@@ -1,29 +1,50 @@
-# src/ice_runtime/events/kernel/taxonomy.py
 """
 ICE Runtime — Event Taxonomy
+===========================
+
 RFC-ICE-007 (v1)
 
-Questo modulo definisce la TASSOMIA CHIUSA degli eventi ICE.
+Questo modulo definisce la TASSONOMIA CHIUSA degli eventi ICE.
 
-Se un event_type non è definito qui:
+Regola fondamentale:
+Se un event_type NON è definito qui:
 - NON ESISTE
-- DEVE essere rigettato
-- NON può essere emesso, validato o persistito
+- NON è valido
+- NON può essere emesso
+- NON può essere validato
+- NON può essere persistito
 
-Questo file è normativa, non configurazione.
+Questo file è:
+→ normativa
+→ fondativa
+→ versione-bloccata
+
+NON è configurazione.
 """
 
 from __future__ import annotations
 
 from enum import Enum
-from typing import FrozenSet
+from typing import FrozenSet, Dict
 
 
-# =========================
-# Categorie Canoniche
-# =========================
+# ============================================================================
+# Categorie Canoniche (CHIUSE)
+# ============================================================================
 
 class EventCategory(str, Enum):
+    """
+    Categoria canonica di un evento ICE.
+
+    La categoria:
+    - NON implica semantica
+    - NON guida il comportamento
+    - serve per:
+        * validazione
+        * policy
+        * introspezione
+        * routing
+    """
     RUNTIME = "runtime"
     COGNITIVE = "cognitive"
     DOMAIN = "domain"
@@ -31,9 +52,9 @@ class EventCategory(str, Enum):
     CAPABILITY = "capability"
 
 
-# =========================
-# Runtime Events (Lifecycle)
-# =========================
+# ============================================================================
+# Runtime Events (Lifecycle & Authority)
+# ============================================================================
 
 RUNTIME_EVENTS: FrozenSet[str] = frozenset({
     "RunProvisioned",
@@ -52,9 +73,9 @@ RUNTIME_EVENTS: FrozenSet[str] = frozenset({
 })
 
 
-# =========================
-# Cognitive Events
-# =========================
+# ============================================================================
+# Cognitive Events (AI / Reasoning Surface)
+# ============================================================================
 
 COGNITIVE_EVENTS: FrozenSet[str] = frozenset({
     "InferenceStep",
@@ -65,9 +86,9 @@ COGNITIVE_EVENTS: FrozenSet[str] = frozenset({
 })
 
 
-# =========================
-# Domain Events
-# =========================
+# ============================================================================
+# Domain Events (External / IO / Business)
+# ============================================================================
 
 DOMAIN_EVENTS: FrozenSet[str] = frozenset({
     "FileRead",
@@ -80,9 +101,9 @@ DOMAIN_EVENTS: FrozenSet[str] = frozenset({
 })
 
 
-# =========================
-# Memory Events
-# =========================
+# ============================================================================
+# Memory Events (Lifecycle & Evolution)
+# ============================================================================
 
 MEMORY_EVENTS: FrozenSet[str] = frozenset({
     "MemoryPromoted",
@@ -93,9 +114,9 @@ MEMORY_EVENTS: FrozenSet[str] = frozenset({
 })
 
 
-# =========================
-# Capability Events
-# =========================
+# ============================================================================
+# Capability Events (Authority & Permission)
+# ============================================================================
 
 CAPABILITY_EVENTS: FrozenSet[str] = frozenset({
     "CapabilityRequested",
@@ -106,9 +127,9 @@ CAPABILITY_EVENTS: FrozenSet[str] = frozenset({
 })
 
 
-# =========================
-# Indici Derivati
-# =========================
+# ============================================================================
+# Indici Derivati (AUTORITATIVI)
+# ============================================================================
 
 ALL_EVENTS: FrozenSet[str] = frozenset().union(
     RUNTIME_EVENTS,
@@ -118,8 +139,7 @@ ALL_EVENTS: FrozenSet[str] = frozenset().union(
     CAPABILITY_EVENTS,
 )
 
-
-EVENT_CATEGORY_MAP = {
+EVENT_CATEGORY_MAP: Dict[str, EventCategory] = {
     **{e: EventCategory.RUNTIME for e in RUNTIME_EVENTS},
     **{e: EventCategory.COGNITIVE for e in COGNITIVE_EVENTS},
     **{e: EventCategory.DOMAIN for e in DOMAIN_EVENTS},
@@ -128,13 +148,21 @@ EVENT_CATEGORY_MAP = {
 }
 
 
-# =========================
-# API di Verifica (Kernel)
-# =========================
+# ============================================================================
+# Kernel Validation API
+# ============================================================================
 
 def is_valid_event_type(event_type: str) -> bool:
     """
-    Verifica se un event_type è ammesso dal Runtime.
+    Verifica se un event_type è ammesso dalla tassonomia ICE.
+
+    Questa funzione:
+    - NON normalizza
+    - NON corregge
+    - NON fa fallback
+
+    True = evento esistente
+    False = evento illegale
     """
     return event_type in ALL_EVENTS
 
@@ -143,25 +171,27 @@ def category_of(event_type: str) -> EventCategory:
     """
     Ritorna la categoria canonica di un event_type.
 
-    Solleva KeyError se l'evento non è ammesso.
+    Solleva KeyError se l'evento NON è ammesso.
+    Questo è INTENZIONALE.
     """
     return EVENT_CATEGORY_MAP[event_type]
 
 
-# =========================
-# Clausola di Chiusura
-# =========================
+# ============================================================================
+# Clausola di Chiusura (NORMATIVA)
+# ============================================================================
 
 """
 Questo modulo NON deve:
 - essere esteso dinamicamente
 - leggere configurazioni
 - accettare override
+- essere monkey-patchato
 
-La tassonomia è chiusa per definizione.
+La tassonomia è CHIUSA per definizione.
 
-Aggiungere un evento richiede:
+Aggiungere un nuovo evento richiede:
 - nuova RFC
-- nuova versione
+- bump di versione
 - modifica esplicita di questo file
 """

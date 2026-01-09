@@ -1,81 +1,94 @@
 """
 ICE Runtime — Event Validator
+=============================
+
 RFC-ICE-003 · Event Model
 RFC-ICE-007 · Event Taxonomy
 
-Questo modulo decide se un evento ICE è:
-- strutturalmente valido
-- causalmente valido
-- temporalmente valido
+Questo modulo decide se un evento ICE:
+- può esistere
+- è strutturalmente valido
+- è causalmente valido
+- è temporalmente valido
+- è autorizzato
 
 Se un evento fallisce qui:
-NON ESISTE.
+→ NON ESISTE
+→ NON entra nel sistema
 """
 
 from __future__ import annotations
 
-from typing import Iterable, Mapping, Set
-from uuid import UUID
 from datetime import datetime
+from typing import Optional, Set
 
-from .event import ICEEvent
-from .taxonomy import EVENT_TAXONOMY
+from .event import ICEEvent, EventID
+from .taxonomy import is_valid_event_type
 from .authority import is_origin_authorized
 
 
-# =========================
-# Errori Canonici
-# =========================
+# ============================================================================
+# Errori Canonici (Fondativi)
+# ============================================================================
 
 class EventValidationError(Exception):
-    """Errore base di validazione evento."""
+    """Errore base di validazione evento ICE."""
 
 
 class StructuralViolation(EventValidationError):
-    pass
+    """Violazione strutturale dell'evento."""
+
+
+class TaxonomyViolation(EventValidationError):
+    """Evento non definito dalla tassonomia RFC-ICE-007."""
 
 
 class AuthorityViolation(EventValidationError):
-    pass
-
-
-class CausalityViolation(EventValidationError):
-    pass
+    """Origine non autorizzata a emettere l'evento."""
 
 
 class TemporalViolation(EventValidationError):
-    pass
+    """Violazione della monotonicità temporale."""
 
 
-# =========================
-# Validator Principale
-# =========================
+class CausalityViolation(EventValidationError):
+    """Violazione della catena causale."""
+
+
+# ============================================================================
+# Validator Sovrano (Stateless)
+# ============================================================================
 
 class EventValidator:
     """
-    Validator stateless.
+    Validator stateless del Kernel Eventi.
 
-    Ogni metodo solleva eccezione se l'evento NON È valido.
+    NON:
+    - modifica eventi
+    - corregge errori
+    - applica fallback
+
+    Valida o rifiuta.
     """
 
-    # ---------------------
-    # Entry point
-    # ---------------------
+    # ------------------------------------------------------------------
+    # Entry Point Unico
+    # ------------------------------------------------------------------
 
     @staticmethod
     def validate(
         event: ICEEvent,
         *,
-        known_event_ids: Set[UUID],
-        last_timestamp: datetime | None = None,
+        known_event_ids: Set[EventID],
+        last_timestamp: Optional[datetime] = None,
     ) -> None:
         """
         Valida un evento ICE.
 
         Args:
             event: evento da validare
-            known_event_ids: eventi già presenti nel Run
-            last_timestamp: ultimo timestamp noto del Run
+            known_event_ids: EventID già noti nel Run
+            last_timestamp: timestamp dell'ultimo evento valido
 
         Raises:
             EventValidationError
@@ -86,30 +99,43 @@ class EventValidator:
         EventValidator._validate_temporal(event, last_timestamp)
         EventValidator._validate_causality(event, known_event_ids)
 
-    # ---------------------
-    # Validazioni
-    # ---------------------
+    # ------------------------------------------------------------------
+    # Validazioni Canoniche
+    # ------------------------------------------------------------------
 
     @staticmethod
     def _validate_structure(event: ICEEvent) -> None:
-        if not isinstance(event.event_id, UUID):
-            raise StructuralViolation("event_id must be UUID")
+        """
+        Valida la struttura minimale dell'evento.
 
-        if not isinstance(event.run_id, UUID):
-            raise StructuralViolation("run_id must be UUID")
+        NOTA:
+        Molti invarianti sono già enforce in ICEEvent.__post_init__.
+        Qui si verifica solo coerenza d'uso.
+        """
+        if not isinstance(event.event_id, str):
+            raise StructuralViolation("event_id must be str")
+
+        if not isinstance(event.run_id, str):
+            raise StructuralViolation("run_id must be str")
 
         if not isinstance(event.timestamp, datetime):
             raise StructuralViolation("timestamp must be datetime")
 
     @staticmethod
     def _validate_taxonomy(event: ICEEvent) -> None:
-        if event.event_type not in EVENT_TAXONOMY:
-            raise StructuralViolation(
+        """
+        Verifica che l'evento esista nella tassonomia chiusa.
+        """
+        if not is_valid_event_type(event.event_type):
+            raise TaxonomyViolation(
                 f"Unknown event_type '{event.event_type}'"
             )
 
     @staticmethod
     def _validate_authority(event: ICEEvent) -> None:
+        """
+        Verifica che l'origine sia autorizzata a emettere l'evento.
+        """
         if not is_origin_authorized(
             origin=event.origin,
             event_type=event.event_type,
@@ -122,8 +148,11 @@ class EventValidator:
     @staticmethod
     def _validate_temporal(
         event: ICEEvent,
-        last_timestamp: datetime | None,
+        last_timestamp: Optional[datetime],
     ) -> None:
+        """
+        Garantisce monotonicità temporale per Run.
+        """
         if last_timestamp is None:
             return
 
@@ -135,48 +164,46 @@ class EventValidator:
     @staticmethod
     def _validate_causality(
         event: ICEEvent,
-        known_event_ids: Set[UUID],
+        known_event_ids: Set[EventID],
     ) -> None:
-        causality = event.causality or {}
+        """
+        Valida la catena causale dell'evento.
 
-        parent_id = causality.get("parent_event_id")
-        if parent_id is not None:
-            try:
-                parent_uuid = UUID(parent_id)
-            except Exception:
+        Regole:
+        - causality è None o Tuple[EventID, ...]
+        - ogni EventID referenziato DEVE esistere
+        """
+        if event.causality is None:
+            return
+
+        if not isinstance(event.causality, tuple):
+            raise CausalityViolation("causality must be tuple")
+
+        for parent_id in event.causality:
+            if not isinstance(parent_id, str):
                 raise CausalityViolation(
-                    "parent_event_id is not a valid UUID"
+                    "causality entries must be EventID (str)"
                 )
 
-            if parent_uuid not in known_event_ids:
+            if parent_id not in known_event_ids:
                 raise CausalityViolation(
-                    "parent_event_id references unknown event"
-                )
-
-        correlation_id = causality.get("correlation_id")
-        if correlation_id is not None:
-            try:
-                UUID(correlation_id)
-            except Exception:
-                raise CausalityViolation(
-                    "correlation_id is not a valid UUID"
+                    f"Unknown causal EventID '{parent_id}'"
                 )
 
 
-# =========================
+# ============================================================================
 # Clausola Finale
-# =========================
+# ============================================================================
 
 """
 Questo modulo NON decide se un evento è utile.
-Decide solo se può esistere.
+NON decide se è intelligente.
+NON decide se è desiderabile.
 
-Ogni evento che passa questo validator:
-- è coerente
-- è tracciabile
-- è auditabile
-- è replayable
+Decide solo una cosa:
+→ l'evento può esistere nel Runtime ICE?
 
-Ogni evento che non lo passa:
-NON ENTRA NEL SISTEMA.
+Se NO:
+→ l'evento viene rigettato
+→ il Run deve abortire
 """

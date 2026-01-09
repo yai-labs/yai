@@ -1,10 +1,19 @@
 """
 ICE Runtime — Event Store
-Append-only event log
+========================
 
-Questo modulo è l'unica sorgente di persistenza degli eventi.
-Non interpreta. Non valida. Non filtra.
-Registra.
+Append-only Event Log sovrano.
+
+Questo modulo è l'UNICA sorgente di persistenza degli eventi ICE.
+
+NON:
+- interpreta
+- valida
+- filtra
+- ordina semanticamente
+
+Fa una sola cosa:
+→ registra eventi validi, in ordine temporale
 """
 
 from __future__ import annotations
@@ -12,63 +21,66 @@ from __future__ import annotations
 from typing import Iterable, List
 from threading import Lock
 
-from .event import ICEEvent
+from .event import ICEEvent, RunID
 
 
 class EventStore:
     """
-    Append-only, in-memory event store.
+    Event Store append-only, in-memory.
 
-    - Nessuna mutazione
-    - Nessuna cancellazione
-    - Nessun update
+    Invarianti:
+    - nessuna mutazione
+    - nessuna cancellazione
+    - nessun update
     """
 
     def __init__(self) -> None:
         self._events: List[ICEEvent] = []
         self._lock = Lock()
 
-    # =========================
-    # Scrittura
-    # =========================
+    # ------------------------------------------------------------------
+    # Scrittura (atto irreversibile)
+    # ------------------------------------------------------------------
 
     def append(self, event: ICEEvent) -> None:
         """
         Appende un evento al log.
 
-        L'evento si assume già VALIDATO.
+        L'evento si assume:
+        - già validato
+        - già autorizzato
         """
         with self._lock:
             self._events.append(event)
 
-    # =========================
-    # Lettura
-    # =========================
+    # ------------------------------------------------------------------
+    # Lettura (read-only)
+    # ------------------------------------------------------------------
 
     def all(self) -> List[ICEEvent]:
         """
-        Restituisce tutti gli eventi in ordine causale.
+        Restituisce TUTTI gli eventi, in ordine di emissione.
         """
         with self._lock:
             return list(self._events)
 
-    def by_run(self, run_id: str) -> List[ICEEvent]:
+    def by_run(self, run_id: RunID) -> List[ICEEvent]:
         """
-        Restituisce gli eventi appartenenti a un Run.
+        Restituisce tutti gli eventi appartenenti a un Run.
         """
         with self._lock:
             return [e for e in self._events if e.run_id == run_id]
 
     def last(self) -> ICEEvent | None:
         """
-        Ultimo evento emesso.
+        Ultimo evento registrato.
         """
         with self._lock:
             return self._events[-1] if self._events else None
 
-    # =========================
+    # ------------------------------------------------------------------
     # Introspezione
-    # =========================
+    # ------------------------------------------------------------------
 
     def __len__(self) -> int:
         return len(self._events)

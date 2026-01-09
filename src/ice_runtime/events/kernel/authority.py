@@ -1,131 +1,86 @@
 """
 ICE Runtime — Event Authority
-RFC-ICE-007 · Event Taxonomy v1
+=============================
 
-Questo modulo definisce l'AUTORITÀ di emissione degli eventi.
-Non decide SE un evento è valido semanticamente.
-Decide CHI può emetterlo.
+RFC-ICE-007 · Event Taxonomy
 
-Violazione = evento illegale.
+Questo modulo definisce CHI può emettere COSA.
+
+Non è policy.
+È legge.
 """
 
 from __future__ import annotations
 
-from typing import Dict, Set
+from typing import Set
 
-from .taxonomy import EVENT_TAXONOMY
+from .taxonomy import (
+    EventCategory,
+    category_of,
+)
 
-
-# =========================
-# Tipi di Origin Canonici
-# =========================
+# ------------------------------------------------------------------
+# Origin canonici
+# ------------------------------------------------------------------
 
 RUNTIME_ORIGIN = "runtime"
 SYSTEM_ORIGIN = "system"
 AGENT_PREFIX = "agent:"
 
 
-# =========================
-# Costruzione Mappa Autorità
-# =========================
-
-# Mappa: event_type -> origin autorizzati
-_EVENT_AUTHORITY: Dict[str, Set[str]] = {}
-
-
-def _build_authority_table() -> None:
-    """
-    Costruisce la tabella di autorità a partire
-    dalla Event Taxonomy canonica.
-
-    Chiamata UNA SOLA VOLTA a import-time.
-    """
-    for event_type, meta in EVENT_TAXONOMY.items():
-        category = meta["category"]
-
-        if category == "RUNTIME":
-            _EVENT_AUTHORITY[event_type] = {RUNTIME_ORIGIN}
-
-        elif category == "COGNITIVE":
-            _EVENT_AUTHORITY[event_type] = {AGENT_PREFIX}
-
-        elif category == "DOMAIN":
-            _EVENT_AUTHORITY[event_type] = {RUNTIME_ORIGIN}
-
-        elif category == "MEMORY":
-            _EVENT_AUTHORITY[event_type] = {RUNTIME_ORIGIN}
-
-        elif category == "CAPABILITY":
-            # richiesta dall'agente, resto runtime
-            if event_type == "CapabilityRequested":
-                _EVENT_AUTHORITY[event_type] = {AGENT_PREFIX}
-            else:
-                _EVENT_AUTHORITY[event_type] = {RUNTIME_ORIGIN}
-
-        else:
-            # Tassonomia non valida → errore di sviluppo
-            raise RuntimeError(
-                f"Unknown event category '{category}' for {event_type}"
-            )
-
-
-_build_authority_table()
-
-
-# =========================
-# API Pubblica
-# =========================
+# ------------------------------------------------------------------
+# API Sovrana
+# ------------------------------------------------------------------
 
 def is_origin_authorized(*, origin: str, event_type: str) -> bool:
     """
     Verifica se un origin è autorizzato a emettere un event_type.
-
-    Args:
-        origin: stringa origin (runtime | system | agent:<id>)
-        event_type: tipo evento canonico
-
-    Returns:
-        True se autorizzato, False altrimenti
     """
-    allowed = _EVENT_AUTHORITY.get(event_type)
-    if allowed is None:
-        return False
+    category = category_of(event_type)
 
-    if origin in allowed:
-        return True
+    if category == EventCategory.RUNTIME:
+        return origin == RUNTIME_ORIGIN
 
-    # gestione agenti dinamici
-    if any(a == AGENT_PREFIX for a in allowed):
+    if category == EventCategory.COGNITIVE:
         return origin.startswith(AGENT_PREFIX)
+
+    if category == EventCategory.DOMAIN:
+        return origin == RUNTIME_ORIGIN
+
+    if category == EventCategory.MEMORY:
+        return origin == RUNTIME_ORIGIN
+
+    if category == EventCategory.CAPABILITY:
+        # unica eccezione controllata
+        if event_type == "CapabilityRequested":
+            return origin.startswith(AGENT_PREFIX)
+        return origin == RUNTIME_ORIGIN
 
     return False
 
 
 def allowed_origins_for(event_type: str) -> Set[str]:
     """
-    Restituisce l'insieme degli origin autorizzati
-    per un dato event_type.
-
-    Usato per introspezione, debug, audit.
+    Restituisce gli origin ammessi per un event_type.
     """
-    return set(_EVENT_AUTHORITY.get(event_type, set()))
+    category = category_of(event_type)
 
+    if category == EventCategory.COGNITIVE:
+        return {AGENT_PREFIX}
 
-# =========================
-# Clausola Finale
-# =========================
+    if category == EventCategory.CAPABILITY and event_type == "CapabilityRequested":
+        return {AGENT_PREFIX}
+
+    return {RUNTIME_ORIGIN}
+
 
 """
-Questo modulo è una legge, non una policy.
+Clausola Fondativa:
 
-- Gli Agenti NON POSSONO mai emettere eventi di Runtime
+- Gli agenti NON possono emettere eventi di Runtime
 - Il Runtime è l'unica autorità causale
-- Nessun evento "ibrido" è ammesso
-- Nessuna escalation implicita è possibile
+- Nessuna escalation implicita è ammessa
 
 Se un evento passa questo controllo:
-→ chi lo emette è legittimato
-
-Se non lo passa:
-→ l'evento NON DEVE essere accettato
+→ l'origine è legittima
 """
