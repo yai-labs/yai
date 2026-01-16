@@ -1,95 +1,97 @@
-# Boundary: Foundation → Runtime
+# ICE Foundation Boundaries
 
-## Purpose
+This directory defines the **canonical boundaries** between the ICE Foundation
+and all downstream ICE domains.
 
-Define the boundary between the **ICE Foundation** and the **ICE Runtime**.
+Boundaries formalize **where Foundation authority ends**
+and **where downstream responsibility begins**.
 
-This document establishes how the Foundation constrains Runtime **conceptually**,
-and what it explicitly does **not** define, control, or implement.
-
-The purpose is to preserve a strict separation between **conceptual authority**
-and **execution mechanics**, preventing semantic leakage between layers.
-
----
-
-## Role of the Foundation
-
-The ICE Foundation:
-
-- Defines **axioms** that establish what is assumed to be true
-- Defines **structural invariants** that must never be violated
-- Establishes **conceptual validity**, not operational behavior
-- Constrains **what execution is allowed to mean**, not how it occurs
-
-The Foundation is **pre-execution** and **non-operational**.
-
-The Foundation does **not** execute.
+They exist to prevent scope creep, semantic leakage,
+and implicit extension of foundational authority.
 
 ---
 
-## Role of the Runtime
+## What a Boundary Is in ICE
 
-The ICE Runtime:
+In the context of ICE, a boundary is:
 
-- Executes actions, workflows, and state transitions
-- Manages lifecycle, scheduling, and coordination
-- Enforces invariants through concrete mechanisms
-- Operates entirely within constraints defined by the Foundation
+- A formal separation of **conceptual authority**
+- A definition of **non-responsibility**
+- A guardrail against semantic overreach
+- A constraint on how downstream systems may interpret Foundation concepts
 
-The Runtime is responsible for **how** things happen,
-never for **what is true**.
-
----
-
-## Explicit Non-Responsibilities of the Foundation
-
-The Foundation does NOT define:
-
-- Execution order or scheduling semantics
-- Concurrency or parallelism models
-- Error handling or recovery strategies
-- Retry logic or failure management
-- Performance characteristics
-- Resource allocation or utilization
-- Runtime optimization techniques
-
-All of the above belong exclusively to Runtime design
-or downstream execution domains.
+A boundary is **not** an integration guide,
+an implementation contract, or a technical interface.
 
 ---
 
-## Constraint Relationship
+## Role of Boundaries
 
-- The Foundation **constrains** Runtime meaning and validity
-- The Runtime **implements** behavior within those constraints
-- Runtime behavior may fail operationally
-- The Foundation may not fail conceptually
+Boundaries serve to:
 
-If Runtime behavior violates an axiom or invariant,
-the Runtime is incorrect — not the Foundation.
+- Protect the Foundation from operational concerns
+- Prevent downstream domains from redefining axioms or invariants
+- Make responsibility shifts explicit
+- Ensure long-term architectural stability
+
+Without explicit boundaries, foundational systems tend to
+absorb responsibilities they were never meant to carry.
 
 ---
 
-## Invalid Boundary Violations
+## Canonical Foundation Boundaries
 
-The following are invalid:
+The following boundary documents are authoritative:
 
-- Introducing execution semantics at the Foundation level
-- Encoding lifecycle or scheduling rules as axioms or invariants
-- Using Foundation documents to justify Runtime implementation choices
-- Allowing Runtime to reinterpret or override axioms
+- **Foundation → Runtime**  
+  Execution, lifecycle, and enforcement
 
-Such actions constitute a **boundary violation**.
+- **Foundation → Engine / Infrastructure**  
+  System construction and operation
+
+- **Foundation → AI / Intelligence**  
+  Reasoning, inference, and adaptation
+
+- **Foundation → Consciousness**  
+  Long-term memory, causality, and decision continuity
+
+- **Foundation → Protocols**  
+  Communication and interaction semantics
+
+- **Foundation → Providers**  
+  External services, platforms, and dependencies
+
+- **Foundation → Observability**  
+  Measurement, inspection, and system visibility
+
+- **Foundation → Documentation**  
+  Epistemic authority versus explanatory content
+
+Each boundary is defined in its own document
+and must remain consistent with ICE axioms and structural invariants.
 
 ---
 
 ## Canonical Status
 
-This boundary definition is **authoritative**.
+Boundary definitions are **authoritative**.
 
-Any Runtime implementation claiming ICE compliance
-must demonstrate that it operates entirely within
-the constraints defined here.
+Any ICE domain claiming compliance
+must demonstrate that it operates entirely
+within the limits defined by its boundary.
 
-The Foundation constrains Runtime.  
-Runtime never extends the Foundation.
+Boundaries may evolve **only** when
+a new domain becomes formally recognized.
+
+---
+
+## Scope Notes
+
+This directory does not define:
+
+- Domain internals
+- Implementation details
+- Tooling or workflows
+- Integration mechanisms
+
+Those belong exclusively to downstream repositories.
