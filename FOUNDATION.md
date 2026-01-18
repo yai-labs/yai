@@ -1,27 +1,39 @@
 # ICE Foundation Dependency
 
-This project derives its core assumptions, invariants, and semantic boundaries
-from **ICE Foundation v1.0.0**.
+This project **derives all its assumptions** from **ICE Foundation v1.0.0**.
 
-ICE Foundation defines the axiomatic and invariant layer that constrains:
+ICE Foundation defines the **axiomatic, invariant, and boundary layer**
+that determines whether this project is conceptually valid.
 
-- what this project is allowed to assume
+This project exists **under** the Foundation.
+It does not reinterpret it, extend it, or negotiate it.
+
+---
+
+## Scope of Derivation
+
+ICE Foundation constrains this project with respect to:
+
+- what may be assumed
 - what may be inferred
 - what may be executed
 - what must never be violated
 
-This project does not redefine, reinterpret, or override any foundational concept.
+These constraints are **non-negotiable**.
+
+Any behavior, architecture, or decision that violates the Foundation
+is invalid by definition, regardless of intent or implementation.
 
 ---
 
 ## Referenced Foundation
 
 - Repository: https://github.com/francescomaiomascio/ice-foundation
-- Version: v1.0.0
-- Tag: v1.0.0-foundation
+- Version: **v1.0.0**
+- Tag: `v1.0.0-foundation`
 
 All architectural, behavioral, and execution-level decisions
-must be evaluated against the referenced Foundation version.
+must be evaluated against this exact Foundation version.
 
 ---
 
@@ -34,26 +46,31 @@ ICE Foundation is **authoritative** with respect to:
 - epistemic boundaries
 - semantic constraints
 
-Any deviation from ICE Foundation invalidates
+No downstream project may override, weaken,
+or implicitly bypass Foundation authority.
+
+Deviation from the Foundation invalidates
 the conceptual integrity of this project.
 
 ---
 
-## Change Policy
+## Versioning and Change Policy
 
-If ICE Foundation is updated:
+Foundational assumptions do not drift.
+
+If ICE Foundation evolves:
 
 - this project does **not** automatically inherit changes
-- any Foundation version update must be explicit
-- version upgrades require deliberate review and validation
+- Foundation upgrades are explicit and deliberate
+- each version change requires conscious validation
 
-Foundational assumptions are chosen, not drifted.
+Foundation versions are **chosen**, not absorbed.
 
 ---
 
 ## Scope Note
 
-This document establishes **dependency**, not implementation.
+This document establishes **conceptual dependency**, not implementation.
 
 Details of runtime behavior, tooling, orchestration, or interfaces
 belong to this project and its downstream layers,
