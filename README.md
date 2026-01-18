@@ -1,71 +1,116 @@
 # ICE Runtime
+## Execution Substrate of the ICE Ecosystem
 
-[![ICE Ecosystem](https://img.shields.io/badge/ICE-Ecosystem-8FB9FF?style=flat)](#)
-[![Docs](https://img.shields.io/badge/docs-ICE%20Docs-8FB9FF?style=flat)](https://github.com/francescomaiomascio/ice-docs)
-[![Status](https://img.shields.io/badge/status-active%20development-6B7280?style=flat)](#)
-[![Language](https://img.shields.io/badge/python-3.x-111827?style=flat)](#)
-[![License](https://img.shields.io/badge/license-MIT-7A7CFF?style=flat)](#)
+ICE Runtime is the **execution substrate** of the ICE ecosystem.
 
-ICE Runtime is the **execution core** of the ICE ecosystem.
+It is responsible for enforcing **how execution happens**,  
+**under which constraints**,  
+and **with what guarantees**.
 
-It provides a structured, extensible, and policy-aware runtime designed to
-coordinate applications, sessions, events, memory, and transports in a
-coherent and inspectable system.
+ICE Runtime does not define intelligence, intent, or meaning.  
+It enforces **valid execution under ICE Foundation constraints**.
 
-ICE Runtime is not a traditional framework.
-It is an **operational substrate** for long-living, stateful, and observable
-intelligent systems.
+---
+
+## Foundation Dependency
+
+This project derives its core assumptions, invariants, and boundaries from  
+**ICE Foundation v1.0.0**.
+
+ICE Foundation defines what is valid.  
+ICE Runtime enforces that validity at execution time.
+
+Any execution behavior that violates the Foundation
+invalidates ICE compliance.
 
 ---
 
 ## Role in the ICE Ecosystem
 
-ICE Runtime sits at the center of ICE execution.
+ICE Runtime occupies a **strictly defined position**:
 
-It does **not** define intelligence, domain logic, or user interfaces.
-Instead, it enforces **how things happen**, **in which order**, and **under which rules**.
+**Foundation → Runtime → Engine → Intelligence → Interfaces**
 
-All ICE applications, agents, and products ultimately execute *through* the Runtime.
+ICE Runtime:
 
----
+- does **not** decide *what* to do
+- does **not** infer intent
+- does **not** redefine authority
 
-## Core Principles
-
-- Explicit lifecycle management  
-- Strong separation of responsibilities  
-- Event-driven coordination  
-- Capability-based access control  
-- Deterministic state transitions  
-- Runtime introspection and observability  
+It ensures that **whatever is executed**:
+- is authorized
+- is traceable
+- respects invariants
+- remains governable over time
 
 ---
 
-## Responsibilities
+## What ICE Runtime Is
+
+ICE Runtime is:
+
+- an **execution substrate**
+- a **lifecycle governor**
+- an **event and state coordinator**
+- an **authority-enforcing runtime**
+- the **anchor of inspectable execution**
+
+It exists to make execution:
+- explicit
+- constrained
+- observable
+- accountable
+
+---
+
+## What ICE Runtime Is Not
+
+ICE Runtime is **not**:
+
+- an AI system
+- an agent framework
+- a business logic layer
+- an orchestration UI
+- a scripting engine
+- a policy definition system
+
+Those concerns belong upstream or downstream.
+
+---
+
+## Core Responsibilities
 
 ICE Runtime is responsible for:
 
-- Managing process, session, and workspace lifecycles
-- Executing and supervising runs
-- Routing, validating, and persisting events
-- Enforcing capability and authority boundaries
-- Governing state transitions and memory exposure
-- Providing structured logging and transport abstractions
-- Acting as the execution substrate for higher-level ICE systems
+- Enforcing execution lifecycles
+- Supervising long-running processes
+- Managing sessions and workspaces
+- Routing and validating events
+- Governing state transitions
+- Enforcing authority and capability boundaries
+- Preserving traceability and accountability
+- Providing execution-level observability
+
+ICE Runtime does **not** infer intent.  
+It enforces execution correctness.
 
 ---
 
-## Usage
+## Governance and Authority
 
-ICE Runtime is typically **not consumed directly by end users**.
+ICE Runtime operates under strict governance.
 
-It is embedded or orchestrated by:
+- Execution is always authority-bound
+- No implicit execution is permitted
+- All state transitions must be traceable
+- Cognitive invalidation must result in suspension
+- Reconfiguration cannot self-authorize execution
 
-- Agent systems
-- IDE integrations
-- Automation layers
-- ICE products such as ICE Studio
+Governance rules are inherited from ICE Foundation
+and are non-bypassable.
 
-A minimal entrypoint is available via:
+---
 
-```bash
-python -m ice_runtime
+## Usage Model
+
+ICE Runtime is not typica
