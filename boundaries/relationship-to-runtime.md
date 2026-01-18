@@ -1,14 +1,31 @@
-# Boundary: Foundation → Runtime
+# Boundary: Foundation ↔ Runtime
 
 ## Purpose
 
-Define the boundary between the **ICE Foundation** and the **ICE Runtime**.
+Define and formalize the **conceptual boundary** between the **ICE Foundation**
+and the **ICE Runtime**.
 
-This document establishes how the Foundation constrains Runtime **conceptually**,
-and what it explicitly does **not** define, control, or implement.
+This document establishes where **Foundation authority ends**
+and where **Runtime responsibility begins**, in order to preserve
+a strict separation between **conceptual validity** and **execution behavior**.
 
-The purpose is to preserve a strict separation between **conceptual authority**
-and **execution mechanics**, preventing semantic leakage between layers.
+The goal is to prevent semantic leakage, implicit authority,
+or retroactive justification of runtime behavior
+through foundational concepts.
+
+---
+
+## Foundational Position
+
+The ICE Foundation is **pre-execution** and **non-operational**.
+
+It exists to define:
+
+- Axioms: what is assumed to be true
+- Structural invariants: what must never be violated
+- Conceptual validity: what behavior is allowed to *mean*
+
+The Foundation does **not** execute, schedule, enforce, or operate.
 
 ---
 
@@ -16,14 +33,13 @@ and **execution mechanics**, preventing semantic leakage between layers.
 
 The ICE Foundation:
 
-- Defines **axioms** that establish what is assumed to be true
-- Defines **structural invariants** that must never be violated
-- Establishes **conceptual validity**, not operational behavior
-- Constrains **what execution is allowed to mean**, not how it occurs
+- Defines **truth**, not behavior
+- Establishes **constraints**, not mechanisms
+- Specifies **validity conditions**, not execution paths
+- Remains **implementation-agnostic by design**
 
-The Foundation is **pre-execution** and **non-operational**.
-
-The Foundation does **not** execute.
+The Foundation constrains the **semantic space**
+within which execution may occur.
 
 ---
 
@@ -31,19 +47,19 @@ The Foundation does **not** execute.
 
 The ICE Runtime:
 
-- Executes actions, workflows, and state transitions
+- Executes actions and workflows
 - Manages lifecycle, scheduling, and coordination
-- Enforces invariants through concrete mechanisms
-- Operates entirely within constraints defined by the Foundation
+- Handles state transitions and enforcement mechanisms
+- Operates under the constraints defined by the Foundation
 
-The Runtime is responsible for **how** things happen,
-never for **what is true**.
+The Runtime is responsible for **how execution occurs**,
+never for **what is conceptually valid**.
 
 ---
 
 ## Explicit Non-Responsibilities of the Foundation
 
-The Foundation does NOT define:
+The ICE Foundation does **not** define, imply, or control:
 
 - Execution order or scheduling semantics
 - Concurrency or parallelism models
@@ -52,44 +68,48 @@ The Foundation does NOT define:
 - Performance characteristics
 - Resource allocation or utilization
 - Runtime optimization techniques
+- Enforcement implementations
 
-All of the above belong exclusively to Runtime design
-or downstream execution domains.
+Any attempt to introduce these concerns
+into Foundation documents is invalid.
 
 ---
 
 ## Constraint Relationship
 
-- The Foundation **constrains** Runtime meaning and validity
-- The Runtime **implements** behavior within those constraints
-- Runtime behavior may fail operationally
-- The Foundation may not fail conceptually
+The relationship between Foundation and Runtime is asymmetric:
+
+- The Foundation **constrains meaning and validity**
+- The Runtime **implements behavior within those constraints**
+
+Operational failure is a Runtime concern.  
+Conceptual failure is a Foundation concern.
 
 If Runtime behavior violates an axiom or invariant,
-the Runtime is incorrect — not the Foundation.
+the Runtime is incorrect.
+The Foundation remains authoritative and unchanged.
 
 ---
 
-## Invalid Boundary Violations
+## Boundary Violations
 
-The following are invalid:
+The following constitute **boundary violations**:
 
 - Introducing execution semantics at the Foundation level
 - Encoding lifecycle or scheduling rules as axioms or invariants
-- Using Foundation documents to justify Runtime implementation choices
-- Allowing Runtime to reinterpret or override axioms
+- Using Foundation documents to justify Runtime design choices
+- Allowing Runtime behavior to redefine or reinterpret axioms
 
-Such actions constitute a **boundary violation**.
+Such violations invalidate ICE compliance.
 
 ---
 
 ## Canonical Status
 
-This boundary definition is **authoritative**.
+This boundary definition is **canonical and authoritative**.
 
-Any Runtime implementation claiming ICE compliance
-must demonstrate that it operates entirely within
-the constraints defined here.
+Any Runtime claiming ICE compliance must demonstrate
+that it operates entirely within the constraints defined here.
 
-The Foundation constrains Runtime.  
-Runtime never extends the Foundation.
+The Foundation constrains the Runtime.  
+The Runtime never extends the Foundation.
