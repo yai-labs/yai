@@ -1,15 +1,32 @@
-# Boundary: Foundation → Consciousness
+# Boundary: Foundation ↔ Consciousness
 
 ## Purpose
 
-Define the boundary between the **ICE Foundation** and the **ICE Consciousness** domain.
+Define and formalize the **conceptual boundary** between the **ICE Foundation**
+and the **Consciousness** domain.
 
-This document establishes what the Foundation **constrains** with respect to
-long-term memory, decision continuity, and historical reasoning, and what it
-explicitly does **not** define, store, operate, or interpret.
+This document establishes that **continuity, memory, experience, and historical
+reasoning** do not possess foundational authority and must never redefine
+axioms, invariants, or conceptual validity.
 
-The goal is to prevent **conceptual authority** from collapsing into
-memory systems, learning processes, or historical interpretation layers.
+The goal is to prevent **cognitive continuity** from collapsing into
+**conceptual truth**.
+
+---
+
+## Foundational Position
+
+The ICE Foundation is **a-temporal** and **non-cognitive**.
+
+It defines:
+
+- Axioms that establish what is assumed to be true
+- Structural invariants that constrain validity over time
+- Conditions for traceability, authority, and determinism
+
+The Foundation does **not** experience time.
+
+The Foundation does **not** remember.
 
 ---
 
@@ -17,42 +34,41 @@ memory systems, learning processes, or historical interpretation layers.
 
 The ICE Foundation:
 
-- Defines **axioms** and **structural invariants**
-- Constrains what *may* be remembered, attributed, and reasoned about
-- Establishes requirements for **traceability**, **authority**, and **determinism**
-- Defines the **validity conditions** under which historical reasoning is admissible
+- Defines **truth conditions** independent of history
+- Establishes **what may be attributed and explained**
+- Constrains how historical reasoning may be interpreted
+- Determines validity boundaries for long-term reasoning
 
-The Foundation defines **truth conditions**, not historical content.
-
-The Foundation does **not** remember.
+The Foundation defines **meaning**, not experience.
 
 ---
 
 ## Role of Consciousness
 
-ICE Consciousness:
+The Consciousness domain:
 
-- Maintains **long-term memory** and historical continuity
-- Preserves decision context across time
-- Supports retrospective reasoning and causal reconstruction
-- Aggregates traces into durable cognitive structures
-- Enables explanation of *how and why a system reached its current state*
+- Maintains **long-term memory** and persistence across time
+- Preserves decision context and causal continuity
+- Aggregates traces into durable cognitive representations
+- Supports retrospective reasoning and explanation
+- Enables understanding of *how a system arrived at its state*
 
-Consciousness answers **why things happened over time**,  
-never **what is true by definition**.
+Consciousness answers **why things unfolded over time**,  
+never **what is valid by definition**.
 
 ---
 
 ## Explicit Non-Responsibilities of the Foundation
 
-The Foundation does **NOT** define:
+The ICE Foundation does **NOT** define, imply, or govern:
 
 - Memory storage models or representations
-- Retention policies, decay, or forgetting strategies
+- Retention, decay, or forgetting strategies
 - Knowledge graph schemas or embeddings
 - Temporal abstraction or summarization mechanisms
 - Historical compression or pattern extraction logic
 - Learning rules derived from past behavior
+- Experiential continuity or subjective state
 
 All such concerns belong **exclusively** to the Consciousness domain.
 
@@ -60,37 +76,41 @@ All such concerns belong **exclusively** to the Consciousness domain.
 
 ## Constraint Relationship
 
-- The Foundation constrains **what must remain traceable and valid**
-- Consciousness preserves, aggregates, and reasons over traces
-- Consciousness may summarize or abstract history
-- Consciousness may **not** alter axioms, invariants, or authority
+The relationship is asymmetric:
+
+- The Foundation constrains **validity and attribution**
+- Consciousness preserves and reasons over historical traces
+
+Consciousness may summarize or abstract history.
+Consciousness may **not** reinterpret axioms or invariants.
 
 If historical reasoning contradicts axioms or invariants,
 the reasoning is invalid — not the Foundation.
 
 ---
 
-## Invalid Boundary Violations
+## Boundary Violations
 
-The following constitute boundary violations:
+The following constitute **boundary violations**:
 
 - Treating memory or experience as authority
-- Allowing historical patterns to redefine axioms or invariants
+- Allowing historical patterns to redefine axioms
 - Encoding learning outcomes as foundational truth
-- Using Consciousness to justify invariant violations
-- Allowing long-term memory to override explicit authority
+- Using long-term memory to justify invariant violations
+- Allowing continuity to override explicit authority
 
-Such actions break ICE compliance.
+Such violations invalidate ICE compliance.
 
 ---
 
 ## Canonical Status
 
-This boundary is **authoritative**.
+This boundary definition is **canonical and authoritative**.
 
 Any Consciousness subsystem claiming ICE compliance
-must demonstrate that long-term memory and historical reasoning
-operate strictly within the constraints defined here.
+must demonstrate that long-term memory, continuity,
+and historical reasoning operate strictly within
+the constraints defined here.
 
 The Foundation constrains Consciousness.  
 Consciousness never redefines the Foundation.
