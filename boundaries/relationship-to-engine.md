@@ -1,16 +1,30 @@
-# Boundary: Foundation → Engine / Infrastructure
+# Boundary: Foundation ↔ Engine / Infrastructure
 
 ## Purpose
 
-Define the boundary between the **ICE Foundation**
-and the **ICE Engine / Infrastructure** domain.
+Define and formalize the **conceptual boundary** between the **ICE Foundation**
+and the **Engine / Infrastructure** domain.
 
-This document establishes what the Foundation constrains
-with respect to system construction and operation,
-and what it explicitly does **not** define or control.
+This document establishes where **Foundation authority ends**
+and where **system construction, deployment, and operation responsibilities begin**.
 
-The goal is to prevent architectural authority
-from leaking into implementation or operational concerns.
+The objective is to preserve strict **implementation agnosticism**
+and prevent architectural, infrastructural, or operational concerns
+from leaking into foundational definitions.
+
+---
+
+## Foundational Position
+
+The ICE Foundation is **non-architectural** and **non-operational**.
+
+It defines:
+
+- Axioms that establish conceptual truth
+- Structural invariants that constrain validity
+- Semantic limits on what systems are allowed to mean
+
+The Foundation does **not** describe how systems are built.
 
 ---
 
@@ -18,76 +32,80 @@ from leaking into implementation or operational concerns.
 
 The ICE Foundation:
 
-- Defines axioms that constrain system meaning
-- Defines structural invariants that Engine must preserve
-- Establishes conceptual validity
-- Sets non-negotiable constraints on what systems are allowed to mean
+- Defines **conceptual validity**, not system structure
+- Establishes **non-negotiable constraints**, not architectures
+- Constrains **meaning**, not implementation
+- Remains **agnostic to technology, topology, and deployment**
 
-The Foundation does **not** describe systems.
+The Foundation never acts as an architecture specification.
 
 ---
 
 ## Role of Engine / Infrastructure
 
-Engine / Infrastructure:
+The Engine / Infrastructure domain:
 
-- Defines how systems are built, deployed, and operated
-- Implements mechanisms that preserve invariants
-- Manages resources, topology, and execution substrates
-- Adapts systems to physical and operational constraints
+- Defines how systems are constructed and assembled
+- Manages deployment, hosting, and execution substrates
+- Handles resource allocation, scaling, and availability
+- Adapts implementations to physical and operational constraints
 
-Engine answers **how systems exist**,
-never **what is true**.
+The Engine answers **how systems exist and operate**,
+never **what is conceptually valid**.
 
 ---
 
 ## Explicit Non-Responsibilities of the Foundation
 
-The Foundation does NOT define:
+The ICE Foundation does **not** define, imply, or govern:
 
-- Infrastructure topology
-- Deployment models
-- Hardware or cloud assumptions
+- Infrastructure topology or layout
+- Deployment models or environments
+- Hardware, cloud, or platform assumptions
 - Resource management strategies
-- Scaling or availability mechanisms
-- Fault tolerance or redundancy models
-- Operational constraints
+- Scaling, redundancy, or availability mechanisms
+- Fault tolerance or operational resilience models
+- Performance or cost constraints
 
-All such concerns belong exclusively to Engine design.
+All such concerns belong exclusively to Engine / Infrastructure design.
 
 ---
 
 ## Constraint Relationship
 
-- The Foundation constrains **meaning**
-- The Engine realizes **structure**
-- The Engine may change implementation
-- The Foundation may not be reinterpreted
+The relationship is asymmetric and non-negotiable:
 
-If an Engine design violates an invariant,
-the Engine is incorrect — not the Foundation.
+- The Foundation **constrains meaning and validity**
+- The Engine **realizes structure and operation**
+
+Engine implementations may evolve, adapt, or change.
+Foundation definitions may not be reinterpreted.
+
+If an Engine violates an axiom or invariant,
+the Engine is incorrect.
+The Foundation remains authoritative.
 
 ---
 
-## Invalid Boundary Violations
+## Boundary Violations
 
-The following are invalid:
+The following constitute **boundary violations**:
 
-- Encoding infrastructure assumptions as axioms
-- Justifying implementation choices via Foundation text
-- Allowing operational constraints to redefine invariants
-- Treating Foundation as an architecture specification
+- Encoding infrastructure assumptions as axioms or invariants
+- Using Foundation documents to justify architectural choices
+- Allowing operational constraints to weaken invariants
+- Treating Foundation text as a system design specification
 
-Such actions violate the boundary.
+Such violations invalidate ICE compliance.
 
 ---
 
 ## Canonical Status
 
-This boundary is authoritative.
+This boundary definition is **canonical and authoritative**.
 
 Any Engine or Infrastructure layer claiming ICE compliance
-must demonstrate alignment with this boundary.
+must demonstrate full alignment with the constraints defined here.
 
 The Foundation constrains Engine meaning.  
 Engine never extends Foundation authority.
