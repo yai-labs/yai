@@ -21,7 +21,7 @@ become undefined.
 
 In ICE, **traceability** is the property by which system behavior can be:
 
-- **Attributed** to an explicit source of authority
+- **Attributed** to an explicit source of authority **and a declared intent**
 - **Reconstructed** after execution
 - **Reasoned about** within the system’s conceptual model
 
@@ -34,6 +34,38 @@ Traceability applies to:
 
 Traceability is not a tooling feature.
 It is a **system-level invariant**.
+
+---
+
+## Attribution Requirement
+
+In ICE, traceability includes a strict **attribution requirement**:
+
+- Every valid action or state transition must be referable to a **canonical authority**
+  (subject, role, policy, or equivalent authoritative source).
+- Every valid action or state transition must include a **declared purpose / intent**.
+
+Actions or transitions that lack an explicit authority reference or a declared intent
+are invalid by definition.
+
+---
+
+## Semantic Evidence Requirement
+
+In ICE, traceability includes a strict **semantic evidence requirement**.
+
+For every valid action or state transition, ICE must preserve a minimum set of
+semantic evidence sufficient to reconstruct causality and justification, including:
+
+- authorization conditions (what permitted it)
+- inputs (what it acted upon)
+- outputs (what it produced)
+- effects (what changed)
+- causal linkage (why this occurred rather than an alternative)
+
+Semantic evidence is not a log format.
+It is the requirement that evidence remains **causally and semantically meaningful**
+within ICE’s conceptual model.
 
 ---
 
@@ -101,10 +133,12 @@ In ICE:
 
 - Every authoritative decision must be traceable to its source.
 - Actions without traceable authority are invalid by definition.
+- Actions without declared intent are invalid by definition.
 
 Traceability is a **prerequisite** for enforceable authority and governance.
 
-A system that cannot explain *who decided what, and why* cannot claim authority.
+A system that cannot explain *who decided what, why, and under which authority*
+cannot claim authority.
 
 ---
 
