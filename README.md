@@ -145,6 +145,9 @@ This repository should be considered **pre-stable**.
 
 Design correctness and architectural clarity are prioritized over velocity.
 
+
+_Note: Documentation is actively evolving alongside the runtime._
+
 ---
 
 ## Getting Started
