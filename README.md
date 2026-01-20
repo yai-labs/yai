@@ -1,23 +1,19 @@
 # ICE Runtime
 
-> **The execution core of the ICE environment**  
-> Orchestrating agents, workflows, and system state with explicit authority.
-
-# ICE Runtime
 
 [![License](https://img.shields.io/github/license/francescomaiomascio/ice-runtime)](LICENSE)
 [![Stars](https://img.shields.io/github/stars/francescomaiomascio/ice-runtime)](https://github.com/francescomaiomascio/ice-runtime/stargazers)
 [![Issues](https://img.shields.io/github/issues/francescomaiomascio/ice-runtime)](https://github.com/francescomaiomascio/ice-runtime/issues)
 [![Last Commit](https://img.shields.io/github/last-commit/francescomaiomascio/ice-runtime)](https://github.com/francescomaiomascio/ice-runtime/commits/main)
 
-> **The execution core of the ICE environment**  
-> Orchestrating agents, workflows, and system state with explicit authority.
-
 
 <p align="center">
   <img src="docs/assets/ice-runtime-hero.png" alt="ICE Runtime execution architecture" width="85%">
 </p>
 
+
+> **The execution core of the ICE environment**  
+> Orchestrating agents, workflows, and system state with explicit authority.
 
 ---
 
