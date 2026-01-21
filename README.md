@@ -13,7 +13,6 @@
 > **The execution core of the ICE environment**  
 > Orchestrating agents, workflows, and system state with explicit authority.
 
----
 
 ## What is ICE Runtime
 
