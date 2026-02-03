@@ -81,11 +81,13 @@ Adaptation precedes any learning process.
 
 Cognitive reconfiguration in ICE is:
 
-- An explicit state transition
+- An explicit **cognitive configuration transition**
 - Inspectable and traceable
 - Subject to authority
+- Represented by an inspectable **Reconfiguration Record**
 
-Cognitive state may include:
+Cognitive configuration may include:
+
 
 - Assumptions
 - Constraints
@@ -124,7 +126,9 @@ This axiom derives from and reinforces:
   No adaptation may authorize execution autonomously.
 
 - **State as a Derived and Inspectable Artifact**  
-  Cognitive reconfiguration must be traceable as a state transition.
+  Cognitive reconfiguration must be represented as an inspectable artifact (Reconfiguration Record)
+  and must not overload “State” as defined in A-003.
+
 
 Adaptability defines the conditions under which execution remains valid.
 

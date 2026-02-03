@@ -15,7 +15,7 @@ responsibility becomes ambiguous,
 and intelligent behavior degrades into uncontrolled adaptation.
 
 A system that adapts implicitly
-or continues execution under invalid cognitive models
+or continues execution under invalid cognitive configurations (cognitive models)
 is not a valid instance of ICE.
 
 ---
@@ -26,7 +26,7 @@ In ICE, **governable cognitive reconfiguration** is the structural property that
 
 - execution never proceeds under known invalid assumptions
 - cognitive invalidation results in suspension or constraint of execution
-- reconfiguration of cognitive state is explicit and inspectable
+- reconfiguration of cognitive configuration is explicit and inspectable
 - resumption of execution requires renewed authority
 - adaptive behavior remains accountable over time
 
@@ -82,12 +82,42 @@ All ICE-compliant systems must satisfy the following:
 
 ---
 
+## Canonical Reconfiguration Record
+
+A cognitive reconfiguration transition MUST be representable as an inspectable artifact.
+
+ICE defines the canonical concept of a **Reconfiguration Record**:
+
+A Reconfiguration Record is the minimal, authoritative representation of:
+
+- a detected invalidation
+- a suspended or constrained execution
+- an authorized transition from one cognitive configuration to another
+- an accountable resumption boundary
+
+A valid Reconfiguration Record MUST include, at minimum:
+
+- an explicit **invalidation statement** (what became invalid)
+- a reference to the **prior cognitive configuration**
+- a description of the **new cognitive configuration**
+- the **authority reference** under which reconfiguration and resumption are permitted
+- a traceability linkage to evidence (per I-001) sufficient to reconstruct the transition
+
+Execution resumption MUST be able to reference a corresponding Reconfiguration Record.
+Reconfiguration without an inspectable record is structurally non-compliant.
+
+A Reconfiguration Record is not “State” as defined in A-003.
+State remains a derived post-execution artifact.
+The Reconfiguration Record is an authority-bound artifact representing a cognitive configuration transition.
+
+---
+
 ## Cognitive Reconfiguration vs Other Concepts
 
 ### Cognitive Reconfiguration vs Error Handling
 
-- Error handling preserves the existing cognitive model.
-- Cognitive reconfiguration reorganizes the model itself.
+- Error handling preserves the existing cognitive configuration.
+- Cognitive reconfiguration reorganizes the configuration itself.
 
 Error handling operates within assumptions.
 Cognitive reconfiguration addresses failed assumptions.
@@ -124,6 +154,10 @@ Governance enforces reconfiguration.
 
 - **Governance (I-003)**  
   Cognitive reconfiguration must not self-authorize and must remain governable.
+
+- **External Effect Boundary (I-006)**  
+  When cognitive reconfiguration enables transitions that cross the external effect boundary,
+  strengthened authority and evidence constraints apply.
 
 Without these invariants,
 cognitive reconfiguration becomes arbitrary.
@@ -164,7 +198,7 @@ and must comply with the invariant defined here.
 This document is authoritative.
 
 All ICE components that execute actions,
-adapt cognitive state,
+adapt cognitive configuration,
 or evolve behavior over time
 must preserve this invariant.
 
