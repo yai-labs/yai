@@ -11,3 +11,13 @@ states/
 # C Build artifacts
 *.o
 bin/
+# TLA+ artifacts
+states/
+*.bin
+*_TTrace_*.tla
+*.fp
+*.st
+
+# C Build artifacts
+*.o
+bin/
