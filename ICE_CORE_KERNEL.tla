@@ -37,7 +37,8 @@ Strap_Boot ==
     /\ state = "HALT"
     /\ state' = "READY"
     /\ authority_bit' = 1
-    /\ UNCHANGED <<cognitive_map, energy, trace_id>>
+    /\ energy' = MaxEnergy
+    /\ UNCHANGED <<cognitive_map, trace_id>>
 
 \* ICE-ENGINE: Esegue un'azione consumando energia
 Engine_Execute ==
@@ -47,7 +48,7 @@ Engine_Execute ==
     /\ energy >= ActionCost
     /\ state' = "RUN"
     /\ energy' = energy - ActionCost
-    /\ trace_id' = trace_id + 1
+    /\ trace_id' = (trace_id + 1) % 100
     /\ UNCHANGED <<authority_bit, cognitive_map>>
 
 \* Invalidation (A-004): Rilevamento discrepanza realtà/modello
@@ -57,7 +58,15 @@ Critical_Invalidation ==
     /\ state' = "SUSPEND"
     /\ UNCHANGED <<authority_bit, energy, trace_id>>
 
-Next == Strap_Boot \/ Engine_Execute \/ Critical_Invalidation
+\* RECOVERY: Il Bootstrap o l'Engine resettano la mappa e tornano in HALT
+System_Reset ==
+    /\ state = "SUSPEND"
+    /\ state' = "HALT"
+    /\ cognitive_map' = TRUE
+    /\ authority_bit' = 0
+    /\ UNCHANGED <<energy, trace_id>>
+
+Next == Strap_Boot \/ Engine_Execute \/ Critical_Invalidation \/ System_Reset
 
 Spec == Init /\ [][Next]_<<state, authority_bit, cognitive_map, energy, trace_id>>
 

@@ -1,3 +1,13 @@
 bin/
 src/*.o
 *.o
+# TLA+ artifacts
+states/
+*.bin
+*_TTrace_*.tla
+*.fp
+*.st
+
+# C Build artifacts
+*.o
+bin/
