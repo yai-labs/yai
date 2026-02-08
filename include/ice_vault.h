@@ -7,6 +7,8 @@
 // Costanti di Sistema per l'accesso SHM
 #define SHM_VAULT_PREFIX "/ice_vault_"
 #define MAX_WS_ID 64
+#define MAX_TRACE_ID 64
+#define MAX_ERR_MSG 256
 
 // Stati del Kernel (Derivati dal Kernel TLA+)
 typedef enum {
@@ -19,15 +21,19 @@ typedef enum {
     ICE_STATE_ERROR
 } ice_state_t;
 
-// La struttura che garantisce A-003 (State as a Derived Artifact)
+// Vault condiviso con Engine (layout compatibile)
 typedef struct {
-    ice_state_t state;          // Stato attuale della FSM
-    uint8_t authority_bit;      // A-002: 1 = Autorità concessa, 0 = Negata
-    bool cognitive_valid;       // A-004: Validità della configurazione
-    uint32_t energy_budget;     // I-005: Abstract Cost (Accountability)
-    uint64_t trace_id;          // I-001: Tracciabilità univoca
-    uint64_t logical_clock;     // I-002: Determinismo temporale
-    char workspace_id[MAX_WS_ID]; // ID del contesto operativo
+    uint32_t status;                 // Stato corrente (usa ice_state_t)
+    uint32_t energy_quota;           // I-005: Budget energetico
+    uint32_t energy_consumed;        // Consumo energetico
+    char workspace_id[MAX_WS_ID];    // ID del contesto operativo
+    char trace_id[MAX_TRACE_ID];     // I-001: Tracciabilità
+    bool authority_lock;             // Se TRUE, Engine è bloccato
+    uint32_t last_command_id;        // Comando pendente
+    uint32_t last_result;            // Risultato ultimo comando (0/1)
+    char response_buffer[1024];      // Risposta Engine -> Kernel
+    char last_error[MAX_ERR_MSG];    // Ultimo errore
+    uint64_t logical_clock;          // I-002: Determinismo temporale (Kernel)
 } ice_vault_t;
 
 #endif
