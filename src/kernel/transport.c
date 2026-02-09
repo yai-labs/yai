@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <string.h>
-#include "../include/transport.h"
+#include "transport.h"
 
 #define SOCKET_PATH "/tmp/ice_runtime.sock"
 

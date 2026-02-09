@@ -17,10 +17,15 @@ ICE-Kernel is the deterministic heart of the ICE environment. It replaces the le
 
 ## Getting Started
 ```bash
-make clean && make
-./bin/ice-kernel
+make clean && make all
+./bin/ice-boot --ws arch_dev_session --raid
+./bin/ice-kernel --ws arch_dev_session
 ```
+
+## Build Targets
+- `make boot` → build `bin/ice-boot`
+- `make kernel` → build `bin/ice-kernel`
+- `make all` → build both
 
 ---
 *Intentional. Inspectable. Deterministic.*
-
