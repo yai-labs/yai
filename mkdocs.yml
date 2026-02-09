@@ -1,0 +1,88 @@
+site_name: ICE Foundation (Authoritative)
+site_description: Authoritative ICE specification and documentation
+site_author: Francesco Maiomascio
+site_url: https://francescomaiomascio.github.io/ice-foundation/
+
+repo_name: ice-foundation
+repo_url: https://github.com/francescomaiomascio/ice-foundation
+edit_uri: ""
+
+docs_dir: .
+
+extra_css:
+  - site/_theme/theme.css
+
+
+
+plugins:
+  - search
+  - git-revision-date
+
+theme:
+  name: material
+  language: en
+  palette:
+    scheme: slate
+    primary: blue grey
+    accent: cyan
+  features:
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - navigation.indexes
+    - content.tabs.link
+    - content.code.copy
+    - content.code.annotate
+    - search.suggest
+    - search.highlight
+    - toc.integrate
+
+markdown_extensions:
+  - toc:
+      permalink: true
+  - admonition
+  - footnotes
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed
+  - pymdownx.snippets
+  - pymdownx.emoji
+nav:
+  - Home: handbook/index.md
+  - Core Spec:
+      - core/README.md
+      - Foundation: core/FOUNDATION.md
+      - Axioms: core/axioms/README.md
+      - Invariants: core/invariants/README.md
+      - Terminology: core/terminology/README.md
+  - Boundaries:
+      - boundaries/README.md
+      - L0 Vault: boundaries/L0-vault.md
+      - L1 Kernel: boundaries/L1-kernel.md
+      - L2 Engine: boundaries/L2-engine.md
+      - L3 API: boundaries/L3-api.md
+      - Docs Boundary: boundaries/Lx-docs.md
+  - Architecture:
+      - architecture/README.md
+      - Kernel: architecture/kernel/logical-topology.md
+      - Engine: architecture/engine/engine.md
+      - API: architecture/api/gui.md
+      - Runtime: architecture/runtime/index.md
+  - Specs:
+      - specs/README.md
+      - Panels: specs/panels/OVERVIEW.md
+      - Security: specs/security/index.md
+  - Protocols:
+      - protocols/README.md
+      - Networking: protocols/networking/index.md
+      - ICENet: protocols/icenet/index.md
+      - ICEP: protocols/icep/index.md
+  - Handbook:
+      - handbook/README.md
+      - Getting Started: handbook/getting-started/index.md
+      - Development: handbook/development/index.md
+      - Tutorials: handbook/tutorials/index.md
+      - Concepts: handbook/concepts/index.md
+      - Extensibility: handbook/extensibility/index.md
