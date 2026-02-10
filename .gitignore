@@ -14,5 +14,7 @@ node_modules/
 *.so
 *.d
 /.yai/
-/law/formal/states/
-states/
+law/formal/states/
+law/formal/*.fp
+law/formal/*.st
+law/formal/*.toolbox/

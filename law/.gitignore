@@ -1,5 +1,0 @@
-# TLC artifacts
-formal/states/
-formal/*.fp
-formal/*.st
-formal/*.toolbox/
