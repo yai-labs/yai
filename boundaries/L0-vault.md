@@ -125,7 +125,7 @@ This boundary binds the following files (non-exhaustive):
 
 - `specs/protocol/README.md`
 - `specs/protocol/protocol.h`, `commands.h`, `transport.h`
-- `yai-kernel/include/yai_vault.h`
+- `kernel/include/yai_vault.h`
 - `yai-engine/include/shared_constants.h`
 - `yai-mind/src/shared/constants.rs`
 

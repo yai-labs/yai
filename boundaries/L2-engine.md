@@ -145,7 +145,7 @@ If an execution crosses the external effect boundary (I-006), L2 MUST provide au
 * `yai-engine/include/transport_client.h`
 * `yai-engine/include/shared_constants.h`
 * `specs/protocol/*`
-* `yai-kernel/include/yai_vault.h`
+* `kernel/include/yai_vault.h`
 
 (Any additional interface introduced by L2 must not expand authority; it must remain an execution surface.)
 

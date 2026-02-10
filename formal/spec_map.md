@@ -13,9 +13,9 @@ It is normative for alignment and must be kept current with both the TLA+ spec a
 
 ## Runtime Sources
 
-- `yai-kernel/include/yai_vault.h` (canonical L0 state enum)
-- `yai-kernel/src/kernel/fsm.c` (transition graph + enforcement)
-- `yai-kernel/include/yai_kernel.h` (runtime run-state enum)
+- `kernel/include/yai_vault.h` (canonical L0 state enum)
+- `kernel/src/kernel/fsm.c` (transition graph + enforcement)
+- `kernel/include/yai_kernel.h` (runtime run-state enum)
 
 ---
 
