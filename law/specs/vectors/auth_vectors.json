@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "cases": [
+    {
+      "name": "minimal-token",
+      "token": {
+        "version": 1,
+        "ttl_secs": 300,
+        "issued_at": 0,
+        "scope_bits": 1,
+        "subject_id": "system",
+        "issuer_id": "kernel",
+        "nonce": "0000000000000000"
+      }
+    }
+  ]
+}

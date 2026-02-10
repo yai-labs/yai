@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "cases": [
+    {
+      "name": "handshake",
+      "header": {
+        "magic": "0x59414950",
+        "version": 1,
+        "msg_type": 1,
+        "flags": 0,
+        "length": 0,
+        "seq": 1,
+        "checksum": 0
+      }
+    }
+  ]
+}

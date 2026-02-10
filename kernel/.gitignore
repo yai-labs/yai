@@ -1,0 +1,42 @@
+bin/
+!src/bin/
+!src/bin/*.c
+src/*.o
+*.o
+# TLA+ artifacts
+states/
+*.bin
+*_TTrace_*.tla
+*.fp
+*.st
+
+# C Build artifacts
+*.o
+bin/
+# TLA+ artifacts
+states/
+*.bin
+*_TTrace_*.tla
+*.fp
+*.st
+
+# C Build artifacts
+*.o
+bin/
+# build
+*.a
+*.so
+*.dylib
+*.exe
+/build/
+/bin/
+# local
+.DS_Store
+*.d
+
+target/
+build/
+out/
+.next/
+node_modules/
+/.yai/

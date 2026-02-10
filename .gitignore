@@ -2,3 +2,17 @@
 .idea
 .vscode
 *.swp
+# local
+
+target/
+build/
+out/
+.next/
+node_modules/
+*.o
+*.a
+*.so
+*.d
+/.yai/
+/law/formal/states/
+states/

@@ -1,0 +1,102 @@
+# YAI Law — Status
+
+This directory defines the **epistemic and research status** of the YAI Law.
+
+It exists to make explicit **what kind of artifact this repository is**,  
+what guarantees it provides, and what it deliberately does **not** provide.
+
+The purpose is to prevent misinterpretation, misuse, or accidental
+treatment of the Law as a production system or executable framework.
+
+---
+
+## Epistemic Status
+
+The YAI Law is a **conceptual authority layer**.
+
+It defines:
+- axioms
+- structural invariants
+- epistemic boundaries
+- canonical terminology
+- documentation authority
+
+It does **not** define:
+- operational behavior
+- executable semantics
+- performance characteristics
+- implementation strategies
+
+Truth in this repository is **conceptual**, not empirical.
+
+---
+
+## Research Status
+
+YAI Law is **research-grade**.
+
+This means:
+- concepts are intentionally minimal and stable
+- changes are rare and high-impact
+- correctness is evaluated conceptually, not experimentally
+- implementation feedback may inform future revisions, but never override axioms
+
+The Law is not optimized for speed of delivery.
+It is optimized for **long-term coherence**.
+
+---
+
+## Stability Guarantees
+
+The following guarantees apply:
+
+- **Conceptual stability**  
+  Once stabilized, axioms and invariants are expected to remain valid
+  across multiple generations of downstream systems.
+
+- **Semantic authority**  
+  Definitions in this repository override interpretations elsewhere.
+
+- **Breaking change awareness**  
+  Any modification at this level is considered a breaking change
+  for the entire YAI ecosystem.
+
+---
+
+## Non-Guarantees
+
+The YAI Law does **not** guarantee:
+
+- readiness for production use
+- completeness of downstream specifications
+- compatibility with any specific implementation
+- absence of future revision
+
+Stability here means **conceptual soundness**, not finality.
+
+---
+
+## Relationship to Downstream Projects
+
+Downstream YAI projects may:
+- evolve rapidly
+- experiment freely
+- change architecture or implementation
+
+They may **not**:
+- contradict axioms
+- violate structural invariants
+- reinterpret foundational terminology
+
+If a downstream project conflicts with the Law,
+the downstream project is incorrect by definition.
+
+---
+
+## Canonical Role
+
+This directory, together with the rest of the YAI Law repository,
+defines the **highest epistemic layer** of the YAI system.
+
+Nothing above it exists.
+Everything below it depends on it.
