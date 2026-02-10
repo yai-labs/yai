@@ -1,31 +1,18 @@
-# ICE-Kernel (Layer 1)
+# yai-kernel
 
-> **The Hardened C11 Execution Core of the ICE Ecosystem.**
+L1 Kernel implementation. This repo is runtime-critical and must remain compliant with YAI Law.
 
-ICE-Kernel is the deterministic heart of the ICE environment. It replaces the legacy Python runtime with a high-performance, memory-safe C11 implementation.
+## Authority Sources
 
-## Core Architecture
-- **Layer 0 (Bootstrap)**: Authority handoff and Vault allocation.
-- **Layer 1 (Kernel)**: State machine enforcement, UDS Transport, and hardware-aligned execution.
-- **Layer 2 (Engine)**: High-level orchestration (Connected via Unix Domain Sockets).
+- `../yai-law/axioms/*`
+- `../yai-law/invariants/*`
+- `../yai-law/boundaries/*` (especially L1 Kernel boundary; L0 Vault contract; YAI Law invariants and axioms.)
 
-## System Status
-- **FSM**: Operational (Deterministic State Machine)
-- **Vault**: Integrated (C11 Shared Headers)
-- **Transport**: UDS Socket (/tmp/ice_runtime.sock)
-- **Language**: C11 (GCC/Clang)
+## Quickstart
 
-## Getting Started
-```bash
-make clean && make all
-./bin/ice-boot --ws arch_dev_session --raid
-./bin/ice-kernel --ws arch_dev_session
-```
+- `make clean && make`
+- `./launcher.sh --ws arch_dev_session`
 
-## Build Targets
-- `make boot` → build `bin/ice-boot`
-- `make kernel` → build `bin/ice-kernel`
-- `make all` → build both
+## Non-goals
 
----
-*Intentional. Inspectable. Deterministic.*
+No policy, intent, or authority decisions. No protocol ID changes.

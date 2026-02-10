@@ -4,10 +4,10 @@
 #include <sys/stat.h>
 
 /**
- * ICE Project Tree Scanner (RFC-ICE-003)
+ * YAI Project Tree Scanner (RFC-YAI-003)
  * Scansiona il Workspace senza saturare la RAM.
  */
-void ice_scan_workspace(const char *path, int depth) {
+void yai_scan_workspace(const char *path, int depth) {
     DIR *dir;
     struct dirent *entry;
     struct stat entry_stat;
@@ -36,7 +36,7 @@ void ice_scan_workspace(const char *path, int depth) {
         if (S_ISDIR(entry_stat.st_mode)) {
             printf("[FOLDER] %s\n", entry->d_name);
             // Ricorsione controllata
-            ice_scan_workspace(full_path, depth + 1);
+            yai_scan_workspace(full_path, depth + 1);
         } else {
             printf("[FILE]   %s (%lld bytes)\n", entry->d_name, (long long)entry_stat.st_size);
         }

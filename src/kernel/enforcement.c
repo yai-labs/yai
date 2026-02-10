@@ -1,8 +1,8 @@
-#include "ice_kernel.h"
+#include "yai_kernel.h"
 #include "kernel.h"
 #include <time.h> // Serve per time(NULL)
 
-int ice_enforce_capability(const ice_grant_t *grant, uint32_t current_run_id, uint32_t req_scope) {
+int yai_enforce_capability(const yai_grant_t *grant, uint32_t current_run_id, uint32_t req_scope) {
     // 1. Run ownership
     if (grant->run_id != current_run_id) return -1;
 
@@ -18,7 +18,7 @@ int ice_enforce_capability(const ice_grant_t *grant, uint32_t current_run_id, ui
     return 0; // SUCCESS
 }
 
-int ice_memory_transition(ice_memory_state_t *mem, ice_mem_status_t new_status) {
+int yai_memory_transition(yai_memory_state_t *mem, yai_mem_status_t new_status) {
     // Invariante: Puoi cambiare stato solo se sei ACTIVE
     if (mem->status != MEM_ACTIVE) {
         return -1; // MemoryLifecycleError

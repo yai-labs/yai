@@ -5,7 +5,7 @@
 #include <string.h>
 #include "transport.h"
 
-#define SOCKET_PATH "/tmp/ice_runtime.sock"
+#define SOCKET_PATH "/tmp/yai_runtime.sock"
 
 static int server_fd = -1;
 
@@ -32,7 +32,7 @@ void handle_client_command(int client_fd) {
     }
 }
 
-int ice_transport_init(void) {
+int yai_transport_init(void) {
     struct sockaddr_un addr;
 
     // Crea la socket
@@ -52,7 +52,7 @@ int ice_transport_init(void) {
     return 0;
 }
 
-void ice_transport_serve_once(void) {
+void yai_transport_serve_once(void) {
     if (server_fd < 0) return;
 
     int client_fd = accept(server_fd, NULL, NULL);

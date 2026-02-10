@@ -1,14 +1,14 @@
 #include "bootstrap.h"
-#include "ice_vault.h"
+#include "yai_vault.h"
 #include <string.h>
 #include <stdio.h>
 
-void ice_vault_populate(ice_vault_t *vault, const char *ws_id, uint32_t quota) {
+void yai_vault_populate(yai_vault_t *vault, const char *ws_id, uint32_t quota) {
     // Pulizia
-    memset(vault, 0, sizeof(ice_vault_t));
+    memset(vault, 0, sizeof(yai_vault_t));
     
     // Configurazione Iniziale
-    vault->status = ICE_STATE_PREBOOT;
+    vault->status = YAI_STATE_PREBOOT;
     vault->authority_lock = false;
     vault->energy_quota = quota;
     vault->energy_consumed = 0;
@@ -20,8 +20,8 @@ void ice_vault_populate(ice_vault_t *vault, const char *ws_id, uint32_t quota) {
 }
 
 // Implementazione che il linker sta cercando
-int ice_handoff_to_engine(ice_vault_t *vault) {
-    if (vault->status == ICE_STATE_ERROR) {
+int yai_handoff_to_engine(yai_vault_t *vault) {
+    if (vault->status == YAI_STATE_ERROR) {
         printf("[STRAP-FATAL] Vault in ERROR state. Handoff aborted.\n");
         return -1;
     }
@@ -33,7 +33,7 @@ int ice_handoff_to_engine(ice_vault_t *vault) {
 
     printf("[STRAP] Setting authority_bit for Engine takeover...\n");
     vault->authority_lock = true;
-    vault->status = ICE_STATE_HANDOFF_COMPLETE;
+    vault->status = YAI_STATE_HANDOFF_COMPLETE;
 
     // In un'architettura reale qui faremmo execve()
     printf("[STRAP] Handoff successful. Transitioning to Engine.\n");

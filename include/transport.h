@@ -1,5 +1,5 @@
-#ifndef ICE_TRANSPORT_H
-#define ICE_TRANSPORT_H
+#ifndef YAI_TRANSPORT_H
+#define YAI_TRANSPORT_H
 
 #include <stdint.h>
 
@@ -16,7 +16,7 @@ typedef struct {
     uint8_t payload[1024];
 } IcePacket;
 
-int ice_transport_init(void);
-void ice_transport_serve_once(void);
+int yai_transport_init(void);
+void yai_transport_serve_once(void);
 
 #endif

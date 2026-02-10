@@ -1,14 +1,21 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -I./include -O2
+ART_ROOT ?= ../.yai/artifacts/yai-kernel
+BUILD_DIR ?= $(ART_ROOT)/build
+BIN_DIR ?= $(ART_ROOT)/bin
+LOG_DIR ?= $(ART_ROOT)/logs
+TMP_DIR ?= $(ART_ROOT)/tmp
+CACHE_DIR ?= $(ART_ROOT)/cache
 
-BOOT_SRC = src/boot/bootstrap.c src/boot/preboot.c src/bin/ice_boot_main.c
-KERNEL_SRC = src/kernel/enforcement.c src/kernel/fsm.c src/kernel/ids.c src/kernel/logger.c src/kernel/project_tree.c src/kernel/transport.c src/bin/ice_kernel_main.c
+CFLAGS = -Wall -Wextra -I./include -O2 -MMD -MP
 
-BOOT_OBJ = $(BOOT_SRC:.c=.o)
-KERNEL_OBJ = $(KERNEL_SRC:.c=.o)
+BOOT_SRC = src/boot/bootstrap.c src/boot/preboot.c src/bin/yai_boot_main.c
+KERNEL_SRC = src/kernel/enforcement.c src/kernel/fsm.c src/kernel/ids.c src/kernel/logger.c src/kernel/project_tree.c src/kernel/transport.c src/bin/yai_kernel_main.c
 
-BOOT_TARGET = bin/ice-boot
-KERNEL_TARGET = bin/ice-kernel
+BOOT_OBJ = $(patsubst %.c,$(BUILD_DIR)/%.o,$(BOOT_SRC))
+KERNEL_OBJ = $(patsubst %.c,$(BUILD_DIR)/%.o,$(KERNEL_SRC))
+
+BOOT_TARGET = $(BIN_DIR)/yai-boot
+KERNEL_TARGET = $(BIN_DIR)/yai-kernel
 
 all: boot kernel
 
@@ -16,16 +23,25 @@ boot: $(BOOT_TARGET)
 
 kernel: $(KERNEL_TARGET)
 
+dirs:
+	@mkdir -p $(BUILD_DIR) $(BIN_DIR) $(LOG_DIR) $(TMP_DIR) $(CACHE_DIR)
+
 $(BOOT_TARGET): $(BOOT_OBJ)
-	@mkdir -p bin
+	@mkdir -p $(dir $@)
 	$(CC) $(BOOT_OBJ) -o $(BOOT_TARGET)
 
 $(KERNEL_TARGET): $(KERNEL_OBJ)
-	@mkdir -p bin
+	@mkdir -p $(dir $@)
 	$(CC) $(KERNEL_OBJ) -o $(KERNEL_TARGET)
 
-%.o: %.c
+$(BUILD_DIR)/%.o: %.c | dirs
+	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f src/boot/*.o src/kernel/*.o src/bin/*.o bin/ice-boot bin/ice-kernel
+	rm -rf $(BUILD_DIR) $(BIN_DIR)
+
+purge: clean
+	rm -rf $(LOG_DIR) $(TMP_DIR) $(CACHE_DIR)
+
+-include $(BOOT_OBJ:.o=.d) $(KERNEL_OBJ:.o=.d)
