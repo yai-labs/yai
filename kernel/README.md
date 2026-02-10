@@ -2,13 +2,13 @@
 
 L1 Kernel implementation. This repo is runtime-critical and must remain compliant with YAI Law.
 Kernel is governed by YAI Law at repo root.
-See: `../boundaries/L1-kernel.md` and `../formal/spec_map.md`.
+See: `../law/boundaries/L1-kernel.md` and `../law/formal/spec_map.md`.
 
 ## Authority Sources
 
-- `../axioms/*`
-- `../invariants/*`
-- `../boundaries/*` (especially L1 Kernel boundary; L0 Vault contract; YAI Law invariants and axioms.)
+- `../law/axioms/*`
+- `../law/invariants/*`
+- `../law/boundaries/*` (especially L1 Kernel boundary; L0 Vault contract; YAI Law invariants and axioms.)
 
 ## Quickstart
 

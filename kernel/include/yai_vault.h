@@ -6,7 +6,7 @@
 #include <stddef.h>
 
 // Protocol authority (source of truth)
-#include "../../specs/protocol/commands.h"
+#include "../../law/specs/protocol/commands.h"
 
 // Costanti di Sistema per l'accesso SHM
 #define SHM_VAULT_PREFIX "/yai_vault_"

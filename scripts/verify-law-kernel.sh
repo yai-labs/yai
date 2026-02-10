@@ -2,9 +2,9 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-LAW="$ROOT"
+LAW="$ROOT/law"
 FORMAL="$LAW/formal"
-KERNEL="$LAW/kernel"
+KERNEL="$ROOT/kernel"
 
 TLA_JAR="${TLA_JAR:-/Users/francescomaiomascio/Developer/tools/tla/tla2tools.jar}"
 

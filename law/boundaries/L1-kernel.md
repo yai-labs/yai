@@ -121,7 +121,7 @@ At kernel entry:
   * `formal/YAI_KERNEL.cfg`
 * Runtime enforcement must match the model:
 
-  * `kernel/src/kernel/*`
+* `../kernel/src/kernel/*`
 * Every transition must be:
 
   * checked (guards + capabilities)
@@ -135,8 +135,8 @@ At kernel entry:
 This boundary binds:
 
 * `formal/YAI_KERNEL.tla`, `formal/YAI_KERNEL.cfg`
-* `kernel/include/yai_kernel.h`, `kernel/include/kernel.h`
-* `kernel/include/yai_vault.h`
+* `../kernel/include/yai_kernel.h`, `../kernel/include/kernel.h`
+* `../kernel/include/yai_vault.h`
 * `specs/protocol/protocol.h`
 
 All downstream components interact with the kernel only through these surfaces (direct state mutation elsewhere is non-compliant).

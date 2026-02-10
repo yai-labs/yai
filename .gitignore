@@ -14,4 +14,5 @@ node_modules/
 *.so
 *.d
 /.yai/
-/formal/states/
+/law/formal/states/
+states/
