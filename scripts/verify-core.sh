@@ -12,7 +12,7 @@ echo "=== FORMAL:    $FORMAL"
 echo "=== TLA_JAR:   $TLA_JAR"
 
 echo "=== CHECK GENERATED"
-cd "$LAW"
+cd "$ROOT"
 bash scripts/check-generated.sh
 
 echo "=== TLC QUICK"

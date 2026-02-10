@@ -15,10 +15,10 @@ echo "=== TLA_JAR:  $TLA_JAR"
 
 echo "=== GENERATE VAULT ABI"
 cd "$ROOT"
-python3 law/scripts/gen-vault-abi.py
+python3 scripts/gen-vault-abi.py
 
 echo "=== CHECK GENERATED"
-bash law/scripts/check-generated.sh
+bash scripts/check-generated.sh
 
 echo "=== KERNEL BUILD"
 cd "$KERNEL"

@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 SPEC="$ROOT/law/specs/vault/vault_abi.json"
-GEN="$ROOT/law/scripts/gen-vault-abi.py"
+GEN="$ROOT/scripts/gen-vault-abi.py"
 
 TMP_DIR="$(mktemp -d)"
 cleanup() {
