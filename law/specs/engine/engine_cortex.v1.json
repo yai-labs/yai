@@ -1,0 +1,39 @@
+{
+  "version": "1.0",
+  "scope": "engine_cortex_baseline",
+  "deterministic": true,
+  "signals": [
+    "queue_depth"
+  ],
+  "events": [
+    "engine_scale_up",
+    "engine_scale_down"
+  ],
+  "state_machine": {
+    "modes": [
+      "stable",
+      "cooldown_up",
+      "cooldown_down"
+    ],
+    "rules": {
+      "up": "ewma > up_threshold for up_hold_ms OR (queue_depth - ewma) > peak_delta",
+      "down": "ewma < down_threshold for down_hold_ms",
+      "hysteresis": "down_threshold < up_threshold"
+    }
+  },
+  "defaults": {
+    "tick_ms": 100,
+    "ewma_alpha": 0.2,
+    "up_threshold": 30,
+    "down_threshold": 10,
+    "peak_delta": 20,
+    "up_hold_ms": 500,
+    "down_hold_ms": 2000,
+    "cooldown_up_ms": 3000,
+    "cooldown_down_ms": 5000,
+    "min_target": 1,
+    "max_target": 8,
+    "step_up": 1,
+    "step_down": 1
+  }
+}
