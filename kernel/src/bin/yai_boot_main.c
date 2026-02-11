@@ -11,12 +11,33 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <errno.h>
+#include <limits.h>
+#include <libgen.h>
 #ifdef __APPLE__
 #include <sys/utsname.h>
 #endif
 
 // Percorso canonico del binario del Kernel (repo unico)
-#define KERNEL_BINARY "./bin/yai-kernel"
+#define KERNEL_BINARY "yai-kernel"
+
+static const char *resolve_kernel_path(char **argv) {
+    const char *env = getenv("YAI_KERNEL_BIN");
+    if (env && env[0] != '\0') {
+        return env;
+    }
+
+    static char buf[PATH_MAX];
+    if (argv && argv[0] && strchr(argv[0], '/')) {
+        char tmp[PATH_MAX];
+        strncpy(tmp, argv[0], sizeof(tmp) - 1);
+        tmp[sizeof(tmp) - 1] = '\0';
+        char *dir = dirname(tmp);
+        snprintf(buf, sizeof(buf), "%s/%s", dir, KERNEL_BINARY);
+        return buf;
+    }
+
+    return KERNEL_BINARY;
+}
 
 static int yai_create_shm_vault(const char *ws_id, uint32_t quota, const char *channel) {
     char shm_path[128];
@@ -113,16 +134,33 @@ int main(int argc, char **argv) {
 #endif
     }
 
+    printf("YAI_BOOT_OK ws=%s\n", ws_id);
+    fflush(stdout);
+
+    const char *no_exec = getenv("YAI_BOOT_NO_EXEC");
+    if (no_exec && strcmp(no_exec, "1") == 0) {
+        printf("[BOOTSTRAP] Kernel exec disabled by env. Exiting bootstrap.\n");
+        return EXIT_SUCCESS;
+    }
+
     // 4. Authority Handoff: Esecuzione del Kernel
     // Invece di chiamare bridge engine, usiamo execvp per trasformare 
     // il processo Bootstrap nel processo Kernel.
     printf("[BOOTSTRAP] Handing off authority to KERNEL...\n");
-    
-    char *kernel_args[] = { KERNEL_BINARY, "--ws", (char *)ws_id, NULL };
-    
-    if (execvp(KERNEL_BINARY, kernel_args) == -1) {
-        perror("[FATAL] Failed to execute YAI-Kernel");
-        return EXIT_FAILURE;
+
+    const char *kernel_bin = resolve_kernel_path(argv);
+    char *kernel_args[] = { (char *)kernel_bin, "--ws", (char *)ws_id, NULL };
+
+    if (strchr(kernel_bin, '/')) {
+        if (execv(kernel_bin, kernel_args) == -1) {
+            perror("[FATAL] Failed to execute YAI-Kernel");
+            return EXIT_FAILURE;
+        }
+    } else {
+        if (execvp(kernel_bin, kernel_args) == -1) {
+            perror("[FATAL] Failed to execute YAI-Kernel");
+            return EXIT_FAILURE;
+        }
     }
 
     // Se arriviamo qui, execvp è fallita
