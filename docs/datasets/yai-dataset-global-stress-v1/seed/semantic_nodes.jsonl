@@ -1,0 +1,15 @@
+{"id": "node:user:test_user", "kind": "user", "meta": {"display": "Test User", "role": "developer"}, "tags": ["user", "synthetic"]}
+{"id": "node:machine:macbook_dev", "kind": "machine", "meta": {"os": "macOS", "arch": "arm64", "label": "MacBook Dev"}, "tags": ["machine", "local"]}
+{"id": "node:machine:gpu_lan_01", "kind": "machine", "meta": {"os": "linux", "gpu": "RTX", "label": "GPU LAN 01"}, "tags": ["machine", "lan"]}
+{"id": "node:project:yai", "kind": "project", "meta": {"name": "YAI", "repo_root": "~/Developer/YAI"}, "tags": ["project"]}
+{"id": "node:project:ecoh_governance_demo", "kind": "project", "meta": {"name": "Ecoh Governance Demo", "domain": "ecohmedia.com"}, "tags": ["project", "enterprise"]}
+{"id": "node:std:gdpr", "kind": "standard", "meta": {"name": "GDPR", "type": "privacy"}, "tags": ["standard", "privacy"]}
+{"id": "node:std:iso27001", "kind": "standard", "meta": {"name": "ISO/IEC 27001", "type": "security_mgmt"}, "tags": ["standard", "security"]}
+{"id": "node:std:iso20000", "kind": "standard", "meta": {"name": "ISO/IEC 20000", "type": "service_mgmt"}, "tags": ["standard", "service"]}
+{"id": "node:std:iso9001", "kind": "standard", "meta": {"name": "ISO 9001", "type": "quality_mgmt"}, "tags": ["standard", "quality"]}
+{"id": "node:concept:uds", "kind": "concept", "meta": {"label": "Unix Domain Socket (UDS)"}, "tags": ["concept"]}
+{"id": "node:concept:vault", "kind": "concept", "meta": {"label": "Vault (SHM ABI)"}, "tags": ["concept"]}
+{"id": "node:concept:kernel_dead", "kind": "concept", "meta": {"label": "kernel_dead hard-fail"}, "tags": ["concept"]}
+{"id": "node:memory:beer_2024_02_13", "kind": "fact", "meta": {"label": "Beer on 2024-02-13", "value": "TEST_BREW_IPA", "note": "synthetic seed"}, "tags": ["seed", "fun"]}
+{"id": "node:file:foo_c", "kind": "file", "meta": {"path": "foo.c"}, "tags": ["seed", "file"]}
+{"id": "node:error:e_runtime", "kind": "error", "meta": {"code": "E_RUNTIME", "desc": "Runtime socket issue"}, "tags": ["seed", "error"]}

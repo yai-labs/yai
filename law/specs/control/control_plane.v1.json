@@ -1,0 +1,48 @@
+{
+  "version": "1.0",
+  "paths": {
+    "run_dir": "~/.yai/run/<ws>/",
+    "control_socket": "~/.yai/run/<ws>/control.sock",
+    "lock_file": "~/.yai/run/<ws>/lock",
+    "daemon_pid": "~/.yai/run/<ws>/daemon.pid",
+    "session_file": "~/.yai/run/<ws>/session.json",
+    "runtime_socket": "/tmp/yai_runtime_<ws>.sock"
+  },
+  "rpc": {
+    "transport": "uds",
+    "framing": "json_lines",
+    "requests": [
+      "ping",
+      "status",
+      "up",
+      "down",
+      "providers_discover",
+      "providers_list",
+      "providers_pair",
+      "providers_attach",
+      "providers_detach",
+      "providers_status",
+      "providers_revoke",
+      "events_subscribe"
+    ],
+    "responses": [
+      "pong",
+      "status",
+      "up_ok",
+      "down_ok",
+      "providers",
+      "provider_status",
+      "event",
+      "error"
+    ]
+  },
+  "process_group": {
+    "mode": "single_pgid",
+    "kill_order": [
+      "killpg(SIGTERM)",
+      "wait",
+      "killpg(SIGKILL)",
+      "individual_pids"
+    ]
+  }
+}

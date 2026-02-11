@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "node": {
+    "id": "string",
+    "kind": "string",
+    "meta": "object"
+  },
+  "edge": {
+    "src": "string",
+    "dst": "string",
+    "rel": "string",
+    "weight": "float"
+  },
+  "query": {
+    "k": "int",
+    "hops": "int"
+  }
+}

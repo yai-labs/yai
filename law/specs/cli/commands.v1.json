@@ -1,0 +1,579 @@
+{
+  "version": "1.0",
+  "binary": "yai",
+  "defaults": {
+    "ws_flag": "--ws",
+    "ws_default_source": "config"
+  },
+  "exit_codes": {
+    "0": "success",
+    "1": "generic_failure",
+    "2": "invalid_arguments_or_contract_violation",
+    "3": "dependency_missing",
+    "4": "runtime_not_ready"
+  },
+  "commands": [
+    {
+      "name": "up",
+      "group": "lifecycle",
+      "summary": "Start stack: boot + engine + mind",
+      "args": [
+        {
+          "name": "ws",
+          "flag": "--ws",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "build",
+          "flag": "--build",
+          "type": "bool",
+          "required": false,
+          "default": false
+        },
+        {
+          "name": "ai",
+          "flag": "--ai",
+          "type": "bool",
+          "required": false,
+          "default": false
+        },
+        {
+          "name": "no_engine",
+          "flag": "--no-engine",
+          "type": "bool",
+          "required": false,
+          "default": false
+        },
+        {
+          "name": "no_mind",
+          "flag": "--no-mind",
+          "type": "bool",
+          "required": false,
+          "default": false
+        },
+        {
+          "name": "detach",
+          "flag": "--detach",
+          "type": "bool",
+          "required": false,
+          "default": false
+        },
+        {
+          "name": "monitor",
+          "flag": "--monitor",
+          "type": "bool",
+          "required": false,
+          "default": false
+        },
+        {
+          "name": "timeout_ms",
+          "flag": "--timeout-ms",
+          "type": "int",
+          "required": false
+        }
+      ],
+      "outputs": [
+        "text",
+        "json"
+      ],
+      "side_effects": [
+        "spawn_processes",
+        "write_session",
+        "write_logs",
+        "create_socket",
+        "rpc_call"
+      ],
+      "law_hooks": [
+        "I-001",
+        "I-002",
+        "I-006",
+        "L1",
+        "L2",
+        "L3"
+      ]
+    },
+    {
+      "name": "restart",
+      "group": "lifecycle",
+      "summary": "Restart stack for a workspace",
+      "args": [
+        {
+          "name": "ws",
+          "flag": "--ws",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "build",
+          "flag": "--build",
+          "type": "bool",
+          "required": false,
+          "default": false
+        },
+        {
+          "name": "ai",
+          "flag": "--ai",
+          "type": "bool",
+          "required": false,
+          "default": false
+        },
+        {
+          "name": "no_engine",
+          "flag": "--no-engine",
+          "type": "bool",
+          "required": false,
+          "default": false
+        },
+        {
+          "name": "no_mind",
+          "flag": "--no-mind",
+          "type": "bool",
+          "required": false,
+          "default": false
+        },
+        {
+          "name": "detach",
+          "flag": "--detach",
+          "type": "bool",
+          "required": false,
+          "default": false
+        },
+        {
+          "name": "monitor",
+          "flag": "--monitor",
+          "type": "bool",
+          "required": false,
+          "default": false
+        },
+        {
+          "name": "timeout_ms",
+          "flag": "--timeout-ms",
+          "type": "int",
+          "required": false
+        },
+        {
+          "name": "force",
+          "flag": "--force",
+          "type": "bool",
+          "required": false,
+          "default": false
+        }
+      ],
+      "outputs": [
+        "text",
+        "json"
+      ],
+      "side_effects": [
+        "signal_processes",
+        "spawn_processes",
+        "write_session",
+        "write_logs",
+        "create_socket",
+        "rpc_call"
+      ],
+      "law_hooks": [
+        "I-001",
+        "I-002",
+        "I-006",
+        "L1",
+        "L2",
+        "L3"
+      ]
+    },
+    {
+      "name": "down",
+      "group": "lifecycle",
+      "summary": "Stop stack and cleanup runtime artifacts",
+      "args": [
+        {
+          "name": "ws",
+          "flag": "--ws",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "force",
+          "flag": "--force",
+          "type": "bool",
+          "required": false,
+          "default": false
+        }
+      ],
+      "outputs": [
+        "text",
+        "json"
+      ],
+      "side_effects": [
+        "signal_processes",
+        "remove_session",
+        "remove_socket",
+        "rpc_call"
+      ],
+      "law_hooks": [
+        "I-001",
+        "I-006",
+        "L1",
+        "L2",
+        "L3"
+      ]
+    },
+    {
+      "name": "status",
+      "group": "inspect",
+      "summary": "Show runtime status (pids, socket, vault readiness)",
+      "args": [
+        {
+          "name": "ws",
+          "flag": "--ws",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "json",
+          "flag": "--json",
+          "type": "bool",
+          "required": false,
+          "default": false
+        }
+      ],
+      "outputs": [
+        "text",
+        "json"
+      ],
+      "side_effects": [],
+      "law_hooks": [
+        "I-001",
+        "L1",
+        "L2",
+        "L3"
+      ]
+    },
+    {
+      "name": "logs",
+      "group": "inspect",
+      "summary": "Tail logs for a component",
+      "args": [
+        {
+          "name": "component",
+          "pos": 1,
+          "type": "enum",
+          "values": [
+            "boot",
+            "engine",
+            "mind",
+            "kernel"
+          ],
+          "required": true
+        },
+        {
+          "name": "ws",
+          "flag": "--ws",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "follow",
+          "flag": "--follow",
+          "type": "bool",
+          "required": false,
+          "default": false
+        }
+      ],
+      "outputs": [
+        "text"
+      ],
+      "side_effects": [],
+      "law_hooks": [
+        "I-001"
+      ]
+    },
+    {
+      "name": "monitor",
+      "group": "monitor",
+      "summary": "Full-screen TUI cockpit",
+      "args": [
+        {
+          "name": "ws",
+          "flag": "--ws",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "headless",
+          "flag": "--headless",
+          "type": "bool",
+          "required": false,
+          "default": false
+        },
+        {
+          "name": "monitor",
+          "flag": "--monitor",
+          "type": "bool",
+          "required": false,
+          "default": false
+        }
+      ],
+      "outputs": [
+        "tui",
+        "text"
+      ],
+      "side_effects": [],
+      "law_hooks": [
+        "I-001",
+        "L1",
+        "L2",
+        "L3"
+      ]
+    },
+    {
+      "name": "events",
+      "group": "monitor",
+      "summary": "Stream daemon events (NDJSON)",
+      "args": [
+        {
+          "name": "ws",
+          "flag": "--ws",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "outputs": [
+        "text"
+      ],
+      "side_effects": [
+        "rpc_call"
+      ],
+      "law_hooks": [
+        "I-001",
+        "L1",
+        "L2",
+        "L3"
+      ]
+    },
+    {
+      "name": "verify",
+      "group": "verify",
+      "summary": "Run verification gates",
+      "args": [
+        {
+          "name": "target",
+          "pos": 1,
+          "type": "enum",
+          "values": [
+            "core",
+            "law-kernel",
+            "full"
+          ],
+          "required": true
+        }
+      ],
+      "outputs": [
+        "text",
+        "json"
+      ],
+      "side_effects": [
+        "spawn_processes",
+        "run_scripts"
+      ],
+      "law_hooks": [
+        "I-003",
+        "I-001",
+        "Lx"
+      ]
+    },
+    {
+      "name": "test",
+      "group": "verify",
+      "summary": "Run test gates",
+      "args": [
+        {
+          "name": "target",
+          "pos": 1,
+          "type": "enum",
+          "values": [
+            "smoke"
+          ],
+          "required": true
+        },
+        {
+          "name": "ws",
+          "flag": "--ws",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "timeout_ms",
+          "flag": "--timeout-ms",
+          "type": "int",
+          "required": false
+        }
+      ],
+      "outputs": [
+        "text",
+        "json"
+      ],
+      "side_effects": [
+        "spawn_processes"
+      ],
+      "law_hooks": [
+        "I-001",
+        "L1",
+        "L2",
+        "L3"
+      ]
+    },
+    {
+      "name": "providers",
+      "group": "control",
+      "summary": "Provider lifecycle (discover/pair/attach/detach/status)",
+      "args": [
+        {
+          "name": "subcommand",
+          "pos": 1,
+          "type": "enum",
+          "values": [
+            "discover",
+            "list",
+            "pair",
+            "attach",
+            "detach",
+            "status"
+          ],
+          "required": true
+        },
+        {
+          "name": "ws",
+          "flag": "--ws",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "outputs": [
+        "text",
+        "json"
+      ],
+      "side_effects": [
+        "rpc_call",
+        "write_trust",
+        "write_session"
+      ],
+      "law_hooks": [
+        "I-001",
+        "L3"
+      ]
+    },
+    {
+      "name": "sessions",
+      "group": "control",
+      "summary": "List or kill sessions",
+      "args": [
+        {
+          "name": "subcommand",
+          "pos": 1,
+          "type": "enum",
+          "values": [
+            "list",
+            "kill"
+          ],
+          "required": true
+        },
+        {
+          "name": "ws",
+          "flag": "--ws",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "force",
+          "flag": "--force",
+          "type": "bool",
+          "required": false,
+          "default": false
+        }
+      ],
+      "outputs": [
+        "text",
+        "json"
+      ],
+      "side_effects": [
+        "rpc_call",
+        "signal_processes"
+      ],
+      "law_hooks": [
+        "I-001",
+        "L1",
+        "L2",
+        "L3"
+      ]
+    },
+    {
+      "name": "graph",
+      "group": "memory",
+      "summary": "MindGraph operations (semantic add-node/add-edge, query uses semantic+vector+activation)",
+      "args": [
+        {
+          "name": "subcommand",
+          "pos": 1,
+          "type": "enum",
+          "values": [
+            "add-node",
+            "add-edge",
+            "query"
+          ],
+          "required": true
+        },
+        {
+          "name": "ws",
+          "flag": "--ws",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "outputs": [
+        "text",
+        "json"
+      ],
+      "side_effects": [
+        "write_semantic",
+        "read_semantic",
+        "write_vector",
+        "read_vector"
+      ],
+      "law_hooks": [
+        "I-001",
+        "L3"
+      ]
+    },
+    {
+      "name": "embed",
+      "group": "memory",
+      "summary": "Generate embedding vector",
+      "args": [
+        {
+          "name": "model",
+          "flag": "--model",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "text",
+          "flag": "--text",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "outputs": [
+        "text",
+        "json"
+      ],
+      "side_effects": [
+        "read_models"
+      ],
+      "law_hooks": [
+        "I-001",
+        "L3"
+      ]
+    }
+  ]
+}

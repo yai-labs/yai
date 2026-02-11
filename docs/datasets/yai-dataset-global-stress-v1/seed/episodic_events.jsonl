@@ -1,0 +1,20 @@
+{"event_id": "c4a92760-a896-455d-8720-f9dab7d2d584", "ts": 1770725753, "ws": "dev", "type": "ws_up_started", "payload": {"ws": "dev"}}
+{"event_id": "cb7a509d-6f65-4582-89bf-13e2a7e800dd", "ts": 1770725755, "ws": "dev", "type": "proc_started", "payload": {"proc": "boot", "pid": 1001, "pgid": 1001}}
+{"event_id": "2dead0b1-9117-4865-b56c-64484ebfad1f", "ts": 1770725755, "ws": "dev", "type": "proc_started", "payload": {"proc": "kernel", "pid": 1002, "pgid": 1001}}
+{"event_id": "471a18cc-df57-4120-a592-69bc7d691fa7", "ts": 1770725755, "ws": "dev", "type": "proc_started", "payload": {"proc": "engine", "pid": 1003, "pgid": 1001}}
+{"event_id": "667b65ea-4085-436a-b2a2-320d7b5359e4", "ts": 1770725755, "ws": "dev", "type": "proc_started", "payload": {"proc": "mind", "pid": 1004, "pgid": 1001}}
+{"event_id": "61853c73-8955-4246-9b99-a824be1a585c", "ts": 1770725756, "ws": "dev", "type": "ws_up_complete", "payload": {"ws": "dev"}}
+{"event_id": "ce0b3d76-9651-499a-9dbf-b21aef3a0e43", "ts": 1770725757, "ws": "dev", "type": "status_changed", "payload": {"boot": false, "kernel": true, "engine": true, "mind": true}}
+{"event_id": "eb604550-d2f4-4267-9ea0-f4fe1ad2edae", "ts": 1770725863, "ws": "dev", "type": "kernel_block", "payload": {"capability": "fs_write", "path": "/etc/hosts", "reason": "outside_workspace"}}
+{"event_id": "c8011663-c23d-4189-88fd-822ec1ba1cef", "ts": 1770725943, "ws": "dev", "type": "provider_discovered", "payload": {"id": "remote:http://127.0.0.1:8080/v1/chat/completions", "model": "qwen2.5-coder", "trusted": false}}
+{"event_id": "c229f620-13c7-4c80-8ce4-141655784c71", "ts": 1770725963, "ws": "dev", "type": "provider_paired", "payload": {"id": "remote:http://127.0.0.1:8080/v1/chat/completions"}}
+{"event_id": "30d33723-091a-446d-ab09-6d3e6a002a10", "ts": 1770725983, "ws": "dev", "type": "provider_attached", "payload": {"id": "remote:http://127.0.0.1:8080/v1/chat/completions", "model": "qwen2.5-coder"}}
+{"event_id": "e19ad079-44f5-4ac3-bdad-3a6f13e44005", "ts": 1770726043, "ws": "dev", "type": "proc_exit", "payload": {"proc": "kernel", "signal": "KILL"}}
+{"event_id": "be6fdd93-dc9e-4616-bae6-5cc1e8ca11c9", "ts": 1770726043, "ws": "dev", "type": "proc_exit", "payload": {"proc": "engine", "signal": "TERM"}}
+{"event_id": "e6b4d322-4b06-4edf-90bb-fa7d67ffb982", "ts": 1770726043, "ws": "dev", "type": "proc_exit", "payload": {"proc": "mind", "signal": "TERM"}}
+{"event_id": "7cc0f905-f6c6-4583-b305-4b7967194ce0", "ts": 1770726044, "ws": "dev", "type": "kernel_dead", "payload": {"reason": "kernel_dead"}}
+{"event_id": "1b9ec4c5-e85a-4574-97a8-8d73744aa349", "ts": 1770726046, "ws": "dev", "type": "ws_down_complete", "payload": {"ws": "dev"}}
+{"event_id": "49f744fc-846f-4c42-b81b-b9ae4619e6bb", "ts": 1770726143, "ws": "dev", "type": "user_note", "payload": {"key": "beer_2024_02_13", "value": "TEST_BREW_IPA", "note": "synthetic seed"}}
+{"event_id": "3054e59d-e819-4504-a614-adacaf55a6fb", "ts": 1770726243, "ws": "test01", "type": "ws_up_complete", "payload": {"ws": "test01"}}
+{"event_id": "60303942-26dd-474e-ad4e-652426581ea8", "ts": 1770726263, "ws": "test01", "type": "status_changed", "payload": {"boot": false, "kernel": true, "engine": true, "mind": true}}
+{"event_id": "7087ac41-7231-431d-863a-72b1c2b6e727", "ts": 1770726443, "ws": "test01", "type": "ws_down_complete", "payload": {"ws": "test01"}}

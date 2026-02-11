@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+BIN="${BIN:-$(command -v yai || true)}"
+CFG="${HOME}/.yai/config/yai.toml"
+
+WS_DEFAULT="${YAI_WS_DEFAULT:-dev}"
+if [[ -f "${CFG}" ]]; then
+  WS_DEFAULT="$(grep -E '^ws_default' "${CFG}" | head -n 1 | sed -E 's/.*"([^"]+)".*/\1/')"
+  WS_DEFAULT="${WS_DEFAULT:-${YAI_WS_DEFAULT:-dev}}"
+fi
+
+if [[ -n "$BIN" && -x "$BIN" ]]; then
+  "$BIN" down --ws "${WS_DEFAULT}" || true
+fi
+
+if [[ -d "${ROOT}/mind" ]]; then
+  (cd "${ROOT}/mind" && cargo clean)
+fi
+
+if [[ -d "${ROOT}/kernel" ]]; then
+  (cd "${ROOT}/kernel" && make clean)
+fi
+
+if [[ -d "${ROOT}/engine" ]]; then
+  (cd "${ROOT}/engine" && make clean)
+fi
+
+if [[ -d "${HOME}/.yai/artifacts" ]]; then
+  find "${HOME}/.yai/artifacts" -type d \( -name build -o -name target -o -name dist \) -prune -exec rm -rf {} +
+fi
+
+echo "OK: purge complete"

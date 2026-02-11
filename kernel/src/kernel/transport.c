@@ -3,9 +3,18 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include "transport.h"
 
 #define SOCKET_PATH "/tmp/yai_runtime.sock"
+
+static const char *yai_socket_path(void) {
+    const char *env_path = getenv("YAI_RUNTIME_SOCKET");
+    if (env_path && env_path[0] != '\0') {
+        return env_path;
+    }
+    return SOCKET_PATH;
+}
 
 static int server_fd = -1;
 
@@ -41,13 +50,14 @@ int yai_transport_init(void) {
     
     memset(&addr, 0, sizeof(struct sockaddr_un));
     addr.sun_family = AF_UNIX;
-    strncpy(addr.sun_path, SOCKET_PATH, sizeof(addr.sun_path) - 1);
+    const char *sock_path = yai_socket_path();
+    strncpy(addr.sun_path, sock_path, sizeof(addr.sun_path) - 1);
 
-    unlink(SOCKET_PATH); // Pulisce se esiste già
+    unlink(sock_path); // Pulisce se esiste già
     if (bind(server_fd, (struct sockaddr *)&addr, sizeof(struct sockaddr_un)) < 0) return -2;
     if (listen(server_fd, 5) < 0) return -3;
 
-    printf("[TRANSPORT] UDS Socket listening at %s\n", SOCKET_PATH);
+    printf("[TRANSPORT] UDS Socket listening at %s\n", sock_path);
     // Qui il main loop accetterà le connessioni dell'Engine
     return 0;
 }

@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "YAI CLI Commands v1",
+  "type": "object",
+  "required": ["version", "binary", "commands"],
+  "properties": {
+    "version": { "type": "string" },
+    "binary": { "type": "string" },
+    "defaults": {
+      "type": "object",
+      "properties": {
+        "ws_flag": { "type": "string" },
+        "ws_default_source": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "exit_codes": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    },
+    "commands": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/command" }
+    }
+  },
+  "$defs": {
+    "arg": {
+      "type": "object",
+      "required": ["name", "type"],
+      "properties": {
+        "name": { "type": "string" },
+        "flag": { "type": "string" },
+        "pos": { "type": "integer" },
+        "type": { "type": "string" },
+        "values": { "type": "array", "items": { "type": "string" } },
+        "required": { "type": "boolean" },
+        "default": {}
+      },
+      "additionalProperties": true
+    },
+    "command": {
+      "type": "object",
+      "required": ["name", "group", "summary", "args"],
+      "properties": {
+        "name": { "type": "string" },
+        "group": { "type": "string" },
+        "summary": { "type": "string" },
+        "args": { "type": "array", "items": { "$ref": "#/$defs/arg" } },
+        "outputs": { "type": "array", "items": { "type": "string" } },
+        "side_effects": { "type": "array", "items": { "type": "string" } },
+        "law_hooks": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": true
+    }
+  }
+}

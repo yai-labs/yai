@@ -1,5 +1,5 @@
 \* AUTO-GENERATED: law/specs/vault/vault_abi.json
-\* Generated: 2026-02-10T15:14:52Z
+\* Generated: 2026-02-10T19:29:11Z
 ---- MODULE LAW_IDS ----
 VaultAbiVersion == 1
 VaultLayoutBytes == 4096

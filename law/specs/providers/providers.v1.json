@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "store": {
+    "path": "~/.yai/trust/providers.json",
+    "fields": [
+      "version",
+      "updated_at",
+      "providers[]",
+      "integrity.file_hash",
+      "integrity.signature"
+    ]
+  },
+  "provider_record": {
+    "required": [
+      "id",
+      "endpoint",
+      "model",
+      "trust_state",
+      "last_seen",
+      "audit.history_hash",
+      "integrity.record_hash",
+      "integrity.signature"
+    ]
+  },
+  "workspace_attachment": {
+    "path": "~/.yai/run/<ws>/providers.json"
+  },
+  "states": [
+    "discovered",
+    "paired",
+    "attached",
+    "detached",
+    "revoked"
+  ],
+  "transitions": [
+    ["discovered", "paired"],
+    ["paired", "attached"],
+    ["attached", "detached"],
+    ["detached", "attached"],
+    ["discovered", "revoked"],
+    ["paired", "revoked"],
+    ["attached", "revoked"],
+    ["detached", "revoked"]
+  ],
+  "events": [
+    "provider_discovered",
+    "provider_paired",
+    "provider_attached",
+    "provider_detached",
+    "provider_revoked"
+  ]
+}

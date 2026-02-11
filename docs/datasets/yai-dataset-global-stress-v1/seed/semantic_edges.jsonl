@@ -1,0 +1,14 @@
+{"src": "node:user:test_user", "dst": "node:machine:macbook_dev", "rel": "uses", "weight": 0.9, "meta": {"since": "2023"}}
+{"src": "node:user:test_user", "dst": "node:project:yai", "rel": "works_on", "weight": 1.0, "meta": {}}
+{"src": "node:project:yai", "dst": "node:concept:uds", "rel": "uses", "weight": 0.8, "meta": {}}
+{"src": "node:project:yai", "dst": "node:concept:vault", "rel": "uses", "weight": 0.8, "meta": {}}
+{"src": "node:concept:kernel_dead", "dst": "node:concept:uds", "rel": "related_to", "weight": 0.6, "meta": {}}
+{"src": "node:file:foo_c", "dst": "node:error:e_runtime", "rel": "blocked_by_kernel", "weight": 1.0, "meta": {}}
+{"src": "node:error:e_runtime", "dst": "node:concept:uds", "rel": "relates_to", "weight": 0.9, "meta": {}}
+{"src": "node:std:gdpr", "dst": "node:project:yai", "rel": "constrains", "weight": 0.7, "meta": {"focus": "data_minimization"}}
+{"src": "node:std:iso27001", "dst": "node:project:yai", "rel": "constrains", "weight": 0.7, "meta": {"focus": "access_control"}}
+{"src": "node:std:iso20000", "dst": "node:project:yai", "rel": "constrains", "weight": 0.5, "meta": {"focus": "service_management"}}
+{"src": "node:std:iso9001", "dst": "node:project:yai", "rel": "constrains", "weight": 0.4, "meta": {"focus": "quality_management"}}
+{"src": "node:project:ecoh_governance_demo", "dst": "node:std:iso27001", "rel": "references", "weight": 0.6, "meta": {}}
+{"src": "node:project:ecoh_governance_demo", "dst": "node:std:gdpr", "rel": "references", "weight": 0.6, "meta": {}}
+{"src": "node:project:ecoh_governance_demo", "dst": "node:project:yai", "rel": "test_profile_for", "weight": 0.5, "meta": {}}
