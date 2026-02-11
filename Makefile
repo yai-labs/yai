@@ -1,5 +1,5 @@
 ROOT_DIR := $(abspath .)
-ARTIFACT_ROOT := $(ROOT_DIR)/../.yai/artifacts/yai-core
+ARTIFACT_ROOT := $(HOME)/.yai/artifacts/yai-core
 BIN_DIR := $(ARTIFACT_ROOT)/bin
 BUILD_DIR := $(ARTIFACT_ROOT)/build
 DIST_DIR := $(ARTIFACT_ROOT)/dist

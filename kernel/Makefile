@@ -1,5 +1,5 @@
 CC = gcc
-ART_ROOT ?= ../../.yai/artifacts/yai-core
+ART_ROOT ?= $(HOME)/.yai/artifacts/yai-core
 OUT_BUILD_DIR ?=
 OUT_BIN_DIR ?=
 BUILD_DIR ?= $(if $(OUT_BUILD_DIR),$(OUT_BUILD_DIR),$(ART_ROOT)/build/kernel)

@@ -2,7 +2,7 @@
 # Target: Eseguibile binario C-only (no Python)
 
 CC = gcc
-ART_ROOT ?= ../../.yai/artifacts/yai-core
+ART_ROOT ?= $(HOME)/.yai/artifacts/yai-core
 OUT_BUILD_DIR ?=
 OUT_BIN_DIR ?=
 BUILD_DIR ?= $(if $(OUT_BUILD_DIR),$(OUT_BUILD_DIR),$(ART_ROOT)/build/engine)
@@ -14,10 +14,10 @@ CACHE_DIR ?= $(ART_ROOT)/cache
 CFLAGS = -Wall -Wextra -O2 -I./include -I../kernel/include -I../law/specs/vault -I../law/specs/protocol -MMD -MP
 LDFLAGS = -lpthread
 
-
 # Directory
 SRC_DIR = src
 TARGET = $(BIN_DIR)/yai-engine
+TEST_CORTEX = $(BUILD_DIR)/cortex_harness
 
 # Sorgenti e Oggetti
 SRCS = $(wildcard $(SRC_DIR)/*.c)
@@ -40,6 +40,12 @@ $(TARGET): $(OBJS)
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c | dirs
 	$(CC) $(CFLAGS) -c $< -o $@
 
+test-cortex: dirs $(TEST_CORTEX)
+	@$(TEST_CORTEX)
+
+$(TEST_CORTEX): tests/cortex_harness.c src/engine_cortex.c | dirs
+	$(CC) $(CFLAGS) tests/cortex_harness.c src/engine_cortex.c -o $(TEST_CORTEX)
+
 # Pulizia
 clean:
 	rm -rf $(BUILD_DIR) $(BIN_DIR)
@@ -52,6 +58,6 @@ purge: clean
 debug: CFLAGS += -g -DDEBUG
 debug: all
 
-.PHONY: all clean purge dirs debug
+.PHONY: all clean purge dirs debug test-cortex
 
 -include $(OBJS:.o=.d)

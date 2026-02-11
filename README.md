@@ -87,10 +87,31 @@ make package
 
 `make package` produces:
 
-- `../.yai/artifacts/yai-core/bin/yai-boot`
-- `../.yai/artifacts/yai-core/bin/yai-kernel`
-- `../.yai/artifacts/yai-core/bin/yai-engine`
-- `../.yai/artifacts/yai-core/dist/yai-core-<timestamp>.tar.gz`
+- `~/.yai/artifacts/yai-core/bin/yai-boot`
+- `~/.yai/artifacts/yai-core/bin/yai-kernel`
+- `~/.yai/artifacts/yai-core/bin/yai-engine`
+- `~/.yai/artifacts/yai-core/dist/yai-core-<timestamp>.tar.gz`
+
+---
+
+## Core Hygiene (Canonical)
+
+Single-purpose commands for reproducible cleanup, build, and smoke checks.
+
+```bash
+# purge: stop session + clean build artifacts
+./scripts/yai-purge
+
+# build: rebuild core binaries
+(cd yai-core && make package)
+(cd yai-mind && cargo build --release)
+
+# smoke: up + status + monitor (explicit BIN path, no PATH required)
+BIN="20 20 101 12 61 79 80 81 98 702 701 33 100 204 250 395 398 399 400command -v yai)"
+$BIN up --ws dev --build --monitor --ai --detach
+$BIN status --ws dev
+$BIN monitor --ws dev
+```
 
 ---
 
