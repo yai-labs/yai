@@ -1,3 +1,4 @@
+pub mod chat;
 pub mod down;
 pub mod dsar;
 pub mod embed;
@@ -8,6 +9,7 @@ pub mod monitor;
 pub mod providers;
 pub mod restart;
 pub mod sessions;
+pub mod shell;
 pub mod status;
 pub mod up;
 pub mod verify;

@@ -31,6 +31,7 @@ pub struct ChatSession {
 pub struct ChatStore {
     sessions: Mutex<HashMap<String, ChatSession>>,
     messages: Mutex<HashMap<String, Vec<Message>>>,
+    selected: Mutex<Option<String>>,
 }
 
 impl ChatStore {
@@ -60,6 +61,18 @@ impl ChatStore {
             .insert(id.clone(), session.clone());
         self.messages.lock().unwrap().insert(id, Vec::new());
         session
+    }
+
+    pub fn select_session(&self, session_id: &str) -> Result<()> {
+        if !self.sessions.lock().unwrap().contains_key(session_id) {
+            bail!("chat session not found: {session_id}");
+        }
+        *self.selected.lock().unwrap() = Some(session_id.to_string());
+        Ok(())
+    }
+
+    pub fn selected_session(&self) -> Option<String> {
+        self.selected.lock().unwrap().clone()
     }
 
     pub fn history(&self, session_id: &str) -> Result<Vec<Message>> {

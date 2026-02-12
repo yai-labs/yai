@@ -138,6 +138,26 @@ pub enum Request {
     DsarExecute {
         request_id: String,
     },
+    ChatSessionsList,
+    ChatSessionNew {
+        title: Option<String>,
+    },
+    ChatSessionSelect {
+        session_id: String,
+    },
+    ChatHistory {
+        session_id: Option<String>,
+    },
+    ChatSend {
+        session_id: Option<String>,
+        text: String,
+        stream: bool,
+    },
+    ShellExec {
+        cmd: String,
+        args: Vec<String>,
+        cwd: Option<String>,
+    },
     EventsSubscribe,
 }
 
@@ -172,6 +192,25 @@ pub enum Response {
     DsarExecuted {
         request: DsarRecord,
     },
+    ChatSessions {
+        items: Vec<ChatSession>,
+        selected: Option<String>,
+    },
+    ChatSession {
+        session: ChatSession,
+    },
+    ChatHistory {
+        session_id: String,
+        items: Vec<ChatMessage>,
+    },
+    ChatSend {
+        message: ChatMessage,
+    },
+    ShellExec {
+        exit_code: i32,
+        stdout: String,
+        stderr: String,
+    },
     EventsStarted,
     Event {
         event: Event,
@@ -195,4 +234,29 @@ pub struct Event {
     pub data: Value,
     #[serde(default)]
     pub compliance: Option<ComplianceContext>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum ChatRole {
+    System,
+    User,
+    Assistant,
+    Tool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ChatMessage {
+    pub id: String,
+    pub ts_ms: u64,
+    pub role: ChatRole,
+    pub content: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ChatSession {
+    pub id: String,
+    pub title: Option<String>,
+    pub created_ts_ms: u64,
+    pub last_ts_ms: u64,
 }

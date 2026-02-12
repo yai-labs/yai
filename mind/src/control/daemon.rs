@@ -1,10 +1,11 @@
-use crate::control::{dsar, events::EventBus, providers, workspace};
+use crate::control::{chat, dsar, events::EventBus, providers, shell, workspace};
 use crate::interface::config::RuntimeConfig;
 use crate::interface::paths;
 use crate::interface::proc::{is_pid_alive, send_signal};
 use crate::memory::graph::bridge;
 use crate::rpc::protocol::{
-    AliveStatus, ComplianceContext, DsarStatus, ProviderInfo, Request, Response, SanityStatus,
+    AliveStatus, ChatMessage, ChatRole, ChatSession, ComplianceContext, DsarStatus, ProviderInfo,
+    Request, Response, SanityStatus,
 };
 use crate::rpc::uds_server;
 use anyhow::{Context, Result};
@@ -18,6 +19,12 @@ use tokio::io::BufReader;
 use tokio::net::{UnixListener, UnixStream};
 use tokio::sync::watch;
 use tokio::time::{self, Duration};
+
+#[derive(Clone)]
+struct AppServices {
+    chat: Arc<chat::ChatEngine>,
+    shell: Arc<shell::ShellService>,
+}
 
 fn emit_provider_transition(
     bus: &EventBus,
@@ -147,6 +154,10 @@ async fn run_daemon_async(cfg: RuntimeConfig, ws: String) -> Result<()> {
 
     let cfg = Arc::new(cfg);
     let ws = Arc::new(ws);
+    let services = AppServices {
+        chat: Arc::new(chat::ChatEngine::new()),
+        shell: Arc::new(shell::ShellService::new()),
+    };
     let bus = Arc::new(EventBus::new(cfg.run_dir.clone(), ws.as_ref().to_string()));
     let _ = bus.emit("daemon_started", json!({ "ws": ws.as_ref() }));
 
@@ -182,9 +193,10 @@ async fn run_daemon_async(cfg: RuntimeConfig, ws: String) -> Result<()> {
                 let cfg = cfg.clone();
                 let ws = ws.clone();
                 let bus = bus.clone();
+                let services = services.clone();
                 let shutdown_tx = shutdown_tx.clone();
                 tokio::spawn(async move {
-                    if let Err(err) = handle_client(stream, cfg, ws, bus, shutdown_tx).await {
+                    if let Err(err) = handle_client(stream, cfg, ws, bus, services, shutdown_tx).await {
                         eprintln!("daemon client error: {}", err);
                     }
                 });
@@ -204,6 +216,7 @@ async fn handle_client(
     cfg: Arc<RuntimeConfig>,
     ws: Arc<String>,
     bus: Arc<EventBus>,
+    services: AppServices,
     shutdown_tx: watch::Sender<bool>,
 ) -> Result<()> {
     let (reader, mut writer) = stream.into_split();
@@ -215,6 +228,107 @@ async fn handle_client(
     let resp = match req {
         Request::Ping => Response::Pong,
         Request::Status => build_status(&cfg, &ws),
+        Request::ChatSessionsList => {
+            let items = services
+                .chat
+                .store()
+                .sessions()
+                .into_iter()
+                .map(to_rpc_chat_session)
+                .collect::<Vec<_>>();
+            let selected = services.chat.store().selected_session();
+            Response::ChatSessions { items, selected }
+        }
+        Request::ChatSessionNew { title } => {
+            let sess = services.chat.store().create_session(title);
+            let _ = services.chat.store().select_session(&sess.id);
+            Response::ChatSession {
+                session: to_rpc_chat_session(sess),
+            }
+        }
+        Request::ChatSessionSelect { session_id } => {
+            match services.chat.store().select_session(&session_id) {
+                Ok(()) => {
+                    let selected = services.chat.store().selected_session();
+                    let items = services
+                        .chat
+                        .store()
+                        .sessions()
+                        .into_iter()
+                        .map(to_rpc_chat_session)
+                        .collect::<Vec<_>>();
+                    Response::ChatSessions { items, selected }
+                }
+                Err(err) => Response::Error {
+                    message: err.to_string(),
+                },
+            }
+        }
+        Request::ChatHistory { session_id } => {
+            let sid = match session_id.or_else(|| services.chat.store().selected_session()) {
+                Some(v) => v,
+                None => {
+                    let s = services.chat.store().create_session(None);
+                    let _ = services.chat.store().select_session(&s.id);
+                    s.id
+                }
+            };
+            match services.chat.store().history(&sid) {
+                Ok(items) => Response::ChatHistory {
+                    session_id: sid,
+                    items: items.into_iter().map(to_rpc_chat_message).collect(),
+                },
+                Err(err) => Response::Error {
+                    message: err.to_string(),
+                },
+            }
+        }
+        Request::ChatSend {
+            session_id,
+            text,
+            stream,
+        } => {
+            let sid = match session_id.or_else(|| services.chat.store().selected_session()) {
+                Some(v) => v,
+                None => {
+                    let s = services.chat.store().create_session(None);
+                    let _ = services.chat.store().select_session(&s.id);
+                    s.id
+                }
+            };
+            match services.chat.send_echo(&sid, &text) {
+                Ok(msg) => {
+                    if stream {
+                        for chunk in msg.content.split_whitespace() {
+                            let _ = bus.emit(
+                                "chat.delta",
+                                json!({ "session_id": sid, "delta": format!("{chunk} ") }),
+                            );
+                        }
+                    }
+                    let _ = bus.emit(
+                        "chat.message",
+                        json!({ "session_id": sid, "id": msg.id, "content": msg.content }),
+                    );
+                    Response::ChatSend {
+                        message: to_rpc_chat_message(msg),
+                    }
+                }
+                Err(err) => Response::Error {
+                    message: err.to_string(),
+                },
+            }
+        }
+        Request::ShellExec { cmd, args, cwd } => match services.shell.exec(&cmd, &args, cwd.as_deref()).await {
+            Ok(out) => Response::ShellExec {
+                exit_code: out.exit_code,
+                stdout: out.stdout,
+                stderr: out.stderr,
+            },
+            Err(err) => Response::Error {
+                message: err.to_string(),
+            },
+        },
         Request::EventsSubscribe => {
             let mut rx = bus.subscribe();
             uds_server::write_response(&mut writer, &Response::EventsStarted).await?;
@@ -715,5 +829,32 @@ fn build_status(cfg: &RuntimeConfig, ws: &str) -> Response {
         daemon_pid: std::process::id(),
         sanity,
         halt_reason,
+    }
+}
+
+fn to_rpc_chat_role(role: &chat::Role) -> ChatRole {
+    match role {
+        chat::Role::System => ChatRole::System,
+        chat::Role::User => ChatRole::User,
+        chat::Role::Assistant => ChatRole::Assistant,
+        chat::Role::Tool => ChatRole::Tool,
+    }
+}
+
+fn to_rpc_chat_message(msg: chat::Message) -> ChatMessage {
+    ChatMessage {
+        id: msg.id,
+        ts_ms: msg.ts_ms,
+        role: to_rpc_chat_role(&msg.role),
+        content: msg.content,
+    }
+}
+
+fn to_rpc_chat_session(sess: chat::ChatSession) -> ChatSession {
+    ChatSession {
+        id: sess.id,
+        title: sess.title,
+        created_ts_ms: sess.created_ts_ms,
+        last_ts_ms: sess.last_ts_ms,
     }
 }

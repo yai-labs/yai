@@ -23,7 +23,7 @@ impl Default for ShellPolicy {
         let mut allow = HashSet::new();
         allow.insert(Capability::ShellExec);
         Self {
-            lockdown: true,
+            lockdown: false,
             armed: false,
             allow,
         }

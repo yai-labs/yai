@@ -27,6 +27,8 @@ pub enum Command {
     Providers(ProvidersArgs),
     Dsar(DsarArgs),
     Sessions(SessionsArgs),
+    Chat(ChatArgs),
+    Shell(ShellArgs),
     Graph(GraphArgs),
     Embed(EmbedArgs),
     #[command(hide = true)]
@@ -205,6 +207,55 @@ pub enum SessionsCommand {
 pub struct SessionsArgs {
     #[command(subcommand)]
     pub command: SessionsCommand,
+}
+
+#[derive(Subcommand, Debug)]
+pub enum ChatCommand {
+    List,
+    New {
+        #[arg(long)]
+        title: Option<String>,
+    },
+    Select {
+        session_id: String,
+    },
+    History {
+        #[arg(long)]
+        session: Option<String>,
+    },
+    Send {
+        #[arg(long)]
+        session: Option<String>,
+        #[arg(long, default_value_t = false)]
+        stream: bool,
+        text: String,
+    },
+}
+
+#[derive(Args, Debug)]
+pub struct ChatArgs {
+    #[command(flatten)]
+    pub common: CommonArgs,
+    #[command(subcommand)]
+    pub command: ChatCommand,
+}
+
+#[derive(Subcommand, Debug)]
+pub enum ShellCommand {
+    Exec {
+        #[arg(long)]
+        cwd: Option<String>,
+        cmd: String,
+        args: Vec<String>,
+    },
+}
+
+#[derive(Args, Debug)]
+pub struct ShellArgs {
+    #[command(flatten)]
+    pub common: CommonArgs,
+    #[command(subcommand)]
+    pub command: ShellCommand,
 }
 
 #[derive(Subcommand, Debug)]
@@ -562,6 +613,38 @@ pub fn run() -> Result<()> {
             match args.command {
                 SessionsCommand::List => commands::sessions::list(&cfg),
                 SessionsCommand::Kill { ws, force } => commands::sessions::kill(&cfg, &ws, force),
+            }
+        }
+        Command::Chat(args) => {
+            let cfg = config::load_config(&overrides_from(&args.common))?;
+            let ws = args
+                .common
+                .ws
+                .clone()
+                .unwrap_or_else(|| cfg.ws_default.clone());
+            match args.command {
+                ChatCommand::List => commands::chat::list(&cfg, &ws),
+                ChatCommand::New { title } => commands::chat::new(&cfg, &ws, title),
+                ChatCommand::Select { session_id } => commands::chat::select(&cfg, &ws, &session_id),
+                ChatCommand::History { session } => commands::chat::history(&cfg, &ws, session),
+                ChatCommand::Send {
+                    session,
+                    stream,
+                    text,
+                } => commands::chat::send(&cfg, &ws, session, stream, &text),
+            }
+        }
+        Command::Shell(args) => {
+            let cfg = config::load_config(&overrides_from(&args.common))?;
+            let ws = args
+                .common
+                .ws
+                .clone()
+                .unwrap_or_else(|| cfg.ws_default.clone());
+            match args.command {
+                ShellCommand::Exec { cwd, cmd, args } => {
+                    commands::shell::exec(&cfg, &ws, &cmd, &args, cwd)
+                }
             }
         }
         Command::Embed(args) => {
