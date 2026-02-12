@@ -1,9 +1,6 @@
-pub mod contracts;
-pub mod legacy;
-pub mod working;
+pub mod core;
 pub mod graph;
+pub mod types;
 
-#[allow(unused_imports)]
-pub use contracts::{MemoryStore, MemoryResult};
-pub use legacy::sqlite::SqliteMemoryStore;
-pub use legacy::store::MemoryCore;
+pub use core::{MemoryCore, MemoryResult};
+pub use types::{Event, EventKind, Fact};

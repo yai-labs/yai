@@ -3,6 +3,9 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 BIN="${BIN:-$(command -v yai || true)}"
+if [[ -z "$BIN" && -x "$HOME/.cargo/bin/yai" ]]; then
+  BIN="$HOME/.cargo/bin/yai"
+fi
 CFG="${HOME}/.yai/config/yai.toml"
 
 WS_DEFAULT="${YAI_WS_DEFAULT:-dev}"

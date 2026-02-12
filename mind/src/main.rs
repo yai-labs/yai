@@ -21,7 +21,7 @@ fn read_core_manifest() -> Option<(String, String)> {
     Some((git_sha, build_time))
 }
 use yai_mind::core::state::SharedState;
-use yai_mind::server::IceStudioServer;
+use yai_mind::server::StudioServer;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -47,7 +47,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
 
     let state = Arc::new(Mutex::new(SharedState::new()));
-    let server = IceStudioServer::new(&host, port, state);
+    let server = StudioServer::new(&host, port, state);
     server.start().await?;
 
     Ok(())

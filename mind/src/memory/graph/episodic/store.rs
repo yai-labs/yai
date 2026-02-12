@@ -39,6 +39,12 @@ impl EpisodicStore {
             "provider_paired",
             "provider_attached",
             "provider_detached",
+            "DATA_WRITE",
+            "DATA_READ",
+            "DATA_EXPORT",
+            "DATA_ERASE",
+            "PROCESSING_DECLARED",
+            "RETENTION_EXPIRE",
             "error",
         ]
         .into_iter()
@@ -64,6 +70,7 @@ impl EpisodicStore {
             }
             .to_string();
             let data = v.get("data").cloned().unwrap_or(Value::Null);
+            let compliance = v.get("compliance").cloned();
             let id = format!("episode:{}:{}:{}", typ, ts, seq);
             out.push(Episode {
                 id,
@@ -71,6 +78,7 @@ impl EpisodicStore {
                 seq,
                 event_type: typ,
                 data,
+                compliance,
             });
             seq += 1;
         }

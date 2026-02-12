@@ -8,4 +8,5 @@ pub struct Episode {
     pub seq: u64,
     pub event_type: String,
     pub data: Value,
+    pub compliance: Option<Value>,
 }
