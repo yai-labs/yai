@@ -4,7 +4,7 @@
 
 bool yai_storage_verify_access(const char* db_path, StorageAccessLevel level) {
     (void)db_path; // Silenzia warning
-    IceVault* v = yai_get_vault();
+    Vault* v = yai_get_vault();
     
     if (!v || v->authority_lock) return false;
 

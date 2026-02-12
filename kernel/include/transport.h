@@ -8,13 +8,13 @@ typedef enum {
     CMD_AGENT_SPAWN = 1,
     CMD_STORAGE_SYNC = 2,
     CMD_SYS_HALT = 255
-} IceCmdType;
+} CmdType;
 
 typedef struct {
-    IceCmdType type;
+    CmdType type;
     uint32_t payload_size;
     uint8_t payload[1024];
-} IcePacket;
+} Packet;
 
 int yai_transport_init(void);
 void yai_transport_serve_once(void);

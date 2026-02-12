@@ -4,6 +4,6 @@
 #include "transport.h"
 
 int yai_transport_init(void);
-int yai_send_command(IceCmdType type, const void* data, size_t len);
+int yai_send_command(CmdType type, const void* data, size_t len);
 
 #endif

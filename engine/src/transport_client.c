@@ -38,17 +38,17 @@ int yai_transport_init() {
     return 0;
 }
 
-int yai_send_command(IceCmdType type, const void* data, size_t len) {
+int yai_send_command(CmdType type, const void* data, size_t len) {
     if (_sock_fd == -1) return -1;
 
-    IcePacket pkt;
+    Packet pkt;
     pkt.type = type;
     pkt.payload_size = (len > 1024) ? 1024 : len;
     if (data && len > 0) {
         memcpy(pkt.payload, data, pkt.payload_size);
     }
 
-    if (send(_sock_fd, &pkt, sizeof(IcePacket), 0) == -1) {
+    if (send(_sock_fd, &pkt, sizeof(Packet), 0) == -1) {
         return -3;
     }
 

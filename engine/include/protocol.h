@@ -9,7 +9,7 @@ typedef enum {
     CMD_KILL_AGENT    = 0x02,
     CMD_INGEST_FILE   = 0x03,
     CMD_STORAGE_SYNC  = 0x04
-} IceCommand;
+} Command;
 
 typedef struct {
     uint8_t  version;
@@ -17,6 +17,6 @@ typedef struct {
     uint16_t payload_len;
     uint32_t request_id;
     uint8_t  data[]; // Flessibile
-} IcePacket;
+} Packet;
 
 #endif

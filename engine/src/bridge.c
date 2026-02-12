@@ -7,13 +7,13 @@
 #include <string.h>
 #include <time.h>
 
-static IceVault* _vault = NULL;
+static Vault* _vault = NULL;
 static int _shm_fd = -1;
 
-static IceVault* attach_shm(const char* shm_path) {
+static Vault* attach_shm(const char* shm_path) {
     int fd = shm_open(shm_path, O_RDWR, 0666);
     if (fd == -1) return NULL;
-    IceVault* v = mmap(NULL, sizeof(IceVault), PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
+    Vault* v = mmap(NULL, sizeof(Vault), PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
     close(fd);
     if (v == MAP_FAILED) return NULL;
     return v;
@@ -26,14 +26,14 @@ int yai_bridge_init(const char* ws_id) {
     _shm_fd = shm_open(shm_path, O_RDWR, 0666);
     if (_shm_fd == -1) return -1;
 
-    _vault = mmap(NULL, sizeof(IceVault), PROT_READ | PROT_WRITE, MAP_SHARED, _shm_fd, 0);
+    _vault = mmap(NULL, sizeof(Vault), PROT_READ | PROT_WRITE, MAP_SHARED, _shm_fd, 0);
     if (_vault == MAP_FAILED) return -2;
 
     _vault->status = YAI_STATE_READY;
     return 0;
 }
 
-IceVault* yai_bridge_attach(const char* ws_id, const char* channel) {
+Vault* yai_bridge_attach(const char* ws_id, const char* channel) {
     char shm_path[128];
     char base_path[128];
 
@@ -44,7 +44,7 @@ IceVault* yai_bridge_attach(const char* ws_id, const char* channel) {
         snprintf(shm_path, sizeof(shm_path), "%s%s", SHM_VAULT_PREFIX, ws_id);
     }
 
-    IceVault* v = attach_shm(shm_path);
+    Vault* v = attach_shm(shm_path);
     if (!v && strcmp(shm_path, base_path) != 0) {
         v = attach_shm(base_path);
     }
@@ -57,7 +57,7 @@ IceVault* yai_bridge_attach(const char* ws_id, const char* channel) {
     return v;
 }
 
-IceVault* yai_get_vault() { return _vault; }
+Vault* yai_get_vault() { return _vault; }
 
 bool yai_consume_energy(uint32_t amount) {
     if (!_vault || _vault->authority_lock) return false;
@@ -68,7 +68,7 @@ bool yai_consume_energy(uint32_t amount) {
 }
 
 void yai_bridge_detach() {
-    if (_vault) munmap(_vault, sizeof(IceVault));
+    if (_vault) munmap(_vault, sizeof(Vault));
     if (_shm_fd != -1) close(_shm_fd);
 }
 
@@ -77,7 +77,7 @@ void yai_audit_log_transition(const char* action, uint32_t prev_state, uint32_t 
     if (!f) return;
 
     // timestamp, azione, stato_precedente, stato_nuovo, energia_attuale
-    IceVault* v = yai_get_vault();
+    Vault* v = yai_get_vault();
     fprintf(f, "%ld,%s,%u,%u,%u\n",
             time(NULL),
             action,

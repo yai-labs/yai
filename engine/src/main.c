@@ -9,7 +9,7 @@
 
 void handle_panic(int sig) {
     printf("\n[YAI-C] Signal %d: Emergency Lock.\n", sig);
-    IceVault* v = yai_get_vault();
+    Vault* v = yai_get_vault();
     {
         char addr_buf[32];
         snprintf(addr_buf, sizeof(addr_buf), "%p", (void*)v);
@@ -23,15 +23,15 @@ void handle_panic(int sig) {
 }
 
 typedef struct {
-    IceVault* core;
-    IceVault* stream;
-    IceVault* brain;
-    IceVault* audit;
-    IceVault* cache;
-    IceVault* control;
-} IceVaultCluster;
+    Vault* core;
+    Vault* stream;
+    Vault* brain;
+    Vault* audit;
+    Vault* cache;
+    Vault* control;
+} VaultCluster;
 
-static void validate_vault_integrity(IceVaultCluster *c) {
+static void validate_vault_integrity(VaultCluster *c) {
     if (!c || !c->core || !c->brain) return;
     if (c->core->energy_consumed > c->core->energy_quota) {
         printf("[SECURITY] Energy Quota Exceeded. Throttling Brain...\n");
@@ -39,7 +39,7 @@ static void validate_vault_integrity(IceVaultCluster *c) {
     }
 }
 
-static void process_command(IceVault* v) {
+static void process_command(Vault* v) {
     if (!v) return;
 
     v->last_result = 0;
@@ -94,7 +94,7 @@ static void process_command(IceVault* v) {
     }
 }
 
-static int engine_get_queue_depth(const IceVault* v) {
+static int engine_get_queue_depth(const Vault* v) {
     if (!v) return 0;
     if (v->command_seq >= v->last_processed_seq) {
         return (int)(v->command_seq - v->last_processed_seq);
@@ -170,7 +170,7 @@ int main(int argc, char *argv[]) {
     signal(SIGINT, handle_panic);
     signal(SIGTERM, handle_panic);
 
-    IceVaultCluster cluster;
+    VaultCluster cluster;
     cluster.core = yai_bridge_attach(argv[1], "");
     cluster.stream = yai_bridge_attach(argv[1], "stream");
     cluster.brain = yai_bridge_attach(argv[1], "brain");
@@ -183,7 +183,7 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    IceVault* v = cluster.core;
+    Vault* v = cluster.core;
     printf("[YAI-C] Engine Running for WS: %s\n", argv[1]);
     v->status = YAI_STATE_READY;
     v->last_processed_seq = 0;
