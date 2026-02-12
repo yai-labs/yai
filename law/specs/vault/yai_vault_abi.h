@@ -1,5 +1,5 @@
 /* AUTO-GENERATED: law/specs/vault/vault_abi.json */
-/* Generated: 2026-02-11T23:08:31Z */
+/* Generated: 2026-02-12T13:30:01Z */
 #ifndef YAI_VAULT_ABI_H
 #define YAI_VAULT_ABI_H
 
