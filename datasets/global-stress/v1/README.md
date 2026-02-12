@@ -9,8 +9,9 @@ Contenuto
 - `seed/semantic_nodes.jsonl`      → nodi semantici seed (sintetici)
 - `seed/semantic_edges.jsonl`      → archi semantici seed
 - `seed/episodic_events.jsonl`     → eventi episodici seed (NDJSON)
-- `scripts/import_seed_via_cli.sh` → importer minimal via CLI (semantic add-node/add-edge)
-- `scripts/load_events_log.sh`     → carica events.log per episodic ingest
+- `scripts/README.md`              → policy: dataset data-only
+- `../../../../scripts/datasets/global-stress/v1/import-seed-via-cli.sh` → importer canonicale
+- `../../../../scripts/datasets/global-stress/v1/load-events-log.sh`     → loader canonicale
 
 Nota su privacy
 I dati “birra 2024-02-13” e simili sono **sintetici** (tag `seed`) e servono solo a testare la pipeline.
@@ -23,20 +24,24 @@ Non è per “colpire” nessuno: è per stressare davvero governance e audit.
 ## Uso rapido (manuale)
 
 1) Build
-- yai-core: `make all`
-- yai-mind: `cargo build --release`
+- core: `make all`
+- mind: `cd mind && cargo build --release`
 
 2) Import seed nodes/edges (opzionale, se vuoi popolare il grafo)
 - Imposta `BIN` e ws:
   ```bash
-  export BIN="20 20 101 12 61 79 80 81 98 702 701 33 100 204 250 395 398 399 400command -v yai)"
+  export BIN="$(command -v yai)"
   export WS="dev"
-  bash scripts/import_seed_via_cli.sh
+  ./scripts/datasets/global-stress/v1/import-seed-via-cli.sh
+  ```
+  Oppure da root repo:
+  ```bash
+  ./scripts/gates/dataset-global-stress.sh dev
   ```
 
 3) Episodic ingest (events.log → episodic)
 ```bash
-bash scripts/load_events_log.sh
+./scripts/datasets/global-stress/v1/load-events-log.sh
 # opzionale: se hai comando ingest nel graph layer
 # "$BIN" graph episodic ingest-events --ws "$WS"
 ```
@@ -52,23 +57,23 @@ bash scripts/load_events_log.sh
 - Embedding locale ONNX disponibile:
   - `~/.yai/models/embeddings/all-MiniLM-L6-v2/model.onnx`
   - `~/.yai/models/embeddings/all-MiniLM-L6-v2/tokenizer.json`
-- `events.log` popolato (da `scripts/load_events_log.sh`).
+- `events.log` popolato (da `scripts/datasets/global-stress/v1/load-events-log.sh`).
 
 ## Test a blocchi (consigliato)
 
 ### Blocco A — Setup e Seed
 ```bash
-export BIN="20 20 101 12 61 79 80 81 98 702 701 33 100 204 250 395 398 399 400command -v yai)"
+export BIN="$(command -v yai)"
 export WS="dev"
 
-cd ~/Developer/YAI/yai-core
+cd ~/Developer/YAI/yai
 make all
-cd ~/Developer/YAI/yai-mind
+cd mind
 cargo build --release
 
-cd ~/Developer/YAI/yai-core/docs/datasets/yai-dataset-global-stress-v1
-bash scripts/import_seed_via_cli.sh
-bash scripts/load_events_log.sh
+cd ../datasets/global-stress/v1
+../../../../scripts/datasets/global-stress/v1/import-seed-via-cli.sh
+../../../../scripts/datasets/global-stress/v1/load-events-log.sh
 ```
 **Expected**
 - `semantic.sqlite` creato in `~/.yai/run/$WS/`
@@ -118,8 +123,8 @@ rm -f ~/.yai/run/$WS/vector.usearch
 
 ## Troubleshooting rapido
 - **embedder fallback hash** → manca ONNX: riesegui `./scripts/fetch-embeddings.sh`
-- **events empty** → manca `events.log`: riesegui `scripts/load_events_log.sh`
-- **no nodes** → verifica `scripts/import_seed_via_cli.sh` e id formato `node:<kind>:<slug>`
+- **events empty** → manca `events.log`: riesegui `scripts/datasets/global-stress/v1/load-events-log.sh`
+- **no nodes** → verifica `scripts/datasets/global-stress/v1/import-seed-via-cli.sh` e id formato `node:<kind>:<slug>`
 
 ## Mapping ai layer (come leggere i test)
 - Authority/Law: deve rifiutare o far rifiutare al kernel; lascia audit/eventi.
