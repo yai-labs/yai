@@ -1,19 +1,29 @@
-use crate::core::runtime::IceError;
+use crate::core::runtime::Error;
 use crate::control::providers;
 use crate::interface::config::RuntimeConfig;
 use serde_json::{json, Value};
 use std::env;
+use std::io::{BufRead, BufReader};
 use std::time::Duration;
 
 #[allow(dead_code)]
 pub trait LlmClient: Send + Sync {
-    fn complete(&self, prompt: &str) -> Result<String, IceError>;
+    fn complete(&self, prompt: &str) -> Result<String, Error>;
+    fn complete_stream(
+        &self,
+        prompt: &str,
+        on_delta: &mut dyn FnMut(&str),
+    ) -> Result<String, Error> {
+        let text = self.complete(prompt)?;
+        on_delta(&text);
+        Ok(text)
+    }
 }
 
 pub struct MockLlmClient;
 
 impl LlmClient for MockLlmClient {
-    fn complete(&self, prompt: &str) -> Result<String, IceError> {
+    fn complete(&self, prompt: &str) -> Result<String, Error> {
         Ok(format!("[mock-llm] {}", prompt))
     }
 }
@@ -62,7 +72,7 @@ impl HttpLlmClient {
         })
     }
 
-    fn parse_response(value: Value) -> Result<String, IceError> {
+    fn parse_response(value: Value) -> Result<String, Error> {
         if let Some(content) = value
             .get("choices")
             .and_then(|c| c.get(0))
@@ -82,16 +92,16 @@ impl HttpLlmClient {
             return Ok(text.trim().to_string());
         }
 
-        Err(IceError::Llm("invalid LLM response".to_string()))
+        Err(Error::Llm("invalid LLM response".to_string()))
     }
 }
 
 impl LlmClient for HttpLlmClient {
-    fn complete(&self, prompt: &str) -> Result<String, IceError> {
+    fn complete(&self, prompt: &str) -> Result<String, Error> {
         let client = reqwest::blocking::Client::builder()
             .timeout(Duration::from_millis(self.timeout_ms))
             .build()
-            .map_err(|e| IceError::Llm(format!("http client error: {}", e)))?;
+            .map_err(|e| Error::Llm(format!("http client error: {}", e)))?;
 
         let body = json!({
             "model": self.model,
@@ -109,21 +119,118 @@ impl LlmClient for HttpLlmClient {
 
         let resp = req
             .send()
-            .map_err(|e| IceError::Llm(format!("http send error: {}", e)))?;
+            .map_err(|e| Error::Llm(format!("http send error: {}", e)))?;
 
         let status = resp.status();
         let value: Value = resp
             .json()
-            .map_err(|e| IceError::Llm(format!("http json error: {}", e)))?;
+            .map_err(|e| Error::Llm(format!("http json error: {}", e)))?;
 
         if !status.is_success() {
-            return Err(IceError::Llm(format!(
+            return Err(Error::Llm(format!(
                 "llm http status {}",
                 status.as_u16()
             )));
         }
 
         Self::parse_response(value)
+    }
+
+    fn complete_stream(
+        &self,
+        prompt: &str,
+        on_delta: &mut dyn FnMut(&str),
+    ) -> Result<String, Error> {
+        let client = reqwest::blocking::Client::builder()
+            .timeout(Duration::from_millis(self.timeout_ms))
+            .build()
+            .map_err(|e| Error::Llm(format!("http client error: {}", e)))?;
+
+        let body = json!({
+            "model": self.model,
+            "messages": [
+                { "role": "user", "content": prompt }
+            ],
+            "temperature": 0.2,
+            "stream": true
+        });
+
+        let mut req = client.post(&self.endpoint).json(&body);
+        if let Some(key) = &self.api_key {
+            req = req.bearer_auth(key);
+        }
+
+        let resp = req
+            .send()
+            .map_err(|e| Error::Llm(format!("http send error: {}", e)))?;
+        let status = resp.status();
+        let content_type = resp
+            .headers()
+            .get(reqwest::header::CONTENT_TYPE)
+            .and_then(|v| v.to_str().ok())
+            .unwrap_or("")
+            .to_string();
+
+        if !status.is_success() {
+            return Err(Error::Llm(format!("llm http status {}", status.as_u16())));
+        }
+
+        if !content_type.contains("text/event-stream") {
+            let value: Value = resp
+                .json()
+                .map_err(|e| Error::Llm(format!("http json error: {}", e)))?;
+            let text = Self::parse_response(value)?;
+            on_delta(&text);
+            return Ok(text);
+        }
+
+        let mut out = String::new();
+        let reader = BufReader::new(resp);
+        for line in reader.lines() {
+            let line = line.map_err(|e| Error::Llm(format!("http stream read error: {}", e)))?;
+            let trimmed = line.trim();
+            if trimmed.is_empty() || !trimmed.starts_with("data:") {
+                continue;
+            }
+            let payload = trimmed.trim_start_matches("data:").trim();
+            if payload == "[DONE]" {
+                break;
+            }
+            let v: Value = match serde_json::from_str(payload) {
+                Ok(v) => v,
+                Err(_) => continue,
+            };
+            if let Some(delta) = v
+                .get("choices")
+                .and_then(|c| c.get(0))
+                .and_then(|c0| c0.get("delta"))
+                .and_then(|d| d.get("content"))
+                .and_then(|c| c.as_str())
+            {
+                if !delta.is_empty() {
+                    out.push_str(delta);
+                    on_delta(delta);
+                }
+                continue;
+            }
+            if let Some(content) = v
+                .get("choices")
+                .and_then(|c| c.get(0))
+                .and_then(|c0| c0.get("message"))
+                .and_then(|m| m.get("content"))
+                .and_then(|c| c.as_str())
+            {
+                if out.is_empty() {
+                    out.push_str(content);
+                    on_delta(content);
+                }
+            }
+        }
+
+        if out.is_empty() {
+            return Err(Error::Llm("empty streaming response".to_string()));
+        }
+        Ok(out)
     }
 }
 

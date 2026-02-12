@@ -5,13 +5,12 @@ use crate::core::planner::{plan, Plan};
 use crate::core::protocol::RoutingDecision;
 use crate::core::scheduler::Scheduler;
 use crate::llm::adapter::LlmClient;
-use crate::memory::legacy::store::MemoryCore;
-use crate::memory::legacy::types::EventKind;
+use crate::memory::{EventKind, MemoryCore};
 use crate::rag::pipeline::build_prompt;
 use std::fmt;
 
 #[derive(Debug)]
-pub enum IceError {
+pub enum Error {
     Routing(String),
     Planning(String),
     Execution(String),
@@ -19,19 +18,19 @@ pub enum IceError {
     Memory(String),
 }
 
-impl fmt::Display for IceError {
+impl fmt::Display for Error {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
-            IceError::Routing(msg) => write!(f, "routing: {}", msg),
-            IceError::Planning(msg) => write!(f, "planning: {}", msg),
-            IceError::Execution(msg) => write!(f, "execution: {}", msg),
-            IceError::Llm(msg) => write!(f, "llm: {}", msg),
-            IceError::Memory(msg) => write!(f, "memory: {}", msg),
+            Error::Routing(msg) => write!(f, "routing: {}", msg),
+            Error::Planning(msg) => write!(f, "planning: {}", msg),
+            Error::Execution(msg) => write!(f, "execution: {}", msg),
+            Error::Llm(msg) => write!(f, "llm: {}", msg),
+            Error::Memory(msg) => write!(f, "memory: {}", msg),
         }
     }
 }
 
-impl std::error::Error for IceError {}
+impl std::error::Error for Error {}
 
 pub struct RuntimeContext {
     pub scheduler: Scheduler,
@@ -50,18 +49,18 @@ pub struct TurnResult {
     pub llm_response: Option<String>,
 }
 
-pub fn run_turn(user_text: &str, ctx: &mut RuntimeContext) -> Result<TurnResult, IceError> {
+pub fn run_turn(user_text: &str, ctx: &mut RuntimeContext) -> Result<TurnResult, Error> {
     let governance = GovernanceEngine::new();
     let decision = RoutingEngine::route_intent(user_text);
 
     let agent = get_agent(decision.agent).ok_or_else(|| {
-        IceError::Routing(format!("No agent found for {:?}", decision.agent))
+        Error::Routing(format!("No agent found for {:?}", decision.agent))
     })?;
     let agent_output = agent.handle(user_text, ctx)?;
     let _ = ctx
         .memory
         .put_event(&ctx.workspace_id, &ctx.trace_id, EventKind::User, user_text)
-        .map_err(IceError::Memory);
+        .map_err(Error::Memory);
 
     let llm_response = match &agent_output.llm_prompt {
         Some(prompt) => {
@@ -78,10 +77,10 @@ pub fn run_turn(user_text: &str, ctx: &mut RuntimeContext) -> Result<TurnResult,
     let _ = ctx
         .memory
         .put_event(&ctx.workspace_id, &ctx.trace_id, EventKind::Agent, agent_payload)
-        .map_err(IceError::Memory);
+        .map_err(Error::Memory);
 
     // Planner produces a plan from routing decision + input
-    let plan = plan(agent_output.decision, user_text).map_err(IceError::Planning)?;
+    let plan = plan(agent_output.decision, user_text).map_err(Error::Planning)?;
 
     // Execute plan via scheduler (Vault)
     let execution = execute(&plan, ctx)?;

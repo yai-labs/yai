@@ -1,586 +1,868 @@
-use std::fs::File;
-use std::io::{self, Read, Seek, SeekFrom, Write, BufRead};
-use std::sync::mpsc::{self, Receiver, Sender};
-use std::thread;
+use crate::interface::config::RuntimeConfig;
+use crate::interface::tui::actions::Action;
+use crate::interface::tui::app::{AppState, FocusZone, ViewKind};
+use crate::interface::tui::datasource::chat::ChatSource;
+use crate::interface::tui::datasource::contracts::ContractsSource;
+use crate::interface::tui::datasource::db::DbSource;
+use crate::interface::tui::datasource::events::EventsSource;
+use crate::interface::tui::datasource::graph::GraphSource;
+use crate::interface::tui::datasource::logs::FileTailSource;
+use crate::interface::tui::datasource::providers::ProvidersSource;
+use crate::interface::tui::datasource::runtime::RuntimeSource;
+use crate::interface::tui::datasource::{tick_all, DataSource};
+use crate::interface::tui::keymap::KeyMap;
+use crate::interface::tui::reducer::reduce;
+use crate::interface::tui::theme::Theme;
+use anyhow::Result;
+use crossterm::event::{self, Event, KeyCode, KeyEventKind, KeyModifiers};
+use crossterm::terminal::{disable_raw_mode, enable_raw_mode, EnterAlternateScreen, LeaveAlternateScreen};
+use crossterm::ExecutableCommand;
+use ratatui::backend::CrosstermBackend;
+use ratatui::layout::{Alignment, Constraint, Direction, Layout, Rect};
+use ratatui::style::{Modifier, Style};
+use ratatui::text::{Line, Span};
+use ratatui::widgets::{Block, Borders, Clear, Paragraph, Wrap};
+use ratatui::Terminal;
+use std::io::{self, Stdout};
 use std::time::{Duration, Instant};
 
-use crossterm::event::{self, DisableMouseCapture, EnableMouseCapture, Event, KeyCode, KeyEvent, KeyModifiers};
-use crossterm::terminal::{disable_raw_mode, enable_raw_mode, EnterAlternateScreen, LeaveAlternateScreen};
-use crossterm::execute;
-use ratatui::backend::CrosstermBackend;
-use ratatui::layout::{Constraint, Direction, Layout, Rect};
-use ratatui::style::{Color, Modifier, Style};
-use ratatui::text::{Line, Span};
-use ratatui::widgets::{Block, Borders, List, ListItem, Paragraph, Wrap};
-use ratatui::Terminal;
+pub mod app;
+pub mod actions;
+pub mod reducer;
+pub mod datasource;
+pub mod views;
+pub mod widgets;
+pub mod snapshot;
+pub mod keymap;
+pub mod theme;
 
-use crate::bridge::vault::VaultBridge as EngineVaultBridge;
-use crate::rpc::protocol::{AliveStatus, Request};
-use crate::rpc::uds_client;
-use crate::interface::config::RuntimeConfig;
-use crate::interface::proc::{log_path, RunState};
-use crate::llm::adapter::build_llm_for_ws;
+pub fn run(ws: &str, cfg: &RuntimeConfig) -> Result<()> {
+    let mut state = AppState::new(ws.to_string());
+    state.graph.depth = 2;
 
-#[derive(Clone)]
-struct VaultInfo {
-    status: u32,
-    energy_quota: u32,
-    energy_used: u32,
-    last_command_id: u32,
-    last_error: String,
-    response: String,
-}
+    let mut sources: Vec<Box<dyn DataSource>> = vec![
+        Box::new(RuntimeSource),
+        Box::new(EventsSource),
+        Box::new(GraphSource),
+        Box::new(FileTailSource),
+        Box::new(DbSource),
+        Box::new(ProvidersSource),
+        Box::new(ContractsSource),
+        Box::new(ChatSource),
+    ];
 
-#[derive(Clone, Copy, PartialEq, Eq)]
-enum AppMode {
-    Normal,
-    ChatInput,
-}
+    let mut terminal = setup_terminal()?;
+    let _restore = TerminalRestore;
+    let theme = Theme::default();
 
-struct App {
-    ws: String,
-    menu_index: usize,
-    input: String,
-    mode: AppMode,
-    messages: Vec<(String, String)>,
-    log_component: usize,
-    log_lines: Vec<String>,
-    last_refresh: Instant,
-    force_refresh: bool,
-    poll_rate: Duration,
-    tick_rate: Duration,
-    run_state: Option<RunState>,
-    alive: AliveStatus,
-    connected: bool,
-    vault_info: Option<VaultInfo>,
-    vault_bridge: Option<EngineVaultBridge>,
-    last_command_id: Option<u32>,
-    build_info: String,
-    llm_rx: Receiver<(String, String)>,
-    llm_tx: Sender<String>,
-    event_rx: Receiver<crate::rpc::protocol::Event>,
-    last_event: Instant,
-    last_event_label: String,
-}
+    let tick_rate = Duration::from_millis(250);
+    let mut last_tick = Instant::now();
 
-const MENU_ITEMS: [&str; 5] = ["Overview", "Processes", "Vault", "Logs", "Chat"];
-const LOG_COMPONENTS: [&str; 3] = ["boot", "engine", "mind"];
-
-pub fn run(ws: &str, cfg: &RuntimeConfig) -> anyhow::Result<()> {
-
-    let (llm_resp_tx, llm_resp_rx) = mpsc::channel::<(String, String)>();
-    let (llm_req_tx, llm_req_rx) = mpsc::channel::<String>();
-    let (event_tx, event_rx) = mpsc::channel::<crate::rpc::protocol::Event>();
-
-    spawn_llm_worker(cfg.clone(), ws.to_string(), llm_req_rx, llm_resp_tx);
-    spawn_event_worker(cfg.clone(), ws.to_string(), event_tx);
-
-    let mut app = App {
-        ws: ws.to_string(),
-        menu_index: 0,
-        input: String::new(),
-        mode: AppMode::Normal,
-        messages: Vec::new(),
-        log_component: 0,
-        log_lines: Vec::new(),
-        last_refresh: Instant::now(),
-        force_refresh: true,
-        poll_rate: Duration::from_millis(800),
-        tick_rate: Duration::from_millis(100),
-        run_state: None,
-        alive: AliveStatus::default(),
-        connected: false,
-        vault_info: None,
-        vault_bridge: None,
-        last_command_id: None,
-        build_info: read_manifest(&cfg).unwrap_or_else(|| "unknown".to_string()),
-        llm_rx: llm_resp_rx,
-        llm_tx: llm_req_tx,
-        event_rx,
-        last_event: Instant::now(),
-        last_event_label: String::new(),
-    };
-
-    enable_raw_mode()?;
-    let mut stdout = io::stdout();
-    execute!(stdout, EnterAlternateScreen, EnableMouseCapture)?;
-    let backend = CrosstermBackend::new(stdout);
-    let mut terminal = Terminal::new(backend)?;
-
-    let res = run_app(&mut terminal, &cfg, &mut app);
-
-    disable_raw_mode()?;
-    execute!(
-        terminal.backend_mut(),
-        LeaveAlternateScreen,
-        DisableMouseCapture
-    )?;
-    terminal.show_cursor()?;
-
-    res
-}
-
-fn run_app(
-    terminal: &mut Terminal<CrosstermBackend<io::Stdout>>,
-    cfg: &RuntimeConfig,
-    app: &mut App,
-) -> anyhow::Result<()> {
     loop {
-        if app.force_refresh || app.last_refresh.elapsed() > app.poll_rate {
-            refresh_state(cfg, app);
-            app.last_refresh = Instant::now();
-            app.force_refresh = false;
+        if last_tick.elapsed() >= tick_rate {
+            tick_all(cfg, &mut state, &mut sources);
+            reduce(&mut state, Action::Tick);
+            last_tick = Instant::now();
         }
 
-        while let Ok((role, msg)) = app.llm_rx.try_recv() {
-            app.messages.push((role, msg));
+        terminal.draw(|f| draw_ui(f, &state, &theme))?;
+
+        let timeout = tick_rate.saturating_sub(last_tick.elapsed());
+        if !event::poll(timeout)? {
+            continue;
         }
-        while let Ok(ev) = app.event_rx.try_recv() {
-            app.last_event = Instant::now();
-            app.last_event_label = format!("{} {:?}", ev.kind, ev.data);
-            app.connected = true;
-            match ev.kind.as_str() {
-                "status_changed" => {
-                    if let Some(obj) = ev.data.as_object() {
-                        if let Some(v) = obj.get("boot").and_then(|v| v.as_bool()) {
-                            app.alive.boot = v;
-                        }
-                        if let Some(v) = obj.get("kernel").and_then(|v| v.as_bool()) {
-                            app.alive.kernel = v;
-                        }
-                        if let Some(v) = obj.get("engine").and_then(|v| v.as_bool()) {
-                            app.alive.engine = v;
-                        }
-                        if let Some(v) = obj.get("mind").and_then(|v| v.as_bool()) {
-                            app.alive.mind = v;
-                        }
-                    }
+        let Event::Key(key) = event::read()? else {
+            continue;
+        };
+        if key.kind != KeyEventKind::Press {
+            continue;
+        }
+
+        if state.palette.active {
+            match key.code {
+                KeyCode::Esc => reduce(&mut state, Action::TogglePalette),
+                KeyCode::Backspace => {
+                    let mut input = state.palette.input.clone();
+                    input.pop();
+                    reduce(&mut state, Action::PaletteInput(input));
+                }
+                KeyCode::Enter => {
+                    let cmd = state.palette.input.clone();
+                    reduce(&mut state, Action::RunCommand(cmd));
+                }
+                KeyCode::Char(ch) => {
+                    let mut input = state.palette.input.clone();
+                    input.push(ch);
+                    reduce(&mut state, Action::PaletteInput(input));
                 }
                 _ => {}
             }
+            continue;
         }
 
-        terminal.draw(|f| ui(f, app))?;
-
-        if event::poll(app.tick_rate)? {
-            if let Event::Key(key) = event::read()? {
-                if handle_key(cfg, app, key)? {
-                    return Ok(());
+        if state.active_view == ViewKind::Chat && state.focus == FocusZone::Composer {
+            match key.code {
+                KeyCode::Esc => {
+                    state.focus = FocusZone::Body;
                 }
+                KeyCode::Enter => {
+                    if key.modifiers.contains(KeyModifiers::SHIFT) {
+                        reduce(&mut state, Action::ChatInputNewline);
+                    } else {
+                        let msg = state.chat.input.clone();
+                        reduce(&mut state, Action::ChatSend(msg));
+                    }
+                }
+                KeyCode::Char('u') if key.modifiers.contains(KeyModifiers::CONTROL) => {
+                    reduce(&mut state, Action::ChatClearInput);
+                }
+                KeyCode::Backspace => {
+                    let mut input = state.chat.input.clone();
+                    input.pop();
+                    reduce(&mut state, Action::ChatSetInput(input));
+                }
+                KeyCode::Char(ch) => {
+                    let mut input = state.chat.input.clone();
+                    input.push(ch);
+                    reduce(&mut state, Action::ChatSetInput(input));
+                }
+                _ => {}
             }
+            continue;
         }
-    }
-}
 
-fn handle_key(
-    _cfg: &RuntimeConfig,
-    app: &mut App,
-    key: KeyEvent,
-) -> anyhow::Result<bool> {
-    match key.code {
-        KeyCode::Char('q') => return Ok(true),
-        KeyCode::Char('1') => app.menu_index = 0,
-        KeyCode::Char('2') => app.menu_index = 1,
-        KeyCode::Char('3') => app.menu_index = 2,
-        KeyCode::Char('4') => app.menu_index = 3,
-        KeyCode::Char('5') => app.menu_index = 4,
-        KeyCode::Char('i') => {
-            if app.menu_index == 4 {
-                app.mode = AppMode::ChatInput;
-            }
-        }
-        KeyCode::Esc => {
-            app.mode = AppMode::Normal;
-        }
-        KeyCode::Char('l') => {
-            if app.menu_index == 3 {
-                app.log_component = (app.log_component + 1) % LOG_COMPONENTS.len();
-                app.force_refresh = true;
-            }
-        }
-        KeyCode::Char('r') => app.force_refresh = true,
-        KeyCode::Char('c') if key.modifiers.contains(KeyModifiers::CONTROL) => return Ok(true),
-        _ => {}
-    }
-
-    if app.menu_index == 4 && app.mode == AppMode::ChatInput {
         match key.code {
-            KeyCode::Char(c) => app.input.push(c),
-            KeyCode::Backspace => {
-                app.input.pop();
+            KeyCode::Char(KeyMap::QUIT) => break,
+            KeyCode::Char('p') if key.modifiers.contains(KeyModifiers::CONTROL) => {
+                reduce(&mut state, Action::TogglePalette)
             }
-            KeyCode::Enter => {
-                let prompt = app.input.trim().to_string();
-                app.input.clear();
-                if !prompt.is_empty() {
-                    app.messages.push(("user".to_string(), prompt.clone()));
-                    let _ = app.llm_tx.send(prompt);
+            KeyCode::Tab => reduce(&mut state, Action::FocusNext),
+            KeyCode::BackTab => prev_view(&mut state),
+            KeyCode::Up => reduce(&mut state, Action::MoveUp),
+            KeyCode::Down => reduce(&mut state, Action::MoveDown),
+            KeyCode::Enter if !state.palette.active && state.active_view != ViewKind::Chat => {
+                reduce(&mut state, Action::Select)
+            }
+            KeyCode::Char('o') => reduce(&mut state, Action::SwitchView(ViewKind::Overview)),
+            KeyCode::Char(KeyMap::GRAPH) => reduce(&mut state, Action::SwitchView(ViewKind::Graph)),
+            KeyCode::Char(KeyMap::EVENTS) if state.active_view != ViewKind::Chat => {
+                reduce(&mut state, Action::SwitchView(ViewKind::Events))
+            }
+            KeyCode::Char(KeyMap::LOGS) => reduce(&mut state, Action::SwitchView(ViewKind::Logs)),
+            KeyCode::Char(KeyMap::DB) => reduce(&mut state, Action::SwitchView(ViewKind::Db)),
+            KeyCode::Char(KeyMap::PROVIDERS) => reduce(&mut state, Action::SwitchView(ViewKind::Providers)),
+            KeyCode::Char(KeyMap::CONTRACTS) if state.active_view != ViewKind::Chat => {
+                reduce(&mut state, Action::SwitchView(ViewKind::Contracts))
+            }
+            KeyCode::Char('h') => reduce(&mut state, Action::SwitchView(ViewKind::Chat)),
+            KeyCode::Char(KeyMap::PALETTE) => reduce(&mut state, Action::TogglePalette),
+            KeyCode::Char(KeyMap::SEARCH) => {
+                if !state.palette.active {
+                    reduce(&mut state, Action::TogglePalette);
+                    reduce(&mut state, Action::PaletteInput("search ".to_string()));
                 }
+            }
+            KeyCode::Char('r') => reduce(&mut state, Action::Refresh),
+            KeyCode::Char('?') => reduce(&mut state, Action::ToggleHelp),
+            KeyCode::Char('f') if state.active_view == ViewKind::Logs => {
+                reduce(&mut state, Action::LogsToggleFollow)
+            }
+            KeyCode::Char('s') if state.active_view == ViewKind::Logs => {
+                reduce(&mut state, Action::LogsCycleSource)
+            }
+            KeyCode::Char('n') if state.active_view == ViewKind::Graph => {
+                reduce(&mut state, Action::GraphToggleDepth)
+            }
+            KeyCode::Char('a') if state.active_view == ViewKind::Graph => {
+                reduce(&mut state, Action::GraphActivateSelected)
+            }
+            KeyCode::Char('C') if state.active_view == ViewKind::Chat => reduce(&mut state, Action::ChatApplyDraft),
+            KeyCode::Char('x') if state.active_view == ViewKind::Chat => reduce(&mut state, Action::ChatDiscardDraft),
+            KeyCode::Char('E') if state.active_view == ViewKind::Chat && !state.palette.active => {
+                reduce(&mut state, Action::TogglePalette);
+                reduce(&mut state, Action::PaletteInput("ask ".to_string()));
             }
             _ => {}
         }
     }
 
-    Ok(false)
+    Ok(())
 }
 
-fn refresh_state(cfg: &RuntimeConfig, app: &mut App) {
-    let fallback = app.last_event.elapsed() > Duration::from_millis(1500);
-    if fallback {
-        if let Ok(resp) = uds_client::send_request(&cfg.run_dir, &app.ws, &Request::Status) {
-            if let crate::rpc::protocol::Response::Status { state, alive, .. } = resp {
-                app.run_state = state;
-                app.alive = alive;
-                app.connected = true;
-                return;
-            }
+fn setup_terminal() -> Result<Terminal<CrosstermBackend<Stdout>>> {
+    enable_raw_mode()?;
+    let mut stdout = io::stdout();
+    stdout.execute(EnterAlternateScreen)?;
+    let backend = CrosstermBackend::new(stdout);
+    Ok(Terminal::new(backend)?)
+}
+
+struct TerminalRestore;
+
+impl Drop for TerminalRestore {
+    fn drop(&mut self) {
+        let _ = disable_raw_mode();
+        let mut stdout = io::stdout();
+        let _ = stdout.execute(LeaveAlternateScreen);
+    }
+}
+
+fn draw_ui(f: &mut ratatui::Frame, state: &AppState, theme: &Theme) {
+    f.render_widget(Block::default().style(theme.root()), f.size());
+
+    let root = Layout::default()
+        .direction(Direction::Vertical)
+        .constraints([Constraint::Length(1), Constraint::Min(1), Constraint::Length(1)])
+        .split(f.size());
+
+    let provider = state
+        .providers
+        .selected
+        .as_ref()
+        .and_then(|id| state.providers.list.iter().find(|p| &p.id == id))
+        .or_else(|| state.providers.list.first());
+    let provider_label = provider.map(|p| p.id.as_str()).unwrap_or("none");
+    let trust_label = provider
+        .map(|p| p.trust_state.as_str())
+        .unwrap_or_else(|| state.providers.trust.as_str());
+
+    let top = Paragraph::new(Line::from(vec![
+        Span::styled(format!(" WS:{} ", state.ws), theme.title()),
+        Span::raw(" "),
+        span_status("K", state.status.kernel_alive, theme),
+        Span::raw(" "),
+        span_status("E", state.status.engine_alive, theme),
+        Span::raw(" "),
+        span_status("M", state.status.mind_alive, theme),
+        Span::raw(" "),
+        span_awareness(state.status.awareness_active, theme),
+        Span::raw(" "),
+        Span::styled(
+            format!(" provider:{} ", short(provider_label, 44)),
+            Style::default().fg(theme.accent),
+        ),
+        Span::raw(" "),
+        Span::styled(
+            format!(" trust:{} ", trust_label),
+            trust_style(trust_label, theme),
+        ),
+        Span::raw(" "),
+        Span::styled(
+            format!(" view:{} ", view_name(&state.active_view).to_ascii_lowercase()),
+            theme.dim(),
+        ),
+    ]));
+    f.render_widget(top, root[0]);
+
+    match state.active_view {
+        ViewKind::Chat => render_chat_cockpit(f, state, theme, root[1]),
+        ViewKind::Graph => render_graph_cockpit(f, state, theme, root[1]),
+        ViewKind::Events => render_events_cockpit(f, state, theme, root[1]),
+        ViewKind::Logs => render_logs_cockpit(f, state, theme, root[1]),
+        _ => {
+            let content = Paragraph::new(current_view_text(state))
+                .block(
+                    Block::default()
+                        .borders(Borders::ALL)
+                        .style(theme.panel())
+                        .border_style(theme.border())
+                        .title(Span::styled(
+                            format!(" {} ", view_name(&state.active_view)),
+                            theme.title(),
+                        )),
+                )
+                .wrap(Wrap { trim: false });
+            f.render_widget(content, root[1]);
         }
-        app.run_state = None;
-        app.connected = false;
     }
 
-    if app.vault_bridge.is_none() {
-        if let Ok(v) = EngineVaultBridge::attach(&app.ws) {
-            app.vault_bridge = Some(v);
-        }
-    }
-    if let Some(v) = &app.vault_bridge {
-            let vault = v.as_mut();
-        let last_error = c_string(&vault.last_error);
-        let response = v.read_response();
-        app.vault_info = Some(VaultInfo {
-            status: vault.status,
-            energy_quota: vault.energy_quota,
-            energy_used: vault.energy_consumed,
-            last_command_id: vault.last_command_id,
-            last_error,
-            response,
-        });
-        app.last_command_id = Some(vault.last_command_id);
+    let mode = if state.palette.active {
+        "palette"
+    } else if state.active_view == ViewKind::Chat && state.focus == FocusZone::Composer {
+        "chat-compose"
     } else {
-        app.vault_info = None;
+        "normal"
+    };
+    let last_cmd = state
+        .palette
+        .history
+        .last()
+        .cloned()
+        .unwrap_or_else(|| "-".to_string());
+    let last_err = if state.chat.last_error.is_empty() {
+        "none".to_string()
+    } else {
+        state.chat.last_error.clone()
+    };
+    let status = Paragraph::new(format!(
+        " {} | Ctrl+P palette | g/e/l/d/p/c/h views | Tab focus | / search | q quit | cmd:{} | err:{}",
+        mode,
+        short(&last_cmd, 24),
+        short(&last_err, 42)
+    ))
+    .alignment(Alignment::Left)
+    .style(theme.dim())
+    .block(Block::default().borders(Borders::TOP).border_style(theme.border()));
+    f.render_widget(status, root[2]);
+
+    if state.palette.active {
+        let area = centered_rect(70, 20, f.size());
+        f.render_widget(Clear, area);
+        let palette = Paragraph::new(format!(
+            "Command Palette\n\n:{}\n\nExamples: ask <prompt> | apply | node <id> | search <term> | source <name>",
+            state.palette.input
+        ))
+        .block(
+            Block::default()
+                .borders(Borders::ALL)
+                .style(theme.panel_alt())
+                .border_style(theme.border())
+                .title(Span::styled("Command", theme.title())),
+        );
+        f.render_widget(palette, area);
     }
 
-    if app.menu_index == 3 {
-        let log_path = log_path(&cfg.run_dir, &app.ws, LOG_COMPONENTS[app.log_component]);
-        app.log_lines = tail_last_kb(&log_path, 128, 80);
+    if state.show_help {
+        let area = centered_rect(80, 34, f.size());
+        f.render_widget(Clear, area);
+        let help = Paragraph::new(
+            "Help\n\n\
+Header: ws/provider/trust/awareness\n\
+Body: view content\n\
+Footer: keys\n\n\
+Pattern: ↑/↓ move, Enter select, / search, : or Ctrl+P palette, Tab focus, q quit\n\
+Graph: n depth, a activate\n\
+Logs: s source, f follow\n\
+Chat: composer Enter send, Shift+Enter newline, Ctrl+U clear, C commit, x discard, E edit/retry\n",
+        )
+        .block(
+            Block::default()
+                .borders(Borders::ALL)
+                .style(theme.panel_alt())
+                .border_style(theme.border())
+                .title(Span::styled("Legend", theme.title())),
+        );
+        f.render_widget(help, area);
     }
 }
 
-fn ui(f: &mut ratatui::Frame, app: &mut App) {
-    let size = f.size();
+fn span_status(name: &str, alive: bool, theme: &Theme) -> Span<'static> {
+    if alive {
+        Span::styled(format!("{name}:up"), theme.badge_ok())
+    } else {
+        Span::styled(format!("{name}:down"), theme.badge_danger())
+    }
+}
 
+fn span_awareness(active: bool, theme: &Theme) -> Span<'static> {
+    if active {
+        Span::styled("awareness:on", theme.badge_ok())
+    } else {
+        Span::styled("awareness:off", theme.badge_warn())
+    }
+}
+
+fn trust_style(trust: &str, theme: &Theme) -> Style {
+    match trust {
+        "trusted" | "attached" => theme.badge_ok(),
+        "revoked" => theme.badge_danger(),
+        _ => theme.badge_warn(),
+    }
+}
+
+fn render_chat_cockpit(f: &mut ratatui::Frame, state: &AppState, theme: &Theme, area: Rect) {
+    let columns = Layout::default()
+        .direction(Direction::Horizontal)
+        .constraints([Constraint::Percentage(74), Constraint::Percentage(26)])
+        .split(area);
+    let left = Layout::default()
+        .direction(Direction::Vertical)
+        .constraints([Constraint::Length(2), Constraint::Min(10), Constraint::Length(5), Constraint::Length(2)])
+        .split(columns[0]);
+
+    let inline = Paragraph::new(Line::from(vec![
+        Span::styled(" CHAT ", theme.title()),
+        Span::raw(" "),
+        Span::styled(
+            format!(
+                "agent={} command={} stream={} state={:?}",
+                state.chat.last_agent.as_deref().unwrap_or("n/a"),
+                state.chat.last_command.as_deref().unwrap_or("n/a"),
+                state.chat.streaming_enabled,
+                state.chat.request_state
+            ),
+            theme.dim(),
+        ),
+    ]));
+    f.render_widget(inline, left[0]);
+
+    let transcript = chat_transcript_lines(state, theme);
+    let transcript_widget = Paragraph::new(transcript)
+        .block(
+            Block::default()
+                .borders(Borders::TOP)
+                .style(theme.panel())
+                .border_style(theme.border())
+                .title(Span::styled(" Transcript ", theme.title())),
+        )
+        .wrap(Wrap { trim: false });
+    f.render_widget(transcript_widget, left[1]);
+
+    let composer_title = if state.focus == FocusZone::Composer {
+        " Composer (active) "
+    } else {
+        " Composer "
+    };
+    let composer_widget = Paragraph::new(if state.chat.input.is_empty() {
+        "<type prompt here>".to_string()
+    } else {
+        state.chat.input.clone()
+    })
+    .style(if state.chat.input.is_empty() {
+        theme.dim()
+    } else {
+        Style::default().fg(theme.fg)
+    })
+    .block(
+        Block::default()
+            .borders(Borders::TOP)
+            .style(theme.panel())
+            .border_style(if state.focus == FocusZone::Composer {
+                theme.border_focused()
+            } else {
+                theme.border()
+            })
+            .title(Span::styled(composer_title, theme.title())),
+    )
+    .wrap(Wrap { trim: false });
+    f.render_widget(composer_widget, left[2]);
+
+    let action_widget = Paragraph::new(vec![
+        Line::from("Enter send | Shift+Enter newline | Ctrl+U clear"),
+        Line::from("Ctrl+P palette | C commit | x discard | s stream"),
+        Line::from(format!("commit_target={:?}", state.chat.commit_target)),
+    ])
+    .style(theme.dim())
+    .block(
+        Block::default()
+            .borders(Borders::TOP)
+            .style(theme.panel())
+            .border_style(theme.border())
+            .title(Span::styled(" Actions ", theme.title())),
+    );
+    f.render_widget(action_widget, left[3]);
+
+    let selected_provider = state
+        .providers
+        .selected
+        .as_ref()
+        .and_then(|id| state.providers.list.iter().find(|p| &p.id == id))
+        .or_else(|| state.providers.list.first());
+    let provider_id = selected_provider
+        .map(|p| p.id.as_str())
+        .unwrap_or("none");
+    let provider_model = selected_provider
+        .map(|p| p.model.as_str())
+        .unwrap_or("unknown");
+    let provider_trust = selected_provider
+        .map(|p| p.trust_state.as_str())
+        .unwrap_or("unknown");
+    let selected_node = state
+        .graph
+        .selected_node
+        .as_deref()
+        .map(|s| short(s, 34))
+        .unwrap_or_else(|| "none".to_string());
+    let subgraph = state
+        .graph
+        .last_subgraph
+        .as_ref()
+        .map(|s| format!("{}n/{}e", s.nodes, s.edges))
+        .unwrap_or_else(|| "n/a".to_string());
+    let activation = state
+        .graph
+        .last_activation
+        .as_ref()
+        .map(|a| format!("{}n/{}e", a.nodes, a.edges))
+        .unwrap_or_else(|| "n/a".to_string());
+    let side = Paragraph::new(vec![
+        Line::from(Span::styled(" SESSION", theme.title())),
+        Line::from(""),
+        Line::from(format!("ws: {}", state.ws)),
+        Line::from(format!("provider: {}", short(provider_id, 34))),
+        Line::from(format!("trust: {}", provider_trust)),
+        Line::from(format!("model: {}", short(provider_model, 34))),
+        Line::from(format!(
+            "agent: {}",
+            state.chat.last_agent.as_deref().unwrap_or("n/a")
+        )),
+        Line::from(format!(
+            "command: {}",
+            state.chat.last_command.as_deref().unwrap_or("n/a")
+        )),
+        Line::from(format!("streaming: {}", state.chat.streaming_enabled)),
+        Line::from(format!("state: {:?}", state.chat.request_state)),
+        Line::from(""),
+        Line::from("Graph live:"),
+        Line::from(format!("nodes/edges: {}/{}", state.graph.stats_nodes, state.graph.stats_edges)),
+        Line::from(format!("selected: {}", selected_node)),
+        Line::from(format!("neighbors: {}", subgraph)),
+        Line::from(format!("activation: {}", activation)),
+        Line::from(format!("backend: {}", short(&state.graph.backend, 34))),
+        Line::from(""),
+        Line::from("Context preview:"),
+        Line::from(short(&state.chat.context_preview, 34)),
+        Line::from(""),
+        Line::from("Last error:"),
+        Line::from(short(&state.chat.last_error, 34)),
+    ])
+    .wrap(Wrap { trim: false })
+    .block(
+        Block::default()
+            .borders(Borders::LEFT)
+            .style(theme.panel_alt())
+            .border_style(theme.border())
+            .title(Span::styled(" ", theme.title())),
+    );
+    f.render_widget(side, columns[1]);
+}
+
+fn render_graph_cockpit(f: &mut ratatui::Frame, state: &AppState, theme: &Theme, area: Rect) {
+    let columns = Layout::default()
+        .direction(Direction::Horizontal)
+        .constraints([Constraint::Percentage(36), Constraint::Percentage(64)])
+        .split(area);
+    let right = Layout::default()
+        .direction(Direction::Vertical)
+        .constraints([Constraint::Percentage(52), Constraint::Percentage(48)])
+        .split(columns[1]);
+
+    let mut node_lines: Vec<Line> = Vec::new();
+    if state.graph.node_list.is_empty() {
+        node_lines.push(Line::from(Span::styled("(no nodes)", theme.dim())));
+    } else {
+        for (i, id) in state.graph.node_list.iter().take(30).enumerate() {
+            let marker = if i == state.graph.selected_index { ">" } else { " " };
+            let style = if i == state.graph.selected_index {
+                theme.selected()
+            } else {
+                Style::default().fg(theme.fg)
+            };
+            node_lines.push(Line::from(Span::styled(format!("{marker} {id}"), style)));
+        }
+    }
+    let nodes = Paragraph::new(node_lines)
+        .block(
+            Block::default()
+                .borders(Borders::RIGHT)
+                .style(theme.panel())
+                .border_style(theme.border())
+                .title(Span::styled(" Nodes ", theme.title())),
+        )
+        .wrap(Wrap { trim: false });
+    f.render_widget(nodes, columns[0]);
+
+    let details = Paragraph::new(vec![
+        Line::from(format!("backend: {}", short(&state.graph.backend, 72))),
+        Line::from(format!("nodes/edges: {}/{}", state.graph.stats_nodes, state.graph.stats_edges)),
+        Line::from(format!("depth: {}", state.graph.depth.max(1))),
+        Line::from(format!(
+            "selected: {}",
+            state.graph.selected_node.as_deref().unwrap_or("none")
+        )),
+        Line::from(format!(
+            "kind: {}",
+            state
+                .graph
+                .selected_node_kind
+                .as_deref()
+                .unwrap_or("n/a")
+        )),
+        Line::from(format!("last_seen: {}", state.graph.selected_node_last_seen)),
+        Line::from(""),
+        Line::from("meta:"),
+        Line::from(short(&state.graph.selected_node_meta.to_string(), 72)),
+    ])
+    .block(
+        Block::default()
+            .borders(Borders::BOTTOM)
+            .style(theme.panel())
+            .border_style(theme.border())
+            .title(Span::styled(" Details ", theme.title())),
+    )
+    .wrap(Wrap { trim: false });
+    f.render_widget(details, right[0]);
+
+    let mut lower_lines: Vec<Line> = vec![
+        Line::from(Span::styled("neighbors", theme.title())),
+    ];
+    if state.graph.neighbors_preview.is_empty() {
+        lower_lines.push(Line::from(Span::styled("  (empty)", theme.dim())));
+    } else {
+        for n in state.graph.neighbors_preview.iter().take(8) {
+            lower_lines.push(Line::from(format!("  {n}")));
+        }
+    }
+    lower_lines.push(Line::from(""));
+    lower_lines.push(Line::from(Span::styled("activation", theme.title())));
+    if state.graph.activation_top.is_empty() {
+        lower_lines.push(Line::from(Span::styled("  (run: a)", theme.dim())));
+    } else {
+        for n in state.graph.activation_top.iter().take(8) {
+            lower_lines.push(Line::from(format!("  {n}")));
+        }
+    }
+    lower_lines.push(Line::from(""));
+    lower_lines.push(Line::from(Span::styled(
+        "keys: ↑/↓ node | n depth | a activate | : node <id>",
+        theme.dim(),
+    )));
+
+    let lower = Paragraph::new(lower_lines)
+        .block(
+            Block::default()
+                .borders(Borders::NONE)
+                .style(theme.panel())
+                .border_style(theme.border())
+                .title(Span::styled(" Explore ", theme.title())),
+        )
+        .wrap(Wrap { trim: false });
+    f.render_widget(lower, right[1]);
+}
+
+fn render_events_cockpit(f: &mut ratatui::Frame, state: &AppState, theme: &Theme, area: Rect) {
     let chunks = Layout::default()
         .direction(Direction::Vertical)
-        .constraints([Constraint::Length(3), Constraint::Min(10), Constraint::Length(3)])
-        .split(size);
+        .constraints([Constraint::Length(3), Constraint::Min(10)])
+        .split(area);
 
-    render_header(f, chunks[0], app);
-
-    let body = Layout::default()
-        .direction(Direction::Horizontal)
-        .constraints([Constraint::Length(18), Constraint::Min(10)])
-        .split(chunks[1]);
-
-    render_menu(f, body[0], app);
-    render_panel(f, body[1], app);
-
-    render_prompt(f, chunks[2], app);
-}
-
-fn render_header(f: &mut ratatui::Frame, area: Rect, app: &App) {
-    let status = if !app.connected {
-        "connecting"
-    } else {
-        match &app.run_state {
-            None => "down",
-            Some(_state) => {
-                if app.alive.kernel {
-                    if app.alive.engine && app.alive.mind {
-                        "up"
-                    } else {
-                        "degraded"
-                    }
-                } else {
-                    "down"
-                }
-            }
-        }
-    };
-
-    let mut title = format!(
-        "YAI TUI  | ws={} | status={} | build={} | [1-5] menu | q quit",
-        app.ws, status, app.build_info
+    let header = Paragraph::new(vec![
+        Line::from(format!(
+            "buffered={}  selected={}  expanded={}",
+            state.events.items.len(),
+            state.events.selected,
+            state.events.expanded
+        )),
+        Line::from(Span::styled(
+            "keys: ↑/↓ select | Enter expand/collapse",
+            theme.dim(),
+        )),
+    ])
+    .block(
+        Block::default()
+            .borders(Borders::TOP)
+            .style(theme.panel())
+            .border_style(theme.border())
+            .title(Span::styled(" Event Stream ", theme.title())),
     );
-    if !app.last_event_label.is_empty() {
-        title.push_str(" | last=");
-        let mut last = app.last_event_label.clone();
-        if last.len() > 60 {
-            last.truncate(60);
-            last.push_str("…");
-        }
-        title.push_str(&last);
-    }
+    f.render_widget(header, chunks[0]);
 
-    let block = Block::default().borders(Borders::ALL).title(title);
-    f.render_widget(block, area);
-}
-
-fn render_menu(f: &mut ratatui::Frame, area: Rect, app: &App) {
-    let items: Vec<ListItem> = MENU_ITEMS
-        .iter()
-        .enumerate()
-        .map(|(i, name)| {
-            let style = if i == app.menu_index {
-                Style::default().fg(Color::Yellow).add_modifier(Modifier::BOLD)
-            } else {
-                Style::default()
-            };
-            ListItem::new(Span::styled(*name, style))
-        })
-        .collect();
-
-    let list = List::new(items)
-        .block(Block::default().borders(Borders::ALL).title("Menu"));
-    f.render_widget(list, area);
-}
-
-fn render_panel(f: &mut ratatui::Frame, area: Rect, app: &App) {
-    match app.menu_index {
-        0 => render_overview(f, area, app),
-        1 => render_processes(f, area, app),
-        2 => render_vault(f, area, app),
-        3 => render_logs(f, area, app),
-        4 => render_chat(f, area, app),
-        _ => {}
-    }
-}
-
-fn render_overview(f: &mut ratatui::Frame, area: Rect, app: &App) {
-    let mut lines = vec![
-        Line::from(Span::styled("Overview", Style::default().add_modifier(Modifier::BOLD))),
-        Line::from(""),
-    ];
-
-    if !app.connected {
-        lines.push(Line::from("connecting to daemon..."));
-    } else if let Some(state) = &app.run_state {
-        let boot_status = match state.boot_pid {
-            None => "not_started",
-            Some(_) if app.alive.boot => "running",
-            Some(_) => "completed",
-        };
-        lines.push(Line::from(format!("boot:       {:?} ({})", state.boot_pid, boot_status)));
-        if let Some(pgid) = state.pgid {
-            lines.push(Line::from(format!("pgid:       {}", pgid)));
-        }
-        lines.push(Line::from(format!("kernel pid: {:?}", state.kernel_pid)));
-        lines.push(Line::from(format!("engine pid: {:?}", state.engine_pid)));
-        lines.push(Line::from(format!("mind pid:   {:?}", state.mind_pid)));
-        lines.push(Line::from(format!("socket:     {}", state.socket_path)));
-    } else {
-        lines.push(Line::from("status: down"));
-    }
-
-    let block = Block::default().borders(Borders::ALL).title("Overview");
-    let para = Paragraph::new(lines).block(block).wrap(Wrap { trim: true });
-    f.render_widget(para, area);
-}
-
-fn render_processes(f: &mut ratatui::Frame, area: Rect, app: &App) {
-    let mut lines = vec![Line::from(Span::styled("Processes", Style::default().add_modifier(Modifier::BOLD)))];
-
-    if !app.connected {
-        lines.push(Line::from("connecting to daemon..."));
-    } else if let Some(state) = &app.run_state {
-        let boot_status = match state.boot_pid {
-            None => "not_started",
-            Some(_) if app.alive.boot => "running",
-            Some(_) => "completed",
-        };
-        lines.push(Line::from(format!(
-            "boot:   pid={:?} status={}",
-            state.boot_pid, boot_status
-        )));
-        lines.push(Line::from(format!(
-            "kernel: pid={:?} alive={}",
-            state.kernel_pid,
-            app.alive.kernel
-        )));
-        lines.push(Line::from(format!(
-            "engine: pid={:?} alive={}",
-            state.engine_pid,
-            app.alive.engine
-        )));
-        lines.push(Line::from(format!(
-            "mind:   pid={:?} alive={}",
-            state.mind_pid,
-            app.alive.mind
-        )));
-    } else {
-        lines.push(Line::from("status: down"));
-    }
-
-    let block = Block::default().borders(Borders::ALL).title("Processes");
-    let para = Paragraph::new(lines).block(block).wrap(Wrap { trim: true });
-    f.render_widget(para, area);
-}
-
-fn render_vault(f: &mut ratatui::Frame, area: Rect, app: &App) {
-    let mut lines = vec![Line::from(Span::styled("Vault", Style::default().add_modifier(Modifier::BOLD)))];
-    if let Some(v) = &app.vault_info {
-        lines.push(Line::from(format!("status: {}", state_name(v.status))));
-        lines.push(Line::from(format!("energy: {}/{}", v.energy_used, v.energy_quota)));
-        lines.push(Line::from(format!("last_command_id: {}", v.last_command_id)));
-        lines.push(Line::from(format!("last_error: {}", v.last_error)));
-        lines.push(Line::from(format!("response: {}", v.response)));
-    } else {
-        lines.push(Line::from("vault unavailable"));
-    }
-
-    let block = Block::default().borders(Borders::ALL).title("Vault");
-    let para = Paragraph::new(lines).block(block).wrap(Wrap { trim: true });
-    f.render_widget(para, area);
-}
-
-fn render_logs(f: &mut ratatui::Frame, area: Rect, app: &App) {
-    let title = format!("Logs ({}) [l to switch]", LOG_COMPONENTS[app.log_component]);
-    let lines: Vec<Line> = if app.log_lines.is_empty() {
-        vec![Line::from("no logs")]
-    } else {
-        app.log_lines.iter().map(|l| Line::from(l.clone())).collect()
-    };
-    let block = Block::default().borders(Borders::ALL).title(title);
-    let para = Paragraph::new(lines).block(block).wrap(Wrap { trim: false });
-    f.render_widget(para, area);
-}
-
-fn render_chat(f: &mut ratatui::Frame, area: Rect, app: &App) {
     let mut lines: Vec<Line> = Vec::new();
-    for (role, msg) in &app.messages {
-        let label = if role == "user" { "you" } else { "ai" };
-        lines.push(Line::from(Span::styled(
-            format!("{}:", label),
-            Style::default().fg(Color::Cyan).add_modifier(Modifier::BOLD),
-        )));
-        lines.push(Line::from(msg.clone()));
-        lines.push(Line::from(""));
-    }
-
-    let block = Block::default().borders(Borders::ALL).title("Chat");
-    let para = Paragraph::new(lines).block(block).wrap(Wrap { trim: true });
-    f.render_widget(para, area);
-}
-
-fn render_prompt(f: &mut ratatui::Frame, area: Rect, app: &App) {
-    let hint = if app.menu_index == 4 {
-        match app.mode {
-            AppMode::ChatInput => "prompt (esc to exit)",
-            AppMode::Normal => "press i to chat",
-        }
+    if state.events.items.is_empty() {
+        lines.push(Line::from(Span::styled("no events yet", theme.dim())));
     } else {
-        ""
-    };
-    let text = format!("> {}", app.input);
-    let block = Block::default().borders(Borders::ALL).title(hint);
-    let para = Paragraph::new(text).block(block);
-    f.render_widget(para, area);
+        for (i, line) in state.events.items.iter().rev().take(120).rev().enumerate() {
+            let marker = if i == state.events.selected { ">" } else { " " };
+            let is_error = line.contains("error") || line.contains("ERROR");
+            let is_warn = line.contains("warn") || line.contains("WARN");
+            let style = if i == state.events.selected {
+                theme.selected()
+            } else if is_error {
+                theme.badge_danger()
+            } else if is_warn {
+                theme.badge_warn()
+            } else {
+                Style::default().fg(theme.fg)
+            };
+            let text = if state.events.expanded || i == state.events.selected {
+                line.to_string()
+            } else {
+                short(line, 180)
+            };
+            lines.push(Line::from(Span::styled(format!("{marker} {text}"), style)));
+        }
+    }
+    let body = Paragraph::new(lines)
+        .block(
+            Block::default()
+                .borders(Borders::NONE)
+                .style(theme.panel())
+                .border_style(theme.border())
+                .title(Span::styled(" Timeline ", theme.title())),
+        )
+        .wrap(Wrap { trim: false });
+    f.render_widget(body, chunks[1]);
 }
 
-fn state_name(state: u32) -> &'static str {
-    match state {
-        crate::shared::constants::YAI_STATE_HALT => "HALT",
-        crate::shared::constants::YAI_STATE_PREBOOT => "PREBOOT",
-        crate::shared::constants::YAI_STATE_READY => "READY",
-        crate::shared::constants::YAI_STATE_HANDOFF_COMPLETE => "HANDOFF",
-        crate::shared::constants::YAI_STATE_RUNNING => "RUNNING",
-        crate::shared::constants::YAI_STATE_SUSPENDED => "SUSPENDED",
-        crate::shared::constants::YAI_STATE_ERROR => "ERROR",
-        _ => "UNKNOWN",
+fn render_logs_cockpit(f: &mut ratatui::Frame, state: &AppState, theme: &Theme, area: Rect) {
+    let chunks = Layout::default()
+        .direction(Direction::Vertical)
+        .constraints([Constraint::Length(3), Constraint::Min(10)])
+        .split(area);
+    let header = Paragraph::new(vec![
+        Line::from(format!(
+            "source={} lines={} follow={} search='{}'",
+            state.logs.source_selected, state.logs.lines, state.logs.follow, state.logs.search_term
+        )),
+        Line::from(Span::styled(
+            "keys: s source | f follow | / search | r refresh",
+            theme.dim(),
+        )),
+    ])
+    .block(
+        Block::default()
+            .borders(Borders::TOP)
+            .style(theme.panel())
+            .border_style(theme.border())
+            .title(Span::styled(" Logs ", theme.title())),
+    );
+    f.render_widget(header, chunks[0]);
+
+    let mut lines: Vec<Line> = Vec::new();
+    if state.logs.tail_buffer.is_empty() {
+        lines.push(Line::from(Span::styled(
+            format!("no logs for source={}", state.logs.source_selected),
+            theme.dim(),
+        )));
+    } else {
+        for (i, line) in state.logs.tail_buffer.iter().rev().take(120).rev().enumerate() {
+            let marker = if i == state.logs.selected { ">" } else { " " };
+            let style = if i == state.logs.selected {
+                theme.selected()
+            } else if line.contains("ERROR") || line.contains("error") {
+                theme.badge_danger()
+            } else if line.contains("WARN") || line.contains("warn") {
+                theme.badge_warn()
+            } else {
+                Style::default().fg(theme.fg)
+            };
+            lines.push(Line::from(Span::styled(
+                format!("{marker} {}", short(line, 190)),
+                style,
+            )));
+        }
     }
+    let body = Paragraph::new(lines)
+        .block(
+            Block::default()
+                .borders(Borders::NONE)
+                .style(theme.panel())
+                .border_style(theme.border())
+                .title(Span::styled(" Tail ", theme.title())),
+        )
+        .wrap(Wrap { trim: false });
+    f.render_widget(body, chunks[1]);
 }
 
-fn c_string(bytes: &[u8]) -> String {
-    let nul = bytes.iter().position(|b| *b == 0).unwrap_or(bytes.len());
-    String::from_utf8_lossy(&bytes[..nul]).to_string()
-}
-
-fn tail_last_kb(path: &std::path::Path, kb: u64, max_lines: usize) -> Vec<String> {
-    let mut f = match File::open(path) {
-        Ok(x) => x,
-        Err(_) => return vec![],
-    };
-    let len = f.metadata().map(|m| m.len()).unwrap_or(0);
-    let start = len.saturating_sub(kb * 1024);
-    if f.seek(SeekFrom::Start(start)).is_err() {
-        return vec![];
+fn chat_transcript_lines(state: &AppState, theme: &Theme) -> Vec<Line<'static>> {
+    if state.chat.transcript.is_empty() {
+        return vec![Line::from(Span::styled("(empty)", theme.dim()))];
     }
-    let mut buf = String::new();
-    if f.read_to_string(&mut buf).is_err() {
-        return vec![];
-    }
-    let mut lines: Vec<String> = buf.lines().map(|s| s.to_string()).collect();
-    if lines.len() > max_lines {
-        lines = lines.split_off(lines.len() - max_lines);
+    let start = state.chat.scroll.min(state.chat.transcript.len());
+    let tail = &state.chat.transcript[start..];
+    let mut lines = Vec::new();
+    for m in tail
+        .iter()
+        .rev()
+        .take(16)
+        .rev()
+    {
+        let role_style = match m.role.as_str() {
+            "USER" => Style::default().fg(theme.accent).add_modifier(Modifier::BOLD),
+            "AGENT" => Style::default().fg(theme.ok).add_modifier(Modifier::BOLD),
+            "SYSTEM" => Style::default().fg(theme.warn).add_modifier(Modifier::BOLD),
+            _ => theme.dim(),
+        };
+        let status_style = match format!("{:?}", m.status).as_str() {
+            "Committed" => theme.badge_ok(),
+            "Discarded" => theme.badge_danger(),
+            "Draft" => theme.badge_warn(),
+            _ => theme.dim(),
+        };
+        lines.push(Line::from(vec![
+            Span::styled(format!(" {} ", m.role), role_style),
+            Span::raw(" "),
+            Span::styled(format!("{:?}", m.status), status_style),
+        ]));
+        lines.push(Line::from(Span::styled(
+            short(&m.text, 180),
+            Style::default().fg(theme.fg),
+        )));
+        lines.push(Line::from(Span::raw("")));
     }
     lines
 }
 
-fn read_manifest(cfg: &RuntimeConfig) -> Option<String> {
-    let manifest = cfg
-        .artifacts_root
-        .join("yai-core")
-        .join("dist")
-        .join("MANIFEST.json");
-    let data = std::fs::read_to_string(manifest).ok()?;
-    let v: serde_json::Value = serde_json::from_str(&data).ok()?;
-    let git_sha = v.get("git_sha")?.as_str()?.to_string();
-    let build_time = v.get("build_time")?.as_str()?.to_string();
-    Some(format!("{} {}", git_sha, build_time))
+fn short(s: &str, max: usize) -> String {
+    if s.len() <= max {
+        return s.to_string();
+    }
+    let keep = max.saturating_sub(3);
+    format!("{}...", &s[..keep])
 }
 
-fn spawn_llm_worker(cfg: RuntimeConfig, ws: String, rx: Receiver<String>, tx: Sender<(String, String)>) {
-    thread::spawn(move || {
-        let client = build_llm_for_ws(&cfg, &ws);
-        while let Ok(prompt) = rx.recv() {
-            let resp = client.complete(&prompt).unwrap_or_else(|e| format!("error: {:?}", e));
-            let _ = tx.send(("ai".to_string(), resp));
-        }
-    });
+fn current_view_text(state: &AppState) -> String {
+    match state.active_view {
+        ViewKind::Overview => views::overview::render(state),
+        ViewKind::Graph => views::graph::render(state),
+        ViewKind::Events => views::events::render(state),
+        ViewKind::Logs => views::logs::render(state),
+        ViewKind::Db => views::db::render(state),
+        ViewKind::Providers => views::providers::render(state),
+        ViewKind::Contracts => views::contracts::render(state),
+        ViewKind::Chat => views::chat::render(state),
+    }
 }
 
-fn spawn_event_worker(cfg: RuntimeConfig, ws: String, tx: Sender<crate::rpc::protocol::Event>) {
-    thread::spawn(move || loop {
-        let sock = crate::control::workspace::control_socket_path(&cfg.run_dir, &ws);
-        let stream = std::os::unix::net::UnixStream::connect(&sock);
-        let mut stream = match stream {
-            Ok(s) => s,
-            Err(_) => {
-                thread::sleep(Duration::from_millis(500));
-                continue;
-            }
-        };
-        let req = serde_json::to_string(&Request::EventsSubscribe).unwrap();
-        let _ = stream.write_all(req.as_bytes());
-        let _ = stream.write_all(b"\n");
-        let _ = stream.flush();
-        let mut reader = std::io::BufReader::new(stream);
-        let mut line = String::new();
-        loop {
-            line.clear();
-            let n = match reader.read_line(&mut line) {
-                Ok(n) => n,
-                Err(_) => break,
-            };
-            if n == 0 {
-                break;
-            }
-            if let Ok(resp) = serde_json::from_str::<crate::rpc::protocol::Response>(&line) {
-                if let crate::rpc::protocol::Response::Event { event } = resp {
-                    let _ = tx.send(event);
-                }
-            }
-        }
-        thread::sleep(Duration::from_millis(200));
-    });
+fn view_order() -> &'static [ViewKind] {
+    const ORDER: [ViewKind; 8] = [
+        ViewKind::Overview,
+        ViewKind::Graph,
+        ViewKind::Events,
+        ViewKind::Logs,
+        ViewKind::Db,
+        ViewKind::Providers,
+        ViewKind::Contracts,
+        ViewKind::Chat,
+    ];
+    &ORDER
+}
+
+fn view_name(view: &ViewKind) -> &'static str {
+    match view {
+        ViewKind::Overview => "Overview",
+        ViewKind::Graph => "Graph",
+        ViewKind::Events => "Events",
+        ViewKind::Logs => "Logs",
+        ViewKind::Db => "DB",
+        ViewKind::Providers => "Providers",
+        ViewKind::Contracts => "Contracts",
+        ViewKind::Chat => "Chat",
+    }
+}
+
+fn prev_view(state: &mut AppState) {
+    let order = view_order();
+    let current = order.iter().position(|v| *v == state.active_view).unwrap_or(0);
+    let prev = if current == 0 { order.len() - 1 } else { current - 1 };
+    reduce(state, Action::SwitchView(order[prev].clone()));
+}
+
+fn centered_rect(percent_x: u16, percent_y: u16, r: Rect) -> Rect {
+    let popup_layout = Layout::default()
+        .direction(Direction::Vertical)
+        .constraints([
+            Constraint::Percentage((100 - percent_y) / 2),
+            Constraint::Percentage(percent_y),
+            Constraint::Percentage((100 - percent_y) / 2),
+        ])
+        .split(r);
+    Layout::default()
+        .direction(Direction::Horizontal)
+        .constraints([
+            Constraint::Percentage((100 - percent_x) / 2),
+            Constraint::Percentage(percent_x),
+            Constraint::Percentage((100 - percent_x) / 2),
+        ])
+        .split(popup_layout[1])[1]
 }

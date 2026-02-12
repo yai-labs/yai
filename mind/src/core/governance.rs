@@ -1,6 +1,6 @@
 // src/core/governance.rs
 #![allow(dead_code)]
-use crate::models::{IceMessage, MessageType};
+use crate::models::{Message, MessageType};
 use crate::core::protocol::{AgentId, CommandId, RoutingDecision};
 
 /// Rappresenta il verdetto di conformità I-003
@@ -22,7 +22,7 @@ impl GovernanceEngine {
     }
 
     /// Valida un messaggio secondo i vincoli strutturali di GOVERNANCE.md
-    pub fn validate_compliance(&self, message: &IceMessage) -> GovernanceVerdict {
+    pub fn validate_compliance(&self, message: &Message) -> GovernanceVerdict {
         // Vincolo: Authority must be EXPLICIT (deve esserci un ID nel payload)
         let authority = message.payload.get("authority_id")
             .and_then(|v| v.as_str());
