@@ -1,4 +1,4 @@
-use yai_mind::bridge::shm::VaultBridge;
+use yai_mind::transport::bridge::shm::VaultBridge;
 
 #[test]
 fn test_vault_connection() {

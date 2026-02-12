@@ -1,5 +1,5 @@
-use yai_mind::memory::{EventKind, MemoryCore};
-use yai_mind::rag::pipeline::build_prompt;
+use yai_mind::cognition::memory::{EventKind, MemoryCore};
+use yai_mind::cognition::rag::pipeline::build_prompt;
 
 #[test]
 fn memory_store_and_rag_context() {
