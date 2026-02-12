@@ -10,8 +10,8 @@ Contenuto
 - `seed/semantic_edges.jsonl`      → archi semantici seed
 - `seed/episodic_events.jsonl`     → eventi episodici seed (NDJSON)
 - `scripts/README.md`              → policy: dataset data-only
-- `../../../../scripts/datasets/global-stress/v1/import-seed-via-cli.sh` → importer canonicale
-- `../../../../scripts/datasets/global-stress/v1/load-events-log.sh`     → loader canonicale
+- `./scripts/import-seed-via-cli.sh` → importer canonicale
+- `./scripts/load-events-log.sh`     → loader canonicale
 
 Nota su privacy
 I dati “birra 2024-02-13” e simili sono **sintetici** (tag `seed`) e servono solo a testare la pipeline.
@@ -32,7 +32,7 @@ Non è per “colpire” nessuno: è per stressare davvero governance e audit.
   ```bash
   export BIN="$(command -v yai)"
   export WS="dev"
-  ./scripts/datasets/global-stress/v1/import-seed-via-cli.sh
+  ./datasets/global-stress/v1/scripts/import-seed-via-cli.sh
   ```
   Oppure da root repo:
   ```bash
@@ -41,7 +41,7 @@ Non è per “colpire” nessuno: è per stressare davvero governance e audit.
 
 3) Episodic ingest (events.log → episodic)
 ```bash
-./scripts/datasets/global-stress/v1/load-events-log.sh
+./datasets/global-stress/v1/scripts/load-events-log.sh
 # opzionale: se hai comando ingest nel graph layer
 # "$BIN" graph episodic ingest-events --ws "$WS"
 ```
@@ -57,7 +57,7 @@ Non è per “colpire” nessuno: è per stressare davvero governance e audit.
 - Embedding locale ONNX disponibile:
   - `~/.yai/models/embeddings/all-MiniLM-L6-v2/model.onnx`
   - `~/.yai/models/embeddings/all-MiniLM-L6-v2/tokenizer.json`
-- `events.log` popolato (da `scripts/datasets/global-stress/v1/load-events-log.sh`).
+- `events.log` popolato (da `datasets/global-stress/v1/scripts/load-events-log.sh`).
 
 ## Test a blocchi (consigliato)
 
@@ -72,8 +72,8 @@ cd mind
 cargo build --release
 
 cd ../datasets/global-stress/v1
-../../../../scripts/datasets/global-stress/v1/import-seed-via-cli.sh
-../../../../scripts/datasets/global-stress/v1/load-events-log.sh
+./scripts/import-seed-via-cli.sh
+./scripts/load-events-log.sh
 ```
 **Expected**
 - `semantic.sqlite` creato in `~/.yai/run/$WS/`
@@ -123,8 +123,8 @@ rm -f ~/.yai/run/$WS/vector.usearch
 
 ## Troubleshooting rapido
 - **embedder fallback hash** → manca ONNX: riesegui `./scripts/fetch-embeddings.sh`
-- **events empty** → manca `events.log`: riesegui `scripts/datasets/global-stress/v1/load-events-log.sh`
-- **no nodes** → verifica `scripts/datasets/global-stress/v1/import-seed-via-cli.sh` e id formato `node:<kind>:<slug>`
+- **events empty** → manca `events.log`: riesegui `datasets/global-stress/v1/scripts/load-events-log.sh`
+- **no nodes** → verifica `datasets/global-stress/v1/scripts/import-seed-via-cli.sh` e id formato `node:<kind>:<slug>`
 
 ## Mapping ai layer (come leggere i test)
 - Authority/Law: deve rifiutare o far rifiutare al kernel; lascia audit/eventi.

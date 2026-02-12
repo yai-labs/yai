@@ -1,31 +1,67 @@
 # RPC v1
 
-Editorial pointer only.
+Editorial pointer aligned with current runtime implementation.
 
 Canonical sources:
-
 - `law/specs/control/control_plane.v1.json`
-- `law/specs/cli/CLI_PUBLIC_INTERFACE.md`
-- `law/specs/cli/commands.v1.json`
+- `mind/src/transport/rpc/protocol.rs`
 
-### `down_ok`
-Payload:
-- `shutdown` (bool)
+Transport:
+- UDS (`~/.yai/run/<ws>/control.sock`)
+- NDJSON / JSON-lines framing
 
-### `providers`
-Payload:
-- `items` (array of ProviderInfo)
+## Requests
 
-### `provider_status`
-Payload:
-- `active` (ProviderInfo or null)
+- `ping`
+- `status`
+- `up`
+- `down`
+- `providers_discover`
+- `providers_list`
+- `providers_pair`
+- `providers_attach`
+- `providers_detach`
+- `providers_revoke`
+- `providers_status`
+- `dsar_request`
+- `dsar_status`
+- `dsar_execute`
+- `chat_sessions_list`
+- `chat_session_new`
+- `chat_session_select`
+- `chat_history`
+- `chat_send`
+- `shell_exec`
+- `events_subscribe`
 
-### `providers_ok`
-No payload.
+## Responses
 
-### `events_started`
-No payload. Stream follows.
+- `pong`
+- `status`
+- `up_ok`
+- `down_ok`
+- `providers`
+- `provider_status`
+- `providers_ok`
+- `dsar_created`
+- `dsar_state`
+- `dsar_executed`
+- `chat_sessions`
+- `chat_session`
+- `chat_history`
+- `chat_send`
+- `shell_exec`
+- `events_started`
+- `event`
+- `error`
 
-### `error`
-Payload:
-- `message` (string)
+## Error envelope
+
+- `type = error`
+- payload:
+  - `message` (string)
+
+## Notes
+
+- CLI and YX are clients of the same RPC contracts.
+- Lifecycle authority remains in daemon/control plane.

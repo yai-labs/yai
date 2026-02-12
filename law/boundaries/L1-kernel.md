@@ -121,7 +121,7 @@ At kernel entry:
   * `formal/YAI_KERNEL.cfg`
 * Runtime enforcement must match the model:
 
-* `../kernel/src/kernel/*`
+* `../kernel/src/core/*`
 * Every transition must be:
 
   * checked (guards + capabilities)

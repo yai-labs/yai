@@ -23,6 +23,15 @@
       "providers_detach",
       "providers_status",
       "providers_revoke",
+      "dsar_request",
+      "dsar_status",
+      "dsar_execute",
+      "chat_sessions_list",
+      "chat_session_new",
+      "chat_session_select",
+      "chat_history",
+      "chat_send",
+      "shell_exec",
       "events_subscribe"
     ],
     "responses": [
@@ -32,6 +41,16 @@
       "down_ok",
       "providers",
       "provider_status",
+      "providers_ok",
+      "dsar_created",
+      "dsar_state",
+      "dsar_executed",
+      "chat_sessions",
+      "chat_session",
+      "chat_history",
+      "chat_send",
+      "shell_exec",
+      "events_started",
       "event",
       "error"
     ]

@@ -64,9 +64,7 @@
           "flag": "--monitor",
           "type": "bool",
           "required": false,
-          "default": false,
-          "deprecated": true,
-          "replacement": "yai tui --ws <id> run"
+          "default": false
         },
         {
           "name": "timeout_ms",
@@ -146,9 +144,7 @@
           "flag": "--monitor",
           "type": "bool",
           "required": false,
-          "default": false,
-          "deprecated": true,
-          "replacement": "yai tui --ws <id> run"
+          "default": false
         },
         {
           "name": "timeout_ms",
@@ -294,10 +290,8 @@
     },
     {
       "name": "monitor",
-      "group": "monitor",
-      "summary": "Legacy alias for `yai tui run` (deprecated)",
-      "deprecated": true,
-      "replacement": "yai tui run",
+      "group": "inspect",
+      "summary": "Live monitor (event stream) for a workspace",
       "args": [
         {
           "name": "ws",
@@ -307,64 +301,10 @@
         }
       ],
       "outputs": [
-        "tui",
-        "text"
-      ],
-      "side_effects": [],
-      "law_hooks": [
-        "I-001",
-        "L1",
-        "L2",
-        "L3"
-      ]
-    },
-    {
-      "name": "tui",
-      "group": "monitor",
-      "summary": "Canonical TUI command (`run` full-screen, `snapshot` JSON)",
-      "args": [
-        {
-          "name": "subcommand",
-          "pos": 1,
-          "type": "enum",
-          "values": [
-            "run",
-            "snapshot"
-          ],
-          "required": true
-        },
-        {
-          "name": "ws",
-          "flag": "--ws",
-          "type": "string",
-          "required": false
-        },
-        {
-          "name": "view",
-          "flag": "--view",
-          "type": "enum",
-          "values": [
-            "overview",
-            "graph",
-            "events",
-            "logs",
-            "db",
-            "providers",
-            "contracts",
-            "chat"
-          ],
-          "required": false
-        }
-      ],
-      "outputs": [
-        "tui",
-        "json",
         "text"
       ],
       "side_effects": [
-        "rpc_call",
-        "read_logs",
-        "read_db"
+        "rpc_call"
       ],
       "law_hooks": [
         "I-001",
@@ -375,7 +315,7 @@
     },
     {
       "name": "events",
-      "group": "monitor",
+      "group": "inspect",
       "summary": "Stream daemon events (NDJSON)",
       "args": [
         {
@@ -409,7 +349,6 @@
           "type": "enum",
           "values": [
             "core",
-            "law-kernel",
             "full"
           ],
           "required": true
@@ -482,9 +421,11 @@
           "values": [
             "discover",
             "list",
+            "trust",
             "pair",
             "attach",
             "detach",
+            "revoke",
             "status"
           ],
           "required": true
@@ -511,6 +452,41 @@
       ]
     },
     {
+      "name": "dsar",
+      "group": "control",
+      "summary": "DSAR workflow (request/status/execute)",
+      "args": [
+        {
+          "name": "subcommand",
+          "pos": 1,
+          "type": "enum",
+          "values": [
+            "request",
+            "status",
+            "execute"
+          ],
+          "required": true
+        },
+        {
+          "name": "ws",
+          "flag": "--ws",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "outputs": [
+        "text",
+        "json"
+      ],
+      "side_effects": [
+        "rpc_call"
+      ],
+      "law_hooks": [
+        "I-001",
+        "L3"
+      ]
+    },
+    {
       "name": "sessions",
       "group": "control",
       "summary": "List or kill sessions",
@@ -526,8 +502,8 @@
           "required": true
         },
         {
-          "name": "ws",
-          "flag": "--ws",
+          "name": "kill_ws",
+          "pos": 2,
           "type": "string",
           "required": false
         },
@@ -555,6 +531,78 @@
       ]
     },
     {
+      "name": "chat",
+      "group": "control",
+      "summary": "Chat sessions and messages via control plane",
+      "args": [
+        {
+          "name": "subcommand",
+          "pos": 1,
+          "type": "enum",
+          "values": [
+            "list",
+            "new",
+            "select",
+            "history",
+            "send"
+          ],
+          "required": true
+        },
+        {
+          "name": "ws",
+          "flag": "--ws",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "outputs": [
+        "text",
+        "json"
+      ],
+      "side_effects": [
+        "rpc_call"
+      ],
+      "law_hooks": [
+        "I-001",
+        "L3"
+      ]
+    },
+    {
+      "name": "shell",
+      "group": "control",
+      "summary": "Capability-gated shell execution via control plane",
+      "args": [
+        {
+          "name": "subcommand",
+          "pos": 1,
+          "type": "enum",
+          "values": [
+            "exec"
+          ],
+          "required": true
+        },
+        {
+          "name": "ws",
+          "flag": "--ws",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "outputs": [
+        "text",
+        "json"
+      ],
+      "side_effects": [
+        "rpc_call",
+        "spawn_processes"
+      ],
+      "law_hooks": [
+        "I-001",
+        "I-006",
+        "L3"
+      ]
+    },
+    {
       "name": "graph",
       "group": "memory",
       "summary": "MindGraph operations (semantic add-node/add-edge, query uses semantic+vector+activation)",
@@ -566,7 +614,14 @@
           "values": [
             "add-node",
             "add-edge",
-            "query"
+            "query",
+            "stats",
+            "node",
+            "neighbors",
+            "export",
+            "awareness",
+            "activate",
+            "trace"
           ],
           "required": true
         },

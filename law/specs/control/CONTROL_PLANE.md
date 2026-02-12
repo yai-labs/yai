@@ -6,7 +6,7 @@ It is normative. Implementations must conform.
 ## Principles
 
 1. **Single authority per workspace**: one daemon owns one `ws`.
-2. **Clients are stateless**: CLI/TUI/GUI never spawn runtimes directly.
+2. **Clients are stateless**: CLI/YX/automation never spawn runtimes directly.
 3. **RPC is the official channel**: all lifecycle and status queries go through RPC.
 4. **No global sockets**: runtime sockets are namespaced per `ws`.
 5. **Idempotent controls**: `up`/`down`/`status` are safe to repeat.
@@ -29,7 +29,7 @@ Files:
 Runtime socket:
 
 ```
-/tmp/yai_runtime.<ws>.sock
+/tmp/yai_runtime_<ws>.sock
 ```
 
 Implementations may accept a template with `{ws}` but must resolve to a per‑ws socket.

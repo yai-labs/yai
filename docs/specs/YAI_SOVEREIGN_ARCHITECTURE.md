@@ -38,7 +38,7 @@ This document is an implementation blueprint. It defines boundaries, contracts, 
 ### Control Plane (Daemon/RPC/Events)
 - Authoritative runtime supervisor per workspace.
 - Owns lifecycle, process supervision, RPC surface, and event stream.
-- Multiple clients (CLI/TUI/GUI) attach to the same workspace.
+- Multiple clients (CLI/YX GUI/automation) attach to the same workspace.
 
 ---
 
@@ -60,7 +60,10 @@ This document is an implementation blueprint. It defines boundaries, contracts, 
 - `status`
 - `up` {build, no_engine, no_mind, ai, timeout_ms}
 - `down` {force, shutdown}
-- `providers_discover|list|pair|attach|detach|status`
+- `providers_discover|list|pair|attach|detach|status|revoke`
+- `dsar_request|dsar_status|dsar_execute`
+- `chat_sessions_list|chat_session_new|chat_session_select|chat_history|chat_send`
+- `shell_exec`
 - `events_subscribe`
 
 **Responses (v1)**:

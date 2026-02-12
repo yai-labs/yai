@@ -9,7 +9,7 @@ Canonical sources:
 Activation computes memory emergence as graph diffusion (PPR/RWR), with deterministic commit and persisted activation traces.
 
 ## Public API (L3/Mind)
-`mind/src/memory/graph/activation/api.rs`
+`mind/src/cognition/memory/graph/activation/api.rs`
 
 - `ActivationSeed { node, weight }`
 - `ActivationMethod { LocalPush, PowerIteration }`
@@ -55,7 +55,7 @@ Commit output is normalized and hashable:
 `run_id` is derived from canonical `(graph_fingerprint, seeds, params)`.
 
 ## Activation Traces
-`mind/src/memory/graph/activation/trace.rs`
+`mind/src/cognition/memory/graph/activation/trace.rs`
 
 `ActivationTrace` fields:
 - `run_id`
@@ -67,7 +67,7 @@ Commit output is normalized and hashable:
 - `topk`
 - `stats`
 
-Store API in `mind/src/memory/graph/activation/store.rs`:
+Store API in `mind/src/cognition/memory/graph/activation/store.rs`:
 - `save_trace(trace)`
 - `load_trace(run_id)`
 - `list_traces(limit)`

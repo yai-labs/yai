@@ -11,8 +11,8 @@ certifying test gates.
 | L0 | Law specs + canonical ABI + identifiers | `law/specs/vault/*`, `law/specs/protocol/*`, generated headers | ABI contracts, schema artifacts | N/A (spec level) | `scripts/verify/law-kernel.sh`, `scripts/verify/core.sh` |
 | L1 | Kernel authority, enforcement, state transitions, transport/session guards | `kernel/include/*`, `yai_vault_t`, kernel FSM | runtime vault/shared memory surfaces | state/authority transitions, violations | `scripts/verify/law-kernel.sh`, `scripts/gates/ws.sh` |
 | L2 | Deterministic engine execution + bridge + cortex + storage proxy | `engine/include/*`, engine runtime interfaces | engine runtime state, deterministic outputs | execution/scale evidence | `scripts/gates/cortex.sh`, `scripts/verify/core.sh` |
-| L3 | Mind control-plane, providers, memory graphs, rpc, tui | `mind/src/control/*`, `mind/src/rpc/*`, `mind/src/memory/*` | working/episodic/semantic/vector stores | process + provider + graph/memory events | `scripts/gates/events.sh`, `scripts/gates/graph.sh`, `scripts/gates/providers.sh` |
-| L4 | Public CLI product interface | `mind/src/interface/commands/*`, `yai` CLI | CLI state wrappers over run dir | command-facing status/events | `yai verify core`, `yai verify full`, `yai test smoke` |
+| L3 | Mind control-plane, providers, memory graphs, rpc transport | `mind/src/control/*`, `mind/src/transport/rpc/*`, `mind/src/cognition/memory/*` | working/episodic/semantic/vector stores | process + provider + graph/memory events | `scripts/gates/events.sh`, `scripts/gates/graph.sh`, `scripts/gates/providers.sh` |
+| L4 | Public CLI product interface | `mind/src/cli/commands/*`, `yai` CLI | CLI state wrappers over run dir | command-facing status/events | `yai verify core`, `yai verify full`, `yai test smoke` |
 | L5 | Deterministic release/test pipeline | `scripts/verify/*`, `scripts/gates/*`, `scripts/suites/*` | test artifacts, run logs | gate pass/fail evidence | `scripts/suites/levels/l0-l7.sh`, `scripts/suites/ops/no-llm-360.sh` |
 
 ## Compute Rule

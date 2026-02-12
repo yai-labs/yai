@@ -5,17 +5,15 @@ It is normative. Implementations must conform.
 
 ## Scope
 
-- Applies to the `yai` binary (Rust) and any future front-end (TUI/GUI/agents).
-- The CLI is the primary interface. TUI/GUI are front-ends that invoke the same command semantics.
+- Applies to the `yai` binary (Rust) and machine clients invoking the same command semantics.
+- GUI front-ends (YX) must call the same control-plane contracts via UDS; they do not redefine command meaning.
 
 ## Principles
 
-1. Single Source of Truth: command semantics are defined here and in `commands.v1.json`.
+1. Single source of truth: command semantics are defined here and in `commands.v1.json`.
 2. Deterministic execution: commands must be reproducible and observable.
 3. Layer boundaries remain (L1 kernel authority, L2 engine deterministic execution, L3 mind orchestration).
-4. Every command supports machine output via `--json` where applicable.
-5. Side effects are explicit (process spawn/kill, SHM touch, socket IO, filesystem writes).
-6. Control plane is authoritative: CLI is a client and must not bypass RPC.
+4. Control plane is authoritative: CLI is a client and must not bypass RPC.
 
 ## Global Conventions
 
@@ -26,27 +24,26 @@ It is normative. Implementations must conform.
 
 ### Output modes
 - Default: human-readable text
-- Optional: `--json` for structured output
+- Optional: `--json` where applicable
 
 ### Exit codes
 - `0` success
 - `1` generic failure
 - `2` invalid arguments / contract violation
-- `3` dependency missing (binary not found, config missing)
-- `4` runtime not ready (handshake/vault/socket not ready)
+- `3` dependency missing
+- `4` runtime not ready
 
 ### Default Workspace
 - A workspace id (`--ws`) identifies a runtime instance.
 - If omitted, `ws_default` is loaded from config.
 
 ### Control Plane Paths (Canonical)
-These paths are authoritative and mirror `law/specs/control/CONTROL_PLANE.md`:
 
 - `~/.yai/run/<ws>/control.sock`
 - `~/.yai/run/<ws>/lock`
 - `~/.yai/run/<ws>/daemon.pid`
 - `~/.yai/run/<ws>/session.json`
-- `/tmp/yai_runtime.<ws>.sock`
+- `/tmp/yai_runtime_<ws>.sock`
 
 ## Command Groups
 
@@ -57,75 +54,104 @@ These paths are authoritative and mirror `law/specs/control/CONTROL_PLANE.md`:
 
 ### Runtime Inspection
 - `yai status`
-- `yai ps`
 - `yai logs`
+- `yai monitor`
+- `yai events`
 
 ### Control
 - `yai providers`
 - `yai sessions`
+- `yai dsar`
+- `yai chat`
+- `yai shell`
 
-### Vault / Protocol
-- `yai vault inspect`
-- `yai vault dump` (optional, gated)
+### Memory / Graph
+- `yai graph`
+- `yai embed`
 
-### Verification (Gates)
-- `yai verify core`
-- `yai verify law-kernel`
-- `yai verify full`
-
-### TUI / Monitor
-- `yai tui run` (canonical full-screen cockpit)
-- `yai tui snapshot --view <overview|graph|events|logs|db|providers|contracts|chat>` (canonical JSON snapshot)
-- `yai monitor` (legacy alias, deprecated; maps to `yai tui run`)
-- `yai events` (stream events)
+### Verification
+- `yai verify core|full`
+- `yai test smoke`
 
 ## Command Contracts (summary)
 
 ### `yai up`
-Purpose: start the runtime stack (boot + engine + mind) under a workspace id.
-
-Required invariants:
-- I-001 traceability
-- I-002 determinism
-- I-006 external effect boundary
+Purpose: start stack (boot + engine + mind) for a workspace.
 
 Usage:
 - `yai up --ws <id> [--build] [--ai] [--no-engine] [--no-mind] [--detach] [--monitor] [--timeout-ms <n>]`
-- `--monitor` is deprecated and maps to `yai tui run`.
-
-Side effects:
-- may spawn processes
-- may create pidfiles/logfiles
-- may create socket(s)
-
-### `yai tui`
-Purpose: live cockpit and deterministic snapshots. Must not mutate state unless explicitly asked.
-
-Usage:
-- `yai tui --ws <id> run`
-- `yai tui --ws <id> snapshot --view overview|graph|events|logs|db|providers|contracts|chat`
 
 Notes:
-- `yai monitor --ws <id>` is a deprecated alias for `yai tui --ws <id> run`.
-- TUI is a rendering of the same interface. It does not invent actions.
-- Navigation and keymap contract is defined in `law/specs/cli/TUI_COCKPIT_V1.md`.
+- `--monitor` opens monitor flow after successful start.
+
+### `yai monitor`
+Purpose: live operator monitor stream for a workspace.
+
+Usage:
+- `yai monitor --ws <id>`
+
+Notes:
+- If daemon is available, monitor tails the event stream.
+- In VSCode terminal environments, implementation may spawn an external terminal.
+
+### `yai events`
+Purpose: stream daemon events (NDJSON-derived event messages).
+
+Usage:
+- `yai events --ws <id>`
 
 ### `yai providers`
-Purpose: discovery, trust, and attach/detach of LLM providers.
+Purpose: provider discovery, trust, and attach lifecycle.
 
 Usage:
-- `yai providers discover --ws <id>`
-- `yai providers list --ws <id>`
-- `yai providers pair <id> <endpoint> <model> --ws <id>`
-- `yai providers attach <id> [--model <m>] --ws <id>`
-- `yai providers detach --ws <id>`
-- `yai providers status --ws <id>`
+- `yai providers --ws <id> discover`
+- `yai providers --ws <id> list`
+- `yai providers trust --id <id>|--endpoint <ep> --state <discovered|trusted|revoked>`
+- `yai providers --ws <id> pair <id> <endpoint> <model>`
+- `yai providers --ws <id> attach <id> [--model <m>]`
+- `yai providers --ws <id> detach`
+- `yai providers --ws <id> revoke <id>`
+- `yai providers --ws <id> status`
 
-### `yai sessions`
-Purpose: list/kill active sessions.
+### `yai dsar`
+Purpose: data subject access request lifecycle.
 
 Usage:
-- `yai sessions list`
-- `yai sessions kill <ws> [--force]`
+- `yai dsar --ws <id> request <export|erase> --subject <subject_ref>`
+- `yai dsar --ws <id> status <request_id>`
+- `yai dsar --ws <id> execute <request_id>`
 
-(…continued in `commands.v1.json` for full detail)
+### `yai chat`
+Purpose: interact with chat service exposed by control plane.
+
+Usage:
+- `yai chat --ws <id> list`
+- `yai chat --ws <id> new [--title <title>]`
+- `yai chat --ws <id> select <session_id>`
+- `yai chat --ws <id> history [--session <session_id>]`
+- `yai chat --ws <id> send [--session <session_id>] [--stream] <text>`
+
+### `yai shell`
+Purpose: execute capability-gated shell commands via control plane.
+
+Usage:
+- `yai shell --ws <id> exec [--cwd <path>] <cmd> [args...]`
+
+### `yai graph`
+Purpose: graph memory operations (semantic/vector/activation/awareness).
+
+Examples:
+- `yai graph add-node ...`
+- `yai graph add-edge ...`
+- `yai graph query ...`
+- `yai graph stats ...`
+- `yai graph node ...`
+- `yai graph neighbors ...`
+- `yai graph export ...`
+- `yai graph awareness ...`
+- `yai graph activate ...`
+- `yai graph trace show <run_id>`
+
+### Deprecated / Historical
+- `yai tui` is removed from CLI and replaced by YX GUI.
+- Historical reference remains in `law/specs/cli/TUI_COCKPIT_V1.md`.

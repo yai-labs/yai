@@ -160,9 +160,9 @@ L3 proposes; L1 authorizes; L2 executes with augmented evidence.
 ## Interfaces
 
 * `yai-mind/src/*`
-* `yai-mind/src/llm/adapter.rs`
+* `yai-mind/src/cognition/llm/adapter.rs`
 * `yai-mind/src/server.rs`
-* `yai-mind/src/bridge/*` (if present; must remain proposal-only)
+* `yai-mind/src/transport/bridge/*` (if present; must remain proposal-only)
 * `specs/protocol/*`
 
 ---
