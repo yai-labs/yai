@@ -21,7 +21,7 @@ Canonical script layout:
   - `security-sanity-v1.sh`
   - `recovery-compat-v1.sh`
   - `stress-v1.sh`
-- `scripts/datasets/global-stress/v1/`
+- `datasets/global-stress/v1/scripts/`
   - `import-seed-via-cli.sh`
   - `load-events-log.sh`
 

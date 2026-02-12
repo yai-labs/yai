@@ -3,7 +3,7 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 DATASET_DIR="$ROOT/datasets/global-stress/v1"
-DATASET_SCRIPTS_DIR="$ROOT/scripts/datasets/global-stress/v1"
+DATASET_SCRIPTS_DIR="$ROOT/datasets/global-stress/v1/scripts"
 WS="${1:-dataset_stress}"
 BIN="${BIN:-$(command -v yai || true)}"
 if [[ -z "$BIN" && -x "$HOME/.cargo/bin/yai" ]]; then

@@ -1,13 +1,13 @@
+use crate::cli::config::RuntimeConfig;
+use crate::cli::paths;
+use crate::cli::proc::{is_pid_alive, send_signal};
+use crate::cognition::memory::graph::bridge;
 use crate::control::{chat, dsar, events::EventBus, providers, shell, workspace};
-use crate::interface::config::RuntimeConfig;
-use crate::interface::paths;
-use crate::interface::proc::{is_pid_alive, send_signal};
-use crate::memory::graph::bridge;
-use crate::rpc::protocol::{
+use crate::transport::rpc::protocol::{
     AliveStatus, ChatMessage, ChatRole, ChatSession, ComplianceContext, DsarStatus, ProviderInfo,
     Request, Response, SanityStatus,
 };
-use crate::rpc::uds_server;
+use crate::transport::rpc::uds_server;
 use anyhow::{Context, Result};
 use serde_json::json;
 use std::fs;
@@ -17,13 +17,44 @@ use std::path::PathBuf;
 use std::sync::Arc;
 use tokio::io::BufReader;
 use tokio::net::{UnixListener, UnixStream};
-use tokio::sync::watch;
+use tokio::sync::{watch, Mutex};
 use tokio::time::{self, Duration};
 
 #[derive(Clone)]
 struct AppServices {
     chat: Arc<chat::ChatEngine>,
     shell: Arc<shell::ShellService>,
+    last_status_snapshot: Arc<Mutex<Option<String>>>,
+}
+
+fn daemon_log(ws: &str, message: &str) {
+    eprintln!("[yai-daemon ws={ws}] {message}");
+}
+
+fn request_name(req: &Request) -> &'static str {
+    match req {
+        Request::Ping => "ping",
+        Request::Status => "status",
+        Request::Up { .. } => "up",
+        Request::Down { .. } => "down",
+        Request::ProvidersDiscover { .. } => "providers.discover",
+        Request::ProvidersList => "providers.list",
+        Request::ProvidersPair { .. } => "providers.pair",
+        Request::ProvidersAttach { .. } => "providers.attach",
+        Request::ProvidersDetach => "providers.detach",
+        Request::ProvidersRevoke { .. } => "providers.revoke",
+        Request::ProvidersStatus => "providers.status",
+        Request::DsarRequest { .. } => "dsar.request",
+        Request::DsarStatus { .. } => "dsar.status",
+        Request::DsarExecute { .. } => "dsar.execute",
+        Request::ChatSessionsList => "chat.sessions.list",
+        Request::ChatSessionNew { .. } => "chat.session.new",
+        Request::ChatSessionSelect { .. } => "chat.session.select",
+        Request::ChatHistory { .. } => "chat.history",
+        Request::ChatSend { .. } => "chat.send",
+        Request::ShellExec { .. } => "shell.exec",
+        Request::EventsSubscribe => "events.subscribe",
+    }
 }
 
 fn emit_provider_transition(
@@ -151,12 +182,14 @@ async fn run_daemon_async(cfg: RuntimeConfig, ws: String) -> Result<()> {
 
     let listener = UnixListener::bind(&sock_path)
         .with_context(|| format!("bind control socket: {}", sock_path.display()))?;
+    daemon_log(&ws, &format!("listening on {}", sock_path.display()));
 
     let cfg = Arc::new(cfg);
     let ws = Arc::new(ws);
     let services = AppServices {
         chat: Arc::new(chat::ChatEngine::new()),
         shell: Arc::new(shell::ShellService::new()),
+        last_status_snapshot: Arc::new(Mutex::new(None)),
     };
     let bus = Arc::new(EventBus::new(cfg.run_dir.clone(), ws.as_ref().to_string()));
     let _ = bus.emit("daemon_started", json!({ "ws": ws.as_ref() }));
@@ -185,6 +218,7 @@ async fn run_daemon_async(cfg: RuntimeConfig, ws: String) -> Result<()> {
         tokio::select! {
             _ = shutdown_rx.changed() => {
                 if *shutdown_rx.borrow() {
+                    daemon_log(&ws, "shutdown requested");
                     break;
                 }
             }
@@ -197,7 +231,7 @@ async fn run_daemon_async(cfg: RuntimeConfig, ws: String) -> Result<()> {
                 let shutdown_tx = shutdown_tx.clone();
                 tokio::spawn(async move {
                     if let Err(err) = handle_client(stream, cfg, ws, bus, services, shutdown_tx).await {
-                        eprintln!("daemon client error: {}", err);
+                        eprintln!("[yai-daemon] client error: {}", err);
                     }
                 });
             }
@@ -208,6 +242,7 @@ async fn run_daemon_async(cfg: RuntimeConfig, ws: String) -> Result<()> {
     workspace::release_lock(&lock_path);
     let _ = std::fs::remove_file(&pid_path);
     let _ = std::fs::remove_dir(&ws_dir);
+    daemon_log(&ws, "stopped");
     Ok(())
 }
 
@@ -225,6 +260,10 @@ async fn handle_client(
         Ok(req) => req,
         Err(_) => return Ok(()),
     };
+    let is_status = matches!(req, Request::Status);
+    if !is_status {
+        daemon_log(ws.as_ref(), &format!("request {}", request_name(&req)));
+    }
     let resp = match req {
         Request::Ping => Response::Pong,
         Request::Status => build_status(&cfg, &ws),
@@ -319,16 +358,18 @@ async fn handle_client(
                 },
             }
         }
-        Request::ShellExec { cmd, args, cwd } => match services.shell.exec(&cmd, &args, cwd.as_deref()).await {
-            Ok(out) => Response::ShellExec {
-                exit_code: out.exit_code,
-                stdout: out.stdout,
-                stderr: out.stderr,
-            },
-            Err(err) => Response::Error {
-                message: err.to_string(),
-            },
-        },
+        Request::ShellExec { cmd, args, cwd } => {
+            match services.shell.exec(&cmd, &args, cwd.as_deref()).await {
+                Ok(out) => Response::ShellExec {
+                    exit_code: out.exit_code,
+                    stdout: out.stdout,
+                    stderr: out.stderr,
+                },
+                Err(err) => Response::Error {
+                    message: err.to_string(),
+                },
+            }
+        }
         Request::EventsSubscribe => {
             let mut rx = bus.subscribe();
             uds_server::write_response(&mut writer, &Response::EventsStarted).await?;
@@ -374,7 +415,7 @@ async fn handle_client(
                 id,
                 endpoint,
                 model,
-                trust_state: crate::rpc::protocol::TrustState::Paired,
+                trust_state: crate::transport::rpc::protocol::TrustState::Paired,
                 fingerprint: None,
                 capabilities: Vec::new(),
                 last_seen: 0,
@@ -572,6 +613,16 @@ async fn handle_client(
             Response::DownOk { shutdown }
         }
     };
+
+    if is_status {
+        let snapshot =
+            serde_json::to_string(&resp).unwrap_or_else(|_| "status-encode-error".to_string());
+        let mut last = services.last_status_snapshot.lock().await;
+        if last.as_ref() != Some(&snapshot) {
+            daemon_log(ws.as_ref(), "request status (changed)");
+            *last = Some(snapshot);
+        }
+    }
 
     uds_server::write_response(&mut writer, &resp).await?;
     Ok(())

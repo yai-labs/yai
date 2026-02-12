@@ -22,7 +22,7 @@ fn read_core_manifest() -> Option<(String, String)> {
     let build_time = v.get("build_time")?.as_str()?.to_string();
     Some((git_sha, build_time))
 }
-use yai_mind::core::state::SharedState;
+use yai_mind::runtime::state::SharedState;
 use yai_mind::server::StudioServer;
 
 #[tokio::main]

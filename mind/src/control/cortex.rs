@@ -1,7 +1,7 @@
+use crate::cli::config::RuntimeConfig;
+use crate::cli::proc::is_pid_alive;
 use crate::control::events::EventBus;
 use crate::control::workspace;
-use crate::interface::config::RuntimeConfig;
-use crate::interface::proc::is_pid_alive;
 use serde_json::json;
 use std::sync::Arc;
 use sysinfo::System;

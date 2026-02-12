@@ -67,7 +67,7 @@ impl EmbeddingProvider for CandleEmbedder {
 }
 
 pub fn default_model_dir(name: &str) -> PathBuf {
-    crate::interface::paths::home_dir()
+    crate::cli::paths::home_dir()
         .join(".yai")
         .join("models")
         .join("embeddings")

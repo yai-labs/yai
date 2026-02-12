@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "datasets": [
+    {
+      "id": "global-stress",
+      "version": "v1",
+      "path": "datasets/global-stress/v1",
+      "seed": [
+        "seed/semantic_nodes.jsonl",
+        "seed/semantic_edges.jsonl",
+        "seed/episodic_events.jsonl"
+      ],
+      "prompts": [
+        "prompts.csv",
+        "YAI_Global_Stress_Test_v1.xlsx"
+      ]
+    }
+  ]
+}

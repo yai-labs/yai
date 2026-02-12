@@ -1,4 +1,4 @@
-use crate::rpc::protocol::{DsarRecord, DsarStatus};
+use crate::transport::rpc::protocol::{DsarRecord, DsarStatus};
 use anyhow::{Context, Result};
 use std::fs;
 use std::path::{Path, PathBuf};

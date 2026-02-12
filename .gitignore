@@ -456,6 +456,7 @@ benchmark_results/
 *.o
 *.a
 /.yai/
+/tmp/
 
 bin/
 # END mind/.gitignore

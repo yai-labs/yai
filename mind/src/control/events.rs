@@ -1,4 +1,4 @@
-use crate::rpc::protocol::{ComplianceContext, Event};
+use crate::transport::rpc::protocol::{ComplianceContext, Event};
 use anyhow::{anyhow, Result};
 use serde_json::Value;
 use std::fs::OpenOptions;
@@ -99,7 +99,7 @@ impl EventBus {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::rpc::protocol::ComplianceContext;
+    use crate::transport::rpc::protocol::ComplianceContext;
     use serde_json::json;
 
     #[test]

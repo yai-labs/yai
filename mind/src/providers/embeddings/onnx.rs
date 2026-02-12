@@ -13,7 +13,7 @@ pub struct OnnxEmbedder {
 }
 
 pub fn default_model_dir(model: &str) -> PathBuf {
-    crate::interface::paths::model_root()
+    crate::cli::paths::model_root()
         .join("embeddings")
         .join(model)
 }

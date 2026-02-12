@@ -1,6 +1,6 @@
-use crate::interface::paths;
-use crate::memory::graph::semantic;
-use crate::rpc::protocol::{ProviderInfo, TrustState};
+use crate::cli::paths;
+use crate::cognition::memory::graph::semantic;
+use crate::transport::rpc::protocol::{ProviderInfo, TrustState};
 use anyhow::{anyhow, bail, Context, Result};
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};

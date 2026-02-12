@@ -1,16 +1,16 @@
 // src/server.rs
 #![allow(dead_code)]
-use crate::bridge::shm::VaultBridge;
-use crate::bridge::vault::VaultBridge as EngineVault;
-use crate::core::governance::GovernanceEngine;
-use crate::core::protocol::CommandId;
-use crate::core::runtime::{run_turn, RuntimeContext};
-use crate::core::state::GlobalState;
-use crate::interface::config::{load_config, CliOverrides};
-use crate::llm::adapter::build_llm_for_ws;
-use crate::memory::MemoryCore;
-use crate::models::{Message as ApiMessage, MessageType};
+use crate::cli::config::{load_config, CliOverrides};
+use crate::cognition::llm::adapter::build_llm_for_ws;
+use crate::cognition::memory::MemoryCore;
+use crate::cognition::models::{Message as ApiMessage, MessageType};
+use crate::runtime::governance::GovernanceEngine;
+use crate::runtime::protocol::CommandId;
+use crate::runtime::runtime::{run_turn, RuntimeContext};
+use crate::runtime::state::GlobalState;
 use crate::shared::constants::DEFAULT_KNOWLEDGE_DB_PATH;
+use crate::transport::bridge::shm::VaultBridge;
+use crate::transport::bridge::vault::VaultBridge as EngineVault;
 
 use futures_util::{SinkExt, StreamExt};
 use serde_json::{json, Value};
@@ -199,7 +199,7 @@ impl StudioServer {
                             let vault = EngineVault::attach(&workspace_id);
                             let result = match vault {
                                 Ok(v) => {
-                                    let scheduler = crate::core::scheduler::Scheduler::new(v);
+                                    let scheduler = crate::runtime::scheduler::Scheduler::new(v);
                                     let memory = MemoryCore::new();
                                     let cfg = load_config(&CliOverrides::default())
                                         .unwrap_or_else(|_| panic!("failed to load config"));

@@ -1,6 +1,6 @@
-use crate::interface::config::RuntimeConfig;
-use crate::interface::paths;
-use crate::interface::proc::{
+use crate::cli::config::RuntimeConfig;
+use crate::cli::paths;
+use crate::cli::proc::{
     is_pid_alive, log_path, now_epoch, pidfile_path, read_run_state, remove_pidfile, send_signal,
     write_run_state, RunState,
 };
@@ -97,7 +97,7 @@ pub fn release_lock(lock_path: &Path) {
     let _ = fs::remove_file(lock_path);
 }
 
-pub fn read_state(cfg: &RuntimeConfig, ws: &str) -> Option<crate::interface::proc::RunState> {
+pub fn read_state(cfg: &RuntimeConfig, ws: &str) -> Option<crate::cli::proc::RunState> {
     let pidfile = pidfile_path(&cfg.run_dir, ws);
     if !pidfile.exists() {
         return None;
