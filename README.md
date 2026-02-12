@@ -49,69 +49,6 @@ yai up --ws dev --build --detach
 yai status --ws dev --json
 ```
 
-### 3) Open cockpit TUI
-
-```bash
-yai tui --ws dev run
-```
-
-Useful keys:
-- `Ctrl+P` or `:` command palette
-- `g e l d p c h` switch views
-- `Tab` focus cycle
-- `q` quit
-
-Chat keys:
-- `Enter` send
-- `Shift+Enter` newline
-- `Ctrl+U` clear
-- `C` commit draft
-- `x` discard draft
-
-## Provider Pairing (LAN)
-
-Check your provider endpoint first:
-
-```bash
-curl -sS http://<LAN_IP>:8080/v1/models
-```
-
-Pair + trust + attach:
-
-```bash
-yai providers --ws dev pair \
-  "remote:http://<LAN_IP>:8080/v1/chat/completions" \
-  "http://<LAN_IP>:8080/v1/chat/completions" \
-  "<MODEL_NAME>"
-
-yai providers trust --id "remote:http://<LAN_IP>:8080/v1/chat/completions" --state trusted
-yai providers --ws dev attach "remote:http://<LAN_IP>:8080/v1/chat/completions"
-yai providers --ws dev status
-```
-
-## Verification and Gates
-
-Canonical runners:
-- `scripts/yai-verify <name>`
-- `scripts/yai-gate <name> [args...]`
-- `scripts/yai-suite <path> [args...]`
-
-Examples:
-
-```bash
-scripts/yai-verify core
-scripts/yai-gate ws dev
-scripts/yai-gate graph dev
-scripts/yai-suite levels/l0-l7
-scripts/yai-suite ops/no-llm-360
-```
-
-Direct suite:
-
-```bash
-DATASET_GATE=1 WS_PREFIX=ops360 ./scripts/suites/levels/l0-l7.sh
-```
-
 ## Build
 
 Core C runtime:
@@ -126,26 +63,6 @@ Mind (Rust):
 cd mind
 cargo build --release
 ```
-
-## Repository Map
-
-- `datasets/`: canonical datasets (data-first, not runtime orchestration)
-- `docs/specs/`: editorial index and pointers
-- `law/specs/`: canonical machine/contract specs
-- `mind/src/interface/tui/`: cockpit implementation
-- `mind/src/memory/graph/`: graph facade, stores, activation
-- `scripts/gates/`, `scripts/verify/`, `scripts/suites/`: deterministic pipeline
-
-## Troubleshooting
-
-Provider appears attached but chat fails:
-- verify endpoint reachability with `curl`
-- ensure attached provider is not revoked
-- check `yai providers --ws <ws> status`
-
-TUI not found:
-- check `which yai`
-- ensure `~/.cargo/bin` in PATH
 
 Runtime issues:
 
