@@ -2,4 +2,4 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-exec "$ROOT/scripts/gates/events.sh" "$@"
+exec "$ROOT/scripts/suites/ops/stress-v1.sh" "$@"

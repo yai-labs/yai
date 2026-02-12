@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+VERIFY_DIR="$ROOT/scripts/verify"
+
+usage() {
+  cat <<'EOF'
+Usage:
+  scripts/yai-verify list
+  scripts/yai-verify <verify-name> [args...]
+
+Examples:
+  scripts/yai-verify core
+  scripts/yai-verify law-kernel
+EOF
+}
+
+list_checks() {
+  find "$VERIFY_DIR" -maxdepth 1 -type f -name "*.sh" -print \
+    | sed -e "s#^$VERIFY_DIR/##" -e 's/\.sh$//' \
+    | sort
+}
+
+if [[ "${1:-}" == "" ]]; then
+  usage
+  exit 1
+fi
+
+if [[ "${1:-}" == "list" ]]; then
+  list_checks
+  exit 0
+fi
+
+NAME="$1"
+shift
+TARGET="$VERIFY_DIR/$NAME.sh"
+if [[ ! -x "$TARGET" ]]; then
+  echo "FAIL: unknown verify '$NAME'"
+  echo "Available verify checks:"
+  list_checks
+  exit 1
+fi
+
+exec "$TARGET" "$@"

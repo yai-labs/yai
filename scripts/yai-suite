@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+SUITES_DIR="$ROOT/scripts/suites"
+
+usage() {
+  cat <<'EOF'
+Usage:
+  scripts/yai-suite list
+  scripts/yai-suite <suite-path> [args...]
+
+Examples:
+  scripts/yai-suite levels/l0-l7
+  scripts/yai-suite ops/no-llm-360
+EOF
+}
+
+list_suites() {
+  find "$SUITES_DIR" -type f -name "*.sh" -print \
+    | sed -e "s#^$SUITES_DIR/##" -e 's/\.sh$//' \
+    | sort
+}
+
+if [[ "${1:-}" == "" ]]; then
+  usage
+  exit 1
+fi
+
+if [[ "${1:-}" == "list" ]]; then
+  list_suites
+  exit 0
+fi
+
+NAME="$1"
+shift
+TARGET="$SUITES_DIR/$NAME.sh"
+if [[ ! -x "$TARGET" ]]; then
+  echo "FAIL: unknown suite '$NAME'"
+  echo "Available suites:"
+  list_suites
+  exit 1
+fi
+
+exec "$TARGET" "$@"
