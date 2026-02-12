@@ -53,7 +53,7 @@ Non è per “colpire” nessuno: è per stressare davvero governance e audit.
 - `"$BIN" events --ws "$WS"` deve restare stabile (multi-client).
 
 ## Prerequisiti (pre‑R2)
-- `yai` binary disponibile (da `yai-mind`).
+- `yai` binary disponibile.
 - Embedding locale ONNX disponibile:
   - `~/.yai/models/embeddings/all-MiniLM-L6-v2/model.onnx`
   - `~/.yai/models/embeddings/all-MiniLM-L6-v2/tokenizer.json`

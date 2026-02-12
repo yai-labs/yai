@@ -73,9 +73,6 @@ pub fn mind_dir(workspace_root: &Path) -> PathBuf {
     if root.join("mind").is_dir() {
         return root.join("mind");
     }
-    if root.join("yai-mind").is_dir() {
-        return root.join("yai-mind");
-    }
     root.join("mind")
 }
 

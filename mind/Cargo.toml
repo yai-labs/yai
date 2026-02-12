@@ -71,13 +71,5 @@ memoffset = "0.9"
 
 
 [[bin]]
-name = "yai-orchestrator"
-path = "src/bin/yai_orchestrator.rs"
-
-[[bin]]
 name = "yai"
-path = "src/bin/yai.rs"
-
-[[bin]]
-name = "xtask"
-path = "src/bin/xtask.rs"
+path = "src/main.rs"

@@ -28,7 +28,7 @@ typedef enum {
     YAI_STATE_ERROR
 } yai_state_t;
 
-// Comandi Engine (orchestrator -> engine) — from protocol authority
+// Comandi Engine (control -> engine) — from protocol authority
 typedef yai_command_id_t yai_command_t;
 
 // Canonical vault header (L0 ABI)

@@ -32,7 +32,7 @@ kernel:
 
 # 2. Compila l'API Rust
 api:
-	@echo "Compilazione YAI-MIND (Rust)..."
+	@echo "Compilazione YAI (Rust)..."
 	cargo build --release
 
 # 3. Setup dei permessi (Critico per SHM)
@@ -44,7 +44,7 @@ setup:
 # 4. Esecuzione Totale
 run: all
 	@echo "Lancio YAI Ecosystem..."
-	./target/release/yai-mind
+	./target/release/yai
 
 clean:
 	cargo clean

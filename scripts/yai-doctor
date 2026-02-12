@@ -13,13 +13,13 @@ echo "root: ${ROOT}"
 
 echo "=== Binaries"
 CORE_BIN="${HOME}/.yai/artifacts/yai-core/bin"
-MIND_ART_BIN="${HOME}/.yai/artifacts/yai-mind/target/release"
+MIND_ART_BIN="${HOME}/.yai/artifacts/mind/target/release"
 
 for f in "${CORE_BIN}/yai-boot" "${CORE_BIN}/yai-kernel" "${CORE_BIN}/yai-engine"; do
   [[ -x "${f}" ]] && echo "OK: ${f}" || echo "MISSING: ${f}"
 done
 
-for f in "${MIND_ART_BIN}/yai" "${MIND_ART_BIN}/yai-mind"; do
+for f in "${MIND_ART_BIN}/yai"; do
   [[ -x "${f}" ]] && echo "OK: ${f}" || echo "MISSING: ${f}"
 done
 

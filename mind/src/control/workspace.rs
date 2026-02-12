@@ -134,7 +134,7 @@ pub fn start_stack(
                 .status()
                 .with_context(|| format!("cargo build in {}", mind_dir.display()))?;
             if !status.success() {
-                anyhow::bail!("build failed: yai-mind");
+                anyhow::bail!("build failed: yai");
             }
         }
     }
@@ -302,25 +302,26 @@ pub fn start_stack(
             .write(true)
             .open(&mind_log_path)
             .with_context(|| format!("open log: {}", mind_log_path.display()))?;
-        let built_mind = paths::mind_dir(&cfg.workspace_root)
+        let built_yai = paths::mind_dir(&cfg.workspace_root)
             .join("target")
             .join("release")
-            .join("yai-mind");
-        let mind_exec = if opts.build && built_mind.exists() {
-            built_mind
+            .join("yai");
+        let mind_exec = if opts.build && built_yai.exists() {
+            built_yai
         } else {
             cfg.yai_mind.clone()
         };
         let mut cmd = Command::new(&mind_exec);
         #[cfg(unix)]
         detach_child(&mut cmd);
+        cmd.arg("mind");
         if opts.ai {
             cmd.env("YAI_AI_LOG", "1");
         }
         cmd.env("YAI_WORKSPACE_ID", ws);
         cmd.stdout(Stdio::from(mind_log.try_clone()?))
             .stderr(Stdio::from(mind_log));
-        let child = cmd.spawn().context("spawn yai-mind")?;
+        let child = cmd.spawn().context("spawn yai")?;
         mind_pid = Some(child.id());
         let _ = bus.emit(
             "proc_started",

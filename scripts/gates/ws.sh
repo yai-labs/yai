@@ -10,8 +10,8 @@ RUN_DIR="$HOME/.yai/run/$WS"
 RUNTIME_SOCK="/tmp/yai_runtime_${WS}.sock"
 CONTROL_SOCK="$RUN_DIR/control.sock"
 
-if [[ -z "$BIN" && -x "$HOME/.yai/artifacts/yai-mind/target/release/yai" ]]; then
-  BIN="$HOME/.yai/artifacts/yai-mind/target/release/yai"
+if [[ -z "$BIN" && -x "$HOME/.yai/artifacts/mind/target/release/yai" ]]; then
+  BIN="$HOME/.yai/artifacts/mind/target/release/yai"
 fi
 
 if [[ -z "$BIN" || ! -x "$BIN" ]]; then

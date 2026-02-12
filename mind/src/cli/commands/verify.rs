@@ -47,26 +47,17 @@ pub fn test_smoke(cfg: &RuntimeConfig, ws: &str, timeout_ms: u64) -> Result<()> 
     up::run(cfg, &runtime)?;
 
     let mind_dir = paths::mind_dir(&cfg.workspace_root);
-    // Prefer canonical binary name; fallback to legacy underscore target on non-zero exit.
-    let mut status = Command::new("cargo")
+    let status = Command::new("cargo")
         .arg("run")
         .arg("--bin")
-        .arg("yai-orchestrator")
-        .env("YAI_WORKSPACE_ID", ws)
+        .arg("yai")
+        .arg("--")
+        .arg("status")
+        .arg("--ws")
+        .arg(ws)
         .current_dir(&mind_dir)
         .status()
-        .with_context(|| format!("run orchestrator in {}", mind_dir.display()))?;
-
-    if !status.success() {
-        status = Command::new("cargo")
-            .arg("run")
-            .arg("--bin")
-            .arg("yai_orchestrator")
-            .env("YAI_WORKSPACE_ID", ws)
-            .current_dir(&mind_dir)
-            .status()
-            .with_context(|| format!("run legacy orchestrator in {}", mind_dir.display()))?;
-    }
+        .with_context(|| format!("run status in {}", mind_dir.display()))?;
     let _ = down::run(cfg, ws, true);
 
     if !status.success() {

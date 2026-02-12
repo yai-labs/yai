@@ -33,6 +33,8 @@ pub enum Command {
     Embed(EmbedArgs),
     #[command(hide = true)]
     Daemon(DaemonArgs),
+    #[command(hide = true)]
+    Mind(MindArgs),
 }
 
 #[derive(Args, Debug, Clone, Default)]
@@ -437,6 +439,9 @@ pub struct DaemonArgs {
     pub common: CommonArgs,
 }
 
+#[derive(Args, Debug)]
+pub struct MindArgs {}
+
 fn overrides_from(common: &CommonArgs) -> config::CliOverrides {
     config::CliOverrides {
         workspace_root: common.workspace_root.clone(),
@@ -756,5 +761,6 @@ pub fn run() -> Result<()> {
                 .unwrap_or_else(|| cfg.ws_default.clone());
             crate::control::daemon::run_daemon(&cfg, &ws)
         }
+        Command::Mind(_args) => crate::app::mind_server::run(),
     }
 }

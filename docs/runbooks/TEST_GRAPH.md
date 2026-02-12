@@ -2,7 +2,7 @@
 
 ## Precondizioni
 - `yai` buildato
-- Graph v1 presente in yai-mind
+- Graph v1 presente in yai
 
 ## Test 1 — Inserimento nodi/archi
 ```bash
@@ -25,4 +25,3 @@ Atteso: ritorna nodi + edge (deterministico).
 yai graph query --ws dev --text "runtime sock" --k 4
 ```
 Atteso: stessi nodi/edge restano presenti.
-

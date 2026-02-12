@@ -95,7 +95,7 @@ fn default_config_file() -> ConfigFile {
         ),
         yai_mind: Some(
             artifacts_root
-                .join("mind/target/release/yai-mind")
+                .join("mind/target/release/yai")
                 .display()
                 .to_string(),
         ),
@@ -187,7 +187,7 @@ pub fn load_config(overrides: &CliOverrides) -> Result<RuntimeConfig> {
         .or_else(|| bin_cfg.yai_mind)
         .unwrap_or_else(|| {
             paths::default_artifacts_root()
-                .join("mind/target/release/yai-mind")
+                .join("mind/target/release/yai")
                 .display()
                 .to_string()
         });
@@ -200,7 +200,7 @@ pub fn load_config(overrides: &CliOverrides) -> Result<RuntimeConfig> {
         yai_boot: paths::expand_tilde(&yai_boot),
         yai_kernel: paths::expand_tilde(&yai_kernel),
         yai_engine: paths::expand_tilde(&yai_engine),
-        yai_mind: paths::expand_tilde(&yai_mind),
+        yai_mind: normalize_mind_binary(paths::expand_tilde(&yai_mind)),
         config_path: cfg_path,
         run_dir: paths::run_dir(),
         logs_dir: paths::logs_dir(),
@@ -212,4 +212,14 @@ pub fn load_config(overrides: &CliOverrides) -> Result<RuntimeConfig> {
         .with_context(|| format!("create logs dir: {}", runtime.logs_dir.display()))?;
 
     Ok(runtime)
+}
+
+fn normalize_mind_binary(path: PathBuf) -> PathBuf {
+    if path.file_name().and_then(|f| f.to_str()) == Some("yai-mind") && !path.exists() {
+        let candidate = path.with_file_name("yai");
+        if candidate.exists() {
+            return candidate;
+        }
+    }
+    path
 }

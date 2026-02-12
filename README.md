@@ -26,6 +26,8 @@ Key docs:
 
 ## Quick Start
 
+Single binary: `yai` is the only CLI entrypoint.
+
 ### 1) Install `yai`
 
 ```bash

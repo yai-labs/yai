@@ -9,8 +9,8 @@ WS="events_test"
 RUN_DIR="$HOME/.yai/run/${WS}"
 SOCK="/tmp/yai_runtime_${WS}.sock"
 
-if [[ -z "$BIN" && -x "$HOME/.yai/artifacts/yai-mind/target/release/yai" ]]; then
-  BIN="$HOME/.yai/artifacts/yai-mind/target/release/yai"
+if [[ -z "$BIN" && -x "$HOME/.yai/artifacts/mind/target/release/yai" ]]; then
+  BIN="$HOME/.yai/artifacts/mind/target/release/yai"
 fi
 
 if [[ -z "$BIN" || ! -x "$BIN" ]]; then
