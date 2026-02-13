@@ -1,5 +1,6 @@
-// Temporary compat layer.
-// TODO: remove once imports are migrated to crate::cognition::providers
+// Temporary compat layer (only).
+// NOTE: Real providers live under crate::cognition::providers.
+// Keep only adapters here until full migration completes.
 pub mod adapters;
 
 pub mod embeddings {

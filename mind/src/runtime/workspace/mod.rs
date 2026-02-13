@@ -8,7 +8,7 @@ pub struct WorkspaceContext {
 
 impl WorkspaceContext {
     pub fn new(ws: WsId) -> Self {
-        let paths = Paths::new_default(ws.clone());
+        let paths = Paths::from_env();
         Self { ws, paths }
     }
 }
