@@ -1,12 +1,14 @@
 [package]
-name = "yai-mind"
-version = "2.5.0"
+name = "yai"
+version = "0.0.1"
 edition = "2021"
 authors = ["Francesco Maiomascio"]
 description = "YAI Core API - High Performance Rust Bridge"
 
 [dependencies]
 # Il runtime asincrono standard per performance industriali
+yx-protocol = { path = "../../yai-yx/crates/yx-protocol" }
+
 tokio = { version = "1.36", features = ["full"] }
 anyhow = "1"
 clap = { version = "4", features = ["derive"] }

@@ -38,11 +38,7 @@ pub fn run(
     Ok(())
 }
 
-pub fn follow_components(
-    cfg: &RuntimeConfig,
-    ws: &str,
-    components: &[&str],
-) -> Result<()> {
+pub fn follow_components(cfg: &RuntimeConfig, ws: &str, components: &[&str]) -> Result<()> {
     let mut paths: Vec<(String, PathBuf)> = Vec::new();
     for component in components {
         let path = log_path(&cfg.run_dir, ws, component);

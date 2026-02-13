@@ -1,21 +1,25 @@
 //! mind/src/transport/rpc/uds_server.rs
-//! UDS RPC server + robust request parsing (strict + loose + legacy).
+//! UDS RPC server — STRICT EnvelopeV1 (fallback legacy ONLY to return protocol_invalid)
 
-use crate::transport::rpc::protocol::{
-    Request, Response, RpcRequestEnvelope, RPC_PROTOCOL_VERSION,
-};
-use anyhow::{Context, Result};
+use crate::transport::rpc::protocol::{Request, Response, RPC_PROTOCOL_VERSION};
+use anyhow::{anyhow, Context, Result};
 use serde::Deserialize;
+use serde_json::Value;
 use std::{future::Future, path::Path, pin::Pin, sync::Arc};
 use tokio::io::{AsyncBufReadExt, AsyncWriteExt, BufReader};
 use tokio::net::unix::{OwnedReadHalf, OwnedWriteHalf};
 use tokio::net::{UnixListener, UnixStream};
 
-pub struct RpcInbound {
-    pub request: Request,
+use yx_protocol::{ClientInfo, RequestEnvelopeV1, ResponseEnvelopeV1, Role, RpcError};
+
+pub struct RpcInboundV1 {
+    pub v: u8,
+    pub trace_id: String,
+    pub ws_id: String,
     pub arming: bool,
-    pub role: Option<String>,
-    pub ws_id: Option<String>,
+    pub role: Role,
+    pub client: ClientInfo,
+    pub request: Request,
 }
 
 // ---------------------------
@@ -25,7 +29,7 @@ pub struct RpcInbound {
 pub type BoxFut<'a, T> = Pin<Box<dyn Future<Output = T> + Send + 'a>>;
 
 pub trait RpcHandler: Send + Sync + 'static {
-    fn handle<'a>(&'a self, inbound: RpcInbound) -> BoxFut<'a, Result<Response>>;
+    fn handle<'a>(&'a self, inbound: RpcInboundV1) -> BoxFut<'a, Result<Response>>;
 }
 
 // ---------------------------
@@ -61,20 +65,33 @@ async fn handle_stream(stream: UnixStream, handler: Arc<dyn RpcHandler>) -> Resu
     let mut reader = BufReader::new(read_half);
 
     loop {
-        match read_request(&mut reader).await {
+        match read_request_v1(&mut reader).await {
             Ok(inbound) => {
+                let trace_id = inbound.trace_id.clone();
+                let ws_id = inbound.ws_id.clone();
+                let v = inbound.v;
+
                 let resp = handler
                     .handle(inbound)
                     .await
                     .context("rpc handler failed")?;
-                write_response(&mut write_half, &resp).await?;
+
+                write_response_v1(&mut write_half, v, &trace_id, &ws_id, &resp).await?;
             }
             Err(e) => {
-                // EOF pulito
                 if is_eof(&e) {
                     return Ok(());
                 }
-                // parse/other error: chiudiamo la connessione (meglio che restare in loop “rotto”)
+
+                // se l’errore porta già un envelope di risposta, lo scriviamo e chiudiamo
+                if let Some((v, trace_id, ws_id, rpc_err)) = e
+                    .downcast_ref::<ProtocolReject>()
+                    .map(|r| (r.v, r.trace_id.clone(), r.ws_id.clone(), r.error.clone()))
+                {
+                    let _ = write_error_v1(&mut write_half, v, &trace_id, &ws_id, &rpc_err).await;
+                    return Ok(());
+                }
+
                 return Err(e);
             }
         }
@@ -248,87 +265,194 @@ fn parse_request_compat(v: &serde_json::Value) -> Result<Request> {
     anyhow::bail!("unsupported request shape: {}", preview_json(v, 240));
 }
 
+#[derive(Debug)]
+struct ProtocolReject {
+    v: u8,
+    trace_id: String,
+    ws_id: String,
+    error: RpcError,
+}
+
+impl std::fmt::Display for ProtocolReject {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "protocol reject: {}", self.error.message)
+    }
+}
+impl std::error::Error for ProtocolReject {}
+
+fn ws_missing(trace_id: String) -> ProtocolReject {
+    let trace_id_opt = Some(trace_id.clone());
+    ProtocolReject {
+        v: RPC_PROTOCOL_VERSION,
+        trace_id,
+        ws_id: "".to_string(),
+        error: RpcError {
+            code: Some("ws_missing".to_string()),
+            message: "ws_id missing".to_string(),
+            detail: None,
+            trace_id: trace_id_opt,
+            ws_id: Some("".to_string()),
+        },
+    }
+}
+
+fn handshake_required(trace_id: String, ws_id: String) -> ProtocolReject {
+    ProtocolReject {
+        v: RPC_PROTOCOL_VERSION,
+        trace_id: trace_id.clone(),
+        ws_id: ws_id.clone(),
+        error: RpcError {
+            code: Some("handshake_required".to_string()),
+            message: "client missing rpc.v1 capability".to_string(),
+            detail: Some(serde_json::json!({
+                "required_capability": "rpc.v1"
+            })),
+            trace_id: Some(trace_id),
+            ws_id: Some(ws_id),
+        },
+    }
+}
+
+fn protocol_invalid() -> ProtocolReject {
+    ProtocolReject {
+        v: RPC_PROTOCOL_VERSION,
+        trace_id: "unknown".to_string(),
+        ws_id: "".to_string(),
+        error: RpcError {
+            code: Some("protocol_invalid".to_string()),
+            message: "invalid rpc envelope".to_string(),
+            detail: None,
+            trace_id: None,
+            ws_id: None,
+        },
+    }
+}
+
 // ---------------------------
 // Public read/write API
 // ---------------------------
-
-pub async fn read_request(reader: &mut BufReader<OwnedReadHalf>) -> Result<RpcInbound> {
+pub async fn read_request_v1(reader: &mut BufReader<OwnedReadHalf>) -> Result<RpcInboundV1> {
     let mut line = String::new();
     let n = reader.read_line(&mut line).await.context("read rpc line")?;
-
     if n == 0 {
         anyhow::bail!("rpc eof");
     }
 
-    if line.trim().is_empty() {
-        anyhow::bail!("empty rpc request");
+    let raw = line.trim_end();
+    if raw.is_empty() {
+        return Err(anyhow!("empty rpc request"));
     }
 
-    let trimmed = line.trim_end();
-    let preview_line = if trimmed.len() > 240 {
-        format!("{}…", &trimmed[..240])
-    } else {
-        trimmed.to_string()
+    // STRICT: parse EnvelopeV1
+    let env: RequestEnvelopeV1<Value> = match serde_json::from_str(raw) {
+        Ok(v) => v,
+        Err(_) => {
+            // fallback legacy parse SOLO per poter rispondere protocol_invalid
+            let _legacy_req_attempt: Result<Request> =
+                serde_json::from_str(raw).map_err(|e| e.into());
+            return Err(ProtocolReject::protocol_invalid().into());
+        }
     };
 
-    // 1) Strict envelope (il tuo path “ideale”)
-    let strict = serde_json::from_str::<RpcRequestEnvelope>(&line);
-    if let Ok(envelope) = strict {
-        if envelope.v != RPC_PROTOCOL_VERSION {
-            anyhow::bail!(
-                "rpc protocol mismatch: client v{} != server v{}",
-                envelope.v,
-                RPC_PROTOCOL_VERSION
-            );
+    let v = u8::try_from(env.v).unwrap_or(0);
+    if v != RPC_PROTOCOL_VERSION {
+        return Err(ProtocolReject {
+            v: RPC_PROTOCOL_VERSION,
+            trace_id: env.trace_id.clone(),
+            ws_id: env.ws_id.clone(),
+            error: RpcError {
+                code: Some("protocol_mismatch".to_string()),
+                message: format!("client v{} != server v{}", v, RPC_PROTOCOL_VERSION),
+                detail: None,
+                trace_id: Some(env.trace_id.clone()),
+                ws_id: Some(env.ws_id.clone()),
+            },
         }
-        return Ok(RpcInbound {
-            request: envelope.request,
-            arming: envelope.arming,
-            role: envelope.role,
-            ws_id: envelope.ws_id,
-        });
+        .into());
     }
 
-    // 2) Loose envelope (alias + diagnostica + request compat)
-    if let Ok(loose) = serde_json::from_str::<RpcRequestEnvelopeLoose>(&line) {
-        let v = parse_version(&loose.v).unwrap_or(0);
-        if v != RPC_PROTOCOL_VERSION {
-            anyhow::bail!(
-                "rpc protocol mismatch: client v{} != server v{}",
-                v,
-                RPC_PROTOCOL_VERSION
-            );
-        }
-
-        let request = parse_request_compat(&loose.request).with_context(|| {
-            format!(
-                "parse rpc request (envelope.value): {}",
-                preview_json(&loose.request, 240)
-            )
-        })?;
-
-        return Ok(RpcInbound {
-            request,
-            arming: loose.arming,
-            role: loose.role,
-            ws_id: loose.ws_id,
-        });
+    if env.ws_id.trim().is_empty() {
+        return Err(ws_missing(env.trace_id).into());
     }
 
-    // 3) Legacy: la riga è direttamente un Request
-    let req: Request = serde_json::from_str(&line)
-        .with_context(|| format!("parse rpc request (legacy): {preview_line}"))?;
+    // client mandatory + must include rpc.v1
+    let has_rpc_v1 = env.client.capabilities.iter().any(|c| c == "rpc.v1");
+    if env.client.client_kind.trim().is_empty()
+        || env.client.client_version.trim().is_empty()
+        || !has_rpc_v1
+    {
+        return Err(handshake_required(env.trace_id, env.ws_id).into());
+    }
 
-    Ok(RpcInbound {
+    // request MUST be domain enum
+    let req: Request = serde_json::from_value(env.request).map_err(|e| ProtocolReject {
+        v: RPC_PROTOCOL_VERSION,
+        trace_id: env.trace_id.clone(),
+        ws_id: env.ws_id.clone(),
+        error: RpcError {
+            code: Some("request_invalid".to_string()),
+            message: format!("invalid request: {e}"),
+            detail: None,
+            trace_id: Some(env.trace_id.clone()),
+            ws_id: Some(env.ws_id.clone()),
+        },
+    })?;
+
+    Ok(RpcInboundV1 {
+        v,
+        trace_id: env.trace_id,
+        ws_id: env.ws_id,
+        arming: env.arming,
+        role: env.role,
+        client: env.client,
         request: req,
-        arming: false,
-        role: None,
-        ws_id: None,
     })
 }
 
-pub async fn write_response(writer: &mut OwnedWriteHalf, resp: &Response) -> Result<()> {
-    let payload = serde_json::to_string(resp).context("serialize rpc response")?;
+impl ProtocolReject {
+    fn protocol_invalid() -> Self {
+        protocol_invalid()
+    }
+}
+
+pub async fn write_response_v1(
+    writer: &mut OwnedWriteHalf,
+    v: u8,
+    trace_id: &str,
+    ws_id: &str,
+    resp: &Response,
+) -> Result<()> {
+    let env = ResponseEnvelopeV1::<Response> {
+        v: v as u32,
+        trace_id: trace_id.to_string(),
+        ws_id: ws_id.to_string(),
+        ok: true,
+        response: Some(resp.clone()),
+        error: None,
+    };
+    let payload = serde_json::to_string(&env).context("serialize rpc response envelope")?;
+    writer.write_all(payload.as_bytes()).await?;
+    writer.write_all(b"\n").await?;
+    writer.flush().await?;
+    Ok(())
+}
+
+pub async fn write_error_v1(
+    writer: &mut OwnedWriteHalf,
+    v: u8,
+    trace_id: &str,
+    ws_id: &str,
+    err: &RpcError,
+) -> Result<()> {
+    let env = ResponseEnvelopeV1::<Response> {
+        v: v as u32,
+        trace_id: trace_id.to_string(),
+        ws_id: ws_id.to_string(),
+        ok: false,
+        response: None,
+        error: Some(err.clone()),
+    };
+    let payload = serde_json::to_string(&env).context("serialize rpc error envelope")?;
     writer.write_all(payload.as_bytes()).await?;
     writer.write_all(b"\n").await?;
     writer.flush().await?;

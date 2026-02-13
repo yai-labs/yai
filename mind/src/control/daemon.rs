@@ -10,6 +10,8 @@ use crate::transport::rpc::protocol::{
 use crate::transport::rpc::uds_server;
 use anyhow::{Context, Result};
 use serde_json::json;
+use yx_protocol::{Role as RpcRole, RpcError};
+
 use std::fs;
 #[cfg(unix)]
 use std::path::PathBuf;
@@ -44,6 +46,31 @@ fn daemon_log(ws: &str, message: &str) {
 
 static DAEMON_RUN_DIR: OnceLock<std::path::PathBuf> = OnceLock::new();
 
+fn rpc_reject(
+    _v: u8,
+    trace_id: &str,
+    ws_id: &str,
+    code: &str,
+    message: &str,
+    detail: Option<serde_json::Value>,
+) -> (Response, RpcError) {
+    let err = RpcError {
+        code: Some(code.to_string()),
+        message: message.to_string(),
+        detail,
+        trace_id: Some(trace_id.to_string()),
+        ws_id: Some(ws_id.to_string()),
+    };
+
+    // mantieni Response::Error per compat interna (dominio),
+    // ma sul wire inviamo envelope V1 ok=false + error=RpcError
+    let resp = Response::Error {
+        message: message.to_string(),
+    };
+
+    (resp, err)
+}
+
 fn request_name(req: &Request) -> &'static str {
     match req {
         Request::ProtocolHandshake { .. } => "protocol.handshake",
@@ -57,7 +84,7 @@ fn request_name(req: &Request) -> &'static str {
         Request::ProvidersAttach { .. } => "providers.attach",
         Request::ProvidersDetach => "providers.detach",
         Request::ProvidersRevoke { .. } => "providers.revoke",
-        Request:: => "providers.status",
+        Request::ProvidersStatus => "providers.status",
         Request::DsarRequest { .. } => "dsar.request",
         Request::DsarStatus { .. } => "dsar.status",
         Request::DsarExecute { .. } => "dsar.execute",
@@ -71,28 +98,19 @@ fn request_name(req: &Request) -> &'static str {
     }
 }
 
-fn requires_arming(req: &Request) -> bool {
-    match req {
-        // UNARMED se endpoint/model sono vuoti (None o Some(""))
-        // ARMED se endpoint/model hanno contenuto (effetto esterno / scan remoto)
-        Request::ProvidersDiscover { endpoint, model } => {
-            let ep = endpoint.as_deref().unwrap_or("");
-            let mo = model.as_deref().unwrap_or("");
-            !(ep.is_empty() && mo.is_empty())
-        }
-
-        // Mutazioni / effetti esterni
+fn is_privileged(req: &Request) -> bool {
+    matches!(
+        req,
         Request::Up { .. }
-        | Request::Down { .. }
-        | Request::ShellExec { .. }
-        | Request::ProvidersPair { .. }
-        | Request::ProvidersAttach { .. }
-        | Request::ProvidersDetach
-        | Request::ProvidersRevoke { .. } => true,
-
-        // Read-only
-        _ => false,
-    }
+            | Request::Down { .. }
+            | Request::ShellExec { .. }
+            | Request::ProvidersDiscover { .. }
+            | Request::ProvidersPair { .. }
+            | Request::ProvidersAttach { .. }
+            | Request::ProvidersDetach
+            | Request::ProvidersRevoke { .. }
+            | Request::DsarExecute { .. }
+    )
 }
 
 fn emit_provider_transition(
@@ -328,66 +346,78 @@ async fn handle_client(
     let mut reader = BufReader::new(reader);
 
     loop {
-        let inbound = match uds_server::read_request(&mut reader).await {
-            Ok(req) => req,
+        let inbound = match uds_server::read_request_v1(&mut reader).await {
+            Ok(v) => v,
             Err(err) => {
-                // EOF: client ha chiuso la connessione -> fine pulita
+                // EOF pulito
                 if err.to_string().contains("rpc eof") {
                     return Ok(());
                 }
-                // Errore di parse o altro: rispondi con error e chiudi
-                let _ = uds_server::write_response(
-                    &mut writer,
-                    &Response::Error {
-                        message: err.to_string(),
-                    },
-                )
-                .await;
+                // se uds_server ha già inviato protocol_invalid/ws_missing/handshake_required, chiudiamo
                 return Ok(());
             }
         };
+
+        let trace_id = inbound.trace_id.clone();
+        let ws_id = inbound.ws_id.clone();
+        let v = inbound.v;
 
         let req = inbound.request;
         let is_status = matches!(req, Request::Status);
 
         if !is_status {
-            daemon_log(ws.as_ref(), &format!("request {}", request_name(&req)));
+            daemon_log(
+                ws.as_ref(),
+                &format!(
+                    "request trace_id={} ws_id={} {}",
+                    trace_id,
+                    ws_id,
+                    request_name(&req)
+                ),
+            );
         }
 
-        // ws_id check
-        if let Some(ws_id) = inbound.ws_id.as_deref() {
-            if ws_id != ws.as_ref() {
-                uds_server::write_response(
-                    &mut writer,
-                    &Response::Error {
-                        message: "ws_mismatch".to_string(),
-                    },
-                )
-                .await?;
-                continue; // non chiudiamo la connessione, rispondiamo e continuiamo
-            }
+        // ws mismatch check (ora ws_id è SEMPRE presente)
+        if ws_id.as_str() != ws.as_str() {
+            let (_resp, err) = rpc_reject(
+                v,
+                &trace_id,
+                &ws_id,
+                "ws_mismatch",
+                "ws_mismatch",
+                Some(json!({ "expected": ws.as_ref(), "got": ws_id })),
+            );
+            uds_server::write_error_v1(&mut writer, v, &trace_id, &ws_id, &err).await?;
+            continue;
         }
 
-        // arming gate
-        if requires_arming(&req) {
+        // PRIVILEGED gate: arming=true AND role=operator
+        if is_privileged(&req) {
             if !inbound.arming {
-                uds_server::write_response(
-                    &mut writer,
-                    &Response::Error {
-                        message: "arming_required".to_string(),
-                    },
-                )
-                .await?;
+                let (_resp, err) = rpc_reject(
+                    v,
+                    &trace_id,
+                    &ws_id,
+                    "arming_required",
+                    "arming_required",
+                    Some(json!({ "request": request_name(&req) })),
+                );
+                uds_server::write_error_v1(&mut writer, v, &trace_id, &ws_id, &err).await?;
                 continue;
             }
-            if inbound.role.as_deref() != Some("operator") {
-                uds_server::write_response(
-                    &mut writer,
-                    &Response::Error {
-                        message: "role_required".to_string(),
-                    },
-                )
-                .await?;
+
+            if inbound.role != RpcRole::Operator {
+                let (_resp, err) = rpc_reject(
+                    v,
+                    &trace_id,
+                    &ws_id,
+                    "role_required",
+                    "role_required",
+                    Some(
+                        json!({ "required": "operator", "got": format!("{:?}", inbound.role).to_lowercase() }),
+                    ),
+                );
+                uds_server::write_error_v1(&mut writer, v, &trace_id, &ws_id, &err).await?;
                 continue;
             }
         }
@@ -517,13 +547,27 @@ async fn handle_client(
             // Questo è “streaming”: questa connessione resta occupata a mandare eventi.
             Request::EventsSubscribe => {
                 let mut rx = bus.subscribe();
-                uds_server::write_response(&mut writer, &Response::EventsStarted).await?;
+
+                uds_server::write_response_v1(
+                    &mut writer,
+                    v,
+                    &trace_id,
+                    &ws_id,
+                    &Response::EventsStarted,
+                )
+                .await?;
+
                 loop {
                     match rx.recv().await {
                         Ok(event) => {
-                            let _ =
-                                uds_server::write_response(&mut writer, &Response::Event { event })
-                                    .await;
+                            let _ = uds_server::write_response_v1(
+                                &mut writer,
+                                v,
+                                &trace_id,
+                                &ws_id,
+                                &Response::Event { event },
+                            )
+                            .await;
                         }
                         Err(_) => break,
                     }
@@ -791,7 +835,7 @@ async fn handle_client(
             }
         }
 
-        uds_server::write_response(&mut writer, &resp).await?;
+        uds_server::write_response_v1(&mut writer, v, &trace_id, &ws_id, &resp).await?;
 
         if close_after {
             return Ok(());

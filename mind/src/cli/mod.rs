@@ -799,28 +799,17 @@ pub fn run() -> Result<()> {
                         global,
                         limit,
                         offset,
-                    } => commands::graph::activation_list(
-                        &cfg,
-                        ws.as_deref(),
-                        global,
-                        limit,
-                        offset,
-                    ),
-                    GraphActivationCommand::Show {
-                        ws,
-                        global,
-                        run_id,
-                    } => commands::graph::activation_show(&cfg, ws.as_deref(), global, &run_id),
+                    } => {
+                        commands::graph::activation_list(&cfg, ws.as_deref(), global, limit, offset)
+                    }
+                    GraphActivationCommand::Show { ws, global, run_id } => {
+                        commands::graph::activation_show(&cfg, ws.as_deref(), global, &run_id)
+                    }
                     GraphActivationCommand::Purge {
                         ws,
                         global,
                         keep_last,
-                    } => commands::graph::activation_purge(
-                        &cfg,
-                        ws.as_deref(),
-                        global,
-                        keep_last,
-                    ),
+                    } => commands::graph::activation_purge(&cfg, ws.as_deref(), global, keep_last),
                 },
             }
         }
@@ -859,7 +848,12 @@ pub fn run() -> Result<()> {
                     cmd.arg("--ws").arg(&ws);
                 }
                 cmd.spawn().context("spawn yai daemon")?;
-                return launch_yx(&cfg.workspace_root, &ws, args.yx_root.as_deref(), args.yx_dev);
+                return launch_yx(
+                    &cfg.workspace_root,
+                    &ws,
+                    args.yx_root.as_deref(),
+                    args.yx_dev,
+                );
             }
             crate::control::daemon::run_daemon(&cfg, &ws)
         }
@@ -870,7 +864,12 @@ pub fn run() -> Result<()> {
                 .ws
                 .clone()
                 .unwrap_or_else(|| cfg.ws_default.clone());
-            launch_yx(&cfg.workspace_root, &ws, args.yx_root.as_deref(), args.yx_dev)
+            launch_yx(
+                &cfg.workspace_root,
+                &ws,
+                args.yx_root.as_deref(),
+                args.yx_dev,
+            )
         }
     }
 }
@@ -917,12 +916,15 @@ fn launch_yx(workspace_root: &Path, ws: &str, yx_root: Option<&str>, dev: bool) 
         c
     } else {
         let mut c = ProcessCommand::new("cargo");
-        c.arg("run").arg("--manifest-path").arg("src-tauri/Cargo.toml");
+        c.arg("run")
+            .arg("--manifest-path")
+            .arg("src-tauri/Cargo.toml");
         c
     };
     cmd.current_dir(&root)
         .env("YAI_WS", ws)
         .env("YX_MODE", "auto");
-    cmd.spawn().with_context(|| format!("launch yx in {}", root.display()))?;
+    cmd.spawn()
+        .with_context(|| format!("launch yx in {}", root.display()))?;
     Ok(())
 }

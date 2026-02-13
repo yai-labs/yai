@@ -1,5 +1,7 @@
 use crate::control::workspace;
-use crate::transport::rpc::protocol::{Request, Response, RpcRequestEnvelope, RPC_PROTOCOL_VERSION};
+use crate::transport::rpc::protocol::{
+    Request, Response, RpcRequestEnvelope, RPC_PROTOCOL_VERSION,
+};
 use anyhow::{Context, Result};
 use std::io::{BufRead, BufReader, Write};
 use std::os::unix::net::UnixStream;
@@ -15,7 +17,11 @@ pub fn send_request(run_dir: &Path, ws: &str, req: &Request) -> Result<Response>
         request: req.clone(),
         ws_id: Some(ws.to_string()),
         arming,
-        role: if arming { Some("operator".to_string()) } else { None },
+        role: if arming {
+            Some("operator".to_string())
+        } else {
+            None
+        },
     };
     let payload = serde_json::to_string(&envelope).context("serialize rpc request")?;
     stream

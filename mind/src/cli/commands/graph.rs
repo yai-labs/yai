@@ -173,7 +173,8 @@ pub fn activate(
     params.alpha = alpha;
     params.epsilon = epsilon;
 
-    let commit = GraphFacade::activate_and_commit_with_trace(scope, &seed_items, params, !no_trace)?;
+    let commit =
+        GraphFacade::activate_and_commit_with_trace(scope, &seed_items, params, !no_trace)?;
     println!("run_id: {}", commit.activation_id);
     println!("commit_hash: {}", commit.result.commit_hash);
     println!("trace_hash: {}", commit.trace_hash);
@@ -208,9 +209,8 @@ pub fn activation_list(
         GraphScope::Workspace(ws) => ws,
         GraphScope::Global => "global".to_string(),
     };
-    let store = crate::cognition::memory::graph::activation::store::ActivationTraceStore::open(
-        &ws_id,
-    )?;
+    let store =
+        crate::cognition::memory::graph::activation::store::ActivationTraceStore::open(&ws_id)?;
     let items = store.list_runs(limit, offset)?;
     if items.is_empty() {
         println!("no activation runs found");
@@ -239,9 +239,8 @@ pub fn activation_show(
         GraphScope::Workspace(ws) => ws,
         GraphScope::Global => "global".to_string(),
     };
-    let store = crate::cognition::memory::graph::activation::store::ActivationTraceStore::open(
-        &ws_id,
-    )?;
+    let store =
+        crate::cognition::memory::graph::activation::store::ActivationTraceStore::open(&ws_id)?;
     let trace = store
         .get_run(run_id)?
         .ok_or_else(|| anyhow::anyhow!("activation run not found: {run_id}"))?;
@@ -254,12 +253,7 @@ pub fn activation_show(
         trace.stats.pushed, trace.stats.visited, trace.stats.residual_mass
     );
     for (idx, hit) in trace.topk.iter().enumerate() {
-        println!(
-            "top {} rank={} score_q={}",
-            hit.node,
-            idx + 1,
-            hit.score_q
-        );
+        println!("top {} rank={} score_q={}", hit.node, idx + 1, hit.score_q);
     }
     Ok(())
 }
@@ -278,9 +272,8 @@ pub fn activation_purge(
         GraphScope::Workspace(ws) => ws,
         GraphScope::Global => "global".to_string(),
     };
-    let store = crate::cognition::memory::graph::activation::store::ActivationTraceStore::open(
-        &ws_id,
-    )?;
+    let store =
+        crate::cognition::memory::graph::activation::store::ActivationTraceStore::open(&ws_id)?;
     let removed = store.purge_keep_last(keep_last)?;
     println!("purged: {}", removed);
     Ok(())
