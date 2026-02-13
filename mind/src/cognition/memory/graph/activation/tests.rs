@@ -1,8 +1,10 @@
 use super::api::{
-    run_activation, ActivationGraph, ActivationMethod, ActivationParams, ActivationSeed, NodeId,
+    quantize_score, run_activation, ActivationGraph, ActivationMethod, ActivationParams,
+    ActivationSeed, NodeId, QUANTIZE_SCALE,
 };
 use anyhow::{bail, Result};
 use std::collections::BTreeMap;
+use std::time::{SystemTime, UNIX_EPOCH};
 
 #[derive(Clone, Default)]
 struct TinyGraph {
@@ -120,26 +122,23 @@ fn local_push_vs_power_iteration_small_graph() -> Result<()> {
 fn determinism_five_runs_same_commit() -> Result<()> {
     let g = TinyGraph::with_edges(&[("a", "b", 1.0), ("b", "c", 1.0), ("c", "a", 0.3)]);
     let params = ActivationParams::default();
-    let mut baseline = None;
+    let mut baseline: Option<(String, String, Vec<(String, i64)>)> = None;
     for _ in 0..5 {
         let r = run_activation(&g, &seed("a"), &params)?;
-        if let Some((hash, hits)) = &baseline {
+        let hits = r
+            .hits
+            .iter()
+            .map(|h| (h.node.clone(), h.score_q))
+            .collect::<Vec<_>>();
+        if let Some((hash, run_id, base_hits)) = &baseline {
             assert_eq!(hash, &r.commit_hash);
+            assert_eq!(run_id, &r.run_id);
             assert_eq!(
-                hits,
-                &r.hits
-                    .iter()
-                    .map(|h| (h.node.clone(), h.score_q))
-                    .collect::<Vec<_>>()
+                base_hits,
+                &hits
             );
         } else {
-            baseline = Some((
-                r.commit_hash.clone(),
-                r.hits
-                    .iter()
-                    .map(|h| (h.node.clone(), h.score_q))
-                    .collect::<Vec<_>>(),
-            ));
+            baseline = Some((r.commit_hash.clone(), r.run_id.clone(), hits));
         }
     }
     Ok(())
@@ -185,10 +184,242 @@ fn trace_store_roundtrip() -> Result<()> {
         topk: result.hits.clone(),
         stats: result.stats.clone(),
     };
-    super::store::save_trace(&trace)?;
-    let loaded = super::store::load_trace(&result.run_id)?;
+    let ws_id = format!(
+        "activation_store_{}",
+        SystemTime::now()
+            .duration_since(UNIX_EPOCH)
+            .unwrap_or_default()
+            .as_millis()
+    );
+    let store = super::store::ActivationTraceStore::open(&ws_id)?;
+    let meta = super::store::ActivationRunMeta {
+        run_id: trace.run_id.clone(),
+        ws_id: ws_id.clone(),
+        created_at_unix: trace.created_at_unix,
+        graph_fingerprint: trace.graph_fingerprint.clone(),
+        params_hash: super::api::hash_params(&trace.params)?,
+        seeds_hash: super::api::hash_seeds(&trace.seeds)?,
+        commit_hash: trace.commit_hash.clone(),
+        params: trace.params.clone(),
+        seeds: trace.seeds.clone(),
+        stats: trace.stats.clone(),
+    };
+    let results = trace
+        .topk
+        .iter()
+        .enumerate()
+        .map(|(idx, hit)| super::store::ActivationResultRow {
+            node_id: hit.node.clone(),
+            rank: idx as i64 + 1,
+            score_q: hit.score_q,
+        })
+        .collect::<Vec<_>>();
+    store.record_run(&meta, &results, None)?;
+    let loaded = store.get_run(&result.run_id)?;
     assert!(loaded.is_some());
-    let list = super::store::list_traces(10)?;
+    let list = store.list_runs(10, 0)?;
     assert!(!list.is_empty());
+    Ok(())
+}
+
+#[test]
+fn activation_run_id_is_deterministic() -> Result<()> {
+    let g = TinyGraph::with_edges(&[("a", "b", 1.0), ("b", "c", 1.0)]);
+    let params = ActivationParams::default();
+    let r1 = run_activation(&g, &seed("a"), &params)?;
+    let r2 = run_activation(&g, &seed("a"), &params)?;
+    assert_eq!(r1.run_id, r2.run_id);
+    assert_eq!(r1.commit_hash, r2.commit_hash);
+    Ok(())
+}
+
+#[test]
+fn activation_does_not_mutate_semantic_graph() -> Result<()> {
+    use crate::cognition::memory::graph::facade::{GraphFacade, GraphNode, GraphEdge, GraphScope};
+    use serde_json::Value;
+
+    let ws_id = format!(
+        "activation_semantic_{}",
+        SystemTime::now()
+            .duration_since(UNIX_EPOCH)
+            .unwrap_or_default()
+            .as_millis()
+    );
+    let scope = GraphScope::Workspace(ws_id.clone());
+
+    GraphFacade::put_node(
+        scope.clone(),
+        GraphNode {
+            id: "node:test:a".to_string(),
+            kind: "semantic".to_string(),
+            meta: serde_json::json!({\"name\": \"a\"}),
+            last_seen: 1,
+        },
+    )?;
+    GraphFacade::put_node(
+        scope.clone(),
+        GraphNode {
+            id: "node:test:b".to_string(),
+            kind: "semantic".to_string(),
+            meta: serde_json::json!({\"name\": \"b\"}),
+            last_seen: 2,
+        },
+    )?;
+    GraphFacade::put_edge(
+        scope.clone(),
+        GraphEdge {
+            id: "edge:test:ab".to_string(),
+            src: "node:test:a".to_string(),
+            dst: "node:test:b".to_string(),
+            rel: "related".to_string(),
+            weight: 1.0,
+            meta: Value::Null,
+        },
+    )?;
+
+    let before_fp = GraphFacade::graph_fingerprint(scope.clone())?;
+    let before_stats = GraphFacade::stats(scope.clone())?;
+    let mut params = ActivationParams::default();
+    params.top_k = 4;
+    let seeds = vec![("node:test:a".to_string(), 1.0)];
+    let _commit = GraphFacade::activate_and_commit_with_trace(scope.clone(), &seeds, params, true)?;
+    let after_fp = GraphFacade::graph_fingerprint(scope.clone())?;
+    let after_stats = GraphFacade::stats(scope)?;
+    assert_eq!(before_fp, after_fp);
+    assert_eq!(before_stats.nodes, after_stats.nodes);
+    assert_eq!(before_stats.edges, after_stats.edges);
+    Ok(())
+}
+
+#[test]
+fn activation_trace_is_prunable_without_semantic_loss() -> Result<()> {
+    use crate::cognition::memory::graph::facade::{GraphFacade, GraphNode, GraphEdge, GraphScope};
+    use serde_json::Value;
+
+    let ws_id = format!(
+        "activation_prune_{}",
+        SystemTime::now()
+            .duration_since(UNIX_EPOCH)
+            .unwrap_or_default()
+            .as_millis()
+    );
+    let scope = GraphScope::Workspace(ws_id.clone());
+
+    GraphFacade::put_node(
+        scope.clone(),
+        GraphNode {
+            id: "node:test:a".to_string(),
+            kind: "semantic".to_string(),
+            meta: serde_json::json!({\"name\": \"a\"}),
+            last_seen: 1,
+        },
+    )?;
+    GraphFacade::put_node(
+        scope.clone(),
+        GraphNode {
+            id: "node:test:b".to_string(),
+            kind: "semantic".to_string(),
+            meta: serde_json::json!({\"name\": \"b\"}),
+            last_seen: 2,
+        },
+    )?;
+    GraphFacade::put_edge(
+        scope.clone(),
+        GraphEdge {
+            id: "edge:test:ab".to_string(),
+            src: "node:test:a".to_string(),
+            dst: "node:test:b".to_string(),
+            rel: "related".to_string(),
+            weight: 1.0,
+            meta: Value::Null,
+        },
+    )?;
+
+    let before_fp = GraphFacade::graph_fingerprint(scope.clone())?;
+    let mut params = ActivationParams::default();
+    params.top_k = 4;
+    let seeds = vec![(\"node:test:a\".to_string(), 1.0)];
+    let _commit = GraphFacade::activate_and_commit_with_trace(scope.clone(), &seeds, params, true)?;
+
+    let store = super::store::ActivationTraceStore::open(&ws_id)?;
+    let removed = store.purge_keep_last(0)?;
+    assert!(removed >= 1);
+
+    let after_fp = GraphFacade::graph_fingerprint(scope)?;
+    assert_eq!(before_fp, after_fp);
+    Ok(())
+}
+
+#[test]
+fn workspace_isolation_commit_differs() -> Result<()> {
+    use crate::cognition::memory::graph::facade::{GraphEdge, GraphFacade, GraphNode, GraphScope};
+    use serde_json::Value;
+
+    let now = SystemTime::now()
+        .duration_since(UNIX_EPOCH)
+        .unwrap_or_default()
+        .as_millis();
+    let scope_a = GraphScope::Workspace(format!("activation_ws_a_{now}"));
+    let scope_b = GraphScope::Workspace(format!("activation_ws_b_{now}"));
+    for scope in [scope_a.clone(), scope_b.clone()] {
+        GraphFacade::put_node(
+            scope.clone(),
+            GraphNode {
+                id: "node:test:a".to_string(),
+                kind: "semantic".to_string(),
+                meta: serde_json::json!({"name": "a"}),
+                last_seen: 1,
+            },
+        )?;
+        GraphFacade::put_node(
+            scope.clone(),
+            GraphNode {
+                id: "node:test:b".to_string(),
+                kind: "semantic".to_string(),
+                meta: serde_json::json!({"name": "b"}),
+                last_seen: 2,
+            },
+        )?;
+        GraphFacade::put_edge(
+            scope,
+            GraphEdge {
+                id: "edge:test:ab".to_string(),
+                src: "node:test:a".to_string(),
+                dst: "node:test:b".to_string(),
+                rel: "related".to_string(),
+                weight: 1.0,
+                meta: Value::Null,
+            },
+        )?;
+    }
+
+    let params = ActivationParams::default();
+    let seeds = vec![("node:test:a".to_string(), 1.0)];
+    let a = GraphFacade::activate_and_commit(scope_a, &seeds, params.clone())?;
+    let b = GraphFacade::activate_and_commit(scope_b, &seeds, params)?;
+    assert_ne!(a.result.commit_hash, b.result.commit_hash);
+    assert_eq!(
+        a.result
+            .hits
+            .iter()
+            .map(|h| (h.node.clone(), h.score_q))
+            .collect::<Vec<_>>(),
+        b.result
+            .hits
+            .iter()
+            .map(|h| (h.node.clone(), h.score_q))
+            .collect::<Vec<_>>()
+    );
+    Ok(())
+}
+
+#[test]
+fn quantization_floor_and_bounds() -> Result<()> {
+    assert_eq!(quantize_score(0.0, QUANTIZE_SCALE)?, 0);
+    assert_eq!(quantize_score(1e-13, QUANTIZE_SCALE)?, 0);
+    assert_eq!(quantize_score(1.0, QUANTIZE_SCALE)?, QUANTIZE_SCALE);
+    assert!(quantize_score(f64::NAN, QUANTIZE_SCALE).is_err());
+    assert!(quantize_score(f64::INFINITY, QUANTIZE_SCALE).is_err());
+    assert!(quantize_score(f64::NEG_INFINITY, QUANTIZE_SCALE).is_err());
     Ok(())
 }

@@ -4,10 +4,12 @@ use crate::cognition::memory::graph::activation::api::{
 };
 use crate::cognition::memory::graph::activation::trace::ActivationTrace;
 use anyhow::{anyhow, bail, Result};
+use rusqlite::{params, Connection};
+use serde::{Deserialize, Serialize};
 use std::cmp::Ordering;
 use std::collections::{BTreeMap, BTreeSet};
-use std::fs::{self, OpenOptions};
-use std::io::{BufRead, BufReader, Write};
+use std::fs;
+use std::path::{Path, PathBuf};
 
 pub fn compute_local_push(
     graph: &dyn ActivationGraph,
@@ -192,65 +194,366 @@ fn pick_push_candidate(
     Ok(best.map(|(n, ru, out_norm, _)| (n, ru, out_norm)))
 }
 
-pub fn save_trace(trace: &ActivationTrace) -> Result<()> {
-    let path = trace_path();
-    if let Some(parent) = path.parent() {
-        fs::create_dir_all(parent)?;
-    }
-    let mut file = OpenOptions::new().create(true).append(true).open(path)?;
-    let line = serde_json::to_string(trace)?;
-    writeln!(file, "{line}")?;
-    Ok(())
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct ActivationRunMeta {
+    pub run_id: String,
+    pub ws_id: String,
+    pub created_at_unix: i64,
+    pub graph_fingerprint: String,
+    pub params_hash: String,
+    pub seeds_hash: String,
+    pub commit_hash: String,
+    pub params: ActivationParams,
+    pub seeds: Vec<ActivationSeed>,
+    pub stats: ActivationStats,
 }
 
-pub fn load_trace(run_id: &str) -> Result<Option<ActivationTrace>> {
-    let path = trace_path();
-    if !path.exists() {
-        return Ok(None);
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct ActivationResultRow {
+    pub node_id: NodeId,
+    pub rank: i64,
+    pub score_q: i64,
+}
+
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct ActivationExplanationRow {
+    pub run_id: String,
+    pub from_node_id: NodeId,
+    pub to_node_id: NodeId,
+    pub contrib_q: i64,
+    pub reason: String,
+}
+
+pub struct ActivationTraceStore {
+    ws_id: String,
+    db_path: PathBuf,
+}
+
+impl ActivationTraceStore {
+    pub fn open(ws_id: &str) -> Result<Self> {
+        let db_path = activation_db_path(ws_id);
+        if let Some(parent) = db_path.parent() {
+            fs::create_dir_all(parent)?;
+        }
+        let store = Self {
+            ws_id: ws_id.to_string(),
+            db_path,
+        };
+        store.init()?;
+        Ok(store)
     }
-    let file = OpenOptions::new().read(true).open(path)?;
-    let reader = BufReader::new(file);
-    let mut out = None;
-    for line in reader.lines() {
-        let line = line?;
-        if line.trim().is_empty() {
-            continue;
+
+    pub fn path(&self) -> &Path {
+        &self.db_path
+    }
+
+    pub fn record_run(
+        &self,
+        meta: &ActivationRunMeta,
+        results: &[ActivationResultRow],
+        explanations: Option<&[ActivationExplanationRow]>,
+    ) -> Result<()> {
+        if meta.ws_id != self.ws_id {
+            bail!("activation trace ws_id mismatch");
         }
-        let trace: ActivationTrace = serde_json::from_str(&line)?;
-        if trace.run_id == run_id {
-            out = Some(trace);
+        let mut conn = self.conn()?;
+        let tx = conn.transaction()?;
+
+        let existing = load_run_meta(&tx, &meta.run_id)?;
+        if let Some(existing) = existing {
+            ensure_meta_matches(&existing, meta)?;
+            let existing_results = load_run_results(&tx, &meta.run_id)?;
+            ensure_results_match(&existing_results, results)?;
+            return Ok(());
         }
+
+        let params_json = serde_json::to_string(&meta.params)?;
+        let seeds_json = serde_json::to_string(&meta.seeds)?;
+        let stats_json = serde_json::to_string(&meta.stats)?;
+
+        tx.execute(
+            "INSERT INTO activation_runs (
+                run_id, ws_id, created_at, graph_fingerprint, params_hash, seeds_hash, commit_hash,
+                params_json, seeds_json, stats_json
+            ) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10)",
+            params![
+                meta.run_id,
+                meta.ws_id,
+                meta.created_at_unix,
+                meta.graph_fingerprint,
+                meta.params_hash,
+                meta.seeds_hash,
+                meta.commit_hash,
+                params_json,
+                seeds_json,
+                stats_json,
+            ],
+        )?;
+
+        for row in results {
+            tx.execute(
+                "INSERT INTO activation_results (run_id, node_id, rank, score_q)
+                 VALUES (?1, ?2, ?3, ?4)",
+                params![meta.run_id, row.node_id, row.rank, row.score_q],
+            )?;
+        }
+
+        if let Some(rows) = explanations {
+            for row in rows {
+                tx.execute(
+                    "INSERT INTO activation_explanations (run_id, from_node_id, to_node_id, contrib_q, reason)
+                     VALUES (?1, ?2, ?3, ?4, ?5)",
+                    params![
+                        row.run_id,
+                        row.from_node_id,
+                        row.to_node_id,
+                        row.contrib_q,
+                        row.reason
+                    ],
+                )?;
+            }
+        }
+
+        tx.commit()?;
+        Ok(())
+    }
+
+    pub fn get_run(&self, run_id: &str) -> Result<Option<ActivationTrace>> {
+        let conn = self.conn()?;
+        let meta = load_run_meta(&conn, run_id)?;
+        let Some(meta) = meta else {
+            return Ok(None);
+        };
+        let results = load_run_results(&conn, run_id)?;
+        Ok(Some(build_trace(meta, results)?))
+    }
+
+    pub fn list_runs(&self, limit: usize, offset: usize) -> Result<Vec<(String, i64, String)>> {
+        if limit == 0 {
+            return Ok(Vec::new());
+        }
+        let conn = self.conn()?;
+        let mut stmt = conn.prepare(
+            "SELECT run_id, created_at, commit_hash
+             FROM activation_runs
+             WHERE ws_id = ?1
+             ORDER BY created_at DESC, run_id ASC
+             LIMIT ?2 OFFSET ?3",
+        )?;
+        let rows = stmt.query_map(params![self.ws_id, limit as i64, offset as i64], |row| {
+            Ok((row.get(0)?, row.get(1)?, row.get(2)?))
+        })?;
+        let mut out = Vec::new();
+        for row in rows {
+            out.push(row?);
+        }
+        Ok(out)
+    }
+
+    pub fn purge_keep_last(&self, keep_last: usize) -> Result<usize> {
+        let mut conn = self.conn()?;
+        let to_delete: Vec<String> = {
+            let mut stmt = conn.prepare(
+                "SELECT run_id
+                 FROM activation_runs
+                 WHERE ws_id = ?1
+                 ORDER BY created_at DESC, run_id ASC
+                 LIMIT -1 OFFSET ?2",
+            )?;
+            let rows =
+                stmt.query_map(params![self.ws_id, keep_last as i64], |row| row.get(0))?;
+            let mut out = Vec::new();
+            for row in rows {
+                out.push(row?);
+            }
+            out
+        };
+        if to_delete.is_empty() {
+            return Ok(0);
+        }
+
+        let tx = conn.transaction()?;
+        for run_id in &to_delete {
+            tx.execute(
+                "DELETE FROM activation_results WHERE run_id = ?1",
+                params![run_id],
+            )?;
+            tx.execute(
+                "DELETE FROM activation_explanations WHERE run_id = ?1",
+                params![run_id],
+            )?;
+            tx.execute(
+                "DELETE FROM activation_runs WHERE run_id = ?1",
+                params![run_id],
+            )?;
+        }
+        tx.commit()?;
+        Ok(to_delete.len())
+    }
+
+    fn conn(&self) -> Result<Connection> {
+        Connection::open(&self.db_path).map_err(|e| anyhow!("open activation db: {e}"))
+    }
+
+    fn init(&self) -> Result<()> {
+        let conn = self.conn()?;
+        conn.execute_batch(
+            "CREATE TABLE IF NOT EXISTS activation_runs (
+                run_id TEXT PRIMARY KEY,
+                ws_id TEXT NOT NULL,
+                created_at INTEGER NOT NULL,
+                graph_fingerprint TEXT NOT NULL,
+                params_hash TEXT NOT NULL,
+                seeds_hash TEXT NOT NULL,
+                commit_hash TEXT NOT NULL,
+                params_json TEXT NOT NULL,
+                seeds_json TEXT NOT NULL,
+                stats_json TEXT NOT NULL
+            );
+            CREATE TABLE IF NOT EXISTS activation_results (
+                run_id TEXT NOT NULL,
+                node_id TEXT NOT NULL,
+                rank INTEGER NOT NULL,
+                score_q INTEGER NOT NULL,
+                PRIMARY KEY (run_id, node_id)
+            );
+            CREATE TABLE IF NOT EXISTS activation_explanations (
+                run_id TEXT NOT NULL,
+                from_node_id TEXT NOT NULL,
+                to_node_id TEXT NOT NULL,
+                contrib_q INTEGER NOT NULL,
+                reason TEXT NOT NULL
+            );
+            CREATE INDEX IF NOT EXISTS activation_runs_ws_idx ON activation_runs(ws_id);
+            CREATE INDEX IF NOT EXISTS activation_runs_created_idx ON activation_runs(created_at);
+            CREATE INDEX IF NOT EXISTS activation_results_run_idx ON activation_results(run_id);",
+        )?;
+        Ok(())
+    }
+}
+
+fn activation_db_path(ws_id: &str) -> PathBuf {
+    paths::run_dir().join(ws_id).join("activation.sqlite")
+}
+
+#[derive(Clone, Debug, Serialize, Deserialize)]
+struct ActivationRunMetaRow {
+    run_id: String,
+    ws_id: String,
+    created_at_unix: i64,
+    graph_fingerprint: String,
+    params_hash: String,
+    seeds_hash: String,
+    commit_hash: String,
+    params_json: String,
+    seeds_json: String,
+    stats_json: String,
+}
+
+fn load_run_meta(conn: &Connection, run_id: &str) -> Result<Option<ActivationRunMetaRow>> {
+    let mut stmt = conn.prepare(
+        "SELECT run_id, ws_id, created_at, graph_fingerprint, params_hash, seeds_hash, commit_hash,
+                params_json, seeds_json, stats_json
+         FROM activation_runs
+         WHERE run_id = ?1
+         LIMIT 1",
+    )?;
+    let mut rows = stmt.query(params![run_id])?;
+    if let Some(row) = rows.next()? {
+        return Ok(Some(ActivationRunMetaRow {
+            run_id: row.get(0)?,
+            ws_id: row.get(1)?,
+            created_at_unix: row.get(2)?,
+            graph_fingerprint: row.get(3)?,
+            params_hash: row.get(4)?,
+            seeds_hash: row.get(5)?,
+            commit_hash: row.get(6)?,
+            params_json: row.get(7)?,
+            seeds_json: row.get(8)?,
+            stats_json: row.get(9)?,
+        }));
+    }
+    Ok(None)
+}
+
+fn load_run_results(conn: &Connection, run_id: &str) -> Result<Vec<ActivationResultRow>> {
+    let mut stmt = conn.prepare(
+        "SELECT node_id, rank, score_q
+         FROM activation_results
+         WHERE run_id = ?1
+         ORDER BY rank ASC, node_id ASC",
+    )?;
+    let rows = stmt.query_map(params![run_id], |row| {
+        Ok(ActivationResultRow {
+            node_id: row.get(0)?,
+            rank: row.get(1)?,
+            score_q: row.get(2)?,
+        })
+    })?;
+    let mut out = Vec::new();
+    for row in rows {
+        out.push(row?);
     }
     Ok(out)
 }
 
-pub fn list_traces(limit: usize) -> Result<Vec<(String, i64, String)>> {
-    if limit == 0 {
-        return Ok(Vec::new());
-    }
-    let path = trace_path();
-    if !path.exists() {
-        return Ok(Vec::new());
-    }
-
-    let file = OpenOptions::new().read(true).open(path)?;
-    let reader = BufReader::new(file);
-    let mut items: Vec<(String, i64, String)> = Vec::new();
-    for line in reader.lines() {
-        let line = line?;
-        if line.trim().is_empty() {
-            continue;
-        }
-        let trace: ActivationTrace = serde_json::from_str(&line)
-            .map_err(|e| anyhow!("invalid activation trace row: {e}"))?;
-        items.push((trace.run_id, trace.created_at_unix, trace.commit_hash));
+fn ensure_meta_matches(existing: &ActivationRunMetaRow, incoming: &ActivationRunMeta) -> Result<()> {
+    if existing.ws_id != incoming.ws_id
+        || existing.graph_fingerprint != incoming.graph_fingerprint
+        || existing.params_hash != incoming.params_hash
+        || existing.seeds_hash != incoming.seeds_hash
+        || existing.commit_hash != incoming.commit_hash
+    {
+        bail!("activation run metadata mismatch for run_id={}", incoming.run_id);
     }
 
-    items.sort_by(|a, b| b.1.cmp(&a.1).then_with(|| a.0.cmp(&b.0)));
-    items.truncate(limit);
-    Ok(items)
+    let params_json = serde_json::to_string(&incoming.params)?;
+    let seeds_json = serde_json::to_string(&incoming.seeds)?;
+    let stats_json = serde_json::to_string(&incoming.stats)?;
+    if existing.params_json != params_json
+        || existing.seeds_json != seeds_json
+        || existing.stats_json != stats_json
+    {
+        bail!("activation run payload mismatch for run_id={}", incoming.run_id);
+    }
+    Ok(())
 }
 
-fn trace_path() -> std::path::PathBuf {
-    paths::run_dir().join("activation_traces.jsonl")
+fn ensure_results_match(existing: &[ActivationResultRow], incoming: &[ActivationResultRow]) -> Result<()> {
+    if existing.len() != incoming.len() {
+        bail!("activation run results length mismatch");
+    }
+    let mut incoming_sorted = incoming.to_vec();
+    incoming_sorted.sort_by(|a, b| a.rank.cmp(&b.rank).then_with(|| a.node_id.cmp(&b.node_id)));
+    for (a, b) in existing.iter().zip(incoming_sorted.iter()) {
+        if a.node_id != b.node_id || a.rank != b.rank || a.score_q != b.score_q {
+            bail!("activation run results mismatch");
+        }
+    }
+    Ok(())
+}
+
+fn build_trace(meta: ActivationRunMetaRow, results: Vec<ActivationResultRow>) -> Result<ActivationTrace> {
+    let params: ActivationParams = serde_json::from_str(&meta.params_json)?;
+    let seeds: Vec<ActivationSeed> = serde_json::from_str(&meta.seeds_json)?;
+    let stats: ActivationStats = serde_json::from_str(&meta.stats_json)?;
+    let scale = params.quantize_scale as f64;
+    let hits = results
+        .into_iter()
+        .map(|row| crate::cognition::memory::graph::activation::api::ActivationHit {
+            node: row.node_id,
+            score_q: row.score_q,
+            score: row.score_q as f64 / scale,
+        })
+        .collect();
+    Ok(ActivationTrace {
+        run_id: meta.run_id,
+        created_at_unix: meta.created_at_unix,
+        graph_fingerprint: meta.graph_fingerprint,
+        params,
+        seeds,
+        commit_hash: meta.commit_hash,
+        topk: hits,
+        stats,
+    })
 }

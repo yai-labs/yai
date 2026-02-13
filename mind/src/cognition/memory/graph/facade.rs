@@ -1,6 +1,10 @@
 use crate::cognition::memory::graph::activation::api::{
-    run_activation, ActivationGraph, ActivationMethod, ActivationParams,
-    ActivationResult as EngineActivationResult, ActivationSeed, ActivationStats, NodeId,
+    canonicalize_seeds, run_activation, ActivationGraph, ActivationMethod, ActivationParams,
+    hash_params, hash_seeds, ActivationResult as EngineActivationResult, ActivationSeed,
+    ActivationStats, NodeId,
+};
+use crate::cognition::memory::graph::activation::store::{
+    ActivationResultRow, ActivationRunMeta, ActivationTraceStore,
 };
 use crate::cognition::memory::graph::activation::trace::ActivationTrace;
 use crate::cognition::memory::graph::store::global_knowledge_store::GlobalKnowledgeStore;
@@ -306,6 +310,9 @@ impl GraphFacade {
         seeds: &[(String, f32)],
         policy: ActivationPolicy,
     ) -> Result<ActivationResult> {
+        if matches!(scope, GraphScope::Global) {
+            bail!("ws_id required for activation");
+        }
         let store = store_for_scope(&scope);
         let mut nodes = store.list_nodes()?;
         let mut edges = store.list_edges()?;
@@ -313,7 +320,11 @@ impl GraphFacade {
         edges.sort_by(|a, b| a.id.cmp(&b.id));
         let (nodes, edges) = filter_snapshot_for_activation(&nodes, &edges);
 
-        let graph = SemanticSnapshotGraph::new(nodes.clone(), edges.clone(), scope_label(&scope));
+        let ws_id = match &scope {
+            GraphScope::Workspace(ws) => ws.clone(),
+            GraphScope::Global => "global".to_string(),
+        };
+        let graph = SemanticSnapshotGraph::new(nodes.clone(), edges.clone(), ws_id);
         let seed = seeds
             .iter()
             .map(|(node, weight)| ActivationSeed {
@@ -321,6 +332,7 @@ impl GraphFacade {
                 weight: *weight as f64,
             })
             .collect::<Vec<_>>();
+        let seed = canonicalize_seeds(&seed)?;
         let params = policy_to_params(&policy);
         let act = run_activation(&graph, &seed, &params)?;
 
@@ -352,6 +364,19 @@ impl GraphFacade {
         seeds: &[(String, f64)],
         params: ActivationParams,
     ) -> Result<ActivationCommit> {
+        Self::activate_and_commit_with_trace(scope, seeds, params, true)
+    }
+
+    pub fn activate_and_commit_with_trace(
+        scope: GraphScope,
+        seeds: &[(String, f64)],
+        params: ActivationParams,
+        save_trace: bool,
+    ) -> Result<ActivationCommit> {
+        let ws_id = match &scope {
+            GraphScope::Workspace(ws) => ws.clone(),
+            GraphScope::Global => bail!("ws_id required for activation"),
+        };
         let store = store_for_scope(&scope);
         let mut nodes = store.list_nodes()?;
         let mut edges = store.list_edges()?;
@@ -359,7 +384,7 @@ impl GraphFacade {
         edges.sort_by(|a, b| a.id.cmp(&b.id));
         let (nodes, edges) = filter_snapshot_for_activation(&nodes, &edges);
 
-        let graph = SemanticSnapshotGraph::new(nodes, edges, scope_label(&scope));
+        let graph = SemanticSnapshotGraph::new(nodes, edges, ws_id.clone());
         let graph_snapshot_id = graph.fingerprint()?;
         let seed = seeds
             .iter()
@@ -368,8 +393,9 @@ impl GraphFacade {
                 weight: *weight,
             })
             .collect::<Vec<_>>();
-        let params_hash = hash_json(&params)?;
-        let seed_hash = hash_json(&seed)?;
+        let seed = canonicalize_seeds(&seed)?;
+        let params_hash = hash_params(&params)?;
+        let seed_hash = hash_seeds(&seed)?;
 
         let result = run_activation(&graph, &seed, &params)?;
         let proof = evaluate_activation_result(&result, &params)?;
@@ -385,7 +411,6 @@ impl GraphFacade {
             topk: result.hits.clone(),
             stats: result.stats.clone(),
         };
-        crate::cognition::memory::graph::activation::store::save_trace(&trace)?;
         let trace_hash = hash_json(&serde_json::json!({
             "run_id": trace.run_id,
             "graph_fingerprint": trace.graph_fingerprint,
@@ -395,37 +420,32 @@ impl GraphFacade {
             "topk": trace.topk,
             "stats": trace.stats,
         }))?;
-
-        let event_node = GraphNode {
-            id: format!("node:activation:{result_hash}"),
-            kind: "activation_event".to_string(),
-            meta: serde_json::json!({
-                "activation_id": activation_id,
-                "scope": scope_label(&scope),
-                "graph_snapshot_id": graph_snapshot_id,
-                "params_hash": params_hash,
-                "seed_hash": seed_hash,
-                "result_hash": result_hash,
-                "trace_hash": trace_hash,
-                "algo_id": algo_id(&params),
-                "metrics": result.stats,
-                "proof": proof,
-                "top_k": result.hits,
-            }),
-            last_seen: now_epoch_secs(),
-        };
-        store.put_node(&event_node)?;
-        let trace_node = GraphNode {
-            id: format!("node:activation_trace:{result_hash}"),
-            kind: "activation_trace".to_string(),
-            meta: serde_json::json!({
-                "activation_id": activation_id,
-                "trace_hash": trace_hash,
-                "trace": trace,
-            }),
-            last_seen: now_epoch_secs(),
-        };
-        store.put_node(&trace_node)?;
+        if save_trace {
+            let trace_store = ActivationTraceStore::open(&ws_id)?;
+            let meta = ActivationRunMeta {
+                run_id: trace.run_id.clone(),
+                ws_id: ws_id.clone(),
+                created_at_unix: trace.created_at_unix,
+                graph_fingerprint: trace.graph_fingerprint.clone(),
+                params_hash: params_hash.clone(),
+                seeds_hash: seed_hash.clone(),
+                commit_hash: trace.commit_hash.clone(),
+                params: trace.params.clone(),
+                seeds: trace.seeds.clone(),
+                stats: trace.stats.clone(),
+            };
+            let results = trace
+                .topk
+                .iter()
+                .enumerate()
+                .map(|(idx, hit)| ActivationResultRow {
+                    node_id: hit.node.clone(),
+                    rank: idx as i64 + 1,
+                    score_q: hit.score_q,
+                })
+                .collect::<Vec<_>>();
+            trace_store.record_run(&meta, &results, None)?;
+        }
 
         Ok(ActivationCommit {
             activation_id,
@@ -563,7 +583,7 @@ fn evaluate_activation_result(
             invariant_errors.push(format!("activation score is not finite for {}", node.node));
         }
         if node.score_q > prev_score_q {
-            invariant_errors.push("activation top_k is not sorted by score desc".to_string());
+            invariant_errors.push("activation top_k is not sorted by score_q desc".to_string());
         }
         if node.score_q == prev_score_q && node.node < prev_id {
             invariant_errors.push("activation top_k ordering is not stable".to_string());
@@ -641,13 +661,17 @@ pub fn graph_fingerprint(scope: GraphScope) -> Result<String> {
     let mut nodes = store.list_nodes()?;
     let mut edges = store.list_edges()?;
     nodes.sort_by(|a, b| a.id.cmp(&b.id));
-    edges.sort_by(|a, b| a.id.cmp(&b.id));
-    let payload = serde_json::to_vec(&serde_json::json!({
-        "scope": scope_label(&scope),
-        "nodes": nodes.into_iter().map(|n| n.id).collect::<Vec<_>>(),
-        "edges": edges.into_iter().map(|e| [e.src, e.dst, e.rel]).collect::<Vec<_>>(),
-    }))?;
-    Ok(blake3::hash(&payload).to_hex().to_string())
+    edges.sort_by(|a, b| {
+        a.src
+            .cmp(&b.src)
+            .then_with(|| a.dst.cmp(&b.dst))
+            .then_with(|| a.rel.cmp(&b.rel))
+    });
+    let ws_id = match &scope {
+        GraphScope::Workspace(ws) => ws.as_str(),
+        GraphScope::Global => "global",
+    };
+    Ok(hash_graph_snapshot(ws_id, &nodes, &edges))
 }
 
 struct SemanticSnapshotGraph {
@@ -657,12 +681,21 @@ struct SemanticSnapshotGraph {
 }
 
 impl SemanticSnapshotGraph {
-    fn new(nodes: Vec<GraphNode>, edges: Vec<GraphEdge>, _scope: String) -> Self {
+    fn new(nodes: Vec<GraphNode>, edges: Vec<GraphEdge>, ws_id: String) -> Self {
         let mut neighbors: BTreeMap<NodeId, Vec<(NodeId, f64)>> = BTreeMap::new();
         for n in nodes {
             neighbors.entry(n.id).or_default();
         }
+        let mut edges_for_fingerprint = Vec::new();
         for e in edges {
+            edges_for_fingerprint.push(GraphEdge {
+                id: e.id.clone(),
+                src: e.src.clone(),
+                dst: e.dst.clone(),
+                rel: e.rel.clone(),
+                weight: e.weight,
+                meta: e.meta.clone(),
+            });
             neighbors
                 .entry(e.src)
                 .or_default()
@@ -675,17 +708,54 @@ impl SemanticSnapshotGraph {
             .iter()
             .map(|(k, v)| (k.clone(), v.iter().map(|(_, w)| *w).sum()))
             .collect::<BTreeMap<_, _>>();
-        let payload = serde_json::to_vec(&serde_json::json!({
-            "neighbors": neighbors,
-        }))
-        .unwrap_or_default();
-        let fingerprint = blake3::hash(&payload).to_hex().to_string();
+        edges_for_fingerprint.sort_by(|a, b| {
+            a.src
+                .cmp(&b.src)
+                .then_with(|| a.dst.cmp(&b.dst))
+                .then_with(|| a.rel.cmp(&b.rel))
+        });
+        let node_ids = neighbors.keys().cloned().collect::<Vec<_>>();
+        let nodes_for_fingerprint = node_ids
+            .into_iter()
+            .map(|id| GraphNode {
+                id,
+                kind: String::new(),
+                meta: serde_json::Value::Null,
+                last_seen: 0,
+            })
+            .collect::<Vec<_>>();
+        let fingerprint = hash_graph_snapshot(&ws_id, &nodes_for_fingerprint, &edges_for_fingerprint);
         Self {
             neighbors,
             norms,
             fingerprint,
         }
     }
+}
+
+fn hash_graph_snapshot(ws_id: &str, nodes: &[GraphNode], edges: &[GraphEdge]) -> String {
+    let mut bytes = Vec::new();
+    append_str(&mut bytes, ws_id);
+    append_u64(&mut bytes, nodes.len() as u64);
+    for node in nodes {
+        append_str(&mut bytes, &node.id);
+    }
+    append_u64(&mut bytes, edges.len() as u64);
+    for edge in edges {
+        append_str(&mut bytes, &edge.src);
+        append_str(&mut bytes, &edge.dst);
+        append_str(&mut bytes, &edge.rel);
+    }
+    blake3::hash(&bytes).to_hex().to_string()
+}
+
+fn append_u64(out: &mut Vec<u8>, value: u64) {
+    out.extend_from_slice(&value.to_le_bytes());
+}
+
+fn append_str(out: &mut Vec<u8>, value: &str) {
+    append_u64(out, value.len() as u64);
+    out.extend_from_slice(value.as_bytes());
 }
 
 impl ActivationGraph for SemanticSnapshotGraph {
@@ -821,12 +891,67 @@ mod tests {
         let first = GraphFacade::activate_and_commit(scope_a, &seeds, params.clone())?;
         let second = GraphFacade::activate_and_commit(scope_b, &seeds, params)?;
 
-        assert_eq!(first.result_hash, second.result_hash);
-        assert_eq!(first.trace_hash, second.trace_hash);
-        assert_eq!(first.graph_snapshot_id, second.graph_snapshot_id);
+        assert_ne!(first.result_hash, second.result_hash);
+        assert_ne!(first.trace_hash, second.trace_hash);
+        assert_ne!(first.graph_snapshot_id, second.graph_snapshot_id);
         assert_eq!(first.params_hash, second.params_hash);
         assert_eq!(first.seed_hash, second.seed_hash);
         assert!(first.proof.invariants_passed);
+        Ok(())
+    }
+
+    #[test]
+    fn snapshot_order_independent_fingerprint() -> Result<()> {
+        let ws_id = "order_independent_ws".to_string();
+        let nodes_a = vec![
+            GraphNode {
+                id: "node:test:b".to_string(),
+                kind: "semantic".to_string(),
+                meta: Value::Null,
+                last_seen: 2,
+            },
+            GraphNode {
+                id: "node:test:a".to_string(),
+                kind: "semantic".to_string(),
+                meta: Value::Null,
+                last_seen: 1,
+            },
+        ];
+        let edges_a = vec![GraphEdge {
+            id: "edge:test:ab".to_string(),
+            src: "node:test:a".to_string(),
+            dst: "node:test:b".to_string(),
+            rel: "related".to_string(),
+            weight: 1.0,
+            meta: Value::Null,
+        }];
+
+        let nodes_b = vec![
+            GraphNode {
+                id: "node:test:a".to_string(),
+                kind: "semantic".to_string(),
+                meta: Value::Null,
+                last_seen: 1,
+            },
+            GraphNode {
+                id: "node:test:b".to_string(),
+                kind: "semantic".to_string(),
+                meta: Value::Null,
+                last_seen: 2,
+            },
+        ];
+        let edges_b = vec![GraphEdge {
+            id: "edge:test:ab".to_string(),
+            src: "node:test:a".to_string(),
+            dst: "node:test:b".to_string(),
+            rel: "related".to_string(),
+            weight: 1.0,
+            meta: Value::Null,
+        }];
+
+        let snap_a = SemanticSnapshotGraph::new(nodes_a, edges_a, ws_id.clone());
+        let snap_b = SemanticSnapshotGraph::new(nodes_b, edges_b, ws_id);
+        assert_eq!(snap_a.fingerprint()?, snap_b.fingerprint()?);
         Ok(())
     }
 }
