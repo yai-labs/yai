@@ -64,8 +64,8 @@ bool yai_ws_build_paths(yai_workspace_t* ws, const char* ws_id);
 bool yai_session_acquire(yai_session_t** out, const char* ws_id);
 void yai_session_release(yai_session_t* s);
 
-bool yai_session_lock(yai_session_t* s);     // crea/lock ~/.yai/run/<ws>/lock
-void yai_session_unlock(yai_session_t* s);
+bool yai_workspace_try_lock(const yai_workspace_t* ws);
+void yai_workspace_unlock(const yai_workspace_t* ws);
+bool yai_workspace_write_pid(const yai_workspace_t* ws);
 
-bool yai_session_write_pid(yai_session_t* s);
 bool yai_session_ensure_run_dir(const yai_workspace_t* ws);

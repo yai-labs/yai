@@ -1,6 +1,8 @@
 // kernel/src/core/yai_session.c
 #include "yai_session.h"
 #include <stdlib.h>
+#include <fcntl.h>
+#include <errno.h>
 #include <string.h>
 #include <stdio.h>
 #include <sys/stat.h>
@@ -74,5 +76,36 @@ bool yai_session_ensure_run_dir(const yai_workspace_t* ws) {
         }
     }
 
+    return true;
+}
+
+bool yai_workspace_try_lock(const yai_workspace_t* ws) {
+    if (!ws) return false;
+
+    int fd = open(ws->lock_file, O_CREAT | O_EXCL | O_RDWR, 0600);
+    if (fd < 0) {
+        if (errno == EEXIST) {
+            return false; // già running
+        }
+        return false;
+    }
+
+    close(fd);
+    return true;
+}
+
+void yai_workspace_unlock(const yai_workspace_t* ws) {
+    if (!ws) return;
+    unlink(ws->lock_file);
+}
+
+bool yai_workspace_write_pid(const yai_workspace_t* ws) {
+    if (!ws) return false;
+
+    FILE* f = fopen(ws->pid_file, "w");
+    if (!f) return false;
+
+    fprintf(f, "%d\n", getpid());
+    fclose(f);
     return true;
 }

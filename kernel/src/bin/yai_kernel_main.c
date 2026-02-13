@@ -61,6 +61,17 @@ int main(int argc, char **argv) {
         fprintf(stderr, "[KERNEL] Failed to create run directory\n");
         return 1;
     }
+    // ---- Ownership check ----
+    if (!yai_workspace_try_lock(&ws)) {
+        fprintf(stderr, "[KERNEL] Workspace already running.\n");
+        return 1;
+    }
+
+    if (!yai_workspace_write_pid(&ws)) {
+        fprintf(stderr, "[KERNEL] Failed to write PID file.\n");
+        return 1;
+    }
+
 
     // -------------------------
     // 4. Vault SHM Init
