@@ -4061,8 +4061,8 @@ dependencies = [
 ]
 
 [[package]]
-name = "yai-mind"
-version = "2.5.0"
+name = "yai"
+version = "0.0.1"
 dependencies = [
  "anyhow",
  "blake3",
@@ -4089,6 +4089,7 @@ dependencies = [
  "tracing-subscriber",
  "tract-onnx",
  "usearch",
+ "yx-protocol",
 ]
 
 [[package]]
@@ -4136,6 +4137,14 @@ dependencies = [
  "quote",
  "syn 2.0.114",
  "synstructure",
+]
+
+[[package]]
+name = "yx-protocol"
+version = "0.1.0"
+dependencies = [
+ "serde",
+ "serde_json",
 ]
 
 [[package]]

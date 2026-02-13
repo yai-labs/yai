@@ -80,6 +80,7 @@ fn local_push_vs_power_iteration_small_graph() -> Result<()> {
         ("b", "d", 1.0),
         ("c", "d", 1.0),
     ]);
+
     let mut p_push = ActivationParams::default();
     p_push.top_k = 10;
     p_push.epsilon = 1e-9;
@@ -109,11 +110,13 @@ fn local_push_vs_power_iteration_small_graph() -> Result<()> {
         }
     }
     keys.sort();
+
     for k in keys {
         let a = map_push.get(&k).copied().unwrap_or(0.0);
         let b = map_power.get(&k).copied().unwrap_or(0.0);
         l1 += (a - b).abs();
     }
+
     assert!(l1 < 0.1, "L1 too high: {l1}");
     Ok(())
 }
@@ -122,7 +125,9 @@ fn local_push_vs_power_iteration_small_graph() -> Result<()> {
 fn determinism_five_runs_same_commit() -> Result<()> {
     let g = TinyGraph::with_edges(&[("a", "b", 1.0), ("b", "c", 1.0), ("c", "a", 0.3)]);
     let params = ActivationParams::default();
+
     let mut baseline: Option<(String, String, Vec<(String, i64)>)> = None;
+
     for _ in 0..5 {
         let r = run_activation(&g, &seed("a"), &params)?;
         let hits = r
@@ -130,17 +135,16 @@ fn determinism_five_runs_same_commit() -> Result<()> {
             .iter()
             .map(|h| (h.node.clone(), h.score_q))
             .collect::<Vec<_>>();
+
         if let Some((hash, run_id, base_hits)) = &baseline {
             assert_eq!(hash, &r.commit_hash);
             assert_eq!(run_id, &r.run_id);
-            assert_eq!(
-                base_hits,
-                &hits
-            );
+            assert_eq!(base_hits, &hits);
         } else {
             baseline = Some((r.commit_hash.clone(), r.run_id.clone(), hits));
         }
     }
+
     Ok(())
 }
 
@@ -150,6 +154,7 @@ fn bounds_max_push_fail() {
     let mut params = ActivationParams::default();
     params.max_push = 1;
     params.epsilon = 1e-18;
+
     let err = run_activation(&g, &seed("a"), &params).expect_err("expected bounded failure");
     assert!(err.to_string().contains("max_push"));
 }
@@ -162,9 +167,11 @@ fn bounds_max_nodes_fail() {
         ("a", "d", 1.0),
         ("a", "e", 1.0),
     ]);
+
     let mut params = ActivationParams::default();
     params.max_nodes = 2;
     params.epsilon = 1e-18;
+
     let err = run_activation(&g, &seed("a"), &params).expect_err("expected bounded failure");
     assert!(err.to_string().contains("max_nodes"));
 }
@@ -174,6 +181,7 @@ fn trace_store_roundtrip() -> Result<()> {
     let g = TinyGraph::with_edges(&[("a", "b", 1.0)]);
     let params = ActivationParams::default();
     let result = run_activation(&g, &seed("a"), &params)?;
+
     let trace = super::trace::ActivationTrace {
         run_id: result.run_id.clone(),
         created_at_unix: 1,
@@ -184,6 +192,7 @@ fn trace_store_roundtrip() -> Result<()> {
         topk: result.hits.clone(),
         stats: result.stats.clone(),
     };
+
     let ws_id = format!(
         "activation_store_{}",
         SystemTime::now()
@@ -191,7 +200,9 @@ fn trace_store_roundtrip() -> Result<()> {
             .unwrap_or_default()
             .as_millis()
     );
+
     let store = super::store::ActivationTraceStore::open(&ws_id)?;
+
     let meta = super::store::ActivationRunMeta {
         run_id: trace.run_id.clone(),
         ws_id: ws_id.clone(),
@@ -204,6 +215,7 @@ fn trace_store_roundtrip() -> Result<()> {
         seeds: trace.seeds.clone(),
         stats: trace.stats.clone(),
     };
+
     let results = trace
         .topk
         .iter()
@@ -214,11 +226,14 @@ fn trace_store_roundtrip() -> Result<()> {
             score_q: hit.score_q,
         })
         .collect::<Vec<_>>();
+
     store.record_run(&meta, &results, None)?;
     let loaded = store.get_run(&result.run_id)?;
     assert!(loaded.is_some());
+
     let list = store.list_runs(10, 0)?;
     assert!(!list.is_empty());
+
     Ok(())
 }
 
@@ -235,7 +250,7 @@ fn activation_run_id_is_deterministic() -> Result<()> {
 
 #[test]
 fn activation_does_not_mutate_semantic_graph() -> Result<()> {
-    use crate::cognition::memory::graph::facade::{GraphFacade, GraphNode, GraphEdge, GraphScope};
+    use crate::cognition::memory::graph::facade::{GraphEdge, GraphFacade, GraphNode, GraphScope};
     use serde_json::Value;
 
     let ws_id = format!(
@@ -252,7 +267,7 @@ fn activation_does_not_mutate_semantic_graph() -> Result<()> {
         GraphNode {
             id: "node:test:a".to_string(),
             kind: "semantic".to_string(),
-            meta: serde_json::json!({\"name\": \"a\"}),
+            meta: serde_json::json!({"name": "a"}),
             last_seen: 1,
         },
     )?;
@@ -261,7 +276,7 @@ fn activation_does_not_mutate_semantic_graph() -> Result<()> {
         GraphNode {
             id: "node:test:b".to_string(),
             kind: "semantic".to_string(),
-            meta: serde_json::json!({\"name\": \"b\"}),
+            meta: serde_json::json!({"name": "b"}),
             last_seen: 2,
         },
     )?;
@@ -279,21 +294,26 @@ fn activation_does_not_mutate_semantic_graph() -> Result<()> {
 
     let before_fp = GraphFacade::graph_fingerprint(scope.clone())?;
     let before_stats = GraphFacade::stats(scope.clone())?;
+
     let mut params = ActivationParams::default();
     params.top_k = 4;
     let seeds = vec![("node:test:a".to_string(), 1.0)];
+
     let _commit = GraphFacade::activate_and_commit_with_trace(scope.clone(), &seeds, params, true)?;
+
     let after_fp = GraphFacade::graph_fingerprint(scope.clone())?;
     let after_stats = GraphFacade::stats(scope)?;
+
     assert_eq!(before_fp, after_fp);
     assert_eq!(before_stats.nodes, after_stats.nodes);
     assert_eq!(before_stats.edges, after_stats.edges);
+
     Ok(())
 }
 
 #[test]
 fn activation_trace_is_prunable_without_semantic_loss() -> Result<()> {
-    use crate::cognition::memory::graph::facade::{GraphFacade, GraphNode, GraphEdge, GraphScope};
+    use crate::cognition::memory::graph::facade::{GraphEdge, GraphFacade, GraphNode, GraphScope};
     use serde_json::Value;
 
     let ws_id = format!(
@@ -310,7 +330,7 @@ fn activation_trace_is_prunable_without_semantic_loss() -> Result<()> {
         GraphNode {
             id: "node:test:a".to_string(),
             kind: "semantic".to_string(),
-            meta: serde_json::json!({\"name\": \"a\"}),
+            meta: serde_json::json!({"name": "a"}),
             last_seen: 1,
         },
     )?;
@@ -319,7 +339,7 @@ fn activation_trace_is_prunable_without_semantic_loss() -> Result<()> {
         GraphNode {
             id: "node:test:b".to_string(),
             kind: "semantic".to_string(),
-            meta: serde_json::json!({\"name\": \"b\"}),
+            meta: serde_json::json!({"name": "b"}),
             last_seen: 2,
         },
     )?;
@@ -336,9 +356,11 @@ fn activation_trace_is_prunable_without_semantic_loss() -> Result<()> {
     )?;
 
     let before_fp = GraphFacade::graph_fingerprint(scope.clone())?;
+
     let mut params = ActivationParams::default();
     params.top_k = 4;
-    let seeds = vec![(\"node:test:a\".to_string(), 1.0)];
+
+    let seeds = vec![("node:test:a".to_string(), 1.0)];
     let _commit = GraphFacade::activate_and_commit_with_trace(scope.clone(), &seeds, params, true)?;
 
     let store = super::store::ActivationTraceStore::open(&ws_id)?;
@@ -347,6 +369,7 @@ fn activation_trace_is_prunable_without_semantic_loss() -> Result<()> {
 
     let after_fp = GraphFacade::graph_fingerprint(scope)?;
     assert_eq!(before_fp, after_fp);
+
     Ok(())
 }
 
@@ -359,8 +382,10 @@ fn workspace_isolation_commit_differs() -> Result<()> {
         .duration_since(UNIX_EPOCH)
         .unwrap_or_default()
         .as_millis();
+
     let scope_a = GraphScope::Workspace(format!("activation_ws_a_{now}"));
     let scope_b = GraphScope::Workspace(format!("activation_ws_b_{now}"));
+
     for scope in [scope_a.clone(), scope_b.clone()] {
         GraphFacade::put_node(
             scope.clone(),
@@ -395,8 +420,10 @@ fn workspace_isolation_commit_differs() -> Result<()> {
 
     let params = ActivationParams::default();
     let seeds = vec![("node:test:a".to_string(), 1.0)];
+
     let a = GraphFacade::activate_and_commit(scope_a, &seeds, params.clone())?;
     let b = GraphFacade::activate_and_commit(scope_b, &seeds, params)?;
+
     assert_ne!(a.result.commit_hash, b.result.commit_hash);
     assert_eq!(
         a.result
@@ -410,6 +437,7 @@ fn workspace_isolation_commit_differs() -> Result<()> {
             .map(|h| (h.node.clone(), h.score_q))
             .collect::<Vec<_>>()
     );
+
     Ok(())
 }
 

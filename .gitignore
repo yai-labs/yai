@@ -460,3 +460,7 @@ benchmark_results/
 
 bin/
 # END mind/.gitignore
+
+# local data
+Data/db/
+*.db

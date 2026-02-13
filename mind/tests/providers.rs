@@ -1,6 +1,6 @@
 #![cfg(feature = "legacy-providers")]
 
-use yai_mind::providers::{build_provider, ProviderConfig, ProviderKind};
+use yai::providers::{build_provider, ProviderConfig, ProviderKind};
 
 #[test]
 fn mock_embedding_deterministic() {

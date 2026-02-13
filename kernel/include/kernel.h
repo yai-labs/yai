@@ -2,78 +2,87 @@
 #define KERNEL_H
 
 #include <stdint.h>
-#include "yai_vault.h"   // <--- AGGIUNGI QUESTO: Contiene yai_vault_t e yai_state_t
+#include <stddef.h>
+#include <stdbool.h>
+
+#include "yai_vault.h"
 #include "yai_kernel.h"
+#include "yai_events.h"
 
-// Event Categories (RFC-YAI-007)
-typedef enum {
-    CAT_RUNTIME = 0, CAT_COGNITIVE, CAT_DOMAIN, CAT_MEMORY, CAT_CAPABILITY
-} yai_event_category_t;
+// -------------------------
+// Phase-1 Gate error codes (stable)
+// -------------------------
+#define YAI_E_OK                0
+#define YAI_E_BAD_ARG          -1
+#define YAI_E_BAD_VERSION      -2
+#define YAI_E_MISSING_WS       -3
+#define YAI_E_WS_MISMATCH      -4
+#define YAI_E_MISSING_TYPE     -5
+#define YAI_E_TYPE_NOT_ALLOWED -6
+#define YAI_E_PRIV_REQUIRED    -7
+#define YAI_E_ROLE_REQUIRED    -8
 
-// Event Types - La Tassonomia Chiusa
-typedef enum {
-    // Runtime
-    EV_RUN_PROVISIONED = 100, EV_CONTEXT_RESOLVED, EV_VALIDATION_PASSED, EV_RUN_TERMINATED,
-    EV_STATE_TRANSITION = 110, EV_TRANSITION_REJECTED = 111,
-    // Cognitive
-    EV_INFERENCE_STEP = 200, EV_DECISION_PROPOSED,
-    // Memory
-    EV_MEMORY_PROMOTED = 300, EV_MEMORY_EXPIRED, EV_MEMORY_INVALIDATED,
-    // Capability
-    EV_CAP_REQUESTED = 400, EV_CAP_GRANTED, EV_CAP_REVOKED
-} yai_event_type_t;
+// New: handshake enforcement (Phase-1 strict)
+#define YAI_E_HANDSHAKE_REQUIRED -9
 
-// Memory Status (Da lifecycle.py)
-typedef enum {
-    MEM_ACTIVE = 0,
-    MEM_EXPIRED,
-    MEM_DEPRECATED,
-    MEM_SUPERSEDED,
-    MEM_INVALIDATED
-} yai_mem_status_t;
+// -------------------------
+// Error model (rpc.v1)
+// -------------------------
+#define YAI_RPC_V1 1
 
-typedef struct {
-    uint32_t memory_id;
-    yai_mem_status_t status;
-    uint32_t replaced_by_id; // Per SUPERSEDED
-} yai_memory_state_t;
+// Max JSON error response length (keep small; detail can be truncated)
+#ifndef YAI_RPC_ERRBUF
+#define YAI_RPC_ERRBUF 512
+#endif
 
-int yai_memory_transition(yai_memory_state_t *mem, yai_mem_status_t new_status);
+// Kernel error response (json-line) writer
+// detail_json MUST be a valid JSON value (object/string/null), not a raw string.
+// Example: "{}" or "\"extra info\"" or "null"
+int yai_rpc_write_error_v1(
+    int fd,
+    const char *ws_id,
+    const char *trace_id,
+    const char *code,
+    const char *message,
+    const char *detail_json
+);
 
-// Profile Configuration (Interfacce collegate al Kernel)
-typedef enum {
-    PROFILE_MINIMAL = 0, // Solo Kernel + CLI
-    PROFILE_STUDIO,      // IDE Native + Agents
-    PROFILE_EDGE,        // Embedded / Remote
-    PROFILE_FULL         // Engine + Consciousness + Observability
-} yai_profile_t;
+// -------------------------
+// Event discipline (kernel events)
+// -------------------------
+#ifndef YAI_KERNEL_EVENT_SCHEMA_ID
+#define YAI_KERNEL_EVENT_SCHEMA_ID "yai.kernel.event.v1"
+#endif
 
-typedef struct {
-    yai_profile_t type;
-    uint32_t max_sessions;    // es. 1 per Edge, 64 per Studio
-    uint8_t observability_lv; // 0: None, 1: Audit, 2: Full Trace
-    uint8_t allow_io_stream;  // Abilita/Disabilita streaming del disco
-} yai_profile_config_t;
+#ifndef YAI_KERNEL_EVENT_VERSION
+#define YAI_KERNEL_EVENT_VERSION 1
+#endif
 
-void yai_log_static(yai_event_type_t type, const char *msg);
+// Minimal event writer: always includes schema_id + event_version.
+// msg is human-readable; data_json must be valid JSON (object/string/null).
+// New (disciplinato, JSON event)
+void yai_log_static(
+    yai_event_type_t type,
+    const char *ws_id,
+    const char *trace_id,
+    const char *level,
+    const char *msg,
+    const char *data_json
+);
 
-// La struttura dell'evento atomico (A-003)
-typedef struct {
-    uint64_t timestamp;
-    yai_event_type_t type;
-    uint32_t run_id;
-    char payload_summary[64]; // Sgrassato: solo l'essenziale per il kernel
-} yai_event_t;
+// Legacy shim (per compatibilità interna durante migrazione Phase-1)
+static inline void yai_log_static_legacy(yai_event_type_t type, const char *msg) {
+    yai_log_static(type, "", "", "info", msg, "null");
+}
 
-// --- State Machine Logic (Ex state_machine.py) ---
 
-// Transizione dello stato globale del Kernel nel Vault
-// Ritorna 0 se la transizione è valida secondo le regole YAI
-int yai_kernel_transition(yai_vault_t *vault, yai_state_t new_state);
-
-// Scansione del workspace per integrità (Ex project_tree.py)
-void yai_scan_workspace(const char *path, int depth);
-
+// Envelope validator (rpc.v1, jsonl frame)
+int yai_validate_envelope_v1(
+    const char *line,
+    const char *expected_ws,     // NULL / "" se non “attached”
+    char *out_request_type,
+    size_t req_cap
+);
 
 
 #endif

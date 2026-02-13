@@ -117,10 +117,7 @@ pub fn run_activation(
     ranked.sort_by(|a, b| {
         b.2.cmp(&a.2)
             .then_with(|| a.0.cmp(&b.0))
-            .then_with(|| {
-                b.1.partial_cmp(&a.1)
-                    .unwrap_or(Ordering::Equal)
-            })
+            .then_with(|| b.1.partial_cmp(&a.1).unwrap_or(Ordering::Equal))
     });
     ranked.truncate(params.top_k);
 

@@ -1,7 +1,7 @@
 use crate::cognition::memory::graph::activation::api::{
-    canonicalize_seeds, run_activation, ActivationGraph, ActivationMethod, ActivationParams,
-    hash_params, hash_seeds, ActivationResult as EngineActivationResult, ActivationSeed,
-    ActivationStats, NodeId,
+    canonicalize_seeds, hash_params, hash_seeds, run_activation, ActivationGraph, ActivationMethod,
+    ActivationParams, ActivationResult as EngineActivationResult, ActivationSeed, ActivationStats,
+    NodeId,
 };
 use crate::cognition::memory::graph::activation::store::{
     ActivationResultRow, ActivationRunMeta, ActivationTraceStore,
@@ -724,7 +724,8 @@ impl SemanticSnapshotGraph {
                 last_seen: 0,
             })
             .collect::<Vec<_>>();
-        let fingerprint = hash_graph_snapshot(&ws_id, &nodes_for_fingerprint, &edges_for_fingerprint);
+        let fingerprint =
+            hash_graph_snapshot(&ws_id, &nodes_for_fingerprint, &edges_for_fingerprint);
         Self {
             neighbors,
             norms,

@@ -360,8 +360,7 @@ impl ActivationTraceStore {
                  ORDER BY created_at DESC, run_id ASC
                  LIMIT -1 OFFSET ?2",
             )?;
-            let rows =
-                stmt.query_map(params![self.ws_id, keep_last as i64], |row| row.get(0))?;
+            let rows = stmt.query_map(params![self.ws_id, keep_last as i64], |row| row.get(0))?;
             let mut out = Vec::new();
             for row in rows {
                 out.push(row?);
@@ -497,14 +496,20 @@ fn load_run_results(conn: &Connection, run_id: &str) -> Result<Vec<ActivationRes
     Ok(out)
 }
 
-fn ensure_meta_matches(existing: &ActivationRunMetaRow, incoming: &ActivationRunMeta) -> Result<()> {
+fn ensure_meta_matches(
+    existing: &ActivationRunMetaRow,
+    incoming: &ActivationRunMeta,
+) -> Result<()> {
     if existing.ws_id != incoming.ws_id
         || existing.graph_fingerprint != incoming.graph_fingerprint
         || existing.params_hash != incoming.params_hash
         || existing.seeds_hash != incoming.seeds_hash
         || existing.commit_hash != incoming.commit_hash
     {
-        bail!("activation run metadata mismatch for run_id={}", incoming.run_id);
+        bail!(
+            "activation run metadata mismatch for run_id={}",
+            incoming.run_id
+        );
     }
 
     let params_json = serde_json::to_string(&incoming.params)?;
@@ -514,12 +519,18 @@ fn ensure_meta_matches(existing: &ActivationRunMetaRow, incoming: &ActivationRun
         || existing.seeds_json != seeds_json
         || existing.stats_json != stats_json
     {
-        bail!("activation run payload mismatch for run_id={}", incoming.run_id);
+        bail!(
+            "activation run payload mismatch for run_id={}",
+            incoming.run_id
+        );
     }
     Ok(())
 }
 
-fn ensure_results_match(existing: &[ActivationResultRow], incoming: &[ActivationResultRow]) -> Result<()> {
+fn ensure_results_match(
+    existing: &[ActivationResultRow],
+    incoming: &[ActivationResultRow],
+) -> Result<()> {
     if existing.len() != incoming.len() {
         bail!("activation run results length mismatch");
     }
@@ -533,18 +544,23 @@ fn ensure_results_match(existing: &[ActivationResultRow], incoming: &[Activation
     Ok(())
 }
 
-fn build_trace(meta: ActivationRunMetaRow, results: Vec<ActivationResultRow>) -> Result<ActivationTrace> {
+fn build_trace(
+    meta: ActivationRunMetaRow,
+    results: Vec<ActivationResultRow>,
+) -> Result<ActivationTrace> {
     let params: ActivationParams = serde_json::from_str(&meta.params_json)?;
     let seeds: Vec<ActivationSeed> = serde_json::from_str(&meta.seeds_json)?;
     let stats: ActivationStats = serde_json::from_str(&meta.stats_json)?;
     let scale = params.quantize_scale as f64;
     let hits = results
         .into_iter()
-        .map(|row| crate::cognition::memory::graph::activation::api::ActivationHit {
-            node: row.node_id,
-            score_q: row.score_q,
-            score: row.score_q as f64 / scale,
-        })
+        .map(
+            |row| crate::cognition::memory::graph::activation::api::ActivationHit {
+                node: row.node_id,
+                score_q: row.score_q,
+                score: row.score_q as f64 / scale,
+            },
+        )
         .collect();
     Ok(ActivationTrace {
         run_id: meta.run_id,

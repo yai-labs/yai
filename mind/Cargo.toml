@@ -1,75 +1,48 @@
 [package]
 name = "yai-mind"
-version = "2.5.0"
+version = "0.1.0"
 edition = "2021"
 authors = ["Francesco Maiomascio"]
-description = "YAI Core API - High Performance Rust Bridge"
+description = "YAI Cognitive Core (Mind Layer - L3)"
 
 [dependencies]
-# Il runtime asincrono standard per performance industriali
-tokio = { version = "1.36", features = ["full"] }
 anyhow = "1"
-clap = { version = "4", features = ["derive"] }
-sysinfo = "0.30"
-toml = "0.8"
 
-# WebSocket ad alta velocità
-tokio-tungstenite = "0.21"
-futures-util = "0.3"
-
-# Serializzazione/Deserializzazione (Il sostituto di JSON in Python)
+# Serializzazione
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
-reqwest = { version = "0.11", features = ["blocking", "json", "rustls-tls"] }
+
+# Storage
 rusqlite = { version = "0.31", features = ["bundled"] }
 
-# Gestione dei flussi di byte per il Kernel
-bytes = "1.5"
-
-# Integrazione con il C del Kernel (FFI)
-libc = "0.2"
-
-# Logging chirurgico
-tracing = "0.1"
-tracing-subscriber = "0.3"
+# Graph / reasoning
 petgraph = "0.6"
+
+# Vector search
 usearch = "2"
+
+# Hashing (determinism / verify)
 blake3 = "1"
+
+# Optional embeddings backends
+tokenizers = { version = "0.15", optional = true }
+tract-onnx = { version = "0.20", optional = true }
+candle-core = { version = "0.5", optional = true }
+candle-nn = { version = "0.5", optional = true }
+candle-transformers = { version = "0.5", optional = true }
 
 [features]
 default = ["embeddings-onnx"]
+
 embeddings-onnx = ["tract-onnx", "tokenizers"]
-embeddings-candle = ["candle-core", "candle-nn", "candle-transformers", "tokenizers"]
+embeddings-candle = [
+    "candle-core",
+    "candle-nn",
+    "candle-transformers",
+    "tokenizers"
+]
+
 legacy-providers = []
-
-[dependencies.candle-core]
-version = "0.5"
-optional = true
-
-[dependencies.candle-nn]
-version = "0.5"
-optional = true
-
-[dependencies.candle-transformers]
-version = "0.5"
-optional = true
-
-[dependencies.tokenizers]
-version = "0.15"
-optional = true
-
-[dependencies.tract-onnx]
-version = "0.20"
-optional = true
-
-[build-dependencies]
-# Necessario per linkare correttamente i file .o del Kernel
-cc = "1.0"
 
 [dev-dependencies]
 memoffset = "0.9"
-
-
-[[bin]]
-name = "yai"
-path = "src/main.rs"

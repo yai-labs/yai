@@ -1,10 +1,13 @@
-#ifndef YAI_RUNTIME_H
-#define YAI_RUNTIME_H
+// kernel/include/yai_kernel.h  (pulito: niente trailing dot, guard coerente)
+#ifndef YAI_KERNEL_H
+#define YAI_KERNEL_H
 
 #include "yai_vault.h"
+#include <stdint.h>
+#include <stdbool.h>
 #include <time.h>
 
-// Stati Canonici RFC-YAI-005 (Tradotti da Python)
+// Stati Canonici (legacy / RFC tradotti). In Phase-1 non li tocchiamo.
 typedef enum {
     YAI_STATE_CREATED = 0,
     YAI_STATE_PROVISIONED,
@@ -17,19 +20,16 @@ typedef enum {
     YAI_STATE_TERMINATED
 } yai_run_state_t;
 
-// Capability Grant (Tradotto da enforcement.py)
 typedef struct {
     uint32_t capability_id;
     uint32_t run_id;
     time_t expires_at;
     bool revoked;
-    uint32_t scope_mask; // Usiamo i bit per gli scope, non le stringhe!
+    uint32_t scope_mask;
 } yai_grant_t;
 
-// RFC-YAI-003: Project Tree Scanner
 void yai_scan_workspace(const char *path, int depth);
-
-// FSM transition
-int yai_runtime_transition(yai_vault_t *vault, yai_run_state_t to_state);
+// Kernel FSM transition (vault->status using yai_state_t)
+int yai_kernel_transition(yai_vault_t *vault, yai_state_t to_state);
 
 #endif

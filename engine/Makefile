@@ -1,63 +1,90 @@
-# Progetto: YAI-ENGINE Core
-# Target: Eseguibile binario C-only (no Python)
+# ===============================
+# YAI Engine Build System (L2)
+# ===============================
 
-CC = gcc
+CC := gcc
+
+# ---- Artifact root ----
 ART_ROOT ?= $(HOME)/.yai/artifacts/yai-core
+
 OUT_BUILD_DIR ?=
 OUT_BIN_DIR ?=
-BUILD_DIR ?= $(if $(OUT_BUILD_DIR),$(OUT_BUILD_DIR),$(ART_ROOT)/build/engine)
-BIN_DIR ?= $(if $(OUT_BIN_DIR),$(OUT_BIN_DIR),$(ART_ROOT)/bin)
-LOG_DIR ?= $(ART_ROOT)/logs
-TMP_DIR ?= $(ART_ROOT)/tmp
-CACHE_DIR ?= $(ART_ROOT)/cache
 
-CFLAGS = -Wall -Wextra -O2 -I./include -I../kernel/include -I../law/specs/vault -I../law/specs/protocol -MMD -MP
-LDFLAGS = -lpthread
+BUILD_DIR := $(if $(OUT_BUILD_DIR),$(OUT_BUILD_DIR),$(ART_ROOT)/build/engine)
+BIN_DIR   := $(if $(OUT_BIN_DIR),$(OUT_BIN_DIR),$(ART_ROOT)/bin)
 
-# Directory
-SRC_DIR = src
-TARGET = $(BIN_DIR)/yai-engine
-TEST_CORTEX = $(BUILD_DIR)/cortex_harness
+LOG_DIR   := $(ART_ROOT)/logs
+TMP_DIR   := $(ART_ROOT)/tmp
+CACHE_DIR := $(ART_ROOT)/cache
 
-# Sorgenti e Oggetti
-SRCS = $(wildcard $(SRC_DIR)/*.c)
-OBJS = $(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
+# ---- ABI + Protocol source of truth ----
+VAULT_ABI_SRC := ../law/specs/vault/yai_vault_abi.h
+PROTOCOL_DIR  := ../law/specs/protocol
 
-# Regola Principale
-all: dirs $(TARGET)
+# ---- Compiler flags ----
+CFLAGS := -Wall -Wextra -O2 -MMD -MP \
+          -I./include \
+          -I../kernel/include \
+          -I../law/specs/vault \
+          -I$(PROTOCOL_DIR)
 
-# Creazione cartelle
+LDFLAGS := -lpthread
+
+# ---- Sources ----
+SRC_DIR := src
+SRCS := $(wildcard $(SRC_DIR)/*.c)
+OBJS := $(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
+
+TARGET := $(BIN_DIR)/yai-engine
+TEST_CORTEX := $(BUILD_DIR)/cortex_harness
+
+# ---- Phony ----
+.PHONY: all clean purge dirs debug test-cortex abi
+
+# ===============================
+# Main targets
+# ===============================
+
+all: abi dirs $(TARGET)
+
+# ---- ABI guard ----
+abi:
+	@test -f $(VAULT_ABI_SRC) || \
+	 (echo "ERROR: Missing yai_vault_abi.h. Run scripts/gen-vault-abi"; exit 1)
+
+# ---- Directories ----
 dirs:
 	@mkdir -p $(BUILD_DIR) $(BIN_DIR) $(LOG_DIR) $(TMP_DIR) $(CACHE_DIR)
 
-# Link finale
+# ---- Link ----
 $(TARGET): $(OBJS)
 	@mkdir -p $(dir $@)
-	$(CC) $(OBJS) -o $(TARGET) $(LDFLAGS)
+	$(CC) $(OBJS) -o $@ $(LDFLAGS)
 	@echo "--- [YAI-ENGINE] Build Complete ---"
 
-# Compilazione singoli file .c
+# ---- Compile ----
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c | dirs
+	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-test-cortex: dirs $(TEST_CORTEX)
+# ---- Cortex test ----
+test-cortex: abi dirs $(TEST_CORTEX)
 	@$(TEST_CORTEX)
 
 $(TEST_CORTEX): tests/cortex_harness.c src/engine_cortex.c | dirs
 	$(CC) $(CFLAGS) tests/cortex_harness.c src/engine_cortex.c -o $(TEST_CORTEX)
 
-# Pulizia
-clean:
-	rm -rf $(BUILD_DIR) $(BIN_DIR)
-	@echo "--- [YAI-ENGINE] Cleaned ---"
-
-purge: clean
-	rm -rf $(LOG_DIR) $(TMP_DIR) $(CACHE_DIR)
-
-# Debug mode
+# ---- Debug ----
 debug: CFLAGS += -g -DDEBUG
 debug: all
 
-.PHONY: all clean purge dirs debug test-cortex
+# ---- Clean ----
+clean:
+	rm -rf $(BUILD_DIR)
+	@echo "--- [YAI-ENGINE] Cleaned Build ---"
 
+purge: clean
+	rm -rf $(BIN_DIR) $(LOG_DIR) $(TMP_DIR) $(CACHE_DIR)
+
+# Auto deps
 -include $(OBJS:.o=.d)

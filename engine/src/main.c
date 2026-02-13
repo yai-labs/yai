@@ -1,5 +1,14 @@
+// engine/src/main.c (Phase-2: Engine C aligned to Kernel RPC v1 + SHM vault)
+//
+// NOTE:
+// - Engine MUST NOT drive kernel-owned vault->status transitions (Kernel FSM owns status).
+// - Engine may write response_buffer/last_result/last_error, and may set authority_lock ONLY on panic.
+// - Kernel control-plane is via ~/.yai/run/<ws>/control.sock (RPC v1 JSONL).
+//
 #include "../include/engine_bridge.h"
 #include "../include/engine_cortex.h"
+#include "../include/transport_client.h"
+
 #include <stdio.h>
 #include <signal.h>
 #include <unistd.h>
@@ -7,19 +16,31 @@
 #include <stdlib.h>
 #include <errno.h>
 
-void handle_panic(int sig) {
-    printf("\n[YAI-C] Signal %d: Emergency Lock.\n", sig);
+static const char *safe_cstr(const char *s) { return (s && s[0]) ? s : ""; }
+
+// -------------------------
+// Panic handler: emergency lock (best-effort)
+// -------------------------
+static void handle_panic(int sig) {
+    fprintf(stderr, "\n[YAI-ENGINE] Signal %d: Emergency Lock.\n", sig);
+
     Vault* v = yai_get_vault();
     {
         char addr_buf[32];
         snprintf(addr_buf, sizeof(addr_buf), "%p", (void*)v);
         setenv("YAI_VAULT_ADDR", addr_buf, 1);
     }
+
     if (v) {
-        v->status = YAI_STATE_ERROR;
+        // Best-effort: lock authority + mark error
+        // (Kernel may observe and react; Engine does not attempt to run FSM here.)
         v->authority_lock = true;
+        v->status = YAI_STATE_ERROR;
+        strncpy(v->last_error, "engine panic: emergency lock", 255);
+        v->last_error[255] = '\0';
     }
-    exit(sig);
+
+    _exit(128 + sig);
 }
 
 typedef struct {
@@ -31,65 +52,88 @@ typedef struct {
     Vault* control;
 } VaultCluster;
 
+// -------------------------
+// Integrity guard (Phase-2: soft throttle)
+// -------------------------
 static void validate_vault_integrity(VaultCluster *c) {
     if (!c || !c->core || !c->brain) return;
+
+    // If energy exceeded: throttle brain (authority lock)
     if (c->core->energy_consumed > c->core->energy_quota) {
-        printf("[SECURITY] Energy Quota Exceeded. Throttling Brain...\n");
+        fprintf(stderr, "[SECURITY] Energy quota exceeded. Throttling brain...\n");
         c->brain->authority_lock = true;
     }
 }
 
+// -------------------------
+// Command processing (Phase-2 disciplined)
+// - DO NOT unilaterally move vault->status across kernel states.
+// - Write response_buffer + last_result + last_error.
+// - If external class and authority_lock => deny.
+// -------------------------
 static void process_command(Vault* v) {
     if (!v) return;
 
     v->last_result = 0;
     v->response_buffer[0] = '\0';
+    v->last_error[0] = '\0';
 
-    uint32_t cmd_class = yai_command_class_for((yai_command_id_t)v->last_command_id);
-    if (cmd_class & YAI_CMD_CLASS_EXTERNAL) {
+    uint32_t cmd_id = v->last_command_id;
+    uint32_t cmd_class = yai_command_class_for((yai_command_id_t)cmd_id);
+
+    // External effect boundary: deny unless authority is present.
+    // (Phase-1/2: authority modeled as authority_lock == false)
+    if ((cmd_class & YAI_CMD_CLASS_EXTERNAL) != 0u) {
         if (v->authority_lock) {
-            snprintf(v->last_error, sizeof(v->last_error), "External effect denied: authority required");
+            snprintf(v->last_error, sizeof(v->last_error),
+                     "External effect denied: authority required (cmd=%u)", cmd_id);
             v->last_result = 0;
-            v->status = YAI_STATE_SUSPENDED;
+            // do not force SUSPENDED here; Kernel owns state transitions.
             return;
         }
+
+        // Provide structured “effect intent” as text for now (Phase-2 minimal)
         snprintf(
             v->response_buffer,
             sizeof(v->response_buffer),
-            "effect=external;class=%s;target=unspecified;irreversible=%s;authority=ok;intent=unspecified;risk=unspecified;mitigation=none",
+            "effect=external;class=%s;target=unspecified;irreversible=%s;authority=ok",
             (cmd_class & YAI_CMD_CLASS_IRREVERSIBLE) ? "irreversible" : "external",
             (cmd_class & YAI_CMD_CLASS_IRREVERSIBLE) ? "true" : "false"
         );
+        v->last_result = 1;
+        return;
     }
 
-    v->status = YAI_STATE_RUNNING;
-    switch (v->last_command_id) {
+    switch (cmd_id) {
         case YAI_CMD_PING:
             snprintf(v->response_buffer, sizeof(v->response_buffer), "PONG");
             v->last_result = 1;
-            v->status = YAI_STATE_READY;
             break;
+
         case YAI_CMD_NOOP:
             snprintf(v->response_buffer, sizeof(v->response_buffer), "OK");
             v->last_result = 1;
-            v->status = YAI_STATE_READY;
             break;
+
         case YAI_CMD_RECONFIGURE:
-            if (v->status != YAI_STATE_SUSPENDED) {
-                snprintf(v->last_error, sizeof(v->last_error), "Reconfigure requires SUSPENDED state");
+            // Phase-2: do not try to enforce state machine here.
+            // If Kernel wants SUSPENDED before reconfigure, it will gate it.
+            // Engine just performs the reconfigure action if allowed (authority must be present).
+            if (v->authority_lock) {
+                snprintf(v->last_error, sizeof(v->last_error),
+                         "Reconfigure denied: authority required");
                 v->last_result = 0;
-                v->status = YAI_STATE_SUSPENDED;
                 break;
             }
-            v->authority_lock = false;
-            v->status = YAI_STATE_HALT;
+            // “reconfigure” here is symbolic; you can wire actual hooks later.
             snprintf(v->response_buffer, sizeof(v->response_buffer), "RECONFIGURED");
             v->last_result = 1;
             break;
+
         default:
-            snprintf(v->last_error, sizeof(v->last_error), "Unknown command id: %u", v->last_command_id);
+            snprintf(v->last_error, sizeof(v->last_error),
+                     "Unknown command id: %u", cmd_id);
             v->last_result = 0;
-            v->status = YAI_STATE_ERROR;
             break;
     }
 }
@@ -126,6 +170,7 @@ static float read_env_float(const char* key, float fallback) {
 
 static void apply_cortex_overrides(engine_cortex_config_t* cfg, int* initial_target) {
     if (!cfg) return;
+
     cfg->tick_ms = (uint32_t)read_env_int("YAI_ENGINE_CORTEX_TICK_MS", (int)cfg->tick_ms);
     cfg->ewma_alpha = read_env_float("YAI_ENGINE_CORTEX_EWMA_ALPHA", cfg->ewma_alpha);
     cfg->up_threshold = read_env_float("YAI_ENGINE_CORTEX_UP_THRESHOLD", cfg->up_threshold);
@@ -139,6 +184,7 @@ static void apply_cortex_overrides(engine_cortex_config_t* cfg, int* initial_tar
     cfg->max_target = read_env_int("YAI_ENGINE_CORTEX_MAX_TARGET", cfg->max_target);
     cfg->step_up = read_env_int("YAI_ENGINE_CORTEX_STEP_UP", cfg->step_up);
     cfg->step_down = read_env_int("YAI_ENGINE_CORTEX_STEP_DOWN", cfg->step_down);
+
     if (initial_target) {
         *initial_target = read_env_int("YAI_ENGINE_CORTEX_INITIAL_TARGET", *initial_target);
     }
@@ -147,10 +193,12 @@ static void apply_cortex_overrides(engine_cortex_config_t* cfg, int* initial_tar
 static void emit_cortex_event(const char* ws, const engine_cortex_decision_t* d, int step) {
     const char* kind = d->direction > 0 ? "engine_scale_up" : "engine_scale_down";
     printf(
-        "[YAI_CORTEX_EVENT] {\"type\":\"%s\",\"ws\":\"%s\",\"actor\":\"engine\",\"reason\":\"%s\",\"metrics\":{\"queue_depth\":%d,\"queue_ewma\":%.4f,\"peak_delta\":%.4f},\"recommendation\":{\"prev_target\":%d,\"new_target\":%d,\"step\":%d}}\n",
+        "[YAI_CORTEX_EVENT] {\"type\":\"%s\",\"ws\":\"%s\",\"actor\":\"engine\",\"reason\":\"%s\","
+        "\"metrics\":{\"queue_depth\":%d,\"queue_ewma\":%.4f,\"peak_delta\":%.4f},"
+        "\"recommendation\":{\"prev_target\":%d,\"new_target\":%d,\"step\":%d}}\n",
         kind,
-        ws,
-        d->reason,
+        safe_cstr(ws),
+        safe_cstr(d->reason),
         d->queue_depth,
         d->queue_ewma,
         d->peak_delta,
@@ -161,33 +209,89 @@ static void emit_cortex_event(const char* ws, const engine_cortex_decision_t* d,
     fflush(stdout);
 }
 
+static int engine_rpc_bootstrap(const char *ws_id) {
+    // Optional but very useful: prove RPC path works and kernel accepts handshake.
+    // Phase-2: engine is not operator (arming=false).
+    yai_rpc_client_t c;
+    int rc = yai_rpc_connect(&c, ws_id);
+    if (rc != 0) {
+        fprintf(stderr, "[ENGINE] rpc connect failed (ws=%s, rc=%d)\n", ws_id, rc);
+        return -1;
+    }
+
+    rc = yai_rpc_handshake(&c, "engine-c/phase2");
+    if (rc != 0) {
+        fprintf(stderr, "[ENGINE] rpc handshake failed (ws=%s, rc=%d)\n", ws_id, rc);
+        yai_rpc_close(&c);
+        return -2;
+    }
+
+    // ping sanity
+    char tr[64];
+    yai_make_trace_id(tr);
+
+    char resp[4096];
+    rc = yai_rpc_call(&c, tr, "ping", 0, "user", "null", resp, sizeof(resp));
+    if (rc != 0) {
+        fprintf(stderr, "[ENGINE] rpc ping failed (rc=%d)\n", rc);
+        yai_rpc_close(&c);
+        return -3;
+    }
+
+    fprintf(stderr, "[ENGINE] rpc ping ok: %s", resp);
+    yai_rpc_close(&c);
+    return 0;
+}
+
 int main(int argc, char *argv[]) {
     if (argc < 2) {
         fprintf(stderr, "USAGE: ./yai-engine <workspace_id>\n");
         return 1;
     }
 
+    const char *ws_id = argv[1];
+
     signal(SIGINT, handle_panic);
     signal(SIGTERM, handle_panic);
 
+    // Attach vaults (Phase-2: best-effort multi-channel, fallback base works)
     VaultCluster cluster;
-    cluster.core = yai_bridge_attach(argv[1], "");
-    cluster.stream = yai_bridge_attach(argv[1], "stream");
-    cluster.brain = yai_bridge_attach(argv[1], "brain");
-    cluster.audit = yai_bridge_attach(argv[1], "audit");
-    cluster.cache = yai_bridge_attach(argv[1], "cache");
-    cluster.control = yai_bridge_attach(argv[1], "control");
+    memset(&cluster, 0, sizeof(cluster));
 
-    if (!cluster.core || !cluster.stream || !cluster.brain || !cluster.audit || !cluster.cache || !cluster.control) {
-        fprintf(stderr, "FATAL: Multi-Vault RAID attach failed.\n");
+    cluster.core    = yai_bridge_attach(ws_id, "");
+    cluster.stream  = yai_bridge_attach(ws_id, "stream");
+    cluster.brain   = yai_bridge_attach(ws_id, "brain");
+    cluster.audit   = yai_bridge_attach(ws_id, "audit");
+    cluster.cache   = yai_bridge_attach(ws_id, "cache");
+    cluster.control = yai_bridge_attach(ws_id, "control");
+
+    if (!cluster.core) {
+        fprintf(stderr, "FATAL: vault attach failed (core)\n");
         return 1;
     }
 
-    Vault* v = cluster.core;
-    printf("[YAI-C] Engine Running for WS: %s\n", argv[1]);
-    v->status = YAI_STATE_READY;
-    v->last_processed_seq = 0;
+    // Phase-2: channels are optional; do NOT hard-fail if missing.
+    // You can tighten later when multi-vault is truly required.
+    if (!cluster.stream)  cluster.stream  = cluster.core;
+    if (!cluster.brain)   cluster.brain   = cluster.core;
+    if (!cluster.audit)   cluster.audit   = cluster.core;
+    if (!cluster.cache)   cluster.cache   = cluster.core;
+    if (!cluster.control) cluster.control = cluster.core;
 
+    Vault* v = cluster.core;
+
+    fprintf(stderr, "[YAI-ENGINE] Engine running (ws=%s)\n", ws_id);
+    // DO NOT set v->status here (Kernel owns state machine)
+    // Do not reset last_processed_seq blindly; preserve if kernel/previous run uses it.
+    // But ensure monotonic safety:
+    if (v->last_processed_seq > v->command_seq) {
+        v->last_processed_seq = v->command_seq;
+    }
+
+    // Optional RPC bootstrap sanity (handshake + ping)
+    (void)engine_rpc_bootstrap(ws_id);
+
+    // Cortex init
     engine_cortex_config_t cortex_cfg = engine_cortex_default_config();
     int initial_target = cortex_cfg.min_target;
     apply_cortex_overrides(&cortex_cfg, &initial_target);
@@ -201,24 +305,34 @@ int main(int argc, char *argv[]) {
 
     uint32_t last_seen_seq = v->last_processed_seq;
     uint32_t cortex_elapsed_ms = 0;
+
     const uint32_t loop_sleep_us = 50000;
     const uint32_t loop_tick_ms = loop_sleep_us / 1000;
 
     while (v->status != YAI_STATE_ERROR && v->status != YAI_STATE_HALT) {
         validate_vault_integrity(&cluster);
+
+        // Process new command if queue advanced
         if (v->command_seq != last_seen_seq) {
             last_seen_seq = v->command_seq;
+
+            // Minimal audit trace (optional)
+            // yai_audit_log_transition("cmd_seen", v->status, v->status);
+
             process_command(v);
+
+            // Mark processed
             v->last_processed_seq = last_seen_seq;
         }
 
+        // Cortex tick
         cortex_elapsed_ms += loop_tick_ms;
         if (cortex_elapsed_ms >= cortex_cfg.tick_ms) {
             int qd = engine_get_queue_depth(v);
             engine_cortex_decision_t d = engine_cortex_tick(&cortex_st, &cortex_cfg, qd);
             if (d.triggered) {
                 int step = d.direction > 0 ? cortex_cfg.step_up : cortex_cfg.step_down;
-                emit_cortex_event(argv[1], &d, step);
+                emit_cortex_event(ws_id, &d, step);
             }
             cortex_elapsed_ms = 0;
         }
