@@ -32,6 +32,7 @@ candle-nn = { version = "0.5", optional = true }
 candle-transformers = { version = "0.5", optional = true }
 
 [features]
+legacy_cognition = []
 default = ["embeddings-onnx"]
 
 embeddings-onnx = ["tract-onnx", "tokenizers"]
