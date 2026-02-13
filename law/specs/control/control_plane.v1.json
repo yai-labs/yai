@@ -11,8 +11,10 @@
   "rpc": {
     "transport": "uds",
     "framing": "json_lines",
+    "envelope": "rpc.v1",
     "requests": [
       "ping",
+      "protocol_handshake",
       "status",
       "up",
       "down",
@@ -36,6 +38,7 @@
     ],
     "responses": [
       "pong",
+      "protocol_handshake_ok",
       "status",
       "up_ok",
       "down_ok",
@@ -48,8 +51,8 @@
       "chat_sessions",
       "chat_session",
       "chat_history",
-      "chat_send",
-      "shell_exec",
+      "chat_sent",
+      "shell_exec_result",
       "events_started",
       "event",
       "error"
@@ -63,5 +66,15 @@
       "killpg(SIGKILL)",
       "individual_pids"
     ]
+  },
+  "authority": {
+    "workspace_scoped": true,
+    "lock_required": true,
+    "privileged_gate": {
+      "arming_required": true,
+      "role_required": "operator",
+      "authority_ref": "staged"
+    },
+    "audit_required": true
   }
 }
