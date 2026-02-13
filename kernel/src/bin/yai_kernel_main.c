@@ -61,7 +61,9 @@ int main(int argc, char **argv) {
         yai_scan_workspace(".", 0);
 
         printf("[KERNEL] Awaiting commands from Engine...\n");
-        yai_transport_serve_once();
+        while (1) {
+            yai_transport_serve_once();
+        }
 
         if (vault->energy_quota < 1000) {
             printf("[KERNEL] Energy critical! Triggering memory mitigation.\n");
