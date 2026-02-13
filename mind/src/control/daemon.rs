@@ -1,6 +1,6 @@
 use crate::cli::config::RuntimeConfig;
 use crate::cli::paths;
-use crate::cli::proc::{is_pid_alive, send_signal};
+use crate::cli::proc::{is_pid_alive, now_epoch};
 use crate::cognition::memory::graph::bridge;
 use crate::control::{chat, dsar, events::EventBus, providers, shell, workspace};
 use crate::transport::rpc::protocol::{
@@ -12,9 +12,9 @@ use anyhow::{Context, Result};
 use serde_json::json;
 use std::fs;
 #[cfg(unix)]
-use std::os::unix::process::CommandExt;
 use std::path::PathBuf;
 use std::sync::Arc;
+use std::sync::OnceLock;
 use tokio::io::BufReader;
 use tokio::net::{UnixListener, UnixStream};
 use tokio::sync::{watch, Mutex};
@@ -29,10 +29,24 @@ struct AppServices {
 
 fn daemon_log(ws: &str, message: &str) {
     eprintln!("[yai-daemon ws={ws}] {message}");
+    if let Some(run_dir) = DAEMON_RUN_DIR.get() {
+        let path = run_dir.join(ws).join("daemon.log");
+        if let Ok(mut file) = std::fs::OpenOptions::new()
+            .create(true)
+            .append(true)
+            .open(&path)
+        {
+            use std::io::Write;
+            let _ = writeln!(file, "[yai-daemon ws={ws}] {message}");
+        }
+    }
 }
+
+static DAEMON_RUN_DIR: OnceLock<std::path::PathBuf> = OnceLock::new();
 
 fn request_name(req: &Request) -> &'static str {
     match req {
+        Request::ProtocolHandshake { .. } => "protocol.handshake",
         Request::Ping => "ping",
         Request::Status => "status",
         Request::Up { .. } => "up",
@@ -43,7 +57,7 @@ fn request_name(req: &Request) -> &'static str {
         Request::ProvidersAttach { .. } => "providers.attach",
         Request::ProvidersDetach => "providers.detach",
         Request::ProvidersRevoke { .. } => "providers.revoke",
-        Request::ProvidersStatus => "providers.status",
+        Request:: => "providers.status",
         Request::DsarRequest { .. } => "dsar.request",
         Request::DsarStatus { .. } => "dsar.status",
         Request::DsarExecute { .. } => "dsar.execute",
@@ -54,6 +68,30 @@ fn request_name(req: &Request) -> &'static str {
         Request::ChatSend { .. } => "chat.send",
         Request::ShellExec { .. } => "shell.exec",
         Request::EventsSubscribe => "events.subscribe",
+    }
+}
+
+fn requires_arming(req: &Request) -> bool {
+    match req {
+        // UNARMED se endpoint/model sono vuoti (None o Some(""))
+        // ARMED se endpoint/model hanno contenuto (effetto esterno / scan remoto)
+        Request::ProvidersDiscover { endpoint, model } => {
+            let ep = endpoint.as_deref().unwrap_or("");
+            let mo = model.as_deref().unwrap_or("");
+            !(ep.is_empty() && mo.is_empty())
+        }
+
+        // Mutazioni / effetti esterni
+        Request::Up { .. }
+        | Request::Down { .. }
+        | Request::ShellExec { .. }
+        | Request::ProvidersPair { .. }
+        | Request::ProvidersAttach { .. }
+        | Request::ProvidersDetach
+        | Request::ProvidersRevoke { .. } => true,
+
+        // Read-only
+        _ => false,
     }
 }
 
@@ -95,8 +133,13 @@ fn dsar_compliance() -> ComplianceContext {
 
 pub fn ensure_daemon(cfg: &RuntimeConfig, ws: &str) -> Result<PathBuf> {
     let sock = workspace::control_socket_path(&cfg.run_dir, ws);
-    let lock = workspace::lock_path(&cfg.run_dir, ws);
+    let lock = workspace::daemon_lock_path(&cfg.run_dir, ws);
     let pid_path = workspace::daemon_pid_path(&cfg.run_dir, ws);
+    let wait_iters = 150u32;
+    let wait_ms = 100u64;
+    let lock_pid = fs::read_to_string(&lock)
+        .ok()
+        .and_then(|v| v.trim().parse::<u32>().ok());
 
     let pid = fs::read_to_string(&pid_path)
         .ok()
@@ -104,21 +147,41 @@ pub fn ensure_daemon(cfg: &RuntimeConfig, ws: &str) -> Result<PathBuf> {
 
     if let Some(pid) = pid {
         if is_pid_alive(pid) {
-            // Daemon alive; wait briefly for socket to appear.
-            for _ in 0..10 {
+            // Daemon alive; wait for socket to appear.
+            for _ in 0..wait_iters {
                 if sock.exists() {
                     if std::os::unix::net::UnixStream::connect(&sock).is_ok() {
                         return Ok(sock);
                     }
                 }
-                std::thread::sleep(std::time::Duration::from_millis(100));
+                std::thread::sleep(std::time::Duration::from_millis(wait_ms));
             }
-            // Daemon appears wedged: terminate and recover.
-            let _ = send_signal(pid, "-TERM");
-            std::thread::sleep(std::time::Duration::from_millis(200));
+            anyhow::bail!(
+                "daemon starting for ws {} (pid {}), control socket not ready",
+                ws,
+                pid
+            );
         }
         // stale pidfile
         let _ = fs::remove_file(&pid_path);
+    }
+
+    if let Some(pid) = lock_pid {
+        if is_pid_alive(pid) {
+            for _ in 0..wait_iters {
+                if sock.exists() {
+                    if std::os::unix::net::UnixStream::connect(&sock).is_ok() {
+                        return Ok(sock);
+                    }
+                }
+                std::thread::sleep(std::time::Duration::from_millis(wait_ms));
+            }
+            anyhow::bail!(
+                "daemon starting for ws {} (pid {}), control socket not ready",
+                ws,
+                pid
+            );
+        }
     }
 
     if lock.exists() {
@@ -129,33 +192,13 @@ pub fn ensure_daemon(cfg: &RuntimeConfig, ws: &str) -> Result<PathBuf> {
         if std::os::unix::net::UnixStream::connect(&sock).is_ok() {
             return Ok(sock);
         }
-        let _ = std::fs::remove_file(&sock);
     }
 
-    let exe = std::env::current_exe().context("resolve current executable")?;
-    let mut cmd = std::process::Command::new(exe);
-    cmd.arg("daemon").arg("--ws").arg(ws);
-    #[cfg(unix)]
-    {
-        unsafe {
-            cmd.pre_exec(|| {
-                libc::setsid();
-                Ok(())
-            });
-        }
-    }
-    cmd.spawn().context("spawn yai daemon")?;
-
-    for _ in 0..30 {
-        if sock.exists() {
-            if std::os::unix::net::UnixStream::connect(&sock).is_ok() {
-                return Ok(sock);
-            }
-        }
-        std::thread::sleep(std::time::Duration::from_millis(100));
-    }
-
-    anyhow::bail!("daemon not ready for ws {}", ws);
+    anyhow::bail!(
+        "daemon not running for ws {} (start with: yai mind --ws {})",
+        ws,
+        ws
+    );
 }
 
 pub fn run_daemon(cfg: &RuntimeConfig, ws: &str) -> Result<()> {
@@ -169,8 +212,24 @@ pub fn run_daemon(cfg: &RuntimeConfig, ws: &str) -> Result<()> {
 }
 
 async fn run_daemon_async(cfg: RuntimeConfig, ws: String) -> Result<()> {
+    let _ = DAEMON_RUN_DIR.set(cfg.run_dir.clone());
     let ws_dir = workspace::ensure_ws_dir(&cfg.run_dir, &ws)?;
-    let lock_path = workspace::acquire_lock(&cfg.run_dir, &ws)?;
+    let runtime_sock = paths::ws_socket_path(&cfg.socket_path, &ws);
+    if !runtime_sock.exists() {
+        anyhow::bail!(
+            "runtime socket not found for ws {} (start runtime first: yai up --ws {})",
+            ws,
+            ws
+        );
+    }
+    if UnixStream::connect(&runtime_sock).await.is_err() {
+        anyhow::bail!(
+            "runtime not reachable for ws {} (start runtime first: yai up --ws {})",
+            ws,
+            ws
+        );
+    }
+    let lock_path = workspace::acquire_daemon_lock(&cfg.run_dir, &ws)?;
     let pid_path = workspace::daemon_pid_path(&cfg.run_dir, &ws);
     std::fs::write(&pid_path, std::process::id().to_string())
         .with_context(|| format!("write daemon pid: {}", pid_path.display()))?;
@@ -246,6 +305,17 @@ async fn run_daemon_async(cfg: RuntimeConfig, ws: String) -> Result<()> {
     Ok(())
 }
 
+fn normalize_opt_string(v: Option<String>) -> Option<String> {
+    v.and_then(|s| {
+        let t = s.trim().to_string();
+        if t.is_empty() {
+            None
+        } else {
+            Some(t)
+        }
+    })
+}
+
 async fn handle_client(
     stream: UnixStream,
     cfg: Arc<RuntimeConfig>,
@@ -256,190 +326,258 @@ async fn handle_client(
 ) -> Result<()> {
     let (reader, mut writer) = stream.into_split();
     let mut reader = BufReader::new(reader);
-    let req = match uds_server::read_request(&mut reader).await {
-        Ok(req) => req,
-        Err(_) => return Ok(()),
-    };
-    let is_status = matches!(req, Request::Status);
-    if !is_status {
-        daemon_log(ws.as_ref(), &format!("request {}", request_name(&req)));
-    }
-    let resp = match req {
-        Request::Ping => Response::Pong,
-        Request::Status => build_status(&cfg, &ws),
-        Request::ChatSessionsList => {
-            let items = services
-                .chat
-                .store()
-                .sessions()
-                .into_iter()
-                .map(to_rpc_chat_session)
-                .collect::<Vec<_>>();
-            let selected = services.chat.store().selected_session();
-            Response::ChatSessions { items, selected }
+
+    loop {
+        let inbound = match uds_server::read_request(&mut reader).await {
+            Ok(req) => req,
+            Err(err) => {
+                // EOF: client ha chiuso la connessione -> fine pulita
+                if err.to_string().contains("rpc eof") {
+                    return Ok(());
+                }
+                // Errore di parse o altro: rispondi con error e chiudi
+                let _ = uds_server::write_response(
+                    &mut writer,
+                    &Response::Error {
+                        message: err.to_string(),
+                    },
+                )
+                .await;
+                return Ok(());
+            }
+        };
+
+        let req = inbound.request;
+        let is_status = matches!(req, Request::Status);
+
+        if !is_status {
+            daemon_log(ws.as_ref(), &format!("request {}", request_name(&req)));
         }
-        Request::ChatSessionNew { title } => {
-            let sess = services.chat.store().create_session(title);
-            let _ = services.chat.store().select_session(&sess.id);
-            Response::ChatSession {
-                session: to_rpc_chat_session(sess),
+
+        // ws_id check
+        if let Some(ws_id) = inbound.ws_id.as_deref() {
+            if ws_id != ws.as_ref() {
+                uds_server::write_response(
+                    &mut writer,
+                    &Response::Error {
+                        message: "ws_mismatch".to_string(),
+                    },
+                )
+                .await?;
+                continue; // non chiudiamo la connessione, rispondiamo e continuiamo
             }
         }
-        Request::ChatSessionSelect { session_id } => {
-            match services.chat.store().select_session(&session_id) {
-                Ok(()) => {
-                    let selected = services.chat.store().selected_session();
-                    let items = services
-                        .chat
-                        .store()
-                        .sessions()
-                        .into_iter()
-                        .map(to_rpc_chat_session)
-                        .collect::<Vec<_>>();
-                    Response::ChatSessions { items, selected }
-                }
-                Err(err) => Response::Error {
-                    message: err.to_string(),
-                },
+
+        // arming gate
+        if requires_arming(&req) {
+            if !inbound.arming {
+                uds_server::write_response(
+                    &mut writer,
+                    &Response::Error {
+                        message: "arming_required".to_string(),
+                    },
+                )
+                .await?;
+                continue;
+            }
+            if inbound.role.as_deref() != Some("operator") {
+                uds_server::write_response(
+                    &mut writer,
+                    &Response::Error {
+                        message: "role_required".to_string(),
+                    },
+                )
+                .await?;
+                continue;
             }
         }
-        Request::ChatHistory { session_id } => {
-            let sid = match session_id.or_else(|| services.chat.store().selected_session()) {
-                Some(v) => v,
-                None => {
-                    let s = services.chat.store().create_session(None);
-                    let _ = services.chat.store().select_session(&s.id);
-                    s.id
-                }
-            };
-            match services.chat.store().history(&sid) {
-                Ok(items) => Response::ChatHistory {
-                    session_id: sid,
-                    items: items.into_iter().map(to_rpc_chat_message).collect(),
-                },
-                Err(err) => Response::Error {
-                    message: err.to_string(),
-                },
+
+        // Se Down con shutdown=true, dopo la response chiudiamo la connessione
+        let mut close_after = false;
+
+        let resp = match req {
+            Request::ProtocolHandshake { .. } => Response::ProtocolHandshake {
+                protocol_version: crate::transport::rpc::protocol::RPC_PROTOCOL_VERSION,
+                server_version: env!("CARGO_PKG_VERSION").to_string(),
+            },
+
+            Request::Ping => Response::Pong,
+
+            Request::Status => build_status(&cfg, &ws),
+
+            Request::ChatSessionsList => {
+                let items = services
+                    .chat
+                    .store()
+                    .sessions()
+                    .into_iter()
+                    .map(to_rpc_chat_session)
+                    .collect::<Vec<_>>();
+                let selected = services.chat.store().selected_session();
+                Response::ChatSessions { items, selected }
             }
-        }
-        Request::ChatSend {
-            session_id,
-            text,
-            stream,
-        } => {
-            let sid = match session_id.or_else(|| services.chat.store().selected_session()) {
-                Some(v) => v,
-                None => {
-                    let s = services.chat.store().create_session(None);
-                    let _ = services.chat.store().select_session(&s.id);
-                    s.id
+
+            Request::ChatSessionNew { title } => {
+                let sess = services.chat.store().create_session(title);
+                let _ = services.chat.store().select_session(&sess.id);
+                Response::ChatSession {
+                    session: to_rpc_chat_session(sess),
                 }
-            };
-            match services.chat.send_echo(&sid, &text) {
-                Ok(msg) => {
-                    if stream {
-                        for chunk in msg.content.split_whitespace() {
-                            let _ = bus.emit(
-                                "chat.delta",
-                                json!({ "session_id": sid, "delta": format!("{chunk} ") }),
-                            );
+            }
+
+            Request::ChatSessionSelect { session_id } => {
+                match services.chat.store().select_session(&session_id) {
+                    Ok(()) => {
+                        let selected = services.chat.store().selected_session();
+                        let items = services
+                            .chat
+                            .store()
+                            .sessions()
+                            .into_iter()
+                            .map(to_rpc_chat_session)
+                            .collect::<Vec<_>>();
+                        Response::ChatSessions { items, selected }
+                    }
+                    Err(err) => Response::Error {
+                        message: err.to_string(),
+                    },
+                }
+            }
+
+            Request::ChatHistory { session_id } => {
+                let sid = match session_id.or_else(|| services.chat.store().selected_session()) {
+                    Some(v) => v,
+                    None => {
+                        let s = services.chat.store().create_session(None);
+                        let _ = services.chat.store().select_session(&s.id);
+                        s.id
+                    }
+                };
+                match services.chat.store().history(&sid) {
+                    Ok(items) => Response::ChatHistory {
+                        session_id: sid,
+                        items: items.into_iter().map(to_rpc_chat_message).collect(),
+                    },
+                    Err(err) => Response::Error {
+                        message: err.to_string(),
+                    },
+                }
+            }
+
+            Request::ChatSend {
+                session_id,
+                text,
+                stream,
+            } => {
+                let sid = match session_id.or_else(|| services.chat.store().selected_session()) {
+                    Some(v) => v,
+                    None => {
+                        let s = services.chat.store().create_session(None);
+                        let _ = services.chat.store().select_session(&s.id);
+                        s.id
+                    }
+                };
+                match services.chat.send_echo(&sid, &text) {
+                    Ok(msg) => {
+                        if stream {
+                            for chunk in msg.content.split_whitespace() {
+                                let _ = bus.emit(
+                                    "chat.delta",
+                                    json!({ "session_id": sid, "delta": format!("{chunk} ") }),
+                                );
+                            }
+                        }
+                        let _ = bus.emit(
+                            "chat.message",
+                            json!({ "session_id": sid, "id": msg.id, "content": msg.content }),
+                        );
+                        Response::ChatSend {
+                            message: to_rpc_chat_message(msg),
                         }
                     }
-                    let _ = bus.emit(
-                        "chat.message",
-                        json!({ "session_id": sid, "id": msg.id, "content": msg.content }),
-                    );
-                    Response::ChatSend {
-                        message: to_rpc_chat_message(msg),
+                    Err(err) => Response::Error {
+                        message: err.to_string(),
+                    },
+                }
+            }
+
+            Request::ShellExec { cmd, args, cwd } => {
+                match services.shell.exec(&cmd, &args, cwd.as_deref()).await {
+                    Ok(out) => Response::ShellExec {
+                        exit_code: out.exit_code,
+                        stdout: out.stdout,
+                        stderr: out.stderr,
+                    },
+                    Err(err) => Response::Error {
+                        message: err.to_string(),
+                    },
+                }
+            }
+
+            // Questo è “streaming”: questa connessione resta occupata a mandare eventi.
+            Request::EventsSubscribe => {
+                let mut rx = bus.subscribe();
+                uds_server::write_response(&mut writer, &Response::EventsStarted).await?;
+                loop {
+                    match rx.recv().await {
+                        Ok(event) => {
+                            let _ =
+                                uds_server::write_response(&mut writer, &Response::Event { event })
+                                    .await;
+                        }
+                        Err(_) => break,
                     }
                 }
+                return Ok(());
+            }
+
+            // ✅ ProvidersDiscover: normalizza "" -> None
+            Request::ProvidersDiscover { endpoint, model } => {
+                let endpoint = normalize_opt_string(endpoint);
+                let model = normalize_opt_string(model);
+
+                match providers::discover(endpoint, model) {
+                    Ok(transitions) => {
+                        let mut items = Vec::new();
+                        for t in &transitions {
+                            emit_provider_transition(&bus, ws.as_ref(), "provider_discovered", t);
+                            let _ = providers::sync_graph(&ws, &t.provider);
+                            items.push(t.provider.clone());
+                        }
+                        Response::Providers { items }
+                    }
+                    Err(err) => Response::Error {
+                        message: err.to_string(),
+                    },
+                }
+            }
+
+            Request::ProvidersList => match providers::list_all() {
+                Ok(items) => Response::Providers { items },
                 Err(err) => Response::Error {
                     message: err.to_string(),
                 },
-            }
-        }
-        Request::ShellExec { cmd, args, cwd } => {
-            match services.shell.exec(&cmd, &args, cwd.as_deref()).await {
-                Ok(out) => Response::ShellExec {
-                    exit_code: out.exit_code,
-                    stdout: out.stdout,
-                    stderr: out.stderr,
-                },
-                Err(err) => Response::Error {
-                    message: err.to_string(),
-                },
-            }
-        }
-        Request::EventsSubscribe => {
-            let mut rx = bus.subscribe();
-            uds_server::write_response(&mut writer, &Response::EventsStarted).await?;
-            loop {
-                match rx.recv().await {
-                    Ok(event) => {
-                        let _ = uds_server::write_response(&mut writer, &Response::Event { event })
-                            .await;
-                    }
-                    Err(_) => break,
-                }
-            }
-            return Ok(());
-        }
-        Request::ProvidersDiscover { endpoint, model } => {
-            match providers::discover(endpoint, model) {
-                Ok(transitions) => {
-                    let mut items = Vec::new();
-                    for t in &transitions {
-                        emit_provider_transition(&bus, ws.as_ref(), "provider_discovered", t);
-                        let _ = providers::sync_graph(&ws, &t.provider);
-                        items.push(t.provider.clone());
-                    }
-                    Response::Providers { items }
-                }
-                Err(err) => Response::Error {
-                    message: err.to_string(),
-                },
-            }
-        }
-        Request::ProvidersList => match providers::list_all() {
-            Ok(items) => Response::Providers { items },
-            Err(err) => Response::Error {
-                message: err.to_string(),
             },
-        },
-        Request::ProvidersPair {
-            id,
-            endpoint,
-            model,
-        } => {
-            let info = ProviderInfo {
+
+            Request::ProvidersPair {
                 id,
                 endpoint,
                 model,
-                trust_state: crate::transport::rpc::protocol::TrustState::Paired,
-                fingerprint: None,
-                capabilities: Vec::new(),
-                last_seen: 0,
-                attached_ws: None,
-            };
-            match providers::pair(info) {
-                Ok(t) => {
-                    emit_provider_transition(&bus, ws.as_ref(), "provider_paired", &t);
-                    let _ = providers::sync_graph(&ws, &t.provider);
-                    Response::ProvidersOk
-                }
-                Err(err) => Response::Error {
-                    message: err.to_string(),
-                },
-            }
-        }
-        Request::ProvidersAttach { id, model } => match providers::get(&id) {
-            Ok(Some(mut info)) => {
-                if let Some(m) = model {
-                    info.model = m;
-                }
-                match providers::attach(&cfg.run_dir, &ws, info) {
+            } => {
+                let info = ProviderInfo {
+                    id,
+                    endpoint,
+                    model,
+                    trust_state: crate::transport::rpc::protocol::TrustState::Paired,
+                    fingerprint: None,
+                    capabilities: Vec::new(),
+                    last_seen: 0,
+                    attached_ws: None,
+                };
+                match providers::pair(info) {
                     Ok(t) => {
-                        emit_provider_transition(&bus, ws.as_ref(), "provider_attached", &t);
+                        emit_provider_transition(&bus, ws.as_ref(), "provider_paired", &t);
+                        let _ = providers::sync_graph(&ws, &t.provider);
                         Response::ProvidersOk
                     }
                     Err(err) => Response::Error {
@@ -447,96 +585,68 @@ async fn handle_client(
                     },
                 }
             }
-            Ok(None) => Response::Error {
-                message: "provider not found (pair first)".to_string(),
-            },
-            Err(err) => Response::Error {
-                message: err.to_string(),
-            },
-        },
-        Request::ProvidersDetach => match providers::detach(&cfg.run_dir, &ws) {
-            Ok(Some(t)) => {
-                emit_provider_transition(&bus, ws.as_ref(), "provider_detached", &t);
-                Response::ProvidersOk
-            }
-            Ok(None) => Response::ProvidersOk,
-            Err(err) => Response::Error {
-                message: err.to_string(),
-            },
-        },
-        Request::ProvidersStatus => match providers::status(&cfg.run_dir, &ws) {
-            Ok(active) => Response::ProviderStatus { active },
-            Err(err) => Response::Error {
-                message: err.to_string(),
-            },
-        },
-        Request::ProvidersRevoke { id } => match providers::revoke(&id) {
-            Ok(Some(t)) => {
-                emit_provider_transition(&bus, ws.as_ref(), "provider_revoked", &t);
-                if let Ok(Some(p)) = providers::get(&id) {
-                    let _ = providers::sync_graph(&ws, &p);
-                }
-                Response::ProvidersOk
-            }
-            Ok(None) => Response::ProvidersOk,
-            Err(err) => Response::Error {
-                message: err.to_string(),
-            },
-        },
-        Request::DsarRequest {
-            request_type,
-            subject_ref,
-        } => match dsar::create_request(&cfg.run_dir, &ws, &request_type, &subject_ref) {
-            Ok(request) => {
-                let event_type = if request_type == "export" {
-                    "DATA_EXPORT"
-                } else {
-                    "DATA_ERASE"
-                };
-                if let Err(err) = bus.emit_with_compliance(
-                    event_type,
-                    json!({
-                        "ws": ws.as_ref(),
-                        "request_id": request.request_id,
-                        "subject_ref": request.subject_ref,
-                        "request_type": request.request_type,
-                        "status": format!("{:?}", request.status).to_lowercase()
-                    }),
-                    Some(dsar_compliance()),
-                ) {
-                    Response::Error {
-                        message: err.to_string(),
+
+            Request::ProvidersAttach { id, model } => match providers::get(&id) {
+                Ok(Some(mut info)) => {
+                    if let Some(m) = model {
+                        info.model = m;
                     }
-                } else {
-                    let _ = bus.emit_with_compliance(
-                        "PROCESSING_DECLARED",
-                        json!({
-                            "ws": ws.as_ref(),
-                            "request_id": request.request_id,
-                            "subject_ref": request.subject_ref,
-                            "request_type": request.request_type,
-                        }),
-                        Some(dsar_compliance()),
-                    );
-                    Response::DsarCreated { request }
+                    match providers::attach(&cfg.run_dir, &ws, info) {
+                        Ok(t) => {
+                            emit_provider_transition(&bus, ws.as_ref(), "provider_attached", &t);
+                            Response::ProvidersOk
+                        }
+                        Err(err) => Response::Error {
+                            message: err.to_string(),
+                        },
+                    }
                 }
-            }
-            Err(err) => Response::Error {
-                message: err.to_string(),
-            },
-        },
-        Request::DsarStatus { request_id } => {
-            match dsar::get_request(&cfg.run_dir, &ws, &request_id) {
-                Ok(request) => Response::DsarState { request },
+                Ok(None) => Response::Error {
+                    message: "provider not found (pair first)".to_string(),
+                },
                 Err(err) => Response::Error {
                     message: err.to_string(),
                 },
-            }
-        }
-        Request::DsarExecute { request_id } => {
-            match dsar::set_status(&cfg.run_dir, &ws, &request_id, DsarStatus::Executed) {
-                Ok(Some(request)) => {
-                    let event_type = if request.request_type == "export" {
+            },
+
+            Request::ProvidersDetach => match providers::detach(&cfg.run_dir, &ws) {
+                Ok(Some(t)) => {
+                    emit_provider_transition(&bus, ws.as_ref(), "provider_detached", &t);
+                    Response::ProvidersOk
+                }
+                Ok(None) => Response::ProvidersOk,
+                Err(err) => Response::Error {
+                    message: err.to_string(),
+                },
+            },
+
+            Request::ProvidersStatus => match providers::status(&cfg.run_dir, &ws) {
+                Ok(active) => Response::ProviderStatus { active },
+                Err(err) => Response::Error {
+                    message: err.to_string(),
+                },
+            },
+
+            Request::ProvidersRevoke { id } => match providers::revoke(&id) {
+                Ok(Some(t)) => {
+                    emit_provider_transition(&bus, ws.as_ref(), "provider_revoked", &t);
+                    if let Ok(Some(p)) = providers::get(&id) {
+                        let _ = providers::sync_graph(&ws, &p);
+                    }
+                    Response::ProvidersOk
+                }
+                Ok(None) => Response::ProvidersOk,
+                Err(err) => Response::Error {
+                    message: err.to_string(),
+                },
+            },
+
+            Request::DsarRequest {
+                request_type,
+                subject_ref,
+            } => match dsar::create_request(&cfg.run_dir, &ws, &request_type, &subject_ref) {
+                Ok(request) => {
+                    let event_type = if request_type == "export" {
                         "DATA_EXPORT"
                     } else {
                         "DATA_ERASE"
@@ -556,76 +666,137 @@ async fn handle_client(
                             message: err.to_string(),
                         }
                     } else {
-                        Response::DsarExecuted { request }
+                        let _ = bus.emit_with_compliance(
+                            "PROCESSING_DECLARED",
+                            json!({
+                                "ws": ws.as_ref(),
+                                "request_id": request.request_id,
+                                "subject_ref": request.subject_ref,
+                                "request_type": request.request_type,
+                            }),
+                            Some(dsar_compliance()),
+                        );
+                        Response::DsarCreated { request }
                     }
                 }
-                Ok(None) => Response::Error {
-                    message: "dsar request not found".to_string(),
-                },
                 Err(err) => Response::Error {
                     message: err.to_string(),
                 },
+            },
+
+            Request::DsarStatus { request_id } => {
+                match dsar::get_request(&cfg.run_dir, &ws, &request_id) {
+                    Ok(request) => Response::DsarState { request },
+                    Err(err) => Response::Error {
+                        message: err.to_string(),
+                    },
+                }
             }
-        }
-        Request::Up {
-            build,
-            no_engine,
-            no_mind,
-            ai,
-            timeout_ms,
-        } => {
-            let cfg = cfg.clone();
-            let ws_name = ws.to_string();
-            let ws_for_task = ws_name.clone();
-            let ws_for_start = ws_name.clone();
-            let opts = workspace::StartOpts {
+
+            Request::DsarExecute { request_id } => {
+                match dsar::set_status(&cfg.run_dir, &ws, &request_id, DsarStatus::Executed) {
+                    Ok(Some(request)) => {
+                        let event_type = if request.request_type == "export" {
+                            "DATA_EXPORT"
+                        } else {
+                            "DATA_ERASE"
+                        };
+                        if let Err(err) = bus.emit_with_compliance(
+                            event_type,
+                            json!({
+                                "ws": ws.as_ref(),
+                                "request_id": request.request_id,
+                                "subject_ref": request.subject_ref,
+                                "request_type": request.request_type,
+                                "status": format!("{:?}", request.status).to_lowercase()
+                            }),
+                            Some(dsar_compliance()),
+                        ) {
+                            Response::Error {
+                                message: err.to_string(),
+                            }
+                        } else {
+                            Response::DsarExecuted { request }
+                        }
+                    }
+                    Ok(None) => Response::Error {
+                        message: "dsar request not found".to_string(),
+                    },
+                    Err(err) => Response::Error {
+                        message: err.to_string(),
+                    },
+                }
+            }
+
+            Request::Up {
                 build,
                 no_engine,
-                no_mind,
+                no_mind: _,
                 ai,
-                timeout_ms: timeout_ms.unwrap_or(5000),
-            };
-            let bus_clone = bus.clone();
-            tokio::task::spawn_blocking(move || {
-                let _ = bus_clone.emit("ws_up_started", json!({ "ws": ws_for_task }));
-                workspace::start_stack(&cfg, &ws_for_start, &opts, &bus_clone)
-            })
-            .await
-            .context("spawn start")??;
-            let _ = bus.emit("ws_up_complete", json!({ "ws": ws_name }));
-            Response::UpOk
-        }
-        Request::Down { force, shutdown } => {
-            let cfg = cfg.clone();
-            let ws = ws.to_string();
-            let bus_clone = bus.clone();
-            let stopping = workspace::stopping_path(&cfg.run_dir, &ws);
-            let _ = std::fs::write(&stopping, "1");
-            workspace::clear_halt(&cfg.run_dir, &ws);
-            tokio::task::spawn_blocking(move || {
-                workspace::stop_stack(&cfg, &ws, force, &bus_clone)
-            })
-            .await
-            .context("spawn down")??;
-            if shutdown {
-                let _ = shutdown_tx.send(true);
+                timeout_ms,
+            } => {
+                let cfg2 = cfg.clone();
+                let ws_name = ws.to_string();
+                let ws_for_task = ws_name.clone();
+                let ws_for_start = ws_name.clone();
+                let opts = workspace::StartOpts {
+                    build,
+                    no_engine,
+                    no_mind: true,
+                    ai,
+                    timeout_ms: timeout_ms.unwrap_or(5000),
+                };
+                let bus_clone = bus.clone();
+                tokio::task::spawn_blocking(move || {
+                    let _ = bus_clone.emit("ws_up_started", json!({ "ws": ws_for_task }));
+                    workspace::start_stack(&cfg2, &ws_for_start, &opts, &bus_clone)
+                })
+                .await
+                .context("spawn start")??;
+                let _ = bus.emit("ws_up_complete", json!({ "ws": ws_name }));
+                Response::UpOk
             }
-            Response::DownOk { shutdown }
-        }
-    };
 
-    if is_status {
-        let snapshot =
-            serde_json::to_string(&resp).unwrap_or_else(|_| "status-encode-error".to_string());
-        let mut last = services.last_status_snapshot.lock().await;
-        if last.as_ref() != Some(&snapshot) {
-            daemon_log(ws.as_ref(), "request status (changed)");
-            *last = Some(snapshot);
+            Request::Down { force, shutdown } => {
+                let cfg2 = cfg.clone();
+                let ws_name = ws.to_string();
+                let bus_clone = bus.clone();
+                let stopping = workspace::stopping_path(&cfg2.run_dir, &ws_name);
+                let _ = std::fs::write(&stopping, "1");
+                workspace::clear_halt(&cfg2.run_dir, &ws_name);
+
+                tokio::task::spawn_blocking(move || {
+                    workspace::stop_stack(&cfg2, &ws_name, force, &bus_clone)
+                })
+                .await
+                .context("spawn down")??;
+
+                if shutdown {
+                    let _ = shutdown_tx.send(true);
+                    close_after = true;
+                }
+
+                Response::DownOk { shutdown }
+            }
+        };
+
+        // status snapshot logging (uguale al tuo, solo dentro loop)
+        if is_status {
+            let snapshot =
+                serde_json::to_string(&resp).unwrap_or_else(|_| "status-encode-error".to_string());
+            let mut last = services.last_status_snapshot.lock().await;
+            if last.as_ref() != Some(&snapshot) {
+                daemon_log(ws.as_ref(), "request status (changed)");
+                *last = Some(snapshot);
+            }
+        }
+
+        uds_server::write_response(&mut writer, &resp).await?;
+
+        if close_after {
+            return Ok(());
         }
     }
-
-    uds_server::write_response(&mut writer, &resp).await?;
-    Ok(())
 }
 
 async fn monitor_processes(cfg: Arc<RuntimeConfig>, ws: Arc<String>, bus: Arc<EventBus>) {
@@ -638,6 +809,7 @@ async fn monitor_processes(cfg: Arc<RuntimeConfig>, ws: Arc<String>, bus: Arc<Ev
             continue;
         }
         let st = state.unwrap();
+        let runtime_age_secs = now_epoch().saturating_sub(st.started_at_epoch);
         let socket_path = paths::ws_socket_path(&cfg.socket_path, &ws);
         let mut alive = AliveStatus::default();
         if let Some(pid) = st.boot_pid {
@@ -707,6 +879,10 @@ async fn monitor_processes(cfg: Arc<RuntimeConfig>, ws: Arc<String>, bus: Arc<Ev
             }
         }
         if last.kernel && alive.kernel && !runtime_sock_exists {
+            if runtime_age_secs < 5 {
+                last = alive;
+                continue;
+            }
             let cfg_clone = cfg.clone();
             let ws_clone = ws.to_string();
             let bus_clone = bus.clone();

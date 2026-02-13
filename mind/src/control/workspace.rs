@@ -39,6 +39,10 @@ pub fn lock_path(run_dir: &Path, ws: &str) -> PathBuf {
     run_dir.join(ws).join("lock")
 }
 
+pub fn daemon_lock_path(run_dir: &Path, ws: &str) -> PathBuf {
+    run_dir.join(ws).join("daemon.lock")
+}
+
 pub fn daemon_pid_path(run_dir: &Path, ws: &str) -> PathBuf {
     run_dir.join(ws).join("daemon.pid")
 }
@@ -93,6 +97,25 @@ pub fn acquire_lock(run_dir: &Path, ws: &str) -> Result<PathBuf> {
     Ok(lock)
 }
 
+pub fn acquire_daemon_lock(run_dir: &Path, ws: &str) -> Result<PathBuf> {
+    let lock = daemon_lock_path(run_dir, ws);
+    if lock.exists() {
+        let pid = fs::read_to_string(&lock)
+            .ok()
+            .and_then(|v| v.trim().parse::<u32>().ok());
+        if let Some(pid) = pid {
+            if is_pid_alive(pid) {
+                anyhow::bail!("daemon lock already held by pid {}", pid);
+            }
+        }
+        fs::remove_file(&lock).ok();
+    }
+    let pid = std::process::id();
+    fs::write(&lock, pid.to_string())
+        .with_context(|| format!("write daemon lock: {}", lock.display()))?;
+    Ok(lock)
+}
+
 pub fn release_lock(lock_path: &Path) {
     let _ = fs::remove_file(lock_path);
 }
@@ -111,6 +134,7 @@ pub fn start_stack(
     opts: &StartOpts,
     bus: &crate::control::events::EventBus,
 ) -> Result<RunState> {
+    let _ = std::fs::create_dir_all(cfg.run_dir.join(ws));
     let socket_path = paths::ws_socket_path(&cfg.socket_path, ws);
     clear_halt(&cfg.run_dir, ws);
 
@@ -160,7 +184,6 @@ pub fn start_stack(
     #[cfg(unix)]
     detach_child(&mut boot_cmd);
     boot_cmd.arg("--ws").arg(ws).arg("--raid");
-    boot_cmd.env("YAI_BOOT_NO_EXEC", "1");
     boot_cmd.stdout(Stdio::piped());
     boot_cmd.stderr(Stdio::from(boot_log.try_clone()?));
 
@@ -231,6 +254,7 @@ pub fn start_stack(
         .open(&kernel_log_path)
         .with_context(|| format!("open log: {}", kernel_log_path.display()))?;
     let mut kernel_cmd = Command::new(&cfg.yai_kernel);
+    kernel_cmd.current_dir(&cfg.workspace_root);
     #[cfg(unix)]
     detach_child(&mut kernel_cmd);
     kernel_cmd.arg("--ws").arg(ws);

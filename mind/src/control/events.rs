@@ -42,6 +42,9 @@ impl EventBus {
         data: Value,
         compliance: Option<ComplianceContext>,
     ) -> Result<Event> {
+        if kind.trim().is_empty() || kind.chars().any(|c| c.is_whitespace()) {
+            return Err(anyhow!("invalid event kind"));
+        }
         Self::validate_compliance(kind, compliance.as_ref())?;
 
         let ts = SystemTime::now()
@@ -56,6 +59,7 @@ impl EventBus {
             .unwrap_or_else(|| self.ws.clone());
         let event = Event {
             v: 1,
+            schema_id: Some("mind.event.v1".to_string()),
             event_id: format!("evt:{}:{}", ws, seq),
             ts,
             ws,
