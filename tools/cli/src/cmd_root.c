@@ -1,18 +1,20 @@
-// tools/cli/src/cmd_root.c
 #include "../include/yai_cmd.h"
 #include "../include/yai_rpc.h"
 #include "../include/yai_fmt.h"
 #include "../include/yai_envelope.h"
+#include "../include/yai_cmd_law.h"   // <-- ADD
 
 #include <stdio.h>
 #include <string.h>
 
+// ... usage() aggiungi queste righe:
 static void usage(void) {
     fprintf(stderr,
         "USAGE:\n"
         "  yai --ws <id> ping\n"
         "  yai --ws <id> status\n"
         "  yai --ws <id> call <type> [payload_json]\n"
+        "  yai law check|tree|paths\n"
         "FLAGS:\n"
         "  --ws <id>           workspace id\n"
         "  --arming            set arming=true\n"
@@ -26,6 +28,12 @@ int yai_cmd_dispatch(int argc, char **argv, const yai_cli_opts_t *opt) {
     if (argc < 1) { usage(); return 2; }
 
     const char *cmd = argv[0];
+
+    
+    if (!strcmp(cmd, "law")) {
+        if (argc < 2) { fprintf(stderr, "ERR: law requires subcommand\n"); return 2; }
+        return yai_cmd_law(argc - 1, argv + 1, opt);
+    }
 
     if (!strcmp(cmd, "help") || !strcmp(cmd, "--help") || !strcmp(cmd, "-h")) {
         usage();

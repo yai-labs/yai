@@ -4,6 +4,7 @@ CFLAGS ?= -O2 -Wall -Wextra -Werror -std=c11
 LDFLAGS ?=
 BIN = yai
 
+# tools/cli/Makefile (aggiungi cmd_law.c e include dir)
 SRC = \
   src/main.c \
   src/env.c \
@@ -11,7 +12,9 @@ SRC = \
   src/envelope.c \
   src/rpc.c \
   src/fmt.c \
-  src/cmd_root.c
+  src/cmd_root.c \
+  src/cmd_law.c
+
 
 INCLUDE = -Iinclude
 

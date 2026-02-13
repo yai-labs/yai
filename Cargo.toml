@@ -1,6 +1,5 @@
 [workspace]
 members = [
     "mind",
-    "crates/runtime-protocol"
 ]
 resolver = "2"
