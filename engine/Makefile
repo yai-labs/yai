@@ -21,20 +21,37 @@ CACHE_DIR := $(ART_ROOT)/cache
 VAULT_ABI_SRC := ../law/specs/vault/yai_vault_abi.h
 PROTOCOL_DIR  := ../law/specs/protocol
 
+# ---- Sources ----
+SRC_DIR := src
+# Il find ricorsivo è perfetto, ma dobbiamo assicurarci che cJSON sia incluso 
+# se si trova fuori dal path ricorsivo o ha bisogno di flag specifici
+SRCS := $(shell find $(SRC_DIR) -name "*.c")
+
+# ---- Objects ----
+OBJS := $(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
+
 # ---- Compiler flags ----
+# Aggiungiamo -I./src/external per cJSON
 CFLAGS := -Wall -Wextra -O2 -MMD -MP \
           -I./include \
+          -I./src/external \
           -I../kernel/include \
           -I../law/specs/vault \
           -I$(PROTOCOL_DIR)
 
-LDFLAGS := -lpthread
+# Aggiunto sqlite3 e pthread come richiesto
+LDFLAGS := -lpthread -lsqlite3
 
 # ---- Sources ----
+# ---- Sources (RECURSIVE) ----
 SRC_DIR := src
-SRCS := $(wildcard $(SRC_DIR)/*.c)
+# Cerca tutti i .c in src e in ogni sottocartella (bridge, cortex, gates, config)
+SRCS := $(shell find $(SRC_DIR) -name "*.c")
+# Trasforma i path dei sorgenti in path degli oggetti mantenendo la struttura
 OBJS := $(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
 
+LDFLAGS := -lpthread -lsqlite3
+SRC += src/external/cJSON.c
 TARGET := $(BIN_DIR)/yai-engine
 TEST_CORTEX := $(BUILD_DIR)/cortex_harness
 

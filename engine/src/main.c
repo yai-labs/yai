@@ -1,246 +1,45 @@
-// engine/src/main.c (Phase-2: Engine C aligned to Kernel RPC v1 + SHM vault)
-//
-// NOTE:
-// - Engine MUST NOT drive kernel-owned vault->status transitions (Kernel FSM owns status).
-// - Engine may write response_buffer/last_result/last_error, and may set authority_lock ONLY on panic.
-// - Kernel control-plane is via ~/.yai/run/<ws>/control.sock (RPC v1 JSONL).
-//
-#include "../include/engine_bridge.h"
-#include "../include/engine_cortex.h"
-#include "../include/transport_client.h"
-
 #include <stdio.h>
 #include <signal.h>
 #include <unistd.h>
 #include <string.h>
 #include <stdlib.h>
 #include <errno.h>
+#include <time.h>
+#include <sys/select.h>
 
-static const char *safe_cstr(const char *s) { return (s && s[0]) ? s : ""; }
+// Header di Progetto
+#include "../include/shared_constants.h"
+#include "../include/engine_bridge.h"
+#include "../include/engine_cortex.h"
+#include "../include/transport_client.h"
+#include "../include/storage_gate.h"
+#include "../include/rpc_router.h"
 
-// -------------------------
-// Panic handler: emergency lock (best-effort)
-// -------------------------
-static void handle_panic(int sig) {
-    fprintf(stderr, "\n[YAI-ENGINE] Signal %d: Emergency Lock.\n", sig);
+// Header della LAW
+#include "../../law/specs/protocol/transport.h"
+#include "../../law/specs/protocol/yai_protocol_ids.h"
 
-    Vault* v = yai_get_vault();
-    {
-        char addr_buf[32];
-        snprintf(addr_buf, sizeof(addr_buf), "%p", (void*)v);
-        setenv("YAI_VAULT_ADDR", addr_buf, 1);
-    }
-
-    if (v) {
-        // Best-effort: lock authority + mark error
-        // (Kernel may observe and react; Engine does not attempt to run FSM here.)
-        v->authority_lock = true;
-        v->status = YAI_STATE_ERROR;
-        strncpy(v->last_error, "engine panic: emergency lock", 255);
-        v->last_error[255] = '\0';
-    }
-
-    _exit(128 + sig);
-}
+static volatile int keep_running = 1;
 
 typedef struct {
     Vault* core;
-    Vault* stream;
     Vault* brain;
-    Vault* audit;
-    Vault* cache;
-    Vault* control;
 } VaultCluster;
 
-// -------------------------
-// Integrity guard (Phase-2: soft throttle)
-// -------------------------
-static void validate_vault_integrity(VaultCluster *c) {
-    if (!c || !c->core || !c->brain) return;
-
-    // If energy exceeded: throttle brain (authority lock)
-    if (c->core->energy_consumed > c->core->energy_quota) {
-        fprintf(stderr, "[SECURITY] Energy quota exceeded. Throttling brain...\n");
-        c->brain->authority_lock = true;
-    }
+static void handle_signal(int sig) {
+    (void)sig;
+    keep_running = 0;
 }
 
-// -------------------------
-// Command processing (Phase-2 disciplined)
-// - DO NOT unilaterally move vault->status across kernel states.
-// - Write response_buffer + last_result + last_error.
-// - If external class and authority_lock => deny.
-// -------------------------
-static void process_command(Vault* v) {
-    if (!v) return;
-
-    v->last_result = 0;
-    v->response_buffer[0] = '\0';
-    v->last_error[0] = '\0';
-
-    uint32_t cmd_id = v->last_command_id;
-    uint32_t cmd_class = yai_command_class_for((yai_command_id_t)cmd_id);
-
-    // External effect boundary: deny unless authority is present.
-    // (Phase-1/2: authority modeled as authority_lock == false)
-    if ((cmd_class & YAI_CMD_CLASS_EXTERNAL) != 0u) {
-        if (v->authority_lock) {
-            snprintf(v->last_error, sizeof(v->last_error),
-                     "External effect denied: authority required (cmd=%u)", cmd_id);
-            v->last_result = 0;
-            // do not force SUSPENDED here; Kernel owns state transitions.
-            return;
-        }
-
-        // Provide structured “effect intent” as text for now (Phase-2 minimal)
-        snprintf(
-            v->response_buffer,
-            sizeof(v->response_buffer),
-            "effect=external;class=%s;target=unspecified;irreversible=%s;authority=ok",
-            (cmd_class & YAI_CMD_CLASS_IRREVERSIBLE) ? "irreversible" : "external",
-            (cmd_class & YAI_CMD_CLASS_IRREVERSIBLE) ? "true" : "false"
-        );
-        v->last_result = 1;
-        return;
+static void handle_panic(int sig) {
+    fprintf(stderr, "\n[PANIC] Signal %d: Locking Vault & Emergency Exit.\n", sig);
+    Vault* v = yai_get_vault();
+    if (v) {
+        v->authority_lock = true;
+        v->status = 4; // ERROR state
     }
-
-    switch (cmd_id) {
-        case YAI_CMD_PING:
-            snprintf(v->response_buffer, sizeof(v->response_buffer), "PONG");
-            v->last_result = 1;
-            break;
-
-        case YAI_CMD_NOOP:
-            snprintf(v->response_buffer, sizeof(v->response_buffer), "OK");
-            v->last_result = 1;
-            break;
-
-        case YAI_CMD_RECONFIGURE:
-            // Phase-2: do not try to enforce state machine here.
-            // If Kernel wants SUSPENDED before reconfigure, it will gate it.
-            // Engine just performs the reconfigure action if allowed (authority must be present).
-            if (v->authority_lock) {
-                snprintf(v->last_error, sizeof(v->last_error),
-                         "Reconfigure denied: authority required");
-                v->last_result = 0;
-                break;
-            }
-            // “reconfigure” here is symbolic; you can wire actual hooks later.
-            snprintf(v->response_buffer, sizeof(v->response_buffer), "RECONFIGURED");
-            v->last_result = 1;
-            break;
-
-        default:
-            snprintf(v->last_error, sizeof(v->last_error),
-                     "Unknown command id: %u", cmd_id);
-            v->last_result = 0;
-            break;
-    }
-}
-
-static int engine_get_queue_depth(const Vault* v) {
-    if (!v) return 0;
-    if (v->command_seq >= v->last_processed_seq) {
-        return (int)(v->command_seq - v->last_processed_seq);
-    }
-    return 0;
-}
-
-static int read_env_int(const char* key, int fallback) {
-    const char* raw = getenv(key);
-    char* end = NULL;
-    long v;
-    if (!raw || raw[0] == '\0') return fallback;
-    errno = 0;
-    v = strtol(raw, &end, 10);
-    if (errno != 0 || end == raw || *end != '\0') return fallback;
-    return (int)v;
-}
-
-static float read_env_float(const char* key, float fallback) {
-    const char* raw = getenv(key);
-    char* end = NULL;
-    float v;
-    if (!raw || raw[0] == '\0') return fallback;
-    errno = 0;
-    v = strtof(raw, &end);
-    if (errno != 0 || end == raw || *end != '\0') return fallback;
-    return v;
-}
-
-static void apply_cortex_overrides(engine_cortex_config_t* cfg, int* initial_target) {
-    if (!cfg) return;
-
-    cfg->tick_ms = (uint32_t)read_env_int("YAI_ENGINE_CORTEX_TICK_MS", (int)cfg->tick_ms);
-    cfg->ewma_alpha = read_env_float("YAI_ENGINE_CORTEX_EWMA_ALPHA", cfg->ewma_alpha);
-    cfg->up_threshold = read_env_float("YAI_ENGINE_CORTEX_UP_THRESHOLD", cfg->up_threshold);
-    cfg->down_threshold = read_env_float("YAI_ENGINE_CORTEX_DOWN_THRESHOLD", cfg->down_threshold);
-    cfg->peak_delta = read_env_float("YAI_ENGINE_CORTEX_PEAK_DELTA", cfg->peak_delta);
-    cfg->up_hold_ms = (uint32_t)read_env_int("YAI_ENGINE_CORTEX_UP_HOLD_MS", (int)cfg->up_hold_ms);
-    cfg->down_hold_ms = (uint32_t)read_env_int("YAI_ENGINE_CORTEX_DOWN_HOLD_MS", (int)cfg->down_hold_ms);
-    cfg->cooldown_up_ms = (uint32_t)read_env_int("YAI_ENGINE_CORTEX_COOLDOWN_UP_MS", (int)cfg->cooldown_up_ms);
-    cfg->cooldown_down_ms = (uint32_t)read_env_int("YAI_ENGINE_CORTEX_COOLDOWN_DOWN_MS", (int)cfg->cooldown_down_ms);
-    cfg->min_target = read_env_int("YAI_ENGINE_CORTEX_MIN_TARGET", cfg->min_target);
-    cfg->max_target = read_env_int("YAI_ENGINE_CORTEX_MAX_TARGET", cfg->max_target);
-    cfg->step_up = read_env_int("YAI_ENGINE_CORTEX_STEP_UP", cfg->step_up);
-    cfg->step_down = read_env_int("YAI_ENGINE_CORTEX_STEP_DOWN", cfg->step_down);
-
-    if (initial_target) {
-        *initial_target = read_env_int("YAI_ENGINE_CORTEX_INITIAL_TARGET", *initial_target);
-    }
-}
-
-static void emit_cortex_event(const char* ws, const engine_cortex_decision_t* d, int step) {
-    const char* kind = d->direction > 0 ? "engine_scale_up" : "engine_scale_down";
-    printf(
-        "[YAI_CORTEX_EVENT] {\"type\":\"%s\",\"ws\":\"%s\",\"actor\":\"engine\",\"reason\":\"%s\","
-        "\"metrics\":{\"queue_depth\":%d,\"queue_ewma\":%.4f,\"peak_delta\":%.4f},"
-        "\"recommendation\":{\"prev_target\":%d,\"new_target\":%d,\"step\":%d}}\n",
-        kind,
-        safe_cstr(ws),
-        safe_cstr(d->reason),
-        d->queue_depth,
-        d->queue_ewma,
-        d->peak_delta,
-        d->prev_target,
-        d->new_target,
-        step
-    );
-    fflush(stdout);
-}
-
-static int engine_rpc_bootstrap(const char *ws_id) {
-    // Optional but very useful: prove RPC path works and kernel accepts handshake.
-    // Phase-2: engine is not operator (arming=false).
-    yai_rpc_client_t c;
-    int rc = yai_rpc_connect(&c, ws_id);
-    if (rc != 0) {
-        fprintf(stderr, "[ENGINE] rpc connect failed (ws=%s, rc=%d)\n", ws_id, rc);
-        return -1;
-    }
-
-    rc = yai_rpc_handshake(&c, "engine-c/phase2");
-    if (rc != 0) {
-        fprintf(stderr, "[ENGINE] rpc handshake failed (ws=%s, rc=%d)\n", ws_id, rc);
-        yai_rpc_close(&c);
-        return -2;
-    }
-
-    // ping sanity
-    char tr[64];
-    yai_make_trace_id(tr);
-
-    char resp[4096];
-    rc = yai_rpc_call(&c, tr, "ping", 0, "user", "null", resp, sizeof(resp));
-    if (rc != 0) {
-        fprintf(stderr, "[ENGINE] rpc ping failed (rc=%d)\n", rc);
-        yai_rpc_close(&c);
-        return -3;
-    }
-
-    fprintf(stderr, "[ENGINE] rpc ping ok: %s", resp);
-    yai_rpc_close(&c);
-    return 0;
+    yai_storage_shutdown();
+    _exit(1);
 }
 
 int main(int argc, char *argv[]) {
@@ -251,95 +50,92 @@ int main(int argc, char *argv[]) {
 
     const char *ws_id = argv[1];
 
-    signal(SIGINT, handle_panic);
-    signal(SIGTERM, handle_panic);
+    signal(SIGINT,  handle_signal);
+    signal(SIGTERM, handle_signal);
+    signal(SIGSEGV, handle_panic);
 
-    // Attach vaults (Phase-2: best-effort multi-channel, fallback base works)
+    // 1. Storage L2 - Inizializzazione Globale (Registro Connessioni)
+    // Non passiamo più ws_id perché la connessione è aperta in lazy-loading
+    yai_storage_init(); 
+
+    // 2. Vault SHM
     VaultCluster cluster;
-    memset(&cluster, 0, sizeof(cluster));
-
-    cluster.core    = yai_bridge_attach(ws_id, "");
-    cluster.stream  = yai_bridge_attach(ws_id, "stream");
-    cluster.brain   = yai_bridge_attach(ws_id, "brain");
-    cluster.audit   = yai_bridge_attach(ws_id, "audit");
-    cluster.cache   = yai_bridge_attach(ws_id, "cache");
-    cluster.control = yai_bridge_attach(ws_id, "control");
-
+    cluster.core = yai_bridge_attach(ws_id, "CORE");
     if (!cluster.core) {
-        fprintf(stderr, "FATAL: vault attach failed (core)\n");
+        fprintf(stderr, "FATAL: Vault attach failed for ws=%s\n", ws_id);
         return 1;
     }
+    cluster.brain = yai_bridge_attach(ws_id, "brain");
 
-    // Phase-2: channels are optional; do NOT hard-fail if missing.
-    // You can tighten later when multi-vault is truly required.
-    if (!cluster.stream)  cluster.stream  = cluster.core;
-    if (!cluster.brain)   cluster.brain   = cluster.core;
-    if (!cluster.audit)   cluster.audit   = cluster.core;
-    if (!cluster.cache)   cluster.cache   = cluster.core;
-    if (!cluster.control) cluster.control = cluster.core;
-
-    Vault* v = cluster.core;
-
-    fprintf(stderr, "[YAI-ENGINE] Engine running (ws=%s)\n", ws_id);
-    // DO NOT set v->status here (Kernel owns state machine)
-    // Do not reset last_processed_seq blindly; preserve if kernel/previous run uses it.
-    // But ensure monotonic safety:
-    if (v->last_processed_seq > v->command_seq) {
-        v->last_processed_seq = v->command_seq;
+    // 3. RPC Control Plane (Canale Sovereign verso il Kernel)
+    yai_rpc_client_t rpc_client;
+    bool rpc_active = false;
+    
+    // Inizializziamo la struttura client
+    memset(&rpc_client, 0, sizeof(rpc_client));
+    
+    if (yai_rpc_connect(&rpc_client, ws_id) == 0) {
+        fprintf(stderr, "[RPC] Control socket connected to Kernel.\n");
+        // Handshake con ID dal nuovo yai_protocol_ids.h
+        yai_rpc_handshake(&rpc_client, YAI_CMD_HANDSHAKE);
+        rpc_active = true;
+    } else {
+        fprintf(stderr, "[RPC] Warning: Kernel connection unavailable. Standing by.\n");
     }
 
-    // Optional RPC bootstrap sanity (handshake + ping)
-    (void)engine_rpc_bootstrap(ws_id);
+    fprintf(stderr, "[ENGINE] Sovereign L2 Online (ws=%s)\n", ws_id);
 
-    // Cortex init
-    engine_cortex_config_t cortex_cfg = engine_cortex_default_config();
-    int initial_target = cortex_cfg.min_target;
-    apply_cortex_overrides(&cortex_cfg, &initial_target);
-    if (engine_cortex_validate_config(&cortex_cfg) != 0) {
-        fprintf(stderr, "FATAL: invalid engine cortex config\n");
-        return 2;
-    }
+    uint32_t last_shm_seq = cluster.core->command_seq;
 
-    engine_cortex_state_t cortex_st;
-    engine_cortex_init(&cortex_st, &cortex_cfg, initial_target);
-
-    uint32_t last_seen_seq = v->last_processed_seq;
-    uint32_t cortex_elapsed_ms = 0;
-
-    const uint32_t loop_sleep_us = 50000;
-    const uint32_t loop_tick_ms = loop_sleep_us / 1000;
-
-    while (v->status != YAI_STATE_ERROR && v->status != YAI_STATE_HALT) {
-        validate_vault_integrity(&cluster);
-
-        // Process new command if queue advanced
-        if (v->command_seq != last_seen_seq) {
-            last_seen_seq = v->command_seq;
-
-            // Minimal audit trace (optional)
-            // yai_audit_log_transition("cmd_seen", v->status, v->status);
-
-            process_command(v);
-
-            // Mark processed
-            v->last_processed_seq = last_seen_seq;
+    // 4. Main Loop
+    while (keep_running) {
+        
+        // CANALE A: State/Legacy (Vault via SHM)
+        if (cluster.core->command_seq != last_shm_seq) {
+            last_shm_seq = cluster.core->command_seq;
+            fprintf(stderr, "[SHM] Command from SHM: 0x%x\n", cluster.core->last_command_id);
+            cluster.core->last_processed_seq = last_shm_seq;
         }
 
-        // Cortex tick
-        cortex_elapsed_ms += loop_tick_ms;
-        if (cortex_elapsed_ms >= cortex_cfg.tick_ms) {
-            int qd = engine_get_queue_depth(v);
-            engine_cortex_decision_t d = engine_cortex_tick(&cortex_st, &cortex_cfg, qd);
-            if (d.triggered) {
-                int step = d.direction > 0 ? cortex_cfg.step_up : cortex_cfg.step_down;
-                emit_cortex_event(ws_id, &d, step);
+        // CANALE B: Inference/Sovereign (Socket via RPC)
+        if (rpc_active && rpc_client.fd >= 0) {
+            fd_set read_fds;
+            struct timeval tv = {0, 5000}; // 5ms sleep
+            FD_ZERO(&read_fds);
+            FD_SET(rpc_client.fd, &read_fds);
+
+            if (select(rpc_client.fd + 1, &read_fds, NULL, NULL, &tv) > 0) {
+                yai_rpc_envelope_t env;
+                ssize_t n = read(rpc_client.fd, &env, sizeof(env));
+                
+                if (n == sizeof(env)) {
+                    char payload[YAI_RPC_BUFFER_MAX] = {0};
+                    if (env.payload_len > 0 && env.payload_len < YAI_RPC_BUFFER_MAX) {
+                        read(rpc_client.fd, payload, env.payload_len);
+                    }
+
+                    // Il Router gestisce il dispatching usando il ws_id dell'engine
+                    // Passiamo il ws_id corrente per assicurare il multi-tenancy dello storage
+                    char* response = yai_rpc_router_dispatch(ws_id, &env, payload);
+                    if (response) {
+                        write(rpc_client.fd, response, strlen(response));
+                        free(response);
+                    }
+                } else if (n == 0) {
+                    fprintf(stderr, "[RPC] Connection closed by Kernel.\n");
+                    rpc_active = false;
+                }
             }
-            cortex_elapsed_ms = 0;
         }
 
-        usleep(loop_sleep_us);
+        usleep(1000); // 1ms tick rate
     }
 
+    // 5. Cleanup
+    fprintf(stderr, "\n[ENGINE] Cleaning up resources...\n");
+    if (rpc_active) yai_rpc_close(&rpc_client);
+    yai_storage_shutdown();
     yai_bridge_detach();
+
     return 0;
 }
