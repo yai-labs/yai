@@ -18,7 +18,6 @@ impl SemanticStore {
         Self::open_at_path(layout.semantic_sqlite())
     }
 
-
     pub fn open_at_path(db_path: PathBuf) -> Result<Self> {
         if let Some(parent) = db_path.parent() {
             fs::create_dir_all(parent).context("create semantic db parent dir")?;

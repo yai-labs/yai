@@ -237,10 +237,7 @@ impl ActivationTraceStore {
             fs::create_dir_all(parent)?;
         }
 
-        let store = Self {
-            layout,
-            db_path,
-        };
+        let store = Self { layout, db_path };
 
         store.init()?;
         Ok(store)
@@ -365,8 +362,7 @@ impl ActivationTraceStore {
     }
 
     fn conn(&self) -> Result<Connection> {
-        Connection::open(&self.db_path)
-            .map_err(|e| anyhow!("open activation db: {e}"))
+        Connection::open(&self.db_path).map_err(|e| anyhow!("open activation db: {e}"))
     }
 
     fn init(&self) -> Result<()> {
@@ -410,7 +406,6 @@ fn activation_db_path(ws_id: &str) -> PathBuf {
     let layout = WorkspaceLayout::new(ws_id);
     layout.root_dir().join("activation.sqlite")
 }
-
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
 struct ActivationRunMetaRow {

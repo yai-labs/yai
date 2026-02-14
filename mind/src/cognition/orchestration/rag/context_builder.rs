@@ -1,9 +1,6 @@
 use crate::memory::graph::api::{GraphFacade, GraphScope};
 
-pub fn build_context(
-    user_text: &str,
-    scope: GraphScope,
-) -> String {
+pub fn build_context(user_text: &str, scope: GraphScope) -> String {
     let mut out = String::new();
     out.push_str("# Context\n");
     out.push_str(&format!("User: {}\n", user_text));

@@ -1,5 +1,5 @@
 pub mod activation;
-pub mod semantic;
-pub mod episodic;
 pub mod authority;
+pub mod episodic;
+pub mod semantic;
 pub mod vector;

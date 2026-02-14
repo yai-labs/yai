@@ -7,5 +7,3 @@ pub struct AgentOutput {
 pub trait Agent: Send + Sync {
     fn id(&self) -> &'static str;
 }
-
-
