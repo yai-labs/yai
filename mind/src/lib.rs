@@ -1,9 +1,8 @@
-pub mod error;
-pub mod types;
-
 pub mod cognition;
-pub mod paths;
+pub mod memory;
 pub mod runtime;
 pub mod transport;
-
-pub mod legacy;
+pub mod providers;
+pub mod workspace;
+pub mod error;
+pub mod shared;

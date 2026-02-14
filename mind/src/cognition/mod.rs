@@ -1,2 +1,4 @@
-// Cognition = planning + memory operations + tool routing.
-// New architecture starts here.
+pub mod agents;
+pub mod models;
+pub mod orchestration;
+pub mod reasoning;
