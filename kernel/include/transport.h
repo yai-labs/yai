@@ -17,7 +17,7 @@ typedef struct {
     uint8_t payload[1024];
 } Packet;
 
-int yai_transport_init(void);
+int yai_transport_init_at(const char *path);
 void yai_transport_serve_once(void);
 
 #endif
