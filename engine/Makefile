@@ -21,37 +21,30 @@ CACHE_DIR := $(ART_ROOT)/cache
 VAULT_ABI_SRC := ../law/specs/vault/yai_vault_abi.h
 PROTOCOL_DIR  := ../law/specs/protocol
 
-# ---- Sources ----
+# ---- Source roots ----
 SRC_DIR := src
-# Il find ricorsivo è perfetto, ma dobbiamo assicurarci che cJSON sia incluso 
-# se si trova fuori dal path ricorsivo o ha bisogno di flag specifici
+THIRD_PARTY_DIR := third_party
+
+# ---- Sources ----
+# Tutti i .c sotto src/ + il cJSON vero sotto third_party/
 SRCS := $(shell find $(SRC_DIR) -name "*.c")
+SRCS += $(THIRD_PARTY_DIR)/cjson/cJSON.c
 
 # ---- Objects ----
-OBJS := $(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
+# Manteniamo la struttura delle cartelle dentro BUILD_DIR
+# (es: src/bridge/x.c -> $(BUILD_DIR)/src/bridge/x.o)
+OBJS := $(patsubst %.c,$(BUILD_DIR)/%.o,$(SRCS))
 
 # ---- Compiler flags ----
-# Aggiungiamo -I./src/external per cJSON
 CFLAGS := -Wall -Wextra -O2 -MMD -MP \
           -I./include \
-          -I./src/external \
+          -I./third_party/cjson \
           -I../kernel/include \
           -I../law/specs/vault \
           -I$(PROTOCOL_DIR)
 
-# Aggiunto sqlite3 e pthread come richiesto
 LDFLAGS := -lpthread -lsqlite3
 
-# ---- Sources ----
-# ---- Sources (RECURSIVE) ----
-SRC_DIR := src
-# Cerca tutti i .c in src e in ogni sottocartella (bridge, cortex, gates, config)
-SRCS := $(shell find $(SRC_DIR) -name "*.c")
-# Trasforma i path dei sorgenti in path degli oggetti mantenendo la struttura
-OBJS := $(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
-
-LDFLAGS := -lpthread -lsqlite3
-SRC += src/external/cJSON.c
 TARGET := $(BIN_DIR)/yai-engine
 TEST_CORTEX := $(BUILD_DIR)/cortex_harness
 
@@ -79,8 +72,9 @@ $(TARGET): $(OBJS)
 	$(CC) $(OBJS) -o $@ $(LDFLAGS)
 	@echo "--- [YAI-ENGINE] Build Complete ---"
 
-# ---- Compile ----
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c | dirs
+# ---- Compile (generic, works for src/ and third_party/) ----
+# $< è il .c originale, $@ è l'oggetto dentro BUILD_DIR
+$(BUILD_DIR)/%.o: %.c | dirs
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
@@ -88,8 +82,8 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c | dirs
 test-cortex: abi dirs $(TEST_CORTEX)
 	@$(TEST_CORTEX)
 
-$(TEST_CORTEX): tests/cortex_harness.c src/engine_cortex.c | dirs
-	$(CC) $(CFLAGS) tests/cortex_harness.c src/engine_cortex.c -o $(TEST_CORTEX)
+$(TEST_CORTEX): tests/cortex_harness.c src/cortex/engine_cortex.c | dirs
+	$(CC) $(CFLAGS) tests/cortex_harness.c src/cortex/engine_cortex.c -o $(TEST_CORTEX)
 
 # ---- Debug ----
 debug: CFLAGS += -g -DDEBUG
@@ -103,5 +97,5 @@ clean:
 purge: clean
 	rm -rf $(BIN_DIR) $(LOG_DIR) $(TMP_DIR) $(CACHE_DIR)
 
-# Auto deps
+# ---- Auto deps ----
 -include $(OBJS:.o=.d)

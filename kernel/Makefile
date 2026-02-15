@@ -23,7 +23,10 @@ CACHE_DIR := $(ART_ROOT)/cache
 CFLAGS := -Wall -Wextra -O2 -MMD -MP \
           -I./include \
           -I../boot/include \
+          -I../law/specs \
+          -I../law/specs/protocol \
           -I../law/specs/vault
+
 
 LDFLAGS :=
 
@@ -44,7 +47,9 @@ KERNEL_CORE_SRC := \
     src/core/transport.c \
     src/core/yai_session.c \
     src/core/control_transport.c \
-    src/bin/yai_kernel_main.c
+    src/bin/yai_kernel_main.c \
+    src/core/rpc_binary.c \
+
 
 # Unifichiamo tutto nell'unico binario sovrano
 SRCS := $(BOOT_SRC) $(KERNEL_CORE_SRC)

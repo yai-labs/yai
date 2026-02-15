@@ -1,55 +1,76 @@
-# YAI CLI - Sovereign Makefile (ADR-004)
-CC = gcc
-CFLAGS = -Wall -Wextra -O2 -I./include -I../../engine/src/external
-LDFLAGS = 
+# ==========================================
+# YAI CLI Build System (Stable)
+# ==========================================
 
-# Directory di output
-BIN_DIR = .
-OBJ_DIR = obj
+CC := gcc
 
-# Sorgenti della CLI
-SRC = src/main.c \
-      src/paths.c \
-      src/rpc.c \
-      src/envelope.c \
-      src/fmt.c \
-      src/env.c \
-      src/cmd_root.c \
-      src/cmd_kernel.c \
-      src/cmd_ws.c \
-      src/cmd_engine.c \
-      src/cmd_mind.c \
-      src/cmd_law.c
+# ---- Artifact roots ----
+ART_ROOT ?= $(HOME)/.yai/artifacts/yai-core
 
-# Dipendenza esterna (cJSON dall'engine)
-EXTERNAL_SRC = ../../engine/src/external/cJSON.c
+OUT_BUILD_DIR ?=
+OUT_BIN_DIR ?=
 
-# Generazione lista oggetti
-OBJS = $(SRC:src/%.c=$(OBJ_DIR)/%.o) $(OBJ_DIR)/cJSON.o
+BUILD_DIR := $(if $(OUT_BUILD_DIR),$(OUT_BUILD_DIR),$(CURDIR)/obj)
+BIN_DIR   := $(if $(OUT_BIN_DIR),$(OUT_BIN_DIR),$(CURDIR))
 
-# Target principale
-TARGET = $(BIN_DIR)/yai
+TARGET := $(BIN_DIR)/yai
 
-all: $(TARGET)
+# ---- Include roots ----
+LAW_DIR := ../../law/specs
+
+CFLAGS := -Wall -Wextra -O2 -MMD -MP \
+	-I./include \
+	-I$(LAW_DIR)
+
+LDFLAGS :=
+
+# ---- Explicit Sources (NO find, NO magic) ----
+SRCS := \
+	src/main.c \
+	src/cmd_engine.c \
+	src/cmd_kernel.c \
+	src/cmd_mind.c \
+	src/cmd_root.c \
+	src/cmd_ws.c \
+	src/cmd_law.c \
+	src/cmd_test.c \
+	src/cmd_up.c \
+	src/env.c \
+	src/envelope.c \
+	src/fmt.c \
+	src/paths.c \
+	src/rpc.c
+
+# ---- Objects ----
+OBJS := $(patsubst src/%.c,$(BUILD_DIR)/%.o,$(SRCS))
+
+.PHONY: all clean dirs
+
+# ==========================================
+# Build
+# ==========================================
+
+all: dirs $(TARGET)
+
+dirs:
+	@mkdir -p $(BUILD_DIR)
+	@mkdir -p $(BIN_DIR)
 
 $(TARGET): $(OBJS)
-	@echo "Linking Sovereign CLI: $@"
-	@$(CC) $(OBJS) -o $@ $(LDFLAGS)
-	@echo "Build Complete: ./yai"
+	@echo "Linking CLI: $@"
+	$(CC) $(OBJS) -o $@ $(LDFLAGS)
+	@echo "--- [YAI-CLI] Build Complete ---"
 
-# Compilazione moduli interni
-$(OBJ_DIR)/%.o: src/%.c
-	@mkdir -p $(OBJ_DIR)
+# Compile rule
+$(BUILD_DIR)/%.o: src/%.c | dirs
 	@echo "CC $<"
-	@$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
-# Compilazione cJSON (Speciale)
-$(OBJ_DIR)/cJSON.o: $(EXTERNAL_SRC)
-	@mkdir -p $(OBJ_DIR)
-	@echo "CC (ext) $<"
-	@$(CC) $(CFLAGS) -c $< -o $@
+# ==========================================
+# Clean
+# ==========================================
 
 clean:
-	rm -rf $(OBJ_DIR) $(TARGET)
+	rm -rf $(BUILD_DIR) $(TARGET)
 
-.PHONY: all clean
+-include $(OBJS:.o=.d)

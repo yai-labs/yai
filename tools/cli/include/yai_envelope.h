@@ -7,7 +7,19 @@
 
 void yai_make_trace_id(char out[64]);
 
-// La nuova busta ADR-004
+/**
+ * ADR-004 (CLI -> Root Control Plane) JSONL builder.
+ *
+ * Canonical line format (single line, newline-terminated):
+ * {
+ *   "v":1,
+ *   "bin":"kernel|engine|mind",
+ *   "ws_id":"<id>" | null,
+ *   "type":"control|storage|provider|cognition",
+ *   "trace":"...",
+ *   "payload": { ... }   // MUST be JSON object
+ * }
+ */
 int yai_build_v1_envelope(
     const char *bin,
     const char *ws_id,
@@ -18,7 +30,10 @@ int yai_build_v1_envelope(
     size_t out_cap
 );
 
-// Vecchia firma (mantenuta per evitare break immediati altrove)
+/**
+ * Legacy compatibility wrapper (kept to avoid breaking old cmd_*)
+ * NOTE: arming/role are ignored here (migrate callers to canonical payload).
+ */
 int yai_build_request_jsonl(
     const char *ws_id,
     const char *trace_id,

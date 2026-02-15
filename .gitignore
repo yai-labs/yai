@@ -465,3 +465,6 @@ bin/
 Data/db/
 *.db
 tools/cli/yai
+
+# build tooling
+engine/compile_commands.json

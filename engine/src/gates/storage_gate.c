@@ -7,7 +7,7 @@
 
 #include "../../include/storage_gate.h"
 #include "../../include/engine_bridge.h"
-#include "../external/cJSON.h" 
+#include "cJSON.h" 
 
 // Registro delle connessioni per il Multi-tenancy (ADR-001)
 typedef struct {

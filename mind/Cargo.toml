@@ -5,10 +5,35 @@ edition = "2021"
 authors = ["Francesco Maiomascio"]
 description = "YAI Cognitive Core (Mind Layer - L3)"
 
+[features]
+# Default: build snella. Niente ONNX, niente C++ (usearch), niente HTTP.
+default = ["minimal"]
+
+# Core runtime (storage + graph + ids + json)
+minimal = []
+
+# --- Optional / heavy ---
+http-client = ["dep:reqwest"]
+
+vector-usearch = ["dep:usearch"]
+
+embeddings-onnx = ["dep:tract-onnx", "dep:tokenizers"]
+embeddings-candle = [
+  "dep:candle-core",
+  "dep:candle-nn",
+  "dep:candle-transformers",
+  "dep:tokenizers"
+]
+
+# Legacy gates
+legacy = []
+legacy_cognition = []
+legacy-providers = ["legacy"]
+
 [dependencies]
 anyhow = "1"
 
-# Identificatori (Mandatorio per RPC Envelope v2)
+# Identificatori
 uuid = { version = "1.7", features = ["v4", "fast-rng"] }
 
 # Serializzazione
@@ -19,12 +44,16 @@ serde_json = "1.0"
 rusqlite = { version = "0.31", features = ["bundled"] }
 petgraph = "0.6"
 
-# Vector search & Hashing
-usearch = "2"
+# Hashing (core)
 blake3 = "1"
 
-# Networking (Necessario per i futuri Provider Gates)
-reqwest = { version = "0.12", features = ["blocking", "json", "rustls-tls"] }
+# Vector search (HEAVY: pulls cxx) -> optional
+usearch = { version = "2", optional = true }
+
+# Networking (HEAVY) -> optional
+# Nota: tolgo "blocking": se ti serve davvero, meglio metterla sotto un'altra feature,
+# ma intanto rendiamola opzionale.
+reqwest = { version = "0.12", default-features = false, features = ["rustls-tls", "json"], optional = true }
 
 # Optional embeddings backends
 tokenizers = { version = "0.15", optional = true }
@@ -32,20 +61,6 @@ tract-onnx = { version = "0.20", optional = true }
 candle-core = { version = "0.5", optional = true }
 candle-nn = { version = "0.5", optional = true }
 candle-transformers = { version = "0.5", optional = true }
-
-[features]
-default = ["embeddings-onnx"]
-embeddings-onnx = ["tract-onnx", "tokenizers"]
-embeddings-candle = [
-    "candle-core",
-    "candle-nn",
-    "candle-transformers",
-    "tokenizers"
-]
-# Feature flags per mantenere il vecchio codice isolato mentre ripuliamo
-legacy = []
-legacy_cognition = []
-legacy-providers = ["legacy"]
 
 [dev-dependencies]
 memoffset = "0.9"

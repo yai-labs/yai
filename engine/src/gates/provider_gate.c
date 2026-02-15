@@ -1,6 +1,6 @@
 #include "../../include/provider_gate.h"
 #include "../../include/shared_constants.h"
-#include "../external/cJSON.h"
+#include "cJSON.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
