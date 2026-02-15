@@ -1,35 +1,30 @@
-#include <stdio.h>   // Per printf, stderr, fprintf
-#include <stdlib.h>  // Per system, exit
-#include <unistd.h>  // Per sleep, access
+#include "../include/yai_paths.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 #define YAI_OK 0
 
-// Funzione dummy per il ping del socket (da implementare con connect())
-int ping_root_socket() {
-    // Verifica se il file del socket esiste come test primario
-    if (access("/Users/francescomaiomascio/.yai/run/dev/control.sock", F_OK) != -1) {
-        return YAI_OK;
-    }
-    return -1;
+static int ping_root_socket(void) {
+    char sock[512];
+    if (yai_path_root_sock(sock, sizeof(sock)) != 0) return -1;
+    return (access(sock, F_OK) == 0) ? YAI_OK : -1;
 }
 
-void cmd_up() {
+void cmd_up(void) {
     printf("\033[1;33m[UP]\033[0m Orchestrating Sovereign Runtime...\n");
 
-    // 1. L0 -> L1: BOOT (che diventa KERNEL via execvp)
-    if (ping_root_socket() != YAI_OK) { 
+    // 1) L0->L1: boot/kernel
+    if (ping_root_socket() != YAI_OK) {
         printf("[UP] Root Plane offline. Launching yai-boot...\n");
-        // Usiamo system() o spawn_process() per lanciare il boot in background
         if (system("yai-boot &") != 0) {
             fprintf(stderr, "[ERROR] Failed to ignite bootstrap.\n");
             return;
         }
-        // Diamo tempo al Kernel di aprire il socket e creare la SHM
-        sleep(2); 
+        sleep(2);
     }
 
-    // 2. L1 -> L2: ENGINE
-    // Ora che il Root Plane è attivo, solleviamo l'Engine di sistema
+    // 2) L1->L2: engine
     printf("[UP] Root Plane active. Igniting Engine...\n");
     if (system("yai-engine &") != 0) {
         fprintf(stderr, "[ERROR] Failed to launch Engine.\n");
@@ -37,5 +32,5 @@ void cmd_up() {
     }
 
     printf("\n\033[1;32m✔ YAI Runtime is UP (Global Context)\033[0m\n");
-    printf("Next step: Launch a workspace with 'yai-mind --ws <id>'\n");
+    printf("Next: choose a workspace with --ws and use 'yai mind ...'\n");
 }

@@ -1,55 +1,54 @@
-# YAI CLI - Sovereign Makefile (ADR-004)
-CC = gcc
-CFLAGS = -Wall -Wextra -O2 -I./include -I../../engine/src/external
-LDFLAGS = 
+# ===============================
+# YAI CLI Build System (Tools)
+# ADR-002/004 aligned
+# ===============================
 
-# Directory di output
-BIN_DIR = .
-OBJ_DIR = obj
+CC := gcc
 
-# Sorgenti della CLI
-SRC = src/main.c \
-      src/paths.c \
-      src/rpc.c \
-      src/envelope.c \
-      src/fmt.c \
-      src/env.c \
-      src/cmd_root.c \
-      src/cmd_kernel.c \
-      src/cmd_ws.c \
-      src/cmd_engine.c \
-      src/cmd_mind.c \
-      src/cmd_law.c
+ART_ROOT ?= $(HOME)/.yai/artifacts/yai-core
+OUT_BUILD_DIR ?=
+OUT_BIN_DIR ?=
 
-# Dipendenza esterna (cJSON dall'engine)
-EXTERNAL_SRC = ../../engine/src/external/cJSON.c
+BUILD_DIR := $(if $(OUT_BUILD_DIR),$(OUT_BUILD_DIR),$(CURDIR)/obj)
+BIN_DIR   := $(if $(OUT_BIN_DIR),$(OUT_BIN_DIR),$(CURDIR))
 
-# Generazione lista oggetti
-OBJS = $(SRC:src/%.c=$(OBJ_DIR)/%.o) $(OBJ_DIR)/cJSON.o
+TARGET := $(BIN_DIR)/yai
 
-# Target principale
-TARGET = $(BIN_DIR)/yai
+# ---- Include roots ----
+LAW_DIR := ../../law/specs
 
-all: $(TARGET)
+CFLAGS := -Wall -Wextra -O2 -MMD -MP \
+  -I./include \
+  -I$(LAW_DIR)
+
+LDFLAGS :=
+
+# ---- Sources ----
+SRC_DIR := src
+SRCS := $(shell find $(SRC_DIR) -name "*.c")
+
+# ---- Objects ----
+OBJS := $(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
+
+.PHONY: all clean dirs
+
+all: dirs $(TARGET)
+
+dirs:
+	@mkdir -p $(BUILD_DIR) $(BIN_DIR)
 
 $(TARGET): $(OBJS)
-	@echo "Linking Sovereign CLI: $@"
+	@mkdir -p $(dir $@)
+	@echo "Linking CLI: $@"
 	@$(CC) $(OBJS) -o $@ $(LDFLAGS)
-	@echo "Build Complete: ./yai"
+	@echo "--- [YAI-CLI] Build Complete ---"
 
-# Compilazione moduli interni
-$(OBJ_DIR)/%.o: src/%.c
-	@mkdir -p $(OBJ_DIR)
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c | dirs
+	@mkdir -p $(dir $@)
 	@echo "CC $<"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-# Compilazione cJSON (Speciale)
-$(OBJ_DIR)/cJSON.o: $(EXTERNAL_SRC)
-	@mkdir -p $(OBJ_DIR)
-	@echo "CC (ext) $<"
-	@$(CC) $(CFLAGS) -c $< -o $@
-
 clean:
-	rm -rf $(OBJ_DIR) $(TARGET)
+	rm -rf $(BUILD_DIR) $(TARGET)
 
-.PHONY: all clean
+-include $(OBJS:.o=.d)

@@ -3,17 +3,22 @@
 #include <stdio.h>
 #include <string.h>
 
+static void print_line_ensure_nl(const char *s) {
+    if (!s) return;
+    fputs(s, stdout);
+    size_t n = strlen(s);
+    if (n == 0 || s[n - 1] != '\n') fputc('\n', stdout);
+}
+
 void yai_print_response(const char *json_line, int json_mode) {
     if (!json_line) return;
 
     if (json_mode) {
-        fputs(json_line, stdout);
-        if (json_line[0] && json_line[strlen(json_line) - 1] != '\n') fputc('\n', stdout);
+        print_line_ensure_nl(json_line);
         return;
     }
 
-    // Human mode: tiny heuristic (no JSON parser)
-    // Print the whole line but with a prefix.
-    fprintf(stdout, "[yai] %s", json_line);
-    if (json_line[0] && json_line[strlen(json_line) - 1] != '\n') fputc('\n', stdout);
+    // Human mode: prefix + line (no JSON parsing; keep deterministic)
+    fputs("[yai] ", stdout);
+    print_line_ensure_nl(json_line);
 }

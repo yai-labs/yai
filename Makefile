@@ -56,8 +56,26 @@ cli:
 	@cp $(CLI_DIR)/yai $(BIN_DIR)/yai
 
 # =========================================
-# INSTALL (The "Sovereign" Way)
+# INSTALL (Sovereign, PATH-friendly)
 # =========================================
+
+UNAME_S := $(shell uname -s 2>/dev/null)
+UNAME_M := $(shell uname -m 2>/dev/null)
+
+# macOS Homebrew default:
+# - arm64: /opt/homebrew/bin
+# - intel: /usr/local/bin
+DEFAULT_PREFIX := /usr/local
+ifeq ($(UNAME_S),Darwin)
+  ifeq ($(UNAME_M),arm64)
+    DEFAULT_PREFIX := /opt/homebrew
+  endif
+endif
+
+PREFIX      ?= $(DEFAULT_PREFIX)
+INSTALL_BIN := $(PREFIX)/bin
+
+.PHONY: install uninstall
 
 install: all
 	@echo "[INSTALL] Deploying YAI binaries to $(INSTALL_BIN)..."
@@ -66,7 +84,13 @@ install: all
 	@sudo install -m 755 $(BIN_DIR)/yai-kernel $(INSTALL_BIN)/yai-kernel
 	@sudo install -m 755 $(BIN_DIR)/yai-engine $(INSTALL_BIN)/yai-engine
 	@sudo install -m 755 $(BIN_DIR)/yai-boot   $(INSTALL_BIN)/yai-boot
-	@echo "✔ YAI is now available globally. Try running 'yai status' without ./"
+	@sudo install -m 755 $(BIN_DIR)/yai-mind   $(INSTALL_BIN)/yai-mind
+	@echo "✔ Installed."
+	@echo "Try:"
+	@echo "  yai law check"
+	@echo "  yai up"
+	@echo "  yai kernel status"
+	@echo "If 'yai' is not found, ensure $(INSTALL_BIN) is in your PATH."
 
 uninstall:
 	@echo "[UNINSTALL] Removing YAI binaries from $(INSTALL_BIN)..."
@@ -74,7 +98,9 @@ uninstall:
 	@sudo rm -f $(INSTALL_BIN)/yai-kernel
 	@sudo rm -f $(INSTALL_BIN)/yai-engine
 	@sudo rm -f $(INSTALL_BIN)/yai-boot
-	@echo "✔ System cleaned."
+	@sudo rm -f $(INSTALL_BIN)/yai-mind
+	@echo "✔ Removed."
+
 
 # =========================================
 # CLEAN
