@@ -2,27 +2,28 @@
 # YAI — Root Build Orchestrator
 # =========================================
 
-ROOT_DIR  := $(abspath .)
-BIN_DIR   := $(ROOT_DIR)/dist/bin
-BUILD_DIR := $(ROOT_DIR)/build
-DIST_DIR  := $(ROOT_DIR)/dist
-VERIFY_DIR:= $(DIST_DIR)/verify
+ROOT_DIR   := $(abspath .)
+BIN_DIR    := $(ROOT_DIR)/dist/bin
+BUILD_DIR  := $(ROOT_DIR)/build
+DIST_DIR   := $(ROOT_DIR)/dist
+VERIFY_DIR := $(DIST_DIR)/verify
 
 BOOT_DIR   := boot
 CORE_DIR   := core
 KERNEL_DIR := kernel
 ENGINE_DIR := engine
-MIND_DIR   := mind
-CLI_DIR    := tools/cli
+
+# Externalized specs (submodule)
+SPECS_DIR  := $(ROOT_DIR)/deps/yai-specs
 
 DOXYFILE := Doxyfile
 
-.PHONY: all boot core kernel engine mind cli clean docs
+.PHONY: all boot core kernel engine clean docs
 
 # -----------------------------------------
 # Build Order
 # -----------------------------------------
-all: boot core kernel engine mind cli
+all: boot core kernel engine
 	@echo "--- [YAI] Build Complete ---"
 
 # -----------------------------------------
@@ -32,7 +33,7 @@ boot:
 	$(MAKE) -C $(BOOT_DIR) \
 	OUT_BIN_DIR=$(BIN_DIR) \
 	OUT_BUILD_DIR=$(BUILD_DIR)/boot \
-	EXTRA_CFLAGS="-I$(ROOT_DIR)/law/specs" all
+	EXTRA_CFLAGS="-I$(SPECS_DIR) -I$(SPECS_DIR)/protocol -I$(SPECS_DIR)/vault -I$(SPECS_DIR)/protocol/runtime" all
 
 # -----------------------------------------
 # Core (Root Plane)
@@ -41,7 +42,7 @@ core:
 	$(MAKE) -C $(CORE_DIR) \
 	OUT_BIN_DIR=$(BIN_DIR) \
 	OUT_BUILD_DIR=$(BUILD_DIR)/core \
-	EXTRA_CFLAGS="-I$(ROOT_DIR)/law/specs" all
+	EXTRA_CFLAGS="-I$(SPECS_DIR) -I$(SPECS_DIR)/protocol -I$(SPECS_DIR)/vault -I$(SPECS_DIR)/protocol/runtime" all
 
 # -----------------------------------------
 # Kernel
@@ -50,7 +51,7 @@ kernel:
 	$(MAKE) -C $(KERNEL_DIR) \
 	OUT_BIN_DIR=$(BIN_DIR) \
 	OUT_BUILD_DIR=$(BUILD_DIR)/kernel \
-	EXTRA_CFLAGS="-I$(ROOT_DIR)/law/specs" all
+	EXTRA_CFLAGS="-I$(SPECS_DIR) -I$(SPECS_DIR)/protocol -I$(SPECS_DIR)/vault -I$(SPECS_DIR)/protocol/runtime" all
 
 # -----------------------------------------
 # Engine
@@ -58,23 +59,8 @@ kernel:
 engine:
 	$(MAKE) -C $(ENGINE_DIR) \
 	OUT_BIN_DIR=$(BIN_DIR) \
-	OUT_BUILD_DIR=$(BUILD_DIR)/engine all
-
-# -----------------------------------------
-# Mind (Rust)
-# -----------------------------------------
-mind:
-	cargo build --release --workspace
-	@mkdir -p $(BIN_DIR)
-	@cp target/release/yai-mind $(BIN_DIR)/yai-mind 2>/dev/null || true
-
-# -----------------------------------------
-# CLI
-# -----------------------------------------
-cli:
-	$(MAKE) -C $(CLI_DIR) \
-	OUT_BIN_DIR=$(BIN_DIR) \
-	OUT_BUILD_DIR=$(BUILD_DIR)/cli
+	OUT_BUILD_DIR=$(BUILD_DIR)/engine \
+	EXTRA_CFLAGS="-I$(SPECS_DIR) -I$(SPECS_DIR)/protocol -I$(SPECS_DIR)/vault -I$(SPECS_DIR)/protocol/runtime" all
 
 # -----------------------------------------
 # Clean
@@ -82,7 +68,6 @@ cli:
 clean:
 	rm -rf $(BUILD_DIR)
 	rm -rf $(DIST_DIR)
-	cd $(MIND_DIR) && cargo clean || true
 
 # -----------------------------------------
 # Docs
