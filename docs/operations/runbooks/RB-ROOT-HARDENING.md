@@ -1,3 +1,16 @@
+---
+id: RB-ROOT-HARDENING
+status: active
+effective_date: 2026-02-16
+revision: 3
+supersedes: []
+law_refs:
+  - law/specs/protocol/transport.h
+  - law/specs/protocol/auth.h
+owner: runtime
+---
+
+
 # YAI Root Hardening v2 — Operational Runbook
 
 **Branch:** `feat/root-hardening-v2`  
