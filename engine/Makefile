@@ -17,25 +17,35 @@ CACHE_DIR := $(ART_ROOT)/cache
 # ---- ABI + Protocol source of truth ----
 VAULT_ABI_SRC := ../law/specs/vault/yai_vault_abi.h
 PROTOCOL_DIR  := ../law/specs/protocol
+PROTOCOL_RUNTIME_DIR := ../law/specs/protocol/runtime
 
 # ---- Source roots ----
 SRC_DIR := src
 THIRD_PARTY_DIR := third_party
 
-# ---- Sources ----
-SRCS := $(shell find $(SRC_DIR) -name "*.c")
-SRCS += $(THIRD_PARTY_DIR)/cjson/cJSON.c
+# ---- Engine sources ----
+ENGINE_SRCS := $(shell find $(SRC_DIR) -name "*.c")
+ENGINE_SRCS += $(THIRD_PARTY_DIR)/cjson/cJSON.c
+
+# ---- Protocol runtime (NEW) ----
+PROTOCOL_RUNTIME_SRCS := \
+	$(PROTOCOL_RUNTIME_DIR)/rpc_runtime.c
 
 # ---- Objects ----
-OBJS := $(patsubst %.c,$(BUILD_DIR)/%.o,$(SRCS))
+OBJS_ENGINE  := $(patsubst %.c,$(BUILD_DIR)/%.o,$(ENGINE_SRCS))
+OBJS_PROTO   := $(patsubst %.c,$(BUILD_DIR)/%.o,$(PROTOCOL_RUNTIME_SRCS))
+
+OBJS := $(OBJS_ENGINE) $(OBJS_PROTO)
 
 # ---- Compiler flags ----
-CFLAGS := -Wall -Wextra -O2 -MMD -MP \
+CFLAGS := -Wall -Wextra -O2 -std=c11 -MMD -MP \
           -I./include \
           -I./third_party/cjson \
           -I../kernel/include \
-          -I../law/specs/vault \
-          -I$(PROTOCOL_DIR)
+          -I../law/specs \
+          -I$(PROTOCOL_DIR) \
+          -I$(PROTOCOL_RUNTIME_DIR) \
+          -I../law/specs/vault
 
 LDFLAGS := -lpthread -lsqlite3
 
@@ -90,4 +100,5 @@ purge: clean
 	rm -rf $(BIN_DIR) $(LOG_DIR) $(TMP_DIR) $(CACHE_DIR)
 
 # ---- Auto deps ----
--include $(OBJS:.o=.d)
+-include $(OBJS_ENGINE:.o=.d)
+-include $(OBJS_PROTO:.o=.d)

@@ -3,18 +3,20 @@
 #include <stddef.h>
 #include <stdint.h>
 #include <sys/types.h>
-#include "rpc_envelope.h"  // sostituisce <protocol/rpc_envelope.h>
+
+#include <protocol/runtime/rpc_runtime.h>
+
 
 
 #define YAI_CONTROL_BACKLOG 16
 
 /* Return codes */
-#define YAI_CTL_OK           0
-#define YAI_CTL_ERR_SOCKET  -1
-#define YAI_CTL_ERR_BIND    -2
-#define YAI_CTL_ERR_LISTEN  -3
-#define YAI_CTL_ERR_READ    -4
-#define YAI_CTL_ERR_WRITE   -5
+#define YAI_CTL_OK            0
+#define YAI_CTL_ERR_SOCKET   -1
+#define YAI_CTL_ERR_BIND     -2
+#define YAI_CTL_ERR_LISTEN   -3
+#define YAI_CTL_ERR_READ     -4
+#define YAI_CTL_ERR_WRITE    -5
 #define YAI_CTL_ERR_OVERFLOW -6
 
 /* Listen for control connections at a UNIX socket path */

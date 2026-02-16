@@ -3,6 +3,7 @@
 
 #include <protocol/transport.h>
 #include <protocol/yai_protocol_ids.h>
+#include <protocol/roles.h>
 
 #include <sys/socket.h>
 #include <sys/un.h>
@@ -143,19 +144,26 @@ void yai_rpc_set_authority(
     int arming,
     const char *role_str)
 {
-    if (!c) return;
+    if (!c)
+        return;
 
     c->arming = arming ? 1 : 0;
 
-    if (!role_str)
-        c->role = 0;
-    else if (strcmp(role_str, "operator") == 0)
-        c->role = 1;
-    else if (strcmp(role_str, "sovereign") == 0)
-        c->role = 2;
+    if (!role_str) {
+        c->role = YAI_ROLE_NONE;
+        return;
+    }
+
+    if (strcmp(role_str, "operator") == 0)
+        c->role = YAI_ROLE_OPERATOR;
+    else if (strcmp(role_str, "system") == 0)
+        c->role = YAI_ROLE_SYSTEM;
+    else if (strcmp(role_str, "user") == 0)
+        c->role = YAI_ROLE_USER;
     else
-        c->role = 0;
+        c->role = YAI_ROLE_NONE;
 }
+
 
 /* ============================================================
    RAW CALL

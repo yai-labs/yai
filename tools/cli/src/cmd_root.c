@@ -30,42 +30,49 @@ static int connect_root(yai_rpc_client_t *c)
 {
     memset(c, 0, sizeof(*c));
 
-    /* Root machine plane uses ws_id = "system" */
-    if (yai_rpc_connect(c, "system") != 0)
+    /* Root always runs in system workspace */
+    if (yai_rpc_connect(c, "system") != 0) {
+        fprintf(stderr, "[CLI] Failed to connect to root plane\n");
         return -1;
+    }
 
     return 0;
 }
 
 /* ============================================================
-   HANDSHAKE
+   HANDSHAKE (Root requires operator + arming)
    ============================================================ */
 
-static int root_handshake(yai_rpc_client_t *c,
-                          const yai_cli_opts_t *opt)
+static int root_handshake(yai_rpc_client_t *c)
 {
-    /* Authority before handshake */
+    /* Root is sovereign machine control.
+       We always escalate to operator + armed. */
     yai_rpc_set_authority(
         c,
-        opt && opt->arming ? 1 : 0,
-        opt && opt->role ? opt->role : "operator"
+        1,              /* arming */
+        "operator"      /* role */
     );
 
-    return yai_rpc_handshake(c);
+    if (yai_rpc_handshake(c) != 0) {
+        fprintf(stderr, "[CLI] Root handshake failed\n");
+        return -1;
+    }
+
+    return 0;
 }
 
 /* ============================================================
    STATUS / PING
    ============================================================ */
 
-static int cmd_root_status(const yai_cli_opts_t *opt)
+static int cmd_root_ping(void)
 {
     yai_rpc_client_t c;
 
     if (connect_root(&c) != 0)
         return -5;
 
-    if (root_handshake(&c, opt) != 0) {
+    if (root_handshake(&c) != 0) {
         yai_rpc_close(&c);
         return -6;
     }
@@ -85,16 +92,18 @@ static int cmd_root_status(const yai_cli_opts_t *opt)
 
     if (rc == 0) {
         response[resp_len] = '\0';
-        yai_print_response(response, opt ? opt->json : 0);
+        printf("%s\n", response);
+    } else {
+        fprintf(stderr, "[CLI] Root ping failed (rc=%d)\n", rc);
     }
 
     yai_rpc_close(&c);
     return rc;
 }
 
-static int cmd_root_ping(const yai_cli_opts_t *opt)
+static int cmd_root_status(void)
 {
-    return cmd_root_status(opt);
+    return cmd_root_ping();
 }
 
 /* ============================================================
@@ -105,16 +114,18 @@ int yai_cmd_root(int argc,
                  char **argv,
                  const yai_cli_opts_t *opt)
 {
+    (void)opt; /* unused for root */
+
     if (argc < 1) {
         usage_root();
         return 1;
     }
 
     if (strcmp(argv[0], "status") == 0)
-        return cmd_root_status(opt);
+        return cmd_root_status();
 
     if (strcmp(argv[0], "ping") == 0)
-        return cmd_root_ping(opt);
+        return cmd_root_ping();
 
     if (strcmp(argv[0], "help") == 0) {
         usage_root();

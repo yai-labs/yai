@@ -51,7 +51,7 @@ int yai_path_root_sock(char *out, size_t cap)
 
     int n = snprintf(out,
                      cap,
-                     "%s/.yai/run/root/control.sock",
+                     "%s/.yai/run/root.sock",
                      home);
 
     return (n > 0 && (size_t)n < cap) ? 0 : -4;
