@@ -1,3 +1,6 @@
 [submodule "deps/yai-specs"]
 	path = deps/yai-specs
 	url = git@github.com:francescomaiomascio/yai-specs.git
+[submodule "deps/yai-mind"]
+	path = deps/yai-mind
+	url = git@github.com:francescomaiomascio/yai-mind.git
