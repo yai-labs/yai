@@ -1,9 +1,12 @@
+#define _POSIX_C_SOURCE 200809L
+
 #include "../include/yai_rpc.h"
 #include "../include/yai_paths.h"
 
 #include <protocol/transport.h>
 #include <protocol/yai_protocol_ids.h>
 #include <protocol/roles.h>
+#include <protocol/protocol.h>   /* yai_handshake_req_t / yai_handshake_ack_t */
 
 #include <sys/socket.h>
 #include <sys/un.h>
@@ -13,14 +16,15 @@
 #include <stdlib.h>
 #include <errno.h>
 #include <stddef.h>
+#include <stdint.h>
 
 /* ============================================================
-   INTERNAL IO
+   INTERNAL IO (STRICT)
    ============================================================ */
 
 static int write_all(int fd, const void *buf, size_t n)
 {
-    const char *p = buf;
+    const uint8_t *p = (const uint8_t *)buf;
     size_t off = 0;
 
     while (off < n) {
@@ -29,6 +33,8 @@ static int write_all(int fd, const void *buf, size_t n)
             if (errno == EINTR) continue;
             return -1;
         }
+        if (w == 0)
+            return -1;
         off += (size_t)w;
     }
     return 0;
@@ -36,22 +42,24 @@ static int write_all(int fd, const void *buf, size_t n)
 
 static int read_all(int fd, void *buf, size_t n)
 {
-    char *p = buf;
+    uint8_t *p = (uint8_t *)buf;
     size_t off = 0;
 
     while (off < n) {
         ssize_t r = read(fd, p + off, n - off);
-        if (r <= 0) {
-            if (r < 0 && errno == EINTR) continue;
+        if (r < 0) {
+            if (errno == EINTR) continue;
             return -1;
         }
+        if (r == 0)
+            return -1; /* EOF */
         off += (size_t)r;
     }
     return 0;
 }
 
 /* ============================================================
-   VALIDATE WS_ID (CRITICAL)
+   VALIDATE WS_ID
    ============================================================ */
 
 static int is_valid_ws_id(const char *ws_id)
@@ -59,12 +67,13 @@ static int is_valid_ws_id(const char *ws_id)
     if (!ws_id || !ws_id[0])
         return 0;
 
-    /* ws_id must NOT contain path separators */
     if (strchr(ws_id, '/'))
         return 0;
 
-    /* forbid absolute paths */
     if (ws_id[0] == '~')
+        return 0;
+
+    if (strstr(ws_id, ".."))
         return 0;
 
     return 1;
@@ -79,19 +88,14 @@ int yai_rpc_connect(yai_rpc_client_t *c, const char *ws_id)
     if (!c)
         return -1;
 
-    if (!is_valid_ws_id(ws_id)) {
-        fprintf(stderr,
-                "[CLI ERROR] Invalid ws_id passed to yai_rpc_connect: '%s'\n",
-                ws_id ? ws_id : "NULL");
+    if (!is_valid_ws_id(ws_id))
         return -99;
-    }
 
     memset(c, 0, sizeof(*c));
     c->fd = -1;
 
     char sock_path[512];
 
-    /* Root plane always uses root socket */
     if (yai_path_root_sock(sock_path, sizeof(sock_path)) != 0)
         return -2;
 
@@ -103,13 +107,10 @@ int yai_rpc_connect(yai_rpc_client_t *c, const char *ws_id)
     memset(&addr, 0, sizeof(addr));
     addr.sun_family = AF_UNIX;
 
-    strncpy(addr.sun_path,
-            sock_path,
-            sizeof(addr.sun_path) - 1);
+    strncpy(addr.sun_path, sock_path, sizeof(addr.sun_path) - 1);
 
     socklen_t len =
-        offsetof(struct sockaddr_un, sun_path) +
-        strlen(addr.sun_path);
+        (socklen_t)(offsetof(struct sockaddr_un, sun_path) + strlen(addr.sun_path));
 
     if (connect(fd, (struct sockaddr *)&addr, len) < 0) {
         close(fd);
@@ -118,11 +119,12 @@ int yai_rpc_connect(yai_rpc_client_t *c, const char *ws_id)
 
     c->fd = fd;
 
-    strncpy(c->ws_id,
-            ws_id,
-            sizeof(c->ws_id) - 1);
-
+    strncpy(c->ws_id, ws_id, sizeof(c->ws_id) - 1);
     c->ws_id[sizeof(c->ws_id) - 1] = '\0';
+
+    /* defaults */
+    c->role = YAI_ROLE_NONE;
+    c->arming = 0;
 
     return 0;
 }
@@ -139,10 +141,7 @@ void yai_rpc_close(yai_rpc_client_t *c)
    AUTHORITY
    ============================================================ */
 
-void yai_rpc_set_authority(
-    yai_rpc_client_t *c,
-    int arming,
-    const char *role_str)
+void yai_rpc_set_authority(yai_rpc_client_t *c, int arming, const char *role_str)
 {
     if (!c)
         return;
@@ -164,10 +163,22 @@ void yai_rpc_set_authority(
         c->role = YAI_ROLE_NONE;
 }
 
-
 /* ============================================================
-   RAW CALL
+   RAW CALL (envelope + payload, strict)
    ============================================================ */
+
+static void set_trace_id(yai_rpc_envelope_t *env)
+{
+    /* semplice e deterministico: pid + counter */
+    static uint32_t ctr = 0;
+    ctr++;
+
+    char tmp[64];
+    snprintf(tmp, sizeof(tmp), "cli-%ld-%u", (long)getpid(), ctr);
+
+    /* trace_id è un campo dell'envelope: copia safe */
+    snprintf(env->trace_id, sizeof(env->trace_id), "%s", tmp);
+}
 
 int yai_rpc_call_raw(
     yai_rpc_client_t *c,
@@ -181,6 +192,9 @@ int yai_rpc_call_raw(
     if (!c || c->fd < 0)
         return -1;
 
+    if (payload_len > 0 && !payload)
+        return -2;
+
     yai_rpc_envelope_t env;
     memset(&env, 0, sizeof(env));
 
@@ -192,23 +206,25 @@ int yai_rpc_call_raw(
     env.arming      = c->arming;
     env.checksum    = 0;
 
-    strncpy(env.ws_id,
-            c->ws_id,
-            sizeof(env.ws_id) - 1);
-    
-    fprintf(stderr, "[CLI DEBUG] Sending ws_id='%s'\n", c->ws_id);
+    snprintf(env.ws_id, sizeof(env.ws_id), "%s", c->ws_id);
+    set_trace_id(&env);
 
+    /* WRITE envelope */
     if (write_all(c->fd, &env, sizeof(env)) != 0)
         return -3;
 
-    if (payload_len > 0)
+    /* WRITE payload */
+    if (payload_len > 0) {
         if (write_all(c->fd, payload, payload_len) != 0)
             return -4;
+    }
 
+    /* READ response envelope */
     yai_rpc_envelope_t resp;
+    memset(&resp, 0, sizeof(resp));
 
     if (read_all(c->fd, &resp, sizeof(resp)) != 0)
-        return -5;
+        return -5; /* EOF / read error */
 
     if (resp.magic != YAI_FRAME_MAGIC)
         return -6;
@@ -216,12 +232,17 @@ int yai_rpc_call_raw(
     if (resp.version != YAI_PROTOCOL_IDS_VERSION)
         return -7;
 
-    if (resp.payload_len > out_cap)
+    if (resp.payload_len > (uint32_t)out_cap)
         return -8;
 
-    if (resp.payload_len > 0)
-        if (read_all(c->fd, out_buf, resp.payload_len) != 0)
+    /* READ response payload */
+    if (resp.payload_len > 0) {
+        if (!out_buf)
             return -9;
+
+        if (read_all(c->fd, out_buf, resp.payload_len) != 0)
+            return -10;
+    }
 
     if (out_len)
         *out_len = resp.payload_len;
@@ -230,7 +251,7 @@ int yai_rpc_call_raw(
 }
 
 /* ============================================================
-   HANDSHAKE
+   HANDSHAKE (uses protocol.h structs)
    ============================================================ */
 
 int yai_rpc_handshake(yai_rpc_client_t *c)
@@ -238,24 +259,15 @@ int yai_rpc_handshake(yai_rpc_client_t *c)
     if (!c || c->fd < 0)
         return -1;
 
-    struct {
-        uint32_t client_version;
-        uint32_t capabilities;
-        char     client_name[32];
-    } req;
-
+    yai_handshake_req_t req;
     memset(&req, 0, sizeof(req));
 
     req.client_version = YAI_PROTOCOL_IDS_VERSION;
-    req.capabilities   = 0;
-    strncpy(req.client_name, "yai-cli", sizeof(req.client_name) - 1);
+    req.capabilities_requested = 0;
+    snprintf(req.client_name, sizeof(req.client_name), "%s", "yai-cli");
 
-    struct {
-        uint32_t version;
-        uint32_t capabilities;
-        uint32_t session_id;
-        uint32_t status;
-    } ack;
+    yai_handshake_ack_t ack;
+    memset(&ack, 0, sizeof(ack));
 
     uint32_t out_len = 0;
 
@@ -263,7 +275,7 @@ int yai_rpc_handshake(yai_rpc_client_t *c)
         c,
         YAI_CMD_HANDSHAKE,
         &req,
-        sizeof(req),
+        (uint32_t)sizeof(req),
         &ack,
         sizeof(ack),
         &out_len);
@@ -274,10 +286,10 @@ int yai_rpc_handshake(yai_rpc_client_t *c)
     if (out_len != sizeof(ack))
         return -20;
 
-    if (ack.version != YAI_PROTOCOL_IDS_VERSION)
+    if (ack.server_version != YAI_PROTOCOL_IDS_VERSION)
         return -21;
 
-    if (ack.status != 1)
+    if (ack.status != YAI_PROTO_STATE_READY)
         return -22;
 
     return 0;

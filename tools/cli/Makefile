@@ -2,25 +2,30 @@
 # YAI CLI Build System (Standalone-Ready)
 # ==========================================
 
-CC := gcc
+CC ?= gcc
 
 # ---- Local repo layout ----
 ROOT_DIR := $(abspath .)
 
-BUILD_DIR ?= $(ROOT_DIR)/build
-BIN_DIR   ?= $(ROOT_DIR)/dist/bin
+# Compat con orchestrator (monorepo) oppure standalone
+OUT_BUILD_DIR ?= $(ROOT_DIR)/build
+OUT_BIN_DIR   ?= $(ROOT_DIR)/dist/bin
+
+BUILD_DIR := $(OUT_BUILD_DIR)
+BIN_DIR   := $(OUT_BIN_DIR)
 
 TARGET := $(BIN_DIR)/yai-cli
 
-
 # ---- Protocol include (temporary monorepo link) ----
+# In monorepo: ../../law/specs
+# In repo standalone: puoi mettere deps/yai-specs oppure vendor/specs
 LAW_DIR ?= ../../law/specs
 
-CFLAGS := -Wall -Wextra -O2 -std=c11 -MMD -MP \
+CFLAGS ?= -Wall -Wextra -O2 -std=c11 -MMD -MP \
           -I./include \
           -I$(LAW_DIR)
 
-LDFLAGS :=
+LDFLAGS ?=
 
 # ---- Sources ----
 SRCS := \
@@ -43,10 +48,6 @@ OBJS := $(patsubst src/%.c,$(BUILD_DIR)/%.o,$(SRCS))
 
 .PHONY: all clean dirs
 
-# ==========================================
-# Build
-# ==========================================
-
 all: dirs $(TARGET)
 	@echo "--- [YAI-CLI] Build Complete ---"
 
@@ -56,17 +57,13 @@ dirs:
 
 $(TARGET): $(OBJS)
 	@echo "[LINK] CLI: $@"
-	$(CC) $(OBJS) -o $@ $(LDFLAGS)
+	@$(CC) $(OBJS) -o $@ $(LDFLAGS)
 
 $(BUILD_DIR)/%.o: src/%.c | dirs
 	@echo "CC $<"
-	$(CC) $(CFLAGS) -c $< -o $@
-
-# ==========================================
-# Clean
-# ==========================================
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -rf $(BUILD_DIR) $(BIN_DIR)
+	@rm -rf $(BUILD_DIR) $(BIN_DIR)
 
 -include $(OBJS:.o=.d)

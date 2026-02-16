@@ -18,64 +18,50 @@ static void usage_root(void)
     fprintf(stderr,
         "Machine Root Plane\n"
         "Usage:\n"
-        "  yai root status\n"
-        "  yai root ping\n");
+        "  yai-cli root status\n"
+        "  yai-cli root ping\n");
 }
 
 /* ============================================================
-   CONNECT ROOT (system plane)
+   CONNECT + HANDSHAKE
    ============================================================ */
 
-static int connect_root(yai_rpc_client_t *c)
+static int root_connect_and_handshake(yai_rpc_client_t *c)
 {
+    if (!c)
+        return -1;
+
     memset(c, 0, sizeof(*c));
 
-    /* Root always runs in system workspace */
+    /* Root plane always runs on system workspace */
     if (yai_rpc_connect(c, "system") != 0) {
         fprintf(stderr, "[CLI] Failed to connect to root plane\n");
-        return -1;
+        return -2;
+    }
+
+    /* Escalate authority */
+    yai_rpc_set_authority(c, 1, "operator");
+
+    int rc = yai_rpc_handshake(c);
+    if (rc != 0) {
+        fprintf(stderr, "[CLI] Root handshake failed (rc=%d)\n", rc);
+        yai_rpc_close(c);
+        return -3;
     }
 
     return 0;
 }
 
 /* ============================================================
-   HANDSHAKE (Root requires operator + arming)
-   ============================================================ */
-
-static int root_handshake(yai_rpc_client_t *c)
-{
-    /* Root is sovereign machine control.
-       We always escalate to operator + armed. */
-    yai_rpc_set_authority(
-        c,
-        1,              /* arming */
-        "operator"      /* role */
-    );
-
-    if (yai_rpc_handshake(c) != 0) {
-        fprintf(stderr, "[CLI] Root handshake failed\n");
-        return -1;
-    }
-
-    return 0;
-}
-
-/* ============================================================
-   STATUS / PING
+   ROOT PING
    ============================================================ */
 
 static int cmd_root_ping(void)
 {
     yai_rpc_client_t c;
 
-    if (connect_root(&c) != 0)
-        return -5;
-
-    if (root_handshake(&c) != 0) {
-        yai_rpc_close(&c);
-        return -6;
-    }
+    if (root_connect_and_handshake(&c) != 0)
+        return -10;
 
     char response[YAI_RPC_LINE_MAX];
     uint32_t resp_len = 0;
@@ -90,16 +76,22 @@ static int cmd_root_ping(void)
         &resp_len
     );
 
-    if (rc == 0) {
-        response[resp_len] = '\0';
-        printf("%s\n", response);
-    } else {
+    if (rc != 0) {
         fprintf(stderr, "[CLI] Root ping failed (rc=%d)\n", rc);
+        yai_rpc_close(&c);
+        return -20;
     }
 
+    response[resp_len] = '\0';
+    printf("%s\n", response);
+
     yai_rpc_close(&c);
-    return rc;
+    return 0;
 }
+
+/* ============================================================
+   ROOT STATUS (alias ping)
+   ============================================================ */
 
 static int cmd_root_status(void)
 {
@@ -114,18 +106,18 @@ int yai_cmd_root(int argc,
                  char **argv,
                  const yai_cli_opts_t *opt)
 {
-    (void)opt; /* unused for root */
+    (void)opt;
 
     if (argc < 1) {
         usage_root();
         return 1;
     }
 
-    if (strcmp(argv[0], "status") == 0)
-        return cmd_root_status();
-
     if (strcmp(argv[0], "ping") == 0)
         return cmd_root_ping();
+
+    if (strcmp(argv[0], "status") == 0)
+        return cmd_root_status();
 
     if (strcmp(argv[0], "help") == 0) {
         usage_root();
