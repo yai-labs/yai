@@ -1,3 +1,11 @@
+---
+id: A-001
+title: Execution
+type: Axiom
+status: Canonical
+version: 1.0.0
+---
+
 # A-001 — Execution
 
 This document defines execution as a foundational axiom of YAI.
