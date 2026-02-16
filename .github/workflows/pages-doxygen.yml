@@ -31,10 +31,23 @@ jobs:
           mkdir -p dist/docs
           doxygen Doxyfile
 
+      - name: Resolve docs path
+        id: docs
+        run: |
+          if [ -d dist/docs/doxygen/html ]; then
+            echo "path=dist/docs/doxygen/html" >> "$GITHUB_OUTPUT"
+          elif [ -d dist/docs/html ]; then
+            echo "path=dist/docs/html" >> "$GITHUB_OUTPUT"
+          else
+            echo "Docs output not found. Contents of dist/docs:"
+            ls -la dist/docs || true
+            exit 1
+          fi
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist/docs/doxygen/html
+          path: ${{ steps.docs.outputs.path }}
 
   deploy:
     needs: build
