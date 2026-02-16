@@ -1,47 +1,70 @@
 # =========================================
-# YAI — Core (Root Control Plane) Makefile
+# YAI — Core (Root Control Plane)
 # =========================================
 
-CC      ?= gcc
-CFLAGS  ?= -Wall -Wextra -O2 -std=c11
-LDFLAGS ?= 
+CC ?= cc
 
-# Path passati dal Root Makefile o default
-OUT_BIN_DIR   ?= ../artifacts/bin
-OUT_BUILD_DIR ?= ../artifacts/build/core
-INCLUDES      := -I./include -I../kernel/include -I../law/specs
+# ---- Repo root (core/ is one level down) ----
+ROOT_DIR := $(abspath ..)
 
-# Target Binary
-TARGET := $(OUT_BIN_DIR)/yai-root-server
+# ---- Unified repo-local layout ----
+BUILD_DIR ?= $(ROOT_DIR)/build/core
+BIN_DIR   ?= $(ROOT_DIR)/dist/bin
 
-# Sorgenti
-SRCS := src/yai_root_server.c \
-        src/control_transport.c
+CFLAGS  ?= -Wall -Wextra -O2 -std=c11 -MMD -MP
+LDFLAGS ?=
 
-# Oggetti
-OBJS := $(SRCS:src/%.c=$(OUT_BUILD_DIR)/%.o)
+# ---- Include paths ----
+INCLUDES := \
+	-I./include \
+	-I$(ROOT_DIR)/law/specs \
+	-I$(ROOT_DIR)/law/specs/protocol \
+	-I$(ROOT_DIR)/law/specs/protocol/runtime
 
-.PHONY: all clean prep
+# ---- Sources ----
+CORE_SRC := \
+	src/yai_root_server.c \
+	src/control_transport.c
 
-all: prep $(TARGET)
+PROTOCOL_RUNTIME_SRC := \
+	$(ROOT_DIR)/law/specs/protocol/runtime/rpc_runtime.c
 
-# Creazione directory di build
-prep:
-	@mkdir -p $(OUT_BIN_DIR)
-	@mkdir -p $(OUT_BUILD_DIR)
+# ---- Objects ----
+OBJS_CORE := $(patsubst %.c,$(BUILD_DIR)/%.o,$(CORE_SRC))
+PROTOCOL_RUNTIME_OBJ := $(BUILD_DIR)/protocol_runtime.o
 
-# Link finale
-$(TARGET): $(OBJS)
-	@echo "[CORE] Linking $@..."
-	@$(CC) $(OBJS) -o $@ $(LDFLAGS)
-	@echo "✔ Root Control Plane built."
+TARGET := $(BIN_DIR)/yai-root-server
 
-# Compilazione oggetti
-$(OUT_BUILD_DIR)/%.o: src/%.c
-	@echo "[CORE] Compiling $<..."
-	@$(CC) $(CFLAGS) $(INCLUDES) $(EXTRA_CFLAGS) -c $< -o $@
+.PHONY: all dirs clean
+
+# ===============================
+# Main
+# ===============================
+all: dirs $(TARGET)
+	@echo "--- [YAI-CORE] Build Complete ---"
+
+dirs:
+	@mkdir -p $(BUILD_DIR) $(BIN_DIR)
+
+# ---- Link ----
+$(TARGET): $(OBJS_CORE) $(PROTOCOL_RUNTIME_OBJ)
+	@echo "[LINK] $@"
+	$(CC) $^ -o $@ $(LDFLAGS)
+
+# ---- Explicit build rules ----
+$(PROTOCOL_RUNTIME_OBJ): $(PROTOCOL_RUNTIME_SRC)
+	@echo "[CC] $<"
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+$(BUILD_DIR)/%.o: %.c
+	@mkdir -p $(dir $@)
+	@echo "[CC] $<"
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
-	@echo "[CORE] Cleaning..."
-	@rm -rf $(OUT_BUILD_DIR)
+	@rm -rf $(BUILD_DIR)
 	@rm -f $(TARGET)
+	@echo "--- [YAI-CORE] Cleaned ---"
+
+-include $(OBJS_CORE:.o=.d)
+-include $(PROTOCOL_RUNTIME_OBJ:.o=.d)
