@@ -15,19 +15,7 @@
 
 #include <protocol/transport.h>
 #include <protocol/yai_protocol_ids.h>
-
-/* ============================================================
-   HANDSHAKE ACK (local definition, aligned to protocol)
-============================================================ */
-
-typedef struct {
-    uint32_t version;
-    uint32_t capabilities;
-    uint32_t session_id;
-    uint32_t status;
-} yai_handshake_ack_t;
-
-#define YAI_STATE_READY 1
+#include <protocol/protocol.h>   /* 👈 UNICA DEFINIZIONE HANDSHAKE */
 
 /* ============================================================
    Ensure runtime directory
@@ -75,7 +63,7 @@ static void handle_client(int listen_fd)
                 payload,
                 sizeof(payload));
 
-        if (plen <= 0)
+        if (plen < 0)
             break;
 
         if (env.magic != YAI_FRAME_MAGIC ||
@@ -89,10 +77,10 @@ static void handle_client(int listen_fd)
             yai_handshake_ack_t ack;
             memset(&ack, 0, sizeof(ack));
 
-            ack.version      = YAI_PROTOCOL_IDS_VERSION;
-            ack.capabilities = 0;
-            ack.session_id   = 1;
-            ack.status       = YAI_STATE_READY;
+            ack.server_version       = YAI_PROTOCOL_IDS_VERSION;
+            ack.capabilities_granted = 0;
+            ack.session_id           = 1;
+            ack.status               = YAI_PROTO_STATE_READY;
 
             yai_rpc_envelope_t resp;
             memset(&resp, 0, sizeof(resp));
