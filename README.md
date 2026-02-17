@@ -1,83 +1,85 @@
-# YAI
+# YAI — Sovereign Intelligence Runtime
+_Acronym: “YAI Ain’t Intelligence”_
 
-YAI is the core runtime in C for sovereign execution: boot, root plane, kernel, and engine.
-Canonical contracts are pinned in `deps/yai-specs`.
 
-Current release baseline: `v0.1.0`.
-Current contract line: `SPECS_API_VERSION=v1`.
+YAI is a **sovereign runtime for intelligence**: a governed execution stack where AI systems run with **deterministic boundaries, auditable state, and explicit authority**—not opaque side-effects.
 
-## Core Contract
+[ Releases ](#releases) · [ Documentation ](#documentation) · [ Specs ](#specs--contracts) · [ Security ](#security) · [ License ](#license)
 
-`deps/yai-specs` is the source of truth for protocol, control, graph, providers, vault, and formal contracts.
-If runtime behavior diverges from `deps/yai-specs`, runtime is a bug and must be fixed.
+---
 
-## Repository Map
+## Why YAI
 
-- `deps/yai-specs/` - L0 canonical contracts (submodule)
-- `boot/` - runtime bootstrap and bring-up entrypoints
-- `root/` - root plane services and control-plane core
-- `kernel/` - L1 authority enforcement runtime
-- `engine/` - L2 deterministic execution and provider gates
-- `runtime/` - runtime glue and protocol integration surface
-- `scripts/` - operations, verification, and gate scripts
-- `docs/` - architecture, guides, runbooks, and reference docs
-- `data/` - local datasets used by tests/ops; policy in `DATA_POLICY.md`
+Modern AI delivers capability, but too often without governance: decisions that cannot be traced, state that cannot be proven, and effects that cannot be constrained.
 
-## Quickstart
+YAI is built to make **intelligence operational**—measurable, accountable, and reproducible—so you can deploy AI as infrastructure, not as a leap of faith.
 
-```bash
-git submodule update --init --recursive
-make all
-./build/bin/yai-boot
-```
+---
 
-Verification commands available in this repo:
+## What YAI Is
 
-```bash
-./scripts/yai-verify
-./scripts/verify-core.sh
-./scripts/verify-events.sh
-```
+YAI brings up a vertical runtime stack designed for **controlled intelligence execution**:
 
-## Ecosystem
+- **Boot** — machine bring-up and environment verification  
+- **Root Plane** — global authority surface and control coordination  
+- **Kernel (L1)** — workspace isolation, policy enforcement, session authority  
+- **Engine (L2)** — deterministic execution and gated external effects  
+- **Mind (L3)** — higher orchestration (emerging line)
 
-- `yai-specs` - normative contracts repository
-- `yai-cli` - operator/developer command-line client
-- `yai-yx` - graphical runtime cockpit
-- `yai-mind` - higher-level orchestration layer
+This repository contains the **foundation runtime** (Boot/Root/Kernel/Engine) and the operational tooling to verify and package it.
 
-## Build Outputs
+---
 
-- build: `build/bin/` (canonical compile outputs)
-- dist: `dist/bin/` (staging copy from `build/bin/`)
-- bundle: `dist/bundle/out/` (release assets)
+## Principles
 
-Commands:
+YAI treats governance as a first-class system property:
 
-```bash
-make all      # build only, no dist side-effects
-make dist     # stage binaries to dist/bin
-make bundle   # package tar/zip + manifest + checksums
-```
+- **Determinism over improvisation** — execution paths are bounded and repeatable  
+- **Auditability over opacity** — state transitions are observable and attributable  
+- **Explicit authority over implicit power** — permissions are declared, verified, and enforced  
+- **Contracts over drift** — behavior is defined by specs, not by “whatever happens”
 
-## Distribution
+---
 
-GitHub Releases are the distribution channel for binaries and bundle metadata.
-The repository remains source code only; runtime artifacts are produced via CI/local `make bundle`.
+## Get Started
 
-Verify downloaded bundles with `SHA256SUMS`:
+**Option A — Bundle (recommended):** download a prebuilt bundle from GitHub Releases.  
+**Option B — Build from source:** clone the repo and compile the runtime.
 
-```bash
-# Linux
-sha256sum -c yai-bundle-<version>-<os>-<arch>.SHA256SUMS
+For installation, verification, and operational runbooks, start here: `docs/`.
 
-# macOS
-shasum -a 256 -c yai-bundle-<version>-<os>-<arch>.SHA256SUMS
-```
+---
+
+## Specs & Contracts
+
+The source of truth for behavior lives in **`deps/yai-specs`**.
+
+Specs are not “documentation”; they are **normative contracts**.  
+The runtime implements these contracts—**and must remain aligned**. When alignment breaks, it is treated as a defect.
+
+---
+
+## Documentation
+
+- `docs/` — architecture notes, runbooks, guides, and operational procedures  
+- `data/` — datasets used for local tests/ops (see `DATA_POLICY.md`)  
+- `scripts/` — verification and gate scripts used in CI and release pipelines
+
+---
+
+## Releases
+
+GitHub Releases are the distribution channel for official bundles and metadata.  
+Each bundle ships with a manifest and checksums to support reproducible deployment.
+
+---
+
+## Security
+
+See `SECURITY.md` for disclosure and handling policy.
+
+---
 
 ## License
 
-Apache License 2.0 (Apache-2.0).
-See `LICENSE` and `NOTICE`.
-Third-party licensing notices are tracked in `THIRD_PARTY_NOTICES.md`.
-Datasets may have separate terms if stated in-place.
+Apache-2.0. See `LICENSE`, `NOTICE`, and `THIRD_PARTY_NOTICES.md`.
