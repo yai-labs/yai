@@ -9,11 +9,12 @@
 #include <sys/mman.h>
 #include <sys/wait.h>
 #include <limits.h>
+#include <libgen.h>
+#include <errno.h>
 
 #define SYSTEM_WS "system"
 #define SHM_PREFIX "/yai_vault_"
 
-#define BIN_DIR "./dist/bin"
 #define ROOT_BIN "yai-root-server"
 #define KERNEL_BIN "yai-kernel"
 
@@ -67,19 +68,55 @@ int yai_init_system_shm(void)
     return 0;
 }
 
-int yai_spawn_planes(int *root_pid, int *kernel_pid)
+static int get_exe_dir(char *out, size_t out_sz, const char *argv0)
 {
+    if (!argv0 || !argv0[0])
+        return -1;
+
+    char resolved[PATH_MAX];
+    if (!realpath(argv0, resolved)) {
+        perror("[BOOT-FATAL] realpath(argv0) failed");
+        return -2;
+    }
+
+    /* dirname() may modify the passed buffer */
+    char tmp[PATH_MAX];
+    strncpy(tmp, resolved, sizeof(tmp) - 1);
+    tmp[sizeof(tmp) - 1] = '\0';
+
+    char *dir = dirname(tmp);
+    if (!dir)
+        return -3;
+
+    if (snprintf(out, out_sz, "%s", dir) >= (int)out_sz)
+        return -4;
+
+    return 0;
+}
+
+int yai_spawn_planes(int *root_pid, int *kernel_pid, const char *argv0)
+{
+    char exe_dir[PATH_MAX];
+    if (get_exe_dir(exe_dir, sizeof(exe_dir), argv0) != 0)
+        return -10;
+
     char root_path[PATH_MAX];
     char kernel_path[PATH_MAX];
 
-    snprintf(root_path, sizeof(root_path), "%s/%s", BIN_DIR, ROOT_BIN);
-    snprintf(kernel_path, sizeof(kernel_path), "%s/%s", BIN_DIR, KERNEL_BIN);
+    snprintf(root_path, sizeof(root_path), "%s/%s", exe_dir, ROOT_BIN);
+    snprintf(kernel_path, sizeof(kernel_path), "%s/%s", exe_dir, KERNEL_BIN);
 
-    if (access(root_path, X_OK) != 0)
+    if (access(root_path, X_OK) != 0) {
+        fprintf(stderr, "[BOOT-FATAL] missing/invalid root bin: %s\n", root_path);
+        perror("[BOOT-FATAL] access(root) failed");
         return -1;
+    }
 
-    if (access(kernel_path, X_OK) != 0)
+    if (access(kernel_path, X_OK) != 0) {
+        fprintf(stderr, "[BOOT-FATAL] missing/invalid kernel bin: %s\n", kernel_path);
+        perror("[BOOT-FATAL] access(kernel) failed");
         return -2;
+    }
 
     *root_pid = spawn(root_path);
     if (*root_pid < 0)

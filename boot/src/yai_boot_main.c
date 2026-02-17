@@ -12,8 +12,9 @@
 
 #define SYSTEM_WS "system"
 
-int main(void)
+int main(int argc, char **argv)
 {
+    (void)argc;
     printf("\n=== YAI MACHINE ENTRYPOINT (L0) ===\n");
 
     if (yai_run_preboot_checks() != 0) {
@@ -36,8 +37,9 @@ int main(void)
     int root_pid = 0;
     int kernel_pid = 0;
 
-    if (yai_spawn_planes(&root_pid, &kernel_pid) != 0) {
-        fprintf(stderr, "[BOOT-FATAL] Failed to spawn planes\n");
+    int rc = yai_spawn_planes(&root_pid, &kernel_pid, argv[0]);
+    if (rc != 0) {
+        fprintf(stderr, "[BOOT-FATAL] Failed to spawn planes (rc=%d)\n", rc);
         return EXIT_FAILURE;
     }
 
