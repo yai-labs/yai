@@ -10,7 +10,7 @@ Contract-level normative behavior is defined in `deps/yai-specs` and consumed by
 Use one of the following channels:
 
 - Open a private GitHub Security Advisory for this repository, if available.
-- Otherwise open a GitHub issue with clear impact, reproduction, and affected paths.
+- Otherwise open a GitHub issue with label `security` and include clear impact, reproduction, and affected paths.
 
 Do not include secrets, tokens, credentials, or private data in reports.
 
@@ -28,7 +28,7 @@ Primary runtime surfaces are local process boundaries and workspace-scoped Unix 
 
 Primary security boundaries:
 
-- Root plane authority and process supervision (`core/`)
+- Root plane authority and process supervision (`root/`)
 - Workspace UDS control sockets and envelope validation
 - Workspace isolation across run directories and process state
 - Provider gate attachment/detachment and trust transitions (`engine/`)

@@ -1,38 +1,4 @@
 #!/usr/bin/env bash
 set -euo pipefail
-
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-BIN="${BIN:-$(command -v yai || true)}"
-if [[ -z "$BIN" && -x "$HOME/.cargo/bin/yai" ]]; then
-  BIN="$HOME/.cargo/bin/yai"
-fi
-WS_DEFAULT="${YAI_WS_DEFAULT:-dev}"
-
-echo "=== YAI Doctor"
-echo "root: ${ROOT}"
-
-echo "=== Binaries"
-CORE_BIN="${HOME}/.yai/artifacts/yai-core/bin"
-MIND_ART_BIN="${HOME}/.yai/artifacts/mind/target/release"
-
-for f in "${CORE_BIN}/yai-boot" "${CORE_BIN}/yai-kernel" "${CORE_BIN}/yai-engine"; do
-  [[ -x "${f}" ]] && echo "OK: ${f}" || echo "MISSING: ${f}"
-done
-
-for f in "${MIND_ART_BIN}/yai"; do
-  [[ -x "${f}" ]] && echo "OK: ${f}" || echo "MISSING: ${f}"
-done
-
-echo "=== yai in PATH"
-if [[ -n "$BIN" ]]; then
-  echo "OK: $(command -v yai)"
-  "$BIN" status --ws "${WS_DEFAULT}" || true
-  "$BIN" monitor --help >/dev/null 2>&1 && echo "OK: monitor command available"
-else
-  echo "MISSING: yai not found in PATH"
-fi
-
-echo "=== Duplicate yai binaries (artifacts)"
-find "${HOME}/.yai/artifacts" -type f -name "yai" -perm -111 -print || true
-
-echo "OK: doctor complete"
+exec "$ROOT/scripts/dev/yai-doctor" "$@"

@@ -29,7 +29,7 @@ Runtime-first changes that alter normative behavior are not accepted.
 ## Ownership Model
 
 - Specs (`deps/yai-specs/*`) are normative.
-- Runtime (`boot/`, `core/`, `kernel/`, `engine/`, `runtime/`) is implementation.
+- Runtime (`boot/`, `root/`, `kernel/`, `engine/`, `runtime/`) is implementation.
 - If implementation conflicts with specs, implementation must be corrected.
 
 ## Required Review Areas

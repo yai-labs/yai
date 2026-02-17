@@ -12,7 +12,7 @@ FILE_PATTERNS          = *.h *.md
 
 # Inputs
 INPUT                  = boot/include \
-                         core/include \
+                         root/include \
                          kernel/include \
                          engine/include \
                          runtime/protocol \

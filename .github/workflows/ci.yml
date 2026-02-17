@@ -1,0 +1,70 @@
+name: ci
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  build-ubuntu:
+    name: Build and verify (Ubuntu)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential make python3 doxygen
+
+      - name: Build
+        run: make all
+
+      - name: Verify generated artifacts
+        run: bash scripts/dev/check-generated.sh
+
+      - name: Build docs
+        run: make docs
+
+  build-arch:
+    name: Build and verify (Arch)
+    runs-on: ubuntu-latest
+    container:
+      image: archlinux:latest
+    steps:
+      - name: Install git
+        run: pacman -Sy --noconfirm git
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install toolchain
+        run: |
+          pacman -Syu --noconfirm
+          pacman -S --noconfirm base-devel make python doxygen
+
+      - name: Build
+        run: make all
+
+      - name: Verify generated artifacts
+        run: bash scripts/dev/check-generated.sh
+
+  build-macos:
+    name: Build (macOS)
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Build
+        run: make all
+
+      - name: Verify generated artifacts
+        run: bash scripts/dev/check-generated.sh

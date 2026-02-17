@@ -1,1 +1,14 @@
+# Default owner
 * @francescomaiomascio
+
+# Critical runtime boundaries
+/boot/** @francescomaiomascio
+/root/** @francescomaiomascio
+/kernel/** @francescomaiomascio
+/engine/** @francescomaiomascio
+/runtime/** @francescomaiomascio
+
+# Build and operations
+/Makefile @francescomaiomascio
+/scripts/** @francescomaiomascio
+/.github/workflows/** @francescomaiomascio

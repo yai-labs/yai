@@ -12,7 +12,7 @@ If runtime behavior diverges from `deps/yai-specs`, runtime is a bug and must be
 
 - `deps/yai-specs/` - L0 canonical contracts (submodule)
 - `boot/` - runtime bootstrap and bring-up entrypoints
-- `core/` - root plane services and control-plane core
+- `root/` - root plane services and control-plane core
 - `kernel/` - L1 authority enforcement runtime
 - `engine/` - L2 deterministic execution and provider gates
 - `runtime/` - runtime glue and protocol integration surface

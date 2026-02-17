@@ -1,14 +1,14 @@
 # =========================================
-# YAI — Core (Root Control Plane)
+# YAI — Root Control Plane
 # =========================================
 
 CC ?= cc
 
-# ---- Repo root (core/ is one level down) ----
+# ---- Repo root (root/ is one level down) ----
 ROOT_DIR := $(abspath ..)
 
 # ---- Orchestrator outputs (optional override) ----
-OUT_BUILD_DIR ?= $(ROOT_DIR)/build/core
+OUT_BUILD_DIR ?= $(ROOT_DIR)/build/root
 OUT_BIN_DIR   ?= $(ROOT_DIR)/dist/bin
 
 BUILD_DIR := $(OUT_BUILD_DIR)
@@ -29,7 +29,7 @@ INCLUDES := \
 	-I$(SPECS_DIR)/vault
 
 # ---- Sources ----
-CORE_SRC := \
+ROOT_SRC := \
 	src/yai_root_server.c \
 	src/control_transport.c
 
@@ -38,7 +38,7 @@ PROTOCOL_RUNTIME_SRC := \
 	$(ROOT_DIR)/runtime/protocol/rpc_runtime.c
 
 # ---- Objects ----
-OBJS_CORE := $(patsubst %.c,$(BUILD_DIR)/%.o,$(CORE_SRC))
+OBJS_ROOT := $(patsubst %.c,$(BUILD_DIR)/%.o,$(ROOT_SRC))
 PROTOCOL_RUNTIME_OBJ := $(BUILD_DIR)/protocol_runtime.o
 
 TARGET := $(BIN_DIR)/yai-root-server
@@ -49,13 +49,13 @@ TARGET := $(BIN_DIR)/yai-root-server
 # Main
 # ===============================
 all: dirs $(TARGET)
-	@echo "--- [YAI-CORE] Build Complete ---"
+	@echo "--- [YAI-ROOT] Build Complete ---"
 
 dirs:
 	@mkdir -p $(BUILD_DIR) $(BIN_DIR)
 
 # ---- Link ----
-$(TARGET): $(OBJS_CORE) $(PROTOCOL_RUNTIME_OBJ)
+$(TARGET): $(OBJS_ROOT) $(PROTOCOL_RUNTIME_OBJ)
 	@echo "[LINK] $@"
 	$(CC) $^ -o $@ $(LDFLAGS)
 
@@ -72,7 +72,7 @@ $(BUILD_DIR)/%.o: %.c | dirs
 clean:
 	@rm -rf $(BUILD_DIR)
 	@rm -f $(TARGET)
-	@echo "--- [YAI-CORE] Cleaned ---"
+	@echo "--- [YAI-ROOT] Cleaned ---"
 
--include $(OBJS_CORE:.o=.d)
+-include $(OBJS_ROOT:.o=.d)
 -include $(PROTOCOL_RUNTIME_OBJ:.o=.d)

@@ -7,10 +7,14 @@ Each component retains its original license.
 
 ### cJSON
 
-- Path: `engine/third_party/cjson/`
-- Upstream: Dave Gamble and cJSON contributors
+- Name: cJSON
+- Origin: upstream cJSON project by Dave Gamble and contributors
+- Upstream reference: https://github.com/DaveGamble/cJSON
+- Vendored path: `engine/third_party/cjson/`
 - License: MIT
-- License notice location: `engine/third_party/cjson/cJSON.h` and `engine/third_party/cjson/cJSON.c`
+- Local license notice location:
+  - `engine/third_party/cjson/cJSON.h`
+  - `engine/third_party/cjson/cJSON.c`
 
 ## Generated Artifacts
 

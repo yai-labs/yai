@@ -9,7 +9,7 @@ DIST_DIR   := $(ROOT_DIR)/dist
 VERIFY_DIR := $(DIST_DIR)/verify
 
 BOOT_DIR   := boot
-CORE_DIR   := core
+ROOT_PLANE_DIR := root
 KERNEL_DIR := kernel
 ENGINE_DIR := engine
 
@@ -20,12 +20,12 @@ DOXYFILE := Doxyfile
 DOXYGEN ?= doxygen
 DOXY_OUT ?= dist/docs/doxygen
 
-.PHONY: all boot core kernel engine clean docs docs-clean
+.PHONY: all boot root core kernel engine clean docs docs-clean help
 
 # -----------------------------------------
 # Build Order
 # -----------------------------------------
-all: docs boot core kernel engine
+all: docs boot root kernel engine
 	@echo "--- [YAI] Build Complete ---"
 
 # -----------------------------------------
@@ -38,13 +38,16 @@ boot:
 	EXTRA_CFLAGS="-I$(SPECS_DIR) -I$(SPECS_DIR)/protocol -I$(SPECS_DIR)/vault -I$(SPECS_DIR)/protocol/runtime" all
 
 # -----------------------------------------
-# Core (Root Plane)
+# Root Plane
 # -----------------------------------------
-core:
-	$(MAKE) -C $(CORE_DIR) \
+root:
+	$(MAKE) -C $(ROOT_PLANE_DIR) \
 	OUT_BIN_DIR=$(BIN_DIR) \
-	OUT_BUILD_DIR=$(BUILD_DIR)/core \
+	OUT_BUILD_DIR=$(BUILD_DIR)/root \
 	EXTRA_CFLAGS="-I$(SPECS_DIR) -I$(SPECS_DIR)/protocol -I$(SPECS_DIR)/vault -I$(SPECS_DIR)/protocol/runtime" all
+
+# Compatibility alias
+core: root
 
 # -----------------------------------------
 # Kernel
@@ -85,6 +88,5 @@ docs-clean:
 # -----------------------------------------
 # Help
 # -----------------------------------------
-
 help:
-	@echo "Targets: all, boot, core, kernel, engine, docs, docs-clean, clean"
+	@echo "Targets: all, boot, root (core alias), kernel, engine, docs, docs-clean, clean"

@@ -28,7 +28,7 @@ SPECS_DIR := $(ROOT_DIR)/deps/yai-specs
 INCLUDES := \
 	-I./include \
 	-I$(ROOT_DIR)/boot/include \
-	-I$(ROOT_DIR)/core/include \
+	-I$(ROOT_DIR)/root/include \
 	-I$(SPECS_DIR) \
 	-I$(SPECS_DIR)/protocol \
 	-I$(SPECS_DIR)/protocol/runtime \
@@ -59,9 +59,9 @@ KERNEL_SRC := \
 # -----------------------------
 # External shared sources
 # -----------------------------
-# NOTE: rpc_runtime.c must live in core repo (not in yai-specs).
+# NOTE: rpc_runtime.c is local runtime integration source (not in yai-specs).
 PROTOCOL_RUNTIME_SRC := $(ROOT_DIR)/runtime/protocol/rpc_runtime.c
-CORE_CONTROL_SRC     := $(ROOT_DIR)/core/src/control_transport.c
+CORE_CONTROL_SRC     := $(ROOT_DIR)/root/src/control_transport.c
 
 # -----------------------------
 # Objects
@@ -101,9 +101,9 @@ $(TARGET_KERNEL): $(OBJS_BOOT) $(OBJS_KERNEL) $(PROTOCOL_RUNTIME_OBJ) $(CORE_CON
 # -----------------------------
 root:
 	@echo "[DELEGATE] building root control plane..."
-	@$(MAKE) -C $(ROOT_DIR)/core \
+	@$(MAKE) -C $(ROOT_DIR)/root \
 		OUT_BIN_DIR=$(BIN_DIR) \
-		OUT_BUILD_DIR=$(BUILD_DIR)/core
+		OUT_BUILD_DIR=$(BUILD_DIR)/root
 
 # -----------------------------
 # Explicit build rules
