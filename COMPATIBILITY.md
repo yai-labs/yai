@@ -10,11 +10,16 @@ This matrix defines baseline compatibility for the `yai` runtime.
 
 ## Platform Support (Current)
 
-| Platform | Status | Notes |
+| Platform | Status | CI Coverage | Notes |
 |---|---|---|
-| Linux | Supported | primary runtime target |
-| macOS | Supported | development and local-first operations |
-| Windows | Not officially supported | no compatibility guarantees yet |
+| Ubuntu 22.04 | Supported | `ci.yml` | full build + generated artifact checks |
+| Ubuntu latest | Supported | `ci.yml` | full build + generated artifact checks |
+| Arch Linux (latest) | Supported | `ci.yml` (container) | full build + generated artifact checks |
+| Debian stable | Supported | `ci.yml` (container) | full build + generated artifact checks |
+| Fedora latest | Supported | `ci.yml` (container) | full build + generated artifact checks |
+| macOS 13 | Supported | `ci.yml` | build + generated artifact checks |
+| macOS latest | Supported | `ci.yml` | build + generated artifact checks |
+| Windows | Not officially supported | none | no compatibility guarantees yet |
 
 ## Toolchain Baseline
 
