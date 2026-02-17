@@ -25,7 +25,7 @@ If runtime behavior diverges from `deps/yai-specs`, runtime is a bug and must be
 ```bash
 git submodule update --init --recursive
 make all
-./dist/bin/yai-boot
+./build/bin/yai-boot
 ```
 
 Verification commands available in this repo:
@@ -42,6 +42,35 @@ Verification commands available in this repo:
 - `yai-cli` - operator/developer command-line client
 - `yai-yx` - graphical runtime cockpit
 - `yai-mind` - higher-level orchestration layer
+
+## Build Outputs
+
+- build: `build/bin/` (canonical compile outputs)
+- dist: `dist/bin/` (staging copy from `build/bin/`)
+- bundle: `dist/bundle/out/` (release assets)
+
+Commands:
+
+```bash
+make all      # build only, no dist side-effects
+make dist     # stage binaries to dist/bin
+make bundle   # package tar/zip + manifest + checksums
+```
+
+## Distribution
+
+GitHub Releases are the distribution channel for binaries and bundle metadata.
+The repository remains source code only; runtime artifacts are produced via CI/local `make bundle`.
+
+Verify downloaded bundles with `SHA256SUMS`:
+
+```bash
+# Linux
+sha256sum -c yai-bundle-<version>-<os>-<arch>.SHA256SUMS
+
+# macOS
+shasum -a 256 -c yai-bundle-<version>-<os>-<arch>.SHA256SUMS
+```
 
 ## License
 
