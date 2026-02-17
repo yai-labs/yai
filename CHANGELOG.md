@@ -7,6 +7,10 @@ and this project adheres to Semantic Versioning.
 
 ## [Unreleased]
 
+## [0.1.4] - 2026-02-17
+
+- TODO: summarize release changes.
+
 ## [0.1.3] - 2026-02-17
 
 - TODO: summarize release changes.
