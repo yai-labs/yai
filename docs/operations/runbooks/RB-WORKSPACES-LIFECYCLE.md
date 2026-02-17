@@ -31,9 +31,9 @@ yai root ping
 ## STEP 0: Protocol Robustness Minimum (If Not Already Done in v2)
 
 ### Files to read FIRST
-- `law/specs/protocol/transport.h`
-- `law/specs/protocol/yai_protocol_ids.h`
-- `law/specs/protocol/errors.h` (create if doesn't exist)
+- `deps/yai-specs/protocol/transport.h`
+- `deps/yai-specs/protocol/yai_protocol_ids.h`
+- `deps/yai-specs/protocol/errors.h` (create if doesn't exist)
 
 ### Deliverables
 
@@ -68,7 +68,7 @@ Today `ws create/destroy` responds OK but creates nothing because Root is not fo
 - `kernel/src/bin/yai_root_server.c`
 - `kernel/src/core/control_transport.c` (for frame read/write helpers)
 - `kernel/src/core/rpc_binary.c` (if relay logic already there)
-- `law/specs/protocol/transport.h`
+- `deps/yai-specs/protocol/transport.h`
 
 ### Implementation
 
@@ -98,7 +98,7 @@ Today `ws create/destroy` responds OK but creates nothing because Root is not fo
 ## STEP 2: Centralize ws_id Validation (SINGLE Definition)
 
 ### Target file
-- `law/specs/protocol/transport.h`
+- `deps/yai-specs/protocol/transport.h`
 
 ### Add
 `static inline int yai_ws_id_is_valid(const char *s)` with strong rule:
@@ -174,7 +174,7 @@ test ! -d ~/.yai/run/testws && echo OK
 ## STEP 4: Authority Enforcement Envelope-Only (Defense in Depth)
 
 ### Files to read FIRST
-- `law/specs/protocol/auth.h` (or define policy table there)
+- `deps/yai-specs/protocol/auth.h` (or define policy table there)
 - Root + Kernel (same command matrix → required role/arming)
 
 ### Rule

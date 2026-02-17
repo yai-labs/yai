@@ -28,7 +28,7 @@ python3 - <<'PY'
 import json, sys
 from pathlib import Path
 
-base = Path("law/specs/cli")
+base = Path("deps/yai-specs/cli")
 schema = json.loads((base / "commands.schema.json").read_text())
 data = json.loads((base / "commands.v1.json").read_text())
 
@@ -50,7 +50,7 @@ PY
 echo "=== COMPLIANCE BASELINE CHECK"
 compliance_files=(
   "law/extensions/compliance/C-001-compliance-context.md"
-  "law/specs/compliance/compliance.context.v1.json"
+  "deps/yai-specs/compliance/compliance.context.v1.json"
   "law/compliance/packs/gdpr-eu/2026Q1/pack.meta.json"
   "law/compliance/packs/gdpr-eu/2026Q1/taxonomy.data_classes.json"
   "law/compliance/packs/gdpr-eu/2026Q1/taxonomy.purposes.json"

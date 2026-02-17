@@ -18,7 +18,7 @@ SPECS_DIR  := $(ROOT_DIR)/deps/yai-specs
 
 DOXYFILE := Doxyfile
 DOXYGEN ?= doxygen
-DOXY_OUT ?= dist/docs
+DOXY_OUT ?= dist/docs/doxygen
 
 .PHONY: all boot core kernel engine clean docs docs-clean
 
@@ -77,7 +77,14 @@ clean:
 docs:
 	@mkdir -p $(DOXY_OUT)
 	@$(DOXYGEN) $(DOXYFILE)
-	@echo "✔ Doxygen: $(DOXY_OUT)/doxygen/html/index.html"
+	@echo "✔ Doxygen: $(DOXY_OUT)/html/index.html"
 
 docs-clean:
 	@rm -rf $(DOXY_OUT)
+
+# -----------------------------------------
+# Help
+# -----------------------------------------
+
+help:
+	@echo "Targets: all, boot, core, kernel, engine, docs, docs-clean, clean"

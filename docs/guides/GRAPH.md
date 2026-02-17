@@ -4,8 +4,8 @@ Editorial pointer only.
 
 Canonical sources:
 
-- `law/specs/graph/GRAPH_V1.md`
-- `law/specs/graph/graph.v1.json`
+- `deps/yai-specs/graph/GRAPH_V1.md`
+- `deps/yai-specs/graph/graph.v1.json`
 
 ## Graph Integrity (Normative)
 Semantic Graph state excludes operational traces (activation/events telemetry).

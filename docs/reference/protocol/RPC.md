@@ -5,10 +5,10 @@ Editorial pointer aligned with the target control-plane switch: the RPC contract
 ## Canonical sources (Single Source of Truth)
 
 **Authoritative (normative):**
-- `law/specs/control/control_plane.v1.json`
-- `law/specs/protocol/protocol.h`
-- `law/specs/protocol/transport.h`
-- `law/specs/protocol/yai_protocol_ids.h` (L0-authoritative Registry)
+- `deps/yai-specs/control/control_plane.v1.json`
+- `deps/yai-specs/protocol/protocol.h`
+- `deps/yai-specs/protocol/transport.h`
+- `deps/yai-specs/protocol/yai_protocol_ids.h` (L0-authoritative Registry)
 
 **Derived / enforced (must match law):**
 - `kernel/*` (control-plane server)
@@ -20,8 +20,8 @@ Editorial pointer aligned with the target control-plane switch: the RPC contract
 - logs, ad-hoc notes, code comments
 
 **Policy:**
-- any behavior change MUST update `law/specs/*` + tests
-- if code disagrees with `law/specs/*`, the code is wrong
+- any behavior change MUST update `deps/yai-specs/*` + tests
+- if code disagrees with `deps/yai-specs/*`, the code is wrong
 
 ---
 
@@ -109,7 +109,7 @@ The first message on a session MUST be a handshake, mapping to `YAI_CMD_HANDSHAK
 
 ## Privilege gate (arming + role)
 
-Privilege classification is owned by: `law/specs/control/control_plane.v1.json`
+Privilege classification is owned by: `deps/yai-specs/control/control_plane.v1.json`
 
 **Runtime enforcement rules:**
 

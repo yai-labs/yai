@@ -5,8 +5,8 @@ effective_date: 2026-02-16
 revision: 3
 supersedes: []
 law_refs:
-  - law/specs/protocol/transport.h
-  - law/specs/protocol/auth.h
+  - deps/yai-specs/protocol/transport.h
+  - deps/yai-specs/protocol/auth.h
 owner: runtime
 ---
 
@@ -51,9 +51,9 @@ yai root ping
 ## STEP 0: Protocol Guardrails (Zero Business Logic)
 
 ### Files to read FIRST
-- `law/specs/protocol/transport.h`
-- `law/specs/protocol/yai_protocol_ids.h`
-- `law/specs/protocol/errors.h` *(recommended: separate from auth)*
+- `deps/yai-specs/protocol/transport.h`
+- `deps/yai-specs/protocol/yai_protocol_ids.h`
+- `deps/yai-specs/protocol/errors.h` *(recommended: separate from auth)*
 
 ### Goal
 Define mechanical wire-format rules identical across: root / kernel / CLI / engine
@@ -92,7 +92,7 @@ Define mechanical wire-format rules identical across: root / kernel / CLI / engi
 - `kernel/src/bin/yai_root_server.c`
 - `kernel/src/core/control_transport.c`
 - `kernel/src/core/transport.c`
-- `law/specs/protocol/transport.h` *(source-of-truth envelope)*
+- `deps/yai-specs/protocol/transport.h` *(source-of-truth envelope)*
 
 ### Goal
 Root becomes pure router:
@@ -136,7 +136,7 @@ Every reject → responds with:
 ## STEP 2: Authority Check Envelope-Only (Defense-in-Depth)
 
 ### Files to read FIRST
-- `law/specs/protocol/auth.h`
+- `deps/yai-specs/protocol/auth.h`
 - `kernel/src/core/rpc_binary.c`
 - `kernel/src/core/yai_session.c`
 
@@ -169,7 +169,7 @@ Authority enforcement on envelope metadata only. Never on payload.
 ## STEP 3: Centralize `is_valid_ws_id` (SINGLE Definition)
 
 ### Target file
-- `law/specs/protocol/transport.h` (static inline)
+- `deps/yai-specs/protocol/transport.h` (static inline)
 
 ### Goal
 Single point of truth for ws_id validation
@@ -198,7 +198,7 @@ Single point of truth for ws_id validation
 - `kernel/src/core/yai_session.c`
 - `kernel/src/core/rpc_binary.c`
 - `kernel/src/core/rpc_codec.c` (if present)
-- `law/specs/protocol/transport.h`
+- `deps/yai-specs/protocol/transport.h`
 
 ### Goal
 No dispatch if:

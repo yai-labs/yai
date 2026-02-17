@@ -89,7 +89,7 @@ The header MUST be:
 
 ### Command and State ID Registry
 
-- All command IDs and state IDs MUST be defined in `law/specs/protocol/yai_protocol_ids.h`.
+- All command IDs and state IDs MUST be defined in `deps/yai-specs/protocol/yai_protocol_ids.h`.
 - IDs MUST be stable, unique, and non-reused.
 - ID ranges ARE reserved:
   - `0x01xx`: Control/Kernel

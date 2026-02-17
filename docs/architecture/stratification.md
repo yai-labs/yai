@@ -33,7 +33,7 @@ Single canonical entrypoint (Root).
 
 | Layer | Responsibility | API / ABI Surface | Storage Scope | Events Domain | Certification Gates |
 |------|---------------|------------------|--------------|--------------|--------------------|
-| L0 | Law specs, canonical ABI, protocol, identifiers | `law/specs/*`, generated headers | ABI + schema artifacts | N/A (spec-level only) | `scripts/verify/law-kernel.sh`, `scripts/verify/core.sh` |
+| L0 | Law specs, canonical ABI, protocol, identifiers | `deps/yai-specs/*`, generated headers | ABI + schema artifacts | N/A (spec-level only) | `scripts/verify/law-kernel.sh`, `scripts/verify/core.sh` |
 | Root | Machine control plane, routing, runtime registry | root socket, control-plane contract | machine runtime metadata | runtime lifecycle + attach events | `scripts/gates/ws.sh`, `scripts/verify/core.sh` |
 | L1 | Kernel authority, session control, isolation, enforcement | `kernel/include/*`, FSM, session registry | per-workspace runtime surface | authority transitions + violations | `scripts/verify/law-kernel.sh` |
 | L2 | Engine deterministic execution + gates + cortex | `engine/include/*` | deterministic execution state | execution evidence + gate signals | `scripts/gates/cortex.sh`, `scripts/verify/core.sh` |

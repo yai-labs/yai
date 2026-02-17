@@ -103,7 +103,7 @@ Rules:
 Prohibited:
 
 - `docs/editorial/` (subjective naming; not allowed)
-- `docs/specs/` (specs live in `law/specs/` only)
+- `deps/yai-specs/` (canonical specs live here)
 
 ---
 
@@ -160,7 +160,7 @@ ADRs MUST NOT contain operational procedures. Those belong in Runbooks.
 
 1. Links MUST be relative paths inside the repo.
 2. Documents MUST prefer pointing to `law/` rather than copying content.
-3. If a doc references a protocol field, it MUST link to the canonical header in `law/specs/`.
+3. If a doc references a protocol field, it MUST link to the canonical header in `deps/yai-specs/`.
 
 ---
 

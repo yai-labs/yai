@@ -432,7 +432,7 @@ typedef struct {
 /* Global access (or pass pointer around) */
 yai_session_table_t *yai_session_table(void);
 
-/* Workspace id validate (ideally use the inline in law/specs/protocol/transport.h) */
+/* Workspace id validate (ideally use the inline in deps/yai-specs/protocol/transport.h) */
 bool yai_ws_validate_id(const char *ws_id);
 
 /* Acquire / create session */

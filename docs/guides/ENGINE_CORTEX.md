@@ -4,4 +4,4 @@ Editorial pointer only.
 
 Canonical source:
 
-- `law/specs/engine/engine_cortex.v1.json`
+- `deps/yai-specs/engine/engine_cortex.v1.json`

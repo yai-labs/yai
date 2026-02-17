@@ -74,7 +74,7 @@ This document is an implementation blueprint. It defines boundaries, contracts, 
 - `events_started`
 - `error` {message}
 
-See `docs/specs/RPC_V1.md` for schema details.
+See `deps/yai-specs/protocol/transport.h` for schema details.
 
 ### D2) Events Stream (NDJSON)
 **Transport**: RPC subscribe on `control.sock`.
@@ -96,7 +96,7 @@ See `docs/specs/RPC_V1.md` for schema details.
 - `ws_down_complete`
 - `provider_attached` / `provider_detached`
 
-See `docs/specs/EVENTS_V1.md`.
+See `deps/yai-specs/control/control_plane.v1.json`.
 
 ### D3) Provider Trust Lifecycle
 **Discover (untrusted)**
@@ -111,7 +111,7 @@ See `docs/specs/EVENTS_V1.md`.
 **Detach**
 - Clears active provider for workspace.
 
-See `docs/specs/PROVIDERS_TRUST.md`.
+See `deps/yai-specs/providers/PROVIDERS_TRUST.md`.
 
 ---
 

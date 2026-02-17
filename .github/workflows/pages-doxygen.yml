@@ -28,7 +28,7 @@ jobs:
 
       - name: Build Doxygen
         run: |
-          mkdir -p dist/docs
+          mkdir -p dist/docs/doxygen
           doxygen Doxyfile
 
       - name: Resolve docs path

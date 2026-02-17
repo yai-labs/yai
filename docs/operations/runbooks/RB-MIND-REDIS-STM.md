@@ -146,7 +146,7 @@ P:meta:schema_version         # string, NO TTL
 
 ### Files to create
 
-**Spec:** `law/specs/storage/REDIS_KEYSPACE.md`
+**Spec:** `deps/yai-specs/storage/REDIS_KEYSPACE.md`
 
 Document the canonical keyspace with examples and TTL policies.
 
@@ -226,7 +226,7 @@ impl KernelClient {
     
     pub fn handshake(&mut self) -> Result<(), String> {
         // Implement YAI_CMD_HANDSHAKE protocol
-        // (use protocol from law/specs/protocol/transport.h)
+        // (use protocol from deps/yai-specs/protocol/transport.h)
         todo!("Implement handshake")
     }
     

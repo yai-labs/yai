@@ -1,108 +1,43 @@
-# YAI  
-### YAI Ain’t Intelligence
+# YAI
 
-YAI is not “just another AI project”.
+YAI is a **layered, sovereign runtime** for governed cognition.
+It separates probabilistic intelligence from deterministic control and makes authority explicit, enforceable, and auditable.
 
-It is a **layered sovereign runtime system** designed to make cognition,
-execution and authority explicit, enforceable, and auditable.
+## Quickstart
 
-YAI separates probabilistic intelligence from deterministic control.
-It treats governance as a first-class architectural primitive.
+```bash
+make clean && make all
+./dist/bin/yai-boot
+./dist/bin/yai-kernel status
+```
 
----
+## Repository Map
 
-## Vision
+- `boot/` — root entrypoint and workspace bring-up
+- `core/` — control plane core services
+- `kernel/` — authority and enforcement runtime (C)
+- `engine/` — deterministic execution bridge and gates (C)
+- `runtime/` — protocol/runtime interfaces
+- `docs/` — architecture, guides, reference, operations
+- `scripts/` — verification and tooling
 
-Most AI systems blur boundaries between inference, execution, and authority.
+## Contracts (Canonical)
 
-YAI does the opposite.
+All contracts are defined in `deps/yai-specs` and are authoritative for protocol, control, graph, vault, and compliance.
+This repo consumes those headers and JSONs directly.
 
-It builds a **machine-level runtime** where:
+## Tooling
 
-- authority is explicit
-- effects are gated
-- workspaces are isolated
-- memory is structured
-- execution is deterministic where it must be
+Related repos:
+- `yai-cli`
+- `yai-yx`
+- `yai-mind`
 
-YAI is not an app.  
-It is an operating surface for governed cognition.
+## Documentation
 
----
-
-## Architecture Overview
-
-YAI is stratified into clearly defined layers:
-
-### `law/` — L0  
-Axioms, invariants, protocol definitions, formal models (TLA+).  
-The canonical source of truth.
-
-### `kernel/` — L1  
-Low-level authority and enforcement runtime (C).  
-Session guards, transport, boundary enforcement.
-
-### `engine/` — L2  
-Deterministic execution bridge and gated runtime services (C).  
-Storage, network, provider gates, execution cortex.
-
-### `mind/` — L3  
-Control plane and cognition layer (Rust).  
-Graph memory, providers, reasoning orchestration, CLI surfaces.
-
-### `boot/`  
-Canonical entrypoint and root control plane.  
-One machine, multiple workspaces.
-
-### `scripts/` — Certification & Gates  
-Deterministic verification suites and operational gates.
-
----
-
-## Core Principles
-
-- **Single Runtime per Machine**
-- **Multiple Isolated Workspaces**
-- **Strict Protocol Contracts**
-- **Authority Before Execution**
-- **Deterministic Commit Surfaces**
-- **Probabilistic Compute Contained**
-
-YAI enforces boundaries instead of assuming discipline.
-
----
-
-## Current Status
-
-- Root Control Plane introduced
-- Workspace kernel isolated
-- Strict RPC envelope enforced
-- Handshake and authority gating active
-- Multi-workspace runtime in progress
-
-This repository is under active architectural consolidation.
-
----
-
-## Who This Is For
-
-YAI is for engineers who:
-
-- care about formal guarantees
-- want deterministic boundaries around AI systems
-- believe governance should be implemented, not described
-
-If you are here, you are entering a system that takes architecture seriously.
-
----
+- `docs/README.md`
+- API Reference (Doxygen): https://francescomaiomascio.github.io/yai/
 
 ## License
 
 See `LICENSE`.
-
----
-
-YAI is not intelligence.  
-It is the structure that makes intelligence accountable.
-
-API Reference (Doxygen): https://francescomaiomascio.github.io/yai/

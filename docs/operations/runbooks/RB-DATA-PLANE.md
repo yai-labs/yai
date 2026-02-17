@@ -84,7 +84,7 @@ yai:<ws_id>:context:*      # Active context (pinned)
 
 ### Files to create
 
-**A) Spec:** `law/specs/storage/DATA_PLANE.md`
+**A) Spec:** `deps/yai-specs/storage/DATA_PLANE.md`
 
 Document the layout, path rules, and isolation guarantees.
 

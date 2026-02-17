@@ -1,9 +1,8 @@
 # Doxygen configuration for yai
 
 PROJECT_NAME           = "yai"
-OUTPUT_DIRECTORY       = dist/docs
+OUTPUT_DIRECTORY       = dist/docs/doxygen
 GENERATE_HTML          = YES
-HTML_OUTPUT            = doxygen
 GENERATE_LATEX         = NO
 EXTRACT_ALL            = YES
 WARN_IF_UNDOCUMENTED   = YES
@@ -12,16 +11,23 @@ RECURSIVE              = YES
 FILE_PATTERNS          = *.h *.md
 
 # Inputs
-INPUT                  = kernel \
-                         engine \
-                         core \
-                         boot \
+INPUT                  = boot/include \
+                         core/include \
+                         kernel/include \
+                         engine/include \
+                         runtime/protocol \
+                         deps/yai-specs/protocol \
+                         deps/yai-specs/vault \
                          README.md \
                          docs/api/C_MAINPAGE.md
 
 # Markdown
 MARKDOWN_SUPPORT       = YES
 USE_MDFILE_AS_MAINPAGE = docs/api/C_MAINPAGE.md
+
+EXCLUDE                = build \
+                         dist \
+                         deps/yai-specs/contracts
 
 # Output layout
 GENERATE_TREEVIEW      = YES
