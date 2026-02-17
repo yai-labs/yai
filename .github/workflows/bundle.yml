@@ -24,6 +24,15 @@ jobs:
         with:
           submodules: recursive
 
+      - name: Show bundle pins
+        run: |
+          if [ ! -f deps/yai-cli.ref ]; then
+            echo "ERROR: missing deps/yai-cli.ref"
+            exit 1
+          fi
+          echo "yai specs pin: $(git -C deps/yai-specs rev-parse HEAD)"
+          echo "yai cli ref  : $(cat deps/yai-cli.ref)"
+
       - name: Release preflight (specs pin alignment)
         env:
           STRICT_SPECS_HEAD: "1"
