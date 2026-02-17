@@ -45,5 +45,7 @@ Verification commands available in this repo:
 
 ## License
 
-This repository is licensed under Apache-2.0. See `LICENSE` and `NOTICE`.
-Third-party components keep their own licenses as documented in `THIRD_PARTY_NOTICES.md`.
+Apache License 2.0 (Apache-2.0).
+See `LICENSE` and `NOTICE`.
+Third-party licensing notices are tracked in `THIRD_PARTY_NOTICES.md`.
+Datasets may have separate terms if stated in-place.
