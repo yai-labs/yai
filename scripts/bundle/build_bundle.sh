@@ -8,9 +8,9 @@ BUNDLE_ROOT="$DIST_ROOT/bundle"
 STAGE_ROOT="$BUNDLE_ROOT/stage"
 OUT_ROOT="$BUNDLE_ROOT/out"
 TMP_ROOT="$BUNDLE_ROOT/.bundle_tmp"
+CLI_PIN_FILE="$ROOT_DIR/deps/yai-cli.ref"
 
 YAI_CLI_REPO="${YAI_CLI_REPO:-https://github.com/francescomaiomascio/yai-cli.git}"
-YAI_CLI_REF="${YAI_CLI_REF:-main}"
 
 EXPECTED_BINS=(
   yai-boot
@@ -33,6 +33,16 @@ done
 
 if [ ! -d "$ROOT_DIR/deps/yai-specs" ]; then
   echo "ERROR: missing deps/yai-specs. Run 'git submodule update --init --recursive'." >&2
+  exit 1
+fi
+
+if [ ! -f "$CLI_PIN_FILE" ]; then
+  echo "ERROR: missing CLI pin file $CLI_PIN_FILE" >&2
+  exit 1
+fi
+CLI_PIN_SHA="$(awk -F= '/^cli_sha=/{print $2}' "$CLI_PIN_FILE" | tr -d '[:space:]')"
+if ! echo "$CLI_PIN_SHA" | grep -Eq '^[0-9a-f]{40}$'; then
+  echo "ERROR: invalid cli_sha in $CLI_PIN_FILE (expected 40-hex SHA)" >&2
   exit 1
 fi
 
@@ -69,9 +79,12 @@ done
 # CLI ingest (hard-fail on any error)
 # -----------------------------
 CLI_SRC_DIR="$TMP_ROOT/yai-cli"
-echo "[bundle] ingesting yai-cli from $YAI_CLI_REPO @ $YAI_CLI_REF"
+echo "[bundle] ingesting yai-cli from $YAI_CLI_REPO @ $CLI_PIN_SHA"
 git clone "$YAI_CLI_REPO" "$CLI_SRC_DIR"
-git -C "$CLI_SRC_DIR" checkout "$YAI_CLI_REF"
+if ! git -C "$CLI_SRC_DIR" checkout "$CLI_PIN_SHA"; then
+  echo "ERROR: failed to checkout pinned yai-cli SHA $CLI_PIN_SHA" >&2
+  exit 1
+fi
 
 # Force specs parity with this runtime bundle pin to avoid drift.
 rm -rf "$CLI_SRC_DIR/deps/yai-specs"
@@ -96,6 +109,10 @@ chmod +x "$STAGE_DIR/bin/yai"
 
 CLI_GIT_SHA="$(git -C "$CLI_SRC_DIR" rev-parse HEAD)"
 CLI_GIT_SHA_SHORT="$(git -C "$CLI_SRC_DIR" rev-parse --short=12 HEAD)"
+if [ "$CLI_GIT_SHA" != "$CLI_PIN_SHA" ]; then
+  echo "ERROR: checked out CLI SHA ($CLI_GIT_SHA) does not match pinned SHA ($CLI_PIN_SHA)" >&2
+  exit 1
+fi
 
 if [ -n "${BUNDLE_VERSION:-}" ]; then
   VERSION="$BUNDLE_VERSION"
@@ -145,7 +162,7 @@ bash "$ROOT_DIR/scripts/bundle/manifest.sh" \
   "$VERSION" \
   "$CORE_VERSION" \
   "$CORE_GIT_SHA" \
-  "$YAI_CLI_REF" \
+  "$CLI_PIN_SHA" \
   "$CLI_GIT_SHA" \
   "$SPECS_COMMIT" \
   "$PLATFORM_OS" \
