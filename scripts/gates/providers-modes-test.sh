@@ -15,7 +15,7 @@ fi
 echo "== providers modes test (ws=$WS)"
 
 "$BIN" down --ws "$WS" --force >/dev/null 2>&1 || true
-"$BIN" up --ws "$WS" --build --no-engine --no-mind --detach >/dev/null
+"$BIN" up --ws "$WS" --build --no-engine --detach >/dev/null
 YAI_REMOTE_ENDPOINT="$ENDPOINT" YAI_REMOTE_MODEL="qwen-test" \
   "$BIN" providers --ws "$WS" discover >/dev/null
 

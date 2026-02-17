@@ -30,13 +30,9 @@ yai_resolve_bin() {
     return 0
   fi
 
-  # Legacy fallbacks (kept for compatibility with older local setups).
+  # Legacy fallback (older local setup).
   if [[ -x "$HOME/.yai/artifacts/yai/bin/yai" ]]; then
     echo "$HOME/.yai/artifacts/yai/bin/yai"
-    return 0
-  fi
-  if [[ -x "$HOME/.yai/artifacts/mind/target/release/yai" ]]; then
-    echo "$HOME/.yai/artifacts/mind/target/release/yai"
     return 0
   fi
 

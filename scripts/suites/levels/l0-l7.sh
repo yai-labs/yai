@@ -51,11 +51,7 @@ run bash -lc "cd \"$ROOT\" && ./scripts/gates/events.sh"
 step "L6 - Graph Gate"
 run bash -lc "cd \"$ROOT\" && ./scripts/gates/graph.sh \"${WS_PREFIX}_graph\""
 
-step "L6b - Awareness Gate"
-run bash -lc "cd \"$ROOT\" && ./scripts/gates/awareness.sh \"${WS_PREFIX}_awareness\""
 
-step "L6c - TUI Snapshot Gate"
-run bash -lc "cd \"$ROOT\" && ./scripts/gates/tui.sh \"${WS_PREFIX}_tui\""
 
 step "L7 - Providers + Rust Unit/Integration Tests + CLI Smoke"
 PROVIDERS_WS="${WS_PREFIX}_prv_$RANDOM"

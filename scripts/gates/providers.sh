@@ -69,13 +69,13 @@ rm -rf "$RUN_DIR"
 
 started=0
 for attempt in 1 2 3 4 5; do
-  if "$BIN" up --ws "$WS" --no-engine --no-mind --detach >/dev/null 2>&1; then
+  if "$BIN" up --ws "$WS" --no-engine --detach >/dev/null 2>&1; then
     started=1
     break
   fi
   "$BIN" down --ws "$WS" --force >/dev/null 2>&1 || true
   rm -rf "$RUN_DIR"
-  if "$BIN" up --ws "$WS" --build --no-engine --no-mind --detach >/dev/null 2>&1; then
+  if "$BIN" up --ws "$WS" --build --no-engine --detach >/dev/null 2>&1; then
     started=1
     break
   fi

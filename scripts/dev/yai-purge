@@ -18,9 +18,6 @@ if [[ -n "$BIN" && -x "$BIN" ]]; then
   "$BIN" down --ws "${WS_DEFAULT}" || true
 fi
 
-if [[ -d "${ROOT}/mind" ]]; then
-  (cd "${ROOT}/mind" && cargo clean)
-fi
 
 if [[ -d "${ROOT}/kernel" ]]; then
   (cd "${ROOT}/kernel" && make clean)
