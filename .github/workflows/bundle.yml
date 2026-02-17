@@ -73,7 +73,20 @@ jobs:
       - name: List release assets
         run: find release-assets -maxdepth 2 -type f | sort
 
-      - name: Publish GitHub Release
-        uses: softprops/action-gh-release@v2
-        with:
-          files: release-assets/*
+      - name: Verify gh CLI
+        run: gh --version
+
+      - name: Publish release assets (official bundle only)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="${GITHUB_REF_NAME}"
+          FILES="$(find release-assets -type f \( -name '*.tar.gz' -o -name '*.zip' \) | sort)"
+          if [ -z "$FILES" ]; then
+            echo "ERROR: no bundle zip/tar assets found for release upload"
+            exit 1
+          fi
+          if ! gh release view "$TAG" >/dev/null 2>&1; then
+            gh release create "$TAG" --title "$TAG" --notes "Official YAI runtime bundle release."
+          fi
+          gh release upload "$TAG" $FILES --clobber
