@@ -34,6 +34,16 @@ jobs:
           echo "yai specs pin: $(git -C deps/yai-specs rev-parse HEAD)"
           echo "yai cli ref  : $(cat deps/yai-cli.ref)"
 
+      - name: Configure git auth for cross-repo checks
+        env:
+          YAI_REPO_READ_TOKEN: ${{ secrets.YAI_REPO_READ_TOKEN }}
+        run: |
+          if [ -z "${YAI_REPO_READ_TOKEN}" ]; then
+            echo "ERROR: missing secret YAI_REPO_READ_TOKEN (requires read access to yai-cli/yai-specs)"
+            exit 1
+          fi
+          git config --global url."https://x-access-token:${YAI_REPO_READ_TOKEN}@github.com/".insteadOf "https://github.com/"
+
       - name: Release preflight (specs pin alignment)
         env:
           STRICT_SPECS_HEAD: "1"
