@@ -54,6 +54,49 @@ jobs:
       - name: Verify generated artifacts
         run: bash scripts/dev/check-generated.sh
 
+  build-debian:
+    name: Build and verify (Debian)
+    runs-on: ubuntu-latest
+    container:
+      image: debian:stable
+    steps:
+      - name: Install toolchain
+        run: |
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install -y ca-certificates git build-essential make python3 doxygen
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Build
+        run: make all
+
+      - name: Verify generated artifacts
+        run: bash scripts/dev/check-generated.sh
+
+  build-fedora:
+    name: Build and verify (Fedora)
+    runs-on: ubuntu-latest
+    container:
+      image: fedora:latest
+    steps:
+      - name: Install toolchain
+        run: |
+          dnf install -y git make gcc gcc-c++ python3 doxygen
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Build
+        run: make all
+
+      - name: Verify generated artifacts
+        run: bash scripts/dev/check-generated.sh
+
   build-macos:
     name: Build (macOS ${{ matrix.os }})
     runs-on: ${{ matrix.os }}
