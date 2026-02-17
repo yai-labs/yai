@@ -22,7 +22,7 @@ jobs:
       - name: Install toolchain
         run: |
           sudo apt-get update
-          sudo apt-get install -y build-essential make python3 doxygen
+          sudo apt-get install -y build-essential make python3 doxygen libsqlite3-dev
 
       - name: Build
         run: make all
@@ -41,7 +41,7 @@ jobs:
     steps:
       - name: Install toolchain
         run: |
-          pacman -Syu --noconfirm --needed ca-certificates git base-devel make python doxygen
+          pacman -Syu --noconfirm --needed ca-certificates git base-devel make python doxygen sqlite
 
       - name: Checkout
         uses: actions/checkout@v4
@@ -63,7 +63,7 @@ jobs:
       - name: Install toolchain
         run: |
           apt-get update
-          DEBIAN_FRONTEND=noninteractive apt-get install -y ca-certificates git build-essential make python3 doxygen
+          DEBIAN_FRONTEND=noninteractive apt-get install -y ca-certificates git build-essential make python3 doxygen libsqlite3-dev
 
       - name: Checkout
         uses: actions/checkout@v4
@@ -84,7 +84,7 @@ jobs:
     steps:
       - name: Install toolchain
         run: |
-          dnf install -y git make gcc gcc-c++ python3 doxygen
+          dnf install -y git make gcc gcc-c++ python3 doxygen sqlite-devel
 
       - name: Checkout
         uses: actions/checkout@v4
