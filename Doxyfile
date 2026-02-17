@@ -17,6 +17,7 @@ INPUT                  = boot/include \
                          engine/include \
                          runtime/protocol \
                          deps/yai-specs/protocol \
+                         deps/yai-specs/protocol/runtime \
                          deps/yai-specs/vault \
                          README.md \
                          docs/api/C_MAINPAGE.md

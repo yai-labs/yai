@@ -276,7 +276,7 @@ void yai_log_deny(const char *ws_id, unsigned cmd_id, const char *reason)
 
 ### Files to create
 
-**A) Spec:** `law/tla/YAI_KERNEL.tla`
+**A) Spec:** `deps/yai-specs/contracts/formal/YAI_KERNEL.tla`
 
 ```tla
 ------------------------------ MODULE YAI_KERNEL ------------------------------
@@ -362,7 +362,7 @@ THEOREM Spec => []IsolationInvariant
 =============================================================================
 ```
 
-**B) Config:** `law/tla/YAI_KERNEL.cfg`
+**B) Config:** `deps/yai-specs/contracts/formal/YAI_KERNEL.cfg`
 
 ```
 SPECIFICATION Spec

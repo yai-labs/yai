@@ -20,7 +20,7 @@ This document is an implementation blueprint. It defines boundaries, contracts, 
 
 ### Law (Authority)
 - Defines axioms, invariants, boundaries, and formal models.
-- Canonical specifications live under `law/` and are the source of truth.
+- Canonical specifications live under `deps/yai-specs/` and are the source of truth.
 
 ### Kernel (L1 Authority Enforcement)
 - Enforces the canonical state machine and authority gating.

@@ -480,3 +480,15 @@ dist/docs/doxygen/
 /tools/cli/build/
 /tools/cli/dist/
 /tools/cli/obj/
+
+# yai runtime build/log artifacts
+build/
+dist/cache/
+dist/logs/
+dist/tmp/
+*.o
+*.d
+*.a
+*.so
+*.dSYM
+*.log
