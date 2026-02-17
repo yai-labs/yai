@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <stddef.h>
+#include <protocol.h>
 #include <transport.h>
 
 #define MAX_SESSIONS    32

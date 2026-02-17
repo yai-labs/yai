@@ -1,6 +1,7 @@
 #ifndef YAI_PROVIDER_GATE_H
 #define YAI_PROVIDER_GATE_H
 
+#include "protocol.h"
 #include "transport.h"
 
 #include <stdbool.h>

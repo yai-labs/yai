@@ -22,6 +22,7 @@ SPECS_INC_VAULT := $(SPECS_DIR)/specs/vault/include
 CFLAGS ?= -Wall -Wextra -O2 -std=c11 -MMD -MP
 CFLAGS += -I./include
 CFLAGS += -I$(ROOT_DIR)/kernel/include
+CFLAGS += -I$(ROOT_DIR)/include/specs_compat
 CFLAGS += -I$(SPECS_DIR)
 CFLAGS += -I$(SPECS_INC_PROTOCOL)
 CFLAGS += -I$(SPECS_INC_RUNTIME)

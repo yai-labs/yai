@@ -1,31 +1,91 @@
 ---
 id: RB-ROOT-HARDENING
+title: Root Hardening
 status: active
-effective_date: 2026-02-16
-revision: 3
-supersedes: []
-law_refs:
-  - deps/yai-specs/specs/protocol/transport.h
-  - deps/yai-specs/specs/protocol/auth.h
 owner: runtime
+effective_date: 2026-02-18
+revision: 1
+supersedes: []
+depends_on:
+  - RB-WORKSPACES-LIFECYCLE (optional, if already exists)
+related:
+  adr:
+    - docs/design/adr/ADR-002-root-entrypoint.md
+    - docs/design/adr/ADR-006-unified-rpc.md
+    - docs/design/adr/ADR-008-connection-lifecycle.md
+  specs:
+    - deps/yai-specs/specs/protocol/include/transport.h
+    - deps/yai-specs/specs/protocol/include/auth.h
+    - deps/yai-specs/specs/protocol/include/errors.h
+    - deps/yai-specs/specs/protocol/include/yai_protocol_ids.h
+  test_plans:
+    - docs/test-plans/hardfail.md
+  tools:
+    - tools/bin/yai-verify
+    - tools/bin/yai-gate
+    - tools/bin/yai-suite
 ---
 
+# RB-ROOT-HARDENING — Root ↔ Kernel Boundary Hardening (YAI 0.1.x)
 
-# YAI Root Hardening v2 — Operational Runbook
+This is an operational runbook for **YAI 0.1.x**.
 
-**Branch:** `feat/root-hardening-v2`  
-**Objective:** Harden L0 Root ↔ L1 Kernel boundary with deterministic protocol rules, envelope-only enforcement, byte-perfect routing, and indestructible logging/audit.
+Objective: harden the **Root control plane** as a deterministic, auditable, envelope-only boundary between clients and the Kernel.
+
+Root must behave like a governed cable:
+- validates envelope invariants
+- enforces handshake + basic policy
+- forwards bytes without mutation
+- never "silent drops"
+- logs everything in an indestructible way
+
+This runbook does NOT redesign architecture. It strengthens enforcement and observability without changing the planes model.
 
 ---
 
-## Daily Prep
+## 1) Sequencing and prerequisites
 
-### 1. Create branch
-```bash
-git checkout -b feat/root-hardening-v2
-```
+### Position in the global sequence
 
-### 2. Clean runtime (before each test round)
+1. Root hardening ✅ (this document)
+2. Workspace lifecycle
+3. Engine attach
+4. Data plane
+5. Mind Redis STM
+
+### Hard prerequisites (must be true before starting)
+
+- `deps/yai-specs` headers are present and treated as source-of-truth
+- Kernel can boot and accept control connections
+- A baseline "ping" command exists end-to-end (CLI → Root → Kernel → response)
+
+If any prerequisite is not true: stop and fix baseline first.
+
+---
+
+## 2) Scope
+
+### In scope
+
+- Strict envelope validation in Root (mechanical guardrails)
+- Mandatory handshake gate (only allow handshake before session is established)
+- Byte-perfect forward/relay (Root does not mutate envelope nor payload)
+- Deterministic error reply (always a response frame, never silent drop)
+- Indestructible Root logging (file + stderr)
+
+### Out of scope
+
+- New protocol fields (no envelope redesign)
+- New business logic in Root (no payload interpretation)
+- Engine/Mind changes beyond what is required for tests
+- Data plane / persistence
+
+---
+
+## 3) Operational workflow (daily)
+
+### Clean runtime before each test round
+
 ```bash
 pkill -f yai-root-server || true
 pkill -f yai-kernel || true
@@ -33,261 +93,383 @@ pkill -f yai-boot || true
 rm -rf ~/.yai/run/root/root.log || true
 ```
 
-### 3. Build + boot baseline
+### Build + boot baseline
+
 ```bash
 make clean
 make
 yai-boot --master
 ```
 
-### 4. Quick sanity check
+### Sanity check
+
 ```bash
 yai root ping
 ```
-**Expected:** pong ok + `root.log` created and appending correctly
+
+Expected:
+
+- `pong ok` (or equivalent)
+- `~/.yai/run/root/root.log` exists and is appending
 
 ---
 
-## STEP 0: Protocol Guardrails (Zero Business Logic)
+## 4) Deliverables (phased)
 
-### Files to read FIRST
-- `deps/yai-specs/specs/protocol/transport.h`
-- `deps/yai-specs/specs/protocol/yai_protocol_ids.h`
-- `deps/yai-specs/specs/protocol/errors.h` *(recommended: separate from auth)*
+This runbook is delivered through sub-phases under YAI 0.1.x.
+Each phase must compile, run, and be verifiable before moving on.
 
-### Goal
-Define mechanical wire-format rules identical across: root / kernel / CLI / engine
+---
 
-### Minimum deliverables
+### 0.1.0 — Protocol Guardrails (no business logic)
 
-**A) Standard error codes (numeric)**
-- `YAI_E_BAD_MAGIC`
-- `YAI_E_BAD_VERSION`
-- `YAI_E_BAD_WS_ID`
-- `YAI_E_NEED_HANDSHAKE`
-- `YAI_E_ARMING_REQUIRED`
-- `YAI_E_ROLE_REQUIRED`
-- `YAI_E_PAYLOAD_TOO_BIG`
-- `YAI_E_BAD_CHECKSUM`
+**Branch:** `feat/root-hardening-0.1.0-guardrails`  
+**Goal:** Root and Kernel share identical mechanical wire rules and error codes.
 
-**B) Explicit frame invariants**
+#### File targets
+
+READ FIRST:
+
+- `deps/yai-specs/specs/protocol/include/transport.h`
+- `deps/yai-specs/specs/protocol/include/yai_protocol_ids.h`
+- `deps/yai-specs/specs/protocol/include/errors.h`
+- `deps/yai-specs/specs/protocol/include/auth.h`
+
+CODE (likely):
+
+- `root/src/yai_root_server.c` (or current Root server file)
+- `kernel/src/core/rpc_binary.c` (or equivalent decode/dispatch point)
+
+#### Guardrails required (mechanical invariants)
+
+- `magic` must match
+- `version` must be supported
 - `payload_len <= YAI_MAX_PAYLOAD`
 - `arming ∈ {0,1}`
-- `role` within range (guest/user/operator/sovereign) → out-of-range = reject
-- `ws_id` null-terminated sender-side, validated receiver-side
+- `role` must be within known enum range
+- `ws_id` validation: reject invalid patterns deterministically
+- checksum policy (0.1.x):
+  - `checksum == 0` is mandatory
+  - non-zero checksum is a deterministic reject
 
-**C) Checksum policy** (even if not implementing CRC tomorrow)
-- For now: `checksum == 0` mandatory
-- If `checksum != 0` → deterministic reject with `YAI_E_BAD_CHECKSUM`
+#### Standard error codes (numeric)
 
-### Done when
-- Root and Kernel can "reject-with-error-frame" using same codes
-- CLI/engine can interpret errors uniformly
+Root and Kernel must reject using the same codes from specs (no local enums).
+Minimum set expected:
+
+- bad magic
+- bad version
+- bad ws_id
+- need handshake
+- arming required
+- role required
+- payload too big
+- bad checksum
+
+#### Verification
+
+- `yai root ping` still works
+- invalid envelope inputs get an error reply (not silent close)
+
+#### Acceptance (0.1.0)
+
+- [ ] Root and Kernel reject invalid frames with the same numeric codes
+- [ ] No silent drop on malformed inputs
+- [ ] Build passes and baseline boot still works
 
 ---
 
-## STEP 1: forward_to_kernel in Root (Pure Router)
+### 0.1.1 — Root = Byte-Perfect Router (forward/relay)
 
-### Files to read FIRST
-- `kernel/src/bin/yai_root_server.c`
-- `kernel/src/core/control_transport.c`
+**Branch:** `feat/root-hardening-0.1.1-router`  
+**Goal:** Root becomes a pure router with deterministic rejects + indestructible logging.
+
+#### File targets
+
+Root:
+
+- `root/src/yai_root_server.c`
+- `root/src/control_transport.c` (if exists)
+
+Kernel side used for comparison:
+
 - `kernel/src/core/transport.c`
-- `deps/yai-specs/specs/protocol/transport.h` *(source-of-truth envelope)*
+- `kernel/src/core/control_transport.c` (if exists)
 
-### Goal
-Root becomes pure router:
-- Does not interpret payload
-- Does not mutate envelope
-- Byte-perfect forward to kernel and byte-perfect relay to client
+Specs:
 
-### Protocol robustness included
+- `deps/yai-specs/specs/protocol/include/transport.h`
 
-**A) Root must never "silent drop"**  
-Every reject → responds with:
-- Valid envelope
-- Short JSON payload: `{ "ok": false, "code": <ERR>, "msg": "..." }`
-- Then closes
+#### Rules
 
-**B) Hard validation BEFORE forward**
-- `magic/version`
-- `payload_len` bounds
-- `ws_id` validate (STEP 3; stub local match for now)
-- Handshake gate: if not done, only pass `YAI_CMD_HANDSHAKE`
+Root MUST NOT:
 
-**C) Byte-perfect forward/relay**
-- Forward identical `env` + identical payload to kernel
-- Read response (envelope+payload) and relay identical to client
-- Do not regenerate `trace_id`
-- Do not touch `ws_id`
+- interpret payload
+- change envelope fields
+- regenerate trace_id
+- rewrite ws_id
 
-### Root "indestructible" logging (definitive reintroduction)
-- File: `~/.yai/run/root/root.log`
-- Open with `O_CREAT | O_APPEND`
-- If directory missing: `mkdir -p ~/.yai/run/root`
-- Log to file + stderr (stderr live, file audit)
+Root MUST:
 
-### Done when
-- Root behaves as "smart cable": validates and forwards
-- Every error produces deterministic response (not timeout/silent close)
-- `root.log` always created and appending
+- validate envelope invariants BEFORE forward
+- forward envelope + payload bytes as received
+- relay response bytes as received
+- on reject: always send an error frame, then close
+
+#### Deterministic error reply policy (0.1.x)
+
+- Response must always be a valid response frame
+- payload may be minimal JSON (optional), but error code MUST be in envelope-level error
+- do not "timeout as error"
+
+#### Indestructible logging
+
+- path: `~/.yai/run/root/root.log`
+- create directory if missing: `~/.yai/run/root`
+- open with append, never truncate
+- log minimal fields per line:
+  - timestamp
+  - ws_id (or "system" if not available)
+  - trace_id
+  - command_id
+  - decision (FORWARD/REJECT)
+  - error_code (if reject)
+
+#### Verification
+
+Re-run baseline:
+
+- `yai root ping`
+
+Protocol negative tests (at least):
+
+- wrong magic
+- wrong version
+- payload too big
+
+#### Acceptance (0.1.1)
+
+- [ ] Root behaves as a "smart cable": validate + forward + relay
+- [ ] Every reject returns a response frame (no silent close)
+- [ ] `root.log` always exists and appends
 
 ---
 
-## STEP 2: Authority Check Envelope-Only (Defense-in-Depth)
+### 0.1.2 — Envelope-Only Authority Gate (Root + Kernel)
 
-### Files to read FIRST
-- `deps/yai-specs/specs/protocol/auth.h`
+**Branch:** `feat/root-hardening-0.1.2-authority-gate`  
+**Goal:** privileged commands require arming+role, enforced in Root and Kernel (defense-in-depth).
+
+#### File targets
+
+Specs:
+
+- `deps/yai-specs/specs/protocol/include/auth.h`
+- `deps/yai-specs/specs/protocol/include/roles.h` (if present)
+
+Root:
+
+- `root/src/yai_root_server.c`
+
+Kernel:
+
 - `kernel/src/core/rpc_binary.c`
-- `kernel/src/core/yai_session.c`
+- `kernel/src/core/yai_session.c` (or current authority/session point)
 
-### Goal
-Authority enforcement on envelope metadata only. Never on payload.
+#### Policy
 
-### Practical deliverables
+Authority is decided ONLY by envelope metadata:
 
-**A) Policy: command → required role/arming (table)**
-- Static array (C) or clear switch mapping
-- Example:
-  - `ws_create/ws_destroy/stop/...` require:
-    - `arming=1`
-    - `role>=operator`
+- command_id
+- arming
+- role
+- ws_id presence/validity
 
-**B) Double enforcement**
-- Root applies policy before forward (fast reject)
-- Kernel applies same policy (defense-in-depth)
+Never read payload to make authority decisions.
 
-**C) Deterministic reject**
-- Error frame with code:
-  - `YAI_E_ARMING_REQUIRED` / `YAI_E_ROLE_REQUIRED`
+Implement a single mapping (table or switch) shared conceptually between root+kernel.
+Minimum expectation:
 
-### Done when
-- Privileged command never passes without correct arming+role
-- Rejects identical whether from root or kernel
+- destructive or governance commands require:
+  - `arming=1`
+  - `role>=operator`
 
----
+#### Verification
 
-## STEP 3: Centralize `is_valid_ws_id` (SINGLE Definition)
+- Try privileged command without arming → deterministic reject
+- Try privileged command with arming but low role → deterministic reject
 
-### Target file
-- `deps/yai-specs/specs/protocol/transport.h` (static inline)
+#### Acceptance (0.1.2)
 
-### Goal
-Single point of truth for ws_id validation
-
-### ws_id rule (recommended)
-- Length: 1..35
-- Charset: `[A-Za-z0-9_-]`
-- Forbidden: `/`, `~`, spaces
-- (Optional) forbid initial `.`
-
-### Must be used by
-- root
-- kernel
-- CLI
-- (later) engine
-
-### Done when
-- No module has divergent manual regex/validations
-- Bug "ws_id = path" can never reappear
+- [ ] Root rejects privileged commands early (fast fail)
+- [ ] Kernel rejects again (defense-in-depth)
+- [ ] Error codes identical in both paths
 
 ---
 
-## STEP 4: Kernel Hard Reject on Invalid ws_id (Zero Side Effects)
+### 0.1.3 — ws_id Validation Centralization (single definition)
 
-### Files to read FIRST
+**Branch:** `feat/root-hardening-0.1.3-ws-id-single-source`  
+**Goal:** one ws_id validator used everywhere (Root/Kernel/CLI), eliminating drift.
+
+#### File targets
+
+Specs (single source of truth):
+
+- `deps/yai-specs/specs/protocol/include/transport.h` (static inline validator)
+
+Consumers:
+
+- Root server file(s)
+- Kernel decode/dispatch file(s)
+- CLI client path (where envelope is formed)
+
+#### ws_id rule (0.1.x)
+
+- length: 1..35
+- charset: `[A-Za-z0-9_-]`
+- forbidden: `/`, `~`, whitespace
+- optional: forbid leading `.`
+
+#### Verification
+
+- invalid ws_id never reaches dispatch
+- CLI cannot send invalid ws_id (client-side guard) AND server rejects anyway
+
+#### Acceptance (0.1.3)
+
+- [ ] No divergent validators remain in repo
+- [ ] "ws_id as path" class of bugs cannot reappear
+
+---
+
+### 0.1.4 — Kernel Hard Reject on Invalid ws_id (zero side effects)
+
+**Branch:** `feat/root-hardening-0.1.4-kernel-hard-reject`  
+**Goal:** Kernel must not create sessions/dirs for invalid ws_id; must respond deterministically.
+
+#### File targets
+
 - `kernel/src/core/yai_session.c`
 - `kernel/src/core/rpc_binary.c`
 - `kernel/src/core/rpc_codec.c` (if present)
-- `deps/yai-specs/specs/protocol/transport.h`
 
-### Goal
-No dispatch if:
-- Invalid ws_id
-- Empty ws_id
-- Overflow length
+Specs:
 
-Fail fast, deterministic log, error response.
+- `deps/yai-specs/specs/protocol/include/transport.h`
 
-### Robustness included
-- Kernel must respond with error frame `YAI_E_BAD_WS_ID` (not just break/close)
-- Kernel does not create sessions/dirs if ws_id invalid (zero side effects)
+#### Rules
 
-### Important warning fix
-In C, `env->ws_id` is not a pointer (it's an array), so:
-```c
-if (!env->ws_id || strlen(env->ws_id) == 0)
-```
-Must change to:
-```c
-if (env->ws_id[0] == '\0')
-```
+If ws_id invalid/empty/overflow:
 
-### Done when
-- Attempts with invalid ws_id create nothing on disk
-- Kernel always responds with deterministic error
+- no session creation
+- no filesystem effects
+- deterministic error response frame
+
+Avoid C bug:
+
+- `env->ws_id` is an array, check `env->ws_id[0] == '\0'`
+
+#### Verification
+
+Send invalid ws_id:
+
+- assert `~/.yai/run/<ws_id>` does NOT appear
+- assert error frame is returned
+
+#### Acceptance (0.1.4)
+
+- [ ] Kernel has zero side effects on invalid ws_id
+- [ ] Kernel always responds deterministically with error frame
 
 ---
 
-## STEP 5: Test Matrix + Protocol Torture
+### 0.1.5 — Test Matrix + Torture Suite
 
-### Mandatory tests (minimum)
-1. Handshake ok
-2. Handshake wrong version → error code + close
-3. Ping valid ws
-4. Ping invalid ws (slash/tilde/space) → deterministic reject
-5. ws with illegal characters
-6. ws overflow length (36+)
-7. Arming violation (ws_destroy without arming)
-8. Missing ws_id (ws_id = "" / simulations)
+**Branch:** `feat/root-hardening-0.1.5-torture`  
+**Goal:** repeatable torture tests that prove hardening is real.
+
+#### Minimum test cases
+
+1. handshake ok
+2. handshake wrong version → error + close
+3. ping valid ws
+4. ping invalid ws (`/`, `~`, space) → deterministic reject
+5. ws overflow length (36+)
+6. missing ws_id (empty string) → reject
+7. arming violation (privileged cmd without arming)
+8. role violation (arming ok but role low)
 9. payload_len > max
-10. Wrong magic
-11. Wrong version
-12. checksum != 0 (while policy is "zero only")
+10. wrong magic
+11. wrong version
+12. checksum != 0 (policy "0 only" in 0.1.x)
 
-### Test tools (to use)
-- `scripts/test_handshake.py` (add cases: wrong version/magic/len)
-- `./tools/cli/yai root ping`
-- `./tools/cli/yai kernel ws create <id>`
-- `./tools/cli/yai kernel ws destroy <id> --arming --role operator`
-- (New recommended) `scripts/protocol_torture.sh` (15 PASS/FAIL cases)
+#### Tools
 
-### Done when
-- All tests repeatable and pass in sequence
-- Every FAIL is "auditable" (log + consistent error)
+In 0.1.x we move tests under tools. If `scripts/` still exists, it is temporary.
 
----
+Preferred:
 
-## Note: "ws create ok but directory doesn't exist"
+- `tools/python/yai_tools/protocol/handshake_test.py`
+- `tools/bin/yai-suite` or `tools/bin/yai-gate`
 
-If root responds `{ "status": "ok" }` but `~/.yai/run/<ws>` doesn't appear, typical of "root stub": not forwarding or kernel not creating session/paths.
+Temporary compatibility:
 
-With STEP 1 (forward) + STEP 4 (kernel creates only on valid ws), path `~/.yai/run/testws` must appear.
+- `scripts/test_handshake.py`
+- `scripts/protocol_tester`
 
----
+#### Verification commands (must be runnable)
 
-## Perfect Daily Sequence (Sure Shot)
+- `yai root ping`
+- `yai verify core` (or equivalent)
+- `yai gate ws` (or equivalent)
+- torture runner (single command) that prints PASS/FAIL per case
 
-1. STEP 0 (errors + invariants)
-2. STEP 1 (forward + relay + log + reject-with-error)
-3. STEP 3 (ws_id inline)
-4. STEP 2 (authority gate root+kernel)
-5. STEP 4 (kernel hard reject + session create)
-6. STEP 5 (torture)
+#### Acceptance (0.1.5)
+
+- [ ] all cases pass deterministically, in sequence
+- [ ] every fail is auditable in `root.log` + kernel logs
 
 ---
 
-## Final Checklist (Before Closing)
+## 5) Observability and audit
 
-- [ ] `yai root ping` ok
-- [ ] `yai kernel ws create testws` actually creates `~/.yai/run/testws`
-- [ ] `yai kernel ws destroy testws` requires arming+operator (else reject)
-- [ ] `root.log` always present, appending, contains RECV + decision + error codes
+Mandatory log location:
+
+- Root: `~/.yai/run/root/root.log`
+
+Every reject must produce:
+
+- a response frame (error code)
+- a log line containing at least:
+  - trace_id
+  - ws_id (or "system")
+  - command_id
+  - error_code
 
 ---
 
-## Expected Output (When Hardened)
+## 6) Rollback
 
-- **Root** = pure router + envelope-only policy + error replies + logging
-- **Kernel** = envelope-only enforcement + ws_id hard reject + zero side effects on dirty input
-- **CLI** = can no longer send "path-like" ws_id (by definition)
-- **Protocol** = unified invariants tested with torture script
+Rollback must be clean:
+
+- each phase is isolated to a branch
+- merge only after acceptance passes
+- do not keep partial enforcement in main
+
+If a phase causes regressions:
+
+- revert that phase (single merge commit / or squash revert)
+- never "hotfix drift" inside a later phase
+
+---
+
+## 7) Final Definition of Done (Root Hardening complete)
+
+- [ ] Root validates invariants + handshake gate
+- [ ] Root is byte-perfect forward/relay
+- [ ] Root never silent drops (always responds)
+- [ ] Root logs are indestructible + informative
+- [ ] Kernel rejects invalid ws_id with zero side effects
+- [ ] authority gating enforced in Root + Kernel
+- [ ] torture suite passes and is repeatable
