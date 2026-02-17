@@ -17,7 +17,6 @@ This matrix defines baseline compatibility for the `yai` runtime.
 | Arch Linux (latest) | Supported | `ci.yml` (container) | full build + generated artifact checks |
 | Debian stable | Supported | `ci.yml` (container) | full build + generated artifact checks |
 | Fedora latest | Supported | `ci.yml` (container) | full build + generated artifact checks |
-| macOS 13 | Supported | `ci.yml` | build + generated artifact checks |
 | macOS latest | Supported | `ci.yml` | build + generated artifact checks |
 | Windows | Not officially supported | none | no compatibility guarantees yet |
 
