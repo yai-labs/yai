@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: Apache-2.0 */
 #ifndef YAI_VAULT_H
 #define YAI_VAULT_H
 

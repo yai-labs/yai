@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: Apache-2.0 */
 // kernel/include/yai_kernel.h  (pulito: niente trailing dot, guard coerente)
 #ifndef YAI_KERNEL_H
 #define YAI_KERNEL_H
