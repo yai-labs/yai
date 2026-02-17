@@ -2,14 +2,9 @@
 set -euo pipefail
 
 WS="${1:-graph_gate}"
-BIN="${BIN:-$(command -v yai || true)}"
-if [[ -z "$BIN" && -x "$HOME/.cargo/bin/yai" ]]; then
-  BIN="$HOME/.cargo/bin/yai"
-fi
-
-if [[ -z "$BIN" && -x "$HOME/.yai/artifacts/mind/target/release/yai" ]]; then
-  BIN="$HOME/.yai/artifacts/mind/target/release/yai"
-fi
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+source "$ROOT/scripts/dev/resolve-yai-bin.sh"
+BIN="$(yai_resolve_bin "$ROOT" || true)"
 
 if [[ -z "$BIN" || ! -x "$BIN" ]]; then
   echo "ERR: yai binary not found" >&2

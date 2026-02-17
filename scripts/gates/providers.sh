@@ -8,19 +8,11 @@ if (( ${#WS_RAW} > 23 )); then
   WS="${WS_RAW:0:14}_${WS_RAW: -8}"
 fi
 ROOT_DIR="$(cd "$(dirname "$0")/../.." && pwd)"
-BIN="${BIN:-$(command -v yai || true)}"
-if [[ -z "$BIN" && -x "$HOME/.cargo/bin/yai" ]]; then
-  BIN="$HOME/.cargo/bin/yai"
-fi
+source "$ROOT_DIR/scripts/dev/resolve-yai-bin.sh"
+BIN="$(yai_resolve_bin "$ROOT_DIR" || true)"
 REQUIRE_ACTIVE_PROVIDER="${REQUIRE_ACTIVE_PROVIDER:-0}"
 TRUST_FILE="$HOME/.yai/trust/providers.json"
 RUN_DIR="$HOME/.yai/run/$WS"
-
-if [[ -z "$BIN" || ! -x "$BIN" ]]; then
-  if [[ -x "$ROOT_DIR/mind/target/release/yai" ]]; then
-    BIN="$ROOT_DIR/mind/target/release/yai"
-  fi
-fi
 if [[ -z "$BIN" || ! -x "$BIN" ]]; then
   echo "FAIL: yai not found in PATH"
   exit 1

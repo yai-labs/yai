@@ -8,6 +8,7 @@ This repository keeps compatibility wrappers in `scripts/` and groups operationa
 - `scripts/dev/` - local build/generation/debug helpers
 - `scripts/ops/` - operator entrypoints for gate/verify/suite runners
 - `scripts/data/` - dataset-related helpers
+- `scripts/dev/resolve-yai-bin.sh` - shared helper for resolving the active `yai` binary
 
 ## Script Catalog
 

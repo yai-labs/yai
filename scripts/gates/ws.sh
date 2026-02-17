@@ -2,17 +2,12 @@
 set -euo pipefail
 
 WS="${1:-dev}"
-BIN="${BIN:-$(command -v yai || true)}"
-if [[ -z "$BIN" && -x "$HOME/.cargo/bin/yai" ]]; then
-  BIN="$HOME/.cargo/bin/yai"
-fi
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+source "$ROOT/scripts/dev/resolve-yai-bin.sh"
+BIN="$(yai_resolve_bin "$ROOT" || true)"
 RUN_DIR="$HOME/.yai/run/$WS"
 RUNTIME_SOCK="/tmp/yai_runtime_${WS}.sock"
 CONTROL_SOCK="$RUN_DIR/control.sock"
-
-if [[ -z "$BIN" && -x "$HOME/.yai/artifacts/mind/target/release/yai" ]]; then
-  BIN="$HOME/.yai/artifacts/mind/target/release/yai"
-fi
 
 if [[ -z "$BIN" || ! -x "$BIN" ]]; then
   echo "ERROR: yai binary not found in PATH"

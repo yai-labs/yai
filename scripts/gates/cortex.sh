@@ -3,11 +3,8 @@ set -euo pipefail
 
 WS="${1:-cortex_test}"
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
-BIN="${YAI_BIN:-$ROOT/mind/target/release/yai}"
-
-if [[ ! -x "$BIN" ]]; then
-  BIN="$HOME/.cargo/bin/yai"
-fi
+source "$ROOT/scripts/dev/resolve-yai-bin.sh"
+BIN="$(yai_resolve_bin "$ROOT" || true)"
 
 if [[ ! -x "$BIN" ]]; then
   echo "FAIL: yai binary not found"
@@ -16,7 +13,6 @@ fi
 
 (cd "$ROOT" && make all >/dev/null)
 (cd "$ROOT/engine" && make test-cortex >/dev/null)
-(cd "$ROOT/mind" && cargo build --release >/dev/null)
 
 "$BIN" down --ws "$WS" --force >/dev/null 2>&1 || true
 

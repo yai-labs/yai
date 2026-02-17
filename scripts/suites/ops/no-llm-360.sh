@@ -3,19 +3,11 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
 WS_PREFIX="${WS_PREFIX:-ops360}"
-BIN="${BIN:-$(command -v yai || true)}"
-if [[ -z "$BIN" && -x "$HOME/.cargo/bin/yai" ]]; then
-  BIN="$HOME/.cargo/bin/yai"
-fi
+source "$ROOT/scripts/dev/resolve-yai-bin.sh"
+BIN="$(yai_resolve_bin "$ROOT" || true)"
 ITERATIONS="${ITERATIONS:-20}"
 P95_BUDGET_MS="${P95_BUDGET_MS:-2000}"
 SKIP_BASE="${SKIP_BASE:-0}"
-
-if [[ -z "$BIN" || ! -x "$BIN" ]]; then
-  if [[ -x "$ROOT/mind/target/release/yai" ]]; then
-    BIN="$ROOT/mind/target/release/yai"
-  fi
-fi
 
 if [[ -z "$BIN" || ! -x "$BIN" ]]; then
   echo "FAIL: yai binary not found"

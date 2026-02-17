@@ -3,10 +3,8 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
 WS_PREFIX="${WS_PREFIX:-l7}"
-YAI_BIN="${YAI_BIN:-$(command -v yai || true)}"
-if [[ -z "$YAI_BIN" && -x "$HOME/.cargo/bin/yai" ]]; then
-  YAI_BIN="$HOME/.cargo/bin/yai"
-fi
+source "$ROOT/scripts/dev/resolve-yai-bin.sh"
+YAI_BIN="$(yai_resolve_bin "$ROOT" || true)"
 DATASET_GATE="${DATASET_GATE:-0}"
 
 run() {
@@ -25,16 +23,7 @@ step() {
 step "L0 - Canonical Sources + Legacy Name Scan"
 run bash -lc "cd \"$ROOT\" && ./scripts/gen-vault-abi"
 run bash -lc "cd \"$ROOT\" && ./scripts/check-generated.sh"
-run bash -lc "cd \"$ROOT\" && if rg -n \"Ice|ICE_\" kernel engine mind law; then echo \"FAIL: legacy Ice/ICE symbols found\"; exit 1; else echo \"OK: no Ice/ICE legacy symbols\"; fi"
-
-if [[ -z "$YAI_BIN" || ! -x "$YAI_BIN" ]]; then
-  if [[ -x "$ROOT/mind/target/release/yai" ]]; then
-    YAI_BIN="$ROOT/mind/target/release/yai"
-  else
-    run bash -lc "cd \"$ROOT/mind\" && cargo build --release"
-    YAI_BIN="$ROOT/mind/target/release/yai"
-  fi
-fi
+run bash -lc "cd \"$ROOT\" && if rg -n \"Ice|ICE_\" boot root kernel engine runtime scripts; then echo \"FAIL: legacy Ice/ICE symbols found\"; exit 1; else echo \"OK: no Ice/ICE legacy symbols\"; fi"
 
 if [[ -z "$YAI_BIN" || ! -x "$YAI_BIN" ]]; then
   echo "FAIL: yai binary not found"
@@ -71,7 +60,6 @@ run bash -lc "cd \"$ROOT\" && ./scripts/gates/tui.sh \"${WS_PREFIX}_tui\""
 step "L7 - Providers + Rust Unit/Integration Tests + CLI Smoke"
 PROVIDERS_WS="${WS_PREFIX}_prv_$RANDOM"
 run bash -lc "cd \"$ROOT\" && ./scripts/gates/providers.sh \"${PROVIDERS_WS}\""
-run bash -lc "cd \"$ROOT/mind\" && cargo test"
 run bash -lc "cd \"$ROOT\" && \"$YAI_BIN\" test smoke --ws \"${WS_PREFIX}_smoke\" --timeout-ms 8000"
 
 if [[ "$DATASET_GATE" == "1" ]]; then

@@ -2,19 +2,11 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
-BIN="${BIN:-$(command -v yai || true)}"
-if [[ -z "$BIN" && -x "$HOME/.cargo/bin/yai" ]]; then
-  BIN="$HOME/.cargo/bin/yai"
-fi
+source "$ROOT/scripts/dev/resolve-yai-bin.sh"
+BIN="$(yai_resolve_bin "$ROOT" || true)"
 WS="${1:-providers_modes_test}"
 ENDPOINT="http://127.0.0.1:18080/v1/chat/completions?ws=${WS}"
 PROVIDER_ID="remote:${ENDPOINT}"
-
-if [[ -z "$BIN" || ! -x "$BIN" ]]; then
-  if [[ -x "$ROOT/mind/target/release/yai" ]]; then
-    BIN="$ROOT/mind/target/release/yai"
-  fi
-fi
 if [[ -z "$BIN" || ! -x "$BIN" ]]; then
   echo "FAIL: yai binary not found"
   exit 1

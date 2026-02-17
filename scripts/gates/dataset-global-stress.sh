@@ -2,19 +2,11 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-DATASET_DIR="$ROOT/datasets/global-stress/v1"
-DATASET_SCRIPTS_DIR="$ROOT/datasets/global-stress/v1/scripts"
+DATASET_DIR="$ROOT/data/datasets/global-stress/v1"
+DATASET_SCRIPTS_DIR="$ROOT/data/datasets/global-stress/v1/scripts"
 WS="${1:-dataset_stress}"
-BIN="${BIN:-$(command -v yai || true)}"
-if [[ -z "$BIN" && -x "$HOME/.cargo/bin/yai" ]]; then
-  BIN="$HOME/.cargo/bin/yai"
-fi
-
-if [[ -z "$BIN" || ! -x "$BIN" ]]; then
-  if [[ -x "$ROOT/mind/target/release/yai" ]]; then
-    BIN="$ROOT/mind/target/release/yai"
-  fi
-fi
+source "$ROOT/scripts/dev/resolve-yai-bin.sh"
+BIN="$(yai_resolve_bin "$ROOT" || true)"
 
 if [[ -z "$BIN" || ! -x "$BIN" ]]; then
   echo "FAIL: yai binary not found"
