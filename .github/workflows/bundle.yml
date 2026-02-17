@@ -24,6 +24,11 @@ jobs:
         with:
           submodules: recursive
 
+      - name: Release preflight (specs pin alignment)
+        env:
+          STRICT_SPECS_HEAD: "1"
+        run: bash scripts/release/check_pins.sh
+
       - name: Validate release metadata (tags only)
         if: startsWith(github.ref, 'refs/tags/v')
         run: |

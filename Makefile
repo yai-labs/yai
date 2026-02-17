@@ -21,7 +21,7 @@ DOXY_OUT ?= $(DIST_ROOT)/docs/doxygen
 
 CANONICAL_BINS := yai-boot yai-root-server yai-kernel yai-engine
 
-.PHONY: all build dist bundle verify boot root core kernel engine clean clean-dist clean-all docs docs-clean help
+.PHONY: all build dist bundle verify preflight-release boot root core kernel engine clean clean-dist clean-all docs docs-clean help
 
 all: build
 	@echo "[YAI] dist is now separated from build. Use 'make dist' or 'make bundle'."
@@ -73,6 +73,9 @@ verify:
 		echo "No verify script found at ./scripts/yai-verify"; \
 	fi
 
+preflight-release:
+	@bash scripts/release/check_pins.sh
+
 docs:
 	@mkdir -p $(DOXY_OUT)
 	@$(DOXYGEN) $(DOXYFILE)
@@ -82,4 +85,4 @@ docs-clean:
 	@rm -rf $(DOXY_OUT)
 
 help:
-	@echo "Targets: all, build, dist, bundle, verify, boot, root (core alias), kernel, engine, clean, clean-dist, clean-all, docs, docs-clean"
+	@echo "Targets: all, build, dist, bundle, verify, preflight-release, boot, root (core alias), kernel, engine, clean, clean-dist, clean-all, docs, docs-clean"
