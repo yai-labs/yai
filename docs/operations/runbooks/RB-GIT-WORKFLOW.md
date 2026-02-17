@@ -2,7 +2,7 @@
 id: RB-GITHUB-WORKFLOW
 status: active
 effective_date: 2026-02-17
-revision: 2
+revision: 3
 owner: release/runtime
 scope:
   - yai-specs
@@ -10,32 +10,22 @@ scope:
   - yai (runtime + bundle + release)
 ---
 
-# YAI GitHub Workflow Runbook (Daily Dev + Release)
+# YAI Release Workflow — Complete Runbook
 
-## Purpose
-
-Define the canonical GitHub workflow for the YAI ecosystem to ensure:
-- deterministic builds and releases,
-- strict dependency pinning (specs + CLI),
-- a single supported distribution artifact (the Runtime Bundle),
-- prevention of version mismatches between Runtime, CLI, and Specs.
-
-This runbook applies to:
-- `yai-specs` — source of truth for contracts/specifications,
-- `yai-cli` — command/control client,
-- `yai` — runtime core + bundling + distribution.
+This document is the single source of truth for the YAI GitHub workflow:
+daily development, pin management, release creation, hotfix procedure,
+failure recovery, and CI contract.
 
 ---
 
 ## Workspace convention
-
-Use a canonical workspace variable in examples:
 
 ```bash
 export YAI_WORKSPACE="<path-to-your-yai-workspace>"
 ```
 
 All commands below assume repositories are located at:
+
 - `$YAI_WORKSPACE/yai-specs`
 - `$YAI_WORKSPACE/yai-cli`
 - `$YAI_WORKSPACE/yai`
@@ -75,6 +65,10 @@ A release tag in `yai` MUST fully determine:
 CI MUST NOT fetch `main` (or any floating ref) for specs or CLI during bundle creation.
 CI MUST use pinned SHAs/tags defined in `yai`.
 
+**5) CI is a verifier and publisher only**
+CI (`bundle.yml`) MUST never bump versions, write pins, or create commits on `main`.
+All version bumps and pin updates are maintainer-initiated from the local machine.
+
 ---
 
 ## Repository responsibilities
@@ -90,64 +84,67 @@ CI MUST use pinned SHAs/tags defined in `yai`.
 ### yai
 - Builds and distributes the runtime core.
 - Vendors `yai-specs` under `deps/yai-specs` (pinned).
-- Pins `yai-cli` via `deps/yai-cli.ref` (see [CLI pinning](#cli-pinning-required-for-deterministic-bundles)).
+- Pins `yai-cli` via `deps/yai-cli.ref`.
 - Produces and publishes the Runtime Bundle on tags.
 
 ---
 
-## Git reference commands (quick lookup)
+## Git reference commands
 
-These commands are used throughout this runbook. Keep them handy.
+These commands are used throughout this runbook.
 
-### Get the current HEAD SHA
+### HEAD SHA and short SHA
 
 ```bash
 git rev-parse HEAD
-```
-
-### Get a short SHA (first 12 chars)
-
-```bash
 git rev-parse --short=12 HEAD
 ```
 
-### Get the SHA of a specific branch
+### SHA of a branch or tag
 
 ```bash
 git rev-parse origin/main
 git rev-parse origin/feat/some-branch
-```
-
-### Get the SHA of a tag
-
-```bash
 git rev-parse v0.1.1
-git rev-parse refs/tags/v0.1.1^{}   # dereferenced tag (for annotated tags)
+git rev-parse refs/tags/v0.1.1^{}   # dereference annotated tag
 ```
 
-### Show the log with SHAs (one line per commit)
+### Log inspection
 
 ```bash
+# One line per commit
 git log --oneline -20
 git log --oneline --graph --decorate -20
+
+# Full: SHA, date, author, message
+git log --pretty=format:"%H  %ad  %an  %s" --date=short -20
+
+# Commits between two SHAs
+git log <OLD_SHA>..<NEW_SHA> --oneline
 ```
 
-### Show full log with author, date, SHA, and message
+### Commit details
 
 ```bash
-git log --pretty=format:"%H  %ad  %an  %s" --date=short -20
+git show <SHA>
+git show <SHA> --stat         # files changed only
+git show <SHA> --no-patch     # commit message only
 ```
 
-### Find the SHA of a submodule/dep at a given path
+### Current state of a repo
+
+```bash
+git log --oneline -1
+git show HEAD --stat
+git branch --show-current
+git describe --tags --always  # nearest tag + distance + SHA
+git status -sb
+```
+
+### Submodule / vendored dep inspection
 
 ```bash
 git -C deps/yai-specs rev-parse HEAD
-git -C deps/yai-cli rev-parse HEAD   # if vendored as subdir
-```
-
-### Show what a pinned submodule currently resolves to
-
-```bash
 git submodule status deps/yai-specs
 # Output: +<SHA> deps/yai-specs (<tag or description>)
 ```
@@ -155,36 +152,43 @@ git submodule status deps/yai-specs
 ### Check if a SHA exists on the remote
 
 ```bash
-git -C deps/yai-specs cat-file -t <SHA>    # returns "commit" if present
+git -C deps/yai-specs cat-file -t <SHA>   # returns "commit" if present
 git ls-remote origin | grep <SHA>
 ```
 
-### Show the diff between two SHAs
+### Diff between two SHAs
 
 ```bash
 git diff <OLD_SHA>..<NEW_SHA> -- .
-git log <OLD_SHA>..<NEW_SHA> --oneline
+git -C deps/yai-specs diff <OLD_SHA>..<NEW_SHA> --stat
 ```
 
-### Find which tag contains a given SHA
+### Tag queries
 
 ```bash
-git tag --contains <SHA>
+git tag --contains <SHA>              # which tags include this commit
+git tag --sort=-v:refname | head -10  # latest tags by semver
 ```
 
-### Show commit info for a specific SHA
+### Read pin files
 
 ```bash
-git show <SHA>
-git show <SHA> --stat           # files changed only
-git show <SHA> --no-patch       # commit message only
+cat deps/yai-cli.ref
+# Output: cli_sha=abcdef1234567890abcdef1234567890abcdef12
+
+# Extract just the SHA
+CLI_SHA=$(grep 'cli_sha=' deps/yai-cli.ref | cut -d= -f2)
+echo $CLI_SHA
 ```
 
-### Show the SHA recorded by the parent repo for a vendored dep
+### All three repos at a glance
 
 ```bash
-cat deps/yai-cli.ref            # for yai-cli pin
-git -C deps/yai-specs rev-parse HEAD   # for specs submodule
+for repo in yai-specs yai-cli yai; do
+  echo "=== $repo ==="
+  git -C $YAI_WORKSPACE/$repo log --oneline -1
+  echo ""
+done
 ```
 
 ---
@@ -199,26 +203,21 @@ git checkout main
 git pull --rebase
 
 git checkout -b feat/specs-<topic>
-
 # --- make changes ---
-
 git add -A
-git commit -m "feat(specs): <description of change>"
+git commit -m "feat(specs): <description>"
 git push -u origin feat/specs-<topic>
 # Open PR → review → merge to main
 ```
 
-After merge, record the new spec SHA for use in consumer repos:
+After merge, record the SHA for consumers:
 
 ```bash
 git checkout main
 git pull --rebase
 
-# Full SHA (use this in deps/yai-specs)
 SPEC_SHA=$(git rev-parse HEAD)
 echo "New spec SHA: $SPEC_SHA"
-
-# Confirm commit details
 git show $SPEC_SHA --no-patch
 ```
 
@@ -230,19 +229,17 @@ git checkout main
 git pull --rebase
 
 git checkout -b feat/cli-<topic>
-
 # --- make changes ---
-
 make all
 make test || true
 
 git add -A
-git commit -m "feat(cli): <description of change>"
+git commit -m "feat(cli): <description>"
 git push -u origin feat/cli-<topic>
 # Open PR → review → merge to main
 ```
 
-After merge, record the CLI SHA for the bundle pin:
+After merge, record the SHA for the bundle pin:
 
 ```bash
 git checkout main
@@ -250,7 +247,6 @@ git pull --rebase
 
 CLI_SHA=$(git rev-parse HEAD)
 echo "New CLI SHA: $CLI_SHA"
-
 git show $CLI_SHA --no-patch
 ```
 
@@ -262,39 +258,33 @@ git checkout main
 git pull --rebase
 
 git checkout -b feat/runtime-<topic>
-
 # --- make changes ---
-
 make all
 make dist
 # make bundle   # optional local smoke bundle
 
 git add -A
-git commit -m "feat(runtime): <description of change>"
+git commit -m "feat(runtime): <description>"
 git push -u origin feat/runtime-<topic>
 # Open PR → review → merge to main
 ```
 
 ---
 
-## Pin update procedure (consumers)
+## Pin update procedure
 
 ### Update Specs pin in yai (runtime)
 
 ```bash
 cd $YAI_WORKSPACE/yai
-git checkout main
-git pull --rebase
+git checkout main && git pull --rebase
 
 git checkout -b chore/bump-specs
 
-# Fetch latest from upstream
 git -C deps/yai-specs fetch origin
-
-# Checkout the desired SHA (from yai-specs step above)
 git -C deps/yai-specs checkout <SPEC_SHA>
 
-# Verify the pin is correct
+# Verify
 git -C deps/yai-specs rev-parse HEAD
 git -C deps/yai-specs log --oneline -5
 
@@ -308,16 +298,14 @@ git push -u origin chore/bump-specs
 
 ```bash
 cd $YAI_WORKSPACE/yai-cli
-git checkout main
-git pull --rebase
+git checkout main && git pull --rebase
 
 git checkout -b chore/bump-specs
 
 git -C deps/yai-specs fetch origin
 git -C deps/yai-specs checkout <SPEC_SHA>
 
-# Verify
-git -C deps/yai-specs rev-parse HEAD
+git -C deps/yai-specs rev-parse HEAD   # verify
 
 git add deps/yai-specs
 git commit -m "chore(specs): bump yai-specs pin to <SPEC_SHA_SHORT>"
@@ -325,13 +313,9 @@ git push -u origin chore/bump-specs
 # Open PR → merge
 ```
 
-### Verify pin state before continuing
+### Verify pin state
 
 ```bash
-# Check what SHA deps/yai-specs currently resolves to
-git -C deps/yai-specs rev-parse HEAD
-
-# Check it matches what you expect
 echo "Expected: <SPEC_SHA>"
 echo "Actual:   $(git -C deps/yai-specs rev-parse HEAD)"
 
@@ -340,15 +324,29 @@ git -C deps/yai-specs status
 git -C deps/yai-specs diff
 ```
 
+### Update CLI pin in yai
+
+```bash
+cd $YAI_WORKSPACE/yai
+git checkout main && git pull --rebase
+
+git checkout -b chore/bump-cli
+
+CLI_SHA=$(git -C $YAI_WORKSPACE/yai-cli rev-parse HEAD)
+echo "cli_sha=$CLI_SHA" > deps/yai-cli.ref
+cat deps/yai-cli.ref   # verify
+
+git add deps/yai-cli.ref
+git commit -m "chore(cli): bump yai-cli pin to ${CLI_SHA:0:12}"
+git push -u origin chore/bump-cli
+# Open PR → merge
+```
+
 ---
 
-## CLI pinning (required for deterministic bundles)
+## CLI pinning — canonical mechanism
 
-`yai` MUST pin the exact CLI revision included in the Runtime Bundle.
-
-### Canonical mechanism
-
-In `yai`, maintain a file:
+In `yai`, maintain:
 
 ```
 deps/yai-cli.ref
@@ -361,165 +359,13 @@ cli_sha=abcdef1234567890abcdef1234567890abcdef12
 ```
 
 Rules:
-- Updating the CLI included in the bundle MUST be done by changing `deps/yai-cli.ref` and committing it to `yai`.
+- Updating the CLI in the bundle MUST be done by changing `deps/yai-cli.ref` and committing it.
 - CI MUST checkout exactly that SHA when building the bundle.
 - No other mechanism (e.g., "clone main") is permitted in release workflows.
 
-### Update CLI pin in yai
-
-```bash
-cd $YAI_WORKSPACE/yai
-git checkout main
-git pull --rebase
-
-git checkout -b chore/bump-cli
-
-# Get the SHA from yai-cli
-CLI_SHA=$(git -C $YAI_WORKSPACE/yai-cli rev-parse HEAD)
-echo "cli_sha=$CLI_SHA" > deps/yai-cli.ref
-
-# Verify file content
-cat deps/yai-cli.ref
-
-git add deps/yai-cli.ref
-git commit -m "chore(cli): bump yai-cli pin to ${CLI_SHA:0:12}"
-git push -u origin chore/bump-cli
-# Open PR → merge
-```
-
-### Read current CLI pin
-
-```bash
-cat deps/yai-cli.ref
-# Output: cli_sha=abcdef1234567890abcdef1234567890abcdef12
-
-# Extract just the SHA
-CLI_SHA=$(grep 'cli_sha=' deps/yai-cli.ref | cut -d= -f2)
-echo $CLI_SHA
-```
-
 ---
 
-## Product release workflow (bundle publish)
-
-### Release principle
-
-Only `yai` tags create user-facing releases.
-A `yai` tag (e.g., `v0.1.1`) triggers CI to build and publish the Runtime Bundle asset.
-
-### Preconditions (verify before tagging)
-
-```bash
-cd $YAI_WORKSPACE/yai
-git checkout main
-git pull --rebase
-
-# 1. Confirm specs pin is at the intended SHA
-echo "Specs pin: $(git -C deps/yai-specs rev-parse HEAD)"
-git -C deps/yai-specs log --oneline -3
-
-# 2. Confirm CLI pin is set
-cat deps/yai-cli.ref
-
-# 3. Confirm no dirty state in deps
-git -C deps/yai-specs status
-git status deps/
-
-# 4. Confirm current main is what you expect
-git log --oneline -5
-
-# 5. Run local smoke checks
-make clean-all
-make all
-make dist
-make bundle
-```
-
-### Release commands
-
-```bash
-cd $YAI_WORKSPACE/yai
-git checkout main
-git pull --rebase
-
-# Option A: use release script (recommended)
-./scripts/release/bump_version.sh patch --commit --tag
-
-# Option B: manual tag
-git tag -a v0.1.1 -m "Release v0.1.1"
-
-# Push both main and the tag
-git push origin main
-git push origin v0.1.1   # or: git push origin --tags
-```
-
-### Verify the tag was created correctly
-
-```bash
-# Show tag details
-git show v0.1.1
-
-# Confirm the tag SHA matches main HEAD
-git rev-parse v0.1.1^{}
-git rev-parse main
-
-# List tags sorted by version
-git tag --sort=-v:refname | head -10
-```
-
-### CI expectations (on tag `v*` in `yai`)
-
-On tag push, CI MUST:
-
-1. Validate `VERSION` / `CHANGELOG` if required.
-2. Build runtime core binaries.
-3. Read `deps/yai-cli.ref`, checkout `yai-cli` at the pinned SHA.
-4. Stage `deps/yai-specs` snapshot exactly as pinned in `yai`.
-5. Generate `manifest.json` containing:
-   - `core_sha` — `yai` git SHA
-   - `core_version` — version string
-   - `specs_sha` — pinned `yai-specs` SHA
-   - `cli_sha` — pinned `yai-cli` SHA
-   - `sha256` map — sha256 of each binary in `bin/`
-   - `os`, `arch`, `timestamp`, `bundle_version`
-6. Produce bundle archives: `.tar.gz` and/or `.zip`.
-7. Publish GitHub Release with those assets.
-
----
-
-## State inspection commands (full reference)
-
-Use these at any time to understand the current state of any repo or pin.
-
-### Inspect current repo state
-
-```bash
-# Where am I and what SHA am I at?
-git log --oneline -1
-
-# Full details of HEAD commit
-git show HEAD --stat
-
-# What branch/tag am I on?
-git branch --show-current
-git describe --tags --always   # nearest tag + distance + SHA
-
-# What's the remote tracking state?
-git status -sb
-git fetch --dry-run
-```
-
-### Inspect all three repos at once
-
-```bash
-for repo in yai-specs yai-cli yai; do
-  echo "=== $repo ==="
-  git -C $YAI_WORKSPACE/$repo log --oneline -1
-  echo ""
-done
-```
-
-### Cross-check pins vs actual repo state
+## Cross-check pins vs actual repo state
 
 ```bash
 cd $YAI_WORKSPACE/yai
@@ -531,32 +377,115 @@ SPEC_ACTUAL=$(git -C $YAI_WORKSPACE/yai-specs rev-parse HEAD)
 CLI_ACTUAL=$(git -C $YAI_WORKSPACE/yai-cli rev-parse HEAD)
 
 echo "--- Specs ---"
-echo "Pinned:  $SPEC_PIN"
+echo "Pinned:       $SPEC_PIN"
 echo "yai-specs HEAD: $SPEC_ACTUAL"
 [ "$SPEC_PIN" = "$SPEC_ACTUAL" ] && echo "✓ In sync" || echo "⚠ DRIFT DETECTED"
 
 echo ""
 echo "--- CLI ---"
-echo "Pinned:  $CLI_PIN"
+echo "Pinned:       $CLI_PIN"
 echo "yai-cli HEAD: $CLI_ACTUAL"
 [ "$CLI_PIN" = "$CLI_ACTUAL" ] && echo "✓ In sync" || echo "⚠ DRIFT DETECTED"
 ```
 
-### Show what changed between two pins
+---
+
+## Release workflow (maintainer checklist)
+
+This is the authoritative release procedure. Follow steps in order.
+
+### Step 1 — Sync and clean working tree
 
 ```bash
-# What changed in specs between two SHAs?
-git -C deps/yai-specs log <OLD_SHA>..<NEW_SHA> --oneline
+cd $YAI_WORKSPACE/yai
+git checkout main
+git pull --rebase
+git status
+```
 
-# What files changed?
-git -C deps/yai-specs diff <OLD_SHA>..<NEW_SHA> --stat
+### Step 2 — Preflight (hard gate)
+
+```bash
+STRICT_SPECS_HEAD=1 bash scripts/release/check_pins.sh
+```
+
+`check_pins.sh` enforces:
+- specs alignment: `yai` == `yai-cli` == `yai-specs/main` (in strict mode)
+- CLI bundle pin compatibility: `deps/yai-cli.ref` commit must pin the same specs revision
+
+**If FAIL:** apply the Fix Plan printed by the script (update specs pins and/or `deps/yai-cli.ref`), merge to `main`, then re-run until PASS.
+
+### Step 3 — Bump version and update changelog
+
+```bash
+./scripts/release/bump_version.sh patch --commit
+# or: minor / major / X.Y.Z
+```
+
+This commits updated `VERSION` and `CHANGELOG.md`.
+
+### Step 4 — Re-run preflight (must be PASS)
+
+```bash
+STRICT_SPECS_HEAD=1 bash scripts/release/check_pins.sh
+```
+
+### Step 5 — Create annotated tag from VERSION
+
+```bash
+VER="$(tr -d '[:space:]' < VERSION)"
+git tag -a "v$VER" -m "Release v$VER"
+```
+
+### Step 6 — Push main and tag (triggers CI release)
+
+```bash
+git push origin main
+git push origin "v$VER"
+```
+
+### Verify the tag
+
+```bash
+git show "v$VER"
+git rev-parse "v$VER"^{}   # must match main HEAD
+git tag --sort=-v:refname | head -5
 ```
 
 ---
 
-## Operational checks (pre-release checklist)
+## CI contract (bundle.yml)
 
-Before every release, run the following checks:
+On tag `v*`, CI MUST:
+
+1. Run `scripts/release/check_pins.sh` (strict mode) — abort if FAIL.
+2. Validate that tag version == `VERSION` and `CHANGELOG.md` contains `[X.Y.Z]`.
+3. Build runtime core binaries.
+4. Read `deps/yai-cli.ref`, checkout `yai-cli` at the pinned SHA.
+5. Stage `deps/yai-specs` snapshot exactly as pinned in `yai`.
+6. Generate `manifest.json`:
+   - `core_sha` — `yai` git SHA
+   - `core_version` — version string
+   - `specs_sha` — pinned `yai-specs` SHA
+   - `cli_sha` — pinned `yai-cli` SHA
+   - `sha256` map — sha256 of each binary in `bin/`
+   - `os`, `arch`, `timestamp`, `bundle_version`
+7. Produce bundle archives: `.tar.gz` and `.zip`.
+8. Publish GitHub Release with those assets.
+
+CI MUST NEVER:
+- change pins (`deps/yai-cli.ref`, `deps/yai-specs`)
+- bump versions or edit `VERSION` / `CHANGELOG.md`
+- create commits on `main`
+
+### Optional: dry run without publishing
+
+Use `workflow_dispatch` on `bundle.yml` to build artifacts without creating a GitHub Release.
+Preflight still runs, so drift is detected early.
+
+---
+
+## Pre-release checklist
 
 ```bash
 cd $YAI_WORKSPACE/yai
@@ -573,39 +502,78 @@ git -C deps/yai-specs cat-file -t $(git -C deps/yai-specs rev-parse HEAD)
 [ -f deps/yai-cli.ref ] && echo "✓ exists" || echo "✗ MISSING"
 grep -E '^cli_sha=[0-9a-f]{40}$' deps/yai-cli.ref && echo "✓ format OK" || echo "✗ bad format"
 
-# 4. No pending commits needed in yai/main
+# 4. No pending commits on main
 git log origin/main..HEAD --oneline
 
-# 5. Confirm version file matches intended tag
-cat VERSION   # or wherever the version is stored
+# 5. Version file matches intended tag
+cat VERSION
 ```
 
-**Policy: consumer repos MUST NOT drift.**
-If `deps/yai-specs` differs from the intended pin, the release MUST be blocked until realigned.
+**Policy:** if `deps/yai-specs` differs from the intended pin, the release MUST be blocked until realigned.
 
 ---
 
 ## Failure modes and recovery
 
-### CI fails: cannot checkout yai-cli SHA
+### A) Specs drift
 
-**Symptom:** CI reports `fatal: reference is not a repository` or `fatal: not a git repository` when checking out the CLI pin.
+**Symptom:** `check_pins.sh` reports `yai` and `yai-cli` are pinned to different `yai-specs` commits, or pin is behind `yai-specs/main` in strict mode.
 
-**Cause:** The SHA in `deps/yai-cli.ref` does not exist in `yai-cli` remote, or the repo URL is misconfigured.
+**Recovery:**
+1. Follow the Fix Plan printed by `check_pins.sh`.
+2. Open and merge the bump branches.
+3. Re-run preflight until PASS.
+
+### B) CLI bundle pin stale ("telecomando drift")
+
+**Symptom:** `deps/yai-cli.ref` points to a `yai-cli` commit whose `deps/yai-specs` gitlink does not match the expected specs commit.
 
 **Recovery:**
 
 ```bash
-# On your local machine, verify the SHA exists in yai-cli
+# Update deps/yai-cli.ref to a compatible yai-cli commit
+cd $YAI_WORKSPACE/yai-cli
+git log --oneline -10   # find a commit that pins the correct specs
+
+cd $YAI_WORKSPACE/yai
+echo "cli_sha=<COMPATIBLE_CLI_SHA>" > deps/yai-cli.ref
+git add deps/yai-cli.ref
+git commit -m "fix(cli): update cli pin to specs-compatible SHA"
+git push origin main
+```
+
+### C) Metadata mismatch
+
+**Symptom:** tag `vX.Y.Z` does not match `VERSION`, or `CHANGELOG.md` is missing the `[X.Y.Z]` section.
+
+**Recovery:**
+
+```bash
+./scripts/release/bump_version.sh X.Y.Z --commit
+# Delete the wrong tag if already pushed
+git tag -d vX.Y.Z
+git push origin --delete vX.Y.Z
+# Re-tag
+VER="$(tr -d '[:space:]' < VERSION)"
+git tag -a "v$VER" -m "Release v$VER"
+git push origin "v$VER"
+```
+
+### D) CI cannot checkout yai-cli SHA
+
+**Symptom:** CI reports `fatal: reference is not a repository` or `fatal: not a git repository`.
+
+**Cause:** SHA in `deps/yai-cli.ref` does not exist on the remote, or was never pushed.
+
+**Recovery:**
+
+```bash
 cd $YAI_WORKSPACE/yai-cli
 git fetch origin
 git cat-file -t <CLI_SHA_FROM_REF>
-# If output is NOT "commit", the SHA is invalid or not pushed
+# If NOT "commit": SHA is invalid or not pushed
 
-# Check what the latest main SHA is
-git log --oneline -5
-
-# Update the pin to a valid SHA and re-push
+# Fix: update pin to a valid SHA
 cd $YAI_WORKSPACE/yai
 echo "cli_sha=$(git -C $YAI_WORKSPACE/yai-cli rev-parse HEAD)" > deps/yai-cli.ref
 git add deps/yai-cli.ref
@@ -613,26 +581,22 @@ git commit -m "fix(cli): correct cli pin to valid SHA"
 git push origin main
 ```
 
-### CI fails: cannot fetch yai-specs pin
+### E) CI cannot fetch yai-specs pin
 
 **Symptom:** CI reports `fatal: couldn't find remote ref` or submodule checkout fails.
 
-**Cause:** The `deps/yai-specs` submodule commit is not reachable from the remote (e.g., was force-pushed over or never pushed).
+**Cause:** The `deps/yai-specs` commit is not reachable from the remote (force-pushed or never pushed).
 
 **Recovery:**
 
 ```bash
-# Verify the SHA exists on yai-specs remote
 cd $YAI_WORKSPACE/yai-specs
 git fetch origin
-SPEC_SHA=$(cat ../yai/deps/yai-specs/.git 2>/dev/null || git -C ../yai/deps/yai-specs rev-parse HEAD)
+SPEC_SHA=$(git -C $YAI_WORKSPACE/yai/deps/yai-specs rev-parse HEAD)
 git cat-file -t $SPEC_SHA
-# If NOT "commit", SHA is unreachable
+# If NOT "commit": SHA is unreachable
 
-# Push the missing commit if it exists locally
-git push origin $SPEC_SHA:refs/heads/main   # only if it's a legit commit
-
-# Or re-pin to the current valid HEAD
+# Re-pin to current valid HEAD
 cd $YAI_WORKSPACE/yai
 git -C deps/yai-specs fetch origin
 git -C deps/yai-specs checkout origin/main
@@ -641,48 +605,20 @@ git commit -m "fix(specs): re-pin yai-specs to valid upstream SHA"
 git push origin main
 ```
 
-### CI fails: manifest SHA mismatch
-
-**Symptom:** Bundle manifest `specs_sha` or `cli_sha` does not match expected values.
-
-**Cause:** CI is not reading the pin files correctly, or the pin files have incorrect content.
-
-**Recovery:**
-
-```bash
-# Verify pin files locally
-cat deps/yai-cli.ref
-git -C deps/yai-specs rev-parse HEAD
-
-# Compare with manifest from last successful release
-# (check GitHub Releases for the manifest.json artifact)
-
-# If pin files are correct, check CI script logic:
-# CI must do: CLI_SHA=$(grep 'cli_sha=' deps/yai-cli.ref | cut -d= -f2)
-# not:        CLI_SHA=$(git -C yai-cli rev-parse HEAD)  ← WRONG, reads floating HEAD
-```
-
-### Local bundle smoke test fails
+### F) Local bundle smoke test fails
 
 **Symptom:** `make bundle` fails locally before release.
 
-**Debug steps:**
+**Debug:**
 
 ```bash
 cd $YAI_WORKSPACE/yai
 
-# Check build artifacts
 make clean-all
 make all 2>&1 | tail -30
-
-# Verify deps are in expected state
 ls deps/yai-specs/
 cat deps/yai-cli.ref
-
-# Try building dist separately
 make dist 2>&1
-
-# Verbose bundle
 make bundle VERBOSE=1 2>&1
 ```
 
@@ -690,63 +626,52 @@ make bundle VERBOSE=1 2>&1
 
 ## Hotfix release (patch on release branch)
 
-Use when a critical bug must be fixed in a shipped version without pulling in unrelated main changes.
+Use when a critical bug must be fixed in a shipped version without pulling in unrelated `main` changes.
 
-### Setup hotfix branch
+### Setup
 
 ```bash
 cd $YAI_WORKSPACE/yai
 
-# Find the tag SHA you want to hotfix
+# Find the target tag
 git log --oneline --decorate | grep "tag:"
-git rev-parse v0.1.1^{}   # confirm the target tag SHA
+git rev-parse v0.1.1^{}
 
-# Create a hotfix branch from the release tag
+# Branch from tag
 git checkout -b hotfix/v0.1.2 v0.1.1
 ```
 
 ### Apply the fix
 
 ```bash
-# Option A: cherry-pick a specific commit from main
-git log --oneline main | head -20    # find the fix commit SHA
+# Option A: cherry-pick from main
+git log --oneline main | head -20
 git cherry-pick <FIX_SHA>
 
-# Option B: apply fix directly on hotfix branch
-# edit files
+# Option B: direct fix on hotfix branch
 git add -A
 git commit -m "fix: <description of critical fix>"
 
-# Verify the fix
 make all
 make test
 ```
 
-### Release the hotfix
+### Release hotfix
 
 ```bash
-# Tag directly from the hotfix branch
 git tag -a v0.1.2 -m "Hotfix release v0.1.2 — <short description>"
-
-# Push branch and tag
 git push origin hotfix/v0.1.2
 git push origin v0.1.2
-
-# Confirm
 git show v0.1.2 --stat
 ```
 
 ### Backport to main (mandatory)
 
-After the hotfix is released, the fix MUST be backported to `main` to avoid regression.
-
 ```bash
 cd $YAI_WORKSPACE/yai
-git checkout main
-git pull --rebase
+git checkout main && git pull --rebase
 
-# Cherry-pick the hotfix commit(s)
-git log --oneline hotfix/v0.1.2 | head -5   # find the fix SHA(s)
+git log --oneline hotfix/v0.1.2 | head -5
 git cherry-pick <FIX_SHA>
 
 git push origin main
@@ -755,7 +680,6 @@ git push origin main
 ### Cleanup
 
 ```bash
-# Delete hotfix branch after backport is confirmed
 git branch -d hotfix/v0.1.2
 git push origin --delete hotfix/v0.1.2
 ```
@@ -766,9 +690,7 @@ git push origin --delete hotfix/v0.1.2
 
 ### Do we need tags in yai-cli or yai-specs?
 
-Not required for the product release.
-The product release is determined by the `yai` tag plus pinned SHAs.
-Standalone tags in `yai-cli`/`yai-specs` are optional (milestones/audit trail).
+Not required for the product release. The product release is determined by the `yai` tag plus pinned SHAs. Standalone tags in `yai-cli`/`yai-specs` are optional (milestones/audit trail).
 
 ### Why pin by SHA instead of branch?
 
@@ -778,42 +700,31 @@ SHA pinning is immutable. A branch ref can be force-pushed or overwritten, makin
 
 ```bash
 cd $YAI_WORKSPACE/yai
-
-# Checkout the release tag
 git checkout v0.1.1
 
-# Read the pins
 cat deps/yai-cli.ref
 git -C deps/yai-specs rev-parse HEAD
-
-# Show specs at that pin
 git -C deps/yai-specs log $(git -C deps/yai-specs rev-parse HEAD) --oneline -5
 
-# Or read the published manifest.json from GitHub Releases (most reliable)
+# Most reliable: read manifest.json from the GitHub Release asset
 ```
 
-### How do I see all SHAs that went into a bundle without the binary?
+### How do I reconstruct bundle inputs without the binary?
 
 ```bash
-# Read manifest.json from the GitHub Release asset for that version
-# Or reconstruct locally:
 echo "=== Bundle inputs for HEAD ==="
 echo "runtime SHA : $(git rev-parse HEAD)"
 echo "specs SHA   : $(git -C deps/yai-specs rev-parse HEAD)"
 echo "cli SHA     : $(grep 'cli_sha=' deps/yai-cli.ref | cut -d= -f2)"
 ```
 
-### What if yai-specs and yai-cli get out of sync with each other?
+### What if yai-specs and yai-cli pins get out of sync?
 
-Both pin `yai-specs` independently. They MUST be updated separately. There is no required sync between the `yai-specs` pin in `yai-cli` and the one in `yai`; they reflect what each consumer was built/tested against.
-
-If you need them aligned (e.g., for a coordinated release), bump both pins to the same `SPEC_SHA` and verify independently.
+Both repos pin `yai-specs` independently. There is no required sync between them; they reflect what each consumer was built/tested against. If coordinated alignment is needed (e.g., a synchronized release), bump both pins to the same `SPEC_SHA` and verify independently.
 
 ---
 
-## Appendix: one-liner state report
-
-Paste this into any terminal to get a full snapshot of all three repos and current pins:
+## Appendix: full state report (one-liner)
 
 ```bash
 echo "===== YAI State Report $(date -u +%Y-%m-%dT%H:%M:%SZ) =====" && \
