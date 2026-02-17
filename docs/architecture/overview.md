@@ -184,10 +184,10 @@ See `deps/yai-specs/providers/PROVIDERS_TRUST.md`.
 ---
 
 ## I) Manual Test Suite (Commands + Expected)
-Runbook: `docs/runbooks/TEST_EVENTS.md`
-Runbook: `docs/runbooks/TEST_HARDFAIL.md`
-Runbook: `docs/runbooks/TEST_GRAPH.md`
-Runbook: `docs/runbooks/TEST_EMBED.md`
+Runbook: `docs/test-plans/events.md`
+Runbook: `docs/test-plans/hardfail.md`
+Runbook: `docs/test-plans/graph.md`
+Runbook: `docs/test-plans/embed.md`
 
 1) **Up and status**
 ```bash

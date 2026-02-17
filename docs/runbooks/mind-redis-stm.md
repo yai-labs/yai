@@ -52,7 +52,7 @@ Mind is a "workspace-scoped" process with **no authority**.
 
 ### Files to document
 
-**ADR:** `docs/adr/0008-mind-lifecycle.md`
+**ADR:** `docs/design/adr/ADR-005-mind-proposer.md`
 
 Document the contract: Mind never operates without successful attach to Kernel.
 

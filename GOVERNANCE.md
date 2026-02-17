@@ -18,8 +18,8 @@ Runtime-first changes that alter normative behavior are not accepted.
 
 ## ADR Policy
 
-- ADR location: `docs/architecture/adr/`
-- Use template: `docs/templates/ADR.template.md`
+- ADR location: `docs/design/adr/`
+- Use template: `docs/design/adr/ADR-000-template.md`
 - ADR required for:
   - cross-layer boundary changes
   - authority/enforcement model changes

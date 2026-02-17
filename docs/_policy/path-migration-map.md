@@ -1,0 +1,45 @@
+# Docs Path Migration Map
+
+| Old Path | New Path |
+|---|---|
+| docs/governance/doc-policy.md | docs/_policy/docs-style.md |
+| docs/governance/README.md | docs/_policy/README.md |
+| docs/RELEASES.md | docs/dev-guide/release.md |
+| docs/api/C_MAINPAGE.md | docs/dev-guide/doxygen-mainpage.md |
+| docs/architecture/stratification.md | docs/architecture/runtime-model.md |
+| docs/architecture/adr/ADR-001-single-runtime.md | docs/design/adr/ADR-001-single-runtime.md |
+| docs/architecture/adr/ADR-002-root-entrypoint.md | docs/design/adr/ADR-002-root-entrypoint.md |
+| docs/architecture/adr/ADR-003-kernel-authority.md | docs/design/adr/ADR-003-kernel-authority.md |
+| docs/architecture/adr/ADR-004-engine-execution.md | docs/design/adr/ADR-004-engine-execution.md |
+| docs/architecture/adr/ADR-005-mind-proposer.md | docs/design/adr/ADR-005-mind-proposer.md |
+| docs/architecture/adr/ADR-006-unified-rpc.md | docs/design/adr/ADR-006-unified-rpc.md |
+| docs/architecture/adr/ADR-007-workspace-isolation.md | docs/design/adr/ADR-007-workspace-isolation.md |
+| docs/architecture/adr/ADR-008-connection-lifecycle.md | docs/design/adr/ADR-008-connection-lifecycle.md |
+| docs/architecture/adr/ADR-009-engine-attachment.md | docs/design/adr/ADR-009-engine-attachment.md |
+| docs/architecture/adr/ADR-010-boot-entrypoint.md | docs/design/adr/ADR-010-boot-entrypoint.md |
+| docs/templates/ADR.template.md | docs/design/adr/ADR-000-template.md |
+| docs/templates/RUNBOOK.template.md | docs/runbooks/RB-000-template.md |
+| docs/guides/ACTIVATION.md | docs/user-guide/activation.md |
+| docs/guides/DATASETS.md | docs/user-guide/datasets.md |
+| docs/guides/EVENTS.md | docs/user-guide/events.md |
+| docs/guides/GRAPH.md | docs/user-guide/graph.md |
+| docs/guides/ENGINE_CORTEX.md | docs/user-guide/engine-cortex.md |
+| docs/guides/PROVIDERS_TRUST.md | docs/user-guide/providers-trust.md |
+| docs/guides/yai-sovereign-architecture.md | docs/architecture/overview.md |
+| docs/operations/runbooks/RB-DATA-PLANE.md | docs/runbooks/data-plane.md |
+| docs/operations/runbooks/RB-ENGINE-ATTACH.md | docs/runbooks/engine-attach.md |
+| docs/operations/runbooks/RB-GIT-WORKFLOW.md | docs/runbooks/repo-workflow.md |
+| docs/operations/runbooks/RB-KERNEL-SOVEREIGNTY.md | docs/runbooks/kernel-sovereignty.md |
+| docs/operations/runbooks/RB-MIND-REDIS-STM.md | docs/runbooks/mind-redis-stm.md |
+| docs/operations/runbooks/RB-ROOT-HARDENING.md | docs/runbooks/root-hardening.md |
+| docs/operations/runbooks/RB-WORKSPACES-LIFECYCLE.md | docs/runbooks/workspaces-lifecycle.md |
+| docs/operations/tests/TEST_EMBED.md | docs/test-plans/embed.md |
+| docs/operations/tests/TEST_EVENTS.md | docs/test-plans/events.md |
+| docs/operations/tests/TEST_GRAPH.md | docs/test-plans/graph.md |
+| docs/operations/tests/TEST_HARDFAIL.md | docs/test-plans/hardfail.md |
+| docs/operations/tests/TEST_PROVIDERS.md | docs/test-plans/providers.md |
+| docs/layers/l0-vault/README.md | docs/architecture/components/vault.md |
+| docs/layers/l1-kernel/README.md | docs/architecture/components/kernel.md |
+| docs/layers/l2-engine/README.md | docs/architecture/components/engine.md |
+| docs/layers/l3-mind/README.md | docs/architecture/components/mind.md |
+| docs/reference/** | docs/_legacy/reference/** |

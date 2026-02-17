@@ -85,19 +85,19 @@ Rules:
 
 - `docs/architecture/`
   Architecture overviews and ADR index.
-- `docs/architecture/adr/`
+- `docs/design/adr/`
   ADR documents only.
-- `docs/governance/`
+- `docs/_policy/`
   Documentation governance and policy.
-- `docs/operations/`
+- `docs/runbooks/`
   Operational material.
-- `docs/operations/runbooks/`
+- `docs/runbooks/`
   RB documents only.
-- `docs/operations/tests/`
+- `docs/test-plans/`
   Test procedures and test matrices (human-run).
-- `docs/guides/`
+- `docs/user-guide/`
   Guides and conceptual docs.
-- `docs/reference/`
+- `docs/_legacy/reference/`
   Indexes, pointers, and curated links (may reference `deps/yai-specs/contracts/`).
 
 Prohibited:
@@ -150,7 +150,7 @@ ADRs MUST NOT contain operational procedures. Those belong in Runbooks.
 
 2. Deprecated documents are not deleted unless legally required.
    If moved, they go to:
-   - `docs/reference/archive/`
+   - `docs/_legacy/reference/archive/`
 
 3. Replacement MUST be declared via `supersedes`.
 
@@ -167,8 +167,8 @@ ADRs MUST NOT contain operational procedures. Those belong in Runbooks.
 ## 10) Review and Merge Rules
 
 1. Any change to:
-   - `docs/governance/`
-   - `docs/architecture/adr/`
+   - `docs/_policy/`
+   - `docs/design/adr/`
    - `deps/yai-specs/contracts/`
    
    requires a review before merge (no self-merge).
@@ -183,7 +183,8 @@ ADRs MUST NOT contain operational procedures. Those belong in Runbooks.
 
 New documents MUST be created from templates located in:
 
-- `docs/templates/`
+- `docs/design/adr/`
+- `docs/runbooks/`
 
 Templates are mandatory to ensure uniform structure.
 

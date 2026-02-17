@@ -38,7 +38,7 @@ yai root ping
 ## STEP 0: ADR (Socket Layout L2 Decision) **MANDATORY**
 
 ### Target file
-- `docs/adr/000X-engine-socket-layout.md`
+- `docs/design/adr/ADR-009-engine-attachment.md`
 
 ### Choose ONE schema and commit to it
 

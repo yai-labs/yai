@@ -2,22 +2,23 @@
 
 ## Architecture
 
-- `docs/architecture/stratification.md`
-- `docs/layers/`
+- `docs/architecture/runtime-model.md`
+- `docs/architecture/components/`
 
 ## Guides
 
-- `docs/guides/`
+- `docs/user-guide/`
 
 ## Operations
 
-- `docs/operations/`
+- `docs/runbooks/`
+- `docs/test-plans/`
 
 ## Reference
 
-- `docs/reference/`
-- `docs/api/`
+- `docs/_legacy/reference/`
+- `docs/dev-guide/doxygen-mainpage.md`
 
 ## Governance
 
-- `docs/governance/`
+- `docs/_policy/`
