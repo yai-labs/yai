@@ -35,18 +35,14 @@ jobs:
     container:
       image: archlinux:latest
     steps:
-      - name: Install git
-        run: pacman -Sy --noconfirm git
+      - name: Install toolchain
+        run: |
+          pacman -Syu --noconfirm --needed ca-certificates git base-devel make python doxygen
 
       - name: Checkout
         uses: actions/checkout@v4
         with:
           submodules: recursive
-
-      - name: Install toolchain
-        run: |
-          pacman -Syu --noconfirm
-          pacman -S --noconfirm base-devel make python doxygen
 
       - name: Build
         run: make all

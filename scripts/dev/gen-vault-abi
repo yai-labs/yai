@@ -33,8 +33,13 @@ def pascal_case(value: str) -> str:
 def render_header(spec: dict, generated: str) -> str:
     header = spec["header"]
     lines = [
+        "/* SPDX-License-Identifier: Apache-2.0 */",
         "/* AUTO-GENERATED: vault/vault_abi.json */",
         f"/* Generated: {generated} */",
+        "/**",
+        " * @file yai_vault_abi.h",
+        " * @brief Vault ABI offsets and constants (generated from schema).",
+        " */",
         "#ifndef YAI_VAULT_ABI_H",
         "#define YAI_VAULT_ABI_H",
         "",
