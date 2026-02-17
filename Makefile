@@ -2,81 +2,77 @@
 # YAI — Root Build Orchestrator
 # =========================================
 
-ROOT_DIR   := $(abspath .)
-BIN_DIR    := $(ROOT_DIR)/dist/bin
-BUILD_DIR  := $(ROOT_DIR)/build
-DIST_DIR   := $(ROOT_DIR)/dist
-VERIFY_DIR := $(DIST_DIR)/verify
+ROOT_DIR := $(abspath .)
 
-BOOT_DIR   := boot
+BUILD_ROOT ?= $(ROOT_DIR)/build
+DIST_ROOT ?= $(ROOT_DIR)/dist
+
+BIN_BUILD := $(BUILD_ROOT)/bin
+BIN_DIST := $(DIST_ROOT)/bin
+
+BOOT_DIR := boot
 ROOT_PLANE_DIR := root
 KERNEL_DIR := kernel
 ENGINE_DIR := engine
 
-# Externalized specs (submodule)
-SPECS_DIR  := $(ROOT_DIR)/deps/yai-specs
-
 DOXYFILE := Doxyfile
 DOXYGEN ?= doxygen
-DOXY_OUT ?= dist/docs/doxygen
+DOXY_OUT ?= $(DIST_ROOT)/docs/doxygen
 
-.PHONY: all boot root core kernel engine clean docs docs-clean help
+CANONICAL_BINS := yai-boot yai-root-server yai-kernel yai-engine
 
-# -----------------------------------------
-# Build Order
-# -----------------------------------------
-all: docs boot root kernel engine
+.PHONY: all build dist bundle verify boot root core kernel engine clean clean-dist clean-all docs docs-clean help
+
+all: build
+	@echo "[YAI] dist is now separated from build. Use 'make dist' or 'make bundle'."
+
+build: boot root kernel engine
 	@echo "--- [YAI] Build Complete ---"
 
-# -----------------------------------------
-# Boot
-# -----------------------------------------
+dist: build
+	@mkdir -p $(BIN_DIST)
+	@set -e; \
+	for bin in $(CANONICAL_BINS); do \
+		if [ ! -f "$(BIN_BUILD)/$$bin" ]; then \
+			echo "ERROR: missing build artifact $(BIN_BUILD)/$$bin (run 'make build')"; \
+			exit 1; \
+		fi; \
+		cp "$(BIN_BUILD)/$$bin" "$(BIN_DIST)/$$bin"; \
+	done
+	@echo "--- [YAI] Dist staged in $(BIN_DIST) ---"
+
+bundle: dist
+	@bash scripts/bundle/build_bundle.sh
+
 boot:
-	$(MAKE) -C $(BOOT_DIR) \
-	OUT_BIN_DIR=$(BIN_DIR) \
-	OUT_BUILD_DIR=$(BUILD_DIR)/boot \
-	EXTRA_CFLAGS="-I$(SPECS_DIR) -I$(SPECS_DIR)/protocol -I$(SPECS_DIR)/vault -I$(SPECS_DIR)/protocol/runtime" all
+	$(MAKE) -C $(BOOT_DIR) build BUILD_ROOT=$(BUILD_ROOT) BIN_BUILD=$(BIN_BUILD)
 
-# -----------------------------------------
-# Root Plane
-# -----------------------------------------
 root:
-	$(MAKE) -C $(ROOT_PLANE_DIR) \
-	OUT_BIN_DIR=$(BIN_DIR) \
-	OUT_BUILD_DIR=$(BUILD_DIR)/root \
-	EXTRA_CFLAGS="-I$(SPECS_DIR) -I$(SPECS_DIR)/protocol -I$(SPECS_DIR)/vault -I$(SPECS_DIR)/protocol/runtime" all
+	$(MAKE) -C $(ROOT_PLANE_DIR) build BUILD_ROOT=$(BUILD_ROOT) BIN_BUILD=$(BIN_BUILD)
 
-# Compatibility alias
 core: root
 
-# -----------------------------------------
-# Kernel
-# -----------------------------------------
 kernel:
-	$(MAKE) -C $(KERNEL_DIR) \
-	OUT_BIN_DIR=$(BIN_DIR) \
-	OUT_BUILD_DIR=$(BUILD_DIR)/kernel \
-	EXTRA_CFLAGS="-I$(SPECS_DIR) -I$(SPECS_DIR)/protocol -I$(SPECS_DIR)/vault -I$(SPECS_DIR)/protocol/runtime" all
+	$(MAKE) -C $(KERNEL_DIR) build BUILD_ROOT=$(BUILD_ROOT) BIN_BUILD=$(BIN_BUILD)
 
-# -----------------------------------------
-# Engine
-# -----------------------------------------
 engine:
-	$(MAKE) -C $(ENGINE_DIR) \
-	OUT_BIN_DIR=$(BIN_DIR) \
-	OUT_BUILD_DIR=$(BUILD_DIR)/engine \
-	EXTRA_CFLAGS="-I$(SPECS_DIR) -I$(SPECS_DIR)/protocol -I$(SPECS_DIR)/vault -I$(SPECS_DIR)/protocol/runtime" all
+	$(MAKE) -C $(ENGINE_DIR) build BUILD_ROOT=$(BUILD_ROOT) BIN_BUILD=$(BIN_BUILD)
 
-# -----------------------------------------
-# Clean
-# -----------------------------------------
 clean:
-	rm -rf $(BUILD_DIR)
-	rm -rf $(DIST_DIR)
+	rm -rf $(BUILD_ROOT)
 
-# -----------------------------------------
-# Docs
-# -----------------------------------------
+clean-dist:
+	rm -rf $(DIST_ROOT)
+
+clean-all: clean clean-dist
+
+verify:
+	@if [ -x ./scripts/yai-verify ]; then \
+		./scripts/yai-verify; \
+	else \
+		echo "No verify script found at ./scripts/yai-verify"; \
+	fi
+
 docs:
 	@mkdir -p $(DOXY_OUT)
 	@$(DOXYGEN) $(DOXYFILE)
@@ -85,8 +81,5 @@ docs:
 docs-clean:
 	@rm -rf $(DOXY_OUT)
 
-# -----------------------------------------
-# Help
-# -----------------------------------------
 help:
-	@echo "Targets: all, boot, root (core alias), kernel, engine, docs, docs-clean, clean"
+	@echo "Targets: all, build, dist, bundle, verify, boot, root (core alias), kernel, engine, clean, clean-dist, clean-all, docs, docs-clean"
