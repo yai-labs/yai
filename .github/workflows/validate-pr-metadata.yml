@@ -2,61 +2,75 @@ name: validate-pr-metadata
 
 on:
   pull_request:
-    types: [opened, edited, synchronize, ready_for_review]
+    types: [opened, edited, synchronize, reopened]
 
 jobs:
   pr-metadata:
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: read
     steps:
-      - name: Validate PR body metadata and placeholder ban
+      - name: Validate PR title + body fields
         uses: actions/github-script@v7
         with:
           script: |
-            const body = context.payload.pull_request.body || "";
+            const pr = context.payload.pull_request;
+            const title = pr.title || "";
+            const body  = pr.body  || "";
 
-            function fail(msg) { core.setFailed(msg); }
-
-            // must contain PR-METADATA yaml block
-            if (!body.includes("## PR-METADATA") || !body.includes("```yaml")) {
-              return fail("Missing PR-METADATA yaml block (see templates).");
+            function fail(msg) {
+              core.setFailed(msg);
             }
 
-            // extract YAML block (best-effort)
-            const match = body.match(/## PR-METADATA\s*```yaml([\s\S]*?)```/m);
-            if (!match) return fail("PR-METADATA block not found or malformed.");
-            const yamlBlock = match[1];
-
-            // required keys (simple presence check)
-            const required = ["yai_pr:", "type:", "base_commit:", "compatibility:", "repos_impacted:"];
-            const missing = required.filter(k => !yamlBlock.includes(k));
-            if (missing.length) {
-              return fail("PR-METADATA missing keys: " + missing.join(", "));
+            // 1) Title must be conventional-ish
+            const titleOk = /^(feat|fix|docs|chore|refactor|test|build|ci)(\([^)]+\))?:\s.+/.test(title);
+            if (!titleOk) {
+              fail("PR title must match: type(scope): subject  (e.g. docs(governance): add templates)");
+              return;
             }
 
-            // ban placeholders
-            const banned = [
-              "<40-char-sha>",
-              "#<issue-number>",
-              "MP-<TRACK>-<X.Y.Z>",
-              "docs/runbooks/<name>.md",
-              "<link>|N/A",
-              "[bug] <short>",
-              "[feat] <short>"
+            // 2) Must contain required sections
+            const requiredBlocks = [
+              { re: /##\s+IDs\b/, msg: "Missing '## IDs' section in PR body." },
+              { re: /##\s+Objective\b/, msg: "Missing '## Objective' section in PR body." },
+              { re: /##\s+Evidence\b/, msg: "Missing '## Evidence' section in PR body." },
+              { re: /##\s+Commands run\b/, msg: "Missing '## Commands run' section in PR body." },
+              { re: /```bash[\s\S]*```/, msg: "Commands run must include a ```bash code block```." },
             ];
-            const hit = banned.filter(x => body.includes(x));
-            if (hit.length) {
-              return fail("Placeholders left in PR body: " + hit.join(", "));
+
+            for (const r of requiredBlocks) {
+              if (!r.re.test(body)) {
+                fail(r.msg);
+                return;
+              }
             }
 
-            // require Commands run section
-            if (!body.includes("## Commands run")) {
-              return fail("Missing '## Commands run' section.");
+            // 3) IDs fields
+            const issueLine = body.match(/Issue-ID:\s*(.+)/i);
+            if (!issueLine) {
+              fail("Missing 'Issue-ID:' line in ## IDs.");
+              return;
             }
 
-            // minimal sanity for base_commit value (40 hex somewhere)
-            const shaMatch = body.match(/base_commit:\s*\"?([0-9a-f]{40})\"?/i);
-            if (!shaMatch) {
-              return fail("base_commit must be a 40-char git SHA in PR-METADATA.");
+            const issueVal = (issueLine[1] || "").trim();
+            const isIssueNumber = /^#\d+$/.test(issueVal);
+            const isNA = /^N\/A$/i.test(issueVal) || /^NA$/i.test(issueVal);
+
+            if (!isIssueNumber && !isNA) {
+              fail("Issue-ID must be '#<number>' or 'N/A'.");
+              return;
             }
+
+            if (isNA) {
+              const reasonOk = /Issue-Reason\s*\(required if N\/A\):\s*\S+/i.test(body) || /Issue-Reason:\s*\S+/i.test(body);
+              if (!reasonOk) {
+                fail("Issue-ID is N/A but Issue-Reason is missing or empty.");
+                return;
+              }
+            }
+
+            const baseCommitOk = /Base-Commit:\s*[0-9a-f]{40}/i.test(body);
+            if (!baseCommitOk) {
+              fail("Missing or invalid 'Base-Commit:' (must include a 40-char SHA).");
+              return;
+            }
+
+            core.info("PR metadata validation: OK");

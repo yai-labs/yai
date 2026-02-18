@@ -1,0 +1,57 @@
+name: Runbook phase (execution)
+description: Track a phase from a runbook/milestone pack with strict acceptance.
+title: "runbook: <RB-ID> — <phase>"
+labels: ["runbook"]
+body:
+  - type: input
+    id: rbid
+    attributes:
+      label: Runbook ID
+      placeholder: "RB-ROOT-HARDENING / RB-WORKSPACES-LIFECYCLE / ..."
+    validations:
+      required: true
+
+  - type: input
+    id: mpid
+    attributes:
+      label: Milestone Pack ID (optional)
+      placeholder: "MP-ROOT-HARDENING-0.1.3"
+    validations:
+      required: false
+
+  - type: textarea
+    id: phase
+    attributes:
+      label: Phase definition
+      placeholder: |
+        Phase:
+        - Inputs:
+        - Outputs:
+        - Done when:
+    validations:
+      required: true
+
+  - type: textarea
+    id: files
+    attributes:
+      label: Files / areas touched
+      placeholder: |
+        - root/...
+        - kernel/...
+        - deps/yai-specs/...
+    validations:
+      required: true
+
+  - type: textarea
+    id: tests
+    attributes:
+      label: Test matrix (minimum)
+      placeholder: |
+        Commands:
+        ```bash
+        ...
+        ```
+        Expected:
+        - ...
+    validations:
+      required: true

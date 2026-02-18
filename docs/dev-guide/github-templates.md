@@ -1,39 +1,42 @@
-# GitHub Templates & Governance Kit (v1)
+# GitHub Templates (YAI)
 
-This repository uses selectable PR templates and enforced PR metadata.
+This repo enforces a consistent workflow: issues are structured, PRs are auditable, and changes are reviewable.
 
-## PR templates
-Location: `.github/PULL_REQUEST_TEMPLATE/`
+## What you get
+- Issue forms (bug/feature/runbook/docs)
+- Multiple PR templates (default + governance + milestone + twin PR)
+- CI gate that rejects PRs without the required PR body structure
 
-Rules:
-- Only this folder must exist (no single-template files).
-- Every PR must contain `## PR-METADATA` with a YAML fenced block.
-- Placeholders are forbidden. Use `N/A`.
+## The rule (canonical)
+1) Prefer: **Issue → Branch → Commits → Push → PR → Review/Merge**
+2) Every PR must use a template and must include:
+   - Issue-ID (or N/A with Issue-Reason only when allowed)
+   - Base-Commit (40-char SHA)
+   - Evidence + commands run
 
-## CLI usage (agents/humans)
-Create PR with explicit template:
+## When an Issue is mandatory
+Default: **always** create an issue first.
 
-```bash
-gh pr create --template 20-core-change.md
-```
+Allowed exception (rare):
+- Repo-tooling / governance bootstrap changes
+- Tiny doc fixes that do not affect behavior
 
-Update body from template (recommended automation):
+If you use the exception, you MUST put:
+- `Issue-ID: N/A`
+- `Issue-Reason: <why this PR is allowed without an issue>`
 
-```bash
-BASE_SHA="$(git rev-parse HEAD)"
-tmp="$(mktemp)"
-cp .github/PULL_REQUEST_TEMPLATE/20-core-change.md "$tmp"
-perl -pi -e "s/<40-char-sha>/$BASE_SHA/g" "$tmp"
-perl -pi -e "s/#<issue-number>/N\/A/g" "$tmp"
-gh pr edit --body-file "$tmp"
-```
+## UI vs GH CLI
+Either is fine. What matters is that the PR body matches the template fields.
 
-## Enforcement
+Recommended:
+- If you use `gh`: paste or supply the template body.
+- If you use UI: select the right template from the dropdown and fill it.
 
-Workflow: `.github/workflows/validate-pr-metadata.yml`
+## Branch naming (recommended)
+- `feat/<area>-<short>` for behavior changes
+- `docs/<topic>-<short>` for docs/governance
+- `fix/<area>-<short>` for bugs
 
-Fails when:
-
-- missing PR-METADATA
-- placeholders exist
-- missing Commands run section
+## Notes
+- Agents (Codex) may create branches and push commits.
+- Opening PRs and merging should be done by the maintainer (you).
