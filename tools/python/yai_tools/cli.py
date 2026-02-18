@@ -16,6 +16,12 @@ def cmd_pr_body(argv: list[str]) -> int:
     p.add_argument("--runbook", default="N/A", help="docs/runbooks/<name>.md#<anchor> or N/A")
     p.add_argument("--classification", default="META", help="FEATURE|FIX|DOCS|OPS|META")
     p.add_argument("--compatibility", default="A", help="A|B|C")
+    p.add_argument("--objective", default="", help="Objective text (required)")
+    p.add_argument("--docs-touched", action="append", default=[], help="Repeatable bullet for docs touched")
+    p.add_argument("--spec-delta", action="append", default=[], help="Repeatable bullet for spec/contract delta")
+    p.add_argument("--evidence-positive", action="append", default=[], help="Repeatable positive evidence bullet")
+    p.add_argument("--evidence-negative", action="append", default=[], help="Repeatable negative evidence bullet")
+    p.add_argument("--command", action="append", default=[], help="Repeatable command entry for Commands run")
     p.add_argument("--out", default="", help="Output file. If omitted: stdout.")
     args = p.parse_args(argv)
 
@@ -27,6 +33,12 @@ def cmd_pr_body(argv: list[str]) -> int:
         runbook=args.runbook,
         classification=args.classification,
         compatibility=args.compatibility,
+        objective=args.objective,
+        docs_touched=args.docs_touched,
+        spec_delta=args.spec_delta,
+        evidence_positive=args.evidence_positive,
+        evidence_negative=args.evidence_negative,
+        commands=args.command,
     )
 
     if args.out:

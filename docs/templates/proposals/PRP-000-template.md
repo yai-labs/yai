@@ -38,6 +38,11 @@ tags: []
 ## Exit Criteria
 - [ ] <clear acceptance criterion>
 
+## Traceability
+
+- Spec anchors (if any): `deps/yai-specs/...`
+- Targets ADR: `docs/design/adr/ADR-...` (optional)
+
 ## References
 - `docs/design/adr/...`
 - `docs/runbooks/...`

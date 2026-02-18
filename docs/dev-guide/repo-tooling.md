@@ -33,7 +33,7 @@ tools/bin/yai-dev-branch --type feat --issue 123 --area root --desc hardening-fo
 Generate PR body to a file:
 
 ```bash
-tools/bin/yai-dev-pr-body --template default --issue 123 --mp-id MP-ROOT-HARDENING-0.1.0 --runbook docs/runbooks/root-hardening.md#phase-0-1-0-protocol-guardrails --classification FEATURE --compatibility A --out .pr/PR_BODY.md
+tools/bin/yai-dev-pr-body --template default --issue 123 --mp-id MP-ROOT-HARDENING-0.1.0 --runbook docs/runbooks/root-hardening.md#phase-0-1-0-protocol-guardrails --classification FEATURE --compatibility A --objective "Enforce protocol guardrails in root runtime" --evidence-positive "happy path handshake succeeds" --evidence-negative "invalid envelope rejects with deterministic error" --command "cargo test -p root_runtime" --out .pr/PR_BODY.md
 ```
 
 Validate PR body locally:

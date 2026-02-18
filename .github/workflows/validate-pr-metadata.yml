@@ -36,10 +36,22 @@ jobs:
               return fail(`Missing required PR fields: ${missing.join(", ")}`);
             }
 
-            const banned = ["#<issue-number>", "<40-char-sha>", "MP-<TRACK>-<X.Y.Z>", "docs/runbooks/<name>.md#<anchor>"];
+            const banned = [
+              "#<issue-number>",
+              "<40-char-sha>",
+              "MP-<TRACK>-<X.Y.Z>",
+              "docs/runbooks/<name>.md#<anchor>",
+              "<one paragraph>",
+              "<what doc/policy changes and why>",
+              "<case 1>",
+              "# exact commands"
+            ];
             const unresolved = banned.filter((x) => body.includes(x));
             if (unresolved.length) {
               return fail(`Unresolved placeholders in PR body: ${unresolved.join(", ")}`);
+            }
+            if (/^\s*-\s+\.\.\.\s*$/m.test(body)) {
+              return fail("Placeholder bullets ('- ...') are not allowed.");
             }
 
             const extract = (label) => {
@@ -83,9 +95,20 @@ jobs:
             if (/(\bTODO\b|\bTBD\b|to be done|lorem ipsum)/i.test(evidence)) {
               return fail("Evidence contains placeholder/TODO text.");
             }
+            if (!/-\s+Positive:\s*[\s\S]*-\s+Negative:/i.test(evidence)) {
+              return fail("Evidence must include Positive and Negative subsections.");
+            }
 
-            if (!/## Commands run\s*[\s\S]*```bash[\s\S]*```/i.test(body)) {
+            const cmdMatch = body.match(/## Commands run\s*[\s\S]*?```bash\s*([\s\S]*?)```/i);
+            if (!cmdMatch) {
               return fail("Commands run must include a bash fenced code block.");
+            }
+            const runnable = cmdMatch[1]
+              .split("\n")
+              .map((x) => x.trim())
+              .filter((x) => x.length > 0 && !x.startsWith("#"));
+            if (runnable.length === 0) {
+              return fail("Commands run must include at least one executable command.");
             }
 
             core.info("PR metadata validation passed.");

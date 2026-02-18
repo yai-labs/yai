@@ -30,10 +30,21 @@ def check_pr_body(path: str) -> tuple[bool, str]:
     if missing:
         return False, f"missing required fields: {', '.join(missing)}"
 
-    banned = ["#<issue-number>", "<40-char-sha>", "MP-<TRACK>-<X.Y.Z>", "docs/runbooks/<name>.md#<anchor>"]
+    banned = [
+        "#<issue-number>",
+        "<40-char-sha>",
+        "MP-<TRACK>-<X.Y.Z>",
+        "docs/runbooks/<name>.md#<anchor>",
+        "<one paragraph>",
+        "<what doc/policy changes and why>",
+        "<case 1>",
+        "# exact commands",
+    ]
     unresolved = [x for x in banned if x in body]
     if unresolved:
         return False, f"unresolved placeholders: {', '.join(unresolved)}"
+    if re.search(r"^\s*-\s+\.\.\.\s*$", body, flags=re.MULTILINE):
+        return False, "placeholder bullets ('- ...') are not allowed"
 
     issue = _extract(body, "Issue-ID")
     if not re.fullmatch(r"#\d+|N/A", issue, flags=re.IGNORECASE):
@@ -62,8 +73,15 @@ def check_pr_body(path: str) -> tuple[bool, str]:
         return False, "Evidence section cannot be empty"
     if re.search(r"\b(TODO|TBD|to be done|lorem ipsum)\b", evidence, flags=re.IGNORECASE):
         return False, "Evidence section has placeholder/TODO text"
+    if not re.search(r"-\s+Positive:\s*[\s\S]*-\s+Negative:", evidence, flags=re.IGNORECASE):
+        return False, "Evidence must include Positive and Negative subsections"
 
-    if not re.search(r"## Commands run\s*[\s\S]*```bash[\s\S]*```", body, flags=re.IGNORECASE):
+    cmd_match = re.search(r"## Commands run\s*[\s\S]*?```bash\s*([\s\S]*?)```", body, flags=re.IGNORECASE)
+    if not cmd_match:
         return False, "Commands run must include a bash fenced block"
+    cmd_body = cmd_match.group(1)
+    runnable = [ln.strip() for ln in cmd_body.splitlines() if ln.strip() and not ln.strip().startswith("#")]
+    if not runnable:
+        return False, "Commands run must include at least one executable command"
 
     return True, f"PR metadata valid ({path})"
