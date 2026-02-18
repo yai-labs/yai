@@ -2,7 +2,7 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-source "$ROOT/scripts/dev/resolve-yai-bin.sh"
+source "$ROOT/tools/dev/resolve-yai-bin.sh"
 BIN="$(yai_resolve_bin "$ROOT" || true)"
 WS="events_test"
 RUN_DIR="$HOME/.yai/run/${WS}"

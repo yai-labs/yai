@@ -2,4 +2,4 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-exec "$ROOT/scripts/suites/ops/no-llm-360.sh" "$@"
+exec "$ROOT/tools/suites/levels/l0-l7.sh" "$@"

@@ -5,7 +5,7 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 DATASET_DIR="$ROOT/data/datasets/global-stress/v1"
 DATASET_SCRIPTS_DIR="$ROOT/data/datasets/global-stress/v1/scripts"
 WS="${1:-dataset_stress}"
-source "$ROOT/scripts/dev/resolve-yai-bin.sh"
+source "$ROOT/tools/dev/resolve-yai-bin.sh"
 BIN="$(yai_resolve_bin "$ROOT" || true)"
 
 if [[ -z "$BIN" || ! -x "$BIN" ]]; then

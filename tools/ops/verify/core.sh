@@ -18,7 +18,7 @@ fi
 
 echo "=== CHECK GENERATED"
 cd "$ROOT"
-bash scripts/dev/check-generated.sh
+bash tools/dev/check-generated.sh
 
 echo "=== UI NOTE"
 echo "TUI removed from mind; UI verification moved to YX repo pipeline."

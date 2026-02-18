@@ -20,10 +20,10 @@ fi
 
 echo "=== GENERATE VAULT ABI"
 cd "$ROOT"
-./scripts/dev/gen-vault-abi
+./tools/dev/gen-vault-abi
 
 echo "=== CHECK GENERATED"
-bash scripts/dev/check-generated.sh
+bash tools/dev/check-generated.sh
 
 echo "=== KERNEL BUILD"
 cd "$KERNEL"

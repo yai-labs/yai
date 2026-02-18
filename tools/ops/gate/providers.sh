@@ -8,7 +8,7 @@ if (( ${#WS_RAW} > 23 )); then
   WS="${WS_RAW:0:14}_${WS_RAW: -8}"
 fi
 ROOT_DIR="$(cd "$(dirname "$0")/../.." && pwd)"
-source "$ROOT_DIR/scripts/dev/resolve-yai-bin.sh"
+source "$ROOT_DIR/tools/dev/resolve-yai-bin.sh"
 BIN="$(yai_resolve_bin "$ROOT_DIR" || true)"
 REQUIRE_ACTIVE_PROVIDER="${REQUIRE_ACTIVE_PROVIDER:-0}"
 TRUST_FILE="$HOME/.yai/trust/providers.json"

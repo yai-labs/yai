@@ -3,7 +3,7 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
 WS="${1:-security_v1}"
-source "$ROOT/scripts/dev/resolve-yai-bin.sh"
+source "$ROOT/tools/dev/resolve-yai-bin.sh"
 BIN="$(yai_resolve_bin "$ROOT" || true)"
 
 if [[ -z "$BIN" || ! -x "$BIN" ]]; then

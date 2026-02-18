@@ -3,7 +3,7 @@ set -euo pipefail
 
 WS="${1:-dev}"
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-source "$ROOT/scripts/dev/resolve-yai-bin.sh"
+source "$ROOT/tools/dev/resolve-yai-bin.sh"
 BIN="$(yai_resolve_bin "$ROOT" || true)"
 RUN_DIR="$HOME/.yai/run/$WS"
 RUNTIME_SOCK="/tmp/yai_runtime_${WS}.sock"
