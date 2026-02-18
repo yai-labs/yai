@@ -10,3 +10,9 @@ Rules:
 Entry points:
 - `tools/bin/yai-pr-body` — generate PR body from repo templates (no PR creation).
 - `tools/bin/yai-branch` — generate canonical branch names (optional checkout).
+
+## PR tooling
+
+```bash
+tools/bin/yai-pr-body --template docs-governance --issue 123
+```

@@ -1,20 +1,30 @@
 ## IDs
-- Issue-ID: #<issue-number> OR N/A
-- Issue-Reason (required if N/A): <why allowed>
+- Issue-ID: #<issue-number>
 - Base-Commit: <40-char-sha>
+
+## Classification
+- Classification: <FEATURE|FIX|DOCS|OPS|META>
+- Compatibility: <A|B|C>
 
 ## Objective
 <what doc/policy changes and why>
 
-## Changes
+## Docs touched
 - ...
 
-## Files changed
+## Spec/Contract delta
 - ...
 
-## Review notes
-- Any naming/versioning decisions:
-- Any deprecations:
+## Evidence
+- Positive:
+  - <case 1>
+- Negative:
+  - <case 1>
+
+## Commands run
+```bash
+# exact commands
+```
 
 ## Checklist
 - [ ] No broken links

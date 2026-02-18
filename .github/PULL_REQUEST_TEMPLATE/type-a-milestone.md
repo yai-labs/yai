@@ -4,6 +4,10 @@
 - Runbook: docs/runbooks/<name>.md
 - Base-Commit: <40-char-sha>
 
+## Classification
+- Classification: <FEATURE|FIX|DOCS|OPS|META>
+- Compatibility: <A|B|C>
+
 ## Objective
 <what milestone phase completes>
 
@@ -11,13 +15,15 @@
 - [ ] ...
 - [ ] ...
 
-## Evidence (minimum)
-- [ ] Test matrix executed
-- [ ] Logs / outputs captured in PR
+## Evidence
+- Positive:
+  - <case 1>
+- Negative:
+  - <case 1>
 
 ## Commands run
 ```bash
-# paste exact commands
+# exact commands
 ```
 
 ## Checklist

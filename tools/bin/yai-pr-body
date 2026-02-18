@@ -1,7 +1,66 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-export PYTHONPATH="$ROOT/tools/python"
+# yai-pr-body
+# Generates a filled PR body file from .github/PULL_REQUEST_TEMPLATE/<name>.md
+#
+# Usage:
+#   tools/bin/yai-pr-body --template docs-governance --issue 123
+#   tools/bin/yai-pr-body --template default --issue N/A
+#
+# Output:
+#   .pr/PR_BODY.md
 
-exec python3 -m yai_tools.cli pr-body "$@"
+TEMPLATE_NAME="default"
+ISSUE_ID="N/A"
+OUT_DIR=".pr"
+OUT_FILE="${OUT_DIR}/PR_BODY.md"
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --template)
+      TEMPLATE_NAME="${2:-}"; shift 2;;
+    --issue)
+      ISSUE_ID="${2:-}"; shift 2;;
+    --out)
+      OUT_FILE="${2:-}"; shift 2;;
+    -h|--help)
+      echo "Usage: yai-pr-body --template <name> --issue <123|N/A> [--out <file>]"
+      exit 0;;
+    *)
+      echo "ERR: unknown arg: $1" >&2
+      exit 2;;
+  esac
+done
+
+TPL_PATH=".github/PULL_REQUEST_TEMPLATE/${TEMPLATE_NAME}.md"
+if [[ ! -f "$TPL_PATH" ]]; then
+  echo "ERR: template not found: $TPL_PATH" >&2
+  exit 3
+fi
+
+BASE_SHA="$(git rev-parse HEAD)"
+
+mkdir -p "$OUT_DIR"
+cp "$TPL_PATH" "$OUT_FILE"
+
+# Replace tokens (safe on macOS + linux)
+# Tokens expected in templates:
+#   #<issue-number>
+#   <40-char-sha>
+python3 - "$OUT_FILE" "$ISSUE_ID" "$BASE_SHA" <<'PY'
+from pathlib import Path
+import sys
+
+out_file = Path(sys.argv[1])
+issue = sys.argv[2]
+sha = sys.argv[3]
+
+text = out_file.read_text(encoding="utf-8")
+text = text.replace("#<issue-number>", issue)
+text = text.replace("<40-char-sha>", sha)
+out_file.write_text(text, encoding="utf-8")
+PY
+
+echo "OK: wrote ${OUT_FILE}"
+echo "TIP: gh pr edit <PR#> --body-file ${OUT_FILE}"

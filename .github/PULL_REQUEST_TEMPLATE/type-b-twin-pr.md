@@ -1,7 +1,10 @@
 ## IDs
 - Issue-ID: #<issue-number>
 - Base-Commit: <40-char-sha>
-- Compatibility: A | B | C
+
+## Classification
+- Classification: <FEATURE|FIX|DOCS|OPS|META>
+- Compatibility: <A|B|C>
 
 ## Twin PR links (required)
 - yai-cli PR: <link or N/A>
@@ -13,13 +16,11 @@
 ## Contract delta
 - ...
 
-## Evidence (cross-repo)
-- yai:
-  - ...
-- yai-cli:
-  - ...
-- yai-specs:
-  - ...
+## Evidence
+- Positive:
+  - <case 1>
+- Negative:
+  - <case 1>
 
 ## Commands run
 ```bash

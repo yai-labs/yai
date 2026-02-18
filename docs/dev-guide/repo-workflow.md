@@ -12,6 +12,17 @@ scope:
 
 # YAI Release Workflow — Complete Runbook
 
+## Toolchain Contract Link
+
+Canonical governance contract:
+- `docs/dev-guide/toolchain-contract-v1.md`
+
+Flow (strict):
+1. branch
+2. commits + push
+3. PR
+4. manual maintainer merge
+
 This document is the single source of truth for the YAI GitHub workflow:
 daily development, pin management, release creation, hotfix procedure,
 failure recovery, and CI contract.

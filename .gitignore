@@ -494,3 +494,4 @@ dist/tmp/
 *.so
 *.dSYM
 *.log
+.pr/

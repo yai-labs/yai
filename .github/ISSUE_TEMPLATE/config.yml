@@ -1,8 +1,8 @@
 blank_issues_enabled: false
 contact_links:
-  - name: Security reports
-    url: https://github.com/yai-labs/yai/security/advisories/new
-    about: Please report security issues via GitHub Security Advisories.
-  - name: Discussions
-    url: https://github.com/yai-labs/yai/discussions
-    about: Questions, ideas, and design discussion.
+  - name: Security report
+    url: https://github.com/<ORG>/<REPO>/security/policy
+    about: Please report security vulnerabilities privately.
+  - name: Questions / Discussions
+    url: https://github.com/<ORG>/<REPO>/discussions
+    about: Use Discussions for Q&A and ideas.

@@ -1,45 +1,50 @@
-# Toolchain Contract v1 (YAI 0.1.x)
+# Toolchain Contract v1 (YAI)
+Effective: 2026-02-18
+Status: Active
+Owner: maintainer
 
-This is the workflow contract for changes in this repo.
+## Perché esiste
+Questo repo non accetta “PR a sentimento”.
+Ogni cambiamento deve essere tracciabile, reviewabile, ripetibile.
 
-## Rule 0 — You are not allowed to “wing it”
-Every change must be traceable: why it exists, what it changed, and how it was tested.
+## Regola 1 — Branch
+1) Di default: ogni branch nasce da una Issue.
+2) Eccezione ammessa (META): lavori su governance/tooling/docs-infrastruttura possono nascere senza Issue.
+   In quel caso la PR DEVE dichiarare `Issue-ID: N/A` e `Classification: META`.
 
-## Issues
-Default: every branch must be anchored to an Issue.
+Naming consigliato:
+- feat/<issue-id>-<slug>
+- fix/<issue-id>-<slug>
+- chore/<issue-id>-<slug>
+- meta/<slug>
 
-Allowed exception:
-- governance / repo-tooling bootstrap
-- small doc-only fixes
+## Regola 2 — PR
+- La PR si apre DOPO che esiste un branch con commit pushati.
+- La PR deve usare un template e avere metadata minimi (vedi “PR Metadata Minimum”).
+- Merge: solo manuale dal maintainer. Gli agenti possono fare solo commit/push.
 
-If exception is used:
-- PR must include `Issue-ID: N/A`
-- PR must include a non-empty `Issue-Reason`
+## Regola 3 — PR Metadata Minimum (obbligatorio)
+Ogni PR deve contenere queste righe nel body:
 
-## Branches
-Canonical patterns:
-- `<type>/<issue>-<area>-<desc>` (example: `feat/123-root-hardening-forward`)
-- `meta/<area>-<desc>` (only when Issue-ID is N/A)
+- Issue-ID: <#123> oppure N/A
+- Base-Commit: <40-char-sha>
+- Classification: <FEATURE|FIX|DOCS|OPS|META>
+- Compatibility: <A|B|C>
+- Evidence:
+  - Positive: ...
+  - Negative: ...
 
-Tool support:
-- Use `tools/bin/yai-branch` to generate canonical names.
+## Regola 4 — Come scegliere template PR (UI o gh)
+UI:
+- usa la pagina di creazione PR con query param `template=<file.md>`.
 
-## Pull requests
-PR body is mandatory and must include:
-- IDs (Issue-ID + Base-Commit)
-- Objective
-- Evidence (positive + negative)
-- Commands run (bash code block)
+CLI (gh):
+- `gh pr create --template .github/PULL_REQUEST_TEMPLATE/<file.md>`
 
-Tool support:
-- Use `tools/bin/yai-pr-body` to generate a PR body from templates.
+## Regola 5 — PR body “compilato”
+Usiamo il tool:
+- `tools/bin/yai-pr-body --template docs-governance --issue 123`
+Questo genera `.pr/PR_BODY.md` con Base-Commit e placeholder pronti.
 
-## Agents (Codex)
-Allowed:
-- create branch
-- commit
-- push
-
-Not allowed:
-- open PR
-- merge PR
+## Regola 6 — Enforcement
+Una GitHub Action rifiuta PR che non rispettano i metadata minimi.
