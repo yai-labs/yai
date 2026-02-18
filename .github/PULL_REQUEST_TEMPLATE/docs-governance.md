@@ -2,7 +2,7 @@
 - Issue-ID: #<issue-number>
 - MP-ID: N/A
 - Runbook: N/A
-- Base-Commit: <40-char-sha> | N/A
+- Base-Commit: <40-char-sha>
 
 ## Classification
 - Compatibility: N/A
