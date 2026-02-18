@@ -16,3 +16,7 @@ Architecture Decision Records for the YAI runtime.
 - `ADR-010-boot-entrypoint.md`
 
 The previous consolidated archive has been removed after split.
+
+Template:
+
+- `docs/templates/adr/ADR-000-template.md`

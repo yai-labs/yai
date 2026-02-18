@@ -12,3 +12,7 @@ For Root Hardening:
 - `MP-ROOT-HARDENING-0.1.5`: `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md`
 
 Reference workflow: `docs/dev-guide/cross-repo-workflow.md`
+
+Canonical template:
+
+- `docs/templates/milestone-packs/MP-000-template.md`
