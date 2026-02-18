@@ -125,6 +125,7 @@ Each phase must compile, run, and be verifiable before moving on.
 
 **Branch:** `feat/root-hardening-0.1.0-guardrails`  
 **Goal:** Root and Kernel share identical mechanical wire rules and error codes.
+**Milestone Pack:** `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`
 
 #### File targets
 
@@ -183,6 +184,7 @@ Minimum set expected:
 
 **Branch:** `feat/root-hardening-0.1.1-router`  
 **Goal:** Root becomes a pure router with deterministic rejects + indestructible logging.
+**Milestone Pack:** `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md`
 
 #### File targets
 
@@ -259,6 +261,7 @@ Protocol negative tests (at least):
 
 **Branch:** `feat/root-hardening-0.1.2-authority-gate`  
 **Goal:** privileged commands require arming+role, enforced in Root and Kernel (defense-in-depth).
+**Milestone Pack:** `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.2.md`
 
 #### File targets
 
@@ -311,6 +314,7 @@ Minimum expectation:
 
 **Branch:** `feat/root-hardening-0.1.3-ws-id-single-source`  
 **Goal:** one ws_id validator used everywhere (Root/Kernel/CLI), eliminating drift.
+**Milestone Pack:** `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.3.md`
 
 #### File targets
 
@@ -347,6 +351,7 @@ Consumers:
 
 **Branch:** `feat/root-hardening-0.1.4-kernel-hard-reject`  
 **Goal:** Kernel must not create sessions/dirs for invalid ws_id; must respond deterministically.
+**Milestone Pack:** `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.4.md`
 
 #### File targets
 
@@ -388,6 +393,7 @@ Send invalid ws_id:
 
 **Branch:** `feat/root-hardening-0.1.5-torture`  
 **Goal:** repeatable torture tests that prove hardening is real.
+**Milestone Pack:** `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md`
 
 #### Minimum test cases
 
