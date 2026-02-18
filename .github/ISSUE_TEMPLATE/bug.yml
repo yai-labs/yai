@@ -1,0 +1,92 @@
+name: Bug report
+description: Something is broken or non-deterministic.
+title: "bug: <short description>"
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this when behavior is wrong, inconsistent, or violates a contract/invariant.
+
+  - type: dropdown
+    id: layer
+    attributes:
+      label: Affected layer
+      options:
+        - L0 Vault
+        - L1 Kernel
+        - Root Control Plane
+        - L2 Engine
+        - L3 Mind
+        - Docs/Specs
+        - Tooling/CI
+    validations:
+      required: true
+
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: Describe the observed behavior (include exact error codes/log lines if you have them).
+      placeholder: "Observed: ...\nLogs: ...\nError code: ..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+      placeholder: "Expected: deterministic reject with YAI_E_* and log line ..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      description: Provide exact commands. Copy/paste preferred.
+      placeholder: |
+        1) ...
+        2) ...
+        3) ...
+        Commands:
+        ```bash
+        ...
+        ```
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence (minimum)
+      description: Provide positive + negative cases.
+      placeholder: |
+        Positive:
+        - ...
+        Negative:
+        - ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: |
+        OS:
+        Compiler:
+        Commit:
+        Artifacts path:
+    validations:
+      required: false
+
+  - type: textarea
+    id: lawrefs
+    attributes:
+      label: Law/Specs references (if relevant)
+      placeholder: |
+        deps/yai-specs/specs/protocol/include/transport.h
+        deps/yai-specs/contracts/invariants/I-002-determinism.md
+    validations:
+      required: false

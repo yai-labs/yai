@@ -1,14 +1,3 @@
-# Default owner
-* @yai-labs/maintainers
-
-# Critical runtime boundaries
-/boot/** @yai-labs/maintainers
-/root/** @yai-labs/maintainers
-/kernel/** @yai-labs/maintainers
-/engine/** @yai-labs/maintainers
-/runtime/** @yai-labs/maintainers
-
-# Build and operations
-/Makefile @yai-labs/maintainers
-/scripts/** @yai-labs/maintainers
-/.github/workflows/** @yai-labs/maintainers
+# YAI — Default code owners
+# Team exists in org: @yai-labs/core
+* @yai-labs/core

@@ -1,0 +1,43 @@
+name: Docs / Governance change
+description: ADR/runbooks/templates/toolchain policy updates.
+title: "docs: <short description>"
+labels: ["docs"]
+body:
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      placeholder: "Why this doc/policy change is needed."
+    validations:
+      required: true
+
+  - type: textarea
+    id: change
+    attributes:
+      label: Change summary
+      placeholder: |
+        - What will be added/changed
+        - What will be removed/deprecated
+    validations:
+      required: true
+
+  - type: textarea
+    id: targets
+    attributes:
+      label: Target files
+      placeholder: |
+        docs/...
+        deps/yai-specs/...
+        .github/...
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      placeholder: |
+        - [ ] ...
+        - [ ] ...
+    validations:
+      required: true
