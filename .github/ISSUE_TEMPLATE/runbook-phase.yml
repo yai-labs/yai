@@ -1,0 +1,67 @@
+name: Runbook phase execution
+description: Track a runbook phase as a delivery unit (MP)
+title: "phase: "
+labels:
+  - runbook
+  - planning
+body:
+  - type: input
+    id: runbook_id
+    attributes:
+      label: Runbook ID
+      placeholder: "RB-ROOT-HARDENING"
+    validations:
+      required: true
+  - type: input
+    id: runbook_path
+    attributes:
+      label: Runbook path
+      placeholder: "docs/runbooks/root-hardening.md"
+    validations:
+      required: true
+  - type: input
+    id: mp_id
+    attributes:
+      label: Milestone Pack ID
+      placeholder: "MP-ROOT-HARDENING-0.1.2"
+    validations:
+      required: true
+  - type: input
+    id: phase
+    attributes:
+      label: Phase
+      placeholder: "0.1.2"
+    validations:
+      required: true
+  - type: dropdown
+    id: compatibility
+    attributes:
+      label: Compatibility type
+      options:
+        - A
+        - B
+    validations:
+      required: true
+  - type: textarea
+    id: dod
+    attributes:
+      label: Definition of Done
+      placeholder: |
+        - [ ] ...
+        - [ ] ...
+        - [ ] ...
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence plan
+      placeholder: |
+        Positive:
+        - ...
+        - ...
+        Negative:
+        - ...
+        - ...
+    validations:
+      required: true

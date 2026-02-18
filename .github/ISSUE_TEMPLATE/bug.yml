@@ -1,0 +1,61 @@
+name: Bug report
+description: Report a defect with deterministic repro and evidence
+title: "bug: "
+labels:
+  - bug
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      placeholder: One-sentence defect statement.
+    validations:
+      required: true
+  - type: input
+    id: issue_id
+    attributes:
+      label: Issue ID
+      description: Keep the auto-generated issue number, or set a tracking alias.
+      placeholder: "#123"
+    validations:
+      required: true
+  - type: input
+    id: mp_id
+    attributes:
+      label: Milestone Pack ID (if applicable)
+      placeholder: "MP-ROOT-HARDENING-0.1.2 or N/A"
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. ...
+        2. ...
+        3. ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Commands, logs, trace IDs, and commit SHA.
+      placeholder: |
+        - Commit: <sha>
+        - Command(s): ...
+        - Trace/log refs: ...
+    validations:
+      required: true

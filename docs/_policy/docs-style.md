@@ -29,6 +29,8 @@ YAI accepts these document types:
 
 - **RUNBOOK (RB-*)**: operational procedures, step-by-step execution.
 - **ADR (ADR-*)**: architecture decision records.
+- **PROPOSAL (PRP-*)**: design proposals before ADR acceptance.
+- **MILESTONE PACK (MP-*)**: cross-repo delivery unit with DoD/evidence.
 - **GUIDE (G-*)**: conceptual explanations and usage guidance.
 - **REFERENCE (REF-*)**: pointers, indexes, quick links to `deps/yai-specs/contracts/` and other docs.
 
@@ -87,12 +89,16 @@ Rules:
   Architecture overviews and ADR index.
 - `docs/design/adr/`
   ADR documents only.
+- `docs/design/proposals/`
+  Proposal documents only.
 - `docs/_policy/`
   Documentation governance and policy.
 - `docs/runbooks/`
-  Operational material.
-- `docs/runbooks/`
   RB documents only.
+- `docs/milestone-packs/`
+  Milestone Pack documents grouped by runbook/topic.
+- `docs/templates/`
+  Canonical templates for all document types.
 - `docs/test-plans/`
   Test procedures and test matrices (human-run).
 - `docs/user-guide/`
@@ -183,8 +189,10 @@ ADRs MUST NOT contain operational procedures. Those belong in Runbooks.
 
 New documents MUST be created from templates located in:
 
-- `docs/design/adr/`
-- `docs/runbooks/`
+- `docs/templates/adr/ADR-000-template.md`
+- `docs/templates/proposals/PRP-000-template.md`
+- `docs/templates/runbooks/RB-000-template.md`
+- `docs/templates/milestone-packs/MP-000-template.md`
 
 Templates are mandatory to ensure uniform structure.
 
@@ -193,87 +201,3 @@ Templates are mandatory to ensure uniform structure.
 ## Enforcement
 
 If a document violates this policy, it is non-canonical and MUST be fixed before it becomes `active`.
-
----
-
-# Template: RUNBOOK
-
-```markdown
----
-id: RB-<NAME>
-status: draft
-effective_date: YYYY-MM-DD
-revision: 1
-supersedes: []
-owner: operations
-law_refs: []
-tags: []
----
-
-# RB-<NAME>
-
-## Purpose
-<one paragraph>
-
-## Preconditions
-- [ ] <precondition>
-
-## Inputs
-- <flags/env/paths>
-
-## Procedure
-1. <step>
-
-## Verification
-- <how to confirm>
-
-## Failure Modes
-- Symptom: <...>
-  Fix: <...>
-
-## Rollback
-- <rollback steps>
-
-## References
-- <links>
-```
-
----
-
-# Template: ADR
-
-```markdown
----
-id: ADR-<NAME>
-status: draft
-effective_date: YYYY-MM-DD
-revision: 1
-supersedes: []
-owner: architecture
-law_refs: []
-tags: []
----
-
-# ADR-<NAME>
-
-## Context
-<...>
-
-## Decision
-<...>
-
-## Rationale
-<...>
-
-## Alternatives Considered
-- <...>
-
-## Consequences
-<...>
-
-## Law Alignment
-- <law refs>
-
-## Status
-draft|accepted|deprecated
-```

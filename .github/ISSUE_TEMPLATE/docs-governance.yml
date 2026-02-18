@@ -1,0 +1,49 @@
+name: Docs governance / templates
+description: Propose docs policy, templates, or structure improvements
+title: "docs: "
+labels:
+  - documentation
+  - governance
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+    validations:
+      required: true
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Scope
+      options:
+        - ADR template
+        - Proposal template
+        - Runbook template
+        - Milestone Pack template
+        - Docs policy
+        - Docs structure
+    validations:
+      required: true
+  - type: input
+    id: issue_id
+    attributes:
+      label: Issue ID
+      placeholder: "#123"
+    validations:
+      required: true
+  - type: textarea
+    id: concrete_change
+    attributes:
+      label: Concrete change
+      placeholder: Files/paths to add, modify, or remove.
+    validations:
+      required: true
+  - type: textarea
+    id: success
+    attributes:
+      label: Success criteria
+      placeholder: |
+        - [ ] ...
+        - [ ] ...
+    validations:
+      required: true

@@ -1,0 +1,69 @@
+name: Validate PR Metadata
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened, ready_for_review]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate required PR metadata fields
+        env:
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: |
+          set -euo pipefail
+
+          body="${PR_BODY:-}"
+
+          require_line() {
+            local key="$1"
+            if ! printf '%s\n' "$body" | grep -Eiq "^- ${key}:"; then
+              echo "Missing required line: - ${key}:"
+              exit 1
+            fi
+          }
+
+          extract_value() {
+            local key="$1"
+            printf '%s\n' "$body" | sed -nE "s/^- ${key}:[[:space:]]*(.*)$/\1/p" | head -n1
+          }
+
+          require_line "Issue-ID"
+          require_line "MP-ID"
+          require_line "Compatibility"
+          require_line "Base-Commit"
+
+          issue_id="$(extract_value "Issue-ID")"
+          mp_id="$(extract_value "MP-ID")"
+          compatibility="$(extract_value "Compatibility")"
+          base_commit="$(extract_value "Base-Commit")"
+
+          if ! printf '%s' "$issue_id" | grep -Eq '^#[0-9]+$|^N/A$'; then
+            echo "Issue-ID must be #<number> or N/A"
+            exit 1
+          fi
+
+          if ! printf '%s' "$mp_id" | grep -Eq '^MP-[A-Z0-9-]+-[0-9]+\.[0-9]+\.[0-9]+$|^N/A$'; then
+            echo "MP-ID must match MP-...-X.Y.Z or N/A"
+            exit 1
+          fi
+
+          if ! printf '%s' "$compatibility" | grep -Eq '^(A|B|N/A)$'; then
+            echo "Compatibility must be A, B, or N/A"
+            exit 1
+          fi
+
+          if ! printf '%s' "$base_commit" | grep -Eq '^[a-f0-9]{40}$|^N/A$'; then
+            echo "Base-Commit must be a 40-char SHA or N/A"
+            exit 1
+          fi
+
+          if [ "$compatibility" = "B" ]; then
+            if ! printf '%s\n' "$body" | grep -Eiq 'yai-cli PR:[[:space:]]*https://'; then
+              echo "Type B PRs must include yai-cli PR link"
+              exit 1
+            fi
+          fi
+
+          echo "PR metadata validation passed."

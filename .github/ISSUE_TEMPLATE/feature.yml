@@ -1,0 +1,65 @@
+name: Feature request
+description: Propose a feature with scope and compatibility impact
+title: "feature: "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem / Motivation
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+    validations:
+      required: true
+  - type: input
+    id: issue_id
+    attributes:
+      label: Issue ID
+      placeholder: "#123"
+    validations:
+      required: true
+  - type: input
+    id: mp_id
+    attributes:
+      label: Milestone Pack ID (if applicable)
+      placeholder: "MP-... or N/A"
+    validations:
+      required: true
+  - type: dropdown
+    id: compatibility
+    attributes:
+      label: Compatibility classification
+      options:
+        - A (core-only/non-breaking)
+        - B (contract-touching/sync required)
+        - N/A
+    validations:
+      required: true
+  - type: checkboxes
+    id: repos
+    attributes:
+      label: Repositories impacted
+      options:
+        - label: yai
+        - label: yai-cli
+        - label: yai-specs
+    validations:
+      required: true
+  - type: textarea
+    id: evidence_plan
+    attributes:
+      label: Evidence plan (minimum)
+      placeholder: |
+        Positive:
+        - ...
+        - ...
+        Negative:
+        - ...
+        - ...
+    validations:
+      required: true

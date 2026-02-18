@@ -1,24 +1,11 @@
-# Documentation
+# Documentation Map
 
-## Architecture
-
-- `docs/architecture/runtime-model.md`
-- `docs/architecture/components/`
-
-## Guides
-
-- `docs/user-guide/`
-
-## Operations
-
-- `docs/runbooks/`
-- `docs/test-plans/`
-
-## Reference
-
-- `docs/_legacy/reference/`
-- `docs/dev-guide/doxygen-mainpage.md`
-
-## Governance
-
-- `docs/_policy/`
+- Policy: `docs/_policy/docs-style.md`
+- Templates (canonical): `docs/templates/README.md`
+- Runbooks: `docs/runbooks/`
+- Milestone Packs: `docs/milestone-packs/`
+- ADRs: `docs/design/adr/`
+- Proposals: `docs/design/proposals/`
+- Dev guides: `docs/dev-guide/`
+- Test plans: `docs/test-plans/`
+- User guides: `docs/user-guide/`
