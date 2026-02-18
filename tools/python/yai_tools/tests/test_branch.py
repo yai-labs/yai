@@ -20,6 +20,10 @@ class TestBranch(unittest.TestCase):
         with self.assertRaises(ValueError):
             make_branch_name("docs", "N/A", "", "governance", "tooling-v1")
 
+    def test_hotfix_na(self):
+        b = make_branch_name("hotfix", "N/A", "incident-123", "root", "rollback-safe")
+        self.assertEqual(b, "hotfix/root-rollback-safe")
+
 
 if __name__ == "__main__":
     unittest.main()

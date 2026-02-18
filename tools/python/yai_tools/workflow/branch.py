@@ -29,8 +29,11 @@ def make_branch_name(change_type: str, issue: str, reason: str, area: str, desc:
     if issue_val == "N/A":
         if not reason.strip():
             raise ValueError("reason is required when issue is N/A")
-        # meta branches are explicit: meta/<area>-<desc>
-        return f"meta/{a}-{d}"
+        if t in {"docs", "chore", "meta"}:
+            return f"meta/{a}-{d}"
+        if t == "hotfix":
+            return f"hotfix/{a}-{d}"
+        raise ValueError("issue N/A is allowed only for meta/docs/chore/hotfix")
 
     # Standard: <type>/<issue>-<area>-<desc>
     return f"{t}/{issue_val[1:]}-{a}-{d}"

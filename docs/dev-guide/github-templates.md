@@ -49,3 +49,14 @@ tools/bin/yai-pr-body --template default --issue 123 --out /tmp/pr.md
 ```
 
 Then paste /tmp/pr.md into the PR description (UI or GH CLI).
+
+
+## Tool-assisted workflow (dev commands)
+Use canonical helpers to avoid drift:
+
+```bash
+tools/bin/yai-dev-issue --type runbook --title "Root hardening phase 0.1.0" --mp-id MP-ROOT-HARDENING-0.1.0 --runbook docs/runbooks/root-hardening.md --phase 0.1.0 --out .pr/ISSUE_BODY.md
+tools/bin/yai-dev-branch --type feat --issue 123 --area root --desc hardening-forward
+tools/bin/yai-dev-pr-body --template default --issue 123 --mp-id MP-ROOT-HARDENING-0.1.0 --runbook docs/runbooks/root-hardening.md#phase-0-1-0-protocol-guardrails --classification FEATURE --compatibility A --out .pr/PR_BODY.md
+tools/bin/yai-dev-pr-check .pr/PR_BODY.md
+```

@@ -3,48 +3,35 @@ Effective: 2026-02-18
 Status: Active
 Owner: maintainer
 
-## Perché esiste
-Questo repo non accetta “PR a sentimento”.
-Ogni cambiamento deve essere tracciabile, reviewabile, ripetibile.
+## Why
+No PR is accepted without traceability and deterministic evidence.
 
-## Regola 1 — Branch
-1) Di default: ogni branch nasce da una Issue.
-2) Eccezione ammessa (META): lavori su governance/tooling/docs-infrastruttura possono nascere senza Issue.
-   In quel caso la PR DEVE dichiarare `Issue-ID: N/A` e `Classification: META`.
+## Branch policy
+- Default: branch must be linked to an issue.
+- Allowed no-issue exceptions:
+  - `meta/*` (governance/tooling/docs-only)
+  - `hotfix/*` (must include explicit reason in PR)
 
-Naming consigliato:
-- feat/<issue-id>-<slug>
-- fix/<issue-id>-<slug>
-- chore/<issue-id>-<slug>
-- meta/<slug>
+## PR metadata minimum (blocking)
+Every PR must include:
+- `Issue-ID: #<number>` or `N/A` (+ `Issue-Reason`)
+- `MP-ID: MP-...` or `N/A`
+- `Runbook: docs/runbooks/<name>.md#<anchor>` or `N/A`
+- `Base-Commit: <40-char-sha>`
+- `Classification`, `Compatibility`
+- `Evidence` section (non-empty, no TODO/TBD)
+- `Commands run` with fenced `bash` block
 
-## Regola 2 — PR
-- La PR si apre DOPO che esiste un branch con commit pushati.
-- La PR deve usare un template e avere metadata minimi (vedi “PR Metadata Minimum”).
-- Merge: solo manuale dal maintainer. Gli agenti possono fare solo commit/push.
+## Tooling commands
+- `tools/bin/yai-dev-issue`
+- `tools/bin/yai-dev-branch`
+- `tools/bin/yai-dev-pr-body`
+- `tools/bin/yai-dev-pr-check`
 
-## Regola 3 — PR Metadata Minimum (obbligatorio)
-Ogni PR deve contenere queste righe nel body:
-
-- Issue-ID: <#123> oppure N/A
-- Base-Commit: <40-char-sha>
-- Classification: <FEATURE|FIX|DOCS|OPS|META>
-- Compatibility: <A|B|C>
-- Evidence:
-  - Positive: ...
-  - Negative: ...
-
-## Regola 4 — Come scegliere template PR (UI o gh)
-UI:
-- usa la pagina di creazione PR con query param `template=<file.md>`.
-
-CLI (gh):
-- `gh pr create --template .github/PULL_REQUEST_TEMPLATE/<file.md>`
-
-## Regola 5 — PR body “compilato”
-Usiamo il tool:
-- `tools/bin/yai-pr-body --template docs-governance --issue 123`
-Questo genera `.pr/PR_BODY.md` con Base-Commit e placeholder pronti.
-
-## Regola 6 — Enforcement
-Una GitHub Action rifiuta PR che non rispettano i metadata minimi.
+## Repository settings checklist (manual)
+- Require status checks to pass before merging
+- Require branches to be up to date
+- Require conversation resolution
+- Restrict who can push to `main`
+- Optional: Require linear history
+- Optional: Auto-delete branches

@@ -22,7 +22,7 @@ def set_kv_line(md: str, key: str, value: str) -> str:
     out = []
     replaced = False
     for line in md.splitlines():
-        if re.search(rf"\b{re.escape(key)}\s*:\b", line):
+        if re.search(rf"{re.escape(key)}\s*:", line):
             prefix = re.split(rf"{re.escape(key)}\s*:", line, maxsplit=1)[0]
             # keep leading bullet/indent and rewrite rest
             new_line = f"{prefix}{key}: {value}"
@@ -34,3 +34,7 @@ def set_kv_line(md: str, key: str, value: str) -> str:
         # append if missing (rare but safer)
         out.append(f"{key}: {value}")
     return "\n".join(out) + ("\n" if md.endswith("\n") else "")
+
+
+def has_kv_line(md: str, key: str) -> bool:
+    return re.search(rf"{re.escape(key)}\s*:", md) is not None

@@ -9,31 +9,37 @@
 So workflow stays consistent even when multiple agents touch the repo:
 - branch names don’t drift
 - PR bodies don’t drift
-- exceptions are explicit (N/A requires reason)
+- exceptions are explicit (`N/A` requires reason)
+
+## Canonical commands
+- `tools/bin/yai-dev-issue`
+- `tools/bin/yai-dev-branch`
+- `tools/bin/yai-dev-pr-body`
+- `tools/bin/yai-dev-pr-check`
 
 ## Quick usage
+Generate issue draft body:
+
+```bash
+tools/bin/yai-dev-issue --type runbook --title "Root hardening phase 0.1.0" --mp-id MP-ROOT-HARDENING-0.1.0 --runbook docs/runbooks/root-hardening.md --phase 0.1.0 --out .pr/ISSUE_BODY.md
+```
+
 Generate a branch name:
 
 ```bash
-tools/bin/yai-branch --type feat --issue 123 --area root --desc hardening-forward
-```
-
-Create and checkout branch:
-
-```bash
-tools/bin/yai-branch --type feat --issue 123 --area root --desc hardening-forward --checkout
+tools/bin/yai-dev-branch --type feat --issue 123 --area root --desc hardening-forward
 ```
 
 Generate PR body to a file:
 
 ```bash
-tools/bin/yai-pr-body --template default --issue 123 --out /tmp/pr.md
+tools/bin/yai-dev-pr-body --template default --issue 123 --mp-id MP-ROOT-HARDENING-0.1.0 --runbook docs/runbooks/root-hardening.md#phase-0-1-0-protocol-guardrails --classification FEATURE --compatibility A --out .pr/PR_BODY.md
 ```
 
-Meta PR body (allowed only for bootstrap) requires reason:
+Validate PR body locally:
 
 ```bash
-tools/bin/yai-pr-body --template docs-governance --issue N/A --reason "meta bootstrap" --out /tmp/pr.md
+tools/bin/yai-dev-pr-check .pr/PR_BODY.md
 ```
 
 ## Maintainer flow (recommended)

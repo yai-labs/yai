@@ -1,7 +1,7 @@
 ## IDs
 - Issue-ID: #<issue-number>
 - MP-ID: MP-<TRACK>-0.1.<X>
-- Runbook: docs/runbooks/<name>.md
+- Runbook: docs/runbooks/<name>.md#<anchor>
 - Base-Commit: <40-char-sha>
 
 ## Classification

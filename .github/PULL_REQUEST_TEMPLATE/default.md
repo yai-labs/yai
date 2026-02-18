@@ -1,5 +1,8 @@
 ## IDs
 - Issue-ID: #<issue-number>
+- Issue-Reason (required if N/A): <required when Issue-ID is N/A>
+- MP-ID: MP-<TRACK>-<X.Y.Z>
+- Runbook: docs/runbooks/<name>.md#<anchor>
 - Base-Commit: <40-char-sha>
 
 ## Classification
@@ -23,4 +26,4 @@
 ## Checklist
 - [ ] Evidence provided
 - [ ] Commands listed
-- [ ] Linked issue or N/A with META justification
+- [ ] Linked issue or N/A with explicit reason
