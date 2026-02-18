@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-exec "$ROOT/scripts/gates/dataset-global-stress.sh" "$@"
+exec "$ROOT/tools/ops/gate/dataset-global-stress.sh" "$@"
