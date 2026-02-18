@@ -43,3 +43,12 @@ tags: []
 - ADR: `docs/design/adr/...`
 - Specs: `deps/yai-specs/...`
 - Test plans: `docs/test-plans/...`
+
+## Traceability
+
+- ADR refs (required unless ops-only):  
+  - `docs/design/adr/ADR-...`
+- Law refs (recommended):  
+  - `deps/yai-specs/...`
+- MPs (filled as phases ship):  
+  - `docs/milestone-packs/...`

@@ -4,6 +4,8 @@ Design documents are organized in:
 
 - ADRs: `docs/design/adr/`
 - Proposals: `docs/design/proposals/`
+- Spine: `docs/design/spine.md`
+- Traceability map: `docs/design/traceability.md`
 
 Canonical templates:
 

@@ -33,3 +33,11 @@ Definition of Done:
 - [ ] CLI proves invariant (positive + negative)
 - [ ] Evidence captured and reviewable
 - [ ] Compatibility notes updated
+
+## Traceability
+
+- Runbook: `docs/runbooks/<name>.md`
+- Phase: `<X.Y.Z>`
+- ADRs: `docs/design/adr/ADR-...`
+- Spec anchors: `deps/yai-specs/...`
+- Issue-ID(s): `#123` (or `N/A` + reason)

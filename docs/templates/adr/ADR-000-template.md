@@ -33,5 +33,14 @@ tags: []
 ## Law Alignment
 - `deps/yai-specs/...`
 
+## Traceability
+
+- Law refs (required):  
+  - `deps/yai-specs/...`
+- Proposals (optional):  
+  - `docs/design/proposals/PRP-...`
+- Implemented by runbooks (optional):  
+  - `docs/runbooks/...`
+
 ## Status
 `draft` | `active` | `deprecated`

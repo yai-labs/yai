@@ -10,3 +10,9 @@ Start here to navigate canonical documentation areas.
 - Milestone Packs: `docs/milestone-packs/`
 - Test plans: `docs/test-plans/`
 - Developer guides: `docs/dev-guide/`
+
+## Navigation
+
+- Design spine: `docs/design/spine.md`
+- Specs bridge: `docs/architecture/specs-bridge.md`
+- Traceability map: `docs/design/traceability.md`
