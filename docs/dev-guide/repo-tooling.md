@@ -45,3 +45,21 @@ tools/bin/yai-dev-pr-check .pr/PR_BODY.md
 ## Maintainer flow (recommended)
 - Agents: branch + commits + push
 - Maintainer (you): open PR + review + merge
+
+## Traceability gates (ADR ↔ Runbook ↔ MP)
+
+Local:
+- Full scan (strict):
+  - `make docs-verify`
+- PR-like scan (only changed docs):
+  - `tools/bin/yai-docs-trace-check --changed --base <BASE_SHA> --head <HEAD_SHA>`
+
+CI:
+- Workflow `validate-traceability.yml` runs on PRs that touch ADR/Runbook/MP/docs templates/tools.
+- Gate is scoped to changed docs to avoid breaking legacy documents.
+
+Hard rules (when files are touched):
+- ADR must have `law_refs` pointing to `deps/yai-specs/...`
+- Runbook must have `adr_refs` unless `ops_only=true`
+- MP must include: `runbook`, `phase`, `adrs`, `spec_anchors`, `issues`
+- MP requires bidirectional link: runbook file must contain the MP id

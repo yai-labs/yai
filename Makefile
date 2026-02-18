@@ -84,5 +84,8 @@ docs:
 docs-clean:
 	@rm -rf $(DOXY_OUT)
 
+docs-verify:
+	@tools/bin/yai-docs-trace-check --all
+
 help:
 	@echo "Targets: all, build, dist, bundle, verify, preflight-release, boot, root (core alias), kernel, engine, clean, clean-dist, clean-all, docs, docs-clean"
