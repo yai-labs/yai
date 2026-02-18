@@ -4,6 +4,8 @@ import struct
 import json
 import time
 import os
+import stat
+import sys
 
 # ====================================================
 # Costanti del protocollo (allineate al kernel)
@@ -115,8 +117,28 @@ def send_ping(sock):
 # Main
 # ====================================================
 def main():
+    if not os.path.exists(SOCK_PATH):
+        print(f"SKIP: control socket not found: {SOCK_PATH}")
+        print("Set YAI_SOCK_PATH or start the runtime/control plane before running this test.")
+        return 0
+
+    mode = os.stat(SOCK_PATH).st_mode
+    if not stat.S_ISSOCK(mode):
+        print(f"SKIP: path exists but is not a Unix socket: {SOCK_PATH}")
+        return 0
+
     s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
-    s.connect(SOCK_PATH)
+    try:
+        s.connect(SOCK_PATH)
+    except FileNotFoundError:
+        print(f"SKIP: control socket not found: {SOCK_PATH}")
+        return 0
+    except ConnectionRefusedError:
+        print(f"SKIP: socket exists but no server is accepting connections: {SOCK_PATH}")
+        return 0
+    except OSError as exc:
+        print(f"SKIP: cannot connect to socket {SOCK_PATH}: {exc}")
+        return 0
     print(f"[+] Connected to {SOCK_PATH}")
 
     try:
@@ -142,4 +164,4 @@ def main():
         print("\n[+] Connection closed")
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

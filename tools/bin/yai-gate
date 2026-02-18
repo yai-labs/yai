@@ -19,6 +19,7 @@ USAGE
 list_gates() {
   find "$GATES_DIR" -maxdepth 1 -type f -name "*.sh" -print \
     | sed -e "s#^$GATES_DIR/##" -e 's/\.sh$//' \
+    | rg -v '^gate$' \
     | sort
 }
 
@@ -39,6 +40,11 @@ if [[ ! -x "$TARGET" ]]; then
   echo "FAIL: unknown gate '$NAME'"
   echo "Available gates:"
   list_gates
+  exit 1
+fi
+
+if [[ "$NAME" == "gate" ]]; then
+  echo "FAIL: gate 'gate' is internal-only"
   exit 1
 fi
 

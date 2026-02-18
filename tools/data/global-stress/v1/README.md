@@ -1,8 +1,12 @@
-# Global Stress Tooling
+# tools/data/global-stress/v1
 
-Dataset files remain under `data/datasets/global-stress/v1`.
+Executable helpers for loading and importing global-stress v1 seed data.
 
-Executable helpers for this dataset are canonical under:
+## Contents
 
-- `tools/data/global-stress/v1/import-seed-via-cli.sh`
-- `tools/data/global-stress/v1/load-events-log.sh`
+- `load-events-log.sh`: loads baseline event logs.
+- `import-seed-via-cli.sh`: imports seed data through CLI.
+
+## Notes
+
+Dataset files remain under `data/datasets/global-stress/v1/`.

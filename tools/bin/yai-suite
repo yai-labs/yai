@@ -19,6 +19,7 @@ USAGE
 list_suites() {
   find "$SUITES_DIR" -type f -name "*.sh" -print \
     | sed -e "s#^$SUITES_DIR/##" -e 's/\.sh$//' \
+    | rg -v '^suite$' \
     | sort
 }
 
@@ -39,6 +40,11 @@ if [[ ! -x "$TARGET" ]]; then
   echo "FAIL: unknown suite '$NAME'"
   echo "Available suites:"
   list_suites
+  exit 1
+fi
+
+if [[ "$NAME" == "suite" ]]; then
+  echo "FAIL: suite 'suite' is internal-only"
   exit 1
 fi
 

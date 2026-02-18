@@ -11,26 +11,29 @@ echo "root: ${ROOT}"
 
 echo "=== Binaries"
 DIST_BIN="$ROOT/dist/bin"
-LEGACY_BIN="${HOME}/.yai/artifacts/yai-core/bin"
 
 for f in "${DIST_BIN}/yai-boot" "${DIST_BIN}/yai-kernel" "${DIST_BIN}/yai-engine" "${DIST_BIN}/yai-root-server"; do
   [[ -x "${f}" ]] && echo "OK: ${f}" || echo "MISSING: ${f}"
 done
 
-for f in "${LEGACY_BIN}/yai-boot" "${LEGACY_BIN}/yai-kernel" "${LEGACY_BIN}/yai-engine"; do
-  [[ -x "${f}" ]] && echo "LEGACY_OK: ${f}" || true
-done
-
 echo "=== yai in PATH"
 if [[ -n "$BIN" ]]; then
   echo "OK: $(command -v yai)"
-  "$BIN" status --ws "${WS_DEFAULT}" || true
+  if "$BIN" status --help >/dev/null 2>&1; then
+    "$BIN" status --ws "${WS_DEFAULT}" || true
+  else
+    echo "SKIP: yai status command not available in current CLI"
+  fi
   "$BIN" monitor --help >/dev/null 2>&1 && echo "OK: monitor command available"
 else
   echo "MISSING: yai not found in PATH"
 fi
 
-echo "=== Duplicate yai binaries (artifacts)"
-find "${HOME}/.yai/artifacts" -type f -name "yai" -perm -111 -print || true
+echo "=== Duplicate yai binaries"
+if [[ -d "${HOME}/.yai/artifacts" ]]; then
+  find "${HOME}/.yai/artifacts" -type f -name "yai" -perm -111 -print || true
+else
+  echo "SKIP: legacy artifacts directory not present"
+fi
 
 echo "OK: doctor complete"

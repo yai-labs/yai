@@ -65,10 +65,10 @@ done
 
 echo "=== TLC QUICK"
 cd "$FORMAL"
-java -XX:+UseParallelGC -jar "$TLA_JAR" -modelcheck YAI_KERNEL.tla -config YAI_KERNEL.quick.cfg
+java -XX:+UseParallelGC -jar "$TLA_JAR" -modelcheck tla/YAI_KERNEL.tla -config configs/YAI_KERNEL.quick.cfg
 
 echo "=== TLC DEEP"
-java -XX:+UseParallelGC -jar "$TLA_JAR" -modelcheck YAI_KERNEL.tla -config YAI_KERNEL.deep.cfg
+java -XX:+UseParallelGC -jar "$TLA_JAR" -modelcheck tla/YAI_KERNEL.tla -config configs/YAI_KERNEL.deep.cfg
 
 echo "=== BUILD CORE"
 cd "$ROOT"

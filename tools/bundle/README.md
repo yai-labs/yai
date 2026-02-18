@@ -1,17 +1,12 @@
-# Bundle scripts
+# tools/bundle
 
-- `build_bundle.sh`: builds release assets from `dist/bin` into `dist/bundle/out`.
-- `manifest.sh`: generates `manifest.json` with bundle metadata and binary checksums.
+Tooling for building distributable bundles.
 
-## Usage
+## Contents
 
-```bash
-make dist
-make bundle
-```
+- `build_bundle.sh`: builds the bundle artifact.
+- `manifest.sh`: generates the bundle manifest.
 
-Optional version override:
+## Quick Start
 
-```bash
-BUNDLE_VERSION=v0.1.0 make bundle
-```
+- `bash tools/bundle/build_bundle.sh`
