@@ -1,0 +1,38 @@
+name: validate-traceability
+
+on:
+  pull_request:
+    paths:
+      - "docs/design/adr/**"
+      - "docs/runbooks/**"
+      - "docs/milestone-packs/**"
+      - "docs/architecture/specs-bridge.md"
+      - "docs/design/spine.md"
+      - "docs/design/traceability.md"
+      - "docs/templates/**"
+      - ".github/workflows/validate-traceability.yml"
+      - "tools/**"
+
+jobs:
+  traceability:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout (full history for diff)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Traceability check (changed docs only)
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.sha }}
+        run: |
+          python3 -m pip install --upgrade pip
+          # if tools/python has a pyproject you can install it; otherwise run module directly
+          # python3 -m pip install -e tools/python
+          tools/bin/yai-docs-trace-check --changed --base "$BASE_SHA" --head "$HEAD_SHA"
