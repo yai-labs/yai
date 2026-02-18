@@ -135,7 +135,7 @@ if [ -z "$SPECS_COMMIT" ]; then
   SPECS_COMMIT="unknown"
 fi
 
-bash "$ROOT_DIR/scripts/bundle/manifest.sh" \
+bash "$ROOT_DIR/tools/bundle/manifest.sh" \
   "$STAGE_DIR" \
   "$VERSION" \
   "$CORE_VERSION" \
