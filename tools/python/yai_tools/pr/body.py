@@ -4,7 +4,7 @@ from pathlib import Path
 
 from yai_tools._core.git import head_sha
 from yai_tools._core.paths import repo_root
-from yai_tools._core.text import normalize_issue, set_kv_line
+from yai_tools._core.text import has_kv_line, normalize_issue, set_kv_line
 
 
 TEMPLATE_MAP = {
@@ -41,7 +41,8 @@ def generate_pr_body(
         if not r:
             raise ValueError("Issue-Reason is required when Issue-ID is N/A")
         md = set_kv_line(md, "Issue-Reason (required if N/A)", r)
-        md = set_kv_line(md, "Issue-Reason", r)
+        if has_kv_line(md, "Issue-Reason"):
+            md = set_kv_line(md, "Issue-Reason", r)
 
     md = set_kv_line(md, "MP-ID", mp_id.strip() or "N/A")
     md = set_kv_line(md, "Runbook", runbook.strip() or "N/A")

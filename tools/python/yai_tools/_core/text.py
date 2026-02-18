@@ -34,3 +34,7 @@ def set_kv_line(md: str, key: str, value: str) -> str:
         # append if missing (rare but safer)
         out.append(f"{key}: {value}")
     return "\n".join(out) + ("\n" if md.endswith("\n") else "")
+
+
+def has_kv_line(md: str, key: str) -> bool:
+    return re.search(rf"{re.escape(key)}\s*:", md) is not None
