@@ -1,0 +1,31 @@
+"area:boot":
+  - changed-files:
+      - any-glob-to-any-file: ["boot/**"]
+
+"area:kernel":
+  - changed-files:
+      - any-glob-to-any-file: ["kernel/**"]
+
+"area:engine":
+  - changed-files:
+      - any-glob-to-any-file: ["engine/**"]
+
+"area:root":
+  - changed-files:
+      - any-glob-to-any-file: ["root/**"]
+
+"area:runtime":
+  - changed-files:
+      - any-glob-to-any-file: ["runtime/**"]
+
+"area:tools":
+  - changed-files:
+      - any-glob-to-any-file: ["tools/**"]
+
+"type:docs":
+  - changed-files:
+      - any-glob-to-any-file: ["docs/**", ".github/**", "**/*.md"]
+
+"area:law":
+  - changed-files:
+      - any-glob-to-any-file: ["law/**", "deps/yai-specs/**"]

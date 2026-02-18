@@ -1,0 +1,28 @@
+name: Runbook phase
+description: Operational runbook work item (deterministic steps + acceptance)
+title: "[runbook] <short>"
+labels: ["type:runbook"]
+body:
+  - type: textarea
+    id: runbook
+    attributes:
+      label: Runbook path
+      description: e.g. docs/runbooks/<name>.md
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: What must be demonstrably true?
+    validations:
+      required: true
+
+  - type: textarea
+    id: commands
+    attributes:
+      label: Commands (expected)
+      render: bash
+    validations:
+      required: false

@@ -1,0 +1,41 @@
+name: Bug report
+description: Deterministic bug report with repro + expected contract behavior
+title: "[bug] <short>"
+labels: ["type:bug"]
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options: ["boot", "kernel", "engine", "root", "runtime", "tools", "docs", "law/specs"]
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Reproduction steps
+      description: Exact commands / inputs.
+      render: bash
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior (contract)
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / evidence
+      description: Paste minimal logs, redact secrets.

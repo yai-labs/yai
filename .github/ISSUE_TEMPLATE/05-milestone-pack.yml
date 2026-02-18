@@ -1,0 +1,28 @@
+name: Milestone pack
+description: Track a versioned milestone pack (MP-*) with deliverables and evidence
+title: "[mp] MP-<TRACK>-<X.Y.Z>"
+labels: ["type:milestone-pack"]
+body:
+  - type: input
+    id: mp_id
+    attributes:
+      label: MP-ID
+      placeholder: "MP-ROOT-HARDENING-0.1.6"
+    validations:
+      required: true
+
+  - type: textarea
+    id: deliverables
+    attributes:
+      label: Deliverables
+      description: Bullet list of concrete outputs.
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence plan
+      description: How will we prove it works? (positive/negative)
+    validations:
+      required: true
