@@ -1,9 +1,12 @@
-# Tools Policy
+# Tools Policy (YAI)
 
-1. No `scripts` directory exists.
-2. All executable entrypoints live in `tools/bin/*`.
-3. Operational suites/gates/verify scripts live under `tools/ops/*`.
-4. Dev helpers live under `tools/dev/*`.
-5. Release/pinning tools live under `tools/release/*`.
-6. Dataset helpers live under `tools/data/*`.
-7. Tests live under `tests/*` (not under tools).
+Non-negotiable:
+1) No logic in shell wrappers (wrappers are glue only).
+2) Python tools must be runnable without installation:
+   - wrapper sets `PYTHONPATH=tools/python`
+3) Tools must never open/merge PRs automatically.
+   - Maintainer does PR creation + merge.
+   - Agents may create branches + commit + push.
+
+Stability:
+- `tools/VERSION` is the tooling interface version (not the repo VERSION).

@@ -40,3 +40,12 @@ Recommended:
 ## Notes
 - Agents (Codex) may create branches and push commits.
 - Opening PRs and merging should be done by the maintainer (you).
+
+## Tool-assisted workflow
+You can generate a correct PR body locally:
+
+```bash
+tools/bin/yai-pr-body --template default --issue 123 --out /tmp/pr.md
+```
+
+Then paste /tmp/pr.md into the PR description (UI or GH CLI).
