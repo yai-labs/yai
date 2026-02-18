@@ -1,0 +1,136 @@
+name: validate-runbook-adr-links
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+    paths:
+      - "docs/runbooks/**"
+      - "docs/design/adr/**"
+      - ".github/workflows/validate-runbook-adr-links.yml"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate runbook <-> ADR linkage
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          import sys
+
+          ROOT = Path('.')
+          RUNBOOK_DIR = ROOT / 'docs' / 'runbooks'
+          ADR_DIR = ROOT / 'docs' / 'design' / 'adr'
+
+          errors = []
+
+          def parse_front_matter(path: Path):
+            text = path.read_text(encoding='utf-8')
+            if not text.startswith('---\n'):
+              return None, text
+            parts = text.split('---\n', 2)
+            if len(parts) < 3:
+              return None, text
+            return parts[1], parts[2]
+
+          def get_scalar(fm: str, key: str):
+            m = re.search(rf'^{re.escape(key)}:\s*(.+)$', fm, flags=re.M)
+            return m.group(1).strip() if m else None
+
+          def get_decisions(fm: str):
+            lines = fm.splitlines()
+            out = []
+            in_block = False
+            for line in lines:
+              if line.startswith('decisions:'):
+                in_block = True
+                continue
+              if in_block:
+                if re.match(r'^[A-Za-z0-9_\-]+:', line):
+                  break
+                m = re.match(r'^\s*-\s+(.+)$', line)
+                if m:
+                  out.append(m.group(1).strip())
+            return out
+
+          def get_applies_to(fm: str):
+            m = re.search(r'^applies_to:\n(?:\s{2}.+\n?)+', fm, flags=re.M)
+            if not m:
+              return {}
+            block = m.group(0)
+            runbook = re.search(r'^\s{2}runbook:\s*(.+)$', block, flags=re.M)
+            phase = re.search(r'^\s{2}phase:\s*(.+)$', block, flags=re.M)
+            anchor = re.search(r'^\s{2}anchor:\s*"?([^"]+)"?$', block, flags=re.M)
+            return {
+              'runbook': runbook.group(1).strip() if runbook else '',
+              'phase': phase.group(1).strip() if phase else '',
+              'anchor': anchor.group(1).strip() if anchor else '',
+            }
+
+          runbooks = []
+          for p in sorted(RUNBOOK_DIR.glob('*.md')):
+            fm, body = parse_front_matter(p)
+            if not fm:
+              continue
+            rb_id = get_scalar(fm, 'id')
+            if not rb_id or not rb_id.startswith('RB-'):
+              continue
+            decisions = get_decisions(fm)
+            if not decisions:
+              errors.append(f"Runbook missing decisions list: {p}")
+            for d in decisions:
+              target = ROOT / d
+              if not target.exists():
+                errors.append(f"Runbook references missing ADR: {p} -> {d}")
+            runbooks.append((p, fm, body, decisions))
+
+          adrs = []
+          for p in sorted(ADR_DIR.glob('ADR-*.md')):
+            if p.name == 'ADR-000-template.md':
+              continue
+            fm, body = parse_front_matter(p)
+            if not fm:
+              errors.append(f"ADR missing front matter: {p}")
+              continue
+
+            adr_id = get_scalar(fm, 'id') or ''
+            status = (get_scalar(fm, 'status') or '').lower()
+            if not adr_id.startswith('ADR-'):
+              errors.append(f"ADR id invalid/missing in {p}")
+
+            applies = get_applies_to(fm)
+            runbook = applies.get('runbook', '')
+            phase = applies.get('phase', '')
+            anchor = applies.get('anchor', '')
+
+            # strong rule: accepted ADRs must have applies_to complete
+            if status == 'accepted':
+              if not (runbook and phase and anchor):
+                errors.append(f"Accepted ADR missing applies_to fields: {p}")
+
+            # base rule: every ADR must declare applies_to
+            if not (runbook and phase and anchor):
+              errors.append(f"ADR missing applies_to linkage: {p}")
+            else:
+              rb_path = ROOT / runbook
+              if not rb_path.exists():
+                errors.append(f"ADR references missing runbook: {p} -> {runbook}")
+              else:
+                rb_text = rb_path.read_text(encoding='utf-8')
+                anchor_id = anchor[1:] if anchor.startswith('#') else anchor
+                has_anchor = (anchor in rb_text) or (f'id=\"{anchor_id}\"' in rb_text) or (f"id='{anchor_id}'" in rb_text)
+                if not has_anchor:
+                  errors.append(f"ADR anchor not found in runbook: {p} -> {runbook} ({anchor})")
+
+            adrs.append((p, status, runbook, phase, anchor))
+
+          if errors:
+            print('Runbook/ADR validation errors:')
+            for e in errors:
+              print(f'- {e}')
+            sys.exit(1)
+
+          print('Runbook <-> ADR linkage validation passed.')
+          PY

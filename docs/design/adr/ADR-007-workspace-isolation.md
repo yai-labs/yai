@@ -1,3 +1,13 @@
+---
+id: ADR-007
+status: accepted
+effective_date: 2026-02-18
+supersedes: []
+applies_to:
+  runbook: docs/runbooks/workspaces-lifecycle.md
+  phase: 0.1.0
+  anchor: "#phase-0-1-0-workspace-layout"
+---
 # ADR-007 — Workspace Isolation Model
 
 ## Context

@@ -8,6 +8,9 @@ revision: 1
 supersedes: []
 depends_on:
   - RB-ROOT-HARDENING
+decisions:
+  - docs/design/adr/ADR-007-workspace-isolation.md
+  - docs/design/adr/ADR-008-connection-lifecycle.md
 related:
   adr:
     - docs/design/adr/ADR-007-workspace-isolation.md
@@ -34,6 +37,11 @@ Non-negotiable outcomes:
 - `yai kernel ws destroy <id>` removes deterministically, guarded against traversal
 - Root remains a pure router (envelope validation + byte-perfect forward/relay)
 - Kernel enforces policy and applies side-effects only when valid + authorized
+
+## Decisions
+
+- docs/design/adr/ADR-007-workspace-isolation.md
+- docs/design/adr/ADR-008-connection-lifecycle.md
 
 ---
 
@@ -122,6 +130,7 @@ Expected:
 
 ---
 
+<a id="phase-0-1-0-workspace-layout"></a>
 ### 0.1.0 — Define Minimal Workspace Layout + Manifest Stub
 
 **Branch:** `feat/workspaces-lifecycle-0.1.0-layout`  
@@ -179,6 +188,7 @@ Confirm:
 
 ---
 
+<a id="phase-0-1-1-ws-create-guardrails"></a>
 ### 0.1.1 — Kernel Implements ws.create With Guardrails
 
 **Branch:** `feat/workspaces-lifecycle-0.1.1-ws-create`  

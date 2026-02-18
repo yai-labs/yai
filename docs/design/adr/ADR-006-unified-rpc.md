@@ -1,3 +1,13 @@
+---
+id: ADR-006
+status: accepted
+effective_date: 2026-02-18
+supersedes: []
+applies_to:
+  runbook: docs/runbooks/root-hardening.md
+  phase: 0.1.0
+  anchor: "#phase-0-1-0-protocol-guardrails"
+---
 # ADR-006 — Strict Unified RPC Contract
 
 ## Context

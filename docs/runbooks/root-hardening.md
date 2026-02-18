@@ -8,6 +8,10 @@ revision: 1
 supersedes: []
 depends_on:
   - RB-WORKSPACES-LIFECYCLE (optional, if already exists)
+decisions:
+  - docs/design/adr/ADR-002-root-entrypoint.md
+  - docs/design/adr/ADR-006-unified-rpc.md
+  - docs/design/adr/ADR-008-connection-lifecycle.md
 related:
   adr:
     - docs/design/adr/ADR-002-root-entrypoint.md
@@ -40,6 +44,12 @@ Root must behave like a governed cable:
 - logs everything in an indestructible way
 
 This runbook does NOT redesign architecture. It strengthens enforcement and observability without changing the planes model.
+
+## Decisions
+
+- docs/design/adr/ADR-002-root-entrypoint.md
+- docs/design/adr/ADR-006-unified-rpc.md
+- docs/design/adr/ADR-008-connection-lifecycle.md
 
 ---
 
@@ -93,6 +103,7 @@ pkill -f yai-boot || true
 rm -rf ~/.yai/run/root/root.log || true
 ```
 
+<a id="phase-root-boot-baseline"></a>
 ### Build + boot baseline
 
 ```bash
@@ -121,6 +132,7 @@ Each phase must compile, run, and be verifiable before moving on.
 
 ---
 
+<a id="phase-0-1-0-protocol-guardrails"></a>
 ### 0.1.0 — Protocol Guardrails (no business logic)
 
 **Branch:** `feat/root-hardening-0.1.0-guardrails`  
@@ -180,6 +192,7 @@ Minimum set expected:
 
 ---
 
+<a id="phase-0-1-1-byte-perfect-router"></a>
 ### 0.1.1 — Root = Byte-Perfect Router (forward/relay)
 
 **Branch:** `feat/root-hardening-0.1.1-router`  
@@ -257,6 +270,7 @@ Protocol negative tests (at least):
 
 ---
 
+<a id="phase-0-1-2-envelope-authority-gate"></a>
 ### 0.1.2 — Envelope-Only Authority Gate (Root + Kernel)
 
 **Branch:** `feat/root-hardening-0.1.2-authority-gate`  

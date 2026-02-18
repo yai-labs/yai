@@ -1,3 +1,13 @@
+---
+id: ADR-003
+status: accepted
+effective_date: 2026-02-18
+supersedes: []
+applies_to:
+  runbook: docs/runbooks/root-hardening.md
+  phase: 0.1.2
+  anchor: "#phase-0-1-2-envelope-authority-gate"
+---
 # ADR-003 — Kernel as Authority Plane (L1)
 
 ## Context

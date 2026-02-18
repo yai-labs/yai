@@ -1,3 +1,13 @@
+---
+id: ADR-004
+status: accepted
+effective_date: 2026-02-18
+supersedes: []
+applies_to:
+  runbook: docs/runbooks/engine-attach.md
+  phase: v4
+  anchor: "#phase-engine-attach-v4"
+---
 # ADR-004 — Engine as Execution Plane (L2)
 
 ## Context

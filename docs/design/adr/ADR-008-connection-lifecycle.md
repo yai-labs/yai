@@ -1,3 +1,13 @@
+---
+id: ADR-008
+status: accepted
+effective_date: 2026-02-18
+supersedes: []
+applies_to:
+  runbook: docs/runbooks/workspaces-lifecycle.md
+  phase: 0.1.1
+  anchor: "#phase-0-1-1-ws-create-guardrails"
+---
 # ADR-008 — Connection Lifecycle Semantics
 
 ## Context

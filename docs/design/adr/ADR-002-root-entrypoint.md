@@ -1,3 +1,13 @@
+---
+id: ADR-002
+status: accepted
+effective_date: 2026-02-18
+supersedes: []
+applies_to:
+  runbook: docs/runbooks/root-hardening.md
+  phase: 0.1.1
+  anchor: "#phase-0-1-1-byte-perfect-router"
+---
 # ADR-002 — Root Control Plane as Canonical Entry Point
 
 ## Context

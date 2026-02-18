@@ -389,6 +389,7 @@ impl WorkspaceCtx {
 }
 ```
 
+<a id="phase-mind-proposer"></a>
 ### E) Proposer (proposal-only)
 
 **File:** `mind/src/proposals/mod.rs`

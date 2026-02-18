@@ -1,3 +1,13 @@
+---
+id: ADR-005
+status: accepted
+effective_date: 2026-02-18
+supersedes: []
+applies_to:
+  runbook: docs/runbooks/mind-redis-stm.md
+  phase: v5.3
+  anchor: "#phase-mind-proposer"
+---
 # ADR-005 — Mind Per Workspace (L3 Cognitive Plane)
 
 ## Context

@@ -1,3 +1,13 @@
+---
+id: ADR-010
+status: accepted
+effective_date: 2026-02-18
+supersedes: []
+applies_to:
+  runbook: docs/runbooks/root-hardening.md
+  phase: boot-baseline
+  anchor: "#phase-root-boot-baseline"
+---
 # ADR-010 — Boot as Canonical Machine Entry
 
 ## Context

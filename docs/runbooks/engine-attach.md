@@ -5,6 +5,7 @@
 
 ---
 
+<a id="phase-engine-attach-v4"></a>
 ## Objective (v4)
 
 Bring L2 Engine "inside" the governed L0↔L1 pipeline:
