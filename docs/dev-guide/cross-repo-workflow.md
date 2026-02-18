@@ -79,6 +79,8 @@ A Milestone Pack represents ONE runbook phase (or a small set of tightly coupled
 7. **Definition of Done** (explicit checks)
 
 ### 4.2 Milestone Pack template
+Canonical file template: `docs/templates/milestone-packs/MP-000-template.md`
+
 ```text
 Milestone Pack: <ID>
 Runbook link: <docs/runbooks/...>
