@@ -7,50 +7,41 @@ applies_to:
   runbook: docs/runbooks/workspaces-lifecycle.md
   phase: 0.1.0
   anchor: "#phase-0-1-0-workspace-layout"
+law_refs:
+  - deps/yai-specs/contracts/invariants/I-001-traceability.md
+  - deps/yai-specs/contracts/invariants/I-002-determinism.md
+  - deps/yai-specs/contracts/boundaries/L1-kernel.md
+  - deps/yai-specs/specs/protocol/include/session.h
+  - deps/yai-specs/specs/protocol/include/transport.h
 ---
-# ADR-007 — Workspace Isolation Model
+# ADR-007 - Workspace Isolation Model
 
 ## Context
 
-# YAI Architecture Decisions (Law-Aligned, 2026 Revision)
+Workspace lifecycle and runtime ownership needed a clear isolation model to prevent session bleed and mixed authority paths.
 
-This document captures the **machine-level architecture commitments**
-of YAI as of the current runtime refactor phase.
+## Decision
 
-It is grounded in `deps/yai-specs/contracts/` invariants and reflects the
-post-envelope, post-authority enforcement state.
+Isolation is enforced on three layers:
 
-The architecture is stratified across:
+1. Session/lock ownership
+2. Per-workspace storage/memory boundaries
+3. Root-mediated routing for runtime commands
 
-- L0 — Vault (immutable identity & ABI boundary)
-- L1 — Kernel (authority, sessions, isolation)
-- L2 — Engine (execution gates)
-- L3 — Mind (proposal-only cognition per workspace)
-- Root — Machine Control Plane (runtime governor)
+Stale lock recovery remains allowed, but only through deterministic validation.
 
----
+## Rationale
 
-### Decision
+The model keeps tenancy explicit and reduces accidental cross-workspace effects under concurrent runtime load.
 
-Workspace isolation is enforced at three levels:
+## Consequences
 
-1. Session lock (PID-based lockfile)
-2. Memory isolation (per-ws storage paths)
-3. RPC routing (Root-bound dispatch)
-
-### Lockfile Policy
-
-- Lockfile contains PID
-- Stale lock detection via kill(pid, 0)
-- Stale locks auto-recovered
-
-### Status
-
-Robust lock logic active.
-Future: move from file-lock to runtime registry model.
-
----
+- Positive:
+  - Safer multi-workspace operation.
+  - Better reproducibility under parallel sessions.
+- Negative:
+  - Operational tooling must preserve strict lock semantics.
 
 ## Status
 
-Active
+Accepted and active.

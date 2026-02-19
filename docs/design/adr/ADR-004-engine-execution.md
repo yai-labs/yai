@@ -7,61 +7,40 @@ applies_to:
   runbook: docs/runbooks/engine-attach.md
   phase: v4
   anchor: "#phase-engine-attach-v4"
+law_refs:
+  - deps/yai-specs/contracts/invariants/I-006-external-effect-boundary.md
+  - deps/yai-specs/contracts/boundaries/L2-engine.md
+  - deps/yai-specs/specs/protocol/include/protocol.h
+  - deps/yai-specs/specs/protocol/include/transport.h
 ---
-# ADR-004 — Engine as Execution Plane (L2)
+# ADR-004 - Engine as Execution Plane (L2)
 
 ## Context
 
-# YAI Architecture Decisions (Law-Aligned, 2026 Revision)
+Execution responsibilities must stay isolated from authority checks to keep runtime behavior auditable and composable.
 
-This document captures the **machine-level architecture commitments**
-of YAI as of the current runtime refactor phase.
+## Decision
 
-It is grounded in `deps/yai-specs/contracts/` invariants and reflects the
-post-envelope, post-authority enforcement state.
+Engine is the execution plane for gates and workloads (storage/provider/network/resource/cortex) and operates only after Kernel authorization.
 
-The architecture is stratified across:
+Engine must not:
 
-- L0 — Vault (immutable identity & ABI boundary)
-- L1 — Kernel (authority, sessions, isolation)
-- L2 — Engine (execution gates)
-- L3 — Mind (proposal-only cognition per workspace)
-- Root — Machine Control Plane (runtime governor)
+- Perform authority validation
+- Choose workspace ownership
+- Open alternative policy channels
 
----
+## Rationale
 
-### Decision
+A strict L1-to-L2 handoff keeps effect boundaries explicit and simplifies traceability from command to governed execution.
 
-Engine is the **execution gate layer**.
+## Consequences
 
-It provides:
-
-- storage_gate
-- provider_gate
-- network_gate
-- resource_gate
-- cortex execution
-
-Engine executes only after Kernel authorization.
-
-### Rules
-
-- Engine never validates authority
-- Engine never selects workspace
-- Engine never bypasses Kernel
-
-### Relationship
-
-Kernel → Engine (downward call)
-Engine → Kernel (never)
-
-### Status
-
-Engine routing stub integrated.
-Full integration with Root pending.
-
----
+- Positive:
+  - Cleaner separation of concerns.
+  - Better gate-level observability and testing.
+- Negative:
+  - Integration requires stable dispatch contracts from Root/Kernel.
 
 ## Status
 
-Active
+Accepted and active.

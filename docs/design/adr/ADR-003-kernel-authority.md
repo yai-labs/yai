@@ -7,64 +7,42 @@ applies_to:
   runbook: docs/runbooks/root-hardening.md
   phase: 0.1.2
   anchor: "#phase-0-1-2-envelope-authority-gate"
+law_refs:
+  - deps/yai-specs/contracts/axioms/A-002-authority.md
+  - deps/yai-specs/contracts/invariants/I-003-governance.md
+  - deps/yai-specs/contracts/invariants/I-006-external-effect-boundary.md
+  - deps/yai-specs/contracts/boundaries/L1-kernel.md
+  - deps/yai-specs/specs/protocol/include/auth.h
+  - deps/yai-specs/specs/protocol/include/session.h
 ---
-# ADR-003 — Kernel as Authority Plane (L1)
+# ADR-003 - Kernel as Authority Plane (L1)
 
 ## Context
 
-# YAI Architecture Decisions (Law-Aligned, 2026 Revision)
+Authority checks were historically mixed with execution paths. This weakened guarantees around role/arming/workspace enforcement.
 
-This document captures the **machine-level architecture commitments**
-of YAI as of the current runtime refactor phase.
+## Decision
 
-It is grounded in `deps/yai-specs/contracts/` invariants and reflects the
-post-envelope, post-authority enforcement state.
+Kernel is the sole authority plane and validates:
 
-The architecture is stratified across:
+- Handshake and protocol conformance
+- Role and arming constraints
+- Workspace binding and session ownership
 
-- L0 — Vault (immutable identity & ABI boundary)
-- L1 — Kernel (authority, sessions, isolation)
-- L2 — Engine (execution gates)
-- L3 — Mind (proposal-only cognition per workspace)
-- Root — Machine Control Plane (runtime governor)
+No effectful execution is allowed before Kernel authorization.
 
----
+## Rationale
 
-### Decision
+Separating authority from execution preserves deterministic policy behavior and ensures that Engine cannot be used as an authorization surface.
 
-Kernel is the **authority enforcement layer**.
+## Consequences
 
-It validates:
-
-- protocol version
-- handshake
-- role
-- arming flag
-- ws_id
-- session ownership
-
-It is the only layer that may authorize effectful execution.
-
-### Enforcement Rules
-
-- `arming=true` requires role ≥ operator
-- No execution without handshake
-- No execution before workspace attach
-- No cross-workspace session mixing
-
-### Non-Goals
-
-- Kernel does not perform business logic
-- Kernel does not execute provider/storage logic
-- Kernel does not own cognition
-
-### Status
-
-Authority enforcement active.
-Session locking stabilized (robust PID validation).
-
----
+- Positive:
+  - Clear trust boundary between policy and execution.
+  - Consistent reject semantics for unauthorized requests.
+- Negative:
+  - Additional coordination needed when evolving command lifecycle.
 
 ## Status
 
-Active
+Accepted and active.
