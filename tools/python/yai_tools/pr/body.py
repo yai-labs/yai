@@ -32,6 +32,69 @@ def _fmt_bullets(items: list[str]) -> str:
     return "\n".join([f"- {x}" for x in items])
 
 
+def _has_validation_command(commands: list[str], needles: list[str]) -> bool:
+    lowered = [c.lower() for c in commands]
+    return any(any(n in c for n in needles) for c in lowered)
+
+
+def _build_checklist(
+    template: str,
+    issue_val: str,
+    reason: str,
+    mp_id: str,
+    runbook: str,
+    docs_touched: list[str],
+    spec_delta: list[str],
+    evidence_positive: list[str],
+    evidence_negative: list[str],
+    commands: list[str],
+) -> str:
+    issue_ok = issue_val != "N/A" or bool(reason.strip())
+    cmd_count = len([c for c in commands if c.strip()])
+    pos_count = len([x for x in evidence_positive if x.strip()])
+    neg_count = len([x for x in evidence_negative if x.strip()])
+    docs_count = len([x for x in docs_touched if x.strip()])
+    spec_count = len([x for x in spec_delta if x.strip()])
+
+    lines = [
+        f"- [{'x' if issue_ok else ' '}] Issue linkage valid (`{issue_val}`{' + reason' if issue_val == 'N/A' else ''})",
+        f"- [x] Evidence is concrete (positive: {pos_count}, negative: {neg_count})",
+        f"- [x] Commands are listed and runnable ({cmd_count})",
+    ]
+
+    if template == "docs-governance":
+        docs_check = docs_count > 0
+        delta_check = spec_count > 0
+        link_checks = _has_validation_command(commands, ["yai-docs-doctor", "yai-docs-trace-check", "yai-architecture-check", "markdown-link", "link"])
+        lines.extend(
+            [
+                f"- [{'x' if docs_check else ' '}] Docs touched is explicit ({docs_count})",
+                f"- [{'x' if delta_check else ' '}] Spec/contract delta is explicit ({spec_count})",
+                f"- [{'x' if link_checks else ' '}] Link/alignment validation command included",
+            ]
+        )
+
+    if template == "type-a-milestone":
+        lines.extend(
+            [
+                f"- [{'x' if mp_id != 'N/A' else ' '}] MP-ID is set (`{mp_id}`)",
+                f"- [{'x' if runbook != 'N/A' else ' '}] Runbook anchor is set (`{runbook}`)",
+                "- [ ] Matches runbook \"Done when\" (manual reviewer confirmation)",
+            ]
+        )
+
+    if template == "type-b-twin-pr":
+        twin_hint = _has_validation_command(commands, ["yai-cli", "yai-specs"])
+        lines.extend(
+            [
+                f"- [{'x' if twin_hint else ' '}] Cross-repo commands/evidence included",
+                "- [ ] Twin PR links filled in the body (manual author confirmation)",
+            ]
+        )
+
+    return "\n".join(lines)
+
+
 def generate_pr_body(
     template: str,
     issue: str,
@@ -100,5 +163,20 @@ def generate_pr_body(
     cmd_lines = [x.strip() for x in commands if x.strip()]
     commands_block = "```bash\n" + "\n".join(cmd_lines) + "\n```"
     md = _set_section(md, "## Commands run", commands_block)
+
+    if "## Checklist" in md:
+        checklist_block = _build_checklist(
+            template=template,
+            issue_val=issue_val,
+            reason=reason,
+            mp_id=(mp_id.strip() or "N/A"),
+            runbook=(runbook.strip() or "N/A"),
+            docs_touched=docs_touched,
+            spec_delta=spec_delta,
+            evidence_positive=ev_pos,
+            evidence_negative=ev_neg,
+            commands=cmd_lines,
+        )
+        md = _set_section(md, "## Checklist", checklist_block)
 
     return md
