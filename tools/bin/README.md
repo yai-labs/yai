@@ -18,11 +18,17 @@ Provide stable, easy-to-remember commands for verify, gate, suite, diagnostics, 
 - `yai-pr-check`: strict PR body metadata validator.
 - `yai-dev-issue`: issue body generator (manual issue creation remains maintainer-owned).
 - `yai-dev-branch`: alias of `yai-branch`.
+- `yai-dev-branch-sync`: create/check out the same branch across `yai`, `yai-cli`, `yai-mind`.
 - `yai-dev-pr-body`: alias of `yai-pr-body`.
 - `yai-dev-pr-check`: alias of `yai-pr-check`.
+- `yai-specs-sync`: sync `deps/yai-specs` pin and proof-pack refs (`manifest` + `README`).
 
 ## Quick Start
 
 - `tools/bin/yai-dev-branch --type feat --issue 123 --area root --desc hardening-forward`
 - `tools/bin/yai-dev-pr-body --template default --issue 123 --mp-id MP-ROOT-HARDENING-0.1.0 --runbook docs/runbooks/root-hardening.md#phase-0-1-0-protocol-guardrails --out .pr/PR_BODY.md`
 - `tools/bin/yai-dev-pr-check .pr/PR_BODY.md`
+
+- `tools/bin/yai-dev-branch-sync --type chore --issue N/A --reason bootstrap --area governance --desc proof-pack-lock`
+
+- `tools/bin/yai-specs-sync --target origin/main`

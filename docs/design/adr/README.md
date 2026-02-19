@@ -1,3 +1,9 @@
+---
+id: ADR-README
+status: active
+law_refs:
+  - deps/yai-specs/contracts/invariants/I-001-traceability.md
+---
 # ADR Index
 
 Architecture Decision Records (ADRs) capture irreversible or high-impact technical choices.
@@ -20,6 +26,7 @@ An ADR should answer:
 - `ADR-008-connection-lifecycle.md`
 - `ADR-009-engine-attachment.md`
 - `ADR-010-boot-entrypoint.md`
+- `ADR-011-contract-baseline-lock.md`
 
 ## Template policy
 

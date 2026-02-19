@@ -1,0 +1,174 @@
+{
+  "id": "PP-FOUNDATION-0001",
+  "schema_version": "v1",
+  "status": "active",
+  "created_at": "2026-02-19",
+  "canonical_source": {
+    "repo": "yai",
+    "path": "docs/proof/PP-FOUNDATION-0001",
+    "single_source_of_truth": true
+  },
+  "program_scope": {
+    "include_repos": [
+      "yai",
+      "yai-cli",
+      "yai-mind",
+      "yai-specs"
+    ],
+    "excluded_changes": [
+      "yai-specs"
+    ]
+  },
+  "pins": {
+    "yai": {
+      "version": "0.1.7",
+      "tag": "UNTAGGED",
+      "commit": "b784cd750cdd34ba7fafb0a02e23fce3427d2c07"
+    },
+    "yai_specs": {
+      "version_line": "v0.1.0 / SPECS_API_VERSION v1",
+      "tag": "UNTAGGED",
+      "commit": "530e83f34d10b9b8c828b287cc02ff68481dc923",
+      "pin_source": "yai/deps/yai-specs"
+    },
+    "yai_cli": {
+      "version": "0.1.7",
+      "tag": "UNTAGGED",
+      "commit": "fd716f4959800b5a7d318639e3eb260a72f40d4b",
+      "pin_source": "yai/deps/yai-cli.ref"
+    },
+    "yai_mind": {
+      "version": "0.1.0",
+      "tag": "UNTAGGED",
+      "commit": "05aa7254c419a1620452e995c286d0d3b9a456c3",
+      "pin_source": "workspace-observed (no explicit yai pin file)"
+    }
+  },
+  "evidence": {
+    "existing": [
+      {
+        "id": "E-SPECS-CHECK-001",
+        "claim": "spec baseline integrity",
+        "paths": [
+          "yai-specs/Makefile",
+          "yai-specs/.github/workflows/ci.yml"
+        ],
+        "run": "make check",
+        "result": "pass"
+      },
+      {
+        "id": "E-SPECS-FORMAL-001",
+        "claim": "formal traceability coverage validated",
+        "paths": [
+          "yai-specs/formal/traceability.v1.json",
+          "yai-specs/tools/formal/validate_traceability.py"
+        ],
+        "run": "make formal-coverage",
+        "result": "pass"
+      },
+      {
+        "id": "E-CORE-VERIFY-001",
+        "claim": "core formal + build baseline",
+        "paths": [
+          "yai/tools/bin/yai-verify",
+          "yai/tools/ops/verify/core.sh"
+        ],
+        "run": "tools/bin/yai-verify core",
+        "result": "pass"
+      },
+      {
+        "id": "E-CLI-VERIFY-001",
+        "claim": "cli verify profile ci",
+        "paths": [
+          "yai-cli/tools/bin/yai-cli-verify",
+          "yai-cli/.github/workflows/ci.yml"
+        ],
+        "run": "./tools/bin/yai-cli-verify --profile ci",
+        "result": "pass"
+      }
+    ],
+    "missing": [
+      {
+        "id": "M-L7-NONSKIP-001",
+        "claim": "l3-l7 runtime gates executed without skip",
+        "required_paths": [
+          "yai/tools/ops/suite/levels/l0-l7.sh",
+          "yai/tools/ops/gate/ws.sh",
+          "yai/tools/ops/gate/events.sh",
+          "yai/tools/ops/gate/graph.sh",
+          "yai/tools/ops/gate/providers.sh"
+        ]
+      },
+      {
+        "id": "M-CONTRACT-PARITY-001",
+        "claim": "command contract parity proof (spec vs cli behavior)",
+        "required_paths": [
+          "yai-cli/deps/yai-specs/specs/cli/schema/commands.v1.json",
+          "yai-cli/src/cli/dispatch.c"
+        ]
+      },
+      {
+        "id": "M-MIND-STABILITY-001",
+        "claim": "mind integration test stability",
+        "required_paths": [
+          "yai-mind/tests/integration_test.rs",
+          "yai-mind/tests/memory_rag.rs",
+          "yai-mind/tests/providers.rs"
+        ]
+      }
+    ]
+  },
+  "gates": {
+    "non_skip": [
+      {
+        "id": "G-SPECS-CHECK",
+        "status": "pass"
+      },
+      {
+        "id": "G-SPECS-FORMAL-COVERAGE",
+        "status": "pass"
+      },
+      {
+        "id": "G-CORE-VERIFY",
+        "status": "pass"
+      },
+      {
+        "id": "G-CLI-VERIFY-CI",
+        "status": "pass"
+      }
+    ],
+    "skip": [
+      {
+        "id": "G-L7-WS",
+        "status": "skip"
+      },
+      {
+        "id": "G-L7-CORTEX",
+        "status": "skip"
+      },
+      {
+        "id": "G-L7-EVENTS",
+        "status": "skip"
+      },
+      {
+        "id": "G-L7-GRAPH",
+        "status": "skip"
+      },
+      {
+        "id": "G-L7-PROVIDERS",
+        "status": "skip"
+      },
+      {
+        "id": "G-L7-SMOKE",
+        "status": "skip"
+      }
+    ]
+  },
+  "pointer_policy": {
+    "other_repos_must_store_only_pointer": true,
+    "allowed_pointer_repos": [
+      "yai-cli",
+      "yai-mind"
+    ]
+  }
+}
