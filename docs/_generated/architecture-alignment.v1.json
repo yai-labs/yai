@@ -144,25 +144,30 @@
         "deps/yai-specs/contracts/boundaries/L2-engine.md",
         "deps/yai-specs/specs/protocol/include/protocol.h"
       ],
-      "mp_refs": [],
+      "mp_refs": [
+        "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md"
+      ],
       "runbook_refs": [
-        "docs/runbooks/engine-attach.md"
+        "docs/runbooks/engine-attach.md",
+        "docs/runbooks/root-hardening.md"
       ],
       "status": "implemented"
     },
     {
       "adr_refs": [
         "docs/design/adr/ADR-003-kernel-authority.md",
-        "docs/design/adr/ADR-007-workspace-isolation.md"
+        "docs/design/adr/ADR-007-workspace-isolation.md",
+        "docs/design/adr/ADR-008-connection-lifecycle.md"
       ],
       "component": "Kernel",
       "is_planned_marker": false,
       "l0_refs": [
         "deps/yai-specs/contracts/boundaries/L1-kernel.md",
-        "deps/yai-specs/contracts/invariants/I-006-external-effect-boundary.md"
+        "deps/yai-specs/specs/protocol/include/session.h"
       ],
       "mp_refs": [
-        "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.2.md"
+        "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.2.md",
+        "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.4.md"
       ],
       "runbook_refs": [
         "docs/runbooks/root-hardening.md",
@@ -194,11 +199,12 @@
       "component": "Root",
       "is_planned_marker": false,
       "l0_refs": [
-        "deps/yai-specs/contracts/invariants/I-003-governance.md",
+        "deps/yai-specs/specs/protocol/include/auth.h",
         "deps/yai-specs/specs/protocol/include/transport.h"
       ],
       "mp_refs": [
-        "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md"
+        "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md",
+        "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md"
       ],
       "runbook_refs": [
         "docs/runbooks/root-hardening.md"

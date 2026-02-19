@@ -144,30 +144,92 @@ def _parse_component_doc(path: Path) -> dict[str, Any]:
     }
 
 
-def _parse_traceability_rows(path: Path) -> list[dict[str, Any]]:
-    text = path.read_text(encoding="utf-8")
+def _check_text_synced(path: Path, expected: str) -> tuple[bool, str]:
+    if not path.exists():
+        return False, f"missing generated file: {path.as_posix()}"
+    current = path.read_text(encoding="utf-8")
+    if current != expected:
+        return False, f"stale generated file: {path.as_posix()} (run --write to refresh)"
+    return True, "ok"
+
+
+def _display_name(component_name: str) -> str:
+    return component_name[:1].upper() + component_name[1:]
+
+
+def _fmt_refs(refs: list[str]) -> str:
+    if not refs:
+        return "*(TBD)*"
+    return ", ".join(f"`{r}`" for r in refs)
+
+
+def _rows_from_components(component_entries: list[dict[str, Any]]) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
-    for raw in text.splitlines():
-        line = raw.strip()
-        if not line.startswith("|"):
-            continue
-        if line.startswith("|---") or line.startswith("| Component"):
-            continue
-        cols = [c.strip() for c in line.strip("|").split("|")]
-        if len(cols) < 6:
-            continue
+    for entry in component_entries:
+        status = entry["status"]
         rows.append(
             {
-                "component": cols[0],
-                "status": cols[1].lower(),
-                "adr_refs": _extract_refs_by_prefix(cols[2], ("docs/design/adr/",)),
-                "runbook_refs": _extract_refs_by_prefix(cols[3], ("docs/runbooks/",)),
-                "mp_refs": _extract_refs_by_prefix(cols[4], ("docs/milestone-packs/",)),
-                "l0_refs": _extract_refs_by_prefix(cols[5], ("deps/yai-specs/",)),
-                "is_planned_marker": cols[1].strip().lower() == "planned/external",
+                "component": _display_name(entry["name"]),
+                "status": status,
+                "adr_refs": list(entry["adr_refs"]),
+                "runbook_refs": list(entry["runbook_refs"]),
+                "mp_refs": list(entry["mp_refs"]),
+                "l0_refs": list(entry["l0_refs"]),
+                "is_planned_marker": status == "planned/external",
             }
         )
-    return rows
+    return sorted(rows, key=lambda x: x["component"].lower())
+
+
+def _render_traceability_md(trace_rows: list[dict[str, Any]]) -> str:
+    lines = [
+        "---",
+        "id: ARCH-TRACEABILITY",
+        "status: active",
+        "effective_date: 2026-02-19",
+        "revision: 1",
+        "owner: architecture",
+        "law_refs:",
+        "  - deps/yai-specs/contracts/invariants/I-001-traceability.md",
+        "---",
+        "",
+        "# Architecture Traceability",
+        "",
+        "<!-- GENERATED FILE: do not edit manually. Run tools/bin/yai-architecture-check --write -->",
+        "",
+        "## Component Alignment Map",
+        "",
+        "| Component | Status | ADR | Runbook | MP | L0 anchors |",
+        "|---|---|---|---|---|---|",
+    ]
+
+    for row in trace_rows:
+        lines.append(
+            "| "
+            + " | ".join(
+                [
+                    row["component"],
+                    row["status"],
+                    _fmt_refs(row["adr_refs"]),
+                    _fmt_refs(row["runbook_refs"]),
+                    _fmt_refs(row["mp_refs"]),
+                    _fmt_refs(row["l0_refs"]),
+                ]
+            )
+            + " |"
+        )
+
+    lines.extend(
+        [
+            "",
+            "## Notes",
+            "",
+            "- `planned/external` means documented in architecture + ADR but not currently implemented as tracked source in this repository.",
+            "- This file is generated from `docs/architecture/components/*.md` traceability sections.",
+            "",
+        ]
+    )
+    return "\n".join(lines)
 
 
 def _validate_schema_like(obj: dict[str, Any], errors: list[str]) -> None:
@@ -197,7 +259,7 @@ def _validate_schema_like(obj: dict[str, Any], errors: list[str]) -> None:
             errors.append(f"generated alignment component status invalid: {c.get('status')}")
 
 
-def build_alignment_snapshot() -> tuple[dict[str, Any], list[str]]:
+def build_alignment_snapshot() -> tuple[dict[str, Any], str, list[str]]:
     errors: list[str] = []
 
     if not SCHEMA_PATH.exists():
@@ -289,17 +351,7 @@ def build_alignment_snapshot() -> tuple[dict[str, Any], list[str]]:
             }
         )
 
-    trace_rows = _parse_traceability_rows(TRACEABILITY_DOC)
-    if not trace_rows:
-        errors.append("docs/architecture/traceability.md: no alignment table rows found")
-
-    component_names = {c["name"].lower() for c in component_entries}
-    trace_names = {r["component"].lower() for r in trace_rows}
-
-    missing_rows = sorted(component_names - trace_names)
-    for name in missing_rows:
-        errors.append(f"traceability table missing component row: {name}")
-
+    trace_rows = _rows_from_components(component_entries)
     for row in trace_rows:
         if row["status"] not in ALLOWED_COMPONENT_STATUS:
             errors.append(f"traceability row `{row['component']}` has invalid status `{row['status']}`")
@@ -314,6 +366,7 @@ def build_alignment_snapshot() -> tuple[dict[str, Any], list[str]]:
             errors.append(
                 f"traceability row `{row['component']}` is orphan: missing ADR refs without planned/external marker"
             )
+    traceability_md = _render_traceability_md(trace_rows)
 
     # global path checks for architecture docs
     for md_path in sorted(ARCH_DIR.rglob("*.md")):
@@ -337,10 +390,10 @@ def build_alignment_snapshot() -> tuple[dict[str, Any], list[str]]:
         "version": 1,
         "canonical_topology": overview_topology,
         "components": sorted(component_entries, key=lambda x: x["name"]),
-        "traceability_rows": sorted(trace_rows, key=lambda x: x["component"].lower()),
+        "traceability_rows": trace_rows,
     }
     _validate_schema_like(snapshot, errors)
-    return snapshot, sorted(set(errors))
+    return snapshot, traceability_md, sorted(set(errors))
 
 
 def run_architecture_alignment(mode: str, base: str, head: str, write: bool) -> int:
@@ -353,7 +406,7 @@ def run_architecture_alignment(mode: str, base: str, head: str, write: bool) -> 
         changed = _changed_paths(base=base, head=head)
         print(f"[architecture-check] changed files: {len(changed)}")
 
-    snapshot, errors = build_alignment_snapshot()
+    snapshot, traceability_md, errors = build_alignment_snapshot()
 
     if errors:
         print("[architecture-check] FAIL:")
@@ -363,13 +416,18 @@ def run_architecture_alignment(mode: str, base: str, head: str, write: bool) -> 
 
     if write:
         write_json(GENERATED_ALIGNMENT, snapshot)
-        print("[architecture-check] OK: generated alignment snapshot updated")
+        TRACEABILITY_DOC.write_text(traceability_md, encoding="utf-8")
+        print("[architecture-check] OK: generated alignment snapshot and traceability doc updated")
         return 0
 
     ok, msg = check_json_synced(GENERATED_ALIGNMENT, snapshot)
-    if not ok:
+    ok_trace, msg_trace = _check_text_synced(TRACEABILITY_DOC, traceability_md)
+    if not ok or not ok_trace:
         print("[architecture-check] FAIL:")
-        print(f"- {msg}")
+        if not ok:
+            print(f"- {msg}")
+        if not ok_trace:
+            print(f"- {msg_trace}")
         return 1
 
     print("[architecture-check] OK")

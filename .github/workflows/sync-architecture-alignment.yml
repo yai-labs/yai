@@ -40,13 +40,13 @@ jobs:
 
       - name: Auto-commit generated updates
         run: |
-          if git diff --quiet -- docs/_generated/architecture-alignment.v1.json; then
+          if git diff --quiet -- docs/_generated/architecture-alignment.v1.json docs/architecture/traceability.md; then
             echo "No generated changes to commit."
             exit 0
           fi
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/_generated/architecture-alignment.v1.json
-          git commit -m "chore(docs): sync architecture alignment snapshot"
+          git add docs/_generated/architecture-alignment.v1.json docs/architecture/traceability.md
+          git commit -m "chore(docs): sync architecture alignment artifacts"
           git push
