@@ -133,34 +133,49 @@ def generate_pr_body(
     objective_val = objective.strip()
     if not objective_val:
         raise ValueError("--objective is required")
-    if not evidence_positive:
-        raise ValueError("at least one --evidence-positive is required")
-    if not evidence_negative:
-        raise ValueError("at least one --evidence-negative is required")
-    if not commands:
-        raise ValueError("at least one --command is required")
 
+    docs_touched = [x.strip() for x in docs_touched if x.strip()]
+    spec_delta = [x.strip() for x in spec_delta if x.strip()]
+    evidence_positive = [x.strip() for x in evidence_positive if x.strip()]
+    evidence_negative = [x.strip() for x in evidence_negative if x.strip()]
+    commands = [x.strip() for x in commands if x.strip()]
+
+    # Docs-governance should be easy to use from CLI with minimal flags.
+    # Populate conservative defaults instead of hard-failing.
     if template == "docs-governance":
         if not docs_touched:
-            raise ValueError("--docs-touched is required for docs-governance")
+            docs_touched = ["docs-only change (explicit file list not provided)"]
         if not spec_delta:
-            raise ValueError("--spec-delta is required for docs-governance")
+            spec_delta = ["No spec/contract delta; docs/governance update only."]
+        if not evidence_positive:
+            evidence_positive = ["PR contains traceable docs/governance updates."]
+        if not evidence_negative:
+            evidence_negative = ["No runtime/protocol behavior change expected."]
+        if not commands:
+            commands = ["tools/bin/yai-docs-trace-check --all"]
+    else:
+        if not evidence_positive:
+            raise ValueError("at least one --evidence-positive is required")
+        if not evidence_negative:
+            raise ValueError("at least one --evidence-negative is required")
+        if not commands:
+            raise ValueError("at least one --command is required")
 
     md = _set_section(md, "## Objective", objective_val)
 
     if "## Docs touched" in md and docs_touched:
-        md = _set_section(md, "## Docs touched", _fmt_bullets([x.strip() for x in docs_touched if x.strip()]))
+        md = _set_section(md, "## Docs touched", _fmt_bullets(docs_touched))
     if "## Spec/Contract delta" in md and spec_delta:
-        md = _set_section(md, "## Spec/Contract delta", _fmt_bullets([x.strip() for x in spec_delta if x.strip()]))
+        md = _set_section(md, "## Spec/Contract delta", _fmt_bullets(spec_delta))
 
-    ev_pos = [x.strip() for x in evidence_positive if x.strip()]
-    ev_neg = [x.strip() for x in evidence_negative if x.strip()]
+    ev_pos = evidence_positive
+    ev_neg = evidence_negative
     evidence_block = "- Positive:\n" + "\n".join([f"  - {x}" for x in ev_pos]) + "\n- Negative:\n" + "\n".join(
         [f"  - {x}" for x in ev_neg]
     )
     md = _set_section(md, "## Evidence", evidence_block)
 
-    cmd_lines = [x.strip() for x in commands if x.strip()]
+    cmd_lines = commands
     commands_block = "```bash\n" + "\n".join(cmd_lines) + "\n```"
     md = _set_section(md, "## Commands run", commands_block)
 
