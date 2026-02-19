@@ -23,18 +23,18 @@
     "yai": {
       "version": "0.1.7",
       "tag": "UNTAGGED",
-      "commit": "6f3af5cdf73b20429deb9b66d8aca8df565aaea5"
+      "commit": "b784cd750cdd34ba7fafb0a02e23fce3427d2c07"
     },
     "yai_specs": {
       "version_line": "v0.1.0 / SPECS_API_VERSION v1",
       "tag": "UNTAGGED",
-      "commit": "1c37e5f98e43c6a03dbc7da4000ad9d3e22c7467",
+      "commit": "b96573d751cf12ff756c9643f4acf926743a1226",
       "pin_source": "yai/deps/yai-specs"
     },
     "yai_cli": {
       "version": "0.1.7",
       "tag": "UNTAGGED",
-      "commit": "11edfa68327fe6126cef04d95fc8e2b4c7805113",
+      "commit": "fd716f4959800b5a7d318639e3eb260a72f40d4b",
       "pin_source": "yai/deps/yai-cli.ref"
     },
     "yai_mind": {

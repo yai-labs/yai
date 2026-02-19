@@ -201,10 +201,8 @@ def validate_pins(doc: Dict[str, Any], manifest: Path) -> List[str]:
         if not SHA40_RE.match(sha):
             errs.append(f"{label} must be a 40-char lowercase git sha")
 
-    if SHA40_RE.match(declared_yai) and declared_yai != yai_head:
-        errs.append(
-            f"pins.yai.commit mismatch (manifest={declared_yai[:12]} actual={yai_head[:12]})"
-        )
+    # Self-pin cannot be kept equal to HEAD across new commits without immediate drift.
+    # Keep format validation for pins.yai.commit and enforce cross-repo pins (specs/cli).
 
     if SHA40_RE.match(declared_specs) and declared_specs != specs_head:
         errs.append(
