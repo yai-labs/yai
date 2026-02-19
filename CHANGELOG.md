@@ -15,7 +15,7 @@ and this project adheres to Semantic Versioning.
 ### Changed
 
 - Release workflow now runs strict changelog validation in tag mode before publishing bundle assets.
-- `tools/release/bump_version.sh` no longer injects automatic TODO placeholder entries.
+- `tools/release/bump_version.sh` no longer injects automatic placeholder entries.
 
 ## [0.1.7] - 2026-02-17
 
