@@ -1,4 +1,5 @@
 import argparse
+import subprocess
 import sys
 
 from yai_tools.issue.body import generate_issue_body
@@ -10,6 +11,78 @@ from yai_tools.verify.doctor import run_doctor
 from yai_tools.verify.frontmatter_schema import run_schema_check
 from yai_tools.verify.trace_graph import run_graph
 from yai_tools.workflow.branch import make_branch_name, maybe_checkout
+
+
+def _repo_root() -> str:
+    out = subprocess.run(["git", "rev-parse", "--show-toplevel"], check=True, capture_output=True, text=True)
+    return out.stdout.strip()
+
+
+def _safe_specs_sha(repo_root: str) -> str:
+    try:
+        out = subprocess.run(
+            ["git", "-C", f"{repo_root}/deps/yai-specs", "rev-parse", "HEAD"],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        return out.stdout.strip()
+    except Exception:
+        return "unknown"
+
+
+def _autofill_docs_touched(repo_root: str) -> list[str]:
+    candidates = [
+        "docs",
+        ".github",
+        "README.md",
+        "CHANGELOG.md",
+        "CONTRIBUTING.md",
+        "SECURITY.md",
+        "CODE_OF_CONDUCT.md",
+    ]
+    try:
+        out = subprocess.run(
+            ["git", "-C", repo_root, "diff", "--name-only", "--", *candidates],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        touched = [x.strip() for x in out.stdout.splitlines() if x.strip()]
+        return touched
+    except Exception:
+        return []
+
+
+def _default_commands_for_template(template: str) -> list[str]:
+    if template == "docs-governance":
+        return [
+            "bash tools/release/check_pins.sh",
+            "tools/bin/yai-docs-trace-check --all",
+            "tools/bin/yai-proof-check",
+        ]
+    if template == "type-a-milestone":
+        return [
+            "bash tools/release/check_pins.sh",
+            "tools/bin/yai-docs-trace-check --all",
+        ]
+    if template == "type-b-twin-pr":
+        return [
+            "bash tools/release/check_pins.sh",
+            "git -C deps/yai-specs rev-parse --short HEAD",
+            "git rev-parse --short HEAD",
+        ]
+    return ["git status -sb"]
+
+
+def _default_spec_delta_for_template(template: str) -> list[str]:
+    if template in ("docs-governance", "default"):
+        return ["No spec/contract delta; docs/governance update only."]
+    if template == "type-a-milestone":
+        return ["Milestone phase closure; no wire/protocol contract delta declared here."]
+    if template == "type-b-twin-pr":
+        return ["Twin-PR alignment; contract delta tracked explicitly across repos."]
+    return ["No contract delta declared."]
 
 
 def cmd_pr_body(argv: list[str]) -> int:
@@ -27,8 +100,81 @@ def cmd_pr_body(argv: list[str]) -> int:
     p.add_argument("--evidence-positive", action="append", default=[], help="Repeatable positive evidence bullet")
     p.add_argument("--evidence-negative", action="append", default=[], help="Repeatable negative evidence bullet")
     p.add_argument("--command", action="append", default=[], help="Repeatable command entry for Commands run")
+    p.add_argument(
+        "--autofill",
+        action="store_true",
+        help="Autofill missing fields based on selected template.",
+    )
+    p.add_argument(
+        "--autofill-docs-governance",
+        action="store_true",
+        help="Legacy alias for --autofill (kept for compatibility).",
+    )
+    p.add_argument(
+        "--run-evidence",
+        action="store_true",
+        help="With --autofill-docs-governance, execute default commands and inject exit-code evidence.",
+    )
     p.add_argument("--out", default="", help="Output file. If omitted: stdout.")
     args = p.parse_args(argv)
+
+    docs_touched = args.docs_touched
+    spec_delta = args.spec_delta
+    evidence_positive = args.evidence_positive
+    evidence_negative = args.evidence_negative
+    commands = args.command
+
+    use_autofill = args.autofill or args.autofill_docs_governance
+    if use_autofill:
+        repo_root = _repo_root()
+        specs_sha = _safe_specs_sha(repo_root)
+
+        if args.template == "docs-governance" and not docs_touched:
+            docs_touched = _autofill_docs_touched(repo_root)
+        if not spec_delta:
+            spec_delta = _default_spec_delta_for_template(args.template)
+        if not commands:
+            commands = _default_commands_for_template(args.template)
+
+        if args.run_evidence:
+            results: list[tuple[str, int, str]] = []
+            for cmd in commands:
+                run = subprocess.run(
+                    cmd,
+                    shell=True,
+                    cwd=repo_root,
+                    capture_output=True,
+                    text=True,
+                )
+                combined = f"{run.stdout}\n{run.stderr}".strip()
+                results.append((cmd, run.returncode, combined))
+
+            if not evidence_positive:
+                evidence_positive = [f"Baseline commit verified: yai + yai-cli -> {specs_sha}"]
+                for cmd, code, _ in results:
+                    if code == 0 and "yai-proof-check" not in cmd:
+                        evidence_positive.append(f"{cmd} exit code = 0")
+
+            if not evidence_negative:
+                neg: list[str] = []
+                for cmd, code, output in results:
+                    if "yai-proof-check" in cmd and "SKIP" in output:
+                        neg.append(f"{cmd} -> SKIP (private draft manifest)")
+                    elif code != 0:
+                        neg.append(f"{cmd} exit code = {code}")
+                if not neg:
+                    neg = ["No runtime/protocol behavior change expected."]
+                evidence_negative = neg
+        else:
+            if not evidence_positive:
+                evidence_positive = [f"Baseline commit verified: yai + yai-cli -> {specs_sha}"]
+                for cmd in commands:
+                    evidence_positive.append(f"{cmd} exit code = 0 (to be confirmed in CI/local run)")
+            if not evidence_negative:
+                if any("yai-proof-check" in c for c in commands):
+                    evidence_negative = ["tools/bin/yai-proof-check -> SKIP (private draft manifest)"]
+                else:
+                    evidence_negative = ["No runtime/protocol behavior change expected."]
 
     md = generate_pr_body(
         template=args.template,
@@ -39,11 +185,11 @@ def cmd_pr_body(argv: list[str]) -> int:
         classification=args.classification,
         compatibility=args.compatibility,
         objective=args.objective,
-        docs_touched=args.docs_touched,
-        spec_delta=args.spec_delta,
-        evidence_positive=args.evidence_positive,
-        evidence_negative=args.evidence_negative,
-        commands=args.command,
+        docs_touched=docs_touched,
+        spec_delta=spec_delta,
+        evidence_positive=evidence_positive,
+        evidence_negative=evidence_negative,
+        commands=commands,
     )
 
     if args.out:

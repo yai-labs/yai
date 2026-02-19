@@ -28,6 +28,12 @@ def _set_section(md: str, heading: str, content: str) -> str:
     return re.sub(pattern, repl, md, count=1)
 
 
+def _set_twin_pr_links_default(md: str) -> str:
+    md = re.sub(r"(^-\s+yai-cli PR:\s*).*$", r"\1N/A", md, flags=re.MULTILINE)
+    md = re.sub(r"(^-\s+yai-specs PR:\s*).*$", r"\1N/A", md, flags=re.MULTILINE)
+    return md
+
+
 def _fmt_bullets(items: list[str]) -> str:
     return "\n".join([f"- {x}" for x in items])
 
@@ -136,6 +142,9 @@ def generate_pr_body(
     md = set_kv_line(md, "Compatibility", compatibility.strip().upper())
     md = set_kv_line(md, "Base-Commit", head_sha())
 
+    if template == "type-b-twin-pr":
+        md = _set_twin_pr_links_default(md)
+
     objective_val = objective.strip()
     if not objective_val:
         raise ValueError("--objective is required")
@@ -173,6 +182,8 @@ def generate_pr_body(
         md = _set_section(md, "## Docs touched", _fmt_bullets(docs_touched))
     if "## Spec/Contract delta" in md and spec_delta:
         md = _set_section(md, "## Spec/Contract delta", _fmt_bullets(spec_delta))
+    if "## Contract delta" in md and spec_delta:
+        md = _set_section(md, "## Contract delta", _fmt_bullets(spec_delta))
 
     ev_pos = evidence_positive
     ev_neg = evidence_negative
