@@ -20,6 +20,7 @@ An ADR should answer:
 - `ADR-008-connection-lifecycle.md`
 - `ADR-009-engine-attachment.md`
 - `ADR-010-boot-entrypoint.md`
+- `ADR-011-contract-baseline-lock.md`
 
 ## Template policy
 

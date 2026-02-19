@@ -87,10 +87,21 @@ docs-clean:
 docs-verify:
 	@tools/bin/yai-docs-trace-check --all
 
+proof-verify:
+	@tools/bin/yai-proof-check
+
+release-guards:
+	@bash tools/release/check_pins.sh
+	@tools/bin/yai-proof-check
+
+release-guards-dev:
+	@STRICT_SPECS_HEAD=0 bash tools/release/check_pins.sh
+	@tools/bin/yai-proof-check
+
 changelog-verify:
 	@BASE_SHA="$$(git rev-parse origin/main)"; \
 	HEAD_SHA="$$(git rev-parse HEAD)"; \
 	tools/bin/yai-changelog-check --pr --base "$$BASE_SHA" --head "$$HEAD_SHA"
 
 help:
-	@echo "Targets: all, build, dist, bundle, verify, preflight-release, boot, root (core alias), kernel, engine, clean, clean-dist, clean-all, docs, docs-clean, docs-verify, changelog-verify"
+	@echo "Targets: all, build, dist, bundle, verify, preflight-release, boot, root (core alias), kernel, engine, clean, clean-dist, clean-all, docs, docs-clean, docs-verify, proof-verify, release-guards, release-guards-dev, changelog-verify"

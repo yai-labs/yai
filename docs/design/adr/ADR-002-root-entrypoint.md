@@ -12,66 +12,51 @@ applies_to:
 
 ## Context
 
-# YAI Architecture Decisions (Law-Aligned, 2026 Revision)
+YAI requires a single machine-level ingress to prevent authority bypass and workspace coupling drift.
 
-This document captures the **machine-level architecture commitments**
-of YAI as of the current runtime refactor phase.
+Current repository state showed path ambiguity in docs (`root.sock`) versus runtime/gate conventions (`control.sock` under root run dir).
+Milestone 1 needs this normalized so contract checks and gates are unambiguous.
 
-It is grounded in `deps/yai-specs/contracts/` invariants and reflects the
-post-envelope, post-authority enforcement state.
+## Decision
 
-The architecture is stratified across:
+Introduce and keep a single public Root ingress policy:
 
-- L0 — Vault (immutable identity & ABI boundary)
-- L1 — Kernel (authority, sessions, isolation)
-- L2 — Engine (execution gates)
-- L3 — Mind (proposal-only cognition per workspace)
-- Root — Machine Control Plane (runtime governor)
+- Canonical external client socket: `~/.yai/run/root/control.sock`
+- Legacy alias `~/.yai/run/root.sock` is non-canonical and must be treated as deprecated compatibility surface only.
+- Workspace sockets remain internal-only.
 
----
+All external clients (CLI/cockpit/automation) must reach runtime authority through Root.
 
-### Decision
+## Responsibilities (Root)
 
-Introduce a **Root Control Plane** as the only public entrypoint
-for CLI and cockpit.
-
-All external clients MUST connect to:
-
-    ~/.yai/run/root.sock
-
-Workspace sockets are internal-only.
-
-### Responsibilities (Root)
-
-- Runtime health & status
-- Workspace registry
-- Workspace spawn/attach/detach
+- Runtime health and status
+- Workspace registry and routing
 - Machine-level boundary enforcement
-- Routing to workspace plane
+- Protocol/session gateway before Kernel/Engine planes
 
-### Non-Goals
+## Non-Goals
 
-- Root does NOT execute engine gates
-- Root does NOT host Mind logic
-- Root does NOT mutate workspace memory
+- Root does not execute engine gates
+- Root does not host mind cognition logic
+- Root does not mutate workspace memory directly
 
-Root is a governor, not an executor.
+Root is a governor/router, not an execution plane.
 
-### Rationale
+## Rationale
 
-Prevents:
+This prevents:
 
-- Direct CLI → workspace bypass
-- Unauthorized multi-tenant conflicts
-- Daemon explosion per workspace
+- direct CLI to workspace bypass
+- tenant boundary erosion
+- path-level drift that breaks gate reproducibility
 
-### Status
+## Law Alignment
 
-Stub implementation active.
-Routing layer under integration.
-
----
+- `deps/yai-specs/contracts/axioms/A-002-authority.md`
+- `deps/yai-specs/contracts/invariants/I-003-governance.md`
+- `deps/yai-specs/contracts/boundaries/L1-kernel.md`
+- `deps/yai-specs/specs/protocol/include/transport.h`
 
 ## Status
 
-Active
+Active. Canonical path policy is now explicit and normalized for Milestone 1.

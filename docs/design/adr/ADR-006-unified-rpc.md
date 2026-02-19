@@ -12,59 +12,58 @@ applies_to:
 
 ## Context
 
-# YAI Architecture Decisions (Law-Aligned, 2026 Revision)
+Milestone 1 requires one explicit contract baseline across specs, core, and CLI.
+Without a strict mapping between envelope contract and exposed command surface, CI can report green while runtime proofs remain partial.
 
-This document captures the **machine-level architecture commitments**
-of YAI as of the current runtime refactor phase.
+## Decision
 
-It is grounded in `deps/yai-specs/contracts/` invariants and reflects the
-post-envelope, post-authority enforcement state.
+All communication follows one binary envelope contract anchored in specs:
 
-The architecture is stratified across:
+- `deps/yai-specs/specs/protocol/include/transport.h`
+- `deps/yai-specs/specs/protocol/include/protocol.h`
+- `deps/yai-specs/specs/protocol/include/yai_protocol_ids.h`
+- `deps/yai-specs/specs/protocol/include/errors.h`
+- `deps/yai-specs/specs/protocol/include/auth.h`
+- `deps/yai-specs/specs/protocol/include/roles.h`
+- `deps/yai-specs/specs/protocol/include/session.h`
+- `deps/yai-specs/specs/protocol/runtime/include/rpc_runtime.h`
 
-- L0 — Vault (immutable identity & ABI boundary)
-- L1 — Kernel (authority, sessions, isolation)
-- L2 — Engine (execution gates)
-- L3 — Mind (proposal-only cognition per workspace)
-- Root — Machine Control Plane (runtime governor)
+And command semantics are anchored by pinned CLI contract artifacts:
 
----
+- `deps/yai-specs/specs/cli/schema/commands.v1.json`
+- `deps/yai-specs/specs/cli/schema/commands.schema.json`
 
-### Decision
+## Mandatory Rules
 
-All communication follows a single binary envelope contract:
+- Handshake required before effectful commands.
+- `ws_id` required for runtime-bound commands.
+- `arming + role` required for privileged commands.
+- Deterministic reject semantics with stable code mapping to specs.
+- No behavior may be claimed as "proved" if required gates are skipped.
 
-Envelope fields:
+## Prohibited
 
-- magic
-- version
-- ws_id
-- trace_id
-- command_id
-- role
-- arming
-- payload_len
+- Parallel protocol surfaces
+- Out-of-contract side channels
+- CLI shortcuts that bypass contract semantics
+- Green evidence based on mandatory-step `SKIP`
 
-### Mandatory Rules
+## Rationale
 
-- Handshake required
-- `ws_id` required for runtime-bound commands
-- `arming + role` required for privileged commands
-- Deterministic error responses (with ws_id + trace_id)
+This establishes an auditable baseline for Milestone 1:
 
-### Prohibited
+- contract and implementation drift are machine-detectable
+- runtime gates can be interpreted as real evidence
+- TRL progression is tied to non-skipped proof
 
-- Parallel protocols
-- JSON-only side channels
-- CLI-specific shortcuts
+## Law Alignment
 
-### Status
-
-Envelope enforcement active.
-CLI authority injection active.
-
----
+- `deps/yai-specs/contracts/invariants/I-001-traceability.md`
+- `deps/yai-specs/contracts/invariants/I-002-determinism.md`
+- `deps/yai-specs/contracts/invariants/I-003-governance.md`
+- `deps/yai-specs/contracts/boundaries/L1-kernel.md`
+- `deps/yai-specs/contracts/boundaries/L2-engine.md`
 
 ## Status
 
-Active
+Active. Milestone 1 requires CI/gates to enforce this contract baseline explicitly.

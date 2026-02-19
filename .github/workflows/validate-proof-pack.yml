@@ -1,0 +1,28 @@
+name: validate-proof-pack
+
+on:
+  pull_request:
+    paths:
+      - "docs/proof/**"
+      - "deps/yai-specs/**"
+      - "deps/yai-cli.ref"
+      - "tools/python/yai_tools/verify/proof_pack.py"
+      - "tools/bin/yai-proof-check"
+      - ".github/workflows/validate-proof-pack.yml"
+
+jobs:
+  proof-pack:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Validate proof pack
+        run: |
+          python3 -m pip install --upgrade pip
+          tools/bin/yai-proof-check

@@ -12,25 +12,10 @@ applies_to:
 
 ## Context
 
-# YAI Architecture Decisions (Law-Aligned, 2026 Revision)
+Connection lifecycle must remain deterministic and auditable across Root and workspace-attached sessions.
+Current implementation is partially proven: baseline handshake/lifecycle exists, but full command-surface parity and non-skip gate proof are still incomplete.
 
-This document captures the **machine-level architecture commitments**
-of YAI as of the current runtime refactor phase.
-
-It is grounded in `deps/yai-specs/contracts/` invariants and reflects the
-post-envelope, post-authority enforcement state.
-
-The architecture is stratified across:
-
-- L0 — Vault (immutable identity & ABI boundary)
-- L1 — Kernel (authority, sessions, isolation)
-- L2 — Engine (execution gates)
-- L3 — Mind (proposal-only cognition per workspace)
-- Root — Machine Control Plane (runtime governor)
-
----
-
-### Decision
+## Decision
 
 Connections are one of:
 
@@ -40,19 +25,30 @@ Connections are one of:
 Handshake establishes protocol validity.
 Attach establishes workspace context.
 
-### Rules
+## Rules
 
-- No execution before attach
-- Attach must be explicit
-- Reconnect must re-handshake
+- No execution before handshake.
+- No runtime-bound execution before explicit attach/workspace context.
+- Reconnect requires re-handshake.
+- Rejects must be deterministic and trace-correlatable.
 
-### Status
+## Rationale
 
-One-shot CLI stable.
-Persistent cockpit session model pending.
+Lifecycle is the control boundary between contract validity and execution authority.
+Ambiguous status wording in docs can overstate readiness; Milestone 1 needs status language aligned to evidence.
 
----
+## Law Alignment
+
+- `deps/yai-specs/contracts/invariants/I-001-traceability.md`
+- `deps/yai-specs/contracts/invariants/I-002-determinism.md`
+- `deps/yai-specs/contracts/invariants/I-003-governance.md`
+- `deps/yai-specs/specs/protocol/include/session.h`
+- `deps/yai-specs/specs/protocol/include/transport.h`
 
 ## Status
 
-Active
+Active with partial proof coverage:
+
+- handshake and basic lifecycle semantics are implemented in core paths
+- persistent cockpit session model remains pending
+- full non-skip gate evidence for lifecycle claims is still required for higher TRL assertions
