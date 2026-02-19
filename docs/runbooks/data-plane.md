@@ -13,6 +13,9 @@ depends_on:
 adr_refs:
   - docs/design/adr/ADR-006-unified-rpc.md
   - docs/design/adr/ADR-011-contract-baseline-lock.md
+decisions:
+  - docs/design/adr/ADR-006-unified-rpc.md
+  - docs/design/adr/ADR-011-contract-baseline-lock.md
 related:
   adr: []
   specs:

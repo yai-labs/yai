@@ -12,6 +12,9 @@ depends_on:
 adr_refs:
   - docs/design/adr/ADR-009-engine-attachment.md
   - docs/design/adr/ADR-008-connection-lifecycle.md
+decisions:
+  - docs/design/adr/ADR-009-engine-attachment.md
+  - docs/design/adr/ADR-008-connection-lifecycle.md
 related:
   adr:
     - docs/design/adr/ADR-009-engine-attachment.md

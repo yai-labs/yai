@@ -9,6 +9,8 @@ supersedes: []
 depends_on: []
 adr_refs:
   - docs/design/adr/ADR-011-contract-baseline-lock.md
+decisions:
+  - docs/design/adr/ADR-011-contract-baseline-lock.md
 related:
   adr:
     - docs/design/adr/ADR-011-contract-baseline-lock.md

@@ -12,6 +12,9 @@ depends_on:
 adr_refs:
   - docs/design/adr/ADR-003-kernel-authority.md
   - docs/design/adr/ADR-006-unified-rpc.md
+decisions:
+  - docs/design/adr/ADR-003-kernel-authority.md
+  - docs/design/adr/ADR-006-unified-rpc.md
 related:
   adr: []
   specs: []
