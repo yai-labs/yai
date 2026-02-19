@@ -26,6 +26,7 @@ Provide stable, easy-to-remember commands for verify, gate, suite, diagnostics, 
 - `yai-docs-graph`: generate/check docs traceability graph + lock.
 - `yai-agent-pack`: generate/check canonical machine-readable agent pack.
 - `yai-docs-doctor`: run end-to-end docs-governance checks for CI/local.
+- `yai-architecture-check`: hard-fail architecture alignment checker (`--changed`, `--all`, `--write`).
 
 ## Quick Start
 

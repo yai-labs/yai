@@ -5,6 +5,7 @@ from yai_tools.issue.body import generate_issue_body
 from yai_tools.pr.body import generate_pr_body
 from yai_tools.pr.check import check_pr_body
 from yai_tools.verify.agent_pack import run_agent_pack
+from yai_tools.verify.architecture_alignment import run_architecture_alignment
 from yai_tools.verify.doctor import run_doctor
 from yai_tools.verify.frontmatter_schema import run_schema_check
 from yai_tools.verify.trace_graph import run_graph
@@ -164,10 +165,27 @@ def cmd_docs_doctor(argv: list[str]) -> int:
     return run_doctor(mode=args.mode, base=args.base, head=args.head)
 
 
+def cmd_architecture_check(argv: list[str]) -> int:
+    p = argparse.ArgumentParser(prog="yai-architecture-check", add_help=True)
+    mode = p.add_mutually_exclusive_group(required=True)
+    mode.add_argument("--changed", action="store_true")
+    mode.add_argument("--all", action="store_true")
+    mode.add_argument("--write", action="store_true")
+    p.add_argument("--base", default="")
+    p.add_argument("--head", default="HEAD")
+    args = p.parse_args(argv)
+
+    run_mode = "all"
+    if args.changed:
+        run_mode = "changed"
+
+    return run_architecture_alignment(mode=run_mode, base=args.base, head=args.head, write=args.write)
+
+
 def main() -> int:
     if len(sys.argv) < 2:
         print(
-            "Usage: python -m yai_tools.cli <pr-body|pr-check|branch|issue-body|docs-schema-check|docs-graph|agent-pack|docs-doctor> ...",
+            "Usage: python -m yai_tools.cli <pr-body|pr-check|branch|issue-body|docs-schema-check|docs-graph|agent-pack|docs-doctor|architecture-check> ...",
             file=sys.stderr,
         )
         return 2
@@ -191,6 +209,8 @@ def main() -> int:
         return cmd_agent_pack(rest)
     if sub == "docs-doctor":
         return cmd_docs_doctor(rest)
+    if sub == "architecture-check":
+        return cmd_architecture_check(rest)
 
     print(f"Unknown subcommand: {sub}", file=sys.stderr)
     return 2

@@ -1,46 +1,37 @@
-# Specs Bridge (YAI ↔ yai-specs)
+---
+id: ARCH-SPECS-BRIDGE
+status: active
+effective_date: 2026-02-19
+revision: 1
+owner: governance
+law_refs:
+  - deps/yai-specs/contracts/invariants/I-001-traceability.md
+  - deps/yai-specs/specs/protocol/include/protocol.h
+---
 
-This repository carries human-readable architecture and operational delivery.
-The **normative truth** (contracts/specs/formal) lives in:
+# Specs Bridge
 
-- `deps/yai-specs/contracts/*`
-- `deps/yai-specs/specs/*`
-- `deps/yai-specs/formal/*`
+## Role
 
-This page explains how to cite specs correctly and how docs remain subordinate to them.
+Define mandatory citation and alignment rules between `yai` architecture docs and `deps/yai-specs` normative sources.
 
-## What is normative
-The following are considered normative:
-- contracts: axioms, invariants, boundaries
-- specs: protocol schemas, role/error taxonomies, formal interfaces
-- formal: TLA+ specs and proof obligations (when present)
+## Rules
 
-Everything in `docs/` is explanatory or operational, never normative.
+- Every architecture document must include `law_refs` in frontmatter.
+- Architecture statements that mention protocol/roles/errors must link a concrete `deps/yai-specs/...` path.
+- Architecture docs must not duplicate normative spec text.
+- If implementation diverges from target ADR intent, document as drift with explicit remediation target.
 
-## How to cite yai-specs in this repo
+## Citation pattern
 
-Use stable paths (and IDs when present) in every ADR/Runbook/MP that touches governance, protocol, roles, errors, or boundaries.
+- Use repo-relative references only.
+- Prefer concrete files over generic folders.
 
-### Citation style (recommended)
-- Prefer paths inside `deps/yai-specs/...`
-- When a document has an ID (e.g. invariants I-001), include both:
-
-Example:
-- `deps/yai-specs/contracts/invariants/I-001-traceability.md`
+Examples:
+- `deps/yai-specs/contracts/invariants/I-003-governance.md`
 - `deps/yai-specs/contracts/boundaries/L1-kernel.md`
 - `deps/yai-specs/specs/protocol/include/transport.h`
-- `deps/yai-specs/specs/protocol/include/errors.h`
 
-## What changes where
-- If you change the law (contracts/specs): it belongs in `yai-specs` (upstream).
-- If you explain the law or implement it here: it belongs in `docs/*` + code in this repo.
+## Twin-change rule
 
-If a change requires touching both:
-- treat it as a “twin change” across repos and link evidence in the MP/PR body.
-
-## Practical mapping (minimum)
-
-- Protocol & authority semantics → `deps/yai-specs/specs/protocol/*`
-- Boundaries (L0/L1/L2/L3) → `deps/yai-specs/contracts/boundaries/*`
-- Determinism/traceability invariants → `deps/yai-specs/contracts/invariants/*`
-- Formal model references → `deps/yai-specs/formal/*`
+If architecture claims require cross-repo behavior changes (`yai`, `yai-cli`, `yai-specs`), track as coordinated updates through runbook/MP references.

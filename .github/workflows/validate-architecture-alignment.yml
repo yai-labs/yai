@@ -1,0 +1,39 @@
+name: validate-architecture-alignment
+
+on:
+  pull_request:
+    paths:
+      - "docs/architecture/**"
+      - "docs/design/adr/**"
+      - "docs/runbooks/**"
+      - "docs/milestone-packs/**"
+      - "tools/**"
+      - ".github/workflows/**"
+  workflow_dispatch:
+
+jobs:
+  architecture-alignment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout (full history)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: recursive
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Architecture alignment check (hard fail)
+        run: |
+          python3 -m pip install --upgrade pip
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            BASE_SHA="${{ github.event.pull_request.base.sha }}"
+            HEAD_SHA="${{ github.sha }}"
+          else
+            BASE_SHA="$(git merge-base HEAD origin/main)"
+            HEAD_SHA="$(git rev-parse HEAD)"
+          fi
+          tools/bin/yai-architecture-check --changed --base "$BASE_SHA" --head "$HEAD_SHA"
