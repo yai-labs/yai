@@ -12,6 +12,8 @@ related:
     - docs/design/adr/ADR-011-contract-baseline-lock.md
   runbooks:
     - docs/runbooks/root-hardening.md
+  milestone_packs:
+    - docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md
   specs:
     - deps/yai-specs/specs/protocol/include/transport.h
     - deps/yai-specs/specs/protocol/include/protocol.h
@@ -58,6 +60,8 @@ Adopt one canonical RPC surface and enforce CLI-to-spec alignment through explic
 
 - Spec anchors (if any): `deps/yai-specs/specs/protocol/include/transport.h`, `deps/yai-specs/specs/protocol/include/protocol.h`, `deps/yai-specs/specs/protocol/runtime/include/rpc_runtime.h`, `deps/yai-specs/specs/cli/schema/commands.v1.json`
 - Targets ADR: `docs/design/adr/ADR-006-unified-rpc.md`, `docs/design/adr/ADR-011-contract-baseline-lock.md`
+- Downstream runbook: `docs/runbooks/root-hardening.md`
+- Downstream MP: `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`
 
 ## References
 - `docs/design/spine.md`

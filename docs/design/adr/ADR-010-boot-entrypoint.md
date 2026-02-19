@@ -44,6 +44,16 @@ A single entrypoint improves reproducibility, policy enforcement, and incident d
 - Negative:
   - Legacy scripts and habits need migration.
 
+## Traceability
+
+- Proposals:
+  - `docs/design/proposals/PRP-003-workspace-lifecycle-and-isolation.md`
+- Implemented by runbooks:
+  - `docs/runbooks/workspaces-lifecycle.md`
+  - `docs/runbooks/engine-attach.md`
+- Milestone packs:
+  - *(TBD for workspace/engine tracks)*
+
 ## Status
 
 Accepted and active.

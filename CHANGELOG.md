@@ -18,6 +18,8 @@ and this project adheres to Semantic Versioning.
 - `tools/release/bump_version.sh` no longer injects automatic placeholder entries.
 - Added proof-pack governance guardrails (`yai-proof-check`, `validate-proof-pack.yml`, `proof-verify`, `release-guards`, `release-guards-dev`) and synchronized branch helper (`yai-dev-branch-sync`).
 - Aligned cross-repo pins for `yai-specs` and `yai-cli` on branch `meta/governance-proof-pack-lock` with canonical proof manifest updates.
+- Strengthened docs traceability chain by linking proposal -> ADR -> runbook -> milestone pack with explicit evidence pointers.
+- Added canonical agent governance guidance and moved draft TRL audits to a private local folder policy.
 
 ## [0.1.7] - 2026-02-17
 

@@ -18,6 +18,7 @@ The goal of this map is to reduce ambiguity:
 - Test plans (evidence expectations): `docs/test-plans/`
 - Templates (single source): `docs/templates/`
 - Developer guides (workflow/tooling/release): `docs/dev-guide/`
+  - Agent execution guide: `docs/dev-guide/agent-playbook.md`
 - Getting started (onboarding): `docs/getting-started/`
 - User-guide pointers: `docs/user-guide/`
 

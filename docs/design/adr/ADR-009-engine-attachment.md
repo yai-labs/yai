@@ -41,6 +41,16 @@ Shared attachment improves operability and keeps execution behavior aligned with
 - Negative:
   - Requires careful migration of existing workspace-oriented assumptions.
 
+## Traceability
+
+- Proposals:
+  - `docs/design/proposals/PRP-003-workspace-lifecycle-and-isolation.md`
+- Implemented by runbooks:
+  - `docs/runbooks/workspaces-lifecycle.md`
+  - `docs/runbooks/engine-attach.md`
+- Milestone packs:
+  - *(TBD for workspace/engine tracks)*
+
 ## Status
 
 Draft; acceptance tied to engine-attach runbook completion.

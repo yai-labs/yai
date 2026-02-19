@@ -32,4 +32,4 @@ They are used when we need structured exploration before freezing an ADR.
 - Proposal: exploration and option analysis.
 - ADR: final decision and consequences.
 
-Accepted proposals should be linked from the resulting ADR for historical traceability.
+Accepted proposals should be linked from resulting ADRs and downstream runbook/MP artifacts for full traceability.

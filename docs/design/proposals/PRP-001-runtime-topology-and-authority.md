@@ -15,6 +15,8 @@ related:
     - docs/design/adr/ADR-005-mind-proposer.md
   runbooks:
     - docs/runbooks/root-hardening.md
+  milestone_packs:
+    - docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md
   specs:
     - deps/yai-specs/contracts/axioms/A-002-authority.md
     - deps/yai-specs/contracts/boundaries/L1-kernel.md
@@ -59,6 +61,8 @@ Define and document the rationale for one machine-level runtime with strict Root
 
 - Spec anchors (if any): `deps/yai-specs/contracts/axioms/A-002-authority.md`, `deps/yai-specs/contracts/boundaries/L1-kernel.md`, `deps/yai-specs/contracts/boundaries/L2-engine.md`
 - Targets ADR: `docs/design/adr/ADR-001-single-runtime.md`, `docs/design/adr/ADR-002-root-entrypoint.md`, `docs/design/adr/ADR-003-kernel-authority.md`, `docs/design/adr/ADR-004-engine-execution.md`, `docs/design/adr/ADR-005-mind-proposer.md`
+- Downstream runbook: `docs/runbooks/root-hardening.md`
+- Downstream MP: `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`
 
 ## References
 - `docs/design/spine.md`

@@ -43,6 +43,15 @@ A single runtime reduces authority ambiguity, improves observability, and streng
   - Legacy assumptions around direct workspace access must be removed.
   - Migration work is required in boot/routing and operational docs.
 
+## Traceability
+
+- Proposals:
+  - `docs/design/proposals/PRP-001-runtime-topology-and-authority.md`
+- Implemented by runbooks:
+  - `docs/runbooks/root-hardening.md`
+- Milestone packs:
+  - `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`
+
 ## Status
 
 Accepted and active.

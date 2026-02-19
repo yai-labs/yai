@@ -41,6 +41,15 @@ This preserves authority ordering and keeps routing and policy enforcement machi
 - Negative:
   - Legacy clients need migration.
 
+## Traceability
+
+- Proposals:
+  - `docs/design/proposals/PRP-001-runtime-topology-and-authority.md`
+- Implemented by runbooks:
+  - `docs/runbooks/root-hardening.md`
+- Milestone packs:
+  - `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`
+
 ## Status
 
 Accepted and active.

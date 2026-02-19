@@ -47,6 +47,17 @@ A lock provides a stable legal/technical floor so later runbook phases can evolv
 - Negative:
   - Higher short-term coordination cost for contract-touching changes.
 
+## Traceability
+
+- Proposals:
+  - `docs/design/proposals/PRP-002-unified-rpc-and-cli-contract.md`
+  - `docs/design/proposals/PRP-004-contract-baseline-lock-and-pin-policy.md`
+  - `docs/design/proposals/PRP-005-formal-coverage-roadmap.md`
+- Implemented by runbooks:
+  - `docs/runbooks/root-hardening.md`
+- Milestone packs:
+  - `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`
+
 ## Status
 
 Draft; intended for acceptance at Milestone 1 governance kickoff.

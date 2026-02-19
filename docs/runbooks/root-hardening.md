@@ -13,6 +13,10 @@ decisions:
   - docs/design/adr/ADR-006-unified-rpc.md
   - docs/design/adr/ADR-008-connection-lifecycle.md
 related:
+adr_refs:
+  - docs/design/adr/ADR-002-root-entrypoint.md
+  - docs/design/adr/ADR-006-unified-rpc.md
+  - docs/design/adr/ADR-008-connection-lifecycle.md
   adr:
     - docs/design/adr/ADR-002-root-entrypoint.md
     - docs/design/adr/ADR-006-unified-rpc.md
@@ -485,6 +489,22 @@ If a phase causes regressions:
 ---
 
 ## 7) Final Definition of Done (Root Hardening complete)
+
+## Upstream proposals
+
+- `docs/design/proposals/PRP-001-runtime-topology-and-authority.md`
+- `docs/design/proposals/PRP-002-unified-rpc-and-cli-contract.md`
+- `docs/design/proposals/PRP-004-contract-baseline-lock-and-pin-policy.md`
+- `docs/design/proposals/PRP-005-formal-coverage-roadmap.md`
+
+## Milestone packs
+
+- `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`
+- `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md`
+- `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.2.md`
+- `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.3.md`
+- `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.4.md`
+- `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md`
 
 - [ ] Root validates invariants + handshake gate
 - [ ] Root is byte-perfect forward/relay

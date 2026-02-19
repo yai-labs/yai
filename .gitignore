@@ -496,3 +496,6 @@ dist/tmp/
 *.dSYM
 *.log
 .pr/
+
+# local audits drafts
+docs/audits/.private/

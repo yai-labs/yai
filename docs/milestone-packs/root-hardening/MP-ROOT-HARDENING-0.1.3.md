@@ -1,5 +1,27 @@
+---
+id: MP-ROOT-HARDENING-0.1.3
+status: active
+runbook: docs/runbooks/root-hardening.md
+phase: "0.1.3 — ws_id Validation Centralization"
+adrs:
+  - docs/design/adr/ADR-002-root-entrypoint.md
+  - docs/design/adr/ADR-006-unified-rpc.md
+  - docs/design/adr/ADR-008-connection-lifecycle.md
+  - docs/design/adr/ADR-011-contract-baseline-lock.md
+spec_anchors:
+  - deps/yai-specs/specs/protocol/include/transport.h
+  - deps/yai-specs/specs/protocol/include/auth.h
+  - deps/yai-specs/specs/protocol/include/errors.h
+issues:
+  - N/A
+issue_reason: "Docs-only traceability alignment PR without dedicated issue."
+---
 Milestone Pack: `MP-ROOT-HARDENING-0.1.3`
 Runbook link: `docs/runbooks/root-hardening.md` (phase `0.1.3 — ws_id Validation Centralization`)
+ADR links: `docs/design/adr/ADR-002-root-entrypoint.md`, `docs/design/adr/ADR-006-unified-rpc.md`, `docs/design/adr/ADR-008-connection-lifecycle.md`, `docs/design/adr/ADR-011-contract-baseline-lock.md`
+Proposal links: `docs/design/proposals/PRP-001-runtime-topology-and-authority.md`, `docs/design/proposals/PRP-002-unified-rpc-and-cli-contract.md`, `docs/design/proposals/PRP-004-contract-baseline-lock-and-pin-policy.md`, `docs/design/proposals/PRP-005-formal-coverage-roadmap.md`
+Evidence links: `docs/test-plans/hardfail.md`
+
 Owner: runtime
 
 Objective:

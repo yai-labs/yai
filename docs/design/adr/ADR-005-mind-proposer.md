@@ -46,6 +46,15 @@ This model preserves cognitive isolation while keeping effectful operations unde
 - Negative:
   - Additional orchestration needed for proposal-to-execution flows.
 
+## Traceability
+
+- Proposals:
+  - `docs/design/proposals/PRP-001-runtime-topology-and-authority.md`
+- Implemented by runbooks:
+  - `docs/runbooks/root-hardening.md`
+- Milestone packs:
+  - `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`
+
 ## Status
 
 Accepted and active.

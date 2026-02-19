@@ -44,6 +44,17 @@ A strict contract baseline makes drift observable and converts gate output into 
 - Negative:
   - Tighter CI can increase short-term failures during migration.
 
+## Traceability
+
+- Proposals:
+  - `docs/design/proposals/PRP-002-unified-rpc-and-cli-contract.md`
+  - `docs/design/proposals/PRP-005-formal-coverage-roadmap.md`
+- Implemented by runbooks:
+  - `docs/runbooks/root-hardening.md`
+- Milestone packs:
+  - `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`
+  - `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md`
+
 ## Status
 
 Accepted and active.

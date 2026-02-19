@@ -14,6 +14,8 @@ related:
     - docs/design/adr/ADR-010-boot-entrypoint.md
   runbooks:
     - docs/runbooks/workspaces-lifecycle.md
+    - docs/runbooks/engine-attach.md
+  milestone_packs: []
   specs:
     - deps/yai-specs/contracts/boundaries/L1-kernel.md
     - deps/yai-specs/specs/protocol/include/session.h
@@ -59,6 +61,7 @@ Define one lifecycle proposal that aligns isolation guarantees with Kernel bound
 
 - Spec anchors (if any): `deps/yai-specs/contracts/boundaries/L1-kernel.md`, `deps/yai-specs/specs/protocol/include/session.h`, `deps/yai-specs/contracts/invariants/I-002-determinism.md`, `deps/yai-specs/contracts/invariants/I-006-external-effect-boundary.md`
 - Targets ADR: `docs/design/adr/ADR-007-workspace-isolation.md`, `docs/design/adr/ADR-008-connection-lifecycle.md`, `docs/design/adr/ADR-009-engine-attachment.md`, `docs/design/adr/ADR-010-boot-entrypoint.md`
+- Downstream runbook: `docs/runbooks/workspaces-lifecycle.md`
 
 ## References
 - `docs/design/spine.md`

@@ -41,6 +41,15 @@ A strict L1-to-L2 handoff keeps effect boundaries explicit and simplifies tracea
 - Negative:
   - Integration requires stable dispatch contracts from Root/Kernel.
 
+## Traceability
+
+- Proposals:
+  - `docs/design/proposals/PRP-001-runtime-topology-and-authority.md`
+- Implemented by runbooks:
+  - `docs/runbooks/root-hardening.md`
+- Milestone packs:
+  - `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`
+
 ## Status
 
 Accepted and active.

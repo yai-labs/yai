@@ -46,6 +46,16 @@ A strict lifecycle avoids hidden state transitions and improves forensic clarity
 - Negative:
   - Partial implementations cannot be presented as full readiness.
 
+## Traceability
+
+- Proposals:
+  - `docs/design/proposals/PRP-003-workspace-lifecycle-and-isolation.md`
+- Implemented by runbooks:
+  - `docs/runbooks/workspaces-lifecycle.md`
+  - `docs/runbooks/engine-attach.md`
+- Milestone packs:
+  - *(TBD for workspace/engine tracks)*
+
 ## Status
 
 Accepted and active, with remaining evidence hardening tracked in runbook phases.
