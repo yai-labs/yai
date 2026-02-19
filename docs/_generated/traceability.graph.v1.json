@@ -53,7 +53,7 @@
     {
       "from": "docs/design/adr/ADR-011-contract-baseline-lock.md",
       "relation": "adr_to_runbook",
-      "to": "docs/runbooks/root-hardening.md"
+      "to": "docs/runbooks/contract-baseline-lock.md"
     },
     {
       "from": "docs/design/proposals/PRP-001-runtime-topology-and-authority.md",
@@ -176,6 +176,171 @@
       "to": "docs/runbooks/root-hardening.md"
     },
     {
+      "from": "docs/milestone-packs/README.md",
+      "relation": "milestone_pack_to_doc",
+      "to": "deps/yai-specs/SPEC_MAP.md"
+    },
+    {
+      "from": "docs/milestone-packs/README.md",
+      "relation": "milestone_pack_to_adr",
+      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+    },
+    {
+      "from": "docs/milestone-packs/README.md",
+      "relation": "milestone_pack_to_runbook",
+      "to": "docs/runbooks/contract-baseline-lock.md"
+    },
+    {
+      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.0.md",
+      "relation": "milestone_pack_to_doc",
+      "to": "deps/yai-specs/contracts/invariants/I-001-traceability.md"
+    },
+    {
+      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.0.md",
+      "relation": "milestone_pack_to_doc",
+      "to": "deps/yai-specs/contracts/invariants/I-002-determinism.md"
+    },
+    {
+      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.0.md",
+      "relation": "milestone_pack_to_doc",
+      "to": "deps/yai-specs/contracts/invariants/I-003-governance.md"
+    },
+    {
+      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.0.md",
+      "relation": "milestone_pack_to_doc",
+      "to": "deps/yai-specs/contracts/invariants/I-006-external-effect-boundary.md"
+    },
+    {
+      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.0.md",
+      "relation": "milestone_pack_to_adr",
+      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+    },
+    {
+      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.0.md",
+      "relation": "milestone_pack_to_runbook",
+      "to": "docs/runbooks/contract-baseline-lock.md"
+    },
+    {
+      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.1.md",
+      "relation": "milestone_pack_to_doc",
+      "to": "deps/yai-specs/contracts/invariants/I-001-traceability.md"
+    },
+    {
+      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.1.md",
+      "relation": "milestone_pack_to_doc",
+      "to": "deps/yai-specs/contracts/invariants/I-002-determinism.md"
+    },
+    {
+      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.1.md",
+      "relation": "milestone_pack_to_doc",
+      "to": "deps/yai-specs/contracts/invariants/I-003-governance.md"
+    },
+    {
+      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.1.md",
+      "relation": "milestone_pack_to_adr",
+      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+    },
+    {
+      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.1.md",
+      "relation": "milestone_pack_to_runbook",
+      "to": "docs/runbooks/contract-baseline-lock.md"
+    },
+    {
+      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.2.md",
+      "relation": "milestone_pack_to_doc",
+      "to": "deps/yai-specs/contracts/invariants/I-001-traceability.md"
+    },
+    {
+      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.2.md",
+      "relation": "milestone_pack_to_doc",
+      "to": "deps/yai-specs/contracts/invariants/I-003-governance.md"
+    },
+    {
+      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.2.md",
+      "relation": "milestone_pack_to_adr",
+      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+    },
+    {
+      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.2.md",
+      "relation": "milestone_pack_to_runbook",
+      "to": "docs/runbooks/contract-baseline-lock.md"
+    },
+    {
+      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.3.md",
+      "relation": "milestone_pack_to_doc",
+      "to": "deps/yai-specs/contracts/invariants/I-002-determinism.md"
+    },
+    {
+      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.3.md",
+      "relation": "milestone_pack_to_doc",
+      "to": "deps/yai-specs/contracts/invariants/I-003-governance.md"
+    },
+    {
+      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.3.md",
+      "relation": "milestone_pack_to_doc",
+      "to": "deps/yai-specs/contracts/invariants/I-006-external-effect-boundary.md"
+    },
+    {
+      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.3.md",
+      "relation": "milestone_pack_to_adr",
+      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+    },
+    {
+      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.3.md",
+      "relation": "milestone_pack_to_runbook",
+      "to": "docs/runbooks/contract-baseline-lock.md"
+    },
+    {
+      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.4.md",
+      "relation": "milestone_pack_to_doc",
+      "to": "deps/yai-specs/contracts/boundaries/L1-kernel.md"
+    },
+    {
+      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.4.md",
+      "relation": "milestone_pack_to_doc",
+      "to": "deps/yai-specs/contracts/invariants/I-001-traceability.md"
+    },
+    {
+      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.4.md",
+      "relation": "milestone_pack_to_doc",
+      "to": "deps/yai-specs/contracts/invariants/I-003-governance.md"
+    },
+    {
+      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.4.md",
+      "relation": "milestone_pack_to_adr",
+      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+    },
+    {
+      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.4.md",
+      "relation": "milestone_pack_to_runbook",
+      "to": "docs/runbooks/contract-baseline-lock.md"
+    },
+    {
+      "from": "docs/milestone-packs/contract-baseline-lock/README.md",
+      "relation": "milestone_pack_to_doc",
+      "to": "deps/yai-specs/contracts/invariants/I-001-traceability.md"
+    },
+    {
+      "from": "docs/milestone-packs/contract-baseline-lock/README.md",
+      "relation": "milestone_pack_to_adr",
+      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+    },
+    {
+      "from": "docs/milestone-packs/contract-baseline-lock/README.md",
+      "relation": "milestone_pack_to_runbook",
+      "to": "docs/runbooks/contract-baseline-lock.md"
+    },
+    {
+      "from": "docs/milestone-packs/engine-attach/README.md",
+      "relation": "milestone_pack_to_adr",
+      "to": "docs/design/adr/ADR-009-engine-attachment.md"
+    },
+    {
+      "from": "docs/milestone-packs/engine-attach/README.md",
+      "relation": "milestone_pack_to_runbook",
+      "to": "docs/runbooks/engine-attach.md"
+    },
+    {
       "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md",
       "relation": "milestone_pack_to_adr",
       "to": "docs/design/adr/ADR-002-root-entrypoint.md"
@@ -324,6 +489,91 @@
       "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md",
       "relation": "milestone_pack_to_runbook",
       "to": "docs/runbooks/root-hardening.md"
+    },
+    {
+      "from": "docs/milestone-packs/specs-refactor-foundation/README.md",
+      "relation": "milestone_pack_to_doc",
+      "to": "deps/yai-specs/SPEC_MAP.md"
+    },
+    {
+      "from": "docs/milestone-packs/specs-refactor-foundation/README.md",
+      "relation": "milestone_pack_to_adr",
+      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+    },
+    {
+      "from": "docs/milestone-packs/specs-refactor-foundation/README.md",
+      "relation": "milestone_pack_to_runbook",
+      "to": "docs/runbooks/specs-refactor-foundation.md"
+    },
+    {
+      "from": "docs/milestone-packs/workspaces-lifecycle/README.md",
+      "relation": "milestone_pack_to_adr",
+      "to": "docs/design/adr/ADR-007-workspace-isolation.md"
+    },
+    {
+      "from": "docs/milestone-packs/workspaces-lifecycle/README.md",
+      "relation": "milestone_pack_to_runbook",
+      "to": "docs/runbooks/workspaces-lifecycle.md"
+    },
+    {
+      "from": "docs/runbooks/README.md",
+      "relation": "runbook_to_adr",
+      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+    },
+    {
+      "from": "docs/runbooks/contract-baseline-lock.md",
+      "relation": "runbook_to_adr",
+      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+    },
+    {
+      "from": "docs/runbooks/data-plane.md",
+      "relation": "runbook_to_adr",
+      "to": "docs/design/adr/ADR-006-unified-rpc.md"
+    },
+    {
+      "from": "docs/runbooks/data-plane.md",
+      "relation": "runbook_to_adr",
+      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+    },
+    {
+      "from": "docs/runbooks/engine-attach.md",
+      "relation": "runbook_to_adr",
+      "to": "docs/design/adr/ADR-008-connection-lifecycle.md"
+    },
+    {
+      "from": "docs/runbooks/engine-attach.md",
+      "relation": "runbook_to_adr",
+      "to": "docs/design/adr/ADR-009-engine-attachment.md"
+    },
+    {
+      "from": "docs/runbooks/kernel-sovereignty.md",
+      "relation": "runbook_to_adr",
+      "to": "docs/design/adr/ADR-003-kernel-authority.md"
+    },
+    {
+      "from": "docs/runbooks/kernel-sovereignty.md",
+      "relation": "runbook_to_adr",
+      "to": "docs/design/adr/ADR-008-connection-lifecycle.md"
+    },
+    {
+      "from": "docs/runbooks/mind-redis-stm.md",
+      "relation": "runbook_to_adr",
+      "to": "docs/design/adr/ADR-005-mind-proposer.md"
+    },
+    {
+      "from": "docs/runbooks/mind-redis-stm.md",
+      "relation": "runbook_to_adr",
+      "to": "docs/design/adr/ADR-008-connection-lifecycle.md"
+    },
+    {
+      "from": "docs/runbooks/operations.md",
+      "relation": "runbook_to_adr",
+      "to": "docs/design/adr/ADR-003-kernel-authority.md"
+    },
+    {
+      "from": "docs/runbooks/operations.md",
+      "relation": "runbook_to_adr",
+      "to": "docs/design/adr/ADR-006-unified-rpc.md"
     },
     {
       "from": "docs/runbooks/root-hardening.md",
@@ -453,6 +703,41 @@
       "type": "milestone_pack"
     },
     {
+      "id": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.0.md",
+      "path": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.0.md",
+      "type": "milestone_pack"
+    },
+    {
+      "id": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.1.md",
+      "path": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.1.md",
+      "type": "milestone_pack"
+    },
+    {
+      "id": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.2.md",
+      "path": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.2.md",
+      "type": "milestone_pack"
+    },
+    {
+      "id": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.3.md",
+      "path": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.3.md",
+      "type": "milestone_pack"
+    },
+    {
+      "id": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.4.md",
+      "path": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.4.md",
+      "type": "milestone_pack"
+    },
+    {
+      "id": "docs/milestone-packs/contract-baseline-lock/README.md",
+      "path": "docs/milestone-packs/contract-baseline-lock/README.md",
+      "type": "milestone_pack"
+    },
+    {
+      "id": "docs/milestone-packs/engine-attach/README.md",
+      "path": "docs/milestone-packs/engine-attach/README.md",
+      "type": "milestone_pack"
+    },
+    {
       "id": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md",
       "path": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md",
       "type": "milestone_pack"
@@ -483,8 +768,23 @@
       "type": "milestone_pack"
     },
     {
+      "id": "docs/milestone-packs/specs-refactor-foundation/README.md",
+      "path": "docs/milestone-packs/specs-refactor-foundation/README.md",
+      "type": "milestone_pack"
+    },
+    {
+      "id": "docs/milestone-packs/workspaces-lifecycle/README.md",
+      "path": "docs/milestone-packs/workspaces-lifecycle/README.md",
+      "type": "milestone_pack"
+    },
+    {
       "id": "docs/runbooks/README.md",
       "path": "docs/runbooks/README.md",
+      "type": "runbook"
+    },
+    {
+      "id": "docs/runbooks/contract-baseline-lock.md",
+      "path": "docs/runbooks/contract-baseline-lock.md",
       "type": "runbook"
     },
     {
@@ -530,12 +830,7 @@
   ],
   "orphans": [
     "docs/design/adr/README.md",
-    "docs/design/proposals/README.md",
-    "docs/milestone-packs/README.md",
-    "docs/runbooks/README.md",
-    "docs/runbooks/data-plane.md",
-    "docs/runbooks/kernel-sovereignty.md",
-    "docs/runbooks/operations.md"
+    "docs/design/proposals/README.md"
   ],
   "version": 1,
   "violations": []
