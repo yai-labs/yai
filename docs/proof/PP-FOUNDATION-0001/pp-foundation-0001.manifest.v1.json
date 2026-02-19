@@ -28,7 +28,7 @@
     "yai_specs": {
       "version_line": "v0.1.0 / SPECS_API_VERSION v1",
       "tag": "UNTAGGED",
-      "commit": "b96573d751cf12ff756c9643f4acf926743a1226",
+      "commit": "530e83f34d10b9b8c828b287cc02ff68481dc923",
       "pin_source": "yai/deps/yai-specs"
     },
     "yai_cli": {

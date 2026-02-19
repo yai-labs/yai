@@ -21,6 +21,7 @@ Provide stable, easy-to-remember commands for verify, gate, suite, diagnostics, 
 - `yai-dev-branch-sync`: create/check out the same branch across `yai`, `yai-cli`, `yai-mind`.
 - `yai-dev-pr-body`: alias of `yai-pr-body`.
 - `yai-dev-pr-check`: alias of `yai-pr-check`.
+- `yai-specs-sync`: sync `deps/yai-specs` pin and proof-pack refs (`manifest` + `README`).
 
 ## Quick Start
 
@@ -29,3 +30,5 @@ Provide stable, easy-to-remember commands for verify, gate, suite, diagnostics, 
 - `tools/bin/yai-dev-pr-check .pr/PR_BODY.md`
 
 - `tools/bin/yai-dev-branch-sync --type chore --issue N/A --reason bootstrap --area governance --desc proof-pack-lock`
+
+- `tools/bin/yai-specs-sync --target origin/main`
