@@ -1,0 +1,37 @@
+name: validate-changelog
+
+on:
+  pull_request:
+    paths:
+      - "CHANGELOG.md"
+      - "VERSION"
+      - "boot/**"
+      - "root/**"
+      - "kernel/**"
+      - "engine/**"
+      - "mind/**"
+      - "runtime/**"
+      - "law/**"
+      - "docs/**"
+      - "tools/**"
+      - ".github/workflows/**"
+      - "Makefile"
+  workflow_dispatch:
+
+jobs:
+  changelog-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout (full history)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Changelog gate (PR mode)
+        run: |
+          tools/bin/yai-changelog-check --pr --base "${{ github.event.pull_request.base.sha }}" --head "${{ github.sha }}"

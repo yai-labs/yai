@@ -63,3 +63,23 @@ Hard rules (when files are touched):
 - Runbook must have `adr_refs` unless `ops_only=true`
 - MP must include: `runbook`, `phase`, `adrs`, `spec_anchors`, `issues`
 - MP requires bidirectional link: runbook file must contain the MP id
+
+## Changelog gate (incremental, PR + tag)
+
+Local:
+- PR-like validation (default local check):
+  - `make changelog-verify`
+- Direct invocation:
+  - `tools/bin/yai-changelog-check --pr --base <BASE_SHA> --head <HEAD_SHA>`
+- Tag simulation:
+  - `tools/bin/yai-changelog-check --tag --version "$(cat VERSION)"`
+
+CI:
+- Workflow `validate-changelog.yml` runs on PRs and enforces incremental changelog quality.
+- Release workflow `bundle.yml` re-validates changelog in tag mode.
+
+Hard rules:
+- Non meta/docs-only PRs must update `CHANGELOG.md`.
+- Allowed Keep a Changelog subsections only: Added, Changed, Deprecated, Removed, Fixed, Security.
+- New/modified changelog lines cannot include placeholders (`TODO`, `TBD`, `...`, `<...>`, `lorem ipsum`).
+- Tag `vX.Y.Z` requires `VERSION == X.Y.Z` and a valid `## [X.Y.Z] - YYYY-MM-DD` section with real bullets.

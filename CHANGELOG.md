@@ -7,6 +7,16 @@ and this project adheres to Semantic Versioning.
 
 ## [Unreleased]
 
+### Added
+
+- Introduced `yai-changelog-check` with PR-mode and tag-mode validation for changelog quality gates.
+- Added CI workflow `validate-changelog.yml` to enforce incremental changelog policy on pull requests.
+
+### Changed
+
+- Release workflow now runs strict changelog validation in tag mode before publishing bundle assets.
+- `tools/release/bump_version.sh` no longer injects automatic placeholder entries.
+
 ## [0.1.7] - 2026-02-17
 
 - TODO: summarize release changes.
