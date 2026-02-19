@@ -123,6 +123,12 @@ def generate_pr_body(
         md = set_kv_line(md, "Issue-Reason (required if N/A)", r)
         if has_kv_line(md, "Issue-Reason"):
             md = set_kv_line(md, "Issue-Reason", r)
+    else:
+        # Avoid leaving template placeholders when issue is linked.
+        if has_kv_line(md, "Issue-Reason (required if N/A)"):
+            md = set_kv_line(md, "Issue-Reason (required if N/A)", "N/A")
+        if has_kv_line(md, "Issue-Reason"):
+            md = set_kv_line(md, "Issue-Reason", "N/A")
 
     md = set_kv_line(md, "MP-ID", mp_id.strip() or "N/A")
     md = set_kv_line(md, "Runbook", runbook.strip() or "N/A")
