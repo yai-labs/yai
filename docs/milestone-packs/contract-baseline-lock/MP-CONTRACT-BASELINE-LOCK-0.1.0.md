@@ -11,8 +11,8 @@ spec_anchors:
   - deps/yai-specs/contracts/invariants/I-003-governance.md
   - deps/yai-specs/contracts/invariants/I-006-external-effect-boundary.md
 issues:
-  - N/A
-issue_reason: "Foundational docs track creation; issue ID not assigned yet."
+  - "https://github.com/yai-labs/yai/issues/125"
+issue_reason: "Phase tracked by governance runbook issue #125."
 ---
 # MP-CONTRACT-BASELINE-LOCK-0.1.0
 
