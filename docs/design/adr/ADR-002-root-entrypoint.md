@@ -7,6 +7,11 @@ applies_to:
   runbook: docs/runbooks/root-hardening.md
   phase: 0.1.1
   anchor: "#phase-0-1-1-byte-perfect-router"
+law_refs:
+  - deps/yai-specs/contracts/axioms/A-002-authority.md
+  - deps/yai-specs/contracts/invariants/I-003-governance.md
+  - deps/yai-specs/contracts/boundaries/L1-kernel.md
+  - deps/yai-specs/specs/protocol/include/transport.h
 ---
 # ADR-002 — Root Control Plane as Canonical Entry Point
 

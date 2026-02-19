@@ -1,3 +1,9 @@
+---
+id: ADR-README
+status: active
+law_refs:
+  - deps/yai-specs/contracts/invariants/I-001-traceability.md
+---
 # ADR Index
 
 Architecture Decision Records (ADRs) capture irreversible or high-impact technical choices.
