@@ -7,65 +7,42 @@ applies_to:
   runbook: docs/runbooks/root-hardening.md
   phase: 0.1.0
   anchor: "#phase-0-1-0-protocol-guardrails"
+law_refs:
+  - deps/yai-specs/contracts/axioms/A-002-authority.md
+  - deps/yai-specs/contracts/invariants/I-003-governance.md
+  - deps/yai-specs/contracts/invariants/I-006-external-effect-boundary.md
+  - deps/yai-specs/contracts/boundaries/L1-kernel.md
+  - deps/yai-specs/contracts/boundaries/L2-engine.md
 ---
-# ADR-001 — Single Runtime Per Machine (Canonical)
+# ADR-001 - Single Runtime Per Machine
 
 ## Context
 
-# YAI Architecture Decisions (Law-Aligned, 2026 Revision)
+YAI is evolving from a mixed execution model toward a machine-level runtime. The previous shape allowed multiple implicit entry paths and per-workspace execution assumptions that made governance and evidence weaker.
 
-This document captures the **machine-level architecture commitments**
-of YAI as of the current runtime refactor phase.
+## Decision
 
-It is grounded in `deps/yai-specs/contracts/` invariants and reflects the
-post-envelope, post-authority enforcement state.
+YAI adopts one canonical machine runtime composed of:
 
-The architecture is stratified across:
+- Root control plane
+- Kernel (L1 authority plane)
+- Engine (L2 execution plane)
 
-- L0 — Vault (immutable identity & ABI boundary)
-- L1 — Kernel (authority, sessions, isolation)
-- L2 — Engine (execution gates)
-- L3 — Mind (proposal-only cognition per workspace)
-- Root — Machine Control Plane (runtime governor)
+Workspaces are logical tenants managed by this runtime, not independent daemon stacks.
 
----
+## Rationale
 
-### Decision
+A single runtime reduces authority ambiguity, improves observability, and strengthens deterministic enforcement of workspace boundaries.
 
-YAI runs as **one machine-level runtime**, composed of:
+## Consequences
 
-- Root Control Plane
-- Kernel (L1)
-- Engine (L2)
-
-This runtime manages multiple workspaces concurrently.
-
-### Implications
-
-- No per-workspace daemon model long-term.
-- No direct CLI-to-workspace socket access.
-- The runtime is machine-scoped, not workspace-scoped.
-
-### Constraints
-
-- All runtime-bound requests MUST carry `ws_id`.
-- Kernel MUST enforce isolation between workspaces.
-- Engine MUST execute effects only under Kernel authority.
-- Cross-workspace state sharing is forbidden by default.
-
-### Law Alignment
-
-- A-002 Authority
-- I-006 External Effect Boundary
-- L1/L2 boundary enforcement
-
-### Status
-
-Architecture locked.
-Implementation staged (Root stub active, full multi-tenant pending).
-
----
+- Positive:
+  - One authoritative ingress and lifecycle model.
+  - Better cross-workspace governance and auditable routing.
+- Negative:
+  - Legacy assumptions around direct workspace access must be removed.
+  - Migration work is required in boot/routing and operational docs.
 
 ## Status
 
-Active
+Accepted and active.

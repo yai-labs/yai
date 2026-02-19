@@ -7,49 +7,43 @@ applies_to:
   runbook: docs/runbooks/root-hardening.md
   phase: boot-baseline
   anchor: "#phase-root-boot-baseline"
+law_refs:
+  - deps/yai-specs/contracts/axioms/A-002-authority.md
+  - deps/yai-specs/contracts/invariants/I-003-governance.md
+  - deps/yai-specs/contracts/boundaries/L1-kernel.md
+  - deps/yai-specs/specs/protocol/include/transport.h
 ---
-# ADR-010 — Boot as Canonical Machine Entry
+# ADR-010 - Boot as Canonical Machine Entry
 
 ## Context
 
-# YAI Architecture Decisions (Law-Aligned, 2026 Revision)
+Multiple startup paths historically allowed inconsistent runtime initialization and reduced confidence in machine-level governance.
 
-This document captures the **machine-level architecture commitments**
-of YAI as of the current runtime refactor phase.
+## Decision
 
-It is grounded in `deps/yai-specs/contracts/` invariants and reflects the
-post-envelope, post-authority enforcement state.
+`yai` boot is the canonical runtime entrypoint.
 
-The architecture is stratified across:
+Boot responsibilities:
 
-- L0 — Vault (immutable identity & ABI boundary)
-- L1 — Kernel (authority, sessions, isolation)
-- L2 — Engine (execution gates)
-- L3 — Mind (proposal-only cognition per workspace)
-- Root — Machine Control Plane (runtime governor)
+- Preboot validation
+- Runtime directory integrity checks
+- Root socket initialization
+- Ordered startup of governed planes
 
----
+Direct ad-hoc startup of internal binaries is deprecated.
 
-### Decision
+## Rationale
 
-`yai` (boot) is the only official runtime entrypoint.
+A single entrypoint improves reproducibility, policy enforcement, and incident diagnosis.
 
-It performs:
+## Consequences
 
-- preboot validation
-- directory integrity
-- root socket creation
-- runtime initialization
-
-Direct launching of workspace kernel binaries is deprecated.
-
-### Status
-
-Migration in progress.
-Boot canonicalization required before engine integration.
-
----
+- Positive:
+  - Consistent startup contract for operators and CI.
+  - Better alignment with Root-first architecture.
+- Negative:
+  - Legacy scripts and habits need migration.
 
 ## Status
 
-Active
+Accepted and active.

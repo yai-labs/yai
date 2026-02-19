@@ -7,66 +7,45 @@ applies_to:
   runbook: docs/runbooks/mind-redis-stm.md
   phase: v5.3
   anchor: "#phase-mind-proposer"
+law_refs:
+  - deps/yai-specs/contracts/invariants/I-002-determinism.md
+  - deps/yai-specs/contracts/invariants/I-004-cognitive-reconfiguration.md
+  - deps/yai-specs/contracts/invariants/I-006-external-effect-boundary.md
+  - deps/yai-specs/contracts/boundaries/L3-mind.md
 ---
-# ADR-005 — Mind Per Workspace (L3 Cognitive Plane)
+# ADR-005 - Mind as Workspace-Scoped Proposer (L3)
 
 ## Context
 
-# YAI Architecture Decisions (Law-Aligned, 2026 Revision)
+Cognitive features need to evolve without becoming a hidden execution authority or a cross-workspace leakage vector.
 
-This document captures the **machine-level architecture commitments**
-of YAI as of the current runtime refactor phase.
+## Decision
 
-It is grounded in `deps/yai-specs/contracts/` invariants and reflects the
-post-envelope, post-authority enforcement state.
-
-The architecture is stratified across:
-
-- L0 — Vault (immutable identity & ABI boundary)
-- L1 — Kernel (authority, sessions, isolation)
-- L2 — Engine (execution gates)
-- L3 — Mind (proposal-only cognition per workspace)
-- Root — Machine Control Plane (runtime governor)
-
----
-
-### Decision
-
-Each workspace owns one Mind instance.
-
-Mind is:
-
-- workspace-scoped
-- proposal-only
-- non-authoritative
+Each workspace owns its Mind context. Mind is proposal-oriented and non-authoritative.
 
 Mind may:
 
-- build graph state
-- generate plans
-- propose actions
+- Build internal graph/cognitive state
+- Generate plans and proposals
 
-Mind may NOT:
+Mind may not:
 
-- execute external effects
-- bypass Engine
-- access other workspaces
+- Execute external effects directly
+- Bypass Engine/Kernel governance
+- Access other workspace state by default
 
-### Rationale
+## Rationale
 
-Preserves:
+This model preserves cognitive isolation while keeping effectful operations under governed L1/L2 control.
 
-- Cognitive isolation
-- Determinism
-- Law invariants
+## Consequences
 
-### Status
-
-Mind remains per-workspace Rust process.
-Future consolidation possible under runtime governance.
-
----
+- Positive:
+  - Safe evolution of cognition features.
+  - Clear boundary between reasoning and execution.
+- Negative:
+  - Additional orchestration needed for proposal-to-execution flows.
 
 ## Status
 
-Active
+Accepted and active.

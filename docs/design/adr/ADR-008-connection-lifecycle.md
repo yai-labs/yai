@@ -14,47 +14,38 @@ law_refs:
   - deps/yai-specs/specs/protocol/include/session.h
   - deps/yai-specs/specs/protocol/include/transport.h
 ---
-# ADR-008 — Connection Lifecycle Semantics
+# ADR-008 - Connection Lifecycle Semantics
 
 ## Context
 
-Connection lifecycle must remain deterministic and auditable across Root and workspace-attached sessions.
-Current implementation is partially proven: baseline handshake/lifecycle exists, but full command-surface parity and non-skip gate proof are still incomplete.
+Connection semantics are foundational for deterministic control-plane behavior and must stay consistent across Root and workspace-attached sessions.
 
 ## Decision
 
-Connections are one of:
+Two connection states are supported:
 
-- root session
-- workspace-attached session
+- Root session
+- Workspace-attached session
 
-Handshake establishes protocol validity.
-Attach establishes workspace context.
+Lifecycle rules:
 
-## Rules
-
-- No execution before handshake.
-- No runtime-bound execution before explicit attach/workspace context.
-- Reconnect requires re-handshake.
-- Rejects must be deterministic and trace-correlatable.
+- Handshake is mandatory before execution
+- Workspace attach is mandatory for runtime-bound operations
+- Reconnect requires fresh handshake
+- Reject paths must remain deterministic and traceable
 
 ## Rationale
 
-Lifecycle is the control boundary between contract validity and execution authority.
-Ambiguous status wording in docs can overstate readiness; Milestone 1 needs status language aligned to evidence.
+A strict lifecycle avoids hidden state transitions and improves forensic clarity for failures.
 
-## Law Alignment
+## Consequences
 
-- `deps/yai-specs/contracts/invariants/I-001-traceability.md`
-- `deps/yai-specs/contracts/invariants/I-002-determinism.md`
-- `deps/yai-specs/contracts/invariants/I-003-governance.md`
-- `deps/yai-specs/specs/protocol/include/session.h`
-- `deps/yai-specs/specs/protocol/include/transport.h`
+- Positive:
+  - Cleaner protocol guarantees and stable observability.
+  - Better fit for non-skip proof requirements.
+- Negative:
+  - Partial implementations cannot be presented as full readiness.
 
 ## Status
 
-Active with partial proof coverage:
-
-- handshake and basic lifecycle semantics are implemented in core paths
-- persistent cockpit session model remains pending
-- full non-skip gate evidence for lifecycle claims is still required for higher TRL assertions
+Accepted and active, with remaining evidence hardening tracked in runbook phases.

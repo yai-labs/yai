@@ -7,50 +7,40 @@ applies_to:
   runbook: docs/runbooks/engine-attach.md
   phase: v4
   anchor: "#phase-engine-attach-v4"
+law_refs:
+  - deps/yai-specs/contracts/invariants/I-003-governance.md
+  - deps/yai-specs/contracts/invariants/I-006-external-effect-boundary.md
+  - deps/yai-specs/contracts/boundaries/L1-kernel.md
+  - deps/yai-specs/contracts/boundaries/L2-engine.md
 ---
-# ADR-009 — Engine Attachment Model (Next Phase)
+# ADR-009 - Engine Attachment Model
 
 ## Context
 
-# YAI Architecture Decisions (Law-Aligned, 2026 Revision)
+Current runtime integration still carries transitional wiring. A final attachment model is needed to eliminate per-workspace execution coupling.
 
-This document captures the **machine-level architecture commitments**
-of YAI as of the current runtime refactor phase.
+## Decision
 
-It is grounded in `deps/yai-specs/contracts/` invariants and reflects the
-post-envelope, post-authority enforcement state.
+Engine is attached as a shared runtime plane under Root governance; workspace context is passed through dispatch metadata rather than process topology.
 
-The architecture is stratified across:
+Target model:
 
-- L0 — Vault (immutable identity & ABI boundary)
-- L1 — Kernel (authority, sessions, isolation)
-- L2 — Engine (execution gates)
-- L3 — Mind (proposal-only cognition per workspace)
-- Root — Machine Control Plane (runtime governor)
+- Root governs ingress and routing
+- Kernel enforces authority
+- Engine executes within authorized workspace context
 
----
+## Rationale
 
-### Decision
+Shared attachment improves operability and keeps execution behavior aligned with the single-runtime strategy.
 
-Engine will be attached to Root runtime,
-not directly spawned per workspace.
+## Consequences
 
-Workspace context will be passed through dispatch layer.
-
-### Future Model
-
-Root
- ├── Kernel (authority)
- ├── Engine (shared execution plane)
- └── Workspace contexts (logical isolation)
-
-### Status
-
-Planned.
-Not yet fully integrated.
-
----
+- Positive:
+  - Lower operational complexity.
+  - Cleaner governance boundary from ingress to effects.
+- Negative:
+  - Requires careful migration of existing workspace-oriented assumptions.
 
 ## Status
 
-Active
+Draft; acceptance tied to engine-attach runbook completion.

@@ -13,55 +13,34 @@ law_refs:
   - deps/yai-specs/contracts/boundaries/L1-kernel.md
   - deps/yai-specs/specs/protocol/include/transport.h
 ---
-# ADR-002 — Root Control Plane as Canonical Entry Point
+# ADR-002 - Root Control Plane as Canonical Entry Point
 
 ## Context
 
-YAI requires a single machine-level ingress to prevent authority bypass and workspace coupling drift.
-
-Current repository state showed path ambiguity in docs (`root.sock`) versus runtime/gate conventions (`control.sock` under root run dir).
-Milestone 1 needs this normalized so contract checks and gates are unambiguous.
+The runtime needed an explicit public ingress to prevent path drift (`root.sock` vs `control.sock`) and bypass patterns across tooling and operators.
 
 ## Decision
 
-Introduce and keep a single public Root ingress policy:
+Root is the single public ingress policy:
 
-- Canonical external client socket: `~/.yai/run/root/control.sock`
-- Legacy alias `~/.yai/run/root.sock` is non-canonical and must be treated as deprecated compatibility surface only.
-- Workspace sockets remain internal-only.
+- Canonical socket: `~/.yai/run/root/control.sock`
+- Legacy `~/.yai/run/root.sock` is deprecated compatibility only
+- Workspace sockets are internal implementation detail
 
-All external clients (CLI/cockpit/automation) must reach runtime authority through Root.
-
-## Responsibilities (Root)
-
-- Runtime health and status
-- Workspace registry and routing
-- Machine-level boundary enforcement
-- Protocol/session gateway before Kernel/Engine planes
-
-## Non-Goals
-
-- Root does not execute engine gates
-- Root does not host mind cognition logic
-- Root does not mutate workspace memory directly
-
-Root is a governor/router, not an execution plane.
+All external clients must enter through Root.
 
 ## Rationale
 
-This prevents:
+This preserves authority ordering and keeps routing and policy enforcement machine-scoped before requests reach Kernel/Engine.
 
-- direct CLI to workspace bypass
-- tenant boundary erosion
-- path-level drift that breaks gate reproducibility
+## Consequences
 
-## Law Alignment
-
-- `deps/yai-specs/contracts/axioms/A-002-authority.md`
-- `deps/yai-specs/contracts/invariants/I-003-governance.md`
-- `deps/yai-specs/contracts/boundaries/L1-kernel.md`
-- `deps/yai-specs/specs/protocol/include/transport.h`
+- Positive:
+  - Uniform ingress for CLI, automation, and cockpit.
+  - Clear operational contract for pathing and diagnostics.
+- Negative:
+  - Legacy clients need migration.
 
 ## Status
 
-Active. Canonical path policy is now explicit and normalized for Milestone 1.
+Accepted and active.

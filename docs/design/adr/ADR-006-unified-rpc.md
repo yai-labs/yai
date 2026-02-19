@@ -14,62 +14,36 @@ law_refs:
   - deps/yai-specs/contracts/boundaries/L1-kernel.md
   - deps/yai-specs/contracts/boundaries/L2-engine.md
 ---
-# ADR-006 — Strict Unified RPC Contract
+# ADR-006 - Strict Unified RPC Contract
 
 ## Context
 
-Milestone 1 requires one explicit contract baseline across specs, core, and CLI.
-Without a strict mapping between envelope contract and exposed command surface, CI can report green while runtime proofs remain partial.
+Milestone 1 required one explicit envelope and command baseline across specs, core runtime, and CLI. Without this, CI could be green while operational behavior drifted.
 
 ## Decision
 
-All communication follows one binary envelope contract anchored in specs:
+All communication follows the pinned binary contract in `deps/yai-specs`, with command semantics anchored by CLI contract artifacts.
 
-- `deps/yai-specs/specs/protocol/include/transport.h`
-- `deps/yai-specs/specs/protocol/include/protocol.h`
-- `deps/yai-specs/specs/protocol/include/yai_protocol_ids.h`
-- `deps/yai-specs/specs/protocol/include/errors.h`
-- `deps/yai-specs/specs/protocol/include/auth.h`
-- `deps/yai-specs/specs/protocol/include/roles.h`
-- `deps/yai-specs/specs/protocol/include/session.h`
-- `deps/yai-specs/specs/protocol/runtime/include/rpc_runtime.h`
+Mandatory rules:
 
-And command semantics are anchored by pinned CLI contract artifacts:
-
-- `deps/yai-specs/specs/cli/schema/commands.v1.json`
-- `deps/yai-specs/specs/cli/schema/commands.schema.json`
-
-## Mandatory Rules
-
-- Handshake required before effectful commands.
-- `ws_id` required for runtime-bound commands.
-- `arming + role` required for privileged commands.
-- Deterministic reject semantics with stable code mapping to specs.
-- No behavior may be claimed as "proved" if required gates are skipped.
-
-## Prohibited
-
-- Parallel protocol surfaces
-- Out-of-contract side channels
-- CLI shortcuts that bypass contract semantics
-- Green evidence based on mandatory-step `SKIP`
+- Handshake before effectful commands
+- Workspace context for runtime-bound commands
+- Role + arming enforcement for privileged operations
+- Deterministic reject semantics mapped to contract identifiers
+- No mandatory proof claims on skipped gates
 
 ## Rationale
 
-This establishes an auditable baseline for Milestone 1:
+A strict contract baseline makes drift observable and converts gate output into reliable evidence.
 
-- contract and implementation drift are machine-detectable
-- runtime gates can be interpreted as real evidence
-- TRL progression is tied to non-skipped proof
+## Consequences
 
-## Law Alignment
-
-- `deps/yai-specs/contracts/invariants/I-001-traceability.md`
-- `deps/yai-specs/contracts/invariants/I-002-determinism.md`
-- `deps/yai-specs/contracts/invariants/I-003-governance.md`
-- `deps/yai-specs/contracts/boundaries/L1-kernel.md`
-- `deps/yai-specs/contracts/boundaries/L2-engine.md`
+- Positive:
+  - Better parity between law/spec and implementation.
+  - Stronger auditability for TRL progression.
+- Negative:
+  - Tighter CI can increase short-term failures during migration.
 
 ## Status
 
-Active. Milestone 1 requires CI/gates to enforce this contract baseline explicitly.
+Accepted and active.
