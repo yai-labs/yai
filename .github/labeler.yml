@@ -22,6 +22,14 @@
   - changed-files:
       - any-glob-to-any-file: ["tools/**"]
 
+"area:law":
+  - changed-files:
+      - any-glob-to-any-file: ["law/**"]
+
+"area:specs":
+  - changed-files:
+      - any-glob-to-any-file: ["deps/yai-specs/**"]
+
 "type:docs":
   - changed-files:
       - any-glob-to-any-file:
@@ -35,6 +43,10 @@
             "CODE_OF_CONDUCT.md",
           ]
 
-"area:law":
+"type:ci":
   - changed-files:
-      - any-glob-to-any-file: ["law/**", "deps/yai-specs/**"]
+      - any-glob-to-any-file:
+          [
+            ".github/workflows/**",
+            ".github/actions/**",
+          ]
