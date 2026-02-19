@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "frontmatter.adr.v1",
+  "type": "object",
+  "required": ["id", "status", "law_refs"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^ADR-"},
+    "status": {"type": "string", "enum": ["draft", "active", "accepted", "deprecated", "superseded"]},
+    "law_refs": {"type": "array", "minItems": 1, "items": {"type": "string", "pattern": "^deps/yai-specs/"}}
+  }
+}

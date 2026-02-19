@@ -23,7 +23,8 @@ Do not invent structure from scratch.
 4. `docs/_policy/docs-style.md`
 5. `docs/design/traceability.md`
 6. `docs/dev-guide/github-templates.md`
-7. `tools/README.md`
+7. `docs/dev-guide/agent-contract.md`
+8. `tools/README.md`
 
 ## Required artifact flow
 
@@ -54,6 +55,13 @@ Use this sequence unless explicitly overridden:
   - `tools/bin/yai-pr-body --template <...> ...`
 - Validate PR metadata when available.
 - Include issue context (`#NNN` or `N/A` + reason when allowed).
+
+## Automation commands
+
+- `tools/bin/yai-docs-schema-check --changed --base <BASE_SHA> --head <HEAD_SHA>`
+- `tools/bin/yai-docs-graph --check`
+- `tools/bin/yai-agent-pack --check`
+- `tools/bin/yai-docs-doctor --mode ci --base <BASE_SHA> --head <HEAD_SHA>`
 
 ## Definition of done for docs-governance changes
 

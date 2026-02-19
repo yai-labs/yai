@@ -4,6 +4,10 @@ import sys
 from yai_tools.issue.body import generate_issue_body
 from yai_tools.pr.body import generate_pr_body
 from yai_tools.pr.check import check_pr_body
+from yai_tools.verify.agent_pack import run_agent_pack
+from yai_tools.verify.doctor import run_doctor
+from yai_tools.verify.frontmatter_schema import run_schema_check
+from yai_tools.verify.trace_graph import run_graph
 from yai_tools.workflow.branch import make_branch_name, maybe_checkout
 
 
@@ -116,9 +120,56 @@ def cmd_branch(argv: list[str]) -> int:
     return 0
 
 
+def cmd_docs_schema_check(argv: list[str]) -> int:
+    p = argparse.ArgumentParser(prog="yai-docs-schema-check", add_help=True)
+    p.add_argument("--changed", action="store_true")
+    p.add_argument("--base", default="")
+    p.add_argument("--head", default="HEAD")
+    args = p.parse_args(argv)
+
+    if args.changed and not args.base:
+        print("[docs-schema] ERROR: --changed requires --base <sha>", file=sys.stderr)
+        return 2
+
+    return run_schema_check(changed=args.changed, base=args.base, head=args.head)
+
+
+def cmd_docs_graph(argv: list[str]) -> int:
+    p = argparse.ArgumentParser(prog="yai-docs-graph", add_help=True)
+    mode = p.add_mutually_exclusive_group(required=True)
+    mode.add_argument("--write", action="store_true")
+    mode.add_argument("--check", action="store_true")
+    args = p.parse_args(argv)
+
+    return run_graph(write=args.write)
+
+
+def cmd_agent_pack(argv: list[str]) -> int:
+    p = argparse.ArgumentParser(prog="yai-agent-pack", add_help=True)
+    mode = p.add_mutually_exclusive_group(required=True)
+    mode.add_argument("--write", action="store_true")
+    mode.add_argument("--check", action="store_true")
+    args = p.parse_args(argv)
+
+    return run_agent_pack(write=args.write)
+
+
+def cmd_docs_doctor(argv: list[str]) -> int:
+    p = argparse.ArgumentParser(prog="yai-docs-doctor", add_help=True)
+    p.add_argument("--mode", choices=["ci", "all"], default="ci")
+    p.add_argument("--base", default="")
+    p.add_argument("--head", default="HEAD")
+    args = p.parse_args(argv)
+
+    return run_doctor(mode=args.mode, base=args.base, head=args.head)
+
+
 def main() -> int:
     if len(sys.argv) < 2:
-        print("Usage: python -m yai_tools.cli <pr-body|pr-check|branch|issue-body> ...", file=sys.stderr)
+        print(
+            "Usage: python -m yai_tools.cli <pr-body|pr-check|branch|issue-body|docs-schema-check|docs-graph|agent-pack|docs-doctor> ...",
+            file=sys.stderr,
+        )
         return 2
 
     sub = sys.argv[1]
@@ -132,6 +183,14 @@ def main() -> int:
         return cmd_branch(rest)
     if sub == "issue-body":
         return cmd_issue_body(rest)
+    if sub == "docs-schema-check":
+        return cmd_docs_schema_check(rest)
+    if sub == "docs-graph":
+        return cmd_docs_graph(rest)
+    if sub == "agent-pack":
+        return cmd_agent_pack(rest)
+    if sub == "docs-doctor":
+        return cmd_docs_doctor(rest)
 
     print(f"Unknown subcommand: {sub}", file=sys.stderr)
     return 2

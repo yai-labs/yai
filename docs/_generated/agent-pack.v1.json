@@ -1,0 +1,56 @@
+{
+  "artifact_flow": [
+    "proposal",
+    "adr",
+    "runbook",
+    "milestone_pack",
+    "evidence",
+    "proof_pack"
+  ],
+  "audit_policy": {
+    "draft_private_path": "docs/audits/.private/",
+    "promotion_requires": [
+      "milestone_closed",
+      "evidence_complete",
+      "human_review"
+    ],
+    "public_path": "docs/audits/"
+  },
+  "canonical_sources": [
+    "docs/design/spine.md",
+    "docs/dev-guide/cross-repo-workflow.md",
+    "docs/templates/README.md",
+    "docs/_policy/docs-style.md",
+    "docs/design/traceability.md",
+    "docs/dev-guide/github-templates.md",
+    "tools/README.md",
+    "docs/dev-guide/agent-contract.md",
+    "docs/dev-guide/agent-playbook.md"
+  ],
+  "path_policy": {
+    "allowed_prefixes": [
+      "docs/",
+      "deps/",
+      "tools/",
+      ".github/"
+    ],
+    "forbid_absolute_paths": true,
+    "relative_only": true
+  },
+  "quality_gates": [
+    "validate-pr-metadata",
+    "validate-traceability",
+    "validate-runbook-adr-links",
+    "validate-agent-pack",
+    "validate-changelog"
+  ],
+  "required_commands": [
+    "tools/bin/yai-docs-trace-check --changed --base <BASE_SHA> --head <HEAD_SHA>",
+    "tools/bin/yai-docs-schema-check --changed --base <BASE_SHA> --head <HEAD_SHA>",
+    "tools/bin/yai-docs-graph --check",
+    "tools/bin/yai-agent-pack --check",
+    "tools/bin/yai-docs-doctor --mode ci --base <BASE_SHA> --head <HEAD_SHA>",
+    "tools/bin/yai-pr-body --template <template> ..."
+  ],
+  "version": 1
+}

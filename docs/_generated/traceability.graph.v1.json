@@ -1,0 +1,542 @@
+{
+  "edges": [
+    {
+      "from": "docs/design/adr/ADR-001-single-runtime.md",
+      "relation": "adr_to_runbook",
+      "to": "docs/runbooks/root-hardening.md"
+    },
+    {
+      "from": "docs/design/adr/ADR-002-root-entrypoint.md",
+      "relation": "adr_to_runbook",
+      "to": "docs/runbooks/root-hardening.md"
+    },
+    {
+      "from": "docs/design/adr/ADR-003-kernel-authority.md",
+      "relation": "adr_to_runbook",
+      "to": "docs/runbooks/root-hardening.md"
+    },
+    {
+      "from": "docs/design/adr/ADR-004-engine-execution.md",
+      "relation": "adr_to_runbook",
+      "to": "docs/runbooks/engine-attach.md"
+    },
+    {
+      "from": "docs/design/adr/ADR-005-mind-proposer.md",
+      "relation": "adr_to_runbook",
+      "to": "docs/runbooks/mind-redis-stm.md"
+    },
+    {
+      "from": "docs/design/adr/ADR-006-unified-rpc.md",
+      "relation": "adr_to_runbook",
+      "to": "docs/runbooks/root-hardening.md"
+    },
+    {
+      "from": "docs/design/adr/ADR-007-workspace-isolation.md",
+      "relation": "adr_to_runbook",
+      "to": "docs/runbooks/workspaces-lifecycle.md"
+    },
+    {
+      "from": "docs/design/adr/ADR-008-connection-lifecycle.md",
+      "relation": "adr_to_runbook",
+      "to": "docs/runbooks/workspaces-lifecycle.md"
+    },
+    {
+      "from": "docs/design/adr/ADR-009-engine-attachment.md",
+      "relation": "adr_to_runbook",
+      "to": "docs/runbooks/engine-attach.md"
+    },
+    {
+      "from": "docs/design/adr/ADR-010-boot-entrypoint.md",
+      "relation": "adr_to_runbook",
+      "to": "docs/runbooks/root-hardening.md"
+    },
+    {
+      "from": "docs/design/adr/ADR-011-contract-baseline-lock.md",
+      "relation": "adr_to_runbook",
+      "to": "docs/runbooks/root-hardening.md"
+    },
+    {
+      "from": "docs/design/proposals/PRP-001-runtime-topology-and-authority.md",
+      "relation": "proposal_to_adr",
+      "to": "docs/design/adr/ADR-001-single-runtime.md"
+    },
+    {
+      "from": "docs/design/proposals/PRP-001-runtime-topology-and-authority.md",
+      "relation": "proposal_to_adr",
+      "to": "docs/design/adr/ADR-002-root-entrypoint.md"
+    },
+    {
+      "from": "docs/design/proposals/PRP-001-runtime-topology-and-authority.md",
+      "relation": "proposal_to_adr",
+      "to": "docs/design/adr/ADR-003-kernel-authority.md"
+    },
+    {
+      "from": "docs/design/proposals/PRP-001-runtime-topology-and-authority.md",
+      "relation": "proposal_to_adr",
+      "to": "docs/design/adr/ADR-004-engine-execution.md"
+    },
+    {
+      "from": "docs/design/proposals/PRP-001-runtime-topology-and-authority.md",
+      "relation": "proposal_to_adr",
+      "to": "docs/design/adr/ADR-005-mind-proposer.md"
+    },
+    {
+      "from": "docs/design/proposals/PRP-001-runtime-topology-and-authority.md",
+      "relation": "proposal_to_milestone_pack",
+      "to": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md"
+    },
+    {
+      "from": "docs/design/proposals/PRP-001-runtime-topology-and-authority.md",
+      "relation": "proposal_to_runbook",
+      "to": "docs/runbooks/root-hardening.md"
+    },
+    {
+      "from": "docs/design/proposals/PRP-002-unified-rpc-and-cli-contract.md",
+      "relation": "proposal_to_adr",
+      "to": "docs/design/adr/ADR-006-unified-rpc.md"
+    },
+    {
+      "from": "docs/design/proposals/PRP-002-unified-rpc-and-cli-contract.md",
+      "relation": "proposal_to_adr",
+      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+    },
+    {
+      "from": "docs/design/proposals/PRP-002-unified-rpc-and-cli-contract.md",
+      "relation": "proposal_to_milestone_pack",
+      "to": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md"
+    },
+    {
+      "from": "docs/design/proposals/PRP-002-unified-rpc-and-cli-contract.md",
+      "relation": "proposal_to_runbook",
+      "to": "docs/runbooks/root-hardening.md"
+    },
+    {
+      "from": "docs/design/proposals/PRP-003-workspace-lifecycle-and-isolation.md",
+      "relation": "proposal_to_adr",
+      "to": "docs/design/adr/ADR-007-workspace-isolation.md"
+    },
+    {
+      "from": "docs/design/proposals/PRP-003-workspace-lifecycle-and-isolation.md",
+      "relation": "proposal_to_adr",
+      "to": "docs/design/adr/ADR-008-connection-lifecycle.md"
+    },
+    {
+      "from": "docs/design/proposals/PRP-003-workspace-lifecycle-and-isolation.md",
+      "relation": "proposal_to_adr",
+      "to": "docs/design/adr/ADR-009-engine-attachment.md"
+    },
+    {
+      "from": "docs/design/proposals/PRP-003-workspace-lifecycle-and-isolation.md",
+      "relation": "proposal_to_adr",
+      "to": "docs/design/adr/ADR-010-boot-entrypoint.md"
+    },
+    {
+      "from": "docs/design/proposals/PRP-003-workspace-lifecycle-and-isolation.md",
+      "relation": "proposal_to_runbook",
+      "to": "docs/runbooks/engine-attach.md"
+    },
+    {
+      "from": "docs/design/proposals/PRP-003-workspace-lifecycle-and-isolation.md",
+      "relation": "proposal_to_runbook",
+      "to": "docs/runbooks/workspaces-lifecycle.md"
+    },
+    {
+      "from": "docs/design/proposals/PRP-004-contract-baseline-lock-and-pin-policy.md",
+      "relation": "proposal_to_adr",
+      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+    },
+    {
+      "from": "docs/design/proposals/PRP-004-contract-baseline-lock-and-pin-policy.md",
+      "relation": "proposal_to_milestone_pack",
+      "to": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md"
+    },
+    {
+      "from": "docs/design/proposals/PRP-004-contract-baseline-lock-and-pin-policy.md",
+      "relation": "proposal_to_runbook",
+      "to": "docs/runbooks/root-hardening.md"
+    },
+    {
+      "from": "docs/design/proposals/PRP-005-formal-coverage-roadmap.md",
+      "relation": "proposal_to_adr",
+      "to": "docs/design/adr/ADR-006-unified-rpc.md"
+    },
+    {
+      "from": "docs/design/proposals/PRP-005-formal-coverage-roadmap.md",
+      "relation": "proposal_to_adr",
+      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+    },
+    {
+      "from": "docs/design/proposals/PRP-005-formal-coverage-roadmap.md",
+      "relation": "proposal_to_milestone_pack",
+      "to": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md"
+    },
+    {
+      "from": "docs/design/proposals/PRP-005-formal-coverage-roadmap.md",
+      "relation": "proposal_to_runbook",
+      "to": "docs/runbooks/root-hardening.md"
+    },
+    {
+      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md",
+      "relation": "milestone_pack_to_adr",
+      "to": "docs/design/adr/ADR-002-root-entrypoint.md"
+    },
+    {
+      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md",
+      "relation": "milestone_pack_to_adr",
+      "to": "docs/design/adr/ADR-006-unified-rpc.md"
+    },
+    {
+      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md",
+      "relation": "milestone_pack_to_adr",
+      "to": "docs/design/adr/ADR-008-connection-lifecycle.md"
+    },
+    {
+      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md",
+      "relation": "milestone_pack_to_adr",
+      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+    },
+    {
+      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md",
+      "relation": "milestone_pack_to_runbook",
+      "to": "docs/runbooks/root-hardening.md"
+    },
+    {
+      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md",
+      "relation": "milestone_pack_to_adr",
+      "to": "docs/design/adr/ADR-002-root-entrypoint.md"
+    },
+    {
+      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md",
+      "relation": "milestone_pack_to_adr",
+      "to": "docs/design/adr/ADR-006-unified-rpc.md"
+    },
+    {
+      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md",
+      "relation": "milestone_pack_to_adr",
+      "to": "docs/design/adr/ADR-008-connection-lifecycle.md"
+    },
+    {
+      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md",
+      "relation": "milestone_pack_to_adr",
+      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+    },
+    {
+      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md",
+      "relation": "milestone_pack_to_runbook",
+      "to": "docs/runbooks/root-hardening.md"
+    },
+    {
+      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.2.md",
+      "relation": "milestone_pack_to_adr",
+      "to": "docs/design/adr/ADR-002-root-entrypoint.md"
+    },
+    {
+      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.2.md",
+      "relation": "milestone_pack_to_adr",
+      "to": "docs/design/adr/ADR-006-unified-rpc.md"
+    },
+    {
+      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.2.md",
+      "relation": "milestone_pack_to_adr",
+      "to": "docs/design/adr/ADR-008-connection-lifecycle.md"
+    },
+    {
+      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.2.md",
+      "relation": "milestone_pack_to_adr",
+      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+    },
+    {
+      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.2.md",
+      "relation": "milestone_pack_to_runbook",
+      "to": "docs/runbooks/root-hardening.md"
+    },
+    {
+      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.3.md",
+      "relation": "milestone_pack_to_adr",
+      "to": "docs/design/adr/ADR-002-root-entrypoint.md"
+    },
+    {
+      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.3.md",
+      "relation": "milestone_pack_to_adr",
+      "to": "docs/design/adr/ADR-006-unified-rpc.md"
+    },
+    {
+      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.3.md",
+      "relation": "milestone_pack_to_adr",
+      "to": "docs/design/adr/ADR-008-connection-lifecycle.md"
+    },
+    {
+      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.3.md",
+      "relation": "milestone_pack_to_adr",
+      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+    },
+    {
+      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.3.md",
+      "relation": "milestone_pack_to_runbook",
+      "to": "docs/runbooks/root-hardening.md"
+    },
+    {
+      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.4.md",
+      "relation": "milestone_pack_to_adr",
+      "to": "docs/design/adr/ADR-002-root-entrypoint.md"
+    },
+    {
+      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.4.md",
+      "relation": "milestone_pack_to_adr",
+      "to": "docs/design/adr/ADR-006-unified-rpc.md"
+    },
+    {
+      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.4.md",
+      "relation": "milestone_pack_to_adr",
+      "to": "docs/design/adr/ADR-008-connection-lifecycle.md"
+    },
+    {
+      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.4.md",
+      "relation": "milestone_pack_to_adr",
+      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+    },
+    {
+      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.4.md",
+      "relation": "milestone_pack_to_runbook",
+      "to": "docs/runbooks/root-hardening.md"
+    },
+    {
+      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md",
+      "relation": "milestone_pack_to_adr",
+      "to": "docs/design/adr/ADR-002-root-entrypoint.md"
+    },
+    {
+      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md",
+      "relation": "milestone_pack_to_adr",
+      "to": "docs/design/adr/ADR-006-unified-rpc.md"
+    },
+    {
+      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md",
+      "relation": "milestone_pack_to_adr",
+      "to": "docs/design/adr/ADR-008-connection-lifecycle.md"
+    },
+    {
+      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md",
+      "relation": "milestone_pack_to_adr",
+      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+    },
+    {
+      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md",
+      "relation": "milestone_pack_to_runbook",
+      "to": "docs/runbooks/root-hardening.md"
+    },
+    {
+      "from": "docs/runbooks/root-hardening.md",
+      "relation": "runbook_to_adr",
+      "to": "docs/design/adr/ADR-002-root-entrypoint.md"
+    },
+    {
+      "from": "docs/runbooks/root-hardening.md",
+      "relation": "runbook_to_adr",
+      "to": "docs/design/adr/ADR-006-unified-rpc.md"
+    },
+    {
+      "from": "docs/runbooks/root-hardening.md",
+      "relation": "runbook_to_adr",
+      "to": "docs/design/adr/ADR-008-connection-lifecycle.md"
+    },
+    {
+      "from": "docs/runbooks/specs-refactor-foundation.md",
+      "relation": "runbook_to_adr",
+      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+    },
+    {
+      "from": "docs/runbooks/workspaces-lifecycle.md",
+      "relation": "runbook_to_adr",
+      "to": "docs/design/adr/ADR-007-workspace-isolation.md"
+    },
+    {
+      "from": "docs/runbooks/workspaces-lifecycle.md",
+      "relation": "runbook_to_adr",
+      "to": "docs/design/adr/ADR-008-connection-lifecycle.md"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "docs/design/adr/ADR-001-single-runtime.md",
+      "path": "docs/design/adr/ADR-001-single-runtime.md",
+      "type": "adr"
+    },
+    {
+      "id": "docs/design/adr/ADR-002-root-entrypoint.md",
+      "path": "docs/design/adr/ADR-002-root-entrypoint.md",
+      "type": "adr"
+    },
+    {
+      "id": "docs/design/adr/ADR-003-kernel-authority.md",
+      "path": "docs/design/adr/ADR-003-kernel-authority.md",
+      "type": "adr"
+    },
+    {
+      "id": "docs/design/adr/ADR-004-engine-execution.md",
+      "path": "docs/design/adr/ADR-004-engine-execution.md",
+      "type": "adr"
+    },
+    {
+      "id": "docs/design/adr/ADR-005-mind-proposer.md",
+      "path": "docs/design/adr/ADR-005-mind-proposer.md",
+      "type": "adr"
+    },
+    {
+      "id": "docs/design/adr/ADR-006-unified-rpc.md",
+      "path": "docs/design/adr/ADR-006-unified-rpc.md",
+      "type": "adr"
+    },
+    {
+      "id": "docs/design/adr/ADR-007-workspace-isolation.md",
+      "path": "docs/design/adr/ADR-007-workspace-isolation.md",
+      "type": "adr"
+    },
+    {
+      "id": "docs/design/adr/ADR-008-connection-lifecycle.md",
+      "path": "docs/design/adr/ADR-008-connection-lifecycle.md",
+      "type": "adr"
+    },
+    {
+      "id": "docs/design/adr/ADR-009-engine-attachment.md",
+      "path": "docs/design/adr/ADR-009-engine-attachment.md",
+      "type": "adr"
+    },
+    {
+      "id": "docs/design/adr/ADR-010-boot-entrypoint.md",
+      "path": "docs/design/adr/ADR-010-boot-entrypoint.md",
+      "type": "adr"
+    },
+    {
+      "id": "docs/design/adr/ADR-011-contract-baseline-lock.md",
+      "path": "docs/design/adr/ADR-011-contract-baseline-lock.md",
+      "type": "adr"
+    },
+    {
+      "id": "docs/design/adr/README.md",
+      "path": "docs/design/adr/README.md",
+      "type": "adr"
+    },
+    {
+      "id": "docs/design/proposals/PRP-001-runtime-topology-and-authority.md",
+      "path": "docs/design/proposals/PRP-001-runtime-topology-and-authority.md",
+      "type": "proposal"
+    },
+    {
+      "id": "docs/design/proposals/PRP-002-unified-rpc-and-cli-contract.md",
+      "path": "docs/design/proposals/PRP-002-unified-rpc-and-cli-contract.md",
+      "type": "proposal"
+    },
+    {
+      "id": "docs/design/proposals/PRP-003-workspace-lifecycle-and-isolation.md",
+      "path": "docs/design/proposals/PRP-003-workspace-lifecycle-and-isolation.md",
+      "type": "proposal"
+    },
+    {
+      "id": "docs/design/proposals/PRP-004-contract-baseline-lock-and-pin-policy.md",
+      "path": "docs/design/proposals/PRP-004-contract-baseline-lock-and-pin-policy.md",
+      "type": "proposal"
+    },
+    {
+      "id": "docs/design/proposals/PRP-005-formal-coverage-roadmap.md",
+      "path": "docs/design/proposals/PRP-005-formal-coverage-roadmap.md",
+      "type": "proposal"
+    },
+    {
+      "id": "docs/design/proposals/README.md",
+      "path": "docs/design/proposals/README.md",
+      "type": "proposal"
+    },
+    {
+      "id": "docs/milestone-packs/README.md",
+      "path": "docs/milestone-packs/README.md",
+      "type": "milestone_pack"
+    },
+    {
+      "id": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md",
+      "path": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md",
+      "type": "milestone_pack"
+    },
+    {
+      "id": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md",
+      "path": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md",
+      "type": "milestone_pack"
+    },
+    {
+      "id": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.2.md",
+      "path": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.2.md",
+      "type": "milestone_pack"
+    },
+    {
+      "id": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.3.md",
+      "path": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.3.md",
+      "type": "milestone_pack"
+    },
+    {
+      "id": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.4.md",
+      "path": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.4.md",
+      "type": "milestone_pack"
+    },
+    {
+      "id": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md",
+      "path": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md",
+      "type": "milestone_pack"
+    },
+    {
+      "id": "docs/runbooks/README.md",
+      "path": "docs/runbooks/README.md",
+      "type": "runbook"
+    },
+    {
+      "id": "docs/runbooks/data-plane.md",
+      "path": "docs/runbooks/data-plane.md",
+      "type": "runbook"
+    },
+    {
+      "id": "docs/runbooks/engine-attach.md",
+      "path": "docs/runbooks/engine-attach.md",
+      "type": "runbook"
+    },
+    {
+      "id": "docs/runbooks/kernel-sovereignty.md",
+      "path": "docs/runbooks/kernel-sovereignty.md",
+      "type": "runbook"
+    },
+    {
+      "id": "docs/runbooks/mind-redis-stm.md",
+      "path": "docs/runbooks/mind-redis-stm.md",
+      "type": "runbook"
+    },
+    {
+      "id": "docs/runbooks/operations.md",
+      "path": "docs/runbooks/operations.md",
+      "type": "runbook"
+    },
+    {
+      "id": "docs/runbooks/root-hardening.md",
+      "path": "docs/runbooks/root-hardening.md",
+      "type": "runbook"
+    },
+    {
+      "id": "docs/runbooks/specs-refactor-foundation.md",
+      "path": "docs/runbooks/specs-refactor-foundation.md",
+      "type": "runbook"
+    },
+    {
+      "id": "docs/runbooks/workspaces-lifecycle.md",
+      "path": "docs/runbooks/workspaces-lifecycle.md",
+      "type": "runbook"
+    }
+  ],
+  "orphans": [
+    "docs/design/adr/README.md",
+    "docs/design/proposals/README.md",
+    "docs/milestone-packs/README.md",
+    "docs/runbooks/README.md",
+    "docs/runbooks/data-plane.md",
+    "docs/runbooks/kernel-sovereignty.md",
+    "docs/runbooks/operations.md"
+  ],
+  "version": 1,
+  "violations": []
+}

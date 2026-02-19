@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -euo pipefail
+export PYTHONPATH="$(cd "$(dirname "${BASH_SOURCE[0]}")/../python" && pwd)${PYTHONPATH:+:$PYTHONPATH}"
+exec python3 -m yai_tools.cli docs-schema-check "$@"

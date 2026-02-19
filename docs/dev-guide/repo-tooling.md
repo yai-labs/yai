@@ -16,6 +16,10 @@ So workflow stays consistent even when multiple agents touch the repo:
 - `tools/bin/yai-dev-branch`
 - `tools/bin/yai-dev-pr-body`
 - `tools/bin/yai-dev-pr-check`
+- `tools/bin/yai-docs-schema-check`
+- `tools/bin/yai-docs-graph`
+- `tools/bin/yai-agent-pack`
+- `tools/bin/yai-docs-doctor`
 
 ## Quick usage
 Generate issue draft body:
@@ -57,6 +61,7 @@ Local:
 CI:
 - Workflow `validate-traceability.yml` runs on PRs that touch ADR/Runbook/MP/docs templates/tools.
 - Gate is scoped to changed docs to avoid breaking legacy documents.
+- Workflow `validate-agent-pack.yml` enforces schema, generated graph sync, and agent-pack sync.
 
 Hard rules (when files are touched):
 - ADR must have `law_refs` pointing to `deps/yai-specs/...`

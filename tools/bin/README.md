@@ -22,6 +22,10 @@ Provide stable, easy-to-remember commands for verify, gate, suite, diagnostics, 
 - `yai-dev-pr-body`: alias of `yai-pr-body`.
 - `yai-dev-pr-check`: alias of `yai-pr-check`.
 - `yai-specs-sync`: sync `deps/yai-specs` pin and proof-pack refs (`manifest` + `README`).
+- `yai-docs-schema-check`: validate docs frontmatter schema.
+- `yai-docs-graph`: generate/check docs traceability graph + lock.
+- `yai-agent-pack`: generate/check canonical machine-readable agent pack.
+- `yai-docs-doctor`: run end-to-end docs-governance checks for CI/local.
 
 ## Quick Start
 

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "frontmatter.runbook.v1",
+  "type": "object",
+  "required": ["id", "status", "adr_refs"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^RB[-_]"},
+    "status": {"type": "string", "enum": ["draft", "active", "deprecated", "superseded"]},
+    "adr_refs": {"type": "array", "minItems": 1, "items": {"type": "string", "pattern": "^docs/design/adr/ADR-.*\\.md$"}}
+  }
+}

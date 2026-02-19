@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "traceability.graph.v1",
+  "type": "object",
+  "required": ["version", "nodes", "edges", "orphans", "violations"],
+  "properties": {
+    "version": {"type": "integer", "const": 1},
+    "nodes": {"type": "array"},
+    "edges": {"type": "array"},
+    "orphans": {"type": "array"},
+    "violations": {"type": "array"}
+  }
+}

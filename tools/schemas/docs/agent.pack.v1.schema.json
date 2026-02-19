@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agent.pack.v1",
+  "type": "object",
+  "required": ["version", "canonical_sources", "artifact_flow", "required_commands", "quality_gates", "path_policy", "audit_policy"],
+  "properties": {
+    "version": {"type": "integer", "const": 1},
+    "canonical_sources": {"type": "array", "minItems": 1},
+    "artifact_flow": {"type": "array", "minItems": 1},
+    "required_commands": {"type": "array", "minItems": 1},
+    "quality_gates": {"type": "array", "minItems": 1},
+    "path_policy": {"type": "object"},
+    "audit_policy": {"type": "object"}
+  }
+}
