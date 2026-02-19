@@ -93,8 +93,6 @@ awk -v v="$NEW" -v d="$DATE_UTC" '
     if (inserted==0 && $0 ~ /^## \[?[Uu]nreleased\]?$/) {
       print ""
       print "## [" v "] - " d
-      print ""
-      print "- TODO: summarize release changes."
       inserted=1
     }
   }
@@ -102,8 +100,6 @@ awk -v v="$NEW" -v d="$DATE_UTC" '
     if (inserted==0) {
       print ""
       print "## [" v "] - " d
-      print ""
-      print "- TODO: summarize release changes."
     }
   }
 ' CHANGELOG.md > "$TMP"
