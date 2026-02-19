@@ -8,8 +8,8 @@ Canonical source: `yai/docs/proof/PP-FOUNDATION-0001/`
 Standardize one canonical, machine-readable foundation proof pack for TRL/documentation/demo preparation.
 
 ## Pin Set (explicit)
-- `yai-specs`: `v0.1.0` line, tag `UNTAGGED`, commit `530e83f34d10b9b8c828b287cc02ff68481dc923` (as pinned in `yai/deps/yai-specs`)
-- `yai-cli`: version `0.1.7`, tag `UNTAGGED`, commit `11edfa68327fe6126cef04d95fc8e2b4c7805113` (from `yai/deps/yai-cli.ref`)
+- `yai-specs`: `v0.1.0` line, tag `UNTAGGED`, commit `51f0ef3b5985d9fbd18c8f794d03206055bc7f0d` (as pinned in `yai/deps/yai-specs`)
+- `yai-cli`: version `0.1.7`, tag `UNTAGGED`, commit `314e8606a0ff6a0a0cd8fa9348b9c499be3536e0` (from `yai/deps/yai-cli.ref`)
 - `yai-mind`: version `0.1.0`, tag `UNTAGGED`, commit `05aa7254c419a1620452e995c286d0d3b9a456c3` (workspace-observed baseline)
 
 ## Evidence Split
