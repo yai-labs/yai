@@ -1,0 +1,39 @@
+name: label-palette-sync
+
+on:
+  workflow_dispatch:
+    inputs:
+      apply:
+        description: "Apply changes (true) or dry-run only (false)"
+        required: false
+        default: false
+        type: boolean
+  schedule:
+    - cron: "17 6 * * 1"
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Sync label palette
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          APPLY_FLAG=""
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" && "${{ inputs.apply }}" == "true" ]]; then
+            APPLY_FLAG="--apply"
+          fi
+          tools/bin/yai-dev-label-sync --repo "${{ github.repository }}" ${APPLY_FLAG}
