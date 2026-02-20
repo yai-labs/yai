@@ -43,7 +43,28 @@
             "CODE_OF_CONDUCT.md",
           ]
 
+"work-type:docs":
+  - changed-files:
+      - any-glob-to-any-file:
+          [
+            "docs/**",
+            ".github/**",
+            "README.md",
+            "CHANGELOG.md",
+            "CONTRIBUTING.md",
+            "SECURITY.md",
+            "CODE_OF_CONDUCT.md",
+          ]
+
 "type:ci":
+  - changed-files:
+      - any-glob-to-any-file:
+          [
+            ".github/workflows/**",
+            ".github/actions/**",
+          ]
+
+"work-type:ci":
   - changed-files:
       - any-glob-to-any-file:
           [

@@ -1,6 +1,7 @@
 import argparse
 import base64
 import json
+import re
 import subprocess
 import sys
 from typing import Any
@@ -29,6 +30,25 @@ from yai_tools.verify.doctor import run_doctor
 from yai_tools.verify.frontmatter_schema import run_schema_check
 from yai_tools.verify.trace_graph import run_graph
 from yai_tools.workflow.branch import make_branch_name, maybe_checkout
+
+_DEFAULT_LABEL_COLOR = "d4a72c"
+_EXACT_LABEL_COLORS: dict[str, str] = {
+    "bug": "d73a4a",
+    "enhancement": "a2eeef",
+    "docs": "0075ca",
+    "governance": "5319e7",
+    "runbook": "1d76db",
+    "mp-closure": "8250df",
+}
+_PREFIX_LABEL_COLORS: tuple[tuple[str, str], ...] = (
+    ("phase:", "1d76db"),
+    ("track:", "0e8a16"),
+    ("class:", "fbca04"),
+    ("work-type:", "c5def5"),
+    ("worktype:", "c5def5"),
+    ("type:", "bfd4f2"),
+    ("area:", "0052cc"),
+)
 
 
 def _repo_root() -> str:
@@ -158,15 +178,63 @@ def _fetch_milestones(repo: str) -> list[dict[str, Any]]:
     return _gh_json(["api", f"repos/{repo}/milestones?state=all&per_page=100"])
 
 
+def _fetch_labels(repo: str) -> list[dict[str, Any]]:
+    run = _run(
+        [
+            "gh",
+            "api",
+            "--paginate",
+            f"repos/{repo}/labels?per_page=100",
+            "--jq",
+            ".[] | @base64",
+        ]
+    )
+    if run.returncode != 0:
+        raise RuntimeError(run.stderr.strip() or run.stdout.strip() or "failed to fetch labels")
+
+    out: list[dict[str, Any]] = []
+    for line in run.stdout.splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        raw = base64.b64decode(line.encode("utf-8")).decode("utf-8")
+        out.append(json.loads(raw))
+    return out
+
+
+def _label_color(label: str) -> str:
+    normalized = label.strip().lower()
+    if normalized in _EXACT_LABEL_COLORS:
+        return _EXACT_LABEL_COLORS[normalized]
+    for prefix, color in _PREFIX_LABEL_COLORS:
+        if normalized.startswith(prefix):
+            return color
+    return _DEFAULT_LABEL_COLOR
+
+
 def _ensure_label(repo: str, label: str, apply: bool) -> None:
     if not apply:
         return
-    _gh(["label", "create", label, "-R", repo, "--force", "--color", "d4a72c"])
+    _gh(["label", "create", label, "-R", repo, "--force", "--color", _label_color(label)])
 
 
 def _ensure_labels(repo: str, labels: list[str], apply: bool) -> None:
     for label in labels:
         _ensure_label(repo, label, apply)
+
+
+def _seed_labels_from_labeler(repo_root: str) -> set[str]:
+    path = f"{repo_root}/.github/labeler.yml"
+    out: set[str] = set()
+    try:
+        with open(path, "r", encoding="utf-8") as fh:
+            for line in fh:
+                match = re.match(r'^\s*"([^"]+)":\s*$', line)
+                if match:
+                    out.add(match.group(1))
+    except FileNotFoundError:
+        return out
+    return out
 
 
 def _find_milestone_by_title(milestones: list[dict[str, Any]], title: str) -> dict[str, Any] | None:
@@ -775,6 +843,64 @@ def cmd_fix_phase(argv: list[str]) -> int:
     return 0
 
 
+def cmd_label_sync(argv: list[str]) -> int:
+    p = argparse.ArgumentParser(prog="yai-label-sync", add_help=True)
+    p.add_argument("--repo", default="yai-labs/yai")
+    p.add_argument("--apply", action="store_true")
+    args = p.parse_args(argv)
+
+    apply = args.apply
+    report: list[str] = []
+
+    repo_root = _repo_root()
+    seed_labels = _seed_labels_from_labeler(repo_root)
+    seed_labels.update(
+        {
+            "runbook",
+            "governance",
+            "mp-closure",
+            "class:A",
+            "class:B",
+            "class:C",
+            "bug",
+            "enhancement",
+            "docs",
+            "type:docs",
+            "type:ci",
+        }
+    )
+
+    current = _fetch_labels(args.repo)
+    current_by_name = {str(x.get("name", "")).strip(): x for x in current if str(x.get("name", "")).strip()}
+    all_labels = sorted(set(current_by_name.keys()) | seed_labels)
+
+    for name in all_labels:
+        desired_color = _label_color(name)
+        current_color = ""
+        if name in current_by_name:
+            current_color = str(current_by_name[name].get("color", "")).strip().lower()
+        if current_color == desired_color:
+            continue
+
+        if current_color:
+            report.append(f"{name}: {current_color} -> {desired_color}")
+        else:
+            report.append(f"{name}: <missing> -> {desired_color}")
+
+        if apply:
+            _gh(["label", "create", name, "-R", args.repo, "--force", "--color", desired_color])
+
+    print(f"repo: {args.repo}")
+    print(f"mode: {'APPLY' if apply else 'DRY-RUN'}")
+    print("updates:")
+    if report:
+        for row in report:
+            print(f"- {row}")
+    else:
+        print("- none")
+    return 0
+
+
 def cmd_dev_issue(argv: list[str]) -> int:
     if not argv or argv[0] in {"-h", "--help"}:
         print("Usage: yai-dev-issue <phase|mp-closure|legacy-body> ...")
@@ -878,7 +1004,7 @@ def cmd_architecture_check(argv: list[str]) -> int:
 def main() -> int:
     if len(sys.argv) < 2:
         print(
-            "Usage: python -m yai_tools.cli <pr-body|pr-check|branch|issue-body|dev-issue|milestone-body|issue-phase|issue-mp-closure|fix-phase|docs-schema-check|docs-graph|agent-pack|docs-doctor|architecture-check> ...",
+            "Usage: python -m yai_tools.cli <pr-body|pr-check|branch|issue-body|dev-issue|milestone-body|issue-phase|issue-mp-closure|fix-phase|label-sync|docs-schema-check|docs-graph|agent-pack|docs-doctor|architecture-check> ...",
             file=sys.stderr,
         )
         return 2
@@ -904,6 +1030,8 @@ def main() -> int:
         return cmd_issue_mp_closure(rest)
     if sub == "fix-phase":
         return cmd_fix_phase(rest)
+    if sub == "label-sync":
+        return cmd_label_sync(rest)
     if sub == "docs-schema-check":
         return cmd_docs_schema_check(rest)
     if sub == "docs-graph":

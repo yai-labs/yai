@@ -28,8 +28,8 @@ jobs:
             const classificationMatch = body.match(/Classification:\s*([A-Z]+)/i);
             const classification = classificationMatch ? classificationMatch[1].toUpperCase() : "";
 
-            const hasDocsLabel = labels.includes("type:docs");
-            const hasCiLabel = labels.includes("type:ci");
+            const hasDocsLabel = labels.includes("type:docs") || labels.includes("work-type:docs");
+            const hasCiLabel = labels.includes("type:ci") || labels.includes("work-type:ci");
             const docsExempt = hasDocsLabel && classification === "DOCS";
             const ciExempt = hasCiLabel;
 
