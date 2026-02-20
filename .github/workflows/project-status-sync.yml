@@ -1,0 +1,14 @@
+name: project-status-sync
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  sync:
+    uses: yai-labs/yai-infra/.github/workflows/reusable-project-status-sync.yml@main
+    with:
+      project_owner: yai-labs
+      project_number: 5
+    secrets:
+      project_token: ${{ secrets.YAI_PROJECT_TOKEN }}
