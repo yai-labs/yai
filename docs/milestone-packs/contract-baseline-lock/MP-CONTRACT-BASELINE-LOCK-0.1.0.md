@@ -1,6 +1,6 @@
 ---
 id: MP-CONTRACT-BASELINE-LOCK-0.1.0
-status: draft
+status: active
 runbook: docs/runbooks/contract-baseline-lock.md
 phase: "0.1.0 — Pin Baseline Freeze"
 adrs:
@@ -21,7 +21,7 @@ issue_reason: "Phase tracked by governance runbook issue #125."
 - Runbook: `docs/runbooks/contract-baseline-lock.md`
 - Phase: `0.1.0 — Pin Baseline Freeze`
 - Owner: `governance`
-- Status: `draft`
+- Status: `active`
 
 ## Links
 
@@ -56,7 +56,26 @@ Compatibility Classification:
 - Upgrade path: existing conformant clients remain valid.
 
 Definition of Done:
-- [ ] `yai` and `yai-cli` point to the same `deps/yai-specs` baseline commit.
-- [ ] Pin check evidence is attached and reviewable.
-- [ ] No contract drift is introduced by this phase.
-- [ ] Phase closure references ADR-011 and runbook anchor.
+- [x] `yai` and `yai-cli` point to the same `deps/yai-specs` baseline commit.
+- [x] Pin check evidence is attached and reviewable.
+- [x] No contract drift is introduced by this phase.
+- [x] Phase closure references ADR-011 and runbook anchor.
+
+## Closure Evidence
+
+Baseline commit:
+51f0ef3b5985d9fbd18c8f794d03206055bc7f0d
+
+Verification commands:
+- `bash tools/release/check_pins.sh` -> PASS
+- `tools/bin/yai-docs-trace-check --all` -> PASS
+- `tools/bin/yai-proof-check` -> SKIP (not required for this phase)
+
+Execution issue:
+#125
+
+Phase closure issue:
+#124
+
+PR:
+#126
