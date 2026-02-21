@@ -1,0 +1,80 @@
+{
+  "id": "PP-FOUNDATION-0001",
+  "schema_version": "v1",
+  "status": "draft",
+  "created_at": "2026-02-21T00:00:00Z",
+  "canonical_source": {
+    "repo": "yai",
+    "path": "docs/proof/PP-FOUNDATION-0001",
+    "single_source_of_truth": true
+  },
+  "program_scope": {
+    "include_repos": ["yai", "yai-specs", "yai-cli", "yai-mind"],
+    "excluded_changes": ["yai-specs"]
+  },
+  "pins": {
+    "yai": {
+      "commit": "f99366742b5a880221d9866efc74b3163c700ba2"
+    },
+    "yai_specs": {
+      "commit": "51f0ef3b5985d9fbd18c8f794d03206055bc7f0d"
+    },
+    "yai_cli": {
+      "commit": "314e8606a0ff6a0a0cd8fa9348b9c499be3536e0"
+    },
+    "yai_mind": {
+      "commit": "51102988a560ac0f2a022e94fafa6e06621800e7",
+      "pin_source": "workspace-head"
+    }
+  },
+  "evidence": {
+    "existing": [
+      {
+        "id": "E-W0-CHECK-PINS",
+        "claim": "C-SPEC-FIRST-PINNED",
+        "run": "tools/release/check_pins.sh",
+        "result": "fail",
+        "paths": [
+          "docs/milestone-packs/contract-baseline-lock/evidence/wave0-2026-02-21/01-check_pins.output.txt",
+          "docs/milestone-packs/contract-baseline-lock/evidence/wave0-2026-02-21/01-check_pins.exit"
+        ]
+      },
+      {
+        "id": "E-W0-TRACE-CHECK",
+        "claim": "C-EVIDENCE-PACK-REPRODUCIBLE",
+        "run": "tools/bin/yai-docs-trace-check --all",
+        "result": "pass",
+        "paths": [
+          "docs/milestone-packs/contract-baseline-lock/evidence/wave0-2026-02-21/02-docs-trace-check.output.txt",
+          "docs/milestone-packs/contract-baseline-lock/evidence/wave0-2026-02-21/02-docs-trace-check.exit"
+        ]
+      }
+    ],
+    "missing": [
+      {
+        "id": "M-W0-PIN-STRICT-PASS",
+        "claim": "C-SPEC-FIRST-PINNED",
+        "required_paths": [
+          "docs/milestone-packs/contract-baseline-lock/evidence/wave0-2026-02-21/01-check_pins.output.txt"
+        ]
+      }
+    ]
+  },
+  "gates": {
+    "non_skip": [
+      {
+        "id": "check_pins_strict",
+        "status": "fail"
+      },
+      {
+        "id": "traceability_all",
+        "status": "pass"
+      },
+      {
+        "id": "proof_pack_manifest",
+        "status": "pass"
+      }
+    ],
+    "skip": []
+  }
+}

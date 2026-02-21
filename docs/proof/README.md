@@ -1,9 +1,9 @@
 # Proof Packs
 
-Proof packs in progress are kept locally under `docs/proof/.private/` (gitignored).
+Canonical/public proof packs live under `docs/proof/<PACK-ID>/`.
 
 Rules:
-- Draft/private packs live in `docs/proof/.private/` and are not tracked.
+- Draft/private packs can live in `docs/proof/.private/` and are not tracked.
 - Public packs (when promoted) must live directly under `docs/proof/`.
 - Other repos (`yai-cli`, `yai-mind`) keep pointer files only.
 - Every public proof pack must pin explicit versions/tags/commits for:

@@ -80,12 +80,13 @@ Definition of Done:
 ## Execution Snapshot (2026-02-21)
 
 - Evidence bundle: `docs/milestone-packs/contract-baseline-lock/evidence/wave0-2026-02-21/`
-- `tools/bin/yai-proof-check` -> `SKIP` (`exit=0`) -> treated as `FAIL` by closure policy
+- `tools/bin/yai-proof-check` -> `PASS` (`exit=0`) via `07-proof-check-public.*`
+- `tools/bin/yai-proof-check --manifest docs/proof/.private/PP-FOUNDATION-0001/pp-foundation-0001.manifest.v1.json` -> `FAIL` (`exit=2`) via `08-proof-check-private-hardfail.*`
 - `tools/bin/yai-verify core` -> `PASS` (`exit=0`)
 - `tools/bin/yai-verify law-kernel` -> `PASS` (`exit=0`)
 
 Phase state:
-- `BLOCKED` because one mandatory check remains `SKIP`.
+- `READY` for phase closure (mandatory checks are non-skip and passing).
 
-Blocking issue:
-- `#146` (`Wave 0 blocker: no-pass-on-skip for proof-check`)
+Wave-level carry-over blocker:
+- `#147` (`Wave 0 blocker: strict specs pin alignment (yai + yai-cli)`)

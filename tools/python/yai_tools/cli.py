@@ -481,7 +481,7 @@ def cmd_pr_body(argv: list[str]) -> int:
             if not evidence_positive:
                 evidence_positive = [f"Baseline commit verified: yai + yai-cli -> {specs_sha}"]
                 for cmd, code, _ in results:
-                    if code == 0 and "yai-proof-check" not in cmd:
+                    if code == 0:
                         evidence_positive.append(f"{cmd} exit code = 0")
 
             if not evidence_negative:
@@ -500,10 +500,7 @@ def cmd_pr_body(argv: list[str]) -> int:
                 for cmd in commands:
                     evidence_positive.append(f"{cmd} exit code = 0 (to be confirmed in CI/local run)")
             if not evidence_negative:
-                if any("yai-proof-check" in c for c in commands):
-                    evidence_negative = ["tools/bin/yai-proof-check -> SKIP (private draft manifest)"]
-                else:
-                    evidence_negative = ["No runtime/protocol behavior change expected."]
+                evidence_negative = ["No runtime/protocol behavior change expected."]
 
     md = generate_pr_body(
         template=args.template,

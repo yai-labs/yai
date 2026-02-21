@@ -85,11 +85,11 @@ Definition of Done:
 - Evidence bundle: `docs/milestone-packs/contract-baseline-lock/evidence/wave0-2026-02-21/`
 - `tools/release/check_pins.sh` -> `FAIL` (`exit=4`)
 - `tools/bin/yai-docs-trace-check --all` -> `PASS` (`exit=0`)
-- `tools/bin/yai-proof-check` -> `SKIP` (`exit=0`) -> treated as `FAIL` by closure policy
+- `tools/bin/yai-proof-check` -> `PASS` (`exit=0`) via `07-proof-check-public.*`
+- `tools/bin/yai-proof-check --manifest docs/proof/.private/PP-FOUNDATION-0001/pp-foundation-0001.manifest.v1.json` -> `FAIL` (`exit=2`) via `08-proof-check-private-hardfail.*`
 
 Phase state:
-- `BLOCKED` until strict pins align and proof-check is non-skip.
+- `BLOCKED` until strict pins align across `yai` + `yai-cli`.
 
 Blocking issues:
 - `#147` (`Wave 0 blocker: strict specs pin alignment (yai + yai-cli)`)
-- `#146` (`Wave 0 blocker: no-pass-on-skip for proof-check`)
