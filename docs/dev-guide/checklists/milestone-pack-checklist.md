@@ -1,7 +1,6 @@
-# Milestone Pack Checklist
+# Moved To yai-infra
 
-- [ ] Uses `docs/templates/milestone-packs/MP-000-template.md`
-- [ ] Frontmatter includes `runbook`, `phase`, `adrs`, `spec_anchors`, `issues`
-- [ ] `runbook` path exists and contains MP ID mention
-- [ ] All `adrs` paths exist
-- [ ] All `spec_anchors` start with `deps/yai-specs/` and exist
+Canonical content moved to:
+- https://github.com/yai-labs/yai-infra/blob/main/docs/governance/yai/dev-guide/checklists/milestone-pack-checklist.md
+
+This file is a compatibility stub kept in yai during migration.

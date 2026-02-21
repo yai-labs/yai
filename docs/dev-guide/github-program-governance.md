@@ -1,6 +1,6 @@
-# GitHub Program Governance
+# Moved To yai-infra
 
-This governance document moved to `yai-infra`:
-- https://github.com/yai-labs/yai-infra/blob/main/docs/governance/github-program-governance.md
+Canonical content moved to:
+- https://github.com/yai-labs/yai-infra/blob/main/docs/governance/yai/dev-guide/github-program-governance.md
 
-Runtime/product documentation for `yai` remains in this repository.
+This file is a compatibility stub kept in yai during migration.

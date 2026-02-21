@@ -18,3 +18,9 @@ Start reducing non-core surface in `yai` while keeping CI/runtime stable.
 ## Next Waves
 - Migrate governance tooling and process docs to `yai-infra`.
 - Leave only thin compatibility wrappers in `yai/tools/bin`.
+
+## Wave 2 (Governance Docs Externalization)
+
+- Replaced `docs/dev-guide/*`, `docs/templates/*`, `docs/_policy/*` with compatibility stubs.
+- Canonical source moved to `yai-infra/docs/governance/yai/...`.
+- `docs/proof/*` intentionally kept in `yai` in this wave to preserve release-script compatibility.

@@ -1,7 +1,6 @@
-# ADR Checklist
+# Moved To yai-infra
 
-- [ ] Uses `docs/templates/adr/ADR-000-template.md`
-- [ ] Frontmatter includes non-empty `law_refs`
-- [ ] `law_refs` resolve to existing `deps/yai-specs/...` paths
-- [ ] Traceability includes proposal and runbook links (or explicit TBD)
-- [ ] Status is explicit (`draft|active|accepted|deprecated`)
+Canonical content moved to:
+- https://github.com/yai-labs/yai-infra/blob/main/docs/governance/yai/dev-guide/checklists/adr-checklist.md
+
+This file is a compatibility stub kept in yai during migration.

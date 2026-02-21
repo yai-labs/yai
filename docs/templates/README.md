@@ -1,20 +1,6 @@
-# Documentation Templates (Canonical)
+# Moved To yai-infra
 
-This directory is the only canonical source for documentation templates.
+Canonical content moved to:
+- https://github.com/yai-labs/yai-infra/blob/main/docs/governance/yai/templates/README.md
 
-## Available templates
-
-- Runbook: `docs/templates/runbooks/RB-000-template.md`
-- ADR: `docs/templates/adr/ADR-000-template.md`
-- Proposal: `docs/templates/proposals/PRP-000-template.md`
-- Milestone Pack: `docs/templates/milestone-packs/MP-000-template.md`
-
-## Why centralized templates
-
-Centralization avoids drift and keeps structure consistent for humans and agents.
-It also simplifies validation and review expectations.
-
-## Rule
-
-Subfolder `README.md` files in `docs/` must reference templates from this directory.
-Do not duplicate template files in topic folders.
+This file is a compatibility stub kept in yai during migration.

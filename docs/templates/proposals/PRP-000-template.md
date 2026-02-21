@@ -1,49 +1,6 @@
----
-id: PRP-<NAME>
-title: <short title>
-status: draft
-owner: <team>
-effective_date: YYYY-MM-DD
-revision: 1
-supersedes: []
-related:
-  adr: []
-  runbooks: []
-  specs: []
-tags: []
----
+# Moved To yai-infra
 
-# PRP-<NAME> — <short title>
+Canonical content moved to:
+- https://github.com/yai-labs/yai-infra/blob/main/docs/governance/yai/templates/proposals/PRP-000-template.md
 
-## Problem
-<what is not working today>
-
-## Scope
-- In scope: <...>
-- Out of scope: <...>
-
-## Proposed Change
-<high-level proposal>
-
-## Options Compared
-- Option A: <...>
-- Option B: <...>
-
-## Risks
-- <risk + mitigation>
-
-## Rollout Sketch
-1. <step>
-
-## Exit Criteria
-- [ ] <clear acceptance criterion>
-
-## Traceability
-
-- Spec anchors (if any): `deps/yai-specs/...`
-- Targets ADR: `docs/design/adr/ADR-...` (optional)
-
-## References
-- `docs/design/adr/...`
-- `docs/runbooks/...`
-- `deps/yai-specs/...`
+This file is a compatibility stub kept in yai during migration.

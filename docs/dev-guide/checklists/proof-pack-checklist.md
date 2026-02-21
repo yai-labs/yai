@@ -1,7 +1,6 @@
-# Proof Pack Checklist
+# Moved To yai-infra
 
-- [ ] Proof pack references source MP(s)
-- [ ] Evidence includes positive and negative deterministic behavior
-- [ ] Artifact pointers are stable and reproducible
-- [ ] Release compatibility note is included
-- [ ] Promotion from private to public is justified and reviewed
+Canonical content moved to:
+- https://github.com/yai-labs/yai-infra/blob/main/docs/governance/yai/dev-guide/checklists/proof-pack-checklist.md
+
+This file is a compatibility stub kept in yai during migration.

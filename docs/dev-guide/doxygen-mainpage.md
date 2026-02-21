@@ -1,13 +1,6 @@
-# YAI Runtime API (Contracts)
+# Moved To yai-infra
 
-These docs are generated from the public headers in this repo.
-They describe runtime-facing contracts used by the root/kernel/engine layers.
+Canonical content moved to:
+- https://github.com/yai-labs/yai-infra/blob/main/docs/governance/yai/dev-guide/doxygen-mainpage.md
 
-Quick links:
-- `kernel/`
-- `engine/`
-- `root/`
-- `boot/`
-
-Normative note:
-If runtime code disagrees with `yai-specs`, the code is wrong.
+This file is a compatibility stub kept in yai during migration.

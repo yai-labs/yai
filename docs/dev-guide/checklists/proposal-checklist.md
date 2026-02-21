@@ -1,7 +1,6 @@
-# Proposal Checklist
+# Moved To yai-infra
 
-- [ ] Uses `docs/templates/proposals/PRP-000-template.md`
-- [ ] Frontmatter contains `id/status/owner/effective_date`
-- [ ] Links to target ADR(s)
-- [ ] Links are repo-relative
-- [ ] L0 anchors point to `deps/yai-specs/...` when relevant
+Canonical content moved to:
+- https://github.com/yai-labs/yai-infra/blob/main/docs/governance/yai/dev-guide/checklists/proposal-checklist.md
+
+This file is a compatibility stub kept in yai during migration.
