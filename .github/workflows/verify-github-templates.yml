@@ -1,0 +1,16 @@
+name: verify-github-templates
+
+on:
+  pull_request:
+    paths:
+      - ".github/ISSUE_TEMPLATE/**"
+      - ".github/PULL_REQUEST_TEMPLATE*"
+      - ".github/workflows/verify-github-templates.yml"
+  workflow_dispatch:
+
+jobs:
+  verify-template-sync:
+    uses: yai-labs/yai-infra/.github/workflows/reusable-verify-github-templates.yml@7395f1ee1cd0a298241ee3f3c0a4ee9ad54c5ca4
+    with:
+      infra_repo: yai-labs/yai-infra
+      infra_ref: 7395f1ee1cd0a298241ee3f3c0a4ee9ad54c5ca4
