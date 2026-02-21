@@ -3,8 +3,10 @@ id: RB-RUNBOOKS-README
 status: active
 adr_refs:
   - docs/design/adr/ADR-011-contract-baseline-lock.md
+  - docs/design/adr/ADR-012-audit-convergence-gates.md
 decisions:
   - docs/design/adr/ADR-011-contract-baseline-lock.md
+  - docs/design/adr/ADR-012-audit-convergence-gates.md
 ---
 
 # Runbooks
@@ -28,6 +30,15 @@ A good runbook must be deterministic:
 - `docs/runbooks/mind-redis-stm.md`
 - `docs/runbooks/kernel-sovereignty.md`
 - `docs/runbooks/operations.md`
+
+## Program Convergence Backbone
+
+Program-level target-state and wave ordering are defined in:
+- `docs/program-delivery/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
+- `docs/program-delivery/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
+
+Runbook phase closure should reference claim IDs from:
+- `docs/audits/claims/infra-grammar.v0.1.json`
 
 ## Template
 

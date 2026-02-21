@@ -15,6 +15,8 @@ The goal of this map is to reduce ambiguity:
 - Design (ADRs, proposals, traceability): `docs/design/`
 - Runbooks (execution): `docs/runbooks/`
 - Milestone Packs (delivery closure): `docs/milestone-packs/`
+- Audits and claims: `docs/audits/`
+- Program delivery convergence: `docs/program-delivery/`
 - Test plans (evidence expectations): `docs/test-plans/`
 - Templates (single source): `docs/templates/`
 - Developer guides (workflow/tooling/release): `docs/dev-guide/`
@@ -30,20 +32,26 @@ The goal of this map is to reduce ambiguity:
 - Design spine: `docs/design/spine.md`
 - Specs bridge: `docs/architecture/specs-bridge.md`
 - Traceability map: `docs/design/traceability.md`
+- Audit convergence plan: `docs/program-delivery/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
+- Audit convergence matrix: `docs/program-delivery/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
+- Infra Grammar claims registry: `docs/audits/claims/infra-grammar.v0.1.json`
 
-These three files define the high-level navigation model:
+These files define the high-level navigation model:
 - spine: lifecycle and artifact ordering,
 - bridge: normative boundary with `yai-specs`,
-- traceability: cross-link map from decision to proof.
+- traceability: cross-link map from decision to proof,
+- convergence plan/matrix: execution order to audit-green closure.
 
 ## Recommended Reading Order
 
 1. `docs/design/spine.md`
 2. `docs/architecture/specs-bridge.md`
 3. `docs/design/adr/README.md`
-4. `docs/runbooks/README.md`
-5. `docs/milestone-packs/README.md`
-6. `docs/test-plans/README.md`
+4. `docs/program-delivery/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
+5. `docs/program-delivery/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
+6. `docs/runbooks/README.md`
+7. `docs/milestone-packs/README.md`
+8. `docs/test-plans/README.md`
 
 ## Writing Rule
 

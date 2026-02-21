@@ -152,3 +152,13 @@ Outputs:
 - `yai-cli` and `yai-specs` use linked issues/PRs, not duplicate canonical milestones.
 - Every runbook phase maps to one `PHASE: <track>@<phase>` milestone.
 - No milestone closure without MP and verifiable evidence.
+
+## 11) Audit Convergence Alignment (v0.1.0)
+
+For Infra Grammar closure governance, use these canonical references:
+- `docs/program-delivery/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
+- `docs/program-delivery/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
+- `docs/audits/claims/infra-grammar.v0.1.json`
+
+Operational rule:
+- issues/PRs that close a runbook phase should include claim IDs from the registry.

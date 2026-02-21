@@ -27,6 +27,7 @@ An ADR should answer:
 - `ADR-009-engine-attachment.md`
 - `ADR-010-boot-entrypoint.md`
 - `ADR-011-contract-baseline-lock.md`
+- `ADR-012-audit-convergence-gates.md`
 
 ## Template policy
 
@@ -41,3 +42,6 @@ When adding a new ADR:
 - update this index,
 - ensure law/spec references are explicit,
 - add downstream runbook linkage when available.
+
+Program-level convergence governance is defined in:
+- `docs/program-delivery/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
