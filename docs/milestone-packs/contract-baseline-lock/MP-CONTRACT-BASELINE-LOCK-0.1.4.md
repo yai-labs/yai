@@ -83,13 +83,10 @@ Definition of Done:
 ## Execution Snapshot (2026-02-21)
 
 - Evidence bundle: `docs/milestone-packs/contract-baseline-lock/evidence/wave0-2026-02-21/`
-- `tools/release/check_pins.sh` -> `FAIL` (`exit=4`)
-- `tools/bin/yai-docs-trace-check --all` -> `PASS` (`exit=0`)
-- `tools/bin/yai-proof-check` -> `PASS` (`exit=0`) via `07-proof-check-public.*`
+- `tools/release/check_pins.sh` -> `PASS` (`exit=0`) via `10-check_pins-strict-pass.*`
+- `tools/bin/yai-docs-trace-check --all` -> `PASS` (`exit=0`) via `12-docs-trace-check-post-pin.*`
+- `tools/bin/yai-proof-check` -> `PASS` (`exit=0`) via `11-proof-check-post-pin.*`
 - `tools/bin/yai-proof-check --manifest docs/proof/.private/PP-FOUNDATION-0001/pp-foundation-0001.manifest.v1.json` -> `FAIL` (`exit=2`) via `08-proof-check-private-hardfail.*`
 
 Phase state:
-- `BLOCKED` until strict pins align across `yai` + `yai-cli`.
-
-Blocking issues:
-- `#147` (`Wave 0 blocker: strict specs pin alignment (yai + yai-cli)`)
+- `READY` for phase closure (strict pins aligned and mandatory checks passing).

@@ -88,5 +88,5 @@ Definition of Done:
 Phase state:
 - `READY` for phase closure (mandatory checks are non-skip and passing).
 
-Wave-level carry-over blocker:
-- `#147` (`Wave 0 blocker: strict specs pin alignment (yai + yai-cli)`)
+Wave-level status:
+- strict pin alignment now passing (`tools/release/check_pins.sh` -> `PASS`) via `10-check_pins-strict-pass.*`.
