@@ -19,19 +19,33 @@ on:
   workflow_dispatch:
 
 jobs:
-  changelog-pr:
+  prepare-shas:
     runs-on: ubuntu-latest
+    outputs:
+      base_sha: ${{ steps.shas.outputs.base_sha }}
+      head_sha: ${{ steps.shas.outputs.head_sha }}
     steps:
       - name: Checkout (full history)
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - name: Changelog gate (PR mode)
+      - name: Compute base/head SHAs
+        id: shas
+        shell: bash
         run: |
-          tools/bin/yai-changelog-check --pr --base "${{ github.event.pull_request.base.sha }}" --head "${{ github.sha }}"
+          set -euo pipefail
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            echo "base_sha=${{ github.event.pull_request.base.sha }}" >> "$GITHUB_OUTPUT"
+            echo "head_sha=${{ github.sha }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "base_sha=$(git merge-base HEAD origin/main)" >> "$GITHUB_OUTPUT"
+            echo "head_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          fi
+
+  call-validate-changelog:
+    needs: prepare-shas
+    uses: yai-labs/yai-infra/.github/workflows/reusable-validate-changelog.yml@717ad404eb98e889b72201bd0bc65e3710441449
+    with:
+      base_sha: ${{ needs.prepare-shas.outputs.base_sha }}
+      head_sha: ${{ needs.prepare-shas.outputs.head_sha }}

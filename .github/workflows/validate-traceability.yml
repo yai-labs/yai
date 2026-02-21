@@ -14,26 +14,8 @@ on:
       - "tools/**"
 
 jobs:
-  traceability:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout (full history for diff)
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          submodules: recursive
-
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - name: Traceability check (changed docs only)
-        env:
-          BASE_SHA: ${{ github.event.pull_request.base.sha }}
-          HEAD_SHA: ${{ github.sha }}
-        run: |
-          python3 -m pip install --upgrade pip
-          # if tools/python has a pyproject you can install it; otherwise run module directly
-          # python3 -m pip install -e tools/python
-          tools/bin/yai-docs-trace-check --changed --base "$BASE_SHA" --head "$HEAD_SHA"
+  call-validate-traceability:
+    uses: yai-labs/yai-infra/.github/workflows/reusable-validate-traceability.yml@717ad404eb98e889b72201bd0bc65e3710441449
+    with:
+      base_sha: ${{ github.event.pull_request.base.sha }}
+      head_sha: ${{ github.sha }}
