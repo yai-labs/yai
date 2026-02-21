@@ -5,13 +5,19 @@ runbook: docs/runbooks/contract-baseline-lock.md
 phase: "0.1.3 — Formal/Core Sync on Contract Delta"
 adrs:
   - docs/design/adr/ADR-011-contract-baseline-lock.md
+  - docs/design/adr/ADR-012-audit-convergence-gates.md
 spec_anchors:
   - deps/yai-specs/contracts/invariants/I-002-determinism.md
   - deps/yai-specs/contracts/invariants/I-003-governance.md
   - deps/yai-specs/contracts/invariants/I-006-external-effect-boundary.md
+claims:
+  - C-AUTHORITY-SURFACE-RUNTIME
+  - C-EVIDENCE-PACK-REPRODUCIBLE
+evidence_commands_required:
+  - tools/bin/yai-proof-check
+  - tools/bin/yai-verify
 issues:
-  - N/A
-issue_reason: "Foundational docs track creation; issue ID not assigned yet."
+  - 141
 ---
 # MP-CONTRACT-BASELINE-LOCK-0.1.3
 
@@ -19,14 +25,17 @@ issue_reason: "Foundational docs track creation; issue ID not assigned yet."
 
 - Runbook: `docs/runbooks/contract-baseline-lock.md`
 - Phase: `0.1.3 — Formal/Core Sync on Contract Delta`
+- Wave issue: `#141`
 - Owner: `governance`
 - Status: `draft`
 
 ## Links
 
 - ADR: `docs/design/adr/ADR-011-contract-baseline-lock.md`
+- ADR: `docs/design/adr/ADR-012-audit-convergence-gates.md`
 - Proposal: `docs/design/proposals/PRP-005-formal-coverage-roadmap.md`
 - Evidence plans: `docs/test-plans/hardfail.md`
+- Claims registry: `docs/audits/claims/infra-grammar.v0.1.json`
 
 Objective:
 - Require formal/core verification updates whenever authority or envelope contracts change.
@@ -49,6 +58,13 @@ Evidence Plan (minimum):
   - Contract delta without verify updates is blocked.
   - Partial verify update without matching contract scope is blocked.
 
+Mandatory command outcomes:
+- `tools/bin/yai-proof-check` -> `PASS`
+- `tools/bin/yai-verify` -> `PASS`
+
+Closure policy:
+- mandatory command `SKIP` is treated as `FAIL`.
+
 Compatibility Classification:
 - Type: B
 - Rationale: introduces stricter merge constraints bound to verification obligations.
@@ -59,3 +75,4 @@ Definition of Done:
 - [ ] Unsynced deltas are blocked deterministically.
 - [ ] Evidence shows explicit contract-to-verify mapping.
 - [ ] All links are traceable in docs and CI output.
+- [ ] Mandatory command outcomes are recorded as `PASS` (no `SKIP` closure).

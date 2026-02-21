@@ -5,12 +5,18 @@ runbook: docs/runbooks/contract-baseline-lock.md
 phase: "0.1.2 — No Pass-on-Skip Enforcement"
 adrs:
   - docs/design/adr/ADR-011-contract-baseline-lock.md
+  - docs/design/adr/ADR-012-audit-convergence-gates.md
 spec_anchors:
   - deps/yai-specs/contracts/invariants/I-001-traceability.md
   - deps/yai-specs/contracts/invariants/I-003-governance.md
+claims:
+  - C-SKIP-FAIL-MANDATORY
+  - C-EVIDENCE-PACK-REPRODUCIBLE
+evidence_commands_required:
+  - tools/bin/yai-proof-check
+  - tools/bin/yai-docs-trace-check --all
 issues:
-  - N/A
-issue_reason: "Foundational docs track creation; issue ID not assigned yet."
+  - 141
 ---
 # MP-CONTRACT-BASELINE-LOCK-0.1.2
 
@@ -18,14 +24,17 @@ issue_reason: "Foundational docs track creation; issue ID not assigned yet."
 
 - Runbook: `docs/runbooks/contract-baseline-lock.md`
 - Phase: `0.1.2 — No Pass-on-Skip Enforcement`
+- Wave issue: `#141`
 - Owner: `governance`
 - Status: `draft`
 
 ## Links
 
 - ADR: `docs/design/adr/ADR-011-contract-baseline-lock.md`
+- ADR: `docs/design/adr/ADR-012-audit-convergence-gates.md`
 - Proposal: `docs/design/proposals/PRP-004-contract-baseline-lock-and-pin-policy.md`
 - Evidence plans: `docs/test-plans/hardfail.md`
+- Claims registry: `docs/audits/claims/infra-grammar.v0.1.json`
 
 Objective:
 - Prevent mandatory proof and contract checks from passing through skip paths.
@@ -48,6 +57,13 @@ Evidence Plan (minimum):
   - Simulated skip of required check fails pipeline.
   - Missing mandatory evidence blocks merge.
 
+Mandatory command outcomes:
+- `tools/bin/yai-proof-check` -> `PASS`
+- `tools/bin/yai-docs-trace-check --all` -> `PASS`
+
+Closure policy:
+- mandatory command `SKIP` is treated as `FAIL`.
+
 Compatibility Classification:
 - Type: A
 - Rationale: governance policy hardening without API/protocol change.
@@ -58,3 +74,4 @@ Definition of Done:
 - [ ] Pipeline fails deterministically on missing mandatory evidence.
 - [ ] Failure semantics are documented and auditable.
 - [ ] Runbook/ADR references are present in closure evidence.
+- [ ] Mandatory command outcomes are recorded as `PASS` (no `SKIP` closure).

@@ -5,13 +5,20 @@ runbook: docs/runbooks/contract-baseline-lock.md
 phase: "0.1.4 — Cross-Repo Evidence Closure"
 adrs:
   - docs/design/adr/ADR-011-contract-baseline-lock.md
+  - docs/design/adr/ADR-012-audit-convergence-gates.md
 spec_anchors:
   - deps/yai-specs/contracts/invariants/I-001-traceability.md
   - deps/yai-specs/contracts/invariants/I-003-governance.md
   - deps/yai-specs/contracts/boundaries/L1-kernel.md
+claims:
+  - C-EVIDENCE-PACK-REPRODUCIBLE
+  - C-SPEC-FIRST-PINNED
+evidence_commands_required:
+  - tools/release/check_pins.sh
+  - tools/bin/yai-docs-trace-check --all
+  - tools/bin/yai-proof-check
 issues:
-  - N/A
-issue_reason: "Foundational docs track creation; issue ID not assigned yet."
+  - 141
 ---
 # MP-CONTRACT-BASELINE-LOCK-0.1.4
 
@@ -19,14 +26,17 @@ issue_reason: "Foundational docs track creation; issue ID not assigned yet."
 
 - Runbook: `docs/runbooks/contract-baseline-lock.md`
 - Phase: `0.1.4 — Cross-Repo Evidence Closure`
+- Wave issue: `#141`
 - Owner: `governance`
 - Status: `draft`
 
 ## Links
 
 - ADR: `docs/design/adr/ADR-011-contract-baseline-lock.md`
+- ADR: `docs/design/adr/ADR-012-audit-convergence-gates.md`
 - Proposals: `docs/design/proposals/PRP-004-contract-baseline-lock-and-pin-policy.md`, `docs/design/proposals/PRP-005-formal-coverage-roadmap.md`
 - Evidence plans: `docs/test-plans/hardfail.md`
+- Claims registry: `docs/audits/claims/infra-grammar.v0.1.json`
 
 Objective:
 - Close Milestone 1 with explicit, auditable cross-repo evidence for the baseline lock track.
@@ -50,6 +60,14 @@ Evidence Plan (minimum):
   - Missing repo evidence blocks closure.
   - Untraceable evidence pointers block closure.
 
+Mandatory command outcomes:
+- `tools/release/check_pins.sh` -> `PASS`
+- `tools/bin/yai-docs-trace-check --all` -> `PASS`
+- `tools/bin/yai-proof-check` -> `PASS`
+
+Closure policy:
+- mandatory command `SKIP` is treated as `FAIL`.
+
 Compatibility Classification:
 - Type: A
 - Rationale: closure/evidence hardening only; no protocol behavior change.
@@ -60,3 +78,4 @@ Definition of Done:
 - [ ] Every phase has explicit proof pointers and outcomes.
 - [ ] Closure review is reproducible from documented commands.
 - [ ] ADR-011 closure readiness is demonstrated by artifacts.
+- [ ] Mandatory command outcomes are recorded as `PASS` (no `SKIP` closure).

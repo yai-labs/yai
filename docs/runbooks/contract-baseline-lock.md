@@ -4,16 +4,19 @@ title: Contract Baseline Lock
 status: draft
 owner: governance
 effective_date: 2026-02-19
-revision: 1
+revision: 2
 supersedes: []
 depends_on: []
 adr_refs:
   - docs/design/adr/ADR-011-contract-baseline-lock.md
+  - docs/design/adr/ADR-012-audit-convergence-gates.md
 decisions:
   - docs/design/adr/ADR-011-contract-baseline-lock.md
+  - docs/design/adr/ADR-012-audit-convergence-gates.md
 related:
   adr:
     - docs/design/adr/ADR-011-contract-baseline-lock.md
+    - docs/design/adr/ADR-012-audit-convergence-gates.md
   specs:
     - deps/yai-specs/contracts/invariants/I-001-traceability.md
     - deps/yai-specs/contracts/invariants/I-002-determinism.md
@@ -26,9 +29,11 @@ related:
     - tools/release/check_pins.sh
     - tools/bin/yai-docs-trace-check
     - tools/bin/yai-proof-check
+    - tools/bin/yai-verify
 tags:
   - governance
   - baseline-lock
+  - audit-convergence
 ---
 
 # RB-CONTRACT-BASELINE-LOCK — Contract Baseline Lock (Milestone 1)
@@ -55,6 +60,21 @@ Create the first governance runbook that locks cross-repo contract behavior acro
   - `tools/release/check_pins.sh`
   - `tools/bin/yai-docs-trace-check`
   - `tools/bin/yai-proof-check`
+  - `tools/bin/yai-verify`
+
+### 3.1 Audit Convergence Binding (Wave 0)
+This runbook phase sequence is Wave 0 under:
+- `docs/program-delivery/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
+- `docs/program-delivery/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
+
+Claims source of truth:
+- `docs/audits/claims/infra-grammar.v0.1.json`
+
+Wave issue:
+- `https://github.com/yai-labs/yai/issues/141`
+
+Mandatory closure policy:
+- for mandatory evidence checks, `SKIP` is treated as `FAIL`.
 
 ## 4) Procedure
 
@@ -76,35 +96,75 @@ Claim: `yai` and `yai-cli` consume the same audited `yai-specs` baseline.
 <a id="phase-0-1-1-ci-parity"></a>
 ### 0.1.1 — CI Parity on Contract Surfaces
 Claim: CI validates contract parity in both consumers with same baseline.
+- Claim IDs: `C-SPEC-FIRST-PINNED`, `C-EVIDENCE-PACK-REPRODUCIBLE`
 - Scope: CI parity checks for protocol/authority surfaces.
-- Gate: parity checks fail on drift.
-- Milestone Pack (planned): `docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.1.md`
+- Mandatory evidence commands:
+  - `tools/release/check_pins.sh`
+  - `tools/bin/yai-docs-trace-check --all`
+- Gate:
+  - parity checks fail on drift,
+  - mandatory checks cannot close on `SKIP`.
+- Milestone Pack: `docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.1.md`
 
 <a id="phase-0-1-2-no-pass-on-skip"></a>
 ### 0.1.2 — No Pass-on-Skip Enforcement
 Claim: required checks cannot pass via skip placeholders.
+- Claim IDs: `C-SKIP-FAIL-MANDATORY`, `C-EVIDENCE-PACK-REPRODUCIBLE`
 - Scope: mandatory gate behavior for proof-relevant checks.
-- Gate: pipeline fails if mandatory evidence is skipped.
-- Milestone Pack (planned): `docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.2.md`
+- Mandatory evidence commands:
+  - `tools/bin/yai-proof-check`
+  - `tools/bin/yai-docs-trace-check --all`
+- Gate:
+  - pipeline fails if mandatory evidence is skipped,
+  - proof-relevant skip placeholders are closure-blocking.
+- Milestone Pack: `docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.2.md`
 
 <a id="phase-0-1-3-formal-core-sync"></a>
 ### 0.1.3 — Formal/Core Sync on Contract Delta
 Claim: authority/envelope contract deltas trigger required formal/core verification updates.
+- Claim IDs: `C-AUTHORITY-SURFACE-RUNTIME`, `C-EVIDENCE-PACK-REPRODUCIBLE`
 - Scope: binding between contract delta and verification obligations.
-- Gate: deltas blocked without required verify updates.
-- Milestone Pack (planned): `docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.3.md`
+- Mandatory evidence commands:
+  - `tools/bin/yai-proof-check`
+  - `tools/bin/yai-verify`
+- Gate:
+  - deltas are blocked without required verify updates,
+  - contract-to-verify mapping must be traceable.
+- Milestone Pack: `docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.3.md`
 
 <a id="phase-0-1-4-cross-repo-evidence"></a>
 ### 0.1.4 — Cross-Repo Evidence Closure
 Claim: closure evidence is explicit and auditable across all repos.
+- Claim IDs: `C-EVIDENCE-PACK-REPRODUCIBLE`, `C-SPEC-FIRST-PINNED`
 - Scope: evidence index and deterministic positive/negative checks.
-- Gate: MP evidence complete and reviewable.
-- Milestone Pack (planned): `docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.4.md`
+- Mandatory evidence commands:
+  - `tools/release/check_pins.sh`
+  - `tools/bin/yai-docs-trace-check --all`
+  - `tools/bin/yai-proof-check`
+- Gate:
+  - MP evidence is complete and reviewable across repos,
+  - missing mandatory evidence or `SKIP` blocks closure.
+- Milestone Pack: `docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.4.md`
 
 ## 6) Verification
-- `tools/release/check_pins.sh`
-- `tools/bin/yai-docs-trace-check --all`
-- `tools/bin/yai-proof-check --all`
+Phase minimum command set:
+- 0.1.1
+  - `tools/release/check_pins.sh`
+  - `tools/bin/yai-docs-trace-check --all`
+- 0.1.2
+  - `tools/bin/yai-proof-check`
+  - `tools/bin/yai-docs-trace-check --all`
+- 0.1.3
+  - `tools/bin/yai-proof-check`
+  - `tools/bin/yai-verify`
+- 0.1.4
+  - `tools/release/check_pins.sh`
+  - `tools/bin/yai-docs-trace-check --all`
+  - `tools/bin/yai-proof-check`
+
+Closure semantics:
+- mandatory command status must be `PASS`;
+- mandatory `SKIP` is treated as `FAIL`.
 
 ## 7) Failure Modes
 - Symptom: `yai` and `yai-cli` pin different specs commits.
