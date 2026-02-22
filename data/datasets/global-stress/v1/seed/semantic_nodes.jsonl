@@ -1,15 +1,120 @@
-{"id": "node:user:test_user", "kind": "user", "meta": {"display": "Test User", "role": "developer"}, "tags": ["user", "synthetic"]}
-{"id": "node:machine:macbook_dev", "kind": "machine", "meta": {"os": "macOS", "arch": "arm64", "label": "MacBook Dev"}, "tags": ["machine", "local"]}
-{"id": "node:machine:gpu_lan_01", "kind": "machine", "meta": {"os": "linux", "gpu": "RTX", "label": "GPU LAN 01"}, "tags": ["machine", "lan"]}
-{"id": "node:project:yai", "kind": "project", "meta": {"name": "YAI", "repo_root": "$YAI_WORKSPACE"}, "tags": ["project"]}
-{"id": "node:project:ecoh_governance_demo", "kind": "project", "meta": {"name": "Ecoh Governance Demo", "domain": "ecohmedia.com"}, "tags": ["project", "enterprise"]}
-{"id": "node:std:gdpr", "kind": "standard", "meta": {"name": "GDPR", "type": "privacy"}, "tags": ["standard", "privacy"]}
-{"id": "node:std:iso27001", "kind": "standard", "meta": {"name": "ISO/IEC 27001", "type": "security_mgmt"}, "tags": ["standard", "security"]}
-{"id": "node:std:iso20000", "kind": "standard", "meta": {"name": "ISO/IEC 20000", "type": "service_mgmt"}, "tags": ["standard", "service"]}
-{"id": "node:std:iso9001", "kind": "standard", "meta": {"name": "ISO 9001", "type": "quality_mgmt"}, "tags": ["standard", "quality"]}
-{"id": "node:concept:uds", "kind": "concept", "meta": {"label": "Unix Domain Socket (UDS)"}, "tags": ["concept"]}
-{"id": "node:concept:vault", "kind": "concept", "meta": {"label": "Vault (SHM ABI)"}, "tags": ["concept"]}
-{"id": "node:concept:kernel_dead", "kind": "concept", "meta": {"label": "kernel_dead hard-fail"}, "tags": ["concept"]}
-{"id": "node:memory:beer_2024_02_13", "kind": "fact", "meta": {"label": "Beer on 2024-02-13", "value": "TEST_BREW_IPA", "note": "synthetic seed"}, "tags": ["seed", "fun"]}
-{"id": "node:file:foo_c", "kind": "file", "meta": {"path": "foo.c"}, "tags": ["seed", "file"]}
-{"id": "node:error:e_runtime", "kind": "error", "meta": {"code": "E_RUNTIME", "desc": "Runtime socket issue"}, "tags": ["seed", "error"]}
+{"node_id": "N-00001", "label": "dataset", "name": "SOCKET_001", "tags": ["governance", "law", "engine"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00002", "label": "axiom", "name": "BOUNDARY_002", "tags": ["yai", "engine", "kernel"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00003", "label": "plane", "name": "TOOL_003", "tags": ["engine", "yai", "law"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00004", "label": "socket", "name": "AXIOM_004", "tags": ["governance", "kernel", "mind"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00005", "label": "invariant", "name": "INVARIANT_005", "tags": ["audit", "trace", "kernel"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00006", "label": "provider", "name": "DATASET_006", "tags": ["law", "audit", "mind"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00007", "label": "plane", "name": "TOOL_007", "tags": ["yai", "mind", "runtime"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00008", "label": "axiom", "name": "AXIOM_008", "tags": ["audit", "kernel", "runtime"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00009", "label": "invariant", "name": "METRIC_009", "tags": ["audit", "law", "yai"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00010", "label": "provider", "name": "TOOL_010", "tags": ["governance", "law", "audit"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00011", "label": "socket", "name": "TOOL_011", "tags": ["trace", "engine", "runtime"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00012", "label": "tool", "name": "DATASET_012", "tags": ["mind", "audit", "trace"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00013", "label": "tool", "name": "POLICY_013", "tags": ["law", "trace", "kernel"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00014", "label": "dataset", "name": "PLANE_014", "tags": ["kernel", "audit", "law"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00015", "label": "policy", "name": "PROVIDER_015", "tags": ["audit", "kernel", "runtime"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00016", "label": "invariant", "name": "PROVIDER_016", "tags": ["kernel", "engine", "audit"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00017", "label": "socket", "name": "PROVIDER_017", "tags": ["governance", "audit", "yai"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00018", "label": "invariant", "name": "INVARIANT_018", "tags": ["law", "kernel", "yai"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00019", "label": "provider", "name": "BOUNDARY_019", "tags": ["trace", "yai", "mind"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00020", "label": "dataset", "name": "DATASET_020", "tags": ["engine", "law", "runtime"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00021", "label": "provider", "name": "POLICY_021", "tags": ["yai", "mind", "audit"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00022", "label": "socket", "name": "PROVIDER_022", "tags": ["law", "runtime", "trace"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00023", "label": "metric", "name": "PLANE_023", "tags": ["law", "engine", "kernel"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00024", "label": "dataset", "name": "PROVIDER_024", "tags": ["law", "mind", "audit"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00025", "label": "plane", "name": "POLICY_025", "tags": ["trace", "yai", "mind"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00026", "label": "socket", "name": "AXIOM_026", "tags": ["governance", "mind", "engine"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00027", "label": "socket", "name": "PROVIDER_027", "tags": ["engine", "yai", "law"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00028", "label": "boundary", "name": "TOOL_028", "tags": ["kernel", "law", "audit"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00029", "label": "axiom", "name": "INVARIANT_029", "tags": ["trace", "runtime", "audit"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00030", "label": "policy", "name": "METRIC_030", "tags": ["engine", "governance", "audit"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00031", "label": "socket", "name": "PROVIDER_031", "tags": ["law", "yai", "trace"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00032", "label": "boundary", "name": "TOOL_032", "tags": ["yai", "law", "governance"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00033", "label": "metric", "name": "POLICY_033", "tags": ["audit", "trace", "runtime"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00034", "label": "socket", "name": "PLANE_034", "tags": ["trace", "law", "governance"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00035", "label": "policy", "name": "INVARIANT_035", "tags": ["mind", "audit", "trace"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00036", "label": "socket", "name": "AXIOM_036", "tags": ["runtime", "kernel", "mind"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00037", "label": "axiom", "name": "AXIOM_037", "tags": ["runtime", "mind", "law"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00038", "label": "boundary", "name": "SOCKET_038", "tags": ["mind", "engine", "yai"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00039", "label": "axiom", "name": "METRIC_039", "tags": ["kernel", "governance", "law"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00040", "label": "policy", "name": "DATASET_040", "tags": ["runtime", "engine", "yai"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00041", "label": "policy", "name": "AXIOM_041", "tags": ["kernel", "yai", "runtime"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00042", "label": "invariant", "name": "PROVIDER_042", "tags": ["kernel", "trace", "engine"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00043", "label": "policy", "name": "SOCKET_043", "tags": ["law", "kernel", "yai"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00044", "label": "provider", "name": "BOUNDARY_044", "tags": ["audit", "engine", "yai"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00045", "label": "policy", "name": "INVARIANT_045", "tags": ["runtime", "kernel", "mind"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00046", "label": "policy", "name": "DATASET_046", "tags": ["law", "kernel", "audit"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00047", "label": "socket", "name": "PROVIDER_047", "tags": ["runtime", "engine", "kernel"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00048", "label": "boundary", "name": "INVARIANT_048", "tags": ["trace", "law", "mind"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00049", "label": "dataset", "name": "PLANE_049", "tags": ["engine", "trace", "audit"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00050", "label": "boundary", "name": "PLANE_050", "tags": ["law", "governance", "audit"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00051", "label": "plane", "name": "BOUNDARY_051", "tags": ["governance", "law", "audit"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00052", "label": "metric", "name": "METRIC_052", "tags": ["audit", "engine", "kernel"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00053", "label": "provider", "name": "BOUNDARY_053", "tags": ["audit", "law", "runtime"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00054", "label": "metric", "name": "SOCKET_054", "tags": ["mind", "yai", "governance"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00055", "label": "dataset", "name": "INVARIANT_055", "tags": ["mind", "audit", "runtime"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00056", "label": "axiom", "name": "AXIOM_056", "tags": ["engine", "mind", "yai"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00057", "label": "invariant", "name": "TOOL_057", "tags": ["trace", "kernel", "runtime"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00058", "label": "tool", "name": "DATASET_058", "tags": ["yai", "audit", "kernel"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00059", "label": "tool", "name": "PLANE_059", "tags": ["engine", "audit", "mind"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00060", "label": "boundary", "name": "AXIOM_060", "tags": ["audit", "law", "kernel"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00061", "label": "provider", "name": "INVARIANT_061", "tags": ["trace", "governance", "yai"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00062", "label": "plane", "name": "METRIC_062", "tags": ["audit", "governance", "trace"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00063", "label": "provider", "name": "SOCKET_063", "tags": ["kernel", "trace", "audit"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00064", "label": "provider", "name": "TOOL_064", "tags": ["yai", "engine", "trace"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00065", "label": "provider", "name": "INVARIANT_065", "tags": ["trace", "kernel", "governance"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00066", "label": "socket", "name": "TOOL_066", "tags": ["governance", "engine", "yai"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00067", "label": "tool", "name": "BOUNDARY_067", "tags": ["engine", "mind", "trace"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00068", "label": "policy", "name": "BOUNDARY_068", "tags": ["law", "mind", "audit"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00069", "label": "policy", "name": "PROVIDER_069", "tags": ["governance", "law", "engine"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00070", "label": "policy", "name": "DATASET_070", "tags": ["engine", "yai", "governance"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00071", "label": "socket", "name": "BOUNDARY_071", "tags": ["runtime", "engine", "kernel"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00072", "label": "metric", "name": "PLANE_072", "tags": ["runtime", "governance", "law"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00073", "label": "invariant", "name": "SOCKET_073", "tags": ["law", "yai", "engine"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00074", "label": "provider", "name": "TOOL_074", "tags": ["governance", "kernel", "law"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00075", "label": "boundary", "name": "BOUNDARY_075", "tags": ["governance", "audit", "yai"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00076", "label": "policy", "name": "PROVIDER_076", "tags": ["runtime", "audit", "mind"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00077", "label": "socket", "name": "METRIC_077", "tags": ["runtime", "trace", "governance"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00078", "label": "metric", "name": "PLANE_078", "tags": ["engine", "audit", "runtime"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00079", "label": "socket", "name": "POLICY_079", "tags": ["trace", "kernel", "law"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00080", "label": "plane", "name": "TOOL_080", "tags": ["governance", "mind", "yai"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00081", "label": "metric", "name": "PROVIDER_081", "tags": ["trace", "law", "engine"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00082", "label": "dataset", "name": "INVARIANT_082", "tags": ["mind", "law", "kernel"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00083", "label": "boundary", "name": "SOCKET_083", "tags": ["audit", "governance", "kernel"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00084", "label": "policy", "name": "INVARIANT_084", "tags": ["runtime", "audit", "governance"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00085", "label": "axiom", "name": "POLICY_085", "tags": ["yai", "kernel", "mind"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00086", "label": "provider", "name": "PLANE_086", "tags": ["kernel", "law", "governance"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00087", "label": "plane", "name": "AXIOM_087", "tags": ["engine", "law", "kernel"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00088", "label": "provider", "name": "BOUNDARY_088", "tags": ["governance", "yai", "trace"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00089", "label": "metric", "name": "BOUNDARY_089", "tags": ["audit", "trace", "mind"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00090", "label": "axiom", "name": "INVARIANT_090", "tags": ["yai", "mind", "law"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00091", "label": "boundary", "name": "DATASET_091", "tags": ["trace", "kernel", "yai"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00092", "label": "socket", "name": "PLANE_092", "tags": ["mind", "law", "yai"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00093", "label": "plane", "name": "POLICY_093", "tags": ["audit", "law", "yai"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00094", "label": "metric", "name": "TOOL_094", "tags": ["trace", "yai", "engine"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00095", "label": "dataset", "name": "TOOL_095", "tags": ["runtime", "governance", "audit"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00096", "label": "policy", "name": "AXIOM_096", "tags": ["engine", "runtime", "mind"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00097", "label": "policy", "name": "BOUNDARY_097", "tags": ["law", "engine", "yai"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00098", "label": "dataset", "name": "DATASET_098", "tags": ["trace", "yai", "runtime"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00099", "label": "metric", "name": "AXIOM_099", "tags": ["kernel", "engine", "governance"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00100", "label": "axiom", "name": "PROVIDER_100", "tags": ["law", "engine", "trace"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00101", "label": "invariant", "name": "TOOL_101", "tags": ["engine", "governance", "yai"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00102", "label": "provider", "name": "DATASET_102", "tags": ["engine", "governance", "kernel"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00103", "label": "metric", "name": "METRIC_103", "tags": ["governance", "trace", "yai"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00104", "label": "metric", "name": "AXIOM_104", "tags": ["mind", "runtime", "yai"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00105", "label": "plane", "name": "AXIOM_105", "tags": ["engine", "mind", "audit"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00106", "label": "policy", "name": "DATASET_106", "tags": ["audit", "mind", "yai"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00107", "label": "plane", "name": "SOCKET_107", "tags": ["engine", "yai", "kernel"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00108", "label": "provider", "name": "SOCKET_108", "tags": ["law", "engine", "runtime"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00109", "label": "policy", "name": "METRIC_109", "tags": ["kernel", "engine", "law"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00110", "label": "metric", "name": "METRIC_110", "tags": ["engine", "mind", "kernel"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00111", "label": "invariant", "name": "POLICY_111", "tags": ["law", "kernel", "mind"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00112", "label": "boundary", "name": "DATASET_112", "tags": ["mind", "engine", "yai"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00113", "label": "invariant", "name": "PROVIDER_113", "tags": ["mind", "trace", "runtime"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00114", "label": "tool", "name": "POLICY_114", "tags": ["governance", "audit", "trace"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00115", "label": "metric", "name": "AXIOM_115", "tags": ["engine", "kernel", "governance"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00116", "label": "axiom", "name": "INVARIANT_116", "tags": ["kernel", "engine", "mind"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00117", "label": "boundary", "name": "AXIOM_117", "tags": ["governance", "audit", "yai"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00118", "label": "boundary", "name": "INVARIANT_118", "tags": ["runtime", "engine", "governance"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00119", "label": "policy", "name": "TOOL_119", "tags": ["yai", "governance", "engine"], "meta": {"schema": "graph.v1", "seed": true}}
+{"node_id": "N-00120", "label": "metric", "name": "PROVIDER_120", "tags": ["engine", "audit", "kernel"], "meta": {"schema": "graph.v1", "seed": true}}

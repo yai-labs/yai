@@ -1,0 +1,44 @@
+{
+  "dataset": "global-stress",
+  "version": "v1",
+  "generated_from": "prompts.v1.global_stress.csv",
+  "generated_at": "2026-02-22T16:04:43.071923+00:00",
+  "counts": {
+    "prompts": 500,
+    "seed_episodic_events": 200,
+    "seed_semantic_nodes": 120,
+    "seed_semantic_edges": 180
+  },
+  "files": [
+    {
+      "path": "prompts.csv",
+      "sha256": "8135d95c1ab6e2b3e6c3a5fa0b58bf291c2e29d24a8581024d55cd4139faf70f",
+      "bytes": 211531
+    },
+    {
+      "path": "README.md",
+      "sha256": "a9c07e8ead22aabdbbe553a71e728016db118c62a31fc236568c3df6833be452",
+      "bytes": 830
+    },
+    {
+      "path": "YAI_Global_Stress_Test_v1.xlsx",
+      "sha256": "acf30f4f9d5dab2fd211975623a11fb59dce98c46127d8c01b1266472ad66c58",
+      "bytes": 65809
+    },
+    {
+      "path": "seed/episodic_events.jsonl",
+      "sha256": "14c8bd9f83ea59229e421ff326d6b108fd5090925820a0910f8ea3471841549e",
+      "bytes": 53132
+    },
+    {
+      "path": "seed/semantic_nodes.jsonl",
+      "sha256": "0ea2f0e57d5f5cd43a79a18b084a105e2fd7964c046cbb6537435894445cc1c3",
+      "bytes": 17876
+    },
+    {
+      "path": "seed/semantic_edges.jsonl",
+      "sha256": "bce0943bb30e0dccb0ef9b331fa20c729272dbe642a1a505ef3affa60476077b",
+      "bytes": 21471
+    }
+  ]
+}
