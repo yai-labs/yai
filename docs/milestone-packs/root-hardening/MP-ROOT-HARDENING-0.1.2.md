@@ -1,64 +1,56 @@
 ---
 id: MP-ROOT-HARDENING-0.1.2
-status: active
+status: draft
 runbook: docs/runbooks/root-hardening.md
 phase: "0.1.2 — Envelope-Only Authority Gate"
 adrs:
   - docs/design/adr/ADR-002-root-entrypoint.md
   - docs/design/adr/ADR-006-unified-rpc.md
   - docs/design/adr/ADR-008-connection-lifecycle.md
-  - docs/design/adr/ADR-011-contract-baseline-lock.md
+  - docs/design/adr/ADR-012-audit-convergence-gates.md
 spec_anchors:
   - deps/yai-specs/specs/protocol/include/transport.h
   - deps/yai-specs/specs/protocol/include/auth.h
   - deps/yai-specs/specs/protocol/include/errors.h
+claims:
+  - C-KERNEL-HARD-BOUNDARY-CORE
+  - C-ENVELOPE-HANDSHAKE-REQUIRED
+evidence_commands_required:
+  - tools/bin/yai-verify
+  - tools/ops/suite/suite.sh
 issues:
-  - N/A
-issue_reason: "Docs-only traceability alignment PR without dedicated issue."
+  - "140"
 ---
+
 # MP-ROOT-HARDENING-0.1.2
 
 ## Metadata
-
 - Runbook: `docs/runbooks/root-hardening.md`
 - Phase: `0.1.2 — Envelope-Only Authority Gate`
-- Owner: `runtime`
-- Status: `active`
+- Wave issue: `#140`
+- Status: `draft`
 
 ## Links
+- Plan: `docs/program-delivery/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
+- Matrix: `docs/program-delivery/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
+- Claims registry: `docs/audits/claims/infra-grammar.v0.1.json`
+- ADR: `docs/design/adr/ADR-012-audit-convergence-gates.md`
 
-- ADRs: `docs/design/adr/ADR-002-root-entrypoint.md`, `docs/design/adr/ADR-006-unified-rpc.md`, `docs/design/adr/ADR-008-connection-lifecycle.md`, `docs/design/adr/ADR-011-contract-baseline-lock.md`
-- Proposals: `docs/design/proposals/PRP-001-runtime-topology-and-authority.md`, `docs/design/proposals/PRP-002-unified-rpc-and-cli-contract.md`, `docs/design/proposals/PRP-004-contract-baseline-lock-and-pin-policy.md`, `docs/design/proposals/PRP-005-formal-coverage-roadmap.md`
-- Evidence plans: `docs/test-plans/hardfail.md`
+## Objective
+Close phase 0.1.2 with explicit claim/evidence bindings and reproducible gate outputs.
 
-Objective:
-- Enforce privileged command authorization via envelope metadata only (`command_id`, `arming`, `role`, `ws_id`) in both Root and Kernel.
+## Mandatory command outcomes
+- `tools/bin/yai-verify` -> `PASS`
+- `tools/ops/suite/suite.sh` -> `PASS`
 
-Contract Delta:
-- Envelope: no new fields; enforcement semantics become strict for privileged commands.
-- Authority: privileged commands require `arming=1` and `role>=operator`.
-- Errors: deterministic rejects for missing arming / insufficient role.
-- Logging: reject reason and code must be audit-visible at Root and Kernel boundaries.
+Closure policy: mandatory `SKIP` is treated as `FAIL`.
 
-Repo Split:
-- `yai`: early reject in Root + defense-in-depth reject in Kernel with identical codes.
-- `yai-cli`: expose explicit operator intent and provide reproducible positive/negative authority proofs.
+## Definition of Done
+- [ ] Phase claim IDs are covered by evidence.
+- [ ] Mandatory commands are recorded with exit codes and outputs.
+- [ ] Root->Kernel evidence is traceable on deterministic pass/fail paths.
+- [ ] MP links from runbook phase and matrix remain valid.
 
-Evidence Plan (minimum):
-- Positive cases:
-  - Privileged command with `arming=1` and `role=operator` succeeds.
-  - Non-privileged command succeeds without elevated requirements.
-- Negative cases:
-  - Privileged command without arming returns deterministic `arming required` reject.
-  - Privileged command with low role returns deterministic `role required` reject.
-
-Compatibility Classification:
-- Type: B
-- Rationale: old client flows that do not provide compliant envelope authority metadata are rejected.
-- Upgrade path: ship Twin PRs (`yai` + `yai-cli`) and merge in a coordinated window.
-
-Definition of Done:
-- [ ] Root fast-fails privileged non-compliant requests.
-- [ ] Kernel rejects the same non-compliant requests (defense-in-depth).
-- [ ] Error code semantics are identical in Root and Kernel paths.
-- [ ] Twin PR evidence (pos/neg) is complete and reviewable.
+## Execution Snapshot
+- Status: `PLANNED`
+- Evidence bundle: `docs/milestone-packs/root-hardening/evidence/0.1.2/`

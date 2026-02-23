@@ -383,7 +383,7 @@
     {
       "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+      "to": "docs/design/adr/ADR-012-audit-convergence-gates.md"
     },
     {
       "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md",
@@ -408,7 +408,7 @@
     {
       "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+      "to": "docs/design/adr/ADR-012-audit-convergence-gates.md"
     },
     {
       "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md",
@@ -433,7 +433,7 @@
     {
       "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.2.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+      "to": "docs/design/adr/ADR-012-audit-convergence-gates.md"
     },
     {
       "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.2.md",
@@ -458,7 +458,7 @@
     {
       "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.3.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+      "to": "docs/design/adr/ADR-012-audit-convergence-gates.md"
     },
     {
       "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.3.md",
@@ -483,7 +483,7 @@
     {
       "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.4.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+      "to": "docs/design/adr/ADR-012-audit-convergence-gates.md"
     },
     {
       "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.4.md",
@@ -508,10 +508,20 @@
     {
       "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+      "to": "docs/design/adr/ADR-012-audit-convergence-gates.md"
     },
     {
       "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md",
+      "relation": "milestone_pack_to_runbook",
+      "to": "docs/runbooks/root-hardening.md"
+    },
+    {
+      "from": "docs/milestone-packs/root-hardening/README.md",
+      "relation": "milestone_pack_to_adr",
+      "to": "docs/design/adr/ADR-012-audit-convergence-gates.md"
+    },
+    {
+      "from": "docs/milestone-packs/root-hardening/README.md",
       "relation": "milestone_pack_to_runbook",
       "to": "docs/runbooks/root-hardening.md"
     },
@@ -851,6 +861,11 @@
       "to": "docs/design/adr/ADR-008-connection-lifecycle.md"
     },
     {
+      "from": "docs/runbooks/root-hardening.md",
+      "relation": "runbook_to_adr",
+      "to": "docs/design/adr/ADR-012-audit-convergence-gates.md"
+    },
+    {
       "from": "docs/runbooks/specs-refactor-foundation.md",
       "relation": "runbook_to_adr",
       "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
@@ -1035,6 +1050,11 @@
     {
       "id": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md",
       "path": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md",
+      "type": "milestone_pack"
+    },
+    {
+      "id": "docs/milestone-packs/root-hardening/README.md",
+      "path": "docs/milestone-packs/root-hardening/README.md",
       "type": "milestone_pack"
     },
     {

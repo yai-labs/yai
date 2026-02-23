@@ -44,6 +44,7 @@ An MP is a closure artifact for a concrete phase and should make review/audit st
 
 ## Current track: Root hardening
 
+- `docs/milestone-packs/root-hardening/README.md`
 - `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`
 - `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md`
 - `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.2.md`

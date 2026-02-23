@@ -1,64 +1,54 @@
 ---
 id: MP-ROOT-HARDENING-0.1.0
-status: active
+status: draft
 runbook: docs/runbooks/root-hardening.md
 phase: "0.1.0 — Protocol Guardrails"
 adrs:
   - docs/design/adr/ADR-002-root-entrypoint.md
   - docs/design/adr/ADR-006-unified-rpc.md
   - docs/design/adr/ADR-008-connection-lifecycle.md
-  - docs/design/adr/ADR-011-contract-baseline-lock.md
+  - docs/design/adr/ADR-012-audit-convergence-gates.md
 spec_anchors:
   - deps/yai-specs/specs/protocol/include/transport.h
   - deps/yai-specs/specs/protocol/include/auth.h
   - deps/yai-specs/specs/protocol/include/errors.h
+claims:
+  - C-ENVELOPE-HANDSHAKE-REQUIRED
+  - C-DOMAIN-COVERAGE-NETWORK
+evidence_commands_required:
+  - tools/bin/yai-verify
 issues:
-  - N/A
-issue_reason: "Docs-only traceability alignment PR without dedicated issue."
+  - "140"
 ---
+
 # MP-ROOT-HARDENING-0.1.0
 
 ## Metadata
-
 - Runbook: `docs/runbooks/root-hardening.md`
 - Phase: `0.1.0 — Protocol Guardrails`
-- Owner: `runtime`
-- Status: `active`
+- Wave issue: `#140`
+- Status: `draft`
 
 ## Links
+- Plan: `docs/program-delivery/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
+- Matrix: `docs/program-delivery/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
+- Claims registry: `docs/audits/claims/infra-grammar.v0.1.json`
+- ADR: `docs/design/adr/ADR-012-audit-convergence-gates.md`
 
-- ADRs: `docs/design/adr/ADR-002-root-entrypoint.md`, `docs/design/adr/ADR-006-unified-rpc.md`, `docs/design/adr/ADR-008-connection-lifecycle.md`, `docs/design/adr/ADR-011-contract-baseline-lock.md`
-- Proposals: `docs/design/proposals/PRP-001-runtime-topology-and-authority.md`, `docs/design/proposals/PRP-002-unified-rpc-and-cli-contract.md`, `docs/design/proposals/PRP-004-contract-baseline-lock-and-pin-policy.md`, `docs/design/proposals/PRP-005-formal-coverage-roadmap.md`
-- Evidence plans: `docs/test-plans/hardfail.md`
+## Objective
+Close phase 0.1.0 with explicit claim/evidence bindings and reproducible gate outputs.
 
-Objective:
-- Root and Kernel enforce the same mechanical envelope invariants and deterministic protocol rejects.
+## Mandatory command outcomes
+- `tools/bin/yai-verify` -> `PASS`
 
-Contract Delta:
-- Envelope: none (strict enforcement of existing fields/invariants only).
-- Authority: none.
-- Errors: use spec-defined numeric codes only.
-- Logging: reject path must remain observable and auditable.
+Closure policy: mandatory `SKIP` is treated as `FAIL`.
 
-Repo Split:
-- `yai`: enforce guardrails at Root and Kernel decode boundaries.
-- `yai-cli`: no required wire change; optional negative harness vectors to lock behavior.
+## Definition of Done
+- [ ] Phase claim IDs are covered by evidence.
+- [ ] Mandatory commands are recorded with exit codes and outputs.
+- [ ] Root->Kernel evidence is traceable on deterministic pass/fail paths.
+- [ ] MP links from runbook phase and matrix remain valid.
 
-Evidence Plan (minimum):
-- Positive cases:
-  - Valid handshake and `yai root ping` succeed end-to-end.
-  - Valid envelope at max-safe limits (payload length and enum ranges) succeeds.
-- Negative cases:
-  - Wrong `magic` and wrong `version` both return deterministic error frames.
-  - Invalid `ws_id` and `payload_len > YAI_MAX_PAYLOAD` both return deterministic reject codes.
-
-Compatibility Classification:
-- Type: A
-- Rationale: no protocol redesign; only stricter validation of already-invalid inputs.
-- Upgrade path: existing conformant CLI behavior remains valid.
-
-Definition of Done:
-- [ ] Root and Kernel reject invalid frames with the same spec numeric codes.
-- [ ] No silent drops on malformed inputs (always deterministic response frame).
-- [ ] Baseline boot and `yai root ping` remain green.
-- [ ] Evidence is captured in PR and CI logs.
+## Execution Snapshot
+- Status: `PLANNED`
+- Evidence bundle: `docs/milestone-packs/root-hardening/evidence/0.1.0/`
