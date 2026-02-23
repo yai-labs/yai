@@ -6,6 +6,8 @@ The format is based on Keep a Changelog,
 and this project adheres to Semantic Versioning.
 
 ## [Unreleased]
+- mind: import L3 Mind plane under /mind as workspace member; add lockfile + Makefile targets; stage yai-mind into build/bin (not in default bundle)
+
 
 ### Added
 
