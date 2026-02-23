@@ -1,0 +1,20 @@
+{
+  "baseline_id": "baseline-quarantine",
+  "baseline_version": 1,
+  "policy": {
+    "bio_access": {
+      "mode": "deny_or_quarantine_on_violation",
+      "require_consent": true,
+      "require_chain_of_custody": true,
+      "allowed_purposes": ["research"],
+      "allowed_datasets": ["DS-SYN-001"],
+      "on_violation": {
+        "consent_missing": { "outcome": "deny", "reason_code": "CONSENT_MISSING" },
+        "consent_expired": { "outcome": "deny", "reason_code": "CONSENT_EXPIRED" },
+        "custody_chain_broken": { "outcome": "quarantine", "reason_code": "CUSTODY_CHAIN_BROKEN" },
+        "purpose_not_allowed": { "outcome": "deny", "reason_code": "PURPOSE_NOT_ALLOWED" },
+        "minimal_disclosure_required": { "outcome": "deny", "reason_code": "MINIMAL_DISCLOSURE_REQUIRED" }
+      }
+    }
+  }
+}

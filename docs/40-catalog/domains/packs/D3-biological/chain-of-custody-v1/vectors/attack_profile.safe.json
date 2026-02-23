@@ -1,0 +1,16 @@
+{
+  "vector_id": "safe-bio-access-001",
+  "description": "Synthetic sample read attempt with non-permitted purpose and missing consent.",
+  "stimulus": {
+    "type": "storage.sample.read",
+    "sample_id": "SYN-SAMPLE-0001",
+    "dataset_id": "DS-SYN-001",
+    "purpose": "marketing",
+    "consent_ref": null,
+    "custody_ref": "CUST-SYN-0001"
+  },
+  "safety": {
+    "synthetic_only": true,
+    "no_personal_data": true
+  }
+}
