@@ -2,6 +2,13 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-export PYTHONPATH="$ROOT/tools/python"
+INFRA_ROOT_DEFAULT="$(cd "$ROOT/.." && pwd)/yai-infra"
+INFRA_ROOT="${YAI_INFRA_ROOT:-$INFRA_ROOT_DEFAULT}"
+INFRA_SCRIPT="$INFRA_ROOT/tools/bin/yai-pr-check"
 
+if [[ -z "${YAI_INFRA_DELEGATED:-}" && -x "$INFRA_SCRIPT" ]]; then
+  exec env YAI_INFRA_DELEGATED=1 "$INFRA_SCRIPT" "$@"
+fi
+
+export PYTHONPATH="$ROOT/tools/python"
 exec python3 -m yai_tools.cli pr-check "$@"
