@@ -1,22 +1,22 @@
 # Third-Party Notices
 
-This repository contains vendored third-party code.
-Each component retains its original license.
+This repository includes third-party components. Each component retains its original license.
+Where third-party code is vendored, the upstream license text and attribution are kept in the vendored files and/or adjacent notices.
 
-## Vendored Components
+## Vendored components
 
 ### cJSON
 
-- Name: cJSON
-- Origin: upstream cJSON project by Dave Gamble and contributors
+- Component: cJSON
+- Upstream: Dave Gamble and contributors
 - Upstream reference: https://github.com/DaveGamble/cJSON
 - Vendored path: `engine/third_party/cjson/`
 - License: MIT
-- Local license notice location:
-  - `engine/third_party/cjson/cJSON.h`
+- License/notice location in-tree:
   - `engine/third_party/cjson/cJSON.c`
+  - `engine/third_party/cjson/cJSON.h`
 
-## Generated Artifacts
+## Generated artifacts
 
-Some headers/artifacts are generated from in-repo schemas (for example vault ABI artifacts).
-Generated files are first-party outputs unless otherwise stated.
+Some files are generated from in-repo schemas or build tooling (for example ABI/header artifacts).
+Unless explicitly marked otherwise, generated outputs are treated as first-party outputs of this repository and do not introduce additional third-party licensing beyond the inputs they were generated from.
