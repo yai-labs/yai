@@ -1,30 +1,50 @@
+---
+id: ARCH-COMP-MIND-BOUNDARIES
+status: active
+effective_date: 2026-02-23
+revision: 1
+owner: mind
+law_refs:
+  - deps/yai-specs/contracts/boundaries/L3-mind.md
+  - deps/yai-specs/contracts/invariants/I-004-cognitive-reconfiguration.md
+---
+
 # Boundaries — Mind (L3)
 
-This document describes the boundary rules Mind must obey.
+## Role
 
-## Authority boundary
+This document defines boundary constraints that Mind must obey as a proposer-only plane.
 
-- Mind must treat every action as requiring an **explicit authority envelope**.
-- Any action that could cause an external effect must be routed through governed planes (Root/Kernel/Engine) and validated.
+## Current Implementation Status
 
-## State boundary
+partial
 
-- Mind may maintain internal state for reasoning, sessions, and memory graphs.
-- State transitions should remain auditable and traceable (domain traces/tests exist under `memory/graph/domains/*/trace.rs`).
+## Interfaces and Entry Points
 
-## Data boundary
+- `mind/src/cognition/orchestration/`
+- `mind/src/memory/graph/`
+- `mind/src/providers/`
+- `mind/src/transport/`
 
-- Default behavior must minimize data retention.
-- Prompts/context fragments are treated as sensitive and must not be logged by default.
-- Memory artifacts derived from real users must not be committed to git.
+## Authority and Boundary Rules
 
-## Provider boundary
+- Any external effect must be routed through governed planes (Root/Kernel/Engine).
+- Mind cannot bypass authority contracts or directly enforce side effects.
+- Boundary decisions must remain auditable via traces/tests.
 
-- Providers are untrusted inputs.
-- All provider responses must be validated/sanitized before entering memory or affecting proposals.
-- Provider configuration must not include secrets committed to the repo.
+## Traceability
 
-## Determinism boundary
+- ADR refs: `docs/20-governance/22-adr/ADR-005-mind-proposer.md`, `docs/20-governance/22-adr/ADR-003-kernel-authority.md`
+- Runbook refs: `docs/20-governance/23-runbooks/mind-redis-stm.md`, `docs/20-governance/23-runbooks/root-hardening.md`
+- MP refs: `docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md`
+- L0 anchors: `deps/yai-specs/contracts/boundaries/L3-mind.md`, `deps/yai-specs/contracts/invariants/I-004-cognitive-reconfiguration.md`
 
-- Prefer reproducible pipelines and test fixtures.
-- Any non-determinism (timestamps, random seeds) should be controlled, injected, or isolated in tests.
+## Known Drift / Gaps
+
+- Coverage of boundary evidence across all provider modes is incomplete.
+- Some drift notes are still tracked outside consolidated closure artifacts.
+
+## Next Alignment Steps
+
+- Complete boundary-focused evidence for provider and memory domains.
+- Re-run architecture alignment generation and keep claims synchronized.

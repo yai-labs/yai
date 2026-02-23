@@ -1,21 +1,20 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ROOT="$(git -C "$SCRIPT_DIR" rev-parse --show-toplevel 2>/dev/null || true)"
+if [[ -z "$ROOT" ]]; then
+  ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
+fi
+
 INFRA_ROOT_DEFAULT="$(cd "$ROOT/.." && pwd)/yai-infra"
 INFRA_ROOT="${YAI_INFRA_ROOT:-$INFRA_ROOT_DEFAULT}"
-INFRA_SCRIPT="$INFRA_ROOT/tools/release/sync_specs_refs.sh"
-LEGACY_SCRIPT="$ROOT/tools/release/.legacy/sync_specs_refs.sh"
+TARGET="$INFRA_ROOT/tools/release/sync_specs_refs.sh"
 
-if [[ -z "${YAI_INFRA_DELEGATED:-}" && -x "$INFRA_SCRIPT" ]]; then
-  cd "$ROOT"
-  exec env YAI_INFRA_DELEGATED=1 "$INFRA_SCRIPT" "$@"
+if [[ -x "$TARGET" ]]; then
+  exec "$TARGET" "$@"
 fi
 
-if [[ -x "$LEGACY_SCRIPT" ]]; then
-  cd "$ROOT"
-  exec "$LEGACY_SCRIPT" "$@"
-fi
-
-echo "ERROR: local fallback unavailable for tools/release/sync_specs_refs.sh" >&2
-exit 1
+echo "Deprecated local mirror: use infra canonical tool at tools/release/sync_specs_refs.sh" >&2
+echo "Missing target: $TARGET" >&2
+exit 2
