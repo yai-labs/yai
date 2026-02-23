@@ -1,20 +1,38 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-ROOT="$(git -C "$SCRIPT_DIR" rev-parse --show-toplevel 2>/dev/null || true)"
-if [[ -z "$ROOT" ]]; then
-  ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+SPEC="$ROOT/deps/yai-specs/specs/vault/schema/vault_abi.json"
+GEN="$ROOT/tools/dev/gen-vault-abi"
+
+TMP_DIR="$(mktemp -d)"
+cleanup() {
+  rm -rf "$TMP_DIR"
+}
+trap cleanup EXIT
+
+"$GEN" --spec "$SPEC" --out-dir "$TMP_DIR"
+
+strip_generated() {
+  sed -e '/^\/\* Generated:/d' -e '/^\\\* Generated:/d'
+}
+
+DIFF_A=$(diff -u <(strip_generated < "$ROOT/deps/yai-specs/specs/vault/include/yai_vault_abi.h") \
+                 <(strip_generated < "$TMP_DIR/deps/yai-specs/specs/vault/include/yai_vault_abi.h") || true)
+if [[ -n "$DIFF_A" ]]; then
+  echo "ERROR: yai_vault_abi.h drift"
+  echo "$DIFF_A"
+  exit 1
 fi
 
-INFRA_ROOT_DEFAULT="$(cd "$ROOT/.." && pwd)/yai-infra"
-INFRA_ROOT="${YAI_INFRA_ROOT:-$INFRA_ROOT_DEFAULT}"
-TARGET="$INFRA_ROOT/tools/dev/check-generated.sh"
-
-if [[ -x "$TARGET" ]]; then
-  exec "$TARGET" "$@"
+DIFF_B=$(diff -u <(strip_generated < "$ROOT/deps/yai-specs/formal/tla/LAW_IDS.tla") \
+                 <(strip_generated < "$TMP_DIR/deps/yai-specs/formal/tla/LAW_IDS.tla") || true)
+if [[ -n "$DIFF_B" ]]; then
+  echo "ERROR: LAW_IDS.tla drift"
+  echo "$DIFF_B"
+  exit 1
 fi
 
-echo "Deprecated local mirror: use infra canonical tool at tools/dev/check-generated.sh" >&2
-echo "Missing target: $TARGET" >&2
-exit 2
+echo "OK: generated files are in sync"
+
+true

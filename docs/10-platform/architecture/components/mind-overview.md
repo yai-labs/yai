@@ -1,29 +1,50 @@
+---
+id: ARCH-COMP-MIND-OVERVIEW
+status: active
+effective_date: 2026-02-23
+revision: 1
+owner: mind
+law_refs:
+  - deps/yai-specs/contracts/boundaries/L3-mind.md
+  - deps/yai-specs/contracts/invariants/I-004-cognitive-reconfiguration.md
+---
+
 # Architecture Overview — Mind (L3)
 
-Mind is the **cognitive plane** of YAI. It runs within governed boundaries and produces proposals, context, and memory updates—while remaining **authority-bound**.
+## Role
 
-## Responsibilities
+Mind is the cognitive proposer plane (L3). It prepares context and proposals but does not execute irreversible external effects.
 
-- Build context for reasoning (RAG context builder + session orchestration)
-- Propose plans (planner module) and score options (reasoning/scoring)
-- Maintain memory graphs (activation/authority/episodic/semantic/vector)
-- Interact with providers through an abstracted registry/client
+## Current Implementation Status
 
-## Non-responsibilities
+partial
 
-Mind does not:
-- execute irreversible external effects directly
-- bypass authority requirements enforced by lower planes
-- silently persist personal data without policy alignment
+## Interfaces and Entry Points
 
-## Major modules
+- `mind/src/main.rs`
+- `mind/src/cognition/mod.rs`
+- `mind/src/cognition/orchestration/mod.rs`
+- `mind/src/transport/mod.rs`
 
-- `cognition/` — agents, orchestration, reasoning roles & scoring
-- `memory/graph/` — graph facade + domain APIs + backend RPC
-- `providers/` — embedder abstraction + provider registry and types
-- `transport/` — UDS server + protocol wiring to runtime
+## Authority and Boundary Rules
 
-## Integration points
+- Mind must remain proposer-only; authority and enforcement remain in lower planes.
+- Effectful decisions require governed handoff to Root/Kernel/Engine.
+- Proposal context must preserve workspace and trace identifiers.
 
-- Contract surfaces are defined in `yai-specs` (canonical)
-- Runtime enforcement and authority boundaries are implemented in lower planes (`yai` core)
+## Traceability
+
+- ADR refs: `docs/20-governance/22-adr/ADR-005-mind-proposer.md`, `docs/20-governance/22-adr/ADR-003-kernel-authority.md`
+- Runbook refs: `docs/20-governance/23-runbooks/mind-redis-stm.md`, `docs/20-governance/23-runbooks/root-hardening.md`
+- MP refs: `docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md`
+- L0 anchors: `deps/yai-specs/contracts/boundaries/L3-mind.md`, `deps/yai-specs/contracts/invariants/I-004-cognitive-reconfiguration.md`
+
+## Known Drift / Gaps
+
+- End-to-end evidence for proposer flow through Kernel enforcement is partial.
+- Some governance closure items are still pending at milestone-pack level.
+
+## Next Alignment Steps
+
+- Close remaining proposer-path evidence in runbook/milestone-pack artifacts.
+- Keep alignment outputs synchronized after each mind-plane change.

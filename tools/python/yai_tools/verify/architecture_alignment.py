@@ -137,9 +137,27 @@ def _parse_component_doc(path: Path) -> dict[str, Any]:
         "frontmatter": fm,
         "sections": sections,
         "impl_status": impl_status,
-        "adr_refs": _extract_refs_by_prefix(traceability, ("docs/20-governance/design/adr/",)),
-        "runbook_refs": _extract_refs_by_prefix(traceability, ("docs/20-governance/runbooks/",)),
-        "mp_refs": _extract_refs_by_prefix(traceability, ("docs/20-governance/milestone-packs/",)),
+        "adr_refs": _extract_refs_by_prefix(
+            traceability,
+            (
+                "docs/20-governance/design/adr/",
+                "docs/20-governance/22-adr/",
+            ),
+        ),
+        "runbook_refs": _extract_refs_by_prefix(
+            traceability,
+            (
+                "docs/20-governance/runbooks/",
+                "docs/20-governance/23-runbooks/",
+            ),
+        ),
+        "mp_refs": _extract_refs_by_prefix(
+            traceability,
+            (
+                "docs/20-governance/milestone-packs/",
+                "docs/20-governance/24-milestone-packs/",
+            ),
+        ),
         "l0_refs": _extract_refs_by_prefix(traceability, ("deps/yai-specs/",)),
     }
 
