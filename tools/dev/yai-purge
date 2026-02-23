@@ -1,20 +1,33 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-ROOT="$(git -C "$SCRIPT_DIR" rev-parse --show-toplevel 2>/dev/null || true)"
-if [[ -z "$ROOT" ]]; then
-  ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+BIN="${BIN:-$(command -v yai || true)}"
+if [[ -z "$BIN" && -x "$HOME/.cargo/bin/yai" ]]; then
+  BIN="$HOME/.cargo/bin/yai"
+fi
+CFG="${HOME}/.yai/config/yai.toml"
+
+WS_DEFAULT="${YAI_WS_DEFAULT:-dev}"
+if [[ -f "${CFG}" ]]; then
+  WS_DEFAULT="$(grep -E '^ws_default' "${CFG}" | head -n 1 | sed -E 's/.*"([^"]+)".*/\1/')"
+  WS_DEFAULT="${WS_DEFAULT:-${YAI_WS_DEFAULT:-dev}}"
 fi
 
-INFRA_ROOT_DEFAULT="$(cd "$ROOT/.." && pwd)/yai-infra"
-INFRA_ROOT="${YAI_INFRA_ROOT:-$INFRA_ROOT_DEFAULT}"
-TARGET="$INFRA_ROOT/tools/dev/yai-purge"
-
-if [[ -x "$TARGET" ]]; then
-  exec "$TARGET" "$@"
+if [[ -n "$BIN" && -x "$BIN" ]]; then
+  "$BIN" down --ws "${WS_DEFAULT}" || true
 fi
 
-echo "Deprecated local mirror: use infra canonical tool at tools/dev/yai-purge" >&2
-echo "Missing target: $TARGET" >&2
-exit 2
+if [[ -d "${ROOT}/kernel" ]]; then
+  (cd "${ROOT}/kernel" && make clean)
+fi
+
+if [[ -d "${ROOT}/engine" ]]; then
+  (cd "${ROOT}/engine" && make clean)
+fi
+
+if [[ -d "${HOME}/.yai/artifacts" ]]; then
+  find "${HOME}/.yai/artifacts" -type d \( -name build -o -name target -o -name dist \) -prune -exec rm -rf {} +
+fi
+
+echo "OK: purge complete"

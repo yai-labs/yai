@@ -1,20 +1,40 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-ROOT="$(git -C "$SCRIPT_DIR" rev-parse --show-toplevel 2>/dev/null || true)"
-if [[ -z "$ROOT" ]]; then
-  ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
-fi
+# Resolve a usable yai binary path.
+# Usage: yai_resolve_bin "<repo_root>"
+yai_resolve_bin() {
+  local root="${1:-}"
 
-INFRA_ROOT_DEFAULT="$(cd "$ROOT/.." && pwd)/yai-infra"
-INFRA_ROOT="${YAI_INFRA_ROOT:-$INFRA_ROOT_DEFAULT}"
-TARGET="$INFRA_ROOT/tools/dev/resolve-yai-bin.sh"
+  if [[ -n "${BIN:-}" && -x "${BIN:-}" ]]; then
+    echo "$BIN"
+    return 0
+  fi
+  if [[ -n "${YAI_BIN:-}" && -x "${YAI_BIN:-}" ]]; then
+    echo "$YAI_BIN"
+    return 0
+  fi
 
-if [[ -x "$TARGET" ]]; then
-  exec "$TARGET" "$@"
-fi
+  if command -v yai >/dev/null 2>&1; then
+    command -v yai
+    return 0
+  fi
 
-echo "Deprecated local mirror: use infra canonical tool at tools/dev/resolve-yai-bin.sh" >&2
-echo "Missing target: $TARGET" >&2
-exit 2
+  if [[ -x "$HOME/.cargo/bin/yai" ]]; then
+    echo "$HOME/.cargo/bin/yai"
+    return 0
+  fi
+
+  if [[ -n "$root" && -x "$root/target/release/yai" ]]; then
+    echo "$root/target/release/yai"
+    return 0
+  fi
+
+  # Legacy fallback (older local setup).
+  if [[ -x "$HOME/.yai/artifacts/yai/bin/yai" ]]; then
+    echo "$HOME/.yai/artifacts/yai/bin/yai"
+    return 0
+  fi
+
+  return 1
+}
