@@ -2,46 +2,80 @@
 
 ## Scope
 
-This policy covers the `yai` runtime repository.
-Contract-level normative behavior is defined in `deps/yai-specs` and consumed by this runtime.
+This policy applies to the **`yai` runtime implementation repository** (Boot/Root/Kernel/Engine/Mind workspace integration, tooling, and release artifacts).
 
-## Disclosure Process
+Normative contract behavior (protocol/control/graph/vault/compliance) is defined in **`deps/yai-specs/`**. Contract issues may be triaged here but the source-of-truth fix may live in `yai-specs`.
 
-Use one of the following channels:
+## Reporting a Vulnerability
 
-- Open a private GitHub Security Advisory for this repository, if available.
-- Otherwise open a GitHub issue with label `security` and include clear impact, reproduction, and affected paths.
+Preferred: **GitHub Security Advisory** (private report) for this repository.
 
-Do not include secrets, tokens, credentials, or private data in reports.
+Fallback: open a GitHub issue labeled **`security`** and include only non-sensitive details (impact + affected paths + high-level reproduction). If the issue requires sensitive material, do **not** post it publicly—use private channels.
+
+Minimum report content:
+- Impact and expected vs actual behavior
+- Affected components/paths (e.g., `root/`, `kernel/`, `engine/`, `runtime/`, `mind/`, `tools/`)
+- Reproduction steps that do **not** require secrets
+- Version/commit information (tag or SHA)
+- Any mitigations you already tried
+
+Do **not** include:
+- credentials, tokens, private keys, session material
+- private datasets or personal data
+- internal infrastructure URLs or sensitive logs
+
+## Response and Triage
+
+We aim to:
+- acknowledge receipt and start triage as soon as practical
+- request additional information if needed
+- provide a mitigation or fix plan when the issue is confirmed
+
+Fixes may be shipped as:
+- a commit on `main`
+- a tagged release with notes and checksums (see `VERSIONING.md` and `COMPATIBILITY.md`)
 
 ## Supported Versions
 
-- Active development line: `main`
-- Release support windows and compatibility guarantees are defined in `VERSIONING.md` and `COMPATIBILITY.md`.
+- Active development line: **`main`**
+- Release support windows and compatibility guarantees are defined in:
+  - `VERSIONING.md`
+  - `COMPATIBILITY.md`
 
 ## Exposure Model
 
-`yai` is local-first and not internet-exposed by default.
-Primary runtime surfaces are local process boundaries and workspace-scoped Unix Domain Sockets.
+`yai` is **local-first** and is **not internet-exposed by default**.
 
-## Threat Model (Summary)
+Primary runtime surfaces are **local process boundaries** and **workspace-scoped Unix Domain Sockets (UDS)**. Any network exposure is an operator choice and must be treated as a separate hardening task.
 
-Primary security boundaries:
+## Threat Model Summary
 
-- Root plane authority and process supervision (`root/`)
-- Workspace UDS control sockets and envelope validation
-- Workspace isolation across run directories and process state
-- Provider gate attachment/detachment and trust transitions (`engine/`)
+Primary security boundaries and high-risk surfaces:
 
-## Hardening Checklist
+- **Root plane authority & supervision** (`root/`)
+- **Kernel enforcement & workspace isolation** (`kernel/`)
+- **Envelope validation / protocol dispatch** (`runtime/` and protocol bindings)
+- **Engine external-effect boundary and provider gates** (`engine/`)
+- **Mind orchestration** (`mind/`) as a proposer that must not bypass authority
 
-- Keep `deps/yai-specs` pinned and verified before upgrade.
-- Validate request envelope/version before dispatch.
-- Enforce role/arming/authority checks on privileged operations.
-- Keep workspace-scoped sockets, locks, and runtime files isolated.
-- Ensure logs/events are emitted for critical state transitions and denials.
-- Do not commit runtime logs, secrets, or generated state.
+Key risks include:
+- authority bypass or confused-deputy flows
+- workspace escape via filesystem/run directories/sockets
+- protocol/envelope downgrade or version confusion
+- unsafe provider attachment/trust transitions
+- sensitive data leakage via logs/artifacts
+
+## Hardening Baselines
+
+Operators and contributors should ensure:
+
+- Contract pins are verified before upgrades (`tools/release/check_pins.sh`)
+- Request envelopes are validated before dispatch (version/role/arming/authority)
+- Privileged operations hard-fail without explicit authority
+- Workspace runtime files (sockets/locks/state) are isolated per workspace
+- Critical state transitions and denials emit auditable events/logs
+- Secrets, runtime logs, generated state, and local datasets are not committed
 
 ## License
 
-This security policy document is licensed under Apache-2.0.
+This security policy is distributed under Apache-2.0. See `LICENSE` and `NOTICE`.

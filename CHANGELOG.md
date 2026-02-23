@@ -16,6 +16,7 @@ and this project adheres to Semantic Versioning.
 
 ### Changed
 
+- Consolidated Mind governance/docs paths after mind-integration cutover and aligned architecture component metadata for validation gates.
 - Closed Wave0 strict pin blocker by aligning `yai` + `yai-cli` to `yai-specs@30d04d0`, updating `deps/yai-cli.ref`, and refreshing closure evidence/MP snapshots.
 - Hardening wave 1: removed non-core local Python test/cache artifacts from `tools/python/yai_tools` (tracked in yai-infra#17).
 - Start infra cutover increment: add reusable `verify` workflow via `yai-infra.1.0-rc1`, migrate governance guide pointer, and add `scripts/yai-govern` compatibility wrapper.

@@ -1,9 +1,9 @@
 ---
 id: ARCH-COMP-MIND
 status: active
-effective_date: 2026-02-19
+effective_date: 2026-02-23
 revision: 1
-owner: cognition
+owner: mind
 law_refs:
   - deps/yai-specs/contracts/boundaries/L3-mind.md
   - deps/yai-specs/contracts/invariants/I-004-cognitive-reconfiguration.md
@@ -13,33 +13,38 @@ law_refs:
 
 ## Role
 
-Workspace-scoped cognitive/proposal plane that may generate plans but must not execute authority-bound effects.
+Cognitive proposer plane (L3) that can suggest plans/actions but cannot directly enforce external effects.
 
 ## Current Implementation Status
 
-planned/external
+partial
 
 ## Interfaces and Entry Points
 
-- Planned contracts and references: `docs/runbooks/mind-redis-stm.md`, `docs/design/adr/ADR-005-mind-proposer.md`
-- Current local implementation status: no tracked source under `yai/mind` (build artifacts only).
+- `mind/src/main.rs`
+- `mind/src/cognition/mod.rs`
+- `mind/src/cognition/orchestration/mod.rs`
+- `mind/src/transport/mod.rs`
 
 ## Authority and Boundary Rules
 
-- Mind cannot be an authority enforcement surface.
-- Mind must pass proposals through governed runtime boundaries.
+- Mind is proposer-only and must not become an authority or enforcement surface.
+- All effectful decisions remain governed by Root/Kernel/Engine contracts.
+- Proposal context must preserve workspace and trace identifiers end-to-end.
 
 ## Traceability
 
-- ADR refs: `docs/design/adr/ADR-005-mind-proposer.md`
-- Runbook refs: `docs/runbooks/mind-redis-stm.md`
-- MP refs: *(TBD)*
+- ADR refs: `docs/design/adr/ADR-005-mind-proposer.md`, `docs/design/adr/ADR-003-kernel-authority.md`
+- Runbook refs: `docs/runbooks/mind-redis-stm.md`, `docs/runbooks/root-hardening.md`
+- MP refs: `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md`
 - L0 anchors: `deps/yai-specs/contracts/boundaries/L3-mind.md`, `deps/yai-specs/contracts/invariants/I-004-cognitive-reconfiguration.md`
 
 ## Known Drift / Gaps
 
-- ADR and runbook define direction, but implementation is currently external/not tracked in this repo.
+- End-to-end evidence for proposer path through Kernel enforcement is still partial.
+- Redis STM integration and governance checks are not fully closed at milestone-pack level.
 
 ## Next Alignment Steps
 
-- Reintroduce tracked implementation sources before promoting status beyond planned/external.
+- Close `RB-MIND-REDIS-STM` phase evidence with mandatory verify/suite/proof outputs.
+- Keep architecture alignment and claims registry synchronized as mind milestones close.
