@@ -4,17 +4,20 @@ title: Specs Refactor Foundation
 status: draft
 owner: governance
 effective_date: 2026-02-19
-revision: 2
+revision: 3
 supersedes: []
 depends_on:
   - RB-CONTRACT-BASELINE-LOCK
 adr_refs:
   - docs/design/adr/ADR-011-contract-baseline-lock.md
+  - docs/design/adr/ADR-012-audit-convergence-gates.md
 decisions:
   - docs/design/adr/ADR-011-contract-baseline-lock.md
+  - docs/design/adr/ADR-012-audit-convergence-gates.md
 related:
   adr:
     - docs/design/adr/ADR-011-contract-baseline-lock.md
+    - docs/design/adr/ADR-012-audit-convergence-gates.md
   specs:
     - deps/yai-specs/SPEC_MAP.md
     - deps/yai-specs/REGISTRY.md
@@ -86,6 +89,21 @@ A *closure artifact* for a phase: what changed, proof evidence, links to issues/
 - `yai` build + verify scripts
 - `yai-cli` build + tests/vectors
 
+### 3.1 Audit Convergence Binding (Wave 1)
+This runbook is Wave 1 under:
+- `docs/program-delivery/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
+- `docs/program-delivery/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
+
+Claims source of truth:
+- `docs/audits/claims/infra-grammar.v0.1.json`
+
+Wave tracking:
+- `https://github.com/yai-labs/yai/issues/142`
+- `https://github.com/yai-labs/yai-specs/issues/9`
+
+Mandatory closure policy:
+- for mandatory evidence checks, `SKIP` is treated as `FAIL`.
+
 ---
 
 ## 4) Sequencing (global program position)
@@ -127,6 +145,9 @@ A phase is "closed" only when:
 ### 0.1.0 - Canonical Tree & Domain Separation
 **Claim:** repository layout is canonical, navigable, and domain-separated.  
 **Scope:** boundaries between `docs/`, `contracts/`, `specs/`, `formal/`, `compliance/`, `vectors/`, `tools/`.  
+**Claim IDs:** `C-EVIDENCE-PACK-REPRODUCIBLE`  
+**Mandatory evidence commands:**
+- `tools/bin/yai-docs-trace-check --all`
 **Work (typical):**
 - ensure each domain has a landing README,
 - ensure "source-of-truth pointers" exist (SPEC_MAP / REGISTRY),
@@ -150,6 +171,9 @@ A phase is "closed" only when:
 **Claim:** mapping cleanup is structural only (move/rename), no normative content changes.  
 **Scope:** move/rename, deduplicate wrong placements, normalize paths.  
 **Hard rule:** normative artifacts content must remain identical (byte-level if possible).
+**Claim IDs:** `C-EVIDENCE-PACK-REPRODUCIBLE`  
+**Mandatory evidence commands:**
+- `tools/bin/yai-docs-trace-check --all`
 
 **Work (typical):**
 - move files to correct domains,
@@ -173,6 +197,9 @@ A phase is "closed" only when:
 ### 0.1.2 - Sanity Link & Pointer Health
 **Claim:** no broken links or ghost paths; indexes are coherent.  
 **Scope:** markdown links, anchors, SPEC_MAP/REGISTRY references, pointer docs.  
+**Claim IDs:** `C-EVIDENCE-PACK-REPRODUCIBLE`  
+**Mandatory evidence commands:**
+- `tools/bin/yai-docs-trace-check --all`
 **Work (typical):**
 - fix broken relative links,
 - fix missing anchors,
@@ -195,6 +222,10 @@ A phase is "closed" only when:
 ### 0.1.3 - Consumer-Ready Wiring in `yai`
 **Claim:** `yai` consumes `yai-specs` deterministically under the new structure.  
 **Scope:** pins/tags/commit refs, include paths, build wiring, verify scripts.  
+**Claim IDs:** `C-SPEC-FIRST-PINNED`, `C-EVIDENCE-PACK-REPRODUCIBLE`  
+**Mandatory evidence commands:**
+- `tools/release/check_pins.sh`
+- `tools/bin/yai-proof-check`
 **Work (typical):**
 - update include paths to new canonical structure,
 - ensure `tools/release/check_pins.sh` (or equivalent) gates drift,
@@ -218,6 +249,10 @@ A phase is "closed" only when:
 ### 0.1.4 - Consumer-Ready Wiring in `yai-cli`
 **Claim:** `yai-cli` remains aligned and deterministic after specs mapping.  
 **Scope:** pin, includes, references, vectors usage, CLI build/tests.  
+**Claim IDs:** `C-SPEC-FIRST-PINNED`, `C-EVIDENCE-PACK-REPRODUCIBLE`  
+**Mandatory evidence commands:**
+- `tools/release/check_pins.sh`
+- `tools/bin/yai-proof-check`
 **Gate:**
 - `yai-cli` build/tests green,
 - pin check green,
@@ -236,6 +271,10 @@ A phase is "closed" only when:
 ### 0.1.5 - CI Hard Guardrails (Enterprise)
 **Claim:** PRs are **non-mergable** if any required check fails; logs are readable; checks are separated.  
 **Scope:** `yai-specs` CI and repo gates.
+**Claim IDs:** `C-EVIDENCE-PACK-REPRODUCIBLE`, `C-SKIP-FAIL-MANDATORY`  
+**Mandatory evidence commands:**
+- `tools/bin/yai-docs-trace-check --all`
+- `tools/bin/yai-proof-check`
 
 **Work (minimum deliverables):**
 - Docs lint: markdownlint + internal link-check
@@ -276,6 +315,10 @@ A phase is "closed" only when:
 ### 0.1.6 - Internal Toolchain & Policy (Enterprise)
 **Claim:** validate/format/policy/release operations are repeatable locally and in CI.  
 **Scope:** toolchain scripts and policy gates.
+**Claim IDs:** `C-EVIDENCE-PACK-REPRODUCIBLE`  
+**Mandatory evidence commands:**
+- `tools/bin/yai-docs-trace-check --all`
+- `tools/bin/yai-proof-check`
 
 **Work (minimum deliverables):**
 - `tools/validate/validate_all.sh` aggregator
@@ -315,6 +358,10 @@ A phase is "closed" only when:
 ### 0.1.7 - Formal Binding & Traceability Matrix (Enterprise)
 **Claim:** contracts <-> specs <-> vectors <-> formal mapping is machine-verifiable.  
 **Scope:** `formal/` bindings + traceability matrix + validators + CI gate.
+**Claim IDs:** `C-AUTHORITY-SURFACE-RUNTIME`, `C-EVIDENCE-PACK-REPRODUCIBLE`  
+**Mandatory evidence commands:**
+- `tools/bin/yai-proof-check`
+- `tools/bin/yai-docs-trace-check --all`
 
 **Work (minimum deliverables):**
 - Binding docs for each area:
@@ -353,6 +400,10 @@ A phase is "closed" only when:
 - **quick** always runs on PR and stays green,
 - **deep** runs on schedule/manual and is stabilized over time,
 - traceability maps to real properties/configs.
+**Claim IDs:** `C-AUTHORITY-SURFACE-RUNTIME`, `C-EVIDENCE-PACK-REPRODUCIBLE`  
+**Mandatory evidence commands:**
+- `tools/bin/yai-proof-check`
+- `tools/bin/yai-docs-trace-check --all`
 
 **Work (minimum deliverables):**
 - Standard runner:
@@ -382,6 +433,7 @@ A phase is "closed" only when:
 
 ## 7) Verification (commands)
 > Commands differ slightly per repo. The point is: **each phase has a deterministic gate**.
+> Mandatory check closure semantics: `SKIP = FAIL`.
 
 ### In `yai-specs` (foundation gates)
 ```bash
