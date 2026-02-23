@@ -115,9 +115,25 @@ Typical events:
 Why it matters:
 Reproducibility is a core constraint. Domain packs must define parameter locks, provenance, and evidence that supports repeatability.
 
+## D9) Environmental / Climatological Domain (Earth Systems)
+
+Environmental and climatological systems where information is produced by measurement and models across space-time:
+environment monitoring, climate analytics, emissions tracking, hazard detection, early warning systems.
+
+Typical events:
+- sensor telemetry ingestion (air quality, temperature, water levels, radiation)
+- calibration updates, station integrity checks
+- derived metrics (AQI, anomaly scores), threshold crossings
+- model runs/forecasts with parameter sets
+- publication of alerts, bulletins, and regulatory reports
+
+Why it matters:
+This domain is high-stakes and multi-scale: small data integrity failures can cascade into wrong operational decisions or compliance exposure.
+Domain semantics must enforce measurement integrity (calibration, provenance) and reproducibility (parameter locks) while minimizing disclosure (e.g., do not leak sensitive location data).
+
 ## Cross-Domain Coherence Note (SC-102 alignment)
 
-SC-102 (core-only qualification) should demonstrate that the following invariants remain identical across all D-Major domains:
+SC-102 (core-only qualification) should demonstrate that the following invariants remain identical across all D-Major domains (D1-D9):
 
 - authority envelope integrity
 - policy/contract chain (baseline hashable)

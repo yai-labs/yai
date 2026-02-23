@@ -26,6 +26,7 @@ A D-Major domain is a macro-area of reality where events, authority, constraints
 - Operational (coordination, logistics, SRE/IR)
 - Cognitive/Cultural (media, meaning, reputation)
 - Scientific (measurement, reproducibility)
+- Environmental/Climatological (earth systems, telemetry, hazards)
 
 YAI does not become any of these domains. YAI remains a governed runtime.
 What changes is the domain semantics captured by a Domain Pack.

@@ -48,6 +48,7 @@ Must follow:
 - `D6-operational`
 - `D7-cognitive-cultural`
 - `D8-scientific`
+- `D9-environmental-climatological`
 
 ### Pack folder name
 
