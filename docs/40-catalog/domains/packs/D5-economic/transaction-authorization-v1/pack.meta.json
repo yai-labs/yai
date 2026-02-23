@@ -1,0 +1,23 @@
+{
+  "id": "D5-economic/transaction-authorization-v1",
+  "d_major": "D5-economic",
+  "title": "Economic - Transaction Authorization & Limits",
+  "version": 1,
+  "revision": 1,
+  "forbidden_effects": [
+    {
+      "effect": "payment.authorize",
+      "description": "Authorization request outside contract limits or for a non-contracted counterparty."
+    },
+    {
+      "effect": "payment.release_hold",
+      "description": "Release of a hold without required role/arming or without contract justification."
+    }
+  ],
+  "primary_runtime_effect_domain": "providers",
+  "audit_steps": ["trigger", "context", "authority", "decision", "enforcement", "evidence"],
+  "safety": {
+    "vector_policy": "safe-only",
+    "notes": "Vectors must be simulated or routed to a mock provider. No real funds movement."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "kpis": [
+    {
+      "id": "time_to_decide_ms",
+      "description": "Latency from authorization request trigger to decision outcome.",
+      "unit": "ms",
+      "target": { "p50_max": 10, "p95_max": 50 }
+    },
+    {
+      "id": "authorization_granted",
+      "description": "Whether authorization was granted for the requested transaction.",
+      "unit": "bool",
+      "target": { "must_be_false_under_deny_or_quarantine": true }
+    },
+    {
+      "id": "evidence_completeness",
+      "description": "Percentage of required evidence fields present.",
+      "unit": "percent",
+      "target": { "min": 100 }
+    },
+    {
+      "id": "repeatability_runs",
+      "description": "Number of consecutive consistent PASS runs required for qualification.",
+      "unit": "count",
+      "target": { "min": 3 }
+    }
+  ],
+  "notes": {
+    "thresholds": "Targets are v0.1 goals for local mock providers. Real payment rails may require different latency envelopes."
+  }
+}

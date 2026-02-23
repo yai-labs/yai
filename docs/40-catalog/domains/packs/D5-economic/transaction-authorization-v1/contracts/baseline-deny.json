@@ -1,0 +1,17 @@
+{
+  "baseline_id": "baseline-deny",
+  "baseline_version": 1,
+  "policy": {
+    "payments": {
+      "mode": "deny_unless_contracted_and_within_limits",
+      "contracted_counterparties": ["CP-ACME-001", "CP-ACME-002"],
+      "allowed_currencies": ["EUR", "USD"],
+      "limits": {
+        "single_tx_max": 1000,
+        "daily_total_max": 5000
+      },
+      "arming_required_over": 1000,
+      "default_outcome": "deny"
+    }
+  }
+}

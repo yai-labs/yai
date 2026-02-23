@@ -1,0 +1,27 @@
+{
+  "COUNTERPARTY_NOT_CONTRACTED": {
+    "severity": "high",
+    "default_outcome": "deny",
+    "description": "Counterparty is not covered by an active contract/allowlist."
+  },
+  "LIMIT_EXCEEDED": {
+    "severity": "high",
+    "default_outcome": "deny",
+    "description": "Requested amount exceeds policy or contract limits."
+  },
+  "CURRENCY_NOT_ALLOWED": {
+    "severity": "medium",
+    "default_outcome": "deny",
+    "description": "Currency not allowed by the contract/policy for this workspace or principal."
+  },
+  "ARMING_REQUIRED": {
+    "severity": "high",
+    "default_outcome": "deny",
+    "description": "High-risk authorization requires arming/explicit approval."
+  },
+  "HOLD_RELEASE_NOT_AUTHORIZED": {
+    "severity": "high",
+    "default_outcome": "deny",
+    "description": "Attempt to release a hold without proper authority/contract."
+  }
+}
