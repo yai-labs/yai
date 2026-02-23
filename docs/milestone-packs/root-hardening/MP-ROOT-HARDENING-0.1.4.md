@@ -1,64 +1,56 @@
 ---
 id: MP-ROOT-HARDENING-0.1.4
-status: active
+status: draft
 runbook: docs/runbooks/root-hardening.md
 phase: "0.1.4 — Kernel Hard Reject on Invalid ws_id"
 adrs:
   - docs/design/adr/ADR-002-root-entrypoint.md
   - docs/design/adr/ADR-006-unified-rpc.md
   - docs/design/adr/ADR-008-connection-lifecycle.md
-  - docs/design/adr/ADR-011-contract-baseline-lock.md
+  - docs/design/adr/ADR-012-audit-convergence-gates.md
 spec_anchors:
   - deps/yai-specs/specs/protocol/include/transport.h
   - deps/yai-specs/specs/protocol/include/auth.h
   - deps/yai-specs/specs/protocol/include/errors.h
+claims:
+  - C-KERNEL-HARD-BOUNDARY-CORE
+  - C-DOMAIN-COVERAGE-RESOURCE
+evidence_commands_required:
+  - tools/bin/yai-verify
+  - tools/ops/suite/suite.sh
 issues:
-  - N/A
-issue_reason: "Docs-only traceability alignment PR without dedicated issue."
+  - "140"
 ---
+
 # MP-ROOT-HARDENING-0.1.4
 
 ## Metadata
-
 - Runbook: `docs/runbooks/root-hardening.md`
 - Phase: `0.1.4 — Kernel Hard Reject on Invalid ws_id`
-- Owner: `runtime`
-- Status: `active`
+- Wave issue: `#140`
+- Status: `draft`
 
 ## Links
+- Plan: `docs/program-delivery/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
+- Matrix: `docs/program-delivery/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
+- Claims registry: `docs/audits/claims/infra-grammar.v0.1.json`
+- ADR: `docs/design/adr/ADR-012-audit-convergence-gates.md`
 
-- ADRs: `docs/design/adr/ADR-002-root-entrypoint.md`, `docs/design/adr/ADR-006-unified-rpc.md`, `docs/design/adr/ADR-008-connection-lifecycle.md`, `docs/design/adr/ADR-011-contract-baseline-lock.md`
-- Proposals: `docs/design/proposals/PRP-001-runtime-topology-and-authority.md`, `docs/design/proposals/PRP-002-unified-rpc-and-cli-contract.md`, `docs/design/proposals/PRP-004-contract-baseline-lock-and-pin-policy.md`, `docs/design/proposals/PRP-005-formal-coverage-roadmap.md`
-- Evidence plans: `docs/test-plans/hardfail.md`
+## Objective
+Close phase 0.1.4 with explicit claim/evidence bindings and reproducible gate outputs.
 
-Objective:
-- Ensure invalid `ws_id` causes deterministic Kernel reject with zero session/filesystem side effects.
+## Mandatory command outcomes
+- `tools/bin/yai-verify` -> `PASS`
+- `tools/ops/suite/suite.sh` -> `PASS`
 
-Contract Delta:
-- Envelope: none.
-- Authority: none.
-- Errors: deterministic invalid `ws_id` error response frame from Kernel.
-- Logging: reject path must expose reason and trace context.
+Closure policy: mandatory `SKIP` is treated as `FAIL`.
 
-Repo Split:
-- `yai`: enforce hard reject before session/dir creation in Kernel paths.
-- `yai-cli`: optional negative harness vectors for invalid ws_id filesystem side-effect checks.
+## Definition of Done
+- [ ] Phase claim IDs are covered by evidence.
+- [ ] Mandatory commands are recorded with exit codes and outputs.
+- [ ] Root->Kernel evidence is traceable on deterministic pass/fail paths.
+- [ ] MP links from runbook phase and matrix remain valid.
 
-Evidence Plan (minimum):
-- Positive cases:
-  - Valid ws_id creates/uses session flow normally.
-  - Valid ws_id command path remains behaviorally unchanged from previous milestone.
-- Negative cases:
-  - Empty/invalid ws_id returns deterministic error frame.
-  - Invalid ws_id attempt produces no `~/.yai/run/<ws_id>` side effects.
-
-Compatibility Classification:
-- Type: A
-- Rationale: hard reject only applies to invalid values that are already non-conformant.
-- Upgrade path: conformant clients unchanged.
-
-Definition of Done:
-- [ ] Kernel never creates session or dirs when ws_id is invalid.
-- [ ] Kernel always replies with deterministic error frame on invalid ws_id.
-- [ ] Side-effect assertions are covered in automated checks.
-- [ ] PR evidence includes filesystem assertions and logs.
+## Execution Snapshot
+- Status: `PLANNED`
+- Evidence bundle: `docs/milestone-packs/root-hardening/evidence/0.1.4/`

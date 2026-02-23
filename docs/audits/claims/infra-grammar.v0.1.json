@@ -68,7 +68,7 @@
       "target_gate": "A-core",
       "baseline_status": "partial",
       "runbook_refs": [
-        "docs/runbooks/root-hardening.md (phase 0.1.3)",
+        "docs/runbooks/root-hardening.md#phase-0-1-3-ws-id-validation-centralization",
         "docs/runbooks/engine-attach.md#phase-engine-attach-v4",
         "docs/runbooks/workspaces-lifecycle.md (phase 0.1.3)"
       ],
@@ -101,7 +101,7 @@
       "baseline_status": "partial",
       "runbook_refs": [
         "docs/runbooks/root-hardening.md#phase-0-1-2-envelope-authority-gate",
-        "docs/runbooks/root-hardening.md (phase 0.1.4)",
+        "docs/runbooks/root-hardening.md#phase-0-1-4-kernel-hard-reject-invalid-ws-id",
         "docs/runbooks/data-plane.md",
         "docs/runbooks/workspaces-lifecycle.md (phase 0.1.3)"
       ],

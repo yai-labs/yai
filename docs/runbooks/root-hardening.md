@@ -4,7 +4,7 @@ title: Root Hardening
 status: active
 owner: runtime
 effective_date: 2026-02-18
-revision: 1
+revision: 2
 supersedes: []
 depends_on:
   - RB-WORKSPACES-LIFECYCLE (optional, if already exists)
@@ -12,15 +12,18 @@ adr_refs:
   - docs/design/adr/ADR-002-root-entrypoint.md
   - docs/design/adr/ADR-006-unified-rpc.md
   - docs/design/adr/ADR-008-connection-lifecycle.md
+  - docs/design/adr/ADR-012-audit-convergence-gates.md
 decisions:
   - docs/design/adr/ADR-002-root-entrypoint.md
   - docs/design/adr/ADR-006-unified-rpc.md
   - docs/design/adr/ADR-008-connection-lifecycle.md
+  - docs/design/adr/ADR-012-audit-convergence-gates.md
 related:
   adr:
     - docs/design/adr/ADR-002-root-entrypoint.md
     - docs/design/adr/ADR-006-unified-rpc.md
     - docs/design/adr/ADR-008-connection-lifecycle.md
+    - docs/design/adr/ADR-012-audit-convergence-gates.md
   specs:
     - deps/yai-specs/specs/protocol/include/transport.h
     - deps/yai-specs/specs/protocol/include/auth.h
@@ -35,6 +38,7 @@ related:
 tags:
   - runtime
   - hardening
+  - audit-convergence
 ---
 
 # RB-ROOT-HARDENING — Root ↔ Kernel Boundary Hardening (YAI 0.1.x)
@@ -72,6 +76,20 @@ Harden the Root control plane as a deterministic, auditable, envelope-only bound
   - `tools/bin/yai-verify`
   - `tools/bin/yai-gate`
   - `tools/bin/yai-suite`
+
+### 3.1 Audit Convergence Binding (Wave 2)
+This runbook phase sequence is Wave 2 under:
+- `docs/program-delivery/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
+- `docs/program-delivery/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
+
+Claims source of truth:
+- `docs/audits/claims/infra-grammar.v0.1.json`
+
+Wave tracking issue:
+- `https://github.com/yai-labs/yai/issues/140`
+
+Mandatory closure policy:
+- for mandatory evidence checks, `SKIP` is treated as `FAIL`.
 
 ## 4) Procedure
 
@@ -158,6 +176,9 @@ Each phase must compile, run, and be verifiable before moving on.
 **Branch:** `feat/root-hardening-0.1.0-guardrails`  
 **Goal:** Root and Kernel share identical mechanical wire rules and error codes.
 **Milestone Pack:** `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`
+**Claim IDs:** `C-ENVELOPE-HANDSHAKE-REQUIRED`, `C-DOMAIN-COVERAGE-NETWORK`
+**Mandatory evidence commands:**
+- `tools/bin/yai-verify`
 
 #### File targets
 
@@ -218,6 +239,10 @@ Minimum set expected:
 **Branch:** `feat/root-hardening-0.1.1-router`  
 **Goal:** Root becomes a pure router with deterministic rejects + indestructible logging.
 **Milestone Pack:** `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md`
+**Claim IDs:** `C-ENVELOPE-HANDSHAKE-REQUIRED`, `C-DOMAIN-COVERAGE-NETWORK`
+**Mandatory evidence commands:**
+- `tools/bin/yai-verify`
+- `tools/ops/suite/suite.sh`
 
 #### File targets
 
@@ -296,6 +321,10 @@ Protocol negative tests (at least):
 **Branch:** `feat/root-hardening-0.1.2-authority-gate`  
 **Goal:** privileged commands require arming+role, enforced in Root and Kernel (defense-in-depth).
 **Milestone Pack:** `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.2.md`
+**Claim IDs:** `C-KERNEL-HARD-BOUNDARY-CORE`, `C-ENVELOPE-HANDSHAKE-REQUIRED`
+**Mandatory evidence commands:**
+- `tools/bin/yai-verify`
+- `tools/ops/suite/suite.sh`
 
 #### File targets
 
@@ -344,11 +373,16 @@ Minimum expectation:
 
 ---
 
+<a id="phase-0-1-3-ws-id-validation-centralization"></a>
 ### 0.1.3 — ws_id Validation Centralization (single definition)
 
 **Branch:** `feat/root-hardening-0.1.3-ws-id-single-source`  
 **Goal:** one ws_id validator used everywhere (Root/Kernel/CLI), eliminating drift.
 **Milestone Pack:** `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.3.md`
+**Claim IDs:** `C-CONTEXT-PROPAGATION`, `C-KERNEL-HARD-BOUNDARY-CORE`
+**Mandatory evidence commands:**
+- `tools/bin/yai-verify`
+- `tools/ops/suite/suite.sh`
 
 #### File targets
 
@@ -381,11 +415,16 @@ Consumers:
 
 ---
 
+<a id="phase-0-1-4-kernel-hard-reject-invalid-ws-id"></a>
 ### 0.1.4 — Kernel Hard Reject on Invalid ws_id (zero side effects)
 
 **Branch:** `feat/root-hardening-0.1.4-kernel-hard-reject`  
 **Goal:** Kernel must not create sessions/dirs for invalid ws_id; must respond deterministically.
 **Milestone Pack:** `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.4.md`
+**Claim IDs:** `C-KERNEL-HARD-BOUNDARY-CORE`, `C-DOMAIN-COVERAGE-RESOURCE`
+**Mandatory evidence commands:**
+- `tools/bin/yai-verify`
+- `tools/ops/suite/suite.sh`
 
 #### File targets
 
@@ -423,11 +462,17 @@ Send invalid ws_id:
 
 ---
 
+<a id="phase-0-1-5-test-matrix-torture-suite"></a>
 ### 0.1.5 — Test Matrix + Torture Suite
 
 **Branch:** `feat/root-hardening-0.1.5-torture`  
 **Goal:** repeatable torture tests that prove hardening is real.
 **Milestone Pack:** `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md`
+**Claim IDs:** `C-DOMAIN-COVERAGE-NETWORK`, `C-KERNEL-HARD-BOUNDARY-CORE`, `C-EVIDENCE-PACK-REPRODUCIBLE`
+**Mandatory evidence commands:**
+- `tools/bin/yai-verify`
+- `tools/ops/suite/suite.sh`
+- `tools/bin/yai-proof-check`
 
 #### Minimum test cases
 
@@ -487,6 +532,10 @@ Every reject must produce:
   - command_id
   - error_code
 
+Phase closure semantics (audit convergence):
+- mandatory command status must be `PASS`;
+- mandatory `SKIP` is treated as `FAIL`.
+
 ---
 
 ## 6) Failure Modes
@@ -530,6 +579,7 @@ If a phase causes regressions:
 - `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.3.md`
 - `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.4.md`
 - `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md`
+- `docs/milestone-packs/root-hardening/README.md` (`MP-ROOT-HARDENING-INDEX`)
 
 ## 9) Final Definition of Done
 
@@ -558,3 +608,4 @@ If a phase causes regressions:
   - `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.3.md`
   - `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.4.md`
   - `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md`
+- `docs/milestone-packs/root-hardening/README.md` (`MP-ROOT-HARDENING-INDEX`)
