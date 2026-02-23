@@ -1,0 +1,15 @@
+{
+  "baseline_id": "baseline-deny",
+  "baseline_version": 1,
+  "policy": {
+    "content_ops": {
+      "mode": "deny_unless_policy_and_provenance_present",
+      "require_provenance": true,
+      "require_policy_basis": true,
+      "require_contestability_for_high_impact": true,
+      "allowed_scopes": ["sandbox"],
+      "high_impact_actions": ["content.moderation.enforce", "content.visibility.change"],
+      "default_outcome": "deny"
+    }
+  }
+}
