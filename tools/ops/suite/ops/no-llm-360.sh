@@ -1,37 +1,20 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../.." && pwd)"
-WS_PREFIX="${WS_PREFIX:-ops360}"
-source "$ROOT/tools/dev/resolve-yai-bin.sh"
-BIN="$(yai_resolve_bin "$ROOT" || true)"
-ITERATIONS="${ITERATIONS:-20}"
-P95_BUDGET_MS="${P95_BUDGET_MS:-2000}"
-SKIP_BASE="${SKIP_BASE:-0}"
-
-if [[ -z "$BIN" || ! -x "$BIN" ]]; then
-  echo "FAIL: yai binary not found"
-  exit 1
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ROOT="$(git -C "$SCRIPT_DIR" rev-parse --show-toplevel 2>/dev/null || true)"
+if [[ -z "$ROOT" ]]; then
+  ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
 fi
 
-run() {
-  echo
-  echo ">>> $*"
-  "$@"
-}
+INFRA_ROOT_DEFAULT="$(cd "$ROOT/.." && pwd)/yai-infra"
+INFRA_ROOT="${YAI_INFRA_ROOT:-$INFRA_ROOT_DEFAULT}"
+TARGET="$INFRA_ROOT/tools/ops/suite/ops/no-llm-360.sh"
 
-export BIN
-
-echo "== suite-ops-360-no-llm (ws_prefix=$WS_PREFIX)"
-
-if [[ "$SKIP_BASE" != "1" ]]; then
-  run bash -lc "cd \"$ROOT\" && DATASET_GATE=1 WS_PREFIX=\"${WS_PREFIX}\" ./tools/ops/suite/levels/l0-l7.sh"
+if [[ -x "$TARGET" ]]; then
+  exec "$TARGET" "$@"
 fi
-run bash -lc "cd \"$ROOT\" && P95_BUDGET_MS=\"$P95_BUDGET_MS\" ITERATIONS=\"$ITERATIONS\" ./tools/ops/suite/ops/perf-slo-v1.sh \"${WS_PREFIX}_perf\""
-run bash -lc "cd \"$ROOT\" && ./tools/ops/suite/ops/fault-injection-v1.sh \"${WS_PREFIX}_fault\""
-run bash -lc "cd \"$ROOT\" && ./tools/ops/suite/ops/security-sanity-v1.sh \"${WS_PREFIX}_sec\""
-run bash -lc "cd \"$ROOT\" && ./tools/ops/suite/ops/recovery-compat-v1.sh \"${WS_PREFIX}_rec\""
-run bash -lc "cd \"$ROOT\" && ITERATIONS=\"$ITERATIONS\" WS_PREFIX=\"${WS_PREFIX}_stress\" ./tools/ops/suite/ops/stress-v1.sh"
 
-echo
-echo "OK: suite-ops-360-no-llm passed"
+echo "Deprecated local mirror: use infra canonical tool at tools/ops/suite/ops/no-llm-360.sh" >&2
+echo "Missing target: $TARGET" >&2
+exit 2

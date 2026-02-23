@@ -1,22 +1,20 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-MODEL_ID="${MODEL_ID:-sentence-transformers/all-MiniLM-L6-v2}"
-MODEL_NAME="${MODEL_NAME:-all-MiniLM-L6-v2}"
-OUT_DIR="${OUT_DIR:-$HOME/.yai/models/embeddings/$MODEL_NAME}"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ROOT="$(git -C "$SCRIPT_DIR" rev-parse --show-toplevel 2>/dev/null || true)"
+if [[ -z "$ROOT" ]]; then
+  ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
+fi
 
-mkdir -p "$OUT_DIR"
+INFRA_ROOT_DEFAULT="$(cd "$ROOT/.." && pwd)/yai-infra"
+INFRA_ROOT="${YAI_INFRA_ROOT:-$INFRA_ROOT_DEFAULT}"
+TARGET="$INFRA_ROOT/tools/data/fetch-embeddings.sh"
 
-BASE_URL="https://huggingface.co/${MODEL_ID}/resolve/main"
-MODEL_URL="${BASE_URL}/onnx/model.onnx"
-TOKEN_URL="${BASE_URL}/tokenizer.json"
+if [[ -x "$TARGET" ]]; then
+  exec "$TARGET" "$@"
+fi
 
-echo "Fetching embeddings model:"
-echo "  model_id:   ${MODEL_ID}"
-echo "  model_name: ${MODEL_NAME}"
-echo "  out_dir:    ${OUT_DIR}"
-
-curl -L -o "${OUT_DIR}/model.onnx" "${MODEL_URL}"
-curl -L -o "${OUT_DIR}/tokenizer.json" "${TOKEN_URL}"
-
-echo "OK: downloaded model.onnx + tokenizer.json"
+echo "Deprecated local mirror: use infra canonical tool at tools/data/fetch-embeddings.sh" >&2
+echo "Missing target: $TARGET" >&2
+exit 2
