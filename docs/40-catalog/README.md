@@ -10,6 +10,7 @@ Naming:
 - Evidence run: `run-00X`
 
 Contents:
+- Domains: `docs/40-catalog/domains/`
 - Scenarios: `docs/40-catalog/scenarios/`
 - Qualification gates: `docs/40-catalog/gates/`
 

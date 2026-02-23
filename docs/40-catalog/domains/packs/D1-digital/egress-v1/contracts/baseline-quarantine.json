@@ -1,0 +1,22 @@
+{
+  "baseline_id": "baseline-quarantine",
+  "baseline_version": 1,
+  "policy": {
+    "network_egress": {
+      "mode": "deny_unless_allowlisted",
+      "allowlist": {
+        "cidr": ["10.0.0.0/8", "192.168.0.0/16"],
+        "hosts": []
+      },
+      "allowed_ports": [53, 80, 443],
+      "default_outcome": "quarantine",
+      "reason_code_on_quarantine": "EGRESS_DEST_NOT_CONTRACTED"
+    },
+    "thresholds": {
+      "egress_attempts_per_minute": 20,
+      "egress_burst": 5,
+      "quarantine_on_threshold_exceed": true,
+      "reason_code_on_threshold": "EGRESS_THRESHOLD_EXCEEDED"
+    }
+  }
+}

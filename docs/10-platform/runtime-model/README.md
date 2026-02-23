@@ -1,6 +1,6 @@
 # Runtime Model Index
 
 Primary source paths:
-- `docs/architecture/runtime-model.md`
-- `docs/architecture/specs-bridge.md`
-- `docs/architecture/traceability.md`
+- `docs/10-platform/architecture/runtime-model.md`
+- `docs/10-platform/architecture/specs-bridge.md`
+- `docs/10-platform/architecture/traceability.md`

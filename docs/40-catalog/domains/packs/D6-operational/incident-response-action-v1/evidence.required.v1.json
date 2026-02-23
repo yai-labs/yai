@@ -1,0 +1,27 @@
+{
+  "required_fields": [
+    "timestamp",
+    "ws_id",
+    "trace_id",
+    "event.type",
+    "event.source",
+    "principal.id",
+    "principal.role",
+    "target.action_id",
+    "target.asset_id",
+    "target.scope",
+    "target.severity",
+    "target.escalation_level",
+    "context.arming_state",
+    "decision.outcome",
+    "decision.reason_code",
+    "decision.baseline_hash",
+    "enforcement.result",
+    "metrics.time_to_decide_ms",
+    "metrics.action_applied"
+  ],
+  "notes": {
+    "minimal_disclosure": "Use stable asset identifiers; do not include secrets or raw infra credentials in evidence.",
+    "action_applied": "Must be false under deny/quarantine for this pack's vectors."
+  }
+}

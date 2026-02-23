@@ -1,0 +1,19 @@
+{
+  "baseline_id": "baseline-quarantine",
+  "baseline_version": 1,
+  "policy": {
+    "scientific_runs": {
+      "mode": "deny_or_quarantine_on_violation",
+      "require_params_hash": true,
+      "require_provenance": true,
+      "require_pinned_dataset_ref": true,
+      "allowed_pipeline_ids": ["PIPE-EXP-001"],
+      "on_violation": {
+        "params_hash_missing": { "outcome": "deny", "reason_code": "PARAM_LOCK_MISSING" },
+        "provenance_missing": { "outcome": "deny", "reason_code": "PROVENANCE_MISSING" },
+        "undeclared_exclusion": { "outcome": "quarantine", "reason_code": "UNDECLARED_EXCLUSION" },
+        "non_deterministic_source": { "outcome": "deny", "reason_code": "NON_DETERMINISTIC_SOURCE" }
+      }
+    }
+  }
+}

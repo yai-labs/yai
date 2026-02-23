@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "yai/docs/architecture.alignment.v1.schema.json",
+  "$id": "yai/docs/10-platform/architecture.alignment.v1.schema.json",
   "title": "YAI Architecture Alignment Snapshot v1",
   "type": "object",
   "required": [
@@ -38,7 +38,7 @@
           },
           "path": {
             "type": "string",
-            "pattern": "^docs/architecture/components/.+\\.md$"
+            "pattern": "^docs/10-platform/architecture/components/.+\\.md$"
           },
           "status": {
             "type": "string",
@@ -48,21 +48,21 @@
             "type": "array",
             "items": {
               "type": "string",
-              "pattern": "^docs/design/adr/.+\\.md$"
+              "pattern": "^docs/20-governance/design/adr/.+\\.md$"
             }
           },
           "runbook_refs": {
             "type": "array",
             "items": {
               "type": "string",
-              "pattern": "^docs/runbooks/.+\\.md$"
+              "pattern": "^docs/20-governance/runbooks/.+\\.md$"
             }
           },
           "mp_refs": {
             "type": "array",
             "items": {
               "type": "string",
-              "pattern": "^docs/milestone-packs/.+\\.md$"
+              "pattern": "^docs/20-governance/milestone-packs/.+\\.md$"
             }
           },
           "l0_refs": {
@@ -102,21 +102,21 @@
             "type": "array",
             "items": {
               "type": "string",
-              "pattern": "^docs/design/adr/.+\\.md$"
+              "pattern": "^docs/20-governance/design/adr/.+\\.md$"
             }
           },
           "runbook_refs": {
             "type": "array",
             "items": {
               "type": "string",
-              "pattern": "^docs/runbooks/.+\\.md$"
+              "pattern": "^docs/20-governance/runbooks/.+\\.md$"
             }
           },
           "mp_refs": {
             "type": "array",
             "items": {
               "type": "string",
-              "pattern": "^docs/milestone-packs/.+\\.md$"
+              "pattern": "^docs/20-governance/milestone-packs/.+\\.md$"
             }
           },
           "l0_refs": {

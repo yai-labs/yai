@@ -96,8 +96,8 @@ law/formal/*.toolbox/
 # -----------------------------------------------------------------------------
 # Local-only drafts
 # -----------------------------------------------------------------------------
-docs/proof/.private/
-docs/audits/.private/
+docs/60-validation/proof/.private/
+docs/60-validation/audits/.private/
 tools/python/**/__pycache__/
 tools/python/**/.pytest_cache/
 tools/python/**/.mypy_cache/

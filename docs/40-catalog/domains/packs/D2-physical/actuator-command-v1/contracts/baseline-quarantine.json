@@ -1,0 +1,26 @@
+{
+  "baseline_id": "baseline-quarantine",
+  "baseline_version": 1,
+  "policy": {
+    "actuators": {
+      "mode": "deny_or_quarantine_on_violation",
+      "arming_required": true,
+      "contracted_actuators": ["ACT-VALVE-17"],
+      "allowed_commands": {
+        "ACT-VALVE-17": ["SET_OPEN_PERCENT"]
+      },
+      "safety": {
+        "allowed_windows_utc": [
+          { "start": "08:00", "end": "18:00" }
+        ],
+        "interlock_required": true
+      },
+      "on_violation": {
+        "actuator_not_contracted": { "outcome": "deny", "reason_code": "ACTUATOR_NOT_CONTRACTED" },
+        "command_not_allowed": { "outcome": "deny", "reason_code": "ACTUATOR_CMD_NOT_ALLOWED" },
+        "safety_window_violation": { "outcome": "quarantine", "reason_code": "SAFETY_WINDOW_VIOLATION" },
+        "arming_missing": { "outcome": "deny", "reason_code": "ARMING_REQUIRED" }
+      }
+    }
+  }
+}

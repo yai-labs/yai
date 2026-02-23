@@ -1,0 +1,17 @@
+{
+  "vector_id": "safe-procedure-step-001",
+  "description": "Attempt to execute an approval step without prerequisites and without arming.",
+  "stimulus": {
+    "type": "procedure.step.execute",
+    "case_id": "CASE-TEST-0001",
+    "procedure_id": "PROC-CASE-APPROVAL",
+    "step_id": "STEP-03-APPROVE",
+    "step_version": 1,
+    "arming_state": "not_armed",
+    "declared_prereq_state": []
+  },
+  "safety": {
+    "simulation_only": true,
+    "no_real_case": true
+  }
+}

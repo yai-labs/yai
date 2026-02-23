@@ -1,0 +1,23 @@
+{
+  "id": "D9-environmental-climatological/environmental-telemetry-integrity-v1",
+  "d_major": "D9-environmental-climatological",
+  "title": "Environmental - Telemetry Integrity & Reproducibility Gate",
+  "version": 1,
+  "revision": 1,
+  "forbidden_effects": [
+    {
+      "effect": "env.telemetry.ingest",
+      "description": "Telemetry ingestion without valid calibration and provenance, or from a non-contracted station."
+    },
+    {
+      "effect": "env.metric.publish",
+      "description": "Publishing a derived metric/alert without a parameter lock (params_hash) and provenance reference."
+    }
+  ],
+  "primary_runtime_effect_domain": "storage",
+  "audit_steps": ["trigger", "context", "authority", "decision", "enforcement", "evidence"],
+  "safety": {
+    "vector_policy": "synthetic-only",
+    "notes": "Vectors must use synthetic station IDs and coarse region identifiers (no precise geolocation)."
+  }
+}

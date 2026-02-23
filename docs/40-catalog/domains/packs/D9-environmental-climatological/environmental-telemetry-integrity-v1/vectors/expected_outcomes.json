@@ -1,0 +1,27 @@
+{
+  "vector_id": "safe-env-telemetry-001",
+  "expected": [
+    {
+      "baseline_id": "baseline-allow",
+      "decision": { "outcome": "deny", "reason_code": "CALIBRATION_MISSING" },
+      "enforcement": { "result": "blocked" },
+      "metrics": { "ingest_committed": false }
+    },
+    {
+      "baseline_id": "baseline-deny",
+      "decision": { "outcome": "deny", "reason_code": "CALIBRATION_MISSING" },
+      "enforcement": { "result": "blocked" },
+      "metrics": { "ingest_committed": false }
+    },
+    {
+      "baseline_id": "baseline-quarantine",
+      "decision": { "outcome": "deny", "reason_code": "CALIBRATION_MISSING" },
+      "enforcement": { "result": "blocked" },
+      "metrics": { "ingest_committed": false }
+    }
+  ],
+  "notes": {
+    "integrity": "All baselines must deny when calibration is missing to preserve measurement integrity.",
+    "extensions": "Add a second vector later for MINIMAL_DISCLOSURE_REQUIRED (attempt with precise coordinates), and a third for PARAM_LOCK_MISSING on env.metric.publish."
+  }
+}

@@ -1,1176 +1,1176 @@
 {
   "edges": [
     {
-      "from": "docs/design/adr/ADR-001-single-runtime.md",
+      "from": "docs/20-governance/22-adr/ADR-001-single-runtime.md",
       "relation": "adr_to_runbook",
-      "to": "docs/runbooks/root-hardening.md"
+      "to": "docs/20-governance/23-runbooks/root-hardening.md"
     },
     {
-      "from": "docs/design/adr/ADR-002-root-entrypoint.md",
+      "from": "docs/20-governance/22-adr/ADR-002-root-entrypoint.md",
       "relation": "adr_to_runbook",
-      "to": "docs/runbooks/root-hardening.md"
+      "to": "docs/20-governance/23-runbooks/root-hardening.md"
     },
     {
-      "from": "docs/design/adr/ADR-003-kernel-authority.md",
+      "from": "docs/20-governance/22-adr/ADR-003-kernel-authority.md",
       "relation": "adr_to_runbook",
-      "to": "docs/runbooks/root-hardening.md"
+      "to": "docs/20-governance/23-runbooks/root-hardening.md"
     },
     {
-      "from": "docs/design/adr/ADR-004-engine-execution.md",
+      "from": "docs/20-governance/22-adr/ADR-004-engine-execution.md",
       "relation": "adr_to_runbook",
-      "to": "docs/runbooks/engine-attach.md"
+      "to": "docs/20-governance/23-runbooks/engine-attach.md"
     },
     {
-      "from": "docs/design/adr/ADR-005-mind-proposer.md",
+      "from": "docs/20-governance/22-adr/ADR-005-mind-proposer.md",
       "relation": "adr_to_runbook",
-      "to": "docs/runbooks/mind-redis-stm.md"
+      "to": "docs/20-governance/23-runbooks/mind-redis-stm.md"
     },
     {
-      "from": "docs/design/adr/ADR-006-unified-rpc.md",
+      "from": "docs/20-governance/22-adr/ADR-006-unified-rpc.md",
       "relation": "adr_to_runbook",
-      "to": "docs/runbooks/root-hardening.md"
+      "to": "docs/20-governance/23-runbooks/root-hardening.md"
     },
     {
-      "from": "docs/design/adr/ADR-007-workspace-isolation.md",
+      "from": "docs/20-governance/22-adr/ADR-007-workspace-isolation.md",
       "relation": "adr_to_runbook",
-      "to": "docs/runbooks/workspaces-lifecycle.md"
+      "to": "docs/20-governance/23-runbooks/workspaces-lifecycle.md"
     },
     {
-      "from": "docs/design/adr/ADR-008-connection-lifecycle.md",
+      "from": "docs/20-governance/22-adr/ADR-008-connection-lifecycle.md",
       "relation": "adr_to_runbook",
-      "to": "docs/runbooks/workspaces-lifecycle.md"
+      "to": "docs/20-governance/23-runbooks/workspaces-lifecycle.md"
     },
     {
-      "from": "docs/design/adr/ADR-009-engine-attachment.md",
+      "from": "docs/20-governance/22-adr/ADR-009-engine-attachment.md",
       "relation": "adr_to_runbook",
-      "to": "docs/runbooks/engine-attach.md"
+      "to": "docs/20-governance/23-runbooks/engine-attach.md"
     },
     {
-      "from": "docs/design/adr/ADR-010-boot-entrypoint.md",
+      "from": "docs/20-governance/22-adr/ADR-010-boot-entrypoint.md",
       "relation": "adr_to_runbook",
-      "to": "docs/runbooks/root-hardening.md"
+      "to": "docs/20-governance/23-runbooks/root-hardening.md"
     },
     {
-      "from": "docs/design/adr/ADR-011-contract-baseline-lock.md",
+      "from": "docs/20-governance/22-adr/ADR-011-contract-baseline-lock.md",
       "relation": "adr_to_runbook",
-      "to": "docs/runbooks/contract-baseline-lock.md"
+      "to": "docs/20-governance/23-runbooks/contract-baseline-lock.md"
     },
     {
-      "from": "docs/design/adr/ADR-012-audit-convergence-gates.md",
+      "from": "docs/20-governance/22-adr/ADR-012-audit-convergence-gates.md",
       "relation": "adr_to_doc",
-      "to": "docs/program-delivery/audit-convergence/EXECUTION-PLAN-v0.1.0.md"
+      "to": "docs/30-program/audit-convergence/EXECUTION-PLAN-v0.1.0.md"
     },
     {
-      "from": "docs/design/proposals/PRP-001-runtime-topology-and-authority.md",
+      "from": "docs/20-governance/21-proposals/PRP-001-runtime-topology-and-authority.md",
       "relation": "proposal_to_adr",
-      "to": "docs/design/adr/ADR-001-single-runtime.md"
+      "to": "docs/20-governance/22-adr/ADR-001-single-runtime.md"
     },
     {
-      "from": "docs/design/proposals/PRP-001-runtime-topology-and-authority.md",
+      "from": "docs/20-governance/21-proposals/PRP-001-runtime-topology-and-authority.md",
       "relation": "proposal_to_adr",
-      "to": "docs/design/adr/ADR-002-root-entrypoint.md"
+      "to": "docs/20-governance/22-adr/ADR-002-root-entrypoint.md"
     },
     {
-      "from": "docs/design/proposals/PRP-001-runtime-topology-and-authority.md",
+      "from": "docs/20-governance/21-proposals/PRP-001-runtime-topology-and-authority.md",
       "relation": "proposal_to_adr",
-      "to": "docs/design/adr/ADR-003-kernel-authority.md"
+      "to": "docs/20-governance/22-adr/ADR-003-kernel-authority.md"
     },
     {
-      "from": "docs/design/proposals/PRP-001-runtime-topology-and-authority.md",
+      "from": "docs/20-governance/21-proposals/PRP-001-runtime-topology-and-authority.md",
       "relation": "proposal_to_adr",
-      "to": "docs/design/adr/ADR-004-engine-execution.md"
+      "to": "docs/20-governance/22-adr/ADR-004-engine-execution.md"
     },
     {
-      "from": "docs/design/proposals/PRP-001-runtime-topology-and-authority.md",
+      "from": "docs/20-governance/21-proposals/PRP-001-runtime-topology-and-authority.md",
       "relation": "proposal_to_adr",
-      "to": "docs/design/adr/ADR-005-mind-proposer.md"
+      "to": "docs/20-governance/22-adr/ADR-005-mind-proposer.md"
     },
     {
-      "from": "docs/design/proposals/PRP-001-runtime-topology-and-authority.md",
+      "from": "docs/20-governance/21-proposals/PRP-001-runtime-topology-and-authority.md",
       "relation": "proposal_to_milestone_pack",
-      "to": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md"
+      "to": "docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md"
     },
     {
-      "from": "docs/design/proposals/PRP-001-runtime-topology-and-authority.md",
+      "from": "docs/20-governance/21-proposals/PRP-001-runtime-topology-and-authority.md",
       "relation": "proposal_to_runbook",
-      "to": "docs/runbooks/root-hardening.md"
+      "to": "docs/20-governance/23-runbooks/root-hardening.md"
     },
     {
-      "from": "docs/design/proposals/PRP-002-unified-rpc-and-cli-contract.md",
+      "from": "docs/20-governance/21-proposals/PRP-002-unified-rpc-and-cli-contract.md",
       "relation": "proposal_to_adr",
-      "to": "docs/design/adr/ADR-006-unified-rpc.md"
+      "to": "docs/20-governance/22-adr/ADR-006-unified-rpc.md"
     },
     {
-      "from": "docs/design/proposals/PRP-002-unified-rpc-and-cli-contract.md",
+      "from": "docs/20-governance/21-proposals/PRP-002-unified-rpc-and-cli-contract.md",
       "relation": "proposal_to_adr",
-      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+      "to": "docs/20-governance/22-adr/ADR-011-contract-baseline-lock.md"
     },
     {
-      "from": "docs/design/proposals/PRP-002-unified-rpc-and-cli-contract.md",
+      "from": "docs/20-governance/21-proposals/PRP-002-unified-rpc-and-cli-contract.md",
       "relation": "proposal_to_milestone_pack",
-      "to": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md"
+      "to": "docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md"
     },
     {
-      "from": "docs/design/proposals/PRP-002-unified-rpc-and-cli-contract.md",
+      "from": "docs/20-governance/21-proposals/PRP-002-unified-rpc-and-cli-contract.md",
       "relation": "proposal_to_runbook",
-      "to": "docs/runbooks/root-hardening.md"
+      "to": "docs/20-governance/23-runbooks/root-hardening.md"
     },
     {
-      "from": "docs/design/proposals/PRP-003-workspace-lifecycle-and-isolation.md",
+      "from": "docs/20-governance/21-proposals/PRP-003-workspace-lifecycle-and-isolation.md",
       "relation": "proposal_to_adr",
-      "to": "docs/design/adr/ADR-007-workspace-isolation.md"
+      "to": "docs/20-governance/22-adr/ADR-007-workspace-isolation.md"
     },
     {
-      "from": "docs/design/proposals/PRP-003-workspace-lifecycle-and-isolation.md",
+      "from": "docs/20-governance/21-proposals/PRP-003-workspace-lifecycle-and-isolation.md",
       "relation": "proposal_to_adr",
-      "to": "docs/design/adr/ADR-008-connection-lifecycle.md"
+      "to": "docs/20-governance/22-adr/ADR-008-connection-lifecycle.md"
     },
     {
-      "from": "docs/design/proposals/PRP-003-workspace-lifecycle-and-isolation.md",
+      "from": "docs/20-governance/21-proposals/PRP-003-workspace-lifecycle-and-isolation.md",
       "relation": "proposal_to_adr",
-      "to": "docs/design/adr/ADR-009-engine-attachment.md"
+      "to": "docs/20-governance/22-adr/ADR-009-engine-attachment.md"
     },
     {
-      "from": "docs/design/proposals/PRP-003-workspace-lifecycle-and-isolation.md",
+      "from": "docs/20-governance/21-proposals/PRP-003-workspace-lifecycle-and-isolation.md",
       "relation": "proposal_to_adr",
-      "to": "docs/design/adr/ADR-010-boot-entrypoint.md"
+      "to": "docs/20-governance/22-adr/ADR-010-boot-entrypoint.md"
     },
     {
-      "from": "docs/design/proposals/PRP-003-workspace-lifecycle-and-isolation.md",
+      "from": "docs/20-governance/21-proposals/PRP-003-workspace-lifecycle-and-isolation.md",
       "relation": "proposal_to_runbook",
-      "to": "docs/runbooks/engine-attach.md"
+      "to": "docs/20-governance/23-runbooks/engine-attach.md"
     },
     {
-      "from": "docs/design/proposals/PRP-003-workspace-lifecycle-and-isolation.md",
+      "from": "docs/20-governance/21-proposals/PRP-003-workspace-lifecycle-and-isolation.md",
       "relation": "proposal_to_runbook",
-      "to": "docs/runbooks/workspaces-lifecycle.md"
+      "to": "docs/20-governance/23-runbooks/workspaces-lifecycle.md"
     },
     {
-      "from": "docs/design/proposals/PRP-004-contract-baseline-lock-and-pin-policy.md",
+      "from": "docs/20-governance/21-proposals/PRP-004-contract-baseline-lock-and-pin-policy.md",
       "relation": "proposal_to_adr",
-      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+      "to": "docs/20-governance/22-adr/ADR-011-contract-baseline-lock.md"
     },
     {
-      "from": "docs/design/proposals/PRP-004-contract-baseline-lock-and-pin-policy.md",
+      "from": "docs/20-governance/21-proposals/PRP-004-contract-baseline-lock-and-pin-policy.md",
       "relation": "proposal_to_milestone_pack",
-      "to": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md"
+      "to": "docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md"
     },
     {
-      "from": "docs/design/proposals/PRP-004-contract-baseline-lock-and-pin-policy.md",
+      "from": "docs/20-governance/21-proposals/PRP-004-contract-baseline-lock-and-pin-policy.md",
       "relation": "proposal_to_runbook",
-      "to": "docs/runbooks/root-hardening.md"
+      "to": "docs/20-governance/23-runbooks/root-hardening.md"
     },
     {
-      "from": "docs/design/proposals/PRP-005-formal-coverage-roadmap.md",
+      "from": "docs/20-governance/21-proposals/PRP-005-formal-coverage-roadmap.md",
       "relation": "proposal_to_adr",
-      "to": "docs/design/adr/ADR-006-unified-rpc.md"
+      "to": "docs/20-governance/22-adr/ADR-006-unified-rpc.md"
     },
     {
-      "from": "docs/design/proposals/PRP-005-formal-coverage-roadmap.md",
+      "from": "docs/20-governance/21-proposals/PRP-005-formal-coverage-roadmap.md",
       "relation": "proposal_to_adr",
-      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+      "to": "docs/20-governance/22-adr/ADR-011-contract-baseline-lock.md"
     },
     {
-      "from": "docs/design/proposals/PRP-005-formal-coverage-roadmap.md",
+      "from": "docs/20-governance/21-proposals/PRP-005-formal-coverage-roadmap.md",
       "relation": "proposal_to_milestone_pack",
-      "to": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md"
+      "to": "docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md"
     },
     {
-      "from": "docs/design/proposals/PRP-005-formal-coverage-roadmap.md",
+      "from": "docs/20-governance/21-proposals/PRP-005-formal-coverage-roadmap.md",
       "relation": "proposal_to_runbook",
-      "to": "docs/runbooks/root-hardening.md"
+      "to": "docs/20-governance/23-runbooks/root-hardening.md"
     },
     {
-      "from": "docs/milestone-packs/README.md",
+      "from": "docs/20-governance/24-milestone-packs/README.md",
       "relation": "milestone_pack_to_doc",
       "to": "deps/yai-specs/SPEC_MAP.md"
     },
     {
-      "from": "docs/milestone-packs/README.md",
+      "from": "docs/20-governance/24-milestone-packs/README.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+      "to": "docs/20-governance/22-adr/ADR-011-contract-baseline-lock.md"
     },
     {
-      "from": "docs/milestone-packs/README.md",
+      "from": "docs/20-governance/24-milestone-packs/README.md",
       "relation": "milestone_pack_to_runbook",
-      "to": "docs/runbooks/contract-baseline-lock.md"
+      "to": "docs/20-governance/23-runbooks/contract-baseline-lock.md"
     },
     {
-      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.0.md",
+      "from": "docs/20-governance/24-milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.0.md",
       "relation": "milestone_pack_to_doc",
       "to": "deps/yai-specs/contracts/invariants/I-001-traceability.md"
     },
     {
-      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.0.md",
+      "from": "docs/20-governance/24-milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.0.md",
       "relation": "milestone_pack_to_doc",
       "to": "deps/yai-specs/contracts/invariants/I-002-determinism.md"
     },
     {
-      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.0.md",
+      "from": "docs/20-governance/24-milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.0.md",
       "relation": "milestone_pack_to_doc",
       "to": "deps/yai-specs/contracts/invariants/I-003-governance.md"
     },
     {
-      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.0.md",
+      "from": "docs/20-governance/24-milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.0.md",
       "relation": "milestone_pack_to_doc",
       "to": "deps/yai-specs/contracts/invariants/I-006-external-effect-boundary.md"
     },
     {
-      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.0.md",
+      "from": "docs/20-governance/24-milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.0.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+      "to": "docs/20-governance/22-adr/ADR-011-contract-baseline-lock.md"
     },
     {
-      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.0.md",
+      "from": "docs/20-governance/24-milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.0.md",
       "relation": "milestone_pack_to_runbook",
-      "to": "docs/runbooks/contract-baseline-lock.md"
+      "to": "docs/20-governance/23-runbooks/contract-baseline-lock.md"
     },
     {
-      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.1.md",
+      "from": "docs/20-governance/24-milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.1.md",
       "relation": "milestone_pack_to_doc",
       "to": "deps/yai-specs/contracts/invariants/I-001-traceability.md"
     },
     {
-      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.1.md",
+      "from": "docs/20-governance/24-milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.1.md",
       "relation": "milestone_pack_to_doc",
       "to": "deps/yai-specs/contracts/invariants/I-002-determinism.md"
     },
     {
-      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.1.md",
+      "from": "docs/20-governance/24-milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.1.md",
       "relation": "milestone_pack_to_doc",
       "to": "deps/yai-specs/contracts/invariants/I-003-governance.md"
     },
     {
-      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.1.md",
+      "from": "docs/20-governance/24-milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.1.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+      "to": "docs/20-governance/22-adr/ADR-011-contract-baseline-lock.md"
     },
     {
-      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.1.md",
+      "from": "docs/20-governance/24-milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.1.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-012-audit-convergence-gates.md"
+      "to": "docs/20-governance/22-adr/ADR-012-audit-convergence-gates.md"
     },
     {
-      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.1.md",
+      "from": "docs/20-governance/24-milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.1.md",
       "relation": "milestone_pack_to_runbook",
-      "to": "docs/runbooks/contract-baseline-lock.md"
+      "to": "docs/20-governance/23-runbooks/contract-baseline-lock.md"
     },
     {
-      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.2.md",
+      "from": "docs/20-governance/24-milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.2.md",
       "relation": "milestone_pack_to_doc",
       "to": "deps/yai-specs/contracts/invariants/I-001-traceability.md"
     },
     {
-      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.2.md",
+      "from": "docs/20-governance/24-milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.2.md",
       "relation": "milestone_pack_to_doc",
       "to": "deps/yai-specs/contracts/invariants/I-003-governance.md"
     },
     {
-      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.2.md",
+      "from": "docs/20-governance/24-milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.2.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+      "to": "docs/20-governance/22-adr/ADR-011-contract-baseline-lock.md"
     },
     {
-      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.2.md",
+      "from": "docs/20-governance/24-milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.2.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-012-audit-convergence-gates.md"
+      "to": "docs/20-governance/22-adr/ADR-012-audit-convergence-gates.md"
     },
     {
-      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.2.md",
+      "from": "docs/20-governance/24-milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.2.md",
       "relation": "milestone_pack_to_runbook",
-      "to": "docs/runbooks/contract-baseline-lock.md"
+      "to": "docs/20-governance/23-runbooks/contract-baseline-lock.md"
     },
     {
-      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.3.md",
+      "from": "docs/20-governance/24-milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.3.md",
       "relation": "milestone_pack_to_doc",
       "to": "deps/yai-specs/contracts/invariants/I-002-determinism.md"
     },
     {
-      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.3.md",
+      "from": "docs/20-governance/24-milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.3.md",
       "relation": "milestone_pack_to_doc",
       "to": "deps/yai-specs/contracts/invariants/I-003-governance.md"
     },
     {
-      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.3.md",
+      "from": "docs/20-governance/24-milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.3.md",
       "relation": "milestone_pack_to_doc",
       "to": "deps/yai-specs/contracts/invariants/I-006-external-effect-boundary.md"
     },
     {
-      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.3.md",
+      "from": "docs/20-governance/24-milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.3.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+      "to": "docs/20-governance/22-adr/ADR-011-contract-baseline-lock.md"
     },
     {
-      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.3.md",
+      "from": "docs/20-governance/24-milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.3.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-012-audit-convergence-gates.md"
+      "to": "docs/20-governance/22-adr/ADR-012-audit-convergence-gates.md"
     },
     {
-      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.3.md",
+      "from": "docs/20-governance/24-milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.3.md",
       "relation": "milestone_pack_to_runbook",
-      "to": "docs/runbooks/contract-baseline-lock.md"
+      "to": "docs/20-governance/23-runbooks/contract-baseline-lock.md"
     },
     {
-      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.4.md",
+      "from": "docs/20-governance/24-milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.4.md",
       "relation": "milestone_pack_to_doc",
       "to": "deps/yai-specs/contracts/boundaries/L1-kernel.md"
     },
     {
-      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.4.md",
+      "from": "docs/20-governance/24-milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.4.md",
       "relation": "milestone_pack_to_doc",
       "to": "deps/yai-specs/contracts/invariants/I-001-traceability.md"
     },
     {
-      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.4.md",
+      "from": "docs/20-governance/24-milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.4.md",
       "relation": "milestone_pack_to_doc",
       "to": "deps/yai-specs/contracts/invariants/I-003-governance.md"
     },
     {
-      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.4.md",
+      "from": "docs/20-governance/24-milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.4.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+      "to": "docs/20-governance/22-adr/ADR-011-contract-baseline-lock.md"
     },
     {
-      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.4.md",
+      "from": "docs/20-governance/24-milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.4.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-012-audit-convergence-gates.md"
+      "to": "docs/20-governance/22-adr/ADR-012-audit-convergence-gates.md"
     },
     {
-      "from": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.4.md",
+      "from": "docs/20-governance/24-milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.4.md",
       "relation": "milestone_pack_to_runbook",
-      "to": "docs/runbooks/contract-baseline-lock.md"
+      "to": "docs/20-governance/23-runbooks/contract-baseline-lock.md"
     },
     {
-      "from": "docs/milestone-packs/contract-baseline-lock/README.md",
+      "from": "docs/20-governance/24-milestone-packs/contract-baseline-lock/README.md",
       "relation": "milestone_pack_to_doc",
       "to": "deps/yai-specs/contracts/invariants/I-001-traceability.md"
     },
     {
-      "from": "docs/milestone-packs/contract-baseline-lock/README.md",
+      "from": "docs/20-governance/24-milestone-packs/contract-baseline-lock/README.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+      "to": "docs/20-governance/22-adr/ADR-011-contract-baseline-lock.md"
     },
     {
-      "from": "docs/milestone-packs/contract-baseline-lock/README.md",
+      "from": "docs/20-governance/24-milestone-packs/contract-baseline-lock/README.md",
       "relation": "milestone_pack_to_runbook",
-      "to": "docs/runbooks/contract-baseline-lock.md"
+      "to": "docs/20-governance/23-runbooks/contract-baseline-lock.md"
     },
     {
-      "from": "docs/milestone-packs/engine-attach/README.md",
+      "from": "docs/20-governance/24-milestone-packs/engine-attach/README.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-009-engine-attachment.md"
+      "to": "docs/20-governance/22-adr/ADR-009-engine-attachment.md"
     },
     {
-      "from": "docs/milestone-packs/engine-attach/README.md",
+      "from": "docs/20-governance/24-milestone-packs/engine-attach/README.md",
       "relation": "milestone_pack_to_runbook",
-      "to": "docs/runbooks/engine-attach.md"
+      "to": "docs/20-governance/23-runbooks/engine-attach.md"
     },
     {
-      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md",
+      "from": "docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-002-root-entrypoint.md"
+      "to": "docs/20-governance/22-adr/ADR-002-root-entrypoint.md"
     },
     {
-      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md",
+      "from": "docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-006-unified-rpc.md"
+      "to": "docs/20-governance/22-adr/ADR-006-unified-rpc.md"
     },
     {
-      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md",
+      "from": "docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-008-connection-lifecycle.md"
+      "to": "docs/20-governance/22-adr/ADR-008-connection-lifecycle.md"
     },
     {
-      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md",
+      "from": "docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-012-audit-convergence-gates.md"
+      "to": "docs/20-governance/22-adr/ADR-012-audit-convergence-gates.md"
     },
     {
-      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md",
+      "from": "docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md",
       "relation": "milestone_pack_to_runbook",
-      "to": "docs/runbooks/root-hardening.md"
+      "to": "docs/20-governance/23-runbooks/root-hardening.md"
     },
     {
-      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md",
+      "from": "docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-002-root-entrypoint.md"
+      "to": "docs/20-governance/22-adr/ADR-002-root-entrypoint.md"
     },
     {
-      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md",
+      "from": "docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-006-unified-rpc.md"
+      "to": "docs/20-governance/22-adr/ADR-006-unified-rpc.md"
     },
     {
-      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md",
+      "from": "docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-008-connection-lifecycle.md"
+      "to": "docs/20-governance/22-adr/ADR-008-connection-lifecycle.md"
     },
     {
-      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md",
+      "from": "docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-012-audit-convergence-gates.md"
+      "to": "docs/20-governance/22-adr/ADR-012-audit-convergence-gates.md"
     },
     {
-      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md",
+      "from": "docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md",
       "relation": "milestone_pack_to_runbook",
-      "to": "docs/runbooks/root-hardening.md"
+      "to": "docs/20-governance/23-runbooks/root-hardening.md"
     },
     {
-      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.2.md",
+      "from": "docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.2.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-002-root-entrypoint.md"
+      "to": "docs/20-governance/22-adr/ADR-002-root-entrypoint.md"
     },
     {
-      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.2.md",
+      "from": "docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.2.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-006-unified-rpc.md"
+      "to": "docs/20-governance/22-adr/ADR-006-unified-rpc.md"
     },
     {
-      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.2.md",
+      "from": "docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.2.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-008-connection-lifecycle.md"
+      "to": "docs/20-governance/22-adr/ADR-008-connection-lifecycle.md"
     },
     {
-      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.2.md",
+      "from": "docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.2.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-012-audit-convergence-gates.md"
+      "to": "docs/20-governance/22-adr/ADR-012-audit-convergence-gates.md"
     },
     {
-      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.2.md",
+      "from": "docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.2.md",
       "relation": "milestone_pack_to_runbook",
-      "to": "docs/runbooks/root-hardening.md"
+      "to": "docs/20-governance/23-runbooks/root-hardening.md"
     },
     {
-      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.3.md",
+      "from": "docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.3.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-002-root-entrypoint.md"
+      "to": "docs/20-governance/22-adr/ADR-002-root-entrypoint.md"
     },
     {
-      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.3.md",
+      "from": "docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.3.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-006-unified-rpc.md"
+      "to": "docs/20-governance/22-adr/ADR-006-unified-rpc.md"
     },
     {
-      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.3.md",
+      "from": "docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.3.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-008-connection-lifecycle.md"
+      "to": "docs/20-governance/22-adr/ADR-008-connection-lifecycle.md"
     },
     {
-      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.3.md",
+      "from": "docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.3.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-012-audit-convergence-gates.md"
+      "to": "docs/20-governance/22-adr/ADR-012-audit-convergence-gates.md"
     },
     {
-      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.3.md",
+      "from": "docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.3.md",
       "relation": "milestone_pack_to_runbook",
-      "to": "docs/runbooks/root-hardening.md"
+      "to": "docs/20-governance/23-runbooks/root-hardening.md"
     },
     {
-      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.4.md",
+      "from": "docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.4.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-002-root-entrypoint.md"
+      "to": "docs/20-governance/22-adr/ADR-002-root-entrypoint.md"
     },
     {
-      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.4.md",
+      "from": "docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.4.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-006-unified-rpc.md"
+      "to": "docs/20-governance/22-adr/ADR-006-unified-rpc.md"
     },
     {
-      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.4.md",
+      "from": "docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.4.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-008-connection-lifecycle.md"
+      "to": "docs/20-governance/22-adr/ADR-008-connection-lifecycle.md"
     },
     {
-      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.4.md",
+      "from": "docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.4.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-012-audit-convergence-gates.md"
+      "to": "docs/20-governance/22-adr/ADR-012-audit-convergence-gates.md"
     },
     {
-      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.4.md",
+      "from": "docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.4.md",
       "relation": "milestone_pack_to_runbook",
-      "to": "docs/runbooks/root-hardening.md"
+      "to": "docs/20-governance/23-runbooks/root-hardening.md"
     },
     {
-      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md",
+      "from": "docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-002-root-entrypoint.md"
+      "to": "docs/20-governance/22-adr/ADR-002-root-entrypoint.md"
     },
     {
-      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md",
+      "from": "docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-006-unified-rpc.md"
+      "to": "docs/20-governance/22-adr/ADR-006-unified-rpc.md"
     },
     {
-      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md",
+      "from": "docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-008-connection-lifecycle.md"
+      "to": "docs/20-governance/22-adr/ADR-008-connection-lifecycle.md"
     },
     {
-      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md",
+      "from": "docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-012-audit-convergence-gates.md"
+      "to": "docs/20-governance/22-adr/ADR-012-audit-convergence-gates.md"
     },
     {
-      "from": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md",
+      "from": "docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md",
       "relation": "milestone_pack_to_runbook",
-      "to": "docs/runbooks/root-hardening.md"
+      "to": "docs/20-governance/23-runbooks/root-hardening.md"
     },
     {
-      "from": "docs/milestone-packs/root-hardening/README.md",
+      "from": "docs/20-governance/24-milestone-packs/root-hardening/README.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-012-audit-convergence-gates.md"
+      "to": "docs/20-governance/22-adr/ADR-012-audit-convergence-gates.md"
     },
     {
-      "from": "docs/milestone-packs/root-hardening/README.md",
+      "from": "docs/20-governance/24-milestone-packs/root-hardening/README.md",
       "relation": "milestone_pack_to_runbook",
-      "to": "docs/runbooks/root-hardening.md"
+      "to": "docs/20-governance/23-runbooks/root-hardening.md"
     },
     {
-      "from": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.0.md",
+      "from": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.0.md",
       "relation": "milestone_pack_to_doc",
       "to": "deps/yai-specs/REGISTRY.md"
     },
     {
-      "from": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.0.md",
+      "from": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.0.md",
       "relation": "milestone_pack_to_doc",
       "to": "deps/yai-specs/SPEC_MAP.md"
     },
     {
-      "from": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.0.md",
+      "from": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.0.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+      "to": "docs/20-governance/22-adr/ADR-011-contract-baseline-lock.md"
     },
     {
-      "from": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.0.md",
+      "from": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.0.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-012-audit-convergence-gates.md"
+      "to": "docs/20-governance/22-adr/ADR-012-audit-convergence-gates.md"
     },
     {
-      "from": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.0.md",
+      "from": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.0.md",
       "relation": "milestone_pack_to_runbook",
-      "to": "docs/runbooks/specs-refactor-foundation.md"
+      "to": "docs/20-governance/23-runbooks/specs-refactor-foundation.md"
     },
     {
-      "from": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.1.md",
+      "from": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.1.md",
       "relation": "milestone_pack_to_doc",
       "to": "deps/yai-specs/REGISTRY.md"
     },
     {
-      "from": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.1.md",
+      "from": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.1.md",
       "relation": "milestone_pack_to_doc",
       "to": "deps/yai-specs/SPEC_MAP.md"
     },
     {
-      "from": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.1.md",
+      "from": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.1.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+      "to": "docs/20-governance/22-adr/ADR-011-contract-baseline-lock.md"
     },
     {
-      "from": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.1.md",
+      "from": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.1.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-012-audit-convergence-gates.md"
+      "to": "docs/20-governance/22-adr/ADR-012-audit-convergence-gates.md"
     },
     {
-      "from": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.1.md",
+      "from": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.1.md",
       "relation": "milestone_pack_to_runbook",
-      "to": "docs/runbooks/specs-refactor-foundation.md"
+      "to": "docs/20-governance/23-runbooks/specs-refactor-foundation.md"
     },
     {
-      "from": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.2.md",
+      "from": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.2.md",
       "relation": "milestone_pack_to_doc",
       "to": "deps/yai-specs/REGISTRY.md"
     },
     {
-      "from": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.2.md",
+      "from": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.2.md",
       "relation": "milestone_pack_to_doc",
       "to": "deps/yai-specs/SPEC_MAP.md"
     },
     {
-      "from": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.2.md",
+      "from": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.2.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+      "to": "docs/20-governance/22-adr/ADR-011-contract-baseline-lock.md"
     },
     {
-      "from": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.2.md",
+      "from": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.2.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-012-audit-convergence-gates.md"
+      "to": "docs/20-governance/22-adr/ADR-012-audit-convergence-gates.md"
     },
     {
-      "from": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.2.md",
+      "from": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.2.md",
       "relation": "milestone_pack_to_runbook",
-      "to": "docs/runbooks/specs-refactor-foundation.md"
+      "to": "docs/20-governance/23-runbooks/specs-refactor-foundation.md"
     },
     {
-      "from": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.3.md",
+      "from": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.3.md",
       "relation": "milestone_pack_to_doc",
       "to": "deps/yai-specs/REGISTRY.md"
     },
     {
-      "from": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.3.md",
+      "from": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.3.md",
       "relation": "milestone_pack_to_doc",
       "to": "deps/yai-specs/SPEC_MAP.md"
     },
     {
-      "from": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.3.md",
+      "from": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.3.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+      "to": "docs/20-governance/22-adr/ADR-011-contract-baseline-lock.md"
     },
     {
-      "from": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.3.md",
+      "from": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.3.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-012-audit-convergence-gates.md"
+      "to": "docs/20-governance/22-adr/ADR-012-audit-convergence-gates.md"
     },
     {
-      "from": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.3.md",
+      "from": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.3.md",
       "relation": "milestone_pack_to_runbook",
-      "to": "docs/runbooks/specs-refactor-foundation.md"
+      "to": "docs/20-governance/23-runbooks/specs-refactor-foundation.md"
     },
     {
-      "from": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.4.md",
+      "from": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.4.md",
       "relation": "milestone_pack_to_doc",
       "to": "deps/yai-specs/REGISTRY.md"
     },
     {
-      "from": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.4.md",
+      "from": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.4.md",
       "relation": "milestone_pack_to_doc",
       "to": "deps/yai-specs/SPEC_MAP.md"
     },
     {
-      "from": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.4.md",
+      "from": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.4.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+      "to": "docs/20-governance/22-adr/ADR-011-contract-baseline-lock.md"
     },
     {
-      "from": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.4.md",
+      "from": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.4.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-012-audit-convergence-gates.md"
+      "to": "docs/20-governance/22-adr/ADR-012-audit-convergence-gates.md"
     },
     {
-      "from": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.4.md",
+      "from": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.4.md",
       "relation": "milestone_pack_to_runbook",
-      "to": "docs/runbooks/specs-refactor-foundation.md"
+      "to": "docs/20-governance/23-runbooks/specs-refactor-foundation.md"
     },
     {
-      "from": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.5.md",
+      "from": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.5.md",
       "relation": "milestone_pack_to_doc",
       "to": "deps/yai-specs/REGISTRY.md"
     },
     {
-      "from": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.5.md",
+      "from": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.5.md",
       "relation": "milestone_pack_to_doc",
       "to": "deps/yai-specs/SPEC_MAP.md"
     },
     {
-      "from": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.5.md",
+      "from": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.5.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+      "to": "docs/20-governance/22-adr/ADR-011-contract-baseline-lock.md"
     },
     {
-      "from": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.5.md",
+      "from": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.5.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-012-audit-convergence-gates.md"
+      "to": "docs/20-governance/22-adr/ADR-012-audit-convergence-gates.md"
     },
     {
-      "from": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.5.md",
+      "from": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.5.md",
       "relation": "milestone_pack_to_runbook",
-      "to": "docs/runbooks/specs-refactor-foundation.md"
+      "to": "docs/20-governance/23-runbooks/specs-refactor-foundation.md"
     },
     {
-      "from": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.6.md",
+      "from": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.6.md",
       "relation": "milestone_pack_to_doc",
       "to": "deps/yai-specs/REGISTRY.md"
     },
     {
-      "from": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.6.md",
+      "from": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.6.md",
       "relation": "milestone_pack_to_doc",
       "to": "deps/yai-specs/SPEC_MAP.md"
     },
     {
-      "from": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.6.md",
+      "from": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.6.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+      "to": "docs/20-governance/22-adr/ADR-011-contract-baseline-lock.md"
     },
     {
-      "from": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.6.md",
+      "from": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.6.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-012-audit-convergence-gates.md"
+      "to": "docs/20-governance/22-adr/ADR-012-audit-convergence-gates.md"
     },
     {
-      "from": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.6.md",
+      "from": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.6.md",
       "relation": "milestone_pack_to_runbook",
-      "to": "docs/runbooks/specs-refactor-foundation.md"
+      "to": "docs/20-governance/23-runbooks/specs-refactor-foundation.md"
     },
     {
-      "from": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.7.md",
+      "from": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.7.md",
       "relation": "milestone_pack_to_doc",
       "to": "deps/yai-specs/REGISTRY.md"
     },
     {
-      "from": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.7.md",
+      "from": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.7.md",
       "relation": "milestone_pack_to_doc",
       "to": "deps/yai-specs/SPEC_MAP.md"
     },
     {
-      "from": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.7.md",
+      "from": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.7.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+      "to": "docs/20-governance/22-adr/ADR-011-contract-baseline-lock.md"
     },
     {
-      "from": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.7.md",
+      "from": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.7.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-012-audit-convergence-gates.md"
+      "to": "docs/20-governance/22-adr/ADR-012-audit-convergence-gates.md"
     },
     {
-      "from": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.7.md",
+      "from": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.7.md",
       "relation": "milestone_pack_to_runbook",
-      "to": "docs/runbooks/specs-refactor-foundation.md"
+      "to": "docs/20-governance/23-runbooks/specs-refactor-foundation.md"
     },
     {
-      "from": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.8.md",
+      "from": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.8.md",
       "relation": "milestone_pack_to_doc",
       "to": "deps/yai-specs/REGISTRY.md"
     },
     {
-      "from": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.8.md",
+      "from": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.8.md",
       "relation": "milestone_pack_to_doc",
       "to": "deps/yai-specs/SPEC_MAP.md"
     },
     {
-      "from": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.8.md",
+      "from": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.8.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+      "to": "docs/20-governance/22-adr/ADR-011-contract-baseline-lock.md"
     },
     {
-      "from": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.8.md",
+      "from": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.8.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-012-audit-convergence-gates.md"
+      "to": "docs/20-governance/22-adr/ADR-012-audit-convergence-gates.md"
     },
     {
-      "from": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.8.md",
+      "from": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.8.md",
       "relation": "milestone_pack_to_runbook",
-      "to": "docs/runbooks/specs-refactor-foundation.md"
+      "to": "docs/20-governance/23-runbooks/specs-refactor-foundation.md"
     },
     {
-      "from": "docs/milestone-packs/specs-refactor-foundation/README.md",
+      "from": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/README.md",
       "relation": "milestone_pack_to_doc",
       "to": "deps/yai-specs/SPEC_MAP.md"
     },
     {
-      "from": "docs/milestone-packs/specs-refactor-foundation/README.md",
+      "from": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/README.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+      "to": "docs/20-governance/22-adr/ADR-011-contract-baseline-lock.md"
     },
     {
-      "from": "docs/milestone-packs/specs-refactor-foundation/README.md",
+      "from": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/README.md",
       "relation": "milestone_pack_to_runbook",
-      "to": "docs/runbooks/specs-refactor-foundation.md"
+      "to": "docs/20-governance/23-runbooks/specs-refactor-foundation.md"
     },
     {
-      "from": "docs/milestone-packs/workspaces-lifecycle/README.md",
+      "from": "docs/20-governance/24-milestone-packs/workspaces-lifecycle/README.md",
       "relation": "milestone_pack_to_adr",
-      "to": "docs/design/adr/ADR-007-workspace-isolation.md"
+      "to": "docs/20-governance/22-adr/ADR-007-workspace-isolation.md"
     },
     {
-      "from": "docs/milestone-packs/workspaces-lifecycle/README.md",
+      "from": "docs/20-governance/24-milestone-packs/workspaces-lifecycle/README.md",
       "relation": "milestone_pack_to_runbook",
-      "to": "docs/runbooks/workspaces-lifecycle.md"
+      "to": "docs/20-governance/23-runbooks/workspaces-lifecycle.md"
     },
     {
-      "from": "docs/runbooks/README.md",
+      "from": "docs/20-governance/23-runbooks/README.md",
       "relation": "runbook_to_adr",
-      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+      "to": "docs/20-governance/22-adr/ADR-011-contract-baseline-lock.md"
     },
     {
-      "from": "docs/runbooks/README.md",
+      "from": "docs/20-governance/23-runbooks/README.md",
       "relation": "runbook_to_adr",
-      "to": "docs/design/adr/ADR-012-audit-convergence-gates.md"
+      "to": "docs/20-governance/22-adr/ADR-012-audit-convergence-gates.md"
     },
     {
-      "from": "docs/runbooks/contract-baseline-lock.md",
+      "from": "docs/20-governance/23-runbooks/contract-baseline-lock.md",
       "relation": "runbook_to_adr",
-      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+      "to": "docs/20-governance/22-adr/ADR-011-contract-baseline-lock.md"
     },
     {
-      "from": "docs/runbooks/contract-baseline-lock.md",
+      "from": "docs/20-governance/23-runbooks/contract-baseline-lock.md",
       "relation": "runbook_to_adr",
-      "to": "docs/design/adr/ADR-012-audit-convergence-gates.md"
+      "to": "docs/20-governance/22-adr/ADR-012-audit-convergence-gates.md"
     },
     {
-      "from": "docs/runbooks/data-plane.md",
+      "from": "docs/20-governance/23-runbooks/data-plane.md",
       "relation": "runbook_to_adr",
-      "to": "docs/design/adr/ADR-006-unified-rpc.md"
+      "to": "docs/20-governance/22-adr/ADR-006-unified-rpc.md"
     },
     {
-      "from": "docs/runbooks/data-plane.md",
+      "from": "docs/20-governance/23-runbooks/data-plane.md",
       "relation": "runbook_to_adr",
-      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+      "to": "docs/20-governance/22-adr/ADR-011-contract-baseline-lock.md"
     },
     {
-      "from": "docs/runbooks/engine-attach.md",
+      "from": "docs/20-governance/23-runbooks/engine-attach.md",
       "relation": "runbook_to_adr",
-      "to": "docs/design/adr/ADR-008-connection-lifecycle.md"
+      "to": "docs/20-governance/22-adr/ADR-008-connection-lifecycle.md"
     },
     {
-      "from": "docs/runbooks/engine-attach.md",
+      "from": "docs/20-governance/23-runbooks/engine-attach.md",
       "relation": "runbook_to_adr",
-      "to": "docs/design/adr/ADR-009-engine-attachment.md"
+      "to": "docs/20-governance/22-adr/ADR-009-engine-attachment.md"
     },
     {
-      "from": "docs/runbooks/kernel-sovereignty.md",
+      "from": "docs/20-governance/23-runbooks/kernel-sovereignty.md",
       "relation": "runbook_to_adr",
-      "to": "docs/design/adr/ADR-003-kernel-authority.md"
+      "to": "docs/20-governance/22-adr/ADR-003-kernel-authority.md"
     },
     {
-      "from": "docs/runbooks/kernel-sovereignty.md",
+      "from": "docs/20-governance/23-runbooks/kernel-sovereignty.md",
       "relation": "runbook_to_adr",
-      "to": "docs/design/adr/ADR-008-connection-lifecycle.md"
+      "to": "docs/20-governance/22-adr/ADR-008-connection-lifecycle.md"
     },
     {
-      "from": "docs/runbooks/mind-redis-stm.md",
+      "from": "docs/20-governance/23-runbooks/mind-redis-stm.md",
       "relation": "runbook_to_adr",
-      "to": "docs/design/adr/ADR-005-mind-proposer.md"
+      "to": "docs/20-governance/22-adr/ADR-005-mind-proposer.md"
     },
     {
-      "from": "docs/runbooks/mind-redis-stm.md",
+      "from": "docs/20-governance/23-runbooks/mind-redis-stm.md",
       "relation": "runbook_to_adr",
-      "to": "docs/design/adr/ADR-008-connection-lifecycle.md"
+      "to": "docs/20-governance/22-adr/ADR-008-connection-lifecycle.md"
     },
     {
-      "from": "docs/runbooks/operations.md",
+      "from": "docs/20-governance/23-runbooks/operations.md",
       "relation": "runbook_to_adr",
-      "to": "docs/design/adr/ADR-003-kernel-authority.md"
+      "to": "docs/20-governance/22-adr/ADR-003-kernel-authority.md"
     },
     {
-      "from": "docs/runbooks/operations.md",
+      "from": "docs/20-governance/23-runbooks/operations.md",
       "relation": "runbook_to_adr",
-      "to": "docs/design/adr/ADR-006-unified-rpc.md"
+      "to": "docs/20-governance/22-adr/ADR-006-unified-rpc.md"
     },
     {
-      "from": "docs/runbooks/root-hardening.md",
+      "from": "docs/20-governance/23-runbooks/root-hardening.md",
       "relation": "runbook_to_adr",
-      "to": "docs/design/adr/ADR-002-root-entrypoint.md"
+      "to": "docs/20-governance/22-adr/ADR-002-root-entrypoint.md"
     },
     {
-      "from": "docs/runbooks/root-hardening.md",
+      "from": "docs/20-governance/23-runbooks/root-hardening.md",
       "relation": "runbook_to_adr",
-      "to": "docs/design/adr/ADR-006-unified-rpc.md"
+      "to": "docs/20-governance/22-adr/ADR-006-unified-rpc.md"
     },
     {
-      "from": "docs/runbooks/root-hardening.md",
+      "from": "docs/20-governance/23-runbooks/root-hardening.md",
       "relation": "runbook_to_adr",
-      "to": "docs/design/adr/ADR-008-connection-lifecycle.md"
+      "to": "docs/20-governance/22-adr/ADR-008-connection-lifecycle.md"
     },
     {
-      "from": "docs/runbooks/root-hardening.md",
+      "from": "docs/20-governance/23-runbooks/root-hardening.md",
       "relation": "runbook_to_adr",
-      "to": "docs/design/adr/ADR-012-audit-convergence-gates.md"
+      "to": "docs/20-governance/22-adr/ADR-012-audit-convergence-gates.md"
     },
     {
-      "from": "docs/runbooks/specs-refactor-foundation.md",
+      "from": "docs/20-governance/23-runbooks/specs-refactor-foundation.md",
       "relation": "runbook_to_adr",
-      "to": "docs/design/adr/ADR-011-contract-baseline-lock.md"
+      "to": "docs/20-governance/22-adr/ADR-011-contract-baseline-lock.md"
     },
     {
-      "from": "docs/runbooks/specs-refactor-foundation.md",
+      "from": "docs/20-governance/23-runbooks/specs-refactor-foundation.md",
       "relation": "runbook_to_adr",
-      "to": "docs/design/adr/ADR-012-audit-convergence-gates.md"
+      "to": "docs/20-governance/22-adr/ADR-012-audit-convergence-gates.md"
     },
     {
-      "from": "docs/runbooks/workspaces-lifecycle.md",
+      "from": "docs/20-governance/23-runbooks/workspaces-lifecycle.md",
       "relation": "runbook_to_adr",
-      "to": "docs/design/adr/ADR-007-workspace-isolation.md"
+      "to": "docs/20-governance/22-adr/ADR-007-workspace-isolation.md"
     },
     {
-      "from": "docs/runbooks/workspaces-lifecycle.md",
+      "from": "docs/20-governance/23-runbooks/workspaces-lifecycle.md",
       "relation": "runbook_to_adr",
-      "to": "docs/design/adr/ADR-008-connection-lifecycle.md"
+      "to": "docs/20-governance/22-adr/ADR-008-connection-lifecycle.md"
     }
   ],
   "nodes": [
     {
-      "id": "docs/design/adr/ADR-001-single-runtime.md",
-      "path": "docs/design/adr/ADR-001-single-runtime.md",
+      "id": "docs/20-governance/22-adr/ADR-001-single-runtime.md",
+      "path": "docs/20-governance/22-adr/ADR-001-single-runtime.md",
       "type": "adr"
     },
     {
-      "id": "docs/design/adr/ADR-002-root-entrypoint.md",
-      "path": "docs/design/adr/ADR-002-root-entrypoint.md",
+      "id": "docs/20-governance/22-adr/ADR-002-root-entrypoint.md",
+      "path": "docs/20-governance/22-adr/ADR-002-root-entrypoint.md",
       "type": "adr"
     },
     {
-      "id": "docs/design/adr/ADR-003-kernel-authority.md",
-      "path": "docs/design/adr/ADR-003-kernel-authority.md",
+      "id": "docs/20-governance/22-adr/ADR-003-kernel-authority.md",
+      "path": "docs/20-governance/22-adr/ADR-003-kernel-authority.md",
       "type": "adr"
     },
     {
-      "id": "docs/design/adr/ADR-004-engine-execution.md",
-      "path": "docs/design/adr/ADR-004-engine-execution.md",
+      "id": "docs/20-governance/22-adr/ADR-004-engine-execution.md",
+      "path": "docs/20-governance/22-adr/ADR-004-engine-execution.md",
       "type": "adr"
     },
     {
-      "id": "docs/design/adr/ADR-005-mind-proposer.md",
-      "path": "docs/design/adr/ADR-005-mind-proposer.md",
+      "id": "docs/20-governance/22-adr/ADR-005-mind-proposer.md",
+      "path": "docs/20-governance/22-adr/ADR-005-mind-proposer.md",
       "type": "adr"
     },
     {
-      "id": "docs/design/adr/ADR-006-unified-rpc.md",
-      "path": "docs/design/adr/ADR-006-unified-rpc.md",
+      "id": "docs/20-governance/22-adr/ADR-006-unified-rpc.md",
+      "path": "docs/20-governance/22-adr/ADR-006-unified-rpc.md",
       "type": "adr"
     },
     {
-      "id": "docs/design/adr/ADR-007-workspace-isolation.md",
-      "path": "docs/design/adr/ADR-007-workspace-isolation.md",
+      "id": "docs/20-governance/22-adr/ADR-007-workspace-isolation.md",
+      "path": "docs/20-governance/22-adr/ADR-007-workspace-isolation.md",
       "type": "adr"
     },
     {
-      "id": "docs/design/adr/ADR-008-connection-lifecycle.md",
-      "path": "docs/design/adr/ADR-008-connection-lifecycle.md",
+      "id": "docs/20-governance/22-adr/ADR-008-connection-lifecycle.md",
+      "path": "docs/20-governance/22-adr/ADR-008-connection-lifecycle.md",
       "type": "adr"
     },
     {
-      "id": "docs/design/adr/ADR-009-engine-attachment.md",
-      "path": "docs/design/adr/ADR-009-engine-attachment.md",
+      "id": "docs/20-governance/22-adr/ADR-009-engine-attachment.md",
+      "path": "docs/20-governance/22-adr/ADR-009-engine-attachment.md",
       "type": "adr"
     },
     {
-      "id": "docs/design/adr/ADR-010-boot-entrypoint.md",
-      "path": "docs/design/adr/ADR-010-boot-entrypoint.md",
+      "id": "docs/20-governance/22-adr/ADR-010-boot-entrypoint.md",
+      "path": "docs/20-governance/22-adr/ADR-010-boot-entrypoint.md",
       "type": "adr"
     },
     {
-      "id": "docs/design/adr/ADR-011-contract-baseline-lock.md",
-      "path": "docs/design/adr/ADR-011-contract-baseline-lock.md",
+      "id": "docs/20-governance/22-adr/ADR-011-contract-baseline-lock.md",
+      "path": "docs/20-governance/22-adr/ADR-011-contract-baseline-lock.md",
       "type": "adr"
     },
     {
-      "id": "docs/design/adr/ADR-012-audit-convergence-gates.md",
-      "path": "docs/design/adr/ADR-012-audit-convergence-gates.md",
+      "id": "docs/20-governance/22-adr/ADR-012-audit-convergence-gates.md",
+      "path": "docs/20-governance/22-adr/ADR-012-audit-convergence-gates.md",
       "type": "adr"
     },
     {
-      "id": "docs/design/adr/README.md",
-      "path": "docs/design/adr/README.md",
+      "id": "docs/20-governance/22-adr/README.md",
+      "path": "docs/20-governance/22-adr/README.md",
       "type": "adr"
     },
     {
-      "id": "docs/design/proposals/PRP-001-runtime-topology-and-authority.md",
-      "path": "docs/design/proposals/PRP-001-runtime-topology-and-authority.md",
+      "id": "docs/20-governance/21-proposals/PRP-001-runtime-topology-and-authority.md",
+      "path": "docs/20-governance/21-proposals/PRP-001-runtime-topology-and-authority.md",
       "type": "proposal"
     },
     {
-      "id": "docs/design/proposals/PRP-002-unified-rpc-and-cli-contract.md",
-      "path": "docs/design/proposals/PRP-002-unified-rpc-and-cli-contract.md",
+      "id": "docs/20-governance/21-proposals/PRP-002-unified-rpc-and-cli-contract.md",
+      "path": "docs/20-governance/21-proposals/PRP-002-unified-rpc-and-cli-contract.md",
       "type": "proposal"
     },
     {
-      "id": "docs/design/proposals/PRP-003-workspace-lifecycle-and-isolation.md",
-      "path": "docs/design/proposals/PRP-003-workspace-lifecycle-and-isolation.md",
+      "id": "docs/20-governance/21-proposals/PRP-003-workspace-lifecycle-and-isolation.md",
+      "path": "docs/20-governance/21-proposals/PRP-003-workspace-lifecycle-and-isolation.md",
       "type": "proposal"
     },
     {
-      "id": "docs/design/proposals/PRP-004-contract-baseline-lock-and-pin-policy.md",
-      "path": "docs/design/proposals/PRP-004-contract-baseline-lock-and-pin-policy.md",
+      "id": "docs/20-governance/21-proposals/PRP-004-contract-baseline-lock-and-pin-policy.md",
+      "path": "docs/20-governance/21-proposals/PRP-004-contract-baseline-lock-and-pin-policy.md",
       "type": "proposal"
     },
     {
-      "id": "docs/design/proposals/PRP-005-formal-coverage-roadmap.md",
-      "path": "docs/design/proposals/PRP-005-formal-coverage-roadmap.md",
+      "id": "docs/20-governance/21-proposals/PRP-005-formal-coverage-roadmap.md",
+      "path": "docs/20-governance/21-proposals/PRP-005-formal-coverage-roadmap.md",
       "type": "proposal"
     },
     {
-      "id": "docs/design/proposals/README.md",
-      "path": "docs/design/proposals/README.md",
+      "id": "docs/20-governance/21-proposals/README.md",
+      "path": "docs/20-governance/21-proposals/README.md",
       "type": "proposal"
     },
     {
-      "id": "docs/milestone-packs/README.md",
-      "path": "docs/milestone-packs/README.md",
+      "id": "docs/20-governance/24-milestone-packs/README.md",
+      "path": "docs/20-governance/24-milestone-packs/README.md",
       "type": "milestone_pack"
     },
     {
-      "id": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.0.md",
-      "path": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.0.md",
+      "id": "docs/20-governance/24-milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.0.md",
+      "path": "docs/20-governance/24-milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.0.md",
       "type": "milestone_pack"
     },
     {
-      "id": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.1.md",
-      "path": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.1.md",
+      "id": "docs/20-governance/24-milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.1.md",
+      "path": "docs/20-governance/24-milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.1.md",
       "type": "milestone_pack"
     },
     {
-      "id": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.2.md",
-      "path": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.2.md",
+      "id": "docs/20-governance/24-milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.2.md",
+      "path": "docs/20-governance/24-milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.2.md",
       "type": "milestone_pack"
     },
     {
-      "id": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.3.md",
-      "path": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.3.md",
+      "id": "docs/20-governance/24-milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.3.md",
+      "path": "docs/20-governance/24-milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.3.md",
       "type": "milestone_pack"
     },
     {
-      "id": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.4.md",
-      "path": "docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.4.md",
+      "id": "docs/20-governance/24-milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.4.md",
+      "path": "docs/20-governance/24-milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.4.md",
       "type": "milestone_pack"
     },
     {
-      "id": "docs/milestone-packs/contract-baseline-lock/README.md",
-      "path": "docs/milestone-packs/contract-baseline-lock/README.md",
+      "id": "docs/20-governance/24-milestone-packs/contract-baseline-lock/README.md",
+      "path": "docs/20-governance/24-milestone-packs/contract-baseline-lock/README.md",
       "type": "milestone_pack"
     },
     {
-      "id": "docs/milestone-packs/engine-attach/README.md",
-      "path": "docs/milestone-packs/engine-attach/README.md",
+      "id": "docs/20-governance/24-milestone-packs/engine-attach/README.md",
+      "path": "docs/20-governance/24-milestone-packs/engine-attach/README.md",
       "type": "milestone_pack"
     },
     {
-      "id": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md",
-      "path": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md",
+      "id": "docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md",
+      "path": "docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md",
       "type": "milestone_pack"
     },
     {
-      "id": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md",
-      "path": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md",
+      "id": "docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md",
+      "path": "docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md",
       "type": "milestone_pack"
     },
     {
-      "id": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.2.md",
-      "path": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.2.md",
+      "id": "docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.2.md",
+      "path": "docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.2.md",
       "type": "milestone_pack"
     },
     {
-      "id": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.3.md",
-      "path": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.3.md",
+      "id": "docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.3.md",
+      "path": "docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.3.md",
       "type": "milestone_pack"
     },
     {
-      "id": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.4.md",
-      "path": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.4.md",
+      "id": "docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.4.md",
+      "path": "docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.4.md",
       "type": "milestone_pack"
     },
     {
-      "id": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md",
-      "path": "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md",
+      "id": "docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md",
+      "path": "docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md",
       "type": "milestone_pack"
     },
     {
-      "id": "docs/milestone-packs/root-hardening/README.md",
-      "path": "docs/milestone-packs/root-hardening/README.md",
+      "id": "docs/20-governance/24-milestone-packs/root-hardening/README.md",
+      "path": "docs/20-governance/24-milestone-packs/root-hardening/README.md",
       "type": "milestone_pack"
     },
     {
-      "id": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.0.md",
-      "path": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.0.md",
+      "id": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.0.md",
+      "path": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.0.md",
       "type": "milestone_pack"
     },
     {
-      "id": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.1.md",
-      "path": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.1.md",
+      "id": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.1.md",
+      "path": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.1.md",
       "type": "milestone_pack"
     },
     {
-      "id": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.2.md",
-      "path": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.2.md",
+      "id": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.2.md",
+      "path": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.2.md",
       "type": "milestone_pack"
     },
     {
-      "id": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.3.md",
-      "path": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.3.md",
+      "id": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.3.md",
+      "path": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.3.md",
       "type": "milestone_pack"
     },
     {
-      "id": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.4.md",
-      "path": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.4.md",
+      "id": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.4.md",
+      "path": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.4.md",
       "type": "milestone_pack"
     },
     {
-      "id": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.5.md",
-      "path": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.5.md",
+      "id": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.5.md",
+      "path": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.5.md",
       "type": "milestone_pack"
     },
     {
-      "id": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.6.md",
-      "path": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.6.md",
+      "id": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.6.md",
+      "path": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.6.md",
       "type": "milestone_pack"
     },
     {
-      "id": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.7.md",
-      "path": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.7.md",
+      "id": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.7.md",
+      "path": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.7.md",
       "type": "milestone_pack"
     },
     {
-      "id": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.8.md",
-      "path": "docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.8.md",
+      "id": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.8.md",
+      "path": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.8.md",
       "type": "milestone_pack"
     },
     {
-      "id": "docs/milestone-packs/specs-refactor-foundation/README.md",
-      "path": "docs/milestone-packs/specs-refactor-foundation/README.md",
+      "id": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/README.md",
+      "path": "docs/20-governance/24-milestone-packs/specs-refactor-foundation/README.md",
       "type": "milestone_pack"
     },
     {
-      "id": "docs/milestone-packs/workspaces-lifecycle/README.md",
-      "path": "docs/milestone-packs/workspaces-lifecycle/README.md",
+      "id": "docs/20-governance/24-milestone-packs/workspaces-lifecycle/README.md",
+      "path": "docs/20-governance/24-milestone-packs/workspaces-lifecycle/README.md",
       "type": "milestone_pack"
     },
     {
-      "id": "docs/program-delivery/audit-convergence/EXECUTION-PLAN-v0.1.0.md",
-      "path": "docs/program-delivery/audit-convergence/EXECUTION-PLAN-v0.1.0.md",
+      "id": "docs/20-governance/23-runbooks/README.md",
+      "path": "docs/20-governance/23-runbooks/README.md",
+      "type": "runbook"
+    },
+    {
+      "id": "docs/20-governance/23-runbooks/contract-baseline-lock.md",
+      "path": "docs/20-governance/23-runbooks/contract-baseline-lock.md",
+      "type": "runbook"
+    },
+    {
+      "id": "docs/20-governance/23-runbooks/data-plane.md",
+      "path": "docs/20-governance/23-runbooks/data-plane.md",
+      "type": "runbook"
+    },
+    {
+      "id": "docs/20-governance/23-runbooks/engine-attach.md",
+      "path": "docs/20-governance/23-runbooks/engine-attach.md",
+      "type": "runbook"
+    },
+    {
+      "id": "docs/20-governance/23-runbooks/kernel-sovereignty.md",
+      "path": "docs/20-governance/23-runbooks/kernel-sovereignty.md",
+      "type": "runbook"
+    },
+    {
+      "id": "docs/20-governance/23-runbooks/mind-redis-stm.md",
+      "path": "docs/20-governance/23-runbooks/mind-redis-stm.md",
+      "type": "runbook"
+    },
+    {
+      "id": "docs/20-governance/23-runbooks/operations.md",
+      "path": "docs/20-governance/23-runbooks/operations.md",
+      "type": "runbook"
+    },
+    {
+      "id": "docs/20-governance/23-runbooks/root-hardening.md",
+      "path": "docs/20-governance/23-runbooks/root-hardening.md",
+      "type": "runbook"
+    },
+    {
+      "id": "docs/20-governance/23-runbooks/specs-refactor-foundation.md",
+      "path": "docs/20-governance/23-runbooks/specs-refactor-foundation.md",
+      "type": "runbook"
+    },
+    {
+      "id": "docs/20-governance/23-runbooks/workspaces-lifecycle.md",
+      "path": "docs/20-governance/23-runbooks/workspaces-lifecycle.md",
+      "type": "runbook"
+    },
+    {
+      "id": "docs/30-program/audit-convergence/EXECUTION-PLAN-v0.1.0.md",
+      "path": "docs/30-program/audit-convergence/EXECUTION-PLAN-v0.1.0.md",
       "type": "doc"
-    },
-    {
-      "id": "docs/runbooks/README.md",
-      "path": "docs/runbooks/README.md",
-      "type": "runbook"
-    },
-    {
-      "id": "docs/runbooks/contract-baseline-lock.md",
-      "path": "docs/runbooks/contract-baseline-lock.md",
-      "type": "runbook"
-    },
-    {
-      "id": "docs/runbooks/data-plane.md",
-      "path": "docs/runbooks/data-plane.md",
-      "type": "runbook"
-    },
-    {
-      "id": "docs/runbooks/engine-attach.md",
-      "path": "docs/runbooks/engine-attach.md",
-      "type": "runbook"
-    },
-    {
-      "id": "docs/runbooks/kernel-sovereignty.md",
-      "path": "docs/runbooks/kernel-sovereignty.md",
-      "type": "runbook"
-    },
-    {
-      "id": "docs/runbooks/mind-redis-stm.md",
-      "path": "docs/runbooks/mind-redis-stm.md",
-      "type": "runbook"
-    },
-    {
-      "id": "docs/runbooks/operations.md",
-      "path": "docs/runbooks/operations.md",
-      "type": "runbook"
-    },
-    {
-      "id": "docs/runbooks/root-hardening.md",
-      "path": "docs/runbooks/root-hardening.md",
-      "type": "runbook"
-    },
-    {
-      "id": "docs/runbooks/specs-refactor-foundation.md",
-      "path": "docs/runbooks/specs-refactor-foundation.md",
-      "type": "runbook"
-    },
-    {
-      "id": "docs/runbooks/workspaces-lifecycle.md",
-      "path": "docs/runbooks/workspaces-lifecycle.md",
-      "type": "runbook"
     }
   ],
   "orphans": [
-    "docs/design/adr/README.md",
-    "docs/design/proposals/README.md"
+    "docs/20-governance/22-adr/README.md",
+    "docs/20-governance/21-proposals/README.md"
   ],
   "version": 1,
   "violations": []

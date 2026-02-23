@@ -1,0 +1,23 @@
+{
+  "id": "D6-operational/incident-response-action-v1",
+  "d_major": "D6-operational",
+  "title": "Operational - Incident Response Action Governance",
+  "version": 1,
+  "revision": 1,
+  "forbidden_effects": [
+    {
+      "effect": "ops.action.execute",
+      "description": "Operational action executed without required escalation/arming or outside permitted scope/window."
+    },
+    {
+      "effect": "ops.action.execute.high_impact_without_arming",
+      "description": "High-impact containment action executed without explicit arming."
+    }
+  ],
+  "primary_runtime_effect_domain": "control",
+  "audit_steps": ["trigger", "context", "authority", "decision", "enforcement", "evidence"],
+  "safety": {
+    "vector_policy": "simulation-only",
+    "notes": "Vectors must target a simulated ops provider. No real firewall/EDR/production actions in v0.1 qualification."
+  }
+}

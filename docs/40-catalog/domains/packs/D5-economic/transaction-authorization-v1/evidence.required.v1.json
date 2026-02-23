@@ -1,0 +1,25 @@
+{
+  "required_fields": [
+    "timestamp",
+    "ws_id",
+    "trace_id",
+    "event.type",
+    "event.source",
+    "principal.id",
+    "principal.role",
+    "target.tx_id",
+    "target.amount",
+    "target.currency",
+    "target.counterparty_id",
+    "decision.outcome",
+    "decision.reason_code",
+    "decision.baseline_hash",
+    "enforcement.result",
+    "metrics.time_to_decide_ms",
+    "metrics.authorization_granted"
+  ],
+  "notes": {
+    "minimal_disclosure": "Do not include raw account numbers or secrets in evidence. Use stable identifiers or redacted tokens.",
+    "authorization_granted": "Must be false under deny/quarantine. Under allow baseline it may be true only when contract conditions match."
+  }
+}

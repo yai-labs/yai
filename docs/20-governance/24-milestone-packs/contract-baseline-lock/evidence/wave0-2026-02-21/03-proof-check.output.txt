@@ -1,0 +1,2 @@
+[proof-pack] SKIP: private draft manifest (docs/60-validation/proof/.private/PP-FOUNDATION-0001/pp-foundation-0001.manifest.v1.json)
+[proof-pack] SKIP: publish under docs/60-validation/proof/<PACK-ID>/ to enforce proof-pack gates

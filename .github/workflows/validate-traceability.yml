@@ -3,13 +3,13 @@ name: validate-traceability
 on:
   pull_request:
     paths:
-      - "docs/design/adr/**"
-      - "docs/runbooks/**"
-      - "docs/milestone-packs/**"
-      - "docs/architecture/specs-bridge.md"
-      - "docs/design/spine.md"
-      - "docs/design/traceability.md"
-      - "docs/templates/**"
+      - "docs/20-governance/22-adr/**"
+      - "docs/20-governance/23-runbooks/**"
+      - "docs/20-governance/24-milestone-packs/**"
+      - "docs/10-platform/architecture/specs-bridge.md"
+      - "docs/20-governance/spine.md"
+      - "docs/20-governance/traceability.md"
+      - "docs/20-governance/25-templates/**"
       - ".github/workflows/validate-traceability.yml"
       - "tools/**"
 

@@ -1,0 +1,6 @@
+[proof-pack] PASS
+manifest=docs/60-validation/proof/PP-FOUNDATION-0001/pp-foundation-0001.manifest.v1.json
+yai_commit=f99366742b5a880221d9866efc74b3163c700ba2
+yai_specs_commit=51f0ef3b5985d9fbd18c8f794d03206055bc7f0d
+yai_cli_commit=314e8606a0ff6a0a0cd8fa9348b9c499be3536e0
+yai_mind_commit=51102988a560ac0f2a022e94fafa6e06621800e7

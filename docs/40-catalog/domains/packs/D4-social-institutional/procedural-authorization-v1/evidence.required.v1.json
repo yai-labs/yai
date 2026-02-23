@@ -1,0 +1,25 @@
+{
+  "required_fields": [
+    "timestamp",
+    "ws_id",
+    "trace_id",
+    "event.type",
+    "event.source",
+    "principal.id",
+    "principal.role",
+    "target.case_id",
+    "target.procedure_id",
+    "target.step_id",
+    "target.step_version",
+    "decision.outcome",
+    "decision.reason_code",
+    "decision.baseline_hash",
+    "enforcement.result",
+    "metrics.time_to_decide_ms",
+    "metrics.step_executed"
+  ],
+  "notes": {
+    "minimal_disclosure": "Do not store personal data in evidence unless strictly required. Prefer stable case identifiers and redacted payloads.",
+    "step_executed": "Must be false under deny/quarantine for this pack's vectors."
+  }
+}

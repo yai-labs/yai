@@ -6,9 +6,9 @@
   "properties": {
     "id": {"type": "string", "pattern": "^MP-"},
     "status": {"type": "string", "enum": ["draft", "active", "deprecated", "superseded"]},
-    "runbook": {"type": "string", "pattern": "^docs/runbooks/.*\\.md$"},
+    "runbook": {"type": "string", "pattern": "^docs/20-governance/runbooks/.*\\.md$"},
     "phase": {"type": "string", "minLength": 1},
-    "adrs": {"type": "array", "minItems": 1, "items": {"type": "string", "pattern": "^docs/design/adr/ADR-.*\\.md$"}},
+    "adrs": {"type": "array", "minItems": 1, "items": {"type": "string", "pattern": "^docs/20-governance/design/adr/ADR-.*\\.md$"}},
     "spec_anchors": {"type": "array", "minItems": 1, "items": {"type": "string", "pattern": "^deps/yai-specs/"}},
     "issues": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}}
   }

@@ -20,11 +20,11 @@ INPUT                  = boot/include \
                          deps/yai-specs/specs/protocol/runtime/include \
                          deps/yai-specs/specs/vault/include \
                          README.md \
-                         docs/dev-guide/doxygen-mainpage.md
+                         docs/70-guides/dev-guide/doxygen-mainpage.md
 
 # Markdown
 MARKDOWN_SUPPORT       = YES
-USE_MDFILE_AS_MAINPAGE = docs/dev-guide/doxygen-mainpage.md
+USE_MDFILE_AS_MAINPAGE = docs/70-guides/dev-guide/doxygen-mainpage.md
 
 EXCLUDE                = build \
                          dist \

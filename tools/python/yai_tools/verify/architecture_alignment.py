@@ -12,7 +12,7 @@ from yai_tools.verify.generated_sync import check_json_synced, write_json
 from yai_tools.verify.traceability import parse_frontmatter
 
 REPO_ROOT = repo_root()
-ARCH_DIR = REPO_ROOT / "docs" / "architecture"
+ARCH_DIR = REPO_ROOT / "docs" / "10-platform" / "architecture"
 COMPONENTS_DIR = ARCH_DIR / "components"
 TRACEABILITY_DOC = ARCH_DIR / "traceability.md"
 OVERVIEW_DOC = ARCH_DIR / "overview.md"
@@ -137,9 +137,9 @@ def _parse_component_doc(path: Path) -> dict[str, Any]:
         "frontmatter": fm,
         "sections": sections,
         "impl_status": impl_status,
-        "adr_refs": _extract_refs_by_prefix(traceability, ("docs/design/adr/",)),
-        "runbook_refs": _extract_refs_by_prefix(traceability, ("docs/runbooks/",)),
-        "mp_refs": _extract_refs_by_prefix(traceability, ("docs/milestone-packs/",)),
+        "adr_refs": _extract_refs_by_prefix(traceability, ("docs/20-governance/design/adr/",)),
+        "runbook_refs": _extract_refs_by_prefix(traceability, ("docs/20-governance/runbooks/",)),
+        "mp_refs": _extract_refs_by_prefix(traceability, ("docs/20-governance/milestone-packs/",)),
         "l0_refs": _extract_refs_by_prefix(traceability, ("deps/yai-specs/",)),
     }
 
@@ -225,7 +225,7 @@ def _render_traceability_md(trace_rows: list[dict[str, Any]]) -> str:
             "## Notes",
             "",
             "- `planned/external` means documented in architecture + ADR but not currently implemented as tracked source in this repository.",
-            "- This file is generated from `docs/architecture/components/*.md` traceability sections.",
+            "- This file is generated from `docs/10-platform/architecture/components/*.md` traceability sections.",
             "",
         ]
     )
@@ -272,7 +272,7 @@ def build_alignment_snapshot() -> tuple[dict[str, Any], str, list[str]]:
 
     component_paths = sorted(COMPONENTS_DIR.glob("*.md"))
     if not component_paths:
-        errors.append("no component docs found under docs/architecture/components")
+        errors.append("no component docs found under docs/10-platform/architecture/components")
 
     overview_topology = _topology_line(OVERVIEW_DOC)
     runtime_topology = _topology_line(RUNTIME_MODEL_DOC)
@@ -382,7 +382,7 @@ def build_alignment_snapshot() -> tuple[dict[str, Any], str, list[str]]:
             errors.append(f"{rel}: absolute markdown link not allowed: {m.group(1)}")
 
         # validate all listed ADR/Runbook/MP/L0 refs anywhere in architecture docs
-        for ref in _extract_refs_by_prefix(txt, ("docs/design/adr/", "docs/runbooks/", "docs/milestone-packs/", "deps/yai-specs/")):
+        for ref in _extract_refs_by_prefix(txt, ("docs/20-governance/design/adr/", "docs/20-governance/runbooks/", "docs/20-governance/milestone-packs/", "deps/yai-specs/")):
             if not _path_exists(ref):
                 errors.append(f"{rel}: referenced path not found: {ref}")
 

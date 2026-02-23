@@ -3,7 +3,7 @@
 - Issue-Reason (required if N/A): <required when Issue-ID is N/A>
 - Closes-Issue: Closes #<issue-number> OR N/A
 - MP-ID: MP-<TRACK>-<X.Y.Z>
-- Runbook: docs/runbooks/<name>.md#<anchor>
+- Runbook: docs/20-governance/23-runbooks/<name>.md#<anchor>
 - Base-Commit: <40-char-sha>
 
 ## Issue linkage

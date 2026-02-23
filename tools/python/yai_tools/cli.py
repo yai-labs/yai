@@ -420,7 +420,7 @@ def cmd_pr_body(argv: list[str]) -> int:
     p.add_argument("--issue", required=True, help="#123 or 123 or N/A")
     p.add_argument("--reason", default="", help="Required when issue is N/A")
     p.add_argument("--mp-id", default="N/A", help="MP-... or N/A")
-    p.add_argument("--runbook", default="N/A", help="docs/runbooks/<name>.md#<anchor> or N/A")
+    p.add_argument("--runbook", default="N/A", help="docs/20-governance/runbooks/<name>.md#<anchor> or N/A")
     p.add_argument("--classification", default="META", help="FEATURE|FIX|DOCS|OPS|META")
     p.add_argument("--compatibility", default="A", help="A|B|C")
     p.add_argument("--objective", default="", help="Objective text (required)")
@@ -546,7 +546,7 @@ def cmd_issue_body(argv: list[str]) -> int:
     p.add_argument("--title", required=True, help="Issue title")
     p.add_argument("--type", default="task", help="bug|feature|runbook|docs|task")
     p.add_argument("--mp-id", default="N/A", help="MP-... or N/A")
-    p.add_argument("--runbook", default="N/A", help="docs/runbooks/<name>.md")
+    p.add_argument("--runbook", default="N/A", help="docs/20-governance/runbooks/<name>.md")
     p.add_argument("--phase", default="N/A", help="Runbook phase, e.g. 0.1.0")
     p.add_argument("--out", default="", help="Output path; stdout if omitted")
     args = p.parse_args(argv)
@@ -664,7 +664,7 @@ def cmd_issue_mp_closure(argv: list[str]) -> int:
             file=sys.stderr,
         )
 
-    rb_anchor = args.rb_anchor.strip() or f"docs/runbooks/{args.track}.md#{args.phase}"
+    rb_anchor = args.rb_anchor.strip() or f"docs/20-governance/runbooks/{args.track}.md#{args.phase}"
     report: list[str] = []
     milestone_title, milestone_number = _ensure_phase_milestone(
         repo=args.repo,
@@ -719,7 +719,7 @@ def cmd_fix_phase(argv: list[str]) -> int:
             f"warning: mp-id '{mp_id}' is not phase-specific; expected suffix '-{args.phase}'",
             file=sys.stderr,
         )
-    rb_anchor = args.rb_anchor.strip() or f"docs/runbooks/{args.track}.md#{args.phase}"
+    rb_anchor = args.rb_anchor.strip() or f"docs/20-governance/runbooks/{args.track}.md#{args.phase}"
     apply = args.apply
 
     report: list[str] = []

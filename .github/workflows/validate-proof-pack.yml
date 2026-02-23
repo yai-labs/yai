@@ -3,7 +3,7 @@ name: validate-proof-pack
 on:
   pull_request:
     paths:
-      - "docs/proof/**"
+      - "docs/60-validation/proof/**"
       - "deps/yai-specs/**"
       - "deps/yai-cli.ref"
       - "tools/python/yai_tools/verify/proof_pack.py"

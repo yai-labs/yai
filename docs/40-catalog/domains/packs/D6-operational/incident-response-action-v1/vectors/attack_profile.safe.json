@@ -1,0 +1,19 @@
+{
+  "vector_id": "safe-ops-action-001",
+  "description": "Simulated high-impact incident response action in production without arming/escalation.",
+  "stimulus": {
+    "type": "ops.action.execute",
+    "mode": "sim_provider_only",
+    "action_id": "isolate_host",
+    "asset_id": "ASSET-PROD-001",
+    "scope": "production",
+    "severity": "high",
+    "escalation_level": "none",
+    "arming_state": "not_armed",
+    "declared_time_utc": "02:30"
+  },
+  "safety": {
+    "simulation_only": true,
+    "no_real_infra_change": true
+  }
+}

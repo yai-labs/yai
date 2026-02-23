@@ -48,7 +48,6 @@ YAI treats governance as a first-class system property:
 - `engine/` — deterministic execution and gated effects (L2)  
 - `mind/` — cognition/orchestration module (L3)  
 - `docs/` — architecture, runbooks, operations, developer guide  
-- `contract/` — contract surface notes (non-normative pointers)  
 - `tools/` — CI/release gates, verification, packaging tooling  
 - `data/` — datasets for local tests/ops (see `DATA_POLICY.md`)  
 - `deps/yai-specs/` — pinned normative specs (source of truth)

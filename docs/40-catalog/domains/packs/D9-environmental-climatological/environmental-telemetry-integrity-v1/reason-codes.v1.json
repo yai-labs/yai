@@ -1,0 +1,27 @@
+{
+  "STATION_NOT_CONTRACTED": {
+    "severity": "high",
+    "default_outcome": "deny",
+    "description": "Telemetry originates from a station/sensor not covered by an active contract/allowlist."
+  },
+  "CALIBRATION_MISSING": {
+    "severity": "high",
+    "default_outcome": "deny",
+    "description": "Telemetry missing required calibration reference or calibration is invalid."
+  },
+  "PROVENANCE_MISSING": {
+    "severity": "high",
+    "default_outcome": "deny",
+    "description": "Telemetry or derived metric missing required provenance reference."
+  },
+  "PARAM_LOCK_MISSING": {
+    "severity": "high",
+    "default_outcome": "deny",
+    "description": "Derived metric/alert publication missing params_hash (reproducibility lock)."
+  },
+  "MINIMAL_DISCLOSURE_REQUIRED": {
+    "severity": "medium",
+    "default_outcome": "deny",
+    "description": "Request includes overly precise location or unnecessary fields beyond policy."
+  }
+}

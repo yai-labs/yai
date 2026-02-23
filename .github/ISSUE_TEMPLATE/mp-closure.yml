@@ -82,7 +82,7 @@ body:
     attributes:
       value: |
         ## Evidence checklist (required)
-        - [ ] MP document linked from `docs/milestone-packs/...`
+        - [ ] MP document linked from `docs/20-governance/24-milestone-packs/...`
         - [ ] All phase PRs linked
         - [ ] Gate status is `Passed`
         - [ ] Evidence is reproducible and reviewable
