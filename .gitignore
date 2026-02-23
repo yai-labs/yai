@@ -98,3 +98,15 @@ law/formal/*.toolbox/
 # -----------------------------------------------------------------------------
 docs/proof/.private/
 docs/audits/.private/
+tools/python/**/__pycache__/
+tools/python/**/.pytest_cache/
+tools/python/**/.mypy_cache/
+tools/python/**/.ruff_cache/
+tools/python/**/tests/
+
+# Local data that must not be committed (decide later if canonical)
+data/global/
+tools/lib/
+
+# If prompts.csv is canonical, REMOVE this line and commit the file instead.
+data/datasets/global-stress/v1/prompts.csv
