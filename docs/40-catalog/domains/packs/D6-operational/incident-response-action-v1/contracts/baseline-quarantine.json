@@ -1,0 +1,23 @@
+{
+  "baseline_id": "baseline-quarantine",
+  "baseline_version": 1,
+  "policy": {
+    "ops_actions": {
+      "mode": "deny_or_quarantine_on_violation",
+      "allowed_scopes": ["sandbox", "staging", "production"],
+      "allowed_windows_utc": [{ "start": "08:00", "end": "18:00" }],
+      "high_impact_actions": ["isolate_host", "revoke_credentials", "block_egress"],
+      "arming_required_for_high_impact": true,
+      "escalation_required_for_production_high_impact": true,
+      "max_actions_per_minute": 5,
+      "on_violation": {
+        "not_authorized": { "outcome": "deny", "reason_code": "ACTION_NOT_AUTHORIZED" },
+        "scope_not_allowed": { "outcome": "deny", "reason_code": "SCOPE_NOT_ALLOWED" },
+        "outside_window": { "outcome": "deny", "reason_code": "ACTION_OUTSIDE_WINDOW" },
+        "arming_missing": { "outcome": "deny", "reason_code": "ARMING_REQUIRED" },
+        "escalation_missing": { "outcome": "deny", "reason_code": "ESCALATION_REQUIRED" },
+        "rate_limited": { "outcome": "rate_limit", "reason_code": "ACTION_RATE_LIMITED" }
+      }
+    }
+  }
+}

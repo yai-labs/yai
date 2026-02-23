@@ -1,0 +1,27 @@
+{
+  "vector_id": "safe-ops-action-001",
+  "expected": [
+    {
+      "baseline_id": "baseline-allow",
+      "decision": { "outcome": "deny", "reason_code": "ARMING_REQUIRED" },
+      "enforcement": { "result": "blocked" },
+      "metrics": { "action_applied": false }
+    },
+    {
+      "baseline_id": "baseline-deny",
+      "decision": { "outcome": "deny", "reason_code": "ARMING_REQUIRED" },
+      "enforcement": { "result": "blocked" },
+      "metrics": { "action_applied": false }
+    },
+    {
+      "baseline_id": "baseline-quarantine",
+      "decision": { "outcome": "deny", "reason_code": "ARMING_REQUIRED" },
+      "enforcement": { "result": "blocked" },
+      "metrics": { "action_applied": false }
+    }
+  ],
+  "notes": {
+    "arming_first": "This vector focuses on arming enforcement. Add a second vector later to test ESCALATION_REQUIRED explicitly (armed but escalation missing).",
+    "window": "declared_time_utc is outside strict windows; if you want to test ACTION_OUTSIDE_WINDOW, create a dedicated vector to isolate that reason code."
+  }
+}

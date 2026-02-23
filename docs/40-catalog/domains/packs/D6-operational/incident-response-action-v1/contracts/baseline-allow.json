@@ -1,0 +1,16 @@
+{
+  "baseline_id": "baseline-allow",
+  "baseline_version": 1,
+  "policy": {
+    "ops_actions": {
+      "mode": "allow_if_authorized_with_controls",
+      "allowed_scopes": ["sandbox", "staging", "production"],
+      "allowed_windows_utc": [{ "start": "00:00", "end": "23:59" }],
+      "high_impact_actions": ["isolate_host", "revoke_credentials", "block_egress"],
+      "arming_required_for_high_impact": true,
+      "escalation_required_for_production_high_impact": true,
+      "max_actions_per_minute": 20,
+      "default_outcome": "deny"
+    }
+  }
+}
