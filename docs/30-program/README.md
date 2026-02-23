@@ -1,9 +1,11 @@
 # 30 Program
 
-Program-level delivery orchestration.
+Program-level delivery orchestration and audit convergence.
 
-Primary source path:
-- `docs/30-program/program-delivery/README.md`
+Canonical sections:
+- Audit convergence: `docs/30-program/audit-convergence/`
+- Migration notes: `docs/30-program/migration/`
 
-Convergence index:
-- `docs/30-program/audit-convergence/README.md`
+Primary artifacts:
+- Execution plan: `docs/30-program/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
+- Convergence matrix: `docs/30-program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`

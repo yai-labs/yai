@@ -1,6 +1,8 @@
-# Moved To yai-infra
+# Doxygen Mainpage Notes
 
-Canonical content moved to:
-- https://github.com/yai-labs/yai-infra/blob/main/docs/governance/yai/dev-guide/doxygen-mainpage.md
+The architecture/Doxygen entrypoint should remain aligned with runtime and governance docs.
 
-This file is a compatibility stub kept in yai during migration.
+When architecture components move:
+- update `docs/10-platform/architecture/README.md`
+- update any generated alignment artifacts
+- verify links from `docs/README.md`

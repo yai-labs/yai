@@ -36,8 +36,8 @@ The repository is operated as a gated runtime:
 
 ## ADR Policy
 
-- ADR location: `docs/20-governance/design/adr/`
-- Template: `docs/20-governance/design/adr/ADR-000-template.md`
+- ADR location: `docs/20-governance/22-adr/`
+- Template: `docs/20-governance/25-templates/adr/ADR-000-template.md`
 
 ADR is required for:
 

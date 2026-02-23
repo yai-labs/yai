@@ -33,9 +33,9 @@ implemented
 
 ## Traceability
 
-- ADR refs: `docs/20-governance/design/adr/ADR-001-single-runtime.md`, `docs/20-governance/design/adr/ADR-002-root-entrypoint.md`
-- Runbook refs: `docs/20-governance/runbooks/root-hardening.md`
-- MP refs: `docs/20-governance/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`, `docs/20-governance/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md`
+- ADR refs: `docs/20-governance/22-adr/ADR-001-single-runtime.md`, `docs/20-governance/22-adr/ADR-002-root-entrypoint.md`
+- Runbook refs: `docs/20-governance/23-runbooks/root-hardening.md`
+- MP refs: `docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`, `docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md`
 - L0 anchors: `deps/yai-specs/specs/protocol/include/transport.h`, `deps/yai-specs/specs/protocol/include/auth.h`
 
 ## Known Drift / Gaps

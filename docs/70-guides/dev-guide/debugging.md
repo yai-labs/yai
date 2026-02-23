@@ -1,6 +1,10 @@
-# Moved To yai-infra
+# Debugging
 
-Canonical content moved to:
-- https://github.com/yai-labs/yai-infra/blob/main/docs/governance/yai/dev-guide/debugging.md
+For docs/governance pipelines, debug in this order:
 
-This file is a compatibility stub kept in yai during migration.
+1. Path contract mismatch (old vs new canonical paths)
+2. Frontmatter schema violations
+3. Traceability graph/linkage gaps
+4. Generated artifact drift
+
+Always capture failing command output in evidence files.

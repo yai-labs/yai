@@ -32,11 +32,16 @@ partial
 - All effectful decisions remain governed by Root/Kernel/Engine contracts.
 - Proposal context must preserve workspace and trace identifiers end-to-end.
 
+## Companion Docs
+
+- Overview: `docs/10-platform/architecture/components/mind-overview.md`
+- Boundaries: `docs/10-platform/architecture/components/mind-boundaries.md`
+
 ## Traceability
 
-- ADR refs: `docs/20-governance/design/adr/ADR-005-mind-proposer.md`, `docs/20-governance/design/adr/ADR-003-kernel-authority.md`
-- Runbook refs: `docs/20-governance/runbooks/mind-redis-stm.md`, `docs/20-governance/runbooks/root-hardening.md`
-- MP refs: `docs/20-governance/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md`
+- ADR refs: `docs/20-governance/22-adr/ADR-005-mind-proposer.md`, `docs/20-governance/22-adr/ADR-003-kernel-authority.md`
+- Runbook refs: `docs/20-governance/23-runbooks/mind-redis-stm.md`, `docs/20-governance/23-runbooks/root-hardening.md`
+- MP refs: `docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md`
 - L0 anchors: `deps/yai-specs/contracts/boundaries/L3-mind.md`, `deps/yai-specs/contracts/invariants/I-004-cognitive-reconfiguration.md`
 
 ## Known Drift / Gaps

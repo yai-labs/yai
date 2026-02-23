@@ -1,6 +1,7 @@
-# Moved To yai-infra
+# ADR Checklist
 
-Canonical content moved to:
-- https://github.com/yai-labs/yai-infra/blob/main/docs/governance/yai/dev-guide/checklists/adr-checklist.md
-
-This file is a compatibility stub kept in yai during migration.
+- Decision scope is explicit.
+- Alternatives are documented.
+- Consequences and risks are stated.
+- Law/spec/runbook references are present.
+- Downstream artifacts are identified.

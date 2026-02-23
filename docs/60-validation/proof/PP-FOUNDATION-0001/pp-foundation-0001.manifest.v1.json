@@ -35,8 +35,8 @@
         "run": "tools/release/check_pins.sh",
         "result": "pass",
         "paths": [
-          "docs/20-governance/milestone-packs/contract-baseline-lock/evidence/wave0-2026-02-21/10-check_pins-strict-pass.output.txt",
-          "docs/20-governance/milestone-packs/contract-baseline-lock/evidence/wave0-2026-02-21/10-check_pins-strict-pass.exit"
+          "docs/20-governance/24-milestone-packs/contract-baseline-lock/evidence/wave0-2026-02-21/10-check_pins-strict-pass.output.txt",
+          "docs/20-governance/24-milestone-packs/contract-baseline-lock/evidence/wave0-2026-02-21/10-check_pins-strict-pass.exit"
         ]
       },
       {
@@ -45,8 +45,8 @@
         "run": "tools/bin/yai-docs-trace-check --all",
         "result": "pass",
         "paths": [
-          "docs/20-governance/milestone-packs/contract-baseline-lock/evidence/wave0-2026-02-21/02-docs-trace-check.output.txt",
-          "docs/20-governance/milestone-packs/contract-baseline-lock/evidence/wave0-2026-02-21/02-docs-trace-check.exit"
+          "docs/20-governance/24-milestone-packs/contract-baseline-lock/evidence/wave0-2026-02-21/02-docs-trace-check.output.txt",
+          "docs/20-governance/24-milestone-packs/contract-baseline-lock/evidence/wave0-2026-02-21/02-docs-trace-check.exit"
         ]
       },
       {
@@ -55,8 +55,8 @@
         "run": "tools/bin/yai-proof-check",
         "result": "pass",
         "paths": [
-          "docs/20-governance/milestone-packs/contract-baseline-lock/evidence/wave0-2026-02-21/11-proof-check-post-pin.output.txt",
-          "docs/20-governance/milestone-packs/contract-baseline-lock/evidence/wave0-2026-02-21/11-proof-check-post-pin.exit"
+          "docs/20-governance/24-milestone-packs/contract-baseline-lock/evidence/wave0-2026-02-21/11-proof-check-post-pin.output.txt",
+          "docs/20-governance/24-milestone-packs/contract-baseline-lock/evidence/wave0-2026-02-21/11-proof-check-post-pin.exit"
         ]
       }
     ],

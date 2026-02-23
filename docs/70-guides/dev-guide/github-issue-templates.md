@@ -1,6 +1,9 @@
-# Moved To yai-infra
+# GitHub Issue Templates
 
-Canonical content moved to:
-- https://github.com/yai-labs/yai-infra/blob/main/docs/governance/yai/dev-guide/github-issue-templates.md
+Use dedicated templates for:
+- runbook phases,
+- milestone closure,
+- docs governance changes,
+- bugs/features.
 
-This file is a compatibility stub kept in yai during migration.
+Keep field names stable when possible to preserve automation compatibility.

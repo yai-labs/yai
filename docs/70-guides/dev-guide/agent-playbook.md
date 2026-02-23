@@ -1,6 +1,11 @@
-# Moved To yai-infra
+# Agent Playbook
 
-Canonical content moved to:
-- https://github.com/yai-labs/yai-infra/blob/main/docs/governance/yai/dev-guide/agent-playbook.md
+Execution sequence for docs/governance work:
 
-This file is a compatibility stub kept in yai during migration.
+1. Read target runbook/ADR/phase scope.
+2. Apply deterministic file-system changes.
+3. Rewrite stale links and path contracts.
+4. Run validation commands.
+5. Attach evidence and summarize residual risks.
+
+Use this playbook for phased docs delivery and audit convergence tasks.

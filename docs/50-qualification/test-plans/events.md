@@ -23,7 +23,7 @@ yai events --ws dev --tail 5
 ```
 **Atteso**: `status_snapshot` + ultimi eventi.
 
-## Test 3 — Kill engine/mind/kernel
+## Test 3 — Kill engine + mind + kernel
 ```bash
 kill -TERM <engine_pid>
 ```
@@ -44,4 +44,3 @@ kill -TERM <kernel_pid>
 yai down --ws dev
 ```
 **Atteso**: `ws_down_started` + `proc_exit` + `ws_down_complete`.
-

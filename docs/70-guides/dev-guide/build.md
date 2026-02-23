@@ -1,6 +1,9 @@
-# Moved To yai-infra
+# Build
 
-Canonical content moved to:
-- https://github.com/yai-labs/yai-infra/blob/main/docs/governance/yai/dev-guide/build.md
+Repository build and sanity commands:
 
-This file is a compatibility stub kept in yai during migration.
+- `cargo build --workspace`
+- `cargo test --workspace`
+- `make help`
+
+For docs-only phases, still run at least the docs validation subset.

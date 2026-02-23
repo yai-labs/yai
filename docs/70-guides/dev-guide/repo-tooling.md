@@ -1,6 +1,10 @@
-# Moved To yai-infra
+# Repo Tooling
 
-Canonical content moved to:
-- https://github.com/yai-labs/yai-infra/blob/main/docs/governance/yai/dev-guide/repo-tooling.md
+Operational tooling relevant to docs/governance:
+- `tools/bin/yai-docs-trace-check`
+- `tools/bin/yai-docs-schema-check`
+- `tools/bin/yai-docs-doctor`
+- `tools/bin/yai-proof-check`
+- `tools/bin/yai-verify`
 
-This file is a compatibility stub kept in yai during migration.
+Use `--check` mode in validation steps and attach outputs in evidence bundles.

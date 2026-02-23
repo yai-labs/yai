@@ -1,6 +1,10 @@
-# Moved To yai-infra
+# Agent Contract
 
-Canonical content moved to:
-- https://github.com/yai-labs/yai-infra/blob/main/docs/governance/yai/dev-guide/agent-contract.md
+Minimum contract for automation and agent-driven changes.
 
-This file is a compatibility stub kept in yai during migration.
+Rules:
+- Keep scope explicit and limited.
+- Preserve traceability links for governance artifacts.
+- Do not bypass mandatory checks with `SKIP` for closure.
+- Do not modify unrelated domains in the same phase closure PR.
+- Report assumptions and blockers with concrete evidence.

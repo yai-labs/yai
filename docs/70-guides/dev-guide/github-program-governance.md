@@ -1,6 +1,8 @@
-# Moved To yai-infra
+# GitHub Program Governance
 
-Canonical content moved to:
-- https://github.com/yai-labs/yai-infra/blob/main/docs/governance/yai/dev-guide/github-program-governance.md
+Program board usage baseline:
+- every issue tied to a runbook phase or MP closure,
+- required metadata fields filled,
+- status transitions reflected in docs artifacts.
 
-This file is a compatibility stub kept in yai during migration.
+Do not close governance issues without evidence-linked closure notes.

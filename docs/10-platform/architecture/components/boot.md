@@ -32,9 +32,9 @@ implemented
 
 ## Traceability
 
-- ADR refs: `docs/20-governance/design/adr/ADR-010-boot-entrypoint.md`
-- Runbook refs: `docs/20-governance/runbooks/root-hardening.md`
-- MP refs: `docs/20-governance/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`
+- ADR refs: `docs/20-governance/22-adr/ADR-010-boot-entrypoint.md`
+- Runbook refs: `docs/20-governance/23-runbooks/root-hardening.md`
+- MP refs: `docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`
 - L0 anchors: `deps/yai-specs/contracts/invariants/I-001-traceability.md`
 
 ## Known Drift / Gaps

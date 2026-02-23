@@ -1,6 +1,8 @@
-# Moved To yai-infra
+# Release
 
-Canonical content moved to:
-- https://github.com/yai-labs/yai-infra/blob/main/docs/governance/yai/dev-guide/release.md
+Docs/governance release checklist:
 
-This file is a compatibility stub kept in yai during migration.
+1. Path contracts stable and validated.
+2. Claims registry and convergence matrix aligned.
+3. Proof/audit references updated.
+4. Generated docs artifacts refreshed where required.

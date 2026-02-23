@@ -5,9 +5,9 @@ on:
     types: [opened, synchronize, reopened]
     paths:
       - "docs/10-platform/architecture/**"
-      - "docs/20-governance/design/adr/**"
-      - "docs/20-governance/runbooks/**"
-      - "docs/20-governance/milestone-packs/**"
+      - "docs/20-governance/22-adr/**"
+      - "docs/20-governance/23-runbooks/**"
+      - "docs/20-governance/24-milestone-packs/**"
       - "tools/**"
       - ".github/workflows/**"
   workflow_dispatch:

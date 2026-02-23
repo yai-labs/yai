@@ -1,6 +1,10 @@
-# Moved To yai-infra
+# GitHub Milestone Template
 
-Canonical content moved to:
-- https://github.com/yai-labs/yai-infra/blob/main/docs/governance/yai/dev-guide/github-milestone-template.md
+Milestone naming pattern:
+- `<track>-<version>` (example: `root-hardening-0.1.x`)
 
-This file is a compatibility stub kept in yai during migration.
+Each milestone should include:
+- scoped objective,
+- closure criteria,
+- linked runbook phases,
+- linked MP artifacts.

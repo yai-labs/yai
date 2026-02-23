@@ -1,6 +1,7 @@
-# Moved To yai-infra
+# Milestone Pack Checklist
 
-Canonical content moved to:
-- https://github.com/yai-labs/yai-infra/blob/main/docs/governance/yai/dev-guide/checklists/milestone-pack-checklist.md
-
-This file is a compatibility stub kept in yai during migration.
+- Scope delivered is explicit.
+- Runbook phase linkage is present.
+- Evidence bundle is attached.
+- Residual risks and follow-ups are documented.
+- Closure decision is justified.

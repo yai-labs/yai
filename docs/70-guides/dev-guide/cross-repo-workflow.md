@@ -1,6 +1,9 @@
-# Moved To yai-infra
+# Cross-Repo Workflow
 
-Canonical content moved to:
-- https://github.com/yai-labs/yai-infra/blob/main/docs/governance/yai/dev-guide/cross-repo-workflow.md
+YAI governance spans multiple repos (`yai`, `yai-specs`, `yai-cli`, `yai-mind`).
 
-This file is a compatibility stub kept in yai during migration.
+Rules:
+- Keep normative spec changes in `yai-specs` branches.
+- Keep runtime enforcement and program docs in `yai` branches.
+- Link related PRs/issues with explicit dependency notes.
+- Update pins only after source branches are merged.

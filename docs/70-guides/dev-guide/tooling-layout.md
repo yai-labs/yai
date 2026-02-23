@@ -1,6 +1,8 @@
-# Moved To yai-infra
+# Tooling Layout
 
-Canonical content moved to:
-- https://github.com/yai-labs/yai-infra/blob/main/docs/governance/yai/dev-guide/tooling-layout.md
+High-level layout:
+- `tools/bin/` executable wrappers
+- `tools/python/` verification logic
+- `tools/schemas/` schema contracts
 
-This file is a compatibility stub kept in yai during migration.
+Docs should reference tooling by stable entrypoints under `tools/bin/`.

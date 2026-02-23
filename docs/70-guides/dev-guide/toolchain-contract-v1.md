@@ -1,6 +1,8 @@
-# Moved To yai-infra
+# Toolchain Contract v1
 
-Canonical content moved to:
-- https://github.com/yai-labs/yai-infra/blob/main/docs/governance/yai/dev-guide/toolchain-contract-v1.md
+The docs/governance toolchain must provide:
+- deterministic traceability checks,
+- schema validation for frontmatter/contracts,
+- reproducible generated artifacts.
 
-This file is a compatibility stub kept in yai during migration.
+A change that breaks this contract requires explicit ADR/runbook acknowledgement.

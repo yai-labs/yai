@@ -1,6 +1,7 @@
-# Moved To yai-infra
+# GitHub Templates
 
-Canonical content moved to:
-- https://github.com/yai-labs/yai-infra/blob/main/docs/governance/yai/dev-guide/github-templates.md
+Template locations:
+- PR templates: `.github/PULL_REQUEST_TEMPLATE/`
+- Issue templates: `.github/ISSUE_TEMPLATE/`
 
-This file is a compatibility stub kept in yai during migration.
+Template changes are governance changes and must be traceable in runbook/MP context.

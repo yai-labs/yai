@@ -4,8 +4,8 @@ on:
   pull_request:
     types: [opened, edited, synchronize, reopened]
     paths:
-      - "docs/20-governance/runbooks/**"
-      - "docs/20-governance/design/adr/**"
+      - "docs/20-governance/23-runbooks/**"
+      - "docs/20-governance/22-adr/**"
       - ".github/workflows/validate-runbook-adr-links.yml"
 
 jobs:

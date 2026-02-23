@@ -1,6 +1,6 @@
-# Moved To yai-infra
+# Proposal Checklist
 
-Canonical content moved to:
-- https://github.com/yai-labs/yai-infra/blob/main/docs/governance/yai/dev-guide/checklists/proposal-checklist.md
-
-This file is a compatibility stub kept in yai during migration.
+- Problem and goals are clear.
+- Multiple options are compared.
+- Recommendation is justified.
+- Expected ADR/runbook impact is listed.

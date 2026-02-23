@@ -9,7 +9,7 @@ revision: 1
 
 # YAI - Macro Domains (D-Major)
 
-This document defines the eight macro domains used to drive YAI's cross-domain coherence.
+This document defines the nine macro domains used to drive YAI's cross-domain coherence.
 
 The purpose of D-Major is simple: prove that YAI is an infrastructure layer, not a single vertical tool.
 YAI must preserve a single runtime grammar across domains:

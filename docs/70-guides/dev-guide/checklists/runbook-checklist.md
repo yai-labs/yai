@@ -1,6 +1,6 @@
-# Moved To yai-infra
+# Runbook Checklist
 
-Canonical content moved to:
-- https://github.com/yai-labs/yai-infra/blob/main/docs/governance/yai/dev-guide/checklists/runbook-checklist.md
-
-This file is a compatibility stub kept in yai during migration.
+- Preconditions and procedure are deterministic.
+- Mandatory evidence commands are listed.
+- PASS/FAIL criteria are explicit.
+- Failure handling and rollback are documented.

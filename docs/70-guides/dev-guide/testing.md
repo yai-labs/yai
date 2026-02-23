@@ -1,6 +1,9 @@
-# Moved To yai-infra
+# Testing
 
-Canonical content moved to:
-- https://github.com/yai-labs/yai-infra/blob/main/docs/governance/yai/dev-guide/testing.md
+Testing baseline for docs/governance changes:
 
-This file is a compatibility stub kept in yai during migration.
+- `tools/bin/yai-docs-trace-check --all`
+- `tools/bin/yai-docs-schema-check`
+- `tools/bin/yai-docs-doctor --mode all`
+
+If a command is unavailable in the current branch, record it explicitly in MP evidence.

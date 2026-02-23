@@ -1,26 +1,18 @@
-# Non-Core Hardening Wave 1
-
-Tracking:
-- Issue: `yai-infra#17`
+# Non-Core Hardening Wave 1 (Historical Note)
 
 ## Goal
-Start reducing non-core surface in `yai` while keeping CI/runtime stable.
+Reduce non-core surface in `yai` while keeping CI/runtime behavior stable.
 
-## Wave 1 Changes
-- Remove local Python test package under `tools/python/yai_tools/tests`.
-- Remove stale Python cache artifacts under `tools/python/yai_tools/__pycache__`.
+## Wave 1 Delivered
+- Removed local Python test package under `tools/python/yai_tools/tests`.
+- Removed stale Python cache artifacts under `tools/python/yai_tools/__pycache__`.
 
-## Why This Is Safe
-- These paths are not part of runtime build artifacts.
-- Current CI workflows do not execute `tools/python/yai_tools/tests`.
-- Runtime/core code (`boot/`, `root/`, `kernel/`, `engine/`, `mind/`, `runtime/`, `law/`) is untouched.
+## Safety Rationale
+- These paths are not runtime build artifacts.
+- CI workflows do not depend on removed local test/cache paths.
+- Runtime domains (`boot/`, `root/`, `kernel/`, `engine/`, `mind/`, `runtime/`, `law/`) were not changed by this wave.
 
-## Next Waves
-- Migrate governance tooling and process docs to `yai-infra`.
-- Leave only thin compatibility wrappers in `yai/tools/bin`.
-
-## Wave 2 (Governance Docs Externalization)
-
-- Replaced `docs/70-guides/dev-guide/*`, `docs/20-governance/templates/*`, `docs/20-governance/policies/_policy/*` with compatibility stubs.
-- Canonical source moved to `yai-infra/docs/governance/yai/...`.
-- `docs/60-validation/proof/*` intentionally kept in `yai` in this wave to preserve release-script compatibility.
+## Current Alignment Status
+- Governance docs are now maintained as canonical local content in `docs/`.
+- No compatibility stubs are required for templates/policies/dev-guide in this repository.
+- Program migration notes are retained only as historical traceability records.

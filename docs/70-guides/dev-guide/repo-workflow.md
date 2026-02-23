@@ -1,6 +1,12 @@
-# Moved To yai-infra
+# Repo Workflow
 
-Canonical content moved to:
-- https://github.com/yai-labs/yai-infra/blob/main/docs/governance/yai/dev-guide/repo-workflow.md
+Branching baseline:
+- one objective per branch,
+- deterministic commit history,
+- no unrelated file churn.
 
-This file is a compatibility stub kept in yai during migration.
+For docs hard-cut refactors:
+- complete path moves first,
+- then rewrite links,
+- then run validation,
+- then close with evidence summary.

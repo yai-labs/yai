@@ -19,8 +19,8 @@ Infra Grammar claims for v0.1.0 are versioned in:
 - `docs/60-validation/audits/claims/infra-grammar.v0.1.json`
 
 Program convergence references:
-- `docs/30-program/program-delivery/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
-- `docs/30-program/program-delivery/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
+- `docs/30-program/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
+- `docs/30-program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
 
 ## When an audit is canonical
 

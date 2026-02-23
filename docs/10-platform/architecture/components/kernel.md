@@ -34,9 +34,9 @@ implemented
 
 ## Traceability
 
-- ADR refs: `docs/20-governance/design/adr/ADR-003-kernel-authority.md`, `docs/20-governance/design/adr/ADR-007-workspace-isolation.md`, `docs/20-governance/design/adr/ADR-008-connection-lifecycle.md`
-- Runbook refs: `docs/20-governance/runbooks/root-hardening.md`, `docs/20-governance/runbooks/workspaces-lifecycle.md`
-- MP refs: `docs/20-governance/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.2.md`, `docs/20-governance/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.4.md`
+- ADR refs: `docs/20-governance/22-adr/ADR-003-kernel-authority.md`, `docs/20-governance/22-adr/ADR-007-workspace-isolation.md`, `docs/20-governance/22-adr/ADR-008-connection-lifecycle.md`
+- Runbook refs: `docs/20-governance/23-runbooks/root-hardening.md`, `docs/20-governance/23-runbooks/workspaces-lifecycle.md`
+- MP refs: `docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.2.md`, `docs/20-governance/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.4.md`
 - L0 anchors: `deps/yai-specs/contracts/boundaries/L1-kernel.md`, `deps/yai-specs/specs/protocol/include/session.h`
 
 ## Known Drift / Gaps
