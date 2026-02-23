@@ -1,0 +1,21 @@
+{
+  "baseline_id": "baseline-allow",
+  "baseline_version": 1,
+  "policy": {
+    "actuators": {
+      "mode": "allow_if_contracted_and_safe",
+      "arming_required": true,
+      "contracted_actuators": ["ACT-VALVE-17", "ACT-PUMP-03"],
+      "allowed_commands": {
+        "ACT-VALVE-17": ["SET_OPEN_PERCENT"],
+        "ACT-PUMP-03": ["SET_RPM"]
+      },
+      "safety": {
+        "allowed_windows_utc": [
+          { "start": "00:00", "end": "23:59" }
+        ],
+        "interlock_required": true
+      }
+    }
+  }
+}
