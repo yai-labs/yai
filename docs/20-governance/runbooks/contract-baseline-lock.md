@@ -8,15 +8,15 @@ revision: 2
 supersedes: []
 depends_on: []
 adr_refs:
-  - docs/design/adr/ADR-011-contract-baseline-lock.md
-  - docs/design/adr/ADR-012-audit-convergence-gates.md
+  - docs/20-governance/design/adr/ADR-011-contract-baseline-lock.md
+  - docs/20-governance/design/adr/ADR-012-audit-convergence-gates.md
 decisions:
-  - docs/design/adr/ADR-011-contract-baseline-lock.md
-  - docs/design/adr/ADR-012-audit-convergence-gates.md
+  - docs/20-governance/design/adr/ADR-011-contract-baseline-lock.md
+  - docs/20-governance/design/adr/ADR-012-audit-convergence-gates.md
 related:
   adr:
-    - docs/design/adr/ADR-011-contract-baseline-lock.md
-    - docs/design/adr/ADR-012-audit-convergence-gates.md
+    - docs/20-governance/design/adr/ADR-011-contract-baseline-lock.md
+    - docs/20-governance/design/adr/ADR-012-audit-convergence-gates.md
   specs:
     - deps/yai-specs/contracts/invariants/I-001-traceability.md
     - deps/yai-specs/contracts/invariants/I-002-determinism.md
@@ -24,7 +24,7 @@ related:
     - deps/yai-specs/contracts/invariants/I-006-external-effect-boundary.md
     - deps/yai-specs/contracts/boundaries/L1-kernel.md
   test_plans:
-    - docs/test-plans/hardfail.md
+    - docs/50-qualification/test-plans/hardfail.md
   tools:
     - tools/release/check_pins.sh
     - tools/bin/yai-docs-trace-check
@@ -42,7 +42,7 @@ tags:
 Create the first governance runbook that locks cross-repo contract behavior across `yai-specs`, `yai`, and `yai-cli` before any additional hardening tracks.
 
 ## 2) Preconditions
-- [ ] `docs/design/adr/ADR-011-contract-baseline-lock.md` is present and traceable.
+- [ ] `docs/20-governance/design/adr/ADR-011-contract-baseline-lock.md` is present and traceable.
 - [ ] Cross-repo repositories are reachable (`yai-specs`, `yai`, `yai-cli`).
 - [ ] Contract edits are performed in source repo (`yai-specs`) and only pinned in consumers.
 - [ ] Baseline CI is green in all three repos before phase work starts.
@@ -64,11 +64,11 @@ Create the first governance runbook that locks cross-repo contract behavior acro
 
 ### 3.1 Audit Convergence Binding (Wave 0)
 This runbook phase sequence is Wave 0 under:
-- `docs/program-delivery/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
-- `docs/program-delivery/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
+- `docs/30-program/program-delivery/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
+- `docs/30-program/program-delivery/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
 
 Claims source of truth:
-- `docs/audits/claims/infra-grammar.v0.1.json`
+- `docs/60-validation/audits/claims/infra-grammar.v0.1.json`
 
 Wave issue:
 - `https://github.com/yai-labs/yai/issues/141`
@@ -80,8 +80,8 @@ Mandatory closure policy:
 
 ### Position in the global sequence
 1. Contract baseline lock (this runbook; first governance runbook).
-2. Specs refactor foundation (`docs/runbooks/specs-refactor-foundation.md`).
-3. Root hardening (`docs/runbooks/root-hardening.md`).
+2. Specs refactor foundation (`docs/20-governance/runbooks/specs-refactor-foundation.md`).
+3. Root hardening (`docs/20-governance/runbooks/root-hardening.md`).
 4. Workspace lifecycle / engine attach / data-plane tracks.
 
 ## 5) Phases
@@ -91,7 +91,7 @@ Mandatory closure policy:
 Claim: `yai` and `yai-cli` consume the same audited `yai-specs` baseline.
 - Scope: pin update + lock verification only.
 - Gate: pin checks green and reproducible.
-- Milestone Pack (planned): `docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.0.md`
+- Milestone Pack (planned): `docs/20-governance/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.0.md`
 
 <a id="phase-0-1-1-ci-parity"></a>
 ### 0.1.1 — CI Parity on Contract Surfaces
@@ -104,7 +104,7 @@ Claim: CI validates contract parity in both consumers with same baseline.
 - Gate:
   - parity checks fail on drift,
   - mandatory checks cannot close on `SKIP`.
-- Milestone Pack: `docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.1.md`
+- Milestone Pack: `docs/20-governance/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.1.md`
 
 <a id="phase-0-1-2-no-pass-on-skip"></a>
 ### 0.1.2 — No Pass-on-Skip Enforcement
@@ -117,7 +117,7 @@ Claim: required checks cannot pass via skip placeholders.
 - Gate:
   - pipeline fails if mandatory evidence is skipped,
   - proof-relevant skip placeholders are closure-blocking.
-- Milestone Pack: `docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.2.md`
+- Milestone Pack: `docs/20-governance/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.2.md`
 
 <a id="phase-0-1-3-formal-core-sync"></a>
 ### 0.1.3 — Formal/Core Sync on Contract Delta
@@ -130,7 +130,7 @@ Claim: authority/envelope contract deltas trigger required formal/core verificat
 - Gate:
   - deltas are blocked without required verify updates,
   - contract-to-verify mapping must be traceable.
-- Milestone Pack: `docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.3.md`
+- Milestone Pack: `docs/20-governance/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.3.md`
 
 <a id="phase-0-1-4-cross-repo-evidence"></a>
 ### 0.1.4 — Cross-Repo Evidence Closure
@@ -144,7 +144,7 @@ Claim: closure evidence is explicit and auditable across all repos.
 - Gate:
   - MP evidence is complete and reviewable across repos,
   - missing mandatory evidence or `SKIP` blocks closure.
-- Milestone Pack: `docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.4.md`
+- Milestone Pack: `docs/20-governance/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.4.md`
 
 ## 6) Verification
 Phase minimum command set:
@@ -180,22 +180,22 @@ Closure semantics:
 - Re-run pin + parity checks before reopening PR.
 
 ## 9) References
-- ADR: `docs/design/adr/ADR-011-contract-baseline-lock.md`
-- Next runbook: `docs/runbooks/specs-refactor-foundation.md`
-- MP track: `docs/milestone-packs/contract-baseline-lock/README.md`
+- ADR: `docs/20-governance/design/adr/ADR-011-contract-baseline-lock.md`
+- Next runbook: `docs/20-governance/runbooks/specs-refactor-foundation.md`
+- MP track: `docs/20-governance/milestone-packs/contract-baseline-lock/README.md`
 
 ## Traceability
 
 - ADR refs (required unless ops-only):
-  - `docs/design/adr/ADR-011-contract-baseline-lock.md`
+  - `docs/20-governance/design/adr/ADR-011-contract-baseline-lock.md`
 - Law refs (recommended):
   - `deps/yai-specs/contracts/invariants/I-001-traceability.md`
   - `deps/yai-specs/contracts/invariants/I-002-determinism.md`
   - `deps/yai-specs/contracts/invariants/I-003-governance.md`
   - `deps/yai-specs/contracts/invariants/I-006-external-effect-boundary.md`
 - MPs (filled as phases ship):
-  - `docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.0.md`
-  - `docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.1.md`
-  - `docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.2.md`
-  - `docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.3.md`
-  - `docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.4.md`
+  - `docs/20-governance/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.0.md`
+  - `docs/20-governance/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.1.md`
+  - `docs/20-governance/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.2.md`
+  - `docs/20-governance/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.3.md`
+  - `docs/20-governance/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.4.md`

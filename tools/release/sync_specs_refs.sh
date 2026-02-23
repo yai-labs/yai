@@ -2,8 +2,8 @@
 set -euo pipefail
 
 ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
-MANIFEST_PATH="docs/proof/.private/PP-FOUNDATION-0001/pp-foundation-0001.manifest.v1.json"
-README_PATH="docs/proof/.private/PP-FOUNDATION-0001/README.md"
+MANIFEST_PATH="docs/60-validation/proof/.private/PP-FOUNDATION-0001/pp-foundation-0001.manifest.v1.json"
+README_PATH="docs/60-validation/proof/.private/PP-FOUNDATION-0001/README.md"
 TARGET_REF=""
 DO_FETCH=1
 DRY_RUN=0
@@ -17,8 +17,8 @@ Usage:
 
 Options:
   --target <ref>   Required. Target commit/ref for deps/yai-specs (e.g. <sha>, origin/main).
-  --manifest <p>   Manifest JSON path (default: docs/proof/.private/PP-FOUNDATION-0001/pp-foundation-0001.manifest.v1.json)
-  --readme <p>     Proof pack README path (default: docs/proof/.private/PP-FOUNDATION-0001/README.md)
+  --manifest <p>   Manifest JSON path (default: docs/60-validation/proof/.private/PP-FOUNDATION-0001/pp-foundation-0001.manifest.v1.json)
+  --readme <p>     Proof pack README path (default: docs/60-validation/proof/.private/PP-FOUNDATION-0001/README.md)
   --no-fetch       Do not run git fetch origin in deps/yai-specs
   --dry-run        Print planned changes only
   --no-stage       Do not git add changed files

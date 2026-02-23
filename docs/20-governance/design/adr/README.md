@@ -32,7 +32,7 @@ An ADR should answer:
 ## Template policy
 
 The ADR template is canonical only in:
-- `docs/templates/adr/ADR-000-template.md`
+- `docs/20-governance/templates/adr/ADR-000-template.md`
 
 No template copy should be kept inside this ADR directory.
 
@@ -44,4 +44,4 @@ When adding a new ADR:
 - add downstream runbook linkage when available.
 
 Program-level convergence governance is defined in:
-- `docs/program-delivery/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
+- `docs/30-program/program-delivery/audit-convergence/EXECUTION-PLAN-v0.1.0.md`

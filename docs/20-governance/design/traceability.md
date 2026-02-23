@@ -12,25 +12,25 @@ It maps proposal and decision artifacts to contract anchors and delivery evidenc
 
 | Proposal (L2) | ADR targets (L3) | Runbook (L4) | Milestone Packs (L5) |
 |---|---|---|---|
-| `docs/design/proposals/PRP-001-runtime-topology-and-authority.md` | `docs/design/adr/ADR-001-single-runtime.md`<br/>`docs/design/adr/ADR-002-root-entrypoint.md`<br/>`docs/design/adr/ADR-003-kernel-authority.md`<br/>`docs/design/adr/ADR-004-engine-execution.md`<br/>`docs/design/adr/ADR-005-mind-proposer.md` | `docs/runbooks/root-hardening.md` | `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md` |
-| `docs/design/proposals/PRP-002-unified-rpc-and-cli-contract.md` | `docs/design/adr/ADR-006-unified-rpc.md`<br/>`docs/design/adr/ADR-011-contract-baseline-lock.md` | `docs/runbooks/contract-baseline-lock.md`<br/>`docs/runbooks/root-hardening.md` | `docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.0.md` *(planned)*<br/>`docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md` |
-| `docs/design/proposals/PRP-003-workspace-lifecycle-and-isolation.md` | `docs/design/adr/ADR-007-workspace-isolation.md`<br/>`docs/design/adr/ADR-008-connection-lifecycle.md`<br/>`docs/design/adr/ADR-009-engine-attachment.md`<br/>`docs/design/adr/ADR-010-boot-entrypoint.md` | `docs/runbooks/workspaces-lifecycle.md`<br/>`docs/runbooks/engine-attach.md` | `docs/milestone-packs/workspaces-lifecycle/MP-WORKSPACES-LIFECYCLE-0.1.0.md` *(planned)*<br/>`docs/milestone-packs/engine-attach/MP-ENGINE-ATTACH-0.1.0.md` *(planned)* |
-| `docs/design/proposals/PRP-004-contract-baseline-lock-and-pin-policy.md` | `docs/design/adr/ADR-011-contract-baseline-lock.md` | `docs/runbooks/contract-baseline-lock.md` | `docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.0.md` *(planned)* |
-| `docs/design/proposals/PRP-004-contract-baseline-lock-and-pin-policy.md` | `docs/design/adr/ADR-011-contract-baseline-lock.md` | `docs/runbooks/specs-refactor-foundation.md` | `docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.0.md` *(planned)* |
-| `docs/design/proposals/PRP-005-formal-coverage-roadmap.md` | `docs/design/adr/ADR-006-unified-rpc.md`<br/>`docs/design/adr/ADR-011-contract-baseline-lock.md` | `docs/runbooks/contract-baseline-lock.md`<br/>`docs/runbooks/root-hardening.md` | `docs/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.3.md` *(planned)*<br/>`docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md` |
+| `docs/20-governance/design/proposals/PRP-001-runtime-topology-and-authority.md` | `docs/20-governance/design/adr/ADR-001-single-runtime.md`<br/>`docs/20-governance/design/adr/ADR-002-root-entrypoint.md`<br/>`docs/20-governance/design/adr/ADR-003-kernel-authority.md`<br/>`docs/20-governance/design/adr/ADR-004-engine-execution.md`<br/>`docs/20-governance/design/adr/ADR-005-mind-proposer.md` | `docs/20-governance/runbooks/root-hardening.md` | `docs/20-governance/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md` |
+| `docs/20-governance/design/proposals/PRP-002-unified-rpc-and-cli-contract.md` | `docs/20-governance/design/adr/ADR-006-unified-rpc.md`<br/>`docs/20-governance/design/adr/ADR-011-contract-baseline-lock.md` | `docs/20-governance/runbooks/contract-baseline-lock.md`<br/>`docs/20-governance/runbooks/root-hardening.md` | `docs/20-governance/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.0.md` *(planned)*<br/>`docs/20-governance/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md` |
+| `docs/20-governance/design/proposals/PRP-003-workspace-lifecycle-and-isolation.md` | `docs/20-governance/design/adr/ADR-007-workspace-isolation.md`<br/>`docs/20-governance/design/adr/ADR-008-connection-lifecycle.md`<br/>`docs/20-governance/design/adr/ADR-009-engine-attachment.md`<br/>`docs/20-governance/design/adr/ADR-010-boot-entrypoint.md` | `docs/20-governance/runbooks/workspaces-lifecycle.md`<br/>`docs/20-governance/runbooks/engine-attach.md` | `docs/20-governance/milestone-packs/workspaces-lifecycle/MP-WORKSPACES-LIFECYCLE-0.1.0.md` *(planned)*<br/>`docs/20-governance/milestone-packs/engine-attach/MP-ENGINE-ATTACH-0.1.0.md` *(planned)* |
+| `docs/20-governance/design/proposals/PRP-004-contract-baseline-lock-and-pin-policy.md` | `docs/20-governance/design/adr/ADR-011-contract-baseline-lock.md` | `docs/20-governance/runbooks/contract-baseline-lock.md` | `docs/20-governance/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.0.md` *(planned)* |
+| `docs/20-governance/design/proposals/PRP-004-contract-baseline-lock-and-pin-policy.md` | `docs/20-governance/design/adr/ADR-011-contract-baseline-lock.md` | `docs/20-governance/runbooks/specs-refactor-foundation.md` | `docs/20-governance/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.0.md` *(planned)* |
+| `docs/20-governance/design/proposals/PRP-005-formal-coverage-roadmap.md` | `docs/20-governance/design/adr/ADR-006-unified-rpc.md`<br/>`docs/20-governance/design/adr/ADR-011-contract-baseline-lock.md` | `docs/20-governance/runbooks/contract-baseline-lock.md`<br/>`docs/20-governance/runbooks/root-hardening.md` | `docs/20-governance/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.3.md` *(planned)*<br/>`docs/20-governance/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md` |
 
 ## Delivery evidence pointers (L6)
 
 | Track | Tests / Gates / Evidence |
 |---|---|
-| Contract baseline lock | `docs/test-plans/hardfail.md`, runbook commands in `docs/runbooks/contract-baseline-lock.md`, CI logs/artifacts |
-| Specs refactor foundation | `docs/test-plans/README.md`, runbook commands in `docs/runbooks/specs-refactor-foundation.md`, CI logs/artifacts |
-| Root hardening | `docs/test-plans/hardfail.md`, runbook commands in `docs/runbooks/root-hardening.md`, CI logs/artifacts |
-| Workspaces lifecycle | `docs/test-plans/hardfail.md`, runbook commands in `docs/runbooks/workspaces-lifecycle.md`, CI logs/artifacts |
-| Engine attach | `docs/test-plans/hardfail.md`, runbook commands in `docs/runbooks/engine-attach.md`, CI logs/artifacts |
-| Data plane | `docs/test-plans/hardfail.md`, runbook commands in `docs/runbooks/data-plane.md`, CI logs/artifacts |
-| Kernel sovereignty | `docs/test-plans/hardfail.md`, runbook commands in `docs/runbooks/kernel-sovereignty.md`, CI logs/artifacts |
-| Mind Redis STM | `docs/test-plans/hardfail.md`, runbook commands in `docs/runbooks/mind-redis-stm.md`, CI logs/artifacts |
+| Contract baseline lock | `docs/50-qualification/test-plans/hardfail.md`, runbook commands in `docs/20-governance/runbooks/contract-baseline-lock.md`, CI logs/artifacts |
+| Specs refactor foundation | `docs/50-qualification/test-plans/README.md`, runbook commands in `docs/20-governance/runbooks/specs-refactor-foundation.md`, CI logs/artifacts |
+| Root hardening | `docs/50-qualification/test-plans/hardfail.md`, runbook commands in `docs/20-governance/runbooks/root-hardening.md`, CI logs/artifacts |
+| Workspaces lifecycle | `docs/50-qualification/test-plans/hardfail.md`, runbook commands in `docs/20-governance/runbooks/workspaces-lifecycle.md`, CI logs/artifacts |
+| Engine attach | `docs/50-qualification/test-plans/hardfail.md`, runbook commands in `docs/20-governance/runbooks/engine-attach.md`, CI logs/artifacts |
+| Data plane | `docs/50-qualification/test-plans/hardfail.md`, runbook commands in `docs/20-governance/runbooks/data-plane.md`, CI logs/artifacts |
+| Kernel sovereignty | `docs/50-qualification/test-plans/hardfail.md`, runbook commands in `docs/20-governance/runbooks/kernel-sovereignty.md`, CI logs/artifacts |
+| Mind Redis STM | `docs/50-qualification/test-plans/hardfail.md`, runbook commands in `docs/20-governance/runbooks/mind-redis-stm.md`, CI logs/artifacts |
 
 Notes:
 - Keep this map synchronized whenever proposal scope or ADR targets change.

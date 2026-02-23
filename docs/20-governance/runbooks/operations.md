@@ -10,16 +10,16 @@ depends_on:
   - RB-ROOT-HARDENING
   - RB-WORKSPACES-LIFECYCLE
 adr_refs:
-  - docs/design/adr/ADR-003-kernel-authority.md
-  - docs/design/adr/ADR-006-unified-rpc.md
+  - docs/20-governance/design/adr/ADR-003-kernel-authority.md
+  - docs/20-governance/design/adr/ADR-006-unified-rpc.md
 decisions:
-  - docs/design/adr/ADR-003-kernel-authority.md
-  - docs/design/adr/ADR-006-unified-rpc.md
+  - docs/20-governance/design/adr/ADR-003-kernel-authority.md
+  - docs/20-governance/design/adr/ADR-006-unified-rpc.md
 related:
   adr: []
   specs: []
   test_plans:
-    - docs/test-plans/hardfail.md
+    - docs/50-qualification/test-plans/hardfail.md
   tools:
     - tools/bin/yai-gate
     - tools/bin/yai-suite
@@ -42,7 +42,7 @@ Define the operational control loop for running, validating, and recovering the 
 ## 3) Inputs
 - Runtime commands: `yai up/down/status`
 - Gate commands: `tools/bin/yai-gate`, `tools/bin/yai-suite`, `tools/bin/yai-verify`
-- Test plans: `docs/test-plans/hardfail.md`
+- Test plans: `docs/50-qualification/test-plans/hardfail.md`
 
 ## 4) Procedure
 1. Start from clean runtime state.
@@ -67,9 +67,9 @@ Define the operational control loop for running, validating, and recovering the 
 - Re-run core checks before resuming.
 
 ## 8) References
-- Test plans: `docs/test-plans/hardfail.md`
+- Test plans: `docs/50-qualification/test-plans/hardfail.md`
 - Ops scripts: `tools/ops/README.md`
 
 ## Traceability
 - ADR refs (ops-only runbook): none mandatory.
-- MPs (filled as phases ship): `docs/milestone-packs/...`
+- MPs (filled as phases ship): `docs/20-governance/milestone-packs/...`

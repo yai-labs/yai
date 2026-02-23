@@ -1,4 +1,4 @@
 # ADR Index
 
 Primary source path:
-- `docs/design/adr/README.md`
+- `docs/20-governance/design/adr/README.md`

@@ -5,10 +5,10 @@ This section is the onboarding lane for contributors who need a fast but correct
 ## First session path
 
 1. `docs/README.md`
-2. `docs/design/spine.md`
-3. `docs/architecture/specs-bridge.md`
-4. `docs/dev-guide/repo-workflow.md`
-5. `docs/dev-guide/repo-tooling.md`
+2. `docs/20-governance/design/spine.md`
+3. `docs/10-platform/architecture/specs-bridge.md`
+4. `docs/70-guides/dev-guide/repo-workflow.md`
+5. `docs/70-guides/dev-guide/repo-tooling.md`
 
 ## What you should understand after this path
 

@@ -26,7 +26,7 @@ If code or docs disagree with L0, **L0 wins**.
 ---
 
 ### L1 — Architecture model (human-readable)
-**Lives in:** `docs/architecture/*`
+**Lives in:** `docs/10-platform/architecture/*`
 
 Explains the runtime model, boundaries, and component responsibilities.  
 Architecture **must map to L0** (and never override it).
@@ -34,14 +34,14 @@ Architecture **must map to L0** (and never override it).
 ---
 
 ### L2 — Proposals (pre-decision, optional)
-**Lives in:** `docs/design/proposals/*`
+**Lives in:** `docs/20-governance/design/proposals/*`
 
 Used to explore alternatives, trade-offs, risks, and design space **before** freezing a decision.
 
 ---
 
 ### L3 — ADRs (frozen decisions)
-**Lives in:** `docs/design/adr/*`
+**Lives in:** `docs/20-governance/design/adr/*`
 
 An ADR:
 - chooses among alternatives
@@ -53,7 +53,7 @@ ADRs are the “decision ledger”.
 ---
 
 ### L4 — Runbooks (execution plan)
-**Lives in:** `docs/runbooks/*`
+**Lives in:** `docs/20-governance/runbooks/*`
 
 Runbooks convert ADR intent into a phased, verifiable sequence with acceptance gates.
 
@@ -65,7 +65,7 @@ Runbooks are the “how we execute” layer:
 ---
 
 ### L5 — Milestone Packs (delivery packaging & audit unit)
-**Lives in:** `docs/milestone-packs/*`
+**Lives in:** `docs/20-governance/milestone-packs/*`
 
 A Milestone Pack (MP) is the **unit of closure**:
 - what changed
@@ -91,7 +91,7 @@ If you’re solo you *can* reduce Issues, but **never skip the MP** (that’s yo
 ---
 
 ### L7 — Evidence & tests (proof-of-work)
-**Lives in:** `docs/test-plans/*` + `tools/*` + CI artifacts/logs
+**Lives in:** `docs/50-qualification/test-plans/*` + `tools/*` + CI artifacts/logs
 
 Test plans define what “proved” means.  
 Tools + CI runs provide repeatable evidence (ideally artifacted, non-skip for TRL claims).
@@ -99,7 +99,7 @@ Tools + CI runs provide repeatable evidence (ideally artifacted, non-skip for TR
 ---
 
 ### L8 — Proof Packs (public/internal credibility bundles)
-**Lives in:** `docs/proof/*` when published, `docs/proof/.private/*` for local drafts
+**Lives in:** `docs/60-validation/proof/*` when published, `docs/60-validation/proof/.private/*` for local drafts
 
 A Proof Pack bundles:
 - evidence index

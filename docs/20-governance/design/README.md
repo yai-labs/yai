@@ -9,15 +9,15 @@ It contains:
 
 ## Structure
 
-- ADRs: `docs/design/adr/`
-- Proposals: `docs/design/proposals/`
-- Spine: `docs/design/spine.md`
-- Traceability map: `docs/design/traceability.md`
+- ADRs: `docs/20-governance/design/adr/`
+- Proposals: `docs/20-governance/design/proposals/`
+- Spine: `docs/20-governance/design/spine.md`
+- Traceability map: `docs/20-governance/design/traceability.md`
 
 ## Templates
 
-- ADR template: `docs/templates/adr/ADR-000-template.md`
-- Proposal template: `docs/templates/proposals/PRP-000-template.md`
+- ADR template: `docs/20-governance/templates/adr/ADR-000-template.md`
+- Proposal template: `docs/20-governance/templates/proposals/PRP-000-template.md`
 
 ## Practical workflow
 

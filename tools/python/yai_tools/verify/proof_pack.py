@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Set
 
 REPO_ROOT = Path(__file__).resolve().parents[4]
-DEFAULT_MANIFEST = REPO_ROOT / "docs" / "proof" / "PP-FOUNDATION-0001" / "pp-foundation-0001.manifest.v1.json"
+DEFAULT_MANIFEST = REPO_ROOT / "docs" / "60-validation" / "proof" / "PP-FOUNDATION-0001" / "pp-foundation-0001.manifest.v1.json"
 SHA40_RE = re.compile(r"^[0-9a-f]{40}$")
 
 
@@ -75,8 +75,8 @@ def validate_schema(doc: Dict[str, Any]) -> List[str]:
         errs.append("canonical_source.single_source_of_truth must be true")
     if canonical_repo and canonical_repo != "yai":
         errs.append("canonical_source.repo must be 'yai'")
-    if canonical_path and not canonical_path.startswith("docs/proof/"):
-        errs.append("canonical_source.path must start with docs/proof/")
+    if canonical_path and not canonical_path.startswith("docs/60-validation/proof/"):
+        errs.append("canonical_source.path must start with docs/60-validation/proof/")
 
     include_repos = require_list(doc, ["program_scope", "include_repos"], errs)
     excluded_changes = require_list(doc, ["program_scope", "excluded_changes"], errs)
@@ -249,18 +249,18 @@ def main() -> int:
     if "/.private/" in f"/{rel_manifest}":
         if args.allow_skip:
             print(f"[proof-pack] SKIP: private draft manifest ({rel_manifest})")
-            print("[proof-pack] SKIP: publish under docs/proof/<PACK-ID>/ to enforce proof-pack gates")
+            print("[proof-pack] SKIP: publish under docs/60-validation/proof/<PACK-ID>/ to enforce proof-pack gates")
             return 0
         print(f"[proof-pack] FAIL: private draft manifest is not allowed for mandatory checks ({rel_manifest})")
-        print("[proof-pack] FAIL: publish under docs/proof/<PACK-ID>/ or pass --allow-skip for local draft checks")
+        print("[proof-pack] FAIL: publish under docs/60-validation/proof/<PACK-ID>/ or pass --allow-skip for local draft checks")
         return 2
     if not manifest.exists() and manifest.resolve() == DEFAULT_MANIFEST.resolve():
         if args.allow_skip:
             print(f"[proof-pack] SKIP: default manifest not found ({rel_manifest})")
-            print("[proof-pack] SKIP: keep draft packs under docs/proof/.private/ until publication")
+            print("[proof-pack] SKIP: keep draft packs under docs/60-validation/proof/.private/ until publication")
             return 0
         print(f"[proof-pack] FAIL: default manifest not found ({rel_manifest})")
-        print("[proof-pack] FAIL: add the public manifest under docs/proof/<PACK-ID>/ or use --allow-skip for local draft checks")
+        print("[proof-pack] FAIL: add the public manifest under docs/60-validation/proof/<PACK-ID>/ or use --allow-skip for local draft checks")
         return 2
     doc = read_json(manifest)
 

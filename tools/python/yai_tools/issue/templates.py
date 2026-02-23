@@ -127,7 +127,7 @@ def render_mp_closure_body(track: str, phase: str, mp_id: str, milestone_title: 
 This issue is the canonical closure record for the phase. Close it only when all evidence is complete.
 
 ## Evidence
-- [ ] MP doc linked (`docs/milestone-packs/...`)
+- [ ] MP doc linked (`docs/20-governance/milestone-packs/...`)
 - [ ] All phase PR links listed
 - [ ] Gate status is `Passed`
 - [ ] Verification artifacts linked (CI logs/proof-pack/command output)

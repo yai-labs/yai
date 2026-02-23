@@ -1,13 +1,13 @@
 ---
 id: MP-ROOT-HARDENING-0.1.4
 status: draft
-runbook: docs/runbooks/root-hardening.md
+runbook: docs/20-governance/runbooks/root-hardening.md
 phase: "0.1.4 — Kernel Hard Reject on Invalid ws_id"
 adrs:
-  - docs/design/adr/ADR-002-root-entrypoint.md
-  - docs/design/adr/ADR-006-unified-rpc.md
-  - docs/design/adr/ADR-008-connection-lifecycle.md
-  - docs/design/adr/ADR-012-audit-convergence-gates.md
+  - docs/20-governance/design/adr/ADR-002-root-entrypoint.md
+  - docs/20-governance/design/adr/ADR-006-unified-rpc.md
+  - docs/20-governance/design/adr/ADR-008-connection-lifecycle.md
+  - docs/20-governance/design/adr/ADR-012-audit-convergence-gates.md
 spec_anchors:
   - deps/yai-specs/specs/protocol/include/transport.h
   - deps/yai-specs/specs/protocol/include/auth.h
@@ -25,16 +25,16 @@ issues:
 # MP-ROOT-HARDENING-0.1.4
 
 ## Metadata
-- Runbook: `docs/runbooks/root-hardening.md`
+- Runbook: `docs/20-governance/runbooks/root-hardening.md`
 - Phase: `0.1.4 — Kernel Hard Reject on Invalid ws_id`
 - Wave issue: `#140`
 - Status: `draft`
 
 ## Links
-- Plan: `docs/program-delivery/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
-- Matrix: `docs/program-delivery/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
-- Claims registry: `docs/audits/claims/infra-grammar.v0.1.json`
-- ADR: `docs/design/adr/ADR-012-audit-convergence-gates.md`
+- Plan: `docs/30-program/program-delivery/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
+- Matrix: `docs/30-program/program-delivery/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
+- Claims registry: `docs/60-validation/audits/claims/infra-grammar.v0.1.json`
+- ADR: `docs/20-governance/design/adr/ADR-012-audit-convergence-gates.md`
 
 ## Objective
 Close phase 0.1.4 with explicit claim/evidence bindings and reproducible gate outputs.
@@ -53,4 +53,4 @@ Closure policy: mandatory `SKIP` is treated as `FAIL`.
 
 ## Execution Snapshot
 - Status: `PLANNED`
-- Evidence bundle: `docs/milestone-packs/root-hardening/evidence/0.1.4/`
+- Evidence bundle: `docs/20-governance/milestone-packs/root-hardening/evidence/0.1.4/`

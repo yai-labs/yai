@@ -1,11 +1,11 @@
 ---
 id: MP-CONTRACT-BASELINE-LOCK-0.1.1
 status: draft
-runbook: docs/runbooks/contract-baseline-lock.md
+runbook: docs/20-governance/runbooks/contract-baseline-lock.md
 phase: "0.1.1 — CI Parity on Contract Surfaces"
 adrs:
-  - docs/design/adr/ADR-011-contract-baseline-lock.md
-  - docs/design/adr/ADR-012-audit-convergence-gates.md
+  - docs/20-governance/design/adr/ADR-011-contract-baseline-lock.md
+  - docs/20-governance/design/adr/ADR-012-audit-convergence-gates.md
 spec_anchors:
   - deps/yai-specs/contracts/invariants/I-001-traceability.md
   - deps/yai-specs/contracts/invariants/I-002-determinism.md
@@ -23,7 +23,7 @@ issues:
 
 ## Metadata
 
-- Runbook: `docs/runbooks/contract-baseline-lock.md`
+- Runbook: `docs/20-governance/runbooks/contract-baseline-lock.md`
 - Phase: `0.1.1 — CI Parity on Contract Surfaces`
 - Wave issue: `#141`
 - Owner: `governance`
@@ -31,12 +31,12 @@ issues:
 
 ## Links
 
-- ADR: `docs/design/adr/ADR-011-contract-baseline-lock.md`
-- ADR: `docs/design/adr/ADR-012-audit-convergence-gates.md`
-- Proposal: `docs/design/proposals/PRP-002-unified-rpc-and-cli-contract.md`
-- Evidence plans: `docs/test-plans/hardfail.md`
-- Claims registry: `docs/audits/claims/infra-grammar.v0.1.json`
-- Convergence matrix: `docs/program-delivery/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
+- ADR: `docs/20-governance/design/adr/ADR-011-contract-baseline-lock.md`
+- ADR: `docs/20-governance/design/adr/ADR-012-audit-convergence-gates.md`
+- Proposal: `docs/20-governance/design/proposals/PRP-002-unified-rpc-and-cli-contract.md`
+- Evidence plans: `docs/50-qualification/test-plans/hardfail.md`
+- Claims registry: `docs/60-validation/audits/claims/infra-grammar.v0.1.json`
+- Convergence matrix: `docs/30-program/program-delivery/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
 
 Objective:
 - Enforce parity checks on protocol and authority contract surfaces across consumers.
@@ -80,7 +80,7 @@ Definition of Done:
 
 ## Execution Snapshot (2026-02-21)
 
-- Evidence bundle: `docs/milestone-packs/contract-baseline-lock/evidence/wave0-2026-02-21/`
+- Evidence bundle: `docs/20-governance/milestone-packs/contract-baseline-lock/evidence/wave0-2026-02-21/`
 - `tools/release/check_pins.sh` -> `PASS` (`exit=0`) via `10-check_pins-strict-pass.*`
 - `tools/bin/yai-docs-trace-check --all` -> `PASS` (`exit=0`) via `12-docs-trace-check-post-pin.*`
 

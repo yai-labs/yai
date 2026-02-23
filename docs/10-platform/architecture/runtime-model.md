@@ -41,7 +41,7 @@ Canonical Topology: Root -> Kernel -> Engine with Mind as planned/external L3 pl
 
 ## Traceability
 
-- ADRs: `docs/design/adr/ADR-002-root-entrypoint.md`, `docs/design/adr/ADR-003-kernel-authority.md`, `docs/design/adr/ADR-004-engine-execution.md`, `docs/design/adr/ADR-008-connection-lifecycle.md`, `docs/design/adr/ADR-010-boot-entrypoint.md`
-- Runbooks: `docs/runbooks/root-hardening.md`, `docs/runbooks/workspaces-lifecycle.md`
-- MPs: `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`, `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md`
+- ADRs: `docs/20-governance/design/adr/ADR-002-root-entrypoint.md`, `docs/20-governance/design/adr/ADR-003-kernel-authority.md`, `docs/20-governance/design/adr/ADR-004-engine-execution.md`, `docs/20-governance/design/adr/ADR-008-connection-lifecycle.md`, `docs/20-governance/design/adr/ADR-010-boot-entrypoint.md`
+- Runbooks: `docs/20-governance/runbooks/root-hardening.md`, `docs/20-governance/runbooks/workspaces-lifecycle.md`
+- MPs: `docs/20-governance/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`, `docs/20-governance/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md`
 - L0 anchors: `deps/yai-specs/specs/protocol/include/transport.h`, `deps/yai-specs/specs/protocol/include/session.h`, `deps/yai-specs/specs/protocol/runtime/include/rpc_runtime.h`

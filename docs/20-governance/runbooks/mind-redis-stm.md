@@ -10,20 +10,20 @@ depends_on:
   - RB-ENGINE-ATTACH
   - RB-DATA-PLANE
 adr_refs:
-  - docs/design/adr/ADR-005-mind-proposer.md
-  - docs/design/adr/ADR-008-connection-lifecycle.md
+  - docs/20-governance/design/adr/ADR-005-mind-proposer.md
+  - docs/20-governance/design/adr/ADR-008-connection-lifecycle.md
 decisions:
-  - docs/design/adr/ADR-005-mind-proposer.md
-  - docs/design/adr/ADR-008-connection-lifecycle.md
+  - docs/20-governance/design/adr/ADR-005-mind-proposer.md
+  - docs/20-governance/design/adr/ADR-008-connection-lifecycle.md
 related:
   adr:
-    - docs/design/adr/ADR-005-mind-proposer.md
-    - docs/design/adr/ADR-008-connection-lifecycle.md
+    - docs/20-governance/design/adr/ADR-005-mind-proposer.md
+    - docs/20-governance/design/adr/ADR-008-connection-lifecycle.md
   specs:
     - deps/yai-specs/specs/protocol/include/transport.h
     - deps/yai-specs/specs/protocol/include/auth.h
   test_plans:
-    - docs/test-plans/hardfail.md
+    - docs/50-qualification/test-plans/hardfail.md
   tools:
     - tools/bin/yai-verify
     - tools/bin/yai-gate
@@ -66,16 +66,16 @@ Execute the staged sequence in this document: lifecycle contract, Redis topology
 - Revert only active phase changes before retrying.
 
 ## 8) References
-- ADR: `docs/design/adr/ADR-005-mind-proposer.md`
-- Runbooks: `docs/runbooks/engine-attach.md`, `docs/runbooks/data-plane.md`
-- Test plans: `docs/test-plans/hardfail.md`
+- ADR: `docs/20-governance/design/adr/ADR-005-mind-proposer.md`
+- Runbooks: `docs/20-governance/runbooks/engine-attach.md`, `docs/20-governance/runbooks/data-plane.md`
+- Test plans: `docs/50-qualification/test-plans/hardfail.md`
 
 ## Traceability
 - ADR refs:
-  - `docs/design/adr/ADR-005-mind-proposer.md`
-  - `docs/design/adr/ADR-008-connection-lifecycle.md`
+  - `docs/20-governance/design/adr/ADR-005-mind-proposer.md`
+  - `docs/20-governance/design/adr/ADR-008-connection-lifecycle.md`
 - MPs (to be filled as phases ship):
-  - `docs/milestone-packs/...`
+  - `docs/20-governance/milestone-packs/...`
 
 ## Appendix — Detailed Operational Notes (Legacy Detailed Content)
 
@@ -133,7 +133,7 @@ Mind is a "workspace-scoped" process with **no authority**.
 
 ### Files to document
 
-**ADR:** `docs/design/adr/ADR-005-mind-proposer.md`
+**ADR:** `docs/20-governance/design/adr/ADR-005-mind-proposer.md`
 
 Document the contract: Mind never operates without successful attach to Kernel.
 

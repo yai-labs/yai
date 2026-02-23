@@ -11,18 +11,18 @@ depends_on:
   - RB-WORKSPACES-LIFECYCLE
   - RB-ENGINE-ATTACH
 adr_refs:
-  - docs/design/adr/ADR-006-unified-rpc.md
-  - docs/design/adr/ADR-011-contract-baseline-lock.md
+  - docs/20-governance/design/adr/ADR-006-unified-rpc.md
+  - docs/20-governance/design/adr/ADR-011-contract-baseline-lock.md
 decisions:
-  - docs/design/adr/ADR-006-unified-rpc.md
-  - docs/design/adr/ADR-011-contract-baseline-lock.md
+  - docs/20-governance/design/adr/ADR-006-unified-rpc.md
+  - docs/20-governance/design/adr/ADR-011-contract-baseline-lock.md
 related:
   adr: []
   specs:
     - deps/yai-specs/specs/protocol/include/transport.h
     - deps/yai-specs/specs/protocol/include/auth.h
   test_plans:
-    - docs/test-plans/hardfail.md
+    - docs/50-qualification/test-plans/hardfail.md
   tools:
     - tools/bin/yai-verify
     - tools/bin/yai-gate
@@ -65,15 +65,15 @@ Use phased execution (`v5.0` to `v5.4`) with closure gates per phase and no cros
 - Re-run build + verify before reopening the phase.
 
 ## 8) References
-- Runbooks: `docs/runbooks/root-hardening.md`, `docs/runbooks/workspaces-lifecycle.md`, `docs/runbooks/engine-attach.md`
-- Test plans: `docs/test-plans/hardfail.md`
+- Runbooks: `docs/20-governance/runbooks/root-hardening.md`, `docs/20-governance/runbooks/workspaces-lifecycle.md`, `docs/20-governance/runbooks/engine-attach.md`
+- Test plans: `docs/50-qualification/test-plans/hardfail.md`
 
 ## Traceability
 - ADR refs:
-  - `docs/design/adr/ADR-003-kernel-authority.md`
-  - `docs/design/adr/ADR-004-engine-execution.md`
-  - `docs/design/adr/ADR-010-boot-entrypoint.md`
-- MPs (to be filled as phases ship): `docs/milestone-packs/...`
+  - `docs/20-governance/design/adr/ADR-003-kernel-authority.md`
+  - `docs/20-governance/design/adr/ADR-004-engine-execution.md`
+  - `docs/20-governance/design/adr/ADR-010-boot-entrypoint.md`
+- MPs (to be filled as phases ship): `docs/20-governance/milestone-packs/...`
 
 ## Appendix — Detailed Operational Series (Legacy Detailed Content)
 

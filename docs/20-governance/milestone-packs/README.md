@@ -1,10 +1,10 @@
 ---
 id: MP-CONTRACT-BASELINE-LOCK-0.1.0
 status: active
-runbook: docs/runbooks/contract-baseline-lock.md
+runbook: docs/20-governance/runbooks/contract-baseline-lock.md
 phase: index
 adrs:
-  - docs/design/adr/ADR-011-contract-baseline-lock.md
+  - docs/20-governance/design/adr/ADR-011-contract-baseline-lock.md
 spec_anchors:
   - deps/yai-specs/SPEC_MAP.md
 issues:
@@ -28,34 +28,34 @@ An MP is a closure artifact for a concrete phase and should make review/audit st
 
 ## Current track: Contract baseline lock (foundational)
 
-- `docs/milestone-packs/contract-baseline-lock/README.md`
+- `docs/20-governance/milestone-packs/contract-baseline-lock/README.md`
 
 ## Planned track: Workspaces lifecycle
 
-- `docs/milestone-packs/workspaces-lifecycle/README.md`
+- `docs/20-governance/milestone-packs/workspaces-lifecycle/README.md`
 
 ## Planned track: Engine attach
 
-- `docs/milestone-packs/engine-attach/README.md`
+- `docs/20-governance/milestone-packs/engine-attach/README.md`
 
 ## Planned track: Specs refactor foundation
 
-- `docs/milestone-packs/specs-refactor-foundation/README.md`
+- `docs/20-governance/milestone-packs/specs-refactor-foundation/README.md`
 
 ## Current track: Root hardening
 
-- `docs/milestone-packs/root-hardening/README.md`
-- `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`
-- `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md`
-- `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.2.md`
-- `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.3.md`
-- `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.4.md`
-- `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md`
+- `docs/20-governance/milestone-packs/root-hardening/README.md`
+- `docs/20-governance/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`
+- `docs/20-governance/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md`
+- `docs/20-governance/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.2.md`
+- `docs/20-governance/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.3.md`
+- `docs/20-governance/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.4.md`
+- `docs/20-governance/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md`
 
 ## Template
 
-- `docs/templates/milestone-packs/MP-000-template.md`
+- `docs/20-governance/templates/milestone-packs/MP-000-template.md`
 
 ## Workflow reference
 
-- `docs/dev-guide/cross-repo-workflow.md`
+- `docs/70-guides/dev-guide/cross-repo-workflow.md`

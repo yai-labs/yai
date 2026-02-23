@@ -9,22 +9,22 @@ supersedes: []
 depends_on:
   - RB-ROOT-HARDENING
 adr_refs:
-  - docs/design/adr/ADR-007-workspace-isolation.md
-  - docs/design/adr/ADR-008-connection-lifecycle.md
+  - docs/20-governance/design/adr/ADR-007-workspace-isolation.md
+  - docs/20-governance/design/adr/ADR-008-connection-lifecycle.md
 decisions:
-  - docs/design/adr/ADR-007-workspace-isolation.md
-  - docs/design/adr/ADR-008-connection-lifecycle.md
+  - docs/20-governance/design/adr/ADR-007-workspace-isolation.md
+  - docs/20-governance/design/adr/ADR-008-connection-lifecycle.md
 related:
   adr:
-    - docs/design/adr/ADR-007-workspace-isolation.md
-    - docs/design/adr/ADR-008-connection-lifecycle.md
+    - docs/20-governance/design/adr/ADR-007-workspace-isolation.md
+    - docs/20-governance/design/adr/ADR-008-connection-lifecycle.md
   specs:
     - deps/yai-specs/specs/protocol/include/transport.h
     - deps/yai-specs/specs/protocol/include/auth.h
     - deps/yai-specs/specs/protocol/include/errors.h
     - deps/yai-specs/specs/protocol/include/yai_protocol_ids.h
   test_plans:
-    - docs/test-plans/hardfail.md
+    - docs/50-qualification/test-plans/hardfail.md
   tools:
     - tools/bin/yai-verify
     - tools/bin/yai-gate
@@ -177,7 +177,7 @@ Expected:
 
 Specs/doc (optional but recommended even as a short note):
 
-- `docs/runbooks/workspaces-lifecycle.md` (this file; update if needed)
+- `docs/20-governance/runbooks/workspaces-lifecycle.md` (this file; update if needed)
 
 Kernel paths/helpers:
 
@@ -462,12 +462,12 @@ Rollback is phase-based:
 
 ### Upstream proposals
 
-- `docs/design/proposals/PRP-003-workspace-lifecycle-and-isolation.md`
+- `docs/20-governance/design/proposals/PRP-003-workspace-lifecycle-and-isolation.md`
 
 ### Milestone packs
 
-- `docs/milestone-packs/workspaces-lifecycle/MP-WORKSPACES-LIFECYCLE-0.1.0.md` *(planned)*
-- `docs/milestone-packs/workspaces-lifecycle/MP-WORKSPACES-LIFECYCLE-0.1.1.md` *(planned)*
+- `docs/20-governance/milestone-packs/workspaces-lifecycle/MP-WORKSPACES-LIFECYCLE-0.1.0.md` *(planned)*
+- `docs/20-governance/milestone-packs/workspaces-lifecycle/MP-WORKSPACES-LIFECYCLE-0.1.1.md` *(planned)*
 
 ## 9) Final Definition of Done
 
@@ -480,12 +480,12 @@ Rollback is phase-based:
 ## Traceability
 
 - ADR refs:
-  - `docs/design/adr/ADR-007-workspace-isolation.md`
-  - `docs/design/adr/ADR-008-connection-lifecycle.md`
+  - `docs/20-governance/design/adr/ADR-007-workspace-isolation.md`
+  - `docs/20-governance/design/adr/ADR-008-connection-lifecycle.md`
 - Law/spec refs:
   - `deps/yai-specs/specs/protocol/include/transport.h`
   - `deps/yai-specs/specs/protocol/include/auth.h`
   - `deps/yai-specs/specs/protocol/include/errors.h`
 - MPs:
-  - `docs/milestone-packs/workspaces-lifecycle/MP-WORKSPACES-LIFECYCLE-0.1.0.md` *(planned)*
-  - `docs/milestone-packs/workspaces-lifecycle/MP-WORKSPACES-LIFECYCLE-0.1.1.md` *(planned)*
+  - `docs/20-governance/milestone-packs/workspaces-lifecycle/MP-WORKSPACES-LIFECYCLE-0.1.0.md` *(planned)*
+  - `docs/20-governance/milestone-packs/workspaces-lifecycle/MP-WORKSPACES-LIFECYCLE-0.1.1.md` *(planned)*

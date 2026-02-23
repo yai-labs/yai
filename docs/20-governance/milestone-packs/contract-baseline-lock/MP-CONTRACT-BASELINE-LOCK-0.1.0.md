@@ -1,10 +1,10 @@
 ---
 id: MP-CONTRACT-BASELINE-LOCK-0.1.0
 status: active
-runbook: docs/runbooks/contract-baseline-lock.md
+runbook: docs/20-governance/runbooks/contract-baseline-lock.md
 phase: "0.1.0 — Pin Baseline Freeze"
 adrs:
-  - docs/design/adr/ADR-011-contract-baseline-lock.md
+  - docs/20-governance/design/adr/ADR-011-contract-baseline-lock.md
 spec_anchors:
   - deps/yai-specs/contracts/invariants/I-001-traceability.md
   - deps/yai-specs/contracts/invariants/I-002-determinism.md
@@ -18,16 +18,16 @@ issue_reason: "Phase tracked by governance runbook issue #125."
 
 ## Metadata
 
-- Runbook: `docs/runbooks/contract-baseline-lock.md`
+- Runbook: `docs/20-governance/runbooks/contract-baseline-lock.md`
 - Phase: `0.1.0 — Pin Baseline Freeze`
 - Owner: `governance`
 - Status: `active`
 
 ## Links
 
-- ADR: `docs/design/adr/ADR-011-contract-baseline-lock.md`
-- Proposal: `docs/design/proposals/PRP-004-contract-baseline-lock-and-pin-policy.md`
-- Evidence plans: `docs/test-plans/contract-baseline-lock-prep.md`, `docs/test-plans/hardfail.md`
+- ADR: `docs/20-governance/design/adr/ADR-011-contract-baseline-lock.md`
+- Proposal: `docs/20-governance/design/proposals/PRP-004-contract-baseline-lock-and-pin-policy.md`
+- Evidence plans: `docs/50-qualification/test-plans/contract-baseline-lock-prep.md`, `docs/50-qualification/test-plans/hardfail.md`
 
 Objective:
 - Ensure `yai` and `yai-cli` consume the same audited `yai-specs` baseline commit.

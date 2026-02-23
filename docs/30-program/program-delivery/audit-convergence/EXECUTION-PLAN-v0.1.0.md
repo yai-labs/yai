@@ -8,9 +8,9 @@ scope: docs-only
 issue:
   - https://github.com/yai-labs/yai/issues/140
 related:
-  - docs/program-delivery/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md
-  - docs/audits/claims/infra-grammar.v0.1.json
-  - docs/design/adr/ADR-012-audit-convergence-gates.md
+  - docs/30-program/program-delivery/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md
+  - docs/60-validation/audits/claims/infra-grammar.v0.1.json
+  - docs/20-governance/design/adr/ADR-012-audit-convergence-gates.md
 ---
 
 # Execution Plan - Audit Convergence v0.1.0
@@ -48,7 +48,7 @@ Out of scope for v0.1.0 GREEN:
 Domains: control plane, network, providers, storage, resources/workspaces, audit pipeline.
 
 Done when all are true:
-- Core claims in `docs/audits/claims/infra-grammar.v0.1.json` are `confirmed`.
+- Core claims in `docs/60-validation/audits/claims/infra-grammar.v0.1.json` are `confirmed`.
 - Mandatory evidence commands for core domains have no SKIP closure.
 - MPs for core runbook phases include reproducible evidence pointers.
 
@@ -66,11 +66,11 @@ Program checkpoint policy:
 
 ## 5) Canonical Artifacts (single source chain)
 1. Claims source of truth:
-   `docs/audits/claims/infra-grammar.v0.1.json`
+   `docs/60-validation/audits/claims/infra-grammar.v0.1.json`
 2. Convergence matrix:
-   `docs/program-delivery/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
+   `docs/30-program/program-delivery/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
 3. Governance decision (gate semantics):
-   `docs/design/adr/ADR-012-audit-convergence-gates.md`
+   `docs/20-governance/design/adr/ADR-012-audit-convergence-gates.md`
 
 Rule:
 - Runbooks/MPs/board cards reference claim IDs from the JSON registry.
@@ -90,13 +90,13 @@ Exception handling:
 
 ### Wave 0 - Stabilize current in-flight baseline
 Primary runbook:
-- `docs/runbooks/contract-baseline-lock.md`
+- `docs/20-governance/runbooks/contract-baseline-lock.md`
 
 Target from current execution point:
 - close phases `0.1.1` -> `0.1.4` with strict evidence.
 
 Required outputs:
-- completed MP sequence under `docs/milestone-packs/contract-baseline-lock/`
+- completed MP sequence under `docs/20-governance/milestone-packs/contract-baseline-lock/`
 - explicit no-skip enforcement for mandatory checks
 
 Exit:
@@ -104,7 +104,7 @@ Exit:
 
 ### Wave 1 - Backbone convergence (specs + governance bindings)
 Primary runbook:
-- `docs/runbooks/specs-refactor-foundation.md`
+- `docs/20-governance/runbooks/specs-refactor-foundation.md`
 
 Scope:
 - keep structural phases deterministic,
@@ -120,7 +120,7 @@ Exit:
 
 ### Wave 2 - Root boundary hardening (core mediation)
 Primary runbook:
-- `docs/runbooks/root-hardening.md`
+- `docs/20-governance/runbooks/root-hardening.md`
 
 Scope:
 - envelope validation,
@@ -133,7 +133,7 @@ Exit:
 
 ### Wave 3 - Workspace lifecycle as governed effects
 Primary runbook:
-- `docs/runbooks/workspaces-lifecycle.md`
+- `docs/20-governance/runbooks/workspaces-lifecycle.md`
 
 Scope:
 - governed create/list/destroy,
@@ -145,7 +145,7 @@ Exit:
 
 ### Wave 4 - Engine attach integration
 Primary runbook:
-- `docs/runbooks/engine-attach.md`
+- `docs/20-governance/runbooks/engine-attach.md`
 
 Scope:
 - attach handshake path,
@@ -157,7 +157,7 @@ Exit:
 
 ### Wave 5 - Data plane governance
 Primary runbook:
-- `docs/runbooks/data-plane.md`
+- `docs/20-governance/runbooks/data-plane.md`
 
 Scope:
 - storage contract surfaces,
@@ -169,7 +169,7 @@ Exit:
 
 ### Wave 6 - Mind integration (proposer-only)
 Primary runbook:
-- `docs/runbooks/mind-redis-stm.md`
+- `docs/20-governance/runbooks/mind-redis-stm.md`
 
 Scope:
 - Mind proposer path only,

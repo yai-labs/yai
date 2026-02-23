@@ -8,13 +8,13 @@ revision: 1
 supersedes: []
 related:
   adr:
-    - docs/design/adr/ADR-007-workspace-isolation.md
-    - docs/design/adr/ADR-008-connection-lifecycle.md
-    - docs/design/adr/ADR-009-engine-attachment.md
-    - docs/design/adr/ADR-010-boot-entrypoint.md
+    - docs/20-governance/design/adr/ADR-007-workspace-isolation.md
+    - docs/20-governance/design/adr/ADR-008-connection-lifecycle.md
+    - docs/20-governance/design/adr/ADR-009-engine-attachment.md
+    - docs/20-governance/design/adr/ADR-010-boot-entrypoint.md
   runbooks:
-    - docs/runbooks/workspaces-lifecycle.md
-    - docs/runbooks/engine-attach.md
+    - docs/20-governance/runbooks/workspaces-lifecycle.md
+    - docs/20-governance/runbooks/engine-attach.md
   milestone_packs: []
   specs:
     - deps/yai-specs/contracts/boundaries/L1-kernel.md
@@ -60,10 +60,10 @@ Define one lifecycle proposal that aligns isolation guarantees with Kernel bound
 ## Traceability
 
 - Spec anchors (if any): `deps/yai-specs/contracts/boundaries/L1-kernel.md`, `deps/yai-specs/specs/protocol/include/session.h`, `deps/yai-specs/contracts/invariants/I-002-determinism.md`, `deps/yai-specs/contracts/invariants/I-006-external-effect-boundary.md`
-- Targets ADR: `docs/design/adr/ADR-007-workspace-isolation.md`, `docs/design/adr/ADR-008-connection-lifecycle.md`, `docs/design/adr/ADR-009-engine-attachment.md`, `docs/design/adr/ADR-010-boot-entrypoint.md`
-- Downstream runbook: `docs/runbooks/workspaces-lifecycle.md`
+- Targets ADR: `docs/20-governance/design/adr/ADR-007-workspace-isolation.md`, `docs/20-governance/design/adr/ADR-008-connection-lifecycle.md`, `docs/20-governance/design/adr/ADR-009-engine-attachment.md`, `docs/20-governance/design/adr/ADR-010-boot-entrypoint.md`
+- Downstream runbook: `docs/20-governance/runbooks/workspaces-lifecycle.md`
 
 ## References
-- `docs/design/spine.md`
-- `docs/design/adr/ADR-007-workspace-isolation.md`
-- `docs/design/adr/ADR-008-connection-lifecycle.md`
+- `docs/20-governance/design/spine.md`
+- `docs/20-governance/design/adr/ADR-007-workspace-isolation.md`
+- `docs/20-governance/design/adr/ADR-008-connection-lifecycle.md`

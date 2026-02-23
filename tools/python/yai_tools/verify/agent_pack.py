@@ -14,15 +14,15 @@ def build_pack() -> dict[str, Any]:
     return {
         "version": 1,
         "canonical_sources": [
-            "docs/design/spine.md",
-            "docs/dev-guide/cross-repo-workflow.md",
-            "docs/templates/README.md",
-            "docs/_policy/docs-style.md",
-            "docs/design/traceability.md",
-            "docs/dev-guide/github-templates.md",
+            "docs/20-governance/design/spine.md",
+            "docs/70-guides/dev-guide/cross-repo-workflow.md",
+            "docs/20-governance/templates/README.md",
+            "docs/20-governance/policies/_policy/docs-style.md",
+            "docs/20-governance/design/traceability.md",
+            "docs/70-guides/dev-guide/github-templates.md",
             "tools/README.md",
-            "docs/dev-guide/agent-contract.md",
-            "docs/dev-guide/agent-playbook.md"
+            "docs/70-guides/dev-guide/agent-contract.md",
+            "docs/70-guides/dev-guide/agent-playbook.md"
         ],
         "artifact_flow": ["proposal", "adr", "runbook", "milestone_pack", "evidence", "proof_pack"],
         "required_commands": [
@@ -46,8 +46,8 @@ def build_pack() -> dict[str, Any]:
             "forbid_absolute_paths": True
         },
         "audit_policy": {
-            "draft_private_path": "docs/audits/.private/",
-            "public_path": "docs/audits/",
+            "draft_private_path": "docs/60-validation/audits/.private/",
+            "public_path": "docs/60-validation/audits/",
             "promotion_requires": ["milestone_closed", "evidence_complete", "human_review"]
         }
     }

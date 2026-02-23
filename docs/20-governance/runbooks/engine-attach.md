@@ -10,20 +10,20 @@ depends_on:
   - RB-ROOT-HARDENING
   - RB-WORKSPACES-LIFECYCLE
 adr_refs:
-  - docs/design/adr/ADR-009-engine-attachment.md
-  - docs/design/adr/ADR-008-connection-lifecycle.md
+  - docs/20-governance/design/adr/ADR-009-engine-attachment.md
+  - docs/20-governance/design/adr/ADR-008-connection-lifecycle.md
 decisions:
-  - docs/design/adr/ADR-009-engine-attachment.md
-  - docs/design/adr/ADR-008-connection-lifecycle.md
+  - docs/20-governance/design/adr/ADR-009-engine-attachment.md
+  - docs/20-governance/design/adr/ADR-008-connection-lifecycle.md
 related:
   adr:
-    - docs/design/adr/ADR-009-engine-attachment.md
-    - docs/design/adr/ADR-008-connection-lifecycle.md
+    - docs/20-governance/design/adr/ADR-009-engine-attachment.md
+    - docs/20-governance/design/adr/ADR-008-connection-lifecycle.md
   specs:
     - deps/yai-specs/specs/protocol/include/transport.h
     - deps/yai-specs/specs/protocol/include/yai_protocol_ids.h
   test_plans:
-    - docs/test-plans/hardfail.md
+    - docs/50-qualification/test-plans/hardfail.md
   tools:
     - tools/bin/yai-verify
     - tools/bin/yai-gate
@@ -65,16 +65,16 @@ Execute the phased attach sequence in this document (ADR decision first, then ke
 - Re-run baseline ping and kernel status checks before retry.
 
 ## 8) References
-- ADR: `docs/design/adr/ADR-009-engine-attachment.md`
-- Runbooks: `docs/runbooks/root-hardening.md`, `docs/runbooks/workspaces-lifecycle.md`
-- Test plans: `docs/test-plans/hardfail.md`
+- ADR: `docs/20-governance/design/adr/ADR-009-engine-attachment.md`
+- Runbooks: `docs/20-governance/runbooks/root-hardening.md`, `docs/20-governance/runbooks/workspaces-lifecycle.md`
+- Test plans: `docs/50-qualification/test-plans/hardfail.md`
 
 ## Traceability
 - ADR refs:
-  - `docs/design/adr/ADR-009-engine-attachment.md`
-  - `docs/design/adr/ADR-008-connection-lifecycle.md`
+  - `docs/20-governance/design/adr/ADR-009-engine-attachment.md`
+  - `docs/20-governance/design/adr/ADR-008-connection-lifecycle.md`
 - MPs (planned):
-  - `docs/milestone-packs/engine-attach/MP-ENGINE-ATTACH-0.1.0.md` (ID: `MP-ENGINE-ATTACH-0.1.0`)
+  - `docs/20-governance/milestone-packs/engine-attach/MP-ENGINE-ATTACH-0.1.0.md` (ID: `MP-ENGINE-ATTACH-0.1.0`)
 
 ## Appendix — Detailed Operational Notes (Legacy Detailed Content)
 
@@ -119,7 +119,7 @@ yai root ping
 ## STEP 0: ADR (Socket Layout L2 Decision) **MANDATORY**
 
 ### Target file
-- `docs/design/adr/ADR-009-engine-attachment.md`
+- `docs/20-governance/design/adr/ADR-009-engine-attachment.md`
 
 ### Choose ONE schema and commit to it
 

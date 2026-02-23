@@ -4,7 +4,7 @@ status: accepted
 effective_date: 2026-02-18
 supersedes: []
 applies_to:
-  runbook: docs/runbooks/root-hardening.md
+  runbook: docs/20-governance/runbooks/root-hardening.md
   phase: boot-baseline
   anchor: "#phase-root-boot-baseline"
 law_refs:
@@ -47,12 +47,12 @@ A single entrypoint improves reproducibility, policy enforcement, and incident d
 ## Traceability
 
 - Proposals:
-  - `docs/design/proposals/PRP-003-workspace-lifecycle-and-isolation.md`
+  - `docs/20-governance/design/proposals/PRP-003-workspace-lifecycle-and-isolation.md`
 - Implemented by runbooks:
-  - `docs/runbooks/workspaces-lifecycle.md`
-  - `docs/runbooks/engine-attach.md`
+  - `docs/20-governance/runbooks/workspaces-lifecycle.md`
+  - `docs/20-governance/runbooks/engine-attach.md`
 - Milestone packs:
-  - `docs/milestone-packs/workspaces-lifecycle/MP-WORKSPACES-LIFECYCLE-0.1.0.md` *(planned)*
+  - `docs/20-governance/milestone-packs/workspaces-lifecycle/MP-WORKSPACES-LIFECYCLE-0.1.0.md` *(planned)*
 
 ## Status
 

@@ -21,6 +21,6 @@ Start reducing non-core surface in `yai` while keeping CI/runtime stable.
 
 ## Wave 2 (Governance Docs Externalization)
 
-- Replaced `docs/dev-guide/*`, `docs/templates/*`, `docs/_policy/*` with compatibility stubs.
+- Replaced `docs/70-guides/dev-guide/*`, `docs/20-governance/templates/*`, `docs/20-governance/policies/_policy/*` with compatibility stubs.
 - Canonical source moved to `yai-infra/docs/governance/yai/...`.
-- `docs/proof/*` intentionally kept in `yai` in this wave to preserve release-script compatibility.
+- `docs/60-validation/proof/*` intentionally kept in `yai` in this wave to preserve release-script compatibility.

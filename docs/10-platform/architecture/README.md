@@ -20,19 +20,19 @@ Canonical Topology: Root -> Kernel -> Engine with Mind as planned/external L3 pl
 
 ## Contents
 
-- `docs/architecture/overview.md`
-- `docs/architecture/runtime-model.md`
-- `docs/architecture/specs-bridge.md`
-- `docs/architecture/traceability.md`
-- `docs/architecture/components/*.md`
+- `docs/10-platform/architecture/overview.md`
+- `docs/10-platform/architecture/runtime-model.md`
+- `docs/10-platform/architecture/specs-bridge.md`
+- `docs/10-platform/architecture/traceability.md`
+- `docs/10-platform/architecture/components/*.md`
 - `docs/_generated/architecture-alignment.v1.json`
 
 ## Reading order
 
-1. `docs/architecture/overview.md`
-2. `docs/architecture/runtime-model.md`
-3. `docs/architecture/specs-bridge.md`
-4. `docs/architecture/traceability.md`
+1. `docs/10-platform/architecture/overview.md`
+2. `docs/10-platform/architecture/runtime-model.md`
+3. `docs/10-platform/architecture/specs-bridge.md`
+4. `docs/10-platform/architecture/traceability.md`
 5. Component docs
 
 ## Contract

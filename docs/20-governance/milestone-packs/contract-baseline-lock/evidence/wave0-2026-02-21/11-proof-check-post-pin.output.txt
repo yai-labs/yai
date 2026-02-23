@@ -1,5 +1,5 @@
 [proof-pack] PASS
-manifest=docs/proof/PP-FOUNDATION-0001/pp-foundation-0001.manifest.v1.json
+manifest=docs/60-validation/proof/PP-FOUNDATION-0001/pp-foundation-0001.manifest.v1.json
 yai_commit=8a793dd42c6a42673b49357ad73bb7a3fc7ff1ee
 yai_specs_commit=30d04d08fc6aba988b1fa20fb8e28cf886b8ccf7
 yai_cli_commit=767ab54515bec163b2e7d365a5892fcb1174bc41

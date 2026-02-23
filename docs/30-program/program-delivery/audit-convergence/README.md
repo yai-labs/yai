@@ -4,10 +4,10 @@ status: active
 owner: governance
 updated: 2026-02-21
 related:
-  - docs/program-delivery/audit-convergence/EXECUTION-PLAN-v0.1.0.md
-  - docs/program-delivery/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md
-  - docs/audits/claims/infra-grammar.v0.1.json
-  - docs/design/adr/ADR-012-audit-convergence-gates.md
+  - docs/30-program/program-delivery/audit-convergence/EXECUTION-PLAN-v0.1.0.md
+  - docs/30-program/program-delivery/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md
+  - docs/60-validation/audits/claims/infra-grammar.v0.1.json
+  - docs/20-governance/design/adr/ADR-012-audit-convergence-gates.md
 issue:
   - https://github.com/yai-labs/yai/issues/140
 ---
@@ -18,10 +18,10 @@ This folder is the canonical backbone for converging runbooks/ADR/MP to one targ
 Infra Grammar audit green on all domains, including Mind.
 
 Canonical artifacts:
-- Execution plan: `docs/program-delivery/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
-- Convergence matrix: `docs/program-delivery/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
-- Claims registry: `docs/audits/claims/infra-grammar.v0.1.json`
-- Governance ADR: `docs/design/adr/ADR-012-audit-convergence-gates.md`
+- Execution plan: `docs/30-program/program-delivery/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
+- Convergence matrix: `docs/30-program/program-delivery/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
+- Claims registry: `docs/60-validation/audits/claims/infra-grammar.v0.1.json`
+- Governance ADR: `docs/20-governance/design/adr/ADR-012-audit-convergence-gates.md`
 
 Rules:
 - Source of truth for claims is the registry JSON.

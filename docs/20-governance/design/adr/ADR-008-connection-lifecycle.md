@@ -4,7 +4,7 @@ status: accepted
 effective_date: 2026-02-18
 supersedes: []
 applies_to:
-  runbook: docs/runbooks/workspaces-lifecycle.md
+  runbook: docs/20-governance/runbooks/workspaces-lifecycle.md
   phase: 0.1.1
   anchor: "#phase-0-1-1-ws-create-guardrails"
 law_refs:
@@ -49,13 +49,13 @@ A strict lifecycle avoids hidden state transitions and improves forensic clarity
 ## Traceability
 
 - Proposals:
-  - `docs/design/proposals/PRP-003-workspace-lifecycle-and-isolation.md`
+  - `docs/20-governance/design/proposals/PRP-003-workspace-lifecycle-and-isolation.md`
 - Implemented by runbooks:
-  - `docs/runbooks/workspaces-lifecycle.md`
-  - `docs/runbooks/engine-attach.md`
+  - `docs/20-governance/runbooks/workspaces-lifecycle.md`
+  - `docs/20-governance/runbooks/engine-attach.md`
 - Milestone packs:
-  - `docs/milestone-packs/workspaces-lifecycle/MP-WORKSPACES-LIFECYCLE-0.1.0.md` *(planned)*
-  - `docs/milestone-packs/engine-attach/MP-ENGINE-ATTACH-0.1.0.md` *(planned)*
+  - `docs/20-governance/milestone-packs/workspaces-lifecycle/MP-WORKSPACES-LIFECYCLE-0.1.0.md` *(planned)*
+  - `docs/20-governance/milestone-packs/engine-attach/MP-ENGINE-ATTACH-0.1.0.md` *(planned)*
 
 ## Status
 

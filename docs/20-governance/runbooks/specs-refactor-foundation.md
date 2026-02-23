@@ -9,15 +9,15 @@ supersedes: []
 depends_on:
   - RB-CONTRACT-BASELINE-LOCK
 adr_refs:
-  - docs/design/adr/ADR-011-contract-baseline-lock.md
-  - docs/design/adr/ADR-012-audit-convergence-gates.md
+  - docs/20-governance/design/adr/ADR-011-contract-baseline-lock.md
+  - docs/20-governance/design/adr/ADR-012-audit-convergence-gates.md
 decisions:
-  - docs/design/adr/ADR-011-contract-baseline-lock.md
-  - docs/design/adr/ADR-012-audit-convergence-gates.md
+  - docs/20-governance/design/adr/ADR-011-contract-baseline-lock.md
+  - docs/20-governance/design/adr/ADR-012-audit-convergence-gates.md
 related:
   adr:
-    - docs/design/adr/ADR-011-contract-baseline-lock.md
-    - docs/design/adr/ADR-012-audit-convergence-gates.md
+    - docs/20-governance/design/adr/ADR-011-contract-baseline-lock.md
+    - docs/20-governance/design/adr/ADR-012-audit-convergence-gates.md
   specs:
     - deps/yai-specs/SPEC_MAP.md
     - deps/yai-specs/REGISTRY.md
@@ -91,11 +91,11 @@ A *closure artifact* for a phase: what changed, proof evidence, links to issues/
 
 ### 3.1 Audit Convergence Binding (Wave 1)
 This runbook is Wave 1 under:
-- `docs/program-delivery/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
-- `docs/program-delivery/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
+- `docs/30-program/program-delivery/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
+- `docs/30-program/program-delivery/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
 
 Claims source of truth:
-- `docs/audits/claims/infra-grammar.v0.1.json`
+- `docs/60-validation/audits/claims/infra-grammar.v0.1.json`
 
 Wave tracking:
 - `https://github.com/yai-labs/yai/issues/142`
@@ -162,7 +162,7 @@ A phase is "closed" only when:
 - optionally: `docs/` navigation pointers.
 
 **MP (planned):**
-- `docs/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.0.md`
+- `docs/20-governance/milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.0.md`
 
 ---
 
@@ -508,6 +508,6 @@ make verify
 
 ## 11) References
 
-- ADR: `docs/design/adr/ADR-011-contract-baseline-lock.md`
+- ADR: `docs/20-governance/design/adr/ADR-011-contract-baseline-lock.md`
 - Specs: `deps/yai-specs/SPEC_MAP.md`, `deps/yai-specs/REGISTRY.md`
-- Planned MPs: `docs/milestone-packs/specs-refactor-foundation/*`
+- Planned MPs: `docs/20-governance/milestone-packs/specs-refactor-foundation/*`

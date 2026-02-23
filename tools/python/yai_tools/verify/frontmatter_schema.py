@@ -16,7 +16,7 @@ from yai_tools.verify.traceability import (
 )
 
 SCHEMA_DIR = REPO_ROOT / "tools" / "schemas" / "docs"
-PROPOSAL_DIR = REPO_ROOT / "docs" / "design" / "proposals"
+PROPOSAL_DIR = REPO_ROOT / "docs" / "20-governance" / "design" / "proposals"
 
 
 def _load(name: str) -> dict[str, Any]:
@@ -95,6 +95,9 @@ def run_schema_check(changed: bool, base: str, head: str) -> int:
 
     failures: list[str] = []
     for p in sorted(set(files)):
+        # Index readmes are navigation docs, not normative proposal/ADR/runbook/MP docs.
+        if p.name.upper() == "README.MD":
+            continue
         c = _classify(p)
         if not c:
             continue

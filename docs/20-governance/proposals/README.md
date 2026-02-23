@@ -1,4 +1,4 @@
 # Proposals Index
 
 Primary source path:
-- `docs/design/proposals/`
+- `docs/20-governance/design/proposals/`

@@ -37,7 +37,7 @@ Canonical Topology: Root -> Kernel -> Engine with Mind as planned/external L3 pl
 
 ## Traceability
 
-- ADRs: `docs/design/adr/ADR-001-single-runtime.md`, `docs/design/adr/ADR-002-root-entrypoint.md`, `docs/design/adr/ADR-003-kernel-authority.md`, `docs/design/adr/ADR-004-engine-execution.md`, `docs/design/adr/ADR-005-mind-proposer.md`
-- Runbooks: `docs/runbooks/root-hardening.md`, `docs/runbooks/engine-attach.md`, `docs/runbooks/mind-redis-stm.md`
-- MPs: `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`
+- ADRs: `docs/20-governance/design/adr/ADR-001-single-runtime.md`, `docs/20-governance/design/adr/ADR-002-root-entrypoint.md`, `docs/20-governance/design/adr/ADR-003-kernel-authority.md`, `docs/20-governance/design/adr/ADR-004-engine-execution.md`, `docs/20-governance/design/adr/ADR-005-mind-proposer.md`
+- Runbooks: `docs/20-governance/runbooks/root-hardening.md`, `docs/20-governance/runbooks/engine-attach.md`, `docs/20-governance/runbooks/mind-redis-stm.md`
+- MPs: `docs/20-governance/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`
 - L0 anchors: `deps/yai-specs/contracts/boundaries/L1-kernel.md`, `deps/yai-specs/contracts/boundaries/L2-engine.md`, `deps/yai-specs/contracts/boundaries/L3-mind.md`

@@ -8,11 +8,11 @@ revision: 1
 supersedes: []
 related:
   adr:
-    - docs/design/adr/ADR-011-contract-baseline-lock.md
+    - docs/20-governance/design/adr/ADR-011-contract-baseline-lock.md
   runbooks:
-    - docs/runbooks/root-hardening.md
+    - docs/20-governance/runbooks/root-hardening.md
   milestone_packs:
-    - docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md
+    - docs/20-governance/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md
   specs:
     - deps/yai-specs/formal/traceability.v1.json
     - deps/yai-specs/formal/spec_map.md
@@ -58,11 +58,11 @@ Define a formal baseline-lock policy with explicit pin responsibilities for `yai
 ## Traceability
 
 - Spec anchors (if any): `deps/yai-specs/formal/traceability.v1.json`, `deps/yai-specs/formal/spec_map.md`, `deps/yai-specs/contracts/invariants/I-001-traceability.md`, `deps/yai-specs/contracts/invariants/I-007-compliance-context-required.md`
-- Targets ADR: `docs/design/adr/ADR-011-contract-baseline-lock.md`
-- Downstream runbook: `docs/runbooks/root-hardening.md`
-- Downstream MP: `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`
+- Targets ADR: `docs/20-governance/design/adr/ADR-011-contract-baseline-lock.md`
+- Downstream runbook: `docs/20-governance/runbooks/root-hardening.md`
+- Downstream MP: `docs/20-governance/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`
 
 ## References
-- `docs/design/spine.md`
-- `docs/design/adr/ADR-011-contract-baseline-lock.md`
+- `docs/20-governance/design/spine.md`
+- `docs/20-governance/design/adr/ADR-011-contract-baseline-lock.md`
 - `tools/release/sync_specs_refs.sh`

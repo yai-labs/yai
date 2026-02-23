@@ -3,8 +3,8 @@ id: AUDIT-CONVERGENCE-MATRIX-v0.1.0
 status: draft
 owner: governance
 updated: 2026-02-21
-registry: docs/audits/claims/infra-grammar.v0.1.json
-plan: docs/program-delivery/audit-convergence/EXECUTION-PLAN-v0.1.0.md
+registry: docs/60-validation/audits/claims/infra-grammar.v0.1.json
+plan: docs/30-program/program-delivery/audit-convergence/EXECUTION-PLAN-v0.1.0.md
 ---
 
 # Audit Convergence Matrix (v0.1.0)
@@ -29,13 +29,13 @@ Legend:
 | Mind (L3) | `RB-MIND-REDIS-STM#phase-mind-proposer` | `RB-MIND-REDIS-STM#phase-mind-proposer` | `RB-MIND-REDIS-STM` + `ADR-005-mind-proposer` | `RB-MIND-REDIS-STM#phase-mind-proposer` | Kernel/Engine mediated path required by runbook closure | End-to-end proposal->enforcement evidence bundle | `C-MIND-PROPOSER-KERNEL-ENFORCER` | B | not_present |
 
 ## 2) Runbook Re-centering Order
-1. `docs/runbooks/contract-baseline-lock.md` (continue from active `0.1.1`, no mid-phase rewrite)
-2. `docs/runbooks/specs-refactor-foundation.md` (backbone binding)
-3. `docs/runbooks/root-hardening.md`
-4. `docs/runbooks/workspaces-lifecycle.md`
-5. `docs/runbooks/engine-attach.md`
-6. `docs/runbooks/data-plane.md`
-7. `docs/runbooks/mind-redis-stm.md`
+1. `docs/20-governance/runbooks/contract-baseline-lock.md` (continue from active `0.1.1`, no mid-phase rewrite)
+2. `docs/20-governance/runbooks/specs-refactor-foundation.md` (backbone binding)
+3. `docs/20-governance/runbooks/root-hardening.md`
+4. `docs/20-governance/runbooks/workspaces-lifecycle.md`
+5. `docs/20-governance/runbooks/engine-attach.md`
+6. `docs/20-governance/runbooks/data-plane.md`
+7. `docs/20-governance/runbooks/mind-redis-stm.md`
 
 ## 3) Mandatory Evidence Command Families
 - Pins/contracts:

@@ -3,118 +3,118 @@
   "components": [
     {
       "adr_refs": [
-        "docs/design/adr/ADR-010-boot-entrypoint.md"
+        "docs/20-governance/design/adr/ADR-010-boot-entrypoint.md"
       ],
       "l0_refs": [
         "deps/yai-specs/contracts/invariants/I-001-traceability.md"
       ],
       "mp_refs": [
-        "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md"
+        "docs/20-governance/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md"
       ],
       "name": "boot",
-      "path": "docs/architecture/components/boot.md",
+      "path": "docs/10-platform/architecture/components/boot.md",
       "runbook_refs": [
-        "docs/runbooks/root-hardening.md"
+        "docs/20-governance/runbooks/root-hardening.md"
       ],
       "status": "implemented"
     },
     {
       "adr_refs": [
-        "docs/design/adr/ADR-004-engine-execution.md",
-        "docs/design/adr/ADR-009-engine-attachment.md"
+        "docs/20-governance/design/adr/ADR-004-engine-execution.md",
+        "docs/20-governance/design/adr/ADR-009-engine-attachment.md"
       ],
       "l0_refs": [
         "deps/yai-specs/contracts/boundaries/L2-engine.md",
         "deps/yai-specs/specs/protocol/include/protocol.h"
       ],
       "mp_refs": [
-        "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md"
+        "docs/20-governance/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md"
       ],
       "name": "engine",
-      "path": "docs/architecture/components/engine.md",
+      "path": "docs/10-platform/architecture/components/engine.md",
       "runbook_refs": [
-        "docs/runbooks/engine-attach.md",
-        "docs/runbooks/root-hardening.md"
+        "docs/20-governance/runbooks/engine-attach.md",
+        "docs/20-governance/runbooks/root-hardening.md"
       ],
       "status": "implemented"
     },
     {
       "adr_refs": [
-        "docs/design/adr/ADR-003-kernel-authority.md",
-        "docs/design/adr/ADR-007-workspace-isolation.md",
-        "docs/design/adr/ADR-008-connection-lifecycle.md"
+        "docs/20-governance/design/adr/ADR-003-kernel-authority.md",
+        "docs/20-governance/design/adr/ADR-007-workspace-isolation.md",
+        "docs/20-governance/design/adr/ADR-008-connection-lifecycle.md"
       ],
       "l0_refs": [
         "deps/yai-specs/contracts/boundaries/L1-kernel.md",
         "deps/yai-specs/specs/protocol/include/session.h"
       ],
       "mp_refs": [
-        "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.2.md",
-        "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.4.md"
+        "docs/20-governance/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.2.md",
+        "docs/20-governance/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.4.md"
       ],
       "name": "kernel",
-      "path": "docs/architecture/components/kernel.md",
+      "path": "docs/10-platform/architecture/components/kernel.md",
       "runbook_refs": [
-        "docs/runbooks/root-hardening.md",
-        "docs/runbooks/workspaces-lifecycle.md"
+        "docs/20-governance/runbooks/root-hardening.md",
+        "docs/20-governance/runbooks/workspaces-lifecycle.md"
       ],
       "status": "implemented"
     },
     {
       "adr_refs": [
-        "docs/design/adr/ADR-003-kernel-authority.md",
-        "docs/design/adr/ADR-005-mind-proposer.md"
+        "docs/20-governance/design/adr/ADR-003-kernel-authority.md",
+        "docs/20-governance/design/adr/ADR-005-mind-proposer.md"
       ],
       "l0_refs": [
         "deps/yai-specs/contracts/boundaries/L3-mind.md",
         "deps/yai-specs/contracts/invariants/I-004-cognitive-reconfiguration.md"
       ],
       "mp_refs": [
-        "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md"
+        "docs/20-governance/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md"
       ],
       "name": "mind",
-      "path": "docs/architecture/components/mind.md",
+      "path": "docs/10-platform/architecture/components/mind.md",
       "runbook_refs": [
-        "docs/runbooks/mind-redis-stm.md",
-        "docs/runbooks/root-hardening.md"
+        "docs/20-governance/runbooks/mind-redis-stm.md",
+        "docs/20-governance/runbooks/root-hardening.md"
       ],
       "status": "partial"
     },
     {
       "adr_refs": [
-        "docs/design/adr/ADR-001-single-runtime.md",
-        "docs/design/adr/ADR-002-root-entrypoint.md"
+        "docs/20-governance/design/adr/ADR-001-single-runtime.md",
+        "docs/20-governance/design/adr/ADR-002-root-entrypoint.md"
       ],
       "l0_refs": [
         "deps/yai-specs/specs/protocol/include/auth.h",
         "deps/yai-specs/specs/protocol/include/transport.h"
       ],
       "mp_refs": [
-        "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md",
-        "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md"
+        "docs/20-governance/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md",
+        "docs/20-governance/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md"
       ],
       "name": "root",
-      "path": "docs/architecture/components/root.md",
+      "path": "docs/10-platform/architecture/components/root.md",
       "runbook_refs": [
-        "docs/runbooks/root-hardening.md"
+        "docs/20-governance/runbooks/root-hardening.md"
       ],
       "status": "implemented"
     },
     {
       "adr_refs": [
-        "docs/design/adr/ADR-001-single-runtime.md"
+        "docs/20-governance/design/adr/ADR-001-single-runtime.md"
       ],
       "l0_refs": [
         "deps/yai-specs/contracts/boundaries/L0-vault.md",
         "deps/yai-specs/specs/vault/include/yai_vault_abi.h"
       ],
       "mp_refs": [
-        "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md"
+        "docs/20-governance/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md"
       ],
       "name": "vault",
-      "path": "docs/architecture/components/vault.md",
+      "path": "docs/10-platform/architecture/components/vault.md",
       "runbook_refs": [
-        "docs/runbooks/root-hardening.md"
+        "docs/20-governance/runbooks/root-hardening.md"
       ],
       "status": "partial"
     }
@@ -122,7 +122,7 @@
   "traceability_rows": [
     {
       "adr_refs": [
-        "docs/design/adr/ADR-010-boot-entrypoint.md"
+        "docs/20-governance/design/adr/ADR-010-boot-entrypoint.md"
       ],
       "component": "Boot",
       "is_planned_marker": false,
@@ -130,17 +130,17 @@
         "deps/yai-specs/contracts/invariants/I-001-traceability.md"
       ],
       "mp_refs": [
-        "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md"
+        "docs/20-governance/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md"
       ],
       "runbook_refs": [
-        "docs/runbooks/root-hardening.md"
+        "docs/20-governance/runbooks/root-hardening.md"
       ],
       "status": "implemented"
     },
     {
       "adr_refs": [
-        "docs/design/adr/ADR-004-engine-execution.md",
-        "docs/design/adr/ADR-009-engine-attachment.md"
+        "docs/20-governance/design/adr/ADR-004-engine-execution.md",
+        "docs/20-governance/design/adr/ADR-009-engine-attachment.md"
       ],
       "component": "Engine",
       "is_planned_marker": false,
@@ -149,19 +149,19 @@
         "deps/yai-specs/specs/protocol/include/protocol.h"
       ],
       "mp_refs": [
-        "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md"
+        "docs/20-governance/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md"
       ],
       "runbook_refs": [
-        "docs/runbooks/engine-attach.md",
-        "docs/runbooks/root-hardening.md"
+        "docs/20-governance/runbooks/engine-attach.md",
+        "docs/20-governance/runbooks/root-hardening.md"
       ],
       "status": "implemented"
     },
     {
       "adr_refs": [
-        "docs/design/adr/ADR-003-kernel-authority.md",
-        "docs/design/adr/ADR-007-workspace-isolation.md",
-        "docs/design/adr/ADR-008-connection-lifecycle.md"
+        "docs/20-governance/design/adr/ADR-003-kernel-authority.md",
+        "docs/20-governance/design/adr/ADR-007-workspace-isolation.md",
+        "docs/20-governance/design/adr/ADR-008-connection-lifecycle.md"
       ],
       "component": "Kernel",
       "is_planned_marker": false,
@@ -170,19 +170,19 @@
         "deps/yai-specs/specs/protocol/include/session.h"
       ],
       "mp_refs": [
-        "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.2.md",
-        "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.4.md"
+        "docs/20-governance/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.2.md",
+        "docs/20-governance/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.4.md"
       ],
       "runbook_refs": [
-        "docs/runbooks/root-hardening.md",
-        "docs/runbooks/workspaces-lifecycle.md"
+        "docs/20-governance/runbooks/root-hardening.md",
+        "docs/20-governance/runbooks/workspaces-lifecycle.md"
       ],
       "status": "implemented"
     },
     {
       "adr_refs": [
-        "docs/design/adr/ADR-003-kernel-authority.md",
-        "docs/design/adr/ADR-005-mind-proposer.md"
+        "docs/20-governance/design/adr/ADR-003-kernel-authority.md",
+        "docs/20-governance/design/adr/ADR-005-mind-proposer.md"
       ],
       "component": "Mind",
       "is_planned_marker": false,
@@ -191,18 +191,18 @@
         "deps/yai-specs/contracts/invariants/I-004-cognitive-reconfiguration.md"
       ],
       "mp_refs": [
-        "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md"
+        "docs/20-governance/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md"
       ],
       "runbook_refs": [
-        "docs/runbooks/mind-redis-stm.md",
-        "docs/runbooks/root-hardening.md"
+        "docs/20-governance/runbooks/mind-redis-stm.md",
+        "docs/20-governance/runbooks/root-hardening.md"
       ],
       "status": "partial"
     },
     {
       "adr_refs": [
-        "docs/design/adr/ADR-001-single-runtime.md",
-        "docs/design/adr/ADR-002-root-entrypoint.md"
+        "docs/20-governance/design/adr/ADR-001-single-runtime.md",
+        "docs/20-governance/design/adr/ADR-002-root-entrypoint.md"
       ],
       "component": "Root",
       "is_planned_marker": false,
@@ -211,17 +211,17 @@
         "deps/yai-specs/specs/protocol/include/transport.h"
       ],
       "mp_refs": [
-        "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md",
-        "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md"
+        "docs/20-governance/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md",
+        "docs/20-governance/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md"
       ],
       "runbook_refs": [
-        "docs/runbooks/root-hardening.md"
+        "docs/20-governance/runbooks/root-hardening.md"
       ],
       "status": "implemented"
     },
     {
       "adr_refs": [
-        "docs/design/adr/ADR-001-single-runtime.md"
+        "docs/20-governance/design/adr/ADR-001-single-runtime.md"
       ],
       "component": "Vault",
       "is_planned_marker": false,
@@ -230,10 +230,10 @@
         "deps/yai-specs/specs/vault/include/yai_vault_abi.h"
       ],
       "mp_refs": [
-        "docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md"
+        "docs/20-governance/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md"
       ],
       "runbook_refs": [
-        "docs/runbooks/root-hardening.md"
+        "docs/20-governance/runbooks/root-hardening.md"
       ],
       "status": "partial"
     }

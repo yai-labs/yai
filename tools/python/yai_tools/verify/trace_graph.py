@@ -7,7 +7,7 @@ from typing import Any
 from yai_tools.verify.generated_sync import check_json_synced, write_json
 from yai_tools.verify.traceability import ADR_DIR, MP_DIR, REPO_ROOT, RUNBOOK_DIR, parse_frontmatter
 
-PROPOSAL_DIR = REPO_ROOT / "docs" / "design" / "proposals"
+PROPOSAL_DIR = REPO_ROOT / "docs" / "20-governance" / "design" / "proposals"
 GENERATED_GRAPH = REPO_ROOT / "docs" / "_generated" / "traceability.graph.v1.json"
 GENERATED_LOCK = REPO_ROOT / "docs" / "_generated" / "traceability.lock.v1.json"
 
@@ -21,9 +21,9 @@ def _node_type(p: Path) -> str:
         return "runbook"
     if p.is_relative_to(MP_DIR):
         return "milestone_pack"
-    if p.is_relative_to(REPO_ROOT / "docs" / "test-plans"):
+    if p.is_relative_to(REPO_ROOT / "docs" / "50-qualification" / "test-plans"):
         return "test_plan"
-    if p.is_relative_to(REPO_ROOT / "docs" / "proof"):
+    if p.is_relative_to(REPO_ROOT / "docs" / "60-validation" / "proof"):
         return "proof_pack"
     return "doc"
 

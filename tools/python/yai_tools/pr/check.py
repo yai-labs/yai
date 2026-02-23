@@ -34,7 +34,7 @@ def check_pr_body(path: str) -> tuple[bool, str]:
         "#<issue-number>",
         "<40-char-sha>",
         "MP-<TRACK>-<X.Y.Z>",
-        "docs/runbooks/<name>.md#<anchor>",
+        "docs/20-governance/runbooks/<name>.md#<anchor>",
         "<one paragraph>",
         "<what doc/policy changes and why>",
         "<case 1>",
@@ -60,8 +60,8 @@ def check_pr_body(path: str) -> tuple[bool, str]:
         return False, "MP-ID must be MP-<TRACK>-<X.Y.Z> or N/A"
 
     runbook = _extract(body, "Runbook")
-    if not re.fullmatch(r"docs/runbooks/.+\.md#.+|N/A", runbook, flags=re.IGNORECASE):
-        return False, "Runbook must be docs/runbooks/<name>.md#<anchor> or N/A"
+    if not re.fullmatch(r"docs/20-governance/runbooks/.+\.md#.+|N/A", runbook, flags=re.IGNORECASE):
+        return False, "Runbook must be docs/20-governance/runbooks/<name>.md#<anchor> or N/A"
 
     base = _extract(body, "Base-Commit")
     if not re.fullmatch(r"[0-9a-fA-F]{40}", base):

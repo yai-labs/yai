@@ -34,9 +34,9 @@ implemented
 
 ## Traceability
 
-- ADR refs: `docs/design/adr/ADR-004-engine-execution.md`, `docs/design/adr/ADR-009-engine-attachment.md`
-- Runbook refs: `docs/runbooks/engine-attach.md`, `docs/runbooks/root-hardening.md`
-- MP refs: `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md`
+- ADR refs: `docs/20-governance/design/adr/ADR-004-engine-execution.md`, `docs/20-governance/design/adr/ADR-009-engine-attachment.md`
+- Runbook refs: `docs/20-governance/runbooks/engine-attach.md`, `docs/20-governance/runbooks/root-hardening.md`
+- MP refs: `docs/20-governance/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md`
 - L0 anchors: `deps/yai-specs/contracts/boundaries/L2-engine.md`, `deps/yai-specs/specs/protocol/include/protocol.h`
 
 ## Known Drift / Gaps

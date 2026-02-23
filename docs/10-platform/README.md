@@ -7,7 +7,7 @@ Contents:
 - Runtime model index: `docs/10-platform/runtime-model/README.md`
 
 Legacy sources:
-- `docs/architecture/README.md`
-- `docs/architecture/overview.md`
-- `docs/architecture/runtime-model.md`
-- `docs/architecture/specs-bridge.md`
+- `docs/10-platform/architecture/README.md`
+- `docs/10-platform/architecture/overview.md`
+- `docs/10-platform/architecture/runtime-model.md`
+- `docs/10-platform/architecture/specs-bridge.md`

@@ -10,4 +10,4 @@ updated: 2026-02-21
 This area contains program-level execution artifacts that align ADR, runbooks, MPs, and audits.
 
 Current canonical package:
-- `docs/program-delivery/audit-convergence/README.md`
+- `docs/30-program/program-delivery/audit-convergence/README.md`

@@ -12,9 +12,9 @@ from typing import Dict, List, Tuple, Optional, Any
 REPO_ROOT = Path(__file__).resolve().parents[4]  # tools/python/yai_tools/verify/traceability.py -> repo root
 
 DOCS_ROOT = REPO_ROOT / "docs"
-ADR_DIR = DOCS_ROOT / "design" / "adr"
-RUNBOOK_DIR = DOCS_ROOT / "runbooks"
-MP_DIR = DOCS_ROOT / "milestone-packs"
+ADR_DIR = DOCS_ROOT / "20-governance" / "design" / "adr"
+RUNBOOK_DIR = DOCS_ROOT / "20-governance" / "runbooks"
+MP_DIR = DOCS_ROOT / "20-governance" / "milestone-packs"
 
 FM_DELIM = "---"
 

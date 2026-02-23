@@ -4,7 +4,7 @@ status: accepted
 effective_date: 2026-02-18
 supersedes: []
 applies_to:
-  runbook: docs/runbooks/root-hardening.md
+  runbook: docs/20-governance/runbooks/root-hardening.md
   phase: 0.1.0
   anchor: "#phase-0-1-0-protocol-guardrails"
 law_refs:
@@ -47,13 +47,13 @@ A strict contract baseline makes drift observable and converts gate output into 
 ## Traceability
 
 - Proposals:
-  - `docs/design/proposals/PRP-002-unified-rpc-and-cli-contract.md`
-  - `docs/design/proposals/PRP-005-formal-coverage-roadmap.md`
+  - `docs/20-governance/design/proposals/PRP-002-unified-rpc-and-cli-contract.md`
+  - `docs/20-governance/design/proposals/PRP-005-formal-coverage-roadmap.md`
 - Implemented by runbooks:
-  - `docs/runbooks/root-hardening.md`
+  - `docs/20-governance/runbooks/root-hardening.md`
 - Milestone packs:
-  - `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`
-  - `docs/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md`
+  - `docs/20-governance/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`
+  - `docs/20-governance/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md`
 
 ## Status
 
