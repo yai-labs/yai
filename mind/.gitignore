@@ -1,0 +1,27 @@
+# Rust / Cargo
+/target/
+**/*.rs.bk
+Cargo.lock
+
+# Local env / secrets
+.env
+.env.*
+*.key
+*.pem
+*.token
+*.secret
+
+# Logs / artifacts
+*.log
+*.out
+*.tmp
+artifacts/
+dist/
+build/
+states/
+cache/
+
+# OS/editor
+.DS_Store
+.idea/
+.vscode/
