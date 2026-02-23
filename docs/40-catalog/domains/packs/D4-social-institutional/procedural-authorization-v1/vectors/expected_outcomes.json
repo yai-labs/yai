@@ -1,0 +1,27 @@
+{
+  "vector_id": "safe-procedure-step-001",
+  "expected": [
+    {
+      "baseline_id": "baseline-allow",
+      "decision": { "outcome": "deny", "reason_code": "ARMING_REQUIRED" },
+      "enforcement": { "result": "blocked" },
+      "metrics": { "step_executed": false }
+    },
+    {
+      "baseline_id": "baseline-deny",
+      "decision": { "outcome": "deny", "reason_code": "ARMING_REQUIRED" },
+      "enforcement": { "result": "blocked" },
+      "metrics": { "step_executed": false }
+    },
+    {
+      "baseline_id": "baseline-quarantine",
+      "decision": { "outcome": "deny", "reason_code": "ARMING_REQUIRED" },
+      "enforcement": { "result": "blocked" },
+      "metrics": { "step_executed": false }
+    }
+  ],
+  "notes": {
+    "arming_vs_sequence": "This vector primarily exercises arming enforcement. Add a second vector later to exercise PROCEDURE_SEQUENCE_VIOLATION explicitly (e.g., STEP-02 without STEP-01).",
+    "policy": "Arming is modeled as mandatory for high-impact steps; outcome must remain deny under all baselines if not armed."
+  }
+}

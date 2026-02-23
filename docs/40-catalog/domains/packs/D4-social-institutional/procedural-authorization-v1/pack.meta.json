@@ -1,0 +1,23 @@
+{
+  "id": "D4-social-institutional/procedural-authorization-v1",
+  "d_major": "D4-social-institutional",
+  "title": "Social/Institutional - Procedural Authorization & Sequencing",
+  "version": 1,
+  "revision": 1,
+  "forbidden_effects": [
+    {
+      "effect": "procedure.step.execute",
+      "description": "Procedure step execution without required authority (role/delegation/arming)."
+    },
+    {
+      "effect": "procedure.step.execute.out_of_order",
+      "description": "Procedure step execution violates required sequencing constraints."
+    }
+  ],
+  "primary_runtime_effect_domain": "control",
+  "audit_steps": ["trigger", "context", "authority", "decision", "enforcement", "evidence"],
+  "safety": {
+    "vector_policy": "safe-only",
+    "notes": "Vectors must simulate procedure-step requests and must not affect real systems."
+  }
+}
