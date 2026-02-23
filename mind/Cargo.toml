@@ -1,0 +1,86 @@
+[package]
+name = "yai-mind"
+version = "0.1.0"
+edition = "2021"
+authors = ["Francesco Maiomascio"]
+description = "YAI Cognitive Core (Mind Layer - L3)"
+license = "MIT"
+
+# ============================================================
+# FEATURES
+# ============================================================
+
+[features]
+# Build minimale: solo core runtime
+default = ["minimal"]
+
+minimal = []
+
+# Optional: HTTP client (provider remoto)
+http-client = ["dep:reqwest"]
+
+# Optional: vector search (C++ binding → pesante)
+vector-usearch = ["dep:usearch"]
+
+# Optional: embeddings backends
+embeddings-onnx = ["dep:tract-onnx", "dep:tokenizers"]
+embeddings-candle = [
+    "dep:candle-core",
+    "dep:candle-nn",
+    "dep:candle-transformers",
+    "dep:tokenizers"
+]
+
+# ============================================================
+# CORE DEPENDENCIES (sempre attive)
+# ============================================================
+
+[dependencies]
+anyhow = "1"
+
+# IDs
+uuid = { version = "1.7", features = ["v4", "fast-rng"] }
+
+# Serialization
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# Storage + Graph
+rusqlite = { version = "0.31", features = ["bundled"] }
+petgraph = "0.6"
+
+# Hashing
+blake3 = "1"
+
+# ============================================================
+# OPTIONAL DEPENDENCIES
+# ============================================================
+
+# Vector search (pulls cxx toolchain)
+usearch = { version = "2", optional = true }
+
+# Networking (no default-features, TLS via rustls)
+reqwest = { version = "0.12", default-features = false, features = ["rustls-tls", "json"], optional = true }
+
+# Tokenization / Embeddings
+tokenizers = { version = "0.15", optional = true }
+tract-onnx = { version = "0.20", optional = true }
+
+candle-core = { version = "0.5", optional = true }
+candle-nn = { version = "0.5", optional = true }
+candle-transformers = { version = "0.5", optional = true }
+
+# ============================================================
+# DEV
+# ============================================================
+
+[dev-dependencies]
+memoffset = "0.9"
+
+# ============================================================
+# BINARIES
+# ============================================================
+
+[[bin]]
+name = "yai-mind"
+path = "src/main.rs"
