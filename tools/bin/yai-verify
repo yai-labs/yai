@@ -2,7 +2,17 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-VERIFY_DIR="$ROOT/tools/ops/verify"
+LOCAL_VERIFY_DIR="$ROOT/tools/ops/verify"
+INFRA_ROOT_DEFAULT="$(cd "$ROOT/.." && pwd)/yai-infra"
+INFRA_ROOT="${YAI_INFRA_ROOT:-$INFRA_ROOT_DEFAULT}"
+INFRA_VERIFY_DIR="$INFRA_ROOT/tools/ops/verify"
+
+# Prefer infra canonical tooling when available; fallback to local copy for compatibility.
+if [[ -d "$INFRA_VERIFY_DIR" ]]; then
+  VERIFY_DIR="$INFRA_VERIFY_DIR"
+else
+  VERIFY_DIR="$LOCAL_VERIFY_DIR"
+fi
 
 usage() {
   cat <<'USAGE'
