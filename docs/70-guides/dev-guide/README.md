@@ -1,4 +1,6 @@
-# Dev Guide Index
+# Moved To yai-infra
 
-Primary source path:
-- `docs/dev-guide/README.md`
+Canonical content moved to:
+- https://github.com/yai-labs/yai-infra/blob/main/docs/governance/yai/dev-guide/README.md
+
+This file is a compatibility stub kept in yai during migration.

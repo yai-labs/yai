@@ -1,4 +1,6 @@
-# Templates Index
+# Moved To yai-infra
 
-Primary source path:
-- `docs/templates/README.md`
+Canonical content moved to:
+- https://github.com/yai-labs/yai-infra/blob/main/docs/governance/yai/templates/README.md
+
+This file is a compatibility stub kept in yai during migration.
