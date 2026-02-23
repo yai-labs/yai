@@ -82,26 +82,25 @@ mind:
 	@command -v cargo >/dev/null 2>&1 || { echo "ERROR: cargo not found (install Rust toolchain)"; exit 1; }
 	@mkdir -p $(BIN_BUILD)
 	@if [ -f "$(ROOT_DIR)/Cargo.lock" ]; then \
-		cd $(MIND_DIR) && cargo build --locked ; \
+		cargo build -p yai-mind --locked ; \
 	else \
 		echo "[YAI] Cargo.lock missing at repo root; generating lockfile (one-time)"; \
 		cargo generate-lockfile --manifest-path $(MIND_DIR)/Cargo.toml || true; \
-		cd $(MIND_DIR) && cargo build ; \
+		cargo build -p yai-mind ; \
 	fi
-	@# best-effort: copy produced binary into build/bin for consistency
-	@if [ -f "$(MIND_DIR)/target/debug/$(MIND_BIN)" ]; then \
-		mkdir -p "$(BIN_BUILD)"; \
-		cp "$(MIND_DIR)/target/debug/$(MIND_BIN)" "$(BIN_BUILD)/$(MIND_BIN)"; \
+	@if [ -f "target/debug/$(MIND_BIN)" ]; then \
+		cp "target/debug/$(MIND_BIN)" "$(BIN_BUILD)/$(MIND_BIN)"; \
 		echo "[YAI] mind staged: $(BIN_BUILD)/$(MIND_BIN)"; \
 	else \
-		echo "[YAI] mind built (binary not staged; check mind/target/)"; \
+		echo "ERROR: mind built but binary missing at ./target/debug/$(MIND_BIN)"; \
+		exit 1; \
 	fi
 
 mind-check:
 	@command -v cargo >/dev/null 2>&1 || { echo "ERROR: cargo not found (install Rust toolchain)"; exit 1; }
-	@cd $(MIND_DIR) && cargo fmt --check
-	@cd $(MIND_DIR) && cargo clippy -- -D warnings
-	@cd $(MIND_DIR) && cargo test --all --locked
+	@cargo fmt -p yai-mind --check
+	@cargo clippy -p yai-mind -- -D warnings
+	@cargo test -p yai-mind --locked
 
 mind-dist: mind
 	@mkdir -p $(BIN_DIST)
