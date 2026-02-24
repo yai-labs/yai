@@ -155,7 +155,7 @@ decision_record = {
     "ws_id": ws_id,
     "trace_id": trace_id,
     "event": {"type": "network.egress.connect", "source": "rt002-otel-live"},
-    "principal": {"id": "principal-rt001", "role": "operator"},
+    "principal": {"id": "principal-rt002", "role": "operator"},
     "target": {"dst": {"ip": "127.0.0.1", "port": 8443, "path": "/v1/traces"}},
     "decision": {"outcome": outcome, "reason_code": reason, "baseline_id": baseline_id, "baseline_hash": baseline_hash},
     "enforcement": {"result": enf_result},

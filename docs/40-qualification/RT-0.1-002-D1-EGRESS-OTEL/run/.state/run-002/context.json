@@ -1,10 +1,10 @@
 {
-  "ws_id": "ws-rt001-run-002",
-  "trace_id": "trace-rt001-run-002",
+  "ws_id": "ws-rt002-run-002",
+  "trace_id": "trace-rt002-run-002",
   "principal": {
-    "id": "principal-rt001",
+    "id": "principal-rt002",
     "role": "operator"
   },
   "arming_state": "armed",
-  "created_at": "2026-02-24T21:29:04.136347+00:00"
+  "created_at": "2026-02-24T21:35:31.039145+00:00"
 }

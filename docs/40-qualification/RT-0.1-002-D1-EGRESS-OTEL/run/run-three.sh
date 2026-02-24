@@ -7,4 +7,4 @@ for rid in run-001 run-002 run-003; do
   RUN_ID="$rid" "$DIR/run-once.sh"
 done
 
-echo "RT-0.1-001-D1-EGRESS-CURL 3/3 runs completed"
+echo "RT-0.1-002-D1-EGRESS-OTEL 3/3 runs completed"

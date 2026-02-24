@@ -1,9 +1,9 @@
 {
   "mode": "live",
-  "started_at": "2026-02-24T21:29:05.141384+00:00",
+  "started_at": "2026-02-24T21:35:32.060645+00:00",
   "run_id": "run-003",
-  "ws_id": "ws-rt001-run-003",
-  "trace_id": "trace-rt001-run-003",
+  "ws_id": "ws-rt002-run-003",
+  "trace_id": "trace-rt002-run-003",
   "sockets": {
     "root": "/Users/francescomaiomascio/.yai/run/root/root.sock",
     "engine": "/Users/francescomaiomascio/.yai/run/engine/control.sock"
