@@ -14,9 +14,11 @@
 #include <transport.h>
 #include <yai_protocol_ids.h>
 #include <roles.h>
+#include <errors.h>
 #include <protocol.h> /* yai_handshake_req_t / yai_handshake_ack_t */
 
 #include "control_transport.h"
+#include "ws_id.h"
 
 static FILE *root_log = NULL;
 
@@ -79,11 +81,111 @@ static int send_response(int fd,
     snprintf(resp.trace_id, sizeof(resp.trace_id), "%s", req->trace_id);
 
     /* Mirror authority fields (optional but consistent) */
-    resp.role   = req->role;
-    resp.arming = req->arming;
+    resp.role     = req->role;
+    resp.arming   = req->arming;
+    resp.checksum = 0;
 
     if (yai_control_write_frame(fd, &resp, payload) != 0) {
         LOG("[ROOT] write_frame failed");
+        return -1;
+    }
+
+    return 0;
+}
+
+static int send_error_response(int fd,
+                               const yai_rpc_envelope_t *req,
+                               uint32_t code,
+                               const char *reason)
+{
+    char payload[256];
+    int n = snprintf(payload,
+                     sizeof(payload),
+                     "{\"status\":\"error\",\"code\":%u,\"reason\":\"%s\"}",
+                     code,
+                     reason ? reason : "unknown");
+    if (n <= 0 || (size_t)n >= sizeof(payload))
+        return -1;
+
+    yai_rpc_envelope_t safe_req;
+    memset(&safe_req, 0, sizeof(safe_req));
+    if (req)
+        safe_req = *req;
+
+    return send_response(fd,
+                         &safe_req,
+                         safe_req.command_id ? safe_req.command_id : YAI_CMD_CONTROL,
+                         payload,
+                         (uint32_t)n);
+}
+
+static int is_valid_role(uint16_t role)
+{
+    return role == YAI_ROLE_NONE ||
+           role == YAI_ROLE_USER ||
+           role == YAI_ROLE_OPERATOR ||
+           role == YAI_ROLE_SYSTEM;
+}
+
+
+static int connect_kernel_socket(void)
+{
+    const char *home = getenv("HOME");
+    if (!home || !home[0])
+        home = "/tmp";
+
+    char path[PATH_MAX];
+    snprintf(path, sizeof(path), "%s/.yai/run/engine/control.sock", home);
+
+    int fd = socket(AF_UNIX, SOCK_STREAM, 0);
+    if (fd < 0)
+        return -1;
+
+    struct sockaddr_un addr;
+    memset(&addr, 0, sizeof(addr));
+    addr.sun_family = AF_UNIX;
+    snprintf(addr.sun_path, sizeof(addr.sun_path), "%s", path);
+
+    if (connect(fd, (struct sockaddr *)&addr, sizeof(addr)) < 0) {
+        close(fd);
+        return -1;
+    }
+
+    return fd;
+}
+
+static int forward_to_kernel_and_relay(int client_fd,
+                                       const yai_rpc_envelope_t *env,
+                                       const void *payload,
+                                       uint32_t payload_len)
+{
+    int kfd = connect_kernel_socket();
+    if (kfd < 0) {
+        LOG("[ROOT] Reject internal: cannot connect kernel");
+        (void)send_error_response(client_fd, env, YAI_E_INTERNAL_ERROR, "kernel_connect_failed");
+        return -1;
+    }
+
+    if (yai_control_write_frame(kfd, env, payload_len ? payload : NULL) != 0) {
+        LOG("[ROOT] Reject internal: write to kernel failed");
+        close(kfd);
+        (void)send_error_response(client_fd, env, YAI_E_INTERNAL_ERROR, "kernel_write_failed");
+        return -1;
+    }
+
+    yai_rpc_envelope_t resp;
+    char resp_payload[YAI_MAX_PAYLOAD];
+    ssize_t r = yai_control_read_frame(kfd, &resp, resp_payload, sizeof(resp_payload));
+    close(kfd);
+
+    if (r < 0) {
+        LOG("[ROOT] Reject internal: read from kernel failed");
+        (void)send_error_response(client_fd, env, YAI_E_INTERNAL_ERROR, "kernel_read_failed");
+        return -1;
+    }
+
+    if (yai_control_write_frame(client_fd, &resp, resp_payload) != 0) {
+        LOG("[ROOT] Relay write to client failed");
         return -1;
     }
 
@@ -112,20 +214,69 @@ static void handle_client(int cfd)
         ssize_t plen = yai_control_read_frame(cfd, &env, payload, sizeof(payload));
 
         if (plen < 0) {
-
+            if (plen == YAI_CTL_ERR_OVERFLOW) {
+                LOG("[ROOT] Reject overflow payload");
+                (void)send_error_response(cfd,
+                                          &env,
+                                          YAI_E_PAYLOAD_TOO_BIG,
+                                          "payload_too_big");
+            }
             break;
         }
 
 
         /* ---- Frame validation ---- */
-        if (env.magic != YAI_FRAME_MAGIC ||
-            env.version != YAI_PROTOCOL_IDS_VERSION) {
-            LOG("[ROOT] Invalid frame header");
+        if (env.magic != YAI_FRAME_MAGIC) {
+            LOG("[ROOT] Reject bad magic");
+            (void)send_error_response(cfd, &env, YAI_E_BAD_MAGIC, "bad_magic");
             break;
         }
 
-        if (!env.ws_id[0] || strchr(env.ws_id, '/')) {
-            LOG("[ROOT] Invalid ws_id");
+        if (env.version != YAI_PROTOCOL_IDS_VERSION) {
+            LOG("[ROOT] Reject bad version");
+            (void)send_error_response(cfd, &env, YAI_E_BAD_VERSION, "bad_version");
+            break;
+        }
+
+        if (env.payload_len > YAI_MAX_PAYLOAD) {
+            LOG("[ROOT] Reject payload too big");
+            (void)send_error_response(cfd,
+                                      &env,
+                                      YAI_E_PAYLOAD_TOO_BIG,
+                                      "payload_too_big");
+            break;
+        }
+
+        if (env.checksum != 0) {
+            LOG("[ROOT] Reject bad checksum=%u", env.checksum);
+            (void)send_error_response(cfd,
+                                      &env,
+                                      YAI_E_BAD_CHECKSUM,
+                                      "bad_checksum");
+            break;
+        }
+
+        if (env.arming > 1) {
+            LOG("[ROOT] Reject invalid arming=%u", env.arming);
+            (void)send_error_response(cfd,
+                                      &env,
+                                      YAI_E_ARMING_REQUIRED,
+                                      "arming_flag_invalid");
+            break;
+        }
+
+        if (!is_valid_role(env.role)) {
+            LOG("[ROOT] Reject invalid role=%u", env.role);
+            (void)send_error_response(cfd,
+                                      &env,
+                                      YAI_E_ROLE_REQUIRED,
+                                      "role_invalid");
+            break;
+        }
+
+        if (!yai_ws_id_is_valid(env.ws_id)) {
+            LOG("[ROOT] Reject bad ws_id");
+            (void)send_error_response(cfd, &env, YAI_E_BAD_WS_ID, "bad_ws_id");
             break;
         }
 
@@ -140,6 +291,10 @@ static void handle_client(int cfd)
             /* Optional strict size check */
             if ((size_t)plen != sizeof(yai_handshake_req_t)) {
                 LOG("[ROOT] Bad handshake payload size: %ld", (long)plen);
+                (void)send_error_response(cfd,
+                                          &env,
+                                          YAI_E_PAYLOAD_TOO_BIG,
+                                          "bad_handshake_payload_size");
                 break;
             }
 
@@ -168,6 +323,10 @@ static void handle_client(int cfd)
            ===================================================== */
         if (!handshake_done) {
             LOG("[ROOT] Command before handshake");
+            (void)send_error_response(cfd,
+                                      &env,
+                                      YAI_E_NEED_HANDSHAKE,
+                                      "need_handshake");
             break;
         }
 
@@ -176,41 +335,30 @@ static void handle_client(int cfd)
            ===================================================== */
         if (env.role != YAI_ROLE_OPERATOR || !env.arming) {
             LOG("[ROOT] Unauthorized command");
+            if (env.role != YAI_ROLE_OPERATOR) {
+                (void)send_error_response(cfd,
+                                          &env,
+                                          YAI_E_ROLE_REQUIRED,
+                                          "role_required");
+            } else {
+                (void)send_error_response(cfd,
+                                          &env,
+                                          YAI_E_ARMING_REQUIRED,
+                                          "arming_required");
+            }
             break;
         }
 
         /* =====================================================
-           PING
+           FORWARD + RELAY (byte-level)
            ===================================================== */
-        if (env.command_id == YAI_CMD_PING) {
-
-            LOG("[ROOT] PING");
-
-            const char *pong = "{\"pong\":true}";
-
-            if (send_response(cfd,
-                              &env,
-                              YAI_CMD_PING,
-                              pong,
-                              (uint32_t)strlen(pong)) != 0)
-                break;
-
-            continue;
-        }
-
-        /* =====================================================
-           DEFAULT
-           ===================================================== */
-        LOG("[ROOT] CMD=%u", env.command_id);
-
-        const char *ok = "{\"status\":\"ok\"}";
-
-        if (send_response(cfd,
-                          &env,
-                          env.command_id,
-                          ok,
-                          (uint32_t)strlen(ok)) != 0)
+        LOG("[ROOT] FORWARD cmd=%u", env.command_id);
+        if (forward_to_kernel_and_relay(cfd,
+                                        &env,
+                                        payload,
+                                        (uint32_t)plen) != 0) {
             break;
+        }
     }
 
     close(cfd);

@@ -2,10 +2,13 @@
 
 #include <transport.h>
 #include <yai_protocol_ids.h>
+#include <errors.h>
+#include <roles.h>
 
 #include "kernel.h"
 #include "yai_kernel.h"
 #include "yai_session.h"
+#include "ws_id.h"
 #include "control_transport.h"
 
 #include <sys/socket.h>
@@ -47,6 +50,48 @@ static int resolve_socket_path(char *out, size_t cap)
     return 0;
 }
 
+static void send_transport_error(int fd,
+                                 const yai_rpc_envelope_t *req,
+                                 uint32_t code,
+                                 const char *reason)
+{
+    char payload[256];
+    int n = snprintf(payload,
+                     sizeof(payload),
+                     "{\"status\":\"error\",\"code\":%u,\"reason\":\"%s\"}",
+                     code,
+                     reason ? reason : "unknown");
+    if (n <= 0 || (size_t)n >= sizeof(payload))
+        return;
+
+    yai_rpc_envelope_t resp;
+    memset(&resp, 0, sizeof(resp));
+
+    resp.magic      = YAI_FRAME_MAGIC;
+    resp.version    = YAI_PROTOCOL_IDS_VERSION;
+    resp.command_id = req && req->command_id ? req->command_id : YAI_CMD_CONTROL;
+    resp.payload_len = (uint32_t)n;
+
+    if (req) {
+        strncpy(resp.ws_id, req->ws_id, sizeof(resp.ws_id) - 1);
+        strncpy(resp.trace_id, req->trace_id, sizeof(resp.trace_id) - 1);
+        resp.role = req->role;
+        resp.arming = req->arming;
+    }
+
+    resp.checksum = 0;
+
+    (void)yai_control_write_frame(fd, &resp, payload);
+}
+
+static int valid_role(uint16_t role)
+{
+    return role == YAI_ROLE_NONE ||
+           role == YAI_ROLE_USER ||
+           role == YAI_ROLE_OPERATOR ||
+           role == YAI_ROLE_SYSTEM;
+}
+
 /* ============================================================
    HANDLE CLIENT (STRICT BINARY FRAME)
 ============================================================ */
@@ -62,36 +107,54 @@ static void handle_client(int client_fd)
                                payload,
                                sizeof(payload));
 
-    if (plen <= 0) {
+    if (plen < 0) {
+        if (plen == YAI_CTL_ERR_OVERFLOW)
+            send_transport_error(client_fd, &env, YAI_E_PAYLOAD_TOO_BIG, "payload_too_big");
         close(client_fd);
         return;
     }
 
-    /* --- STRICT HEADER CHECK --- */
-
     if (env.magic != YAI_FRAME_MAGIC) {
-        fprintf(stderr, "[ENGINE] Bad magic\n");
+        send_transport_error(client_fd, &env, YAI_E_BAD_MAGIC, "bad_magic");
         close(client_fd);
         return;
     }
 
     if (env.version != YAI_PROTOCOL_IDS_VERSION) {
-        fprintf(stderr, "[ENGINE] Bad version\n");
+        send_transport_error(client_fd, &env, YAI_E_BAD_VERSION, "bad_version");
         close(client_fd);
         return;
     }
 
-    /* --- ws_id sanity (NO slash allowed) --- */
-
-    if (strchr(env.ws_id, '/')) {
-        fprintf(stderr,
-            "[ENGINE] Invalid ws_id detected: %s\n",
-            env.ws_id);
+    if (env.payload_len > YAI_MAX_PAYLOAD) {
+        send_transport_error(client_fd, &env, YAI_E_PAYLOAD_TOO_BIG, "payload_too_big");
         close(client_fd);
         return;
     }
 
-    /* --- Dispatch --- */
+    if (env.checksum != 0) {
+        send_transport_error(client_fd, &env, YAI_E_BAD_CHECKSUM, "bad_checksum");
+        close(client_fd);
+        return;
+    }
+
+    if (env.arming > 1) {
+        send_transport_error(client_fd, &env, YAI_E_ARMING_REQUIRED, "arming_flag_invalid");
+        close(client_fd);
+        return;
+    }
+
+    if (!valid_role(env.role)) {
+        send_transport_error(client_fd, &env, YAI_E_ROLE_REQUIRED, "role_invalid");
+        close(client_fd);
+        return;
+    }
+
+    if (!yai_ws_id_is_valid(env.ws_id)) {
+        send_transport_error(client_fd, &env, YAI_E_BAD_WS_ID, "bad_ws_id");
+        close(client_fd);
+        return;
+    }
 
     yai_session_dispatch(client_fd, &env, payload);
 

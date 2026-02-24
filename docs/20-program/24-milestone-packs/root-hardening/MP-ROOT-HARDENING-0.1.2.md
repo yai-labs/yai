@@ -1,6 +1,6 @@
 ---
 id: MP-ROOT-HARDENING-0.1.2
-status: draft
+status: active
 runbook: docs/20-program/23-runbooks/root-hardening.md
 phase: "0.1.2 — Envelope-Only Authority Gate"
 adrs:
@@ -19,7 +19,7 @@ evidence_commands_required:
   - tools/bin/yai-verify
   - tools/bin/yai-suite
 issues:
-  - "140"
+  - "191"
 ---
 
 # MP-ROOT-HARDENING-0.1.2
@@ -27,8 +27,8 @@ issues:
 ## Metadata
 - Runbook: `docs/20-program/23-runbooks/root-hardening.md`
 - Phase: `0.1.2 — Envelope-Only Authority Gate`
-- Wave issue: `#140`
-- Status: `draft`
+- Wave issue: `#191`
+- Status: `active`
 
 ## Links
 - Plan: `docs/20-program/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
@@ -46,11 +46,16 @@ Close phase 0.1.2 with explicit claim/evidence bindings and reproducible gate ou
 Closure policy: mandatory `SKIP` is treated as `FAIL`.
 
 ## Definition of Done
-- [ ] Phase claim IDs are covered by evidence.
-- [ ] Mandatory commands are recorded with exit codes and outputs.
-- [ ] Root->Kernel evidence is traceable on deterministic pass/fail paths.
-- [ ] MP links from runbook phase and matrix remain valid.
+- [x] Phase claim IDs are covered by evidence.
+- [x] Mandatory commands are recorded with exit codes and outputs.
+- [x] Root->Kernel evidence is traceable on deterministic pass/fail paths.
+- [x] MP links from runbook phase and matrix remain valid.
 
 ## Execution Snapshot
-- Status: `PLANNED`
+- Status: `COMPLETED`
 - Evidence bundle: `docs/20-program/24-milestone-packs/root-hardening/evidence/0.1.2/`
+- Commands:
+  - `tools/bin/yai-verify core` -> `PASS`
+  - `tools/bin/yai-verify law-kernel` -> `PASS`
+  - `tools/bin/yai-suite levels/l0-l7` -> `PASS` *(L3-L7 tool-gated SKIPs expected in current CLI target set)*
+  - `tools/bin/yai-check-pins` -> `PASS`

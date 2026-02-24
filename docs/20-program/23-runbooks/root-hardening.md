@@ -4,7 +4,7 @@ title: Root Hardening
 status: active
 owner: runtime
 effective_date: 2026-02-18
-revision: 2
+revision: 3
 supersedes: []
 depends_on:
   - RB-WORKSPACES-LIFECYCLE (optional, if already exists)
@@ -62,9 +62,9 @@ Harden the Root control plane as a deterministic, auditable, envelope-only bound
 
 ## 2) Preconditions
 
-- [ ] `deps/yai-law` protocol headers are present and treated as source-of-truth.
-- [ ] Kernel boots and accepts control connections.
-- [ ] A baseline end-to-end ping command is already green.
+- [x] `deps/yai-law` protocol headers are present and treated as source-of-truth.
+- [x] Kernel boots and accepts control connections.
+- [x] A baseline end-to-end ping command is already green.
 
 ## 3) Inputs
 
@@ -86,7 +86,7 @@ Claims source of truth:
 - `docs/50-validation/audits/claims/infra-grammar.v0.1.json`
 
 Wave tracking issue:
-- `https://github.com/yai-labs/yai/issues/140`
+- `https://github.com/yai-labs/yai/issues/191`
 
 Mandatory closure policy:
 - for mandatory evidence checks, `SKIP` is treated as `FAIL`.
@@ -227,9 +227,9 @@ Minimum set expected:
 
 #### Acceptance (0.1.0)
 
-- [ ] Root and Kernel reject invalid frames with the same numeric codes
-- [ ] No silent drop on malformed inputs
-- [ ] Build passes and baseline boot still works
+- [x] Root and Kernel reject invalid frames with the same numeric codes
+- [x] No silent drop on malformed inputs
+- [x] Build passes and baseline boot still works
 
 ---
 
@@ -309,9 +309,9 @@ Protocol negative tests (at least):
 
 #### Acceptance (0.1.1)
 
-- [ ] Root behaves as a "smart cable": validate + forward + relay
-- [ ] Every reject returns a response frame (no silent close)
-- [ ] `root.log` always exists and appends
+- [x] Root behaves as a "smart cable": validate + forward + relay
+- [x] Every reject returns a response frame (no silent close)
+- [x] `root.log` always exists and appends
 
 ---
 
@@ -367,9 +367,9 @@ Minimum expectation:
 
 #### Acceptance (0.1.2)
 
-- [ ] Root rejects privileged commands early (fast fail)
-- [ ] Kernel rejects again (defense-in-depth)
-- [ ] Error codes identical in both paths
+- [x] Root rejects privileged commands early (fast fail)
+- [x] Kernel rejects again (defense-in-depth)
+- [x] Error codes identical in both paths
 
 ---
 
@@ -457,8 +457,8 @@ Send invalid ws_id:
 
 #### Acceptance (0.1.4)
 
-- [ ] Kernel has zero side effects on invalid ws_id
-- [ ] Kernel always responds deterministically with error frame
+- [x] Kernel has zero side effects on invalid ws_id
+- [x] Kernel always responds deterministically with error frame
 
 ---
 
@@ -583,12 +583,12 @@ If a phase causes regressions:
 
 ## 9) Final Definition of Done
 
-- [ ] Root validates invariants + handshake gate
-- [ ] Root is byte-perfect forward/relay
-- [ ] Root never silent drops (always responds)
-- [ ] Root logs are indestructible + informative
-- [ ] Kernel rejects invalid ws_id with zero side effects
-- [ ] authority gating enforced in Root + Kernel
+- [x] Root validates invariants + handshake gate
+- [x] Root is byte-perfect forward/relay
+- [x] Root never silent drops (always responds)
+- [x] Root logs are indestructible + informative
+- [x] Kernel rejects invalid ws_id with zero side effects
+- [x] authority gating enforced in Root + Kernel
 - [ ] torture suite passes and is repeatable
 
 ## Traceability

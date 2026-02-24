@@ -1,6 +1,6 @@
 ---
 id: MP-ROOT-HARDENING-0.1.3
-status: draft
+status: active
 runbook: docs/20-program/23-runbooks/root-hardening.md
 phase: "0.1.3 — ws_id Validation Centralization"
 adrs:
@@ -19,7 +19,7 @@ evidence_commands_required:
   - tools/bin/yai-verify
   - tools/bin/yai-suite
 issues:
-  - "140"
+  - "191"
 ---
 
 # MP-ROOT-HARDENING-0.1.3
@@ -27,8 +27,8 @@ issues:
 ## Metadata
 - Runbook: `docs/20-program/23-runbooks/root-hardening.md`
 - Phase: `0.1.3 — ws_id Validation Centralization`
-- Wave issue: `#140`
-- Status: `draft`
+- Wave issue: `#191`
+- Status: `active`
 
 ## Links
 - Plan: `docs/20-program/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
@@ -52,5 +52,10 @@ Closure policy: mandatory `SKIP` is treated as `FAIL`.
 - [ ] MP links from runbook phase and matrix remain valid.
 
 ## Execution Snapshot
-- Status: `PLANNED`
+- Status: `IN_PROGRESS`
 - Evidence bundle: `docs/20-program/24-milestone-packs/root-hardening/evidence/0.1.3/`
+- Commands:
+  - `tools/bin/yai-verify core` -> `PASS`
+  - `tools/bin/yai-verify law-kernel` -> `PASS`
+  - `tools/bin/yai-check-pins` -> `PASS`
+- Notes: runtime-side ws_id validation is centralized in `root/include/ws_id.h`; CLI-side validator alignment remains open in this phase.
