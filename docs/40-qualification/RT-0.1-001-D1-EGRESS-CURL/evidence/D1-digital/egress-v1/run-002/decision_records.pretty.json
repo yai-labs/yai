@@ -19,6 +19,7 @@
       "gated_hits": 0,
       "local_target_reachable": true,
       "precheck_hits": 1,
+      "target_reachable": true,
       "time_to_contain_ms": 0
     },
     "principal": {
@@ -28,10 +29,11 @@
     "target": {
       "dst": {
         "ip": "127.0.0.1",
+        "path": "/",
         "port": 8443
       }
     },
-    "timestamp": "2026-02-24T21:42:23.540686+00:00",
+    "timestamp": "2026-02-24T22:16:43.786056+00:00",
     "trace_id": "trace-rt001-run-002",
     "ws_id": "ws-rt001-run-002"
   }

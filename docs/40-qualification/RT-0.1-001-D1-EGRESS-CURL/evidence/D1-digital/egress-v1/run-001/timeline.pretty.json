@@ -4,34 +4,36 @@
     "mode": "live",
     "status": "received",
     "step": "trigger",
-    "ts": "2026-02-24T21:42:21.577836+00:00"
+    "target_profile": "local",
+    "ts": "2026-02-24T22:16:42.128911+00:00"
   },
   {
     "arming": "armed",
     "role": "operator",
     "step": "context",
+    "target_url": "http://127.0.0.1:8443/",
     "trace_id": "trace-rt001-run-001",
-    "ts": "2026-02-24T21:42:21.577836+00:00",
+    "ts": "2026-02-24T22:16:42.128911+00:00",
     "ws_id": "ws-rt001-run-001"
   },
   {
     "baseline_hash": "4214c2e8d1c75dd97cfe3bdb961d186da8927c24d341de9fe864ce3a9df443fb",
     "baseline_id": "baseline-deny",
     "step": "authority",
-    "ts": "2026-02-24T21:42:21.577836+00:00"
+    "ts": "2026-02-24T22:16:42.128911+00:00"
   },
   {
-    "local_target_reachable": true,
     "precheck_hits": 1,
     "step": "precheck",
+    "target_reachable": true,
     "tool": "curl",
-    "ts": "2026-02-24T21:42:21.577836+00:00"
+    "ts": "2026-02-24T22:16:42.128911+00:00"
   },
   {
     "outcome": "deny",
     "reason_code": "EGRESS_DEST_NOT_CONTRACTED",
     "step": "decision",
-    "ts": "2026-02-24T21:42:21.577836+00:00"
+    "ts": "2026-02-24T22:16:42.128911+00:00"
   },
   {
     "bytes_exfiltrated": 0,
@@ -39,11 +41,11 @@
     "gated_hits": 0,
     "result": "blocked",
     "step": "enforcement",
-    "ts": "2026-02-24T21:42:21.577836+00:00"
+    "ts": "2026-02-24T22:16:42.128911+00:00"
   },
   {
     "status": "materialized",
     "step": "evidence",
-    "ts": "2026-02-24T21:42:21.577836+00:00"
+    "ts": "2026-02-24T22:16:42.128911+00:00"
   }
 ]

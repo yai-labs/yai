@@ -10,11 +10,15 @@ out = subprocess.check_output(["curl", "--version"], text=True).splitlines()[0]
 meta = {
   "tool": "curl",
   "version_line": out,
-  "target_host": "127.0.0.1",
-  "target_port": 8443,
+  "target_profile": os.environ.get("TARGET_PROFILE", "local"),
+  "target_scheme": os.environ.get("TARGET_SCHEME"),
+  "target_host": os.environ.get("TARGET_HOST"),
+  "target_port": int(os.environ.get("TARGET_PORT", "0")),
+  "target_path": os.environ.get("TARGET_PATH"),
+  "target_url": os.environ.get("TARGET_URL"),
   "status": "ready",
 }
 open(os.path.join(os.environ["STATE_DIR"], "target.json"), "w", encoding="utf-8").write(json.dumps(meta, indent=2))
 PY
 
-echo "target ready: curl + local endpoint plan"
+echo "target ready: profile=${TARGET_PROFILE} url=${TARGET_URL}"

@@ -25,8 +25,8 @@ if decision["decision"]["outcome"] != "deny":
     raise SystemExit("outcome must be deny")
 if decision["decision"]["reason_code"] != "EGRESS_DEST_NOT_CONTRACTED":
     raise SystemExit("reason_code must be EGRESS_DEST_NOT_CONTRACTED")
-if not bool(decision.get("metrics", {}).get("local_target_reachable", False)):
-    raise SystemExit("local target must be reachable in precheck")
+if not bool(decision.get("metrics", {}).get("target_reachable", decision.get("metrics", {}).get("local_target_reachable", False))):
+    raise SystemExit("target must be reachable in precheck")
 if bool(metrics.get("connect_established", False)):
     raise SystemExit("connect_established must be false")
 if int(metrics.get("bytes_exfiltrated", 1)) != 0:

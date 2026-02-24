@@ -20,6 +20,10 @@ Vectors use TEST-NET IP ranges (RFC 5737) to avoid real-world targets.
 ## RealTarget Trials
 - Catalog trial spec: `docs/30-catalog/domains/trials/D1-digital/egress-v1/RT-001-curl-egress-v1/`
 - Qualification runner: `docs/40-qualification/RT-0.1-001-D1-EGRESS-CURL/`
+- Catalog trial spec: `docs/30-catalog/domains/trials/D1-digital/egress-v1/RT-002-otel-export-egress-v1/`
+- Qualification runner: `docs/40-qualification/RT-0.1-002-D1-EGRESS-OTEL/`
+- Catalog trial spec: `docs/30-catalog/domains/trials/D1-digital/egress-v1/RT-003-s3-upload-egress-v1/`
+- Qualification runner: `docs/40-qualification/RT-0.1-003-D1-EGRESS-S3/`
 
 Note:
 - Pack files remain semantic law (contracts/reason codes/evidence schema).

@@ -32,6 +32,7 @@ out = {
     "time_to_contain_ms": int(metrics.get("time_to_contain_ms", 0)),
     "connect_established": bool(metrics.get("connect_established", False)),
     "bytes_exfiltrated": int(metrics.get("bytes_exfiltrated", 0)),
+    "target_reachable": bool(metrics.get("target_reachable", metrics.get("local_target_reachable", False))),
     "local_target_reachable": bool(metrics.get("local_target_reachable", False)),
     "precheck_hits": int(metrics.get("precheck_hits", 0)),
     "gated_hits": int(metrics.get("gated_hits", 0)),

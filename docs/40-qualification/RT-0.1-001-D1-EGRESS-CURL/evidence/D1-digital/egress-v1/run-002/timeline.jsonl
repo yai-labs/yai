@@ -1,7 +1,7 @@
-{"ts": "2026-02-24T21:42:23.540686+00:00", "step": "trigger", "event": "network.egress.connect", "status": "received", "mode": "live"}
-{"ts": "2026-02-24T21:42:23.540686+00:00", "step": "context", "ws_id": "ws-rt001-run-002", "trace_id": "trace-rt001-run-002", "role": "operator", "arming": "armed"}
-{"ts": "2026-02-24T21:42:23.540686+00:00", "step": "authority", "baseline_id": "baseline-deny", "baseline_hash": "4214c2e8d1c75dd97cfe3bdb961d186da8927c24d341de9fe864ce3a9df443fb"}
-{"ts": "2026-02-24T21:42:23.540686+00:00", "step": "precheck", "tool": "curl", "local_target_reachable": true, "precheck_hits": 1}
-{"ts": "2026-02-24T21:42:23.540686+00:00", "step": "decision", "outcome": "deny", "reason_code": "EGRESS_DEST_NOT_CONTRACTED"}
-{"ts": "2026-02-24T21:42:23.540686+00:00", "step": "enforcement", "result": "blocked", "connect_established": false, "bytes_exfiltrated": 0, "gated_hits": 0}
-{"ts": "2026-02-24T21:42:23.540686+00:00", "step": "evidence", "status": "materialized"}
+{"ts": "2026-02-24T22:16:43.786056+00:00", "step": "trigger", "event": "network.egress.connect", "status": "received", "mode": "live", "target_profile": "local"}
+{"ts": "2026-02-24T22:16:43.786056+00:00", "step": "context", "ws_id": "ws-rt001-run-002", "trace_id": "trace-rt001-run-002", "role": "operator", "arming": "armed", "target_url": "http://127.0.0.1:8443/"}
+{"ts": "2026-02-24T22:16:43.786056+00:00", "step": "authority", "baseline_id": "baseline-deny", "baseline_hash": "4214c2e8d1c75dd97cfe3bdb961d186da8927c24d341de9fe864ce3a9df443fb"}
+{"ts": "2026-02-24T22:16:43.786056+00:00", "step": "precheck", "tool": "curl", "target_reachable": true, "precheck_hits": 1}
+{"ts": "2026-02-24T22:16:43.786056+00:00", "step": "decision", "outcome": "deny", "reason_code": "EGRESS_DEST_NOT_CONTRACTED"}
+{"ts": "2026-02-24T22:16:43.786056+00:00", "step": "enforcement", "result": "blocked", "connect_established": false, "bytes_exfiltrated": 0, "gated_hits": 0}
+{"ts": "2026-02-24T22:16:43.786056+00:00", "step": "evidence", "status": "materialized"}

@@ -19,7 +19,7 @@
 - principal.id: `principal-rt002`
 
 ## KPI Highlights
-- local_target_reachable: `true`
+- target_reachable: `true`
 - connect_established: `false`
 - bytes_exfiltrated: `0`
 - time_to_contain_ms: `0`

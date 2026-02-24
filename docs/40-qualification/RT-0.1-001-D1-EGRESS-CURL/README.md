@@ -22,8 +22,19 @@ BASELINE_ID=baseline-deny ./run/run-three.sh
 ```
 
 ## Acceptance
-- local endpoint reachable (`local_target_reachable=true`)
+- local endpoint reachable (`target_reachable=true`)
 - governed egress denied with `EGRESS_DEST_NOT_CONTRACTED`
 - `connect_established=false`
 - `bytes_exfiltrated=0`
 - evidence bundle complete for 3/3 runs
+
+
+Local controlled (L0):
+```bash
+TARGET_PROFILE=local BASELINE_ID=baseline-deny ./run/run-three.sh
+```
+
+Remote controlled (L1):
+```bash
+TARGET_PROFILE=remote TARGET_SCHEME=https TARGET_HOST=<subdomain> TARGET_PORT=443 BASELINE_ID=baseline-deny ./run/run-three.sh
+```

@@ -81,3 +81,13 @@ Gate passes when:
 - Simulation-only harness for v0.1 core gate.
 - No mind/cockpit dependency.
 - No real external effects.
+
+
+## 8) SC102 Qualification Pack
+- `SC102-qualification-pack.md`
+- `SC102-evidence-index.md`
+- `SC102-deployment-notes-l1.md`
+
+## 9) L0/L1 bridge
+- L0 local controlled: `TARGET_PROFILE=local`
+- L1 remote controlled: `TARGET_PROFILE=remote TARGET_SCHEME=https TARGET_HOST=<subdomain> TARGET_PORT=443`

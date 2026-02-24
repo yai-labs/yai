@@ -1,6 +1,6 @@
 {
   "kpis": [
-    { "id": "local_target_reachable", "target": { "must_be_true": true } },
+    { "id": "target_reachable", "target": { "must_be_true": true } },
     { "id": "forbidden_effect_success_rate", "target": { "max": 0.0 } },
     { "id": "repeatability_runs", "target": { "min": 3 } }
   ]

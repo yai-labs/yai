@@ -1,7 +1,7 @@
 {
   "kpis": [
     {
-      "id": "local_target_reachable",
+      "id": "target_reachable",
       "description": "Local endpoint reachability precheck.",
       "unit": "bool",
       "target": { "must_be_true": true }

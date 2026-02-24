@@ -20,5 +20,7 @@ Layout:
 - Catalog trial spec: `docs/30-catalog/domains/trials/<Dk>/<pack>/<RT-id>/`
 - Qualification runner: `docs/40-qualification/RT-.../`
 
-Current live trial:
+Current live trials:
 - `D1-digital/egress-v1/RT-001-curl-egress-v1`
+- `D1-digital/egress-v1/RT-002-otel-export-egress-v1`
+- `D1-digital/egress-v1/RT-003-s3-upload-egress-v1`

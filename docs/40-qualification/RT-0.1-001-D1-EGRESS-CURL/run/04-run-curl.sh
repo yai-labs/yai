@@ -11,6 +11,7 @@ import socket
 import struct
 import threading
 import time
+import subprocess
 from pathlib import Path
 
 state_dir = Path(os.environ["STATE_DIR"])
@@ -21,16 +22,23 @@ trace_id = os.environ["TRACE_ID"]
 baseline_id = os.environ["BASELINE_ID"]
 baseline_file = os.environ["BASELINE_FILE"]
 
+target_profile = os.environ.get("TARGET_PROFILE", "local")
+target_host = os.environ.get("TARGET_HOST", "127.0.0.1")
+target_port = int(os.environ.get("TARGET_PORT", "8443"))
+target_scheme = os.environ.get("TARGET_SCHEME", "http")
+target_path = os.environ.get("TARGET_PATH", "/")
+target_url = f"{target_scheme}://{target_host}:{target_port}{target_path}"
+
 mock_log = state_dir / "mock_server.log"
 hits = {"count": 0}
 stop_evt = threading.Event()
 ready_evt = threading.Event()
+use_local_server = (target_profile == "local")
 
-# local real endpoint
 def server_loop():
     srv = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    srv.bind(("127.0.0.1", 8443))
+    srv.bind((target_host, target_port))
     srv.listen(8)
     srv.settimeout(0.2)
     ready_evt.set()
@@ -56,17 +64,17 @@ def server_loop():
         f.write(f"count={hits['count']}\n")
     srv.close()
 
-th = threading.Thread(target=server_loop, daemon=True)
-th.start()
-if not ready_evt.wait(timeout=3):
-    raise SystemExit("failed to start local mock endpoint")
+if use_local_server:
+    th = threading.Thread(target=server_loop, daemon=True)
+    th.start()
+    if not ready_evt.wait(timeout=3):
+        raise SystemExit("failed to start local mock endpoint")
 
-# real tool precheck: curl must reach local endpoint
-import subprocess
-curl = subprocess.run(["curl", "-sS", "-o", "/dev/null", "-w", "%{http_code}", "http://127.0.0.1:8443/"], capture_output=True, text=True)
-local_target_reachable = (curl.returncode == 0 and curl.stdout.strip() == "200")
-if not local_target_reachable:
-    stop_evt.set(); th.join(timeout=2)
+curl = subprocess.run(["curl", "-sS", "-o", "/dev/null", "-w", "%{http_code}", target_url], capture_output=True, text=True)
+target_reachable = (curl.returncode == 0 and curl.stdout.strip() == "200")
+if not target_reachable:
+    if use_local_server:
+        stop_evt.set(); th.join(timeout=2)
     raise SystemExit(f"curl precheck failed: rc={curl.returncode} out={curl.stdout!r} err={curl.stderr!r}")
 
 precheck_hits = hits["count"]
@@ -96,8 +104,8 @@ def recv_exact(sock, n):
 
 handshake_payload = struct.pack("<II32s", 1, 0x0102, b"rt001-curl\0")
 attack_payload = json.dumps({
-    "target": {"host": "127.0.0.1", "port": 8443},
-    "request": {"kind": "egress_probe", "actor": "curl", "trial_id": "RT-001-curl-egress-v1"},
+    "target": {"host": target_host, "port": target_port, "path": target_path},
+    "request": {"kind": "egress_probe", "actor": "curl", "trial_id": "RT-001-curl-egress-v1", "target_profile": target_profile},
 }).encode("utf-8")
 
 with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as cli:
@@ -119,8 +127,9 @@ with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as cli:
 
 time_to_contain_ms = int((t1 - t0) * 1000)
 
-stop_evt.set(); th.join(timeout=2)
-gated_hits = max(0, hits["count"] - precheck_hits)
+if use_local_server:
+    stop_evt.set(); th.join(timeout=2)
+gated_hits = max(0, hits["count"] - precheck_hits) if use_local_server else 0
 
 with open(baseline_file, "rb") as f:
     baseline_hash = hashlib.sha256(f.read()).hexdigest()
@@ -139,10 +148,10 @@ bytes_exfiltrated = int(metrics.get("bytes_exfiltrated", 0))
 now = datetime.datetime.now(datetime.UTC).isoformat()
 
 timeline = [
-    {"ts": now, "step": "trigger", "event": "network.egress.connect", "status": "received", "mode": "live"},
-    {"ts": now, "step": "context", "ws_id": ws_id, "trace_id": trace_id, "role": "operator", "arming": "armed"},
+    {"ts": now, "step": "trigger", "event": "network.egress.connect", "status": "received", "mode": "live", "target_profile": target_profile},
+    {"ts": now, "step": "context", "ws_id": ws_id, "trace_id": trace_id, "role": "operator", "arming": "armed", "target_url": target_url},
     {"ts": now, "step": "authority", "baseline_id": baseline_id, "baseline_hash": baseline_hash},
-    {"ts": now, "step": "precheck", "tool": "curl", "local_target_reachable": local_target_reachable, "precheck_hits": precheck_hits},
+    {"ts": now, "step": "precheck", "tool": "curl", "target_reachable": target_reachable, "precheck_hits": precheck_hits},
     {"ts": now, "step": "decision", "outcome": outcome, "reason_code": reason},
     {"ts": now, "step": "enforcement", "result": enf_result, "connect_established": connect_established, "bytes_exfiltrated": bytes_exfiltrated, "gated_hits": gated_hits},
     {"ts": now, "step": "evidence", "status": "materialized"},
@@ -157,7 +166,7 @@ decision_record = {
     "trace_id": trace_id,
     "event": {"type": "network.egress.connect", "source": "rt001-curl-live"},
     "principal": {"id": "principal-rt001", "role": "operator"},
-    "target": {"dst": {"ip": "127.0.0.1", "port": 8443}},
+    "target": {"dst": {"ip": target_host, "port": target_port, "path": target_path}},
     "decision": {
         "outcome": outcome,
         "reason_code": reason,
@@ -169,7 +178,8 @@ decision_record = {
         "time_to_contain_ms": time_to_contain_ms,
         "connect_established": connect_established,
         "bytes_exfiltrated": bytes_exfiltrated,
-        "local_target_reachable": bool(local_target_reachable),
+        "target_reachable": bool(target_reachable),
+        "local_target_reachable": bool(target_reachable) if target_profile == "local" else False,
         "precheck_hits": precheck_hits,
         "gated_hits": gated_hits,
     },
@@ -183,6 +193,8 @@ decision_record = {
         "role": resp_env[5], "arming": resp_env[6], "payload_len": resp_env[7],
     },
     "response_payload": resp_json,
+    "target_url": target_url,
+    "target_profile": target_profile,
 }, indent=2), encoding="utf-8")
 PY
 
