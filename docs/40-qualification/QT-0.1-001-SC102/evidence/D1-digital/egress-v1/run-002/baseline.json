@@ -1,5 +1,6 @@
 {
   "baseline_id": "baseline-deny",
   "baseline_hash": "4214c2e8d1c75dd97cfe3bdb961d186da8927c24d341de9fe864ce3a9df443fb",
-  "baseline_source": "/Users/francescomaiomascio/Developer/YAI/yai/docs/30-catalog/domains/packs/D1-digital/egress-v1/contracts/baseline-deny.json"
+  "baseline_source": "/Users/francescomaiomascio/Developer/YAI/yai/docs/30-catalog/domains/packs/D1-digital/egress-v1/contracts/baseline-deny.json",
+  "contract_ref": "policy.network_egress.allowlist"
 }

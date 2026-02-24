@@ -2,6 +2,13 @@
 set -euo pipefail
 source "$(dirname "$0")/_lib.sh"
 
+if [[ "$QT_MODE" == "live" ]]; then
+  qt_live_env
+  "$LIVE_RUN_DIR/05-collect-evidence.sh"
+  echo "evidence collected: $EVIDENCE_DIR"
+  exit 0
+fi
+
 python - <<"PY"
 import json, os, hashlib
 

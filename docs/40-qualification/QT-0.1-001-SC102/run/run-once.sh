@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+trap '"$DIR/99-stop-runtime.sh" || true' EXIT
 
 "$DIR/01-start-runtime.sh"
 "$DIR/02-create-workspace.sh"
