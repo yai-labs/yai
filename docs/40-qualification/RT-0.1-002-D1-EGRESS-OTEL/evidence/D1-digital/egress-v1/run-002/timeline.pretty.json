@@ -1,0 +1,32 @@
+[
+  {
+    "event": "network.egress.connect",
+    "mode": "live",
+    "status": "received",
+    "step": "trigger",
+    "trial": "RT-002",
+    "ts": "2026-02-24T21:41:39.775419+00:00"
+  },
+  {
+    "local_target_reachable": true,
+    "mode": "otlp-http",
+    "precheck_hits": 1,
+    "step": "precheck",
+    "tool": "curl",
+    "ts": "2026-02-24T21:41:39.775419+00:00"
+  },
+  {
+    "outcome": "deny",
+    "reason_code": "EGRESS_DEST_NOT_CONTRACTED",
+    "step": "decision",
+    "ts": "2026-02-24T21:41:39.775419+00:00"
+  },
+  {
+    "bytes_exfiltrated": 0,
+    "connect_established": false,
+    "gated_hits": 0,
+    "result": "blocked",
+    "step": "enforcement",
+    "ts": "2026-02-24T21:41:39.775419+00:00"
+  }
+]

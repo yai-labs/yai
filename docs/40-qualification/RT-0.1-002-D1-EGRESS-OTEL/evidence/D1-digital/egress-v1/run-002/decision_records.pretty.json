@@ -1,0 +1,39 @@
+[
+  {
+    "decision": {
+      "baseline_hash": "4214c2e8d1c75dd97cfe3bdb961d186da8927c24d341de9fe864ce3a9df443fb",
+      "baseline_id": "baseline-deny",
+      "outcome": "deny",
+      "reason_code": "EGRESS_DEST_NOT_CONTRACTED"
+    },
+    "enforcement": {
+      "result": "blocked"
+    },
+    "event": {
+      "source": "rt002-otel-live",
+      "type": "network.egress.connect"
+    },
+    "metrics": {
+      "bytes_exfiltrated": 0,
+      "connect_established": false,
+      "gated_hits": 0,
+      "local_target_reachable": true,
+      "precheck_hits": 1,
+      "time_to_contain_ms": 0
+    },
+    "principal": {
+      "id": "principal-rt002",
+      "role": "operator"
+    },
+    "target": {
+      "dst": {
+        "ip": "127.0.0.1",
+        "path": "/v1/traces",
+        "port": 8443
+      }
+    },
+    "timestamp": "2026-02-24T21:41:39.775419+00:00",
+    "trace_id": "trace-rt002-run-002",
+    "ws_id": "ws-rt002-run-002"
+  }
+]

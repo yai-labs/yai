@@ -36,6 +36,8 @@ out = {
     "precheck_hits": int(metrics.get("precheck_hits", 0)),
     "gated_hits": int(metrics.get("gated_hits", 0)),
     "forbidden_effect_success_rate": 1.0 if bool(metrics.get("connect_established", False)) else 0.0,
+    "forbidden_effect_block_rate": 0.0 if bool(metrics.get("connect_established", False)) else 1.0,
+    "containment_success_rate": 0.0 if bool(metrics.get("connect_established", False)) else 1.0,
 }
 with open(dst, "w", encoding="utf-8") as f:
     json.dump(out, f, indent=2)

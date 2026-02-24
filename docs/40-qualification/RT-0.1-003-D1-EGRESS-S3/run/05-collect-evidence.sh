@@ -13,6 +13,7 @@ open(os.path.join(evidence_dir, "baseline.json"), "w", encoding="utf-8").write(j
   "baseline_id": baseline_id,
   "baseline_hash": bhash,
   "baseline_source": baseline_file,
+  "contract_ref": "policy.network_egress.allowlist"
 }, indent=2))
 PY
 
@@ -60,3 +61,5 @@ index = [
 PY
 
 echo "evidence collected: $EVIDENCE_DIR"
+
+python3 "$REPO_ROOT/docs/40-qualification/_shared/render_human_evidence.py" "$EVIDENCE_DIR" "${RT_DIR##*/}"
