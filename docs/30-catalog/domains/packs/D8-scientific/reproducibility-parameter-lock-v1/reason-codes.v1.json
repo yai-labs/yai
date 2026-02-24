@@ -2,7 +2,17 @@
   "PARAM_LOCK_MISSING": {
     "severity": "high",
     "default_outcome": "deny",
-    "description": "Missing params hash/parameter lock for reproducibility."
+    "description": "Missing params lock for reproducibility."
+  },
+  "PARAMS_LOCK_MISMATCH": {
+    "severity": "high",
+    "default_outcome": "deny",
+    "description": "Declared lock hash does not match params payload hash."
+  },
+  "PARAMS_LOCK_INVALID": {
+    "severity": "high",
+    "default_outcome": "deny",
+    "description": "Lock signature or lock structure is invalid."
   },
   "PROVENANCE_MISSING": {
     "severity": "high",
@@ -18,15 +28,5 @@
     "severity": "medium",
     "default_outcome": "deny",
     "description": "Run depends on non-deterministic inputs not declared/pinned (e.g., unpinned dataset version)."
-  },
-  "PARAMS_HASH_MISMATCH": {
-    "severity": "high",
-    "default_outcome": "deny",
-    "description": "Declared lock hash does not match params payload hash."
-  },
-  "PARAMS_LOCK_INVALID": {
-    "severity": "high",
-    "default_outcome": "deny",
-    "description": "Lock signature or lock structure is invalid."
   }
 }

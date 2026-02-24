@@ -7,4 +7,4 @@ for rid in run-001 run-002 run-003; do
   RUN_ID="$rid" "$DIR/run-once.sh"
 done
 
-echo "RT-0.1-004-D8-PARAMS-LOCK 3/3 runs completed"
+echo "RT-0.1-001-D8-PARAMS-LOCK 3/3 runs completed"

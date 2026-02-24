@@ -10,7 +10,6 @@ import ctypes, os
 
 ws = os.environ["WS_ID"]
 libc = ctypes.CDLL(None, use_errno=True)
-
 O_CREAT = os.O_CREAT
 O_RDWR = os.O_RDWR
 PROT_READ = 0x1
@@ -34,8 +33,7 @@ def ensure(name: str):
     libc.shm_unlink(n)
     fd = libc.shm_open(n, O_CREAT | O_RDWR, 0o666)
     if fd < 0:
-        err = ctypes.get_errno()
-        raise OSError(err, f"shm_open failed for {name}")
+        raise OSError(ctypes.get_errno(), f"shm_open failed for {name}")
     if libc.ftruncate(fd, SIZE) != 0:
         err = ctypes.get_errno()
         libc.close(fd)
@@ -45,11 +43,9 @@ def ensure(name: str):
         err = ctypes.get_errno()
         libc.close(fd)
         raise OSError(err, f"mmap failed for {name}")
-
     buf = (ctypes.c_ubyte * SIZE).from_address(ptr)
     for i in range(0, 256):
         buf[i] = 0
-
     quota = 100000
     buf[4:8] = quota.to_bytes(4, "little")
     ws_b = ws.encode()[:63]
@@ -57,19 +53,24 @@ def ensure(name: str):
         buf[12 + i] = b
     buf[12 + len(ws_b)] = 0
     buf[140] = 0
-
     libc.close(fd)
 
 ensure(f"/yai_vault_{ws}")
 ensure(f"/yai_vault_{ws}_CORE")
 PY
 
+if [[ "$TARGET_PROFILE" == "docker" ]]; then
+  mkdir -p "$DOCKER_STORE_DIR"
+  docker compose -f "$DOCKER_COMPOSE_FILE" up -d >/dev/null
+else
+  mkdir -p "$LOCAL_STORE_DIR"
+fi
+
 if [[ ! -x "$YAI_ROOT_BIN" || ! -x "$YAI_ENGINE_BIN" ]]; then
   make all >/dev/null
 fi
 
-YAI_ENGINE_ALLOW_DEGRADED="1" YAI_EGRESS_ALLOWLIST="" YAI_PROVIDER_HOST="127.0.0.1" YAI_PROVIDER_PORT="8443" \
-"$YAI_ENGINE_BIN" "$WS_ID" >"$ENGINE_LOG" 2>&1 &
+YAI_ENGINE_ALLOW_DEGRADED="1" "$YAI_ENGINE_BIN" "$WS_ID" >"$ENGINE_LOG" 2>&1 &
 ENGINE_PID=$!
 
 wait_for_pid_alive "$ENGINE_PID" 10 || { echo "engine failed" >&2; exit 1; }
@@ -82,7 +83,7 @@ ROOT_PID=$!
 wait_for_pid_alive "$ROOT_PID" 10 || { echo "root failed" >&2; exit 1; }
 wait_for_socket "$ROOT_SOCK" 15 || { echo "root socket not ready" >&2; exit 1; }
 
-python3 - <<'PY'
+python3 - <<PY
 import json, os, datetime
 state = {
   "runtime_mode": "live",
@@ -90,15 +91,10 @@ state = {
   "domain_pack_id": os.environ["DOMAIN_PACK_ID"],
   "baseline_id": os.environ["BASELINE_ID"],
   "run_id": os.environ["RUN_ID"],
+  "target_profile": os.environ["TARGET_PROFILE"],
 }
-open(os.path.join(os.environ["STATE_DIR"], "runtime.json"), "w", encoding="utf-8").write(json.dumps(state, indent=2))
-PY
-
-python3 - <<PY
-import json, os
-open(os.path.join("$STATE_DIR", "pids.json"), "w", encoding="utf-8").write(
-    json.dumps({"engine_pid": int("$ENGINE_PID"), "root_pid": int("$ROOT_PID")}, indent=2)
-)
+open(os.path.join("$STATE_DIR", "runtime.json"), "w", encoding="utf-8").write(json.dumps(state, indent=2))
+open(os.path.join("$STATE_DIR", "pids.json"), "w", encoding="utf-8").write(json.dumps({"engine_pid": int("$ENGINE_PID"), "root_pid": int("$ROOT_PID")}, indent=2))
 PY
 
 echo "runtime started (live): $RUN_ID"

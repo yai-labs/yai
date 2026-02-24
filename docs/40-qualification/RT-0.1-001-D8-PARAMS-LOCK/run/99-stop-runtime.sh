@@ -20,3 +20,6 @@ PY
 
 sleep 0.2
 rm -f "$ROOT_SOCK" "$ENGINE_SOCK"
+if [[ "$TARGET_PROFILE" == "docker" ]]; then
+  docker compose -f "$DOCKER_COMPOSE_FILE" down >/dev/null || true
+fi

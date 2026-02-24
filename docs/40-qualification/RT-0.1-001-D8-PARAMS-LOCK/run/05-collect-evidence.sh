@@ -34,13 +34,13 @@ lines = [
   "runtime_mode=live",
   f"ws_id={os.environ['WS_ID']}",
   f"trace_id={os.environ['TRACE_ID']}",
-  f"target_path={os.environ.get('TARGET_PATH', 'n/a')}",
+  f"target_profile={os.environ['TARGET_PROFILE']}",
+  f"target_store_dir={os.environ['TARGET_STORE_DIR']}",
+  f"target_url={os.environ['TARGET_URL']}",
   f"root_socket={os.environ['ROOT_SOCK']}",
   f"engine_socket={os.environ['ENGINE_SOCK']}",
   f"root_pid={pids.get('root_pid', 0)}",
   f"engine_pid={pids.get('engine_pid', 0)}",
-  f"root_log={os.environ['ROOT_LOG']}",
-  f"engine_log={os.environ['ENGINE_LOG']}",
 ]
 sha = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=os.environ["REPO_ROOT"], text=True).strip()
 lines.append(f"repo_sha={sha}")
@@ -62,5 +62,4 @@ index = [
 PY
 
 echo "evidence collected: $EVIDENCE_DIR"
-
 python3 "$REPO_ROOT/docs/40-qualification/_shared/render_human_evidence.py" "$EVIDENCE_DIR" "${RT_DIR##*/}"

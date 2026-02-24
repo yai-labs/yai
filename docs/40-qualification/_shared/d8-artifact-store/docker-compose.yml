@@ -1,0 +1,20 @@
+services:
+  artifact-store:
+    image: nginx:1.27-alpine
+    container_name: yai-d8-artifact-store
+    ports:
+      - "18080:80"
+    volumes:
+      - ./_artifact_store:/usr/share/nginx/html:ro
+
+  runtime:
+    image: alpine:3.20
+    container_name: yai-d8-runtime
+    command: ["sh", "-lc", "while true; do sleep 3600; done"]
+    volumes:
+      - ./_artifact_store:/artifact_store:rw
+
+  workload:
+    image: alpine:3.20
+    container_name: yai-d8-workload
+    command: ["sh", "-lc", "while true; do sleep 3600; done"]

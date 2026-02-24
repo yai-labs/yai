@@ -9,18 +9,27 @@
     "principal.role",
     "target.pipeline_id",
     "target.run_id",
-    "target.params_hash",
     "target.dataset_ref",
+    "target.params_hash",
+    "target.lock_hash",
+    "target.dst.path",
+    "target.dst.url",
     "decision.outcome",
     "decision.reason_code",
+    "decision.baseline_id",
     "decision.baseline_hash",
     "enforcement.result",
-    "metrics.time_to_decide_ms",
-    "metrics.run_started"
+    "metrics.time_to_contain_ms",
+    "metrics.target_reachable",
+    "metrics.run_started",
+    "metrics.outputs_persisted",
+    "metrics.bytes_written",
+    "metrics.artifacts_delta"
   ],
   "notes": {
-    "params_hash": "A stable hash of declared parameters is mandatory for reproducibility.",
-    "dataset_ref": "Should be a pinned reference (version/hash), not a floating tag.",
-    "run_started": "Must be false when decision is deny/quarantine for this pack's vectors."
+    "params_hash": "Stable sha256 hash of params.json.",
+    "lock_hash": "sha256 hash of params.lock, or null when missing.",
+    "outputs_persisted": "Must be false under deny/quarantine.",
+    "artifacts_delta": "Black-box count delta on artifact-store files."
   }
 }

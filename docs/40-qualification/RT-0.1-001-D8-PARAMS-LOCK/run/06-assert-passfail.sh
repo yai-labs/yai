@@ -24,7 +24,7 @@ metrics = json.loads(open(os.path.join(evidence_dir, "containment_metrics.json")
 
 expected_reason = {
     "run-001": "PARAM_LOCK_MISSING",
-    "run-002": "PARAMS_HASH_MISMATCH",
+    "run-002": "PARAMS_LOCK_MISMATCH",
     "run-003": "PARAMS_LOCK_INVALID",
 }.get(run_id, "PARAM_LOCK_MISSING")
 
@@ -38,6 +38,8 @@ if bool(metrics.get("outputs_persisted", True)):
     raise SystemExit("outputs_persisted must be false")
 if int(metrics.get("bytes_written", 1)) != 0:
     raise SystemExit("bytes_written must be 0")
+if int(metrics.get("artifacts_delta", 1)) != 0:
+    raise SystemExit("artifacts_delta must be 0")
 if metrics.get("forbidden_effect_success_rate") != 0.0:
     raise SystemExit("forbidden_effect_success_rate must be 0.0")
 

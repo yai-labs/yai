@@ -10,4 +10,4 @@ trap '"$DIR/99-stop-runtime.sh" || true' EXIT
 "$DIR/05-collect-evidence.sh"
 "$DIR/06-assert-passfail.sh"
 
-echo "RT-0.1-004-D8-PARAMS-LOCK run completed: ${RUN_ID:-run-001}"
+echo "RT-0.1-001-D8-PARAMS-LOCK run completed: ${RUN_ID:-run-001}"

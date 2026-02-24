@@ -7,7 +7,7 @@ import datetime, json, os
 ctx = {
   "ws_id": os.environ["WS_ID"],
   "trace_id": os.environ["TRACE_ID"],
-  "principal": {"id": "principal-rt004", "role": "operator"},
+  "principal": {"id": "principal-rt001d8", "role": "operator"},
   "arming_state": "armed",
   "created_at": datetime.datetime.now(datetime.UTC).isoformat(),
 }

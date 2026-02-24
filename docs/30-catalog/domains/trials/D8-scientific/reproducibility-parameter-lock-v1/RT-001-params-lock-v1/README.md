@@ -25,7 +25,7 @@ Prove that scientific runs are fail-closed when parameter-lock requirements are 
 
 ## Catalog -> Qualification mapping
 - Catalog trial spec (this folder)
-- Qualification runner: `docs/40-qualification/RT-0.1-004-D8-PARAMS-LOCK/`
+- Qualification runner: `docs/40-qualification/RT-0.1-001-D8-PARAMS-LOCK/`
 
 ## Produced evidence
 - `baseline.json`
