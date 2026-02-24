@@ -14,7 +14,7 @@ claims:
   - C-EVIDENCE-PACK-REPRODUCIBLE
   - C-SPEC-FIRST-PINNED
 evidence_commands_required:
-  - tools/release/check_pins.sh
+  - tools/bin/yai-check-pins
   - tools/bin/yai-docs-trace-check --all
   - tools/bin/yai-proof-check
 issues:
@@ -61,7 +61,7 @@ Evidence Plan (minimum):
   - Untraceable evidence pointers block closure.
 
 Mandatory command outcomes:
-- `tools/release/check_pins.sh` -> `PASS`
+- `tools/bin/yai-check-pins` -> `PASS`
 - `tools/bin/yai-docs-trace-check --all` -> `PASS`
 - `tools/bin/yai-proof-check` -> `PASS`
 
@@ -83,7 +83,7 @@ Definition of Done:
 ## Execution Snapshot (2026-02-21)
 
 - Evidence bundle: `docs/20-governance/24-milestone-packs/contract-baseline-lock/evidence/wave0-2026-02-21/`
-- `tools/release/check_pins.sh` -> `PASS` (`exit=0`) via `10-check_pins-strict-pass.*`
+- `tools/bin/yai-check-pins` -> `PASS` (`exit=0`) via `10-check_pins-strict-pass.*`
 - `tools/bin/yai-docs-trace-check --all` -> `PASS` (`exit=0`) via `12-docs-trace-check-post-pin.*`
 - `tools/bin/yai-proof-check` -> `PASS` (`exit=0`) via `11-proof-check-post-pin.*`
 - `tools/bin/yai-proof-check --manifest docs/60-validation/proof/.private/PP-FOUNDATION-0001/pp-foundation-0001.manifest.v1.json` -> `FAIL` (`exit=2`) via `08-proof-check-private-hardfail.*`

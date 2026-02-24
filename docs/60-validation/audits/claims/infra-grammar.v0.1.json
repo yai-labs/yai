@@ -42,7 +42,7 @@
         "docs/20-governance/23-runbooks/specs-refactor-foundation.md#phase-0-1-4-consumer-yai-cli"
       ],
       "evidence_required": [
-        "tools/release/check_pins.sh"
+        "tools/bin/yai-check-pins"
       ]
     },
     {
@@ -74,7 +74,7 @@
       ],
       "evidence_required": [
         "tools/bin/yai-verify",
-        "tools/ops/suite/suite.sh"
+        "tools/bin/yai-suite"
       ]
     },
     {
@@ -107,7 +107,7 @@
       ],
       "evidence_required": [
         "tools/bin/yai-verify",
-        "tools/ops/suite/suite.sh"
+        "tools/bin/yai-suite"
       ]
     },
     {
@@ -160,7 +160,7 @@
       ],
       "evidence_required": [
         "tools/bin/yai-verify",
-        "tools/ops/suite/suite.sh"
+        "tools/bin/yai-suite"
       ]
     },
     {
@@ -182,7 +182,7 @@
       ],
       "evidence_required": [
         "tools/bin/yai-verify",
-        "tools/ops/suite/suite.sh"
+        "tools/bin/yai-suite"
       ]
     },
     {
@@ -205,7 +205,7 @@
       ],
       "evidence_required": [
         "tools/bin/yai-verify",
-        "tools/ops/suite/suite.sh"
+        "tools/bin/yai-suite"
       ]
     },
     {
@@ -227,7 +227,7 @@
       ],
       "evidence_required": [
         "tools/bin/yai-verify",
-        "tools/ops/suite/suite.sh"
+        "tools/bin/yai-suite"
       ]
     },
     {
@@ -250,7 +250,7 @@
       ],
       "evidence_required": [
         "tools/bin/yai-verify",
-        "tools/ops/suite/suite.sh",
+        "tools/bin/yai-suite",
         "tools/bin/yai-proof-check"
       ]
     }

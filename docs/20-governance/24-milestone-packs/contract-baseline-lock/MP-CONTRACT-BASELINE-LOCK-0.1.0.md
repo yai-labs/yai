@@ -44,7 +44,7 @@ Repo Split:
 
 Evidence Plan (minimum):
 - Positive cases:
-  - `tools/release/check_pins.sh` confirms aligned pins.
+  - `tools/bin/yai-check-pins` confirms aligned pins.
   - Consumer verify commands pass with the aligned baseline.
 - Negative cases:
   - Mismatched pin between repos is detected by pin check.
@@ -67,7 +67,7 @@ Baseline commit:
 51f0ef3b5985d9fbd18c8f794d03206055bc7f0d
 
 Verification commands:
-- `bash tools/release/check_pins.sh` -> PASS
+- `tools/bin/yai-check-pins` -> PASS
 - `tools/bin/yai-docs-trace-check --all` -> PASS
 - `tools/bin/yai-proof-check` -> SKIP (not required for this phase)
 

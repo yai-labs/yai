@@ -18,7 +18,7 @@ claims:
   - C-EVIDENCE-PACK-REPRODUCIBLE
 evidence_commands_required:
   - tools/bin/yai-verify
-  - tools/ops/suite/suite.sh
+  - tools/bin/yai-suite
   - tools/bin/yai-proof-check
 issues:
   - "140"
@@ -43,7 +43,7 @@ Close phase 0.1.5 with explicit claim/evidence bindings and reproducible gate ou
 
 ## Mandatory command outcomes
 - `tools/bin/yai-verify` -> `PASS`
-- `tools/ops/suite/suite.sh` -> `PASS`
+- `tools/bin/yai-suite` -> `PASS`
 - `tools/bin/yai-proof-check` -> `PASS`
 
 Closure policy: mandatory `SKIP` is treated as `FAIL`.

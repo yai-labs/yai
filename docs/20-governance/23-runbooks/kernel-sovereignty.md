@@ -640,7 +640,7 @@ Verify system behavior under adversarial conditions
 5. **Path traversal battery:** 50 different escape attempts
 
 ### Tools
-- `tools/ops/stress-v1.sh`
+- `yai-infra/tools/ops/stress-v1.sh`
 - Python test harness with threading
 
 ### Acceptance

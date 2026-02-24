@@ -14,7 +14,7 @@ claims:
   - C-SPEC-FIRST-PINNED
   - C-EVIDENCE-PACK-REPRODUCIBLE
 evidence_commands_required:
-  - tools/release/check_pins.sh
+  - tools/bin/yai-check-pins
   - tools/bin/yai-docs-trace-check --all
 issues:
   - 141
@@ -60,7 +60,7 @@ Evidence Plan (minimum):
   - Pin mismatch causes parity check failure.
 
 Mandatory command outcomes:
-- `tools/release/check_pins.sh` -> `PASS`
+- `tools/bin/yai-check-pins` -> `PASS`
 - `tools/bin/yai-docs-trace-check --all` -> `PASS`
 
 Closure policy:
@@ -81,7 +81,7 @@ Definition of Done:
 ## Execution Snapshot (2026-02-21)
 
 - Evidence bundle: `docs/20-governance/24-milestone-packs/contract-baseline-lock/evidence/wave0-2026-02-21/`
-- `tools/release/check_pins.sh` -> `PASS` (`exit=0`) via `10-check_pins-strict-pass.*`
+- `tools/bin/yai-check-pins` -> `PASS` (`exit=0`) via `10-check_pins-strict-pass.*`
 - `tools/bin/yai-docs-trace-check --all` -> `PASS` (`exit=0`) via `12-docs-trace-check-post-pin.*`
 
 Phase state:

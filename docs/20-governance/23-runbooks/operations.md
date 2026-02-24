@@ -68,7 +68,7 @@ Define the operational control loop for running, validating, and recovering the 
 
 ## 8) References
 - Test plans: `docs/50-qualification/test-plans/hardfail.md`
-- Ops scripts: `tools/ops/README.md`
+- Ops scripts: `tools/bin/yai-gate list`
 
 ## Traceability
 - ADR refs (ops-only runbook): none mandatory.

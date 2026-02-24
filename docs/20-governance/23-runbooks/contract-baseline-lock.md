@@ -26,7 +26,7 @@ related:
   test_plans:
     - docs/50-qualification/test-plans/hardfail.md
   tools:
-    - tools/release/check_pins.sh
+    - tools/bin/yai-check-pins
     - tools/bin/yai-docs-trace-check
     - tools/bin/yai-proof-check
     - tools/bin/yai-verify
@@ -57,7 +57,7 @@ Create the first governance runbook that locks cross-repo contract behavior acro
   - `deps/yai-specs/contracts/invariants/I-003-governance.md`
   - `deps/yai-specs/contracts/invariants/I-006-external-effect-boundary.md`
 - Verification tooling:
-  - `tools/release/check_pins.sh`
+  - `tools/bin/yai-check-pins`
   - `tools/bin/yai-docs-trace-check`
   - `tools/bin/yai-proof-check`
   - `tools/bin/yai-verify`
@@ -99,7 +99,7 @@ Claim: CI validates contract parity in both consumers with same baseline.
 - Claim IDs: `C-SPEC-FIRST-PINNED`, `C-EVIDENCE-PACK-REPRODUCIBLE`
 - Scope: CI parity checks for protocol/authority surfaces.
 - Mandatory evidence commands:
-  - `tools/release/check_pins.sh`
+  - `tools/bin/yai-check-pins`
   - `tools/bin/yai-docs-trace-check --all`
 - Gate:
   - parity checks fail on drift,
@@ -138,7 +138,7 @@ Claim: closure evidence is explicit and auditable across all repos.
 - Claim IDs: `C-EVIDENCE-PACK-REPRODUCIBLE`, `C-SPEC-FIRST-PINNED`
 - Scope: evidence index and deterministic positive/negative checks.
 - Mandatory evidence commands:
-  - `tools/release/check_pins.sh`
+  - `tools/bin/yai-check-pins`
   - `tools/bin/yai-docs-trace-check --all`
   - `tools/bin/yai-proof-check`
 - Gate:
@@ -149,7 +149,7 @@ Claim: closure evidence is explicit and auditable across all repos.
 ## 6) Verification
 Phase minimum command set:
 - 0.1.1
-  - `tools/release/check_pins.sh`
+  - `tools/bin/yai-check-pins`
   - `tools/bin/yai-docs-trace-check --all`
 - 0.1.2
   - `tools/bin/yai-proof-check`
@@ -158,7 +158,7 @@ Phase minimum command set:
   - `tools/bin/yai-proof-check`
   - `tools/bin/yai-verify`
 - 0.1.4
-  - `tools/release/check_pins.sh`
+  - `tools/bin/yai-check-pins`
   - `tools/bin/yai-docs-trace-check --all`
   - `tools/bin/yai-proof-check`
 

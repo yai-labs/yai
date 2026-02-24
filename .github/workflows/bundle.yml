@@ -51,7 +51,7 @@ jobs:
         env:
           STRICT_SPECS_HEAD: "1"
           STRICT_BUNDLE_ENTRYPOINT: "1"
-        run: bash tools/release/check_pins.sh
+        run: tools/bin/yai-check-pins
 
       - name: Validate release metadata (tags only)
         if: startsWith(github.ref, 'refs/tags/v')

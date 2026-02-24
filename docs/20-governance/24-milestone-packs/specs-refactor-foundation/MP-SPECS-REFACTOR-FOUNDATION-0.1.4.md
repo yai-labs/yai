@@ -13,7 +13,7 @@ claims:
   - C-SPEC-FIRST-PINNED
   - C-EVIDENCE-PACK-REPRODUCIBLE
 evidence_commands_required:
-  - tools/release/check_pins.sh
+  - tools/bin/yai-check-pins
   - tools/bin/yai-proof-check
 issues:
   - "142"
@@ -40,7 +40,7 @@ issues:
 Close phase 0.1.4 with explicit claim/evidence bindings and reproducible gate outputs.
 
 ## Mandatory command outcomes
-- `tools/release/check_pins.sh` -> `PASS`
+- `tools/bin/yai-check-pins` -> `PASS`
 - `tools/bin/yai-proof-check` -> `PASS`
 
 Closure policy: mandatory `SKIP` is treated as `FAIL`.

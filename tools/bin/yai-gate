@@ -2,60 +2,14 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-LOCAL_GATES_DIR="$ROOT/tools/ops/gate"
 INFRA_ROOT_DEFAULT="$(cd "$ROOT/.." && pwd)/yai-infra"
 INFRA_ROOT="${YAI_INFRA_ROOT:-$INFRA_ROOT_DEFAULT}"
-INFRA_GATES_DIR="$INFRA_ROOT/tools/ops/gate"
+TARGET="$INFRA_ROOT/tools/bin/yai-gate"
 
-# Prefer infra canonical tooling when available; fallback to local copy for compatibility.
-if [[ -d "$INFRA_GATES_DIR" ]]; then
-  GATES_DIR="$INFRA_GATES_DIR"
-else
-  GATES_DIR="$LOCAL_GATES_DIR"
+if [[ -x "$TARGET" ]]; then
+  exec "$TARGET" "$@"
 fi
 
-usage() {
-  cat <<'USAGE'
-Usage:
-  tools/bin/yai-gate list
-  tools/bin/yai-gate <gate-name> [args...]
-
-Examples:
-  tools/bin/yai-gate ws dev
-  tools/bin/yai-gate graph graph_gate
-USAGE
-}
-
-list_gates() {
-  find "$GATES_DIR" -maxdepth 1 -type f -name "*.sh" -print \
-    | sed -e "s#^$GATES_DIR/##" -e 's/\.sh$//' \
-    | rg -v '^gate$' \
-    | sort
-}
-
-if [[ "${1:-}" == "" ]]; then
-  usage
-  exit 1
-fi
-
-if [[ "${1:-}" == "list" ]]; then
-  list_gates
-  exit 0
-fi
-
-NAME="$1"
-shift
-TARGET="$GATES_DIR/$NAME.sh"
-if [[ ! -x "$TARGET" ]]; then
-  echo "FAIL: unknown gate '$NAME'"
-  echo "Available gates:"
-  list_gates
-  exit 1
-fi
-
-if [[ "$NAME" == "gate" ]]; then
-  echo "FAIL: gate 'gate' is internal-only"
-  exit 1
-fi
-
-exec "$TARGET" "$@"
+echo "Hard cutover: use yai-infra canonical tool for yai-gate" >&2
+echo "Missing target: $TARGET" >&2
+exit 2

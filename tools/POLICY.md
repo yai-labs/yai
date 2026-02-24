@@ -1,11 +1,9 @@
 # Tools Policy (YAI)
 
 Non-negotiable:
-1) No logic in shell wrappers (wrappers are glue only).
-2) Governance tooling in `yai` delegates to canonical `yai-infra` tooling.
+1) No non-core governance logic in `yai` wrappers.
+2) Non-core tooling delegates to canonical `yai-infra` targets.
 3) Tools must never open/merge PRs automatically.
-   - Maintainer does PR creation + merge.
-   - Agents may create branches + commit + push.
 
-Stability:
-- `tools/VERSION` is the tooling interface version (not the repo VERSION).
+Runtime note:
+- Runtime build integrity checks may remain local under `tools/dev/` when strictly required by core build CI.

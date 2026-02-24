@@ -242,7 +242,7 @@ Minimum set expected:
 **Claim IDs:** `C-ENVELOPE-HANDSHAKE-REQUIRED`, `C-DOMAIN-COVERAGE-NETWORK`
 **Mandatory evidence commands:**
 - `tools/bin/yai-verify`
-- `tools/ops/suite/suite.sh`
+- `tools/bin/yai-suite`
 
 #### File targets
 
@@ -324,7 +324,7 @@ Protocol negative tests (at least):
 **Claim IDs:** `C-KERNEL-HARD-BOUNDARY-CORE`, `C-ENVELOPE-HANDSHAKE-REQUIRED`
 **Mandatory evidence commands:**
 - `tools/bin/yai-verify`
-- `tools/ops/suite/suite.sh`
+- `tools/bin/yai-suite`
 
 #### File targets
 
@@ -382,7 +382,7 @@ Minimum expectation:
 **Claim IDs:** `C-CONTEXT-PROPAGATION`, `C-KERNEL-HARD-BOUNDARY-CORE`
 **Mandatory evidence commands:**
 - `tools/bin/yai-verify`
-- `tools/ops/suite/suite.sh`
+- `tools/bin/yai-suite`
 
 #### File targets
 
@@ -424,7 +424,7 @@ Consumers:
 **Claim IDs:** `C-KERNEL-HARD-BOUNDARY-CORE`, `C-DOMAIN-COVERAGE-RESOURCE`
 **Mandatory evidence commands:**
 - `tools/bin/yai-verify`
-- `tools/ops/suite/suite.sh`
+- `tools/bin/yai-suite`
 
 #### File targets
 
@@ -471,7 +471,7 @@ Send invalid ws_id:
 **Claim IDs:** `C-DOMAIN-COVERAGE-NETWORK`, `C-KERNEL-HARD-BOUNDARY-CORE`, `C-EVIDENCE-PACK-REPRODUCIBLE`
 **Mandatory evidence commands:**
 - `tools/bin/yai-verify`
-- `tools/ops/suite/suite.sh`
+- `tools/bin/yai-suite`
 - `tools/bin/yai-proof-check`
 
 #### Minimum test cases

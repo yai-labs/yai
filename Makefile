@@ -58,7 +58,7 @@ dist-all: dist mind-dist
 	@echo "--- [YAI] Dist-All staged (including mind) ---"
 
 bundle: dist
-	@bash tools/bundle/build_bundle.sh
+	@tools/bin/yai-bundle
 
 boot:
 	$(MAKE) -C $(BOOT_DIR) build BUILD_ROOT=$(BUILD_ROOT) BIN_BUILD=$(BIN_BUILD)
@@ -128,7 +128,7 @@ verify:
 	fi
 
 preflight-release:
-	@bash tools/release/check_pins.sh
+	@tools/bin/yai-check-pins
 
 docs:
 	@mkdir -p $(DOXY_OUT)
@@ -145,11 +145,11 @@ proof-verify:
 	@tools/bin/yai-proof-check
 
 release-guards:
-	@bash tools/release/check_pins.sh
+	@tools/bin/yai-check-pins
 	@tools/bin/yai-proof-check
 
 release-guards-dev:
-	@STRICT_SPECS_HEAD=0 bash tools/release/check_pins.sh
+	@STRICT_SPECS_HEAD=0 tools/bin/yai-check-pins
 	@tools/bin/yai-proof-check
 
 changelog-verify:

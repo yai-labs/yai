@@ -20,7 +20,7 @@ This is a preparation plan, not the final governance plan.
 
 ```bash
 # In yai repo
-tools/release/check_pins.sh
+tools/bin/yai-check-pins
 tools/bin/yai-docs-trace-check --all
 tools/bin/yai-proof-check --all
 python3 tests/integration/test_handshake.py

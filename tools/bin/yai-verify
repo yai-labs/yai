@@ -2,54 +2,14 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-LOCAL_VERIFY_DIR="$ROOT/tools/ops/verify"
 INFRA_ROOT_DEFAULT="$(cd "$ROOT/.." && pwd)/yai-infra"
 INFRA_ROOT="${YAI_INFRA_ROOT:-$INFRA_ROOT_DEFAULT}"
-INFRA_VERIFY_DIR="$INFRA_ROOT/tools/ops/verify"
+TARGET="$INFRA_ROOT/tools/bin/yai-verify"
 
-# Prefer infra canonical tooling when available; fallback to local copy for compatibility.
-if [[ -d "$INFRA_VERIFY_DIR" ]]; then
-  VERIFY_DIR="$INFRA_VERIFY_DIR"
-else
-  VERIFY_DIR="$LOCAL_VERIFY_DIR"
+if [[ -x "$TARGET" ]]; then
+  exec "$TARGET" "$@"
 fi
 
-usage() {
-  cat <<'USAGE'
-Usage:
-  tools/bin/yai-verify list
-  tools/bin/yai-verify <verify-name> [args...]
-
-Examples:
-  tools/bin/yai-verify core
-  tools/bin/yai-verify law-kernel
-USAGE
-}
-
-list_checks() {
-  find "$VERIFY_DIR" -maxdepth 1 -type f -name "*.sh" -print \
-    | sed -e "s#^$VERIFY_DIR/##" -e 's/\.sh$//' \
-    | sort
-}
-
-if [[ "${1:-}" == "" ]]; then
-  usage
-  exit 1
-fi
-
-if [[ "${1:-}" == "list" ]]; then
-  list_checks
-  exit 0
-fi
-
-NAME="$1"
-shift
-TARGET="$VERIFY_DIR/$NAME.sh"
-if [[ ! -x "$TARGET" ]]; then
-  echo "FAIL: unknown verify '$NAME'"
-  echo "Available verify checks:"
-  list_checks
-  exit 1
-fi
-
-exec "$TARGET" "$@"
+echo "Hard cutover: use yai-infra canonical tool for yai-verify" >&2
+echo "Missing target: $TARGET" >&2
+exit 2

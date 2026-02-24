@@ -32,7 +32,7 @@
       {
         "id": "E-W0-CHECK-PINS-STRICT",
         "claim": "C-SPEC-FIRST-PINNED",
-        "run": "tools/release/check_pins.sh",
+        "run": "tools/bin/yai-check-pins",
         "result": "pass",
         "paths": [
           "docs/20-governance/24-milestone-packs/contract-baseline-lock/evidence/wave0-2026-02-21/10-check_pins-strict-pass.output.txt",

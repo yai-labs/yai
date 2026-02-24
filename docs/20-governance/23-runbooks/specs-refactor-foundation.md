@@ -27,7 +27,7 @@ related:
   tools:
     - tools/bin/yai-docs-trace-check
     - tools/bin/yai-proof-check
-    - tools/release/check_pins.sh
+    - tools/bin/yai-check-pins
 ---
 
 # RB-SPECS-REFACTOR-FOUNDATION - Pre-Hardening Specs Program
@@ -69,7 +69,7 @@ A *closure artifact* for a phase: what changed, proof evidence, links to issues/
 
 ## 2) Preconditions (hard rules)
 - [ ] `RB-CONTRACT-BASELINE-LOCK` has been executed or at least stabilized (ADR-011 baseline available).
-- [ ] Cross-repo pin governance is active and runnable (e.g. `tools/release/check_pins.sh` in the consumer).
+- [ ] Cross-repo pin governance is active and runnable (e.g. `tools/bin/yai-check-pins` in the consumer).
 - [ ] No direct development is performed inside consumer vendored specs trees (e.g. `yai/deps/yai-specs`).
 - [ ] Any change in `yai-specs` that affects consumers is coordinated via pins/tags and verified in consumers.
 
@@ -224,11 +224,11 @@ A phase is "closed" only when:
 **Scope:** pins/tags/commit refs, include paths, build wiring, verify scripts.  
 **Claim IDs:** `C-SPEC-FIRST-PINNED`, `C-EVIDENCE-PACK-REPRODUCIBLE`  
 **Mandatory evidence commands:**
-- `tools/release/check_pins.sh`
+- `tools/bin/yai-check-pins`
 - `tools/bin/yai-proof-check`
 **Work (typical):**
 - update include paths to new canonical structure,
-- ensure `tools/release/check_pins.sh` (or equivalent) gates drift,
+- ensure `tools/bin/yai-check-pins` (or equivalent) gates drift,
 - run `yai` build + verify.
 
 **Gate:**
@@ -251,7 +251,7 @@ A phase is "closed" only when:
 **Scope:** pin, includes, references, vectors usage, CLI build/tests.  
 **Claim IDs:** `C-SPEC-FIRST-PINNED`, `C-EVIDENCE-PACK-REPRODUCIBLE`  
 **Mandatory evidence commands:**
-- `tools/release/check_pins.sh`
+- `tools/bin/yai-check-pins`
 - `tools/bin/yai-proof-check`
 **Gate:**
 - `yai-cli` build/tests green,
@@ -345,8 +345,8 @@ A phase is "closed" only when:
 - `tools/format/format_all.sh`
 - `tools/validate/validate_all.sh`
 - `tools/policy/check_stability.sh`
-- `tools/release/generate_release_notes.sh`
-- `tools/release/tag_checklist.md`
+- `yai-infra/tools/release/README.md`
+- `yai-infra/tools/release/bump_version.sh`
 - Makefile targets: `validate`, `format`, `format-check`, `policy`, `release-notes`
 
 **MP (planned):**
@@ -449,7 +449,7 @@ make tla-quick
 
 ```bash
 # pin governance (example)
-./tools/release/check_pins.sh
+tools/bin/yai-check-pins
 
 # build + verify (examples)
 make all

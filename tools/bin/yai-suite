@@ -2,60 +2,14 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-LOCAL_SUITES_DIR="$ROOT/tools/ops/suite"
 INFRA_ROOT_DEFAULT="$(cd "$ROOT/.." && pwd)/yai-infra"
 INFRA_ROOT="${YAI_INFRA_ROOT:-$INFRA_ROOT_DEFAULT}"
-INFRA_SUITES_DIR="$INFRA_ROOT/tools/ops/suite"
+TARGET="$INFRA_ROOT/tools/bin/yai-suite"
 
-# Prefer infra canonical tooling when available; fallback to local copy for compatibility.
-if [[ -d "$INFRA_SUITES_DIR" ]]; then
-  SUITES_DIR="$INFRA_SUITES_DIR"
-else
-  SUITES_DIR="$LOCAL_SUITES_DIR"
+if [[ -x "$TARGET" ]]; then
+  exec "$TARGET" "$@"
 fi
 
-usage() {
-  cat <<'USAGE'
-Usage:
-  tools/bin/yai-suite list
-  tools/bin/yai-suite <suite-path> [args...]
-
-Examples:
-  tools/bin/yai-suite levels/l0-l7
-  tools/bin/yai-suite ops/no-llm-360
-USAGE
-}
-
-list_suites() {
-  find "$SUITES_DIR" -type f -name "*.sh" -print \
-    | sed -e "s#^$SUITES_DIR/##" -e 's/\.sh$//' \
-    | rg -v '^suite$' \
-    | sort
-}
-
-if [[ "${1:-}" == "" ]]; then
-  usage
-  exit 1
-fi
-
-if [[ "${1:-}" == "list" ]]; then
-  list_suites
-  exit 0
-fi
-
-NAME="$1"
-shift
-TARGET="$SUITES_DIR/$NAME.sh"
-if [[ ! -x "$TARGET" ]]; then
-  echo "FAIL: unknown suite '$NAME'"
-  echo "Available suites:"
-  list_suites
-  exit 1
-fi
-
-if [[ "$NAME" == "suite" ]]; then
-  echo "FAIL: suite 'suite' is internal-only"
-  exit 1
-fi
-
-exec "$TARGET" "$@"
+echo "Hard cutover: use yai-infra canonical tool for yai-suite" >&2
+echo "Missing target: $TARGET" >&2
+exit 2

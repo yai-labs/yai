@@ -39,13 +39,13 @@ Legend:
 
 ## 3) Mandatory Evidence Command Families
 - Pins/contracts:
-  - `tools/release/check_pins.sh`
+  - `tools/bin/yai-check-pins`
 - Proof/traceability:
   - `tools/bin/yai-docs-trace-check`
   - `tools/bin/yai-proof-check`
 - Runtime verify/suite:
   - `tools/bin/yai-verify`
-  - `tools/ops/suite/suite.sh`
+  - `tools/bin/yai-suite`
 
 Operational policy:
 - If command family is mandatory for the phase, `SKIP` closes as `FAIL`.

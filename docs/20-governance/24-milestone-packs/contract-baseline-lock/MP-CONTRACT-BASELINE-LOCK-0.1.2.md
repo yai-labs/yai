@@ -87,4 +87,4 @@ Phase state:
 - `READY` for phase closure (no mandatory `SKIP` path on proof-check).
 
 Wave-level status:
-- strict pin alignment now passing (`tools/release/check_pins.sh` -> `PASS`) via `10-check_pins-strict-pass.*`.
+- strict pin alignment now passing (`tools/bin/yai-check-pins` -> `PASS`) via `10-check_pins-strict-pass.*`.
