@@ -1,24 +1,31 @@
 # Dev Guide
 
-Developer-facing operational guidance for docs, governance, and delivery execution.
+Developer-facing guidance for product runtime work in `yai`.
 
-Core guides:
+## Core local guides
+
 - `repo-workflow.md`
-- `cross-repo-workflow.md`
 - `build.md`
 - `testing.md`
 - `debugging.md`
 - `release.md`
+- `mind-build.md`
+- `mind-testing.md`
+- `mind-workflow.md`
 
-Governance and templates:
-- `agent-contract.md`
-- `agent-playbook.md`
+## Governance/process pointers (canonical in yai-infra)
+
+- `cross-repo-workflow.md`
 - `github-templates.md`
 - `github-issue-templates.md`
 - `github-milestone-template.md`
 - `github-program-governance.md`
-
-Checks and standards:
-- `checklists/*.md`
+- `repo-tooling.md`
 - `toolchain-contract-v1.md`
+
+## Still local
+
+- `agent-contract.md`
+- `agent-playbook.md`
 - `tooling-layout.md`
+- `checklists/*.md`

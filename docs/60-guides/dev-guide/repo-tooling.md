@@ -1,10 +1,10 @@
 # Repo Tooling
 
-Operational tooling relevant to docs/governance:
-- `tools/bin/yai-docs-trace-check`
-- `../yai-infra/tools/bin/yai-docs-schema-check`
-- `../yai-infra/tools/bin/yai-docs-doctor`
-- `tools/bin/yai-proof-check`
-- `tools/bin/yai-verify`
+Governance tooling source-of-truth is `yai-infra`.
 
-Use `--check` mode in validation steps and attach outputs in evidence bundles.
+See:
+
+- `https://github.com/yai-labs/yai-infra/blob/main/docs/tooling/github-actions-suite.md`
+- `https://github.com/yai-labs/yai-infra/blob/main/docs/tooling/governance-suite.md`
+
+`yai/tools/bin` keeps thin wrappers only.
