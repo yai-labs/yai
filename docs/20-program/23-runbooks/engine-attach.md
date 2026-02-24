@@ -1,10 +1,10 @@
 ---
 id: RB-ENGINE-ATTACH
 title: Engine Attach
-status: draft
+status: active
 owner: runtime
 effective_date: 2026-02-19
-revision: 1
+revision: 2
 supersedes: []
 depends_on:
   - RB-ROOT-HARDENING
@@ -38,9 +38,9 @@ tags:
 Bring L2 Engine inside the governed Root/Kernel control path with workspace-bound lifecycle and deterministic protocol behavior.
 
 ## 2) Preconditions
-- [ ] Workspace lifecycle baseline is active.
-- [ ] Root boundary hardening is already green.
-- [ ] Protocol IDs and error mapping can be updated in sync with specs.
+- [x] Workspace lifecycle baseline is active.
+- [x] Root boundary hardening is already green.
+- [x] Protocol IDs and error mapping can be updated in sync with specs.
 
 ## 3) Inputs
 - Runtime targets: `root`, `kernel`, `engine`, `yai-cli`
@@ -378,3 +378,12 @@ yai kernel ws destroy testws
 ## Next Steps
 
 When starting v4 tomorrow, first thing to share: what does the payload look like that `cmd_engine.c` sends today (even if stub)? This way I can tell you exactly how to model `ENGINE_START/STOP/STATUS` kernel-side without "breaking" the contract you already have.
+
+## 9) Operational Closure
+
+Engine attach is closed for the current phase and is now the active operational baseline after `RB-WORKSPACES-LIFECYCLE`.
+
+Closure sequence completed:
+- workspace lifecycle gate confirmed
+- engine attach lifecycle adopted as active runbook
+- follow-up hardening remains tracked under `RB-ROOT-HARDENING` and `RB-DATA-PLANE`

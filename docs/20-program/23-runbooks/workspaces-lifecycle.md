@@ -4,7 +4,7 @@ title: Workspaces Lifecycle
 status: active
 owner: runtime
 effective_date: 2026-02-18
-revision: 1
+revision: 2
 supersedes: []
 depends_on:
   - RB-ROOT-HARDENING
@@ -50,9 +50,9 @@ Upgrade workspace commands from stub behavior to deterministic governed side-eff
 
 ## 2) Preconditions
 
-- [ ] Root hardening baseline is active (handshake gate, ws_id validation, deterministic errors).
-- [ ] Kernel is reachable from control plane commands.
-- [ ] `yai root ping` and one kernel command are already green.
+- [x] Root hardening baseline is active (handshake gate, ws_id validation, deterministic errors).
+- [x] Kernel is reachable from control plane commands.
+- [x] `yai root ping` and one kernel command are already green.
 
 ## 3) Inputs
 
@@ -471,11 +471,11 @@ Rollback is phase-based:
 
 ## 9) Final Definition of Done
 
-- [ ] `yai kernel ws create testws` creates `~/.yai/run/testws/manifest.json`
-- [ ] `yai kernel ws list` lists created workspaces deterministically
-- [ ] `yai kernel ws destroy testws` requires authority and deletes only inside jail
-- [ ] invalid ws_id is rejected deterministically with zero side effects
-- [ ] workspace+protocol torture suite passes repeatably
+- [x] `yai kernel ws create testws` creates `~/.yai/run/testws/manifest.json`
+- [x] `yai kernel ws list` lists created workspaces deterministically
+- [x] `yai kernel ws destroy testws` requires authority and deletes only inside jail
+- [x] invalid ws_id is rejected deterministically with zero side effects
+- [x] workspace+protocol torture suite passes repeatably
 
 ## Traceability
 
@@ -489,3 +489,7 @@ Rollback is phase-based:
 - MPs:
   - `docs/20-program/24-milestone-packs/workspaces-lifecycle/MP-WORKSPACES-LIFECYCLE-0.1.0.md` *(planned)*
   - `docs/20-program/24-milestone-packs/workspaces-lifecycle/MP-WORKSPACES-LIFECYCLE-0.1.1.md` *(planned)*
+
+## 10) Operational Closure
+
+This runbook is operationally closed for the current phase and remains active as a prerequisite baseline for `RB-ENGINE-ATTACH`.
