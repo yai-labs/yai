@@ -1,6 +1,6 @@
-{"ts": "2026-02-24T16:28:58.961526Z", "step": "trigger", "event": "network.egress.connect", "status": "received"}
-{"ts": "2026-02-24T16:28:58.961526Z", "step": "context", "ws_id": "ws-sc102-run-003", "trace_id": "trace-sc102-run-003", "role": "operator", "arming": "armed"}
-{"ts": "2026-02-24T16:28:58.961526Z", "step": "authority", "baseline_id": "baseline-deny", "baseline_hash": "4214c2e8d1c75dd97cfe3bdb961d186da8927c24d341de9fe864ce3a9df443fb"}
-{"ts": "2026-02-24T16:28:58.961526Z", "step": "decision", "outcome": "deny", "reason_code": "EGRESS_DEST_NOT_CONTRACTED"}
-{"ts": "2026-02-24T16:28:58.961526Z", "step": "enforcement", "result": "blocked", "connect_established": false, "bytes_exfiltrated": 0}
-{"ts": "2026-02-24T16:28:58.961526Z", "step": "evidence", "status": "materialized"}
+{"ts": "2026-02-24T16:54:41.854993Z", "step": "trigger", "event": "network.egress.connect", "status": "received"}
+{"ts": "2026-02-24T16:54:41.854993Z", "step": "context", "ws_id": "ws-sc102-run-003", "trace_id": "trace-sc102-run-003", "role": "operator", "arming": "armed"}
+{"ts": "2026-02-24T16:54:41.854993Z", "step": "authority", "baseline_id": "baseline-deny", "baseline_hash": "4214c2e8d1c75dd97cfe3bdb961d186da8927c24d341de9fe864ce3a9df443fb"}
+{"ts": "2026-02-24T16:54:41.854993Z", "step": "decision", "outcome": "deny", "reason_code": "EGRESS_DEST_NOT_CONTRACTED"}
+{"ts": "2026-02-24T16:54:41.854993Z", "step": "enforcement", "result": "blocked", "connect_established": false, "bytes_exfiltrated": 0}
+{"ts": "2026-02-24T16:54:41.854993Z", "step": "evidence", "status": "materialized"}
