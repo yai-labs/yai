@@ -2,8 +2,8 @@
 
 Operational tooling relevant to docs/governance:
 - `tools/bin/yai-docs-trace-check`
-- `tools/bin/yai-docs-schema-check`
-- `tools/bin/yai-docs-doctor`
+- `../yai-infra/tools/bin/yai-docs-schema-check`
+- `../yai-infra/tools/bin/yai-docs-doctor`
 - `tools/bin/yai-proof-check`
 - `tools/bin/yai-verify`
 

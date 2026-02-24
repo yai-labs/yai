@@ -70,4 +70,4 @@ Define a formal baseline-lock policy with explicit pin responsibilities for `yai
 ## References
 - `docs/20-program/spine.md`
 - `docs/20-program/22-adr/ADR-011-contract-baseline-lock.md`
-- `tools/bin/yai-specs-sync`
+- `../yai-infra/tools/bin/yai-specs-sync`

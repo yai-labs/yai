@@ -6,9 +6,9 @@ body:
   - type: markdown
     attributes:
       value: |
-        This form is a manual fallback. Preferred path is `tools/bin/yai-dev-issue mp-closure ...`.
+        This form is a manual fallback. Preferred path is `../yai-infra/tools/bin/yai-dev-issue mp-closure ...`.
         After submit, enforce canonical milestone + labels with:
-        `tools/bin/yai-dev-fix-phase --track <track> --phase <phase> --repo yai-labs/yai --apply`
+        `../yai-infra/tools/bin/yai-dev-fix-phase --track <track> --phase <phase> --repo yai-labs/yai --apply`
 
   - type: input
     id: track

@@ -46,11 +46,11 @@
   ],
   "required_commands": [
     "tools/bin/yai-docs-trace-check --changed --base <BASE_SHA> --head <HEAD_SHA>",
-    "tools/bin/yai-docs-schema-check --changed --base <BASE_SHA> --head <HEAD_SHA>",
-    "tools/bin/yai-docs-graph --check",
-    "tools/bin/yai-agent-pack --check",
-    "tools/bin/yai-docs-doctor --mode ci --base <BASE_SHA> --head <HEAD_SHA>",
-    "tools/bin/yai-pr-body --template <template> ..."
+    "../yai-infra/tools/bin/yai-docs-schema-check --changed --base <BASE_SHA> --head <HEAD_SHA>",
+    "../yai-infra/tools/bin/yai-docs-graph --check",
+    "../yai-infra/tools/bin/yai-agent-pack --check",
+    "../yai-infra/tools/bin/yai-docs-doctor --mode ci --base <BASE_SHA> --head <HEAD_SHA>",
+    "../yai-infra/tools/bin/yai-pr-body --template <template> ..."
   ],
   "version": 1
 }
