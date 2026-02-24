@@ -22,6 +22,10 @@ A Domain Pack defines:
 Domain Packs are not runbooks, not audits, and not implementation code.
 They are the semantic local law + test vectors used by scenarios (SC) and qualification gates (QT).
 
+RealTarget execution procedures are defined outside packs under:
+`docs/30-catalog/domains/trials/` (catalog spec) and
+`docs/40-qualification/RT-.../` (runner/evidence).
+
 ## Relationship to other artifacts
 
 - D-Major Domains: semantic taxonomy (`docs/30-catalog/domains/D-MAJOR.md`)

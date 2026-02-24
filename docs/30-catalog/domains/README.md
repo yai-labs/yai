@@ -57,3 +57,4 @@ A D-Major domain can map to multiple runtime effect domains. Example:
 
 - `D-MAJOR.md` - canonical D-Major taxonomy.
 - `packs/` - domain packs (semantics packages) referenced by scenarios and qualification gates.
+- `trials/` - RealTarget trial specifications (procedures bound to packs; no runtime code).

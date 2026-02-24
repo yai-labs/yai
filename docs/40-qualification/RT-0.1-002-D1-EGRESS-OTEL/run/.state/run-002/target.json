@@ -1,0 +1,7 @@
+{
+  "tool": "curl",
+  "version_line": "curl 8.7.1 (x86_64-apple-darwin25.0) libcurl/8.7.1 (SecureTransport) LibreSSL/3.3.6 zlib/1.2.12 nghttp2/1.68.0",
+  "target_host": "127.0.0.1",
+  "target_port": 8443,
+  "status": "ready"
+}

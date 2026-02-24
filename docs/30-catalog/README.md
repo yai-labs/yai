@@ -13,6 +13,7 @@ Contents:
 - Domains: `docs/30-catalog/domains/`
 - Scenarios: `docs/30-catalog/scenarios/`
 - Qualification gates: `docs/30-catalog/gates/`
+- RealTarget trials (catalog specs): `docs/30-catalog/domains/trials/`
 
 Usage model:
 - Catalog defines expected behavior and evidence requirements.
