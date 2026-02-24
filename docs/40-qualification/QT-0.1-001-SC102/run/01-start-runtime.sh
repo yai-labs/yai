@@ -2,6 +2,13 @@
 set -euo pipefail
 source "$(dirname "$0")/_lib.sh"
 
+if [[ "$QT_MODE" == "live" ]]; then
+  qt_live_env
+  "$LIVE_RUN_DIR/01-start-runtime.sh"
+  echo "runtime started (live): $RUN_ID"
+  exit 0
+fi
+
 python - <<"PY"
 import json, os, datetime
 state = {

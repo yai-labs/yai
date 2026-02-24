@@ -53,6 +53,8 @@ int main(int argc, char *argv[]) {
     }
 
     const char *ws_id = argv[1];
+    const char *allow_degraded = getenv("YAI_ENGINE_ALLOW_DEGRADED");
+    const bool degraded_allowed = (allow_degraded && strcmp(allow_degraded, "1") == 0);
 
     signal(SIGINT,  handle_signal);
     signal(SIGTERM, handle_signal);
@@ -66,8 +68,18 @@ int main(int argc, char *argv[]) {
     VaultCluster cluster;
     cluster.core = yai_bridge_attach(ws_id, "CORE");
     if (!cluster.core) {
-        fprintf(stderr, "FATAL: Vault attach failed for ws=%s\n", ws_id);
-        return 1;
+        if (!degraded_allowed) {
+            fprintf(stderr, "FATAL: Vault attach failed for ws=%s\n", ws_id);
+            return 1;
+        }
+
+        static Vault degraded_vault;
+        memset(&degraded_vault, 0, sizeof(degraded_vault));
+        degraded_vault.energy_quota = 100000;
+        degraded_vault.authority_lock = false;
+        strncpy(degraded_vault.workspace_id, ws_id, sizeof(degraded_vault.workspace_id) - 1);
+        cluster.core = &degraded_vault;
+        fprintf(stderr, "[ENGINE] Warning: Vault attach failed for ws=%s, continuing in degraded mode\n", ws_id);
     }
     cluster.brain = yai_bridge_attach(ws_id, "brain");
 

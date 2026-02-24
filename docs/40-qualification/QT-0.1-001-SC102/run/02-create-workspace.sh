@@ -2,6 +2,13 @@
 set -euo pipefail
 source "$(dirname "$0")/_lib.sh"
 
+if [[ "$QT_MODE" == "live" ]]; then
+  qt_live_env
+  "$LIVE_RUN_DIR/02-create-workspace.sh"
+  echo "workspace context created (live): $RUN_ID"
+  exit 0
+fi
+
 python - <<"PY"
 import json, os, datetime
 rid = os.environ["RUN_ID"]
