@@ -22,4 +22,5 @@ Runtime wrappers kept in this repo:
 
 
 Notes:
-- Wrappers do not keep local fallback logic; canonical behavior comes from `yai-infra`.
+- Wrappers are infra-first.
+- `yai-changelog-check` keeps a CI fallback to local validator when `yai-infra` is not checked out by the runner.
