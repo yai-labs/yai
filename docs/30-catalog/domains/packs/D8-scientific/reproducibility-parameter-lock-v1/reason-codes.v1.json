@@ -18,5 +18,15 @@
     "severity": "medium",
     "default_outcome": "deny",
     "description": "Run depends on non-deterministic inputs not declared/pinned (e.g., unpinned dataset version)."
+  },
+  "PARAMS_HASH_MISMATCH": {
+    "severity": "high",
+    "default_outcome": "deny",
+    "description": "Declared lock hash does not match params payload hash."
+  },
+  "PARAMS_LOCK_INVALID": {
+    "severity": "high",
+    "default_outcome": "deny",
+    "description": "Lock signature or lock structure is invalid."
   }
 }

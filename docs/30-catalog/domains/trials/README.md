@@ -24,3 +24,4 @@ Current live trials:
 - `D1-digital/egress-v1/RT-001-curl-egress-v1`
 - `D1-digital/egress-v1/RT-002-otel-export-egress-v1`
 - `D1-digital/egress-v1/RT-003-s3-upload-egress-v1`
+- `D8-scientific/reproducibility-parameter-lock-v1/RT-001-params-lock-v1`

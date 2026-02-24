@@ -1,0 +1,4 @@
+run/.state/
+artifacts/
+evidence.local/*
+!evidence.local/.gitkeep

@@ -11,6 +11,7 @@ Gate directories:
 - `docs/40-qualification/RT-0.1-001-D1-EGRESS-CURL/`
 - `docs/40-qualification/RT-0.1-002-D1-EGRESS-OTEL/`
 - `docs/40-qualification/RT-0.1-003-D1-EGRESS-S3/`
+- `docs/40-qualification/RT-0.1-004-D8-PARAMS-LOCK/`
 
 Rule:
 - Qualification artifacts define execution and evidence.

@@ -1,0 +1,17 @@
+{
+  "inherits": "docs/30-catalog/domains/packs/D8-scientific/reproducibility-parameter-lock-v1/kpi.v1.json",
+  "trial_kpis": [
+    {
+      "id": "outputs_persisted",
+      "target": {
+        "must_be_false_under_deny": true
+      }
+    },
+    {
+      "id": "bytes_written",
+      "target": {
+        "must_equal": 0
+      }
+    }
+  ]
+}

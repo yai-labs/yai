@@ -16,3 +16,7 @@ trigger -> context -> authority/contract -> decision -> enforcement -> evidence
 ## Intended use
 - SC-102 (core-only) qualification: prove fail-closed on missing reproducibility lock + evidence completeness.
 - Safe by design: vectors are simulated pipeline runs (no external side effects required).
+## RealTarget Trials
+- `docs/30-catalog/domains/trials/D8-scientific/reproducibility-parameter-lock-v1/RT-001-params-lock-v1`
+- Qualification runner: `docs/40-qualification/RT-0.1-004-D8-PARAMS-LOCK/`
+
