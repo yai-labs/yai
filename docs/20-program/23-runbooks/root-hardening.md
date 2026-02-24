@@ -367,9 +367,9 @@ Minimum expectation:
 
 #### Acceptance (0.1.2)
 
-- [ ] Root rejects privileged commands early (fast fail)
-- [ ] Kernel rejects again (defense-in-depth)
-- [ ] Error codes identical in both paths
+- [x] Root rejects privileged commands early (fast fail)
+- [x] Kernel rejects again (defense-in-depth)
+- [x] Error codes identical in both paths
 
 ---
 
@@ -457,8 +457,8 @@ Send invalid ws_id:
 
 #### Acceptance (0.1.4)
 
-- [ ] Kernel has zero side effects on invalid ws_id
-- [ ] Kernel always responds deterministically with error frame
+- [x] Kernel has zero side effects on invalid ws_id
+- [x] Kernel always responds deterministically with error frame
 
 ---
 
@@ -583,12 +583,12 @@ If a phase causes regressions:
 
 ## 9) Final Definition of Done
 
-- [ ] Root validates invariants + handshake gate
+- [x] Root validates invariants + handshake gate
 - [ ] Root is byte-perfect forward/relay
-- [ ] Root never silent drops (always responds)
+- [x] Root never silent drops (always responds)
 - [ ] Root logs are indestructible + informative
-- [ ] Kernel rejects invalid ws_id with zero side effects
-- [ ] authority gating enforced in Root + Kernel
+- [x] Kernel rejects invalid ws_id with zero side effects
+- [x] authority gating enforced in Root + Kernel
 - [ ] torture suite passes and is repeatable
 
 ## Traceability
