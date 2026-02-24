@@ -182,3 +182,7 @@ To add a new pack:
 7. Reference the pack in:
    - the relevant `SC-xxx` scenario spec, and
    - the relevant `QT-...` qualification gate.
+
+
+## SC-102 rollout planning
+- `docs/30-catalog/domains/packs/SC102-DOMAIN-ROLLOUT-WAVES-v0.1.0.md`

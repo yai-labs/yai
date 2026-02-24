@@ -65,6 +65,7 @@ Out of scope:
    - align matrix baseline and findings.
 6. Issue `#186` - define D2..D9 rollout wave:
    - no execution yet, only ordered plan and acceptance.
+   - output file: `docs/30-catalog/domains/packs/SC102-DOMAIN-ROLLOUT-WAVES-v0.1.0.md`.
 
 ## 4) Mandatory Policy
 
