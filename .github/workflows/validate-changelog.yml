@@ -45,7 +45,10 @@ jobs:
 
   call-validate-changelog:
     needs: prepare-shas
-    uses: yai-labs/yai-infra/.github/workflows/reusable-validate-changelog.yml@717ad404eb98e889b72201bd0bc65e3710441449
+    uses: yai-labs/yai-infra/.github/workflows/reusable-validate-changelog.yml@main
     with:
+      org: yai-labs
+      project_number: 2
       base_sha: ${{ needs.prepare-shas.outputs.base_sha }}
       head_sha: ${{ needs.prepare-shas.outputs.head_sha }}
+    secrets: inherit

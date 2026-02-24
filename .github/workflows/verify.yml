@@ -6,6 +6,9 @@ on:
 
 jobs:
   call-verify:
-    uses: yai-labs/yai-infra/.github/workflows/reusable-verify.yml@v0.1.0-rc1
+    uses: yai-labs/yai-infra/.github/workflows/reusable-verify.yml@main
     with:
+      org: yai-labs
+      project_number: 2
       python: false
+    secrets: inherit
