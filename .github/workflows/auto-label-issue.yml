@@ -1,0 +1,17 @@
+name: auto-label-issue
+
+on:
+  issues:
+    types: [opened, edited, reopened]
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  label:
+    uses: yai-labs/yai-infra/.github/workflows/reusable-auto-label-issue.yml@v0.1.1-rc2
+    with:
+      default_track_label: track:audit-convergence
+      default_track_color: 1d76db
+      default_track_description: Audit convergence track
