@@ -6,7 +6,7 @@
     "step": "trigger",
     "target_profile": "local",
     "trial": "RT-003",
-    "ts": "2026-02-24T22:20:59.312809+00:00"
+    "ts": "2026-02-24T22:23:37.817675+00:00"
   },
   {
     "mode": "http-put",
@@ -14,13 +14,13 @@
     "step": "precheck",
     "target_reachable": true,
     "tool": "curl",
-    "ts": "2026-02-24T22:20:59.312809+00:00"
+    "ts": "2026-02-24T22:23:37.817675+00:00"
   },
   {
     "outcome": "deny",
     "reason_code": "EGRESS_DEST_NOT_CONTRACTED",
     "step": "decision",
-    "ts": "2026-02-24T22:20:59.312809+00:00"
+    "ts": "2026-02-24T22:23:37.817675+00:00"
   },
   {
     "bytes_exfiltrated": 0,
@@ -28,6 +28,6 @@
     "gated_hits": 0,
     "result": "blocked",
     "step": "enforcement",
-    "ts": "2026-02-24T22:20:59.312809+00:00"
+    "ts": "2026-02-24T22:23:37.817675+00:00"
   }
 ]

@@ -22,5 +22,7 @@
       "connect_established": false,
       "bytes_exfiltrated": 0
     }
-  }
+  },
+  "target_url": "http://127.0.0.1:8443/",
+  "target_profile": "local"
 }
