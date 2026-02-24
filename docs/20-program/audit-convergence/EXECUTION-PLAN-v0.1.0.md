@@ -7,6 +7,10 @@ revision: 1
 scope: docs-only
 issue:
   - https://github.com/yai-labs/yai/issues/140
+  - https://github.com/yai-labs/yai/issues/183
+  - https://github.com/yai-labs/yai/issues/184
+  - https://github.com/yai-labs/yai/issues/185
+  - https://github.com/yai-labs/yai/issues/186
 related:
   - docs/20-program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md
   - docs/50-validation/audits/claims/infra-grammar.v0.1.json

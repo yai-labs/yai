@@ -1,72 +1,83 @@
 ---
 id: QT-0.1-001-SC102
 title: Qualification Gate - SC-102 Core Contain -> Evidence (Cross-Domain)
-status: draft
+status: active
 owner: runtime
 effective_date: 2026-02-23
-revision: 2
+revision: 3
 sc_ref: SC-102
 ---
 
 # QT-0.1-001-SC102 - Qualification Gate (Core-only, Cross-Domain)
 
 ## 1) Goal
-Eseguire SC-102 come gate ripetibile pass/fail per qualificare il Core.
-Questo gate e parametrico: la stessa harness gira con Domain Packs diversi (D-Major).
+Execute SC-102 as a repeatable pass/fail gate for Core qualification.
+The harness is parameterized by `domain_pack_id`; runtime grammar stays invariant.
 
-## 2) What changes across domains
-- Cambia il Domain Pack (semantica + contratti + forbidden effect).
-- Non cambia la grammatica runtime ne la struttura evidence.
+## 2) Required inputs
+Each run declares:
+- `DOMAIN_PACK_ID` (default: `D1-digital/egress-v1`)
+- `BASELINE_ID` (default: `baseline-deny`)
+- `WORKLOAD_ID` (default: `wrk-d1-egress-sim-v1`)
+- `ATTACK_PROFILE_ID` (default: `safe-egress-attempt-001`)
+- `RUN_ID` (`run-001|run-002|run-003`)
 
-## 3) Required inputs
-Ogni esecuzione deve dichiarare:
-- `domain_pack_id` (es. `D1-digital/egress-v1`)
-- `baseline_id` e `baseline_hash`
-- `workload_id`
-- `attack_profile_id` (stimolo)
+## 3) Harness structure
+- `baseline/` baseline materials for gate context.
+- `workload/` workload descriptors.
+- `attacker/` safe stimulus descriptors.
+- `run/` executable flow:
+  - `01-start-runtime.sh`
+  - `02-create-workspace.sh`
+  - `03-start-workload.sh`
+  - `04-attack.sh`
+  - `05-collect-evidence.sh`
+  - `06-assert-passfail.sh`
+  - `run-once.sh`
+  - `run-three.sh`
+- `metrics/parse_containment.py` metrics parser.
+- `evidence/<domain_pack_id>/run-00X/` evidence output per run.
 
-## 4) Structure
-- `baseline/` baselines per pack (`allow|deny|quarantine`)
-- `workload/` workload reale/reference
-- `attacker/` stimolo safe parametrico
-- `run/` script end-to-end one-shot
-- `metrics/` parser evidence -> KPI
-- `evidence/` output run (indicizzati)
+## 4) Execution
+Single run:
 
-## 5) Minimum compliance for v0.1
-Per dichiarare il gate "PASS v0.1 Core-qualified":
-- eseguire almeno 1 Domain Pack (raccomandato: D1 Digitale) con 3 run coerenti.
+```bash
+cd docs/40-qualification/QT-0.1-001-SC102
+DOMAIN_PACK_ID=D1-digital/egress-v1 \
+BASELINE_ID=baseline-deny \
+RUN_ID=run-001 \
+./run/run-once.sh
+```
 
-Per dichiarare "Cross-domain qualified" (estensione):
-- eseguire N Domain Packs (fino a 8) mantenendo le stesse invarianti.
+Three coherent runs:
 
-## 6) Pass criteria
-Una run passa se:
-- forbidden effect bloccato (deny/quarantine baseline)
-- decision record completo: outcome + reason code + baseline hash
-- evidence pack completo e indicizzato
-- outcome coerente con baseline e stimolo
+```bash
+cd docs/40-qualification/QT-0.1-001-SC102
+DOMAIN_PACK_ID=D1-digital/egress-v1 \
+BASELINE_ID=baseline-deny \
+./run/run-three.sh
+```
 
-Il gate passa se:
-- 3 run consecutive passano per lo stesso `domain_pack_id` + baseline.
+## 5) Pass criteria
+A run passes when:
+- forbidden effect is blocked (deny/quarantine baseline expectation)
+- decision record includes outcome + reason_code + baseline_hash
+- evidence files are complete and indexed
+- containment metrics confirm `connect_established=false` and `bytes_exfiltrated=0`
 
-## 7) Evidence layout (per run)
+Gate passes when:
+- 3 consecutive runs pass for the same `domain_pack_id` + baseline.
+
+## 6) Evidence layout (per run)
 `evidence/<domain_pack_id>/run-00X/`
-- `baseline.json` (id + hash + refs)
-- `timeline.jsonl` (eventi + decisioni + enforcement)
+- `baseline.json`
+- `timeline.jsonl`
 - `decision_records.jsonl`
 - `containment_metrics.json`
 - `system_state.txt`
 - `EVIDENCE_INDEX.md`
 
-## 8) One-shot execution (placeholders)
-- `run/01-start-runtime.sh`
-- `run/02-create-workspace.sh`
-- `run/03-start-workload.sh`
-- `run/04-attack.sh --pack <domain_pack_id>`
-- `run/05-collect-evidence.sh`
-- `run/06-assert-passfail.sh`
-
-## 9) Notes
-- No Mind. No Cockpit.
-- Ogni pack deve poter essere eseguito e validato senza interventi manuali durante la run.
+## 7) Safety notes
+- Simulation-only harness for v0.1 core gate.
+- No mind/cockpit dependency.
+- No real external effects.

@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -euo pipefail
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+"$DIR/01-start-runtime.sh"
+"$DIR/02-create-workspace.sh"
+"$DIR/03-start-workload.sh"
+"$DIR/04-attack.sh"
+"$DIR/05-collect-evidence.sh"
+"$DIR/06-assert-passfail.sh"
+
+echo "QT-0.1-001-SC102 run completed: ${RUN_ID:-run-001}"

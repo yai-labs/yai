@@ -7,6 +7,7 @@ related:
   - docs/20-program/audit-convergence/EXECUTION-PLAN-v0.1.0.md
   - docs/20-program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md
   - docs/50-validation/audits/claims/infra-grammar.v0.1.json
+  - docs/20-program/audit-convergence/SC102-GATEA-WORKPLAN-v0.1.0.md
   - docs/20-program/22-adr/ADR-012-audit-convergence-gates.md
 issue:
   - https://github.com/yai-labs/yai/issues/140
@@ -21,6 +22,7 @@ Canonical artifacts:
 - Execution plan: `docs/20-program/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
 - Convergence matrix: `docs/20-program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
 - Claims registry: `docs/50-validation/audits/claims/infra-grammar.v0.1.json`
+- Active Gate A workplan: `docs/20-program/audit-convergence/SC102-GATEA-WORKPLAN-v0.1.0.md`
 - Governance ADR: `docs/20-program/22-adr/ADR-012-audit-convergence-gates.md`
 
 Rules:

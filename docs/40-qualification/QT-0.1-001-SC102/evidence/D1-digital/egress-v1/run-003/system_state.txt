@@ -1,0 +1,6 @@
+run_id=run-003
+domain_pack_id=D1-digital/egress-v1
+baseline_id=baseline-deny
+workload_id=wrk-d1-egress-sim-v1
+attack_profile_id=safe-egress-attempt-001
+runtime_mode=simulated

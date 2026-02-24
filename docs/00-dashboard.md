@@ -14,5 +14,6 @@
 
 ## Next Actions
 
-- Continue runbook phases under `docs/20-program/23-runbooks/`.
+- Execute Gate A first block: `docs/20-program/audit-convergence/SC102-GATEA-WORKPLAN-v0.1.0.md`.
+- Continue runbook phases under `docs/20-program/23-runbooks/` according to the Gate A sequence.
 - Keep governance automation contract synced from `yai-infra`.
