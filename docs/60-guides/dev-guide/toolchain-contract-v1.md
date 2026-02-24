@@ -1,8 +1,8 @@
 # Toolchain Contract v1
 
-The docs/governance toolchain must provide:
-- deterministic traceability checks,
-- schema validation for frontmatter/contracts,
-- reproducible generated artifacts.
+Canonical governance/toolchain contracts are published in `yai-infra`:
 
-A change that breaks this contract requires explicit ADR/runbook acknowledgement.
+- `https://github.com/yai-labs/yai-infra/blob/main/docs/tooling/github-actions-suite.md`
+- `https://github.com/yai-labs/yai-infra/blob/main/docs/standards/docs-residency.md`
+
+`yai` must consume, not fork, governance tooling contracts.

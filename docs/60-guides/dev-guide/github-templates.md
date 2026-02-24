@@ -1,7 +1,8 @@
 # GitHub Templates
 
-Template locations:
-- PR templates: `.github/PULL_REQUEST_TEMPLATE/`
-- Issue templates: `.github/ISSUE_TEMPLATE/`
+Canonical template policy is maintained in `yai-infra`:
 
-Template changes are governance changes and must be traceable in runbook/MP context.
+- `https://github.com/yai-labs/yai-infra/blob/main/docs/standards/github-templates.md`
+- `https://github.com/yai-labs/yai-infra/blob/main/docs/standards/github-template-residency.md`
+
+`yai` consumes mirrored templates and must not introduce local drift.

@@ -1,9 +1,8 @@
 # GitHub Issue Templates
 
-Use dedicated templates for:
-- runbook phases,
-- milestone closure,
-- docs governance changes,
-- bugs/features.
+Issue template contract is managed in `yai-infra`.
 
-Keep field names stable when possible to preserve automation compatibility.
+See:
+
+- `https://github.com/yai-labs/yai-infra/blob/main/docs/standards/github-templates.md`
+- `https://github.com/yai-labs/yai-infra/blob/main/docs/tooling/governance-suite.md`

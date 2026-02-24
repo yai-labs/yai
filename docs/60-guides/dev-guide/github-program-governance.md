@@ -1,8 +1,6 @@
 # GitHub Program Governance
 
-Program board usage baseline:
-- every issue tied to a runbook phase or MP closure,
-- required metadata fields filled,
-- status transitions reflected in docs artifacts.
+Program board automation contract is maintained in `yai-infra`:
 
-Do not close governance issues without evidence-linked closure notes.
+- `https://github.com/yai-labs/yai-infra/blob/main/docs/standards/project-automation-policy.md`
+- `https://github.com/yai-labs/yai-infra/blob/main/docs/tooling/governance-suite.md`

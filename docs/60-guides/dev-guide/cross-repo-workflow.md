@@ -1,9 +1,12 @@
 # Cross-Repo Workflow
 
-YAI governance spans multiple repos (`yai`, `yai-specs`, `yai-cli`, `yai-mind`).
+Cross-repo governance automation standards are defined in `yai-infra`.
 
-Rules:
-- Keep normative spec changes in `yai-specs` branches.
-- Keep runtime enforcement and program docs in `yai` branches.
-- Link related PRs/issues with explicit dependency notes.
-- Update pins only after source branches are merged.
+See:
+
+- `https://github.com/yai-labs/yai-infra/blob/main/docs/standards/project-automation-policy.md`
+- `https://github.com/yai-labs/yai-infra/blob/main/docs/tooling/governance-suite.md`
+
+For YAI product execution specifics, use local runbooks under:
+
+- `docs/20-program/23-runbooks/`

@@ -1,10 +1,5 @@
 # GitHub Milestone Template
 
-Milestone naming pattern:
-- `<track>-<version>` (example: `root-hardening-0.1.x`)
+Milestone governance policy is managed in `yai-infra`:
 
-Each milestone should include:
-- scoped objective,
-- closure criteria,
-- linked runbook phases,
-- linked MP artifacts.
+- `https://github.com/yai-labs/yai-infra/blob/main/docs/standards/project-automation-policy.md`
