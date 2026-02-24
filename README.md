@@ -1,53 +1,51 @@
-# YAI — Sovereign Intelligence Runtime
+# YAI - Governed Intelligence Runtime
 
-YAI is the runtime implementation repository (Boot/Root/Kernel/Engine/Mind).
+**Make AI accountable: authority-first execution, audit trails, deterministic gates, reproducible evidence.**
 
-## Scope
+YAI is the runtime + program hub for a governed execution stack: deterministic planes, explicit authority, auditable state, and reproducible verification.
 
-This repository is runtime-first:
-- implementation code
-- core build and runtime checks
-- runtime release artifacts
+## Repository Role
 
-Governance/process/program documentation is externalized to `yai-infra`.
+This repo is the product implementation and the program center:
+- Runtime planes: Boot / Root / Kernel / Engine / (Mind)
+- Program docs: RFCs, ADRs, Runbooks, Milestone Packs, Qualification/Validation, Evidence
 
-## Repository Layout
+Not in this repo:
+- Cross-repo governance/tooling standards (that lives in `yai-infra`)
+- Canonical contracts/law artifacts (that lives in `yai-law`)
 
-- `boot/` — machine bring-up and environment verification
-- `root/` — root control plane and authority coordination
-- `kernel/` — workspace isolation + policy enforcement (L1)
-- `engine/` — deterministic execution and gated effects (L2)
-- `mind/` — cognition/orchestration module (L3)
-- `tools/` — runtime-facing wrappers and build checks
-- `data/` — runtime datasets and local fixtures
-- `deps/yai-law/` — pinned normative specs (source of truth)
+## Repo Map (What To Read Next)
 
-## Build
+- `yai-law` - canonical contracts and constraints (normative source of truth)
+- `yai-cli` - operator interface (client control plane)
+- `yai-infra` - open factory window (standards, automation, reusable governance suite)
 
-- `make build`
-- `make dist`
-- `make bundle`
+## Quick Start
 
-Optional mind targets:
-- `make mind`
-- `make mind-check`
+Build:
 
-## Verification
+```bash
+make build
+make dist
+```
 
-- `make verify`
-- `make release-guards`
-- `make changelog-verify`
+Verify:
 
-## Governance and Program Docs
+```bash
+make verify
+```
 
-Canonical location:
-- `../yai-infra/docs/governance/yai/`
-- `../yai-infra/docs/governance/`
-- `../yai-infra/migration/`
+Docs entrypoint:
+- `docs/00-dashboard.md`
+- `docs/README.md`
 
-## Security
+## Law and Contract Pinning
 
-See `SECURITY.md` and `DATA_POLICY.md`.
+This repo consumes canonical law as a pinned dependency:
+
+- `deps/yai-law/` - pinned normative contracts (do not edit to fix drift)
+
+If behavior drifts from law, the implementation is wrong.
 
 ## License
 
