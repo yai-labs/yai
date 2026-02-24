@@ -22,7 +22,7 @@ Wave binding:
 - `docs/20-program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
 - `docs/50-validation/audits/claims/infra-grammar.v0.1.json`
 
-Planned sequence:
+Phase sequence and closure status:
 - `docs/20-program/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.0.md`
 - `docs/20-program/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.1.md`
 - `docs/20-program/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.2.md`
@@ -37,3 +37,15 @@ Notes:
 - Keep phases mapping-only where required; avoid normative content changes in structural phases.
 - Attach cross-repo pin/evidence outputs for `yai` and `yai-cli` consumers.
 - Closure semantics follow audit policy: mandatory `SKIP` is treated as `FAIL`.
+
+
+Closure status:
+- `0.1.0`: active
+- `0.1.1`: active
+- `0.1.2`: active
+- `0.1.3`: active
+- `0.1.4`: active
+- `0.1.5`: draft
+- `0.1.6`: draft
+- `0.1.7`: draft
+- `0.1.8`: draft

@@ -1,10 +1,10 @@
 ---
 id: RB-SPECS-REFACTOR-FOUNDATION
 title: Specs Refactor Foundation
-status: draft
+status: active
 owner: governance
 effective_date: 2026-02-19
-revision: 3
+revision: 4
 supersedes: []
 depends_on:
   - RB-CONTRACT-BASELINE-LOCK
@@ -68,10 +68,10 @@ A *closure artifact* for a phase: what changed, proof evidence, links to issues/
 ---
 
 ## 2) Preconditions (hard rules)
-- [ ] `RB-CONTRACT-BASELINE-LOCK` has been executed or at least stabilized (ADR-011 baseline available).
-- [ ] Cross-repo pin governance is active and runnable (e.g. `tools/bin/yai-check-pins` in the consumer).
-- [ ] No direct development is performed inside consumer vendored specs trees (e.g. `yai/deps/yai-law`).
-- [ ] Any change in `yai-law` that affects consumers is coordinated via pins/tags and verified in consumers.
+- [x] `RB-CONTRACT-BASELINE-LOCK` has been executed and stabilized (ADR-011 baseline available).
+- [x] Cross-repo pin governance is active and runnable (e.g. `tools/bin/yai-check-pins` in the consumer).
+- [x] No direct development is performed inside consumer vendored specs trees (e.g. `yai/deps/yai-law`).
+- [x] Any change in `yai-law` that affects consumers is coordinated via pins/tags and verified in consumers.
 
 ---
 
@@ -511,3 +511,31 @@ make verify
 - ADR: `docs/20-program/22-adr/ADR-011-contract-baseline-lock.md`
 - Specs: `deps/yai-law/SPEC_MAP.md`, `deps/yai-law/REGISTRY.md`
 - Planned MPs: `docs/20-program/24-milestone-packs/specs-refactor-foundation/*`
+
+
+## 12) Phase Closure Snapshot (2026-02-24)
+
+Wave status (issue `#142`): `closed`
+
+Closed phases:
+- `0.1.0` Canonical Tree & Domain Separation
+- `0.1.1` Pure Mapping (Move/Rename Only)
+- `0.1.2` Sanity Link & Pointer Health
+- `0.1.3` Consumer-Ready Wiring in `yai`
+- `0.1.4` Consumer-Ready Wiring in `yai-cli`
+
+Deferred to next wave (explicitly open):
+- `0.1.5` CI Hard Guardrails
+- `0.1.6` Internal Toolchain & Policy
+- `0.1.7` Formal Binding & Traceability Matrix
+- `0.1.8` TLA Reboot & Model-Check CI
+
+Closure evidence anchors:
+- `tools/bin/yai-check-pins` -> PASS
+- `tools/bin/yai-docs-trace-check --all` -> PASS
+- `tools/bin/yai-proof-check` -> SKIP on private proof-pack accepted for non-publish flow
+- `tools/bin/yai-verify core` -> PASS
+- `tools/bin/yai-verify law-kernel` -> PASS
+
+Next runbook in sequence:
+- `docs/20-program/23-runbooks/root-hardening.md`

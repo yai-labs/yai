@@ -1,6 +1,6 @@
 ---
 id: MP-SPECS-REFACTOR-FOUNDATION-0.1.2
-status: draft
+status: active
 runbook: docs/20-program/23-runbooks/specs-refactor-foundation.md
 phase: "0.1.2 — Sanity Link & Pointer Health"
 adrs:
@@ -25,7 +25,7 @@ issues:
 - Phase: `0.1.2 — Sanity Link & Pointer Health`
 - Wave issue: `#142`
 - Specs branch issue: `yai-law#9`
-- Status: `draft`
+- Status: `active`
 
 ## Links
 - Plan: `docs/20-program/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
@@ -43,11 +43,15 @@ Close phase 0.1.2 with explicit claim/evidence bindings and reproducible gate ou
 Closure policy: mandatory `SKIP` is treated as `FAIL`.
 
 ## Definition of Done
-- [ ] Phase claim IDs are covered by evidence.
-- [ ] Mandatory commands are recorded with exit codes and outputs.
-- [ ] Cross-repo references are traceable (yai <-> yai-law <-> yai-cli).
-- [ ] MP links from runbook phase and matrix remain valid.
+- [x] Phase claim IDs are covered by evidence.
+- [x] Mandatory commands are recorded with exit codes and outputs.
+- [x] Cross-repo references are traceable (yai <-> yai-law <-> yai-cli).
+- [x] MP links from runbook phase and matrix remain valid.
 
 ## Execution Snapshot
-- Status: `PLANNED`
+- Status: `CLOSED`
 - Evidence bundle: `docs/20-program/24-milestone-packs/specs-refactor-foundation/evidence/0.1.2/`
+
+
+Phase state:
+- `CLOSED` (phase acceptance criteria satisfied for Wave 1 scope).
