@@ -6,7 +6,7 @@ on:
 
 jobs:
   sync:
-    uses: yai-labs/yai-infra/.github/workflows/reusable-project-status-sync.yml@main
+    uses: yai-labs/yai-infra/.github/workflows/reusable-project-status-sync.yml@cb04d0d22cac40e14c7a9150a3c337b70993ecbc
     with:
       project_owner: yai-labs
       project_number: 5
