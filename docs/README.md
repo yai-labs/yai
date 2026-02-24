@@ -1,31 +1,13 @@
-# Documentation Map (Docs IA v1)
+# Documentation (Runtime-First)
 
-This repository now uses a hard-cut layered documentation structure.
-Legacy internal path aliases are removed.
+`yai` keeps runtime implementation and build-oriented documentation only.
 
-## Start Here (Layered Hubs)
+Governance, program delivery, templates, qualification packs, audits, and proof artifacts
+are canonical in `yai-infra`.
 
-- Platform: `docs/10-platform/`
-- Governance: `docs/20-governance/`
-- Program: `docs/30-program/`
-- Catalog: `docs/40-catalog/`
-- Qualification: `docs/50-qualification/`
-- Validation: `docs/60-validation/`
-- Guides: `docs/70-guides/`
+Canonical references:
+- `../yai-infra/docs/governance/yai/`
+- `../yai-infra/docs/governance/`
+- `../yai-infra/migration/`
 
-## Canonical Anchors
-
-- Architecture: `docs/10-platform/architecture/`
-- Governance spine: `docs/20-governance/spine.md`
-- Governance traceability: `docs/20-governance/traceability.md`
-- Runbooks: `docs/20-governance/23-runbooks/`
-- Milestone packs: `docs/20-governance/24-milestone-packs/`
-- Program convergence: `docs/30-program/audit-convergence/`
-- Claims registry: `docs/60-validation/audits/claims/infra-grammar.v0.1.json`
-
-## Usage Model
-
-- Catalog (`40-catalog`) defines target capabilities and scenario specs.
-- Runbooks (`20-governance/23-runbooks`) define implementation work.
-- Qualification (`50-qualification`) defines executable gates and evidence runs.
-- Validation (`60-validation`) carries audits and proof-verification outputs.
+For API/architecture browsing in this repo, use generated Doxygen (`make docs`).

@@ -1,3 +1,0 @@
-core
-law-kernel
-verify
