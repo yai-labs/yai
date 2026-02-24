@@ -28,4 +28,4 @@ Rules:
 - SKIP on mandatory evidence checks is FAIL.
 - Gate A (Core) and Gate B (Mind) are distinct closure checkpoints.
 - In-flight runbook execution is not rewritten mid-phase; re-centering happens at phase boundaries.
-- Consumer `deps/` trees are read-only for this program; normative changes are made only in `yai-specs` branches.
+- Consumer `deps/` trees are read-only for this program; normative changes are made only in `yai-law` branches.

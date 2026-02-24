@@ -19,10 +19,10 @@ related:
     - docs/20-program/22-adr/ADR-007-workspace-isolation.md
     - docs/20-program/22-adr/ADR-008-connection-lifecycle.md
   specs:
-    - deps/yai-specs/specs/protocol/include/transport.h
-    - deps/yai-specs/specs/protocol/include/auth.h
-    - deps/yai-specs/specs/protocol/include/errors.h
-    - deps/yai-specs/specs/protocol/include/yai_protocol_ids.h
+    - deps/yai-law/specs/protocol/include/transport.h
+    - deps/yai-law/specs/protocol/include/auth.h
+    - deps/yai-law/specs/protocol/include/errors.h
+    - deps/yai-law/specs/protocol/include/yai_protocol_ids.h
   test_plans:
     - docs/40-qualification/test-plans/hardfail.md
   tools:
@@ -57,9 +57,9 @@ Upgrade workspace commands from stub behavior to deterministic governed side-eff
 ## 3) Inputs
 
 - Protocol anchors:
-  - `deps/yai-specs/specs/protocol/include/transport.h`
-  - `deps/yai-specs/specs/protocol/include/auth.h`
-  - `deps/yai-specs/specs/protocol/include/errors.h`
+  - `deps/yai-law/specs/protocol/include/transport.h`
+  - `deps/yai-law/specs/protocol/include/auth.h`
+  - `deps/yai-law/specs/protocol/include/errors.h`
 - Tooling:
   - `tools/bin/yai-verify`
   - `tools/bin/yai-gate`
@@ -218,10 +218,10 @@ Confirm:
 
 Specs:
 
-- `deps/yai-specs/specs/protocol/include/transport.h`
-- `deps/yai-specs/specs/protocol/include/yai_protocol_ids.h`
-- `deps/yai-specs/specs/protocol/include/errors.h`
-- `deps/yai-specs/specs/protocol/include/auth.h`
+- `deps/yai-law/specs/protocol/include/transport.h`
+- `deps/yai-law/specs/protocol/include/yai_protocol_ids.h`
+- `deps/yai-law/specs/protocol/include/errors.h`
+- `deps/yai-law/specs/protocol/include/auth.h`
 
 Kernel dispatch/codec/session:
 
@@ -322,8 +322,8 @@ yai kernel ws list
 
 Specs:
 
-- `deps/yai-specs/specs/protocol/include/auth.h`
-- `deps/yai-specs/specs/protocol/include/roles.h` (if present)
+- `deps/yai-law/specs/protocol/include/auth.h`
+- `deps/yai-law/specs/protocol/include/roles.h` (if present)
 
 Root (only if you mirror policy fast-fail; Kernel is mandatory):
 
@@ -483,9 +483,9 @@ Rollback is phase-based:
   - `docs/20-program/22-adr/ADR-007-workspace-isolation.md`
   - `docs/20-program/22-adr/ADR-008-connection-lifecycle.md`
 - Law/spec refs:
-  - `deps/yai-specs/specs/protocol/include/transport.h`
-  - `deps/yai-specs/specs/protocol/include/auth.h`
-  - `deps/yai-specs/specs/protocol/include/errors.h`
+  - `deps/yai-law/specs/protocol/include/transport.h`
+  - `deps/yai-law/specs/protocol/include/auth.h`
+  - `deps/yai-law/specs/protocol/include/errors.h`
 - MPs:
   - `docs/20-program/24-milestone-packs/workspaces-lifecycle/MP-WORKSPACES-LIFECYCLE-0.1.0.md` *(planned)*
   - `docs/20-program/24-milestone-packs/workspaces-lifecycle/MP-WORKSPACES-LIFECYCLE-0.1.1.md` *(planned)*

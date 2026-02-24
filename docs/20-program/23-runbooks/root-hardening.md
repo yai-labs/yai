@@ -25,10 +25,10 @@ related:
     - docs/20-program/22-adr/ADR-008-connection-lifecycle.md
     - docs/20-program/22-adr/ADR-012-audit-convergence-gates.md
   specs:
-    - deps/yai-specs/specs/protocol/include/transport.h
-    - deps/yai-specs/specs/protocol/include/auth.h
-    - deps/yai-specs/specs/protocol/include/errors.h
-    - deps/yai-specs/specs/protocol/include/yai_protocol_ids.h
+    - deps/yai-law/specs/protocol/include/transport.h
+    - deps/yai-law/specs/protocol/include/auth.h
+    - deps/yai-law/specs/protocol/include/errors.h
+    - deps/yai-law/specs/protocol/include/yai_protocol_ids.h
   test_plans:
     - docs/40-qualification/test-plans/hardfail.md
   tools:
@@ -62,16 +62,16 @@ Harden the Root control plane as a deterministic, auditable, envelope-only bound
 
 ## 2) Preconditions
 
-- [ ] `deps/yai-specs` protocol headers are present and treated as source-of-truth.
+- [ ] `deps/yai-law` protocol headers are present and treated as source-of-truth.
 - [ ] Kernel boots and accepts control connections.
 - [ ] A baseline end-to-end ping command is already green.
 
 ## 3) Inputs
 
 - Protocol anchors:
-  - `deps/yai-specs/specs/protocol/include/transport.h`
-  - `deps/yai-specs/specs/protocol/include/auth.h`
-  - `deps/yai-specs/specs/protocol/include/errors.h`
+  - `deps/yai-law/specs/protocol/include/transport.h`
+  - `deps/yai-law/specs/protocol/include/auth.h`
+  - `deps/yai-law/specs/protocol/include/errors.h`
 - Tooling:
   - `tools/bin/yai-verify`
   - `tools/bin/yai-gate`
@@ -103,7 +103,7 @@ Mandatory closure policy:
 
 ### Hard prerequisites (must be true before starting)
 
-- `deps/yai-specs` headers are present and treated as source-of-truth
+- `deps/yai-law` headers are present and treated as source-of-truth
 - Kernel can boot and accept control connections
 - A baseline "ping" command exists end-to-end (CLI → Root → Kernel → response)
 
@@ -184,10 +184,10 @@ Each phase must compile, run, and be verifiable before moving on.
 
 READ FIRST:
 
-- `deps/yai-specs/specs/protocol/include/transport.h`
-- `deps/yai-specs/specs/protocol/include/yai_protocol_ids.h`
-- `deps/yai-specs/specs/protocol/include/errors.h`
-- `deps/yai-specs/specs/protocol/include/auth.h`
+- `deps/yai-law/specs/protocol/include/transport.h`
+- `deps/yai-law/specs/protocol/include/yai_protocol_ids.h`
+- `deps/yai-law/specs/protocol/include/errors.h`
+- `deps/yai-law/specs/protocol/include/auth.h`
 
 CODE (likely):
 
@@ -258,7 +258,7 @@ Kernel side used for comparison:
 
 Specs:
 
-- `deps/yai-specs/specs/protocol/include/transport.h`
+- `deps/yai-law/specs/protocol/include/transport.h`
 
 #### Rules
 
@@ -330,8 +330,8 @@ Protocol negative tests (at least):
 
 Specs:
 
-- `deps/yai-specs/specs/protocol/include/auth.h`
-- `deps/yai-specs/specs/protocol/include/roles.h` (if present)
+- `deps/yai-law/specs/protocol/include/auth.h`
+- `deps/yai-law/specs/protocol/include/roles.h` (if present)
 
 Root:
 
@@ -388,7 +388,7 @@ Minimum expectation:
 
 Specs (single source of truth):
 
-- `deps/yai-specs/specs/protocol/include/transport.h` (static inline validator)
+- `deps/yai-law/specs/protocol/include/transport.h` (static inline validator)
 
 Consumers:
 
@@ -434,7 +434,7 @@ Consumers:
 
 Specs:
 
-- `deps/yai-specs/specs/protocol/include/transport.h`
+- `deps/yai-law/specs/protocol/include/transport.h`
 
 #### Rules
 
@@ -598,9 +598,9 @@ If a phase causes regressions:
   - `docs/20-program/22-adr/ADR-006-unified-rpc.md`
   - `docs/20-program/22-adr/ADR-008-connection-lifecycle.md`
 - Law/spec refs:
-  - `deps/yai-specs/specs/protocol/include/transport.h`
-  - `deps/yai-specs/specs/protocol/include/auth.h`
-  - `deps/yai-specs/specs/protocol/include/errors.h`
+  - `deps/yai-law/specs/protocol/include/transport.h`
+  - `deps/yai-law/specs/protocol/include/auth.h`
+  - `deps/yai-law/specs/protocol/include/errors.h`
 - MPs:
   - `docs/20-program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`
   - `docs/20-program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md`

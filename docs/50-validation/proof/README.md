@@ -8,7 +8,7 @@ Rules:
 - Other repos (`yai-cli`, `yai-mind`) keep pointer files only.
 - Mind pointer file in this repo: `docs/50-validation/proof/mind-proof-pointer.md`.
 - Every public proof pack must pin explicit versions/tags/commits for:
-  - `yai-specs`
+  - `yai-law`
   - `yai-cli`
   - `yai-mind`
 - Every public proof pack must split:

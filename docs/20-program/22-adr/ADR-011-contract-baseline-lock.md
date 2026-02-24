@@ -8,11 +8,11 @@ applies_to:
   phase: 0.1.0
   anchor: "#phase-0-1-0-pin-baseline-freeze"
 law_refs:
-  - deps/yai-specs/contracts/invariants/I-001-traceability.md
-  - deps/yai-specs/contracts/invariants/I-002-determinism.md
-  - deps/yai-specs/contracts/invariants/I-003-governance.md
-  - deps/yai-specs/contracts/invariants/I-006-external-effect-boundary.md
-  - deps/yai-specs/contracts/boundaries/L1-kernel.md
+  - deps/yai-law/contracts/invariants/I-001-traceability.md
+  - deps/yai-law/contracts/invariants/I-002-determinism.md
+  - deps/yai-law/contracts/invariants/I-003-governance.md
+  - deps/yai-law/contracts/invariants/I-006-external-effect-boundary.md
+  - deps/yai-law/contracts/boundaries/L1-kernel.md
 ---
 # ADR-011 - Contract Baseline Lock for Milestone 1
 
@@ -26,7 +26,7 @@ Milestone 1 exposed three recurring risks:
 
 ## Decision
 
-Milestone 1 enforces a contract baseline lock across `yai-specs`, `yai`, and `yai-cli`.
+Milestone 1 enforces a contract baseline lock across `yai-law`, `yai`, and `yai-cli`.
 
 Controls:
 

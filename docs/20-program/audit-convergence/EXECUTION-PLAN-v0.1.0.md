@@ -191,7 +191,7 @@ Exit:
 ## 8) Execution Controls
 - Work type: docs-only in this branch.
 - No runtime code changes in this convergence branch.
-- No direct edits under `deps/*` in consumer repos; specs changes happen in `yai-specs` branch and pins are aligned only at merge closure.
+- No direct edits under `deps/*` in consumer repos; specs changes happen in `yai-law` branch and pins are aligned only at merge closure.
 - Each wave closure must reference:
   - runbook anchor,
   - MP artifact,

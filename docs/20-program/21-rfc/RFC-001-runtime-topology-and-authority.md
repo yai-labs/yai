@@ -23,9 +23,9 @@ related:
   milestone_packs:
     - docs/20-program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md
   specs:
-    - deps/yai-specs/contracts/axioms/A-002-authority.md
-    - deps/yai-specs/contracts/boundaries/L1-kernel.md
-    - deps/yai-specs/contracts/boundaries/L2-engine.md
+    - deps/yai-law/contracts/axioms/A-002-authority.md
+    - deps/yai-law/contracts/boundaries/L1-kernel.md
+    - deps/yai-law/contracts/boundaries/L2-engine.md
 tags:
   - topology
   - authority
@@ -64,7 +64,7 @@ Define and document the rationale for one machine-level runtime with strict Root
 
 ## Traceability
 
-- Spec anchors (if any): `deps/yai-specs/contracts/axioms/A-002-authority.md`, `deps/yai-specs/contracts/boundaries/L1-kernel.md`, `deps/yai-specs/contracts/boundaries/L2-engine.md`
+- Spec anchors (if any): `deps/yai-law/contracts/axioms/A-002-authority.md`, `deps/yai-law/contracts/boundaries/L1-kernel.md`, `deps/yai-law/contracts/boundaries/L2-engine.md`
 - Targets ADR: `docs/20-program/22-adr/ADR-001-single-runtime.md`, `docs/20-program/22-adr/ADR-002-root-entrypoint.md`, `docs/20-program/22-adr/ADR-003-kernel-authority.md`, `docs/20-program/22-adr/ADR-004-engine-execution.md`, `docs/20-program/22-adr/ADR-005-mind-proposer.md`
 - Downstream runbook: `docs/20-program/23-runbooks/root-hardening.md`
 - Downstream MP: `docs/20-program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`

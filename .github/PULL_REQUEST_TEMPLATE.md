@@ -15,7 +15,7 @@
 ```
 
 ## Contract Alignment
-- [ ] No contract changes in `deps/yai-specs`
+- [ ] No contract changes in `deps/yai-law`
 - [ ] Contract changes included and linked
 
 ## Risk / Rollback

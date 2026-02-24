@@ -8,11 +8,11 @@ applies_to:
   phase: governance
   anchor: "#4-two-official-gates"
 law_refs:
-  - deps/yai-specs/contracts/invariants/I-001-traceability.md
-  - deps/yai-specs/contracts/invariants/I-002-determinism.md
-  - deps/yai-specs/contracts/invariants/I-003-governance.md
-  - deps/yai-specs/contracts/invariants/I-006-external-effect-boundary.md
-  - deps/yai-specs/contracts/boundaries/L1-kernel.md
+  - deps/yai-law/contracts/invariants/I-001-traceability.md
+  - deps/yai-law/contracts/invariants/I-002-determinism.md
+  - deps/yai-law/contracts/invariants/I-003-governance.md
+  - deps/yai-law/contracts/invariants/I-006-external-effect-boundary.md
+  - deps/yai-law/contracts/boundaries/L1-kernel.md
 ---
 
 # ADR-012 - Audit Convergence Gates for v0.1.0

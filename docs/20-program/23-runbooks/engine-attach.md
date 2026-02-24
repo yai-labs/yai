@@ -20,8 +20,8 @@ related:
     - docs/20-program/22-adr/ADR-009-engine-attachment.md
     - docs/20-program/22-adr/ADR-008-connection-lifecycle.md
   specs:
-    - deps/yai-specs/specs/protocol/include/transport.h
-    - deps/yai-specs/specs/protocol/include/yai_protocol_ids.h
+    - deps/yai-law/specs/protocol/include/transport.h
+    - deps/yai-law/specs/protocol/include/yai_protocol_ids.h
   test_plans:
     - docs/40-qualification/test-plans/hardfail.md
   tools:
@@ -149,9 +149,9 @@ It's "ICE-grade" and avoids a thousand ambiguities later.
 ## STEP 1: Law/Spec Add Engine Paths + IDs (If Missing)
 
 ### Files to read FIRST
-- `deps/yai-specs/specs/protocol/yai_protocol_ids.h`
-- `deps/yai-specs/specs/protocol/transport.h`
-- `deps/yai-specs/specs/protocol/errors.h` (optional)
+- `deps/yai-law/specs/protocol/yai_protocol_ids.h`
+- `deps/yai-law/specs/protocol/transport.h`
+- `deps/yai-law/specs/protocol/errors.h` (optional)
 
 ### Deliverables
 

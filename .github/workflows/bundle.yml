@@ -32,7 +32,7 @@ jobs:
             echo "ERROR: missing deps/yai-cli.ref"
             exit 1
           fi
-          echo "yai specs pin: $(git -C deps/yai-specs rev-parse HEAD)"
+          echo "yai specs pin: $(git -C deps/yai-law rev-parse HEAD)"
           echo "yai cli ref  : $(cat deps/yai-cli.ref)"
 
       - name: Configure git auth for cross-repo checks

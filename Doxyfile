@@ -16,9 +16,9 @@ INPUT                  = boot/include \
                          kernel/include \
                          engine/include \
                          runtime/protocol \
-                         deps/yai-specs/specs/protocol/include \
-                         deps/yai-specs/specs/protocol/runtime/include \
-                         deps/yai-specs/specs/vault/include \
+                         deps/yai-law/specs/protocol/include \
+                         deps/yai-law/specs/protocol/runtime/include \
+                         deps/yai-law/specs/vault/include \
                          README.md \
                          docs/70-guides/dev-guide/doxygen-mainpage.md
 
@@ -28,7 +28,7 @@ USE_MDFILE_AS_MAINPAGE = docs/70-guides/dev-guide/doxygen-mainpage.md
 
 EXCLUDE                = build \
                          dist \
-                         deps/yai-specs/contracts
+                         deps/yai-law/contracts
 
 # Output layout
 GENERATE_TREEVIEW      = YES

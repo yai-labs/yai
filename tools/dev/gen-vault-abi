@@ -78,7 +78,7 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--spec",
-        default=str(root / "deps/yai-specs/specs/vault/schema/vault_abi.json"),
+        default=str(root / "deps/yai-law/specs/vault/schema/vault_abi.json"),
         help="Path to vault ABI spec JSON",
     )
     parser.add_argument(
@@ -97,8 +97,8 @@ def main() -> int:
     header_text = render_header(spec, generated)
     law_text = render_law_ids(spec, generated)
 
-    header_path = out_dir / "deps/yai-specs/specs/vault/include/yai_vault_abi.h"
-    law_path = out_dir / "deps/yai-specs/formal/tla/LAW_IDS.tla"
+    header_path = out_dir / "deps/yai-law/specs/vault/include/yai_vault_abi.h"
+    law_path = out_dir / "deps/yai-law/formal/tla/LAW_IDS.tla"
     header_path.parent.mkdir(parents=True, exist_ok=True)
     law_path.parent.mkdir(parents=True, exist_ok=True)
     header_path.write_text(header_text, encoding="utf-8")

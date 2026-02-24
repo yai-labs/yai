@@ -6,10 +6,10 @@ phase: "0.1.0 — Pin Baseline Freeze"
 adrs:
   - docs/20-program/22-adr/ADR-011-contract-baseline-lock.md
 spec_anchors:
-  - deps/yai-specs/contracts/invariants/I-001-traceability.md
-  - deps/yai-specs/contracts/invariants/I-002-determinism.md
-  - deps/yai-specs/contracts/invariants/I-003-governance.md
-  - deps/yai-specs/contracts/invariants/I-006-external-effect-boundary.md
+  - deps/yai-law/contracts/invariants/I-001-traceability.md
+  - deps/yai-law/contracts/invariants/I-002-determinism.md
+  - deps/yai-law/contracts/invariants/I-003-governance.md
+  - deps/yai-law/contracts/invariants/I-006-external-effect-boundary.md
 issues:
   - "https://github.com/yai-labs/yai/issues/125"
 issue_reason: "Phase tracked by governance runbook issue #125."
@@ -30,7 +30,7 @@ issue_reason: "Phase tracked by governance runbook issue #125."
 - Evidence plans: `docs/40-qualification/test-plans/contract-baseline-lock-prep.md`, `docs/40-qualification/test-plans/hardfail.md`
 
 Objective:
-- Ensure `yai` and `yai-cli` consume the same audited `yai-specs` baseline commit.
+- Ensure `yai` and `yai-cli` consume the same audited `yai-law` baseline commit.
 
 Contract Delta:
 - Envelope: none.
@@ -39,8 +39,8 @@ Contract Delta:
 - Logging: pin-check execution evidence must be recorded.
 
 Repo Split:
-- `yai`: align `deps/yai-specs` ref to audited baseline.
-- `yai-cli`: align `deps/yai-specs` ref to the same audited baseline.
+- `yai`: align `deps/yai-law` ref to audited baseline.
+- `yai-cli`: align `deps/yai-law` ref to the same audited baseline.
 
 Evidence Plan (minimum):
 - Positive cases:
@@ -56,7 +56,7 @@ Compatibility Classification:
 - Upgrade path: existing conformant clients remain valid.
 
 Definition of Done:
-- [x] `yai` and `yai-cli` point to the same `deps/yai-specs` baseline commit.
+- [x] `yai` and `yai-cli` point to the same `deps/yai-law` baseline commit.
 - [x] Pin check evidence is attached and reviewable.
 - [x] No contract drift is introduced by this phase.
 - [x] Phase closure references ADR-011 and runbook anchor.

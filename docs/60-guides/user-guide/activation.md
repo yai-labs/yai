@@ -2,8 +2,8 @@
 
 Canonical sources:
 
-- `deps/yai-specs/specs/graph/GRAPH_V1.md`
-- `deps/yai-specs/specs/graph/graph.v1.json`
+- `deps/yai-law/specs/graph/GRAPH_V1.md`
+- `deps/yai-law/specs/graph/graph.v1.json`
 
 ## Objective
 Activation computes memory emergence as graph diffusion (PPR/RWR), with deterministic commit and persisted activation traces.

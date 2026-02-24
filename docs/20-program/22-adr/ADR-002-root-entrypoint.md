@@ -8,10 +8,10 @@ applies_to:
   phase: 0.1.1
   anchor: "#phase-0-1-1-byte-perfect-router"
 law_refs:
-  - deps/yai-specs/contracts/axioms/A-002-authority.md
-  - deps/yai-specs/contracts/invariants/I-003-governance.md
-  - deps/yai-specs/contracts/boundaries/L1-kernel.md
-  - deps/yai-specs/specs/protocol/include/transport.h
+  - deps/yai-law/contracts/axioms/A-002-authority.md
+  - deps/yai-law/contracts/invariants/I-003-governance.md
+  - deps/yai-law/contracts/boundaries/L1-kernel.md
+  - deps/yai-law/specs/protocol/include/transport.h
 ---
 # ADR-002 - Root Control Plane as Canonical Entry Point
 

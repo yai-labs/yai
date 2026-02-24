@@ -4,7 +4,7 @@ YAI is a sovereign runtime: **authority is explicit**, **execution is determinis
 
 ## Layer Model
 
-- **L0 — Contracts**: canonical, normative contracts in `deps/yai-specs/`
+- **L0 — Contracts**: canonical, normative contracts in `deps/yai-law/`
 - **L1 — Kernel**: authority enforcement, boundary checks, and policy gating
 - **L2 — Engine**: deterministic execution under kernel-governed constraints
 - **L3 — Mind / Clients**: proposers and orchestrators that never override authority
@@ -14,7 +14,7 @@ YAI is a sovereign runtime: **authority is explicit**, **execution is determinis
 - **Auditability**: externally relevant actions must be reconstructible from logs/events.
 - **No silent side effects**: state/effect changes require an explicit command path and policy checks.
 - **Effect boundary**: authority boundaries are explicit and enforced at runtime interfaces.
-- **Spec-first**: normative behavior is defined in `deps/yai-specs`; implementation is never normative.
+- **Spec-first**: normative behavior is defined in `deps/yai-law`; implementation is never normative.
 
 ## Runtime Guarantees
 

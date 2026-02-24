@@ -2,7 +2,7 @@
 id: ADR-README
 status: active
 law_refs:
-  - deps/yai-specs/contracts/invariants/I-001-traceability.md
+  - deps/yai-law/contracts/invariants/I-001-traceability.md
 ---
 # ADR Index
 

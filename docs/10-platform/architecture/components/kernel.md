@@ -5,8 +5,8 @@ effective_date: 2026-02-19
 revision: 1
 owner: kernel
 law_refs:
-  - deps/yai-specs/contracts/boundaries/L1-kernel.md
-  - deps/yai-specs/contracts/invariants/I-006-external-effect-boundary.md
+  - deps/yai-law/contracts/boundaries/L1-kernel.md
+  - deps/yai-law/contracts/invariants/I-006-external-effect-boundary.md
 ---
 
 # Kernel Component
@@ -37,7 +37,7 @@ implemented
 - ADR refs: `docs/20-program/22-adr/ADR-003-kernel-authority.md`, `docs/20-program/22-adr/ADR-007-workspace-isolation.md`, `docs/20-program/22-adr/ADR-008-connection-lifecycle.md`
 - Runbook refs: `docs/20-program/23-runbooks/root-hardening.md`, `docs/20-program/23-runbooks/workspaces-lifecycle.md`
 - MP refs: `docs/20-program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.2.md`, `docs/20-program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.4.md`
-- L0 anchors: `deps/yai-specs/contracts/boundaries/L1-kernel.md`, `deps/yai-specs/specs/protocol/include/session.h`
+- L0 anchors: `deps/yai-law/contracts/boundaries/L1-kernel.md`, `deps/yai-law/specs/protocol/include/session.h`
 
 ## Known Drift / Gaps
 

@@ -42,7 +42,7 @@ tags: []
 
 ## Traceability
 
-- Spec anchors (if any): `deps/yai-specs/...`
+- Spec anchors (if any): `deps/yai-law/...`
 - Target ADR(s): `docs/20-program/22-adr/ADR-...` (optional)
 - Downstream runbook(s): `docs/20-program/23-runbooks/...` (optional)
 - Downstream MP(s): `docs/20-program/24-milestone-packs/...` (optional)

@@ -5,8 +5,8 @@ effective_date: 2026-02-23
 revision: 1
 owner: mind
 law_refs:
-  - deps/yai-specs/contracts/boundaries/L3-mind.md
-  - deps/yai-specs/contracts/invariants/I-004-cognitive-reconfiguration.md
+  - deps/yai-law/contracts/boundaries/L3-mind.md
+  - deps/yai-law/contracts/invariants/I-004-cognitive-reconfiguration.md
 ---
 
 # Mind Component
@@ -42,7 +42,7 @@ partial
 - ADR refs: `docs/20-program/22-adr/ADR-005-mind-proposer.md`, `docs/20-program/22-adr/ADR-003-kernel-authority.md`
 - Runbook refs: `docs/20-program/23-runbooks/mind-redis-stm.md`, `docs/20-program/23-runbooks/root-hardening.md`
 - MP refs: `docs/20-program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md`
-- L0 anchors: `deps/yai-specs/contracts/boundaries/L3-mind.md`, `deps/yai-specs/contracts/invariants/I-004-cognitive-reconfiguration.md`
+- L0 anchors: `deps/yai-law/contracts/boundaries/L3-mind.md`, `deps/yai-law/contracts/invariants/I-004-cognitive-reconfiguration.md`
 
 ## Known Drift / Gaps
 

@@ -7,7 +7,7 @@ INFRA_ROOT="${YAI_INFRA_ROOT:-$INFRA_ROOT_DEFAULT}"
 TARGET="$INFRA_ROOT/tools/bin/yai-changelog-check"
 
 if [[ -x "$TARGET" ]]; then
-  YAI_CORE_ROOT="$ROOT" YAI_SPECS_ROOT="$ROOT/deps/yai-specs" exec "$TARGET" "$@"
+  YAI_CORE_ROOT="$ROOT" YAI_SPECS_ROOT="$ROOT/deps/yai-law" exec "$TARGET" "$@"
 fi
 
 # CI compatibility: if yai-infra is not checked out, fall back to local validator.

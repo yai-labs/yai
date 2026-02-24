@@ -20,7 +20,7 @@ Governance/process/program documentation is externalized to `yai-infra`.
 - `mind/` — cognition/orchestration module (L3)
 - `tools/` — runtime-facing wrappers and build checks
 - `data/` — runtime datasets and local fixtures
-- `deps/yai-specs/` — pinned normative specs (source of truth)
+- `deps/yai-law/` — pinned normative specs (source of truth)
 
 ## Build
 

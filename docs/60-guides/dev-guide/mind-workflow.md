@@ -17,7 +17,7 @@
 
 ## Repository mapping (high level)
 
-- `yai-specs` — canonical contracts, schemas, compliance packs
+- `yai-law` — canonical contracts, schemas, compliance packs
 - `yai` — runtime enforcement, toolchain, runbooks
 - `yai-cli` — user interface surface
 - `yai-mind` — cognition + memory + providers within L3 boundary

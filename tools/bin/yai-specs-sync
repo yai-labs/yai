@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "DEPRECATION: yai-specs-sync is deprecated; use yai-law-sync" >&2
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+exec "$ROOT/tools/bin/yai-law-sync" "$@"

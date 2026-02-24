@@ -10,6 +10,8 @@ Behavior:
 - If canonical target is missing, wrapper exits with `2` and prints missing path.
 
 Runtime wrappers kept in this repo:
+- `yai-law-sync`
+- `yai-specs-sync` (deprecated alias)
 - `yai-version`
 - `yai-bundle`
 - `yai-changelog-check`

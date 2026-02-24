@@ -8,10 +8,10 @@ applies_to:
   phase: v4
   anchor: "#phase-engine-attach-v4"
 law_refs:
-  - deps/yai-specs/contracts/invariants/I-006-external-effect-boundary.md
-  - deps/yai-specs/contracts/boundaries/L2-engine.md
-  - deps/yai-specs/specs/protocol/include/protocol.h
-  - deps/yai-specs/specs/protocol/include/transport.h
+  - deps/yai-law/contracts/invariants/I-006-external-effect-boundary.md
+  - deps/yai-law/contracts/boundaries/L2-engine.md
+  - deps/yai-law/specs/protocol/include/protocol.h
+  - deps/yai-law/specs/protocol/include/transport.h
 ---
 # ADR-004 - Engine as Execution Plane (L2)
 
