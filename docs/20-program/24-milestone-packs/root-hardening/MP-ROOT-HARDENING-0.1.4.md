@@ -9,9 +9,9 @@ adrs:
   - docs/20-program/22-adr/ADR-008-connection-lifecycle.md
   - docs/20-program/22-adr/ADR-012-audit-convergence-gates.md
 spec_anchors:
-  - deps/yai-specs/specs/protocol/include/transport.h
-  - deps/yai-specs/specs/protocol/include/auth.h
-  - deps/yai-specs/specs/protocol/include/errors.h
+  - deps/yai-law/specs/protocol/include/transport.h
+  - deps/yai-law/specs/protocol/include/auth.h
+  - deps/yai-law/specs/protocol/include/errors.h
 claims:
   - C-KERNEL-HARD-BOUNDARY-CORE
   - C-DOMAIN-COVERAGE-RESOURCE

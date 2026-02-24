@@ -6,7 +6,7 @@
         "docs/20-program/22-adr/ADR-010-boot-entrypoint.md"
       ],
       "l0_refs": [
-        "deps/yai-specs/contracts/invariants/I-001-traceability.md"
+        "deps/yai-law/contracts/invariants/I-001-traceability.md"
       ],
       "mp_refs": [
         "docs/20-program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md"
@@ -24,8 +24,8 @@
         "docs/20-program/22-adr/ADR-009-engine-attachment.md"
       ],
       "l0_refs": [
-        "deps/yai-specs/contracts/boundaries/L2-engine.md",
-        "deps/yai-specs/specs/protocol/include/protocol.h"
+        "deps/yai-law/contracts/boundaries/L2-engine.md",
+        "deps/yai-law/specs/protocol/include/protocol.h"
       ],
       "mp_refs": [
         "docs/20-program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md"
@@ -45,8 +45,8 @@
         "docs/20-program/22-adr/ADR-008-connection-lifecycle.md"
       ],
       "l0_refs": [
-        "deps/yai-specs/contracts/boundaries/L1-kernel.md",
-        "deps/yai-specs/specs/protocol/include/session.h"
+        "deps/yai-law/contracts/boundaries/L1-kernel.md",
+        "deps/yai-law/specs/protocol/include/session.h"
       ],
       "mp_refs": [
         "docs/20-program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.2.md",
@@ -66,8 +66,8 @@
         "docs/20-program/22-adr/ADR-005-mind-proposer.md"
       ],
       "l0_refs": [
-        "deps/yai-specs/contracts/boundaries/L3-mind.md",
-        "deps/yai-specs/contracts/invariants/I-004-cognitive-reconfiguration.md"
+        "deps/yai-law/contracts/boundaries/L3-mind.md",
+        "deps/yai-law/contracts/invariants/I-004-cognitive-reconfiguration.md"
       ],
       "mp_refs": [
         "docs/20-program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md"
@@ -86,8 +86,8 @@
         "docs/20-program/22-adr/ADR-005-mind-proposer.md"
       ],
       "l0_refs": [
-        "deps/yai-specs/contracts/boundaries/L3-mind.md",
-        "deps/yai-specs/contracts/invariants/I-004-cognitive-reconfiguration.md"
+        "deps/yai-law/contracts/boundaries/L3-mind.md",
+        "deps/yai-law/contracts/invariants/I-004-cognitive-reconfiguration.md"
       ],
       "mp_refs": [
         "docs/20-program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md"
@@ -106,8 +106,8 @@
         "docs/20-program/22-adr/ADR-005-mind-proposer.md"
       ],
       "l0_refs": [
-        "deps/yai-specs/contracts/boundaries/L3-mind.md",
-        "deps/yai-specs/contracts/invariants/I-004-cognitive-reconfiguration.md"
+        "deps/yai-law/contracts/boundaries/L3-mind.md",
+        "deps/yai-law/contracts/invariants/I-004-cognitive-reconfiguration.md"
       ],
       "mp_refs": [
         "docs/20-program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md"
@@ -126,8 +126,8 @@
         "docs/20-program/22-adr/ADR-002-root-entrypoint.md"
       ],
       "l0_refs": [
-        "deps/yai-specs/specs/protocol/include/auth.h",
-        "deps/yai-specs/specs/protocol/include/transport.h"
+        "deps/yai-law/specs/protocol/include/auth.h",
+        "deps/yai-law/specs/protocol/include/transport.h"
       ],
       "mp_refs": [
         "docs/20-program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md",
@@ -145,8 +145,8 @@
         "docs/20-program/22-adr/ADR-001-single-runtime.md"
       ],
       "l0_refs": [
-        "deps/yai-specs/contracts/boundaries/L0-vault.md",
-        "deps/yai-specs/specs/vault/include/yai_vault_abi.h"
+        "deps/yai-law/contracts/boundaries/L0-vault.md",
+        "deps/yai-law/specs/vault/include/yai_vault_abi.h"
       ],
       "mp_refs": [
         "docs/20-program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md"
@@ -167,7 +167,7 @@
       "component": "Boot",
       "is_planned_marker": false,
       "l0_refs": [
-        "deps/yai-specs/contracts/invariants/I-001-traceability.md"
+        "deps/yai-law/contracts/invariants/I-001-traceability.md"
       ],
       "mp_refs": [
         "docs/20-program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md"
@@ -185,8 +185,8 @@
       "component": "Engine",
       "is_planned_marker": false,
       "l0_refs": [
-        "deps/yai-specs/contracts/boundaries/L2-engine.md",
-        "deps/yai-specs/specs/protocol/include/protocol.h"
+        "deps/yai-law/contracts/boundaries/L2-engine.md",
+        "deps/yai-law/specs/protocol/include/protocol.h"
       ],
       "mp_refs": [
         "docs/20-program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md"
@@ -206,8 +206,8 @@
       "component": "Kernel",
       "is_planned_marker": false,
       "l0_refs": [
-        "deps/yai-specs/contracts/boundaries/L1-kernel.md",
-        "deps/yai-specs/specs/protocol/include/session.h"
+        "deps/yai-law/contracts/boundaries/L1-kernel.md",
+        "deps/yai-law/specs/protocol/include/session.h"
       ],
       "mp_refs": [
         "docs/20-program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.2.md",
@@ -227,8 +227,8 @@
       "component": "Mind",
       "is_planned_marker": false,
       "l0_refs": [
-        "deps/yai-specs/contracts/boundaries/L3-mind.md",
-        "deps/yai-specs/contracts/invariants/I-004-cognitive-reconfiguration.md"
+        "deps/yai-law/contracts/boundaries/L3-mind.md",
+        "deps/yai-law/contracts/invariants/I-004-cognitive-reconfiguration.md"
       ],
       "mp_refs": [
         "docs/20-program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md"
@@ -247,8 +247,8 @@
       "component": "Mind-boundaries",
       "is_planned_marker": false,
       "l0_refs": [
-        "deps/yai-specs/contracts/boundaries/L3-mind.md",
-        "deps/yai-specs/contracts/invariants/I-004-cognitive-reconfiguration.md"
+        "deps/yai-law/contracts/boundaries/L3-mind.md",
+        "deps/yai-law/contracts/invariants/I-004-cognitive-reconfiguration.md"
       ],
       "mp_refs": [
         "docs/20-program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md"
@@ -267,8 +267,8 @@
       "component": "Mind-overview",
       "is_planned_marker": false,
       "l0_refs": [
-        "deps/yai-specs/contracts/boundaries/L3-mind.md",
-        "deps/yai-specs/contracts/invariants/I-004-cognitive-reconfiguration.md"
+        "deps/yai-law/contracts/boundaries/L3-mind.md",
+        "deps/yai-law/contracts/invariants/I-004-cognitive-reconfiguration.md"
       ],
       "mp_refs": [
         "docs/20-program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md"
@@ -287,8 +287,8 @@
       "component": "Root",
       "is_planned_marker": false,
       "l0_refs": [
-        "deps/yai-specs/specs/protocol/include/auth.h",
-        "deps/yai-specs/specs/protocol/include/transport.h"
+        "deps/yai-law/specs/protocol/include/auth.h",
+        "deps/yai-law/specs/protocol/include/transport.h"
       ],
       "mp_refs": [
         "docs/20-program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md",
@@ -306,8 +306,8 @@
       "component": "Vault",
       "is_planned_marker": false,
       "l0_refs": [
-        "deps/yai-specs/contracts/boundaries/L0-vault.md",
-        "deps/yai-specs/specs/vault/include/yai_vault_abi.h"
+        "deps/yai-law/contracts/boundaries/L0-vault.md",
+        "deps/yai-law/specs/vault/include/yai_vault_abi.h"
       ],
       "mp_refs": [
         "docs/20-program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md"

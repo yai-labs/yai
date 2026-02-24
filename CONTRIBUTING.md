@@ -7,7 +7,7 @@ This document defines contribution standards for the `yai` runtime repository.
 ## Scope and Sources of Truth
 
 - Runtime implementation lives in this repository (`boot/`, `root/`, `kernel/`, `engine/`, `runtime/`, `mind/`).
-- Canonical normative contracts live in `deps/yai-specs/` (pinned and verified by governance/CI).
+- Canonical normative contracts live in `deps/yai-law/` (pinned and verified by governance/CI).
 - Documentation under `docs/` is operational guidance; contracts remain normative.
 
 ## Prerequisites
@@ -92,7 +92,7 @@ If a check fails, fix it or document the failure with rationale in the PR eviden
 
 If your change affects any contract-facing surface (protocol/control/graph/vault/providers/compliance):
 
-1. Update the contract in `yai-specs` first (or via a tandem PR).
+1. Update the contract in `yai-law` first (or via a tandem PR).
 2. Provide versioning/compatibility rationale for the contract change.
 3. Update the pinned reference in this repo (submodule/ref/pin policy).
 4. Update runtime code to match the new contract.

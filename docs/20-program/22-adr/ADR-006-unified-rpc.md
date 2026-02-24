@@ -8,11 +8,11 @@ applies_to:
   phase: 0.1.0
   anchor: "#phase-0-1-0-protocol-guardrails"
 law_refs:
-  - deps/yai-specs/contracts/invariants/I-001-traceability.md
-  - deps/yai-specs/contracts/invariants/I-002-determinism.md
-  - deps/yai-specs/contracts/invariants/I-003-governance.md
-  - deps/yai-specs/contracts/boundaries/L1-kernel.md
-  - deps/yai-specs/contracts/boundaries/L2-engine.md
+  - deps/yai-law/contracts/invariants/I-001-traceability.md
+  - deps/yai-law/contracts/invariants/I-002-determinism.md
+  - deps/yai-law/contracts/invariants/I-003-governance.md
+  - deps/yai-law/contracts/boundaries/L1-kernel.md
+  - deps/yai-law/contracts/boundaries/L2-engine.md
 ---
 # ADR-006 - Strict Unified RPC Contract
 
@@ -22,7 +22,7 @@ Milestone 1 required one explicit envelope and command baseline across specs, co
 
 ## Decision
 
-All communication follows the pinned binary contract in `deps/yai-specs`, with command semantics anchored by CLI contract artifacts.
+All communication follows the pinned binary contract in `deps/yai-law`, with command semantics anchored by CLI contract artifacts.
 
 Mandatory rules:
 

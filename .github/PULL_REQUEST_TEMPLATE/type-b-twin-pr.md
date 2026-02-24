@@ -15,7 +15,7 @@
 
 ## Twin PR links (required)
 - yai-cli PR: <link or N/A>
-- yai-specs PR: <link or N/A>
+- yai-law PR: <link or N/A>
 
 ## Objective
 <single objective across repos>

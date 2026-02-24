@@ -5,8 +5,8 @@ effective_date: 2026-02-19
 revision: 1
 owner: engine
 law_refs:
-  - deps/yai-specs/contracts/boundaries/L2-engine.md
-  - deps/yai-specs/contracts/invariants/I-002-determinism.md
+  - deps/yai-law/contracts/boundaries/L2-engine.md
+  - deps/yai-law/contracts/invariants/I-002-determinism.md
 ---
 
 # Engine Component
@@ -37,7 +37,7 @@ implemented
 - ADR refs: `docs/20-program/22-adr/ADR-004-engine-execution.md`, `docs/20-program/22-adr/ADR-009-engine-attachment.md`
 - Runbook refs: `docs/20-program/23-runbooks/engine-attach.md`, `docs/20-program/23-runbooks/root-hardening.md`
 - MP refs: `docs/20-program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md`
-- L0 anchors: `deps/yai-specs/contracts/boundaries/L2-engine.md`, `deps/yai-specs/specs/protocol/include/protocol.h`
+- L0 anchors: `deps/yai-law/contracts/boundaries/L2-engine.md`, `deps/yai-law/specs/protocol/include/protocol.h`
 
 ## Known Drift / Gaps
 

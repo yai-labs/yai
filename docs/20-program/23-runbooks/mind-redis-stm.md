@@ -20,8 +20,8 @@ related:
     - docs/20-program/22-adr/ADR-005-mind-proposer.md
     - docs/20-program/22-adr/ADR-008-connection-lifecycle.md
   specs:
-    - deps/yai-specs/specs/protocol/include/transport.h
-    - deps/yai-specs/specs/protocol/include/auth.h
+    - deps/yai-law/specs/protocol/include/transport.h
+    - deps/yai-law/specs/protocol/include/auth.h
   test_plans:
     - docs/40-qualification/test-plans/hardfail.md
   tools:
@@ -227,7 +227,7 @@ P:meta:schema_version         # string, NO TTL
 
 ### Files to create
 
-**Spec:** `deps/yai-specs/storage/REDIS_KEYSPACE.md`
+**Spec:** `deps/yai-law/storage/REDIS_KEYSPACE.md`
 
 Document the canonical keyspace with examples and TTL policies.
 
@@ -307,7 +307,7 @@ impl KernelClient {
     
     pub fn handshake(&mut self) -> Result<(), String> {
         // Implement YAI_CMD_HANDSHAKE protocol
-        // (use protocol from deps/yai-specs/specs/protocol/transport.h)
+        // (use protocol from deps/yai-law/specs/protocol/transport.h)
         todo!("Implement handshake")
     }
     

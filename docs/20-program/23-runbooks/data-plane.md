@@ -19,8 +19,8 @@ decisions:
 related:
   adr: []
   specs:
-    - deps/yai-specs/specs/protocol/include/transport.h
-    - deps/yai-specs/specs/protocol/include/auth.h
+    - deps/yai-law/specs/protocol/include/transport.h
+    - deps/yai-law/specs/protocol/include/auth.h
   test_plans:
     - docs/40-qualification/test-plans/hardfail.md
   tools:
@@ -43,7 +43,7 @@ Define and deliver the staged data-plane rollout with deterministic tenant isola
 - [ ] Logger pipeline is available for storage/debug traces.
 
 ## 3) Inputs
-- Repos/components: `yai`, `yai-cli`, `yai-specs`
+- Repos/components: `yai`, `yai-cli`, `yai-law`
 - Storage targets: LMDB (authority), DuckDB (events), Redis (STM/context)
 - Validation tooling: `tools/bin/yai-verify`, `tools/bin/yai-gate`
 
@@ -163,7 +163,7 @@ yai:<ws_id>:context:*      # Active context (pinned)
 
 ### Files to create
 
-**A) Spec:** `deps/yai-specs/storage/DATA_PLANE.md`
+**A) Spec:** `deps/yai-law/storage/DATA_PLANE.md`
 
 Document the layout, path rules, and isolation guarantees.
 

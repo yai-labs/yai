@@ -8,11 +8,11 @@ applies_to:
   phase: 0.1.0
   anchor: "#phase-0-1-0-protocol-guardrails"
 law_refs:
-  - deps/yai-specs/contracts/axioms/A-002-authority.md
-  - deps/yai-specs/contracts/invariants/I-003-governance.md
-  - deps/yai-specs/contracts/invariants/I-006-external-effect-boundary.md
-  - deps/yai-specs/contracts/boundaries/L1-kernel.md
-  - deps/yai-specs/contracts/boundaries/L2-engine.md
+  - deps/yai-law/contracts/axioms/A-002-authority.md
+  - deps/yai-law/contracts/invariants/I-003-governance.md
+  - deps/yai-law/contracts/invariants/I-006-external-effect-boundary.md
+  - deps/yai-law/contracts/boundaries/L1-kernel.md
+  - deps/yai-law/contracts/boundaries/L2-engine.md
 ---
 # ADR-001 - Single Runtime Per Machine
 

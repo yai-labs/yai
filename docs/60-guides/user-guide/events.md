@@ -4,5 +4,5 @@ Editorial pointer only.
 
 Canonical sources:
 
-- `deps/yai-specs/specs/control/control_plane.v1.json`
-- `deps/yai-specs/specs/cli/commands.v1.json`
+- `deps/yai-law/specs/control/control_plane.v1.json`
+- `deps/yai-law/specs/cli/commands.v1.json`

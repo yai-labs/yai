@@ -8,10 +8,10 @@ applies_to:
   phase: v4
   anchor: "#phase-engine-attach-v4"
 law_refs:
-  - deps/yai-specs/contracts/invariants/I-003-governance.md
-  - deps/yai-specs/contracts/invariants/I-006-external-effect-boundary.md
-  - deps/yai-specs/contracts/boundaries/L1-kernel.md
-  - deps/yai-specs/contracts/boundaries/L2-engine.md
+  - deps/yai-law/contracts/invariants/I-003-governance.md
+  - deps/yai-law/contracts/invariants/I-006-external-effect-boundary.md
+  - deps/yai-law/contracts/boundaries/L1-kernel.md
+  - deps/yai-law/contracts/boundaries/L2-engine.md
 ---
 # ADR-009 - Engine Attachment Model
 

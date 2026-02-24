@@ -19,10 +19,10 @@ related:
     - docs/20-program/22-adr/ADR-011-contract-baseline-lock.md
     - docs/20-program/22-adr/ADR-012-audit-convergence-gates.md
   specs:
-    - deps/yai-specs/SPEC_MAP.md
-    - deps/yai-specs/REGISTRY.md
-    - deps/yai-specs/VERSIONING.md
-    - deps/yai-specs/COMPATIBILITY.md
+    - deps/yai-law/SPEC_MAP.md
+    - deps/yai-law/REGISTRY.md
+    - deps/yai-law/VERSIONING.md
+    - deps/yai-law/COMPATIBILITY.md
   test_plans: []
   tools:
     - tools/bin/yai-docs-trace-check
@@ -33,7 +33,7 @@ related:
 # RB-SPECS-REFACTOR-FOUNDATION - Pre-Hardening Specs Program
 
 ## 0) Intent
-This runbook establishes a deterministic, enterprise-grade foundation for **`yai-specs`** and its consumers (**`yai`**, **`yai-cli`**) *before* runtime hardening tracks (Root Hardening, Workspace Lifecycle, Engine Attach, Data Plane).
+This runbook establishes a deterministic, enterprise-grade foundation for **`yai-law`** and its consumers (**`yai`**, **`yai-cli`**) *before* runtime hardening tracks (Root Hardening, Workspace Lifecycle, Engine Attach, Data Plane).
 
 It turns the "specs refactor" from a vague refactor into **phased, gated work** with:
 - strict *mapping-only* steps first (no semantic drift),
@@ -70,18 +70,18 @@ A *closure artifact* for a phase: what changed, proof evidence, links to issues/
 ## 2) Preconditions (hard rules)
 - [ ] `RB-CONTRACT-BASELINE-LOCK` has been executed or at least stabilized (ADR-011 baseline available).
 - [ ] Cross-repo pin governance is active and runnable (e.g. `tools/bin/yai-check-pins` in the consumer).
-- [ ] No direct development is performed inside consumer vendored specs trees (e.g. `yai/deps/yai-specs`).
-- [ ] Any change in `yai-specs` that affects consumers is coordinated via pins/tags and verified in consumers.
+- [ ] No direct development is performed inside consumer vendored specs trees (e.g. `yai/deps/yai-law`).
+- [ ] Any change in `yai-law` that affects consumers is coordinated via pins/tags and verified in consumers.
 
 ---
 
 ## 3) Inputs / Repos
 ### Repos involved
-- `yai-specs` (canonical specs)
+- `yai-law` (canonical specs)
 - `yai` (consumer/runtime)
 - `yai-cli` (consumer)
 
-### Canonical references (in `yai-specs`)
+### Canonical references (in `yai-law`)
 - `SPEC_MAP.md`, `REGISTRY.md`, `VERSIONING.md`, `COMPATIBILITY.md`
 - `contracts/**`, `specs/**`, `vectors/**`, `formal/**`, `compliance/**`
 
@@ -99,7 +99,7 @@ Claims source of truth:
 
 Wave tracking:
 - `https://github.com/yai-labs/yai/issues/142`
-- `https://github.com/yai-labs/yai-specs/issues/9`
+- `https://github.com/yai-labs/yai-law/issues/9`
 
 Mandatory closure policy:
 - for mandatory evidence checks, `SKIP` is treated as `FAIL`.
@@ -120,8 +120,8 @@ Mandatory closure policy:
 
 ## 5) Working Model (how you execute without chaos)
 ### Repo-of-truth rule
-- `yai-specs` is **source of truth** for specs/contracts/formal/vectors.
-- `yai` and `yai-cli` **consume pinned versions** (tag/commit) of `yai-specs`.
+- `yai-law` is **source of truth** for specs/contracts/formal/vectors.
+- `yai` and `yai-cli` **consume pinned versions** (tag/commit) of `yai-law`.
 
 ### Change Budget rule
 - Phases 0.1.0-0.1.2 are **structure/mapping/links only**.
@@ -220,7 +220,7 @@ A phase is "closed" only when:
 
 <a id="phase-0-1-3-consumer-yai"></a>
 ### 0.1.3 - Consumer-Ready Wiring in `yai`
-**Claim:** `yai` consumes `yai-specs` deterministically under the new structure.  
+**Claim:** `yai` consumes `yai-law` deterministically under the new structure.  
 **Scope:** pins/tags/commit refs, include paths, build wiring, verify scripts.  
 **Claim IDs:** `C-SPEC-FIRST-PINNED`, `C-EVIDENCE-PACK-REPRODUCIBLE`  
 **Mandatory evidence commands:**
@@ -270,7 +270,7 @@ A phase is "closed" only when:
 <a id="phase-0-1-5-ci-guardrails"></a>
 ### 0.1.5 - CI Hard Guardrails (Enterprise)
 **Claim:** PRs are **non-mergable** if any required check fails; logs are readable; checks are separated.  
-**Scope:** `yai-specs` CI and repo gates.
+**Scope:** `yai-law` CI and repo gates.
 **Claim IDs:** `C-EVIDENCE-PACK-REPRODUCIBLE`, `C-SKIP-FAIL-MANDATORY`  
 **Mandatory evidence commands:**
 - `tools/bin/yai-docs-trace-check --all`
@@ -435,7 +435,7 @@ A phase is "closed" only when:
 > Commands differ slightly per repo. The point is: **each phase has a deterministic gate**.
 > Mandatory check closure semantics: `SKIP = FAIL`.
 
-### In `yai-specs` (foundation gates)
+### In `yai-law` (foundation gates)
 ```bash
 make ci
 make validate
@@ -484,10 +484,10 @@ make verify
 
 ## 9) Rollback (safe rollback rules)
 
-- Roll back to last known good `yai-specs` tag/commit in consumers.
+- Roll back to last known good `yai-law` tag/commit in consumers.
 - Revert mapping commits within the current phase only (don't mix phases in one revert blob).
 - Re-run:
-  - CI in `yai-specs`
+  - CI in `yai-law`
   - pin checks and verify in consumers
   - then reopen the phase.
 
@@ -509,5 +509,5 @@ make verify
 ## 11) References
 
 - ADR: `docs/20-program/22-adr/ADR-011-contract-baseline-lock.md`
-- Specs: `deps/yai-specs/SPEC_MAP.md`, `deps/yai-specs/REGISTRY.md`
+- Specs: `deps/yai-law/SPEC_MAP.md`, `deps/yai-law/REGISTRY.md`
 - Planned MPs: `docs/20-program/24-milestone-packs/specs-refactor-foundation/*`

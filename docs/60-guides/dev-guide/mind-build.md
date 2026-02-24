@@ -20,4 +20,4 @@ Convenience:
 ## Notes
 
 - This repo is intended to integrate with the wider YAI runtime.
-- Build scripts and contracts must remain compatible with the canonical specs in `yai-specs`.
+- Build scripts and contracts must remain compatible with the canonical specs in `yai-law`.

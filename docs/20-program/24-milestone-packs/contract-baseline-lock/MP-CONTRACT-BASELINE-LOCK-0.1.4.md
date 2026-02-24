@@ -7,9 +7,9 @@ adrs:
   - docs/20-program/22-adr/ADR-011-contract-baseline-lock.md
   - docs/20-program/22-adr/ADR-012-audit-convergence-gates.md
 spec_anchors:
-  - deps/yai-specs/contracts/invariants/I-001-traceability.md
-  - deps/yai-specs/contracts/invariants/I-003-governance.md
-  - deps/yai-specs/contracts/boundaries/L1-kernel.md
+  - deps/yai-law/contracts/invariants/I-001-traceability.md
+  - deps/yai-law/contracts/invariants/I-003-governance.md
+  - deps/yai-law/contracts/boundaries/L1-kernel.md
 claims:
   - C-EVIDENCE-PACK-REPRODUCIBLE
   - C-SPEC-FIRST-PINNED
@@ -48,7 +48,7 @@ Contract Delta:
 - Logging: evidence index must include reproducible command/log pointers.
 
 Repo Split:
-- `yai-specs`: normative contract and governance anchors.
+- `yai-law`: normative contract and governance anchors.
 - `yai`: consumer pin/proof evidence and gate results.
 - `yai-cli`: consumer pin/proof evidence and gate results.
 
@@ -74,7 +74,7 @@ Compatibility Classification:
 - Upgrade path: none required for runtime clients.
 
 Definition of Done:
-- [ ] Evidence index spans `yai-specs`, `yai`, and `yai-cli`.
+- [ ] Evidence index spans `yai-law`, `yai`, and `yai-cli`.
 - [ ] Every phase has explicit proof pointers and outcomes.
 - [ ] Closure review is reproducible from documented commands.
 - [ ] ADR-011 closure readiness is demonstrated by artifacts.

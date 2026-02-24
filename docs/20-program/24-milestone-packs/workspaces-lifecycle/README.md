@@ -6,7 +6,7 @@ phase: index
 adrs:
   - docs/20-program/22-adr/ADR-007-workspace-isolation.md
 spec_anchors:
-  - deps/yai-specs/specs/protocol/include/transport.h
+  - deps/yai-law/specs/protocol/include/transport.h
 issues:
   - "N/A: track index document"
 ---

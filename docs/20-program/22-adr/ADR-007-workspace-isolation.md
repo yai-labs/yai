@@ -8,11 +8,11 @@ applies_to:
   phase: 0.1.0
   anchor: "#phase-0-1-0-workspace-layout"
 law_refs:
-  - deps/yai-specs/contracts/invariants/I-001-traceability.md
-  - deps/yai-specs/contracts/invariants/I-002-determinism.md
-  - deps/yai-specs/contracts/boundaries/L1-kernel.md
-  - deps/yai-specs/specs/protocol/include/session.h
-  - deps/yai-specs/specs/protocol/include/transport.h
+  - deps/yai-law/contracts/invariants/I-001-traceability.md
+  - deps/yai-law/contracts/invariants/I-002-determinism.md
+  - deps/yai-law/contracts/boundaries/L1-kernel.md
+  - deps/yai-law/specs/protocol/include/session.h
+  - deps/yai-law/specs/protocol/include/transport.h
 ---
 # ADR-007 - Workspace Isolation Model
 

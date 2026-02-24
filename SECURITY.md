@@ -4,7 +4,7 @@
 
 This policy applies to the **`yai` runtime implementation repository** (Boot/Root/Kernel/Engine/Mind workspace integration, tooling, and release artifacts).
 
-Normative contract behavior (protocol/control/graph/vault/compliance) is defined in **`deps/yai-specs/`**. Contract issues may be triaged here but the source-of-truth fix may live in `yai-specs`.
+Normative contract behavior (protocol/control/graph/vault/compliance) is defined in **`deps/yai-law/`**. Contract issues may be triaged here but the source-of-truth fix may live in `yai-law`.
 
 ## Reporting a Vulnerability
 

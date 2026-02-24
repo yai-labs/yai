@@ -6,7 +6,7 @@ phase: index
 adrs:
   - docs/20-program/22-adr/ADR-011-contract-baseline-lock.md
 spec_anchors:
-  - deps/yai-specs/SPEC_MAP.md
+  - deps/yai-law/SPEC_MAP.md
 issues:
   - "N/A: track index document"
 ---
@@ -18,7 +18,7 @@ Runbook reference:
 
 Wave binding:
 - `https://github.com/yai-labs/yai/issues/142`
-- `https://github.com/yai-labs/yai-specs/issues/9`
+- `https://github.com/yai-labs/yai-law/issues/9`
 - `docs/20-program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
 - `docs/50-validation/audits/claims/infra-grammar.v0.1.json`
 

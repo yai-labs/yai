@@ -13,7 +13,7 @@ It answers:
 ## The spine (L0 → L8)
 
 ### L0 — Constitution (normative truth)
-**Lives in:** `yai-specs/` (authoritative) and pinned into other repos via `deps/yai-specs/`
+**Lives in:** `yai-law/` (authoritative) and pinned into other repos via `deps/yai-law/`
 
 - `contracts/*` (axioms, invariants, boundaries)
 - `specs/*` (protocols, schemas, roles, errors)
@@ -112,7 +112,7 @@ A Proof Pack bundles:
 
 **Pointer-only policy (recommended):**
 - `yai-cli` and `yai-mind` contain a small pointer file to the canonical proof pack in `yai`
-- `yai-specs` does **not** host proof packs (it hosts the contract)
+- `yai-law` does **not** host proof packs (it hosts the contract)
 
 ---
 
@@ -121,7 +121,7 @@ A Proof Pack bundles:
 Every artifact must point **up** and **down** where applicable:
 
 ### ADR must reference
-- **Upstream:** L0 (`yai-specs/...`) via `law_refs`
+- **Upstream:** L0 (`yai-law/...`) via `law_refs`
 - **Downstream:** 1+ runbooks (recommended; can be “TBD” early, but track it)
 
 ### Runbook must reference

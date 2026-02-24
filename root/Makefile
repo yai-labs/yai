@@ -16,7 +16,7 @@ BIN_DIR := $(BIN_BUILD)
 CFLAGS ?= -Wall -Wextra -O2 -std=c11 -MMD -MP
 LDFLAGS ?=
 
-SPECS_DIR := $(ROOT_DIR)/deps/yai-specs
+SPECS_DIR := $(ROOT_DIR)/deps/yai-law
 SPECS_INC_PROTOCOL := $(SPECS_DIR)/specs/protocol/include
 SPECS_INC_RUNTIME := $(SPECS_DIR)/specs/protocol/runtime/include
 SPECS_INC_VAULT := $(SPECS_DIR)/specs/vault/include

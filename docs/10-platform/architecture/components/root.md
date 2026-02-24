@@ -5,8 +5,8 @@ effective_date: 2026-02-19
 revision: 1
 owner: runtime
 law_refs:
-  - deps/yai-specs/contracts/axioms/A-002-authority.md
-  - deps/yai-specs/contracts/invariants/I-003-governance.md
+  - deps/yai-law/contracts/axioms/A-002-authority.md
+  - deps/yai-law/contracts/invariants/I-003-governance.md
 ---
 
 # Root Component
@@ -36,7 +36,7 @@ implemented
 - ADR refs: `docs/20-program/22-adr/ADR-001-single-runtime.md`, `docs/20-program/22-adr/ADR-002-root-entrypoint.md`
 - Runbook refs: `docs/20-program/23-runbooks/root-hardening.md`
 - MP refs: `docs/20-program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`, `docs/20-program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md`
-- L0 anchors: `deps/yai-specs/specs/protocol/include/transport.h`, `deps/yai-specs/specs/protocol/include/auth.h`
+- L0 anchors: `deps/yai-law/specs/protocol/include/transport.h`, `deps/yai-law/specs/protocol/include/auth.h`
 
 ## Known Drift / Gaps
 

@@ -8,11 +8,11 @@ applies_to:
   phase: 0.1.1
   anchor: "#phase-0-1-1-ws-create-guardrails"
 law_refs:
-  - deps/yai-specs/contracts/invariants/I-001-traceability.md
-  - deps/yai-specs/contracts/invariants/I-002-determinism.md
-  - deps/yai-specs/contracts/invariants/I-003-governance.md
-  - deps/yai-specs/specs/protocol/include/session.h
-  - deps/yai-specs/specs/protocol/include/transport.h
+  - deps/yai-law/contracts/invariants/I-001-traceability.md
+  - deps/yai-law/contracts/invariants/I-002-determinism.md
+  - deps/yai-law/contracts/invariants/I-003-governance.md
+  - deps/yai-law/specs/protocol/include/session.h
+  - deps/yai-law/specs/protocol/include/transport.h
 ---
 # ADR-008 - Connection Lifecycle Semantics
 

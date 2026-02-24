@@ -7,9 +7,9 @@ adrs:
   - docs/20-program/22-adr/ADR-011-contract-baseline-lock.md
   - docs/20-program/22-adr/ADR-012-audit-convergence-gates.md
 spec_anchors:
-  - deps/yai-specs/contracts/invariants/I-001-traceability.md
-  - deps/yai-specs/contracts/invariants/I-002-determinism.md
-  - deps/yai-specs/contracts/invariants/I-003-governance.md
+  - deps/yai-law/contracts/invariants/I-001-traceability.md
+  - deps/yai-law/contracts/invariants/I-002-determinism.md
+  - deps/yai-law/contracts/invariants/I-003-governance.md
 claims:
   - C-SPEC-FIRST-PINNED
   - C-EVIDENCE-PACK-REPRODUCIBLE

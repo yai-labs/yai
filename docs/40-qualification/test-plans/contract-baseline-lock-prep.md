@@ -12,8 +12,8 @@ This is a preparation plan, not the final governance plan.
 
 ## Preconditions
 
-- `yai`, `yai-cli`, `yai-specs` repos available
-- same target baseline commit identified for `deps/yai-specs`
+- `yai`, `yai-cli`, `yai-law` repos available
+- same target baseline commit identified for `deps/yai-law`
 - local build is clean enough to run verify commands
 
 ## Commands (minimum)

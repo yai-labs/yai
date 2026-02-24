@@ -7,7 +7,7 @@ INFRA_ROOT="${YAI_INFRA_ROOT:-$INFRA_ROOT_DEFAULT}"
 TARGET="$INFRA_ROOT/tools/bin/yai-verify"
 
 if [[ -x "$TARGET" ]]; then
-  YAI_CORE_ROOT="$ROOT" YAI_SPECS_ROOT="$ROOT/deps/yai-specs" exec "$TARGET" "$@"
+  YAI_CORE_ROOT="$ROOT" YAI_SPECS_ROOT="$ROOT/deps/yai-law" exec "$TARGET" "$@"
 fi
 
 echo "Hard cutover: use yai-infra canonical tool for yai-verify" >&2

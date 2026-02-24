@@ -6,7 +6,7 @@ This section is the onboarding lane for contributors who need a fast but correct
 
 1. `docs/README.md`
 2. `docs/20-program/spine.md`
-3. `docs/10-platform/architecture/specs-bridge.md`
+3. `docs/10-platform/architecture/law-bridge.md`
 4. `docs/60-guides/dev-guide/repo-workflow.md`
 5. `docs/60-guides/dev-guide/repo-tooling.md`
 
