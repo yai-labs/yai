@@ -4,7 +4,7 @@ title: Root Hardening
 status: active
 owner: runtime
 effective_date: 2026-02-18
-revision: 2
+revision: 3
 supersedes: []
 depends_on:
   - RB-WORKSPACES-LIFECYCLE (optional, if already exists)
@@ -62,9 +62,9 @@ Harden the Root control plane as a deterministic, auditable, envelope-only bound
 
 ## 2) Preconditions
 
-- [ ] `deps/yai-law` protocol headers are present and treated as source-of-truth.
-- [ ] Kernel boots and accepts control connections.
-- [ ] A baseline end-to-end ping command is already green.
+- [x] `deps/yai-law` protocol headers are present and treated as source-of-truth.
+- [x] Kernel boots and accepts control connections.
+- [x] A baseline end-to-end ping command is already green.
 
 ## 3) Inputs
 
@@ -86,7 +86,7 @@ Claims source of truth:
 - `docs/50-validation/audits/claims/infra-grammar.v0.1.json`
 
 Wave tracking issue:
-- `https://github.com/yai-labs/yai/issues/140`
+- `https://github.com/yai-labs/yai/issues/191`
 
 Mandatory closure policy:
 - for mandatory evidence checks, `SKIP` is treated as `FAIL`.
@@ -227,9 +227,9 @@ Minimum set expected:
 
 #### Acceptance (0.1.0)
 
-- [ ] Root and Kernel reject invalid frames with the same numeric codes
-- [ ] No silent drop on malformed inputs
-- [ ] Build passes and baseline boot still works
+- [x] Root and Kernel reject invalid frames with the same numeric codes
+- [x] No silent drop on malformed inputs
+- [x] Build passes and baseline boot still works
 
 ---
 

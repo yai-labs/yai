@@ -21,7 +21,7 @@ evidence_commands_required:
   - tools/bin/yai-suite
   - tools/bin/yai-proof-check
 issues:
-  - "140"
+  - "191"
 ---
 
 # MP-ROOT-HARDENING-0.1.5
@@ -29,7 +29,7 @@ issues:
 ## Metadata
 - Runbook: `docs/20-program/23-runbooks/root-hardening.md`
 - Phase: `0.1.5 — Test Matrix + Torture Suite`
-- Wave issue: `#140`
+- Wave issue: `#191`
 - Status: `draft`
 
 ## Links
