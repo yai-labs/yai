@@ -18,7 +18,7 @@ This track is Wave 2 of audit convergence and binds Root hardening phases to cla
 References:
 - Plan: `docs/20-program/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
 - Matrix: `docs/20-program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
-- Claims: `docs/60-validation/audits/claims/infra-grammar.v0.1.json`
+- Claims: `docs/50-validation/audits/claims/infra-grammar.v0.1.json`
 - Runbook: `docs/20-program/23-runbooks/root-hardening.md`
 
 Policy:

@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-set -euo pipefail
-
-echo "Deprecated: use yai-infra tooling"
-echo "See: yai-labs/yai-infra"
-exit 2

@@ -39,7 +39,7 @@ Enforce policy:
 - mandatory-check `SKIP` is treated as `FAIL` for phase closure.
 
 Claims are canonicalized in:
-- `docs/60-validation/audits/claims/infra-grammar.v0.1.json`
+- `docs/50-validation/audits/claims/infra-grammar.v0.1.json`
 
 ## Rationale
 The two-gate model keeps one trajectory while avoiding false blocking:
@@ -63,7 +63,7 @@ The explicit GREEN definition prevents over-claiming and keeps delivery aligned 
 - Convergence matrix:
   - `docs/20-program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
 - Claims registry:
-  - `docs/60-validation/audits/claims/infra-grammar.v0.1.json`
+  - `docs/50-validation/audits/claims/infra-grammar.v0.1.json`
 - Related ADR:
   - `docs/20-program/22-adr/ADR-005-mind-proposer.md`
   - `docs/20-program/22-adr/ADR-011-contract-baseline-lock.md`

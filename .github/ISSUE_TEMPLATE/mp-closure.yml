@@ -82,7 +82,7 @@ body:
     attributes:
       value: |
         ## Evidence checklist (required)
-        - [ ] MP document linked from `yai-infra governance milestone-pack reference`
+        - [ ] MP document linked from `docs/milestone-packs/...`
         - [ ] All phase PRs linked
         - [ ] Gate status is `Passed`
         - [ ] Evidence is reproducible and reviewable

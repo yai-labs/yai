@@ -95,7 +95,7 @@ This runbook is Wave 1 under:
 - `docs/20-program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
 
 Claims source of truth:
-- `docs/60-validation/audits/claims/infra-grammar.v0.1.json`
+- `docs/50-validation/audits/claims/infra-grammar.v0.1.json`
 
 Wave tracking:
 - `https://github.com/yai-labs/yai/issues/142`

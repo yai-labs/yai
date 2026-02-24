@@ -23,14 +23,14 @@ It maps proposal and decision artifacts to contract anchors and delivery evidenc
 
 | Track | Tests / Gates / Evidence |
 |---|---|
-| Contract baseline lock | `docs/50-qualification/test-plans/hardfail.md`, runbook commands in `docs/20-program/23-runbooks/contract-baseline-lock.md`, CI logs/artifacts |
-| Specs refactor foundation | `docs/50-qualification/test-plans/README.md`, runbook commands in `docs/20-program/23-runbooks/specs-refactor-foundation.md`, CI logs/artifacts |
-| Root hardening | `docs/50-qualification/test-plans/hardfail.md`, runbook commands in `docs/20-program/23-runbooks/root-hardening.md`, CI logs/artifacts |
-| Workspaces lifecycle | `docs/50-qualification/test-plans/hardfail.md`, runbook commands in `docs/20-program/23-runbooks/workspaces-lifecycle.md`, CI logs/artifacts |
-| Engine attach | `docs/50-qualification/test-plans/hardfail.md`, runbook commands in `docs/20-program/23-runbooks/engine-attach.md`, CI logs/artifacts |
-| Data plane | `docs/50-qualification/test-plans/hardfail.md`, runbook commands in `docs/20-program/23-runbooks/data-plane.md`, CI logs/artifacts |
-| Kernel sovereignty | `docs/50-qualification/test-plans/hardfail.md`, runbook commands in `docs/20-program/23-runbooks/kernel-sovereignty.md`, CI logs/artifacts |
-| Mind Redis STM | `docs/50-qualification/test-plans/hardfail.md`, runbook commands in `docs/20-program/23-runbooks/mind-redis-stm.md`, CI logs/artifacts |
+| Contract baseline lock | `docs/40-qualification/test-plans/hardfail.md`, runbook commands in `docs/20-program/23-runbooks/contract-baseline-lock.md`, CI logs/artifacts |
+| Specs refactor foundation | `docs/40-qualification/test-plans/README.md`, runbook commands in `docs/20-program/23-runbooks/specs-refactor-foundation.md`, CI logs/artifacts |
+| Root hardening | `docs/40-qualification/test-plans/hardfail.md`, runbook commands in `docs/20-program/23-runbooks/root-hardening.md`, CI logs/artifacts |
+| Workspaces lifecycle | `docs/40-qualification/test-plans/hardfail.md`, runbook commands in `docs/20-program/23-runbooks/workspaces-lifecycle.md`, CI logs/artifacts |
+| Engine attach | `docs/40-qualification/test-plans/hardfail.md`, runbook commands in `docs/20-program/23-runbooks/engine-attach.md`, CI logs/artifacts |
+| Data plane | `docs/40-qualification/test-plans/hardfail.md`, runbook commands in `docs/20-program/23-runbooks/data-plane.md`, CI logs/artifacts |
+| Kernel sovereignty | `docs/40-qualification/test-plans/hardfail.md`, runbook commands in `docs/20-program/23-runbooks/kernel-sovereignty.md`, CI logs/artifacts |
+| Mind Redis STM | `docs/40-qualification/test-plans/hardfail.md`, runbook commands in `docs/20-program/23-runbooks/mind-redis-stm.md`, CI logs/artifacts |
 
 Notes:
 - Keep this map synchronized whenever proposal scope or ADR targets change.

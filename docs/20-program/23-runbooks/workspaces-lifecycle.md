@@ -24,7 +24,7 @@ related:
     - deps/yai-specs/specs/protocol/include/errors.h
     - deps/yai-specs/specs/protocol/include/yai_protocol_ids.h
   test_plans:
-    - docs/50-qualification/test-plans/hardfail.md
+    - docs/40-qualification/test-plans/hardfail.md
   tools:
     - tools/bin/yai-verify
     - tools/bin/yai-gate

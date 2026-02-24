@@ -9,7 +9,7 @@ issue:
   - https://github.com/yai-labs/yai/issues/140
 related:
   - docs/20-program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md
-  - docs/60-validation/audits/claims/infra-grammar.v0.1.json
+  - docs/50-validation/audits/claims/infra-grammar.v0.1.json
   - docs/20-program/22-adr/ADR-012-audit-convergence-gates.md
 ---
 
@@ -48,7 +48,7 @@ Out of scope for v0.1.0 GREEN:
 Domains: control plane, network, providers, storage, resources/workspaces, audit pipeline.
 
 Done when all are true:
-- Core claims in `docs/60-validation/audits/claims/infra-grammar.v0.1.json` are `confirmed`.
+- Core claims in `docs/50-validation/audits/claims/infra-grammar.v0.1.json` are `confirmed`.
 - Mandatory evidence commands for core domains have no SKIP closure.
 - MPs for core runbook phases include reproducible evidence pointers.
 
@@ -66,7 +66,7 @@ Program checkpoint policy:
 
 ## 5) Canonical Artifacts (single source chain)
 1. Claims source of truth:
-   `docs/60-validation/audits/claims/infra-grammar.v0.1.json`
+   `docs/50-validation/audits/claims/infra-grammar.v0.1.json`
 2. Convergence matrix:
    `docs/20-program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
 3. Governance decision (gate semantics):

@@ -10,7 +10,7 @@ law_refs:
 
 # Architecture Traceability
 
-<!-- GENERATED FILE: do not edit manually. Run tools/bin/yai-architecture-check --write -->
+<!-- GENERATED FILE: do not edit manually. Run ../yai-infra/tools/bin/yai-architecture-check --write -->
 
 ## Component Alignment Map
 

@@ -20,7 +20,7 @@ Wave binding:
 - `https://github.com/yai-labs/yai/issues/142`
 - `https://github.com/yai-labs/yai-specs/issues/9`
 - `docs/20-program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
-- `docs/60-validation/audits/claims/infra-grammar.v0.1.json`
+- `docs/50-validation/audits/claims/infra-grammar.v0.1.json`
 
 Planned sequence:
 - `docs/20-program/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.0.md`

@@ -24,7 +24,7 @@ related:
     - deps/yai-specs/contracts/invariants/I-006-external-effect-boundary.md
     - deps/yai-specs/contracts/boundaries/L1-kernel.md
   test_plans:
-    - docs/50-qualification/test-plans/hardfail.md
+    - docs/40-qualification/test-plans/hardfail.md
   tools:
     - tools/bin/yai-check-pins
     - tools/bin/yai-docs-trace-check
@@ -68,7 +68,7 @@ This runbook phase sequence is Wave 0 under:
 - `docs/20-program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
 
 Claims source of truth:
-- `docs/60-validation/audits/claims/infra-grammar.v0.1.json`
+- `docs/50-validation/audits/claims/infra-grammar.v0.1.json`
 
 Wave issue:
 - `https://github.com/yai-labs/yai/issues/141`

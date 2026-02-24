@@ -23,7 +23,7 @@ related:
     - deps/yai-specs/specs/protocol/include/transport.h
     - deps/yai-specs/specs/protocol/include/auth.h
   test_plans:
-    - docs/50-qualification/test-plans/hardfail.md
+    - docs/40-qualification/test-plans/hardfail.md
   tools:
     - tools/bin/yai-verify
     - tools/bin/yai-gate
@@ -68,7 +68,7 @@ Execute the staged sequence in this document: lifecycle contract, Redis topology
 ## 8) References
 - ADR: `docs/20-program/22-adr/ADR-005-mind-proposer.md`
 - Runbooks: `docs/20-program/23-runbooks/engine-attach.md`, `docs/20-program/23-runbooks/data-plane.md`
-- Test plans: `docs/50-qualification/test-plans/hardfail.md`
+- Test plans: `docs/40-qualification/test-plans/hardfail.md`
 
 ## Traceability
 - ADR refs:

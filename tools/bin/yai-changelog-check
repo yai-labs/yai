@@ -2,6 +2,13 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+LOCAL_FALLBACK="$ROOT/tools/dev/yai-changelog-check.py"
+
+# Local-first to keep changelog validation scoped to the current repo checkout.
+if [[ -x "$LOCAL_FALLBACK" ]]; then
+  exec "$LOCAL_FALLBACK" "$@"
+fi
+
 INFRA_ROOT_DEFAULT="$(cd "$ROOT/.." && pwd)/yai-infra"
 INFRA_ROOT="${YAI_INFRA_ROOT:-$INFRA_ROOT_DEFAULT}"
 TARGET="$INFRA_ROOT/tools/bin/yai-changelog-check"

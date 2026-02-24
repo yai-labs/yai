@@ -23,7 +23,7 @@ related:
     - deps/yai-specs/specs/protocol/include/transport.h
     - deps/yai-specs/specs/protocol/include/auth.h
   test_plans:
-    - docs/50-qualification/test-plans/hardfail.md
+    - docs/40-qualification/test-plans/hardfail.md
   tools:
     - tools/bin/yai-verify
     - tools/bin/yai-gate
@@ -67,7 +67,7 @@ Execute staged hardening in this document (logger first, then session/path harde
 ## 8) References
 - ADR: `docs/20-program/22-adr/ADR-003-kernel-authority.md`
 - Runbooks: `docs/20-program/23-runbooks/root-hardening.md`, `docs/20-program/23-runbooks/engine-attach.md`
-- Test plans: `docs/50-qualification/test-plans/hardfail.md`
+- Test plans: `docs/40-qualification/test-plans/hardfail.md`
 
 ## Traceability
 - ADR refs:
