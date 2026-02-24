@@ -4,7 +4,6 @@ Program-level delivery, governance execution rules, and audit convergence.
 
 Indexes:
 - RFC index: `docs/20-program/21-rfc/README.md`
-- Legacy proposals pointers: `docs/20-program/21-proposals/README.md`
 - ADR index: `docs/20-program/22-adr/README.md`
 - Program spine: `docs/20-program/spine.md`
 - Program traceability: `docs/20-program/traceability.md`

@@ -24,5 +24,5 @@ This directory is the canonical home for governance RFCs migrated from legacy PR
 ## Rules
 
 - RFC numbering is preserved from PRP numbering (001..005).
-- Legacy PRP paths are kept as pointer documents under `docs/20-program/21-proposals/`.
+- PRP IDs are retained only as historical mapping metadata.
 - New proposal work should start directly as RFC.

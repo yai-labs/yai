@@ -33,8 +33,8 @@ Architecture **must map to L0** (and never override it).
 
 ---
 
-### L2 — Proposals (pre-decision, optional)
-**Lives in:** `docs/20-program/21-proposals/*`
+### L2 — RFCs (pre-decision design)
+**Lives in:** `docs/20-program/21-rfc/*`
 
 Used to explore alternatives, trade-offs, risks, and design space **before** freezing a decision.
 
@@ -141,13 +141,13 @@ Every artifact must point **up** and **down** where applicable:
 
 ## Canonical “order of writing” (practical)
 
-- If you are exploring: write a **Proposal** (L2).
+- If you are exploring: write an **RFC** (L2).
 - If you are committing to a decision: write an **ADR** (L3).
 - If you are implementing in phases: write/update a **Runbook** (L4).
 - If you want to close a deliverable with evidence: write an **MP** (L5).
 - If you want external/internal credibility: publish a **Proof Pack** (L8).
 
-If in doubt: write a Proposal first.  
+If in doubt: write an RFC first.  
 If you are shipping: always close with an MP (even if the issue tracking is minimal).
 
 ---

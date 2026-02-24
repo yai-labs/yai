@@ -19,7 +19,7 @@ This policy defines the minimum style baseline for documentation in this reposit
 ## Naming
 
 - Use kebab-case for files and directories.
-- Use fixed prefixes for governance artifacts: `ADR-`, `PRP-`, `RB-`, `MP-`, `SC-`, `QT-`.
+- Use fixed prefixes for governance artifacts: `ADR-`, `RFC-`, `RB-`, `MP-`, `SC-`, `QT-`.
 
 ## Review
 
