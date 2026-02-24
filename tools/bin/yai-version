@@ -4,12 +4,12 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 INFRA_ROOT_DEFAULT="$(cd "$ROOT/.." && pwd)/yai-infra"
 INFRA_ROOT="${YAI_INFRA_ROOT:-$INFRA_ROOT_DEFAULT}"
-TARGET="$INFRA_ROOT/tools/bin/yai-changelog-check"
+TARGET="$INFRA_ROOT/tools/bin/yai-version"
 
 if [[ -x "$TARGET" ]]; then
-  YAI_CORE_ROOT="$ROOT" YAI_SPECS_ROOT="$ROOT/deps/yai-specs" exec "$TARGET" "$@"
+  exec "$TARGET" "$@"
 fi
 
-echo "Hard cutover: use yai-infra canonical tool for yai-changelog-check" >&2
+echo "Hard cutover: use yai-infra canonical tool for yai-version" >&2
 echo "Missing target: $TARGET" >&2
 exit 2

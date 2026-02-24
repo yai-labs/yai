@@ -10,6 +10,7 @@ Behavior:
 - If canonical target is missing, wrapper exits with `2` and prints missing path.
 
 Runtime wrappers kept in this repo:
+- `yai-version`
 - `yai-bundle`
 - `yai-changelog-check`
 - `yai-check-pins`
@@ -18,3 +19,7 @@ Runtime wrappers kept in this repo:
 - `yai-proof-check`
 - `yai-suite`
 - `yai-verify`
+
+
+Notes:
+- Wrappers do not keep local fallback logic; canonical behavior comes from `yai-infra`.
