@@ -32,8 +32,14 @@
     {
       "claim_id": "C-SPEC-FIRST-PINNED",
       "description": "Spec-first governance is pinned and enforced across repos.",
-      "audit_steps": ["authority_contract", "evidence"],
-      "domains": ["control_plane", "audit"],
+      "audit_steps": [
+        "authority_contract",
+        "evidence"
+      ],
+      "domains": [
+        "control_plane",
+        "audit"
+      ],
       "target_gate": "A-core",
       "baseline_status": "partial",
       "runbook_refs": [
@@ -48,8 +54,14 @@
     {
       "claim_id": "C-ENVELOPE-HANDSHAKE-REQUIRED",
       "description": "Envelope and handshake requirements are mandatory and validated.",
-      "audit_steps": ["trigger", "context"],
-      "domains": ["control_plane", "network"],
+      "audit_steps": [
+        "trigger",
+        "context"
+      ],
+      "domains": [
+        "control_plane",
+        "network"
+      ],
       "target_gate": "A-core",
       "baseline_status": "partial",
       "runbook_refs": [
@@ -63,8 +75,14 @@
     {
       "claim_id": "C-CONTEXT-PROPAGATION",
       "description": "ws_id/trace_id/role/arming context is propagated root->kernel->engine and validated.",
-      "audit_steps": ["context"],
-      "domains": ["control_plane", "providers", "resource"],
+      "audit_steps": [
+        "context"
+      ],
+      "domains": [
+        "control_plane",
+        "providers",
+        "resource"
+      ],
       "target_gate": "A-core",
       "baseline_status": "partial",
       "runbook_refs": [
@@ -80,8 +98,15 @@
     {
       "claim_id": "C-AUTHORITY-SURFACE-RUNTIME",
       "description": "Authority surface is machine-readable and consumed by runtime decision points.",
-      "audit_steps": ["authority_contract", "decision"],
-      "domains": ["control_plane", "providers", "storage"],
+      "audit_steps": [
+        "authority_contract",
+        "decision"
+      ],
+      "domains": [
+        "control_plane",
+        "providers",
+        "storage"
+      ],
       "target_gate": "A-core",
       "baseline_status": "partial",
       "runbook_refs": [
@@ -95,8 +120,16 @@
     {
       "claim_id": "C-KERNEL-HARD-BOUNDARY-CORE",
       "description": "Kernel/engine enforce non-bypassable runtime boundaries on governed effects.",
-      "audit_steps": ["decision", "enforcement"],
-      "domains": ["network", "providers", "storage", "resource"],
+      "audit_steps": [
+        "decision",
+        "enforcement"
+      ],
+      "domains": [
+        "network",
+        "providers",
+        "storage",
+        "resource"
+      ],
       "target_gate": "A-core",
       "baseline_status": "partial",
       "runbook_refs": [
@@ -113,8 +146,12 @@
     {
       "claim_id": "C-EVIDENCE-PACK-REPRODUCIBLE",
       "description": "Traceability and proof artifacts are reproducible and auditable.",
-      "audit_steps": ["evidence"],
-      "domains": ["audit"],
+      "audit_steps": [
+        "evidence"
+      ],
+      "domains": [
+        "audit"
+      ],
       "target_gate": "A-core",
       "baseline_status": "partial",
       "runbook_refs": [
@@ -124,13 +161,21 @@
       "evidence_required": [
         "tools/bin/yai-docs-trace-check",
         "tools/bin/yai-proof-check"
+      ],
+      "evidence_refs": [
+        "docs/50-validation/audits/findings/FINDING-001-sc102-d1-harness-runset.md"
       ]
     },
     {
       "claim_id": "C-SKIP-FAIL-MANDATORY",
       "description": "Mandatory phase checks cannot close on SKIP placeholders.",
-      "audit_steps": ["evidence"],
-      "domains": ["audit", "control_plane"],
+      "audit_steps": [
+        "evidence"
+      ],
+      "domains": [
+        "audit",
+        "control_plane"
+      ],
       "target_gate": "A-core",
       "baseline_status": "partial",
       "runbook_refs": [
@@ -152,7 +197,9 @@
         "enforcement",
         "evidence"
       ],
-      "domains": ["network"],
+      "domains": [
+        "network"
+      ],
       "target_gate": "A-core",
       "baseline_status": "partial",
       "runbook_refs": [
@@ -161,6 +208,9 @@
       "evidence_required": [
         "tools/bin/yai-verify",
         "tools/bin/yai-suite"
+      ],
+      "evidence_refs": [
+        "docs/50-validation/audits/findings/FINDING-001-sc102-d1-harness-runset.md"
       ]
     },
     {
@@ -174,7 +224,9 @@
         "enforcement",
         "evidence"
       ],
-      "domains": ["storage"],
+      "domains": [
+        "storage"
+      ],
       "target_gate": "A-core",
       "baseline_status": "partial",
       "runbook_refs": [
@@ -196,7 +248,9 @@
         "enforcement",
         "evidence"
       ],
-      "domains": ["providers"],
+      "domains": [
+        "providers"
+      ],
       "target_gate": "A-core",
       "baseline_status": "partial",
       "runbook_refs": [
@@ -219,7 +273,9 @@
         "enforcement",
         "evidence"
       ],
-      "domains": ["resource"],
+      "domains": [
+        "resource"
+      ],
       "target_gate": "A-core",
       "baseline_status": "partial",
       "runbook_refs": [
@@ -241,7 +297,9 @@
         "enforcement",
         "evidence"
       ],
-      "domains": ["mind"],
+      "domains": [
+        "mind"
+      ],
       "target_gate": "B-mind",
       "baseline_status": "not_present",
       "runbook_refs": [
