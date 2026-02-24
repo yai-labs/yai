@@ -14,13 +14,12 @@ permissions:
 
 jobs:
   intake:
-    uses: yai-labs/yai-infra/.github/workflows/reusable-project-intake-sync.yml@v0.1.1-rc2
+    uses: yai-labs/yai-infra/.github/workflows/reusable-project-intake-sync.yml@main
     with:
-      project_owner: yai-labs
+      org: yai-labs
       project_number: 2
       default_assignee: francescomaiomascio
       default_phase: "0.1.0"
       default_track: audit-convergence
       allowed_tracks: contract-baseline-lock,specs-refactor-foundation,audit-convergence
-    secrets:
-      project_token: ${{ secrets.YAI_PROJECT_TOKEN }}
+    secrets: inherit

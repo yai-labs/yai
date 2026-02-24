@@ -5,12 +5,16 @@ on:
     paths:
       - ".github/ISSUE_TEMPLATE/**"
       - ".github/PULL_REQUEST_TEMPLATE*"
+      - ".github/.managed-by-yai-infra"
       - ".github/workflows/verify-github-templates.yml"
   workflow_dispatch:
 
 jobs:
   verify-template-sync:
-    uses: yai-labs/yai-infra/.github/workflows/reusable-verify-github-templates.yml@7395f1ee1cd0a298241ee3f3c0a4ee9ad54c5ca4
+    uses: yai-labs/yai-infra/.github/workflows/reusable-verify-github-templates.yml@main
     with:
+      org: yai-labs
+      project_number: 2
       infra_repo: yai-labs/yai-infra
-      infra_ref: 7395f1ee1cd0a298241ee3f3c0a4ee9ad54c5ca4
+      infra_ref: main
+    secrets: inherit

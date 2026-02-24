@@ -13,13 +13,12 @@ permissions:
 
 jobs:
   backfill:
-    uses: yai-labs/yai-infra/.github/workflows/reusable-project-backfill-sync.yml@v0.1.1-rc2
+    uses: yai-labs/yai-infra/.github/workflows/reusable-project-backfill-sync.yml@main
     with:
-      project_owner: yai-labs
+      org: yai-labs
       project_number: 2
       default_phase: "0.1.0"
       default_track: audit-convergence
       default_assignee: francescomaiomascio
       allowed_tracks: contract-baseline-lock,specs-refactor-foundation,audit-convergence
-    secrets:
-      project_token: ${{ secrets.YAI_PROJECT_TOKEN }}
+    secrets: inherit

@@ -10,10 +10,11 @@ permissions:
 
 jobs:
   label:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Apply labels from .github/labeler.yml
-        uses: actions/labeler@v5
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          sync-labels: true
+    uses: yai-labs/yai-infra/.github/workflows/reusable-auto-label-pr.yml@main
+    with:
+      org: yai-labs
+      project_number: 2
+      default_track_label: track:audit-convergence
+      default_track_color: 1d76db
+      default_track_description: Audit convergence track
+    secrets: inherit

@@ -10,64 +10,8 @@ permissions:
 
 jobs:
   enforce:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Enforce issue linkage policy
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const pr = context.payload.pull_request;
-            const body = pr.body || "";
-            const { data: fullPr } = await github.rest.pulls.get({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: pr.number,
-            });
-            const labels = (fullPr.labels || []).map((l) => l.name || "");
-
-            const classificationMatch = body.match(/Classification:\s*([A-Z]+)/i);
-            const classification = classificationMatch ? classificationMatch[1].toUpperCase() : "";
-
-            const hasDocsLabel = labels.includes("type:docs") || labels.includes("work-type:docs");
-            const hasCiLabel = labels.includes("type:ci") || labels.includes("work-type:ci");
-            const docsExempt = hasDocsLabel && classification === "DOCS";
-            const ciExempt = hasCiLabel;
-
-            if (docsExempt || ciExempt) {
-              core.info(
-                `Issue-link enforcement skipped due to exemption: docsExempt=${docsExempt}, ciExempt=${ciExempt}`
-              );
-              return;
-            }
-
-            const hasClosingRef = /\b(?:close[sd]?|fix(?:e[sd])?|resolve[sd]?)\s+#\d+\b/i.test(body);
-            const closingRefMatch = body.match(/\b(?:close[sd]?|fix(?:e[sd])?|resolve[sd]?)\s+#(\d+)\b/i);
-            const closingIssueNum = closingRefMatch ? closingRefMatch[1] : "";
-
-            const issueIdMatch = body.match(/Issue-ID:\s*#?(\d+)/i);
-            const hasIssueId = !!issueIdMatch;
-            const issueIdNum = hasIssueId ? issueIdMatch[1] : "";
-
-            const issueReasonMatch = body.match(/Issue-Reason[^:\n\r]*:\s*([^\n\r]+)/i);
-            const issueReason = issueReasonMatch ? issueReasonMatch[1].trim() : "";
-            const hasIssueReason =
-              issueReason.length > 0 &&
-              !/^<.*>$/.test(issueReason) &&
-              !/^N\/A$/i.test(issueReason) &&
-              !/^(todo|tbd)$/i.test(issueReason);
-
-            if (hasClosingRef || hasIssueReason) {
-              if (hasIssueId && closingIssueNum && issueIdNum !== closingIssueNum) {
-                core.warning(
-                  `Issue-ID (#${issueIdNum}) and closing reference (#${closingIssueNum}) differ.`
-                );
-              }
-              core.info(
-                `Issue-link policy satisfied: hasClosingRef=${hasClosingRef}, hasIssueReason=${hasIssueReason}`
-              );
-              return;
-            }
-
-            core.setFailed(
-              "PR must include either an auto-closing reference (e.g. `Closes #123`) or a non-empty `Issue-Reason:`."
-            );
+    uses: yai-labs/yai-infra/.github/workflows/reusable-pr-issue-enforcement.yml@main
+    with:
+      org: yai-labs
+      project_number: 2
+    secrets: inherit
