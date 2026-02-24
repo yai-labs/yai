@@ -6,9 +6,9 @@ body:
   - type: markdown
     attributes:
       value: |
-        This form is a manual fallback. Preferred path is `../yai-infra/tools/bin/yai-dev-issue phase ...`.
+        This form is a manual fallback. Preferred path is `tools/bin/yai-dev-issue phase ...`.
         After submit, enforce canonical milestone + labels with:
-        `../yai-infra/tools/bin/yai-dev-fix-phase --track <track> --phase <phase> --repo yai-labs/yai --apply`
+        `tools/bin/yai-dev-fix-phase --track <track> --phase <phase> --repo yai-labs/yai --apply`
 
   - type: input
     id: track
@@ -58,7 +58,7 @@ body:
     id: runbook_anchor
     attributes:
       label: Runbook anchor path
-      placeholder: "yai-infra governance runbook anchor"
+      placeholder: "docs/runbooks/contract-baseline-lock.md#0.1.0"
     validations:
       required: true
 

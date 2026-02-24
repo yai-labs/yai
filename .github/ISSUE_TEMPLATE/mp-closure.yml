@@ -6,9 +6,9 @@ body:
   - type: markdown
     attributes:
       value: |
-        This form is a manual fallback. Preferred path is `../yai-infra/tools/bin/yai-dev-issue mp-closure ...`.
+        This form is a manual fallback. Preferred path is `tools/bin/yai-dev-issue mp-closure ...`.
         After submit, enforce canonical milestone + labels with:
-        `../yai-infra/tools/bin/yai-dev-fix-phase --track <track> --phase <phase> --repo yai-labs/yai --apply`
+        `tools/bin/yai-dev-fix-phase --track <track> --phase <phase> --repo yai-labs/yai --apply`
 
   - type: input
     id: track
@@ -82,7 +82,7 @@ body:
     attributes:
       value: |
         ## Evidence checklist (required)
-        - [ ] MP document linked from `yai-infra governance milestone-pack reference`
+        - [ ] MP document linked from `docs/milestone-packs/...`
         - [ ] All phase PRs linked
         - [ ] Gate status is `Passed`
         - [ ] Evidence is reproducible and reviewable
