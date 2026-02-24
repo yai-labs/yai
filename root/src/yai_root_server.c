@@ -127,6 +127,71 @@ static int is_valid_role(uint16_t role)
            role == YAI_ROLE_SYSTEM;
 }
 
+
+static int connect_kernel_socket(void)
+{
+    const char *home = getenv("HOME");
+    if (!home || !home[0])
+        home = "/tmp";
+
+    char path[PATH_MAX];
+    snprintf(path, sizeof(path), "%s/.yai/run/engine/control.sock", home);
+
+    int fd = socket(AF_UNIX, SOCK_STREAM, 0);
+    if (fd < 0)
+        return -1;
+
+    struct sockaddr_un addr;
+    memset(&addr, 0, sizeof(addr));
+    addr.sun_family = AF_UNIX;
+    snprintf(addr.sun_path, sizeof(addr.sun_path), "%s", path);
+
+    if (connect(fd, (struct sockaddr *)&addr, sizeof(addr)) < 0) {
+        close(fd);
+        return -1;
+    }
+
+    return fd;
+}
+
+static int forward_to_kernel_and_relay(int client_fd,
+                                       const yai_rpc_envelope_t *env,
+                                       const void *payload,
+                                       uint32_t payload_len)
+{
+    int kfd = connect_kernel_socket();
+    if (kfd < 0) {
+        LOG("[ROOT] Reject internal: cannot connect kernel");
+        (void)send_error_response(client_fd, env, YAI_E_INTERNAL_ERROR, "kernel_connect_failed");
+        return -1;
+    }
+
+    if (yai_control_write_frame(kfd, env, payload_len ? payload : NULL) != 0) {
+        LOG("[ROOT] Reject internal: write to kernel failed");
+        close(kfd);
+        (void)send_error_response(client_fd, env, YAI_E_INTERNAL_ERROR, "kernel_write_failed");
+        return -1;
+    }
+
+    yai_rpc_envelope_t resp;
+    char resp_payload[YAI_MAX_PAYLOAD];
+    ssize_t r = yai_control_read_frame(kfd, &resp, resp_payload, sizeof(resp_payload));
+    close(kfd);
+
+    if (r < 0) {
+        LOG("[ROOT] Reject internal: read from kernel failed");
+        (void)send_error_response(client_fd, env, YAI_E_INTERNAL_ERROR, "kernel_read_failed");
+        return -1;
+    }
+
+    if (yai_control_write_frame(client_fd, &resp, resp_payload) != 0) {
+        LOG("[ROOT] Relay write to client failed");
+        return -1;
+    }
+
+    return 0;
+}
+
 /* ============================================================
    HANDLE CLIENT
    ============================================================ */
@@ -285,37 +350,15 @@ static void handle_client(int cfd)
         }
 
         /* =====================================================
-           PING
+           FORWARD + RELAY (byte-level)
            ===================================================== */
-        if (env.command_id == YAI_CMD_PING) {
-
-            LOG("[ROOT] PING");
-
-            const char *pong = "{\"pong\":true}";
-
-            if (send_response(cfd,
-                              &env,
-                              YAI_CMD_PING,
-                              pong,
-                              (uint32_t)strlen(pong)) != 0)
-                break;
-
-            continue;
-        }
-
-        /* =====================================================
-           DEFAULT
-           ===================================================== */
-        LOG("[ROOT] CMD=%u", env.command_id);
-
-        const char *ok = "{\"status\":\"ok\"}";
-
-        if (send_response(cfd,
-                          &env,
-                          env.command_id,
-                          ok,
-                          (uint32_t)strlen(ok)) != 0)
+        LOG("[ROOT] FORWARD cmd=%u", env.command_id);
+        if (forward_to_kernel_and_relay(cfd,
+                                        &env,
+                                        payload,
+                                        (uint32_t)plen) != 0) {
             break;
+        }
     }
 
     close(cfd);

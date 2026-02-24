@@ -309,9 +309,9 @@ Protocol negative tests (at least):
 
 #### Acceptance (0.1.1)
 
-- [ ] Root behaves as a "smart cable": validate + forward + relay
-- [ ] Every reject returns a response frame (no silent close)
-- [ ] `root.log` always exists and appends
+- [x] Root behaves as a "smart cable": validate + forward + relay
+- [x] Every reject returns a response frame (no silent close)
+- [x] `root.log` always exists and appends
 
 ---
 
@@ -584,9 +584,9 @@ If a phase causes regressions:
 ## 9) Final Definition of Done
 
 - [x] Root validates invariants + handshake gate
-- [ ] Root is byte-perfect forward/relay
+- [x] Root is byte-perfect forward/relay
 - [x] Root never silent drops (always responds)
-- [ ] Root logs are indestructible + informative
+- [x] Root logs are indestructible + informative
 - [x] Kernel rejects invalid ws_id with zero side effects
 - [x] authority gating enforced in Root + Kernel
 - [ ] torture suite passes and is repeatable
