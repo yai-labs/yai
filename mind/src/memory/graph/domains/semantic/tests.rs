@@ -3,6 +3,7 @@ use crate::memory::graph::domains::semantic::types::NodeRetention;
 use serde_json::json;
 
 #[test]
+#[ignore = "requires engine UDS socket"]
 fn semantic_add_list_deterministic() {
     let ws = "test_semantic";
     let _ = api::add_node(ws, "node:file:a", "file", &json!({"path":"a"}));
@@ -13,6 +14,7 @@ fn semantic_add_list_deterministic() {
 }
 
 #[test]
+#[ignore = "requires engine UDS socket"]
 fn retention_expire_is_deterministic_and_tombstones() {
     let ws = "test_semantic_retention";
     let node_id = "node:episode:test:10:1";
@@ -56,6 +58,7 @@ fn retention_expire_is_deterministic_and_tombstones() {
 }
 
 #[test]
+#[ignore = "requires engine UDS socket"]
 fn retention_skips_records_without_compliance() {
     let ws = "test_semantic_no_compliance_retention";
     let node_id = "node:episode:test:20:1";

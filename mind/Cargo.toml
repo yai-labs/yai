@@ -15,6 +15,7 @@ license = "MIT"
 default = ["minimal"]
 
 minimal = []
+legacy-providers = []
 
 # Optional: HTTP client (provider remoto)
 http-client = ["dep:reqwest"]

@@ -2,6 +2,7 @@ use super::api;
 use super::types::VectorEntry;
 
 #[test]
+#[ignore = "requires engine UDS socket"]
 fn vector_build_deterministic() {
     let ws = "test_vector";
     let entries = vec![
