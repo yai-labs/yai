@@ -24,7 +24,7 @@ They are the semantic local law + test vectors used by scenarios (SC) and qualif
 
 ## Relationship to other artifacts
 
-- D-Major Domains: semantic taxonomy (`docs/40-catalog/domains/D-MAJOR.md`)
+- D-Major Domains: semantic taxonomy (`docs/30-catalog/domains/D-MAJOR.md`)
 - SC (Scenario Spec): declares the scenario goal and invariants (Catalog)
 - QT (Qualification Test): executable harness that runs a scenario with one or more packs
 - ER (Evidence Run): a single execution output (evidence artifacts)

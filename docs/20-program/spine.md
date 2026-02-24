@@ -91,7 +91,7 @@ If you’re solo you *can* reduce Issues, but **never skip the MP** (that’s yo
 ---
 
 ### L7 — Evidence & tests (proof-of-work)
-**Lives in:** `docs/50-qualification/test-plans/*` + `tools/*` + CI artifacts/logs
+**Lives in:** `docs/40-qualification/test-plans/*` + `tools/*` + CI artifacts/logs
 
 Test plans define what “proved” means.  
 Tools + CI runs provide repeatable evidence (ideally artifacted, non-skip for TRL claims).
@@ -99,7 +99,7 @@ Tools + CI runs provide repeatable evidence (ideally artifacted, non-skip for TR
 ---
 
 ### L8 — Proof Packs (public/internal credibility bundles)
-**Lives in:** `docs/60-validation/proof/*` when published, `docs/60-validation/proof/.private/*` for local drafts
+**Lives in:** `docs/50-validation/proof/*` when published, `docs/50-validation/proof/.private/*` for local drafts
 
 A Proof Pack bundles:
 - evidence index

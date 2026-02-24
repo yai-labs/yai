@@ -1,4 +1,4 @@
-# 40 Catalog
+# 30 Catalog
 
 Catalog is the capability/scenario target layer.
 
@@ -10,9 +10,9 @@ Naming:
 - Evidence run: `run-00X`
 
 Contents:
-- Domains: `docs/40-catalog/domains/`
-- Scenarios: `docs/40-catalog/scenarios/`
-- Qualification gates: `docs/40-catalog/gates/`
+- Domains: `docs/30-catalog/domains/`
+- Scenarios: `docs/30-catalog/scenarios/`
+- Qualification gates: `docs/30-catalog/gates/`
 
 Usage model:
 - Catalog defines expected behavior and evidence requirements.

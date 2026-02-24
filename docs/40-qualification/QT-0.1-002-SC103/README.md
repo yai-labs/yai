@@ -9,5 +9,5 @@ Structure:
 - `baseline/`, `workload/`, `attacker/`, `cognition/`, `agent/`, `run/`, `metrics/`, `evidence/run-00X/`
 
 References:
-- Scenario: `docs/40-catalog/scenarios/SC-103-mind-integrated-remediation.md`
-- Gate registry: `docs/40-catalog/gates/QUALIFICATION-GATES-v0.1.0.md`
+- Scenario: `docs/30-catalog/scenarios/SC-103-mind-integrated-remediation.md`
+- Gate registry: `docs/30-catalog/gates/QUALIFICATION-GATES-v0.1.0.md`

@@ -6,7 +6,7 @@ updated: 2026-02-21
 related:
   - docs/20-program/audit-convergence/EXECUTION-PLAN-v0.1.0.md
   - docs/20-program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md
-  - docs/60-validation/audits/claims/infra-grammar.v0.1.json
+  - docs/50-validation/audits/claims/infra-grammar.v0.1.json
   - docs/20-program/22-adr/ADR-012-audit-convergence-gates.md
 issue:
   - https://github.com/yai-labs/yai/issues/140
@@ -20,7 +20,7 @@ Infra Grammar audit green on all domains, including Mind.
 Canonical artifacts:
 - Execution plan: `docs/20-program/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
 - Convergence matrix: `docs/20-program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
-- Claims registry: `docs/60-validation/audits/claims/infra-grammar.v0.1.json`
+- Claims registry: `docs/50-validation/audits/claims/infra-grammar.v0.1.json`
 - Governance ADR: `docs/20-program/22-adr/ADR-012-audit-convergence-gates.md`
 
 Rules:

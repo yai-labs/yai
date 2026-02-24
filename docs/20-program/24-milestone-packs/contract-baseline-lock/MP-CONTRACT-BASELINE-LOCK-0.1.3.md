@@ -34,8 +34,8 @@ issues:
 - ADR: `docs/20-program/22-adr/ADR-011-contract-baseline-lock.md`
 - ADR: `docs/20-program/22-adr/ADR-012-audit-convergence-gates.md`
 - Proposal: `docs/20-program/21-rfc/RFC-005-formal-coverage-roadmap.md`
-- Evidence plans: `docs/50-qualification/test-plans/hardfail.md`
-- Claims registry: `docs/60-validation/audits/claims/infra-grammar.v0.1.json`
+- Evidence plans: `docs/40-qualification/test-plans/hardfail.md`
+- Claims registry: `docs/50-validation/audits/claims/infra-grammar.v0.1.json`
 
 Objective:
 - Require formal/core verification updates whenever authority or envelope contracts change.
@@ -81,7 +81,7 @@ Definition of Done:
 
 - Evidence bundle: `docs/20-program/24-milestone-packs/contract-baseline-lock/evidence/wave0-2026-02-21/`
 - `tools/bin/yai-proof-check` -> `PASS` (`exit=0`) via `07-proof-check-public.*`
-- `tools/bin/yai-proof-check --manifest docs/60-validation/proof/.private/PP-FOUNDATION-0001/pp-foundation-0001.manifest.v1.json` -> `FAIL` (`exit=2`) via `08-proof-check-private-hardfail.*`
+- `tools/bin/yai-proof-check --manifest docs/50-validation/proof/.private/PP-FOUNDATION-0001/pp-foundation-0001.manifest.v1.json` -> `FAIL` (`exit=2`) via `08-proof-check-private-hardfail.*`
 - `tools/bin/yai-verify core` -> `PASS` (`exit=0`)
 - `tools/bin/yai-verify law-kernel` -> `PASS` (`exit=0`)
 

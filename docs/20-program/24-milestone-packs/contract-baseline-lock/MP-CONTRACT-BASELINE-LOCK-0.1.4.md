@@ -35,8 +35,8 @@ issues:
 - ADR: `docs/20-program/22-adr/ADR-011-contract-baseline-lock.md`
 - ADR: `docs/20-program/22-adr/ADR-012-audit-convergence-gates.md`
 - Proposals: `docs/20-program/21-rfc/RFC-004-contract-baseline-lock-and-pin-policy.md`, `docs/20-program/21-rfc/RFC-005-formal-coverage-roadmap.md`
-- Evidence plans: `docs/50-qualification/test-plans/hardfail.md`
-- Claims registry: `docs/60-validation/audits/claims/infra-grammar.v0.1.json`
+- Evidence plans: `docs/40-qualification/test-plans/hardfail.md`
+- Claims registry: `docs/50-validation/audits/claims/infra-grammar.v0.1.json`
 
 Objective:
 - Close Milestone 1 with explicit, auditable cross-repo evidence for the baseline lock track.
@@ -86,7 +86,7 @@ Definition of Done:
 - `tools/bin/yai-check-pins` -> `PASS` (`exit=0`) via `10-check_pins-strict-pass.*`
 - `tools/bin/yai-docs-trace-check --all` -> `PASS` (`exit=0`) via `12-docs-trace-check-post-pin.*`
 - `tools/bin/yai-proof-check` -> `PASS` (`exit=0`) via `11-proof-check-post-pin.*`
-- `tools/bin/yai-proof-check --manifest docs/60-validation/proof/.private/PP-FOUNDATION-0001/pp-foundation-0001.manifest.v1.json` -> `FAIL` (`exit=2`) via `08-proof-check-private-hardfail.*`
+- `tools/bin/yai-proof-check --manifest docs/50-validation/proof/.private/PP-FOUNDATION-0001/pp-foundation-0001.manifest.v1.json` -> `FAIL` (`exit=2`) via `08-proof-check-private-hardfail.*`
 
 Phase state:
 - `READY` for phase closure (strict pins aligned and mandatory checks passing).

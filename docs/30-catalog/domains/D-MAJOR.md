@@ -147,7 +147,7 @@ Only the domain semantics should change (via Domain Packs), not the runtime.
 ## Domain Packs (reference)
 
 Domain packs are defined under:
-`docs/40-catalog/domains/packs/<Dk>/<pack-id>/`
+`docs/30-catalog/domains/packs/<Dk>/<pack-id>/`
 
 Each pack should declare:
 - forbidden effects (domain semantics)

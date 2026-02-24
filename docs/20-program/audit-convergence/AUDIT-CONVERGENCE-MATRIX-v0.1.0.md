@@ -3,7 +3,7 @@ id: AUDIT-CONVERGENCE-MATRIX-v0.1.0
 status: draft
 owner: governance
 updated: 2026-02-21
-registry: docs/60-validation/audits/claims/infra-grammar.v0.1.json
+registry: docs/50-validation/audits/claims/infra-grammar.v0.1.json
 plan: docs/20-program/audit-convergence/EXECUTION-PLAN-v0.1.0.md
 ---
 

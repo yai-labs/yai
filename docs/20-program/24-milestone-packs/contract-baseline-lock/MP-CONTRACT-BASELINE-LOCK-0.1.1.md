@@ -34,8 +34,8 @@ issues:
 - ADR: `docs/20-program/22-adr/ADR-011-contract-baseline-lock.md`
 - ADR: `docs/20-program/22-adr/ADR-012-audit-convergence-gates.md`
 - Proposal: `docs/20-program/21-rfc/RFC-002-unified-rpc-and-cli-contract.md`
-- Evidence plans: `docs/50-qualification/test-plans/hardfail.md`
-- Claims registry: `docs/60-validation/audits/claims/infra-grammar.v0.1.json`
+- Evidence plans: `docs/40-qualification/test-plans/hardfail.md`
+- Claims registry: `docs/50-validation/audits/claims/infra-grammar.v0.1.json`
 - Convergence matrix: `docs/20-program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
 
 Objective:

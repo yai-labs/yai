@@ -22,7 +22,7 @@ related:
     - deps/yai-specs/specs/protocol/include/transport.h
     - deps/yai-specs/specs/protocol/include/auth.h
   test_plans:
-    - docs/50-qualification/test-plans/hardfail.md
+    - docs/40-qualification/test-plans/hardfail.md
   tools:
     - tools/bin/yai-verify
     - tools/bin/yai-gate
@@ -66,7 +66,7 @@ Use phased execution (`v5.0` to `v5.4`) with closure gates per phase and no cros
 
 ## 8) References
 - Runbooks: `docs/20-program/23-runbooks/root-hardening.md`, `docs/20-program/23-runbooks/workspaces-lifecycle.md`, `docs/20-program/23-runbooks/engine-attach.md`
-- Test plans: `docs/50-qualification/test-plans/hardfail.md`
+- Test plans: `docs/40-qualification/test-plans/hardfail.md`
 
 ## Traceability
 - ADR refs:

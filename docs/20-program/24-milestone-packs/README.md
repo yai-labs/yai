@@ -58,4 +58,4 @@ An MP is a closure artifact for a concrete phase and should make review/audit st
 
 ## Workflow reference
 
-- `docs/70-guides/dev-guide/cross-repo-workflow.md`
+- `docs/60-guides/dev-guide/cross-repo-workflow.md`

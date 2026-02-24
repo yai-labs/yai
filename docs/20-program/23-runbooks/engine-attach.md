@@ -23,7 +23,7 @@ related:
     - deps/yai-specs/specs/protocol/include/transport.h
     - deps/yai-specs/specs/protocol/include/yai_protocol_ids.h
   test_plans:
-    - docs/50-qualification/test-plans/hardfail.md
+    - docs/40-qualification/test-plans/hardfail.md
   tools:
     - tools/bin/yai-verify
     - tools/bin/yai-gate
@@ -67,7 +67,7 @@ Execute the phased attach sequence in this document (ADR decision first, then ke
 ## 8) References
 - ADR: `docs/20-program/22-adr/ADR-009-engine-attachment.md`
 - Runbooks: `docs/20-program/23-runbooks/root-hardening.md`, `docs/20-program/23-runbooks/workspaces-lifecycle.md`
-- Test plans: `docs/50-qualification/test-plans/hardfail.md`
+- Test plans: `docs/40-qualification/test-plans/hardfail.md`
 
 ## Traceability
 - ADR refs:

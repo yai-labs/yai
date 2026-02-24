@@ -27,7 +27,7 @@ issue_reason: "Phase tracked by governance runbook issue #125."
 
 - ADR: `docs/20-program/22-adr/ADR-011-contract-baseline-lock.md`
 - Proposal: `docs/20-program/21-rfc/RFC-004-contract-baseline-lock-and-pin-policy.md`
-- Evidence plans: `docs/50-qualification/test-plans/contract-baseline-lock-prep.md`, `docs/50-qualification/test-plans/hardfail.md`
+- Evidence plans: `docs/40-qualification/test-plans/contract-baseline-lock-prep.md`, `docs/40-qualification/test-plans/hardfail.md`
 
 Objective:
 - Ensure `yai` and `yai-cli` consume the same audited `yai-specs` baseline commit.

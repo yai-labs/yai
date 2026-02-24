@@ -32,7 +32,7 @@ issues:
 ## Links
 - Plan: `docs/20-program/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
 - Matrix: `docs/20-program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
-- Claims registry: `docs/60-validation/audits/claims/infra-grammar.v0.1.json`
+- Claims registry: `docs/50-validation/audits/claims/infra-grammar.v0.1.json`
 - ADR: `docs/20-program/22-adr/ADR-012-audit-convergence-gates.md`
 
 ## Objective

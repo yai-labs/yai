@@ -23,5 +23,5 @@ Test plans describe how to validate; they do not replace normative contract/spec
 
 ## Suggested progression
 
-- Start with a preparation plan: `docs/50-qualification/test-plans/contract-baseline-lock-prep.md`
+- Start with a preparation plan: `docs/40-qualification/test-plans/contract-baseline-lock-prep.md`
 - Promote to an official plan only after commands/evidence are stable in CI.

@@ -11,12 +11,12 @@ revision: 2
 Public audits in this folder are canonical governance artifacts.
 
 Draft or provisional audits must stay local in:
-- `docs/60-validation/audits/.private/` (gitignored)
+- `docs/50-validation/audits/.private/` (gitignored)
 
 ## Claims Source of Truth
 
 Infra Grammar claims for v0.1.0 are versioned in:
-- `docs/60-validation/audits/claims/infra-grammar.v0.1.json`
+- `docs/50-validation/audits/claims/infra-grammar.v0.1.json`
 
 Program convergence references:
 - `docs/20-program/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
@@ -24,7 +24,7 @@ Program convergence references:
 
 ## When an audit is canonical
 
-An audit should be published in `docs/60-validation/audits/` only when all are true:
+An audit should be published in `docs/50-validation/audits/` only when all are true:
 
 1. A milestone phase is closed (MP status aligned with delivered scope).
 2. Evidence is attached and reproducible (commands, outputs, CI pointers, dates).
@@ -35,9 +35,9 @@ If one of these is missing, keep the audit private and treat it as working draft
 
 ## Suggested workflow
 
-1. Agent prepares draft audit under `docs/60-validation/audits/.private/...`.
+1. Agent prepares draft audit under `docs/50-validation/audits/.private/...`.
 2. Maintainer reviews and challenges claims.
-3. Promote only the finalized version to `docs/60-validation/audits/`.
+3. Promote only the finalized version to `docs/50-validation/audits/`.
 
 ## Closure Rule
 

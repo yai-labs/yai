@@ -7,7 +7,7 @@ This is a preparation plan, not the final governance plan.
 ## Scope
 
 - Baseline pin alignment checks (`yai` + `yai-cli`)
-- Deterministic docs/60-validation/proof checks
+- Deterministic docs/50-validation/proof checks
 - Minimal positive/negative integration checks for control path
 
 ## Preconditions

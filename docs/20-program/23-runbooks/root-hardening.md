@@ -30,7 +30,7 @@ related:
     - deps/yai-specs/specs/protocol/include/errors.h
     - deps/yai-specs/specs/protocol/include/yai_protocol_ids.h
   test_plans:
-    - docs/50-qualification/test-plans/hardfail.md
+    - docs/40-qualification/test-plans/hardfail.md
   tools:
     - tools/bin/yai-verify
     - tools/bin/yai-gate
@@ -83,7 +83,7 @@ This runbook phase sequence is Wave 2 under:
 - `docs/20-program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
 
 Claims source of truth:
-- `docs/60-validation/audits/claims/infra-grammar.v0.1.json`
+- `docs/50-validation/audits/claims/infra-grammar.v0.1.json`
 
 Wave tracking issue:
 - `https://github.com/yai-labs/yai/issues/140`
