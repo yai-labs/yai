@@ -1,0 +1,19 @@
+{
+  "id": "D1-digital/egress-v1",
+  "d_major": "D1-digital",
+  "title": "Digital - Network Egress Control",
+  "version": 1,
+  "revision": 1,
+  "forbidden_effects": [
+    {
+      "effect": "network.egress.connect",
+      "description": "Outbound connect to a destination not covered by an active workspace egress contract/allowlist."
+    }
+  ],
+  "primary_runtime_effect_domain": "network",
+  "audit_steps": ["trigger", "context", "authority", "decision", "enforcement", "evidence"],
+  "safety": {
+    "vector_policy": "safe-only",
+    "notes": "Vectors must use reserved TEST-NET ranges and must not include real credentials or destructive payloads."
+  }
+}

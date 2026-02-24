@@ -1,0 +1,27 @@
+{
+  "vector_id": "safe-pipeline-run-001",
+  "expected": [
+    {
+      "baseline_id": "baseline-allow",
+      "decision": { "outcome": "deny", "reason_code": "PARAM_LOCK_MISSING" },
+      "enforcement": { "result": "blocked" },
+      "metrics": { "run_started": false }
+    },
+    {
+      "baseline_id": "baseline-deny",
+      "decision": { "outcome": "deny", "reason_code": "PARAM_LOCK_MISSING" },
+      "enforcement": { "result": "blocked" },
+      "metrics": { "run_started": false }
+    },
+    {
+      "baseline_id": "baseline-quarantine",
+      "decision": { "outcome": "deny", "reason_code": "PARAM_LOCK_MISSING" },
+      "enforcement": { "result": "blocked" },
+      "metrics": { "run_started": false }
+    }
+  ],
+  "notes": {
+    "determinism": "All baselines must deny when params_hash is missing, preserving reproducibility invariants.",
+    "extensions": "Add a second vector later for UNDECLARED_EXCLUSION to exercise quarantine behavior."
+  }
+}

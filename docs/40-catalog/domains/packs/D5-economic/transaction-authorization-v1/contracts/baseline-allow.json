@@ -1,0 +1,16 @@
+{
+  "baseline_id": "baseline-allow",
+  "baseline_version": 1,
+  "policy": {
+    "payments": {
+      "mode": "allow_if_contracted_and_within_limits",
+      "contracted_counterparties": ["CP-ACME-001", "CP-ACME-002"],
+      "allowed_currencies": ["EUR", "USD"],
+      "limits": {
+        "single_tx_max": 5000,
+        "daily_total_max": 20000
+      },
+      "arming_required_over": 2500
+    }
+  }
+}

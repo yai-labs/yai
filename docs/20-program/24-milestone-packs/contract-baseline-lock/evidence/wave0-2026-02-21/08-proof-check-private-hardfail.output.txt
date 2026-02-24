@@ -1,0 +1,2 @@
+[proof-pack] FAIL: private draft manifest is not allowed for mandatory checks (docs/60-validation/proof/.private/PP-FOUNDATION-0001/pp-foundation-0001.manifest.v1.json)
+[proof-pack] FAIL: publish under docs/60-validation/proof/<PACK-ID>/ or pass --allow-skip for local draft checks

@@ -1,0 +1,14 @@
+{
+  "vector_id": "safe-egress-attempt-001",
+  "description": "Single outbound connect attempt to a non-allowlisted TEST-NET destination.",
+  "stimulus": {
+    "type": "network.egress.connect",
+    "dst": { "ip": "203.0.113.10", "port": 443 },
+    "attempts": 1,
+    "connect_timeout_ms": 200
+  },
+  "safety": {
+    "target_is_reserved_testnet": true,
+    "payload": "none"
+  }
+}

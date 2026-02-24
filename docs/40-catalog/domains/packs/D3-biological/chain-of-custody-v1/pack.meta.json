@@ -1,0 +1,23 @@
+{
+  "id": "D3-biological/chain-of-custody-v1",
+  "d_major": "D3-biological",
+  "title": "Biological - Consent & Chain-of-Custody Enforcement",
+  "version": 1,
+  "revision": 1,
+  "forbidden_effects": [
+    {
+      "effect": "storage.sample.read",
+      "description": "Read sample data without valid consent and custody chain."
+    },
+    {
+      "effect": "storage.sample.export",
+      "description": "Export sample data for an undeclared or non-permitted purpose."
+    }
+  ],
+  "primary_runtime_effect_domain": "storage",
+  "audit_steps": ["trigger", "context", "authority", "decision", "enforcement", "evidence"],
+  "safety": {
+    "vector_policy": "synthetic-only",
+    "notes": "Vectors must contain synthetic sample IDs and no personal/clinical data."
+  }
+}

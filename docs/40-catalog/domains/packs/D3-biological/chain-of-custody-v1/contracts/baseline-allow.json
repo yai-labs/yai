@@ -1,0 +1,14 @@
+{
+  "baseline_id": "baseline-allow",
+  "baseline_version": 1,
+  "policy": {
+    "bio_access": {
+      "mode": "allow_if_consent_and_custody_valid",
+      "require_consent": true,
+      "require_chain_of_custody": true,
+      "allowed_purposes": ["research", "quality_control"],
+      "allowed_datasets": ["DS-SYN-001"],
+      "default_outcome": "deny"
+    }
+  }
+}

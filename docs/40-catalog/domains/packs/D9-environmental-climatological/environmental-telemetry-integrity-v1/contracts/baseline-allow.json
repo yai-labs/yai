@@ -1,0 +1,15 @@
+{
+  "baseline_id": "baseline-allow",
+  "baseline_version": 1,
+  "policy": {
+    "environment": {
+      "mode": "allow_if_station_contracted_and_integrity_valid",
+      "contracted_stations": ["ENV-STATION-001", "ENV-STATION-002"],
+      "allowed_regions": ["REGION-COARSE-01", "REGION-COARSE-02"],
+      "require_calibration_ref": true,
+      "require_provenance_ref": true,
+      "require_coarse_region_only": true,
+      "default_outcome": "deny"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "baseline_id": "baseline-quarantine",
+  "baseline_version": 1,
+  "policy": {
+    "payments": {
+      "mode": "deny_or_quarantine_on_violation",
+      "contracted_counterparties": ["CP-ACME-001", "CP-ACME-002"],
+      "allowed_currencies": ["EUR", "USD"],
+      "limits": {
+        "single_tx_max": 500,
+        "daily_total_max": 2000
+      },
+      "arming_required_over": 500,
+      "on_violation": {
+        "counterparty_not_contracted": { "outcome": "quarantine", "reason_code": "COUNTERPARTY_NOT_CONTRACTED" },
+        "limit_exceeded": { "outcome": "deny", "reason_code": "LIMIT_EXCEEDED" },
+        "currency_not_allowed": { "outcome": "deny", "reason_code": "CURRENCY_NOT_ALLOWED" }
+      }
+    }
+  }
+}

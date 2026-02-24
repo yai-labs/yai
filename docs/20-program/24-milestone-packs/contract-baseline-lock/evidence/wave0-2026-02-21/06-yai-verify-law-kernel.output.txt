@@ -1,0 +1,81 @@
+=== CONTRACTS: /Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs/contracts
+=== KERNEL:    /Users/francescomaiomascio/Developer/YAI/yai/kernel
+=== FORMAL:    /Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs/formal
+=== TLA_JAR:   /Users/francescomaiomascio/Developer/tools/tla/tla2tools.jar
+=== GENERATE VAULT ABI
+=== CHECK GENERATED
+OK: generated files are in sync
+=== KERNEL BUILD
+--- [YAI-KERNEL] Cleaned ---
+[CC] ../boot/src/bootstrap.c
+cc -Wall -Wextra -O2 -std=c11 -MMD -MP -I./include -I/Users/francescomaiomascio/Developer/YAI/yai/boot/include -I/Users/francescomaiomascio/Developer/YAI/yai/root/include -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs/specs/protocol/include -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs/specs/protocol/runtime/include -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs/specs/vault/include -c ../boot/src/bootstrap.c -o /Users/francescomaiomascio/Developer/YAI/yai/build/kernel/boot/src/bootstrap.o
+[CC] ../boot/src/preboot.c
+cc -Wall -Wextra -O2 -std=c11 -MMD -MP -I./include -I/Users/francescomaiomascio/Developer/YAI/yai/boot/include -I/Users/francescomaiomascio/Developer/YAI/yai/root/include -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs/specs/protocol/include -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs/specs/protocol/runtime/include -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs/specs/vault/include -c ../boot/src/preboot.c -o /Users/francescomaiomascio/Developer/YAI/yai/build/kernel/boot/src/preboot.o
+[CC] src/enforcement/enforcement.c
+cc -Wall -Wextra -O2 -std=c11 -MMD -MP -I./include -I/Users/francescomaiomascio/Developer/YAI/yai/boot/include -I/Users/francescomaiomascio/Developer/YAI/yai/root/include -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs/specs/protocol/include -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs/specs/protocol/runtime/include -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs/specs/vault/include -c src/enforcement/enforcement.c -o /Users/francescomaiomascio/Developer/YAI/yai/build/kernel/src/enforcement/enforcement.o
+[CC] src/core/fsm.c
+cc -Wall -Wextra -O2 -std=c11 -MMD -MP -I./include -I/Users/francescomaiomascio/Developer/YAI/yai/boot/include -I/Users/francescomaiomascio/Developer/YAI/yai/root/include -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs/specs/protocol/include -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs/specs/protocol/runtime/include -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs/specs/vault/include -c src/core/fsm.c -o /Users/francescomaiomascio/Developer/YAI/yai/build/kernel/src/core/fsm.o
+[CC] src/core/ids.c
+cc -Wall -Wextra -O2 -std=c11 -MMD -MP -I./include -I/Users/francescomaiomascio/Developer/YAI/yai/boot/include -I/Users/francescomaiomascio/Developer/YAI/yai/root/include -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs/specs/protocol/include -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs/specs/protocol/runtime/include -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs/specs/vault/include -c src/core/ids.c -o /Users/francescomaiomascio/Developer/YAI/yai/build/kernel/src/core/ids.o
+[CC] src/core/logger.c
+cc -Wall -Wextra -O2 -std=c11 -MMD -MP -I./include -I/Users/francescomaiomascio/Developer/YAI/yai/boot/include -I/Users/francescomaiomascio/Developer/YAI/yai/root/include -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs/specs/protocol/include -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs/specs/protocol/runtime/include -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs/specs/vault/include -c src/core/logger.c -o /Users/francescomaiomascio/Developer/YAI/yai/build/kernel/src/core/logger.o
+[CC] src/core/project_tree.c
+cc -Wall -Wextra -O2 -std=c11 -MMD -MP -I./include -I/Users/francescomaiomascio/Developer/YAI/yai/boot/include -I/Users/francescomaiomascio/Developer/YAI/yai/root/include -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs/specs/protocol/include -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs/specs/protocol/runtime/include -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs/specs/vault/include -c src/core/project_tree.c -o /Users/francescomaiomascio/Developer/YAI/yai/build/kernel/src/core/project_tree.o
+[CC] src/core/transport.c
+cc -Wall -Wextra -O2 -std=c11 -MMD -MP -I./include -I/Users/francescomaiomascio/Developer/YAI/yai/boot/include -I/Users/francescomaiomascio/Developer/YAI/yai/root/include -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs/specs/protocol/include -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs/specs/protocol/runtime/include -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs/specs/vault/include -c src/core/transport.c -o /Users/francescomaiomascio/Developer/YAI/yai/build/kernel/src/core/transport.o
+[CC] src/core/yai_session.c
+cc -Wall -Wextra -O2 -std=c11 -MMD -MP -I./include -I/Users/francescomaiomascio/Developer/YAI/yai/boot/include -I/Users/francescomaiomascio/Developer/YAI/yai/root/include -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs/specs/protocol/include -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs/specs/protocol/runtime/include -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs/specs/vault/include -c src/core/yai_session.c -o /Users/francescomaiomascio/Developer/YAI/yai/build/kernel/src/core/yai_session.o
+[CC] src/core/rpc_binary.c
+cc -Wall -Wextra -O2 -std=c11 -MMD -MP -I./include -I/Users/francescomaiomascio/Developer/YAI/yai/boot/include -I/Users/francescomaiomascio/Developer/YAI/yai/root/include -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs/specs/protocol/include -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs/specs/protocol/runtime/include -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs/specs/vault/include -c src/core/rpc_binary.c -o /Users/francescomaiomascio/Developer/YAI/yai/build/kernel/src/core/rpc_binary.o
+[CC] src/core/rpc_codec.c
+cc -Wall -Wextra -O2 -std=c11 -MMD -MP -I./include -I/Users/francescomaiomascio/Developer/YAI/yai/boot/include -I/Users/francescomaiomascio/Developer/YAI/yai/root/include -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs/specs/protocol/include -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs/specs/protocol/runtime/include -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs/specs/vault/include -c src/core/rpc_codec.c -o /Users/francescomaiomascio/Developer/YAI/yai/build/kernel/src/core/rpc_codec.o
+[CC] src/bin/workspace_kernel_main.c
+cc -Wall -Wextra -O2 -std=c11 -MMD -MP -I./include -I/Users/francescomaiomascio/Developer/YAI/yai/boot/include -I/Users/francescomaiomascio/Developer/YAI/yai/root/include -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs/specs/protocol/include -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs/specs/protocol/runtime/include -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs/specs/vault/include -c src/bin/workspace_kernel_main.c -o /Users/francescomaiomascio/Developer/YAI/yai/build/kernel/src/bin/workspace_kernel_main.o
+[CC] ../runtime/protocol/rpc_runtime.c
+cc -Wall -Wextra -O2 -std=c11 -MMD -MP -I./include -I/Users/francescomaiomascio/Developer/YAI/yai/boot/include -I/Users/francescomaiomascio/Developer/YAI/yai/root/include -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs/specs/protocol/include -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs/specs/protocol/runtime/include -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs/specs/vault/include -c ../runtime/protocol/rpc_runtime.c -o /Users/francescomaiomascio/Developer/YAI/yai/build/kernel/runtime/protocol/rpc_runtime.o
+[CC] ../root/src/control_transport.c
+cc -Wall -Wextra -O2 -std=c11 -MMD -MP -I./include -I/Users/francescomaiomascio/Developer/YAI/yai/boot/include -I/Users/francescomaiomascio/Developer/YAI/yai/root/include -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs/specs/protocol/include -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs/specs/protocol/runtime/include -I/Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs/specs/vault/include -c ../root/src/control_transport.c -o /Users/francescomaiomascio/Developer/YAI/yai/build/kernel/root/src/control_transport.o
+[LINK] /Users/francescomaiomascio/Developer/YAI/yai/build/bin/yai-kernel
+cc /Users/francescomaiomascio/Developer/YAI/yai/build/kernel/boot/src/bootstrap.o /Users/francescomaiomascio/Developer/YAI/yai/build/kernel/boot/src/preboot.o /Users/francescomaiomascio/Developer/YAI/yai/build/kernel/src/enforcement/enforcement.o /Users/francescomaiomascio/Developer/YAI/yai/build/kernel/src/core/fsm.o /Users/francescomaiomascio/Developer/YAI/yai/build/kernel/src/core/ids.o /Users/francescomaiomascio/Developer/YAI/yai/build/kernel/src/core/logger.o /Users/francescomaiomascio/Developer/YAI/yai/build/kernel/src/core/project_tree.o /Users/francescomaiomascio/Developer/YAI/yai/build/kernel/src/core/transport.o /Users/francescomaiomascio/Developer/YAI/yai/build/kernel/src/core/yai_session.o /Users/francescomaiomascio/Developer/YAI/yai/build/kernel/src/core/rpc_binary.o /Users/francescomaiomascio/Developer/YAI/yai/build/kernel/src/core/rpc_codec.o /Users/francescomaiomascio/Developer/YAI/yai/build/kernel/src/bin/workspace_kernel_main.o /Users/francescomaiomascio/Developer/YAI/yai/build/kernel/runtime/protocol/rpc_runtime.o /Users/francescomaiomascio/Developer/YAI/yai/build/kernel/root/src/control_transport.o -o /Users/francescomaiomascio/Developer/YAI/yai/build/bin/yai-kernel 
+--- [YAI-KERNEL] Build Complete ---
+=== TLC QUICK
+TLC2 Version 2.19 of 08 August 2024 (rev: 5a47802)
+Running breadth-first search Model-Checking with fp 47 and seed 7890373977976036596 with 1 worker on 8 cores with 1820MB heap and 64MB offheap memory [pid: 97799] (Mac OS X 26.3 aarch64, Eclipse Adoptium 21.0.5 x86_64, MSBDiskFPSet, DiskStateQueue).
+Parsing file /Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs/formal/tla/YAI_KERNEL.tla
+Parsing file /private/var/folders/6q/l7kqg4l93zd7pylwgx7t3lzm0000gn/T/Naturals.tla
+Parsing file /Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs/formal/tla/LAW_IDS.tla
+Semantic processing of module Naturals
+Semantic processing of module LAW_IDS
+Semantic processing of module YAI_KERNEL
+Starting... (2026-02-21 13:08:03)
+Computing initial states...
+Finished computing initial states: 1 distinct state generated at 2026-02-21 13:08:03.
+Model checking completed. No error has been found.
+  Estimates of the probability that TLC did not check all reachable states
+  because two distinct states had the same fingerprint:
+  calculated (optimistic):  val = 9.0E-16
+258 states generated, 120 distinct states found, 0 states left on queue.
+The depth of the complete state graph search is 13.
+The average outdegree of the complete state graph is 1 (minimum is 0, the maximum 5 and the 95th percentile is 5).
+Finished in 00s at (2026-02-21 13:08:03)
+=== TLC DEEP
+TLC2 Version 2.19 of 08 August 2024 (rev: 5a47802)
+Running breadth-first search Model-Checking with fp 121 and seed 4806605159194560771 with 1 worker on 8 cores with 1820MB heap and 64MB offheap memory [pid: 97804] (Mac OS X 26.3 aarch64, Eclipse Adoptium 21.0.5 x86_64, MSBDiskFPSet, DiskStateQueue).
+Parsing file /Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs/formal/tla/YAI_KERNEL.tla
+Parsing file /private/var/folders/6q/l7kqg4l93zd7pylwgx7t3lzm0000gn/T/Naturals.tla
+Parsing file /Users/francescomaiomascio/Developer/YAI/yai/deps/yai-specs/formal/tla/LAW_IDS.tla
+Semantic processing of module Naturals
+Semantic processing of module LAW_IDS
+Semantic processing of module YAI_KERNEL
+Starting... (2026-02-21 13:08:04)
+Computing initial states...
+Finished computing initial states: 1 distinct state generated at 2026-02-21 13:08:04.
+Model checking completed. No error has been found.
+  Estimates of the probability that TLC did not check all reachable states
+  because two distinct states had the same fingerprint:
+  calculated (optimistic):  val = 1.6E-13
+3456 states generated, 1535 distinct states found, 0 states left on queue.
+The depth of the complete state graph search is 58.
+The average outdegree of the complete state graph is 1 (minimum is 0, the maximum 5 and the 95th percentile is 5).
+Finished in 00s at (2026-02-21 13:08:04)
+OK: Law<->Kernel verification passed.

@@ -1,0 +1,27 @@
+{
+  "PROVENANCE_MISSING": {
+    "severity": "high",
+    "default_outcome": "deny",
+    "description": "Required provenance metadata is missing (source, author, generation trace, or lineage)."
+  },
+  "POLICY_BASIS_MISSING": {
+    "severity": "high",
+    "default_outcome": "deny",
+    "description": "No valid policy basis or rule reference provided for this action."
+  },
+  "CONTESTABILITY_MISSING": {
+    "severity": "medium",
+    "default_outcome": "deny",
+    "description": "No appeal/contestation metadata provided for a high-impact moderation/visibility action."
+  },
+  "SCOPE_NOT_AUTHORIZED": {
+    "severity": "high",
+    "default_outcome": "deny",
+    "description": "Principal is not authorized to publish or enforce this action in the given scope."
+  },
+  "ARMING_REQUIRED": {
+    "severity": "high",
+    "default_outcome": "deny",
+    "description": "High-impact action requires explicit arming."
+  }
+}

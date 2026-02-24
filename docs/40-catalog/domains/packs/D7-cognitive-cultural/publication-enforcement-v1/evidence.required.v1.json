@@ -1,0 +1,26 @@
+{
+  "required_fields": [
+    "timestamp",
+    "ws_id",
+    "trace_id",
+    "event.type",
+    "event.source",
+    "principal.id",
+    "principal.role",
+    "target.content_id",
+    "target.action",
+    "target.scope",
+    "policy.rule_ref",
+    "provenance.ref",
+    "decision.outcome",
+    "decision.reason_code",
+    "decision.baseline_hash",
+    "enforcement.result",
+    "metrics.time_to_decide_ms",
+    "metrics.action_applied"
+  ],
+  "notes": {
+    "privacy": "Evidence should avoid raw content bodies; store stable content IDs and references only.",
+    "action_applied": "Must be false under deny/quarantine for this pack's vectors."
+  }
+}

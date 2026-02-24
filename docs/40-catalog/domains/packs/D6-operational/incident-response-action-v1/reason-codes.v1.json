@@ -1,0 +1,32 @@
+{
+  "ACTION_NOT_AUTHORIZED": {
+    "severity": "high",
+    "default_outcome": "deny",
+    "description": "Principal lacks authorization to execute the requested operational action."
+  },
+  "ESCALATION_REQUIRED": {
+    "severity": "high",
+    "default_outcome": "deny",
+    "description": "Action requires escalation level that is not satisfied (e.g., IR lead approval)."
+  },
+  "ARMING_REQUIRED": {
+    "severity": "high",
+    "default_outcome": "deny",
+    "description": "High-impact action requires explicit arming."
+  },
+  "ACTION_OUTSIDE_WINDOW": {
+    "severity": "medium",
+    "default_outcome": "deny",
+    "description": "Action request is outside the permitted response/maintenance window."
+  },
+  "SCOPE_NOT_ALLOWED": {
+    "severity": "high",
+    "default_outcome": "deny",
+    "description": "Action is not allowed in the requested scope (e.g., production) under current authority."
+  },
+  "ACTION_RATE_LIMITED": {
+    "severity": "medium",
+    "default_outcome": "rate_limit",
+    "description": "Action requests exceed configured rate thresholds."
+  }
+}

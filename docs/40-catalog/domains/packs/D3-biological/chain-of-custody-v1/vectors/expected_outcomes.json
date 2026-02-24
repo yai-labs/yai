@@ -1,0 +1,27 @@
+{
+  "vector_id": "safe-bio-access-001",
+  "expected": [
+    {
+      "baseline_id": "baseline-allow",
+      "decision": { "outcome": "deny", "reason_code": "PURPOSE_NOT_ALLOWED" },
+      "enforcement": { "result": "blocked" },
+      "metrics": { "read_granted": false }
+    },
+    {
+      "baseline_id": "baseline-deny",
+      "decision": { "outcome": "deny", "reason_code": "PURPOSE_NOT_ALLOWED" },
+      "enforcement": { "result": "blocked" },
+      "metrics": { "read_granted": false }
+    },
+    {
+      "baseline_id": "baseline-quarantine",
+      "decision": { "outcome": "deny", "reason_code": "PURPOSE_NOT_ALLOWED" },
+      "enforcement": { "result": "blocked" },
+      "metrics": { "read_granted": false }
+    }
+  ],
+  "notes": {
+    "purpose_first": "This vector primarily tests purpose gating. Add a second vector later to exercise custody-chain quarantine (CUSTODY_CHAIN_BROKEN).",
+    "privacy": "All identifiers are synthetic; evidence must remain free of personal data."
+  }
+}

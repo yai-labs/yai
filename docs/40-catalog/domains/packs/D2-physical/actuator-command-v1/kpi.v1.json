@@ -1,0 +1,31 @@
+{
+  "kpis": [
+    {
+      "id": "time_to_decide_ms",
+      "description": "Latency from command request trigger to decision outcome.",
+      "unit": "ms",
+      "target": { "p50_max": 10, "p95_max": 50 }
+    },
+    {
+      "id": "command_executed",
+      "description": "Whether the actuator command was executed by the provider adapter.",
+      "unit": "bool",
+      "target": { "must_be_false_under_deny_or_quarantine": true }
+    },
+    {
+      "id": "evidence_completeness",
+      "description": "Percentage of required evidence fields present.",
+      "unit": "percent",
+      "target": { "min": 100 }
+    },
+    {
+      "id": "repeatability_runs",
+      "description": "Number of consecutive consistent PASS runs required for qualification.",
+      "unit": "count",
+      "target": { "min": 3 }
+    }
+  ],
+  "notes": {
+    "safety": "For v0.1 qualification, all vectors must remain simulated. Real hardware is out-of-scope."
+  }
+}

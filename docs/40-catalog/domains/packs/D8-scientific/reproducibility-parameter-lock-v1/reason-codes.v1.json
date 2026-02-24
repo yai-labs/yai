@@ -1,0 +1,22 @@
+{
+  "PARAM_LOCK_MISSING": {
+    "severity": "high",
+    "default_outcome": "deny",
+    "description": "Missing params hash/parameter lock for reproducibility."
+  },
+  "PROVENANCE_MISSING": {
+    "severity": "high",
+    "default_outcome": "deny",
+    "description": "Missing provenance fields required for reproducible runs."
+  },
+  "UNDECLARED_EXCLUSION": {
+    "severity": "high",
+    "default_outcome": "quarantine",
+    "description": "Run declares exclusions/filters not specified in reproducibility metadata."
+  },
+  "NON_DETERMINISTIC_SOURCE": {
+    "severity": "medium",
+    "default_outcome": "deny",
+    "description": "Run depends on non-deterministic inputs not declared/pinned (e.g., unpinned dataset version)."
+  }
+}

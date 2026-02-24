@@ -1,0 +1,20 @@
+{
+  "baseline_id": "baseline-quarantine",
+  "baseline_version": 1,
+  "policy": {
+    "environment": {
+      "mode": "deny_or_quarantine_on_violation",
+      "contracted_stations": ["ENV-STATION-001"],
+      "allowed_regions": ["REGION-COARSE-01"],
+      "require_calibration_ref": true,
+      "require_provenance_ref": true,
+      "require_coarse_region_only": true,
+      "on_violation": {
+        "station_not_contracted": { "outcome": "deny", "reason_code": "STATION_NOT_CONTRACTED" },
+        "calibration_missing": { "outcome": "deny", "reason_code": "CALIBRATION_MISSING" },
+        "provenance_missing": { "outcome": "deny", "reason_code": "PROVENANCE_MISSING" },
+        "minimal_disclosure_required": { "outcome": "deny", "reason_code": "MINIMAL_DISCLOSURE_REQUIRED" }
+      }
+    }
+  }
+}
