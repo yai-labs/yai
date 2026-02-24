@@ -6,7 +6,6 @@ on:
       - "docs/60-validation/proof/**"
       - "deps/yai-specs/**"
       - "deps/yai-cli.ref"
-      - "tools/python/yai_tools/verify/proof_pack.py"
       - "tools/bin/yai-proof-check"
       - ".github/workflows/validate-proof-pack.yml"
 

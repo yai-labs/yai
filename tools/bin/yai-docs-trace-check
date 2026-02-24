@@ -4,12 +4,12 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 INFRA_ROOT_DEFAULT="$(cd "$ROOT/.." && pwd)/yai-infra"
 INFRA_ROOT="${YAI_INFRA_ROOT:-$INFRA_ROOT_DEFAULT}"
-INFRA_SCRIPT="$INFRA_ROOT/tools/bin/yai-docs-trace-check"
+TARGET="$INFRA_ROOT/tools/bin/yai-docs-trace-check"
 
-if [[ -z "${YAI_INFRA_DELEGATED:-}" && -x "$INFRA_SCRIPT" ]]; then
-  exec env YAI_INFRA_DELEGATED=1 "$INFRA_SCRIPT" "$@"
+if [[ -x "$TARGET" ]]; then
+  exec "$TARGET" "$@"
 fi
 
-PYTHON="${PYTHON:-python3}"
-export PYTHONPATH="${ROOT}/tools/python"
-exec "${PYTHON}" -m yai_tools.verify.traceability "$@"
+echo "Hard cutover: use yai-infra canonical tool for yai-docs-trace-check" >&2
+echo "Missing target: $TARGET" >&2
+exit 2

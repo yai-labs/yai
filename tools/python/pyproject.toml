@@ -1,9 +1,0 @@
-[project]
-name = "yai-tools"
-version = "0.1.0"
-description = "YAI repo tooling (local, no-install required)"
-requires-python = ">=3.9"
-dependencies = []
-
-[tool.black]
-line-length = 100

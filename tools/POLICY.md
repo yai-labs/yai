@@ -2,8 +2,7 @@
 
 Non-negotiable:
 1) No logic in shell wrappers (wrappers are glue only).
-2) Python tools must be runnable without installation:
-   - wrapper sets `PYTHONPATH=tools/python`
+2) Governance tooling in `yai` delegates to canonical `yai-infra` tooling.
 3) Tools must never open/merge PRs automatically.
    - Maintainer does PR creation + merge.
    - Agents may create branches + commit + push.

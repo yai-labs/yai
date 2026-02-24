@@ -495,7 +495,7 @@ In 0.1.x we move tests under tools. If `tools/` still exists, it is temporary.
 
 Preferred:
 
-- `tools/python/yai_tools/protocol/handshake_test.py`
+- `yai-infra/tools/python/yai_tools/` (canonical protocol/governance tooling)
 - `tools/bin/yai-suite` or `tools/bin/yai-gate`
 
 Temporary compatibility:
