@@ -1,10 +1,10 @@
 ---
 id: RB-CONTRACT-BASELINE-LOCK
 title: Contract Baseline Lock
-status: draft
+status: active
 owner: governance
 effective_date: 2026-02-19
-revision: 2
+revision: 3
 supersedes: []
 depends_on: []
 adr_refs:
@@ -42,10 +42,10 @@ tags:
 Create the first governance runbook that locks cross-repo contract behavior across `yai-law`, `yai`, and `yai-cli` before any additional hardening tracks.
 
 ## 2) Preconditions
-- [ ] `docs/20-program/22-adr/ADR-011-contract-baseline-lock.md` is present and traceable.
-- [ ] Cross-repo repositories are reachable (`yai-law`, `yai`, `yai-cli`).
-- [ ] Contract edits are performed in source repo (`yai-law`) and only pinned in consumers.
-- [ ] Baseline CI is green in all three repos before phase work starts.
+- [x] `docs/20-program/22-adr/ADR-011-contract-baseline-lock.md` is present and traceable.
+- [x] Cross-repo repositories are reachable (`yai-law`, `yai`, `yai-cli`).
+- [x] Contract edits are performed in source repo (`yai-law`) and only pinned in consumers.
+- [x] Baseline CI is green in all three repos before phase work starts.
 
 ## 3) Inputs
 - Pin references:
@@ -199,3 +199,18 @@ Closure semantics:
   - `docs/20-program/24-milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.2.md`
   - `docs/20-program/24-milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.3.md`
   - `docs/20-program/24-milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.4.md`
+
+
+## 10) Closure Snapshot (2026-02-24)
+- Runbook status: `active` (phase sequence `0.1.0 -> 0.1.4` completed in Wave 0).
+- Wave issue: `#141` is closed.
+- Milestone packs: `0.1.1`, `0.1.2`, `0.1.3`, `0.1.4` moved to `active` with execution snapshots and evidence pointers.
+- Required command outcomes recorded as `PASS` in wave evidence:
+  - `tools/bin/yai-check-pins`
+  - `tools/bin/yai-docs-trace-check --all`
+  - `tools/bin/yai-proof-check`
+  - `tools/bin/yai-verify core`
+  - `tools/bin/yai-verify law-kernel`
+
+Next runbook in sequence:
+- `docs/20-program/23-runbooks/specs-refactor-foundation.md`

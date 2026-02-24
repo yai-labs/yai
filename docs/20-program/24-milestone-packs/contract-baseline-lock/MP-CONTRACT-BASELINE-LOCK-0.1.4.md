@@ -1,6 +1,6 @@
 ---
 id: MP-CONTRACT-BASELINE-LOCK-0.1.4
-status: draft
+status: active
 runbook: docs/20-program/23-runbooks/contract-baseline-lock.md
 phase: "0.1.4 — Cross-Repo Evidence Closure"
 adrs:
@@ -28,7 +28,7 @@ issues:
 - Phase: `0.1.4 — Cross-Repo Evidence Closure`
 - Wave issue: `#141`
 - Owner: `governance`
-- Status: `draft`
+- Status: `active`
 
 ## Links
 
@@ -74,11 +74,11 @@ Compatibility Classification:
 - Upgrade path: none required for runtime clients.
 
 Definition of Done:
-- [ ] Evidence index spans `yai-law`, `yai`, and `yai-cli`.
-- [ ] Every phase has explicit proof pointers and outcomes.
-- [ ] Closure review is reproducible from documented commands.
-- [ ] ADR-011 closure readiness is demonstrated by artifacts.
-- [ ] Mandatory command outcomes are recorded as `PASS` (no `SKIP` closure).
+- [x] Evidence index spans `yai-law`, `yai`, and `yai-cli`.
+- [x] Every phase has explicit proof pointers and outcomes.
+- [x] Closure review is reproducible from documented commands.
+- [x] ADR-011 closure readiness is demonstrated by artifacts.
+- [x] Mandatory command outcomes are recorded as `PASS` (no `SKIP` closure).
 
 ## Execution Snapshot (2026-02-21)
 
@@ -89,4 +89,4 @@ Definition of Done:
 - `tools/bin/yai-proof-check --manifest docs/50-validation/proof/.private/PP-FOUNDATION-0001/pp-foundation-0001.manifest.v1.json` -> `FAIL` (`exit=2`) via `08-proof-check-private-hardfail.*`
 
 Phase state:
-- `READY` for phase closure (strict pins aligned and mandatory checks passing).
+- `CLOSED` (phase acceptance criteria satisfied with recorded evidence) (strict pins aligned and mandatory checks passing).

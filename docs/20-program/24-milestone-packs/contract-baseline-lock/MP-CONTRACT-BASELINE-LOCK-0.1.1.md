@@ -1,6 +1,6 @@
 ---
 id: MP-CONTRACT-BASELINE-LOCK-0.1.1
-status: draft
+status: active
 runbook: docs/20-program/23-runbooks/contract-baseline-lock.md
 phase: "0.1.1 — CI Parity on Contract Surfaces"
 adrs:
@@ -27,7 +27,7 @@ issues:
 - Phase: `0.1.1 — CI Parity on Contract Surfaces`
 - Wave issue: `#141`
 - Owner: `governance`
-- Status: `draft`
+- Status: `active`
 
 ## Links
 
@@ -72,11 +72,11 @@ Compatibility Classification:
 - Upgrade path: existing conformant behavior remains supported.
 
 Definition of Done:
-- [ ] CI parity checks are active and non-optional in both repos.
-- [ ] Drift between repos is detected and blocks merge.
-- [ ] Evidence artifacts are attached for review.
-- [ ] Traceability links to ADR-011 and runbook phase are present.
-- [ ] Mandatory command outcomes are recorded as `PASS` (no `SKIP` closure).
+- [x] CI parity checks are active and non-optional in both repos.
+- [x] Drift between repos is detected and blocks merge.
+- [x] Evidence artifacts are attached for review.
+- [x] Traceability links to ADR-011 and runbook phase are present.
+- [x] Mandatory command outcomes are recorded as `PASS` (no `SKIP` closure).
 
 ## Execution Snapshot (2026-02-21)
 
@@ -85,4 +85,4 @@ Definition of Done:
 - `tools/bin/yai-docs-trace-check --all` -> `PASS` (`exit=0`) via `12-docs-trace-check-post-pin.*`
 
 Phase state:
-- `READY` for phase closure (strict pin mismatch resolved).
+- `CLOSED` (phase acceptance criteria satisfied with recorded evidence) (strict pin mismatch resolved).

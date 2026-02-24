@@ -1,6 +1,6 @@
 ---
 id: MP-CONTRACT-BASELINE-LOCK-0.1.2
-status: draft
+status: active
 runbook: docs/20-program/23-runbooks/contract-baseline-lock.md
 phase: "0.1.2 — No Pass-on-Skip Enforcement"
 adrs:
@@ -26,7 +26,7 @@ issues:
 - Phase: `0.1.2 — No Pass-on-Skip Enforcement`
 - Wave issue: `#141`
 - Owner: `governance`
-- Status: `draft`
+- Status: `active`
 
 ## Links
 
@@ -70,11 +70,11 @@ Compatibility Classification:
 - Upgrade path: no runtime migration required.
 
 Definition of Done:
-- [ ] Mandatory proof checks cannot pass via skip.
-- [ ] Pipeline fails deterministically on missing mandatory evidence.
-- [ ] Failure semantics are documented and auditable.
-- [ ] Runbook/ADR references are present in closure evidence.
-- [ ] Mandatory command outcomes are recorded as `PASS` (no `SKIP` closure).
+- [x] Mandatory proof checks cannot pass via skip.
+- [x] Pipeline fails deterministically on missing mandatory evidence.
+- [x] Failure semantics are documented and auditable.
+- [x] Runbook/ADR references are present in closure evidence.
+- [x] Mandatory command outcomes are recorded as `PASS` (no `SKIP` closure).
 
 ## Execution Snapshot (2026-02-21)
 
@@ -84,7 +84,7 @@ Definition of Done:
 - `tools/bin/yai-docs-trace-check --all` -> `PASS` (`exit=0`)
 
 Phase state:
-- `READY` for phase closure (no mandatory `SKIP` path on proof-check).
+- `CLOSED` (phase acceptance criteria satisfied with recorded evidence) (no mandatory `SKIP` path on proof-check).
 
 Wave-level status:
 - strict pin alignment now passing (`tools/bin/yai-check-pins` -> `PASS`) via `10-check_pins-strict-pass.*`.
