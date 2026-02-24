@@ -36,3 +36,8 @@ cd docs/40-qualification/RT-0.1-003-D1-EGRESS-S3 && BASELINE_ID=baseline-deny TA
 TARGET_PROFILE=remote TARGET_SCHEME=https TARGET_HOST=curl.<your-domain> TARGET_PORT=443 BASELINE_ID=baseline-deny ./run/run-three.sh
 ```
 Apply analogous host/path mapping for OTEL and S3 trials.
+
+
+## Workload completeness note
+Full workload-completeness validation is controlled in dedicated workload validation tracks outside this RT harness.
+SC102 RT focus remains governance containment + evidence integrity.

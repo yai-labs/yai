@@ -38,3 +38,8 @@ Remote controlled (L1):
 ```bash
 TARGET_PROFILE=remote TARGET_SCHEME=https TARGET_HOST=<subdomain> TARGET_PORT=443 BASELINE_ID=baseline-deny ./run/run-three.sh
 ```
+
+
+Note:
+- Default runs write to `evidence.local/` (git-ignored).
+- To refresh tracked audit evidence under `evidence/`, run with `EVIDENCE_ROOT="$PWD/evidence"`.
