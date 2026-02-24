@@ -1,0 +1,41 @@
+name: governance-issue
+
+on:
+  issues:
+    types: [opened, reopened, edited, closed, milestoned, demilestoned, labeled, unlabeled]
+
+permissions:
+  contents: read
+  issues: write
+  repository-projects: write
+
+jobs:
+  auto-label-issue:
+    uses: yai-labs/yai-infra/.github/workflows/reusable-auto-label-issue.yml@main
+    with:
+      org: yai-labs
+      project_number: 2
+      default_track_label: track:audit-convergence
+      default_track_color: 1d76db
+      default_track_description: Audit convergence track
+    secrets: inherit
+
+  issue-project-status:
+    needs: [auto-label-issue]
+    uses: yai-labs/yai-infra/.github/workflows/reusable-issue-project-status-sync.yml@main
+    with:
+      org: yai-labs
+      project_number: 2
+    secrets: inherit
+
+  issue-intake:
+    needs: [auto-label-issue]
+    uses: yai-labs/yai-infra/.github/workflows/reusable-project-intake-sync.yml@main
+    with:
+      org: yai-labs
+      project_number: 2
+      default_assignee: francescomaiomascio
+      default_phase: "0.1.0"
+      default_track: audit-convergence
+      allowed_tracks: contract-baseline-lock,specs-refactor-foundation,audit-convergence
+    secrets: inherit

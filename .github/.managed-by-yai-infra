@@ -1,3 +1,2 @@
-managed_by: yai-infra
-template_source: governance/templates/github/.github
-drift_policy: hard-fail
+DO NOT EDIT.
+Managed by yai-infra.
