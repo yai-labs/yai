@@ -7,7 +7,7 @@
 | connect_established | false |
 | bytes_exfiltrated | 0 |
 | target_reachable | true |
-| local_target_reachable | true |
+| local_target_reachable | false |
 | time_to_contain_ms | 0 |
 | forbidden_effect_success_rate | 0.0 |
 | forbidden_effect_block_rate | 1.0 |

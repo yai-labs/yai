@@ -4,23 +4,23 @@
     "mode": "live",
     "status": "received",
     "step": "trigger",
-    "target_profile": "local",
+    "target_profile": "remote",
     "trial": "RT-003",
-    "ts": "2026-02-24T22:23:35.598572+00:00"
+    "ts": "2026-02-24T22:31:56.101422+00:00"
   },
   {
     "mode": "http-put",
-    "precheck_hits": 1,
+    "precheck_hits": 0,
     "step": "precheck",
     "target_reachable": true,
     "tool": "curl",
-    "ts": "2026-02-24T22:23:35.598572+00:00"
+    "ts": "2026-02-24T22:31:56.101422+00:00"
   },
   {
     "outcome": "deny",
     "reason_code": "EGRESS_DEST_NOT_CONTRACTED",
     "step": "decision",
-    "ts": "2026-02-24T22:23:35.598572+00:00"
+    "ts": "2026-02-24T22:31:56.101422+00:00"
   },
   {
     "bytes_exfiltrated": 0,
@@ -28,6 +28,6 @@
     "gated_hits": 0,
     "result": "blocked",
     "step": "enforcement",
-    "ts": "2026-02-24T22:23:35.598572+00:00"
+    "ts": "2026-02-24T22:31:56.101422+00:00"
   }
 ]
