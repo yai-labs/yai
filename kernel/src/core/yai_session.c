@@ -2,6 +2,7 @@
 
 #include "yai_session.h"
 #include "control_transport.h"
+#include "ws_id.h"
 
 #include <transport.h>
 #include <yai_protocol_ids.h>
@@ -64,19 +65,7 @@ static int ensure_run_tree(const char *home)
 
 bool yai_ws_validate_id(const char *ws_id)
 {
-    if (!ws_id || strlen(ws_id) == 0 || strlen(ws_id) >= MAX_WS_ID_LEN)
-        return false;
-
-    for (const char *p = ws_id; *p; p++)
-    {
-        if (!((*p >= 'a' && *p <= 'z') ||
-              (*p >= 'A' && *p <= 'Z') ||
-              (*p >= '0' && *p <= '9') ||
-              *p == '-' || *p == '_'))
-            return false;
-    }
-
-    return true;
+    return yai_ws_id_is_valid(ws_id);
 }
 
 bool yai_ws_build_paths(yai_workspace_t *ws, const char *ws_id)

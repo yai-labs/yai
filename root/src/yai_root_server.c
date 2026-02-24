@@ -18,6 +18,7 @@
 #include <protocol.h> /* yai_handshake_req_t / yai_handshake_ack_t */
 
 #include "control_transport.h"
+#include "ws_id.h"
 
 static FILE *root_log = NULL;
 
@@ -126,25 +127,6 @@ static int is_valid_role(uint16_t role)
            role == YAI_ROLE_SYSTEM;
 }
 
-static int is_valid_ws_id(const char *ws_id)
-{
-    const char *p;
-
-    if (!ws_id || !ws_id[0])
-        return 0;
-
-    for (p = ws_id; *p; p++) {
-        if (!(('a' <= *p && *p <= 'z') ||
-              ('A' <= *p && *p <= 'Z') ||
-              ('0' <= *p && *p <= '9') ||
-              *p == '-' || *p == '_')) {
-            return 0;
-        }
-    }
-
-    return 1;
-}
-
 /* ============================================================
    HANDLE CLIENT
    ============================================================ */
@@ -227,7 +209,7 @@ static void handle_client(int cfd)
             break;
         }
 
-        if (!is_valid_ws_id(env.ws_id)) {
+        if (!yai_ws_id_is_valid(env.ws_id)) {
             LOG("[ROOT] Reject bad ws_id");
             (void)send_error_response(cfd, &env, YAI_E_BAD_WS_ID, "bad_ws_id");
             break;

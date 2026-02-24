@@ -8,6 +8,7 @@
 #include "kernel.h"
 #include "yai_kernel.h"
 #include "yai_session.h"
+#include "ws_id.h"
 #include "control_transport.h"
 
 #include <sys/socket.h>
@@ -149,7 +150,7 @@ static void handle_client(int client_fd)
         return;
     }
 
-    if (!yai_ws_validate_id(env.ws_id)) {
+    if (!yai_ws_id_is_valid(env.ws_id)) {
         send_transport_error(client_fd, &env, YAI_E_BAD_WS_ID, "bad_ws_id");
         close(client_fd);
         return;

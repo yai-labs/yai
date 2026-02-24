@@ -38,6 +38,6 @@ Phase packs:
 - `0.1.0`: completed
 - `0.1.1`: open
 - `0.1.2`: completed
-- `0.1.3`: open
+- `0.1.3`: in_progress
 - `0.1.4`: completed
 - `0.1.5`: open

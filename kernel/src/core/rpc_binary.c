@@ -8,6 +8,7 @@
 #include "yai_kernel.h"
 #include "control_transport.h"
 #include "yai_session.h"
+#include "ws_id.h"
 
 #include <transport.h>
 #include <yai_protocol_ids.h>
@@ -145,7 +146,7 @@ void yai_kernel_handle_binary_connection(int cfd)
         return;
     }
 
-    if (!yai_ws_validate_id(env.ws_id)) {
+    if (!yai_ws_id_is_valid(env.ws_id)) {
         send_error(cfd, &env, YAI_E_BAD_WS_ID, "bad_ws_id");
         close(cfd);
         return;
