@@ -20,3 +20,6 @@
 
 ## Next Wave
 - Active work item: `#189` (RB-SPECS-REFACTOR-FOUNDATION closure).
+
+## Next Wave
+- Active work item: `#191` (RB-ROOT-HARDENING implementation + closure).
