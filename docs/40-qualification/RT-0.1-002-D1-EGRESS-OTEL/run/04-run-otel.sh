@@ -76,7 +76,8 @@ curl = subprocess.run([
     "-d", "{\"resourceSpans\":[]}",
     target_url,
 ], capture_output=True, text=True)
-target_reachable = (curl.returncode == 0 and curl.stdout.strip() == "200")
+precheck_http_status = (curl.stdout or "").strip()
+target_reachable = (curl.returncode == 0 and precheck_http_status.isdigit())
 if not target_reachable:
     if use_local_server:
         stop_evt.set(); th.join(timeout=2)
@@ -153,7 +154,7 @@ now = datetime.datetime.now(datetime.UTC).isoformat()
 
 timeline = [
     {"ts": now, "step": "trigger", "event": "network.egress.connect", "status": "received", "mode": "live", "trial": "RT-002", "target_profile": target_profile},
-    {"ts": now, "step": "precheck", "tool": "curl", "mode": "otlp-http", "target_reachable": target_reachable, "precheck_hits": precheck_hits},
+    {"ts": now, "step": "precheck", "tool": "curl", "mode": "otlp-http", "target_reachable": target_reachable, "precheck_http_status": precheck_http_status, "precheck_hits": precheck_hits},
     {"ts": now, "step": "decision", "outcome": outcome, "reason_code": reason},
     {"ts": now, "step": "enforcement", "result": enf_result, "connect_established": connect_established, "bytes_exfiltrated": bytes_exfiltrated, "gated_hits": gated_hits},
 ]
@@ -176,6 +177,7 @@ decision_record = {
         "bytes_exfiltrated": bytes_exfiltrated,
         "target_reachable": bool(target_reachable),
         "local_target_reachable": bool(target_reachable) if target_profile == "local" else False,
+        "precheck_http_status": precheck_http_status,
         "precheck_hits": precheck_hits,
         "gated_hits": gated_hits,
     },
