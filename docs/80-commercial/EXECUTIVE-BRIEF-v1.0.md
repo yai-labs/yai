@@ -51,3 +51,11 @@ Execution and proof:
 - `docs/80-commercial/COMMERCIAL-PLAN-v1.0.md`
 - `docs/80-commercial/PILOT-OFFER-v1.0.md`
 - `docs/80-commercial/ROI-MODEL-v1.0.md`
+
+
+## Launch Reference (Fixed)
+
+- Launch ID: `SC102-WAVE1-LAUNCH`
+- Golden wave: `WAVE-1-2026-02-25-0e7af41`
+- Proof bundle: `docs/40-qualification/WAVES/WAVE-1-2026-02-25-0e7af41/`
+- Verify command: `./verify/verify.sh`

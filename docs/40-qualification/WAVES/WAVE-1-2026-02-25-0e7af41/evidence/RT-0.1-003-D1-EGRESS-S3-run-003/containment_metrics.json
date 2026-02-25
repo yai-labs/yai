@@ -1,0 +1,15 @@
+{
+  "runs": 1,
+  "decision_outcome": "deny",
+  "reason_code": "EGRESS_DEST_NOT_CONTRACTED",
+  "time_to_contain_ms": 0,
+  "connect_established": false,
+  "bytes_exfiltrated": 0,
+  "target_reachable": true,
+  "local_target_reachable": true,
+  "precheck_hits": 1,
+  "gated_hits": 0,
+  "forbidden_effect_success_rate": 0.0,
+  "forbidden_effect_block_rate": 1.0,
+  "containment_success_rate": 1.0
+}

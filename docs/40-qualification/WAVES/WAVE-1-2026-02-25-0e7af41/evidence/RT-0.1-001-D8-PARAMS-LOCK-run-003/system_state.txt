@@ -1,0 +1,17 @@
+run_id=run-003
+domain_pack_id=D8-scientific/reproducibility-parameter-lock-v1
+baseline_id=baseline-deny
+runtime_mode=live
+ws_id=wrt8-003
+trace_id=trt8-003
+target_profile=docker
+target_store_dir=/Users/francescomaiomascio/Developer/YAI/yai/docs/40-qualification/_shared/d8-artifact-store/_artifact_store
+target_url=http://127.0.0.1:18080/runs/run-003/result.json
+root_socket=/Users/francescomaiomascio/.yai/run/root/root.sock
+kernel_socket=/Users/francescomaiomascio/.yai/run/kernel/control.sock
+engine_socket=/Users/francescomaiomascio/.yai/run/engine/control.sock
+boot_pid=37833
+root_pid=37834
+kernel_pid=37835
+engine_pid=37837
+repo_sha=0e7af41437f14f0fbb4fc5bdc23738909ea9176a
