@@ -14,8 +14,10 @@ QT_MODE="${QT_MODE:-sim}" # sim|live
 PACK_DIR="$REPO_ROOT/docs/30-catalog/domains/packs/$DOMAIN_PACK_ID"
 BASELINE_FILE="$PACK_DIR/contracts/${BASELINE_ID}.json"
 EXPECTED_FILE="$PACK_DIR/vectors/expected_outcomes.json"
-EVIDENCE_DIR="$QT_DIR/evidence/$DOMAIN_PACK_ID/$RUN_ID"
-STATE_DIR="$QT_DIR/run/.state/$RUN_ID"
+EVIDENCE_ROOT="${EVIDENCE_ROOT:-$QT_DIR/evidence}"
+STATE_ROOT="${STATE_ROOT:-$QT_DIR/run/.state}"
+EVIDENCE_DIR="$EVIDENCE_ROOT/$DOMAIN_PACK_ID/$RUN_ID"
+STATE_DIR="$STATE_ROOT/$RUN_ID"
 
 LIVE_RT_DIR="${LIVE_RT_DIR:-$REPO_ROOT/docs/40-qualification/RT-0.1-001-D1-EGRESS-CURL}"
 LIVE_RUN_DIR="$LIVE_RT_DIR/run"
@@ -37,7 +39,8 @@ if [[ "$QT_MODE" == "live" && ! -x "$LIVE_RUN_DIR/01-start-runtime.sh" ]]; then
 fi
 
 qt_live_env() {
-  export EVIDENCE_ROOT="$QT_DIR/evidence"
+  export EVIDENCE_ROOT="${EVIDENCE_ROOT:-$QT_DIR/evidence}"
+  export STATE_ROOT="${STATE_ROOT:-$QT_DIR/run/.state}"
   export WS_ID="ws-qt1-${RUN_ID}"
   export TRACE_ID="trace-qt1-${RUN_ID}"
   export RT_ID="${RT_ID:-sc102}"
@@ -46,4 +49,4 @@ qt_live_env() {
 }
 
 export QT_DIR REPO_ROOT DOMAIN_PACK_ID BASELINE_ID WORKLOAD_ID ATTACK_PROFILE_ID RUN_ID QT_MODE
-export PACK_DIR BASELINE_FILE EXPECTED_FILE EVIDENCE_DIR STATE_DIR LIVE_RT_DIR LIVE_RUN_DIR
+export PACK_DIR BASELINE_FILE EXPECTED_FILE EVIDENCE_ROOT EVIDENCE_DIR STATE_ROOT STATE_DIR LIVE_RT_DIR LIVE_RUN_DIR

@@ -1,0 +1,6 @@
+{
+  "baseline_id": "baseline-deny",
+  "baseline_hash": "eece03c617b469ebe7adf851459039792190971828d0311fff8cf6d5e7fb5ad9",
+  "baseline_source": "/Users/francescomaiomascio/Developer/YAI/yai/docs/30-catalog/domains/packs/D8-scientific/reproducibility-parameter-lock-v1/contracts/baseline-deny.json",
+  "contract_ref": "policy.scientific_runs.parameter_lock"
+}

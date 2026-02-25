@@ -35,7 +35,7 @@ tags:
 # RB-ENGINE-ATTACH — Engine Attach
 
 ## 1) Purpose
-Bring L2 Engine inside the governed Root/Kernel control path with workspace-bound lifecycle and deterministic protocol behavior.
+Bring L2 Engine inside the governed Root/Kernel control path using ADR-009 shared runtime-plane semantics and deterministic protocol behavior.
 
 ## 2) Preconditions
 - [x] Workspace lifecycle baseline is active.
@@ -52,11 +52,11 @@ Execute the phased attach sequence in this document (ADR decision first, then ke
 
 ## 5) Verification
 - Run pre-flight and per-step acceptance checks.
-- Confirm deterministic start/stop/status semantics and socket/pid lifecycle.
+- Confirm deterministic start/stop/status semantics and functional attach via Root/Kernel-mediated RPC probes.
 
 ## 6) Failure Modes
-- Symptom: engine process starts but socket is missing.
-  - Fix: enforce socket poll timeout + cleanup in kernel start path.
+- Symptom: engine RPC probe fails even if control socket is present/missing.
+  - Fix: treat socket exposure as informational and gate readiness on RPC probe success.
 - Symptom: mismatched authority behavior between kernel and CLI.
   - Fix: enforce envelope authority checks (`arming` + `role`) on server side and align client expectations.
 
@@ -78,10 +78,13 @@ Execute the phased attach sequence in this document (ADR decision first, then ke
 
 ## Appendix — Detailed Operational Notes (Legacy Detailed Content)
 
+> NOTE: This appendix contains transitional notes. Canonical topology is ADR-009 shared engine plane; do not infer per-workspace engine process requirements from older snippets below.
+
+
 ### YAI L2 Engine Attach v4 — Operational Runbook
 
 **Branch:** `feat/l2-engine-attach-v1`  
-**Objective:** Bring L2 Engine into L0↔L1 governed pipeline with workspace-bound lifecycle management.
+**Objective:** Bring L2 Engine into L0↔L1 governed pipeline with shared runtime-plane topology and workspace-scoped dispatch metadata.
 
 ---
 
@@ -89,15 +92,15 @@ Execute the phased attach sequence in this document (ADR decision first, then ke
 ## Objective (v4)
 
 Bring L2 Engine "inside" the governed L0↔L1 pipeline:
-- Kernel becomes **control authority** for start/stop/status Engine per workspace
-- Engine becomes **workspace-bound** (ws_id mandatory) and **handshake-gated**
+- Root governs ingress/routing
+- Kernel enforces authority and workspace isolation
+- Engine executes as a **shared runtime plane** with workspace context carried in dispatch metadata
 - Everything remains consistent with wire protocol (envelope invariants + error replies)
 
 **Final outcome (end v4):**
-- `yai kernel ws create testws` creates run dir
-- `yai engine start testws` spawns `yai-engine` for that ws and creates `engine.pid`
-- `yai engine status testws` confirms socket+pid
-- `yai engine stop testws` stops engine and cleans up
+- Runtime topology remains `boot -> root -> kernel -> engine`
+- `yai engine --ws <id> ...` requests are authorized by Kernel and executed in workspace context
+- Engine attach/readiness is verified by functional RPC probe (not by per-workspace process/socket topology)
 - Root remains pure router (does not interpret payload)
 
 ---
@@ -121,25 +124,14 @@ yai root ping
 ### Target file
 - `docs/20-program/22-adr/ADR-009-engine-attachment.md`
 
-### Choose ONE schema and commit to it
+### Canonical schema (ADR-009)
 
-**Option A (recommended for now): Per-workspace engine socket**
-- Engine listens: `~/.yai/run/<ws_id>/engine/control.sock`
-- **Pros:**
-  - Strong tenant isolation
-  - Mental clarity: everything for ws lives under its run dir
-- **Cons:**
-  - More path handling
+Engine attachment is a **shared runtime plane** under Root governance.
+Workspace context is passed through dispatch metadata, not process topology.
 
-**Option B: Global engine socket + ws_id in frame**
-- Engine listens: `~/.yai/run/engine/control.sock`
-- **Pros:**
-  - Single socket, simpler
-- **Cons:**
-  - Weaker isolation (but ws_id in envelope still governs)
-
-**Recommended decision v4:** Option A (per-workspace)  
-It's "ICE-grade" and avoids a thousand ambiguities later.
+- Engine control socket exposure is optional and informational.
+- Readiness must be validated functionally via Root/Kernel-mediated RPC probe with `--ws <id>`.
+- Do not require per-workspace engine process/socket as an acceptance condition.
 
 ### Acceptance
 - [ ] ADR committed before code
@@ -181,65 +173,50 @@ It's "ICE-grade" and avoids a thousand ambiguities later.
 
 ### 2.1 Path Invariants (ALWAYS use ws->run_dir)
 
-**If Option A:**
-- Engine socket: `ws->run_dir + "/engine/control.sock"`
-- Engine pid: `ws->run_dir + "/engine.pid"`
-- Engine log: `ws->run_dir + "/engine.log"` (optional but recommended)
-
-**Create engine dir on start:**
-```bash
-mkdir -p ~/.yai/run/<ws>/engine
-```
+- Engine runtime socket (if exposed): `~/.yai/run/engine/control.sock` (informational)
+- Engine logs can remain global/runtime-plane while preserving `ws_id` in every request/trace.
+- Workspace isolation is enforced by Kernel authority + dispatch metadata, not per-workspace engine process layout.
 
 ### 2.2 start Command
 
-**Command:** `YAI_CMD_ENGINE_START`
+**Command:** shared-plane attach via `yai up --ws <control_ws> --detach --allow-degraded`
 
 **Rules:**
-- ws_id valid
-- Workspace run dir exists (or created in v3)
+- control workspace valid (default `dev`)
 - **Authority:**
-  - Requires `arming=1` and `role>=operator` (envelope-only)
-- If `engine.pid` exists and process alive → `YAI_E_ENGINE_ALREADY_RUNNING`
-- Spawn `yai-engine --ws <ws_id>` (or env `YAI_WS_ID=<ws_id>`)
-- Write pid to `engine.pid`
-- Brief wait (poll) for socket to appear (`control.sock`), otherwise fail with cleanup
+  - Requires `arming=1` and `role>=operator` for governed calls
+- Root + Kernel must be reachable (`yai root ping`, `yai kernel --arming --role operator ping`)
+- Engine readiness validated functionally via RPC probe in target workspace context
 
 ### 2.3 status Command
 
-**Command:** `YAI_CMD_ENGINE_STATUS`
+**Command:** `yai status` / `yai doctor` plus engine RPC probe semantics
 
 **Rules:**
-- ws_id valid
-- If pid file missing → NOT RUNNING
-- If pid not alive → NOT RUNNING (and clean stale pid)
-- If socket missing → "degraded" state or deterministic error
+- `engine.socket_exposed` is informational only
+- READY requires `root_ping=true`, `kernel_ping=true`, and `engine.rpc_ok=true`
+- `engine.rpc_ok` is validated through governed `yai engine --ws <id> ...` call path
 
 ### 2.4 stop Command
 
-**Command:** `YAI_CMD_ENGINE_STOP`
+**Command:** `yai down --ws <control_ws> --force`
 
 **Rules:**
-- Authority `arming=1 role>=operator`
-- **Graceful kill:**
-  - `SIGTERM`, brief wait, then `SIGKILL` fallback (only if needed)
-- **Cleanup:**
-  - Remove `engine.pid`
-  - Optional: remove `engine/control.sock` (unlink)
+- stop is control-plane scoped; no per-workspace engine process lifecycle requirement
+- post-stop status must return `overall=DEGRADED`
 
 ### Payload Responses
 
 Always valid frame + short JSON:
-- **start ok:** `{"ok":true,"ws":"testws","pid":1234}`
-- **status:** `{"ok":true,"ws":"testws","running":true,"pid":1234,"socket":true}`
-- **stop ok:** `{"ok":true,"ws":"testws","stopped":true}`
+- **status:** includes `engine.rpc_ok` and `engine.socket_exposed`
+- **doctor:** includes same status snapshot and actionable hints
 
 ### Acceptance (kernel-side)
 - [ ] Commands respond deterministically even on error
 
 ---
 
-## STEP 3: Engine Become Workspace-Bound + Socket Listen
+## STEP 3: Engine Shared Plane + Workspace-Scoped Dispatch
 
 ### Files to read FIRST
 - `engine/src/main.c`
@@ -248,15 +225,13 @@ Always valid frame + short JSON:
 
 ### Deliverables
 
-**1. Engine requires ws_id:**
-- Arg `--ws <id>` (preferred)
-- Fallback env `YAI_WS_ID`
-- If missing → non-zero exit + log to stderr
+**1. Engine is attached as shared runtime plane:**
+- single engine runtime plane process under Root/KERNEL governance
+- workspace context comes from dispatch metadata per request
 
-**2. Engine creates socket path (Option A):**
-- `~/.yai/run/<ws_id>/engine/control.sock`
-- `unlink` before bind
-- `listen` and log "Runtime Plane online (path) ws=<id>"
+**2. Engine socket exposure (optional):**
+- if exposed, path is `~/.yai/run/engine/control.sock`
+- do not treat socket exposure as required readiness for qualification
 
 **3. Handshake gate (minimum):**
 - First request must be `YAI_CMD_HANDSHAKE`
@@ -264,11 +239,11 @@ Always valid frame + short JSON:
 - Note: if engine has no real commands yet, just ping/handshake is enough
 
 **4. Logging:**
-- If started by kernel, write to `~/.yai/run/<ws>/engine.log`
-- If can't, at least stderr (kernel can redirect)
+- Runtime logs must preserve `ws_id` per request/trace.
+- Shared engine logs are acceptable as long as workspace context remains explicit.
 
 ### Acceptance
-- [ ] `yai-engine --ws testws` actually creates the socket
+- [ ] Engine attach validated via RPC probe (`yai engine --ws <id> ...`) through Root/Kernel path
 
 ---
 
@@ -286,7 +261,7 @@ Always valid frame + short JSON:
 
 ---
 
-## STEP 5: CLI Commands `yai engine start|stop|status <ws>`
+## STEP 5: CLI Commands (Shared-Plane + Workspace-Scoped Calls)
 
 ### Files to read FIRST
 - `tools/cli/src/cmd_engine.c`
@@ -294,9 +269,11 @@ Always valid frame + short JSON:
 - `tools/cli/src/paths.c` (only if you need ws run dir, but better not)
 
 ### Deliverables
-- `yai engine start testws`
-- `yai engine status testws`
-- `yai engine stop testws`
+- `yai up --ws dev --detach --allow-degraded`
+- `yai status --json`
+- `yai doctor --json`
+- `yai engine --ws testws --arming --role operator storage get_node '{"id":"__yai_status_probe__"}'`
+- `yai down --ws dev --force`
 
 ### Authority
 **start/stop must set:**
@@ -311,11 +288,11 @@ Always valid frame + short JSON:
 
 ### Acceptance
 ```bash
-yai kernel ws create testws
-yai engine start testws
-yai engine status testws
-yai engine stop testws
-yai kernel ws destroy testws
+yai up --ws dev --detach --allow-degraded
+yai status --json
+yai doctor --json
+yai engine --ws testws --arming --role operator storage get_node '{"id":"__yai_status_probe__"}'
+yai down --ws dev --force
 ```
 
 ---
@@ -326,24 +303,20 @@ yai kernel ws destroy testws
 - `tests/integration/test_l2_engine.sh`
 
 ### Minimum cases
-1. start on non-existent ws → deterministic fail
-2. start on valid ws → ok, socket present
-3. double start → `ENGINE_ALREADY_RUNNING`
-4. status running → running true
-5. stop without arming → reject
-6. stop with arming/operator → ok
-7. status after stop → running false
-8. invalid ws_id (in target payload) → deterministic reject
+1. runtime down → `status.overall=DEGRADED`
+2. runtime up + root/kernel ping OK
+3. engine socket not exposed but `engine.rpc_ok=true` → READY
+4. engine RPC probe fails in target ws → deterministic fail
+5. invalid ws_id in payload → deterministic reject
 
 ### Manual equivalent commands
 ```bash
-yai kernel ws create testws
-yai engine start testws
-ls -la ~/.yai/run/testws/engine/control.sock
-yai engine status testws
-yai engine stop testws
-yai engine status testws
-yai kernel ws destroy testws
+yai up --ws dev --detach --allow-degraded
+yai status --json
+yai doctor --json
+yai engine --ws testws --arming --role operator storage put_node '{"id":"attach-probe","kind":"probe","meta":{}}'
+yai engine --ws testws --arming --role operator storage get_node '{"id":"attach-probe"}'
+yai down --ws dev --force
 ```
 
 ---
@@ -366,10 +339,10 @@ yai kernel ws destroy testws
 
 ## Definition of Done (v4)
 
-- [ ] Engine startable per workspace via Kernel
-- [ ] Engine socket present under `~/.yai/run/<ws>/engine/`
-- [ ] CLI has start/stop/status
-- [ ] Envelope-only authority active on start/stop
+- [ ] Engine attach validated via governed RPC probe in target workspace context
+- [ ] `status/doctor` READY semantics include `engine.rpc_ok`
+- [ ] Engine socket exposure treated as informational, not gating
+- [ ] Authority and workspace isolation enforced by Root/Kernel boundaries
 - [ ] Test script PASS
 - [ ] ADR present and respected
 
