@@ -11,10 +11,10 @@ Public launch reference is fixed to `SC102-WAVE1-LAUNCH`.
 ## Launch Reference (Fixed 60-Day ID)
 
 - Launch ID: `SC102-WAVE1-LAUNCH`
-- Canonical wave ID: `WAVE-1-2026-02-25-ddb4e9e`
+- Canonical wave ID: `WAVE-1-2026-02-25-578371a`
 - Proof bundle: `docs/40-qualification/WAVES/SC102-WAVE1-LAUNCH/`
 - Manifest SHA-256: `9bf3305d06edc5d91c8c7a373d1f9268cef8d97fa266e0aa0d5cd244dcd3f00a`
-- Index SHA-256: `0177fa91f394a0a1e990d66a1369ec44e20506cdad217df4cc90a9d2d64d3631`
+- Index SHA-256: `ae29266cd8f5bbd249bcb0d2cc6c078afc39e17eb7edcd14abce1e323e0638e4`
 
 ## Release Identity
 
@@ -24,7 +24,7 @@ Source of truth:
 
 Key fields:
 
-- `yai_git_sha`: `ddb4e9e9c6f18d8f7d109c6ca8bafef81fbb8dbc`
+- `yai_git_sha`: `578371ad7f6e82df576cb61f4009b09082f3b9fd`
 - `yai_cli_git_sha`: `72e487ee55de2efaa7de71374427421a923aa5ed`
 - `specs_pin_sha`: `20abef1874e56e4c3493df5a42697779cba00381`
 

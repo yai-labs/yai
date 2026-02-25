@@ -115,6 +115,54 @@
           "run-003"
         ]
       }
+    },
+    {
+      "pack_id": "D1-digital/egress-v1",
+      "trial_ref": "docs/40-qualification/RT-0.1-004-D1-GITHUB-ISSUE-COMMENT",
+      "required_fields_ref": "docs/30-catalog/domains/packs/D1-digital/egress-v1/evidence.required.v1.json",
+      "select": {
+        "keep": [
+          "run-001"
+        ]
+      },
+      "trial_id": "RT-0.1-004-D1-GITHUB-ISSUE-COMMENT",
+      "baseline_contract_ref": "docs/30-catalog/domains/packs/D1-digital/egress-v1/contracts/baseline-deny.json",
+      "run_cmds": [
+        {
+          "path": "docs/40-qualification/RT-0.1-004-D1-GITHUB-ISSUE-COMMENT/run/run-once.sh",
+          "env": {
+            "BASELINE_ID": "baseline-deny",
+            "TARGET_PROFILE": "github",
+            "GH_REPO": "yai-labs/yai",
+            "GH_ISSUE_NUMBER": "199",
+            "GH_COMMENT_CLEANUP": "1"
+          }
+        }
+      ]
+    },
+    {
+      "pack_id": "D1-digital/egress-v1",
+      "trial_ref": "docs/40-qualification/RT-0.1-004-D1-GITHUB-ISSUE-COMMENT",
+      "required_fields_ref": "docs/30-catalog/domains/packs/D1-digital/egress-v1/evidence.required.v1.json",
+      "select": {
+        "keep": [
+          "run-001"
+        ]
+      },
+      "trial_id": "RT-0.1-004-D1-GITHUB-ISSUE-COMMENT-ALLOW",
+      "baseline_contract_ref": "docs/30-catalog/domains/packs/D1-digital/egress-v1/contracts/baseline-allow.json",
+      "run_cmds": [
+        {
+          "path": "docs/40-qualification/RT-0.1-004-D1-GITHUB-ISSUE-COMMENT/run/run-once.sh",
+          "env": {
+            "BASELINE_ID": "baseline-allow",
+            "TARGET_PROFILE": "github",
+            "GH_REPO": "yai-labs/yai",
+            "GH_ISSUE_NUMBER": "199",
+            "GH_COMMENT_CLEANUP": "1"
+          }
+        }
+      ]
     }
   ]
 }

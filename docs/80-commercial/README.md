@@ -16,7 +16,7 @@ This section contains customer-facing commercialization strategy for YAI.
 ## Launch lock
 
 - Launch ID (fixed 60 days): `SC102-WAVE1-LAUNCH`
-- Golden wave: `WAVE-1-2026-02-25-ddb4e9e`
+- Golden wave: `WAVE-1-2026-02-25-578371a`
 - Golden bundle path: `docs/40-qualification/WAVES/SC102-WAVE1-LAUNCH/`
 
 ## Traceability

@@ -243,8 +243,16 @@ def verify_run(bundle_root: Path, run: dict, repo_root: Path):
 
     metrics = decision.get("metrics", {})
     if run["pack_id"].startswith("D1-digital"):
-        ensure(metrics.get("connect_established") is False, f"D1 connect_established must be false in {run['id']}")
-        ensure(metrics.get("bytes_exfiltrated") == 0, f"D1 bytes_exfiltrated must be 0 in {run['id']}")
+        if run["expected"]["outcome"] == "allow":
+            ensure(bool(metrics.get("connect_established", False)), f"D1 allow must set connect_established=true in {run['id']}")
+            ensure(int(metrics.get("bytes_exfiltrated", 0)) > 0, f"D1 allow must set bytes_exfiltrated>0 in {run['id']}")
+            if "GITHUB" in run["trial_id"]:
+                ensure(bool(decision.get("enforcement", {}).get("effect_applied", False)), f"D1 GitHub allow must apply effect in {run['id']}")
+        else:
+            ensure(metrics.get("connect_established") is False, f"D1 connect_established must be false in {run['id']}")
+            ensure(metrics.get("bytes_exfiltrated") == 0, f"D1 bytes_exfiltrated must be 0 in {run['id']}")
+            if "GITHUB" in run["trial_id"]:
+                ensure(not bool(decision.get("enforcement", {}).get("effect_applied", False)), f"D1 GitHub deny must block effect in {run['id']}")
     if run["pack_id"].startswith("D8-scientific"):
         if run["expected"]["outcome"] == "allow":
             ensure(bool(metrics.get("outputs_persisted", False)), f"D8 outputs_persisted must be true in {run['id']}")

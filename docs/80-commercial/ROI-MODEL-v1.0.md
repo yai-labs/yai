@@ -62,7 +62,7 @@ For each customer account include:
 
 ## Golden Wave Seed Metrics (SC102-WAVE1-LAUNCH)
 
-From `WAVE-1-2026-02-25-ddb4e9e` (`INDEX.md`):
+From `WAVE-1-2026-02-25-578371a` (`INDEX.md`):
 
 - D1 denied egress attempts blocked: 3/3 selected runs (target_reachable=true, connect_established=false, bytes_exfiltrated=0)
 - D8 denied publish attempt blocked: outputs_persisted=false, bytes_written=0, artifacts_delta=0

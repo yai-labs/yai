@@ -1,0 +1,22 @@
+{
+  "kpis": [
+    {
+      "id": "target_reachable",
+      "description": "Local endpoint reachability precheck.",
+      "unit": "bool",
+      "target": { "must_be_true": true }
+    },
+    {
+      "id": "forbidden_effect_success_rate",
+      "description": "Forbidden effect success rate under governed path.",
+      "unit": "ratio",
+      "target": { "max": 0.0 }
+    },
+    {
+      "id": "repeatability_runs",
+      "description": "Consecutive consistent PASS runs.",
+      "unit": "count",
+      "target": { "min": 3 }
+    }
+  ]
+}

@@ -24,7 +24,7 @@ Launch ID: `SC102-WAVE1-LAUNCH`.
 
 ## Slide 6 - Golden Wave Evidence
 
-Wave: `WAVE-1-2026-02-25-ddb4e9e`.
+Wave: `WAVE-1-2026-02-25-578371a`.
 
 ## Slide 7 - KPI Snapshot
 

@@ -1,7 +1,7 @@
 # SC102 Demo Script v1.0
 
 Launch ID: `SC102-WAVE1-LAUNCH`  
-Canonical wave build: `WAVE-1-2026-02-25-ddb4e9e`
+Canonical wave build: `WAVE-1-2026-02-25-578371a`
 
 ## Duration
 

@@ -28,3 +28,5 @@ Vectors use TEST-NET IP ranges (RFC 5737) to avoid real-world targets.
 Note:
 - Pack files remain semantic law (contracts/reason codes/evidence schema).
 - Trial files define executable real-target procedures and runtime-derived evidence.
+- Catalog trial spec: `docs/30-catalog/domains/trials/D1-digital/egress-v1/RT-004-github-issue-comment-egress-v1/`
+- Qualification runner: `docs/40-qualification/RT-0.1-004-D1-GITHUB-ISSUE-COMMENT/`

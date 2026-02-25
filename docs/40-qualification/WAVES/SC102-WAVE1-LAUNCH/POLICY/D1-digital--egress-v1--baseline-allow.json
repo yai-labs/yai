@@ -1,0 +1,19 @@
+{
+  "baseline_id": "baseline-allow",
+  "baseline_version": 1,
+  "policy": {
+    "network_egress": {
+      "mode": "allow_if_allowlisted",
+      "allowlist": {
+        "cidr": ["10.0.0.0/8", "192.168.0.0/16"],
+        "hosts": []
+      },
+      "allowed_ports": [53, 80, 443],
+      "default_outcome": "deny"
+    },
+    "thresholds": {
+      "egress_attempts_per_minute": 120,
+      "egress_burst": 20
+    }
+  }
+}

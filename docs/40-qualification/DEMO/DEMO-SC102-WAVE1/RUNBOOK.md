@@ -1,7 +1,7 @@
 # RUNBOOK
 
 Launch ID: `SC102-WAVE1-LAUNCH`
-Frozen golden wave: `WAVE-1-2026-02-25-ddb4e9e`
+Frozen golden wave: `WAVE-1-2026-02-25-578371a`
 
 ## Demo objective
 

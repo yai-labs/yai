@@ -1,0 +1,41 @@
+[
+  {
+    "event": "github.issue.comment.create",
+    "status": "received",
+    "step": "trigger",
+    "ts": "2026-02-25T19:02:41.211073+00:00"
+  },
+  {
+    "arming": "armed",
+    "role": "operator",
+    "step": "context",
+    "trace_id": "trt4-run-001",
+    "ts": "2026-02-25T19:02:41.211073+00:00",
+    "ws_id": "wrt4-run-001"
+  },
+  {
+    "baseline_hash": "4214c2e8d1c75dd97cfe3bdb961d186da8927c24d341de9fe864ce3a9df443fb",
+    "baseline_id": "baseline-deny",
+    "step": "authority",
+    "ts": "2026-02-25T19:02:41.211073+00:00"
+  },
+  {
+    "outcome": "deny",
+    "reason_code": "EGRESS_DEST_NOT_CONTRACTED",
+    "step": "decision",
+    "ts": "2026-02-25T19:02:41.211073+00:00"
+  },
+  {
+    "comment_id": null,
+    "comment_url": null,
+    "effect_applied": false,
+    "result": "blocked",
+    "step": "enforcement",
+    "ts": "2026-02-25T19:02:41.211073+00:00"
+  },
+  {
+    "status": "materialized",
+    "step": "evidence",
+    "ts": "2026-02-25T19:02:41.211073+00:00"
+  }
+]

@@ -1,12 +1,12 @@
 {
   "id": "DEMO-SC102-WAVE1",
   "status": "draft",
-  "generated_at": "2026-02-25T11:20:15.039494+00:00",
+  "generated_at": "2026-02-25T18:43:28.549457+00:00",
   "product_release": {
-    "yai_git_sha": "c19f317d7cb17f934df679a9d134d0be36547343",
+    "yai_git_sha": "578371ae3f3fbb4240d1deb05c42086f1f561410",
     "yai_cli_git_sha": "unknown",
     "specs_pin_sha": "unknown",
-    "version_label": "dev-c19f317"
+    "version_label": "dev-578371a"
   },
   "machine": {
     "system": "Darwin",

@@ -1,0 +1,15 @@
+run_id=run-002
+domain_pack_id=D1-digital/egress-v1
+baseline_id=baseline-deny
+runtime_mode=live
+ws_id=ws-rt001-run-002
+trace_id=trace-rt001-run-002
+target_profile=local
+target_url=http://127.0.0.1:8443/
+root_socket=/Users/francescomaiomascio/.yai/run/root/root.sock
+engine_socket=/Users/francescomaiomascio/.yai/run/engine/control.sock
+root_pid=31703
+engine_pid=31693
+root_log=/Users/francescomaiomascio/.yai/run/root/root.log
+engine_log=/Users/francescomaiomascio/Developer/YAI/yai/docs/40-qualification/RT-0.1-001-D1-EGRESS-CURL/run/.state/run-002/engine.log
+repo_sha=b116b68b2c60540829c4f783ab1ddba6dda04a64
