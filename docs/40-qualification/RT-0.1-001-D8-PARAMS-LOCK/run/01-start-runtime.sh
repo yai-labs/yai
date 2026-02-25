@@ -89,11 +89,6 @@ ROOT_PID="$(pgrep -f yai-root-server | tail -n1 || true)"
 KERNEL_PID="$(pgrep -f yai-kernel | tail -n1 || true)"
 ENGINE_PID="$(pgrep -f "yai-engine.*$WS_ID" | tail -n1 || true)"
 
-if [[ -z "${ENGINE_PID:-}" ]] || ! kill -0 "${ENGINE_PID}" >/dev/null 2>&1; then
-  echo "engine attach check failed: no live yai-engine process for ws=$WS_ID" >&2
-  exit 1
-fi
-
 ENGINE_PROBE_ID="engine-attach-${RUN_ID}"
 probe_ok=0
 for _ in $(seq 1 40); do
@@ -107,7 +102,7 @@ if [[ "$probe_ok" != "1" ]]; then
   echo "engine attach check failed: rpc probe did not succeed for ws=$WS_ID" >&2
   exit 1
 fi
-echo "engine attach verified: rpc_probe id=$ENGINE_PROBE_ID pid=$ENGINE_PID" >&2
+echo "engine attach verified: rpc_probe id=$ENGINE_PROBE_ID ws=$WS_ID" >&2
 export ENGINE_PID ENGINE_PROBE_ID
 
 python3 - <<PY2
@@ -121,7 +116,7 @@ open(os.path.join(os.environ["STATE_DIR"], "pids.json"), "w", encoding="utf-8").
 PY2
 
 if [[ ! -S "$ENGINE_SOCK" ]]; then
-  echo "engine control socket not exposed; attach verified by live process pid=$ENGINE_PID" >&2
+  echo "engine control socket not exposed; attach verified via rpc probe" >&2
 fi
 
 python3 - <<'PY2'
@@ -141,7 +136,6 @@ state = {
   },
   "engine_attach": {
     "required": True,
-    "engine_pid": int(os.environ.get("ENGINE_PID", "0") or 0),
     "probe_id": os.environ.get("ENGINE_PROBE_ID", ""),
     "method": "rpc_probe",
     "ok": int(os.environ.get("ENGINE_PID", "0") or 0) > 0,
