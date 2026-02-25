@@ -49,3 +49,12 @@ Validate that one production-relevant AI workflow can be governed with determini
 - `docs/80-commercial/COMMERCIAL-PLAN-v1.0.md`
 - `docs/30-catalog/scenarios/SC-102.md`
 - `docs/40-qualification/QT-0.1-003-SC102-WAVE1/`
+
+
+## Launch Reference (Pilot Baseline)
+
+All pilot communications must reference:
+
+- Launch ID: `SC102-WAVE1-LAUNCH`
+- Golden wave: `WAVE-1-2026-02-25-0e7af41`
+- Evidence source: `docs/40-qualification/WAVES/WAVE-1-2026-02-25-0e7af41/`

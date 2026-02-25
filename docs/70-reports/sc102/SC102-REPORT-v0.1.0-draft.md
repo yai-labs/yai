@@ -17,6 +17,17 @@ Minimum identity fields to report:
 - `specs_pin_sha`
 - `version_label`
 
+
+## Launch Reference (Fixed 60-Day ID)
+
+- Launch ID: `SC102-WAVE1-LAUNCH`
+- Frozen wave ID: `WAVE-1-2026-02-25-0e7af41`
+- Manifest SHA-256: `689573e73feb4a52fb0cc36bec974579af91f22f860e87754b559a16984263f1`
+- Index SHA-256: `0d93028eb389e2932f5b2499a1b6cf43dd927e8e8a7a17192cfba0a3171d8e61`
+- yai sha: `0e7af41437f14f0fbb4fc5bdc23738909ea9176a`
+- yai-cli sha: `72e487ee55de2efaa7de71374427421a923aa5ed`
+- specs pin sha: `20abef1874e56e4c3493df5a42697779cba00381`
+
 ## Wave Coverage
 
 Wave entrypoint:

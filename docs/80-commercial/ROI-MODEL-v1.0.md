@@ -58,3 +58,13 @@ For each customer account include:
 - Use conservative assumptions for first commercial proposal.
 - Recompute after pilot completion with measured values.
 - Always reference concrete `wave_id` in ROI appendices.
+
+
+## Golden Wave Seed Metrics (SC102-WAVE1-LAUNCH)
+
+From `WAVE-1-2026-02-25-0e7af41` (`INDEX.md`):
+
+- D1 denied egress attempts blocked: 3/3 selected runs (target_reachable=true, connect_established=false, bytes_exfiltrated=0)
+- D8 denied publish attempt blocked: outputs_persisted=false, bytes_written=0, artifacts_delta=0
+
+Use these as conservative baseline proof points until pilot-specific measured numbers replace assumptions.

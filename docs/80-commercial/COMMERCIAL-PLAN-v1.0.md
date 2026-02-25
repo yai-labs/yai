@@ -400,3 +400,21 @@ Customer decks, pilot reports, and ROI claims must include:
 - path to `INDEX.md`
 - verify result stamp (pass/fail + timestamp)
 
+
+## 18. Launch Reference Freeze (60-Day Lock)
+
+Launch reference ID (fixed, no variants for 60 days):
+
+- `SC102-WAVE1-LAUNCH`
+
+Frozen golden execution:
+
+- `wave_id`: `WAVE-1-2026-02-25-0e7af41`
+- bundle path: `docs/40-qualification/WAVES/WAVE-1-2026-02-25-0e7af41/`
+- manifest sha256: `689573e73feb4a52fb0cc36bec974579af91f22f860e87754b559a16984263f1`
+- index sha256: `0d93028eb389e2932f5b2499a1b6cf43dd927e8e8a7a17192cfba0a3171d8e61`
+- yai git sha: `0e7af41437f14f0fbb4fc5bdc23738909ea9176a`
+- yai-cli git sha: `72e487ee55de2efaa7de71374427421a923aa5ed`
+- specs pin sha: `20abef1874e56e4c3493df5a42697779cba00381`
+
+This launch reference must be identical across deck, one-pager, runbook, report, and SOW.

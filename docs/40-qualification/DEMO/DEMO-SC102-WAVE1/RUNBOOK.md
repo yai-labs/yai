@@ -1,5 +1,8 @@
 # RUNBOOK
 
+Launch ID: `SC102-WAVE1-LAUNCH`
+Frozen golden wave: `WAVE-1-2026-02-25-0e7af41`
+
 ## Demo objective
 
 Demonstrate, in 10-15 minutes, that YAI can run one governed cross-domain wave (D1 + D8), produce auditable evidence, and verify it deterministically.
