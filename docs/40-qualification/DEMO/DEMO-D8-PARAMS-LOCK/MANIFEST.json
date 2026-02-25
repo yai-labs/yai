@@ -1,0 +1,13 @@
+{
+  "id": "DEMO-D8-PARAMS-LOCK",
+  "generated_at": null,
+  "product_release": {
+    "yai_git_sha": null,
+    "yai_cli_git_sha": null,
+    "specs_pin_sha": null,
+    "version_label": null
+  },
+  "runtime_outputs": {
+    "trial_runtime_ref": null
+  }
+}
