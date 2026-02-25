@@ -409,12 +409,76 @@ Launch reference ID (fixed, no variants for 60 days):
 
 Frozen golden execution:
 
-- `wave_id`: `WAVE-1-2026-02-25-bf59d51`
-- bundle path: `docs/40-qualification/WAVES/WAVE-1-2026-02-25-bf59d51/`
-- manifest sha256: `7f6806492950858a1b78fe99bb02701443eba77a371dfea2095cd0df2cb5b100`
-- index sha256: `9b320ec5d5edcd7ccc5630a940bf9d5e8af36f6fc808350b8990eed92a2c4f6c`
-- yai git sha: `bf59d51941456042b71f268468d9a62dbf53d74d`
+- `wave_id`: `WAVE-1-2026-02-25-ddb4e9e`
+- bundle path: `docs/40-qualification/WAVES/SC102-WAVE1-LAUNCH/`
+- manifest sha256: `9bf3305d06edc5d91c8c7a373d1f9268cef8d97fa266e0aa0d5cd244dcd3f00a`
+- index sha256: `0177fa91f394a0a1e990d66a1369ec44e20506cdad217df4cc90a9d2d64d3631`
+- yai git sha: `ddb4e9e9c6f18d8f7d109c6ca8bafef81fbb8dbc`
 - yai-cli git sha: `72e487ee55de2efaa7de71374427421a923aa5ed`
 - specs pin sha: `20abef1874e56e4c3493df5a42697779cba00381`
+- policy hash: `faf40d98fd52b94cbbc81ed6d9205dd7efa9875413f4624c51b14f14f8aa3270`
+- policy ref: `docs/40-qualification/WAVES/SC102-WAVE1-LAUNCH/POLICY/`
 
 This launch reference must be identical across deck, one-pager, runbook, report, and SOW.
+
+## 19. Star Case Offer v1 - AI Production Change Guard (Official)
+
+### 19.1 Offer outcome
+
+- Fail-closed governance on one agentic workflow.
+- Deterministic evidence bundle (`MANIFEST.json`, `INDEX.md`, `verify.sh`, pinned `POLICY/`).
+- Replayable deny/allow proof linked to one immutable launch reference.
+
+### 19.2 Fixed scope
+
+- Scenario: `SC-102`
+- Packs: `D1-digital/egress-v1`, `D8-scientific/reproducibility-parameter-lock-v1`
+- Entrypoint: `QT-0.1-003-SC102-WAVE1`
+- Launch alias: `docs/40-qualification/WAVES/SC102-WAVE1-LAUNCH/`
+
+### 19.3 Definition of done (non-negotiable)
+
+1. `run-wave.sh` succeeds and emits a launch-linked bundle.
+2. `verify.sh` succeeds with deterministic PASS/FAIL exit codes.
+3. Policy files are pinned in `POLICY/` with hash-verified integrity.
+4. Deny and allow outcomes are both present in `RUNS/` and reflected in `INDEX.md`.
+
+### 19.4 Pilot motion
+
+- 14-day pilot on one workflow.
+- Day-14 decision gate: `expand` or `stop`.
+- Expand path: add packs/workspaces/teams first; Mind integration later.
+
+### 19.5 Launch colossus track
+
+Wave-1 launch colossus: **GitHub Issue Comment Agent** (no simulation).
+
+- Deny run: comment creation blocked.
+- Allow run: comment allowed only for explicitly contracted repo target.
+- Evidence: decision reason code, policy hash, effect applied/not applied, verify PASS.
+
+Slack/Webhook and framework-agent variants are queued as Wave-2/Wave-3 extensions.
+
+## 20. Next Star Case Placeholder (Roadmap)
+
+- Next Star Case: `AutoAudit (no AI)`
+- Objective: automate audit-readiness over evidence + policy bundles without agent execution.
+- Status: placeholder only (not in current implementation scope).
+
+## 21. Public vs Enterprise Framing (Canonical)
+
+### 21.1 Public-facing layer
+
+- Wave proofs are the public demo surface.
+- Each wave is a recognizable use case + deny/allow outcome + evidence + deterministic verify.
+- D1 + D8 are shown as foundational guardrails (external effects + reproducibility lock), not as the headline.
+
+### 21.2 Enterprise-facing layer
+
+- Domains/packs provide taxonomy, rigor, and procurement-grade control mapping.
+- Contracts/baselines provide formal policy references and pinned hashes.
+- D2..D9 scale by demand and enterprise requirements without changing the runtime grammar.
+
+### 21.3 Canonical one-liner
+
+"Wave proofs are the demonstrations. Domains are the theory and catalog that make demonstrations extensible and sellable."

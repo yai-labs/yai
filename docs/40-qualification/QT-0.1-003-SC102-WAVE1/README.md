@@ -4,7 +4,7 @@ title: SC-102 Wave 1 Aggregate Gate (D1 + D8)
 status: draft
 owner: runtime
 effective_date: 2026-02-25
-revision: 2
+revision: 3
 catalog_scenario_ref: docs/30-catalog/scenarios/SC-102.md
 ---
 
@@ -14,7 +14,7 @@ Canonical SC102 Wave 1 orchestrator.
 
 Scope:
 - D1 digital egress containment (RT-001/002/003)
-- D8 scientific params-lock containment (RT-001)
+- D8 scientific params-lock containment (RT-001 deny + allow)
 
 ## One-button run
 
@@ -29,17 +29,23 @@ Evidence and logs are written to:
 
 `~/.yai/qualifications/SC102/<wave_id>/<timestamp>/`
 
-This keeps repo execution clean.
+## Bundle outputs (inside repo)
 
-## Bundle output (inside repo)
+Canonical build bundle:
 
 `docs/40-qualification/WAVES/<wave_id>/`
 
+Stable launch alias (public-facing):
+
+`docs/40-qualification/WAVES/SC102-WAVE1-LAUNCH/`
+
 Generated artifacts:
 - `README.md`
-- `INDEX.md`
 - `MANIFEST.json`
-- `evidence/` (selected runs only)
+- `INDEX.md`
+- `POLICY/` (pinned deny/allow policy files + hashes)
+- `RUNS/deny/`
+- `RUNS/allow/`
 - `verify/verify.sh`
 - `verify/verify_wave.py`
 
@@ -51,7 +57,6 @@ Single source of truth:
 
 To add a new pack/domain to the wave, edit only `wave/wave.yaml`.
 
-
 ## Commercial consumption
 
 This QT is the execution entrypoint used by commercial collateral.
@@ -61,6 +66,6 @@ Upstream business context:
 - `docs/30-catalog/scenarios/SC-102.md`
 
 Downstream proof package:
-- `docs/40-qualification/WAVES/<wave_id>/MANIFEST.json`
-- `docs/40-qualification/WAVES/<wave_id>/INDEX.md`
-- `docs/40-qualification/WAVES/<wave_id>/verify/verify.sh`
+- `docs/40-qualification/WAVES/SC102-WAVE1-LAUNCH/MANIFEST.json`
+- `docs/40-qualification/WAVES/SC102-WAVE1-LAUNCH/INDEX.md`
+- `docs/40-qualification/WAVES/SC102-WAVE1-LAUNCH/verify/verify.sh`

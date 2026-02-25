@@ -1,0 +1,14 @@
+{
+  "baseline_id": "baseline-allow",
+  "baseline_version": 1,
+  "policy": {
+    "scientific_runs": {
+      "mode": "allow_if_reproducible",
+      "require_params_hash": true,
+      "require_provenance": true,
+      "require_pinned_dataset_ref": true,
+      "allowed_pipeline_ids": ["PIPE-EXP-001", "PIPE-SIM-002"],
+      "default_outcome": "deny"
+    }
+  }
+}

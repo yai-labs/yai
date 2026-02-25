@@ -24,7 +24,7 @@ Launch ID: `SC102-WAVE1-LAUNCH`.
 
 ## Slide 6 - Golden Wave Evidence
 
-Wave: `WAVE-1-2026-02-25-bf59d51`.
+Wave: `WAVE-1-2026-02-25-ddb4e9e`.
 
 ## Slide 7 - KPI Snapshot
 
@@ -43,3 +43,9 @@ Review-hours saved, approval-cycle reduction, risk proxy reduction.
 ## Slide 10 - Next Step
 
 Start pilot, run wave, decide expand/stop on day 14.
+
+## Slide Addendum - Framing Rule
+
+- Wave proofs = what buyers see first.
+- Domains/packs = what procurement and assurance teams validate.
+- Keep this split explicit in every presentation.

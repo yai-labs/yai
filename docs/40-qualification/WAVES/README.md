@@ -2,14 +2,16 @@
 
 Canonical source-of-truth policy for qualification outputs:
 
-- Public/product truth: `docs/40-qualification/WAVES/<wave_id>/` bundles.
-- Runtime cache/archive: `~/.yai/qualifications/...` (local, non-product artifact).
+- Public/product truth: `docs/40-qualification/WAVES/SC102-WAVE1-LAUNCH/`
+- Canonical generated build: `docs/40-qualification/WAVES/WAVE-<n>-YYYY-MM-DD-<gitshortsha>/`
+- Runtime cache/archive: `~/.yai/qualifications/...` (local, non-product artifact)
 
 Naming policy:
-- Canonical wave id must be immutable and release-linked: `WAVE-<n>-YYYY-MM-DD-<gitshortsha>`.
-- Legacy wave folders without release suffix are non-canonical and must live under `_archive/`.
+- Launch ID is fixed for collateral: `SC102-WAVE1-LAUNCH`
+- Canonical wave id is immutable and release-linked: `WAVE-<n>-YYYY-MM-DD-<gitshortsha>`
+- Legacy bundles without release suffix belong under `_archive/`
 
 Operational rule:
-- Keep only current canonical wave bundles in `WAVES/` root.
-- Move superseded or legacy bundles to `WAVES/_archive/`.
-- `WAVES/LATEST` must point to the current canonical wave directory name.
+- `LATEST` points to the launch alias directory name.
+- Launch alias always contains: `MANIFEST.json`, `INDEX.md`, `verify.sh`, `POLICY/`, `RUNS/deny/`, `RUNS/allow/`.
+- Superseded canonical builds are moved to `WAVES/_archive/` when no longer referenced.

@@ -1,0 +1,6 @@
+{"ts": "2026-02-25T18:17:26.378326+00:00", "step": "trigger", "event": "scientific.publish.attempt", "status": "received", "variant": "valid"}
+{"ts": "2026-02-25T18:17:26.378326+00:00", "step": "context", "ws_id": "wrt8-003", "trace_id": "trt8-003", "role": "operator", "arming": "armed"}
+{"ts": "2026-02-25T18:17:26.378326+00:00", "step": "authority", "baseline_id": "baseline-allow", "baseline_hash": "c85d817e974c9a45774e6e0852477384653e076b3a34bf94f8a331379f24b208"}
+{"ts": "2026-02-25T18:17:26.378326+00:00", "step": "decision", "outcome": "allow", "reason_code": "PARAMS_LOCK_VALID"}
+{"ts": "2026-02-25T18:17:26.378326+00:00", "step": "enforcement", "result": "published", "outputs_persisted": true, "bytes_written": 179, "artifacts_delta": 1}
+{"ts": "2026-02-25T18:17:26.378326+00:00", "step": "evidence", "status": "materialized"}

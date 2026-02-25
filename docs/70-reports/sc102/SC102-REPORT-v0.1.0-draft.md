@@ -2,82 +2,69 @@
 
 ## Executive Summary
 
-SC102 Wave 1 demonstrates governed runtime containment across two different domain semantics using the same runtime grammar (`contract -> decision -> enforcement -> evidence`).
+SC102 Wave 1 demonstrates governed runtime containment across two domain semantics using one deterministic grammar:
+
+`contract -> decision -> enforcement -> evidence`
+
+Public launch reference is fixed to `SC102-WAVE1-LAUNCH`.
+
+## Launch Reference (Fixed 60-Day ID)
+
+- Launch ID: `SC102-WAVE1-LAUNCH`
+- Canonical wave ID: `WAVE-1-2026-02-25-ddb4e9e`
+- Proof bundle: `docs/40-qualification/WAVES/SC102-WAVE1-LAUNCH/`
+- Manifest SHA-256: `9bf3305d06edc5d91c8c7a373d1f9268cef8d97fa266e0aa0d5cd244dcd3f00a`
+- Index SHA-256: `0177fa91f394a0a1e990d66a1369ec44e20506cdad217df4cc90a9d2d64d3631`
 
 ## Release Identity
 
 Source of truth:
 
-- `docs/40-qualification/WAVES/<wave_id>/MANIFEST.json`
+- `docs/40-qualification/WAVES/SC102-WAVE1-LAUNCH/MANIFEST.json`
 
-Minimum identity fields to report:
+Key fields:
 
-- `yai_git_sha`
-- `yai_cli_git_sha`
-- `specs_pin_sha`
-- `version_label`
+- `yai_git_sha`: `ddb4e9e9c6f18d8f7d109c6ca8bafef81fbb8dbc`
+- `yai_cli_git_sha`: `72e487ee55de2efaa7de71374427421a923aa5ed`
+- `specs_pin_sha`: `20abef1874e56e4c3493df5a42697779cba00381`
 
+## Policy In Force
 
-## Launch Reference (Fixed 60-Day ID)
-
-- Launch ID: `SC102-WAVE1-LAUNCH`
-- Frozen wave ID: `WAVE-1-2026-02-25-bf59d51`
-- Manifest SHA-256: `7f6806492950858a1b78fe99bb02701443eba77a371dfea2095cd0df2cb5b100`
-- Index SHA-256: `9b320ec5d5edcd7ccc5630a940bf9d5e8af36f6fc808350b8990eed92a2c4f6c`
-- yai sha: `bf59d51941456042b71f268468d9a62dbf53d74d`
-- yai-cli sha: `72e487ee55de2efaa7de71374427421a923aa5ed`
-- specs pin sha: `20abef1874e56e4c3493df5a42697779cba00381`
-
-## Wave Coverage
-
-Wave entrypoint:
-
-- `docs/40-qualification/QT-0.1-003-SC102-WAVE1/`
-
-Covered packs:
-
-- `D1-digital/egress-v1`
-- `D8-scientific/reproducibility-parameter-lock-v1`
+- Policy ref: `docs/40-qualification/WAVES/SC102-WAVE1-LAUNCH/POLICY/`
+- Policy digest (`policy_hash`): `faf40d98fd52b94cbbc81ed6d9205dd7efa9875413f4624c51b14f14f8aa3270`
+- Baseline mode: `FAIL-CLOSED`
 
 ## Star Case Evidence Summary
 
 Star Case: `AI Production Change Guard`
 
-Verification chain:
+Business proof rows are in:
 
-1. Execute wave: `run/run-wave.sh`
-2. Verify bundle: `verify/verify.sh`
-3. Consume summary in `INDEX.md`
+- `docs/40-qualification/WAVES/SC102-WAVE1-LAUNCH/INDEX.md`
 
-Expected key outcomes for customer-facing proof:
+Expected readout:
 
-- D1 rows: `outcome=deny`, `reason=EGRESS_DEST_NOT_CONTRACTED`, `connect_established=false`, `bytes_exfiltrated=0`
-- D8 deny row: `outcome=deny`, `reason=PARAMS_LOCK_INVALID`, `outputs_persisted=false`, `bytes_written=0`, `artifacts_delta=0`
-- D8 allow row: `outcome=allow`, `reason=PARAMS_LOCK_VALID`, `outputs_persisted=true`, `bytes_written>0`, `artifacts_delta>0`
+- D1 rows: deny + blocked egress effect (`connect_established=false`, `bytes_exfiltrated=0`)
+- D8 deny row: blocked publish (`outputs_persisted=false`, `bytes_written=0`, `artifacts_delta=0`)
+- D8 allow row: governed publish (`outputs_persisted=true`, `bytes_written>0`, `artifacts_delta>0`)
 
-## Operator Demo
+## Verification
 
-- reference: `docs/40-qualification/DEMO/DEMO-SC102-WAVE1/`
+```bash
+cd docs/40-qualification/WAVES/SC102-WAVE1-LAUNCH
+./verify/verify.sh
+```
 
-## Benchmark Snapshot
+Expected: `PASS: Wave bundle verified`
 
-- reference: `docs/50-validation/benchmarks/sc102/`
+## Commercial Recommendation
 
-## Commercial Readout Template
+- Ready for design-partner pilot: **YES**
+- Positioning: pilot operational governance proof (not full enterprise rollout)
+- Next star case placeholder: `AutoAudit (no AI)`
 
-For each customer run include:
-
-- Customer/profile identifier
-- `wave_id`
-- verification result
-- KPI deltas versus baseline process
-- go/no-go recommendation
-
-## Appendix
-
-Primary links:
+## References
 
 - `docs/80-commercial/COMMERCIAL-PLAN-v1.0.md`
+- `docs/80-commercial/DEMO-SCRIPT-v1.0.md`
 - `docs/30-catalog/scenarios/SC-102.md`
-- `docs/40-qualification/WAVES/<wave_id>/INDEX.md`
-- `docs/40-qualification/WAVES/<wave_id>/MANIFEST.json`

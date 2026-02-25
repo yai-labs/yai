@@ -1,5 +1,6 @@
 {
   "id": "WAVE-1",
+  "launch_id": "SC102-WAVE1-LAUNCH",
   "scenario": "SC-102",
   "qt_ref": "docs/40-qualification/QT-0.1-003-SC102-WAVE1",
   "release_ref_mode": "auto",

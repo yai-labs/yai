@@ -56,5 +56,5 @@ Validate that one production-relevant AI workflow can be governed with determini
 All pilot communications must reference:
 
 - Launch ID: `SC102-WAVE1-LAUNCH`
-- Golden wave: `WAVE-1-2026-02-25-bf59d51`
-- Evidence source: `docs/40-qualification/WAVES/WAVE-1-2026-02-25-bf59d51/`
+- Golden wave: `WAVE-1-2026-02-25-ddb4e9e`
+- Evidence source: `docs/40-qualification/WAVES/SC102-WAVE1-LAUNCH/`

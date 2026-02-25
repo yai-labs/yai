@@ -56,6 +56,12 @@ Execution and proof:
 ## Launch Reference (Fixed)
 
 - Launch ID: `SC102-WAVE1-LAUNCH`
-- Golden wave: `WAVE-1-2026-02-25-bf59d51`
-- Proof bundle: `docs/40-qualification/WAVES/WAVE-1-2026-02-25-bf59d51/`
+- Golden wave: `WAVE-1-2026-02-25-ddb4e9e`
+- Proof bundle: `docs/40-qualification/WAVES/SC102-WAVE1-LAUNCH/`
 - Verify command: `./verify/verify.sh`
+
+## Messaging discipline
+
+- Public narrative: show wave proofs (recognizable use case, deny/allow, verify PASS).
+- Enterprise narrative: show domain packs/contracts as the formal control catalog behind the wave.
+- Canonical line: "Wave proofs are the demonstrations. Domains are the catalog that makes them extensible and sellable."
