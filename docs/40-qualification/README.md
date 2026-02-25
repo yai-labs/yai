@@ -8,6 +8,7 @@ Purpose:
 Gate directories:
 - `docs/40-qualification/QT-0.1-001-SC102/`
 - `docs/40-qualification/QT-0.1-002-SC103/`
+- `docs/40-qualification/QT-0.1-003-SC102-WAVE1/`
 - `docs/40-qualification/RT-0.1-001-D1-EGRESS-CURL/`
 - `docs/40-qualification/RT-0.1-002-D1-EGRESS-OTEL/`
 - `docs/40-qualification/RT-0.1-003-D1-EGRESS-S3/`
