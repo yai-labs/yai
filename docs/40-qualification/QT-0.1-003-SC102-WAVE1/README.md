@@ -4,32 +4,49 @@ title: SC-102 Wave 1 Aggregate Gate (D1 + D8)
 status: draft
 owner: runtime
 effective_date: 2026-02-25
-revision: 1
+revision: 2
 catalog_scenario_ref: docs/30-catalog/scenarios/SC-102.md
 ---
 
 # QT-0.1-003-SC102-WAVE1
 
-Aggregate qualification gate for SC-102 Wave 1.
+Canonical SC102 Wave 1 orchestrator.
 
 Scope:
-- D1 digital egress containment (`QT-0.1-001-SC102`, live mode)
-- D8 scientific params-lock containment (`RT-0.1-001-D8-PARAMS-LOCK`, docker profile)
+- D1 digital egress containment (RT-001/002/003)
+- D8 scientific params-lock containment (RT-001)
 
-## Run
+## One-button run
 
 ```bash
 cd docs/40-qualification/QT-0.1-003-SC102-WAVE1
-./run/run-wave1.sh
+./run/run-wave.sh
 ```
 
-## Expected outcome
+## Runtime output (outside repo)
 
-- D1 live: `3/3` pass
-- D8 docker deny: `3/3` pass
-- Both stages print explicit PASS markers.
+Evidence and logs are written to:
 
-## Notes
+`~/.yai/qualifications/SC102/<wave_id>/<timestamp>/`
 
-- This gate is an orchestration wrapper. Evidence remains in the child gate/trial folders.
-- It is intentionally strict: any stage failure exits non-zero.
+This keeps repo execution clean.
+
+## Bundle output (inside repo)
+
+`docs/40-qualification/WAVES/<wave_id>/`
+
+Generated artifacts:
+- `README.md`
+- `INDEX.md`
+- `MANIFEST.json`
+- `evidence/` (selected runs only)
+- `verify/verify.sh`
+- `verify/verify_wave.py`
+
+## Configuration
+
+Single source of truth:
+
+`docs/40-qualification/QT-0.1-003-SC102-WAVE1/wave/wave.yaml`
+
+To add a new pack/domain to the wave, edit only `wave/wave.yaml`.
