@@ -50,3 +50,17 @@ Single source of truth:
 `docs/40-qualification/QT-0.1-003-SC102-WAVE1/wave/wave.yaml`
 
 To add a new pack/domain to the wave, edit only `wave/wave.yaml`.
+
+
+## Commercial consumption
+
+This QT is the execution entrypoint used by commercial collateral.
+
+Upstream business context:
+- `docs/80-commercial/COMMERCIAL-PLAN-v1.0.md`
+- `docs/30-catalog/scenarios/SC-102.md`
+
+Downstream proof package:
+- `docs/40-qualification/WAVES/<wave_id>/MANIFEST.json`
+- `docs/40-qualification/WAVES/<wave_id>/INDEX.md`
+- `docs/40-qualification/WAVES/<wave_id>/verify/verify.sh`
