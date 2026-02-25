@@ -38,7 +38,7 @@ def run_cmd(cmd: list[str], cwd: Path, env: dict | None = None, log_path: Path |
 
 def git_value(repo: Path, args: list[str], default: str = "unknown") -> str:
     try:
-        out = subprocess.check_output(["git", *args], cwd=str(repo), text=True).strip()
+        out = subprocess.check_output(["git", *args], cwd=str(repo), stderr=subprocess.DEVNULL, text=True).strip()
         return out if out else default
     except Exception:
         return default
