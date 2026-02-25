@@ -21,7 +21,13 @@ def sha256_file(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def run_cmd(cmd: list[str], cwd: Path, env: dict | None = None, log_path: Path | None = None) -> tuple[int, str]:
+def run_cmd(
+    cmd: list[str],
+    cwd: Path,
+    env: dict | None = None,
+    log_path: Path | None = None,
+    timeout_s: int | None = None,
+) -> tuple[int, str]:
     final_env = os.environ.copy()
     if env:
         final_env.update(env)
@@ -29,10 +35,33 @@ def run_cmd(cmd: list[str], cwd: Path, env: dict | None = None, log_path: Path |
     if log_path:
         log_path.parent.mkdir(parents=True, exist_ok=True)
         with log_path.open("w", encoding="utf-8") as fh:
-            proc = subprocess.run(cmd, cwd=str(cwd), env=final_env, stdout=fh, stderr=subprocess.STDOUT, text=True)
+            try:
+                proc = subprocess.run(
+                    cmd,
+                    cwd=str(cwd),
+                    env=final_env,
+                    stdout=fh,
+                    stderr=subprocess.STDOUT,
+                    text=True,
+                    timeout=timeout_s,
+                )
+            except subprocess.TimeoutExpired:
+                fh.write(f"\n[wave] TIMEOUT: command exceeded {timeout_s}s\n")
+                fh.flush()
+                return 124, log_path.read_text(encoding="utf-8", errors="replace")
         return proc.returncode, log_path.read_text(encoding="utf-8", errors="replace")
 
-    proc = subprocess.run(cmd, cwd=str(cwd), env=final_env, capture_output=True, text=True)
+    try:
+        proc = subprocess.run(
+            cmd,
+            cwd=str(cwd),
+            env=final_env,
+            capture_output=True,
+            text=True,
+            timeout=timeout_s,
+        )
+    except subprocess.TimeoutExpired:
+        return 124, f"[wave] TIMEOUT: command exceeded {timeout_s}s\n"
     return proc.returncode, proc.stdout + proc.stderr
 
 
@@ -332,6 +361,8 @@ def main() -> int:
     lock_path = qt_dir / "wave" / "wave.lock.json"
     cfg = load_wave_config(cfg_path)
 
+    default_timeout_s = int(os.getenv("YAI_WAVE_CMD_TIMEOUT", "1200"))
+
     now = dt.datetime.now(dt.timezone.utc)
     stamp = now.strftime("%Y%m%dT%H%M%SZ")
     wave_id = canonical_wave_id(cfg, args.wave_id, now, repo_root)
@@ -361,7 +392,10 @@ def main() -> int:
             env.update({k: str(v) for k, v in run_cfg.get("env", {}).items()})
 
             log_path = runtime_logs / f"{idx:02d}_{trial_id}_{cmd_idx}.log"
-            rc, output = run_cmd([str(cmd_path)], cwd=repo_root, env=env, log_path=log_path)
+            timeout_s = int(run_cfg.get("timeout_s", default_timeout_s))
+            print(f"[wave] run start: {trial_id} cmd#{cmd_idx} timeout={timeout_s}s")
+            rc, output = run_cmd([str(cmd_path)], cwd=repo_root, env=env, log_path=log_path, timeout_s=timeout_s)
+            print(f"[wave] run end: {trial_id} cmd#{cmd_idx} rc={rc} log={log_path}")
             if rc != 0:
                 print(output)
                 raise RuntimeError(f"run failed for {trial_id} cmd#{cmd_idx}: {run_cfg['path']}")
