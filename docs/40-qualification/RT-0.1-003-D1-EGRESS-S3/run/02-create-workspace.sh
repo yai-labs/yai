@@ -2,6 +2,15 @@
 set -euo pipefail
 source "$(dirname "$0")/_lib.sh"
 
+if [[ -z "$YAI_BIN" ]]; then
+  echo "yai CLI not found in PATH" >&2
+  exit 1
+fi
+
+# Ensure workspace lifecycle is governed by Root->Kernel path.
+"$YAI_BIN" kernel ws destroy "$WS_ID" --arming --role operator >/dev/null 2>&1 || true
+"$YAI_BIN" kernel ws create "$WS_ID" --arming --role operator >/dev/null
+
 python3 - <<'PY'
 import datetime, json, os
 ctx = {

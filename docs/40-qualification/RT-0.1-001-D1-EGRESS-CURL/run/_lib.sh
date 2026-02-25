@@ -42,6 +42,7 @@ ROOT_STDOUT_LOG="$STATE_DIR/root.stdout.log"
 YAI_BOOT_BIN="$REPO_ROOT/build/bin/yai-boot"
 YAI_ROOT_BIN="$REPO_ROOT/build/bin/yai-root-server"
 YAI_ENGINE_BIN="$REPO_ROOT/build/bin/yai-engine"
+YAI_BIN="${YAI_BIN:-$(command -v yai || true)}"
 
 mkdir -p "$EVIDENCE_DIR" "$STATE_DIR"
 
@@ -75,4 +76,16 @@ wait_for_pid_alive() {
 export RT_DIR REPO_ROOT DOMAIN_PACK_ID BASELINE_ID RUN_ID WORKLOAD_ID ATTACK_PROFILE_ID
 export PACK_DIR BASELINE_FILE EXPECTED_FILE EVIDENCE_ROOT EVIDENCE_DIR STATE_DIR
 export WS_ID TRACE_ID RT_ID TARGET_PROFILE REMOTE_DOMAIN TARGET_SCHEME TARGET_HOST TARGET_PORT TARGET_PATH TARGET_URL ROOT_SOCK KERNEL_SOCK ENGINE_SOCK ROOT_LOG KERNEL_LOG BOOT_LOG ENGINE_LOG ROOT_STDERR_LOG ROOT_STDOUT_LOG
-export YAI_BOOT_BIN YAI_ROOT_BIN YAI_ENGINE_BIN
+export YAI_BOOT_BIN YAI_ROOT_BIN YAI_ENGINE_BIN YAI_BIN
+
+wait_for_root_cli_ready() {
+  local timeout_s="${1:-20}"
+  local i
+  for ((i=0; i<timeout_s*2; i++)); do
+    if [[ -n "$YAI_BIN" ]] && "$YAI_BIN" root ping >/dev/null 2>&1; then
+      return 0
+    fi
+    sleep 0.5
+  done
+  return 1
+}

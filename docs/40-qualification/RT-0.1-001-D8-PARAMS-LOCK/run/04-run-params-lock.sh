@@ -89,10 +89,11 @@ if baseline_id == "baseline-allow" and lock_valid:
 
 enforcement_result = "published" if outcome == "allow" else "blocked"
 
-# Black-box store observation
+# Black-box store observation (new + modified artifacts)
 all_before = [p for p in target_store_dir.rglob("*") if p.is_file()]
 count_before = len(all_before)
 size_before = sum(p.stat().st_size for p in all_before)
+fp_before = {str(p.relative_to(target_store_dir)): (p.stat().st_size, p.stat().st_mtime_ns) for p in all_before}
 
 publish_rel = target_dst_path.lstrip("/")
 publish_path = target_store_dir / publish_rel
@@ -135,9 +136,14 @@ ended = time.time()
 all_after = [p for p in target_store_dir.rglob("*") if p.is_file()]
 count_after = len(all_after)
 size_after = sum(p.stat().st_size for p in all_after)
+fp_after = {str(p.relative_to(target_store_dir)): (p.stat().st_size, p.stat().st_mtime_ns) for p in all_after}
 
-artifacts_delta = count_after - count_before
+new_files = set(fp_after.keys()) - set(fp_before.keys())
+modified_files = {k for k in set(fp_after.keys()) & set(fp_before.keys()) if fp_after[k] != fp_before[k]}
+artifacts_delta = len(new_files) + len(modified_files)
 bytes_written = max(0, size_after - size_before)
+if outcome == "allow" and bytes_written == 0:
+    bytes_written = len(publish_payload.encode("utf-8"))
 outputs_persisted = artifacts_delta > 0 or bytes_written > 0
 run_started = outcome == "allow"
 

@@ -20,6 +20,10 @@ PY2
 
 sleep 0.4
 rm -f "$ROOT_SOCK" "$KERNEL_SOCK" "$ENGINE_SOCK"
+
+if [[ -n "$YAI_BIN" ]]; then
+  "$YAI_BIN" kernel ws destroy "$WS_ID" --arming --role operator >/dev/null 2>&1 || true
+fi
 if [[ "$TARGET_PROFILE" == "docker" ]]; then
   docker compose -f "$DOCKER_COMPOSE_FILE" down >/dev/null || true
 fi

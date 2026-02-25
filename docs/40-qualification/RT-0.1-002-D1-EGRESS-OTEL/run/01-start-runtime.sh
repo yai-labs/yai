@@ -69,6 +69,11 @@ wait_for_pid_alive "$BOOT_PID" 10 || { echo "boot failed" >&2; exit 1; }
 wait_for_socket "$ROOT_SOCK" 20 || { echo "root socket not ready" >&2; exit 1; }
 wait_for_socket "$KERNEL_SOCK" 20 || { echo "kernel socket not ready" >&2; exit 1; }
 
+if ! wait_for_root_cli_ready 20; then
+  echo "root CLI ping not ready" >&2
+  exit 1
+fi
+
 ROOT_PID=$(pgrep -P "$BOOT_PID" yai-root-server | head -n1 || true)
 KERNEL_PID=$(pgrep -P "$BOOT_PID" yai-kernel | head -n1 || true)
 
