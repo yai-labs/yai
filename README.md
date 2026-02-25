@@ -2,6 +2,20 @@
 
 **Make AI accountable: authority-first execution, audit trails, deterministic gates, reproducible evidence.**
 
+## Launch Reference
+
+**Star Case:** AI Production Change Guard  
+**Launch ID:** `SC102-WAVE1-LAUNCH`  
+**Release:** https://github.com/yai-labs/yai/releases/tag/sc102-wave1-launch-v1.0.0
+
+Verify (deterministic):
+
+```bash
+cd docs/40-qualification/WAVES/SC102-WAVE1-LAUNCH
+./verify.sh
+```
+---
+
 YAI is the runtime + program hub for a governed execution stack: deterministic planes, explicit authority, auditable state, and reproducible verification.
 
 ## Repository Role
