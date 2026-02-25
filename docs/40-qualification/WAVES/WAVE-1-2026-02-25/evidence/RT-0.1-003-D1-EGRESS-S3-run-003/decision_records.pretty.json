@@ -10,7 +10,7 @@
       "result": "blocked"
     },
     "event": {
-      "source": "rt001-curl-live",
+      "source": "rt003-s3-live",
       "type": "network.egress.connect"
     },
     "metrics": {
@@ -24,18 +24,18 @@
       "time_to_contain_ms": 0
     },
     "principal": {
-      "id": "principal-rt001",
+      "id": "principal-rt003",
       "role": "operator"
     },
     "target": {
       "dst": {
         "ip": "127.0.0.1",
-        "path": "/",
+        "path": "/bucket/object",
         "port": 8443
       }
     },
-    "timestamp": "2026-02-25T09:53:00.387691+00:00",
-    "trace_id": "trace-qt1-run-002",
-    "ws_id": "ws-qt1-run-002"
+    "timestamp": "2026-02-25T01:38:42.239482+00:00",
+    "trace_id": "trt3",
+    "ws_id": "wrt3"
   }
 ]
