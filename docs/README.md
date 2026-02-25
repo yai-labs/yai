@@ -11,6 +11,7 @@ This repository uses a hard-cut layered documentation structure.
 - Qualification: `docs/40-qualification/`
 - Validation: `docs/50-validation/`
 - Guides: `docs/60-guides/`
+- Commercial: `docs/80-commercial/`
 - Worklog: `docs/90-worklog/`
 
 ## Canonical Anchors
