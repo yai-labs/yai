@@ -135,7 +135,7 @@ static int connect_kernel_socket(void)
         home = "/tmp";
 
     char path[PATH_MAX];
-    snprintf(path, sizeof(path), "%s/.yai/run/engine/control.sock", home);
+    snprintf(path, sizeof(path), "%s/.yai/run/kernel/control.sock", home);
 
     int fd = socket(AF_UNIX, SOCK_STREAM, 0);
     if (fd < 0)
@@ -163,6 +163,41 @@ static int forward_to_kernel_and_relay(int client_fd,
     if (kfd < 0) {
         LOG("[ROOT] Reject internal: cannot connect kernel");
         (void)send_error_response(client_fd, env, YAI_E_INTERNAL_ERROR, "kernel_connect_failed");
+        return -1;
+    }
+
+    yai_rpc_envelope_t kreq;
+    memset(&kreq, 0, sizeof(kreq));
+    kreq.magic = YAI_FRAME_MAGIC;
+    kreq.version = YAI_PROTOCOL_IDS_VERSION;
+    kreq.command_id = YAI_CMD_HANDSHAKE;
+    kreq.payload_len = (uint32_t)sizeof(yai_handshake_req_t);
+    snprintf(kreq.ws_id, sizeof(kreq.ws_id), "%s", env->ws_id);
+    snprintf(kreq.trace_id, sizeof(kreq.trace_id), "%s", env->trace_id);
+    kreq.role = env->role;
+    kreq.arming = env->arming;
+    kreq.checksum = 0;
+
+    yai_handshake_req_t hs;
+    memset(&hs, 0, sizeof(hs));
+    hs.client_version = YAI_PROTOCOL_IDS_VERSION;
+    hs.capabilities_requested = 0;
+    snprintf(hs.client_name, sizeof(hs.client_name), "yai-root");
+
+    if (yai_control_write_frame(kfd, &kreq, &hs) != 0) {
+        LOG("[ROOT] Reject internal: kernel handshake write failed");
+        close(kfd);
+        (void)send_error_response(client_fd, env, YAI_E_INTERNAL_ERROR, "kernel_handshake_write_failed");
+        return -1;
+    }
+
+    yai_rpc_envelope_t kresp;
+    char kpayload[YAI_MAX_PAYLOAD];
+    ssize_t hr = yai_control_read_frame(kfd, &kresp, kpayload, sizeof(kpayload));
+    if (hr < 0 || kresp.command_id != YAI_CMD_HANDSHAKE) {
+        LOG("[ROOT] Reject internal: kernel handshake read failed");
+        close(kfd);
+        (void)send_error_response(client_fd, env, YAI_E_INTERNAL_ERROR, "kernel_handshake_read_failed");
         return -1;
     }
 
