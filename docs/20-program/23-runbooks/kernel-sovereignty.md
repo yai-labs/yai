@@ -98,13 +98,13 @@ Harden kernel sovereignty with formal verification, structured session managemen
 ## Recommended Sequence (Without Getting Stuck)
 
 **A) Immediate (even today):** Multi-stream logger + fix `env->ws_id[0]` warning (helps everywhere)  
-**B) v4:** L2 engine attach (start/stop/status, socket per ws)  
+**B) v4:** L2 engine attach (shared engine plane, ws context via dispatch metadata; ADR-009)  
 **C) Post-v4:** SessionTable hardening + Path Jail + Access Verify + Stress Injection
 
 **Why this is "senior method":**
 1. First put tools in place (observability)
 2. Then do feature (attach engine)
-3. Then deep hardening (security & tables) with real feedback (engine per ws)
+3. Then deep hardening (security & tables) with real feedback (shared engine, multi-WS dispatch context)
 
 ---
 
@@ -456,7 +456,7 @@ CONSTANTS
 
 ### Checklist
 - [ ] TLC confirms `IsolationInvariant`
-- [ ] If adding "spawn engine", "pid", "socket", add as per-workspace variables: `EnginePid[w]`, `EngineSock[w]`
+- [ ] If adding engine liveness observability, keep topology shared-plane and track per-request workspace context (no per-workspace engine process requirement).
 
 ---
 
