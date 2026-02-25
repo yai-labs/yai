@@ -8,8 +8,7 @@ if [[ -z "$YAI_BIN" ]]; then
 fi
 
 # Ensure workspace lifecycle is governed by Root->Kernel path.
-"$YAI_BIN" kernel ws destroy "$WS_ID" --arming --role operator >/dev/null 2>&1 || true
-"$YAI_BIN" kernel ws create "$WS_ID" --arming --role operator >/dev/null
+"$REPO_ROOT/tools/bin/yai-rt" ws-reset --ws "$WS_ID" >/dev/null
 
 python3 - <<'PY'
 import datetime, json, os

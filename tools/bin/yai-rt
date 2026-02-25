@@ -1,0 +1,239 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+YAI_BIN_DEFAULT="$(command -v yai || true)"
+YAI_BIN_ALT="$ROOT/../yai-cli/dist/bin/yai-cli"
+
+if [[ -n "${YAI_BIN:-}" ]]; then
+  :
+elif [[ -n "$YAI_BIN_DEFAULT" ]] && "$YAI_BIN_DEFAULT" up --help >/dev/null 2>&1; then
+  YAI_BIN="$YAI_BIN_DEFAULT"
+elif [[ -x "$YAI_BIN_ALT" ]]; then
+  YAI_BIN="$YAI_BIN_ALT"
+else
+  YAI_BIN="$YAI_BIN_DEFAULT"
+fi
+
+usage() {
+  cat <<USAGE
+Usage:
+  tools/bin/yai-rt up --ws <id> [--boot-bin <path>] [--engine-bin <path>] [--boot-log <path>] [--engine-log <path>] [--provider-host <h>] [--provider-port <p>] [--egress-allowlist <v>]
+  tools/bin/yai-rt down --ws <id> [--pids-json <path>]
+  tools/bin/yai-rt ping
+  tools/bin/yai-rt ws-create --ws <id>
+  tools/bin/yai-rt ws-destroy --ws <id>
+  tools/bin/yai-rt ws-reset --ws <id>
+USAGE
+}
+
+wait_for_socket() {
+  local sock="$1"
+  local timeout_s="${2:-20}"
+  local i
+  for ((i=0; i<timeout_s*10; i++)); do
+    [[ -S "$sock" ]] && return 0
+    sleep 0.1
+  done
+  return 1
+}
+
+wait_for_pid() {
+  local pid="$1"
+  local timeout_s="${2:-10}"
+  local i
+  for ((i=0; i<timeout_s*10; i++)); do
+    kill -0 "$pid" >/dev/null 2>&1 && return 0
+    sleep 0.1
+  done
+  return 1
+}
+
+wait_for_root_ping() {
+  local timeout_s="${1:-20}"
+  local i
+  for ((i=0; i<timeout_s*2; i++)); do
+    if [[ -n "$YAI_BIN" ]] && "$YAI_BIN" root ping >/dev/null 2>&1; then
+      return 0
+    fi
+    sleep 0.5
+  done
+  return 1
+}
+
+supports_yai_up() {
+  [[ -n "$YAI_BIN" ]] || return 1
+  "$YAI_BIN" up --help >/dev/null 2>&1
+}
+
+latest_pid() {
+  local name="$1"
+  pgrep -f "$name" | tail -n1 || true
+}
+
+cmd="${1:-}"
+shift || true
+
+case "$cmd" in
+  up)
+    ws=""
+    boot_bin="$ROOT/build/bin/yai-boot"
+    engine_bin="$ROOT/build/bin/yai-engine"
+    boot_log="/tmp/yai_rt_boot.log"
+    engine_log="/tmp/yai_rt_engine.log"
+    provider_host="127.0.0.1"
+    provider_port="8443"
+    egress_allowlist=""
+
+    while [[ $# -gt 0 ]]; do
+      case "$1" in
+        --ws) ws="$2"; shift 2 ;;
+        --boot-bin) boot_bin="$2"; shift 2 ;;
+        --engine-bin) engine_bin="$2"; shift 2 ;;
+        --boot-log) boot_log="$2"; shift 2 ;;
+        --engine-log) engine_log="$2"; shift 2 ;;
+        --provider-host) provider_host="$2"; shift 2 ;;
+        --provider-port) provider_port="$2"; shift 2 ;;
+        --egress-allowlist) egress_allowlist="$2"; shift 2 ;;
+        *) echo "unknown option: $1" >&2; usage; exit 2 ;;
+      esac
+    done
+
+    [[ -n "$ws" ]] || { echo "--ws required" >&2; exit 2; }
+
+    root_sock="$HOME/.yai/run/root/root.sock"
+    kernel_sock="$HOME/.yai/run/kernel/control.sock"
+    engine_sock="$HOME/.yai/run/engine/control.sock"
+
+    mkdir -p "$HOME/.yai/run/root" "$HOME/.yai/run/kernel" "$HOME/.yai/run/engine"
+    rm -f "$root_sock" "$kernel_sock" "$engine_sock"
+
+    if supports_yai_up; then
+      help_txt="$($YAI_BIN up --help 2>&1 || true)"
+      ws_flag="--ws"
+      [[ "$help_txt" == *"--ws-id"* ]] && ws_flag="--ws-id"
+      [[ "$help_txt" == *"--workspace"* ]] && ws_flag="--workspace"
+
+      cmdline=("$YAI_BIN" up "$ws_flag" "$ws")
+      [[ "$help_txt" == *"--detach"* ]] && cmdline+=("--detach")
+      [[ "$help_txt" == *"--allow-degraded"* ]] && cmdline+=("--allow-degraded")
+      [[ "$help_txt" == *"--root-sock"* ]] && cmdline+=("--root-sock" "$root_sock")
+      [[ "$help_txt" == *"--kernel-sock"* ]] && cmdline+=("--kernel-sock" "$kernel_sock")
+      [[ "$help_txt" == *"--engine-sock"* ]] && cmdline+=("--engine-sock" "$engine_sock")
+
+      "${cmdline[@]}" >"$boot_log" 2>&1 &
+      cli_pid=$!
+      wait_for_pid "$cli_pid" 10 || { echo "yai up failed" >&2; exit 1; }
+
+      wait_for_socket "$root_sock" 20 || { echo "root socket not ready" >&2; exit 1; }
+      wait_for_socket "$kernel_sock" 20 || { echo "kernel socket not ready" >&2; exit 1; }
+      wait_for_root_ping 20 || { echo "root ping not ready" >&2; exit 1; }
+
+      boot_pid="$cli_pid"
+      root_pid="$(latest_pid yai-root-server)"
+      kernel_pid="$(latest_pid yai-kernel)"
+      engine_pid="$(latest_pid yai-engine)"
+      [[ -n "$engine_pid" ]] || engine_pid="$cli_pid"
+    else
+      [[ -x "$boot_bin" ]] || { echo "missing boot bin: $boot_bin" >&2; exit 1; }
+      [[ -x "$engine_bin" ]] || { echo "missing engine bin: $engine_bin" >&2; exit 1; }
+
+      "$boot_bin" >"$boot_log" 2>&1 &
+      boot_pid=$!
+      wait_for_pid "$boot_pid" 10 || { echo "boot failed" >&2; exit 1; }
+      wait_for_socket "$root_sock" 20 || { echo "root socket not ready" >&2; exit 1; }
+      wait_for_socket "$kernel_sock" 20 || { echo "kernel socket not ready" >&2; exit 1; }
+      wait_for_root_ping 20 || { echo "root ping not ready" >&2; exit 1; }
+
+      root_pid="$(pgrep -P "$boot_pid" yai-root-server | head -n1 || true)"
+      kernel_pid="$(pgrep -P "$boot_pid" yai-kernel | head -n1 || true)"
+
+      YAI_ENGINE_ALLOW_DEGRADED="1" YAI_EGRESS_ALLOWLIST="$egress_allowlist" YAI_PROVIDER_HOST="$provider_host" YAI_PROVIDER_PORT="$provider_port" \
+        "$engine_bin" "$ws" >"$engine_log" 2>&1 &
+      engine_pid=$!
+      wait_for_pid "$engine_pid" 10 || { echo "engine failed" >&2; exit 1; }
+    fi
+
+    python3 - <<PY
+import json
+print(json.dumps({
+  "boot_pid": int("${boot_pid:-0}" or 0),
+  "root_pid": int("${root_pid:-0}" or 0),
+  "kernel_pid": int("${kernel_pid:-0}" or 0),
+  "engine_pid": int("${engine_pid:-0}" or 0),
+  "sockets": {
+    "root": "$root_sock",
+    "kernel": "$kernel_sock",
+    "engine": "$engine_sock"
+  }
+}))
+PY
+    ;;
+
+  down)
+    ws=""
+    pids_json=""
+    while [[ $# -gt 0 ]]; do
+      case "$1" in
+        --ws) ws="$2"; shift 2 ;;
+        --pids-json) pids_json="$2"; shift 2 ;;
+        *) echo "unknown option: $1" >&2; usage; exit 2 ;;
+      esac
+    done
+    [[ -n "$ws" ]] || { echo "--ws required" >&2; exit 2; }
+
+    if [[ -n "$pids_json" && -f "$pids_json" ]]; then
+      python3 - <<PY
+import json, os, signal
+p="$pids_json"
+try:
+  data=json.load(open(p,'r',encoding='utf-8'))
+except Exception:
+  data={}
+for k in ('engine_pid','root_pid','kernel_pid','boot_pid'):
+  pid=int(data.get(k,0) or 0)
+  if pid>0:
+    try: os.kill(pid, signal.SIGTERM)
+    except Exception: pass
+PY
+    fi
+
+    if [[ -n "$YAI_BIN" ]]; then
+      "$YAI_BIN" kernel ws destroy "$ws" --arming --role operator >/dev/null 2>&1 || true
+    fi
+
+    rm -f "$HOME/.yai/run/root/root.sock" "$HOME/.yai/run/kernel/control.sock" "$HOME/.yai/run/engine/control.sock"
+    ;;
+
+  ping)
+    [[ -n "$YAI_BIN" ]] || { echo "yai CLI not found" >&2; exit 1; }
+    "$YAI_BIN" root ping
+    ;;
+
+  ws-create)
+    [[ "${1:-}" == "--ws" ]] || { usage; exit 2; }
+    ws="${2:-}"
+    [[ -n "$YAI_BIN" ]] || { echo "yai CLI not found" >&2; exit 1; }
+    "$YAI_BIN" kernel ws create "$ws" --arming --role operator
+    ;;
+
+  ws-destroy)
+    [[ "${1:-}" == "--ws" ]] || { usage; exit 2; }
+    ws="${2:-}"
+    [[ -n "$YAI_BIN" ]] || { echo "yai CLI not found" >&2; exit 1; }
+    "$YAI_BIN" kernel ws destroy "$ws" --arming --role operator
+    ;;
+
+  ws-reset)
+    [[ "${1:-}" == "--ws" ]] || { usage; exit 2; }
+    ws="${2:-}"
+    [[ -n "$YAI_BIN" ]] || { echo "yai CLI not found" >&2; exit 1; }
+    "$YAI_BIN" kernel ws destroy "$ws" --arming --role operator >/dev/null 2>&1 || true
+    "$YAI_BIN" kernel ws create "$ws" --arming --role operator
+    ;;
+
+  *)
+    usage
+    exit 2
+    ;;
+esac
