@@ -93,7 +93,22 @@ if [[ -z "${ENGINE_PID:-}" ]] || ! kill -0 "${ENGINE_PID}" >/dev/null 2>&1; then
   echo "engine attach check failed: no live yai-engine process for ws=$WS_ID" >&2
   exit 1
 fi
-export ENGINE_PID
+
+ENGINE_PROBE_ID="engine-attach-${RUN_ID}"
+probe_ok=0
+for _ in $(seq 1 40); do
+  if "$YAI_BIN" engine --ws "$WS_ID" --arming --role operator storage put_node '{"id":"'"$ENGINE_PROBE_ID"'","kind":"attach_probe","meta":{"source":"sc102"}}' >/dev/null 2>&1 &&      "$YAI_BIN" engine --ws "$WS_ID" --arming --role operator storage get_node '{"id":"'"$ENGINE_PROBE_ID"'"}' >/dev/null 2>&1; then
+    probe_ok=1
+    break
+  fi
+  sleep 0.5
+done
+if [[ "$probe_ok" != "1" ]]; then
+  echo "engine attach check failed: rpc probe did not succeed for ws=$WS_ID" >&2
+  exit 1
+fi
+echo "engine attach verified: rpc_probe id=$ENGINE_PROBE_ID pid=$ENGINE_PID" >&2
+export ENGINE_PID ENGINE_PROBE_ID
 
 python3 - <<PY2
 import json, os
@@ -127,7 +142,8 @@ state = {
   "engine_attach": {
     "required": True,
     "engine_pid": int(os.environ.get("ENGINE_PID", "0") or 0),
-    "method": "process_alive",
+    "probe_id": os.environ.get("ENGINE_PROBE_ID", ""),
+    "method": "rpc_probe",
     "ok": int(os.environ.get("ENGINE_PID", "0") or 0) > 0,
   }
 }
