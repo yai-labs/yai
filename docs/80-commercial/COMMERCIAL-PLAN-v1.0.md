@@ -389,7 +389,7 @@ A customer-facing run is valid only if all are true:
 - `run-wave.sh` exits `0`
 - `verify/verify.sh` exits `0`
 - D1 rows show deny + blocked effect (`connect_established=false`, `bytes_exfiltrated=0`)
-- D8 row shows deny + blocked persistence (`outputs_persisted=false`, `bytes_written=0`, `artifacts_delta=0`)
+- D8 deny row shows blocked persistence (`outputs_persisted=false`, `bytes_written=0`, `artifacts_delta=0`) and D8 allow row shows governed publish success (`outputs_persisted=true`, `bytes_written>0`, `artifacts_delta>0`)
 
 ### 17.6 Packaging Rule
 
@@ -409,11 +409,11 @@ Launch reference ID (fixed, no variants for 60 days):
 
 Frozen golden execution:
 
-- `wave_id`: `WAVE-1-2026-02-25-0e7af41`
-- bundle path: `docs/40-qualification/WAVES/WAVE-1-2026-02-25-0e7af41/`
-- manifest sha256: `689573e73feb4a52fb0cc36bec974579af91f22f860e87754b559a16984263f1`
-- index sha256: `0d93028eb389e2932f5b2499a1b6cf43dd927e8e8a7a17192cfba0a3171d8e61`
-- yai git sha: `0e7af41437f14f0fbb4fc5bdc23738909ea9176a`
+- `wave_id`: `WAVE-1-2026-02-25-bf59d51`
+- bundle path: `docs/40-qualification/WAVES/WAVE-1-2026-02-25-bf59d51/`
+- manifest sha256: `7f6806492950858a1b78fe99bb02701443eba77a371dfea2095cd0df2cb5b100`
+- index sha256: `9b320ec5d5edcd7ccc5630a940bf9d5e8af36f6fc808350b8990eed92a2c4f6c`
+- yai git sha: `bf59d51941456042b71f268468d9a62dbf53d74d`
 - yai-cli git sha: `72e487ee55de2efaa7de71374427421a923aa5ed`
 - specs pin sha: `20abef1874e56e4c3493df5a42697779cba00381`
 

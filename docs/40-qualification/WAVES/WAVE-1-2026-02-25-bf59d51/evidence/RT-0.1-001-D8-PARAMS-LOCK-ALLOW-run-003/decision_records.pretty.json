@@ -1,0 +1,44 @@
+[
+  {
+    "decision": {
+      "baseline_hash": "c85d817e974c9a45774e6e0852477384653e076b3a34bf94f8a331379f24b208",
+      "baseline_id": "baseline-allow",
+      "outcome": "allow",
+      "reason_code": "PARAMS_LOCK_VALID"
+    },
+    "domain_pack_id": "D8-scientific/reproducibility-parameter-lock-v1",
+    "enforcement": {
+      "result": "published"
+    },
+    "event": {
+      "source": "rt001-d8-params-lock-live",
+      "type": "scientific.publish.attempt"
+    },
+    "metrics": {
+      "artifacts_delta": 1,
+      "bytes_written": 179,
+      "outputs_persisted": true,
+      "run_started": true,
+      "target_reachable": true,
+      "time_to_contain_ms": 121
+    },
+    "principal": {
+      "id": "principal-rt001d8",
+      "role": "operator"
+    },
+    "target": {
+      "dataset_ref": "DATASET-TEST-001@sha256:0000000000000000000000000000000000000000000000000000000000000000",
+      "dst": {
+        "path": "/runs/run-003/result.json",
+        "url": "http://127.0.0.1:18080/runs/run-003/result.json"
+      },
+      "lock_hash": "81d239daa74741bb8a913032afd0efa55952390936f254b189cd4eb43397f651",
+      "params_hash": "fce770793252347a831f5476066482f5eee92777df52b4db58fa69e01741f54b",
+      "pipeline_id": "PIPE-EXP-001",
+      "run_id": "run-003"
+    },
+    "timestamp": "2026-02-25T17:46:08.339199+00:00",
+    "trace_id": "trt8-003",
+    "ws_id": "wrt8-003"
+  }
+]

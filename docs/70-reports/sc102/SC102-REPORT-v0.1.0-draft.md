@@ -21,10 +21,10 @@ Minimum identity fields to report:
 ## Launch Reference (Fixed 60-Day ID)
 
 - Launch ID: `SC102-WAVE1-LAUNCH`
-- Frozen wave ID: `WAVE-1-2026-02-25-0e7af41`
-- Manifest SHA-256: `689573e73feb4a52fb0cc36bec974579af91f22f860e87754b559a16984263f1`
-- Index SHA-256: `0d93028eb389e2932f5b2499a1b6cf43dd927e8e8a7a17192cfba0a3171d8e61`
-- yai sha: `0e7af41437f14f0fbb4fc5bdc23738909ea9176a`
+- Frozen wave ID: `WAVE-1-2026-02-25-bf59d51`
+- Manifest SHA-256: `7f6806492950858a1b78fe99bb02701443eba77a371dfea2095cd0df2cb5b100`
+- Index SHA-256: `9b320ec5d5edcd7ccc5630a940bf9d5e8af36f6fc808350b8990eed92a2c4f6c`
+- yai sha: `bf59d51941456042b71f268468d9a62dbf53d74d`
 - yai-cli sha: `72e487ee55de2efaa7de71374427421a923aa5ed`
 - specs pin sha: `20abef1874e56e4c3493df5a42697779cba00381`
 
@@ -52,7 +52,8 @@ Verification chain:
 Expected key outcomes for customer-facing proof:
 
 - D1 rows: `outcome=deny`, `reason=EGRESS_DEST_NOT_CONTRACTED`, `connect_established=false`, `bytes_exfiltrated=0`
-- D8 row: `outcome=deny`, `reason=PARAMS_LOCK_INVALID`, `outputs_persisted=false`, `bytes_written=0`, `artifacts_delta=0`
+- D8 deny row: `outcome=deny`, `reason=PARAMS_LOCK_INVALID`, `outputs_persisted=false`, `bytes_written=0`, `artifacts_delta=0`
+- D8 allow row: `outcome=allow`, `reason=PARAMS_LOCK_VALID`, `outputs_persisted=true`, `bytes_written>0`, `artifacts_delta>0`
 
 ## Operator Demo
 
