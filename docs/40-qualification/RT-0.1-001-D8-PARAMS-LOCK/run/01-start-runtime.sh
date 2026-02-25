@@ -89,6 +89,12 @@ ROOT_PID="$(pgrep -f yai-root-server | tail -n1 || true)"
 KERNEL_PID="$(pgrep -f yai-kernel | tail -n1 || true)"
 ENGINE_PID="$(pgrep -f "yai-engine.*$WS_ID" | tail -n1 || true)"
 
+if [[ -z "${ENGINE_PID:-}" ]] || ! kill -0 "${ENGINE_PID}" >/dev/null 2>&1; then
+  echo "engine attach check failed: no live yai-engine process for ws=$WS_ID" >&2
+  exit 1
+fi
+export ENGINE_PID
+
 python3 - <<PY2
 import json, os
 open(os.path.join(os.environ["STATE_DIR"], "pids.json"), "w", encoding="utf-8").write(json.dumps({
@@ -100,7 +106,7 @@ open(os.path.join(os.environ["STATE_DIR"], "pids.json"), "w", encoding="utf-8").
 PY2
 
 if [[ ! -S "$ENGINE_SOCK" ]]; then
-  echo "engine control socket not exposed; continuing with root-governed path" >&2
+  echo "engine control socket not exposed; attach verified by live process pid=$ENGINE_PID" >&2
 fi
 
 python3 - <<'PY2'
@@ -117,6 +123,12 @@ state = {
     "root": os.environ["ROOT_SOCK"],
     "kernel": os.environ["KERNEL_SOCK"],
     "engine": os.environ["ENGINE_SOCK"],
+  },
+  "engine_attach": {
+    "required": True,
+    "engine_pid": int(os.environ.get("ENGINE_PID", "0") or 0),
+    "method": "process_alive",
+    "ok": int(os.environ.get("ENGINE_PID", "0") or 0) > 0,
   }
 }
 open(os.path.join(os.environ["STATE_DIR"], "runtime.json"), "w", encoding="utf-8").write(json.dumps(state, indent=2))
