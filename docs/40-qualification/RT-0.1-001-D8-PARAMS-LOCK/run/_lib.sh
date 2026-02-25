@@ -55,7 +55,23 @@ ROOT_STDOUT_LOG="$STATE_DIR/root.stdout.log"
 YAI_BOOT_BIN="$REPO_ROOT/build/bin/yai-boot"
 YAI_ROOT_BIN="$REPO_ROOT/build/bin/yai-root-server"
 YAI_ENGINE_BIN="$REPO_ROOT/build/bin/yai-engine"
-YAI_BIN="${YAI_BIN:-$(command -v yai || true)}"
+
+YAI_CLI_REPO="$REPO_ROOT/../yai-cli"
+YAI_BIN_DEFAULT="$(command -v yai || true)"
+YAI_BIN_ALT="$YAI_CLI_REPO/dist/bin/yai"
+YAI_BIN_ALT_LEGACY="$YAI_CLI_REPO/dist/bin/yai-cli"
+
+if [[ -n "${YAI_BIN:-}" ]]; then
+  :
+elif [[ -n "$YAI_BIN_DEFAULT" ]] && "$YAI_BIN_DEFAULT" up --help >/dev/null 2>&1; then
+  YAI_BIN="$YAI_BIN_DEFAULT"
+elif [[ -x "$YAI_BIN_ALT" ]]; then
+  YAI_BIN="$YAI_BIN_ALT"
+elif [[ -x "$YAI_BIN_ALT_LEGACY" ]]; then
+  YAI_BIN="$YAI_BIN_ALT_LEGACY"
+else
+  YAI_BIN="$YAI_BIN_DEFAULT"
+fi
 
 mkdir -p "$EVIDENCE_DIR" "$STATE_DIR"
 

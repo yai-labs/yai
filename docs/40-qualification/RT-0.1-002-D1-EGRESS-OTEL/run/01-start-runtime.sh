@@ -63,17 +63,34 @@ if [[ ! -x "$YAI_BOOT_BIN" || ! -x "$YAI_ENGINE_BIN" ]]; then
   make all >/dev/null
 fi
 
-RT_UP_JSON="$($REPO_ROOT/tools/bin/yai-rt up \
-  --ws "$WS_ID" \
-  --boot-bin "$YAI_BOOT_BIN" \
-  --engine-bin "$YAI_ENGINE_BIN" \
-  --boot-log "$BOOT_LOG" \
-  --engine-log "$ENGINE_LOG" \
-  --provider-host "127.0.0.1" \
-  --provider-port "8443" \
-  --egress-allowlist "")"
+if [[ -z "$YAI_BIN" || ! -x "$YAI_BIN" ]]; then
+  echo "yai CLI not found (set YAI_BIN or build yai-cli)" >&2
+  exit 1
+fi
 
-printf '%s\n' "$RT_UP_JSON" > "$STATE_DIR/pids.json"
+YAI_BOOT_BIN="$YAI_BOOT_BIN" YAI_ENGINE_BIN="$YAI_ENGINE_BIN"   "$YAI_BIN" up --ws "$WS_ID" --detach --allow-degraded >>"$BOOT_LOG" 2>&1
+
+wait_for_socket "$ROOT_SOCK" 20 || { echo "root socket not ready" >&2; exit 1; }
+wait_for_socket "$KERNEL_SOCK" 20 || { echo "kernel socket not ready" >&2; exit 1; }
+if ! wait_for_root_cli_ready 20; then
+  echo "root CLI ping not ready" >&2
+  exit 1
+fi
+
+BOOT_PID="$(pgrep -f yai-boot | tail -n1 || true)"
+ROOT_PID="$(pgrep -f yai-root-server | tail -n1 || true)"
+KERNEL_PID="$(pgrep -f yai-kernel | tail -n1 || true)"
+ENGINE_PID="$(pgrep -f "yai-engine.*$WS_ID" | tail -n1 || true)"
+
+python3 - <<PY2
+import json, os
+open(os.path.join(os.environ["STATE_DIR"], "pids.json"), "w", encoding="utf-8").write(json.dumps({
+  "boot_pid": int("${BOOT_PID:-0}" or 0),
+  "root_pid": int("${ROOT_PID:-0}" or 0),
+  "kernel_pid": int("${KERNEL_PID:-0}" or 0),
+  "engine_pid": int("${ENGINE_PID:-0}" or 0),
+}, indent=2))
+PY2
 
 if [[ ! -S "$ENGINE_SOCK" ]]; then
   echo "engine control socket not exposed; continuing with root-governed path" >&2
