@@ -203,9 +203,14 @@ def verify_run(bundle_root: Path, run: dict, repo_root: Path):
         ensure(metrics.get("connect_established") is False, f"D1 connect_established must be false in {run['id']}")
         ensure(metrics.get("bytes_exfiltrated") == 0, f"D1 bytes_exfiltrated must be 0 in {run['id']}")
     if run["pack_id"].startswith("D8-scientific"):
-        ensure(metrics.get("outputs_persisted") is False, f"D8 outputs_persisted must be false in {run['id']}")
-        ensure(metrics.get("bytes_written") == 0, f"D8 bytes_written must be 0 in {run['id']}")
-        ensure(metrics.get("artifacts_delta") == 0, f"D8 artifacts_delta must be 0 in {run['id']}")
+        if run["expected"]["outcome"] == "allow":
+            ensure(bool(metrics.get("outputs_persisted", False)), f"D8 outputs_persisted must be true in {run['id']}")
+            ensure(int(metrics.get("bytes_written", 0)) > 0, f"D8 bytes_written must be > 0 in {run['id']}")
+            ensure(int(metrics.get("artifacts_delta", 0)) > 0, f"D8 artifacts_delta must be > 0 in {run['id']}")
+        else:
+            ensure(metrics.get("outputs_persisted") is False, f"D8 outputs_persisted must be false in {run['id']}")
+            ensure(metrics.get("bytes_written") == 0, f"D8 bytes_written must be 0 in {run['id']}")
+            ensure(metrics.get("artifacts_delta") == 0, f"D8 artifacts_delta must be 0 in {run['id']}")
 
     return {
         "pack": run["pack_id"],
@@ -338,10 +343,13 @@ def canonical_wave_id(cfg: dict, arg_wave_id: str, now: dt.datetime, repo_root: 
 def expected_reason_codes(pack_id: str, last_reason: str) -> list[str]:
     if pack_id.startswith("D8-scientific"):
         return [
+            "PARAM_LOCK_MISSING",
             "PARAMS_LOCK_MISSING",
+            "PARAMS_LOCK_MISMATCH",
             "PARAMS_LOCK_HASH_MISMATCH",
             "PARAMS_LOCK_INVALID",
             "PARAMS_LOCK_INVALID_SIGNATURE",
+            "PARAMS_LOCK_VALID",
         ]
     if last_reason:
         return [last_reason]
@@ -403,6 +411,9 @@ def main() -> int:
         for run_id in item.get("select", {}).get("keep", []):
             src_run = trial_evidence_root / item["pack_id"] / run_id
             ensure(src_run.exists(), f"missing selected runtime evidence: {src_run}")
+            baseline_id = "baseline-deny"
+            if item.get("run_cmds"):
+                baseline_id = str(item["run_cmds"][0].get("env", {}).get("BASELINE_ID", "baseline-deny"))
             run_records.append(
                 {
                     "trial_id": trial_id,
@@ -412,6 +423,7 @@ def main() -> int:
                     "trial_ref": item["trial_ref"],
                     "baseline_contract_ref": item["baseline_contract_ref"],
                     "required_fields_ref": item["required_fields_ref"],
+                    "baseline_id": baseline_id,
                 }
             )
 
@@ -445,12 +457,14 @@ def main() -> int:
             ensure(fp.exists(), f"missing required file in bundle run {run_key}: {fname}")
             required_hashes[fname] = sha256_file(fp)
 
+        expected_outcome = "allow" if rr.get("baseline_id") == "baseline-allow" else "deny"
         manifest_runs.append(
             {
                 "id": run_key,
                 "trial_id": rr["trial_id"],
                 "pack_id": rr["pack_id"],
                 "run_id": rr["run_id"],
+                "baseline_id": rr.get("baseline_id", "baseline-deny"),
                 "trial_ref": rr["trial_ref"],
                 "bundle_run_dir": str(dst_rel),
                 "source_runtime_ref": str(rr["src_run"]),
@@ -458,7 +472,7 @@ def main() -> int:
                 "required_fields_ref": rr["required_fields_ref"],
                 "required_file_hashes": required_hashes,
                 "expected": {
-                    "outcome": "deny",
+                    "outcome": expected_outcome,
                     "reason_codes": expected_reason_codes(rr["pack_id"], decision["decision"].get("reason_code", "")),
                 },
             }

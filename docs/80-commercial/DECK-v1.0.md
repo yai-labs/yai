@@ -24,12 +24,12 @@ Launch ID: `SC102-WAVE1-LAUNCH`.
 
 ## Slide 6 - Golden Wave Evidence
 
-Wave: `WAVE-1-2026-02-25-0e7af41`.
+Wave: `WAVE-1-2026-02-25-bf59d51`.
 
 ## Slide 7 - KPI Snapshot
 
 - D1 blocked egress attempts
-- D8 blocked non-compliant publish
+- D8 blocked non-compliant publish and allowed compliant publish
 - evidence verification pass
 
 ## Slide 8 - Pilot Offer

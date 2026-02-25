@@ -93,6 +93,27 @@
           "run-003"
         ]
       }
+    },
+    {
+      "trial_id": "RT-0.1-001-D8-PARAMS-LOCK-ALLOW",
+      "pack_id": "D8-scientific/reproducibility-parameter-lock-v1",
+      "trial_ref": "docs/40-qualification/RT-0.1-001-D8-PARAMS-LOCK",
+      "baseline_contract_ref": "docs/30-catalog/domains/packs/D8-scientific/reproducibility-parameter-lock-v1/contracts/baseline-allow.json",
+      "required_fields_ref": "docs/30-catalog/domains/packs/D8-scientific/reproducibility-parameter-lock-v1/evidence.required.v1.json",
+      "run_cmds": [
+        {
+          "path": "docs/40-qualification/RT-0.1-001-D8-PARAMS-LOCK/run/run-three.sh",
+          "env": {
+            "BASELINE_ID": "baseline-allow",
+            "TARGET_PROFILE": "docker"
+          }
+        }
+      ],
+      "select": {
+        "keep": [
+          "run-003"
+        ]
+      }
     }
   ]
 }

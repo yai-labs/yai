@@ -1,7 +1,7 @@
 # SC102 Demo Script v1.0
 
 Launch ID: `SC102-WAVE1-LAUNCH`
-Golden Wave: `WAVE-1-2026-02-25-0e7af41`
+Golden Wave: `WAVE-1-2026-02-25-bf59d51`
 
 ## Duration
 
@@ -30,7 +30,7 @@ Expected: `PASS: wave run complete`.
 ## Step 3 - Open frozen bundle
 
 ```bash
-cd ~/Developer/YAI/yai/docs/40-qualification/WAVES/WAVE-1-2026-02-25-0e7af41
+cd ~/Developer/YAI/yai/docs/40-qualification/WAVES/WAVE-1-2026-02-25-bf59d51
 ./verify/verify.sh
 ```
 
@@ -45,7 +45,8 @@ sed -n '1,120p' INDEX.md
 Expected highlights:
 
 - D1: deny, `connect_established=false`, `bytes_exfiltrated=0`
-- D8: deny, `outputs_persisted=false`, `bytes_written=0`, `artifacts_delta=0`
+- D8 deny: `outputs_persisted=false`, `bytes_written=0`, `artifacts_delta=0`
+- D8 allow: `outputs_persisted=true`, `bytes_written>0`, `artifacts_delta>0`
 
 ## Step 5 - Show release identity
 

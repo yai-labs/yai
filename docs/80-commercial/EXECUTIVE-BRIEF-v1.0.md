@@ -56,6 +56,6 @@ Execution and proof:
 ## Launch Reference (Fixed)
 
 - Launch ID: `SC102-WAVE1-LAUNCH`
-- Golden wave: `WAVE-1-2026-02-25-0e7af41`
-- Proof bundle: `docs/40-qualification/WAVES/WAVE-1-2026-02-25-0e7af41/`
+- Golden wave: `WAVE-1-2026-02-25-bf59d51`
+- Proof bundle: `docs/40-qualification/WAVES/WAVE-1-2026-02-25-bf59d51/`
 - Verify command: `./verify/verify.sh`
