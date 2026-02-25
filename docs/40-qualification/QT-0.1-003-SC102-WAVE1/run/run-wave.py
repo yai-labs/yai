@@ -448,6 +448,8 @@ def main() -> int:
     }
 
     (bundle_dir / "MANIFEST.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+    waves_root = bundle_dir.parent
+    (waves_root / "LATEST").write_text(f"{wave_id}\n", encoding="utf-8")
     write_verify_scripts(bundle_dir)
     generate_bundle_readme(bundle_dir, manifest)
 
