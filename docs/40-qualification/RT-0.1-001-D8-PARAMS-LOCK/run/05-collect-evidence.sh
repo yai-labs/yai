@@ -38,8 +38,11 @@ lines = [
   f"target_store_dir={os.environ['TARGET_STORE_DIR']}",
   f"target_url={os.environ['TARGET_URL']}",
   f"root_socket={os.environ['ROOT_SOCK']}",
+  f"kernel_socket={os.environ.get('KERNEL_SOCK', 'n/a')}",
   f"engine_socket={os.environ['ENGINE_SOCK']}",
+  f"boot_pid={pids.get('boot_pid', 0)}",
   f"root_pid={pids.get('root_pid', 0)}",
+  f"kernel_pid={pids.get('kernel_pid', 0)}",
   f"engine_pid={pids.get('engine_pid', 0)}",
 ]
 sha = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=os.environ["REPO_ROOT"], text=True).strip()

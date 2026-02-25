@@ -2,10 +2,10 @@
 set -euo pipefail
 source "$(dirname "$0")/_lib.sh"
 
-mkdir -p "$HOME/.yai/run/root" "$HOME/.yai/run/engine"
-rm -f "$ROOT_SOCK" "$ENGINE_SOCK"
+mkdir -p "$HOME/.yai/run/root" "$HOME/.yai/run/kernel" "$HOME/.yai/run/engine"
+rm -f "$ROOT_SOCK" "$KERNEL_SOCK" "$ENGINE_SOCK"
 
-python3 - <<'PY'
+python3 - <<'PY2'
 import ctypes, os
 
 ws = os.environ["WS_ID"]
@@ -57,7 +57,7 @@ def ensure(name: str):
 
 ensure(f"/yai_vault_{ws}")
 ensure(f"/yai_vault_{ws}_CORE")
-PY
+PY2
 
 if [[ "$TARGET_PROFILE" == "docker" ]]; then
   mkdir -p "$DOCKER_STORE_DIR"
@@ -66,9 +66,18 @@ else
   mkdir -p "$LOCAL_STORE_DIR"
 fi
 
-if [[ ! -x "$YAI_ROOT_BIN" || ! -x "$YAI_ENGINE_BIN" ]]; then
+if [[ ! -x "$YAI_BOOT_BIN" || ! -x "$YAI_ENGINE_BIN" ]]; then
   make all >/dev/null
 fi
+
+"$YAI_BOOT_BIN" >"$BOOT_LOG" 2>&1 &
+BOOT_PID=$!
+wait_for_pid_alive "$BOOT_PID" 10 || { echo "boot failed" >&2; exit 1; }
+wait_for_socket "$ROOT_SOCK" 20 || { echo "root socket not ready" >&2; exit 1; }
+wait_for_socket "$KERNEL_SOCK" 20 || { echo "kernel socket not ready" >&2; exit 1; }
+
+ROOT_PID=$(pgrep -P "$BOOT_PID" yai-root-server | head -n1 || true)
+KERNEL_PID=$(pgrep -P "$BOOT_PID" yai-kernel | head -n1 || true)
 
 YAI_ENGINE_ALLOW_DEGRADED="1" "$YAI_ENGINE_BIN" "$WS_ID" >"$ENGINE_LOG" 2>&1 &
 ENGINE_PID=$!
@@ -78,23 +87,29 @@ if [[ ! -S "$ENGINE_SOCK" ]]; then
   echo "engine control socket not exposed; continuing with root-governed path" >&2
 fi
 
-"$YAI_ROOT_BIN" >"$ROOT_STDOUT_LOG" 2>"$ROOT_STDERR_LOG" &
-ROOT_PID=$!
-wait_for_pid_alive "$ROOT_PID" 10 || { echo "root failed" >&2; exit 1; }
-wait_for_socket "$ROOT_SOCK" 15 || { echo "root socket not ready" >&2; exit 1; }
-
-python3 - <<PY
+ENGINE_PID="$ENGINE_PID" ROOT_PID="${ROOT_PID:-0}" KERNEL_PID="${KERNEL_PID:-0}" BOOT_PID="$BOOT_PID" python3 - <<'PY2'
 import json, os, datetime
 state = {
   "runtime_mode": "live",
+  "topology": "boot->root->kernel->engine",
   "started_at": datetime.datetime.now(datetime.UTC).isoformat(),
   "domain_pack_id": os.environ["DOMAIN_PACK_ID"],
   "baseline_id": os.environ["BASELINE_ID"],
   "run_id": os.environ["RUN_ID"],
   "target_profile": os.environ["TARGET_PROFILE"],
+  "sockets": {
+    "root": os.environ["ROOT_SOCK"],
+    "kernel": os.environ["KERNEL_SOCK"],
+    "engine": os.environ["ENGINE_SOCK"],
+  }
 }
-open(os.path.join("$STATE_DIR", "runtime.json"), "w", encoding="utf-8").write(json.dumps(state, indent=2))
-open(os.path.join("$STATE_DIR", "pids.json"), "w", encoding="utf-8").write(json.dumps({"engine_pid": int("$ENGINE_PID"), "root_pid": int("$ROOT_PID")}, indent=2))
-PY
+open(os.path.join(os.environ["STATE_DIR"], "runtime.json"), "w", encoding="utf-8").write(json.dumps(state, indent=2))
+open(os.path.join(os.environ["STATE_DIR"], "pids.json"), "w", encoding="utf-8").write(json.dumps({
+  "boot_pid": int(os.environ["BOOT_PID"] or 0),
+  "root_pid": int(os.environ["ROOT_PID"] or 0),
+  "kernel_pid": int(os.environ["KERNEL_PID"] or 0),
+  "engine_pid": int(os.environ["ENGINE_PID"]),
+}, indent=2))
+PY2
 
-echo "runtime started (live): $RUN_ID"
+echo "runtime started (live): $RUN_ID (boot->root->kernel->engine)"

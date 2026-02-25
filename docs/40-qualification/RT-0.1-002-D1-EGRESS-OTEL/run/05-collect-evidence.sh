@@ -37,10 +37,15 @@ lines = [
   f"target_profile={os.environ.get('TARGET_PROFILE', 'local')}",
   f"target_url={os.environ.get('TARGET_URL', 'n/a')}",
   f"root_socket={os.environ['ROOT_SOCK']}",
+  f"kernel_socket={os.environ.get('KERNEL_SOCK', 'n/a')}",
   f"engine_socket={os.environ['ENGINE_SOCK']}",
+  f"boot_pid={pids.get('boot_pid', 0)}",
   f"root_pid={pids.get('root_pid', 0)}",
+  f"kernel_pid={pids.get('kernel_pid', 0)}",
   f"engine_pid={pids.get('engine_pid', 0)}",
+  f"boot_log={os.environ.get('BOOT_LOG', 'n/a')}",
   f"root_log={os.environ['ROOT_LOG']}",
+  f"kernel_log={os.environ.get('KERNEL_LOG', 'n/a')}",
   f"engine_log={os.environ['ENGINE_LOG']}",
 ]
 sha = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=os.environ["REPO_ROOT"], text=True).strip()

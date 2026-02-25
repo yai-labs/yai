@@ -2,21 +2,21 @@
 set -euo pipefail
 source "$(dirname "$0")/_lib.sh"
 
-python3 - <<'PY'
+python3 - <<'PY2'
 import json, os, signal
 p=os.path.join(os.environ['STATE_DIR'],'pids.json')
 try:
     data=json.load(open(p,'r',encoding='utf-8'))
 except Exception:
-    raise SystemExit(0)
-for key in ('root_pid','engine_pid'):
+    data={}
+for key in ('engine_pid','root_pid','kernel_pid','boot_pid'):
     pid=int(data.get(key,0) or 0)
     if pid>0:
         try:
             os.kill(pid, signal.SIGTERM)
         except Exception:
             pass
-PY
+PY2
 
-sleep 0.2
-rm -f "$ROOT_SOCK" "$ENGINE_SOCK"
+sleep 0.4
+rm -f "$ROOT_SOCK" "$KERNEL_SOCK" "$ENGINE_SOCK"

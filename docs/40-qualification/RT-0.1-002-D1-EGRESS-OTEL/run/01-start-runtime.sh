@@ -2,16 +2,14 @@
 set -euo pipefail
 source "$(dirname "$0")/_lib.sh"
 
-mkdir -p "$HOME/.yai/run/root" "$HOME/.yai/run/engine"
-rm -f "$ROOT_SOCK" "$ENGINE_SOCK"
+mkdir -p "$HOME/.yai/run/root" "$HOME/.yai/run/kernel" "$HOME/.yai/run/engine"
+rm -f "$ROOT_SOCK" "$KERNEL_SOCK" "$ENGINE_SOCK"
 
-
-python3 - <<'PY'
+python3 - <<'PY2'
 import ctypes, os
 
 ws = os.environ["WS_ID"]
 libc = ctypes.CDLL(None, use_errno=True)
-
 O_CREAT = os.O_CREAT
 O_RDWR = os.O_RDWR
 PROT_READ = 0x1
@@ -35,8 +33,7 @@ def ensure(name: str):
     libc.shm_unlink(n)
     fd = libc.shm_open(n, O_CREAT | O_RDWR, 0o666)
     if fd < 0:
-        err = ctypes.get_errno()
-        raise OSError(err, f"shm_open failed for {name}")
+        raise OSError(ctypes.get_errno(), f"shm_open failed for {name}")
     if libc.ftruncate(fd, SIZE) != 0:
         err = ctypes.get_errno()
         libc.close(fd)
@@ -46,11 +43,9 @@ def ensure(name: str):
         err = ctypes.get_errno()
         libc.close(fd)
         raise OSError(err, f"mmap failed for {name}")
-
     buf = (ctypes.c_ubyte * SIZE).from_address(ptr)
     for i in range(0, 256):
         buf[i] = 0
-
     quota = 100000
     buf[4:8] = quota.to_bytes(4, "little")
     ws_b = ws.encode()[:63]
@@ -58,17 +53,24 @@ def ensure(name: str):
         buf[12 + i] = b
     buf[12 + len(ws_b)] = 0
     buf[140] = 0
-
     libc.close(fd)
 
 ensure(f"/yai_vault_{ws}")
 ensure(f"/yai_vault_{ws}_CORE")
-PY
+PY2
 
-
-if [[ ! -x "$YAI_ROOT_BIN" || ! -x "$YAI_ENGINE_BIN" ]]; then
+if [[ ! -x "$YAI_BOOT_BIN" || ! -x "$YAI_ENGINE_BIN" ]]; then
   make all >/dev/null
 fi
+
+"$YAI_BOOT_BIN" >"$BOOT_LOG" 2>&1 &
+BOOT_PID=$!
+wait_for_pid_alive "$BOOT_PID" 10 || { echo "boot failed" >&2; exit 1; }
+wait_for_socket "$ROOT_SOCK" 20 || { echo "root socket not ready" >&2; exit 1; }
+wait_for_socket "$KERNEL_SOCK" 20 || { echo "kernel socket not ready" >&2; exit 1; }
+
+ROOT_PID=$(pgrep -P "$BOOT_PID" yai-root-server | head -n1 || true)
+KERNEL_PID=$(pgrep -P "$BOOT_PID" yai-kernel | head -n1 || true)
 
 YAI_ENGINE_ALLOW_DEGRADED="1" YAI_EGRESS_ALLOWLIST="" YAI_PROVIDER_HOST="127.0.0.1" YAI_PROVIDER_PORT="8443" \
 "$YAI_ENGINE_BIN" "$WS_ID" >"$ENGINE_LOG" 2>&1 &
@@ -79,27 +81,28 @@ if [[ ! -S "$ENGINE_SOCK" ]]; then
   echo "engine control socket not exposed; continuing with root-governed path" >&2
 fi
 
-"$YAI_ROOT_BIN" >"$ROOT_STDOUT_LOG" 2>"$ROOT_STDERR_LOG" &
-ROOT_PID=$!
-
-wait_for_pid_alive "$ROOT_PID" 10 || { echo "root failed" >&2; exit 1; }
-wait_for_socket "$ROOT_SOCK" 20 || { echo "root socket not ready" >&2; exit 1; }
-
-ENGINE_PID="$ENGINE_PID" ROOT_PID="$ROOT_PID" python3 - <<'PY'
+ENGINE_PID="$ENGINE_PID" ROOT_PID="${ROOT_PID:-0}" KERNEL_PID="${KERNEL_PID:-0}" BOOT_PID="$BOOT_PID" python3 - <<'PY2'
 import datetime, json, os
 state = {
   "mode": "live",
+  "topology": "boot->root->kernel->engine",
   "started_at": datetime.datetime.now(datetime.UTC).isoformat(),
   "run_id": os.environ["RUN_ID"],
   "ws_id": os.environ["WS_ID"],
   "trace_id": os.environ["TRACE_ID"],
-  "sockets": {"root": os.environ["ROOT_SOCK"], "engine": os.environ["ENGINE_SOCK"]},
+  "sockets": {
+    "root": os.environ["ROOT_SOCK"],
+    "kernel": os.environ["KERNEL_SOCK"],
+    "engine": os.environ["ENGINE_SOCK"],
+  },
 }
 open(os.path.join(os.environ["STATE_DIR"], "runtime.json"), "w", encoding="utf-8").write(json.dumps(state, indent=2))
 open(os.path.join(os.environ["STATE_DIR"], "pids.json"), "w", encoding="utf-8").write(json.dumps({
+  "boot_pid": int(os.environ["BOOT_PID"] or 0),
+  "root_pid": int(os.environ["ROOT_PID"] or 0),
+  "kernel_pid": int(os.environ["KERNEL_PID"] or 0),
   "engine_pid": int(os.environ["ENGINE_PID"]),
-  "root_pid": int(os.environ["ROOT_PID"]),
 }, indent=2))
-PY
+PY2
 
-echo "runtime started (live): $RUN_ID"
+echo "runtime started (live): $RUN_ID (boot->root->kernel->engine)"
