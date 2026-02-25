@@ -16,6 +16,9 @@ and this project adheres to Semantic Versioning.
 
 ### Changed
 
+- release: align `deps/yai-law` and `deps/yai-cli.ref` to yai-law/yai-cli main heads for strict pin gates.
+- core: make workspace id validation portable in C11 by removing `strnlen` dependency in `root/include/ws_id.h`.
+
 - Aligned dependency and docs/tooling naming from `yai-specs` to `yai-law` in `yai` (canonical `deps/yai-law`, compatibility alias, sync wrappers, governance suite pinned to `gov-suite-v0.1.0`).
 - Consolidated Mind governance/docs paths after mind-integration cutover and aligned architecture component metadata for validation gates.
 - Closed Wave0 strict pin blocker by aligning `yai` + `yai-cli` to `yai-specs@30d04d0`, updating `deps/yai-cli.ref`, and refreshing closure evidence/MP snapshots.
