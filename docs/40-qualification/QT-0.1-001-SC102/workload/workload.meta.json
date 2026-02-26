@@ -1,6 +1,0 @@
-{
-  "workload_id": "wrk-d1-egress-sim-v1",
-  "name": "Simulated workload for D1 egress containment",
-  "entrypoint": "simulated",
-  "notes": "No runtime side effects; used to validate decision/enforcement/evidence chain."
-}

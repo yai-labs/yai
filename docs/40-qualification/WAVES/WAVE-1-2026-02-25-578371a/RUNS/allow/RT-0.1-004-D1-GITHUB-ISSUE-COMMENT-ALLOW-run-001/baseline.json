@@ -1,6 +1,0 @@
-{
-  "baseline_id": "baseline-allow",
-  "baseline_hash": "79c578d85000c82e7481bed0252e24043a5aa9e9b17fe3847a8321692dfd0308",
-  "baseline_source": "/Users/francescomaiomascio/Developer/YAI/yai/docs/30-catalog/domains/packs/D1-digital/egress-v1/contracts/baseline-allow.json",
-  "contract_ref": "policy.network_egress.allowlist"
-}

@@ -1,6 +1,0 @@
-{
-  "baseline_id": "baseline-allow",
-  "baseline_hash": "c85d817e974c9a45774e6e0852477384653e076b3a34bf94f8a331379f24b208",
-  "baseline_source": "/Users/francescomaiomascio/Developer/YAI/yai/docs/30-catalog/domains/packs/D8-scientific/reproducibility-parameter-lock-v1/contracts/baseline-allow.json",
-  "contract_ref": "policy.scientific_runs.parameter_lock"
-}
