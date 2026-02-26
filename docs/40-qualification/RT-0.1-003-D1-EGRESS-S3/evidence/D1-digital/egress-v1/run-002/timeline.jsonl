@@ -1,4 +1,0 @@
-{"ts": "2026-02-24T22:23:36.699684+00:00", "step": "trigger", "event": "network.egress.connect", "status": "received", "mode": "live", "trial": "RT-003", "target_profile": "local"}
-{"ts": "2026-02-24T22:23:36.699684+00:00", "step": "precheck", "tool": "curl", "mode": "http-put", "target_reachable": true, "precheck_hits": 1}
-{"ts": "2026-02-24T22:23:36.699684+00:00", "step": "decision", "outcome": "deny", "reason_code": "EGRESS_DEST_NOT_CONTRACTED"}
-{"ts": "2026-02-24T22:23:36.699684+00:00", "step": "enforcement", "result": "blocked", "connect_established": false, "bytes_exfiltrated": 0, "gated_hits": 0}

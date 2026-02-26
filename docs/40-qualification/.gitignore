@@ -1,5 +1,0 @@
-# Runtime transient state
-**/run/.state/
-
-# Default local evidence output (untracked)
-**/evidence.local/

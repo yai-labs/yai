@@ -1,5 +1,0 @@
-{
-  "attack_profile_id": "safe-egress-attempt-001",
-  "description": "Safe outbound egress attempt to TEST-NET destination.",
-  "source": "docs/30-catalog/domains/packs/D1-digital/egress-v1/vectors/attack_profile.safe.json"
-}

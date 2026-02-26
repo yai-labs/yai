@@ -1,6 +1,0 @@
-{"ts": "2026-02-25T19:02:45.153498+00:00", "step": "trigger", "event": "github.issue.comment.create", "status": "received"}
-{"ts": "2026-02-25T19:02:45.153498+00:00", "step": "context", "ws_id": "wrt4-run-001", "trace_id": "trt4-run-001", "role": "operator", "arming": "armed"}
-{"ts": "2026-02-25T19:02:45.153498+00:00", "step": "authority", "baseline_id": "baseline-allow", "baseline_hash": "79c578d85000c82e7481bed0252e24043a5aa9e9b17fe3847a8321692dfd0308"}
-{"ts": "2026-02-25T19:02:45.153498+00:00", "step": "decision", "outcome": "allow", "reason_code": "EGRESS_DEST_CONTRACTED"}
-{"ts": "2026-02-25T19:02:45.153498+00:00", "step": "enforcement", "result": "allowed", "effect_applied": true, "comment_id": 3961368524, "comment_url": "https://github.com/yai-labs/yai/pull/199#issuecomment-3961368524"}
-{"ts": "2026-02-25T19:02:45.153498+00:00", "step": "evidence", "status": "materialized"}
