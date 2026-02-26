@@ -1,3 +1,5 @@
 # Developer docs
 
-- Guides: docs/developer/guides/dev-guide/
+- Dev guide: docs/developer/guides/dev-guide/
+- Getting started: docs/developer/guides/getting-started/
+- User guide: docs/developer/guides/user-guide/
