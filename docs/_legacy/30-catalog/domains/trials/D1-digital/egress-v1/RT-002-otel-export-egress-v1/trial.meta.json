@@ -1,9 +1,0 @@
-{
-  "trial_id": "RT-002-otel-export-egress-v1",
-  "domain_pack_id": "D1-digital/egress-v1",
-  "runner_id": "RT-0.1-002-D1-EGRESS-OTEL",
-  "mode": "live-only",
-  "forbidden_effect": "network.egress.connect",
-  "target_protocol": "otlp-http",
-  "expected_reason_code": "EGRESS_DEST_NOT_CONTRACTED"
-}
