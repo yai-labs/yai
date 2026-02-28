@@ -46,12 +46,14 @@ KERNEL_SRC := \
 	src/core/rpc_codec.c \
 	src/bin/workspace_kernel_main.c
 
-PROTOCOL_RUNTIME_SRC := ../runtime/protocol/rpc_runtime.c
+# Single protocol runtime artifact (Fix #2)
+PROTOCOL_RUNTIME_LIB := ../build/runtime-protocol/libruntime_protocol.a
+
+# Root control transport reused by kernel
 CORE_CONTROL_SRC := ../root/src/control_transport.c
 
 OBJS_BOOT := $(patsubst ../%.c,$(BUILD_DIR)/%.o,$(BOOT_SRC))
 OBJS_KERNEL := $(patsubst src/%.c,$(BUILD_DIR)/src/%.o,$(KERNEL_SRC))
-PROTOCOL_RUNTIME_OBJ := $(BUILD_DIR)/runtime/protocol/rpc_runtime.o
 CORE_CONTROL_OBJ := $(BUILD_DIR)/root/src/control_transport.o
 
 TARGET_KERNEL := $(BIN_DIR)/yai-kernel
@@ -73,17 +75,12 @@ dirs:
 		$(BUILD_DIR)/src/enforcement \
 		$(BUILD_DIR)/src/core \
 		$(BUILD_DIR)/src/bin \
-		$(BUILD_DIR)/runtime/protocol \
 		$(BUILD_DIR)/root/src \
 		$(BIN_DIR)
 
-$(TARGET_KERNEL): $(OBJS_BOOT) $(OBJS_KERNEL) $(PROTOCOL_RUNTIME_OBJ) $(CORE_CONTROL_OBJ)
+$(TARGET_KERNEL): $(OBJS_BOOT) $(OBJS_KERNEL) $(CORE_CONTROL_OBJ) $(PROTOCOL_RUNTIME_LIB)
 	@echo "[LINK] $@"
 	$(CC) $^ -o $@ $(LDFLAGS)
-
-$(PROTOCOL_RUNTIME_OBJ): $(PROTOCOL_RUNTIME_SRC) | dirs
-	@echo "[CC] $<"
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(CORE_CONTROL_OBJ): $(CORE_CONTROL_SRC) | dirs
 	@echo "[CC] $<"
@@ -105,5 +102,4 @@ clean:
 
 -include $(OBJS_BOOT:.o=.d)
 -include $(OBJS_KERNEL:.o=.d)
--include $(PROTOCOL_RUNTIME_OBJ:.o=.d)
 -include $(CORE_CONTROL_OBJ:.o=.d)

@@ -22,7 +22,8 @@ SPECS_INC_RUNTIME := $(SPECS_DIR)/contracts/protocol/runtime/include
 SPECS_INC_VAULT := $(SPECS_DIR)/contracts/vault/include
 
 INCLUDES := \
-	-I./include -I$(ROOT)/deps/yai-law/contracts/vault/include -I$(ROOT)/deps/yai-law/contracts/protocol/runtime/include -I$(ROOT)/deps/yai-law/contracts/protocol/include -I../kernel/include -I$(ROOT)/kernel/include \
+	-I./include \
+	-I../kernel/include \
 	-I$(SPECS_DIR) \
 	-I$(SPECS_INC_PROTOCOL) \
 	-I$(SPECS_INC_RUNTIME) \
@@ -32,10 +33,10 @@ ROOT_SRC := \
 	src/yai_root_server.c \
 	src/control_transport.c
 
-PROTOCOL_RUNTIME_SRC := ../runtime/protocol/rpc_runtime.c
+# Single protocol runtime artifact (Fix #2)
+PROTOCOL_RUNTIME_LIB := ../build/runtime-protocol/libruntime_protocol.a
 
 OBJS_ROOT := $(patsubst src/%.c,$(BUILD_DIR)/src/%.o,$(ROOT_SRC))
-PROTOCOL_RUNTIME_OBJ := $(BUILD_DIR)/runtime/protocol/rpc_runtime.o
 
 TARGET := $(BIN_DIR)/yai-root-server
 
@@ -47,15 +48,11 @@ build: dirs $(TARGET)
 	@echo "--- [YAI-ROOT] Build Complete ---"
 
 dirs:
-	@mkdir -p $(BUILD_DIR)/src $(BUILD_DIR)/runtime/protocol $(BIN_DIR)
+	@mkdir -p $(BUILD_DIR)/src $(BIN_DIR)
 
-$(TARGET): $(OBJS_ROOT) $(PROTOCOL_RUNTIME_OBJ)
+$(TARGET): $(OBJS_ROOT) $(PROTOCOL_RUNTIME_LIB)
 	@echo "[LINK] $@"
-	$(CC) $^ -o $@ $(LDFLAGS)
-
-$(PROTOCOL_RUNTIME_OBJ): $(PROTOCOL_RUNTIME_SRC) | dirs
-	@echo "[CC] $<"
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	$(CC) $(OBJS_ROOT) $(PROTOCOL_RUNTIME_LIB) -o $@ $(LDFLAGS)
 
 $(BUILD_DIR)/src/%.o: src/%.c | dirs
 	@echo "[CC] $<"
@@ -66,4 +63,3 @@ clean:
 	@echo "--- [YAI-ROOT] Cleaned ---"
 
 -include $(OBJS_ROOT:.o=.d)
--include $(PROTOCOL_RUNTIME_OBJ:.o=.d)
