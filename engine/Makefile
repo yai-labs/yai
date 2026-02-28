@@ -14,9 +14,9 @@ BUILD_DIR := $(COMPONENT_BUILD_DIR)
 BIN_DIR := $(BIN_BUILD)
 
 SPECS_DIR := $(ROOT_DIR)/deps/yai-law
-SPECS_INC_PROTOCOL := $(SPECS_DIR)/specs/protocol/include
-SPECS_INC_RUNTIME := $(SPECS_DIR)/specs/protocol/runtime/include
-SPECS_INC_VAULT := $(SPECS_DIR)/specs/vault/include
+SPECS_INC_PROTOCOL := $(SPECS_DIR)/contracts/protocol/include
+SPECS_INC_RUNTIME := $(SPECS_DIR)/contracts/protocol/runtime/include
+SPECS_INC_VAULT := $(SPECS_DIR)/contracts/vault/include
 VAULT_ABI_SRC := $(SPECS_INC_VAULT)/yai_vault_abi.h
 
 SRC_DIR := src
@@ -53,7 +53,7 @@ build: abi dirs $(TARGET)
 
 abi:
 	@test -f $(VAULT_ABI_SRC) || \
-	 (echo "ERROR: Missing yai_vault_abi.h in deps/yai-law/specs/vault/include"; exit 1)
+	 (echo "ERROR: Missing yai_vault_abi.h in ../deps/yai-law/contracts/vault/include"; exit 1)
 
 dirs:
 	@mkdir -p $(BUILD_DIR) $(BIN_DIR) $(BUILD_DIR)/tests

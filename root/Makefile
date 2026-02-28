@@ -17,12 +17,12 @@ CFLAGS ?= -Wall -Wextra -O2 -std=c11 -MMD -MP
 LDFLAGS ?=
 
 SPECS_DIR := $(ROOT_DIR)/deps/yai-law
-SPECS_INC_PROTOCOL := $(SPECS_DIR)/specs/protocol/include
-SPECS_INC_RUNTIME := $(SPECS_DIR)/specs/protocol/runtime/include
-SPECS_INC_VAULT := $(SPECS_DIR)/specs/vault/include
+SPECS_INC_PROTOCOL := $(SPECS_DIR)/contracts/protocol/include
+SPECS_INC_RUNTIME := $(SPECS_DIR)/contracts/protocol/runtime/include
+SPECS_INC_VAULT := $(SPECS_DIR)/contracts/vault/include
 
 INCLUDES := \
-	-I./include \
+	-I./include -I$(ROOT)/deps/yai-law/contracts/vault/include -I$(ROOT)/deps/yai-law/contracts/protocol/runtime/include -I$(ROOT)/deps/yai-law/contracts/protocol/include -I../kernel/include -I$(ROOT)/kernel/include \
 	-I$(SPECS_DIR) \
 	-I$(SPECS_INC_PROTOCOL) \
 	-I$(SPECS_INC_RUNTIME) \
