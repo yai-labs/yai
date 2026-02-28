@@ -22,7 +22,8 @@ SPECS_INC_RUNTIME := $(SPECS_DIR)/contracts/protocol/runtime/include
 SPECS_INC_VAULT := $(SPECS_DIR)/contracts/vault/include
 
 INCLUDES := \
-	-I./include -I$(ROOT)/deps/yai-law/contracts/vault/include -I$(ROOT)/deps/yai-law/contracts/protocol/runtime/include -I$(ROOT)/deps/yai-law/contracts/protocol/include -I../kernel/include -I$(ROOT)/kernel/include \
+	-I./include \
+	-I../kernel/include \
 	-I$(SPECS_DIR) \
 	-I$(SPECS_INC_PROTOCOL) \
 	-I$(SPECS_INC_RUNTIME) \
@@ -32,7 +33,9 @@ ROOT_SRC := \
 	src/yai_root_server.c \
 	src/control_transport.c
 
+# Single protocol runtime artifact (Fix #2)
 PROTOCOL_RUNTIME_LIB := ../build/runtime-protocol/libruntime_protocol.a
+
 OBJS_ROOT := $(patsubst src/%.c,$(BUILD_DIR)/src/%.o,$(ROOT_SRC))
 
 TARGET := $(BIN_DIR)/yai-root-server
@@ -47,9 +50,9 @@ build: dirs $(TARGET)
 dirs:
 	@mkdir -p $(BUILD_DIR)/src $(BIN_DIR)
 
-1000 959 986 998 1000TARGET): 1000 959 986 998 1000OBJS_ROOT) 1000 959 986 998 1000PROTOCOL_RUNTIME_LIB)
+$(TARGET): $(OBJS_ROOT) $(PROTOCOL_RUNTIME_LIB)
 	@echo "[LINK] $@"
-	$(CC) $^ $(PROTOCOL_RUNTIME_LIB) -o $@ $(LDFLAGS)
+	$(CC) $(OBJS_ROOT) $(PROTOCOL_RUNTIME_LIB) -o $@ $(LDFLAGS)
 
 $(BUILD_DIR)/src/%.o: src/%.c | dirs
 	@echo "[CC] $<"
