@@ -34,7 +34,7 @@ all: build
 	@echo "[YAI] dist is now separated from build. Use 'make dist' or 'make bundle'."
 
 # Default build: only canonical planes (L0-L2)
-build: boot root kernel engine
+build: runtime-protocol boot root kernel engine
 	@echo "--- [YAI] Build Complete ---"
 
 # Convenience: build everything including Mind (L3)
@@ -168,3 +168,6 @@ help:
 	@echo "  mind-check   (fmt/clippy/test for mind)"
 	@echo "  mind-dist    (stage mind binary in dist/bin)"
 	@echo "  verify, preflight-release, docs, docs-verify, proof-verify, release-guards, changelog-verify"
+.PHONY: runtime-protocol
+runtime-protocol:
+	$(MAKE) -C runtime-protocol

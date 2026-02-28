@@ -32,10 +32,8 @@ ROOT_SRC := \
 	src/yai_root_server.c \
 	src/control_transport.c
 
-PROTOCOL_RUNTIME_SRC := ../runtime/protocol/rpc_runtime.c
-
+PROTOCOL_RUNTIME_LIB := ../build/runtime-protocol/libruntime_protocol.a
 OBJS_ROOT := $(patsubst src/%.c,$(BUILD_DIR)/src/%.o,$(ROOT_SRC))
-PROTOCOL_RUNTIME_OBJ := $(BUILD_DIR)/runtime/protocol/rpc_runtime.o
 
 TARGET := $(BIN_DIR)/yai-root-server
 
@@ -47,15 +45,11 @@ build: dirs $(TARGET)
 	@echo "--- [YAI-ROOT] Build Complete ---"
 
 dirs:
-	@mkdir -p $(BUILD_DIR)/src $(BUILD_DIR)/runtime/protocol $(BIN_DIR)
+	@mkdir -p $(BUILD_DIR)/src $(BIN_DIR)
 
-$(TARGET): $(OBJS_ROOT) $(PROTOCOL_RUNTIME_OBJ)
+1000 959 986 998 1000TARGET): 1000 959 986 998 1000OBJS_ROOT) 1000 959 986 998 1000PROTOCOL_RUNTIME_LIB)
 	@echo "[LINK] $@"
-	$(CC) $^ -o $@ $(LDFLAGS)
-
-$(PROTOCOL_RUNTIME_OBJ): $(PROTOCOL_RUNTIME_SRC) | dirs
-	@echo "[CC] $<"
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	$(CC) $^ $(PROTOCOL_RUNTIME_LIB) -o $@ $(LDFLAGS)
 
 $(BUILD_DIR)/src/%.o: src/%.c | dirs
 	@echo "[CC] $<"
@@ -66,4 +60,3 @@ clean:
 	@echo "--- [YAI-ROOT] Cleaned ---"
 
 -include $(OBJS_ROOT:.o=.d)
--include $(PROTOCOL_RUNTIME_OBJ:.o=.d)

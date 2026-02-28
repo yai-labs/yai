@@ -24,11 +24,12 @@ THIRD_PARTY_DIR := third_party
 
 ENGINE_SRCS := $(shell find $(SRC_DIR) -name "*.c")
 ENGINE_SRCS += $(THIRD_PARTY_DIR)/cjson/cJSON.c
-PROTOCOL_RUNTIME_SRCS := ../runtime/protocol/rpc_runtime.c
+
+# Single protocol runtime artifact (Fix #2)
+PROTOCOL_RUNTIME_LIB := ../build/runtime-protocol/libruntime_protocol.a
 
 OBJS_ENGINE := $(patsubst %.c,$(BUILD_DIR)/%.o,$(ENGINE_SRCS))
-OBJS_PROTO := $(patsubst ../%.c,$(BUILD_DIR)/%.o,$(PROTOCOL_RUNTIME_SRCS))
-OBJS := $(OBJS_ENGINE) $(OBJS_PROTO)
+OBJS := $(OBJS_ENGINE)
 
 CFLAGS ?= -Wall -Wextra -O2 -std=c11 -MMD -MP
 CFLAGS += -I./include
@@ -58,15 +59,11 @@ abi:
 dirs:
 	@mkdir -p $(BUILD_DIR) $(BIN_DIR) $(BUILD_DIR)/tests
 
-$(TARGET): $(OBJS)
+$(TARGET): $(OBJS) $(PROTOCOL_RUNTIME_LIB)
 	@mkdir -p $(dir $@)
-	$(CC) $(OBJS) -o $@ $(LDFLAGS)
+	$(CC) $(OBJS) $(PROTOCOL_RUNTIME_LIB) -o $@ $(LDFLAGS)
 
 $(BUILD_DIR)/%.o: %.c | dirs
-	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@
-
-$(BUILD_DIR)/%.o: ../%.c | dirs
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
@@ -84,4 +81,3 @@ clean:
 	@echo "--- [YAI-ENGINE] Cleaned Build ---"
 
 -include $(OBJS_ENGINE:.o=.d)
--include $(OBJS_PROTO:.o=.d)
