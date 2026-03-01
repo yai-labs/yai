@@ -1,5 +1,6 @@
 # Data
 
-This directory contains data assets only.
+Runtime repository does not store research datasets or benchmark seeds.
 
-Tooling scripts must live under `tools/data/`.
+Canonical location:
+- yai-ops/research/
