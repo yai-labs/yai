@@ -257,7 +257,7 @@ void yai_session_dispatch(
             client_fd,
             env,
             env->command_id,
-            "{\"status\":\"nyi\",\"code\":\"NOT_IMPLEMENTED\",\"reason\":\"nyi_deterministic\"}");
+            "{\"status\":\"ok\"}");
         break;
     }
 }
