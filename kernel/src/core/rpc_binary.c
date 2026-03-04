@@ -205,8 +205,8 @@ void yai_kernel_handle_binary_connection(int cfd)
         return;
     }
 
-    /* -------- DEFAULT RESPONSE -------- */
-    const char *ok = "{\"status\":\"ok\"}";
-    send_frame(cfd, &env, env.command_id, ok, (uint32_t)strlen(ok));
+    /* -------- DEFAULT RESPONSE (deterministic NYI) -------- */
+    const char *nyi = "{\"status\":\"nyi\",\"code\":\"NOT_IMPLEMENTED\",\"reason\":\"nyi_deterministic\"}";
+    send_frame(cfd, &env, env.command_id, nyi, (uint32_t)strlen(nyi));
     close(cfd);
 }
