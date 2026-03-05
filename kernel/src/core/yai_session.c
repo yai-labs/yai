@@ -15,6 +15,7 @@
 #include <signal.h>
 #include <unistd.h>
 #include <sys/stat.h>
+#include <yai_protocol_ids.h>
 
 /* ============================================================
    GLOBAL REGISTRY
@@ -195,11 +196,23 @@ void yai_session_dispatch(
         return;
 
     if (env->ws_id[0] == '\0' || strlen(env->ws_id) == 0) {
-        yai_session_send_binary_response(
-            client_fd,
-            env,
-            env->command_id,
-            "{\"status\":\"error\",\"reason\":\"ws_required\"}");
+        if (env->command_id == YAI_CMD_CONTROL_CALL) {
+            yai_session_send_exec_reply(
+                client_fd,
+                env,
+                "error",
+                "BAD_ARGS",
+                "ws_required",
+                "yai.kernel.unknown",
+                "kernel",
+                NULL);
+        } else {
+            yai_session_send_binary_response(
+                client_fd,
+                env,
+                env->command_id,
+                "{\"status\":\"error\",\"reason\":\"ws_required\"}");
+        }
         return;
     }
 
@@ -207,11 +220,23 @@ void yai_session_dispatch(
 
     if (!yai_session_acquire(&s, env->ws_id))
     {
-        yai_session_send_binary_response(
-            client_fd,
-            env,
-            env->command_id,
-            "{\"status\":\"error\",\"reason\":\"session_denied\"}");
+        if (env->command_id == YAI_CMD_CONTROL_CALL) {
+            yai_session_send_exec_reply(
+                client_fd,
+                env,
+                "error",
+                "RUNTIME_NOT_READY",
+                "session_denied",
+                "yai.kernel.unknown",
+                "kernel",
+                NULL);
+        } else {
+            yai_session_send_binary_response(
+                client_fd,
+                env,
+                env->command_id,
+                "{\"status\":\"error\",\"reason\":\"session_denied\"}");
+        }
         return;
     }
 

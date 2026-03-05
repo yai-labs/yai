@@ -28,6 +28,12 @@ Implement real runtime handlers for first-priority status surfaces (`root`, `ker
 
 Group mission: control-plane observability/readiness before wider command expansion.
 
+Execution output contract for this MP:
+- Runtime reply envelope: `yai.exec.reply.v1` (strict).
+- CLI canonical line (all outcomes, including `rc=0`):
+  - `yai: <status>: <code>: <reason> (command_id=<id>)`
+- SDK rc mapping remains deterministic from `status/code`.
+
 ## Scope (Wave target)
 - Canonical target groups: `root`, `kernel`, `boot`
 - Canonical command count: `15`
@@ -55,6 +61,7 @@ Group mission: control-plane observability/readiness before wider command expans
 - [ ] No `unknown command` for registered IDs in this group.
 - [x] Selected real handlers are wired end-to-end (CLI -> SDK -> Root -> Kernel).
 - [x] Non-target commands remain deterministic (`NOT_IMPLEMENTED` with exec.reply.v1).
+- [ ] No empty output for successful target command execution (`rc=0` with canonical line).
 - [ ] Evidence pointers/logs for executed commands are archived from operator run.
 
 ## Required evidence (to fill at execution time)

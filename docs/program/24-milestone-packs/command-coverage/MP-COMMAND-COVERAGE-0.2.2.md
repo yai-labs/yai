@@ -28,6 +28,11 @@ Expand real coverage in `root+kernel+boot` beyond status surfaces, preserving de
 
 Group mission: operational control verbs needed for bootstrap, router governance, and workspace observability.
 
+Contract baseline inherited from MP 0.2.1:
+- Runtime responses must be `yai.exec.reply.v1`.
+- CLI must emit canonical line for success/nyi/error:
+  - `yai: <status>: <code>: <reason> (command_id=<id>)`
+
 ## Scope (Planned)
 - Canonical target groups: `root`, `kernel`, `boot`
 - Canonical command count (initial slice): `45` (15 per group)
