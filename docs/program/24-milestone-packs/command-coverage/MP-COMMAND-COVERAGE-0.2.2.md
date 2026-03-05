@@ -30,8 +30,10 @@ Group mission: operational control verbs needed for bootstrap, router governance
 
 Contract baseline inherited from MP 0.2.1:
 - Runtime responses must be `yai.exec.reply.v1`.
-- CLI must emit canonical line for success/nyi/error:
-  - `yai: <status>: <code>: <reason> (command_id=<id>)`
+- CLI default must emit canonical short line for success/nyi/error:
+  - `yai: <status>: <code>: <reason>`
+- `--verbose-contract` must emit:
+  - `yai: <status>: <code>: <reason> (command_id=<id>, trace_id=<tid>, target_plane=<plane>)`
 
 ## Scope (Planned)
 - Canonical target groups: `root`, `kernel`, `boot`

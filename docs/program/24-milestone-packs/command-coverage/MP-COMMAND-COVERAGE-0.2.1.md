@@ -30,8 +30,10 @@ Group mission: control-plane observability/readiness before wider command expans
 
 Execution output contract for this MP:
 - Runtime reply envelope: `yai.exec.reply.v1` (strict).
-- CLI canonical line (all outcomes, including `rc=0`):
-  - `yai: <status>: <code>: <reason> (command_id=<id>)`
+- CLI canonical short line (all outcomes, including `rc=0`):
+  - `yai: <status>: <code>: <reason>`
+- CLI verbose contract line (`--verbose-contract`):
+  - `yai: <status>: <code>: <reason> (command_id=<id>, trace_id=<tid>, target_plane=<plane>)`
 - SDK rc mapping remains deterministic from `status/code`.
 
 ## Scope (Wave target)
