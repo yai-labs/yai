@@ -4,15 +4,15 @@ status: draft
 effective_date: 2026-02-19
 supersedes: []
 applies_to:
-  runbook: docs/20-program/23-runbooks/contract-baseline-lock.md
+  runbook: docs/program/23-runbooks/contract-baseline-lock.md
   phase: 0.1.0
   anchor: "#phase-0-1-0-pin-baseline-freeze"
 law_refs:
-  - deps/yai-law/contracts/invariants/I-001-traceability.md
-  - deps/yai-law/contracts/invariants/I-002-determinism.md
-  - deps/yai-law/contracts/invariants/I-003-governance.md
-  - deps/yai-law/contracts/invariants/I-006-external-effect-boundary.md
-  - deps/yai-law/contracts/boundaries/L1-kernel.md
+  - deps/yai-law/foundation/invariants/I-001-traceability.md
+  - deps/yai-law/foundation/invariants/I-002-determinism.md
+  - deps/yai-law/foundation/invariants/I-003-governance.md
+  - deps/yai-law/foundation/invariants/I-006-external-effect-boundary.md
+  - deps/yai-law/foundation/boundaries/L1-kernel.md
 ---
 # ADR-011 - Contract Baseline Lock for Milestone 1
 
@@ -50,14 +50,14 @@ A lock provides a stable legal/technical floor so later runbook phases can evolv
 ## Traceability
 
 - Proposals:
-  - `docs/20-program/21-rfc/RFC-002-unified-rpc-and-cli-contract.md`
-  - `docs/20-program/21-rfc/RFC-004-contract-baseline-lock-and-pin-policy.md`
-  - `docs/20-program/21-rfc/RFC-005-formal-coverage-roadmap.md`
+  - `docs/program/21-rfc/RFC-002-unified-rpc-and-cli-contract.md`
+  - `docs/program/21-rfc/RFC-004-contract-baseline-lock-and-pin-policy.md`
+  - `docs/program/21-rfc/RFC-005-formal-coverage-roadmap.md`
 - Implemented by runbooks:
-  - `docs/20-program/23-runbooks/contract-baseline-lock.md`
-  - `docs/20-program/23-runbooks/root-hardening.md` (downstream hardening)
+  - `docs/program/23-runbooks/contract-baseline-lock.md`
+  - `docs/program/23-runbooks/root-hardening.md` (downstream hardening)
 - Milestone packs:
-  - `docs/20-program/24-milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.0.md` (planned)
+  - `docs/program/24-milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.0.md` (planned)
 
 ## Status
 

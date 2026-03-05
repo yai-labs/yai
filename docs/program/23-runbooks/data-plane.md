@@ -11,18 +11,18 @@ depends_on:
   - RB-WORKSPACES-LIFECYCLE
   - RB-ENGINE-ATTACH
 adr_refs:
-  - docs/20-program/22-adr/ADR-006-unified-rpc.md
-  - docs/20-program/22-adr/ADR-011-contract-baseline-lock.md
+  - docs/program/22-adr/ADR-006-unified-rpc.md
+  - docs/program/22-adr/ADR-011-contract-baseline-lock.md
 decisions:
-  - docs/20-program/22-adr/ADR-006-unified-rpc.md
-  - docs/20-program/22-adr/ADR-011-contract-baseline-lock.md
+  - docs/program/22-adr/ADR-006-unified-rpc.md
+  - docs/program/22-adr/ADR-011-contract-baseline-lock.md
 related:
   adr: []
   specs:
-    - deps/yai-law/specs/protocol/include/transport.h
-    - deps/yai-law/specs/protocol/include/auth.h
+    - deps/yai-law/contracts/protocol/include/transport.h
+    - deps/yai-law/contracts/protocol/include/auth.h
   test_plans:
-    - docs/40-qualification/test-plans/hardfail.md
+    - yai-ops/evidence/qualification/test-plans/hardfail.md
   tools:
     - tools/bin/yai-verify
     - tools/bin/yai-gate
@@ -65,15 +65,15 @@ Use phased execution (`v5.0` to `v5.4`) with closure gates per phase and no cros
 - Re-run build + verify before reopening the phase.
 
 ## 8) References
-- Runbooks: `docs/20-program/23-runbooks/root-hardening.md`, `docs/20-program/23-runbooks/workspaces-lifecycle.md`, `docs/20-program/23-runbooks/engine-attach.md`
-- Test plans: `docs/40-qualification/test-plans/hardfail.md`
+- Runbooks: `docs/program/23-runbooks/root-hardening.md`, `docs/program/23-runbooks/workspaces-lifecycle.md`, `docs/program/23-runbooks/engine-attach.md`
+- Test plans: `yai-ops/evidence/qualification/test-plans/hardfail.md`
 
 ## Traceability
 - ADR refs:
-  - `docs/20-program/22-adr/ADR-003-kernel-authority.md`
-  - `docs/20-program/22-adr/ADR-004-engine-execution.md`
-  - `docs/20-program/22-adr/ADR-010-boot-entrypoint.md`
-- MPs (to be filled as phases ship): `docs/20-program/24-milestone-packs/...`
+  - `docs/program/22-adr/ADR-003-kernel-authority.md`
+  - `docs/program/22-adr/ADR-004-engine-execution.md`
+  - `docs/program/22-adr/ADR-010-boot-entrypoint.md`
+- MPs (to be filled as phases ship): `docs/program/24-milestone-packs/...`
 
 ## Appendix — Detailed Operational Series (Legacy Detailed Content)
 

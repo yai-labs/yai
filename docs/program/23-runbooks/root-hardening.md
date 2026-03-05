@@ -9,28 +9,28 @@ supersedes: []
 depends_on:
   - RB-WORKSPACES-LIFECYCLE (optional, if already exists)
 adr_refs:
-  - docs/20-program/22-adr/ADR-002-root-entrypoint.md
-  - docs/20-program/22-adr/ADR-006-unified-rpc.md
-  - docs/20-program/22-adr/ADR-008-connection-lifecycle.md
-  - docs/20-program/22-adr/ADR-012-audit-convergence-gates.md
+  - docs/program/22-adr/ADR-002-root-entrypoint.md
+  - docs/program/22-adr/ADR-006-unified-rpc.md
+  - docs/program/22-adr/ADR-008-connection-lifecycle.md
+  - docs/program/22-adr/ADR-012-audit-convergence-gates.md
 decisions:
-  - docs/20-program/22-adr/ADR-002-root-entrypoint.md
-  - docs/20-program/22-adr/ADR-006-unified-rpc.md
-  - docs/20-program/22-adr/ADR-008-connection-lifecycle.md
-  - docs/20-program/22-adr/ADR-012-audit-convergence-gates.md
+  - docs/program/22-adr/ADR-002-root-entrypoint.md
+  - docs/program/22-adr/ADR-006-unified-rpc.md
+  - docs/program/22-adr/ADR-008-connection-lifecycle.md
+  - docs/program/22-adr/ADR-012-audit-convergence-gates.md
 related:
   adr:
-    - docs/20-program/22-adr/ADR-002-root-entrypoint.md
-    - docs/20-program/22-adr/ADR-006-unified-rpc.md
-    - docs/20-program/22-adr/ADR-008-connection-lifecycle.md
-    - docs/20-program/22-adr/ADR-012-audit-convergence-gates.md
+    - docs/program/22-adr/ADR-002-root-entrypoint.md
+    - docs/program/22-adr/ADR-006-unified-rpc.md
+    - docs/program/22-adr/ADR-008-connection-lifecycle.md
+    - docs/program/22-adr/ADR-012-audit-convergence-gates.md
   specs:
-    - deps/yai-law/specs/protocol/include/transport.h
-    - deps/yai-law/specs/protocol/include/auth.h
-    - deps/yai-law/specs/protocol/include/errors.h
-    - deps/yai-law/specs/protocol/include/yai_protocol_ids.h
+    - deps/yai-law/contracts/protocol/include/transport.h
+    - deps/yai-law/contracts/protocol/include/auth.h
+    - deps/yai-law/contracts/protocol/include/errors.h
+    - deps/yai-law/contracts/protocol/include/yai_protocol_ids.h
   test_plans:
-    - docs/40-qualification/test-plans/hardfail.md
+    - yai-ops/evidence/qualification/test-plans/hardfail.md
   tools:
     - tools/bin/yai-verify
     - tools/bin/yai-gate
@@ -69,9 +69,9 @@ Harden the Root control plane as a deterministic, auditable, envelope-only bound
 ## 3) Inputs
 
 - Protocol anchors:
-  - `deps/yai-law/specs/protocol/include/transport.h`
-  - `deps/yai-law/specs/protocol/include/auth.h`
-  - `deps/yai-law/specs/protocol/include/errors.h`
+  - `deps/yai-law/contracts/protocol/include/transport.h`
+  - `deps/yai-law/contracts/protocol/include/auth.h`
+  - `deps/yai-law/contracts/protocol/include/errors.h`
 - Tooling:
   - `tools/bin/yai-verify`
   - `tools/bin/yai-gate`
@@ -79,11 +79,11 @@ Harden the Root control plane as a deterministic, auditable, envelope-only bound
 
 ### 3.1 Audit Convergence Binding (Wave 2)
 This runbook phase sequence is Wave 2 under:
-- `docs/20-program/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
-- `docs/20-program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
+- `docs/program/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
+- `docs/program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
 
 Claims source of truth:
-- `docs/50-validation/audits/claims/infra-grammar.v0.1.json`
+- `yai-ops/evidence/validation/audits/claims/infra-grammar.v0.1.json`
 
 Wave tracking issue:
 - `https://github.com/yai-labs/yai/issues/191`
@@ -175,7 +175,7 @@ Each phase must compile, run, and be verifiable before moving on.
 
 **Branch:** `feat/root-hardening-0.1.0-guardrails`  
 **Goal:** Root and Kernel share identical mechanical wire rules and error codes.
-**Milestone Pack:** `docs/20-program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`
+**Milestone Pack:** `docs/program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`
 **Claim IDs:** `C-ENVELOPE-HANDSHAKE-REQUIRED`, `C-DOMAIN-COVERAGE-NETWORK`
 **Mandatory evidence commands:**
 - `tools/bin/yai-verify`
@@ -184,10 +184,10 @@ Each phase must compile, run, and be verifiable before moving on.
 
 READ FIRST:
 
-- `deps/yai-law/specs/protocol/include/transport.h`
-- `deps/yai-law/specs/protocol/include/yai_protocol_ids.h`
-- `deps/yai-law/specs/protocol/include/errors.h`
-- `deps/yai-law/specs/protocol/include/auth.h`
+- `deps/yai-law/contracts/protocol/include/transport.h`
+- `deps/yai-law/contracts/protocol/include/yai_protocol_ids.h`
+- `deps/yai-law/contracts/protocol/include/errors.h`
+- `deps/yai-law/contracts/protocol/include/auth.h`
 
 CODE (likely):
 
@@ -238,7 +238,7 @@ Minimum set expected:
 
 **Branch:** `feat/root-hardening-0.1.1-router`  
 **Goal:** Root becomes a pure router with deterministic rejects + indestructible logging.
-**Milestone Pack:** `docs/20-program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md`
+**Milestone Pack:** `docs/program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md`
 **Claim IDs:** `C-ENVELOPE-HANDSHAKE-REQUIRED`, `C-DOMAIN-COVERAGE-NETWORK`
 **Mandatory evidence commands:**
 - `tools/bin/yai-verify`
@@ -258,7 +258,7 @@ Kernel side used for comparison:
 
 Specs:
 
-- `deps/yai-law/specs/protocol/include/transport.h`
+- `deps/yai-law/contracts/protocol/include/transport.h`
 
 #### Rules
 
@@ -320,7 +320,7 @@ Protocol negative tests (at least):
 
 **Branch:** `feat/root-hardening-0.1.2-authority-gate`  
 **Goal:** privileged commands require arming+role, enforced in Root and Kernel (defense-in-depth).
-**Milestone Pack:** `docs/20-program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.2.md`
+**Milestone Pack:** `docs/program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.2.md`
 **Claim IDs:** `C-KERNEL-HARD-BOUNDARY-CORE`, `C-ENVELOPE-HANDSHAKE-REQUIRED`
 **Mandatory evidence commands:**
 - `tools/bin/yai-verify`
@@ -330,8 +330,8 @@ Protocol negative tests (at least):
 
 Specs:
 
-- `deps/yai-law/specs/protocol/include/auth.h`
-- `deps/yai-law/specs/protocol/include/roles.h` (if present)
+- `deps/yai-law/contracts/protocol/include/auth.h`
+- `deps/yai-law/contracts/protocol/include/roles.h` (if present)
 
 Root:
 
@@ -378,7 +378,7 @@ Minimum expectation:
 
 **Branch:** `feat/root-hardening-0.1.3-ws-id-single-source`  
 **Goal:** one ws_id validator used everywhere (Root/Kernel/CLI), eliminating drift.
-**Milestone Pack:** `docs/20-program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.3.md`
+**Milestone Pack:** `docs/program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.3.md`
 **Claim IDs:** `C-CONTEXT-PROPAGATION`, `C-KERNEL-HARD-BOUNDARY-CORE`
 **Mandatory evidence commands:**
 - `tools/bin/yai-verify`
@@ -388,7 +388,7 @@ Minimum expectation:
 
 Specs (single source of truth):
 
-- `deps/yai-law/specs/protocol/include/transport.h` (static inline validator)
+- `deps/yai-law/contracts/protocol/include/transport.h` (static inline validator)
 
 Consumers:
 
@@ -420,7 +420,7 @@ Consumers:
 
 **Branch:** `feat/root-hardening-0.1.4-kernel-hard-reject`  
 **Goal:** Kernel must not create sessions/dirs for invalid ws_id; must respond deterministically.
-**Milestone Pack:** `docs/20-program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.4.md`
+**Milestone Pack:** `docs/program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.4.md`
 **Claim IDs:** `C-KERNEL-HARD-BOUNDARY-CORE`, `C-DOMAIN-COVERAGE-RESOURCE`
 **Mandatory evidence commands:**
 - `tools/bin/yai-verify`
@@ -434,7 +434,7 @@ Consumers:
 
 Specs:
 
-- `deps/yai-law/specs/protocol/include/transport.h`
+- `deps/yai-law/contracts/protocol/include/transport.h`
 
 #### Rules
 
@@ -467,7 +467,7 @@ Send invalid ws_id:
 
 **Branch:** `feat/root-hardening-0.1.5-torture`  
 **Goal:** repeatable torture tests that prove hardening is real.
-**Milestone Pack:** `docs/20-program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md`
+**Milestone Pack:** `docs/program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md`
 **Claim IDs:** `C-DOMAIN-COVERAGE-NETWORK`, `C-KERNEL-HARD-BOUNDARY-CORE`, `C-EVIDENCE-PACK-REPRODUCIBLE`
 **Mandatory evidence commands:**
 - `tools/bin/yai-verify`
@@ -566,20 +566,20 @@ If a phase causes regressions:
 
 ### Upstream proposals
 
-- `docs/20-program/21-rfc/RFC-001-runtime-topology-and-authority.md`
-- `docs/20-program/21-rfc/RFC-002-unified-rpc-and-cli-contract.md`
-- `docs/20-program/21-rfc/RFC-004-contract-baseline-lock-and-pin-policy.md`
-- `docs/20-program/21-rfc/RFC-005-formal-coverage-roadmap.md`
+- `docs/program/21-rfc/RFC-001-runtime-topology-and-authority.md`
+- `docs/program/21-rfc/RFC-002-unified-rpc-and-cli-contract.md`
+- `docs/program/21-rfc/RFC-004-contract-baseline-lock-and-pin-policy.md`
+- `docs/program/21-rfc/RFC-005-formal-coverage-roadmap.md`
 
 ### Milestone packs
 
-- `docs/20-program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`
-- `docs/20-program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md`
-- `docs/20-program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.2.md`
-- `docs/20-program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.3.md`
-- `docs/20-program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.4.md`
-- `docs/20-program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md`
-- `docs/20-program/24-milestone-packs/root-hardening/README.md` (`MP-ROOT-HARDENING-INDEX`)
+- `docs/program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`
+- `docs/program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md`
+- `docs/program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.2.md`
+- `docs/program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.3.md`
+- `docs/program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.4.md`
+- `docs/program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md`
+- `docs/program/24-milestone-packs/root-hardening/README.md` (`MP-ROOT-HARDENING-INDEX`)
 
 ## 9) Final Definition of Done
 
@@ -594,18 +594,18 @@ If a phase causes regressions:
 ## Traceability
 
 - ADR refs:
-  - `docs/20-program/22-adr/ADR-002-root-entrypoint.md`
-  - `docs/20-program/22-adr/ADR-006-unified-rpc.md`
-  - `docs/20-program/22-adr/ADR-008-connection-lifecycle.md`
+  - `docs/program/22-adr/ADR-002-root-entrypoint.md`
+  - `docs/program/22-adr/ADR-006-unified-rpc.md`
+  - `docs/program/22-adr/ADR-008-connection-lifecycle.md`
 - Law/spec refs:
-  - `deps/yai-law/specs/protocol/include/transport.h`
-  - `deps/yai-law/specs/protocol/include/auth.h`
-  - `deps/yai-law/specs/protocol/include/errors.h`
+  - `deps/yai-law/contracts/protocol/include/transport.h`
+  - `deps/yai-law/contracts/protocol/include/auth.h`
+  - `deps/yai-law/contracts/protocol/include/errors.h`
 - MPs:
-  - `docs/20-program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`
-  - `docs/20-program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md`
-  - `docs/20-program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.2.md`
-  - `docs/20-program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.3.md`
-  - `docs/20-program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.4.md`
-  - `docs/20-program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md`
-- `docs/20-program/24-milestone-packs/root-hardening/README.md` (`MP-ROOT-HARDENING-INDEX`)
+  - `docs/program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`
+  - `docs/program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md`
+  - `docs/program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.2.md`
+  - `docs/program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.3.md`
+  - `docs/program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.4.md`
+  - `docs/program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md`
+- `docs/program/24-milestone-packs/root-hardening/README.md` (`MP-ROOT-HARDENING-INDEX`)

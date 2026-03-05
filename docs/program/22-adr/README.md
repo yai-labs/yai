@@ -2,7 +2,7 @@
 id: ADR-README
 status: active
 law_refs:
-  - deps/yai-law/contracts/invariants/I-001-traceability.md
+  - deps/yai-law/foundation/invariants/I-001-traceability.md
 ---
 # ADR Index
 
@@ -32,7 +32,7 @@ An ADR should answer:
 ## Template policy
 
 The ADR template is canonical only in:
-- `docs/20-program/25-templates/adr/ADR-000-template.md`
+- `docs/program/25-templates/adr/ADR-000-template.md`
 
 No template copy should be kept inside this ADR directory.
 
@@ -44,4 +44,4 @@ When adding a new ADR:
 - add downstream runbook linkage when available.
 
 Program-level convergence governance is defined in:
-- `docs/20-program/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
+- `docs/program/audit-convergence/EXECUTION-PLAN-v0.1.0.md`

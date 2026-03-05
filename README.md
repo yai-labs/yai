@@ -1,40 +1,43 @@
-# YAI - Governed Intelligence Runtime
+# YAI — Enterprise Governed Execution Platform
 
-**Make AI accountable: authority-first execution, audit trails, deterministic gates, reproducible evidence.**
+YAI is a governed execution platform for high-assurance AI/runtime operations with explicit authority, deterministic control surfaces, and auditable evidence.
 
-## Launch Reference
+## Platform posture
 
-**Star Case:** AI Production Change Guard  
-**Launch ID:** `SC102-WAVE1-LAUNCH`  
-**Release:** https://github.com/yai-labs/yai/releases/tag/sc102-wave1-launch-v1.0.0
+YAI is not a demo runtime.
+It is the implementation and program center of a contract-governed platform stack.
 
-Verify (deterministic):
+Authority and dependency chain:
 
-```bash
-cd docs/40-qualification/WAVES/SC102-WAVE1-LAUNCH
-./verify.sh
-```
----
+`yai-law` -> `yai-sdk` -> `yai-cli` -> `yai` -> `yai-ops`
 
-YAI is the runtime + program hub for a governed execution stack: deterministic planes, explicit authority, auditable state, and reproducible verification.
+## Repository role
 
-## Repository Role
+This repository owns:
+- Runtime implementation surfaces (Boot, Root, Kernel, Engine, Mind)
+- Program governance artifacts (RFCs, ADRs, runbooks, milestone packs, validation plans)
+- Platform integration logic constrained by pinned law contracts
 
-This repo is the product implementation and the program center:
-- Runtime planes: Boot / Root / Kernel / Engine / (Mind)
-- Program docs: RFCs, ADRs, Runbooks, Milestone Packs, Qualification/Validation, Evidence
+This repository does not own:
+- Cross-repo governance standards and reusable governance tooling (`yai-infra`)
+- Normative law contracts (`yai-law`)
 
-Not in this repo:
-- Cross-repo governance/tooling standards (that lives in `yai-infra`)
-- Canonical contracts/law artifacts (that lives in `yai-law`)
+## Enterprise operating principles
 
-## Repo Map (What To Read Next)
+- Authority-first execution
+- Deterministic gates at effect boundaries
+- Evidence and traceability as first-class artifacts
+- Pinned contract consumption with explicit upgrade discipline
+- Mind surfaces governed as part of platform architecture (scope-dependent in program phases)
 
-- `yai-law` - canonical contracts and constraints (normative source of truth)
-- `yai-cli` - operator interface (client control plane)
-- `yai-infra` - open factory window (standards, automation, reusable governance suite)
+## Program anchors
 
-## Quick Start
+- Audit convergence matrix: `docs/program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
+- Audit convergence index: `docs/program/audit-convergence/README.md`
+- Workspaces lifecycle MP index: `docs/program/24-milestone-packs/workspaces-lifecycle/README.md`
+- Governance ADR: `docs/program/22-adr/ADR-012-audit-convergence-gates.md`
+
+## Quick start
 
 Build:
 
@@ -49,17 +52,20 @@ Verify:
 make verify
 ```
 
-Docs entrypoint:
+## Documentation entrypoints
+
 - `docs/00-dashboard.md`
 - `docs/README.md`
 
-## Law and Contract Pinning
+## Law and dependency pinning
 
-This repo consumes canonical law as a pinned dependency:
+This repository consumes canonical law as a pinned dependency:
+- `deps/yai-law/`
 
-- `deps/yai-law/` - pinned normative contracts (do not edit to fix drift)
+It also tracks SDK pin alignment:
+- `deps/yai-sdk.ref`
 
-If behavior drifts from law, the implementation is wrong.
+If implementation behavior diverges from pinned law contracts, the implementation must be corrected.
 
 ## License
 

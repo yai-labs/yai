@@ -13,19 +13,19 @@ revision: 1
 supersedes: []
 related:
   adr:
-    - docs/20-program/22-adr/ADR-007-workspace-isolation.md
-    - docs/20-program/22-adr/ADR-008-connection-lifecycle.md
-    - docs/20-program/22-adr/ADR-009-engine-attachment.md
-    - docs/20-program/22-adr/ADR-010-boot-entrypoint.md
+    - docs/program/22-adr/ADR-007-workspace-isolation.md
+    - docs/program/22-adr/ADR-008-connection-lifecycle.md
+    - docs/program/22-adr/ADR-009-engine-attachment.md
+    - docs/program/22-adr/ADR-010-boot-entrypoint.md
   runbooks:
-    - docs/20-program/23-runbooks/workspaces-lifecycle.md
-    - docs/20-program/23-runbooks/engine-attach.md
+    - docs/program/23-runbooks/workspaces-lifecycle.md
+    - docs/program/23-runbooks/engine-attach.md
   milestone_packs: []
   specs:
-    - deps/yai-law/contracts/boundaries/L1-kernel.md
-    - deps/yai-law/specs/protocol/include/session.h
-    - deps/yai-law/contracts/invariants/I-002-determinism.md
-    - deps/yai-law/contracts/invariants/I-006-external-effect-boundary.md
+    - deps/yai-law/foundation/boundaries/L1-kernel.md
+    - deps/yai-law/contracts/protocol/include/session.h
+    - deps/yai-law/foundation/invariants/I-002-determinism.md
+    - deps/yai-law/foundation/invariants/I-006-external-effect-boundary.md
 tags:
   - workspace
   - isolation
@@ -64,11 +64,11 @@ Define one lifecycle proposal that aligns isolation guarantees with Kernel bound
 
 ## Traceability
 
-- Spec anchors (if any): `deps/yai-law/contracts/boundaries/L1-kernel.md`, `deps/yai-law/specs/protocol/include/session.h`, `deps/yai-law/contracts/invariants/I-002-determinism.md`, `deps/yai-law/contracts/invariants/I-006-external-effect-boundary.md`
-- Targets ADR: `docs/20-program/22-adr/ADR-007-workspace-isolation.md`, `docs/20-program/22-adr/ADR-008-connection-lifecycle.md`, `docs/20-program/22-adr/ADR-009-engine-attachment.md`, `docs/20-program/22-adr/ADR-010-boot-entrypoint.md`
-- Downstream runbook: `docs/20-program/23-runbooks/workspaces-lifecycle.md`
+- Spec anchors (if any): `deps/yai-law/foundation/boundaries/L1-kernel.md`, `deps/yai-law/contracts/protocol/include/session.h`, `deps/yai-law/foundation/invariants/I-002-determinism.md`, `deps/yai-law/foundation/invariants/I-006-external-effect-boundary.md`
+- Targets ADR: `docs/program/22-adr/ADR-007-workspace-isolation.md`, `docs/program/22-adr/ADR-008-connection-lifecycle.md`, `docs/program/22-adr/ADR-009-engine-attachment.md`, `docs/program/22-adr/ADR-010-boot-entrypoint.md`
+- Downstream runbook: `docs/program/23-runbooks/workspaces-lifecycle.md`
 
 ## References
-- `docs/20-program/spine.md`
-- `docs/20-program/22-adr/ADR-007-workspace-isolation.md`
-- `docs/20-program/22-adr/ADR-008-connection-lifecycle.md`
+- `docs/program/spine.md`
+- `docs/program/22-adr/ADR-007-workspace-isolation.md`
+- `docs/program/22-adr/ADR-008-connection-lifecycle.md`

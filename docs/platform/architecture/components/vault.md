@@ -5,8 +5,8 @@ effective_date: 2026-02-19
 revision: 1
 owner: runtime
 law_refs:
-  - deps/yai-law/contracts/boundaries/L0-vault.md
-  - deps/yai-law/specs/vault/include/yai_vault_abi.h
+  - deps/yai-law/foundation/boundaries/L0-vault.md
+  - deps/yai-law/contracts/vault/include/yai_vault_abi.h
 ---
 
 # Vault Component
@@ -32,10 +32,10 @@ partial
 
 ## Traceability
 
-- ADR refs: `docs/20-program/22-adr/ADR-001-single-runtime.md`
-- Runbook refs: `docs/20-program/23-runbooks/root-hardening.md`
-- MP refs: `docs/20-program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`
-- L0 anchors: `deps/yai-law/contracts/boundaries/L0-vault.md`, `deps/yai-law/specs/vault/include/yai_vault_abi.h`
+- ADR refs: `docs/program/22-adr/ADR-001-single-runtime.md`
+- Runbook refs: `docs/program/23-runbooks/root-hardening.md`
+- MP refs: `docs/program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`
+- L0 anchors: `deps/yai-law/foundation/boundaries/L0-vault.md`, `deps/yai-law/contracts/vault/include/yai_vault_abi.h`
 
 ## Known Drift / Gaps
 

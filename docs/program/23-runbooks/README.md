@@ -2,11 +2,11 @@
 id: RB-RUNBOOKS-README
 status: active
 adr_refs:
-  - docs/20-program/22-adr/ADR-011-contract-baseline-lock.md
-  - docs/20-program/22-adr/ADR-012-audit-convergence-gates.md
+  - docs/program/22-adr/ADR-011-contract-baseline-lock.md
+  - docs/program/22-adr/ADR-012-audit-convergence-gates.md
 decisions:
-  - docs/20-program/22-adr/ADR-011-contract-baseline-lock.md
-  - docs/20-program/22-adr/ADR-012-audit-convergence-gates.md
+  - docs/program/22-adr/ADR-011-contract-baseline-lock.md
+  - docs/program/22-adr/ADR-012-audit-convergence-gates.md
 ---
 
 # Runbooks
@@ -21,28 +21,28 @@ A good runbook must be deterministic:
 
 ## Typical runbooks in this repo
 
-- `docs/20-program/23-runbooks/contract-baseline-lock.md`
-- `docs/20-program/23-runbooks/specs-refactor-foundation.md`
-- `docs/20-program/23-runbooks/root-hardening.md`
-- `docs/20-program/23-runbooks/workspaces-lifecycle.md`
-- `docs/20-program/23-runbooks/engine-attach.md`
-- `docs/20-program/23-runbooks/data-plane.md`
-- `docs/20-program/23-runbooks/mind-redis-stm.md`
-- `docs/20-program/23-runbooks/kernel-sovereignty.md`
-- `docs/20-program/23-runbooks/operations.md`
+- `docs/program/23-runbooks/contract-baseline-lock.md`
+- `docs/program/23-runbooks/specs-refactor-foundation.md`
+- `docs/program/23-runbooks/root-hardening.md`
+- `docs/program/23-runbooks/workspaces-lifecycle.md`
+- `docs/program/23-runbooks/engine-attach.md`
+- `docs/program/23-runbooks/data-plane.md`
+- `docs/program/23-runbooks/mind-redis-stm.md`
+- `docs/program/23-runbooks/kernel-sovereignty.md`
+- `docs/program/23-runbooks/operations.md`
 
 ## Program Convergence Backbone
 
 Program-level target-state and wave ordering are defined in:
-- `docs/20-program/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
-- `docs/20-program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
+- `docs/program/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
+- `docs/program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
 
 Runbook phase closure should reference claim IDs from:
-- `docs/50-validation/audits/claims/infra-grammar.v0.1.json`
+- `yai-ops/evidence/validation/audits/claims/infra-grammar.v0.1.json`
 
 ## Template
 
-- `docs/20-program/25-templates/runbooks/RB-000-template.md`
+- `docs/program/25-templates/runbooks/RB-000-template.md`
 
 ## Traceability expectation
 

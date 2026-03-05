@@ -6,18 +6,18 @@ Normative law/specs remain in `deps/yai-law/**`.
 ## Canonical spec pointers
 
 - Engine cortex:
-  - `deps/yai-law/specs/engine/engine_cortex.v1.json`
+  - `deps/yai-law/runtime/engine/schema/engine_cortex.v1.json`
 - Control/events:
-  - `deps/yai-law/specs/control/control_plane.v1.json`
+  - `deps/yai-law/contracts/control/schema/control_plane.v1.json`
 - Graph:
-  - `deps/yai-law/specs/graph/GRAPH_V1.md`
-  - `deps/yai-law/specs/graph/graph.v1.json`
+  - `deps/yai-law/runtime/mind/graph/notes/GRAPH_V1.md`
+  - `deps/yai-law/runtime/mind/graph/schema/graph.v1.json`
 - Providers trust:
-  - `deps/yai-law/specs/providers/PROVIDERS_TRUST.md`
-  - `deps/yai-law/specs/providers/providers.v1.json`
+  - `deps/yai-law/contracts/providers/notes/PROVIDERS_TRUST.md`
+  - `deps/yai-law/contracts/providers/schema/providers.v1.json`
 - RPC/CLI surface:
-  - `deps/yai-law/specs/cli/CLI_PUBLIC_INTERFACE.md`
-  - `deps/yai-law/specs/cli/commands.v1.json`
+  - `deps/yai-law/contracts/cli/notes/CLI_PUBLIC_INTERFACE.md`
+  - `deps/yai-law/registry/commands.v1.json`
 
 ## Boundary rule
 

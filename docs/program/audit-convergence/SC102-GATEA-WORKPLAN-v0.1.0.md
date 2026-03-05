@@ -12,9 +12,9 @@ issue:
 related:
   - docs/30-catalog/scenarios/SC-102.md
   - docs/30-catalog/domains/packs/D1-digital/egress-v1/pack.meta.json
-  - docs/40-qualification/QT-0.1-001-SC102/README.md
-  - docs/50-validation/audits/claims/infra-grammar.v0.1.json
-  - docs/20-program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md
+  - yai-ops/evidence/qualification/QT-0.1-001-SC102/README.md
+  - yai-ops/evidence/validation/audits/claims/infra-grammar.v0.1.json
+  - docs/program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md
 ---
 
 # SC-102 Gate A Workplan (v0.1.0)
@@ -38,13 +38,13 @@ Out of scope:
 ## 2) Entry Checklist
 
 1. Program anchors reviewed:
-   - `docs/20-program/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
-   - `docs/20-program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
+   - `docs/program/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
+   - `docs/program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
 2. Claims baseline reviewed:
-   - `docs/50-validation/audits/claims/infra-grammar.v0.1.json`
+   - `yai-ops/evidence/validation/audits/claims/infra-grammar.v0.1.json`
 3. Scenario/gate anchors locked:
    - `docs/30-catalog/scenarios/SC-102.md`
-   - `docs/40-qualification/QT-0.1-001-SC102/README.md`
+   - `yai-ops/evidence/qualification/QT-0.1-001-SC102/README.md`
 
 ## 3) Implementation Sequence
 

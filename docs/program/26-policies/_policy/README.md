@@ -8,6 +8,6 @@ Files:
 Policy hierarchy:
 1. `GOVERNANCE.md`
 2. `FOUNDATION.md`
-3. `docs/20-program/26-policies/_policy/*.md`
+3. `docs/program/26-policies/_policy/*.md`
 
 If conflicts exist, higher hierarchy wins.

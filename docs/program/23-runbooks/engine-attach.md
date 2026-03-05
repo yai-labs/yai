@@ -10,20 +10,20 @@ depends_on:
   - RB-ROOT-HARDENING
   - RB-WORKSPACES-LIFECYCLE
 adr_refs:
-  - docs/20-program/22-adr/ADR-009-engine-attachment.md
-  - docs/20-program/22-adr/ADR-008-connection-lifecycle.md
+  - docs/program/22-adr/ADR-009-engine-attachment.md
+  - docs/program/22-adr/ADR-008-connection-lifecycle.md
 decisions:
-  - docs/20-program/22-adr/ADR-009-engine-attachment.md
-  - docs/20-program/22-adr/ADR-008-connection-lifecycle.md
+  - docs/program/22-adr/ADR-009-engine-attachment.md
+  - docs/program/22-adr/ADR-008-connection-lifecycle.md
 related:
   adr:
-    - docs/20-program/22-adr/ADR-009-engine-attachment.md
-    - docs/20-program/22-adr/ADR-008-connection-lifecycle.md
+    - docs/program/22-adr/ADR-009-engine-attachment.md
+    - docs/program/22-adr/ADR-008-connection-lifecycle.md
   specs:
-    - deps/yai-law/specs/protocol/include/transport.h
-    - deps/yai-law/specs/protocol/include/yai_protocol_ids.h
+    - deps/yai-law/contracts/protocol/include/transport.h
+    - deps/yai-law/contracts/protocol/include/yai_protocol_ids.h
   test_plans:
-    - docs/40-qualification/test-plans/hardfail.md
+    - yai-ops/evidence/qualification/test-plans/hardfail.md
   tools:
     - tools/bin/yai-verify
     - tools/bin/yai-gate
@@ -65,16 +65,16 @@ Execute the phased attach sequence in this document (ADR decision first, then ke
 - Re-run baseline ping and kernel status checks before retry.
 
 ## 8) References
-- ADR: `docs/20-program/22-adr/ADR-009-engine-attachment.md`
-- Runbooks: `docs/20-program/23-runbooks/root-hardening.md`, `docs/20-program/23-runbooks/workspaces-lifecycle.md`
-- Test plans: `docs/40-qualification/test-plans/hardfail.md`
+- ADR: `docs/program/22-adr/ADR-009-engine-attachment.md`
+- Runbooks: `docs/program/23-runbooks/root-hardening.md`, `docs/program/23-runbooks/workspaces-lifecycle.md`
+- Test plans: `yai-ops/evidence/qualification/test-plans/hardfail.md`
 
 ## Traceability
 - ADR refs:
-  - `docs/20-program/22-adr/ADR-009-engine-attachment.md`
-  - `docs/20-program/22-adr/ADR-008-connection-lifecycle.md`
+  - `docs/program/22-adr/ADR-009-engine-attachment.md`
+  - `docs/program/22-adr/ADR-008-connection-lifecycle.md`
 - MPs (planned):
-  - `docs/20-program/24-milestone-packs/engine-attach/MP-ENGINE-ATTACH-0.1.0.md` (ID: `MP-ENGINE-ATTACH-0.1.0`)
+  - `docs/program/24-milestone-packs/engine-attach/MP-ENGINE-ATTACH-0.1.0.md` (ID: `MP-ENGINE-ATTACH-0.1.0`)
 
 ## Appendix — Detailed Operational Notes (Legacy Detailed Content)
 
@@ -122,7 +122,7 @@ yai root ping
 ## STEP 0: ADR (Socket Layout L2 Decision) **MANDATORY**
 
 ### Target file
-- `docs/20-program/22-adr/ADR-009-engine-attachment.md`
+- `docs/program/22-adr/ADR-009-engine-attachment.md`
 
 ### Canonical schema (ADR-009)
 
@@ -141,9 +141,9 @@ Workspace context is passed through dispatch metadata, not process topology.
 ## STEP 1: Law/Spec Add Engine Paths + IDs (If Missing)
 
 ### Files to read FIRST
-- `deps/yai-law/specs/protocol/yai_protocol_ids.h`
-- `deps/yai-law/specs/protocol/transport.h`
-- `deps/yai-law/specs/protocol/errors.h` (optional)
+- `deps/yai-law/contracts/protocol/include/yai_protocol_ids.h`
+- `deps/yai-law/contracts/protocol/include/transport.h`
+- `deps/yai-law/contracts/protocol/include/errors.h` (optional)
 
 ### Deliverables
 

@@ -3,10 +3,10 @@
 Canonical templates for governance artifacts in this repository.
 
 Use these templates when creating new documents:
-- ADR template: `docs/20-program/25-templates/adr/ADR-000-template.md`
-- RFC template: `docs/20-program/25-templates/rfc/RFC-000-template.md`
-- Runbook template: `docs/20-program/25-templates/runbooks/RB-000-template.md`
-- Milestone Pack template: `docs/20-program/25-templates/milestone-packs/MP-000-template.md`
+- ADR template: `docs/program/25-templates/adr/ADR-000-template.md`
+- RFC template: `docs/program/25-templates/rfc/RFC-000-template.md`
+- Runbook template: `docs/program/25-templates/runbooks/RB-000-template.md`
+- Milestone Pack template: `docs/program/25-templates/milestone-packs/MP-000-template.md`
 
 Rules:
 - Keep IDs stable (`ADR-`, `RFC-`, `RB-`, `MP-`).

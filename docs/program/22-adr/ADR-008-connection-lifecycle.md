@@ -4,15 +4,15 @@ status: accepted
 effective_date: 2026-02-18
 supersedes: []
 applies_to:
-  runbook: docs/20-program/23-runbooks/workspaces-lifecycle.md
+  runbook: docs/program/23-runbooks/workspaces-lifecycle.md
   phase: 0.1.1
   anchor: "#phase-0-1-1-ws-create-guardrails"
 law_refs:
-  - deps/yai-law/contracts/invariants/I-001-traceability.md
-  - deps/yai-law/contracts/invariants/I-002-determinism.md
-  - deps/yai-law/contracts/invariants/I-003-governance.md
-  - deps/yai-law/specs/protocol/include/session.h
-  - deps/yai-law/specs/protocol/include/transport.h
+  - deps/yai-law/foundation/invariants/I-001-traceability.md
+  - deps/yai-law/foundation/invariants/I-002-determinism.md
+  - deps/yai-law/foundation/invariants/I-003-governance.md
+  - deps/yai-law/contracts/protocol/include/session.h
+  - deps/yai-law/contracts/protocol/include/transport.h
 ---
 # ADR-008 - Connection Lifecycle Semantics
 
@@ -49,13 +49,13 @@ A strict lifecycle avoids hidden state transitions and improves forensic clarity
 ## Traceability
 
 - Proposals:
-  - `docs/20-program/21-rfc/RFC-003-workspace-lifecycle-and-isolation.md`
+  - `docs/program/21-rfc/RFC-003-workspace-lifecycle-and-isolation.md`
 - Implemented by runbooks:
-  - `docs/20-program/23-runbooks/workspaces-lifecycle.md`
-  - `docs/20-program/23-runbooks/engine-attach.md`
+  - `docs/program/23-runbooks/workspaces-lifecycle.md`
+  - `docs/program/23-runbooks/engine-attach.md`
 - Milestone packs:
-  - `docs/20-program/24-milestone-packs/workspaces-lifecycle/MP-WORKSPACES-LIFECYCLE-0.1.0.md` *(planned)*
-  - `docs/20-program/24-milestone-packs/engine-attach/MP-ENGINE-ATTACH-0.1.0.md` *(planned)*
+  - `docs/program/24-milestone-packs/workspaces-lifecycle/MP-WORKSPACES-LIFECYCLE-0.1.0.md` *(planned)*
+  - `docs/program/24-milestone-packs/engine-attach/MP-ENGINE-ATTACH-0.1.0.md` *(planned)*
 
 ## Status
 

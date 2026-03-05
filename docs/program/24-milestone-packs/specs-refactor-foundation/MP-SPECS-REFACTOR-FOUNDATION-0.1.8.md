@@ -1,11 +1,11 @@
 ---
 id: MP-SPECS-REFACTOR-FOUNDATION-0.1.8
 status: draft
-runbook: docs/20-program/23-runbooks/specs-refactor-foundation.md
+runbook: docs/program/23-runbooks/specs-refactor-foundation.md
 phase: "0.1.8 — TLA Reboot & Model-Check CI"
 adrs:
-  - docs/20-program/22-adr/ADR-011-contract-baseline-lock.md
-  - docs/20-program/22-adr/ADR-012-audit-convergence-gates.md
+  - docs/program/22-adr/ADR-011-contract-baseline-lock.md
+  - docs/program/22-adr/ADR-012-audit-convergence-gates.md
 spec_anchors:
   - deps/yai-law/SPEC_MAP.md
   - deps/yai-law/REGISTRY.md
@@ -23,18 +23,18 @@ issues:
 # MP-SPECS-REFACTOR-FOUNDATION-0.1.8
 
 ## Metadata
-- Runbook: `docs/20-program/23-runbooks/specs-refactor-foundation.md`
+- Runbook: `docs/program/23-runbooks/specs-refactor-foundation.md`
 - Phase: `0.1.8 — TLA Reboot & Model-Check CI`
 - Wave issue: `#142`
 - Specs branch issue: `yai-law#9`
 - Status: `draft`
 
 ## Links
-- Plan: `docs/20-program/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
-- Matrix: `docs/20-program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
-- Claims registry: `docs/50-validation/audits/claims/infra-grammar.v0.1.json`
-- ADR: `docs/20-program/22-adr/ADR-011-contract-baseline-lock.md`
-- ADR: `docs/20-program/22-adr/ADR-012-audit-convergence-gates.md`
+- Plan: `docs/program/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
+- Matrix: `docs/program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
+- Claims registry: `yai-ops/evidence/validation/audits/claims/infra-grammar.v0.1.json`
+- ADR: `docs/program/22-adr/ADR-011-contract-baseline-lock.md`
+- ADR: `docs/program/22-adr/ADR-012-audit-convergence-gates.md`
 
 ## Objective
 Close phase 0.1.8 with explicit claim/evidence bindings and reproducible gate outputs.
@@ -53,4 +53,4 @@ Closure policy: mandatory `SKIP` is treated as `FAIL`.
 
 ## Execution Snapshot
 - Status: `PLANNED`
-- Evidence bundle: `docs/20-program/24-milestone-packs/specs-refactor-foundation/evidence/0.1.8/`
+- Evidence bundle: `docs/program/24-milestone-packs/specs-refactor-foundation/evidence/0.1.8/`

@@ -10,20 +10,20 @@ depends_on:
   - RB-ROOT-HARDENING
   - RB-ENGINE-ATTACH
 adr_refs:
-  - docs/20-program/22-adr/ADR-003-kernel-authority.md
-  - docs/20-program/22-adr/ADR-008-connection-lifecycle.md
+  - docs/program/22-adr/ADR-003-kernel-authority.md
+  - docs/program/22-adr/ADR-008-connection-lifecycle.md
 decisions:
-  - docs/20-program/22-adr/ADR-003-kernel-authority.md
-  - docs/20-program/22-adr/ADR-008-connection-lifecycle.md
+  - docs/program/22-adr/ADR-003-kernel-authority.md
+  - docs/program/22-adr/ADR-008-connection-lifecycle.md
 related:
   adr:
-    - docs/20-program/22-adr/ADR-003-kernel-authority.md
-    - docs/20-program/22-adr/ADR-008-connection-lifecycle.md
+    - docs/program/22-adr/ADR-003-kernel-authority.md
+    - docs/program/22-adr/ADR-008-connection-lifecycle.md
   specs:
-    - deps/yai-law/specs/protocol/include/transport.h
-    - deps/yai-law/specs/protocol/include/auth.h
+    - deps/yai-law/contracts/protocol/include/transport.h
+    - deps/yai-law/contracts/protocol/include/auth.h
   test_plans:
-    - docs/40-qualification/test-plans/hardfail.md
+    - yai-ops/evidence/qualification/test-plans/hardfail.md
   tools:
     - tools/bin/yai-verify
     - tools/bin/yai-gate
@@ -65,16 +65,16 @@ Execute staged hardening in this document (logger first, then session/path harde
 - Re-run core verify and handshake smoke checks before reopening.
 
 ## 8) References
-- ADR: `docs/20-program/22-adr/ADR-003-kernel-authority.md`
-- Runbooks: `docs/20-program/23-runbooks/root-hardening.md`, `docs/20-program/23-runbooks/engine-attach.md`
-- Test plans: `docs/40-qualification/test-plans/hardfail.md`
+- ADR: `docs/program/22-adr/ADR-003-kernel-authority.md`
+- Runbooks: `docs/program/23-runbooks/root-hardening.md`, `docs/program/23-runbooks/engine-attach.md`
+- Test plans: `yai-ops/evidence/qualification/test-plans/hardfail.md`
 
 ## Traceability
 - ADR refs:
-  - `docs/20-program/22-adr/ADR-003-kernel-authority.md`
-  - `docs/20-program/22-adr/ADR-008-connection-lifecycle.md`
+  - `docs/program/22-adr/ADR-003-kernel-authority.md`
+  - `docs/program/22-adr/ADR-008-connection-lifecycle.md`
 - MPs (to be filled as phases ship):
-  - `docs/20-program/24-milestone-packs/...`
+  - `docs/program/24-milestone-packs/...`
 
 ## Appendix — Detailed Operational Notes (Legacy Detailed Content)
 
@@ -512,7 +512,7 @@ typedef struct {
 /* Global access (or pass pointer around) */
 yai_session_table_t *yai_session_table(void);
 
-/* Workspace id validate (ideally use the inline in deps/yai-law/specs/protocol/transport.h) */
+/* Workspace id validate (ideally use the inline in deps/yai-law/contracts/protocol/include/transport.h) */
 bool yai_ws_validate_id(const char *ws_id);
 
 /* Acquire / create session */
@@ -704,4 +704,4 @@ Once sovereignty hardened:
 1. Add workspace quota limits (disk, memory)
 2. Implement graceful degradation on resource exhaustion
 3. Add metrics collection per workspace
-4. Document security model in `docs/20-program/27-security/SOVEREIGNTY.md`
+4. Document security model in `docs/program/27-security/SOVEREIGNTY.md`

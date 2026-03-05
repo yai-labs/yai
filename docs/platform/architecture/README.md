@@ -5,8 +5,8 @@ effective_date: 2026-02-19
 revision: 1
 owner: architecture
 law_refs:
-  - deps/yai-law/contracts/boundaries/L1-kernel.md
-  - deps/yai-law/contracts/boundaries/L2-engine.md
+  - deps/yai-law/foundation/boundaries/L1-kernel.md
+  - deps/yai-law/foundation/boundaries/L2-engine.md
 ---
 
 # Architecture

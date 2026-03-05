@@ -4,14 +4,14 @@ status: draft
 effective_date: 2026-02-18
 supersedes: []
 applies_to:
-  runbook: docs/20-program/23-runbooks/engine-attach.md
+  runbook: docs/program/23-runbooks/engine-attach.md
   phase: v4
   anchor: "#phase-engine-attach-v4"
 law_refs:
-  - deps/yai-law/contracts/invariants/I-003-governance.md
-  - deps/yai-law/contracts/invariants/I-006-external-effect-boundary.md
-  - deps/yai-law/contracts/boundaries/L1-kernel.md
-  - deps/yai-law/contracts/boundaries/L2-engine.md
+  - deps/yai-law/foundation/invariants/I-003-governance.md
+  - deps/yai-law/foundation/invariants/I-006-external-effect-boundary.md
+  - deps/yai-law/foundation/boundaries/L1-kernel.md
+  - deps/yai-law/foundation/boundaries/L2-engine.md
 ---
 # ADR-009 - Engine Attachment Model
 
@@ -44,12 +44,12 @@ Shared attachment improves operability and keeps execution behavior aligned with
 ## Traceability
 
 - Proposals:
-  - `docs/20-program/21-rfc/RFC-003-workspace-lifecycle-and-isolation.md`
+  - `docs/program/21-rfc/RFC-003-workspace-lifecycle-and-isolation.md`
 - Implemented by runbooks:
-  - `docs/20-program/23-runbooks/workspaces-lifecycle.md`
-  - `docs/20-program/23-runbooks/engine-attach.md`
+  - `docs/program/23-runbooks/workspaces-lifecycle.md`
+  - `docs/program/23-runbooks/engine-attach.md`
 - Milestone packs:
-  - `docs/20-program/24-milestone-packs/engine-attach/MP-ENGINE-ATTACH-0.1.0.md` *(planned)*
+  - `docs/program/24-milestone-packs/engine-attach/MP-ENGINE-ATTACH-0.1.0.md` *(planned)*
 
 ## Status
 

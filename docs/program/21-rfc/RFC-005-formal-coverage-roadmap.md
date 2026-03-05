@@ -13,12 +13,12 @@ revision: 1
 supersedes: []
 related:
   adr:
-    - docs/20-program/22-adr/ADR-006-unified-rpc.md
-    - docs/20-program/22-adr/ADR-011-contract-baseline-lock.md
+    - docs/program/22-adr/ADR-006-unified-rpc.md
+    - docs/program/22-adr/ADR-011-contract-baseline-lock.md
   runbooks:
-    - docs/20-program/23-runbooks/root-hardening.md
+    - docs/program/23-runbooks/root-hardening.md
   milestone_packs:
-    - docs/20-program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md
+    - docs/program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md
   specs:
     - deps/yai-law/formal/spec_map.md
     - deps/yai-law/formal/tla/YAI_KERNEL.tla
@@ -63,11 +63,11 @@ Define a prioritized formal roadmap that starts from protocol/control criticalit
 ## Traceability
 
 - Spec anchors (if any): `deps/yai-law/formal/spec_map.md`, `deps/yai-law/formal/tla/YAI_KERNEL.tla`, `deps/yai-law/formal/bindings/BINDING_PROTOCOL.md`, `deps/yai-law/formal/bindings/BINDING_CLI.md`
-- Targets ADR: `docs/20-program/22-adr/ADR-006-unified-rpc.md`, `docs/20-program/22-adr/ADR-011-contract-baseline-lock.md`
-- Downstream runbook: `docs/20-program/23-runbooks/root-hardening.md`
-- Downstream MP: `docs/20-program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md`
+- Targets ADR: `docs/program/22-adr/ADR-006-unified-rpc.md`, `docs/program/22-adr/ADR-011-contract-baseline-lock.md`
+- Downstream runbook: `docs/program/23-runbooks/root-hardening.md`
+- Downstream MP: `docs/program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md`
 
 ## References
-- `docs/20-program/spine.md`
+- `docs/program/spine.md`
 - `deps/yai-law/formal/spec_map.md`
 - `deps/yai-law/formal/traceability.v1.json`

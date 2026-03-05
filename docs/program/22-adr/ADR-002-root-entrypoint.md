@@ -4,14 +4,14 @@ status: accepted
 effective_date: 2026-02-18
 supersedes: []
 applies_to:
-  runbook: docs/20-program/23-runbooks/root-hardening.md
+  runbook: docs/program/23-runbooks/root-hardening.md
   phase: 0.1.1
   anchor: "#phase-0-1-1-byte-perfect-router"
 law_refs:
-  - deps/yai-law/contracts/axioms/A-002-authority.md
-  - deps/yai-law/contracts/invariants/I-003-governance.md
-  - deps/yai-law/contracts/boundaries/L1-kernel.md
-  - deps/yai-law/specs/protocol/include/transport.h
+  - deps/yai-law/foundation/axioms/A-002-authority.md
+  - deps/yai-law/foundation/invariants/I-003-governance.md
+  - deps/yai-law/foundation/boundaries/L1-kernel.md
+  - deps/yai-law/contracts/protocol/include/transport.h
 ---
 # ADR-002 - Root Control Plane as Canonical Entry Point
 
@@ -44,11 +44,11 @@ This preserves authority ordering and keeps routing and policy enforcement machi
 ## Traceability
 
 - Proposals:
-  - `docs/20-program/21-rfc/RFC-001-runtime-topology-and-authority.md`
+  - `docs/program/21-rfc/RFC-001-runtime-topology-and-authority.md`
 - Implemented by runbooks:
-  - `docs/20-program/23-runbooks/root-hardening.md`
+  - `docs/program/23-runbooks/root-hardening.md`
 - Milestone packs:
-  - `docs/20-program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`
+  - `docs/program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`
 
 ## Status
 

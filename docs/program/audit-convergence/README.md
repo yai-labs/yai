@@ -2,15 +2,16 @@
 id: PROGRAM-DELIVERY-AUDIT-CONVERGENCE
 status: active
 owner: governance
-updated: 2026-02-21
+updated: 2026-03-05
 related:
-  - docs/20-program/audit-convergence/EXECUTION-PLAN-v0.1.0.md
-  - docs/20-program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md
-  - docs/50-validation/audits/claims/infra-grammar.v0.1.json
-  - docs/20-program/audit-convergence/SC102-GATEA-WORKPLAN-v0.1.0.md
-  - docs/20-program/22-adr/ADR-012-audit-convergence-gates.md
+  - docs/program/audit-convergence/EXECUTION-PLAN-v0.1.0.md
+  - docs/program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md
+  - yai-ops/evidence/validation/audits/claims/infra-grammar.v0.1.json
+  - docs/program/audit-convergence/SC102-GATEA-WORKPLAN-v0.1.0.md
+  - docs/program/22-adr/ADR-012-audit-convergence-gates.md
 issue:
   - https://github.com/yai-labs/yai/issues/140
+  - https://github.com/yai-labs/yai/issues/211
 ---
 
 # Audit Convergence (v0.1.0)
@@ -19,11 +20,11 @@ This folder is the canonical backbone for converging runbooks/ADR/MP to one targ
 Infra Grammar audit green on all domains, including Mind.
 
 Canonical artifacts:
-- Execution plan: `docs/20-program/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
-- Convergence matrix: `docs/20-program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
-- Claims registry: `docs/50-validation/audits/claims/infra-grammar.v0.1.json`
-- Active Gate A workplan: `docs/20-program/audit-convergence/SC102-GATEA-WORKPLAN-v0.1.0.md`
-- Governance ADR: `docs/20-program/22-adr/ADR-012-audit-convergence-gates.md`
+- Execution plan: `docs/program/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
+- Convergence matrix: `docs/program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
+- Claims registry: `yai-ops/evidence/validation/audits/claims/infra-grammar.v0.1.json`
+- Active Gate A workplan: `docs/program/audit-convergence/SC102-GATEA-WORKPLAN-v0.1.0.md`
+- Governance ADR: `docs/program/22-adr/ADR-012-audit-convergence-gates.md`
 
 Rules:
 - Source of truth for claims is the registry JSON.

@@ -1,15 +1,15 @@
 ---
 id: MP-CONTRACT-BASELINE-LOCK-0.1.4
 status: active
-runbook: docs/20-program/23-runbooks/contract-baseline-lock.md
+runbook: docs/program/23-runbooks/contract-baseline-lock.md
 phase: "0.1.4 — Cross-Repo Evidence Closure"
 adrs:
-  - docs/20-program/22-adr/ADR-011-contract-baseline-lock.md
-  - docs/20-program/22-adr/ADR-012-audit-convergence-gates.md
+  - docs/program/22-adr/ADR-011-contract-baseline-lock.md
+  - docs/program/22-adr/ADR-012-audit-convergence-gates.md
 spec_anchors:
-  - deps/yai-law/contracts/invariants/I-001-traceability.md
-  - deps/yai-law/contracts/invariants/I-003-governance.md
-  - deps/yai-law/contracts/boundaries/L1-kernel.md
+  - deps/yai-law/foundation/invariants/I-001-traceability.md
+  - deps/yai-law/foundation/invariants/I-003-governance.md
+  - deps/yai-law/foundation/boundaries/L1-kernel.md
 claims:
   - C-EVIDENCE-PACK-REPRODUCIBLE
   - C-SPEC-FIRST-PINNED
@@ -24,7 +24,7 @@ issues:
 
 ## Metadata
 
-- Runbook: `docs/20-program/23-runbooks/contract-baseline-lock.md`
+- Runbook: `docs/program/23-runbooks/contract-baseline-lock.md`
 - Phase: `0.1.4 — Cross-Repo Evidence Closure`
 - Wave issue: `#141`
 - Owner: `governance`
@@ -32,11 +32,11 @@ issues:
 
 ## Links
 
-- ADR: `docs/20-program/22-adr/ADR-011-contract-baseline-lock.md`
-- ADR: `docs/20-program/22-adr/ADR-012-audit-convergence-gates.md`
-- Proposals: `docs/20-program/21-rfc/RFC-004-contract-baseline-lock-and-pin-policy.md`, `docs/20-program/21-rfc/RFC-005-formal-coverage-roadmap.md`
-- Evidence plans: `docs/40-qualification/test-plans/hardfail.md`
-- Claims registry: `docs/50-validation/audits/claims/infra-grammar.v0.1.json`
+- ADR: `docs/program/22-adr/ADR-011-contract-baseline-lock.md`
+- ADR: `docs/program/22-adr/ADR-012-audit-convergence-gates.md`
+- Proposals: `docs/program/21-rfc/RFC-004-contract-baseline-lock-and-pin-policy.md`, `docs/program/21-rfc/RFC-005-formal-coverage-roadmap.md`
+- Evidence plans: `yai-ops/evidence/qualification/test-plans/hardfail.md`
+- Claims registry: `yai-ops/evidence/validation/audits/claims/infra-grammar.v0.1.json`
 
 Objective:
 - Close Milestone 1 with explicit, auditable cross-repo evidence for the baseline lock track.
@@ -82,11 +82,11 @@ Definition of Done:
 
 ## Execution Snapshot (2026-02-21)
 
-- Evidence bundle: `docs/20-program/24-milestone-packs/contract-baseline-lock/evidence/wave0-2026-02-21/`
+- Evidence bundle: `docs/program/24-milestone-packs/contract-baseline-lock/evidence/wave0-2026-02-21/`
 - `tools/bin/yai-check-pins` -> `PASS` (`exit=0`) via `10-check_pins-strict-pass.*`
 - `tools/bin/yai-docs-trace-check --all` -> `PASS` (`exit=0`) via `12-docs-trace-check-post-pin.*`
 - `tools/bin/yai-proof-check` -> `PASS` (`exit=0`) via `11-proof-check-post-pin.*`
-- `tools/bin/yai-proof-check --manifest docs/50-validation/proof/.private/PP-FOUNDATION-0001/pp-foundation-0001.manifest.v1.json` -> `FAIL` (`exit=2`) via `08-proof-check-private-hardfail.*`
+- `tools/bin/yai-proof-check --manifest yai-ops/evidence/validation/proof/.private/PP-FOUNDATION-0001/pp-foundation-0001.manifest.v1.json` -> `FAIL` (`exit=2`) via `08-proof-check-private-hardfail.*`
 
 Phase state:
 - `CLOSED` (phase acceptance criteria satisfied with recorded evidence) (strict pins aligned and mandatory checks passing).

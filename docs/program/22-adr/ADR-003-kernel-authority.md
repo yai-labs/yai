@@ -4,16 +4,16 @@ status: accepted
 effective_date: 2026-02-18
 supersedes: []
 applies_to:
-  runbook: docs/20-program/23-runbooks/root-hardening.md
+  runbook: docs/program/23-runbooks/root-hardening.md
   phase: 0.1.2
   anchor: "#phase-0-1-2-envelope-authority-gate"
 law_refs:
-  - deps/yai-law/contracts/axioms/A-002-authority.md
-  - deps/yai-law/contracts/invariants/I-003-governance.md
-  - deps/yai-law/contracts/invariants/I-006-external-effect-boundary.md
-  - deps/yai-law/contracts/boundaries/L1-kernel.md
-  - deps/yai-law/specs/protocol/include/auth.h
-  - deps/yai-law/specs/protocol/include/session.h
+  - deps/yai-law/foundation/axioms/A-002-authority.md
+  - deps/yai-law/foundation/invariants/I-003-governance.md
+  - deps/yai-law/foundation/invariants/I-006-external-effect-boundary.md
+  - deps/yai-law/foundation/boundaries/L1-kernel.md
+  - deps/yai-law/contracts/protocol/include/auth.h
+  - deps/yai-law/contracts/protocol/include/session.h
 ---
 # ADR-003 - Kernel as Authority Plane (L1)
 
@@ -46,11 +46,11 @@ Separating authority from execution preserves deterministic policy behavior and 
 ## Traceability
 
 - Proposals:
-  - `docs/20-program/21-rfc/RFC-001-runtime-topology-and-authority.md`
+  - `docs/program/21-rfc/RFC-001-runtime-topology-and-authority.md`
 - Implemented by runbooks:
-  - `docs/20-program/23-runbooks/root-hardening.md`
+  - `docs/program/23-runbooks/root-hardening.md`
 - Milestone packs:
-  - `docs/20-program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`
+  - `docs/program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`
 
 ## Status
 

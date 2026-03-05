@@ -9,15 +9,15 @@ supersedes: []
 depends_on:
   - RB-CONTRACT-BASELINE-LOCK
 adr_refs:
-  - docs/20-program/22-adr/ADR-011-contract-baseline-lock.md
-  - docs/20-program/22-adr/ADR-012-audit-convergence-gates.md
+  - docs/program/22-adr/ADR-011-contract-baseline-lock.md
+  - docs/program/22-adr/ADR-012-audit-convergence-gates.md
 decisions:
-  - docs/20-program/22-adr/ADR-011-contract-baseline-lock.md
-  - docs/20-program/22-adr/ADR-012-audit-convergence-gates.md
+  - docs/program/22-adr/ADR-011-contract-baseline-lock.md
+  - docs/program/22-adr/ADR-012-audit-convergence-gates.md
 related:
   adr:
-    - docs/20-program/22-adr/ADR-011-contract-baseline-lock.md
-    - docs/20-program/22-adr/ADR-012-audit-convergence-gates.md
+    - docs/program/22-adr/ADR-011-contract-baseline-lock.md
+    - docs/program/22-adr/ADR-012-audit-convergence-gates.md
   specs:
     - deps/yai-law/SPEC_MAP.md
     - deps/yai-law/REGISTRY.md
@@ -91,11 +91,11 @@ A *closure artifact* for a phase: what changed, proof evidence, links to issues/
 
 ### 3.1 Audit Convergence Binding (Wave 1)
 This runbook is Wave 1 under:
-- `docs/20-program/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
-- `docs/20-program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
+- `docs/program/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
+- `docs/program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
 
 Claims source of truth:
-- `docs/50-validation/audits/claims/infra-grammar.v0.1.json`
+- `yai-ops/evidence/validation/audits/claims/infra-grammar.v0.1.json`
 
 Wave tracking:
 - `https://github.com/yai-labs/yai/issues/142`
@@ -162,7 +162,7 @@ A phase is "closed" only when:
 - optionally: `docs/` navigation pointers.
 
 **MP (planned):**
-- `docs/20-program/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.0.md`
+- `docs/program/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.0.md`
 
 ---
 
@@ -508,9 +508,9 @@ make verify
 
 ## 11) References
 
-- ADR: `docs/20-program/22-adr/ADR-011-contract-baseline-lock.md`
+- ADR: `docs/program/22-adr/ADR-011-contract-baseline-lock.md`
 - Specs: `deps/yai-law/SPEC_MAP.md`, `deps/yai-law/REGISTRY.md`
-- Planned MPs: `docs/20-program/24-milestone-packs/specs-refactor-foundation/*`
+- Planned MPs: `docs/program/24-milestone-packs/specs-refactor-foundation/*`
 
 
 ## 12) Phase Closure Snapshot (2026-02-24)
@@ -538,4 +538,4 @@ Closure evidence anchors:
 - `tools/bin/yai-verify law-kernel` -> PASS
 
 Next runbook in sequence:
-- `docs/20-program/23-runbooks/root-hardening.md`
+- `docs/program/23-runbooks/root-hardening.md`

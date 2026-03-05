@@ -1,495 +1,453 @@
 ---
 id: RB-WORKSPACES-LIFECYCLE
-title: Workspaces Lifecycle
-status: active
-owner: runtime
-effective_date: 2026-02-18
+status: draft
 revision: 2
-supersedes: []
+owner: runtime
+effective_date: 2026-03-03
+supersedes:
+  - RB-WORKSPACES-LIFECYCLE@rev1
+scope_grade: SC102
+
+# Core dependencies for this runbook
+# SC103 adds optional mind surfaces.
 depends_on:
   - RB-ROOT-HARDENING
+  - RB-DATA-PLANE@rev2
+  - RB-ENGINE-ATTACH
+
 adr_refs:
-  - docs/20-program/22-adr/ADR-007-workspace-isolation.md
-  - docs/20-program/22-adr/ADR-008-connection-lifecycle.md
-decisions:
-  - docs/20-program/22-adr/ADR-007-workspace-isolation.md
-  - docs/20-program/22-adr/ADR-008-connection-lifecycle.md
-related:
-  adr:
-    - docs/20-program/22-adr/ADR-007-workspace-isolation.md
-    - docs/20-program/22-adr/ADR-008-connection-lifecycle.md
-  specs:
-    - deps/yai-law/specs/protocol/include/transport.h
-    - deps/yai-law/specs/protocol/include/auth.h
-    - deps/yai-law/specs/protocol/include/errors.h
-    - deps/yai-law/specs/protocol/include/yai_protocol_ids.h
-  test_plans:
-    - docs/40-qualification/test-plans/hardfail.md
-  tools:
-    - tools/bin/yai-verify
-    - tools/bin/yai-gate
-    - tools/bin/yai-suite
-tags:
-  - runtime
-  - workspace
+  - docs/program/22-adr/ADR-006-unified-rpc.md
+  - docs/program/22-adr/ADR-007-workspace-isolation.md
+  - docs/program/22-adr/ADR-011-contract-baseline-lock.md
+  - docs/program/22-adr/ADR-012-audit-convergence-gates.md
+
+tools:
+  - tools/bin/yai-check-pins
+  - tools/bin/yai-verify
+  - tools/bin/yai-gate
+  - tools/bin/yai-suite
 ---
 
-# RB-WORKSPACES-LIFECYCLE — Workspace Commands With Real Side-Effects (YAI 0.1.x)
+# RB-WORKSPACES-LIFECYCLE — Workspace Lifecycle (v2)
 
-This runbook upgrades workspace commands from "stub OK" to **real, governed, deterministic side-effects** while preserving Root hardening.
+Status: Draft | Revision: 2 | Owner: Runtime | Effective date: 2026-03-03  
+Supersedes: RB-WORKSPACES-LIFECYCLE@rev1  
+Scope grade: SC102 (Mind NOT required) — SC103 adds optional Mind surfaces
 
-Non-negotiable outcomes:
-- `yai kernel ws create <id>` creates `~/.yai/run/<id>/` and minimal state files
-- `yai kernel ws destroy <id>` removes deterministically, guarded against traversal
-- Root remains a pure router (envelope validation + byte-perfect forward/relay)
-- Kernel enforces policy and applies side-effects only when valid + authorized
+## Dependencies & references
 
-## 1) Purpose
+### Depends on
+- `RB-ROOT-HARDENING`
+- `RB-DATA-PLANE` (rev2)
+- `RB-ENGINE-ATTACH`
 
-Upgrade workspace commands from stub behavior to deterministic governed side-effects while preserving Root hardening invariants.
+### ADR refs
+- `docs/program/22-adr/ADR-006-unified-rpc.md` (Unified RPC)
+- `docs/program/22-adr/ADR-007-workspace-isolation.md` (Workspace isolation)
+- `docs/program/22-adr/ADR-011-contract-baseline-lock.md` (Baseline lock + pins)
+- `docs/program/22-adr/ADR-012-audit-convergence-gates.md` (Audit convergence gates)
 
-## 2) Preconditions
+### Related specs (yai-law)
+- `deps/yai-law/contracts/control/schema/control_plane.v1.json`
+- `deps/yai-law/contracts/protocol/include/auth.h`
+- `deps/yai-law/contracts/protocol/include/audit.h`
+- `deps/yai-law/contracts/protocol/include/transport.h`
+- `deps/yai-law/runtime/kernel/README.md` (runtime model)
+- `deps/yai-law/runtime/engine/schema/engine_cortex.v1.json`
+- `deps/yai-law/runtime/mind/graph/schema/graph.v1.json` (optional, SC103)
 
-- [x] Root hardening baseline is active (handshake gate, ws_id validation, deterministic errors).
-- [x] Kernel is reachable from control plane commands.
-- [x] `yai root ping` and one kernel command are already green.
+### Related runbooks
+- `docs/program/23-runbooks/root-hardening.md`
+- `docs/program/23-runbooks/data-plane.md` (rev2, canonical storage contract)
+- `docs/program/23-runbooks/engine-attach.md`
+- `docs/program/23-runbooks/mind-redis-stm.md` (optional)
 
-## 3) Inputs
+### Tools
+- `yai-check-pins`
+- `yai-verify`
+- `yai-gate`
+- `yai-suite`
 
-- Protocol anchors:
-  - `deps/yai-law/specs/protocol/include/transport.h`
-  - `deps/yai-law/specs/protocol/include/auth.h`
-  - `deps/yai-law/specs/protocol/include/errors.h`
-- Tooling:
-  - `tools/bin/yai-verify`
-  - `tools/bin/yai-gate`
-  - `tools/bin/yai-suite`
+## 1. Purpose
 
-## 4) Procedure
+Define the workspace lifecycle as the canonical mechanism for:
+- containment-by-default: a workspace is a containerized execution context (not a client calling middleware)
+- scanner semantics: workload passes through a governed perimeter where effects-out are gated
+- operational interaction: safe live operations (inspect/authorize/baseline change) without cowboy edits
+- layered adoption:
+  - SC102: enforcement + evidence without Mind
+  - SC103: optional Mind decision support and automation on top
 
-### Position in the global sequence
+## 2. Definitions
 
-1. Root hardening ✅
-2. Workspaces lifecycle ✅ (this document)
-3. Engine attach
-4. Data plane
-5. Mind Redis STM
+### 2.1 Workspace (WS)
 
-### Hard prerequisites
+A workspace is a tenant-isolated execution perimeter that hosts:
+- pinned law/spec/registry context (baseline/policy)
+- storage layout (data plane)
+- execution runs and evidence
+- optional Mind surfaces (SC103)
 
-- Root hardening is complete enough that:
-  - handshake gate is active
-  - ws_id validation exists and is used
-  - Root forwards byte-perfect to Kernel
-  - deterministic error replies exist (no silent drop)
-- Kernel boots and can respond to control plane requests
-- CLI can run at least:
-  - `yai root ping`
-  - `yai kernel status` (or any kernel command that hits the kernel)
+Key rule: workloads do not call YAI; they execute inside WS scope where effects-out are governed.
 
-If these are not true, stop and complete RB-ROOT-HARDENING first.
+### 2.2 Scanner semantics (airport scanner)
 
----
+A WS enforces:
+- gating on external effects (egress, storage writes, publication, transactions, actuator commands)
+- deterministic outcomes: `allow | deny | quarantine`
+- evidence bundle materialization and indexing
 
-### Scope
+### 2.3 Gates
+
+A gate is a runtime boundary at an effect commit point and exists to prevent uncontrolled side effects.
+
+### 2.4 Quarantine
+
+Quarantine is persisted pending state for an action/run:
+- external effect is NOT committed
+- state is checkpointed/parked
+- resolution is governed (CLI/SDK/Cockpit), with TTL and audit evidence
+
+## 3. Scope
 
 ### In scope
-
-- Implement Kernel handlers for:
-  - `ws.create`
-  - `ws.destroy`
-  - `ws.list` (minimal)
-- Ensure side effects happen ONLY under:
-  - valid ws_id
-  - successful handshake
-  - correct authority for privileged ops (arming+role)
-- Minimal on-disk workspace layout (0.1.x)
-- Deterministic response behavior + logging for all outcomes
+- workspace lifecycle commands: create/open/close/destroy
+- workspace identity and isolation rules
+- execution run lifecycle inside workspace
+- per-workspace gates configuration model
+- live interaction model: inspect / authorize / baseline change / resume
+- pending/quarantine queue semantics (persisted, TTL, resolvable)
+- evidence conventions (aligned to RB-DATA-PLANE)
 
 ### Out of scope
+- multi-node clustering, cross-workspace queries
+- SC103 advanced graph causal queries
+- high-throughput distributed event storage
 
-- Data plane databases (LMDB/DuckDB) beyond a minimal manifest placeholder
-- Engine attachment and engine per-workspace sockets
-- Mind STM / Redis
-- Expanding protocol schema or adding new envelope fields
+## 4. Non-negotiable invariants
 
----
+1. Workspace isolation: no cross-workspace storage, queries, or side effects
+2. Path jail: all file operations resolve under `~/.yai/run/<ws_id>/`
+3. Fail-closed on effects-out: no proof => no effect commit
+4. Evidence first-class: every decision touching effects-out emits evidence refs + hashes
+5. Mind never SC102 dependency: SC102 must run without Redis/LLM/Mind
 
-### Operational Workflow (Daily)
+## 5. Data Plane alignment (RB-DATA-PLANE rev2)
 
-### Clean runtime before each test round
+Canonical storage contract:
 
-```bash
-pkill -f yai-root-server || true
-pkill -f yai-kernel || true
-pkill -f yai-boot || true
+Workspace root: `~/.yai/run/<ws_id>/`
+
+Minimum layout (rev2):
+
+```text
+~/.yai/run/<ws_id>/
+├── manifest.json
+├── authority/           # LMDB (L1) - kernel store
+├── events/              # DuckDB (L2) - engine store
+├── engine/              # sockets/pid
+└── logs/
 ```
 
-### Build + boot baseline
+Rules:
+- `ws create` MUST create/validate layout + `manifest.json`
+- `ws open` MUST validate `manifest.json` and ABI compatibility
+- CLI MUST NOT touch storage directly:
+  - `CLI -> Root -> Kernel -> storage`
 
-```bash
-make clean
-make
-yai-boot --master
-```
+## 6. Lifecycle model
 
-### Sanity checks
+### 6.1 States
+- `NON_EXISTENT`
+- `CREATED` (layout exists, not active)
+- `OPEN` (active session + runtime surfaces available)
+- `CLOSING` (draining)
+- `CLOSED` (inactive but retained)
+- `DESTROYED` (removed, irreversible)
+
+### 6.2 Allowed transitions
+- `NON_EXISTENT -> CREATED -> OPEN -> CLOSED -> DESTROYED`
+- `OPEN -> CLOSING -> CLOSED`
+
+Forbidden:
+- `OPEN -> DESTROYED` directly (must close first)
+- `CLOSED -> OPEN` without re-validation
+- cross-tenant operations
+
+## 7. Control plane responsibilities
+
+### Root
+- entrypoint for CLI/SDK/Cockpit
+- validate workspace id and auth context
+- route to Kernel
+- enforce handshake lifecycle
+
+### Kernel (L1 authority)
+- workspace identity + isolation
+- path jail enforcement for storage ops
+- authority checks for privileged operations (authorize/break-glass/baseline change)
+- expose controlled surfaces to engine/mind
+
+### Engine (L2 event store)
+- append events and decision records
+- produce/export metrics where applicable
+
+### Mind (optional, SC103)
+- diagnosis and remediation suggestions
+- planning support
+- final commits still governed/evidenced
+
+## 8. Gates model (effect commit points)
+
+### 8.1 Gate categories (examples)
+- D1: network egress
+- D2: actuator command
+- D5: economic transaction authorization
+- D7: publication enforcement
+- D8: reproducibility / parameter lock
+- D6: incident response action
+
+### 8.2 Gate outcomes
+- `allow`: effect may commit
+- `deny`: effect must not commit
+- `quarantine`: effect must not commit; action becomes pending
+
+Rule: quarantine requires checkpoint/park, never infinite sleep.
+
+## 9. Execution runs inside a workspace
+
+### 9.1 Run concept
+
+A run is a bounded unit of activity in a workspace and MUST have:
+- `trace_id` (or equivalent)
+- decision records + timeline (append-only)
+- evidence index references
+- baseline/policy hash linkage
+
+### 9.2 Two-phase execution
+- propose: evaluate action + evidence context
+- commit effect: only if gate returns allow (or quarantine resolved)
+
+## 10. Live interaction model (production-safe)
+
+### 10.1 Principle
+YAI governs external effects at gates; deny/quarantine transitions into known operational state.
+
+### 10.2 Standard handling modes
+- `ABORT`
+- `RETRY` (bounded retries + backoff)
+- `WAIT_FOR_AUTH` (quarantine persisted pending)
+
+### 10.3 Quarantine queue
+Quarantined actions MUST be:
+- persisted
+- observable (`list/inspect`)
+- resolvable (`authorize/deny/baseline change`)
+- bounded by TTL
+
+TTL minimum:
+- each pending has TTL
+- on expiry: abort or compensating action (policy-defined)
+- TTL expiry emits evidence + reason codes
+
+### 10.4 Interaction surfaces
+- CLI (now)
+- Cockpit UI (future, via SDK)
+- SDK (embedded/pro)
+
+No ad-hoc scripts as operational control plane.
+
+### 10.5 Three authoritative live operations
+A) Inspect (read-only)
+- pending queue, decision records, reason codes
+- baseline/policy hash in force
+- evidence index and timeline
+
+B) Authorize/resolve (run-scoped)
+- emit authorization event for quarantined action
+- scoped to run/action
+- includes who/when/why/authority
+
+C) Baseline/policy change (forward-scoped)
+- bump pinned baseline/policy version
+- affects future decisions (or explicit reevaluation path)
+- evidence-captured governance change
+
+### 10.6 Break-glass override
+Only governed action with:
+- strict single run/action scope
+- bounded time window
+- mandatory justification
+- automatic postmortem hooks
+- high-visibility evidence
+
+## 11. CLI operational contract (v2, aligned to expanded registry)
+
+Exact command names may evolve, semantics MUST stay stable.
+
+### 11.1 Source-of-truth rules
+- Canonical interface is `command_id` from `yai-law/registry/commands.v1.json`.
+- CLI aliases are convenience surfaces and MUST resolve to the same canonical `command_id`.
+- For workspace lifecycle in SC102, aliases below are the required operational surface.
+
+### 11.2 Implemented-now operational aliases (SC102 core)
 
 ```bash
 yai root ping
+yai kernel ping
+
+# Workspace lifecycle via kernel
+yai kernel ws create --ws-id <ws_id>
+yai kernel ws reset  --ws-id <ws_id>
+yai kernel ws destroy --ws-id <ws_id>
+
+# Stack lifecycle
+yai lifecycle up      [--ws <ws_id>] [--no-engine] [--no-mind] [--detach]
+yai lifecycle restart [--ws <ws_id>] [--force]
+yai lifecycle down    [--ws <ws_id>] [--force]
+
+# Inspection
+yai inspect status [--ws <ws_id>] [--json]
+yai inspect logs <component> [--ws <ws_id>] [--follow]
+yai inspect monitor
+yai inspect events [--ws <ws_id>]
+
+# Verification
+yai verify verify <target>
+yai verify test <target> [--ws <ws_id>] [--timeout-ms <ms>]
 ```
 
-Expected:
+### 11.3 Canonical IDs backing current aliases
+- `yai.root.ping`
+- `yai.kernel.ping`
+- `yai.kernel.ws` (argument `action=create|reset|destroy`)
+- `yai.lifecycle.up`
+- `yai.lifecycle.restart`
+- `yai.lifecycle.down`
+- `yai.inspect.status`
+- `yai.inspect.logs`
+- `yai.inspect.monitor`
+- `yai.inspect.events`
+- `yai.verify.verify`
+- `yai.verify.test`
 
-- Root responds
-- logs exist (root/kernel), and failures are deterministic
+### 11.4 Expanded WS-related registry families (now cataloged)
 
----
+The registry is already expanded (200 IDs per group). Workspace lifecycle v2 MUST evolve by implementing these families progressively without changing contract semantics:
 
-### Deliverables (Phased)
+- `lifecycle` families: `workspace_*`, `stack_*`, `runtime_*`, `service_*`, `session_*`, `daemon_*`, `engine_*`, `mind_*`, `plane_*`, `profile_*`.
+- `kernel` families: `ws_*`, `boundary_*`, `enforce_*`, `policy_*`, `route_*`, `session_*`, `resource_*`, `quota_*`, `mount_*`, `audit_*`.
+- `inspect` families: `status_*`, `logs_*`, `events_*`, `health_*`, `metrics_*`, `trace_*`, `routes_*`, `sessions_*`, `jobs_*`, `alerts_*`.
+- `verify` families: `gate_*`, `policy_*`, `evidence_*`, `proof_*`, `trace_*`, `bundle_*`, `report_*`, `suite_*`, `vector_*`, `check_*`.
+- `control` families used by live operations: `authority_*`, `dispatch_*`, `route_*`, `session_*`, `provider_*`, `target_*`, `policy_*`, plus compatibility IDs (`call`, `root`, `kernel`, `chat`, `shell`, `dsar`, `providers`, `sessions`).
 
----
+### 11.5 Contract guarantees for all registered commands
+- A registered `command_id` MUST be invocable through CLI/SDK path.
+- If runtime handler is missing, response MUST be deterministic (`nyi`/mapped equivalent), never `unknown command`.
+- Help surfaces MUST expose both overview and full catalog views:
+  - `yai help` -> overview (compact)
+  - `yai help <group>` -> compact group overview
+  - `yai help <group>:all` -> full group command expansion
 
-<a id="phase-0-1-0-workspace-layout"></a>
-### 0.1.0 — Define Minimal Workspace Layout + Manifest Stub
+### 11.6 Mediation hard rule
+CLI access is always mediated by governance plane:
 
-**Branch:** `feat/workspaces-lifecycle-0.1.0-layout`  
-**Goal:** decide and implement the minimal filesystem footprint created by `ws create`.
+`CLI -> Root -> Kernel -> storage/effect`
 
-#### Minimal layout (0.1.x)
+Direct storage mutation from CLI is forbidden.
 
-`~/.yai/run/<ws_id>/`
+### 11.7 Complete command map (all groups)
+The complete catalog (all `2800` command_id) is tracked in:
 
-- `manifest.json` (required)
-- `logs/` (directory; optional creation in 0.1.0, mandatory by later runbooks)
+- `docs/program/23-runbooks/workspaces-lifecycle-command-map.v2.md`
 
-`manifest.json` (0.1.x stub, stable keys):
+This runbook stays normative on lifecycle semantics; the map file is the exhaustive command inventory source for planning waves.
 
-```json
-{
-  "ws_id": "testws",
-  "created_at": "2026-02-18T00:00:00Z",
-  "owner_role": "operator"
-}
-```
+## 12. Mind integration (optional, SC103)
 
-#### File targets
+### 12.1 Modes
+- Mode 1 (SC102 default): governance-only, no Mind dependency
+- Mode 2 (SC103): active control support from Mind, commits still gated/evidenced
 
-Specs/doc (optional but recommended even as a short note):
+### 12.2 Mind action constraints
+Mind-driven actions MUST:
+- be represented as actions/events in workspace
+- be policy/authority authorized
+- be evidence-captured like human actions
 
-- `docs/20-program/23-runbooks/workspaces-lifecycle.md` (this file; update if needed)
+### 12.3 STM/Redis behavior
+If Redis absent:
+- safe degradation (`DEGRADED_READONLY` for STM endpoints)
+- SC102 enforcement continues unaffected
 
-Kernel paths/helpers:
+## 13. Evidence & audit convergence
 
-- `kernel/src/core/project_tree.c` (if it already builds directories)
-- or introduce:
-  - `kernel/include/storage_paths.h` (NEW, if not already created by other runbooks)
-  - `kernel/src/core/storage_paths.c` (NEW)
+### 13.1 Minimum evidence per run (SC102-grade)
+A run touching effects-out MUST produce:
+- decision record(s) with baseline hash
+- events timeline
+- containment metrics (where applicable)
+- minimal system_state snapshot
+- evidence index
 
-Ensure directory creation is jailed under `~/.yai/run/`.
+### 13.2 Audit convergence gates
+Lifecycle transitions and resolve actions MUST:
+- emit audit events (engine append)
+- be queryable by trace/run id
+- be verifiable (hash + required fields)
 
-#### Verification
+## 14. Failure modes (fail-closed)
 
-Create a workspace:
+| Failure | Required behavior |
+|---|---|
+| Path jail violation | block op, emit evidence + reason code |
+| Cross-workspace access | deny, audit event, no partial reads |
+| Baseline/policy hash mismatch | deny/quarantine; never commit effect |
+| Pending TTL expiry | policy abort/compensation + evidence |
+| Mind/Redis unavailable (SC103) | safe degrade, SC102 unaffected |
+| Unauthorized resolve/override | deny + audit event |
 
+## 15. Rollback & recovery
+
+### 15.1 Operational rollback
+- run-level: abort pending, rollback to safe checkpoint, or deterministic rerun
+- policy-level: explicit pinned rollback, never silent revert
+
+### 15.2 Recovery guarantees
+Pending/quarantine MUST survive restart.
+Open workspace restart MUST revalidate:
+- manifest ABI compatibility
+- authority store presence
+- events store integrity (openability at minimum)
+
+## 16. Acceptance criteria (v2)
+
+- [ ] `ws create/open/close/destroy` enforce state machine + audit events
+- [ ] data-plane layout created/validated per RB-DATA-PLANE rev2
+- [ ] deterministic gate outcomes at effect commit points
+- [ ] quarantine persisted pending with TTL
+- [ ] live ops inspect/authorize/baseline-change are governed + auditable
+- [ ] CLI never directly touches storage
+- [ ] SC102 works with Mind absent
+- [ ] evidence bundle generated and verifiable per run
+
+### Closure gates
 ```bash
-yai kernel ws create testws
+tools/bin/yai-check-pins
+tools/bin/yai-verify list
+tools/bin/yai-verify core
 ```
 
-Confirm:
-
-- `~/.yai/run/testws/manifest.json` exists and contains ws_id
-
-#### Acceptance (0.1.0)
-
-- [ ] minimal layout decision is written (in this runbook section is enough)
-- [ ] `ws create` produces directory + manifest stub
-- [ ] all paths are inside `~/.yai/run/<ws_id>/` only
-
----
-
-<a id="phase-0-1-1-ws-create-guardrails"></a>
-### 0.1.1 — Kernel Implements ws.create With Guardrails
-
-**Branch:** `feat/workspaces-lifecycle-0.1.1-ws-create`  
-**Goal:** `ws create` performs real side-effects only when input is valid and authorized.
-
-#### File targets (read-first)
-
-Specs:
-
-- `deps/yai-law/specs/protocol/include/transport.h`
-- `deps/yai-law/specs/protocol/include/yai_protocol_ids.h`
-- `deps/yai-law/specs/protocol/include/errors.h`
-- `deps/yai-law/specs/protocol/include/auth.h`
-
-Kernel dispatch/codec/session:
-
-- `kernel/src/core/rpc_binary.c` (or current dispatch entry)
-- `kernel/src/core/rpc_codec.c` (if present)
-- `kernel/src/core/yai_session.c`
-- `kernel/src/core/transport.c` or `kernel/src/core/project_tree.c` (filesystem ops)
-
-CLI command assembly (so you know what payload looks like):
-
-- wherever kernel ws commands are built (CLI source in this repo)
-
-#### Rules (hard)
-
-No side effects if:
-
-- ws_id is invalid
-- ws_id empty
-- handshake not established (if applicable to your current session model)
-- authority is insufficient for this command (see 0.1.3)
-
-Deterministic response always:
-
-- on success: OK response frame
-- on failure: error response frame, with stable numeric code
-
-#### C correctness note (must fix if present)
-
-Do not check ws_id as pointer:
-
-```c
-if (!env->ws_id || strlen(env->ws_id) == 0)   // WRONG
-```
-
-Use:
-
-```c
-if (env->ws_id[0] == '\0')                    // RIGHT
-```
-
-#### Verification
-
-```bash
-yai kernel ws create testws
-ls -la ~/.yai/run/testws
-cat ~/.yai/run/testws/manifest.json
-```
-
-#### Acceptance (0.1.1)
-
-- [ ] `ws create` creates `~/.yai/run/<ws_id>/`
-- [ ] manifest stub is created deterministically
-- [ ] invalid ws_id produces deterministic reject and creates nothing
-
----
-
-### 0.1.2 — Kernel Implements ws.list (Minimal)
-
-**Branch:** `feat/workspaces-lifecycle-0.1.2-ws-list`  
-**Goal:** list existing workspaces deterministically (even a simple dir scan is fine in 0.1.x).
-
-#### File targets
-
-Kernel:
-
-- `kernel/src/core/transport.c` / `project_tree.c` (dir scan utilities)
-- `kernel/src/core/rpc_binary.c` (dispatch)
-
-CLI:
-
-- ws list command if missing
-
-#### Rules
-
-- Only list directories under `~/.yai/run/`
-- Must ignore non-directories and invalid names (apply ws_id validator)
-
-#### Verification
-
-```bash
-yai kernel ws create testws
-yai kernel ws list
-```
-
-#### Acceptance (0.1.2)
-
-- [ ] `ws list` returns at least `testws`
-- [ ] output is deterministic and filtered by validator
-
----
-
-### 0.1.3 — ws.destroy + Authority Enforcement (arming+role)
-
-**Branch:** `feat/workspaces-lifecycle-0.1.3-ws-destroy-authority`  
-**Goal:** destroy is privileged and must be envelope-governed; Kernel must re-check even if Root does.
-
-#### File targets
-
-Specs:
-
-- `deps/yai-law/specs/protocol/include/auth.h`
-- `deps/yai-law/specs/protocol/include/roles.h` (if present)
-
-Root (only if you mirror policy fast-fail; Kernel is mandatory):
-
-- `root/src/yai_root_server.c`
-
-Kernel:
-
-- `kernel/src/core/rpc_binary.c`
-- `kernel/src/core/yai_session.c`
-- filesystem removal code location (`transport.c` / `project_tree.c`)
-
-#### Policy (0.1.x baseline)
-
-`ws.destroy` requires:
-
-- `arming=1`
-- `role>=operator`
-
-`ws.create` can be either:
-
-- privileged (same as destroy) OR
-- allowed for `role>=user` with arming optional
-
-Choose ONE policy and document it here (do not drift).
-
-Recommended for safety during early 0.1.x: make both create and destroy privileged until you formalize tenancy.
-
-#### Guardrails (critical)
-
-Deletion must be jailed:
-
-- target path must be exactly `~/.yai/run/<ws_id>/`
-- refuse if ws_id invalid (no attempt)
-- refuse if computed path escapes jail
-
-Deletion must be deterministic:
-
-- if workspace missing: return NOTFOUND code (or OK with "already absent"), but pick one and keep it stable
-- always log outcome
-
-#### Verification
-
-```bash
-yai kernel ws create testws
-
-# should fail without authority
-yai kernel ws destroy testws
-
-# should pass with authority (depending on your CLI flags model)
-yai kernel ws destroy testws --arming --role operator
-
-test ! -d ~/.yai/run/testws && echo OK
-```
-
-#### Acceptance (0.1.3)
-
-- [ ] destroy without arming rejects deterministically
-- [ ] destroy with arming+operator succeeds
-- [ ] deletion cannot traverse paths (no rm -rf outside jail)
-
----
-
-### 0.1.4 — Torture + Repeatability (Workspace + Protocol)
-
-**Branch:** `feat/workspaces-lifecycle-0.1.4-torture`  
-**Goal:** prove workspace lifecycle correctness with repeatable tests.
-
-#### Minimum test cases
-
-1. handshake ok
-2. handshake wrong version → reject
-3. ws create valid → creates dir + manifest
-4. ws create invalid id → reject + no side effects
-5. ws destroy without arming → reject
-6. ws destroy with arming+role → ok
-7. payload_len > max → reject
-8. magic/version wrong → reject
-
-#### Tools
-
-Preferred (move toward tools/):
-
-- `tools/bin/yai-gate ws`
-- `tools/bin/yai-suite` (add a workspace sub-suite)
-
-Temporary compatibility allowed:
-
-- `tools/...` only as shim; do not add new logic there
-
-#### Verification
-
-One command that runs all cases and prints PASS/FAIL per case.
-
-#### Acceptance (0.1.4)
-
-- [ ] tests are repeatable on a clean runtime
-- [ ] every failure produces deterministic error codes and logs
-
----
-
-## 5) Verification
-
-Minimum log expectations:
-
-- Root logs FORWARD/REJECT decisions (already covered by RB-ROOT-HARDENING)
-- Kernel logs:
-  - ws.create attempt + outcome
-  - ws.destroy attempt + outcome
-  - filesystem path actually used (after jail resolution)
-
-Always include ws_id + trace_id when available.
-
----
-
-## 6) Failure Modes
-
-- Symptom: workspace side-effects appear outside `~/.yai/run/<ws_id>`.
-  - Fix: enforce path jail and ws_id validation before applying FS mutations.
-- Symptom: create/destroy behavior is non-deterministic across retries.
-  - Fix: harden idempotency paths and rerun lifecycle checks.
-- Symptom: unauthorized workspace operations pass.
-  - Fix: reapply envelope authority gate (`arming` + `role`) in kernel handlers.
-
-## 7) Rollback
-
-Rollback is phase-based:
-
-- each phase is merged only after its acceptance passes
-- if a phase regresses:
-  - revert the phase branch merge
-  - do not "patch-forward" in later phases
-
----
-
-## 8) References
-
-### Upstream proposals
-
-- `docs/20-program/21-rfc/RFC-003-workspace-lifecycle-and-isolation.md`
-
-### Milestone packs
-
-- `docs/20-program/24-milestone-packs/workspaces-lifecycle/MP-WORKSPACES-LIFECYCLE-0.1.0.md` *(planned)*
-- `docs/20-program/24-milestone-packs/workspaces-lifecycle/MP-WORKSPACES-LIFECYCLE-0.1.1.md` *(planned)*
-
-## 9) Final Definition of Done
-
-- [x] `yai kernel ws create testws` creates `~/.yai/run/testws/manifest.json`
-- [x] `yai kernel ws list` lists created workspaces deterministically
-- [x] `yai kernel ws destroy testws` requires authority and deletes only inside jail
-- [x] invalid ws_id is rejected deterministically with zero side effects
-- [x] workspace+protocol torture suite passes repeatably
-
-## Traceability
-
-- ADR refs:
-  - `docs/20-program/22-adr/ADR-007-workspace-isolation.md`
-  - `docs/20-program/22-adr/ADR-008-connection-lifecycle.md`
-- Law/spec refs:
-  - `deps/yai-law/specs/protocol/include/transport.h`
-  - `deps/yai-law/specs/protocol/include/auth.h`
-  - `deps/yai-law/specs/protocol/include/errors.h`
-- MPs:
-  - `docs/20-program/24-milestone-packs/workspaces-lifecycle/MP-WORKSPACES-LIFECYCLE-0.1.0.md` *(planned)*
-  - `docs/20-program/24-milestone-packs/workspaces-lifecycle/MP-WORKSPACES-LIFECYCLE-0.1.1.md` *(planned)*
-
-## 10) Operational Closure
-
-This runbook is operationally closed for the current phase and remains active as a prerequisite baseline for `RB-ENGINE-ATTACH`.
+## 17. Traceability
+
+### ADR refs
+- `docs/program/22-adr/ADR-006-unified-rpc.md`
+- `docs/program/22-adr/ADR-007-workspace-isolation.md`
+- `docs/program/22-adr/ADR-011-contract-baseline-lock.md`
+- `docs/program/22-adr/ADR-012-audit-convergence-gates.md`
+
+### Runbooks
+- `docs/program/23-runbooks/data-plane.md` (rev2)
+- `docs/program/23-runbooks/root-hardening.md`
+- `docs/program/23-runbooks/engine-attach.md`
+- `docs/program/23-runbooks/mind-redis-stm.md` (optional)

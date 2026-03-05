@@ -5,8 +5,8 @@ effective_date: 2026-02-19
 revision: 1
 owner: governance
 law_refs:
-  - deps/yai-law/contracts/invariants/I-001-traceability.md
-  - deps/yai-law/specs/protocol/include/protocol.h
+  - deps/yai-law/foundation/invariants/I-001-traceability.md
+  - deps/yai-law/contracts/protocol/include/protocol.h
 ---
 
 # Law Bridge
@@ -28,9 +28,9 @@ Define mandatory citation and alignment rules between `yai` architecture docs an
 - Prefer concrete files over generic folders.
 
 Examples:
-- `deps/yai-law/contracts/invariants/I-003-governance.md`
-- `deps/yai-law/contracts/boundaries/L1-kernel.md`
-- `deps/yai-law/specs/protocol/include/transport.h`
+- `deps/yai-law/foundation/invariants/I-003-governance.md`
+- `deps/yai-law/foundation/boundaries/L1-kernel.md`
+- `deps/yai-law/contracts/protocol/include/transport.h`
 
 ## Twin-change rule
 

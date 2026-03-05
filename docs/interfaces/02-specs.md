@@ -1,4 +1,4 @@
 # Interface specs (protocol / control / engine / providers / graph / vault)
 
 See:
-- deps/yai-law/specs/
+- deps/yai-law/contracts/

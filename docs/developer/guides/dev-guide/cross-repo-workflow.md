@@ -9,4 +9,4 @@ See:
 
 For YAI product execution specifics, use local runbooks under:
 
-- `docs/20-program/23-runbooks/`
+- `docs/program/23-runbooks/`

@@ -34,14 +34,14 @@ Architecture **must map to L0** (and never override it).
 ---
 
 ### L2 — RFCs (pre-decision design)
-**Lives in:** `docs/20-program/21-rfc/*`
+**Lives in:** `docs/program/21-rfc/*`
 
 Used to explore alternatives, trade-offs, risks, and design space **before** freezing a decision.
 
 ---
 
 ### L3 — ADRs (frozen decisions)
-**Lives in:** `docs/20-program/22-adr/*`
+**Lives in:** `docs/program/22-adr/*`
 
 An ADR:
 - chooses among alternatives
@@ -53,7 +53,7 @@ ADRs are the “decision ledger”.
 ---
 
 ### L4 — Runbooks (execution plan)
-**Lives in:** `docs/20-program/23-runbooks/*`
+**Lives in:** `docs/program/23-runbooks/*`
 
 Runbooks convert ADR intent into a phased, verifiable sequence with acceptance gates.
 
@@ -65,7 +65,7 @@ Runbooks are the “how we execute” layer:
 ---
 
 ### L5 — Milestone Packs (delivery packaging & audit unit)
-**Lives in:** `docs/20-program/24-milestone-packs/*`
+**Lives in:** `docs/program/24-milestone-packs/*`
 
 A Milestone Pack (MP) is the **unit of closure**:
 - what changed
@@ -91,7 +91,7 @@ If you’re solo you *can* reduce Issues, but **never skip the MP** (that’s yo
 ---
 
 ### L7 — Evidence & tests (proof-of-work)
-**Lives in:** `docs/40-qualification/test-plans/*` + `tools/*` + CI artifacts/logs
+**Lives in:** `yai-ops/evidence/qualification/test-plans/*` + `tools/*` + CI artifacts/logs
 
 Test plans define what “proved” means.  
 Tools + CI runs provide repeatable evidence (ideally artifacted, non-skip for TRL claims).
@@ -99,7 +99,7 @@ Tools + CI runs provide repeatable evidence (ideally artifacted, non-skip for TR
 ---
 
 ### L8 — Proof Packs (public/internal credibility bundles)
-**Lives in:** `docs/50-validation/proof/*` when published, `docs/50-validation/proof/.private/*` for local drafts
+**Lives in:** `yai-ops/evidence/validation/proof/*` when published, `yai-ops/evidence/validation/proof/.private/*` for local drafts
 
 A Proof Pack bundles:
 - evidence index

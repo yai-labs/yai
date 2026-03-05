@@ -1,14 +1,14 @@
 ---
 id: MP-CONTRACT-BASELINE-LOCK-0.1.2
 status: active
-runbook: docs/20-program/23-runbooks/contract-baseline-lock.md
+runbook: docs/program/23-runbooks/contract-baseline-lock.md
 phase: "0.1.2 — No Pass-on-Skip Enforcement"
 adrs:
-  - docs/20-program/22-adr/ADR-011-contract-baseline-lock.md
-  - docs/20-program/22-adr/ADR-012-audit-convergence-gates.md
+  - docs/program/22-adr/ADR-011-contract-baseline-lock.md
+  - docs/program/22-adr/ADR-012-audit-convergence-gates.md
 spec_anchors:
-  - deps/yai-law/contracts/invariants/I-001-traceability.md
-  - deps/yai-law/contracts/invariants/I-003-governance.md
+  - deps/yai-law/foundation/invariants/I-001-traceability.md
+  - deps/yai-law/foundation/invariants/I-003-governance.md
 claims:
   - C-SKIP-FAIL-MANDATORY
   - C-EVIDENCE-PACK-REPRODUCIBLE
@@ -22,7 +22,7 @@ issues:
 
 ## Metadata
 
-- Runbook: `docs/20-program/23-runbooks/contract-baseline-lock.md`
+- Runbook: `docs/program/23-runbooks/contract-baseline-lock.md`
 - Phase: `0.1.2 — No Pass-on-Skip Enforcement`
 - Wave issue: `#141`
 - Owner: `governance`
@@ -30,11 +30,11 @@ issues:
 
 ## Links
 
-- ADR: `docs/20-program/22-adr/ADR-011-contract-baseline-lock.md`
-- ADR: `docs/20-program/22-adr/ADR-012-audit-convergence-gates.md`
-- Proposal: `docs/20-program/21-rfc/RFC-004-contract-baseline-lock-and-pin-policy.md`
-- Evidence plans: `docs/40-qualification/test-plans/hardfail.md`
-- Claims registry: `docs/50-validation/audits/claims/infra-grammar.v0.1.json`
+- ADR: `docs/program/22-adr/ADR-011-contract-baseline-lock.md`
+- ADR: `docs/program/22-adr/ADR-012-audit-convergence-gates.md`
+- Proposal: `docs/program/21-rfc/RFC-004-contract-baseline-lock-and-pin-policy.md`
+- Evidence plans: `yai-ops/evidence/qualification/test-plans/hardfail.md`
+- Claims registry: `yai-ops/evidence/validation/audits/claims/infra-grammar.v0.1.json`
 
 Objective:
 - Prevent mandatory proof and contract checks from passing through skip paths.
@@ -78,9 +78,9 @@ Definition of Done:
 
 ## Execution Snapshot (2026-02-21)
 
-- Evidence bundle: `docs/20-program/24-milestone-packs/contract-baseline-lock/evidence/wave0-2026-02-21/`
+- Evidence bundle: `docs/program/24-milestone-packs/contract-baseline-lock/evidence/wave0-2026-02-21/`
 - `tools/bin/yai-proof-check` -> `PASS` (`exit=0`) via `07-proof-check-public.*`
-- `tools/bin/yai-proof-check --manifest docs/50-validation/proof/.private/PP-FOUNDATION-0001/pp-foundation-0001.manifest.v1.json` -> `FAIL` (`exit=2`) via `08-proof-check-private-hardfail.*`
+- `tools/bin/yai-proof-check --manifest yai-ops/evidence/validation/proof/.private/PP-FOUNDATION-0001/pp-foundation-0001.manifest.v1.json` -> `FAIL` (`exit=2`) via `08-proof-check-private-hardfail.*`
 - `tools/bin/yai-docs-trace-check --all` -> `PASS` (`exit=0`)
 
 Phase state:

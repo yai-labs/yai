@@ -4,5 +4,5 @@ Editorial pointer only.
 
 Canonical sources:
 
-- `deps/yai-law/specs/providers/PROVIDERS_TRUST.md`
-- `deps/yai-law/specs/providers/providers.v1.json`
+- `deps/yai-law/contracts/providers/notes/PROVIDERS_TRUST.md`
+- `deps/yai-law/contracts/providers/schema/providers.v1.json`

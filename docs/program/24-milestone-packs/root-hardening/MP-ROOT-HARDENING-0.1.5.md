@@ -1,17 +1,17 @@
 ---
 id: MP-ROOT-HARDENING-0.1.5
 status: draft
-runbook: docs/20-program/23-runbooks/root-hardening.md
+runbook: docs/program/23-runbooks/root-hardening.md
 phase: "0.1.5 — Test Matrix + Torture Suite"
 adrs:
-  - docs/20-program/22-adr/ADR-002-root-entrypoint.md
-  - docs/20-program/22-adr/ADR-006-unified-rpc.md
-  - docs/20-program/22-adr/ADR-008-connection-lifecycle.md
-  - docs/20-program/22-adr/ADR-012-audit-convergence-gates.md
+  - docs/program/22-adr/ADR-002-root-entrypoint.md
+  - docs/program/22-adr/ADR-006-unified-rpc.md
+  - docs/program/22-adr/ADR-008-connection-lifecycle.md
+  - docs/program/22-adr/ADR-012-audit-convergence-gates.md
 spec_anchors:
-  - deps/yai-law/specs/protocol/include/transport.h
-  - deps/yai-law/specs/protocol/include/auth.h
-  - deps/yai-law/specs/protocol/include/errors.h
+  - deps/yai-law/contracts/protocol/include/transport.h
+  - deps/yai-law/contracts/protocol/include/auth.h
+  - deps/yai-law/contracts/protocol/include/errors.h
 claims:
   - C-DOMAIN-COVERAGE-NETWORK
   - C-KERNEL-HARD-BOUNDARY-CORE
@@ -27,16 +27,16 @@ issues:
 # MP-ROOT-HARDENING-0.1.5
 
 ## Metadata
-- Runbook: `docs/20-program/23-runbooks/root-hardening.md`
+- Runbook: `docs/program/23-runbooks/root-hardening.md`
 - Phase: `0.1.5 — Test Matrix + Torture Suite`
 - Wave issue: `#191`
 - Status: `draft`
 
 ## Links
-- Plan: `docs/20-program/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
-- Matrix: `docs/20-program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
-- Claims registry: `docs/50-validation/audits/claims/infra-grammar.v0.1.json`
-- ADR: `docs/20-program/22-adr/ADR-012-audit-convergence-gates.md`
+- Plan: `docs/program/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
+- Matrix: `docs/program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
+- Claims registry: `yai-ops/evidence/validation/audits/claims/infra-grammar.v0.1.json`
+- ADR: `docs/program/22-adr/ADR-012-audit-convergence-gates.md`
 
 ## Objective
 Close phase 0.1.5 with explicit claim/evidence bindings and reproducible gate outputs.
@@ -56,4 +56,4 @@ Closure policy: mandatory `SKIP` is treated as `FAIL`.
 
 ## Execution Snapshot
 - Status: `PLANNED`
-- Evidence bundle: `docs/20-program/24-milestone-packs/root-hardening/evidence/0.1.5/`
+- Evidence bundle: `docs/program/24-milestone-packs/root-hardening/evidence/0.1.5/`

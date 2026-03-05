@@ -1,15 +1,15 @@
 ---
 id: MP-CONTRACT-BASELINE-LOCK-0.1.1
 status: active
-runbook: docs/20-program/23-runbooks/contract-baseline-lock.md
+runbook: docs/program/23-runbooks/contract-baseline-lock.md
 phase: "0.1.1 — CI Parity on Contract Surfaces"
 adrs:
-  - docs/20-program/22-adr/ADR-011-contract-baseline-lock.md
-  - docs/20-program/22-adr/ADR-012-audit-convergence-gates.md
+  - docs/program/22-adr/ADR-011-contract-baseline-lock.md
+  - docs/program/22-adr/ADR-012-audit-convergence-gates.md
 spec_anchors:
-  - deps/yai-law/contracts/invariants/I-001-traceability.md
-  - deps/yai-law/contracts/invariants/I-002-determinism.md
-  - deps/yai-law/contracts/invariants/I-003-governance.md
+  - deps/yai-law/foundation/invariants/I-001-traceability.md
+  - deps/yai-law/foundation/invariants/I-002-determinism.md
+  - deps/yai-law/foundation/invariants/I-003-governance.md
 claims:
   - C-SPEC-FIRST-PINNED
   - C-EVIDENCE-PACK-REPRODUCIBLE
@@ -23,7 +23,7 @@ issues:
 
 ## Metadata
 
-- Runbook: `docs/20-program/23-runbooks/contract-baseline-lock.md`
+- Runbook: `docs/program/23-runbooks/contract-baseline-lock.md`
 - Phase: `0.1.1 — CI Parity on Contract Surfaces`
 - Wave issue: `#141`
 - Owner: `governance`
@@ -31,12 +31,12 @@ issues:
 
 ## Links
 
-- ADR: `docs/20-program/22-adr/ADR-011-contract-baseline-lock.md`
-- ADR: `docs/20-program/22-adr/ADR-012-audit-convergence-gates.md`
-- Proposal: `docs/20-program/21-rfc/RFC-002-unified-rpc-and-cli-contract.md`
-- Evidence plans: `docs/40-qualification/test-plans/hardfail.md`
-- Claims registry: `docs/50-validation/audits/claims/infra-grammar.v0.1.json`
-- Convergence matrix: `docs/20-program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
+- ADR: `docs/program/22-adr/ADR-011-contract-baseline-lock.md`
+- ADR: `docs/program/22-adr/ADR-012-audit-convergence-gates.md`
+- Proposal: `docs/program/21-rfc/RFC-002-unified-rpc-and-cli-contract.md`
+- Evidence plans: `yai-ops/evidence/qualification/test-plans/hardfail.md`
+- Claims registry: `yai-ops/evidence/validation/audits/claims/infra-grammar.v0.1.json`
+- Convergence matrix: `docs/program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
 
 Objective:
 - Enforce parity checks on protocol and authority contract surfaces across consumers.
@@ -80,7 +80,7 @@ Definition of Done:
 
 ## Execution Snapshot (2026-02-21)
 
-- Evidence bundle: `docs/20-program/24-milestone-packs/contract-baseline-lock/evidence/wave0-2026-02-21/`
+- Evidence bundle: `docs/program/24-milestone-packs/contract-baseline-lock/evidence/wave0-2026-02-21/`
 - `tools/bin/yai-check-pins` -> `PASS` (`exit=0`) via `10-check_pins-strict-pass.*`
 - `tools/bin/yai-docs-trace-check --all` -> `PASS` (`exit=0`) via `12-docs-trace-check-post-pin.*`
 
