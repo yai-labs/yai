@@ -1,6 +1,6 @@
 ---
 id: MP-WORKSPACES-LIFECYCLE-0.1.0
-status: draft
+status: in_progress
 runbook: docs/program/23-runbooks/workspaces-lifecycle.md
 phase: "0.1.0 — Workspace layout baseline"
 adrs:
@@ -18,7 +18,8 @@ evidence_commands_required:
   - tools/bin/yai-verify
   - tools/bin/yai-gate
 issues:
-  - "N/A: workspace-lifecycle phase sequencing"
+  - "Parent: https://github.com/yai-labs/yai/issues/217"
+  - "Child: https://github.com/yai-labs/yai/issues/218"
 ---
 
 # MP-WORKSPACES-LIFECYCLE-0.1.0
@@ -45,5 +46,9 @@ Closure policy: mandatory `SKIP` is treated as `FAIL`.
 - [ ] MP links from runbook phase and matrix remain valid.
 
 ## Execution Snapshot
-- Status: `PLANNED`
+- Status: `IN_PROGRESS`
 - Evidence bundle: `docs/program/24-milestone-packs/workspaces-lifecycle/evidence/0.1.0/`
+
+## Traceability
+- Parent issue: `#217`
+- MP issue: `#218`
