@@ -18,15 +18,11 @@
 #include <time.h>
 #include <yai_protocol_ids.h>
 
-/* ============================================================
-   GLOBAL REGISTRY
-   ============================================================ */
+/* Global in-process session registry. */
 
 yai_session_t g_session_registry[MAX_SESSIONS] = {0};
 
-/* ============================================================
-   INTERNAL UTIL
-   ============================================================ */
+/* Internal helpers. */
 
 static const char *yai_get_home(void)
 {
@@ -59,9 +55,7 @@ static int ensure_run_tree(const char *home)
 }
 
 
-/* ============================================================
-   WORKSPACE
-   ============================================================ */
+/* Workspace path/state helpers. */
 
 bool yai_ws_validate_id(const char *ws_id)
 {
@@ -97,16 +91,14 @@ bool yai_ws_build_paths(yai_workspace_t *ws, const char *ws_id)
     return true;
 }
 
-/* ============================================================
-   SESSION ACQUIRE
-   ============================================================ */
+/* Session acquire/release lifecycle. */
 
 bool yai_session_acquire(yai_session_t **out, const char *ws_id)
 {
     if (!out || !ws_id)
         return false;
 
-    /* 1️⃣ Already active */
+    /* Fast path: return an already-active session for the workspace. */
 
     for (int i = 0; i < MAX_SESSIONS; i++)
     {
@@ -118,7 +110,7 @@ bool yai_session_acquire(yai_session_t **out, const char *ws_id)
         }
     }
 
-    /* 2️⃣ Allocate new slot */
+    /* Allocate a new slot when no active session is found. */
 
     for (int i = 0; i < MAX_SESSIONS; i++)
     {
@@ -188,9 +180,7 @@ void yai_session_release(yai_session_t *s)
     memset(s, 0, sizeof(*s));
 }
 
-/* ============================================================
-   SESSION DISPATCH
-   ============================================================ */
+/* Session dispatch entrypoint. */
 
 void yai_session_dispatch(
     int client_fd,
