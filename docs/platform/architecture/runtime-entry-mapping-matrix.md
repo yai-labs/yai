@@ -1,0 +1,11 @@
+# Runtime Entry Mapping Matrix
+
+| Legacy entrypoint | Target entrypoint/module | Action | Runtime role | Rationale | Deprecation status | Follow-up |
+|---|---|---|---|---|---|---|
+| `boot/src/yai_boot_main.c` | `cmd/yai-core/main.c` + `lib/core/lifecycle/*` | keep-temporary + deprecate | boot/lifecycle launcher | core lifecycle APIs already provide authoritative startup checks/layout | deprecated (runtime warning on start) | merge remaining monitor loop behavior into core composition, then remove |
+| `root/src/yai_root_server.c` | `cmd/yai-core/main.c` + `lib/core/dispatch/*` | keep-temporary + deprecate | control-plane server | root identity no longer primary; dispatch belongs to core module composition | deprecated (runtime warning on start) | absorb entry behavior into yai-core composition and remove standalone main |
+| `kernel/src/bin/workspace_kernel_main.c` | `cmd/yai-core/main.c` + `lib/core/session/*` | keep-temporary + deprecate | workspace kernel loop | kernel identity no longer primary; session/control dispatch now core internals | deprecated (runtime warning on start) | move residual startup guard + loop policy into core lifecycle/session and remove |
+| `engine/src/main.c` | `cmd/yai-core/main.c` + `lib/exec/runtime/*` | keep-temporary + deprecate | execution plane loop | `exec` is an internal runtime plane, not an independent system identity | deprecated (runtime warning on start) | continue absorb loop orchestration into unified runtime, then remove |
+| `mind/src/main.c` | `cmd/yai-core/main.c` + `lib/brain/lifecycle/*` | keep-temporary + deprecate | cognitive plane loop | `brain` is internal runtime module; yai-core now runs init/probe directly | deprecated (runtime warning on start) | remove after full runtime composition parity |
+| `cmd/yai/main.c` | `cmd/yai/main.c` | keep (authoritative) | operator CLI/multiplexer | primary user-facing command surface | active authoritative | extend command surface while preserving pass-through model |
+| `cmd/yai-core/main.c` | `cmd/yai-core/main.c` | keep (authoritative) | unified runtime entry | composes `core+exec+brain` and exposes readiness modes | active authoritative | replace remaining legacy trampolines with direct module composition |
