@@ -1,115 +1,227 @@
 # =========================================
-# YAI — Root Build Orchestrator
+# YAI — Unified Root Build Spine (Transition)
 # =========================================
 
 ROOT_DIR := $(abspath .)
 
-BUILD_ROOT ?= $(ROOT_DIR)/build
+BUILD_DIR ?= $(ROOT_DIR)/build
+BIN_DIR ?= $(BUILD_DIR)/bin
+OBJ_DIR ?= $(BUILD_DIR)/obj
+LIB_DIR ?= $(BUILD_DIR)/lib
+TEST_DIR ?= $(BUILD_DIR)/test
+
 DIST_ROOT ?= $(ROOT_DIR)/dist
+BIN_DIST ?= $(DIST_ROOT)/bin
 
-BIN_BUILD := $(BUILD_ROOT)/bin
-BIN_DIST := $(DIST_ROOT)/bin
+CC ?= cc
+CPPFLAGS ?= -I$(ROOT_DIR) -I$(ROOT_DIR)/include -I$(ROOT_DIR)/include/yai \
+            -I$(ROOT_DIR)/lib/third_party/cjson \
+            -I$(ROOT_DIR)/deps/yai-law/contracts/protocol/include \
+            -I$(ROOT_DIR)/deps/yai-law/contracts/protocol/runtime/include \
+            -I$(ROOT_DIR)/deps/yai-law/contracts/vault/include
+CFLAGS ?= -Wall -Wextra -std=c11 -O2
+LDFLAGS ?=
+LDLIBS ?= -lm
 
-BOOT_DIR := boot
-ROOT_PLANE_DIR := root
-KERNEL_DIR := kernel
-ENGINE_DIR := engine
+YAI_OBJ := $(OBJ_DIR)/cmd/yai/main.o
+YAI_CORE_OBJ := $(OBJ_DIR)/cmd/yai-core/main.o
+YAI_BIN := $(BIN_DIR)/yai
+YAI_CORE_BIN := $(BIN_DIR)/yai-core
 
-# L3 (Mind) — optional plane (not part of default dist/bundle)
-MIND_DIR := mind
-MIND_BIN := yai-mind
+SUPPORT_SRCS := lib/support/ids.c lib/support/logger.c lib/support/errors.c lib/support/strings.c lib/support/paths.c
+PLATFORM_SRCS := lib/platform/os.c lib/platform/fs.c lib/platform/clock.c lib/platform/uds.c
+PROTOCOL_SRCS := lib/protocol/rpc_runtime.c lib/protocol/rpc_codec.c lib/protocol/rpc_binary.c lib/protocol/message_types.c
+CORE_SRCS := \
+	lib/core/lifecycle/bootstrap.c \
+	lib/core/lifecycle/preboot.c \
+	lib/core/lifecycle/startup_plan.c \
+	lib/core/dispatch/control_transport.c \
+	lib/core/dispatch/command_dispatch.c \
+	lib/core/dispatch/attach_flow.c \
+	lib/core/session/session.c \
+	lib/core/session/session_reply.c \
+	lib/core/session/session_utils.c \
+	lib/core/workspace/project_tree.c \
+	lib/core/workspace/workspace_registry.c \
+	lib/core/workspace/workspace_runtime.c \
+	lib/core/enforcement/enforcement.c \
+	lib/core/authority/authority_registry.c \
+	lib/core/authority/identity.c
+EXEC_SRCS := \
+	lib/exec/runtime/exec_runtime.c \
+	lib/exec/runtime/config_loader.c \
+	lib/exec/runtime/runtime_model.c \
+	lib/exec/gates/provider_gate.c \
+	lib/exec/gates/network_gate.c \
+	lib/exec/gates/storage_gate.c \
+	lib/exec/gates/resource_gate.c \
+	lib/exec/bridge/engine_bridge.c \
+	lib/exec/bridge/transport_client.c \
+	lib/exec/bridge/rpc_router.c \
+	lib/exec/agents/agent_enforcement.c \
+	lib/third_party/cjson/cJSON.c
+BRAIN_SRCS := \
+	lib/brain/lifecycle/brain_lifecycle.c \
+	lib/brain/cognition/cognition.c \
+	lib/brain/cognition/agents/agents_dispatch.c \
+	lib/brain/cognition/agents/agent_code.c \
+	lib/brain/cognition/agents/agent_historian.c \
+	lib/brain/cognition/agents/agent_knowledge.c \
+	lib/brain/cognition/agents/agent_system.c \
+	lib/brain/cognition/agents/agent_validator.c \
+	lib/brain/cognition/orchestration/planner.c \
+	lib/brain/cognition/orchestration/rag_sessions.c \
+	lib/brain/cognition/orchestration/rag_context_builder.c \
+	lib/brain/cognition/orchestration/rag_prompts.c \
+	lib/brain/cognition/orchestration/rag_pipeline.c \
+	lib/brain/cognition/reasoning/reasoning_roles.c \
+	lib/brain/cognition/reasoning/scoring.c \
+	lib/brain/memory/memory.c \
+	lib/brain/memory/arena_store.c \
+	lib/brain/memory/storage_bridge.c \
+	lib/brain/memory/graph/graph_backend.c \
+	lib/brain/memory/graph/graph_backend_rpc.c \
+	lib/brain/memory/graph/graph_facade.c \
+	lib/brain/memory/graph/graph.c \
+	lib/brain/memory/graph/ids.c \
+	lib/brain/memory/graph/domain_activation.c \
+	lib/brain/memory/graph/domain_authority.c \
+	lib/brain/memory/graph/domain_episodic.c \
+	lib/brain/memory/graph/domain_semantic.c \
+	lib/brain/memory/graph/semantic_db.c \
+	lib/brain/memory/graph/vector_index.c \
+	lib/brain/bridge/providers.c \
+	lib/brain/bridge/provider_registry.c \
+	lib/brain/bridge/client_bridge.c \
+	lib/brain/bridge/mock_provider.c \
+	lib/brain/bridge/embedder_mock.c \
+	lib/brain/transport/brain_transport.c \
+	lib/brain/transport/brain_protocol.c \
+	lib/brain/transport/uds_server.c
+
+SUPPORT_OBJS := $(patsubst %.c,$(OBJ_DIR)/%.o,$(SUPPORT_SRCS))
+PLATFORM_OBJS := $(patsubst %.c,$(OBJ_DIR)/%.o,$(PLATFORM_SRCS))
+PROTOCOL_OBJS := $(patsubst %.c,$(OBJ_DIR)/%.o,$(PROTOCOL_SRCS))
+CORE_OBJS := $(patsubst %.c,$(OBJ_DIR)/%.o,$(CORE_SRCS))
+EXEC_OBJS := $(patsubst %.c,$(OBJ_DIR)/%.o,$(EXEC_SRCS))
+BRAIN_OBJS := $(patsubst %.c,$(OBJ_DIR)/%.o,$(BRAIN_SRCS))
+
+SUPPORT_LIB := $(LIB_DIR)/libyai_support.a
+PLATFORM_LIB := $(LIB_DIR)/libyai_platform.a
+PROTOCOL_LIB := $(LIB_DIR)/libyai_protocol.a
+CORE_LIB := $(LIB_DIR)/libyai_core.a
+EXEC_LIB := $(LIB_DIR)/libyai_exec.a
+BRAIN_LIB := $(LIB_DIR)/libyai_brain.a
+
+LEGACY_BINS := yai-boot yai-root-server yai-kernel yai-engine yai-mind
+SPINE_DIRS := $(BIN_DIR) $(OBJ_DIR) $(LIB_DIR) $(TEST_DIR)
 
 DOXYFILE := Doxyfile
 DOXYGEN ?= doxygen
 DOXY_OUT ?= $(DIST_ROOT)/docs/doxygen
 
-CANONICAL_BINS := yai-boot yai-root-server yai-kernel yai-engine
+.PHONY: all yai yai-core foundations support platform protocol core exec brain test test-unit test-integration test-e2e test-core test-brain test-protocol clean clean-dist clean-all \
+        build legacy-build build-all dist dist-all bundle verify preflight-release \
+        docs docs-clean docs-verify proof-verify release-guards release-guards-dev \
+        changelog-verify dirs help
 
-.PHONY: all build build-all dist dist-all bundle verify preflight-release \
-        boot root core kernel engine mind mind-check mind-dist \
-        clean clean-dist clean-all docs docs-clean docs-verify proof-verify \
-        release-guards release-guards-dev changelog-verify help
+all: yai yai-core foundations
+	@echo "[YAI] unified binary spine ready: $(YAI_BIN) $(YAI_CORE_BIN)"
 
-all: build
-	@echo "[YAI] dist is now separated from build. Use 'make dist' or 'make bundle'."
+yai: $(YAI_BIN)
 
-# Default build: only canonical planes (L0-L2)
-build: runtime-protocol boot root kernel engine
-	@echo "--- [YAI] Build Complete ---"
+yai-core: $(YAI_CORE_BIN)
 
-# Convenience: build everything including Mind (L3)
-build-all: build mind
-	@echo "--- [YAI] Build-All Complete (including mind) ---"
+foundations: support platform protocol
+core: $(CORE_LIB)
+exec: $(EXEC_LIB)
+brain: $(BRAIN_LIB)
+
+support: $(SUPPORT_LIB)
+
+platform: $(PLATFORM_LIB)
+
+protocol: $(PROTOCOL_LIB)
+
+test: test-unit test-integration test-e2e
+	@echo "[YAI] unified test baseline complete"
+
+test-unit: test-core test-protocol test-brain
+	@echo "[YAI] unit suites complete"
+
+test-integration:
+	@tests/integration/core_exec/run_core_exec_smoke.sh
+	@tests/integration/core_brain/run_core_brain_smoke.sh
+	@tests/integration/core_brain/run_core_brain_c_tests.sh
+	@tests/integration/workspace_lifecycle/workspace_runtime_contract_v1.sh || true
+	@python3 tests/integration/runtime_handshake/test_handshake.py || true
+	@echo "[YAI] integration suites complete"
+
+test-e2e:
+	@tests/e2e/run_entrypoint_e2e.sh
+	@echo "[YAI] e2e suite complete"
+
+test-core: yai-core
+	@./build/bin/yai-core --status
+
+test-brain:
+	@tests/unit/brain/run_brain_unit_tests.sh
+
+test-protocol:
+	@tests/unit/exec/run_exec_unit_tests.sh
+	@tests/unit/protocol/run_protocol_unit_tests.sh
+
+$(YAI_BIN): $(YAI_OBJ) | dirs
+	$(CC) $(LDFLAGS) $< -o $@ $(LDLIBS)
+
+$(YAI_CORE_BIN): $(YAI_CORE_OBJ) $(CORE_LIB) $(EXEC_LIB) $(BRAIN_LIB) $(SUPPORT_LIB) $(PLATFORM_LIB) $(PROTOCOL_LIB) | dirs
+	$(CC) $(LDFLAGS) $(YAI_CORE_OBJ) -o $@ $(CORE_LIB) $(EXEC_LIB) $(BRAIN_LIB) $(SUPPORT_LIB) $(PLATFORM_LIB) $(PROTOCOL_LIB) $(LDLIBS)
+
+$(SUPPORT_LIB): $(SUPPORT_OBJS) | dirs
+	ar rcs $@ $^
+
+$(PLATFORM_LIB): $(PLATFORM_OBJS) | dirs
+	ar rcs $@ $^
+
+$(PROTOCOL_LIB): $(PROTOCOL_OBJS) | dirs
+	ar rcs $@ $^
+
+$(CORE_LIB): $(CORE_OBJS) | dirs
+	ar rcs $@ $^
+
+$(EXEC_LIB): $(EXEC_OBJS) | dirs
+	ar rcs $@ $^
+
+$(BRAIN_LIB): $(BRAIN_OBJS) | dirs
+	ar rcs $@ $^
+
+$(OBJ_DIR)/%.o: %.c | dirs
+	@mkdir -p $(dir $@)
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
+
+dirs:
+	@mkdir -p $(SPINE_DIRS)
+
+build: yai yai-core
+	@echo "--- [YAI] primary entrypoint build complete (yai + yai-core) ---"
+
+legacy-build:
+	@echo "--- [YAI] legacy-build removed: legacy top-level planes were decommissioned ---"
+
+build-all: build
+	@echo "--- [YAI] build-all complete (primary topology only) ---"
 
 dist: build
 	@mkdir -p $(BIN_DIST)
-	@set -e; \
-	for bin in $(CANONICAL_BINS); do \
-		if [ ! -f "$(BIN_BUILD)/$$bin" ]; then \
-			echo "ERROR: missing build artifact $(BIN_BUILD)/$$bin (run 'make build')"; \
-			exit 1; \
-		fi; \
-		cp "$(BIN_BUILD)/$$bin" "$(BIN_DIST)/$$bin"; \
-	done
-	@echo "--- [YAI] Dist staged in $(BIN_DIST) ---"
+	@cp "$(YAI_BIN)" "$(BIN_DIST)/yai"
+	@cp "$(YAI_CORE_BIN)" "$(BIN_DIST)/yai-core"
+	@echo "--- [YAI] dist staged in $(BIN_DIST) ---"
 
-# Convenience: dist everything including Mind (still not in bundle unless you want)
-dist-all: dist mind-dist
-	@echo "--- [YAI] Dist-All staged (including mind) ---"
+dist-all: dist
+	@echo "--- [YAI] dist-all staged ---"
 
 bundle: dist
 	@tools/bin/yai-bundle
-
-boot:
-	$(MAKE) -C $(BOOT_DIR) build BUILD_ROOT=$(BUILD_ROOT) BIN_BUILD=$(BIN_BUILD)
-
-root:
-	$(MAKE) -C $(ROOT_PLANE_DIR) build BUILD_ROOT=$(BUILD_ROOT) BIN_BUILD=$(BIN_BUILD)
-
-core: root
-
-kernel:
-	$(MAKE) -C $(KERNEL_DIR) build BUILD_ROOT=$(BUILD_ROOT) BIN_BUILD=$(BIN_BUILD)
-
-engine:
-	$(MAKE) -C $(ENGINE_DIR) build BUILD_ROOT=$(BUILD_ROOT) BIN_BUILD=$(BIN_BUILD)
-
-# -------------------------
-# Mind (C runtime) — primary
-# -------------------------
-
-mind:
-	@mkdir -p $(BIN_BUILD)
-	@$(MAKE) -C $(MIND_DIR) clean >/dev/null
-	@$(MAKE) -C $(MIND_DIR) all
-	@if [ -f "$(MIND_DIR)/dist/bin/$(MIND_BIN)" ]; then \
-		cp "$(MIND_DIR)/dist/bin/$(MIND_BIN)" "$(BIN_BUILD)/$(MIND_BIN)"; \
-		echo "[YAI] mind staged: $(BIN_BUILD)/$(MIND_BIN)"; \
-	else \
-		echo "ERROR: mind binary missing at $(MIND_DIR)/dist/bin/$(MIND_BIN)"; \
-		exit 1; \
-	fi
-
-mind-check:
-	@$(MAKE) -C $(MIND_DIR) test
-
-mind-dist: mind
-	@mkdir -p $(BIN_DIST)
-	@if [ -f "$(BIN_BUILD)/$(MIND_BIN)" ]; then \
-		cp "$(BIN_BUILD)/$(MIND_BIN)" "$(BIN_DIST)/$(MIND_BIN)"; \
-		echo "[YAI] mind dist staged: $(BIN_DIST)/$(MIND_BIN)"; \
-	else \
-		echo "ERROR: mind artifact missing at $(BIN_BUILD)/$(MIND_BIN) (run 'make mind')"; \
-		exit 1; \
-	fi
-
-clean:
-	rm -rf $(BUILD_ROOT)
-
-clean-dist:
-	rm -rf $(DIST_ROOT)
-
-clean-all: clean clean-dist
 
 verify:
 	@if [ -x ./tools/bin/yai-verify ]; then \
@@ -148,17 +260,24 @@ changelog-verify:
 	HEAD_SHA="$$(git rev-parse HEAD)"; \
 	tools/bin/yai-changelog-check --pr --base "$$BASE_SHA" --head "$$HEAD_SHA"
 
+clean:
+	rm -rf $(BUILD_DIR)
+
+clean-dist:
+	rm -rf $(DIST_ROOT)
+
+clean-all: clean clean-dist
+
 help:
-	@echo "Targets:"
-	@echo "  build        (boot/root/kernel/engine)"
-	@echo "  dist         (stage canonical bins)"
-	@echo "  bundle       (bundle canonical dist)"
-	@echo "  build-all    (build + mind)"
-	@echo "  dist-all     (dist + mind-dist)"
-	@echo "  mind         (build mind; stage in build/bin when possible)"
-	@echo "  mind-check   (fmt/clippy/test for mind)"
-	@echo "  mind-dist    (stage mind binary in dist/bin)"
-	@echo "  verify, preflight-release, docs, docs-verify, proof-verify, release-guards, changelog-verify"
-.PHONY: runtime-protocol
-runtime-protocol:
-	$(MAKE) -C runtime-protocol
+	@echo "Primary transition targets:"
+	@echo "  all            (yai + yai-core + foundation libs)"
+	@echo "  yai            (build/bin/yai)"
+	@echo "  yai-core       (build/bin/yai-core)"
+	@echo "  foundations    (support/platform/protocol archives)"
+	@echo "  test-unit      (core/protocol/brain unit suites)"
+	@echo "  test-integration (runtime/core-exec/core-brain/workspace)"
+	@echo "  test-e2e       (entrypoint e2e smoke)"
+	@echo "  test           (full test baseline)"
+	@echo "  clean          (remove build artifacts)"
+	@echo "  dist, dist-all, bundle"
+	@echo "  verify, docs, docs-verify, proof-verify, release-guards, changelog-verify"

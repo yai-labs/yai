@@ -33,15 +33,27 @@ It does not own canonical law (`yai-law`) or shared cross-repo governance toolin
 ## Build
 
 ```bash
-make build
+make yai
+make yai-core
 make dist
 ```
 
-## Verify
+## Test/Verify
 
 ```bash
+make test
 make verify
 ```
+
+Primary runtime entrypoints:
+- `build/bin/yai`
+- `build/bin/yai-core`
+
+Repository topology is authoritative under:
+- `cmd/`
+- `include/yai/`
+- `lib/`
+- `tests/`
 
 ## Documentation
 
