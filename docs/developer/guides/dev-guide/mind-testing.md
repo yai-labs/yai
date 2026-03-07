@@ -1,24 +1,23 @@
-# Testing — YAI Mind
+# Testing — YAI Mind (C Runtime)
 
 ## Test types
 
-- Unit tests: module-level correctness
-- Domain tests: per-memory-domain behaviors (`memory/graph/domains/*/tests.rs`)
-- Integration tests: cross-module flows under `tests/`
+- Unit/integration tests under `mind/tests_c/`
+- Runtime smoke checks through `make -C mind test`
 
 ## Goals
 
-- Ensure memory graph APIs are consistent and traceable.
-- Ensure RAG/session pipeline behavior remains stable.
-- Ensure provider abstractions can be mocked and validated.
+- Validate lifecycle init/shutdown consistency.
+- Validate provider dispatch and transport request/response baseline.
+- Validate memory graph and cognition pipeline baseline flows.
 
 ## Running tests
 
-- `cargo test --all --locked`
+- `make -C mind test`
 
 ## Determinism
 
 Tests should be deterministic:
-- avoid real network calls
-- prefer mocks/fixtures
-- control randomness and time where applicable
+- avoid external network dependencies
+- use mock providers where available
+- keep timing assumptions bounded

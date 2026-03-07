@@ -1,23 +1,22 @@
-# Build — YAI Mind
+# Build — YAI Mind (C Runtime)
 
 ## Requirements
 
-- Rust stable toolchain
-- rustfmt + clippy components
+- C toolchain (`cc`, `make`)
 
 ## Commands
 
-- Format check:
-  - `cargo fmt --check`
-- Lint:
-  - `cargo clippy -- -D warnings`
+- Build:
+  - `make -C mind`
+- Clean:
+  - `make -C mind clean`
 - Tests:
-  - `cargo test --all --locked`
-
-Convenience:
-- `make check` runs fmt + clippy + tests.
+  - `make -C mind test`
+- Optional run (daemon baseline):
+  - `make -C mind run`
 
 ## Notes
 
-- This repo is intended to integrate with the wider YAI runtime.
-- Build scripts and contracts must remain compatible with the canonical specs in `yai-law`.
+- `mind/` is C-runtime primary.
+- Rust/Cargo build path for Mind is decommissioned.
+- Historical migration notes are under `mind/docs/archive/`.
