@@ -35,6 +35,8 @@ tags:
 
 # RB-MIND-REDIS-STM — Mind Redis STM
 
+> Historical note: this runbook still contains Rust-era implementation path references and is not the canonical build/runtime guide for Mind. Use `mind/docs/README.md` and `docs/developer/guides/dev-guide/mind-build.md` for active C runtime commands.
+
 ## 1) Purpose
 Define a tenant-safe, deterministic short-term memory model for Mind using Redis with strict `ws_id` scoping and governed attach workflow.
 

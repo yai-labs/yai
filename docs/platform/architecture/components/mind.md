@@ -21,10 +21,10 @@ partial
 
 ## Interfaces and Entry Points
 
-- `mind/src/main.rs`
-- `mind/src/cognition/mod.rs`
-- `mind/src/cognition/orchestration/mod.rs`
-- `mind/src/transport/mod.rs`
+- `mind/src/main.c`
+- `mind/include/mind_cognition.h`
+- `mind/src/cognition/orchestration/planner.c`
+- `mind/src/transport/protocol.c`
 
 ## Authority and Boundary Rules
 

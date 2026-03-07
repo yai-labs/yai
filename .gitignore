@@ -55,6 +55,9 @@ tmp/
 *.log
 .pr/
 
+mind/build/
+mind/dist/
+
 # Keep doxygen output out of VCS
 dist/docs/doxygen/
 

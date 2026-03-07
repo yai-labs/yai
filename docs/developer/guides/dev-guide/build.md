@@ -2,8 +2,9 @@
 
 Repository build and sanity commands:
 
-- `cargo build --workspace`
-- `cargo test --workspace`
+- `make -j4`
+- `make test`
+- `make mind-check`
 - `make help`
 
-For docs-only phases, still run at least the docs validation subset.
+For docs-only changes, still run the smallest relevant verification target.

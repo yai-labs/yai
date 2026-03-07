@@ -75,32 +75,23 @@ engine:
 	$(MAKE) -C $(ENGINE_DIR) build BUILD_ROOT=$(BUILD_ROOT) BIN_BUILD=$(BIN_BUILD)
 
 # -------------------------
-# Mind (Rust) — optional
+# Mind (C runtime) — primary
 # -------------------------
 
 mind:
-	@command -v cargo >/dev/null 2>&1 || { echo "ERROR: cargo not found (install Rust toolchain)"; exit 1; }
 	@mkdir -p $(BIN_BUILD)
-	@if [ -f "$(ROOT_DIR)/Cargo.lock" ]; then \
-		cargo build -p yai-mind --locked ; \
-	else \
-		echo "[YAI] Cargo.lock missing at repo root; generating lockfile (one-time)"; \
-		cargo generate-lockfile --manifest-path $(MIND_DIR)/Cargo.toml || true; \
-		cargo build -p yai-mind ; \
-	fi
-	@if [ -f "target/debug/$(MIND_BIN)" ]; then \
-		cp "target/debug/$(MIND_BIN)" "$(BIN_BUILD)/$(MIND_BIN)"; \
+	@$(MAKE) -C $(MIND_DIR) clean >/dev/null
+	@$(MAKE) -C $(MIND_DIR) all
+	@if [ -f "$(MIND_DIR)/dist/bin/$(MIND_BIN)" ]; then \
+		cp "$(MIND_DIR)/dist/bin/$(MIND_BIN)" "$(BIN_BUILD)/$(MIND_BIN)"; \
 		echo "[YAI] mind staged: $(BIN_BUILD)/$(MIND_BIN)"; \
 	else \
-		echo "ERROR: mind built but binary missing at ./target/debug/$(MIND_BIN)"; \
+		echo "ERROR: mind binary missing at $(MIND_DIR)/dist/bin/$(MIND_BIN)"; \
 		exit 1; \
 	fi
 
 mind-check:
-	@command -v cargo >/dev/null 2>&1 || { echo "ERROR: cargo not found (install Rust toolchain)"; exit 1; }
-	@cargo fmt -p yai-mind --check
-	@cargo clippy -p yai-mind -- -D warnings
-	@cargo test -p yai-mind --locked
+	@$(MAKE) -C $(MIND_DIR) test
 
 mind-dist: mind
 	@mkdir -p $(BIN_DIST)

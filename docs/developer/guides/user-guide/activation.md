@@ -1,5 +1,7 @@
 # ACTIVATION_V1
 
+> Note: paths and examples in this guide are aligned to the C Mind runtime. Rust file paths are decommissioned for active runtime usage.
+
 Canonical sources:
 
 - `deps/yai-law/runtime/mind/graph/notes/GRAPH_V1.md`
@@ -20,7 +22,9 @@ Activation MUST satisfy:
 - Execution is independent of insertion order (canonical ordering).
 
 ## Public API (L3/Mind)
-`mind/src/cognition/memory/graph/activation/api.rs`
+`mind/include/mind_memory.h`
+
+Primary implementation: `mind/src/memory/graph/domain_activation.c`
 
 - `ActivationSeed { node, weight }`
 - `ActivationMethod { LocalPush, PowerIteration }`
@@ -117,7 +121,7 @@ Tables:
 Activation traces are prunable without impacting semantic graph state. Purge operations MUST only affect activation trace tables.
 
 ## Activation Traces
-`mind/src/cognition/memory/graph/activation/trace.rs`
+`mind/src/memory/graph/domain_activation.c` (trace state for last activation run)
 
 `ActivationTrace` fields:
 - `run_id`
@@ -129,11 +133,11 @@ Activation traces are prunable without impacting semantic graph state. Purge ope
 - `topk`
 - `stats`
 
-Store API in `mind/src/cognition/memory/graph/activation/store.rs`:
-- `ActivationTraceStore::record_run`
-- `ActivationTraceStore::get_run`
-- `ActivationTraceStore::list_runs`
-- `ActivationTraceStore::purge_keep_last`
+Store API in the C runtime is currently exposed through:
+- `yai_mind_domain_activation_record(...)`
+- `yai_mind_domain_activation_last(...)`
+
+Persistent trace storage can be layered later without changing activation semantics.
 
 ## Facade/CLI Wiring
 - `GraphFacade` exposes semantic graph adapter helpers for activation.
