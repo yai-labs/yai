@@ -1,4 +1,4 @@
 # Contracts (axioms / invariants / boundaries)
 
 See:
-- deps/yai-law/contracts/
+- deps/law/contracts/

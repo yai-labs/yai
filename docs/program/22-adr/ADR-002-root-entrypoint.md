@@ -1,6 +1,6 @@
 ---
 id: ADR-002
-status: accepted
+status: historical
 effective_date: 2026-02-18
 supersedes: []
 applies_to:
@@ -8,12 +8,15 @@ applies_to:
   phase: 0.1.1
   anchor: "#phase-0-1-1-byte-perfect-router"
 law_refs:
-  - deps/yai-law/foundation/axioms/A-002-authority.md
-  - deps/yai-law/foundation/invariants/I-003-governance.md
-  - deps/yai-law/foundation/boundaries/L1-kernel.md
-  - deps/yai-law/contracts/protocol/include/transport.h
+  - deps/law/foundation/axioms/A-002-authority.md
+  - deps/law/foundation/invariants/I-003-governance.md
+  - deps/law/foundation/boundaries/L1-kernel.md
+  - deps/law/contracts/protocol/include/transport.h
 ---
 # ADR-002 - Root Control Plane as Canonical Entry Point
+
+> Historical ADR: superseded by single-binary runtime cutover.
+> Current authoritative ingress is `~/.yai/run/control.sock` owned by `yai`.
 
 ## Context
 

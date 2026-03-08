@@ -12,6 +12,9 @@ typedef struct yai_rpc_client {
   bool connected;
 } yai_rpc_client_t;
 
+/* Runtime ingress resolution: transport concerns only, independent from law/registry compatibility data. */
+int yai_runtime_ingress_path(char *out, uint32_t out_cap);
+int yai_rpc_connect_at_ingress(yai_rpc_client_t *c, const char *ws_id, const char *socket_path);
 int yai_rpc_connect(yai_rpc_client_t *c, const char *ws_id);
 void yai_rpc_close(yai_rpc_client_t *c);
 int yai_rpc_handshake(yai_rpc_client_t *c, uint32_t capabilities);

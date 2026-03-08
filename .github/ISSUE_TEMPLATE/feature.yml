@@ -54,7 +54,7 @@ body:
     attributes:
       label: Law/Specs references
       placeholder: |
-        deps/yai-law/...
+        deps/law/...
         docs/...
     validations:
       required: false
@@ -64,6 +64,6 @@ body:
     attributes:
       label: Cross-repo impact
       options:
-        - label: This change requires a twin PR in yai-cli
-        - label: This change requires a twin PR in yai-law
+        - label: This change requires a twin PR in cli
+        - label: This change requires a twin PR in law
         - label: This change is isolated to this repo only

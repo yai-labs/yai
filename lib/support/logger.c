@@ -1,11 +1,11 @@
 #include <yai/core/events.h>
 
-#ifndef YAI_KERNEL_EVENT_SCHEMA_ID
-#define YAI_KERNEL_EVENT_SCHEMA_ID "yai.kernel.event.v1"
+#ifndef YAI_RUNTIME_EVENT_SCHEMA_ID
+#define YAI_RUNTIME_EVENT_SCHEMA_ID "yai.runtime.event.v1"
 #endif
 
-#ifndef YAI_KERNEL_EVENT_VERSION
-#define YAI_KERNEL_EVENT_VERSION 1
+#ifndef YAI_RUNTIME_EVENT_VERSION
+#define YAI_RUNTIME_EVENT_VERSION 1
 #endif
 #include <stdio.h>
 #include <string.h>
@@ -50,8 +50,8 @@ void yai_log_static(
     fprintf(stderr,
         "{\"schema_id\":\"%s\",\"event_version\":%d,"
         "\"ts\":%ld,\"ws_id\":\"",
-        YAI_KERNEL_EVENT_SCHEMA_ID,
-        YAI_KERNEL_EVENT_VERSION,
+        YAI_RUNTIME_EVENT_SCHEMA_ID,
+        YAI_RUNTIME_EVENT_VERSION,
         (long)now
     );
     json_escape(stderr, ws);

@@ -41,7 +41,7 @@ Closure policy: mandatory `SKIP` is treated as `FAIL`.
 ## Definition of Done
 - [ ] Matrix pointers resolve for provider domain claims.
 - [ ] Mandatory checks are green with reproducible outputs.
-- [ ] Evidence pack indexed in `yai-ops`.
+- [ ] Evidence pack indexed in `ops`.
 - [ ] Closure links runbook -> MP -> claim -> evidence remain valid.
 
 ## Execution Snapshot

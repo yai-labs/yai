@@ -20,8 +20,8 @@ int yai_control_listen_at(const char *path);
 ssize_t yai_control_read_frame(int fd, yai_rpc_envelope_t *env, void *payload_buf, size_t payload_cap);
 int yai_control_write_frame(int fd, const yai_rpc_envelope_t *env, const void *payload);
 
-int root_dispatch_frame(int client_fd,
-                        const yai_rpc_envelope_t *env,
-                        const char *payload,
-                        ssize_t payload_len,
-                        int *handshake_done);
+int yai_dispatch_frame(int client_fd,
+                       const yai_rpc_envelope_t *env,
+                       const char *payload,
+                       ssize_t payload_len,
+                       int *handshake_done);

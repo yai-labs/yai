@@ -8,9 +8,9 @@ adrs:
   - docs/program/22-adr/ADR-008-connection-lifecycle.md
   - docs/program/22-adr/ADR-012-audit-convergence-gates.md
 spec_anchors:
-  - deps/yai-law/contracts/protocol/include/transport.h
-  - deps/yai-law/contracts/protocol/include/yai_protocol_ids.h
-  - deps/yai-law/contracts/control/schema/exec_reply.v1.json
+  - deps/law/contracts/protocol/include/transport.h
+  - deps/law/contracts/protocol/include/yai_protocol_ids.h
+  - deps/law/contracts/control/schema/exec_reply.v1.json
 issues:
   - "N/A: engine-attach track index"
 ---
@@ -22,7 +22,7 @@ This track is the Engine Attach execution line and binds runbook phases to claim
 References:
 - Plan: `docs/program/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
 - Matrix: `docs/program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
-- Claims: `yai-ops/evidence/validation/audits/claims/infra-grammar.v0.1.json`
+- Claims: `ops/evidence/validation/audits/claims/infra-grammar.v0.1.json`
 - Runbook: `docs/program/23-runbooks/engine-attach.md`
 
 Policy:

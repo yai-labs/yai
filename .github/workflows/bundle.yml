@@ -28,12 +28,12 @@ jobs:
 
       - name: Show bundle pins
         run: |
-          if [ ! -f deps/yai-cli.ref ]; then
-            echo "ERROR: missing deps/yai-cli.ref"
+          if [ ! -f deps/cli.ref ]; then
+            echo "ERROR: missing deps/cli.ref"
             exit 1
           fi
-          echo "yai specs pin: $(git -C deps/yai-law rev-parse HEAD)"
-          echo "yai cli ref  : $(cat deps/yai-cli.ref)"
+          echo "yai specs pin: $(git -C deps/law rev-parse HEAD)"
+          echo "yai cli ref  : $(cat deps/cli.ref)"
 
       - name: Configure git auth for cross-repo checks
         env:

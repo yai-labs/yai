@@ -11,7 +11,7 @@ Indexes:
 - Mind testing guide: `docs/60-guides/dev-guide/mind-testing.md`
 - Mind workflow guide: `docs/60-guides/dev-guide/mind-workflow.md`
 
-Governance tooling/process standards are consumed from `yai-infra`:
+Governance tooling/process standards are consumed from `infra`:
 
-- `https://github.com/yai-labs/yai-infra/tree/main/docs/standards`
-- `https://github.com/yai-labs/yai-infra/tree/main/docs/tooling`
+- `https://github.com/yai-labs/infra/tree/main/docs/standards`
+- `https://github.com/yai-labs/infra/tree/main/docs/tooling`

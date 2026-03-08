@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   auto-label-issue:
-    uses: yai-labs/yai-infra/.github/workflows/reusable-auto-label-issue.yml@main
+    uses: yai-labs/infra/.github/workflows/reusable-auto-label-issue.yml@main
     with:
       org: yai-labs
       project_number: 2
@@ -22,7 +22,7 @@ jobs:
 
   issue-project-status:
     needs: [auto-label-issue]
-    uses: yai-labs/yai-infra/.github/workflows/reusable-issue-project-status-sync.yml@main
+    uses: yai-labs/infra/.github/workflows/reusable-issue-project-status-sync.yml@main
     with:
       org: yai-labs
       project_number: 2
@@ -30,7 +30,7 @@ jobs:
 
   issue-intake:
     needs: [auto-label-issue]
-    uses: yai-labs/yai-infra/.github/workflows/reusable-project-intake-sync.yml@main
+    uses: yai-labs/infra/.github/workflows/reusable-project-intake-sync.yml@main
     with:
       org: yai-labs
       project_number: 2

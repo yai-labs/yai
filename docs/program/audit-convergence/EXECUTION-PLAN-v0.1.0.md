@@ -13,7 +13,7 @@ issue:
   - https://github.com/yai-labs/yai/issues/186
 related:
   - docs/program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md
-  - yai-ops/evidence/validation/audits/claims/infra-grammar.v0.1.json
+  - ops/evidence/validation/audits/claims/infra-grammar.v0.1.json
   - docs/program/22-adr/ADR-012-audit-convergence-gates.md
 ---
 
@@ -52,7 +52,7 @@ Out of scope for v0.1.0 GREEN:
 Domains: control plane, network, providers, storage, resources/workspaces, audit pipeline.
 
 Done when all are true:
-- Core claims in `yai-ops/evidence/validation/audits/claims/infra-grammar.v0.1.json` are `confirmed`.
+- Core claims in `ops/evidence/validation/audits/claims/infra-grammar.v0.1.json` are `confirmed`.
 - Mandatory evidence commands for core domains have no SKIP closure.
 - MPs for core runbook phases include reproducible evidence pointers.
 
@@ -70,7 +70,7 @@ Program checkpoint policy:
 
 ## 5) Canonical Artifacts (single source chain)
 1. Claims source of truth:
-   `yai-ops/evidence/validation/audits/claims/infra-grammar.v0.1.json`
+   `ops/evidence/validation/audits/claims/infra-grammar.v0.1.json`
 2. Convergence matrix:
    `docs/program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
 3. Governance decision (gate semantics):
@@ -195,7 +195,7 @@ Exit:
 ## 8) Execution Controls
 - Work type: docs-only in this branch.
 - No runtime code changes in this convergence branch.
-- No direct edits under `deps/*` in consumer repos; specs changes happen in `yai-law` branch and pins are aligned only at merge closure.
+- No direct edits under `deps/*` in consumer repos; specs changes happen in `law` branch and pins are aligned only at merge closure.
 - Each wave closure must reference:
   - runbook anchor,
   - MP artifact,

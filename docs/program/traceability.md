@@ -6,7 +6,7 @@ It maps proposal and decision artifacts to contract anchors and delivery evidenc
 ## How to use this map
 - Add a row when a new Proposal, ADR, or Runbook is introduced.
 - Keep links as repo-relative paths.
-- Anchor every row to real `deps/yai-law` paths.
+- Anchor every row to real `deps/law` paths.
 
 ## Proposal -> ADR -> Runbook -> MP map
 
@@ -23,15 +23,15 @@ It maps proposal and decision artifacts to contract anchors and delivery evidenc
 
 | Track | Tests / Gates / Evidence |
 |---|---|
-| Contract baseline lock | `yai-ops/evidence/qualification/test-plans/hardfail.md`, runbook commands in `docs/program/23-runbooks/contract-baseline-lock.md`, CI logs/artifacts |
-| Specs refactor foundation | `yai-ops/evidence/qualification/test-plans/README.md`, runbook commands in `docs/program/23-runbooks/specs-refactor-foundation.md`, CI logs/artifacts |
-| Root hardening | `yai-ops/evidence/qualification/test-plans/hardfail.md`, runbook commands in `docs/program/23-runbooks/root-hardening.md`, CI logs/artifacts |
-| Workspaces lifecycle | `yai-ops/evidence/qualification/test-plans/hardfail.md`, runbook commands in `docs/program/23-runbooks/workspaces-lifecycle.md`, CI logs/artifacts |
-| Engine attach | `yai-ops/evidence/qualification/test-plans/hardfail.md`, runbook commands in `docs/program/23-runbooks/engine-attach.md`, CI logs/artifacts |
-| Data plane | `yai-ops/evidence/qualification/test-plans/hardfail.md`, runbook commands in `docs/program/23-runbooks/data-plane.md`, CI logs/artifacts |
-| Kernel sovereignty | `yai-ops/evidence/qualification/test-plans/hardfail.md`, runbook commands in `docs/program/23-runbooks/kernel-sovereignty.md`, CI logs/artifacts |
-| Mind Redis STM | `yai-ops/evidence/qualification/test-plans/hardfail.md`, runbook commands in `docs/program/23-runbooks/mind-redis-stm.md`, CI logs/artifacts |
+| Contract baseline lock | `ops/evidence/qualification/test-plans/hardfail.md`, runbook commands in `docs/program/23-runbooks/contract-baseline-lock.md`, CI logs/artifacts |
+| Specs refactor foundation | `ops/evidence/qualification/test-plans/README.md`, runbook commands in `docs/program/23-runbooks/specs-refactor-foundation.md`, CI logs/artifacts |
+| Root hardening | `ops/evidence/qualification/test-plans/hardfail.md`, runbook commands in `docs/program/23-runbooks/root-hardening.md`, CI logs/artifacts |
+| Workspaces lifecycle | `ops/evidence/qualification/test-plans/hardfail.md`, runbook commands in `docs/program/23-runbooks/workspaces-lifecycle.md`, CI logs/artifacts |
+| Engine attach | `ops/evidence/qualification/test-plans/hardfail.md`, runbook commands in `docs/program/23-runbooks/engine-attach.md`, CI logs/artifacts |
+| Data plane | `ops/evidence/qualification/test-plans/hardfail.md`, runbook commands in `docs/program/23-runbooks/data-plane.md`, CI logs/artifacts |
+| Kernel sovereignty | `ops/evidence/qualification/test-plans/hardfail.md`, runbook commands in `docs/program/23-runbooks/kernel-sovereignty.md`, CI logs/artifacts |
+| Mind Redis STM | `ops/evidence/qualification/test-plans/hardfail.md`, runbook commands in `docs/program/23-runbooks/mind-redis-stm.md`, CI logs/artifacts |
 
 Notes:
 - Keep this map synchronized whenever proposal scope or ADR targets change.
-- Do not invent new anchors: always anchor to `deps/yai-law` paths.
+- Do not invent new anchors: always anchor to `deps/law` paths.

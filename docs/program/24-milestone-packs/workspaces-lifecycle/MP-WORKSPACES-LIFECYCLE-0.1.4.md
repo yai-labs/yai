@@ -37,7 +37,7 @@ Close lifecycle scope with reproducible evidence and traceability links.
 Closure policy: mandatory `SKIP` is treated as `FAIL`.
 
 ## Definition of Done
-- [ ] Phase evidence linked in `yai-ops`.
+- [ ] Phase evidence linked in `ops`.
 - [ ] Convergence matrix pointers resolve.
 - [ ] No mandatory check remains in `SKIP` state.
 - [ ] Closure links runbook -> MP -> claim -> evidence remain valid.

@@ -13,7 +13,7 @@ Developer-facing guidance for product runtime work in `yai`.
 - `mind-testing.md`
 - `mind-workflow.md`
 
-## Governance/process pointers (canonical in yai-infra)
+## Governance/process pointers (canonical in infra)
 
 - `cross-repo-workflow.md`
 - `github-templates.md`

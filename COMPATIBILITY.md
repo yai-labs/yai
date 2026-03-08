@@ -8,13 +8,13 @@ Compatibility in YAI is contract-driven: normative behavior is defined by pinned
 
 ### Specs API Baseline
 
-| `yai` line | Specs API | `deps/yai-law` pin policy | Guarantee |
+| `yai` line | Specs API | `deps/law` pin policy | Guarantee |
 |---|---|---|---|
-| `v0.1.x` | `v1` | pinned submodule commit under `deps/yai-law` | Spec compliance is required; drift is a defect |
+| `v0.1.x` | `v1` | pinned submodule commit under `deps/law` | Spec compliance is required; drift is a defect |
 
 ### Contract Surfaces
 
-Contract-facing behavior is governed by `deps/yai-law` and includes (non-exhaustive):
+Contract-facing behavior is governed by `deps/law` and includes (non-exhaustive):
 
 - protocol envelope and roles
 - control plane authority surfaces
@@ -55,9 +55,10 @@ Minimum expected toolchain for contributors:
 
 ## Compatibility Rules
 
-1. **Pinned specs are part of compatibility.** Updating `deps/yai-law` changes the contract baseline and must be justified (versioning + evidence).
-2. **No silent drift.** Runtime changes that alter contract-facing behavior without a corresponding specs change are not accepted.
-3. **Breaking changes require explicit handling.** If a change is breaking, it must be reflected in:
+1. **Pinned specs are part of compatibility.** Updating `deps/law` changes the contract baseline and must be justified (versioning + evidence).
+2. **CLI/SDK are compatibility-declared, not structurally pinned.** `yai` must not track `cli`/`sdk` via `deps/*.ref`; alignment is declared and verified through compatibility/governance evidence.
+3. **No silent drift.** Runtime changes that alter contract-facing behavior without a corresponding specs change are not accepted.
+4. **Breaking changes require explicit handling.** If a change is breaking, it must be reflected in:
    - `VERSIONING.md` policy
    - `CHANGELOG.md` entry under Unreleased
    - evidence showing intentional compatibility impact and migration path (if applicable)

@@ -6,7 +6,7 @@ phase: index
 adrs:
   - docs/program/22-adr/ADR-011-contract-baseline-lock.md
 spec_anchors:
-  - deps/yai-law/SPEC_MAP.md
+  - deps/law/SPEC_MAP.md
 issues:
   - "N/A: track index document"
 ---
@@ -18,9 +18,9 @@ Runbook reference:
 
 Wave binding:
 - `https://github.com/yai-labs/yai/issues/142`
-- `https://github.com/yai-labs/yai-law/issues/9`
+- `https://github.com/yai-labs/law/issues/9`
 - `docs/program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
-- `yai-ops/evidence/validation/audits/claims/infra-grammar.v0.1.json`
+- `ops/evidence/validation/audits/claims/infra-grammar.v0.1.json`
 
 Phase sequence and closure status:
 - `docs/program/24-milestone-packs/specs-refactor-foundation/MP-SPECS-REFACTOR-FOUNDATION-0.1.0.md`
@@ -35,7 +35,7 @@ Phase sequence and closure status:
 
 Notes:
 - Keep phases mapping-only where required; avoid normative content changes in structural phases.
-- Attach cross-repo pin/evidence outputs for `yai` and `yai-cli` consumers.
+- Attach cross-repo pin/evidence outputs for `yai` and `cli` consumers.
 - Closure semantics follow audit policy: mandatory `SKIP` is treated as `FAIL`.
 
 

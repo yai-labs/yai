@@ -1,16 +1,19 @@
 ---
 id: ARCH-RUNTIME-MODEL
-status: active
+status: historical
 effective_date: 2026-02-19
 revision: 1
 owner: architecture
 law_refs:
-  - deps/yai-law/foundation/boundaries/L1-kernel.md
-  - deps/yai-law/foundation/boundaries/L2-engine.md
-  - deps/yai-law/foundation/invariants/I-001-traceability.md
+  - deps/law/foundation/boundaries/L1-kernel.md
+  - deps/law/foundation/boundaries/L2-engine.md
+  - deps/law/foundation/invariants/I-001-traceability.md
 ---
 
 # Runtime Model
+
+> Historical archive: this document reflects pre-cutover multi-plane topology.
+> Authoritative runtime truth is single-binary ingress in `cmd/yai/main.c` (`yai up` + `~/.yai/run/control.sock`).
 
 ## Role
 
@@ -44,4 +47,4 @@ Canonical Topology: Root -> Kernel -> Engine with Mind as planned/external L3 pl
 - ADRs: `docs/program/22-adr/ADR-002-root-entrypoint.md`, `docs/program/22-adr/ADR-003-kernel-authority.md`, `docs/program/22-adr/ADR-004-engine-execution.md`, `docs/program/22-adr/ADR-008-connection-lifecycle.md`, `docs/program/22-adr/ADR-010-boot-entrypoint.md`
 - Runbooks: `docs/program/23-runbooks/root-hardening.md`, `docs/program/23-runbooks/workspaces-lifecycle.md`
 - MPs: `docs/program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`, `docs/program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md`
-- L0 anchors: `deps/yai-law/contracts/protocol/include/transport.h`, `deps/yai-law/contracts/protocol/include/session.h`, `deps/yai-law/contracts/protocol/runtime/include/rpc_runtime.h`
+- L0 anchors: `deps/law/contracts/protocol/include/transport.h`, `deps/law/contracts/protocol/include/session.h`, `deps/law/contracts/protocol/runtime/include/rpc_runtime.h`

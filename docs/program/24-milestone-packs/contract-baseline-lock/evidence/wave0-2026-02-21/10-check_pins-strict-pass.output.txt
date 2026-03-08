@@ -9,15 +9,15 @@
   expected_specs_sha : 30d04d08fc6a
 
 [RESULT] PASS
-[REASON] aligned specs pins and yai-cli.ref triangle
+[REASON] aligned specs pins and cli.ref triangle
 
 [MACHINE]
 result=PASS
-reason=aligned specs pins and yai-cli.ref triangle
+reason=aligned specs pins and cli.ref triangle
 exit_code=0
 yai_pin=30d04d08fc6aba988b1fa20fb8e28cf886b8ccf7
 yai_cli_pin=30d04d08fc6aba988b1fa20fb8e28cf886b8ccf7
 yai_cli_ref_sha=767ab54515bec163b2e7d365a5892fcb1174bc41
 yai_cli_ref_specs_pin=30d04d08fc6aba988b1fa20fb8e28cf886b8ccf7
 expected_specs_sha=30d04d08fc6aba988b1fa20fb8e28cf886b8ccf7
-PASS: yai, yai-cli, and yai-cli.ref are aligned and valid.
+PASS: yai, cli, and cli.ref are aligned and valid.

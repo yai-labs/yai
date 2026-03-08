@@ -2,6 +2,10 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
+LAW_ROOT="$ROOT/deps/law"
+if [[ ! -d "$LAW_ROOT" ]]; then
+  LAW_ROOT="$ROOT/deps/law"
+fi
 OUT_ROOT="$ROOT/build/test/brain"
 OBJ_DIR="$OUT_ROOT/obj"
 BIN_DIR="$OUT_ROOT/bin"
@@ -51,7 +55,7 @@ OBJS=()
 for src in "${BRAIN_SRCS[@]}"; do
   obj="$OBJ_DIR/${src%.c}.o"
   mkdir -p "$(dirname "$obj")"
-  cc -Wall -Wextra -std=c11 -O2 -I"$ROOT/include" -I"$ROOT/include/yai" -I"$ROOT/deps/yai-law/contracts/protocol/include" -c "$ROOT/$src" -o "$obj"
+  cc -Wall -Wextra -std=c11 -O2 -I"$ROOT/include" -I"$ROOT/include/yai" -I"$LAW_ROOT/contracts/protocol/include" -c "$ROOT/$src" -o "$obj"
   OBJS+=("$obj")
 done
 

@@ -18,13 +18,13 @@ related:
     - docs/program/22-adr/ADR-011-contract-baseline-lock.md
     - docs/program/22-adr/ADR-012-audit-convergence-gates.md
   specs:
-    - deps/yai-law/foundation/invariants/I-001-traceability.md
-    - deps/yai-law/foundation/invariants/I-002-determinism.md
-    - deps/yai-law/foundation/invariants/I-003-governance.md
-    - deps/yai-law/foundation/invariants/I-006-external-effect-boundary.md
-    - deps/yai-law/foundation/boundaries/L1-kernel.md
+    - deps/law/foundation/invariants/I-001-traceability.md
+    - deps/law/foundation/invariants/I-002-determinism.md
+    - deps/law/foundation/invariants/I-003-governance.md
+    - deps/law/foundation/invariants/I-006-external-effect-boundary.md
+    - deps/law/foundation/boundaries/L1-kernel.md
   test_plans:
-    - yai-ops/evidence/qualification/test-plans/hardfail.md
+    - ops/evidence/qualification/test-plans/hardfail.md
   tools:
     - tools/bin/yai-check-pins
     - tools/bin/yai-docs-trace-check
@@ -39,23 +39,23 @@ tags:
 # RB-CONTRACT-BASELINE-LOCK — Contract Baseline Lock (Milestone 1)
 
 ## 1) Purpose
-Create the first governance runbook that locks cross-repo contract behavior across `yai-law`, `yai`, and `yai-cli` before any additional hardening tracks.
+Create the first governance runbook that locks cross-repo contract behavior across `law`, `yai`, and `cli` before any additional hardening tracks.
 
 ## 2) Preconditions
 - [x] `docs/program/22-adr/ADR-011-contract-baseline-lock.md` is present and traceable.
-- [x] Cross-repo repositories are reachable (`yai-law`, `yai`, `yai-cli`).
-- [x] Contract edits are performed in source repo (`yai-law`) and only pinned in consumers.
+- [x] Cross-repo repositories are reachable (`law`, `yai`, `cli`).
+- [x] Contract edits are performed in source repo (`law`) and only pinned in consumers.
 - [x] Baseline CI is green in all three repos before phase work starts.
 
 ## 3) Inputs
 - Pin references:
-  - `yai/deps/yai-law`
-  - `yai-cli/deps/yai-law`
+  - `yai/deps/law`
+  - `cli/deps/law`
 - Normative anchors:
-  - `deps/yai-law/foundation/invariants/I-001-traceability.md`
-  - `deps/yai-law/foundation/invariants/I-002-determinism.md`
-  - `deps/yai-law/foundation/invariants/I-003-governance.md`
-  - `deps/yai-law/foundation/invariants/I-006-external-effect-boundary.md`
+  - `deps/law/foundation/invariants/I-001-traceability.md`
+  - `deps/law/foundation/invariants/I-002-determinism.md`
+  - `deps/law/foundation/invariants/I-003-governance.md`
+  - `deps/law/foundation/invariants/I-006-external-effect-boundary.md`
 - Verification tooling:
   - `tools/bin/yai-check-pins`
   - `tools/bin/yai-docs-trace-check`
@@ -68,7 +68,7 @@ This runbook phase sequence is Wave 0 under:
 - `docs/program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
 
 Claims source of truth:
-- `yai-ops/evidence/validation/audits/claims/infra-grammar.v0.1.json`
+- `ops/evidence/validation/audits/claims/infra-grammar.v0.1.json`
 
 Wave issue:
 - `https://github.com/yai-labs/yai/issues/141`
@@ -88,7 +88,7 @@ Mandatory closure policy:
 
 <a id="phase-0-1-0-pin-baseline-freeze"></a>
 ### 0.1.0 — Pin Baseline Freeze
-Claim: `yai` and `yai-cli` consume the same audited `yai-law` baseline.
+Claim: `yai` and `cli` consume the same audited `law` baseline.
 - Scope: pin update + lock verification only.
 - Gate: pin checks green and reproducible.
 - Milestone Pack (planned): `docs/program/24-milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.0.md`
@@ -167,7 +167,7 @@ Closure semantics:
 - mandatory `SKIP` is treated as `FAIL`.
 
 ## 7) Failure Modes
-- Symptom: `yai` and `yai-cli` pin different specs commits.
+- Symptom: `yai` and `cli` pin different specs commits.
   - Fix: resync pins and rerun parity checks.
 - Symptom: CI green despite missing mandatory proof checks.
   - Fix: convert skip path to hard fail and rerun.
@@ -189,10 +189,10 @@ Closure semantics:
 - ADR refs (required unless ops-only):
   - `docs/program/22-adr/ADR-011-contract-baseline-lock.md`
 - Law refs (recommended):
-  - `deps/yai-law/foundation/invariants/I-001-traceability.md`
-  - `deps/yai-law/foundation/invariants/I-002-determinism.md`
-  - `deps/yai-law/foundation/invariants/I-003-governance.md`
-  - `deps/yai-law/foundation/invariants/I-006-external-effect-boundary.md`
+  - `deps/law/foundation/invariants/I-001-traceability.md`
+  - `deps/law/foundation/invariants/I-002-determinism.md`
+  - `deps/law/foundation/invariants/I-003-governance.md`
+  - `deps/law/foundation/invariants/I-006-external-effect-boundary.md`
 - MPs (filled as phases ship):
   - `docs/program/24-milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.0.md`
   - `docs/program/24-milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.1.md`

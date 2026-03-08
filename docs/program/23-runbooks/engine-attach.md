@@ -1,4 +1,7 @@
 ---
+
+> Historical topology note: engine-attach terminology is preserved for traceability.
+> Runtime ingress ownership is now single-binary `yai`; no standalone root/kernel/engine binaries are required.
 id: RB-ENGINE-ATTACH
 title: Engine Attach
 status: active
@@ -25,20 +28,20 @@ related:
     - docs/program/22-adr/ADR-008-connection-lifecycle.md
     - docs/program/22-adr/ADR-006-unified-rpc.md
   specs:
-    - deps/yai-law/contracts/protocol/include/transport.h
-    - deps/yai-law/contracts/protocol/include/yai_protocol_ids.h
-    - deps/yai-law/contracts/control/schema/exec_reply.v1.json
-    - deps/yai-law/contracts/control/schema/authority.v1.json
-    - deps/yai-law/registry/commands.v1.json
-    - deps/yai-law/runtime/engine/README.md
-    - deps/yai-law/contracts/vault/include/yai_vault_abi.h
-    - deps/yai-law/contracts/vault/schema/vault_abi.json
+    - deps/law/contracts/protocol/include/transport.h
+    - deps/law/contracts/protocol/include/yai_protocol_ids.h
+    - deps/law/contracts/control/schema/exec_reply.v1.json
+    - deps/law/contracts/control/schema/authority.v1.json
+    - deps/law/registry/commands.v1.json
+    - deps/law/runtime/engine/README.md
+    - deps/law/contracts/vault/include/yai_vault_abi.h
+    - deps/law/contracts/vault/schema/vault_abi.json
   runbooks:
     - docs/program/23-runbooks/root-hardening.md
     - docs/program/23-runbooks/workspaces-lifecycle.md
     - docs/program/23-runbooks/data-plane.md
   test_plans:
-    - yai-ops/evidence/qualification/test-plans/hardfail.md
+    - ops/evidence/qualification/test-plans/hardfail.md
   tools:
     - tools/bin/yai-check-pins
     - tools/bin/yai-verify
@@ -211,7 +214,7 @@ Objective:
 Exit criteria:
 - matrix pointers resolve for provider domain claims;
 - mandatory checks are green (no SKIP for mandatory lanes);
-- evidence pack indexed in `yai-ops`.
+- evidence pack indexed in `ops`.
 
 ## 10) Verification policy
 
@@ -257,8 +260,8 @@ Minimum evidence set:
   - `docs/program/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
   - `docs/program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
 - Evidence destination:
-  - `yai-ops/evidence/qualification/`
-  - `yai-ops/evidence/validation/`
+  - `ops/evidence/qualification/`
+  - `ops/evidence/validation/`
 
 ## 14) Definition of Done (rev4)
 - Engine attach semantics are lifecycle-integrated and deterministic.

@@ -45,9 +45,9 @@ Residual legacy remains only as compatibility leaves outside removed top-level d
 - `cmd/legacy/yai-mind/main.c` compatibility daemon entry used by integration smoke
 - deprecated `tests/domains/*` placeholders retained as migration markers
 
-## Bridge Toward `yai-law` Refoundation
+## Bridge Toward `law` Refoundation
 Packaging changed; semantics remain governed.
-For `yai-law` follow-up:
+For `law` follow-up:
 - preserve authority/workspace/session invariants
 - preserve separation of planes (`core`, `exec`, `brain`)
 - reflect new package topology in contract pointers and trace docs

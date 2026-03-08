@@ -38,7 +38,7 @@ Program-level target-state and wave ordering are defined in:
 - `docs/program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
 
 Runbook phase closure should reference claim IDs from:
-- `yai-ops/evidence/validation/audits/claims/infra-grammar.v0.1.json`
+- `ops/evidence/validation/audits/claims/infra-grammar.v0.1.json`
 
 ## Template
 

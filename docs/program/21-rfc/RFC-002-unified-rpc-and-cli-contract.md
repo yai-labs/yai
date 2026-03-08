@@ -20,10 +20,10 @@ related:
   milestone_packs:
     - docs/program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md
   specs:
-    - deps/yai-law/contracts/protocol/include/transport.h
-    - deps/yai-law/contracts/protocol/include/protocol.h
-    - deps/yai-law/contracts/protocol/runtime/include/rpc_runtime.h
-    - deps/yai-law/registry/commands.v1.json
+    - deps/law/contracts/protocol/include/transport.h
+    - deps/law/contracts/protocol/include/protocol.h
+    - deps/law/contracts/protocol/runtime/include/rpc_runtime.h
+    - deps/law/registry/commands.v1.json
 tags:
   - rpc
   - cli
@@ -63,7 +63,7 @@ Adopt one canonical RPC surface and enforce CLI-to-spec alignment through explic
 
 ## Traceability
 
-- Spec anchors (if any): `deps/yai-law/contracts/protocol/include/transport.h`, `deps/yai-law/contracts/protocol/include/protocol.h`, `deps/yai-law/contracts/protocol/runtime/include/rpc_runtime.h`, `deps/yai-law/registry/commands.v1.json`
+- Spec anchors (if any): `deps/law/contracts/protocol/include/transport.h`, `deps/law/contracts/protocol/include/protocol.h`, `deps/law/contracts/protocol/runtime/include/rpc_runtime.h`, `deps/law/registry/commands.v1.json`
 - Targets ADR: `docs/program/22-adr/ADR-006-unified-rpc.md`, `docs/program/22-adr/ADR-011-contract-baseline-lock.md`
 - Downstream runbook: `docs/program/23-runbooks/root-hardening.md`
 - Downstream MP: `docs/program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`

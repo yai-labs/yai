@@ -1,4 +1,7 @@
 ---
+
+> Historical topology note: this runbook may use root/kernel/engine labels from earlier waves.
+> Canonical runtime ingress now is `yai` on `~/.yai/run/control.sock`.
 id: RB-DATA-PLANE
 title: Data Plane
 status: draft
@@ -30,17 +33,17 @@ related:
     - docs/program/22-adr/ADR-011-contract-baseline-lock.md
     - docs/program/22-adr/ADR-012-audit-convergence-gates.md
   specs:
-    - deps/yai-law/REGISTRY.md
-    - deps/yai-law/contracts/control/schema/control_call.v1.json
-    - deps/yai-law/contracts/control/schema/exec_reply.v1.json
-    - deps/yai-law/contracts/control/schema/authority.v1.json
-    - deps/yai-law/contracts/protocol/include/transport.h
-    - deps/yai-law/contracts/protocol/include/yai_protocol_ids.h
-    - deps/yai-law/contracts/vault/include/yai_vault_abi.h
-    - deps/yai-law/contracts/vault/schema/vault_abi.json
-    - deps/yai-law/registry/commands.v1.json
+    - deps/law/REGISTRY.md
+    - deps/law/contracts/control/schema/control_call.v1.json
+    - deps/law/contracts/control/schema/exec_reply.v1.json
+    - deps/law/contracts/control/schema/authority.v1.json
+    - deps/law/contracts/protocol/include/transport.h
+    - deps/law/contracts/protocol/include/yai_protocol_ids.h
+    - deps/law/contracts/vault/include/yai_vault_abi.h
+    - deps/law/contracts/vault/schema/vault_abi.json
+    - deps/law/registry/commands.v1.json
   test_plans:
-    - yai-ops/evidence/qualification/test-plans/hardfail.md
+    - ops/evidence/qualification/test-plans/hardfail.md
   tools:
     - tools/bin/yai-check-pins
     - tools/bin/yai-verify
@@ -58,14 +61,14 @@ tags:
 ## 1) Purpose
 Define the enterprise baseline for YAI Data Plane delivery across the current platform stack:
 
-`yai-law -> yai-sdk -> yai-cli -> yai -> yai-ops` (with `yai-infra` as governance/tooling factory).
+`law -> sdk -> cli -> yai -> ops` (with `infra` as governance/tooling factory).
 
 This runbook aligns implementation sequencing, contract boundaries, and evidence closure for storage and stateful runtime operations.
 
 ## 2) Snapshot (as of 2026-03-06)
 - Runtime topology in `yai`: Root -> Kernel -> Engine, Mind surfaces optional/planned by scope.
 - Workspace-first operation is active and remains the containment boundary.
-- Vault contract is pinned from `yai-law` and consumed by runtime/SDK/CLI.
+- Vault contract is pinned from `law` and consumed by runtime/SDK/CLI.
 - Audit convergence program is active; Data Plane remains partially closed in matrix status.
 - Existing rev1 content is superseded by this rev2 governance and delivery model.
 
@@ -87,18 +90,18 @@ This runbook aligns implementation sequencing, contract boundaries, and evidence
 ## 4) Non-negotiable invariants
 1. No direct client access to storage backends.
 2. All operations must be workspace-scoped and path-jail compliant.
-3. Contract authority is externalized to pinned `deps/yai-law` artifacts.
+3. Contract authority is externalized to pinned `deps/law` artifacts.
 4. Deterministic error semantics must use canonical exec-reply/control schemas.
-5. Data-plane changes are not complete until evidence is published in `yai-ops`.
+5. Data-plane changes are not complete until evidence is published in `ops`.
 6. If checks are mandatory in a closure phase, `SKIP` is treated as `FAIL`.
 
 ## 5) Responsibility model (current repo structure)
-- `yai-law`: normative contracts, schemas, registries, ABI surfaces.
-- `yai-sdk`: contract-constrained API surface for governed data operations.
-- `yai-cli`: operator command surface only (no storage bypass).
+- `law`: normative contracts, schemas, registries, ABI surfaces.
+- `sdk`: contract-constrained API surface for governed data operations.
+- `cli`: operator command surface only (no storage bypass).
 - `yai`: runtime implementation (Root/Kernel/Engine behavior and enforcement).
-- `yai-ops`: evidence bundles, qualification reports, official closure artifacts.
-- `yai-infra`: shared governance checks, docs/tooling policy, reusable automation.
+- `ops`: evidence bundles, qualification reports, official closure artifacts.
+- `infra`: shared governance checks, docs/tooling policy, reusable automation.
 
 ## 6) Canonical control and data flow
 
@@ -137,7 +140,7 @@ Objective:
 
 Required outputs:
 - Pin check green.
-- Registry and schema references resolved to pinned `deps/yai-law`.
+- Registry and schema references resolved to pinned `deps/law`.
 - No local redefinition of normative fields.
 
 Exit criteria:
@@ -201,7 +204,7 @@ Objective:
 - Close runbook phases with traceable evidence suitable for audit and partner review.
 
 Required outputs:
-- Evidence pack index and verification reports in `yai-ops`.
+- Evidence pack index and verification reports in `ops`.
 - Run references linked from milestone packs and audit convergence matrix.
 - Open issues mapped to residual risk or closure actions.
 
@@ -232,7 +235,7 @@ Evidence minimums:
 - Runtime/backend mismatch risk:
   - Control: deterministic error mapping and startup validation.
 - Non-reproducible closure risk:
-  - Control: evidence publication in `yai-ops` with stable pointers.
+  - Control: evidence publication in `ops` with stable pointers.
 
 ## 11) Rollback policy
 - Roll back the active DP phase branch only.
@@ -249,8 +252,8 @@ Evidence minimums:
   - `docs/program/23-runbooks/workspaces-lifecycle.md`
   - `docs/program/23-runbooks/engine-attach.md`
 - Evidence destination:
-  - `yai-ops/evidence/qualification/`
-  - `yai-ops/evidence/validation/`
+  - `ops/evidence/qualification/`
+  - `ops/evidence/validation/`
 
 ## 13) Definition of Done (rev2)
 - All DP phases closed with explicit evidence links.

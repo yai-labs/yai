@@ -1,16 +1,19 @@
 ---
 id: ARCH-OVERVIEW
-status: active
+status: historical
 effective_date: 2026-02-19
 revision: 1
 owner: architecture
 law_refs:
-  - deps/yai-law/foundation/axioms/A-002-authority.md
-  - deps/yai-law/foundation/invariants/I-003-governance.md
-  - deps/yai-law/foundation/invariants/I-006-external-effect-boundary.md
+  - deps/law/foundation/axioms/A-002-authority.md
+  - deps/law/foundation/invariants/I-003-governance.md
+  - deps/law/foundation/invariants/I-006-external-effect-boundary.md
 ---
 
 # Architecture Overview
+
+> Historical overview: pre-cutover topology record.
+> Authoritative runtime model is `cli -> sdk -> yai` with one ingress socket.
 
 ## Role
 
@@ -40,4 +43,4 @@ Canonical Topology: Root -> Kernel -> Engine with Mind as planned/external L3 pl
 - ADRs: `docs/program/22-adr/ADR-001-single-runtime.md`, `docs/program/22-adr/ADR-002-root-entrypoint.md`, `docs/program/22-adr/ADR-003-kernel-authority.md`, `docs/program/22-adr/ADR-004-engine-execution.md`, `docs/program/22-adr/ADR-005-mind-proposer.md`
 - Runbooks: `docs/program/23-runbooks/root-hardening.md`, `docs/program/23-runbooks/engine-attach.md`, `docs/program/23-runbooks/mind-redis-stm.md`
 - MPs: `docs/program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`
-- L0 anchors: `deps/yai-law/foundation/boundaries/L1-kernel.md`, `deps/yai-law/foundation/boundaries/L2-engine.md`, `deps/yai-law/foundation/boundaries/L3-mind.md`
+- L0 anchors: `deps/law/foundation/boundaries/L1-kernel.md`, `deps/law/foundation/boundaries/L2-engine.md`, `deps/law/foundation/boundaries/L3-mind.md`

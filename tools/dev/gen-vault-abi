@@ -75,9 +75,12 @@ def render_law_ids(spec: dict, generated: str) -> str:
 
 def main() -> int:
     root = Path(__file__).resolve().parent.parent.parent
-    default_spec = root / "deps/yai-law/contracts/vault/schema/vault_abi.json"
-    legacy_spec = root / "deps/yai-law/specs/vault/schema/vault_abi.json"
-    default_spec_arg = default_spec if default_spec.exists() else legacy_spec
+    default_spec = root / "deps/law/contracts/vault/schema/vault_abi.json"
+    fallback_spec = root / "deps/law/contracts/vault/schema/vault_abi.json"
+    legacy_spec = root / "deps/law/specs/vault/schema/vault_abi.json"
+    default_spec_arg = default_spec if default_spec.exists() else fallback_spec
+    if not default_spec_arg.exists():
+        default_spec_arg = legacy_spec
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--spec",
@@ -100,8 +103,12 @@ def main() -> int:
     header_text = render_header(spec, generated)
     law_text = render_law_ids(spec, generated)
 
-    header_path = out_dir / "deps/yai-law/contracts/vault/include/yai_vault_abi.h"
-    law_path = out_dir / "deps/yai-law/formal/tla/LAW_IDS.tla"
+    out_law = out_dir / "deps/law"
+    if not out_law.exists():
+        out_law = out_dir / "deps/law"
+
+    header_path = out_law / "contracts/vault/include/yai_vault_abi.h"
+    law_path = out_law / "formal/tla/LAW_IDS.tla"
     header_path.parent.mkdir(parents=True, exist_ok=True)
     law_path.parent.mkdir(parents=True, exist_ok=True)
     header_path.write_text(header_text, encoding="utf-8")

@@ -4,8 +4,8 @@
 
 Canonical sources:
 
-- `deps/yai-law/runtime/mind/graph/notes/GRAPH_V1.md`
-- `deps/yai-law/runtime/mind/graph/schema/graph.v1.json`
+- `deps/law/runtime/mind/graph/notes/GRAPH_V1.md`
+- `deps/law/runtime/mind/graph/schema/graph.v1.json`
 
 ## Objective
 Activation computes memory emergence as graph diffusion (PPR/RWR), with deterministic commit and persisted activation traces.

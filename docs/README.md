@@ -18,12 +18,12 @@ This directory is the primary documentation entrypoint for the YAI platform impl
 
 ## Cross-repo alignment notes
 
-- Normative contract authority is pinned from `deps/yai-law/`.
-- Operational evidence bundles and field collateral are maintained in `yai-ops`.
-- CLI and SDK command/control surfaces are maintained in `yai-cli` and `yai-sdk`.
-- Cross-repo docs/surface governance policy is defined in `deps/yai-law/docs/pointers/DOCS_ARCHITECTURE.pointer.md`.
+- Normative contract authority is pinned from `deps/law/`.
+- Operational evidence bundles and field collateral are maintained in `ops`.
+- CLI and SDK command/control surfaces are maintained in `cli` and `sdk`.
+- Cross-repo docs/surface governance policy is defined in `deps/law/docs/pointers/DOCS_ARCHITECTURE.pointer.md`.
 
 ## Interpretation rule
 
 Docs in this repository are implementation/program-facing.
-Normative contract disputes are resolved against pinned `yai-law` artifacts.
+Normative contract disputes are resolved against pinned `law` artifacts.

@@ -14,4 +14,4 @@ Developer utilities for local workflows and artifact consistency.
 ## Quick Start
 
 - `tools/dev/check-generated.sh`
-- `../yai-infra/tools/bin/yai-doctor`
+- `../infra/tools/bin/yai-doctor`

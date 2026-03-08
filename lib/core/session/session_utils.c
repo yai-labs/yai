@@ -360,7 +360,7 @@ static int yai_workspace_write_manifest(
             "  \"updated_at\": %ld,\n"
             "  \"layout\": \"v2\",\n"
             "  \"root_path\": \"%s\",\n"
-            "  \"runtime_owner\": \"kernel\",\n"
+            "  \"runtime_owner\": \"yai\",\n"
             "  \"attachments\": [],\n"
             "  \"capabilities\": {\n"
             "    \"workspace_scope\": true,\n"
@@ -499,7 +499,7 @@ int yai_session_handle_workspace_action(
     char ws_dir[MAX_PATH_LEN];
     char auth_dir[MAX_PATH_LEN];
     char events_dir[MAX_PATH_LEN];
-    char engine_dir[MAX_PATH_LEN];
+    char exec_dir[MAX_PATH_LEN];
     char logs_dir[MAX_PATH_LEN];
     char root_path[MAX_PATH_LEN] = {0};
     time_t now = time(NULL);
@@ -514,7 +514,7 @@ int yai_session_handle_workspace_action(
         snprintf(ws_dir, sizeof(ws_dir), "%s/.yai/run/%s", home, ws_id) <= 0 ||
         snprintf(auth_dir, sizeof(auth_dir), "%s/authority", ws_dir) <= 0 ||
         snprintf(events_dir, sizeof(events_dir), "%s/events", ws_dir) <= 0 ||
-        snprintf(engine_dir, sizeof(engine_dir), "%s/engine", ws_dir) <= 0 ||
+        snprintf(exec_dir, sizeof(exec_dir), "%s/exec", ws_dir) <= 0 ||
         snprintf(logs_dir, sizeof(logs_dir), "%s/logs", ws_dir) <= 0)
         return -1;
 
@@ -548,7 +548,7 @@ int yai_session_handle_workspace_action(
         mkdir_if_missing(ws_dir, 0755) != 0 ||
         mkdir_if_missing(auth_dir, 0755) != 0 ||
         mkdir_if_missing(events_dir, 0755) != 0 ||
-        mkdir_if_missing(engine_dir, 0755) != 0 ||
+        mkdir_if_missing(exec_dir, 0755) != 0 ||
         mkdir_if_missing(logs_dir, 0755) != 0 ||
         mkdir_parents(root_path, 0755) != 0)
         return -1;

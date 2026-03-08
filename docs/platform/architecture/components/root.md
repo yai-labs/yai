@@ -1,15 +1,18 @@
 ---
 id: ARCH-COMP-ROOT
-status: active
+status: historical
 effective_date: 2026-02-19
 revision: 1
 owner: runtime
 law_refs:
-  - deps/yai-law/foundation/axioms/A-002-authority.md
-  - deps/yai-law/foundation/invariants/I-003-governance.md
+  - deps/law/foundation/axioms/A-002-authority.md
+  - deps/law/foundation/invariants/I-003-governance.md
 ---
 
 # Root Component
+
+> Historical archive: this component page describes pre-cutover topology.
+> Current runtime model is single-binary `yai` ingress; root/kernel/engine are internal semantics, not standalone public components.
 
 ## Role
 
@@ -36,7 +39,7 @@ implemented
 - ADR refs: `docs/program/22-adr/ADR-001-single-runtime.md`, `docs/program/22-adr/ADR-002-root-entrypoint.md`
 - Runbook refs: `docs/program/23-runbooks/root-hardening.md`
 - MP refs: `docs/program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`, `docs/program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md`
-- L0 anchors: `deps/yai-law/contracts/protocol/include/transport.h`, `deps/yai-law/contracts/protocol/include/auth.h`
+- L0 anchors: `deps/law/contracts/protocol/include/transport.h`, `deps/law/contracts/protocol/include/auth.h`
 
 ## Known Drift / Gaps
 

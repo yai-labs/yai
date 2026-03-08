@@ -9,9 +9,9 @@ adrs:
   - docs/program/22-adr/ADR-008-connection-lifecycle.md
   - docs/program/22-adr/ADR-012-audit-convergence-gates.md
 spec_anchors:
-  - deps/yai-law/contracts/protocol/include/transport.h
-  - deps/yai-law/contracts/protocol/include/auth.h
-  - deps/yai-law/contracts/protocol/include/errors.h
+  - deps/law/contracts/protocol/include/transport.h
+  - deps/law/contracts/protocol/include/auth.h
+  - deps/law/contracts/protocol/include/errors.h
 claims:
   - C-KERNEL-HARD-BOUNDARY-CORE
   - C-ENVELOPE-HANDSHAKE-REQUIRED
@@ -33,7 +33,7 @@ issues:
 ## Links
 - Plan: `docs/program/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
 - Matrix: `docs/program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
-- Claims registry: `yai-ops/evidence/validation/audits/claims/infra-grammar.v0.1.json`
+- Claims registry: `ops/evidence/validation/audits/claims/infra-grammar.v0.1.json`
 - ADR: `docs/program/22-adr/ADR-012-audit-convergence-gates.md`
 
 ## Objective

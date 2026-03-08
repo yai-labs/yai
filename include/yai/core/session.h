@@ -31,7 +31,7 @@ typedef struct {
   char ws_id[MAX_WS_ID_LEN];
   char run_dir[MAX_PATH_LEN];
   char root_path[MAX_PATH_LEN];
-  char control_sock[MAX_PATH_LEN];
+  char ingress_sock[MAX_PATH_LEN];
   char lock_file[MAX_PATH_LEN];
   char pid_file[MAX_PATH_LEN];
   long created_at;

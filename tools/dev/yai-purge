@@ -2,28 +2,24 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-BIN="${BIN:-$(command -v yai || true)}"
-if [[ -z "$BIN" && -x "$HOME/.cargo/bin/yai" ]]; then
-  BIN="$HOME/.cargo/bin/yai"
-fi
-CFG="${HOME}/.yai/config/yai.toml"
+PID_FILE="${HOME}/.yai/run/runtime.pid"
+INGRESS_SOCK="${YAI_RUNTIME_INGRESS:-$HOME/.yai/run/control.sock}"
 
-WS_DEFAULT="${YAI_WS_DEFAULT:-dev}"
-if [[ -f "${CFG}" ]]; then
-  WS_DEFAULT="$(grep -E '^ws_default' "${CFG}" | head -n 1 | sed -E 's/.*"([^"]+)".*/\1/')"
-  WS_DEFAULT="${WS_DEFAULT:-${YAI_WS_DEFAULT:-dev}}"
-fi
-
-if [[ -n "$BIN" && -x "$BIN" ]]; then
-  "$BIN" down --ws "${WS_DEFAULT}" || true
+if [[ -f "$PID_FILE" ]]; then
+  PID="$(cat "$PID_FILE" 2>/dev/null || true)"
+  if [[ -n "$PID" ]] && kill -0 "$PID" 2>/dev/null; then
+    kill "$PID" || true
+    sleep 1
+  fi
+  rm -f "$PID_FILE"
 fi
 
-if [[ -d "${ROOT}/kernel" ]]; then
-  (cd "${ROOT}/kernel" && make clean)
+if [[ -S "$INGRESS_SOCK" ]]; then
+  rm -f "$INGRESS_SOCK"
 fi
 
-if [[ -d "${ROOT}/engine" ]]; then
-  (cd "${ROOT}/engine" && make clean)
+if [[ -f "${ROOT}/Makefile" ]]; then
+  (cd "${ROOT}" && make clean)
 fi
 
 if [[ -d "${HOME}/.yai/artifacts" ]]; then

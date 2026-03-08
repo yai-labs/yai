@@ -20,10 +20,10 @@ related:
     - docs/program/22-adr/ADR-003-kernel-authority.md
     - docs/program/22-adr/ADR-008-connection-lifecycle.md
   specs:
-    - deps/yai-law/contracts/protocol/include/transport.h
-    - deps/yai-law/contracts/protocol/include/auth.h
+    - deps/law/contracts/protocol/include/transport.h
+    - deps/law/contracts/protocol/include/auth.h
   test_plans:
-    - yai-ops/evidence/qualification/test-plans/hardfail.md
+    - ops/evidence/qualification/test-plans/hardfail.md
   tools:
     - tools/bin/yai-verify
     - tools/bin/yai-gate
@@ -67,7 +67,7 @@ Execute staged hardening in this document (logger first, then session/path harde
 ## 8) References
 - ADR: `docs/program/22-adr/ADR-003-kernel-authority.md`
 - Runbooks: `docs/program/23-runbooks/root-hardening.md`, `docs/program/23-runbooks/engine-attach.md`
-- Test plans: `yai-ops/evidence/qualification/test-plans/hardfail.md`
+- Test plans: `ops/evidence/qualification/test-plans/hardfail.md`
 
 ## Traceability
 - ADR refs:
@@ -356,7 +356,7 @@ void yai_log_deny(const char *ws_id, unsigned cmd_id, const char *reason)
 
 ### Files to create
 
-**A) Spec:** `deps/yai-law/formal/YAI_KERNEL.tla`
+**A) Spec:** `deps/law/formal/YAI_KERNEL.tla`
 
 ```tla
 ------------------------------ MODULE YAI_KERNEL ------------------------------
@@ -442,7 +442,7 @@ THEOREM Spec => []IsolationInvariant
 =============================================================================
 ```
 
-**B) Config:** `deps/yai-law/formal/YAI_KERNEL.cfg`
+**B) Config:** `deps/law/formal/YAI_KERNEL.cfg`
 
 ```
 SPECIFICATION Spec
@@ -512,7 +512,7 @@ typedef struct {
 /* Global access (or pass pointer around) */
 yai_session_table_t *yai_session_table(void);
 
-/* Workspace id validate (ideally use the inline in deps/yai-law/contracts/protocol/include/transport.h) */
+/* Workspace id validate (ideally use the inline in deps/law/contracts/protocol/include/transport.h) */
 bool yai_ws_validate_id(const char *ws_id);
 
 /* Acquire / create session */
@@ -640,7 +640,7 @@ Verify system behavior under adversarial conditions
 5. **Path traversal battery:** 50 different escape attempts
 
 ### Tools
-- `yai-infra/tools/ops/stress-v1.sh`
+- `infra/tools/ops/stress-v1.sh`
 - Python test harness with threading
 
 ### Acceptance

@@ -8,11 +8,11 @@ applies_to:
   phase: governance
   anchor: "#4-two-official-gates"
 law_refs:
-  - deps/yai-law/foundation/invariants/I-001-traceability.md
-  - deps/yai-law/foundation/invariants/I-002-determinism.md
-  - deps/yai-law/foundation/invariants/I-003-governance.md
-  - deps/yai-law/foundation/invariants/I-006-external-effect-boundary.md
-  - deps/yai-law/foundation/boundaries/L1-kernel.md
+  - deps/law/foundation/invariants/I-001-traceability.md
+  - deps/law/foundation/invariants/I-002-determinism.md
+  - deps/law/foundation/invariants/I-003-governance.md
+  - deps/law/foundation/invariants/I-006-external-effect-boundary.md
+  - deps/law/foundation/boundaries/L1-kernel.md
 ---
 
 # ADR-012 - Audit Convergence Gates for v0.1.0
@@ -39,7 +39,7 @@ Enforce policy:
 - mandatory-check `SKIP` is treated as `FAIL` for phase closure.
 
 Claims are canonicalized in:
-- `yai-ops/evidence/validation/audits/claims/infra-grammar.v0.1.json`
+- `ops/evidence/validation/audits/claims/infra-grammar.v0.1.json`
 
 ## Rationale
 The two-gate model keeps one trajectory while avoiding false blocking:
@@ -63,7 +63,7 @@ The explicit GREEN definition prevents over-claiming and keeps delivery aligned 
 - Convergence matrix:
   - `docs/program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
 - Claims registry:
-  - `yai-ops/evidence/validation/audits/claims/infra-grammar.v0.1.json`
+  - `ops/evidence/validation/audits/claims/infra-grammar.v0.1.json`
 - Related ADR:
   - `docs/program/22-adr/ADR-005-mind-proposer.md`
   - `docs/program/22-adr/ADR-011-contract-baseline-lock.md`

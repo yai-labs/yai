@@ -1,5 +1,6 @@
 #define _POSIX_C_SOURCE 200809L
 #include <yai/core/lifecycle.h>
+#include <yai/api/runtime.h>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -21,11 +22,6 @@ static int mkdir_safe(const char *path)
     return -1;
 }
 
-static void cleanup_socket(const char *path)
-{
-    unlink(path);
-}
-
 int yai_ensure_runtime_layout(const char *ws_id)
 {
     const char *home = getenv("HOME");
@@ -44,35 +40,12 @@ int yai_ensure_runtime_layout(const char *ws_id)
     if (mkdir_safe(path) != 0)
         return -3;
 
-    /* planes */
-    snprintf(path, sizeof(path), "%s/.yai/run/root", home);
-    if (mkdir_safe(path) != 0)
-        return -4;
-
-    snprintf(path, sizeof(path), "%s/.yai/run/kernel", home);
-    if (mkdir_safe(path) != 0)
-        return -5;
-
-    snprintf(path, sizeof(path), "%s/.yai/run/engine", home);
-    if (mkdir_safe(path) != 0)
-        return -6;
-
     /* workspace */
     if (ws_id && ws_id[0]) {
         snprintf(path, sizeof(path), "%s/.yai/run/%s", home, ws_id);
         if (mkdir_safe(path) != 0)
-            return -7;
+            return -4;
     }
-
-    /* cleanup stale sockets */
-    snprintf(path, sizeof(path), "%s/.yai/run/root/root.sock", home);
-    cleanup_socket(path);
-
-    snprintf(path, sizeof(path), "%s/.yai/run/kernel/control.sock", home);
-    cleanup_socket(path);
-
-    snprintf(path, sizeof(path), "%s/.yai/run/engine/control.sock", home);
-    cleanup_socket(path);
 
     return 0;
 }

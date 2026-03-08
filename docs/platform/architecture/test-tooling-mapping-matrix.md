@@ -11,7 +11,7 @@
 | `engine/tests/cortex_harness.c` | `tests/unit/exec/cortex_harness.c` | move | exec unit | pure exec runtime model unit check | none |
 | `engine/tests/protocol_test.c` | `tests/unit/protocol/protocol_test.c` | move | protocol unit | protocol contract shape check | expand malformed envelope assertions |
 | `tests/integration/test_handshake.py` | `tests/integration/runtime_handshake/test_handshake.py` | move | runtime handshake integration | explicit integration domain | migrate to `yai-core` socket discovery helper |
-| `tests/integration/workspace_runtime_contract_v1.sh` | `tests/integration/workspace_lifecycle/workspace_runtime_contract_v1.sh` | move | workspace lifecycle integration | explicit integration domain | remove yai-cli dependency once parity complete |
+| `tests/integration/workspace_runtime_contract_v1.sh` | `tests/integration/workspace_lifecycle/workspace_runtime_contract_v1.sh` | move | workspace lifecycle integration | explicit integration domain | remove cli dependency once parity complete |
 | `tools/dev/resolve-yai-bin.sh` | prefer `build/bin/{yai,yai-core}` | merge/update | tool runtime resolution | new binary topology authoritative | drop legacy artifact fallback later |
 | `tools/bin/yai-verify` | infra wrapper with `YAI_CORE_ROOT` | keep | verify orchestration | already topology-agnostic | none |
 | `tools/bin/yai-docs-trace-check` | infra wrapper with `YAI_CORE_ROOT` | keep | docs trace verification | already topology-agnostic | none |

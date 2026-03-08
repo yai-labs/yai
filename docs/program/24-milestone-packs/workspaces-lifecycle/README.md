@@ -10,9 +10,9 @@ adrs:
   - docs/program/22-adr/ADR-011-contract-baseline-lock.md
   - docs/program/22-adr/ADR-012-audit-convergence-gates.md
 spec_anchors:
-  - deps/yai-law/contracts/control/schema/control_plane.v1.json
-  - deps/yai-law/contracts/protocol/include/auth.h
-  - deps/yai-law/contracts/vault/include/yai_vault_abi.h
+  - deps/law/contracts/control/schema/control_plane.v1.json
+  - deps/law/contracts/protocol/include/auth.h
+  - deps/law/contracts/vault/include/yai_vault_abi.h
 issues:
   - "N/A: workspace-lifecycle track index"
 ---
@@ -25,7 +25,7 @@ References:
 - Runbook: `docs/program/23-runbooks/workspaces-lifecycle.md`
 - Plan: `docs/program/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
 - Matrix: `docs/program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
-- Claims: `yai-ops/evidence/validation/audits/claims/infra-grammar.v0.1.json`
+- Claims: `ops/evidence/validation/audits/claims/infra-grammar.v0.1.json`
 
 Policy:
 - Mandatory command outcomes are required for closure.

@@ -2,15 +2,15 @@
 
 `yai` keeps stable command entrypoints here, but canonical implementation is externalized.
 
-- Primary target: `yai-infra/tools/bin/*`
-- Extended targets: `yai-infra/tools/release/*`, `yai-infra/tools/bundle/*`
+- Primary target: `infra/tools/bin/*`
+- Extended targets: `infra/tools/release/*`, `infra/tools/bundle/*`
 
 Behavior:
 - Wrappers are hard-delegated.
 - If canonical target is missing, wrapper exits with `2` and prints missing path.
 
 Runtime wrappers kept in this repo:
-- `yai-law-sync`
+- `law-sync`
 - `yai-specs-sync` (deprecated alias)
 - `yai-version`
 - `yai-bundle`
@@ -25,4 +25,4 @@ Runtime wrappers kept in this repo:
 
 Notes:
 - Wrappers are infra-first.
-- `yai-changelog-check` keeps a CI fallback to local validator when `yai-infra` is not checked out by the runner.
+- `yai-changelog-check` keeps a CI fallback to local validator when `infra` is not checked out by the runner.

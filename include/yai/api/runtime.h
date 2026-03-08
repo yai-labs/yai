@@ -9,4 +9,14 @@ typedef enum yai_runtime_mode
   YAI_RUNTIME_MODE_DIAGNOSTIC
 } yai_runtime_mode_t;
 
+/* Canonical runtime/operator entrypoint for this repository. */
 #define YAI_BIN_MAIN "yai"
+
+/* Canonical runtime ingress socket relative to $HOME. */
+#define YAI_RUNTIME_INGRESS_SOCKET_REL ".yai/run/control.sock"
+
+/* Canonical runtime pidfile relative to $HOME. */
+#define YAI_RUNTIME_PIDFILE_REL ".yai/run/runtime.pid"
+
+/* Optional absolute override for runtime ingress resolution. */
+#define YAI_RUNTIME_INGRESS_ENV "YAI_RUNTIME_INGRESS"

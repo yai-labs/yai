@@ -42,4 +42,4 @@ This matrix is intentionally initial and domain-level; file-level refinement wil
 | `mind/include/mind_transport.h` | `include/yai/brain/transport.h` | `rename` | brain transport belongs to brain domain | transitional wrapper |
 | `mind/include/mind_error.h` | `include/yai/support/errors.h` | `merge` | cross-cutting error taxonomy belongs to support | transitional include bridge used |
 | `mind/include/mind_types.h` | `include/yai/brain/*` + `include/yai/support/*` | `split` | mixed public types require domain ownership separation | gradual extraction |
-| `runtime-protocol/include/*` | `include/yai/protocol/*` | `move`/`merge` | protocol layer is foundation owner | currently bridged to yai-law protocol headers |
+| `runtime-protocol/include/*` | `include/yai/protocol/*` | `move`/`merge` | protocol layer is foundation owner | currently bridged to law protocol headers |

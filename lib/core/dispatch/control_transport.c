@@ -7,6 +7,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <errno.h>
+#include <stddef.h>
 
 /* ---------------------------
    Internal helpers
@@ -48,24 +49,37 @@ static int write_all(int fd, const void *buf, size_t n) {
 ---------------------------- */
 int yai_control_listen_at(const char *path) {
     struct sockaddr_un addr;
+    int path_len = 0;
     memset(&addr, 0, sizeof(addr));
 
+    if (!path || !path[0]) return YAI_CTL_ERR_BIND;
     addr.sun_family = AF_UNIX;
     strncpy(addr.sun_path, path, sizeof(addr.sun_path) - 1);
+    addr.sun_path[sizeof(addr.sun_path) - 1] = '\0';
+    path_len = (int)strlen(addr.sun_path);
+    if (path_len <= 0 || path_len >= (int)sizeof(addr.sun_path)) {
+        errno = ENAMETOOLONG;
+        return YAI_CTL_ERR_BIND;
+    }
 
     int fd = socket(AF_UNIX, SOCK_STREAM, 0);
     if (fd < 0) return YAI_CTL_ERR_SOCKET;
 
     unlink(path); // cleanup previous socket
 
-    if (bind(fd, (struct sockaddr *)&addr, sizeof(addr)) < 0) {
-        close(fd);
-        return YAI_CTL_ERR_BIND;
+    {
+        socklen_t addr_len = (socklen_t)(offsetof(struct sockaddr_un, sun_path) + path_len + 1);
+        if (bind(fd, (struct sockaddr *)&addr, addr_len) < 0) {
+            perror("yai: control bind failed");
+            close(fd);
+            return YAI_CTL_ERR_BIND;
+        }
     }
 
     chmod(path, 0600); // restrict access
 
     if (listen(fd, YAI_CONTROL_BACKLOG) < 0) {
+        perror("yai: control listen failed");
         close(fd);
         return YAI_CTL_ERR_LISTEN;
     }

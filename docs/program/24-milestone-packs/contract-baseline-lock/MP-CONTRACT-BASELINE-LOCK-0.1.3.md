@@ -7,9 +7,9 @@ adrs:
   - docs/program/22-adr/ADR-011-contract-baseline-lock.md
   - docs/program/22-adr/ADR-012-audit-convergence-gates.md
 spec_anchors:
-  - deps/yai-law/foundation/invariants/I-002-determinism.md
-  - deps/yai-law/foundation/invariants/I-003-governance.md
-  - deps/yai-law/foundation/invariants/I-006-external-effect-boundary.md
+  - deps/law/foundation/invariants/I-002-determinism.md
+  - deps/law/foundation/invariants/I-003-governance.md
+  - deps/law/foundation/invariants/I-006-external-effect-boundary.md
 claims:
   - C-AUTHORITY-SURFACE-RUNTIME
   - C-EVIDENCE-PACK-REPRODUCIBLE
@@ -34,8 +34,8 @@ issues:
 - ADR: `docs/program/22-adr/ADR-011-contract-baseline-lock.md`
 - ADR: `docs/program/22-adr/ADR-012-audit-convergence-gates.md`
 - Proposal: `docs/program/21-rfc/RFC-005-formal-coverage-roadmap.md`
-- Evidence plans: `yai-ops/evidence/qualification/test-plans/hardfail.md`
-- Claims registry: `yai-ops/evidence/validation/audits/claims/infra-grammar.v0.1.json`
+- Evidence plans: `ops/evidence/qualification/test-plans/hardfail.md`
+- Claims registry: `ops/evidence/validation/audits/claims/infra-grammar.v0.1.json`
 
 Objective:
 - Require formal/core verification updates whenever authority or envelope contracts change.
@@ -48,7 +48,7 @@ Contract Delta:
 
 Repo Split:
 - `yai`: core verification artifacts updated for contract deltas.
-- `yai-cli`: contract/vector verification updated when CLI surface is impacted.
+- `cli`: contract/vector verification updated when CLI surface is impacted.
 
 Evidence Plan (minimum):
 - Positive cases:
@@ -81,7 +81,7 @@ Definition of Done:
 
 - Evidence bundle: `docs/program/24-milestone-packs/contract-baseline-lock/evidence/wave0-2026-02-21/`
 - `tools/bin/yai-proof-check` -> `PASS` (`exit=0`) via `07-proof-check-public.*`
-- `tools/bin/yai-proof-check --manifest yai-ops/evidence/validation/proof/.private/PP-FOUNDATION-0001/pp-foundation-0001.manifest.v1.json` -> `FAIL` (`exit=2`) via `08-proof-check-private-hardfail.*`
+- `tools/bin/yai-proof-check --manifest ops/evidence/validation/proof/.private/PP-FOUNDATION-0001/pp-foundation-0001.manifest.v1.json` -> `FAIL` (`exit=2`) via `08-proof-check-private-hardfail.*`
 - `tools/bin/yai-verify core` -> `PASS` (`exit=0`)
 - `tools/bin/yai-verify law-kernel` -> `PASS` (`exit=0`)
 

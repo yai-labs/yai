@@ -9,7 +9,7 @@
 #include <sys/un.h>
 #include <unistd.h>
 
-static const char *g_default_socket = "/tmp/yai-mind.sock";
+static const char *g_default_socket = "/tmp/yai-brain.sock";
 
 static int write_all(int fd, const char *buf, size_t len)
 {

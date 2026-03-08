@@ -4,7 +4,7 @@
 
 This document governs the `yai` runtime implementation repository.
 
-- Normative contracts: `deps/yai-law/`
+- Normative contracts: `deps/law/`
 - Runtime implementation: `boot/`, `root/`, `kernel/`, `engine/`, `runtime/`, `mind/`
 
 If implementation and contracts diverge, implementation must be corrected.
@@ -12,17 +12,17 @@ If implementation and contracts diverge, implementation must be corrected.
 ## Spec-First Process
 
 For contract-facing changes:
-1. Update contracts in `yai-law` first.
+1. Update contracts in `law` first.
 2. Merge/approve contract change.
 3. Align runtime implementation in `yai`.
 4. Verify with CI and runtime checks.
 
 ## Documentation Residency
 
-Governance/program docs are externalized to `yai-infra`:
-- `../yai-infra/docs/governance/yai/`
-- `../yai-infra/docs/governance/`
-- `../yai-infra/migration/`
+Governance/program docs are externalized to `infra`:
+- `../infra/docs/governance/yai/`
+- `../infra/docs/governance/`
+- `../infra/migration/`
 
 `yai/docs/` is runtime-first and minimal.
 

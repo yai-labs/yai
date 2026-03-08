@@ -3,7 +3,7 @@ id: AUDIT-CONVERGENCE-MATRIX-v0.1.0
 status: draft
 owner: governance
 updated: 2026-03-05
-registry: yai-ops/evidence/validation/audits/claims/infra-grammar.v0.1.json
+registry: ops/evidence/validation/audits/claims/infra-grammar.v0.1.json
 plan: docs/program/audit-convergence/EXECUTION-PLAN-v0.1.0.md
 ---
 
@@ -60,7 +60,7 @@ Do not report synthetic percentages disconnected from claim status.
 ## 5) Gate A D1 Progress Snapshot (2026-02-24)
 - Qualification harness (`QT-0.1-001-SC102`) executed for `D1-digital/egress-v1` with `baseline-deny`.
 - Run command:
-  - `cd yai-ops/evidence/qualification/QT-0.1-001-SC102`
+  - `cd ops/evidence/qualification/QT-0.1-001-SC102`
   - `DOMAIN_PACK_ID=D1-digital/egress-v1 BASELINE_ID=baseline-deny ./run/run-three.sh`
 - Result: `3/3 PASS` (simulation harness) with indexed evidence per run.
-- Canonical finding: `yai-ops/evidence/validation/audits/findings/FINDING-001-sc102-d1-harness-runset.md`
+- Canonical finding: `ops/evidence/validation/audits/findings/FINDING-001-sc102-d1-harness-runset.md`

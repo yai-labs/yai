@@ -4,29 +4,40 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 source "$ROOT/tools/dev/resolve-yai-bin.sh"
 BIN="$(yai_resolve_bin "$ROOT" || true)"
-WS_DEFAULT="${YAI_WS_DEFAULT:-dev}"
+INGRESS_SOCK="${YAI_RUNTIME_INGRESS:-$HOME/.yai/run/control.sock}"
+PID_FILE="${HOME}/.yai/run/runtime.pid"
 
 echo "=== YAI Doctor"
-echo "root: ${ROOT}"
+echo "repo: ${ROOT}"
 
 echo "=== Binaries"
-DIST_BIN="$ROOT/dist/bin"
-
-for f in "${DIST_BIN}/yai-boot" "${DIST_BIN}/yai-kernel" "${DIST_BIN}/yai-engine" "${DIST_BIN}/yai-root-server"; do
-  [[ -x "${f}" ]] && echo "OK: ${f}" || echo "MISSING: ${f}"
-done
+[[ -x "$ROOT/build/bin/yai" ]] && echo "OK: $ROOT/build/bin/yai" || echo "MISSING: $ROOT/build/bin/yai"
 
 echo "=== yai in PATH"
 if [[ -n "$BIN" ]]; then
   echo "OK: $(command -v yai)"
-  if "$BIN" status --help >/dev/null 2>&1; then
-    "$BIN" status --ws "${WS_DEFAULT}" || true
-  else
-    echo "SKIP: yai status command not available in current CLI"
-  fi
-  "$BIN" monitor --help >/dev/null 2>&1 && echo "OK: monitor command available"
+  "$BIN" --help >/dev/null || true
 else
   echo "MISSING: yai not found in PATH"
+fi
+
+echo "=== Runtime ingress"
+if [[ -S "$INGRESS_SOCK" ]]; then
+  echo "OK: socket $INGRESS_SOCK"
+else
+  echo "MISSING: socket $INGRESS_SOCK"
+fi
+
+echo "=== Runtime pidfile"
+if [[ -f "$PID_FILE" ]]; then
+  PID="$(cat "$PID_FILE" 2>/dev/null || true)"
+  if [[ -n "$PID" ]] && kill -0 "$PID" 2>/dev/null; then
+    echo "OK: pidfile $PID_FILE (pid=$PID alive)"
+  else
+    echo "STALE: pidfile $PID_FILE"
+  fi
+else
+  echo "MISSING: pidfile $PID_FILE"
 fi
 
 echo "=== Duplicate yai binaries"

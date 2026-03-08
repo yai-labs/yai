@@ -6,10 +6,10 @@ phase: "0.1.0 — Pin Baseline Freeze"
 adrs:
   - docs/program/22-adr/ADR-011-contract-baseline-lock.md
 spec_anchors:
-  - deps/yai-law/foundation/invariants/I-001-traceability.md
-  - deps/yai-law/foundation/invariants/I-002-determinism.md
-  - deps/yai-law/foundation/invariants/I-003-governance.md
-  - deps/yai-law/foundation/invariants/I-006-external-effect-boundary.md
+  - deps/law/foundation/invariants/I-001-traceability.md
+  - deps/law/foundation/invariants/I-002-determinism.md
+  - deps/law/foundation/invariants/I-003-governance.md
+  - deps/law/foundation/invariants/I-006-external-effect-boundary.md
 issues:
   - "https://github.com/yai-labs/yai/issues/125"
 issue_reason: "Phase tracked by governance runbook issue #125."
@@ -27,10 +27,10 @@ issue_reason: "Phase tracked by governance runbook issue #125."
 
 - ADR: `docs/program/22-adr/ADR-011-contract-baseline-lock.md`
 - Proposal: `docs/program/21-rfc/RFC-004-contract-baseline-lock-and-pin-policy.md`
-- Evidence plans: `yai-ops/evidence/qualification/test-plans/contract-baseline-lock-prep.md`, `yai-ops/evidence/qualification/test-plans/hardfail.md`
+- Evidence plans: `ops/evidence/qualification/test-plans/contract-baseline-lock-prep.md`, `ops/evidence/qualification/test-plans/hardfail.md`
 
 Objective:
-- Ensure `yai` and `yai-cli` consume the same audited `yai-law` baseline commit.
+- Ensure `yai` and `cli` consume the same audited `law` baseline commit.
 
 Contract Delta:
 - Envelope: none.
@@ -39,8 +39,8 @@ Contract Delta:
 - Logging: pin-check execution evidence must be recorded.
 
 Repo Split:
-- `yai`: align `deps/yai-law` ref to audited baseline.
-- `yai-cli`: align `deps/yai-law` ref to the same audited baseline.
+- `yai`: align `deps/law` ref to audited baseline.
+- `cli`: align `deps/law` ref to the same audited baseline.
 
 Evidence Plan (minimum):
 - Positive cases:
@@ -56,7 +56,7 @@ Compatibility Classification:
 - Upgrade path: existing conformant clients remain valid.
 
 Definition of Done:
-- [x] `yai` and `yai-cli` point to the same `deps/yai-law` baseline commit.
+- [x] `yai` and `cli` point to the same `deps/law` baseline commit.
 - [x] Pin check evidence is attached and reviewable.
 - [x] No contract drift is introduced by this phase.
 - [x] Phase closure references ADR-011 and runbook anchor.

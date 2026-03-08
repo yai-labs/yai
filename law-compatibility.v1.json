@@ -1,13 +1,13 @@
 {
-  "authority_repo": "yai-law",
+  "authority_repo": "law",
   "compatibility_mode": "strong-baseline-lock",
   "supported_baselines": [
-    "deps/yai-law@502e618c7d8c1dee6b172b4ce31e718777e0833f"
+    "deps/law@502e618c7d8c1dee6b172b4ce31e718777e0833f"
   ],
-  "tested_baseline": "deps/yai-law@502e618c7d8c1dee6b172b4ce31e718777e0833f",
+  "tested_baseline": "deps/law@502e618c7d8c1dee6b172b4ce31e718777e0833f",
   "notes": [
     "yai is the integration/runtime authority.",
-    "law baseline is locked in deps/yai-law.",
+    "law baseline is locked in deps/law.",
     "baseline updates require explicit review."
   ]
 }

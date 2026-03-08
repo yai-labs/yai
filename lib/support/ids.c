@@ -1,4 +1,4 @@
-// kernel/src/core/ids.c  (fix: serve cap per non rischiare overflow)
+// Runtime ID helper.
 #include <yai/core/vault.h>
 #include <stdio.h>
 

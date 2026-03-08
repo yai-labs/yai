@@ -37,7 +37,7 @@ int yai_init_system_shm(void)
 
     rc = yai_format_system_shm_name(name, sizeof(name));
     if (rc != 0) {
-        fprintf(stderr, "[YAI-BOOT] failed to format system shm name (rc=%d)\n", rc);
+        fprintf(stderr, "[YAI-RUNTIME] failed to format system shm name (rc=%d)\n", rc);
         return -1;
     }
 
@@ -45,12 +45,12 @@ int yai_init_system_shm(void)
 
     fd = shm_open(name, O_CREAT | O_RDWR, 0666);
     if (fd < 0) {
-        perror("[YAI-BOOT] shm_open failed");
+        perror("[YAI-RUNTIME] shm_open failed");
         return -2;
     }
 
     if (ftruncate(fd, (off_t)sizeof(yai_vault_t)) != 0) {
-        perror("[YAI-BOOT] ftruncate failed");
+        perror("[YAI-RUNTIME] ftruncate failed");
         close(fd);
         return -3;
     }
@@ -62,7 +62,7 @@ int yai_init_system_shm(void)
                  fd,
                  0);
     if (vault == MAP_FAILED) {
-        perror("[YAI-BOOT] mmap failed");
+        perror("[YAI-RUNTIME] mmap failed");
         close(fd);
         return -4;
     }
@@ -72,31 +72,16 @@ int yai_init_system_shm(void)
     vault->workspace_id[MAX_WS_ID - 1] = '\0';
 
     if (munmap(vault, sizeof(yai_vault_t)) != 0) {
-        perror("[YAI-BOOT] munmap failed");
+        perror("[YAI-RUNTIME] munmap failed");
         close(fd);
         return -5;
     }
 
     if (close(fd) != 0) {
-        perror("[YAI-BOOT] close failed");
+        perror("[YAI-RUNTIME] close failed");
         return -6;
     }
 
-    printf("[YAI-BOOT] system shared memory initialized (%s)\n", name);
-    return 0;
-}
-
-
-int yai_spawn_planes(int *root_pid, int *kernel_pid, const char *argv0)
-{
-    (void)argv0;
-
-    if (root_pid) {
-        *root_pid = 0;
-    }
-    if (kernel_pid) {
-        *kernel_pid = 0;
-    }
-
+    printf("[YAI-RUNTIME] system shared memory initialized (%s)\n", name);
     return 0;
 }

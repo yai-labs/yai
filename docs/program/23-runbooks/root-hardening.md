@@ -25,12 +25,12 @@ related:
     - docs/program/22-adr/ADR-008-connection-lifecycle.md
     - docs/program/22-adr/ADR-012-audit-convergence-gates.md
   specs:
-    - deps/yai-law/contracts/protocol/include/transport.h
-    - deps/yai-law/contracts/protocol/include/auth.h
-    - deps/yai-law/contracts/protocol/include/errors.h
-    - deps/yai-law/contracts/protocol/include/yai_protocol_ids.h
+    - deps/law/contracts/protocol/include/transport.h
+    - deps/law/contracts/protocol/include/auth.h
+    - deps/law/contracts/protocol/include/errors.h
+    - deps/law/contracts/protocol/include/yai_protocol_ids.h
   test_plans:
-    - yai-ops/evidence/qualification/test-plans/hardfail.md
+    - ops/evidence/qualification/test-plans/hardfail.md
   tools:
     - tools/bin/yai-verify
     - tools/bin/yai-gate
@@ -62,16 +62,16 @@ Harden the Root control plane as a deterministic, auditable, envelope-only bound
 
 ## 2) Preconditions
 
-- [x] `deps/yai-law` protocol headers are present and treated as source-of-truth.
+- [x] `deps/law` protocol headers are present and treated as source-of-truth.
 - [x] Kernel boots and accepts control connections.
 - [x] A baseline end-to-end ping command is already green.
 
 ## 3) Inputs
 
 - Protocol anchors:
-  - `deps/yai-law/contracts/protocol/include/transport.h`
-  - `deps/yai-law/contracts/protocol/include/auth.h`
-  - `deps/yai-law/contracts/protocol/include/errors.h`
+  - `deps/law/contracts/protocol/include/transport.h`
+  - `deps/law/contracts/protocol/include/auth.h`
+  - `deps/law/contracts/protocol/include/errors.h`
 - Tooling:
   - `tools/bin/yai-verify`
   - `tools/bin/yai-gate`
@@ -83,7 +83,7 @@ This runbook phase sequence is Wave 2 under:
 - `docs/program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
 
 Claims source of truth:
-- `yai-ops/evidence/validation/audits/claims/infra-grammar.v0.1.json`
+- `ops/evidence/validation/audits/claims/infra-grammar.v0.1.json`
 
 Wave tracking issue:
 - `https://github.com/yai-labs/yai/issues/191`
@@ -103,7 +103,7 @@ Mandatory closure policy:
 
 ### Hard prerequisites (must be true before starting)
 
-- `deps/yai-law` headers are present and treated as source-of-truth
+- `deps/law` headers are present and treated as source-of-truth
 - Kernel can boot and accept control connections
 - A baseline "ping" command exists end-to-end (CLI → Root → Kernel → response)
 
@@ -184,10 +184,10 @@ Each phase must compile, run, and be verifiable before moving on.
 
 READ FIRST:
 
-- `deps/yai-law/contracts/protocol/include/transport.h`
-- `deps/yai-law/contracts/protocol/include/yai_protocol_ids.h`
-- `deps/yai-law/contracts/protocol/include/errors.h`
-- `deps/yai-law/contracts/protocol/include/auth.h`
+- `deps/law/contracts/protocol/include/transport.h`
+- `deps/law/contracts/protocol/include/yai_protocol_ids.h`
+- `deps/law/contracts/protocol/include/errors.h`
+- `deps/law/contracts/protocol/include/auth.h`
 
 CODE (likely):
 
@@ -258,7 +258,7 @@ Kernel side used for comparison:
 
 Specs:
 
-- `deps/yai-law/contracts/protocol/include/transport.h`
+- `deps/law/contracts/protocol/include/transport.h`
 
 #### Rules
 
@@ -330,8 +330,8 @@ Protocol negative tests (at least):
 
 Specs:
 
-- `deps/yai-law/contracts/protocol/include/auth.h`
-- `deps/yai-law/contracts/protocol/include/roles.h` (if present)
+- `deps/law/contracts/protocol/include/auth.h`
+- `deps/law/contracts/protocol/include/roles.h` (if present)
 
 Root:
 
@@ -388,7 +388,7 @@ Minimum expectation:
 
 Specs (single source of truth):
 
-- `deps/yai-law/contracts/protocol/include/transport.h` (static inline validator)
+- `deps/law/contracts/protocol/include/transport.h` (static inline validator)
 
 Consumers:
 
@@ -434,7 +434,7 @@ Consumers:
 
 Specs:
 
-- `deps/yai-law/contracts/protocol/include/transport.h`
+- `deps/law/contracts/protocol/include/transport.h`
 
 #### Rules
 
@@ -495,7 +495,7 @@ In 0.1.x we move tests under tools. If `tools/` still exists, it is temporary.
 
 Preferred:
 
-- `yai-infra/tools/python/yai_tools/` (canonical protocol/governance tooling)
+- `infra/tools/python/yai_tools/` (canonical protocol/governance tooling)
 - `tools/bin/yai-suite` or `tools/bin/yai-gate`
 
 Temporary compatibility:
@@ -598,9 +598,9 @@ If a phase causes regressions:
   - `docs/program/22-adr/ADR-006-unified-rpc.md`
   - `docs/program/22-adr/ADR-008-connection-lifecycle.md`
 - Law/spec refs:
-  - `deps/yai-law/contracts/protocol/include/transport.h`
-  - `deps/yai-law/contracts/protocol/include/auth.h`
-  - `deps/yai-law/contracts/protocol/include/errors.h`
+  - `deps/law/contracts/protocol/include/transport.h`
+  - `deps/law/contracts/protocol/include/auth.h`
+  - `deps/law/contracts/protocol/include/errors.h`
 - MPs:
   - `docs/program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`
   - `docs/program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md`

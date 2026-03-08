@@ -14,8 +14,8 @@
 - Compatibility: <A|B|C>
 
 ## Twin PR links (required)
-- yai-cli PR: <link or N/A>
-- yai-law PR: <link or N/A>
+- cli PR: <link or N/A>
+- law PR: <link or N/A>
 
 ## Objective
 <single objective across repos>

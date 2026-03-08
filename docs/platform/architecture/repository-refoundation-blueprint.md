@@ -8,7 +8,7 @@ The target state is a runtime-first C repository with:
 - modular semantic domains (`core`, `exec`, `brain`),
 - explicit cross-cutting foundations (`protocol`, `platform`, `support`).
 
-This document is intentionally prescriptive for packaging and dependency direction, while preserving normative invariants owned by `yai-law`.
+This document is intentionally prescriptive for packaging and dependency direction, while preserving normative invariants owned by `law`.
 
 ## Why the old topology is no longer the right packaging model
 The legacy top-level domains (`boot/`, `root/`, `kernel/`, `engine/`, `mind/`, `runtime-protocol/`) reflect historical implementation phases, not the runtime model we now operate.

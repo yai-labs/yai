@@ -7,9 +7,9 @@ adrs:
   - docs/program/22-adr/ADR-011-contract-baseline-lock.md
   - docs/program/22-adr/ADR-012-audit-convergence-gates.md
 spec_anchors:
-  - deps/yai-law/foundation/invariants/I-001-traceability.md
-  - deps/yai-law/foundation/invariants/I-002-determinism.md
-  - deps/yai-law/foundation/invariants/I-003-governance.md
+  - deps/law/foundation/invariants/I-001-traceability.md
+  - deps/law/foundation/invariants/I-002-determinism.md
+  - deps/law/foundation/invariants/I-003-governance.md
 claims:
   - C-SPEC-FIRST-PINNED
   - C-EVIDENCE-PACK-REPRODUCIBLE
@@ -34,8 +34,8 @@ issues:
 - ADR: `docs/program/22-adr/ADR-011-contract-baseline-lock.md`
 - ADR: `docs/program/22-adr/ADR-012-audit-convergence-gates.md`
 - Proposal: `docs/program/21-rfc/RFC-002-unified-rpc-and-cli-contract.md`
-- Evidence plans: `yai-ops/evidence/qualification/test-plans/hardfail.md`
-- Claims registry: `yai-ops/evidence/validation/audits/claims/infra-grammar.v0.1.json`
+- Evidence plans: `ops/evidence/qualification/test-plans/hardfail.md`
+- Claims registry: `ops/evidence/validation/audits/claims/infra-grammar.v0.1.json`
 - Convergence matrix: `docs/program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
 
 Objective:
@@ -49,7 +49,7 @@ Contract Delta:
 
 Repo Split:
 - `yai`: parity checks over contract-facing code paths and pins.
-- `yai-cli`: parity checks over contract-facing commands and vectors.
+- `cli`: parity checks over contract-facing commands and vectors.
 
 Evidence Plan (minimum):
 - Positive cases:

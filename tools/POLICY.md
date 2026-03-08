@@ -2,7 +2,7 @@
 
 Non-negotiable:
 1) No non-core governance logic in `yai` wrappers.
-2) Non-core tooling delegates to canonical `yai-infra` targets.
+2) Non-core tooling delegates to canonical `infra` targets.
 3) Tools must never open/merge PRs automatically.
 
 Runtime note:

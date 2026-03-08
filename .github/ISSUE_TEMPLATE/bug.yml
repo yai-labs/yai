@@ -86,7 +86,7 @@ body:
     attributes:
       label: Law/Specs references (if relevant)
       placeholder: |
-        deps/yai-law/specs/protocol/include/transport.h
-        deps/yai-law/contracts/invariants/I-002-determinism.md
+        deps/law/specs/protocol/include/transport.h
+        deps/law/contracts/invariants/I-002-determinism.md
     validations:
       required: false

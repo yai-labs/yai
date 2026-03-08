@@ -2,6 +2,7 @@
 #define _POSIX_C_SOURCE 200809L
 
 #include <yai/core/dispatch.h>
+#include <yai/core/session.h>
 #include <yai/core/workspace.h>
 
 #include <errors.h>
@@ -10,13 +11,8 @@
 #include <yai_protocol_ids.h>
 
 #include <errno.h>
-#include <limits.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
-#include <sys/socket.h>
-#include <sys/un.h>
-#include <unistd.h>
 
 static int send_response(int fd,
                          const yai_rpc_envelope_t *req,
@@ -74,102 +70,7 @@ static int is_valid_role(uint16_t role)
            role == YAI_ROLE_SYSTEM;
 }
 
-static int connect_kernel_socket(void)
-{
-    const char *home = getenv("HOME");
-    if (!home || !home[0])
-        home = "/tmp";
-
-    char path[PATH_MAX];
-    snprintf(path, sizeof(path), "%s/.yai/run/kernel/control.sock", home);
-
-    int fd = socket(AF_UNIX, SOCK_STREAM, 0);
-    if (fd < 0)
-        return -1;
-
-    struct sockaddr_un addr;
-    memset(&addr, 0, sizeof(addr));
-    addr.sun_family = AF_UNIX;
-    snprintf(addr.sun_path, sizeof(addr.sun_path), "%s", path);
-
-    if (connect(fd, (struct sockaddr *)&addr, sizeof(addr)) < 0)
-    {
-        close(fd);
-        return -1;
-    }
-
-    return fd;
-}
-
-static int forward_to_kernel_and_relay(int client_fd,
-                                       const yai_rpc_envelope_t *env,
-                                       const void *payload,
-                                       uint32_t payload_len)
-{
-    int kfd = connect_kernel_socket();
-    if (kfd < 0)
-    {
-        (void)send_error_response(client_fd, env, YAI_E_INTERNAL_ERROR, "kernel_connect_failed");
-        return -1;
-    }
-
-    yai_rpc_envelope_t kreq;
-    memset(&kreq, 0, sizeof(kreq));
-    kreq.magic = YAI_FRAME_MAGIC;
-    kreq.version = YAI_PROTOCOL_IDS_VERSION;
-    kreq.command_id = YAI_CMD_HANDSHAKE;
-    kreq.payload_len = (uint32_t)sizeof(yai_handshake_req_t);
-    snprintf(kreq.ws_id, sizeof(kreq.ws_id), "%s", env->ws_id);
-    snprintf(kreq.trace_id, sizeof(kreq.trace_id), "%s", env->trace_id);
-    kreq.role = env->role;
-    kreq.arming = env->arming;
-    kreq.checksum = 0;
-
-    yai_handshake_req_t hs;
-    memset(&hs, 0, sizeof(hs));
-    hs.client_version = YAI_PROTOCOL_IDS_VERSION;
-    hs.capabilities_requested = 0;
-    snprintf(hs.client_name, sizeof(hs.client_name), "yai-root");
-
-    if (yai_control_write_frame(kfd, &kreq, &hs) != 0)
-    {
-        close(kfd);
-        (void)send_error_response(client_fd, env, YAI_E_INTERNAL_ERROR, "kernel_handshake_write_failed");
-        return -1;
-    }
-
-    yai_rpc_envelope_t kresp;
-    char kpayload[YAI_MAX_PAYLOAD];
-    ssize_t hr = yai_control_read_frame(kfd, &kresp, kpayload, sizeof(kpayload));
-    if (hr < 0 || kresp.command_id != YAI_CMD_HANDSHAKE)
-    {
-        close(kfd);
-        (void)send_error_response(client_fd, env, YAI_E_INTERNAL_ERROR, "kernel_handshake_read_failed");
-        return -1;
-    }
-
-    if (yai_control_write_frame(kfd, env, payload_len ? payload : NULL) != 0)
-    {
-        close(kfd);
-        (void)send_error_response(client_fd, env, YAI_E_INTERNAL_ERROR, "kernel_write_failed");
-        return -1;
-    }
-
-    yai_rpc_envelope_t resp;
-    char resp_payload[YAI_MAX_PAYLOAD];
-    ssize_t r = yai_control_read_frame(kfd, &resp, resp_payload, sizeof(resp_payload));
-    close(kfd);
-
-    if (r < 0)
-    {
-        (void)send_error_response(client_fd, env, YAI_E_INTERNAL_ERROR, "kernel_read_failed");
-        return -1;
-    }
-
-    return yai_control_write_frame(client_fd, &resp, resp_payload);
-}
-
-int root_dispatch_frame(
+int yai_dispatch_frame(
     int client_fd,
     const yai_rpc_envelope_t *env,
     const char *payload,
@@ -223,5 +124,9 @@ int root_dispatch_frame(
         return send_error_response(client_fd, env, YAI_E_ARMING_REQUIRED, "arming_required");
     }
 
-    return forward_to_kernel_and_relay(client_fd, env, payload, (uint32_t)payload_len);
+    if (payload_len < 0)
+        return send_error_response(client_fd, env, YAI_E_PAYLOAD_TOO_BIG, "bad_payload");
+
+    yai_session_dispatch(client_fd, env, payload_len > 0 ? payload : "");
+    return 0;
 }

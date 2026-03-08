@@ -8,9 +8,9 @@ adrs:
   - docs/program/22-adr/ADR-008-connection-lifecycle.md
   - docs/program/22-adr/ADR-006-unified-rpc.md
 spec_anchors:
-  - deps/yai-law/contracts/protocol/include/transport.h
-  - deps/yai-law/contracts/control/schema/exec_reply.v1.json
-  - deps/yai-law/contracts/control/schema/authority.v1.json
+  - deps/law/contracts/protocol/include/transport.h
+  - deps/law/contracts/control/schema/exec_reply.v1.json
+  - deps/law/contracts/control/schema/authority.v1.json
 claims:
   - C-KERNEL-HARD-BOUNDARY-CORE
   - C-CONTEXT-PROPAGATION

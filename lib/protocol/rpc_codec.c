@@ -29,7 +29,7 @@ int yai_rpc_write_error_v1(int fd,
                "{\"type\":\"error\",\"error\":{\"code\":\"%s\",\"msg\":\"%s\",\"actor\":\"%s\"}}",
                code ? code : "UNKNOWN",
                msg ? msg : "unknown error",
-               actor ? actor : "kernel");
+               actor ? actor : "runtime");
   if (n <= 0 || (size_t)n >= sizeof(payload)) {
     return -1;
   }

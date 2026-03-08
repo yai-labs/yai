@@ -2,6 +2,7 @@
 
 #include <yai/core/session.h>
 #include "yai_session_internal.h"
+#include <yai/api/runtime.h>
 #include <yai/core/workspace.h>
 
 #include <transport.h>
@@ -83,7 +84,10 @@ bool yai_ws_build_paths(yai_workspace_t *ws, const char *ws_id)
              "%s/lock", ws->run_dir);
 
     snprintf(ws->pid_file, MAX_PATH_LEN,
-             "%s/kernel.pid", ws->run_dir);
+             "%s/runtime.pid", ws->run_dir);
+
+    snprintf(ws->ingress_sock, MAX_PATH_LEN,
+             "%s/%s", home, YAI_RUNTIME_INGRESS_SOCKET_REL);
 
     ws->created_at = (long)now;
     ws->updated_at = (long)now;
@@ -200,8 +204,8 @@ void yai_session_dispatch(
                 "error",
                 "BAD_ARGS",
                 "ws_required",
-                "yai.kernel.unknown",
-                "kernel",
+                "yai.runtime.unknown",
+                "runtime",
                 NULL);
         } else {
             yai_session_send_binary_response(
@@ -224,8 +228,8 @@ void yai_session_dispatch(
                 "error",
                 "RUNTIME_NOT_READY",
                 "session_denied",
-                "yai.kernel.unknown",
-                "kernel",
+                "yai.runtime.unknown",
+                "runtime",
                 NULL);
         } else {
             yai_session_send_binary_response(
@@ -262,4 +266,59 @@ void yai_session_dispatch(
 
 cleanup:
     yai_session_release(s);
+}
+
+int yai_session_handle_control_call(
+    int client_fd,
+    const yai_rpc_envelope_t *env,
+    const char *payload,
+    const yai_session_t *s)
+{
+    char data[256];
+
+    if (!env || !s)
+        return -1;
+
+    if (!payload || !payload[0])
+    {
+        yai_session_send_exec_reply(
+            client_fd,
+            env,
+            "error",
+            "BAD_ARGS",
+            "payload_required",
+            "yai.runtime.control_call",
+            "runtime",
+            NULL);
+        return -1;
+    }
+
+    if (snprintf(data,
+                 sizeof(data),
+                 "{\"ws_id\":\"%s\",\"session_id\":%u}",
+                 s->ws.ws_id,
+                 s->session_id) <= 0)
+    {
+        yai_session_send_exec_reply(
+            client_fd,
+            env,
+            "error",
+            "INTERNAL_ERROR",
+            "response_encode_failed",
+            "yai.runtime.control_call",
+            "runtime",
+            NULL);
+        return -1;
+    }
+
+    yai_session_send_exec_reply(
+        client_fd,
+        env,
+        "ok",
+        "OK",
+        "accepted",
+        "yai.runtime.control_call",
+        "runtime",
+        data);
+    return 0;
 }

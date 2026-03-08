@@ -50,7 +50,7 @@ body:
       description: One PR per line (core/docs/specs/cli as needed).
       placeholder: |
         https://github.com/yai-labs/yai/pull/126
-        https://github.com/yai-labs/yai-cli/pull/99
+        https://github.com/yai-labs/cli/pull/99
     validations:
       required: true
 

@@ -1,7 +1,7 @@
 #include <yai/exec/transport_client.h>
+#include <yai/api/runtime.h>
 
 #include "protocol.h"
-#include "transport.h"
 #include "yai_protocol_ids.h"
 
 #include <errno.h>
@@ -70,46 +70,56 @@ void yai_make_trace_id(char out[36])
     snprintf(out, 36, "tr-%lx-%u", (unsigned long)time(NULL), counter++);
 }
 
-static int build_root_socket_path(char *out, size_t cap)
+int yai_runtime_ingress_path(char *out, uint32_t out_cap)
 {
+    size_t cap = (size_t)out_cap;
     const char *home = getenv("HOME");
+    const char *override = getenv(YAI_RUNTIME_INGRESS_ENV);
 
-    if (!out || cap == 0 || !home || !home[0])
+    if (!out || cap == 0)
     {
         return -1;
     }
 
-    if (snprintf(out, cap, "%s/.yai/run/root/control.sock", home) >= (int)cap)
+    if (override && override[0])
     {
-        return -2;
+        if (snprintf(out, cap, "%s", override) >= (int)cap)
+        {
+            return -2;
+        }
+        return 0;
+    }
+
+    if (!home || !home[0])
+    {
+        return -3;
+    }
+
+    if (snprintf(out, cap, "%s/%s", home, YAI_RUNTIME_INGRESS_SOCKET_REL) >= (int)cap)
+    {
+        return -4;
     }
 
     return 0;
 }
 
-int yai_rpc_connect(yai_rpc_client_t *client, const char *ws_id)
+int yai_rpc_connect_at_ingress(yai_rpc_client_t *client, const char *ws_id, const char *socket_path)
 {
-    char socket_path[256];
     struct sockaddr_un addr;
     socklen_t addr_len = 0;
     int fd = -1;
 
-    if (!client)
+    if (!client || !socket_path || !socket_path[0])
     {
         return -1;
     }
 
     memset(client, 0, sizeof(*client));
 
-    if (build_root_socket_path(socket_path, sizeof(socket_path)) != 0)
-    {
-        return -2;
-    }
-
     fd = socket(AF_UNIX, SOCK_STREAM, 0);
     if (fd < 0)
     {
-        return -3;
+        return -2;
     }
 
     memset(&addr, 0, sizeof(addr));
@@ -123,7 +133,7 @@ int yai_rpc_connect(yai_rpc_client_t *client, const char *ws_id)
     if (connect(fd, (struct sockaddr *)&addr, addr_len) < 0)
     {
         close(fd);
-        return -4;
+        return -3;
     }
 
     client->fd = fd;
@@ -138,6 +148,17 @@ int yai_rpc_connect(yai_rpc_client_t *client, const char *ws_id)
     client->connected = true;
 
     return 0;
+}
+
+int yai_rpc_connect(yai_rpc_client_t *client, const char *ws_id)
+{
+    char socket_path[256];
+
+    if (yai_runtime_ingress_path(socket_path, (uint32_t)sizeof(socket_path)) != 0)
+    {
+        return -1;
+    }
+    return yai_rpc_connect_at_ingress(client, ws_id, socket_path);
 }
 
 int yai_rpc_call(yai_rpc_client_t *client,
@@ -163,7 +184,7 @@ int yai_rpc_call(yai_rpc_client_t *client,
 
     memset(&request, 0, sizeof(request));
     request.magic = YAI_FRAME_MAGIC;
-    request.version = YAI_PROTOCOL_VERSION;
+    request.version = YAI_PROTOCOL_IDS_VERSION;
     request.command_id = command_id;
     request.payload_len = payload_len;
 
@@ -194,7 +215,7 @@ int yai_rpc_call(yai_rpc_client_t *client,
         return -6;
     }
 
-    if (response.version != YAI_PROTOCOL_VERSION)
+    if (response.version != YAI_PROTOCOL_IDS_VERSION)
     {
         return -7;
     }
@@ -233,7 +254,7 @@ int yai_rpc_handshake(yai_rpc_client_t *client, uint32_t capabilities)
     }
 
     memset(&request, 0, sizeof(request));
-    request.client_version = YAI_PROTOCOL_VERSION;
+    request.client_version = YAI_PROTOCOL_IDS_VERSION;
     request.capabilities_requested = capabilities;
     strncpy(request.client_name, "yai", sizeof(request.client_name) - 1);
     request.client_name[sizeof(request.client_name) - 1] = '\0';

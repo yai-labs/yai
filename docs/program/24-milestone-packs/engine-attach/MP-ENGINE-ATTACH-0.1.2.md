@@ -8,9 +8,9 @@ adrs:
   - docs/program/22-adr/ADR-009-engine-attachment.md
   - docs/program/22-adr/ADR-012-audit-convergence-gates.md
 spec_anchors:
-  - deps/yai-law/contracts/protocol/include/auth.h
-  - deps/yai-law/contracts/control/schema/authority.v1.json
-  - deps/yai-law/registry/commands.v1.json
+  - deps/law/contracts/protocol/include/auth.h
+  - deps/law/contracts/control/schema/authority.v1.json
+  - deps/law/registry/commands.v1.json
 claims:
   - C-DOMAIN-COVERAGE-RESOURCE
   - C-CONTEXT-PROPAGATION

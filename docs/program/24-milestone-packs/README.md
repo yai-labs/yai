@@ -6,7 +6,7 @@ phase: index
 adrs:
   - docs/program/22-adr/ADR-011-contract-baseline-lock.md
 spec_anchors:
-  - deps/yai-law/SPEC_MAP.md
+  - deps/law/SPEC_MAP.md
 issues:
   - "N/A: index-only overview document"
 ---

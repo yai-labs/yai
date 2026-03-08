@@ -19,7 +19,7 @@ related:
   adr: []
   specs: []
   test_plans:
-    - yai-ops/evidence/qualification/test-plans/hardfail.md
+    - ops/evidence/qualification/test-plans/hardfail.md
   tools:
     - tools/bin/yai-gate
     - tools/bin/yai-suite
@@ -42,7 +42,7 @@ Define the operational control loop for running, validating, and recovering the 
 ## 3) Inputs
 - Runtime commands: `yai up/down/status`
 - Gate commands: `tools/bin/yai-gate`, `tools/bin/yai-suite`, `tools/bin/yai-verify`
-- Test plans: `yai-ops/evidence/qualification/test-plans/hardfail.md`
+- Test plans: `ops/evidence/qualification/test-plans/hardfail.md`
 
 ## 4) Procedure
 1. Start from clean runtime state.
@@ -67,7 +67,7 @@ Define the operational control loop for running, validating, and recovering the 
 - Re-run core checks before resuming.
 
 ## 8) References
-- Test plans: `yai-ops/evidence/qualification/test-plans/hardfail.md`
+- Test plans: `ops/evidence/qualification/test-plans/hardfail.md`
 - Ops scripts: `tools/bin/yai-gate list`
 
 ## Traceability

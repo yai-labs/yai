@@ -1,25 +1,25 @@
 # User Guide Pointers
 
 This folder contains editorial pointers for navigation.
-Normative law/specs remain in `deps/yai-law/**`.
+Normative law/specs remain in `deps/law/**`.
 
 ## Canonical spec pointers
 
 - Engine cortex:
-  - `deps/yai-law/runtime/engine/schema/engine_cortex.v1.json`
+  - `deps/law/runtime/engine/schema/engine_cortex.v1.json`
 - Control/events:
-  - `deps/yai-law/contracts/control/schema/control_plane.v1.json`
+  - `deps/law/contracts/control/schema/control_plane.v1.json`
 - Graph:
-  - `deps/yai-law/runtime/mind/graph/notes/GRAPH_V1.md`
-  - `deps/yai-law/runtime/mind/graph/schema/graph.v1.json`
+  - `deps/law/runtime/mind/graph/notes/GRAPH_V1.md`
+  - `deps/law/runtime/mind/graph/schema/graph.v1.json`
 - Providers trust:
-  - `deps/yai-law/contracts/providers/notes/PROVIDERS_TRUST.md`
-  - `deps/yai-law/contracts/providers/schema/providers.v1.json`
+  - `deps/law/contracts/providers/notes/PROVIDERS_TRUST.md`
+  - `deps/law/contracts/providers/schema/providers.v1.json`
 - RPC/CLI surface:
-  - `deps/yai-law/contracts/cli/notes/CLI_PUBLIC_INTERFACE.md`
-  - `deps/yai-law/registry/commands.v1.json`
+  - `deps/law/contracts/cli/notes/CLI_PUBLIC_INTERFACE.md`
+  - `deps/law/registry/commands.v1.json`
 
 ## Boundary rule
 
-If a change modifies contract/spec behavior, it belongs upstream in `yai-law`.
+If a change modifies contract/spec behavior, it belongs upstream in `law`.
 This folder should remain explanatory/navigation-only.

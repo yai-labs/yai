@@ -23,8 +23,8 @@ static int build_exec_reply_v1(
         return -1;
 
     const char *trace = (trace_id && trace_id[0]) ? trace_id : "";
-    const char *cmd = (command_id && command_id[0]) ? command_id : "yai.kernel.unknown";
-    const char *plane = (target_plane && target_plane[0]) ? target_plane : "kernel";
+    const char *cmd = (command_id && command_id[0]) ? command_id : "yai.runtime.unknown";
+    const char *plane = (target_plane && target_plane[0]) ? target_plane : "runtime";
     const char *st = (status && status[0]) ? status : "error";
     const char *cd = (code && code[0]) ? code : "INTERNAL_ERROR";
     const char *rs = (reason && reason[0]) ? reason : "internal_error";
@@ -116,8 +116,8 @@ void yai_session_send_exec_reply(
             req,
             req ? req->command_id : YAI_CMD_CONTROL_CALL,
             "{\"type\":\"yai.exec.reply.v1\",\"status\":\"error\",\"code\":\"INTERNAL_ERROR\","
-            "\"reason\":\"response_encode_failed\",\"command_id\":\"yai.kernel.unknown\","
-            "\"target_plane\":\"kernel\",\"trace_id\":\"\"}");
+            "\"reason\":\"response_encode_failed\",\"command_id\":\"yai.runtime.unknown\","
+            "\"target_plane\":\"runtime\",\"trace_id\":\"\"}");
         return;
     }
 

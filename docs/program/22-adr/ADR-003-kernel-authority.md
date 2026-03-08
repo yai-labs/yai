@@ -8,12 +8,12 @@ applies_to:
   phase: 0.1.2
   anchor: "#phase-0-1-2-envelope-authority-gate"
 law_refs:
-  - deps/yai-law/foundation/axioms/A-002-authority.md
-  - deps/yai-law/foundation/invariants/I-003-governance.md
-  - deps/yai-law/foundation/invariants/I-006-external-effect-boundary.md
-  - deps/yai-law/foundation/boundaries/L1-kernel.md
-  - deps/yai-law/contracts/protocol/include/auth.h
-  - deps/yai-law/contracts/protocol/include/session.h
+  - deps/law/foundation/axioms/A-002-authority.md
+  - deps/law/foundation/invariants/I-003-governance.md
+  - deps/law/foundation/invariants/I-006-external-effect-boundary.md
+  - deps/law/foundation/boundaries/L1-kernel.md
+  - deps/law/contracts/protocol/include/auth.h
+  - deps/law/contracts/protocol/include/session.h
 ---
 # ADR-003 - Kernel as Authority Plane (L1)
 

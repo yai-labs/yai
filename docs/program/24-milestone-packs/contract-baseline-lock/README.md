@@ -6,7 +6,7 @@ phase: index
 adrs:
   - docs/program/22-adr/ADR-011-contract-baseline-lock.md
 spec_anchors:
-  - deps/yai-law/foundation/invariants/I-001-traceability.md
+  - deps/law/foundation/invariants/I-001-traceability.md
 issues:
   - "N/A: track index document"
 ---
@@ -27,7 +27,7 @@ Phase sequence (Wave 0 closure status):
 
 Notes:
 - Create each MP only when the corresponding runbook phase is delivered.
-- Keep cross-repo evidence pointers explicit (`yai-law`, `yai`, `yai-cli`).
+- Keep cross-repo evidence pointers explicit (`law`, `yai`, `cli`).
 
 
 Closure status:

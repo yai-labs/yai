@@ -8,9 +8,9 @@ adrs:
   - docs/program/22-adr/ADR-011-contract-baseline-lock.md
   - docs/program/22-adr/ADR-012-audit-convergence-gates.md
 spec_anchors:
-  - deps/yai-law/contracts/vault/include/yai_vault_abi.h
-  - deps/yai-law/contracts/vault/schema/vault_abi.json
-  - deps/yai-law/registry/commands.v1.json
+  - deps/law/contracts/vault/include/yai_vault_abi.h
+  - deps/law/contracts/vault/schema/vault_abi.json
+  - deps/law/registry/commands.v1.json
 claims:
   - C-DOMAIN-COVERAGE-STORAGE
   - C-KERNEL-HARD-BOUNDARY-CORE

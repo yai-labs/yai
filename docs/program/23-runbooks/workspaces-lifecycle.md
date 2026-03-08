@@ -1,4 +1,7 @@
 ---
+
+> Historical topology note: references to root/kernel/engine in this runbook are legacy semantic aliases.
+> Current ingress/runtime truth is single-binary `yai` via `~/.yai/run/control.sock`.
 id: RB-WORKSPACES-LIFECYCLE
 title: Workspace Lifecycle
 status: draft
@@ -23,15 +26,15 @@ adr_refs:
 
 related:
   specs:
-    - deps/yai-law/contracts/control/schema/control_plane.v1.json
-    - deps/yai-law/contracts/control/schema/control_call.v1.json
-    - deps/yai-law/contracts/control/schema/exec_reply.v1.json
-    - deps/yai-law/contracts/protocol/include/transport.h
-    - deps/yai-law/contracts/protocol/include/auth.h
-    - deps/yai-law/contracts/protocol/include/yai_protocol_ids.h
-    - deps/yai-law/registry/commands.v1.json
-    - deps/yai-law/contracts/vault/include/yai_vault_abi.h
-    - deps/yai-law/contracts/vault/schema/vault_abi.json
+    - deps/law/contracts/control/schema/control_plane.v1.json
+    - deps/law/contracts/control/schema/control_call.v1.json
+    - deps/law/contracts/control/schema/exec_reply.v1.json
+    - deps/law/contracts/protocol/include/transport.h
+    - deps/law/contracts/protocol/include/auth.h
+    - deps/law/contracts/protocol/include/yai_protocol_ids.h
+    - deps/law/registry/commands.v1.json
+    - deps/law/contracts/vault/include/yai_vault_abi.h
+    - deps/law/contracts/vault/schema/vault_abi.json
   runbooks:
     - docs/program/23-runbooks/root-hardening.md
     - docs/program/23-runbooks/engine-attach.md
@@ -40,8 +43,8 @@ related:
   maps:
     - docs/program/23-runbooks/workspaces-lifecycle-command-map.v2.md
   evidence:
-    - yai-ops/evidence/qualification/
-    - yai-ops/evidence/validation/
+    - ops/evidence/qualification/
+    - ops/evidence/validation/
 
 tools:
   - tools/bin/yai-check-pins
@@ -150,7 +153,7 @@ For high-assurance or hostile multi-tenant scenarios, workspace governance shoul
 3. Lifecycle transitions are deterministic and auditable.
 4. No direct CLI/SDK storage mutation path.
 5. Evidence is required for lifecycle actions touching effects-out.
-6. Contract authority stays pinned to `deps/yai-law`; local semantic drift is non-compliant.
+6. Contract authority stays pinned to `deps/law`; local semantic drift is non-compliant.
 
 ## 6) Architecture and role boundaries
 
@@ -253,7 +256,7 @@ Objective:
 - close lifecycle scope with reproducible evidence and traceability links.
 
 Exit criteria:
-- phase evidence linked in `yai-ops`;
+- phase evidence linked in `ops`;
 - convergence matrix pointers resolve;
 - no mandatory check in `SKIP` state.
 
@@ -315,5 +318,5 @@ Preferred control order:
 3. only documented fallback mechanisms
 
 See:
-- `yai-law/docs/pointers/RUNTIME_RESOLUTION.pointer.md`
-- `yai-sdk/docs/RUNTIME_RESOLUTION_POLICY.md`
+- `law/docs/pointers/RUNTIME_RESOLUTION.pointer.md`
+- `sdk/docs/RUNTIME_RESOLUTION_POLICY.md`

@@ -6,7 +6,7 @@ updated: 2026-03-05
 related:
   - docs/program/audit-convergence/EXECUTION-PLAN-v0.1.0.md
   - docs/program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md
-  - yai-ops/evidence/validation/audits/claims/infra-grammar.v0.1.json
+  - ops/evidence/validation/audits/claims/infra-grammar.v0.1.json
   - docs/program/audit-convergence/SC102-GATEA-WORKPLAN-v0.1.0.md
   - docs/program/22-adr/ADR-012-audit-convergence-gates.md
 issue:
@@ -22,7 +22,7 @@ Infra Grammar audit green on all domains, including Mind.
 Canonical artifacts:
 - Execution plan: `docs/program/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
 - Convergence matrix: `docs/program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
-- Claims registry: `yai-ops/evidence/validation/audits/claims/infra-grammar.v0.1.json`
+- Claims registry: `ops/evidence/validation/audits/claims/infra-grammar.v0.1.json`
 - Active Gate A workplan: `docs/program/audit-convergence/SC102-GATEA-WORKPLAN-v0.1.0.md`
 - Governance ADR: `docs/program/22-adr/ADR-012-audit-convergence-gates.md`
 
@@ -31,4 +31,4 @@ Rules:
 - SKIP on mandatory evidence checks is FAIL.
 - Gate A (Core) and Gate B (Mind) are distinct closure checkpoints.
 - In-flight runbook execution is not rewritten mid-phase; re-centering happens at phase boundaries.
-- Consumer `deps/` trees are read-only for this program; normative changes are made only in `yai-law` branches.
+- Consumer `deps/` trees are read-only for this program; normative changes are made only in `law` branches.

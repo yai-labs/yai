@@ -20,10 +20,10 @@ related:
     - docs/program/22-adr/ADR-005-mind-proposer.md
     - docs/program/22-adr/ADR-008-connection-lifecycle.md
   specs:
-    - deps/yai-law/contracts/protocol/include/transport.h
-    - deps/yai-law/contracts/protocol/include/auth.h
+    - deps/law/contracts/protocol/include/transport.h
+    - deps/law/contracts/protocol/include/auth.h
   test_plans:
-    - yai-ops/evidence/qualification/test-plans/hardfail.md
+    - ops/evidence/qualification/test-plans/hardfail.md
   tools:
     - tools/bin/yai-verify
     - tools/bin/yai-gate
@@ -35,7 +35,8 @@ tags:
 
 # RB-MIND-REDIS-STM — Mind Redis STM
 
-> Historical note: this runbook still contains Rust-era implementation path references and is not the canonical build/runtime guide for Mind. Use `mind/docs/README.md` and `docs/developer/guides/dev-guide/mind-build.md` for active C runtime commands.
+> Historical note: this runbook contains pre-cutover topology references (`root/kernel/engine/mind`).
+> It is not authoritative for current runtime ingress. Canonical flow is `cli -> sdk -> yai` through `~/.yai/run/control.sock`.
 
 ## 1) Purpose
 Define a tenant-safe, deterministic short-term memory model for Mind using Redis with strict `ws_id` scoping and governed attach workflow.
@@ -70,7 +71,7 @@ Execute the staged sequence in this document: lifecycle contract, Redis topology
 ## 8) References
 - ADR: `docs/program/22-adr/ADR-005-mind-proposer.md`
 - Runbooks: `docs/program/23-runbooks/engine-attach.md`, `docs/program/23-runbooks/data-plane.md`
-- Test plans: `yai-ops/evidence/qualification/test-plans/hardfail.md`
+- Test plans: `ops/evidence/qualification/test-plans/hardfail.md`
 
 ## Traceability
 - ADR refs:
@@ -229,7 +230,7 @@ P:meta:schema_version         # string, NO TTL
 
 ### Files to create
 
-**Spec:** `deps/yai-law/storage/REDIS_KEYSPACE.md`
+**Spec:** `deps/law/storage/REDIS_KEYSPACE.md`
 
 Document the canonical keyspace with examples and TTL policies.
 
@@ -309,7 +310,7 @@ impl KernelClient {
     
     pub fn handshake(&mut self) -> Result<(), String> {
         // Implement YAI_CMD_HANDSHAKE protocol
-        // (use protocol from deps/yai-law/contracts/protocol/include/transport.h)
+        // (use protocol from deps/law/contracts/protocol/include/transport.h)
         todo!("Implement handshake")
     }
     

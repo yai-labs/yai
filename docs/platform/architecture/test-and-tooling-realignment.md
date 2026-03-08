@@ -46,7 +46,7 @@ Updated tooling behavior:
 - `tools/dev/resolve-yai-bin.sh` now resolves `build/bin/yai` and `build/bin/yai-core` as primary.
 - legacy artifact fallbacks are explicit and marked compatibility-only.
 
-Verified tooling wrappers remain aligned to `yai-infra` canonical tools:
+Verified tooling wrappers remain aligned to `infra` canonical tools:
 - `tools/bin/yai-verify`
 - `tools/bin/yai-suite`
 - `tools/bin/yai-docs-trace-check`
@@ -54,7 +54,7 @@ Verified tooling wrappers remain aligned to `yai-infra` canonical tools:
 
 ## Compatibility Temporary Items
 - `tests/domains/*` directories still exist as deprecated placeholders.
-- workspace lifecycle contract script still supports external `yai-cli` binary for command-surface compatibility.
+- workspace lifecycle contract script still supports external `cli` binary for command-surface compatibility.
 - `mind_legacy_tests` suffix retained for current brain unit subset until final naming cleanup.
 
 ## Deferred

@@ -6,7 +6,7 @@ phase: index
 adrs:
   - docs/program/22-adr/ADR-012-audit-convergence-gates.md
 spec_anchors:
-  - deps/yai-law/contracts/protocol/include/transport.h
+  - deps/law/contracts/protocol/include/transport.h
 issues:
   - "191"
 ---
@@ -18,7 +18,7 @@ This track is Wave 2 of audit convergence and binds Root hardening phases to cla
 References:
 - Plan: `docs/program/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
 - Matrix: `docs/program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
-- Claims: `yai-ops/evidence/validation/audits/claims/infra-grammar.v0.1.json`
+- Claims: `ops/evidence/validation/audits/claims/infra-grammar.v0.1.json`
 - Runbook: `docs/program/23-runbooks/root-hardening.md`
 
 Policy:

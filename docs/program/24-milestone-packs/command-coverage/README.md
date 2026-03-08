@@ -7,7 +7,7 @@ adrs:
   - docs/program/22-adr/ADR-006-unified-rpc.md
   - docs/program/22-adr/ADR-012-audit-convergence-gates.md
 spec_anchors:
-  - deps/yai-law/registry/commands.v1.json
+  - deps/law/registry/commands.v1.json
 issues:
   - "N/A: command-coverage index"
 ---

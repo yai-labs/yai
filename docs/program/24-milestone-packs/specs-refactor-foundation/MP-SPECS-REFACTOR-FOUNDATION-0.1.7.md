@@ -7,8 +7,8 @@ adrs:
   - docs/program/22-adr/ADR-011-contract-baseline-lock.md
   - docs/program/22-adr/ADR-012-audit-convergence-gates.md
 spec_anchors:
-  - deps/yai-law/SPEC_MAP.md
-  - deps/yai-law/REGISTRY.md
+  - deps/law/SPEC_MAP.md
+  - deps/law/REGISTRY.md
 claims:
   - C-AUTHORITY-SURFACE-RUNTIME
   - C-EVIDENCE-PACK-REPRODUCIBLE
@@ -17,7 +17,7 @@ evidence_commands_required:
   - tools/bin/yai-docs-trace-check --all
 issues:
   - "142"
-  - "yai-law#9"
+  - "law#9"
 ---
 
 # MP-SPECS-REFACTOR-FOUNDATION-0.1.7
@@ -26,13 +26,13 @@ issues:
 - Runbook: `docs/program/23-runbooks/specs-refactor-foundation.md`
 - Phase: `0.1.7 — Formal Binding & Traceability Matrix`
 - Wave issue: `#142`
-- Specs branch issue: `yai-law#9`
+- Specs branch issue: `law#9`
 - Status: `draft`
 
 ## Links
 - Plan: `docs/program/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
 - Matrix: `docs/program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
-- Claims registry: `yai-ops/evidence/validation/audits/claims/infra-grammar.v0.1.json`
+- Claims registry: `ops/evidence/validation/audits/claims/infra-grammar.v0.1.json`
 - ADR: `docs/program/22-adr/ADR-011-contract-baseline-lock.md`
 - ADR: `docs/program/22-adr/ADR-012-audit-convergence-gates.md`
 
@@ -48,7 +48,7 @@ Closure policy: mandatory `SKIP` is treated as `FAIL`.
 ## Definition of Done
 - [ ] Phase claim IDs are covered by evidence.
 - [ ] Mandatory commands are recorded with exit codes and outputs.
-- [ ] Cross-repo references are traceable (yai <-> yai-law <-> yai-cli).
+- [ ] Cross-repo references are traceable (yai <-> law <-> cli).
 - [ ] MP links from runbook phase and matrix remain valid.
 
 ## Execution Snapshot

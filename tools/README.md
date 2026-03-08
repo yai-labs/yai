@@ -4,7 +4,7 @@ This directory contains stable entrypoints only.
 
 Rules:
 - `tools/bin/*` are stable wrappers.
-- Canonical governance/process tooling lives in `yai-infra/tools/`.
+- Canonical governance/process tooling lives in `infra/tools/`.
 - `yai` keeps only runtime-adjacent tooling required for local build checks.
 
 Use (runtime wrappers kept in yai):

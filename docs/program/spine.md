@@ -13,7 +13,7 @@ It answers:
 ## The spine (L0 → L8)
 
 ### L0 — Constitution (normative truth)
-**Lives in:** `yai-law/` (authoritative) and pinned into other repos via `deps/yai-law/`
+**Lives in:** `law/` (authoritative) and pinned into other repos via `deps/law/`
 
 - `contracts/*` (axioms, invariants, boundaries)
 - `specs/*` (protocols, schemas, roles, errors)
@@ -91,7 +91,7 @@ If you’re solo you *can* reduce Issues, but **never skip the MP** (that’s yo
 ---
 
 ### L7 — Evidence & tests (proof-of-work)
-**Lives in:** `yai-ops/evidence/qualification/test-plans/*` + `tools/*` + CI artifacts/logs
+**Lives in:** `ops/evidence/qualification/test-plans/*` + `tools/*` + CI artifacts/logs
 
 Test plans define what “proved” means.  
 Tools + CI runs provide repeatable evidence (ideally artifacted, non-skip for TRL claims).
@@ -99,7 +99,7 @@ Tools + CI runs provide repeatable evidence (ideally artifacted, non-skip for TR
 ---
 
 ### L8 — Proof Packs (public/internal credibility bundles)
-**Lives in:** `yai-ops/evidence/validation/proof/*` when published, `yai-ops/evidence/validation/proof/.private/*` for local drafts
+**Lives in:** `ops/evidence/validation/proof/*` when published, `ops/evidence/validation/proof/.private/*` for local drafts
 
 A Proof Pack bundles:
 - evidence index
@@ -111,8 +111,8 @@ A Proof Pack bundles:
 - storyline (onepager + deck outline)
 
 **Pointer-only policy (recommended):**
-- `yai-cli` and `yai-mind` contain a small pointer file to the canonical proof pack in `yai`
-- `yai-law` does **not** host proof packs (it hosts the contract)
+- `cli` and `yai-mind` contain a small pointer file to the canonical proof pack in `yai`
+- `law` does **not** host proof packs (it hosts the contract)
 
 ---
 
@@ -121,7 +121,7 @@ A Proof Pack bundles:
 Every artifact must point **up** and **down** where applicable:
 
 ### ADR must reference
-- **Upstream:** L0 (`yai-law/...`) via `law_refs`
+- **Upstream:** L0 (`law/...`) via `law_refs`
 - **Downstream:** 1+ runbooks (recommended; can be “TBD” early, but track it)
 
 ### Runbook must reference

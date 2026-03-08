@@ -19,10 +19,10 @@ related:
     - docs/program/22-adr/ADR-011-contract-baseline-lock.md
     - docs/program/22-adr/ADR-012-audit-convergence-gates.md
   specs:
-    - deps/yai-law/SPEC_MAP.md
-    - deps/yai-law/REGISTRY.md
-    - deps/yai-law/VERSIONING.md
-    - deps/yai-law/COMPATIBILITY.md
+    - deps/law/SPEC_MAP.md
+    - deps/law/REGISTRY.md
+    - deps/law/VERSIONING.md
+    - deps/law/COMPATIBILITY.md
   test_plans: []
   tools:
     - tools/bin/yai-docs-trace-check
@@ -33,7 +33,7 @@ related:
 # RB-SPECS-REFACTOR-FOUNDATION - Pre-Hardening Specs Program
 
 ## 0) Intent
-This runbook establishes a deterministic, enterprise-grade foundation for **`yai-law`** and its consumers (**`yai`**, **`yai-cli`**) *before* runtime hardening tracks (Root Hardening, Workspace Lifecycle, Engine Attach, Data Plane).
+This runbook establishes a deterministic, enterprise-grade foundation for **`law`** and its consumers (**`yai`**, **`cli`**) *before* runtime hardening tracks (Root Hardening, Workspace Lifecycle, Engine Attach, Data Plane).
 
 It turns the "specs refactor" from a vague refactor into **phased, gated work** with:
 - strict *mapping-only* steps first (no semantic drift),
@@ -70,24 +70,24 @@ A *closure artifact* for a phase: what changed, proof evidence, links to issues/
 ## 2) Preconditions (hard rules)
 - [x] `RB-CONTRACT-BASELINE-LOCK` has been executed and stabilized (ADR-011 baseline available).
 - [x] Cross-repo pin governance is active and runnable (e.g. `tools/bin/yai-check-pins` in the consumer).
-- [x] No direct development is performed inside consumer vendored specs trees (e.g. `yai/deps/yai-law`).
-- [x] Any change in `yai-law` that affects consumers is coordinated via pins/tags and verified in consumers.
+- [x] No direct development is performed inside consumer vendored specs trees (e.g. `yai/deps/law`).
+- [x] Any change in `law` that affects consumers is coordinated via pins/tags and verified in consumers.
 
 ---
 
 ## 3) Inputs / Repos
 ### Repos involved
-- `yai-law` (canonical specs)
+- `law` (canonical specs)
 - `yai` (consumer/runtime)
-- `yai-cli` (consumer)
+- `cli` (consumer)
 
-### Canonical references (in `yai-law`)
+### Canonical references (in `law`)
 - `SPEC_MAP.md`, `REGISTRY.md`, `VERSIONING.md`, `COMPATIBILITY.md`
 - `contracts/**`, `specs/**`, `vectors/**`, `formal/**`, `compliance/**`
 
 ### Consumer checks (examples)
 - `yai` build + verify scripts
-- `yai-cli` build + tests/vectors
+- `cli` build + tests/vectors
 
 ### 3.1 Audit Convergence Binding (Wave 1)
 This runbook is Wave 1 under:
@@ -95,11 +95,11 @@ This runbook is Wave 1 under:
 - `docs/program/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
 
 Claims source of truth:
-- `yai-ops/evidence/validation/audits/claims/infra-grammar.v0.1.json`
+- `ops/evidence/validation/audits/claims/infra-grammar.v0.1.json`
 
 Wave tracking:
 - `https://github.com/yai-labs/yai/issues/142`
-- `https://github.com/yai-labs/yai-law/issues/9`
+- `https://github.com/yai-labs/law/issues/9`
 
 Mandatory closure policy:
 - for mandatory evidence checks, `SKIP` is treated as `FAIL`.
@@ -120,8 +120,8 @@ Mandatory closure policy:
 
 ## 5) Working Model (how you execute without chaos)
 ### Repo-of-truth rule
-- `yai-law` is **source of truth** for specs/contracts/formal/vectors.
-- `yai` and `yai-cli` **consume pinned versions** (tag/commit) of `yai-law`.
+- `law` is **source of truth** for specs/contracts/formal/vectors.
+- `yai` and `cli` **consume pinned versions** (tag/commit) of `law`.
 
 ### Change Budget rule
 - Phases 0.1.0-0.1.2 are **structure/mapping/links only**.
@@ -220,7 +220,7 @@ A phase is "closed" only when:
 
 <a id="phase-0-1-3-consumer-yai"></a>
 ### 0.1.3 - Consumer-Ready Wiring in `yai`
-**Claim:** `yai` consumes `yai-law` deterministically under the new structure.  
+**Claim:** `yai` consumes `law` deterministically under the new structure.  
 **Scope:** pins/tags/commit refs, include paths, build wiring, verify scripts.  
 **Claim IDs:** `C-SPEC-FIRST-PINNED`, `C-EVIDENCE-PACK-REPRODUCIBLE`  
 **Mandatory evidence commands:**
@@ -245,21 +245,21 @@ A phase is "closed" only when:
 
 ---
 
-<a id="phase-0-1-4-consumer-yai-cli"></a>
-### 0.1.4 - Consumer-Ready Wiring in `yai-cli`
-**Claim:** `yai-cli` remains aligned and deterministic after specs mapping.  
+<a id="phase-0-1-4-consumer-cli"></a>
+### 0.1.4 - Consumer-Ready Wiring in `cli`
+**Claim:** `cli` remains aligned and deterministic after specs mapping.  
 **Scope:** pin, includes, references, vectors usage, CLI build/tests.  
 **Claim IDs:** `C-SPEC-FIRST-PINNED`, `C-EVIDENCE-PACK-REPRODUCIBLE`  
 **Mandatory evidence commands:**
 - `tools/bin/yai-check-pins`
 - `tools/bin/yai-proof-check`
 **Gate:**
-- `yai-cli` build/tests green,
+- `cli` build/tests green,
 - pin check green,
 - vectors/tests (if any) consistent.
 
 **Deliverables:**
-- consumer path changes in `yai-cli`,
+- consumer path changes in `cli`,
 - pin updates.
 
 **MP (planned):**
@@ -270,7 +270,7 @@ A phase is "closed" only when:
 <a id="phase-0-1-5-ci-guardrails"></a>
 ### 0.1.5 - CI Hard Guardrails (Enterprise)
 **Claim:** PRs are **non-mergable** if any required check fails; logs are readable; checks are separated.  
-**Scope:** `yai-law` CI and repo gates.
+**Scope:** `law` CI and repo gates.
 **Claim IDs:** `C-EVIDENCE-PACK-REPRODUCIBLE`, `C-SKIP-FAIL-MANDATORY`  
 **Mandatory evidence commands:**
 - `tools/bin/yai-docs-trace-check --all`
@@ -345,8 +345,8 @@ A phase is "closed" only when:
 - `tools/format/format_all.sh`
 - `tools/validate/validate_all.sh`
 - `tools/policy/check_stability.sh`
-- `yai-infra/tools/release/README.md`
-- `yai-infra/tools/release/bump_version.sh`
+- `infra/tools/release/README.md`
+- `infra/tools/release/bump_version.sh`
 - Makefile targets: `validate`, `format`, `format-check`, `policy`, `release-notes`
 
 **MP (planned):**
@@ -435,7 +435,7 @@ A phase is "closed" only when:
 > Commands differ slightly per repo. The point is: **each phase has a deterministic gate**.
 > Mandatory check closure semantics: `SKIP = FAIL`.
 
-### In `yai-law` (foundation gates)
+### In `law` (foundation gates)
 ```bash
 make ci
 make validate
@@ -445,7 +445,7 @@ make formal-coverage
 make tla-quick
 ```
 
-### In consumers (`yai`, `yai-cli`)
+### In consumers (`yai`, `cli`)
 
 ```bash
 # pin governance (example)
@@ -484,10 +484,10 @@ make verify
 
 ## 9) Rollback (safe rollback rules)
 
-- Roll back to last known good `yai-law` tag/commit in consumers.
+- Roll back to last known good `law` tag/commit in consumers.
 - Revert mapping commits within the current phase only (don't mix phases in one revert blob).
 - Re-run:
-  - CI in `yai-law`
+  - CI in `law`
   - pin checks and verify in consumers
   - then reopen the phase.
 
@@ -509,7 +509,7 @@ make verify
 ## 11) References
 
 - ADR: `docs/program/22-adr/ADR-011-contract-baseline-lock.md`
-- Specs: `deps/yai-law/SPEC_MAP.md`, `deps/yai-law/REGISTRY.md`
+- Specs: `deps/law/SPEC_MAP.md`, `deps/law/REGISTRY.md`
 - Planned MPs: `docs/program/24-milestone-packs/specs-refactor-foundation/*`
 
 
@@ -522,7 +522,7 @@ Closed phases:
 - `0.1.1` Pure Mapping (Move/Rename Only)
 - `0.1.2` Sanity Link & Pointer Health
 - `0.1.3` Consumer-Ready Wiring in `yai`
-- `0.1.4` Consumer-Ready Wiring in `yai-cli`
+- `0.1.4` Consumer-Ready Wiring in `cli`
 
 Deferred to next wave (explicitly open):
 - `0.1.5` CI Hard Guardrails

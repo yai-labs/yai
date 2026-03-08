@@ -19,10 +19,10 @@ related:
   milestone_packs:
     - docs/program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md
   specs:
-    - deps/yai-law/formal/traceability.v1.json
-    - deps/yai-law/formal/spec_map.md
-    - deps/yai-law/foundation/invariants/I-001-traceability.md
-    - deps/yai-law/foundation/invariants/I-007-compliance-context-required.md
+    - deps/law/formal/traceability.v1.json
+    - deps/law/formal/spec_map.md
+    - deps/law/foundation/invariants/I-001-traceability.md
+    - deps/law/foundation/invariants/I-007-compliance-context-required.md
 tags:
   - baseline
   - pin
@@ -40,7 +40,7 @@ Cross-repo updates can become inconsistent when pins are not updated in lockstep
 - Out of scope: Detailed runtime topology and per-command behavior.
 
 ## Proposed Change
-Define a formal baseline-lock policy with explicit pin responsibilities for `yai`, `yai-cli`, and `yai-law`, including required checks before milestone closure.
+Define a formal baseline-lock policy with explicit pin responsibilities for `yai`, `cli`, and `law`, including required checks before milestone closure.
 
 ## Options Compared
 - Option A: Strict lockstep pin policy with mandatory checks.
@@ -62,7 +62,7 @@ Define a formal baseline-lock policy with explicit pin responsibilities for `yai
 
 ## Traceability
 
-- Spec anchors (if any): `deps/yai-law/formal/traceability.v1.json`, `deps/yai-law/formal/spec_map.md`, `deps/yai-law/foundation/invariants/I-001-traceability.md`, `deps/yai-law/foundation/invariants/I-007-compliance-context-required.md`
+- Spec anchors (if any): `deps/law/formal/traceability.v1.json`, `deps/law/formal/spec_map.md`, `deps/law/foundation/invariants/I-001-traceability.md`, `deps/law/foundation/invariants/I-007-compliance-context-required.md`
 - Targets ADR: `docs/program/22-adr/ADR-011-contract-baseline-lock.md`
 - Downstream runbook: `docs/program/23-runbooks/root-hardening.md`
 - Downstream MP: `docs/program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`
@@ -70,4 +70,4 @@ Define a formal baseline-lock policy with explicit pin responsibilities for `yai
 ## References
 - `docs/program/spine.md`
 - `docs/program/22-adr/ADR-011-contract-baseline-lock.md`
-- `../yai-infra/tools/bin/yai-law-sync`
+- `../infra/tools/bin/law-sync`

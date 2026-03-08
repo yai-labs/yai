@@ -8,8 +8,8 @@ adrs:
   - docs/program/22-adr/ADR-010-boot-entrypoint.md
   - docs/program/22-adr/ADR-012-audit-convergence-gates.md
 spec_anchors:
-  - deps/yai-law/contracts/control/schema/control_plane.v1.json
-  - deps/yai-law/contracts/vault/include/yai_vault_abi.h
+  - deps/law/contracts/control/schema/control_plane.v1.json
+  - deps/law/contracts/vault/include/yai_vault_abi.h
 claims:
   - C-DOMAIN-COVERAGE-RESOURCE
   - C-KERNEL-HARD-BOUNDARY-CORE

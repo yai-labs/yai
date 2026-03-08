@@ -3,6 +3,7 @@
 # =========================================
 
 ROOT_DIR := $(abspath .)
+LAW_COMPAT_ROOT ?= $(ROOT_DIR)/deps/law
 
 BUILD_DIR ?= $(ROOT_DIR)/build
 BIN_DIR ?= $(BUILD_DIR)/bin
@@ -16,9 +17,9 @@ BIN_DIST ?= $(DIST_ROOT)/bin
 CC ?= cc
 CPPFLAGS ?= -I$(ROOT_DIR) -I$(ROOT_DIR)/include -I$(ROOT_DIR)/include/yai \
             -I$(ROOT_DIR)/lib/third_party/cjson \
-            -I$(ROOT_DIR)/deps/yai-law/contracts/protocol/include \
-            -I$(ROOT_DIR)/deps/yai-law/contracts/protocol/runtime/include \
-            -I$(ROOT_DIR)/deps/yai-law/contracts/vault/include
+            -I$(LAW_COMPAT_ROOT)/contracts/protocol/include \
+            -I$(LAW_COMPAT_ROOT)/contracts/protocol/runtime/include \
+            -I$(LAW_COMPAT_ROOT)/contracts/vault/include
 CFLAGS ?= -Wall -Wextra -std=c11 -O2
 LDFLAGS ?=
 LDLIBS ?= -lm
@@ -147,8 +148,8 @@ test-integration:
 	@tests/integration/core_exec/run_core_exec_smoke.sh
 	@tests/integration/core_brain/run_core_brain_smoke.sh
 	@tests/integration/core_brain/run_core_brain_c_tests.sh
-	@tests/integration/workspace_lifecycle/workspace_runtime_contract_v1.sh || true
-	@python3 tests/integration/runtime_handshake/test_handshake.py || true
+	@tests/integration/workspace_lifecycle/workspace_runtime_contract_v1.sh
+	@tests/integration/runtime_handshake/run_runtime_handshake_smoke.sh
 	@echo "[YAI] integration suites complete"
 
 test-e2e:
