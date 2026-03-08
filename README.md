@@ -11,7 +11,6 @@ This repository contains the primary implementation of YAI: runtime foundations,
 YAI operates inside a disciplined platform chain:
 
 `law` → `sdk` → `cli` → `yai` → `ops`
-
 Each layer carries constraints forward.  
 Law defines them. Interfaces expose them. YAI implements them. Operations verify them.
 
@@ -34,7 +33,6 @@ It does not own canonical law (`law`) or shared cross-repo governance tooling (`
 
 ```bash
 make yai
-make yai-core
 make dist
 ```
 
@@ -47,7 +45,6 @@ make verify
 
 Primary runtime entrypoints:
 - `build/bin/yai`
-- `build/bin/yai-core`
 
 Repository topology is authoritative under:
 - `cmd/`
