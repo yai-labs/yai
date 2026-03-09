@@ -17,6 +17,9 @@
 
 #define YAI_WS_JSON_IO_CAP 32768
 
+#define YAI_MANAGED_BEGIN "# BEGIN YAI MANAGED SHELL INTEGRATION"
+#define YAI_MANAGED_END   "# END YAI MANAGED SHELL INTEGRATION"
+
 static const char *yai_get_home(void)
 {
     const char *home = getenv("HOME");
@@ -102,6 +105,206 @@ static int mkdir_if_missing(const char *path, mode_t mode)
     if (stat(path, &st) == 0)
         return S_ISDIR(st.st_mode) ? 0 : -1;
     return mkdir(path, mode);
+}
+
+static int yai_file_read_all(const char *path, char *out, size_t out_cap)
+{
+    FILE *f;
+    size_t n;
+    if (!path || !out || out_cap < 2)
+        return -1;
+    f = fopen(path, "rb");
+    if (!f)
+        return -1;
+    n = fread(out, 1, out_cap - 1, f);
+    fclose(f);
+    out[n] = '\0';
+    return 0;
+}
+
+static int yai_file_write_all(const char *path, const char *content)
+{
+    FILE *f;
+    if (!path || !content)
+        return -1;
+    f = fopen(path, "wb");
+    if (!f)
+        return -1;
+    if (fwrite(content, 1, strlen(content), f) != strlen(content))
+    {
+        fclose(f);
+        return -1;
+    }
+    fclose(f);
+    return 0;
+}
+
+static void yai_remove_range(char *buf, char *from, char *to_after)
+{
+    size_t tail_len;
+    if (!buf || !from || !to_after || to_after < from)
+        return;
+    tail_len = strlen(to_after);
+    memmove(from, to_after, tail_len + 1);
+}
+
+static int yai_remove_block_in_file(const char *path, const char *begin, const char *end)
+{
+    char buf[YAI_WS_JSON_IO_CAP];
+    char *p, *q, *q_end;
+    int changed = 0;
+    if (!path || !begin || !end)
+        return -1;
+    if (yai_file_read_all(path, buf, sizeof(buf)) != 0)
+        return 0;
+    while ((p = strstr(buf, begin)) != NULL)
+    {
+        q = strstr(p, end);
+        if (!q)
+            break;
+        q_end = q + strlen(end);
+        if (*q_end == '\n')
+            q_end++;
+        yai_remove_range(buf, p, q_end);
+        changed = 1;
+    }
+    if (changed)
+        return yai_file_write_all(path, buf);
+    return 0;
+}
+
+static int yai_replace_managed_block(const char *path, const char *begin, const char *end, const char *block)
+{
+    char buf[YAI_WS_JSON_IO_CAP];
+    char out[YAI_WS_JSON_IO_CAP];
+    char *p, *q;
+    int n;
+    if (!path || !begin || !end || !block)
+        return -1;
+
+    if (yai_file_read_all(path, buf, sizeof(buf)) != 0)
+    {
+        n = snprintf(out, sizeof(out), "%s", block);
+        if (n <= 0 || (size_t)n >= sizeof(out))
+            return -1;
+        return yai_file_write_all(path, out);
+    }
+
+    p = strstr(buf, begin);
+    if (!p)
+    {
+        n = snprintf(out, sizeof(out), "%s%s%s",
+                     buf,
+                     (buf[0] && buf[strlen(buf) - 1] != '\n') ? "\n" : "",
+                     block);
+        if (n <= 0 || (size_t)n >= sizeof(out))
+            return -1;
+        return yai_file_write_all(path, out);
+    }
+
+    q = strstr(p, end);
+    if (!q)
+    {
+        n = snprintf(out, sizeof(out), "%s%s%s",
+                     buf,
+                     (buf[0] && buf[strlen(buf) - 1] != '\n') ? "\n" : "",
+                     block);
+        if (n <= 0 || (size_t)n >= sizeof(out))
+            return -1;
+        return yai_file_write_all(path, out);
+    }
+
+    q += strlen(end);
+    if (*q == '\n')
+        q++;
+
+    n = snprintf(out, sizeof(out), "%.*s%s%s", (int)(p - buf), buf, block, q);
+    if (n <= 0 || (size_t)n >= sizeof(out))
+        return -1;
+    return yai_file_write_all(path, out);
+}
+
+static int yai_session_ensure_shell_integration(void)
+{
+    const char *home = yai_get_home();
+    char config_dir[MAX_PATH_LEN];
+    char yai_cfg_dir[MAX_PATH_LEN];
+    char shell_dir[MAX_PATH_LEN];
+    char prompt_script[MAX_PATH_LEN];
+    char zshrc[MAX_PATH_LEN];
+    const char *script_content =
+        "# yai managed prompt integration (do not edit manually)\n"
+        "function prompt_yai_ws() {\n"
+        "  emulate -L zsh\n"
+        "  local tok cmd\n"
+        "  cmd=\"${commands[yai-ws-token]}\"\n"
+        "  [[ -n \"$cmd\" ]] || cmd=\"$HOME/Developer/YAI/yai/tools/bin/yai-ws-token\"\n"
+        "  [[ -x \"$cmd\" ]] || return\n"
+        "  tok=\"$($cmd 2>/dev/null)\"\n"
+        "  [[ -n \"$tok\" ]] || return\n"
+        "  p10k segment -f 255 -b 35 -t \"$tok\"\n"
+        "}\n"
+        "typeset -ga POWERLEVEL9K_LEFT_PROMPT_ELEMENTS\n"
+        "typeset -ga POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS\n"
+        "POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(${POWERLEVEL9K_LEFT_PROMPT_ELEMENTS:#yai_ws})\n"
+        "POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(${POWERLEVEL9K_LEFT_PROMPT_ELEMENTS:#context})\n"
+        "POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(${POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS:#context})\n"
+        "if (( ${POWERLEVEL9K_LEFT_PROMPT_ELEMENTS[(I)vcs]} <= ${#POWERLEVEL9K_LEFT_PROMPT_ELEMENTS} )); then\n"
+        "  integer _yai_i=${POWERLEVEL9K_LEFT_PROMPT_ELEMENTS[(I)vcs]}\n"
+        "  POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(\n"
+        "    ${POWERLEVEL9K_LEFT_PROMPT_ELEMENTS[1,$((_yai_i-1))]}\n"
+        "    yai_ws\n"
+        "    ${POWERLEVEL9K_LEFT_PROMPT_ELEMENTS[_yai_i,-1]}\n"
+        "  )\n"
+        "  unset _yai_i\n"
+        "else\n"
+        "  POWERLEVEL9K_LEFT_PROMPT_ELEMENTS+=(yai_ws)\n"
+        "fi\n";
+    const char *zshrc_block =
+        YAI_MANAGED_BEGIN "\n"
+        "if [[ -f \"$HOME/.config/yai/shell/yai-prompt.zsh\" ]]; then\n"
+        "  source \"$HOME/.config/yai/shell/yai-prompt.zsh\"\n"
+        "fi\n"
+        YAI_MANAGED_END "\n";
+
+    if (!home || !home[0])
+        return -1;
+    if (snprintf(config_dir, sizeof(config_dir), "%s/.config", home) <= 0)
+        return -1;
+    if (snprintf(yai_cfg_dir, sizeof(yai_cfg_dir), "%s/.config/yai", home) <= 0)
+        return -1;
+    if (snprintf(shell_dir, sizeof(shell_dir), "%s/.config/yai/shell", home) <= 0)
+        return -1;
+    if (snprintf(prompt_script, sizeof(prompt_script), "%s/yai-prompt.zsh", shell_dir) <= 0)
+        return -1;
+    if (snprintf(zshrc, sizeof(zshrc), "%s/.zshrc", home) <= 0)
+        return -1;
+
+    (void)mkdir_if_missing(config_dir, 0755);
+    (void)mkdir_if_missing(yai_cfg_dir, 0755);
+    (void)mkdir_if_missing(shell_dir, 0755);
+
+    if (yai_file_write_all(prompt_script, script_content) != 0)
+        return -1;
+
+    /* Cleanup legacy manual patches injected during migration/debug rounds. */
+    (void)yai_remove_block_in_file(zshrc,
+                                   "# --- YAI workspace token (left prompt, robust) ---",
+                                   "# --- end ---");
+    (void)yai_remove_block_in_file(zshrc,
+                                   "# ==== YAI prompt patch (path -> workspace -> git) ====",
+                                   "# ==== end patch ====");
+    {
+        char p10k[MAX_PATH_LEN];
+        if (snprintf(p10k, sizeof(p10k), "%s/.p10k.zsh", home) > 0)
+        {
+            (void)yai_remove_block_in_file(p10k,
+                                           "# === YAI workspace segment ===",
+                                           "# === end YAI workspace segment ===");
+        }
+    }
+
+    return yai_replace_managed_block(zshrc, YAI_MANAGED_BEGIN, YAI_MANAGED_END, zshrc_block);
 }
 
 static int mkdir_parents(const char *path, mode_t mode)
@@ -985,6 +1188,11 @@ int yai_session_set_active_workspace(const char *ws_id, char *err, size_t err_ca
         why = "manifest_write_failed";
         goto fail;
     }
+
+    /* Best-effort shell integration bootstrap.
+     * Keep activation successful even if user shell files are read-only/missing. */
+    (void)yai_session_ensure_shell_integration();
+
     return 0;
 
 fail:
