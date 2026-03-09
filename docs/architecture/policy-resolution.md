@@ -43,6 +43,19 @@ Resolver outputs:
 - authority requirement summary (baseline + overlay uplifts)
 - contributor-aware profiles (`authority_profile`, `evidence_profile`)
 
+Workspace model integration:
+- declared context acts as strong initial hint
+- inferred context is updated from real classification/discovery outcomes
+- effective summaries are persisted as workspace inspectable state
+- workspace execution path (`yai ws run ...`) resolves through the same law-driven stack and updates workspace summaries
+
 ## Determinism
 
 Resolution is deterministic for same input + same embedded law version.
+
+## WS-3 Inspectability Surfaces
+
+Workspace-facing inspection endpoints now expose this state:
+- `yai.workspace.policy.effective`: effective family/specialization + stack/overlay/effect summaries
+- `yai.workspace.debug.resolution`: compact declared/inferred/effective debug summary
+- `yai.workspace.inspect`: full workspace-level snapshot including last resolution summary

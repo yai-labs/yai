@@ -16,6 +16,8 @@ int yai_law_classify_event(const char *ws_id,
   if (yai_law_classify_provider(payload, out->provider, sizeof(out->provider)) != 0) return -1;
   if (yai_law_classify_resource(payload, out->resource, sizeof(out->resource)) != 0) return -1;
   if (yai_law_classify_protocol(payload, out->protocol, sizeof(out->protocol)) != 0) return -1;
+  (void)yai_law_json_extract_string(payload, "workspace_declared_family", out->declared_family, sizeof(out->declared_family));
+  (void)yai_law_json_extract_string(payload, "workspace_declared_specialization", out->declared_specialization, sizeof(out->declared_specialization));
   if (yai_law_extract_workspace_context(payload,
                                         out->workspace_mode,
                                         sizeof(out->workspace_mode),

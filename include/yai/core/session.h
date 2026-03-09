@@ -45,7 +45,28 @@ typedef struct {
   char state[24];
   char root_path[MAX_PATH_LEN];
   char layout[32];
+  char workspace_alias[64];
+  char session_binding[64];
+  int runtime_attached;
+  int control_plane_attached;
+  char declared_control_family[96];
+  char declared_specialization[96];
+  char declared_context_source[24];
+  char inferred_family[96];
+  char inferred_specialization[96];
+  double inferred_confidence;
+  char effective_stack_ref[192];
+  char effective_overlays_ref[192];
+  char last_effect_summary[192];
+  char last_authority_summary[192];
+  char last_evidence_summary[192];
+  char last_resolution_summary[192];
+  char isolation_mode[24];
+  int debug_mode;
+  char last_resolution_trace_ref[192];
   long created_at;
+  long activated_at;
+  long last_attached_at;
   long updated_at;
 } yai_workspace_runtime_info_t;
 

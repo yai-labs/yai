@@ -23,6 +23,13 @@ For second-half resolver debugging, inspect:
 - `authority_contributor_count`, `evidence_contributor_count`
 - `authority_profile`, `evidence_profile`, `precedence_trace`
 
+For workspace-centric debugging, correlate trace output with workspace inspect state:
+- declared context fields
+- inferred context fields
+- effective summaries (`last_effect_summary`, `last_authority_summary`, `last_evidence_summary`)
+- workspace surfaces (`yai.workspace.status`, `yai.workspace.inspect`, `yai.workspace.debug.resolution`)
+- workspace execution macro (`yai ws run ...`) to reproduce inspectable post-action state
+
 ## Quick validation
 
 Use the law-native suites:

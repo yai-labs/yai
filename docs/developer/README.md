@@ -8,3 +8,9 @@ Cross-repo governance:
 - `docs/developer/cross-repo-dependency-policy.md`
 - `docs/developer/cross-repo-responsibility-matrix.md`
 - `docs/developer/cross-repo-pinning-matrix.md`
+
+Workspace runtime model:
+- `docs/developer/workspace-inspect-model.md`
+- `docs/developer/workspace-prompt-context.md`
+- `docs/developer/workspace-policy-inspection.md`
+- `docs/developer/workspace-first-real-scenario.md`

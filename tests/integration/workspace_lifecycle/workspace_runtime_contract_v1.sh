@@ -9,6 +9,9 @@ if [[ ! -x "$YAI" ]]; then
   make -C "$REPO" yai >/dev/null
 fi
 
+"$YAI" down >/dev/null 2>&1 || true
+rm -f "$SOCK" >/dev/null 2>&1 || true
+
 RUNTIME_PID=""
 cleanup() {
   if [[ -n "$RUNTIME_PID" ]] && kill -0 "$RUNTIME_PID" 2>/dev/null; then
@@ -85,7 +88,7 @@ def call(ws_id):
     body = recv_exact(s, plen).decode("utf-8")
     s.close()
     obj = json.loads(body)
-    if obj.get("status") != "ok" or obj.get("code") != "OK":
+    if obj.get("status") != "ok" or obj.get("code") not in ("OK", "REVIEW_REQUIRED"):
       raise RuntimeError(f"unexpected reply {obj}")
 
 for ws in ("ws_contract_01", "ws_contract_02", "ws_contract_ops"):

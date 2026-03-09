@@ -28,3 +28,14 @@ Those files are historical/transitional and not architecture authority.
 - `law`: canonical normative source
 - `yai`: runtime consumer/realization
 - `ops`: official qualification/evidence/publication bureau
+
+## Workspace references
+
+- `architecture/workspace-model.md`
+- `architecture/workspace-session-binding.md`
+- `architecture/workspace-inspect-surfaces.md`
+- `architecture/workspace-normative-execution-flow.md`
+- `developer/workspace-inspect-model.md`
+- `developer/workspace-prompt-context.md`
+- `developer/workspace-policy-inspection.md`
+- `developer/workspace-first-real-scenario.md`

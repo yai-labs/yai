@@ -186,6 +186,11 @@ static int yai_runtime_serve_loop(const char *socket_path)
         {
           break;
         }
+        if (payload_len >= 0)
+        {
+          size_t term = (size_t)payload_len < sizeof(payload) ? (size_t)payload_len : (sizeof(payload) - 1);
+          payload[term] = '\0';
+        }
         if (yai_dispatch_frame(client_fd, &env, payload, payload_len, &handshake_done) != 0)
         {
           break;

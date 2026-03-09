@@ -146,6 +146,22 @@ static void sort_family_candidates(yai_family_candidate_t *cands, int n) {
   }
 }
 
+static void apply_declared_workspace_hints(const yai_law_classification_ctx_t *ctx,
+                                           yai_family_candidate_t *cands,
+                                           int n) {
+  int i;
+  if (!ctx || !cands || n <= 0) return;
+  if (ctx->declared_family[0] == '\0' && ctx->declared_specialization[0] == '\0') return;
+
+  for (i = 0; i < n; ++i) {
+    if (ctx->declared_family[0] != '\0' && strcmp(cands[i].family_id, ctx->declared_family) == 0) {
+      cands[i].score += 0.20; /* strong hint: prefer workspace-declared family when compatible */
+      (void)yai_law_safe_snprintf(cands[i].rationale, sizeof(cands[i].rationale),
+                                  "workspace declared family hint + classification match");
+    }
+  }
+}
+
 int yai_law_discover_domain(const yai_law_classification_ctx_t *ctx,
                             yai_law_discovery_result_t *out) {
   double b = 0.0;
@@ -170,6 +186,8 @@ int yai_law_discover_domain(const yai_law_classification_ctx_t *ctx,
   }
 
   sort_family_candidates(candidates, 3);
+  apply_declared_workspace_hints(ctx, candidates, 3);
+  sort_family_candidates(candidates, 3);
   out->family_candidate_count = 3;
   for (i = 0; i < 3; ++i) {
     (void)yai_law_safe_snprintf(out->family_candidates[i], sizeof(out->family_candidates[i]), "%s", candidates[i].family_id);
@@ -181,6 +199,15 @@ int yai_law_discover_domain(const yai_law_classification_ctx_t *ctx,
   out->confidence = candidates[0].score;
   (void)yai_law_safe_snprintf(out->rationale, sizeof(out->rationale), "%s", candidates[0].rationale);
   choose_specialization(ctx, out->family_id, out);
+
+  if (ctx->declared_specialization[0] != '\0' &&
+      specialization_exists(out->family_id, ctx->declared_specialization)) {
+    (void)yai_law_safe_snprintf(out->specialization_id, sizeof(out->specialization_id), "%s", ctx->declared_specialization);
+    out->confidence += 0.06;
+    if (out->confidence > 1.0) out->confidence = 1.0;
+    (void)yai_law_safe_snprintf(out->rationale, sizeof(out->rationale),
+                                "workspace declared specialization hint selected");
+  }
 
   (void)yai_law_confidence_label(out->confidence, &out->ambiguous);
   if (out->confidence < 0.45) {

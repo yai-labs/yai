@@ -10,6 +10,8 @@ typedef struct yai_law_classification_ctx {
   char resource[64];
   char protocol[32];
   char workspace_mode[32];
+  char declared_family[64];
+  char declared_specialization[96];
   int has_params_hash;
   int black_box_mode;
   int has_authority_contract;

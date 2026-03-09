@@ -5,12 +5,13 @@
 ## Canonical runtime flow
 
 1. Ingress request reaches runtime control surface.
-2. Runtime builds classification context from the operation.
-3. Embedded law is loaded and validated.
-4. Domain discovery selects applicable domain policy context.
-5. Normative stack is resolved (foundation -> domain -> compliance -> overlays hook).
-6. Final effect is handed to enforcement.
-7. Decision/evidence trace shape is returned for downstream handling.
+2. Workspace identity/binding/context is resolved from active runtime workspace state.
+3. Runtime builds classification context from the operation.
+4. Embedded law is loaded and validated.
+5. Discovery selects family/specialization policy context.
+6. Normative stack is resolved (specialization + overlays + authority/evidence composition).
+7. Final effect is handed to enforcement.
+8. Decision/evidence trace shape is returned for downstream handling and workspace inspect surfaces.
 
 ## Repository boundaries
 
@@ -22,3 +23,5 @@
 
 Dataplane persistence/query is outside this tranche.
 This runtime model ends at decision/evidence envelope preparation and enforcement handoff.
+
+Workspace model details are defined in `docs/architecture/workspace-model.md`.

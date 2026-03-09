@@ -2,6 +2,7 @@
 #define YAI_SESSION_INTERNAL_H
 
 #include <yai/core/session.h>
+#include <yai/law/resolver.h>
 
 int yai_session_extract_json_string(const char *json, const char *key, char *out, size_t out_cap);
 int yai_session_extract_argv_first(const char *json, char *out, size_t out_cap);
@@ -21,6 +22,29 @@ int yai_session_handle_workspace_action(
     const char *action,
     const char *root_path_opt,
     yai_workspace_runtime_info_t *info_out);
+int yai_session_set_active_workspace(const char *ws_id, char *err, size_t err_cap);
+int yai_session_clear_active_workspace(void);
+int yai_session_resolve_current_workspace(yai_workspace_runtime_info_t *info_out,
+                                          char *status_out,
+                                          size_t status_cap,
+                                          char *err,
+                                          size_t err_cap);
+int yai_session_build_prompt_context_json(char *out, size_t out_cap);
+int yai_session_build_workspace_status_json(char *out, size_t out_cap);
+int yai_session_build_workspace_inspect_json(char *out, size_t out_cap);
+int yai_session_build_workspace_domain_get_json(char *out, size_t out_cap);
+int yai_session_set_workspace_declared_context(const char *family,
+                                               const char *specialization,
+                                               char *out_json,
+                                               size_t out_cap,
+                                               char *err,
+                                               size_t err_cap);
+int yai_session_build_workspace_policy_effective_json(char *out, size_t out_cap);
+int yai_session_build_workspace_debug_resolution_json(char *out, size_t out_cap);
+int yai_session_record_resolution_snapshot(const char *ws_id,
+                                          const yai_law_resolution_output_t *law_out,
+                                          char *err,
+                                          size_t err_cap);
 
 void yai_session_send_binary_response(
     int fd,

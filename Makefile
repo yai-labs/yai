@@ -189,6 +189,9 @@ test-integration:
 	@tests/integration/core_brain/run_core_brain_smoke.sh
 	@tests/integration/core_brain/run_core_brain_c_tests.sh
 	@tests/integration/workspace_lifecycle/workspace_runtime_contract_v1.sh
+	@tests/integration/workspace_lifecycle/workspace_session_binding_contract_v1.sh
+	@tests/integration/workspace_lifecycle/workspace_inspect_surfaces_v1.sh
+	@tests/integration/workspace_lifecycle/workspace_real_flow_v1.sh
 	@tests/integration/runtime_handshake/run_runtime_handshake_smoke.sh
 	@echo "[YAI] integration suites complete"
 

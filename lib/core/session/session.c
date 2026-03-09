@@ -186,6 +186,63 @@ void yai_session_release(yai_session_t *s)
     memset(s, 0, sizeof(*s));
 }
 
+static int yai_session_build_workspace_enriched_payload(const char *payload,
+                                                        const yai_workspace_runtime_info_t *ws_info,
+                                                        char *out,
+                                                        size_t out_cap)
+{
+    size_t plen;
+    size_t cut;
+    int n;
+    int has_family;
+    int has_spec;
+    int has_source;
+
+    if (!payload || !ws_info || !out || out_cap == 0)
+        return -1;
+    plen = strlen(payload);
+    if (plen < 2 || payload[plen - 1] != '}')
+        return -1;
+
+    has_family = strstr(payload, "\"workspace_declared_family\"") != NULL;
+    has_spec = strstr(payload, "\"workspace_declared_specialization\"") != NULL;
+    has_source = strstr(payload, "\"workspace_context_source\"") != NULL;
+    if ((has_family || ws_info->declared_control_family[0] == '\0') &&
+        (has_spec || ws_info->declared_specialization[0] == '\0') &&
+        has_source)
+    {
+        n = snprintf(out, out_cap, "%s", payload);
+        return (n > 0 && (size_t)n < out_cap) ? 0 : -1;
+    }
+
+    cut = plen - 1; /* skip final } and append normalized workspace hint fields */
+    n = snprintf(out, out_cap, "%.*s", (int)cut, payload);
+    if (n <= 0 || (size_t)n >= out_cap)
+        return -1;
+
+    if (!has_family && ws_info->declared_control_family[0] != '\0')
+    {
+        n += snprintf(out + n, out_cap - (size_t)n, ",\"workspace_declared_family\":\"%s\"", ws_info->declared_control_family);
+        if ((size_t)n >= out_cap)
+            return -1;
+    }
+    if (!has_spec && ws_info->declared_specialization[0] != '\0')
+    {
+        n += snprintf(out + n, out_cap - (size_t)n, ",\"workspace_declared_specialization\":\"%s\"", ws_info->declared_specialization);
+        if ((size_t)n >= out_cap)
+            return -1;
+    }
+    if (!has_source)
+    {
+        const char *src = ws_info->declared_context_source[0] ? ws_info->declared_context_source : "unset";
+        n += snprintf(out + n, out_cap - (size_t)n, ",\"workspace_context_source\":\"%s\"", src);
+        if ((size_t)n >= out_cap)
+            return -1;
+    }
+    n += snprintf(out + n, out_cap - (size_t)n, "}");
+    return ((n > 0) && (size_t)n < out_cap) ? 0 : -1;
+}
+
 /* Session dispatch entrypoint. */
 
 void yai_session_dispatch(
@@ -276,6 +333,17 @@ int yai_session_handle_control_call(
     const char *payload,
     const yai_session_t *s)
 {
+    char command_id[128];
+    char action_ws_id[MAX_WS_ID_LEN];
+    char action_arg[128];
+    char root_path[MAX_PATH_LEN];
+    char domain_family[96];
+    char domain_specialization[96];
+    yai_workspace_runtime_info_t ws_info;
+    char binding_status[24];
+    char binding_err[96];
+    char prompt_json[1024];
+    char law_payload[YAI_MAX_PAYLOAD + 512];
     yai_law_resolution_output_t law_out;
     char data[2048];
     char err[256];
@@ -301,11 +369,296 @@ int yai_session_handle_control_call(
         return -1;
     }
 
+    command_id[0] = '\0';
+    action_ws_id[0] = '\0';
+    action_arg[0] = '\0';
+    root_path[0] = '\0';
+    domain_family[0] = '\0';
+    domain_specialization[0] = '\0';
+
+    (void)yai_session_extract_json_string(payload, "command_id", command_id, sizeof(command_id));
+    (void)yai_session_extract_json_string(payload, "workspace_id", action_ws_id, sizeof(action_ws_id));
+    (void)yai_session_extract_json_string(payload, "family", domain_family, sizeof(domain_family));
+    (void)yai_session_extract_json_string(payload, "specialization", domain_specialization, sizeof(domain_specialization));
+    (void)yai_session_extract_argv_first(payload, action_arg, sizeof(action_arg));
+    (void)yai_session_extract_argv_flag_value(payload, "--root", "--path", root_path, sizeof(root_path));
+    if (domain_family[0] == '\0')
+        (void)yai_session_extract_argv_flag_value(payload, "--family", "-f", domain_family, sizeof(domain_family));
+    if (domain_specialization[0] == '\0')
+        (void)yai_session_extract_argv_flag_value(payload, "--specialization", "-s", domain_specialization, sizeof(domain_specialization));
+
+    if (command_id[0] == '\0')
+    {
+        if (strstr(payload, "yai.workspace.create")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.create");
+        else if (strstr(payload, "yai.workspace.reset")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.reset");
+        else if (strstr(payload, "yai.workspace.destroy")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.destroy");
+        else if (strstr(payload, "yai.workspace.activate")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.activate");
+        else if (strstr(payload, "yai.workspace.current")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.current");
+        else if (strstr(payload, "yai.workspace.clear")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.clear");
+        else if (strstr(payload, "yai.workspace.deactivate")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.deactivate");
+        else if (strstr(payload, "yai.workspace.status")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.status");
+        else if (strstr(payload, "yai.workspace.inspect")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.inspect");
+        else if (strstr(payload, "yai.workspace.domain_get")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.domain_get");
+        else if (strstr(payload, "yai.workspace.domain.get")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.domain.get");
+        else if (strstr(payload, "yai.workspace.domain_set")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.domain_set");
+        else if (strstr(payload, "yai.workspace.domain.set")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.domain.set");
+        else if (strstr(payload, "yai.workspace.policy_effective")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.policy_effective");
+        else if (strstr(payload, "yai.workspace.policy.effective")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.policy.effective");
+        else if (strstr(payload, "yai.workspace.debug_resolution")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.debug_resolution");
+        else if (strstr(payload, "yai.workspace.debug.resolution")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.debug.resolution");
+        else if (strstr(payload, "yai.workspace.prompt_context")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.prompt_context");
+        else if (strstr(payload, "yai.workspace.run")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.run");
+    }
+
+    if (command_id[0] != '\0' && strncmp(command_id, "yai.workspace.", 14) == 0)
+    {
+        const char *target_ws = action_ws_id[0] ? action_ws_id : (action_arg[0] ? action_arg : env->ws_id);
+
+        if (strcmp(command_id, "yai.workspace.create") == 0 ||
+            strcmp(command_id, "yai.workspace.reset") == 0 ||
+            strcmp(command_id, "yai.workspace.destroy") == 0)
+        {
+            const char *action = "create";
+            if (strcmp(command_id, "yai.workspace.reset") == 0) action = "reset";
+            if (strcmp(command_id, "yai.workspace.destroy") == 0) action = "destroy";
+
+            if (yai_session_handle_workspace_action(target_ws,
+                                                    action,
+                                                    root_path[0] ? root_path : NULL,
+                                                    &ws_info) != 0)
+            {
+                yai_session_send_exec_reply(client_fd,
+                                            env,
+                                            "error",
+                                            "BAD_ARGS",
+                                            "workspace_action_failed",
+                                            command_id,
+                                            "runtime",
+                                            NULL);
+                return -1;
+            }
+
+            if (snprintf(data,
+                         sizeof(data),
+                         "{\"ws_id\":\"%s\",\"state\":\"%s\",\"root_path\":\"%s\"}",
+                         ws_info.ws_id,
+                         ws_info.state,
+                         ws_info.root_path) <= 0)
+            {
+                yai_session_send_exec_reply(client_fd,
+                                            env,
+                                            "error",
+                                            "INTERNAL_ERROR",
+                                            "response_encode_failed",
+                                            command_id,
+                                            "runtime",
+                                            NULL);
+                return -1;
+            }
+
+            yai_session_send_exec_reply(client_fd, env, "ok", "OK", "workspace_action_applied", command_id, "runtime", data);
+            return 0;
+        }
+
+        if (strcmp(command_id, "yai.workspace.activate") == 0)
+        {
+            if (yai_session_set_active_workspace(target_ws, err, sizeof(err)) != 0)
+            {
+                yai_session_send_exec_reply(client_fd,
+                                            env,
+                                            "error",
+                                            "BAD_ARGS",
+                                            err[0] ? err : "activate_failed",
+                                            command_id,
+                                            "runtime",
+                                            NULL);
+                return -1;
+            }
+            if (snprintf(data,
+                         sizeof(data),
+                         "{\"binding_status\":\"active\",\"workspace_id\":\"%s\"}",
+                         target_ws) <= 0)
+            {
+                yai_session_send_exec_reply(client_fd, env, "error", "INTERNAL_ERROR", "response_encode_failed", command_id, "runtime", NULL);
+                return -1;
+            }
+            yai_session_send_exec_reply(client_fd, env, "ok", "OK", "workspace_activated", command_id, "runtime", data);
+            return 0;
+        }
+
+        if (strcmp(command_id, "yai.workspace.clear") == 0 ||
+            strcmp(command_id, "yai.workspace.deactivate") == 0)
+        {
+            if (yai_session_clear_active_workspace() != 0)
+            {
+                yai_session_send_exec_reply(client_fd, env, "error", "INTERNAL_ERROR", "clear_failed", command_id, "runtime", NULL);
+                return -1;
+            }
+            yai_session_send_exec_reply(client_fd, env, "ok", "OK", "workspace_cleared", command_id, "runtime", "{\"binding_status\":\"no_active\"}");
+            return 0;
+        }
+
+        if (strcmp(command_id, "yai.workspace.current") == 0)
+        {
+            int cur = yai_session_resolve_current_workspace(&ws_info,
+                                                            binding_status,
+                                                            sizeof(binding_status),
+                                                            binding_err,
+                                                            sizeof(binding_err));
+            if (cur == 0 && strcmp(binding_status, "active") == 0)
+            {
+                if (snprintf(data,
+                             sizeof(data),
+                             "{"
+                             "\"binding_status\":\"active\","
+                             "\"workspace_id\":\"%s\","
+                             "\"workspace_alias\":\"%s\","
+                             "\"state\":\"%s\","
+                             "\"root_path\":\"%s\","
+                             "\"session_binding\":\"%s\","
+                             "\"runtime_attached\":%s"
+                             "}",
+                             ws_info.ws_id,
+                             ws_info.workspace_alias,
+                             ws_info.state,
+                             ws_info.root_path,
+                             ws_info.session_binding,
+                             ws_info.runtime_attached ? "true" : "false") <= 0)
+                {
+                    yai_session_send_exec_reply(client_fd, env, "error", "INTERNAL_ERROR", "response_encode_failed", command_id, "runtime", NULL);
+                    return -1;
+                }
+                yai_session_send_exec_reply(client_fd, env, "ok", "OK", "workspace_current_resolved", command_id, "runtime", data);
+                return 0;
+            }
+
+            if (snprintf(data,
+                         sizeof(data),
+                         "{\"binding_status\":\"%s\",\"reason\":\"%s\"}",
+                         binding_status[0] ? binding_status : "invalid",
+                         binding_err[0] ? binding_err : "none") <= 0)
+            {
+                yai_session_send_exec_reply(client_fd, env, "error", "INTERNAL_ERROR", "response_encode_failed", command_id, "runtime", NULL);
+                return -1;
+            }
+            yai_session_send_exec_reply(client_fd, env, "ok", "OK", "workspace_current_unbound", command_id, "runtime", data);
+            return 0;
+        }
+
+        if (strcmp(command_id, "yai.workspace.status") == 0)
+        {
+            if (yai_session_build_workspace_status_json(data, sizeof(data)) != 0)
+            {
+                yai_session_send_exec_reply(client_fd, env, "error", "INTERNAL_ERROR", "workspace_status_failed", command_id, "runtime", NULL);
+                return -1;
+            }
+            yai_session_send_exec_reply(client_fd, env, "ok", "OK", "workspace_status", command_id, "runtime", data);
+            return 0;
+        }
+
+        if (strcmp(command_id, "yai.workspace.inspect") == 0)
+        {
+            if (yai_session_build_workspace_inspect_json(data, sizeof(data)) != 0)
+            {
+                yai_session_send_exec_reply(client_fd, env, "error", "INTERNAL_ERROR", "workspace_inspect_failed", command_id, "runtime", NULL);
+                return -1;
+            }
+            yai_session_send_exec_reply(client_fd, env, "ok", "OK", "workspace_inspect", command_id, "runtime", data);
+            return 0;
+        }
+
+        if (strcmp(command_id, "yai.workspace.domain.get") == 0 ||
+            strcmp(command_id, "yai.workspace.domain_get") == 0)
+        {
+            if (yai_session_build_workspace_domain_get_json(data, sizeof(data)) != 0)
+            {
+                yai_session_send_exec_reply(client_fd, env, "error", "INTERNAL_ERROR", "workspace_domain_get_failed", command_id, "runtime", NULL);
+                return -1;
+            }
+            yai_session_send_exec_reply(client_fd, env, "ok", "OK", "workspace_domain_get", command_id, "runtime", data);
+            return 0;
+        }
+
+        if (strcmp(command_id, "yai.workspace.domain.set") == 0 ||
+            strcmp(command_id, "yai.workspace.domain_set") == 0)
+        {
+            if (yai_session_set_workspace_declared_context(domain_family[0] ? domain_family : NULL,
+                                                           domain_specialization[0] ? domain_specialization : NULL,
+                                                           data,
+                                                           sizeof(data),
+                                                           err,
+                                                           sizeof(err)) != 0)
+            {
+                yai_session_send_exec_reply(client_fd,
+                                            env,
+                                            "error",
+                                            "BAD_ARGS",
+                                            err[0] ? err : "workspace_domain_set_failed",
+                                            command_id,
+                                            "runtime",
+                                            NULL);
+                return -1;
+            }
+            yai_session_send_exec_reply(client_fd, env, "ok", "OK", "workspace_domain_set", command_id, "runtime", data);
+            return 0;
+        }
+
+        if (strcmp(command_id, "yai.workspace.policy.effective") == 0 ||
+            strcmp(command_id, "yai.workspace.policy_effective") == 0)
+        {
+            if (yai_session_build_workspace_policy_effective_json(data, sizeof(data)) != 0)
+            {
+                yai_session_send_exec_reply(client_fd, env, "error", "INTERNAL_ERROR", "workspace_policy_effective_failed", command_id, "runtime", NULL);
+                return -1;
+            }
+            yai_session_send_exec_reply(client_fd, env, "ok", "OK", "workspace_policy_effective", command_id, "runtime", data);
+            return 0;
+        }
+
+        if (strcmp(command_id, "yai.workspace.debug.resolution") == 0 ||
+            strcmp(command_id, "yai.workspace.debug_resolution") == 0)
+        {
+            if (yai_session_build_workspace_debug_resolution_json(data, sizeof(data)) != 0)
+            {
+                yai_session_send_exec_reply(client_fd, env, "error", "INTERNAL_ERROR", "workspace_debug_resolution_failed", command_id, "runtime", NULL);
+                return -1;
+            }
+            yai_session_send_exec_reply(client_fd, env, "ok", "OK", "workspace_debug_resolution", command_id, "runtime", data);
+            return 0;
+        }
+
+        if (strcmp(command_id, "yai.workspace.prompt_context") == 0)
+        {
+            if (yai_session_build_prompt_context_json(prompt_json, sizeof(prompt_json)) != 0)
+            {
+                yai_session_send_exec_reply(client_fd, env, "error", "INTERNAL_ERROR", "prompt_context_failed", command_id, "runtime", NULL);
+                return -1;
+            }
+            yai_session_send_exec_reply(client_fd, env, "ok", "OK", "workspace_prompt_context", command_id, "runtime", prompt_json);
+            return 0;
+        }
+
+        if (strcmp(command_id, "yai.workspace.run") == 0)
+        {
+            /* Execution macro: keep workspace-aware command semantics but resolve through runtime law path. */
+            snprintf(command_id, sizeof(command_id), "%s", "yai.runtime.ping");
+        }
+    }
+
     memset(&law_out, 0, sizeof(law_out));
     memset(err, 0, sizeof(err));
+    law_payload[0] = '\0';
+
+    if (yai_session_read_workspace_info(s->ws.ws_id, &ws_info) == 0 && ws_info.exists) {
+        if (yai_session_build_workspace_enriched_payload(payload, &ws_info, law_payload, sizeof(law_payload)) != 0) {
+            (void)snprintf(law_payload, sizeof(law_payload), "%s", payload);
+        }
+    } else {
+        (void)snprintf(law_payload, sizeof(law_payload), "%s", payload);
+    }
 
     if (yai_law_resolve_control_call(s->ws.ws_id,
-                                     payload,
+                                     law_payload,
                                      env->trace_id,
                                      &law_out,
                                      err,
@@ -324,6 +677,8 @@ int yai_session_handle_control_call(
     }
 
     effect_name = yai_law_effect_name(law_out.decision.final_effect);
+
+    (void)yai_session_record_resolution_snapshot(s->ws.ws_id, &law_out, err, sizeof(err));
 
     if (law_out.decision.final_effect == YAI_LAW_EFFECT_DENY ||
         law_out.decision.final_effect == YAI_LAW_EFFECT_QUARANTINE)
