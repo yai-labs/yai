@@ -16,8 +16,12 @@ int yai_law_resource_match_bonus(const yai_law_classification_ctx_t *ctx, const 
   *bonus = 0.0;
   family = normalize_family(domain_id);
   if (strcmp(family, "digital") == 0 && strstr(ctx->resource, "external")) *bonus = 0.05;
+  if (strcmp(family, "digital") == 0 &&
+      (strstr(ctx->resource, "sink") || strstr(ctx->resource, "channel") ||
+       strstr(ctx->resource, "distribution") || strstr(ctx->resource, "artifact"))) *bonus += 0.04;
   if (strcmp(family, "economic") == 0 &&
       (strstr(ctx->resource, "ledger") || strstr(ctx->resource, "counterparty") || strstr(ctx->resource, "instrument"))) *bonus = 0.05;
-  if (strcmp(family, "scientific") == 0 && (strstr(ctx->resource, "dataset") || strstr(ctx->resource, "experiment"))) *bonus = 0.05;
+  if (strcmp(family, "scientific") == 0 &&
+      (strstr(ctx->resource, "dataset") || strstr(ctx->resource, "experiment") || strstr(ctx->resource, "artifact"))) *bonus = 0.05;
   return 0;
 }

@@ -99,7 +99,7 @@ def call(ws_id, command_id, argv=None):
 # 1) create and activate workspace
 r = call(WS, "yai.workspace.create", [WS])
 assert r["status"] == "ok", r
-r = call("system", "yai.workspace.activate", [WS])
+r = call("system", "yai.workspace.set", [WS])
 assert r["status"] == "ok", r
 
 # 2) declare payments context

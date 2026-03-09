@@ -31,5 +31,34 @@
   "evidence_profile": {
     "requires_parameter_trace": true,
     "retention_hint": "extended"
-  }
+  },
+  "scientific_semantics": {
+    "experiment_intent": "dataset_verification",
+    "governed_assets": [
+      "dataset",
+      "dataset-lineage",
+      "integrity-attestation"
+    ],
+    "risk_surface": [
+      "dataset-corruption",
+      "tampered-input",
+      "cross-workspace-dataset-leak"
+    ]
+  },
+  "dataset_policy": {
+    "requires_dataset_reference": true,
+    "requires_integrity_attestation": true,
+    "requires_lineage_pointer": true
+  },
+  "policy_baseline": {
+    "effect_default": "review_required",
+    "effect_on_missing_dataset_reference": "deny",
+    "effect_on_attestation_gap": "quarantine"
+  },
+  "evidence_obligations": [
+    "resolution_trace",
+    "decision_record",
+    "dataset_integrity_attestation_required",
+    "provenance_required"
+  ]
 }

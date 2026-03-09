@@ -21,6 +21,7 @@ int yai_session_handle_workspace_action(
     const char *ws_id,
     const char *action,
     const char *root_path_opt,
+    const char *security_level_opt,
     yai_workspace_runtime_info_t *info_out);
 int yai_session_set_active_workspace(const char *ws_id, char *err, size_t err_cap);
 int yai_session_clear_active_workspace(void);
@@ -46,6 +47,9 @@ int yai_session_record_resolution_snapshot(const char *ws_id,
                                           const yai_law_resolution_output_t *law_out,
                                           char *err,
                                           size_t err_cap);
+int yai_session_enforce_workspace_scope(const char *target_ws_id,
+                                        char *err,
+                                        size_t err_cap);
 
 void yai_session_send_binary_response(
     int fd,

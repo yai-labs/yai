@@ -1,4 +1,4 @@
-# Workspace Validation Matrix (WS-6 Closeout)
+# Workspace Validation Matrix (WS-14 Final Demo Convergence)
 
 This matrix defines the release-readiness checks for the workspace-driven normative path.
 
@@ -21,8 +21,18 @@ Expected: registry/contracts/manifests/domain corpus remain coherent with worksp
   - `tests/integration/workspace_lifecycle/workspace_inspect_surfaces_v1.sh`
   - `tests/integration/workspace_lifecycle/workspace_real_flow_v1.sh`
   - `tests/integration/workspace_lifecycle/workspace_negative_paths_v1.sh`
+  - `tests/integration/workspace_lifecycle/workspace_architecture_boundary_v1.sh`
+  - `tests/integration/workspace_lifecycle/workspace_isolation_guards_v1.sh`
+  - `tests/integration/workspace_lifecycle/workspace_containment_structure_v1.sh`
+  - `tests/integration/workspace_lifecycle/workspace_security_envelope_v1.sh`
+  - `tests/integration/workspace_lifecycle/workspace_execution_containment_hooks_v1.sh`
+  - `tests/integration/workspace_lifecycle/workspace_hostile_path_baseline_v1.sh`
+  - `tests/integration/workspace_lifecycle/workspace_scientific_flow_v1.sh`
+  - `tests/integration/workspace_lifecycle/workspace_digital_flow_v1.sh`
+  - `tests/integration/workspace_lifecycle/workspace_final_demo_matrix_v1.sh`
+  - `tools/dev/verify_final_demo_matrix.sh`
 
-Expected: active-path resolution works for happy-path and negative-path workspace cases.
+Expected: lifecycle, vertical, and hostile-path scenarios converge as one governed workspace proof pack.
 
 ## CLI
 

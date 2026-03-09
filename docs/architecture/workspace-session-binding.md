@@ -53,9 +53,10 @@ Implemented runtime control commands (`command_id` in control payload):
 - `yai.workspace.create`
 - `yai.workspace.reset`
 - `yai.workspace.destroy`
-- `yai.workspace.activate`
+- `yai.workspace.set` / `yai.workspace.switch`
 - `yai.workspace.current`
-- `yai.workspace.clear` (alias: `yai.workspace.deactivate`)
+- `yai.workspace.unset` (binding clear)
+- `yai.workspace.clear` (runtime-state clear)
 - `yai.workspace.prompt_context`
 
 These are lightweight session/context primitives, not full user-facing CLI workflows.

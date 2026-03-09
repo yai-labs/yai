@@ -15,6 +15,18 @@ typedef struct yai_law_classification_ctx {
   int has_params_hash;
   int black_box_mode;
   int has_authority_contract;
+  int has_repro_context;
+  int has_dataset_ref;
+  int has_publication_intent;
+  int has_locked_parameters;
+  int has_result_ref;
+  int has_retrieve_intent;
+  int has_egress_intent;
+  int has_commentary_intent;
+  int has_distribution_intent;
+  int has_sink_ref;
+  int sink_trusted;
+  int sink_external;
 } yai_law_classification_ctx_t;
 
 int yai_law_classify_event(const char *ws_id,

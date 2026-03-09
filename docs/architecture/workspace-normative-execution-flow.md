@@ -4,7 +4,7 @@ This document defines the first real workspace-driven normative execution path.
 
 ## Flow
 
-1. Activate workspace binding (`yai.workspace.activate`).
+1. Set workspace binding (`yai.workspace.set` / `yai.workspace.switch`).
 2. Declare context hint (`yai.workspace.domain_set --family economic --specialization payments`).
 3. Execute action from workspace context (`yai.workspace.run payment.authorize ...`).
 4. Runtime resolves through law stack:

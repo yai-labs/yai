@@ -16,6 +16,8 @@ int yai_law_provider_match_bonus(const yai_law_classification_ctx_t *ctx, const 
   *bonus = 0.0;
   family = normalize_family(domain_id);
   if (strcmp(family, "digital") == 0 && ctx->provider[0] != '\0') *bonus = 0.05;
+  if (strcmp(family, "digital") == 0 &&
+      (strstr(ctx->provider, "github") || strstr(ctx->provider, "cdn") || strstr(ctx->provider, "webhook"))) *bonus += 0.03;
   if (strcmp(family, "economic") == 0 && ctx->provider[0] != '\0') *bonus = 0.05;
   if (strcmp(family, "scientific") == 0 && ctx->provider[0] != '\0') *bonus = 0.05;
   return 0;

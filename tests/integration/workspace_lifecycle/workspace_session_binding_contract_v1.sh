@@ -116,7 +116,7 @@ assert r["data"]["binding_status"] == "no_active"
 r = call(WS_GOOD, "yai.workspace.create", [WS_GOOD])
 assert r["status"] == "ok"
 
-r = call("system", "yai.workspace.activate", [WS_GOOD])
+r = call("system", "yai.workspace.set", [WS_GOOD])
 assert r["status"] == "ok"
 assert r["data"]["binding_status"] == "active"
 

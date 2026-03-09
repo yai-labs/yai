@@ -23,7 +23,19 @@ int yai_law_classify_event(const char *ws_id,
                                         sizeof(out->workspace_mode),
                                         &out->black_box_mode,
                                         &out->has_params_hash,
-                                        &out->has_authority_contract) != 0) {
+                                        &out->has_authority_contract,
+                                        &out->has_repro_context,
+                                        &out->has_dataset_ref,
+                                        &out->has_publication_intent,
+                                        &out->has_locked_parameters,
+                                        &out->has_result_ref,
+                                        &out->has_retrieve_intent,
+                                        &out->has_egress_intent,
+                                        &out->has_commentary_intent,
+                                        &out->has_distribution_intent,
+                                        &out->has_sink_ref,
+                                        &out->sink_trusted,
+                                        &out->sink_external) != 0) {
     return -1;
   }
 
@@ -35,6 +47,9 @@ int yai_law_classify_event(const char *ws_id,
     else if (strstr(payload, "transfer")) (void)yai_law_safe_snprintf(out->command, sizeof(out->command), "%s", "transfer.authorize");
     else if (strstr(payload, "settlement")) (void)yai_law_safe_snprintf(out->command, sizeof(out->command), "%s", "settlement.finalize");
     else if (strstr(payload, "github")) (void)yai_law_safe_snprintf(out->command, sizeof(out->command), "%s", "github.issues.comment.create");
+    else if (strstr(payload, "distribution") || strstr(payload, "deliver")) (void)yai_law_safe_snprintf(out->command, sizeof(out->command), "%s", "artifact.distribution.push");
+    else if (strstr(payload, "sink") || strstr(payload, "destination")) (void)yai_law_safe_snprintf(out->command, sizeof(out->command), "%s", "digital.sink.validate");
+    else if (strstr(payload, "retrieve") || strstr(payload, "fetch")) (void)yai_law_safe_snprintf(out->command, sizeof(out->command), "%s", "remote.retrieve");
     else if (strstr(payload, "experiment")) (void)yai_law_safe_snprintf(out->command, sizeof(out->command), "%s", "experiment.run");
     else (void)yai_law_safe_snprintf(out->command, sizeof(out->command), "%s", "unknown");
   }

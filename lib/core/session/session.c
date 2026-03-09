@@ -197,6 +197,10 @@ static int yai_session_build_workspace_enriched_payload(const char *payload,
     int has_family;
     int has_spec;
     int has_source;
+    int has_exec_requested;
+    int has_exec_effective;
+    int has_exec_degraded;
+    int has_exec_backend;
 
     if (!payload || !ws_info || !out || out_cap == 0)
         return -1;
@@ -207,9 +211,17 @@ static int yai_session_build_workspace_enriched_payload(const char *payload,
     has_family = strstr(payload, "\"workspace_declared_family\"") != NULL;
     has_spec = strstr(payload, "\"workspace_declared_specialization\"") != NULL;
     has_source = strstr(payload, "\"workspace_context_source\"") != NULL;
+    has_exec_requested = strstr(payload, "\"workspace_execution_mode_requested\"") != NULL;
+    has_exec_effective = strstr(payload, "\"workspace_execution_mode_effective\"") != NULL;
+    has_exec_degraded = strstr(payload, "\"workspace_execution_mode_degraded\"") != NULL;
+    has_exec_backend = strstr(payload, "\"workspace_execution_backend\"") != NULL;
     if ((has_family || ws_info->declared_control_family[0] == '\0') &&
         (has_spec || ws_info->declared_specialization[0] == '\0') &&
-        has_source)
+        has_source &&
+        has_exec_requested &&
+        has_exec_effective &&
+        has_exec_degraded &&
+        has_exec_backend)
     {
         n = snprintf(out, out_cap, "%s", payload);
         return (n > 0 && (size_t)n < out_cap) ? 0 : -1;
@@ -236,6 +248,34 @@ static int yai_session_build_workspace_enriched_payload(const char *payload,
     {
         const char *src = ws_info->declared_context_source[0] ? ws_info->declared_context_source : "unset";
         n += snprintf(out + n, out_cap - (size_t)n, ",\"workspace_context_source\":\"%s\"", src);
+        if ((size_t)n >= out_cap)
+            return -1;
+    }
+    if (!has_exec_requested)
+    {
+        n += snprintf(out + n, out_cap - (size_t)n, ",\"workspace_execution_mode_requested\":\"%s\"",
+                      ws_info->execution_mode_requested[0] ? ws_info->execution_mode_requested : "scoped");
+        if ((size_t)n >= out_cap)
+            return -1;
+    }
+    if (!has_exec_effective)
+    {
+        n += snprintf(out + n, out_cap - (size_t)n, ",\"workspace_execution_mode_effective\":\"%s\"",
+                      ws_info->execution_mode_effective[0] ? ws_info->execution_mode_effective : "scoped");
+        if ((size_t)n >= out_cap)
+            return -1;
+    }
+    if (!has_exec_degraded)
+    {
+        n += snprintf(out + n, out_cap - (size_t)n, ",\"workspace_execution_mode_degraded\":%s",
+                      ws_info->execution_mode_degraded ? "true" : "false");
+        if ((size_t)n >= out_cap)
+            return -1;
+    }
+    if (!has_exec_backend)
+    {
+        n += snprintf(out + n, out_cap - (size_t)n, ",\"workspace_execution_backend\":\"%s\"",
+                      ws_info->security_backend_mode[0] ? ws_info->security_backend_mode : "none");
         if ((size_t)n >= out_cap)
             return -1;
     }
@@ -337,6 +377,7 @@ int yai_session_handle_control_call(
     char action_ws_id[MAX_WS_ID_LEN];
     char action_arg[128];
     char root_path[MAX_PATH_LEN];
+    char security_level[32];
     char domain_family[96];
     char domain_specialization[96];
     yai_workspace_runtime_info_t ws_info;
@@ -345,12 +386,21 @@ int yai_session_handle_control_call(
     char prompt_json[1024];
     char law_payload[YAI_MAX_PAYLOAD + 512];
     yai_law_resolution_output_t law_out;
-    char data[2048];
+    char data[YAI_MAX_PAYLOAD + 2048];
     char err[256];
     const char *status = "ok";
     const char *code = "OK";
     const char *reason = "accepted";
     const char *effect_name = "unknown";
+    char sci_parameter[128];
+    char sci_repro[128];
+    char sci_dataset[128];
+    char sci_publication[128];
+    char dig_outbound[128];
+    char dig_sink[128];
+    char dig_publication[128];
+    char dig_retrieval[128];
+    char dig_distribution[128];
     const char *runtime_ws_id = NULL;
     char runtime_ws_id_buf[MAX_WS_ID_LEN];
     int workspace_run_macro = 0;
@@ -376,6 +426,7 @@ int yai_session_handle_control_call(
     action_ws_id[0] = '\0';
     action_arg[0] = '\0';
     root_path[0] = '\0';
+    security_level[0] = '\0';
     domain_family[0] = '\0';
     domain_specialization[0] = '\0';
 
@@ -385,6 +436,9 @@ int yai_session_handle_control_call(
     (void)yai_session_extract_json_string(payload, "specialization", domain_specialization, sizeof(domain_specialization));
     (void)yai_session_extract_argv_first(payload, action_arg, sizeof(action_arg));
     (void)yai_session_extract_argv_flag_value(payload, "--root", "--path", root_path, sizeof(root_path));
+    (void)yai_session_extract_json_string(payload, "security_level", security_level, sizeof(security_level));
+    if (security_level[0] == '\0')
+        (void)yai_session_extract_argv_flag_value(payload, "--containment-level", "--security-level", security_level, sizeof(security_level));
     if (domain_family[0] == '\0')
         (void)yai_session_extract_argv_flag_value(payload, "--family", "-f", domain_family, sizeof(domain_family));
     if (domain_specialization[0] == '\0')
@@ -397,11 +451,9 @@ int yai_session_handle_control_call(
         else if (strstr(payload, "yai.workspace.destroy")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.destroy");
         else if (strstr(payload, "yai.workspace.set")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.set");
         else if (strstr(payload, "yai.workspace.switch")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.switch");
-        else if (strstr(payload, "yai.workspace.activate")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.activate");
         else if (strstr(payload, "yai.workspace.unset")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.unset");
         else if (strstr(payload, "yai.workspace.current")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.current");
         else if (strstr(payload, "yai.workspace.clear")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.clear");
-        else if (strstr(payload, "yai.workspace.deactivate")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.deactivate");
         else if (strstr(payload, "yai.workspace.status")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.status");
         else if (strstr(payload, "yai.workspace.inspect")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.inspect");
         else if (strstr(payload, "yai.workspace.domain_get")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.domain_get");
@@ -431,6 +483,7 @@ int yai_session_handle_control_call(
             if (yai_session_handle_workspace_action(target_ws,
                                                     action,
                                                     root_path[0] ? root_path : NULL,
+                                                    security_level[0] ? security_level : NULL,
                                                     &ws_info) != 0)
             {
                 yai_session_send_exec_reply(client_fd,
@@ -454,7 +507,10 @@ int yai_session_handle_control_call(
                          "\"workspace_store_root\":\"%s\","
                          "\"runtime_state_root\":\"%s\","
                          "\"metadata_root\":\"%s\","
-                         "\"root_anchor_mode\":\"%s\""
+                         "\"root_anchor_mode\":\"%s\","
+                         "\"execution_mode_requested\":\"%s\","
+                         "\"execution_mode_effective\":\"%s\","
+                         "\"execution_mode_degraded\":%s"
                          "}",
                          ws_info.ws_id,
                          ws_info.workspace_alias,
@@ -463,7 +519,10 @@ int yai_session_handle_control_call(
                          ws_info.workspace_store_root,
                          ws_info.runtime_state_root,
                          ws_info.metadata_root,
-                         ws_info.root_anchor_mode[0] ? ws_info.root_anchor_mode : "managed_default_root") <= 0)
+                         ws_info.root_anchor_mode[0] ? ws_info.root_anchor_mode : "managed_default_root",
+                         ws_info.execution_mode_requested[0] ? ws_info.execution_mode_requested : "scoped",
+                         ws_info.execution_mode_effective[0] ? ws_info.execution_mode_effective : "scoped",
+                         ws_info.execution_mode_degraded ? "true" : "false") <= 0)
             {
                 yai_session_send_exec_reply(client_fd,
                                             env,
@@ -480,8 +539,7 @@ int yai_session_handle_control_call(
             return 0;
         }
 
-        if (strcmp(command_id, "yai.workspace.activate") == 0 ||
-            strcmp(command_id, "yai.workspace.set") == 0 ||
+        if (strcmp(command_id, "yai.workspace.set") == 0 ||
             strcmp(command_id, "yai.workspace.switch") == 0)
         {
             if (yai_session_set_active_workspace(target_ws, err, sizeof(err)) != 0)
@@ -490,7 +548,7 @@ int yai_session_handle_control_call(
                                             env,
                                             "error",
                                             "BAD_ARGS",
-                                            err[0] ? err : "activate_failed",
+                                            err[0] ? err : "set_failed",
                                             command_id,
                                             "runtime",
                                             NULL);
@@ -506,12 +564,20 @@ int yai_session_handle_control_call(
                              "\"workspace_alias\":\"%s\","
                              "\"root_path\":\"%s\","
                              "\"root_anchor_mode\":\"%s\","
+                             "\"execution_mode_requested\":\"%s\","
+                             "\"execution_mode_effective\":\"%s\","
+                             "\"execution_mode_degraded\":%s,"
+                             "\"attach_descriptor_ref\":\"%s\","
                              "\"binding_scope\":\"session\""
                              "}",
                              target_ws,
                              ws_info.workspace_alias[0] ? ws_info.workspace_alias : target_ws,
                              ws_info.root_path,
-                             ws_info.root_anchor_mode[0] ? ws_info.root_anchor_mode : "managed_default_root") <= 0)
+                             ws_info.root_anchor_mode[0] ? ws_info.root_anchor_mode : "managed_default_root",
+                             ws_info.execution_mode_requested[0] ? ws_info.execution_mode_requested : "scoped",
+                             ws_info.execution_mode_effective[0] ? ws_info.execution_mode_effective : "scoped",
+                             ws_info.execution_mode_degraded ? "true" : "false",
+                             ws_info.attach_descriptor_ref) <= 0)
                 {
                     yai_session_send_exec_reply(client_fd, env, "error", "INTERNAL_ERROR", "response_encode_failed", command_id, "runtime", NULL);
                     return -1;
@@ -528,19 +594,18 @@ int yai_session_handle_control_call(
                 return -1;
             }
             }
-            yai_session_send_exec_reply(client_fd, env, "ok", "OK", "workspace_activated", command_id, "runtime", data);
+            yai_session_send_exec_reply(client_fd, env, "ok", "OK", "workspace_bound", command_id, "runtime", data);
             return 0;
         }
 
-        if (strcmp(command_id, "yai.workspace.unset") == 0 ||
-            strcmp(command_id, "yai.workspace.deactivate") == 0)
+        if (strcmp(command_id, "yai.workspace.unset") == 0)
         {
             if (yai_session_clear_active_workspace() != 0)
             {
                 yai_session_send_exec_reply(client_fd, env, "error", "INTERNAL_ERROR", "clear_failed", command_id, "runtime", NULL);
                 return -1;
             }
-            yai_session_send_exec_reply(client_fd, env, "ok", "OK", "workspace_cleared", command_id, "runtime", "{\"binding_status\":\"no_active\",\"binding_scope\":\"session\"}");
+            yai_session_send_exec_reply(client_fd, env, "ok", "OK", "workspace_unset", command_id, "runtime", "{\"binding_status\":\"no_active\",\"binding_scope\":\"session\"}");
             return 0;
         }
 
@@ -587,7 +652,10 @@ int yai_session_handle_control_call(
                              "\"root_anchor_mode\":\"%s\","
                              "\"shell_path_relation\":\"%s\","
                              "\"session_binding\":\"%s\","
-                             "\"runtime_attached\":%s"
+                             "\"runtime_attached\":%s,"
+                             "\"execution_mode_requested\":\"%s\","
+                             "\"execution_mode_effective\":\"%s\","
+                             "\"execution_mode_degraded\":%s"
                              "}",
                              ws_info.ws_id,
                              ws_info.workspace_alias,
@@ -599,7 +667,10 @@ int yai_session_handle_control_call(
                              ws_info.root_anchor_mode[0] ? ws_info.root_anchor_mode : "managed_default_root",
                              ws_info.shell_path_relation[0] ? ws_info.shell_path_relation : "unknown",
                              ws_info.session_binding,
-                             ws_info.runtime_attached ? "true" : "false") <= 0)
+                             ws_info.runtime_attached ? "true" : "false",
+                             ws_info.execution_mode_requested[0] ? ws_info.execution_mode_requested : "scoped",
+                             ws_info.execution_mode_effective[0] ? ws_info.execution_mode_effective : "scoped",
+                             ws_info.execution_mode_degraded ? "true" : "false") <= 0)
                 {
                     yai_session_send_exec_reply(client_fd, env, "error", "INTERNAL_ERROR", "response_encode_failed", command_id, "runtime", NULL);
                     return -1;
@@ -751,6 +822,21 @@ int yai_session_handle_control_call(
         snprintf(runtime_ws_id_buf, sizeof(runtime_ws_id_buf), "%s", ws_info.ws_id);
         runtime_ws_id = runtime_ws_id_buf;
     }
+    else
+    {
+        if (yai_session_enforce_workspace_scope(runtime_ws_id, err, sizeof(err)) != 0)
+        {
+            yai_session_send_exec_reply(client_fd,
+                                        env,
+                                        "error",
+                                        "BAD_ARGS",
+                                        err[0] ? err : "workspace_scope_denied",
+                                        "yai.runtime.control_call",
+                                        "runtime",
+                                        NULL);
+            return -1;
+        }
+    }
 
     if (yai_session_read_workspace_info(runtime_ws_id, &ws_info) == 0 && ws_info.exists) {
         if (yai_session_build_workspace_enriched_payload(payload, &ws_info, law_payload, sizeof(law_payload)) != 0) {
@@ -782,6 +868,92 @@ int yai_session_handle_control_call(
     effect_name = yai_law_effect_name(law_out.decision.final_effect);
 
     (void)yai_session_record_resolution_snapshot(runtime_ws_id, &law_out, err, sizeof(err));
+    sci_parameter[0] = '\0';
+    sci_repro[0] = '\0';
+    sci_dataset[0] = '\0';
+    sci_publication[0] = '\0';
+    dig_outbound[0] = '\0';
+    dig_sink[0] = '\0';
+    dig_publication[0] = '\0';
+    dig_retrieval[0] = '\0';
+    dig_distribution[0] = '\0';
+    if (strcmp(law_out.decision.family_id, "scientific") == 0)
+    {
+        snprintf(sci_parameter,
+                 sizeof(sci_parameter),
+                 "%s",
+                 (strstr(law_out.decision.stack.evidence_profile, "parameter_lock_required") ||
+                  strstr(law_out.decision.stack.evidence_profile, "parameter_diff_trace_required"))
+                     ? "parameter lock and diff trace required"
+                     : "parameter governance active");
+        snprintf(sci_repro,
+                 sizeof(sci_repro),
+                 "%s",
+                 strstr(law_out.decision.stack.evidence_profile, "reproducibility_proofpack_required")
+                     ? "reproducibility proofpack required"
+                     : "reproducibility checks partial");
+        snprintf(sci_dataset,
+                 sizeof(sci_dataset),
+                 "%s",
+                 strstr(law_out.decision.stack.evidence_profile, "dataset_integrity_attestation_required")
+                     ? "dataset integrity attestation required"
+                     : "dataset integrity not primary");
+        snprintf(sci_publication,
+                 sizeof(sci_publication),
+                 "%s",
+                 strcmp(law_out.decision.specialization_id, "result-publication-control") == 0
+                     ? (law_out.decision.final_effect == YAI_LAW_EFFECT_DENY
+                            ? "publication blocked pending authority/repro checks"
+                            : law_out.decision.final_effect == YAI_LAW_EFFECT_QUARANTINE
+                                  ? "publication quarantined pending review"
+                                  : "publication control active")
+                     : "publication control not primary");
+    }
+    if (strcmp(law_out.decision.family_id, "digital") == 0)
+    {
+        snprintf(dig_outbound,
+                 sizeof(dig_outbound),
+                 "%s",
+                 strcmp(law_out.decision.specialization_id, "remote-retrieval") == 0
+                     ? "remote retrieval governed path active"
+                     : strcmp(law_out.decision.specialization_id, "remote-publication") == 0
+                           ? "remote publication governed path active"
+                           : strcmp(law_out.decision.specialization_id, "external-commentary") == 0
+                                 ? "external commentary governed path active"
+                                 : strcmp(law_out.decision.specialization_id, "artifact-distribution") == 0
+                                       ? "artifact distribution governed path active"
+                                       : strcmp(law_out.decision.specialization_id, "digital-sink-control") == 0
+                                             ? "digital sink governance active"
+                                             : "digital outbound governance active");
+        snprintf(dig_sink,
+                 sizeof(dig_sink),
+                 "%s",
+                 strstr(law_out.decision.stack.evidence_profile, "sink_policy_attestation_required")
+                     ? "sink policy attestation required"
+                     : "sink target checks not primary");
+        snprintf(dig_publication,
+                 sizeof(dig_publication),
+                 "%s",
+                 strcmp(law_out.decision.specialization_id, "remote-publication") == 0
+                     ? (law_out.decision.final_effect == YAI_LAW_EFFECT_DENY
+                            ? "publication denied pending authority/sink checks"
+                            : law_out.decision.final_effect == YAI_LAW_EFFECT_QUARANTINE
+                                  ? "publication quarantined pending sink review"
+                                  : "publication requires review record")
+                     : "publication control not primary");
+        snprintf(dig_retrieval,
+                 sizeof(dig_retrieval),
+                 "%s",
+                 strstr(law_out.decision.stack.evidence_profile, "retrieval_source_attestation_required")
+                     ? "retrieval source attestation required"
+                     : "retrieval control not primary");
+        snprintf(dig_distribution,
+                 sizeof(dig_distribution),
+                 "%s",
+                 strstr(law_out.decision.stack.evidence_profile, "distribution_manifest_required")
+                     ? "distribution manifest and destination trace required"
+                     : "artifact distribution not primary");
+    }
 
     if (law_out.decision.final_effect == YAI_LAW_EFFECT_DENY ||
         law_out.decision.final_effect == YAI_LAW_EFFECT_QUARANTINE)
@@ -805,6 +977,8 @@ int yai_session_handle_control_call(
                  "\"decision\":{"
                    "\"decision_id\":\"%s\","
                    "\"domain_id\":\"%s\","
+                   "\"family_id\":\"%s\","
+                   "\"specialization_id\":\"%s\","
                    "\"effect\":\"%s\","
                    "\"rationale\":\"%s\""
                  "},"
@@ -817,12 +991,36 @@ int yai_session_handle_control_call(
                    "\"resource\":\"%s\","
                    "\"authority_context\":\"%s\""
                  "},"
+                 "\"execution\":{"
+                   "\"mode_requested\":\"%s\","
+                   "\"mode_effective\":\"%s\","
+                   "\"degraded\":%s,"
+                   "\"degraded_reason\":\"%s\","
+                   "\"unsupported_scopes\":\"%s\","
+                   "\"attach_descriptor_ref\":\"%s\","
+                   "\"execution_profile_ref\":\"%s\""
+                 "},"
+                 "\"scientific\":{"
+                   "\"parameter_governance_summary\":\"%s\","
+                   "\"reproducibility_summary\":\"%s\","
+                   "\"dataset_integrity_summary\":\"%s\","
+                   "\"publication_control_summary\":\"%s\""
+                 "},"
+                 "\"digital\":{"
+                   "\"outbound_context_summary\":\"%s\","
+                   "\"sink_target_summary\":\"%s\","
+                   "\"publication_control_summary\":\"%s\","
+                   "\"retrieval_control_summary\":\"%s\","
+                   "\"distribution_control_summary\":\"%s\""
+                 "},"
                  "\"resolution_trace\":%s"
                  "}",
                  runtime_ws_id,
                  s->session_id,
                  law_out.decision.decision_id,
                  law_out.decision.domain_id,
+                 law_out.decision.family_id,
+                 law_out.decision.specialization_id,
                  effect_name,
                  law_out.decision.rationale,
                  law_out.evidence.trace_id,
@@ -832,6 +1030,22 @@ int yai_session_handle_control_call(
                  law_out.evidence.provider,
                  law_out.evidence.resource,
                  law_out.evidence.authority_context,
+                 ws_info.execution_mode_requested[0] ? ws_info.execution_mode_requested : "scoped",
+                 ws_info.execution_mode_effective[0] ? ws_info.execution_mode_effective : "scoped",
+                 ws_info.execution_mode_degraded ? "true" : "false",
+                 ws_info.execution_degraded_reason[0] ? ws_info.execution_degraded_reason : "none",
+                 ws_info.execution_unsupported_scopes[0] ? ws_info.execution_unsupported_scopes : "none",
+                 ws_info.attach_descriptor_ref,
+                 ws_info.execution_profile_ref,
+                 sci_parameter[0] ? sci_parameter : "not scientific context",
+                 sci_repro[0] ? sci_repro : "not scientific context",
+                 sci_dataset[0] ? sci_dataset : "not scientific context",
+                 sci_publication[0] ? sci_publication : "not scientific context",
+                 dig_outbound[0] ? dig_outbound : "not digital context",
+                 dig_sink[0] ? dig_sink : "not digital context",
+                 dig_publication[0] ? dig_publication : "not digital context",
+                 dig_retrieval[0] ? dig_retrieval : "not digital context",
+                 dig_distribution[0] ? dig_distribution : "not digital context",
                  law_out.trace_json[0] ? law_out.trace_json : "{}") <= 0)
     {
         yai_session_send_exec_reply(

@@ -112,7 +112,7 @@ assert r["data"]["active"] is False
 # create + activate
 r = call(WS, "yai.workspace.create", [WS])
 assert r["status"] == "ok"
-r = call("system", "yai.workspace.activate", [WS])
+r = call("system", "yai.workspace.set", [WS])
 assert r["status"] == "ok"
 
 # current/status/inspect
@@ -125,11 +125,16 @@ r = call("system", "yai.workspace.status")
 assert r["status"] == "ok"
 assert r["data"]["binding_status"] == "active"
 assert r["data"]["active"] is True
+assert r["data"]["security_level_declared"] in ("logical", "scoped", "isolated", "sandboxed")
+assert r["data"]["security_level_effective"] in ("logical", "scoped", "isolated", "sandboxed")
 
 r = call("system", "yai.workspace.inspect")
 assert r["status"] == "ok"
 assert r["data"]["identity"]["workspace_id"] == WS
 assert "normative" in r["data"]
+assert "security" in r["data"]
+assert r["data"]["security"]["level_declared"] in ("logical", "scoped", "isolated", "sandboxed")
+assert r["data"]["security"]["capabilities"]["sandbox_ready"] is True
 
 # domain set/get valid
 r = call("system", "yai.workspace.domain_set", ["--family", "economic", "--specialization", "payments"])
@@ -156,11 +161,13 @@ r = call("system", "yai.workspace.policy_effective")
 assert r["status"] == "ok"
 assert r["data"]["workspace_id"] == WS
 assert "effect_summary" in r["data"]
+assert r["data"]["security_level_effective"] in ("logical", "scoped", "isolated", "sandboxed")
 
 r = call("system", "yai.workspace.debug_resolution")
 assert r["status"] == "ok"
 assert r["data"]["workspace_id"] == WS
 assert "effective" in r["data"]
+assert r["data"]["security_level_effective"] in ("logical", "scoped", "isolated", "sandboxed")
 
 # clear + no active
 r = call("system", "yai.workspace.unset")

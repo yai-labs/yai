@@ -6,12 +6,18 @@ int yai_law_classify_action(const char *payload, char *out, size_t out_cap) {
   const char *v = "transform";
   if (!payload || !out || out_cap == 0) return -1;
 
-  if (strstr(payload, "curl") || strstr(payload, "egress") || strstr(payload, "otel") || strstr(payload, "s3")) {
+  if (strstr(payload, "curl") || strstr(payload, "egress") || strstr(payload, "otel") || strstr(payload, "s3") ||
+      strstr(payload, "outbound") || strstr(payload, "webhook") || strstr(payload, "upload")) {
     v = "egress";
-  } else if (strstr(payload, "github") || strstr(payload, "comment") || strstr(payload, "publish")) {
+  } else if (strstr(payload, "github") || strstr(payload, "comment") || strstr(payload, "publish") ||
+             strstr(payload, "release")) {
     v = "publish";
-  } else if (strstr(payload, "retrieve") || strstr(payload, "read")) {
+  } else if (strstr(payload, "retrieve") || strstr(payload, "read") || strstr(payload, "fetch")) {
     v = "retrieve";
+  } else if (strstr(payload, "distribution") || strstr(payload, "deliver") || strstr(payload, "share")) {
+    v = "distribute";
+  } else if (strstr(payload, "sink") || strstr(payload, "destination") || strstr(payload, "target")) {
+    v = "sink-control";
   } else if (strstr(payload, "payment") || strstr(payload, "transfer") || strstr(payload, "settlement") ||
              strstr(payload, "ledger") || strstr(payload, "authorize")) {
     v = "authorize";

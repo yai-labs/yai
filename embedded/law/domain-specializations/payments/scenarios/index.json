@@ -5,6 +5,7 @@
   "scenario_classes": [
     "payments.default",
     "payments.high_impact",
-    "payments.overlay_finance"
+    "payments.overlay_finance",
+    "payments.workspace_real_flow_v1"
   ]
 }

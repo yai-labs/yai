@@ -109,7 +109,7 @@ zshrc = home / ".zshrc"
 prompt_script = home / ".config" / "yai" / "shell" / "yai-prompt.zsh"
 
 call(WS1, "yai.workspace.create", [WS1])
-call("system", "yai.workspace.activate", [WS1])
+call("system", "yai.workspace.set", [WS1])
 
 assert_true(prompt_script.exists(), "managed prompt script missing after activate")
 assert_true(zshrc.exists(), "managed zshrc missing after activate")
@@ -125,7 +125,7 @@ assert_true("prompt_yai_ws" in s1, "prompt segment function missing")
 assert_true(WS1 not in s1, "prompt script must not be workspace-specific")
 
 call(WS2, "yai.workspace.create", [WS2])
-call("system", "yai.workspace.activate", [WS2])
+call("system", "yai.workspace.set", [WS2])
 
 z2 = zshrc.read_text(encoding="utf-8")
 s2 = prompt_script.read_text(encoding="utf-8")

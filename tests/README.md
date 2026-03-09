@@ -23,5 +23,6 @@ Primary commands:
 
 - `make test-unit`
 - `make test-integration`
+- `make test-demo-matrix`
 - `make test-e2e`
 - `make test`

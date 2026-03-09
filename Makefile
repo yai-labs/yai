@@ -159,6 +159,7 @@ DOXY_OUT ?= $(DIST_ROOT)/docs/doxygen
 
 .PHONY: all yai foundations support platform protocol core exec brain \
         test test-unit test-integration test-e2e test-core test-brain test-protocol test-law \
+        test-demo-matrix verify-final-demo-matrix \
         clean clean-dist clean-all build build-all dist dist-all bundle verify \
         preflight-release docs docs-clean docs-verify proof-verify release-guards \
         release-guards-dev changelog-verify dirs help legacy-build \
@@ -192,9 +193,18 @@ test-integration:
 	@tests/integration/workspace_lifecycle/workspace_session_binding_contract_v1.sh
 	@tests/integration/workspace_lifecycle/workspace_inspect_surfaces_v1.sh
 	@tests/integration/workspace_lifecycle/workspace_real_flow_v1.sh
+	@tests/integration/workspace_lifecycle/workspace_scientific_flow_v1.sh
+	@tests/integration/workspace_lifecycle/workspace_digital_flow_v1.sh
 	@tests/integration/workspace_lifecycle/workspace_negative_paths_v1.sh
 	@tests/integration/runtime_handshake/run_runtime_handshake_smoke.sh
 	@echo "[YAI] integration suites complete"
+
+test-demo-matrix:
+	@tests/integration/workspace_lifecycle/workspace_final_demo_matrix_v1.sh
+	@echo "[YAI] final demo matrix suites complete"
+
+verify-final-demo-matrix:
+	@tools/dev/verify_final_demo_matrix.sh
 
 test-e2e:
 	@tests/e2e/run_entrypoint_e2e.sh

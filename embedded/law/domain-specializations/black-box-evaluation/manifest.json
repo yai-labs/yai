@@ -31,5 +31,34 @@
   "evidence_profile": {
     "requires_parameter_trace": true,
     "retention_hint": "extended"
-  }
+  },
+  "scientific_semantics": {
+    "experiment_intent": "black_box_evaluation",
+    "governed_assets": [
+      "evaluation-config",
+      "model-artifact",
+      "evaluation-result"
+    ],
+    "risk_surface": [
+      "opaque-behavior",
+      "hidden-parameter-dependency",
+      "unsupported-publication-claim"
+    ]
+  },
+  "evaluation_policy": {
+    "requires_human_oversight": true,
+    "requires_review_trace": true,
+    "requires_provenance_capture": true
+  },
+  "policy_baseline": {
+    "effect_default": "review_required",
+    "effect_on_high_risk_signal": "quarantine"
+  },
+  "evidence_obligations": [
+    "resolution_trace",
+    "decision_record",
+    "review_trace_required",
+    "oversight_trace_required",
+    "provenance_required"
+  ]
 }

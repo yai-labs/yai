@@ -99,7 +99,7 @@ void yai_session_send_exec_reply(
     const char *target_plane,
     const char *data_json)
 {
-    char out[2048];
+    char out[YAI_MAX_PAYLOAD + 4096];
     if (build_exec_reply_v1(
             out,
             sizeof(out),

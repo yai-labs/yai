@@ -22,6 +22,12 @@ typedef struct yai_stack_accumulator {
   int has_oversight_trace;
   int has_parameter_lock;
   int has_fraud_trace;
+  int has_destination_trace;
+  int has_channel_trace;
+  int has_sink_attestation;
+  int has_retrieval_attestation;
+  int has_distribution_manifest;
+  int has_commentary_review;
 } yai_stack_accumulator_t;
 
 static void add_rule(yai_law_effective_stack_t *stack, const char *id) {
@@ -280,12 +286,176 @@ int yai_law_stack_build(const yai_law_runtime_t *rt,
     *effect = YAI_LAW_EFFECT_DENY;
     (void)yai_law_safe_snprintf(rationale, rationale_cap, "%s", "missing parameter lock");
   }
+  if (strcmp(discovery->specialization_id, "parameter-governance") == 0 && ctx->has_params_hash) {
+    add_rule(stack, "specialization.parameter-lock.present");
+    agg.has_parameter_lock = 1;
+    agg.has_provenance = 1;
+    if (*effect == YAI_LAW_EFFECT_ALLOW) *effect = YAI_LAW_EFFECT_REVIEW_REQUIRED;
+    agg.has_review_required = 1;
+    (void)yai_law_safe_snprintf(rationale, rationale_cap, "%s", "parameter lock captured; review required for governed parameter changes");
+  }
+  if (strcmp(discovery->specialization_id, "experiment-configuration") == 0) {
+    add_rule(stack, "specialization.experiment-configuration.review");
+    agg.has_review_trace = 1;
+    agg.has_provenance = 1;
+    agg.has_review_required = 1;
+    if (*effect == YAI_LAW_EFFECT_ALLOW) *effect = YAI_LAW_EFFECT_REVIEW_REQUIRED;
+    (void)yai_law_safe_snprintf(rationale, rationale_cap, "%s", "experiment configuration requires reproducibility traceability");
+  }
+  if (strcmp(discovery->specialization_id, "reproducibility-control") == 0) {
+    if (!ctx->has_repro_context || !ctx->has_dataset_ref) {
+      add_rule(stack, "specialization.reproducibility.context-missing");
+      agg.has_provenance = 1;
+      agg.has_review_trace = 1;
+      agg.has_review_required = 1;
+      *effect = YAI_LAW_EFFECT_DENY;
+      (void)yai_law_safe_snprintf(rationale, rationale_cap, "%s", "reproducibility context is incomplete");
+    } else {
+      add_rule(stack, "specialization.reproducibility.proofpack-required");
+      agg.has_provenance = 1;
+      agg.has_retention = 1;
+      agg.has_review_trace = 1;
+      agg.has_review_required = 1;
+      if (*effect == YAI_LAW_EFFECT_ALLOW) *effect = YAI_LAW_EFFECT_REVIEW_REQUIRED;
+      (void)yai_law_safe_snprintf(rationale, rationale_cap, "%s", "reproducibility proof material required before publication");
+    }
+  }
+  if (strcmp(discovery->specialization_id, "dataset-integrity") == 0) {
+    add_rule(stack, "specialization.dataset-integrity.attestation-required");
+    agg.has_provenance = 1;
+    agg.has_review_trace = 1;
+    agg.has_review_required = 1;
+    if (!ctx->has_dataset_ref) {
+      *effect = YAI_LAW_EFFECT_DENY;
+      (void)yai_law_safe_snprintf(rationale, rationale_cap, "%s", "dataset integrity operation missing dataset reference");
+    } else if (*effect == YAI_LAW_EFFECT_ALLOW) {
+      *effect = YAI_LAW_EFFECT_REVIEW_REQUIRED;
+      (void)yai_law_safe_snprintf(rationale, rationale_cap, "%s", "dataset integrity requires attestation and review trace");
+    }
+  }
+  if (strcmp(discovery->specialization_id, "result-publication-control") == 0) {
+    add_rule(stack, "specialization.result-publication.review");
+    agg.has_provenance = 1;
+    agg.has_review_trace = 1;
+    agg.has_retention = 1;
+    agg.has_review_required = 1;
+    if (!ctx->has_authority_contract) {
+      *effect = YAI_LAW_EFFECT_DENY;
+      agg.has_explicit_approval = 1;
+      (void)yai_law_safe_snprintf(rationale, rationale_cap, "%s", "result publication requires authority contract");
+    } else if (!ctx->has_repro_context || !ctx->has_result_ref) {
+      *effect = YAI_LAW_EFFECT_QUARANTINE;
+      agg.has_escalation = 1;
+      (void)yai_law_safe_snprintf(rationale, rationale_cap, "%s", "result publication quarantined until reproducibility proof is complete");
+    } else if (*effect == YAI_LAW_EFFECT_ALLOW) {
+      *effect = YAI_LAW_EFFECT_REVIEW_REQUIRED;
+      (void)yai_law_safe_snprintf(rationale, rationale_cap, "%s", "publication-ready result requires final human review");
+    }
+  }
   if (strcmp(discovery->specialization_id, "black-box-evaluation") == 0 || ctx->black_box_mode) {
     add_rule(stack, "specialization.black-box.review");
     agg.has_review_required = 1;
     agg.has_review_trace = 1;
+    agg.has_provenance = 1;
     *effect = YAI_LAW_EFFECT_REVIEW_REQUIRED;
     (void)yai_law_safe_snprintf(rationale, rationale_cap, "%s", "black-box evaluation requires review");
+  }
+  if (strcmp(discovery->specialization_id, "remote-retrieval") == 0) {
+    add_rule(stack, "specialization.remote-retrieval.source-attestation");
+    agg.has_destination_trace = 1;
+    agg.has_retrieval_attestation = 1;
+    if (ctx->sink_external && !ctx->sink_trusted) {
+      *effect = YAI_LAW_EFFECT_REVIEW_REQUIRED;
+      agg.has_review_required = 1;
+      agg.has_review_trace = 1;
+      (void)yai_law_safe_snprintf(rationale, rationale_cap, "%s", "external retrieval requires source attestation review");
+    } else if (*effect == YAI_LAW_EFFECT_ALLOW) {
+      (void)yai_law_safe_snprintf(rationale, rationale_cap, "%s", "retrieval allowed with source and destination trace");
+    }
+  }
+  if (strcmp(discovery->specialization_id, "network-egress") == 0) {
+    add_rule(stack, "specialization.network-egress.destination-trace");
+    agg.has_destination_trace = 1;
+    agg.has_channel_trace = 1;
+    if (ctx->sink_external && !ctx->has_authority_contract) {
+      *effect = YAI_LAW_EFFECT_DENY;
+      agg.has_explicit_approval = 1;
+      (void)yai_law_safe_snprintf(rationale, rationale_cap, "%s", "external egress requires authority contract");
+    } else if (ctx->sink_external && *effect == YAI_LAW_EFFECT_ALLOW) {
+      *effect = YAI_LAW_EFFECT_REVIEW_REQUIRED;
+      agg.has_review_required = 1;
+      (void)yai_law_safe_snprintf(rationale, rationale_cap, "%s", "external egress allowed with review");
+    }
+  }
+  if (strcmp(discovery->specialization_id, "remote-publication") == 0) {
+    add_rule(stack, "specialization.remote-publication.review");
+    agg.has_destination_trace = 1;
+    agg.has_channel_trace = 1;
+    agg.has_review_required = 1;
+    agg.has_review_trace = 1;
+    if (!ctx->has_authority_contract) {
+      *effect = YAI_LAW_EFFECT_DENY;
+      agg.has_explicit_approval = 1;
+      (void)yai_law_safe_snprintf(rationale, rationale_cap, "%s", "remote publication requires authority contract");
+    } else if (!ctx->sink_trusted && ctx->sink_external) {
+      *effect = YAI_LAW_EFFECT_QUARANTINE;
+      agg.has_escalation = 1;
+      (void)yai_law_safe_snprintf(rationale, rationale_cap, "%s", "publication to untrusted external sink quarantined");
+    } else if (*effect == YAI_LAW_EFFECT_ALLOW) {
+      *effect = YAI_LAW_EFFECT_REVIEW_REQUIRED;
+      (void)yai_law_safe_snprintf(rationale, rationale_cap, "%s", "publication requires review record");
+    }
+  }
+  if (strcmp(discovery->specialization_id, "external-commentary") == 0) {
+    add_rule(stack, "specialization.external-commentary.governed");
+    agg.has_destination_trace = 1;
+    agg.has_commentary_review = 1;
+    if (ctx->sink_external && !ctx->has_authority_contract) {
+      *effect = YAI_LAW_EFFECT_DENY;
+      agg.has_explicit_approval = 1;
+      (void)yai_law_safe_snprintf(rationale, rationale_cap, "%s", "external commentary denied without authority contract");
+    } else {
+      *effect = YAI_LAW_EFFECT_REVIEW_REQUIRED;
+      agg.has_review_required = 1;
+      agg.has_review_trace = 1;
+      (void)yai_law_safe_snprintf(rationale, rationale_cap, "%s", "external commentary requires review trace");
+    }
+  }
+  if (strcmp(discovery->specialization_id, "artifact-distribution") == 0) {
+    add_rule(stack, "specialization.artifact-distribution.manifest-required");
+    agg.has_destination_trace = 1;
+    agg.has_distribution_manifest = 1;
+    if (!ctx->has_result_ref || !ctx->has_sink_ref) {
+      *effect = YAI_LAW_EFFECT_DENY;
+      agg.has_explicit_approval = 1;
+      (void)yai_law_safe_snprintf(rationale, rationale_cap, "%s", "artifact distribution missing artifact or sink reference");
+    } else if (!ctx->has_authority_contract || !ctx->sink_trusted) {
+      *effect = YAI_LAW_EFFECT_QUARANTINE;
+      agg.has_escalation = 1;
+      agg.has_review_trace = 1;
+      (void)yai_law_safe_snprintf(rationale, rationale_cap, "%s", "artifact distribution quarantined pending manifest and sink review");
+    } else {
+      *effect = YAI_LAW_EFFECT_REVIEW_REQUIRED;
+      agg.has_review_required = 1;
+      (void)yai_law_safe_snprintf(rationale, rationale_cap, "%s", "artifact distribution requires final release review");
+    }
+  }
+  if (strcmp(discovery->specialization_id, "digital-sink-control") == 0) {
+    add_rule(stack, "specialization.digital-sink-control.attestation");
+    agg.has_sink_attestation = 1;
+    agg.has_destination_trace = 1;
+    if (!ctx->has_sink_ref) {
+      *effect = YAI_LAW_EFFECT_DENY;
+      (void)yai_law_safe_snprintf(rationale, rationale_cap, "%s", "digital sink control requires sink reference");
+    } else if (ctx->sink_external && !ctx->sink_trusted) {
+      *effect = YAI_LAW_EFFECT_QUARANTINE;
+      agg.has_escalation = 1;
+      (void)yai_law_safe_snprintf(rationale, rationale_cap, "%s", "untrusted external sink quarantined");
+    } else {
+      *effect = YAI_LAW_EFFECT_REVIEW_REQUIRED;
+      agg.has_review_required = 1;
+      (void)yai_law_safe_snprintf(rationale, rationale_cap, "%s", "sink policy attestation required");
+    }
   }
 
   if (stack_has_token(stack->regulatory_overlays, stack->regulatory_overlay_count, "security-supply-chain") &&
@@ -373,6 +543,18 @@ int yai_law_stack_build(const yai_law_runtime_t *rt,
   if (agg.has_oversight_trace) add_evidence_contributor(stack, "oversight_trace_required");
   if (agg.has_parameter_lock) add_evidence_contributor(stack, "parameter_lock_required");
   if (agg.has_fraud_trace) add_evidence_contributor(stack, "fraud_trace_required");
+  if (agg.has_destination_trace) add_evidence_contributor(stack, "destination_trace_required");
+  if (agg.has_channel_trace) add_evidence_contributor(stack, "outbound_channel_trace_required");
+  if (agg.has_sink_attestation) add_evidence_contributor(stack, "sink_policy_attestation_required");
+  if (agg.has_retrieval_attestation) add_evidence_contributor(stack, "retrieval_source_attestation_required");
+  if (agg.has_distribution_manifest) add_evidence_contributor(stack, "distribution_manifest_required");
+  if (agg.has_commentary_review) add_evidence_contributor(stack, "commentary_review_record_required");
+  if (strcmp(discovery->family_id, "scientific") == 0) {
+    if (ctx->has_repro_context) add_evidence_contributor(stack, "reproducibility_proofpack_required");
+    if (ctx->has_dataset_ref) add_evidence_contributor(stack, "dataset_integrity_attestation_required");
+    if (ctx->has_publication_intent) add_evidence_contributor(stack, "publication_review_record_required");
+    if (ctx->has_locked_parameters || ctx->has_params_hash) add_evidence_contributor(stack, "parameter_diff_trace_required");
+  }
 
   build_profile_from_contributors(stack->authority_contributors,
                                   stack->authority_contributor_count,

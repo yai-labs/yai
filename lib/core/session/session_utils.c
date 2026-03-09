@@ -26,6 +26,172 @@ static const char *yai_get_home(void)
     return (home && home[0]) ? home : NULL;
 }
 
+static int yai_workspace_is_scientific(const yai_workspace_runtime_info_t *info)
+{
+  const char *family;
+  if (!info) return 0;
+  family = info->inferred_family[0] ? info->inferred_family : info->declared_control_family;
+  return (family[0] && strcmp(family, "scientific") == 0) ? 1 : 0;
+}
+
+static int yai_workspace_is_digital(const yai_workspace_runtime_info_t *info)
+{
+    const char *family;
+    if (!info) return 0;
+    family = info->inferred_family[0] ? info->inferred_family : info->declared_control_family;
+    return (family[0] && strcmp(family, "digital") == 0) ? 1 : 0;
+}
+
+static void yai_workspace_build_scientific_summaries(const yai_workspace_runtime_info_t *info,
+                                                     char *experiment_context,
+                                                     size_t experiment_cap,
+                                                     char *parameter_governance,
+                                                     size_t parameter_cap,
+                                                     char *reproducibility,
+                                                     size_t reproducibility_cap,
+                                                     char *dataset_integrity,
+                                                     size_t dataset_cap,
+                                                     char *publication_control,
+                                                     size_t publication_cap)
+{
+    const char *spec;
+    const char *effect;
+    int scientific;
+    if (!info) return;
+    spec = info->inferred_specialization[0] ? info->inferred_specialization : info->declared_specialization;
+    effect = info->last_effect_summary[0] ? info->last_effect_summary : "not resolved";
+    scientific = yai_workspace_is_scientific(info);
+
+    if (!scientific) {
+        (void)snprintf(experiment_context, experiment_cap, "%s", "not scientific context");
+        (void)snprintf(parameter_governance, parameter_cap, "%s", "not scientific context");
+        (void)snprintf(reproducibility, reproducibility_cap, "%s", "not scientific context");
+        (void)snprintf(dataset_integrity, dataset_cap, "%s", "not scientific context");
+        (void)snprintf(publication_control, publication_cap, "%s", "not scientific context");
+        return;
+    }
+
+    if (strcmp(spec, "experiment-configuration") == 0) {
+        (void)snprintf(experiment_context, experiment_cap, "%s", "experiment configuration governance active");
+    } else if (strcmp(spec, "parameter-governance") == 0) {
+        (void)snprintf(experiment_context, experiment_cap, "%s", "parameter-focused experiment path active");
+    } else {
+        (void)snprintf(experiment_context, experiment_cap, "%s", "scientific workspace execution path active");
+    }
+
+    if (strstr(info->last_evidence_summary, "parameter_lock_required") ||
+        strstr(info->last_evidence_summary, "parameter_diff_trace_required")) {
+        (void)snprintf(parameter_governance, parameter_cap, "%s", "parameter lock and diff trace required");
+    } else if (strcmp(spec, "parameter-governance") == 0) {
+        (void)snprintf(parameter_governance, parameter_cap, "%s", "parameter governance enforced");
+    } else {
+        (void)snprintf(parameter_governance, parameter_cap, "%s", "parameter governance not primary in last resolution");
+    }
+
+    if (strstr(info->last_evidence_summary, "reproducibility_proofpack_required")) {
+        (void)snprintf(reproducibility, reproducibility_cap, "%s", "reproducibility proofpack required");
+    } else if (strcmp(spec, "reproducibility-control") == 0) {
+        (void)snprintf(reproducibility, reproducibility_cap, "%s", "reproducibility control active");
+    } else {
+        (void)snprintf(reproducibility, reproducibility_cap, "%s", "reproducibility checks partial");
+    }
+
+    if (strstr(info->last_evidence_summary, "dataset_integrity_attestation_required") ||
+        strcmp(spec, "dataset-integrity") == 0) {
+        (void)snprintf(dataset_integrity, dataset_cap, "%s", "dataset integrity attestation required");
+    } else {
+        (void)snprintf(dataset_integrity, dataset_cap, "%s", "dataset integrity checks not primary in last resolution");
+    }
+
+    if (strcmp(spec, "result-publication-control") == 0) {
+        (void)snprintf(publication_control,
+                       publication_cap,
+                       "%s",
+                       strcmp(effect, "deny") == 0 ? "publication blocked pending authority/repro checks" :
+                       strcmp(effect, "quarantine") == 0 ? "publication quarantined pending review" :
+                       strcmp(effect, "review_required") == 0 ? "publication requires final review" :
+                       "publication path allowed with evidence obligations");
+    } else {
+        (void)snprintf(publication_control, publication_cap, "%s", "publication control not primary in last resolution");
+    }
+}
+
+static void yai_workspace_build_digital_summaries(const yai_workspace_runtime_info_t *info,
+                                                  char *outbound_context,
+                                                  size_t outbound_cap,
+                                                  char *sink_target,
+                                                  size_t sink_cap,
+                                                  char *publication_control,
+                                                  size_t publication_cap,
+                                                  char *retrieval_control,
+                                                  size_t retrieval_cap,
+                                                  char *distribution_control,
+                                                  size_t distribution_cap)
+{
+    const char *spec;
+    const char *effect;
+    int digital;
+    if (!info) return;
+    spec = info->inferred_specialization[0] ? info->inferred_specialization : info->declared_specialization;
+    effect = info->last_effect_summary[0] ? info->last_effect_summary : "not resolved";
+    digital = yai_workspace_is_digital(info);
+
+    if (!digital) {
+        (void)snprintf(outbound_context, outbound_cap, "%s", "not digital context");
+        (void)snprintf(sink_target, sink_cap, "%s", "not digital context");
+        (void)snprintf(publication_control, publication_cap, "%s", "not digital context");
+        (void)snprintf(retrieval_control, retrieval_cap, "%s", "not digital context");
+        (void)snprintf(distribution_control, distribution_cap, "%s", "not digital context");
+        return;
+    }
+
+    if (strcmp(spec, "remote-retrieval") == 0) {
+        (void)snprintf(outbound_context, outbound_cap, "%s", "remote retrieval governed path active");
+    } else if (strcmp(spec, "remote-publication") == 0) {
+        (void)snprintf(outbound_context, outbound_cap, "%s", "remote publication governed path active");
+    } else if (strcmp(spec, "external-commentary") == 0) {
+        (void)snprintf(outbound_context, outbound_cap, "%s", "external commentary governed path active");
+    } else if (strcmp(spec, "artifact-distribution") == 0) {
+        (void)snprintf(outbound_context, outbound_cap, "%s", "artifact distribution governed path active");
+    } else if (strcmp(spec, "digital-sink-control") == 0) {
+        (void)snprintf(outbound_context, outbound_cap, "%s", "digital sink governance active");
+    } else {
+        (void)snprintf(outbound_context, outbound_cap, "%s", "digital outbound governance active");
+    }
+
+    if (strstr(info->last_evidence_summary, "sink_policy_attestation_required")) {
+        (void)snprintf(sink_target, sink_cap, "%s", "sink policy attestation required");
+    } else if (strcmp(spec, "digital-sink-control") == 0) {
+        (void)snprintf(sink_target, sink_cap, "%s", "sink target control active");
+    } else {
+        (void)snprintf(sink_target, sink_cap, "%s", "sink target checks not primary in last resolution");
+    }
+
+    if (strcmp(spec, "remote-publication") == 0 || strstr(info->last_evidence_summary, "publication_review_record_required")) {
+        (void)snprintf(publication_control,
+                       publication_cap,
+                       "%s",
+                       strcmp(effect, "deny") == 0 ? "publication denied pending authority/sink checks" :
+                       strcmp(effect, "quarantine") == 0 ? "publication quarantined pending sink review" :
+                       strcmp(effect, "review_required") == 0 ? "publication requires review record" :
+                       "publication path allowed with destination trace");
+    } else {
+        (void)snprintf(publication_control, publication_cap, "%s", "publication control not primary in last resolution");
+    }
+
+    if (strcmp(spec, "remote-retrieval") == 0 || strstr(info->last_evidence_summary, "retrieval_source_attestation_required")) {
+        (void)snprintf(retrieval_control, retrieval_cap, "%s", "retrieval source attestation required");
+    } else {
+        (void)snprintf(retrieval_control, retrieval_cap, "%s", "retrieval control not primary in last resolution");
+    }
+
+    if (strcmp(spec, "artifact-distribution") == 0 || strstr(info->last_evidence_summary, "distribution_manifest_required")) {
+        (void)snprintf(distribution_control, distribution_cap, "%s", "distribution manifest and destination trace required");
+    } else {
+        (void)snprintf(distribution_control, distribution_cap, "%s", "artifact distribution not primary in last resolution");
+    }
+}
+
 static void trim_trailing_slashes(char *path);
 
 static int yai_workspace_store_root_path(char *out, size_t out_cap)
@@ -60,8 +226,210 @@ static int yai_workspace_runtime_state_root_path(const char *ws_id, char *out, s
 
 static int yai_workspace_metadata_root_path(const char *ws_id, char *out, size_t out_cap)
 {
-    /* metadata root currently co-locates with runtime state root by design. */
-    return yai_workspace_runtime_state_root_path(ws_id, out, out_cap);
+    char run_dir[MAX_PATH_LEN];
+    if (!ws_id || !out || out_cap == 0)
+        return -1;
+    if (yai_session_build_run_path(run_dir, sizeof(run_dir), ws_id) != 0)
+        return -1;
+    if (snprintf(out, out_cap, "%s/metadata", run_dir) <= 0)
+        return -1;
+    return 0;
+}
+
+static int yai_workspace_state_root_path(const char *ws_id, char *out, size_t out_cap)
+{
+    char run_dir[MAX_PATH_LEN];
+    if (!ws_id || !out || out_cap == 0)
+        return -1;
+    if (yai_session_build_run_path(run_dir, sizeof(run_dir), ws_id) != 0)
+        return -1;
+    if (snprintf(out, out_cap, "%s/state", run_dir) <= 0)
+        return -1;
+    return 0;
+}
+
+static int yai_workspace_traces_root_path(const char *ws_id, char *out, size_t out_cap)
+{
+    char run_dir[MAX_PATH_LEN];
+    if (!ws_id || !out || out_cap == 0)
+        return -1;
+    if (yai_session_build_run_path(run_dir, sizeof(run_dir), ws_id) != 0)
+        return -1;
+    if (snprintf(out, out_cap, "%s/traces", run_dir) <= 0)
+        return -1;
+    return 0;
+}
+
+static int yai_workspace_artifacts_root_path(const char *ws_id, char *out, size_t out_cap)
+{
+    char run_dir[MAX_PATH_LEN];
+    if (!ws_id || !out || out_cap == 0)
+        return -1;
+    if (yai_session_build_run_path(run_dir, sizeof(run_dir), ws_id) != 0)
+        return -1;
+    if (snprintf(out, out_cap, "%s/artifacts", run_dir) <= 0)
+        return -1;
+    return 0;
+}
+
+static int yai_workspace_runtime_local_root_path(const char *ws_id, char *out, size_t out_cap)
+{
+    char run_dir[MAX_PATH_LEN];
+    if (!ws_id || !out || out_cap == 0)
+        return -1;
+    if (yai_session_build_run_path(run_dir, sizeof(run_dir), ws_id) != 0)
+        return -1;
+    if (snprintf(out, out_cap, "%s/runtime", run_dir) <= 0)
+        return -1;
+    return 0;
+}
+
+static int yai_workspace_containment_surface_paths(yai_workspace_runtime_info_t *info)
+{
+    if (!info || !info->ws_id[0])
+        return -1;
+
+    if (yai_workspace_state_root_path(info->ws_id, info->state_root, sizeof(info->state_root)) != 0)
+        return -1;
+    if (yai_workspace_traces_root_path(info->ws_id, info->traces_root, sizeof(info->traces_root)) != 0)
+        return -1;
+    if (yai_workspace_artifacts_root_path(info->ws_id, info->artifacts_root, sizeof(info->artifacts_root)) != 0)
+        return -1;
+    if (yai_workspace_runtime_local_root_path(info->ws_id, info->runtime_local_root, sizeof(info->runtime_local_root)) != 0)
+        return -1;
+    if (snprintf(info->state_surface_path, sizeof(info->state_surface_path), "%s/workspace-state.json", info->state_root) <= 0)
+        return -1;
+    if (snprintf(info->traces_index_path, sizeof(info->traces_index_path), "%s/index.json", info->traces_root) <= 0)
+        return -1;
+    if (snprintf(info->artifacts_index_path, sizeof(info->artifacts_index_path), "%s/index.json", info->artifacts_root) <= 0)
+        return -1;
+    if (snprintf(info->runtime_surface_path, sizeof(info->runtime_surface_path), "%s/runtime-state.json", info->runtime_local_root) <= 0)
+        return -1;
+    if (snprintf(info->binding_state_path, sizeof(info->binding_state_path), "%s/binding.json", info->metadata_root) <= 0)
+        return -1;
+    if (snprintf(info->attach_descriptor_ref, sizeof(info->attach_descriptor_ref), "%s/attach-descriptor.json", info->runtime_local_root) <= 0)
+        return -1;
+    if (snprintf(info->execution_profile_ref, sizeof(info->execution_profile_ref), "%s/execution-profile.json", info->runtime_local_root) <= 0)
+        return -1;
+    return 0;
+}
+
+static void yai_workspace_security_defaults(yai_workspace_runtime_info_t *info)
+{
+    if (!info)
+        return;
+    snprintf(info->security_envelope_version, sizeof(info->security_envelope_version), "%s", "v1");
+    snprintf(info->security_level_declared, sizeof(info->security_level_declared), "%s", "scoped");
+    snprintf(info->security_level_effective, sizeof(info->security_level_effective), "%s", "logical");
+    snprintf(info->security_enforcement_mode, sizeof(info->security_enforcement_mode), "%s", "runtime_scoped");
+    snprintf(info->security_backend_mode, sizeof(info->security_backend_mode), "%s", "none");
+    info->scope_process = 0;
+    info->scope_filesystem = 1;
+    info->scope_socket = 0;
+    info->scope_network = 0;
+    info->scope_resource = 0;
+    info->scope_privilege = 0;
+    info->scope_runtime_route = 1;
+    info->scope_binding = 1;
+    info->capability_sandbox_ready = 1;
+    info->capability_hardened_fs = 1;
+    info->capability_process_isolation = 0;
+    info->capability_network_policy = 0;
+    snprintf(info->execution_mode_requested, sizeof(info->execution_mode_requested), "%s", "scoped");
+    snprintf(info->execution_mode_effective, sizeof(info->execution_mode_effective), "%s", "scoped");
+    info->execution_mode_degraded = 0;
+    snprintf(info->execution_degraded_reason, sizeof(info->execution_degraded_reason), "%s", "none");
+    snprintf(info->execution_unsupported_scopes, sizeof(info->execution_unsupported_scopes), "%s", "none");
+    snprintf(info->execution_advisory_scopes, sizeof(info->execution_advisory_scopes), "%s", "process,socket,network,resource,privilege");
+    snprintf(info->process_intent, sizeof(info->process_intent), "%s", "shared_runtime");
+    snprintf(info->channel_mode, sizeof(info->channel_mode), "%s", "global_control_scoped_route");
+    snprintf(info->artifact_policy_mode, sizeof(info->artifact_policy_mode), "%s", "workspace_owned");
+    snprintf(info->network_intent, sizeof(info->network_intent), "%s", "advisory_none");
+    snprintf(info->resource_intent, sizeof(info->resource_intent), "%s", "advisory_none");
+    snprintf(info->privilege_intent, sizeof(info->privilege_intent), "%s", "inherited_host");
+    info->attach_descriptor_ref[0] = '\0';
+    info->execution_profile_ref[0] = '\0';
+}
+
+static int yai_workspace_security_level_is_valid(const char *level)
+{
+    if (!level || !level[0])
+        return 0;
+    return strcmp(level, "logical") == 0 ||
+           strcmp(level, "scoped") == 0 ||
+           strcmp(level, "isolated") == 0 ||
+           strcmp(level, "sandboxed") == 0;
+}
+
+static void yai_workspace_security_recompute_effective(yai_workspace_runtime_info_t *info)
+{
+    const char *requested = NULL;
+    if (!info)
+        return;
+    requested = yai_workspace_security_level_is_valid(info->security_level_declared)
+                    ? info->security_level_declared
+                    : "scoped";
+    snprintf(info->execution_mode_requested, sizeof(info->execution_mode_requested), "%s", requested);
+
+    if (!info->containment_ready || !info->namespace_valid)
+    {
+        snprintf(info->security_level_effective, sizeof(info->security_level_effective), "%s", "logical");
+        snprintf(info->execution_mode_effective, sizeof(info->execution_mode_effective), "%s", "logical");
+        info->execution_mode_degraded = strcmp(requested, "logical") != 0;
+        snprintf(info->execution_degraded_reason,
+                 sizeof(info->execution_degraded_reason),
+                 "%s",
+                 info->execution_mode_degraded ? "containment_not_ready_or_namespace_invalid" : "none");
+        snprintf(info->execution_unsupported_scopes, sizeof(info->execution_unsupported_scopes), "%s", "none");
+        return;
+    }
+
+    if (strcmp(requested, "sandboxed") == 0)
+    {
+        snprintf(info->security_level_effective, sizeof(info->security_level_effective), "%s", "scoped");
+        snprintf(info->execution_mode_effective, sizeof(info->execution_mode_effective), "%s", "scoped");
+        info->execution_mode_degraded = 1;
+        snprintf(info->execution_degraded_reason, sizeof(info->execution_degraded_reason), "%s", "sandbox_backend_unavailable");
+        snprintf(info->execution_unsupported_scopes, sizeof(info->execution_unsupported_scopes), "%s", "process,socket,network,resource,privilege");
+        return;
+    }
+
+    if (strcmp(requested, "isolated") == 0)
+    {
+        if (info->scope_process || info->scope_socket || info->scope_network || info->scope_resource || info->scope_privilege)
+        {
+            snprintf(info->security_level_effective, sizeof(info->security_level_effective), "%s", "isolated");
+            snprintf(info->execution_mode_effective, sizeof(info->execution_mode_effective), "%s", "isolated");
+            info->execution_mode_degraded = 0;
+            snprintf(info->execution_degraded_reason, sizeof(info->execution_degraded_reason), "%s", "none");
+            snprintf(info->execution_unsupported_scopes, sizeof(info->execution_unsupported_scopes), "%s", "none");
+        }
+        else
+        {
+            snprintf(info->security_level_effective, sizeof(info->security_level_effective), "%s", "scoped");
+            snprintf(info->execution_mode_effective, sizeof(info->execution_mode_effective), "%s", "scoped");
+            info->execution_mode_degraded = 1;
+            snprintf(info->execution_degraded_reason, sizeof(info->execution_degraded_reason), "%s", "isolated_scopes_not_enforced");
+            snprintf(info->execution_unsupported_scopes, sizeof(info->execution_unsupported_scopes), "%s", "process,socket,network,resource,privilege");
+        }
+        return;
+    }
+
+    if (strcmp(requested, "logical") == 0)
+    {
+        snprintf(info->security_level_effective, sizeof(info->security_level_effective), "%s", "logical");
+        snprintf(info->execution_mode_effective, sizeof(info->execution_mode_effective), "%s", "logical");
+        info->execution_mode_degraded = 0;
+        snprintf(info->execution_degraded_reason, sizeof(info->execution_degraded_reason), "%s", "none");
+        snprintf(info->execution_unsupported_scopes, sizeof(info->execution_unsupported_scopes), "%s", "none");
+        return;
+    }
+
+    snprintf(info->security_level_effective, sizeof(info->security_level_effective), "%s", "scoped");
+    snprintf(info->execution_mode_effective, sizeof(info->execution_mode_effective), "%s", "scoped");
+    info->execution_mode_degraded = 0;
+    snprintf(info->execution_degraded_reason, sizeof(info->execution_degraded_reason), "%s", "none");
+    snprintf(info->execution_unsupported_scopes, sizeof(info->execution_unsupported_scopes), "%s", "none");
 }
 
 static int yai_path_is_under(const char *root, const char *path)
@@ -73,6 +441,15 @@ static int yai_path_is_under(const char *root, const char *path)
     if (strncmp(root, path, n) != 0)
         return 0;
     return path[n] == '\0' || path[n] == '/';
+}
+
+static int yai_is_ws_runtime_path_valid(const char *ws_id,
+                                        const char *actual_path,
+                                        const char *expected_path)
+{
+    if (!ws_id || !ws_id[0] || !actual_path || !actual_path[0] || !expected_path || !expected_path[0])
+        return 0;
+    return strcmp(actual_path, expected_path) == 0;
 }
 
 static void yai_workspace_fill_shell_relation(yai_workspace_runtime_info_t *info)
@@ -766,7 +1143,6 @@ static int yai_workspace_write_manifest_path(
     const yai_workspace_runtime_info_t *info)
 {
     FILE *f;
-    const char *declared_source;
 
     if (!manifest_path || !info)
         return -1;
@@ -774,119 +1150,77 @@ static int yai_workspace_write_manifest_path(
     f = fopen(manifest_path, "w");
     if (!f)
         return -1;
-
-    declared_source = info->declared_context_source[0] ? info->declared_context_source : "unset";
-    fprintf(f,
-            "{\n"
-            "  \"type\": \"yai.workspace.manifest.v1\",\n"
-            "  \"schema\": \"workspace-runtime.v1\",\n"
-            "  \"ws_id\": \"%s\",\n"
-            "  \"state\": \"%s\",\n"
-            "  \"created_at\": %ld,\n"
-            "  \"updated_at\": %ld,\n"
-            "  \"layout\": \"v3\",\n"
-            "  \"root_path\": \"%s\",\n"
-            "  \"identity\": {\n"
-            "    \"workspace_id\": \"%s\",\n"
-            "    \"workspace_alias\": \"%s\",\n"
-            "    \"workspace_root\": \"%s\"\n"
-            "  },\n"
-            "  \"lifecycle\": {\n"
-            "    \"workspace_state\": \"%s\",\n"
-            "    \"created_at\": %ld,\n"
-            "    \"activated_at\": %ld,\n"
-            "    \"last_attached_at\": %ld,\n"
-            "    \"last_updated_at\": %ld\n"
-            "  },\n"
-            "  \"root_model\": {\n"
-            "    \"workspace_store_root\": \"%s\",\n"
-            "    \"workspace_root\": \"%s\",\n"
-            "    \"runtime_state_root\": \"%s\",\n"
-            "    \"metadata_root\": \"%s\",\n"
-            "    \"root_anchor_mode\": \"%s\"\n"
-            "  },\n"
-            "  \"boundaries\": {\n"
-            "    \"execution_boundary\": true,\n"
-            "    \"context_boundary\": true,\n"
-            "    \"policy_boundary\": true,\n"
-            "    \"runtime_binding_boundary\": true,\n"
-            "    \"shell_binding_scope\": \"session\"\n"
-            "  },\n"
-            "  \"binding\": {\n"
-            "    \"session_binding\": \"%s\",\n"
-            "    \"runtime_attached\": %s,\n"
-            "    \"runtime_endpoint\": \"\",\n"
-            "    \"control_plane_attached\": %s\n"
-            "  },\n"
-            "  \"declared_context\": {\n"
-            "    \"declared_control_family\": \"%s\",\n"
-            "    \"declared_specialization\": \"%s\",\n"
-            "    \"declared_profile\": \"\",\n"
-            "    \"declared_context_source\": \"%s\"\n"
-            "  },\n"
-            "  \"inferred_context\": {\n"
-            "    \"last_inferred_family\": \"%s\",\n"
-            "    \"last_inferred_specialization\": \"%s\",\n"
-            "    \"last_inference_confidence\": %.3f\n"
-            "  },\n"
-            "  \"effective_state\": {\n"
-            "    \"effective_stack_ref\": \"%s\",\n"
-            "    \"effective_overlays_ref\": \"%s\",\n"
-            "    \"last_effect_summary\": \"%s\",\n"
-            "    \"last_authority_summary\": \"%s\",\n"
-            "    \"last_evidence_summary\": \"%s\"\n"
-            "  },\n"
-            "  \"runtime\": {\n"
-            "    \"isolation_mode\": \"%s\",\n"
-            "    \"debug_mode\": %s,\n"
-            "    \"last_resolution_trace_ref\": \"%s\"\n"
-            "  },\n"
-            "  \"inspect\": {\n"
-            "    \"last_resolution_summary\": \"%s\"\n"
-            "  },\n"
-            "  \"runtime_owner\": \"yai\",\n"
-            "  \"attachments\": [],\n"
-            "  \"capabilities\": {\n"
-            "    \"workspace_scope\": true,\n"
-            "    \"attachment_ready\": true\n"
-            "  }\n"
-            "}\n",
-            info->ws_id,
-            info->state[0] ? info->state : "created",
-            info->created_at,
-            info->updated_at,
-            info->root_path,
-            info->ws_id,
-            info->workspace_alias[0] ? info->workspace_alias : info->ws_id,
-            info->root_path,
-            info->state[0] ? info->state : "created",
-            info->created_at,
-            info->activated_at,
-            info->last_attached_at,
-            info->updated_at,
-            info->workspace_store_root,
-            info->root_path,
-            info->runtime_state_root,
-            info->metadata_root,
-            info->root_anchor_mode[0] ? info->root_anchor_mode : "managed_default_root",
-            info->session_binding,
-            info->runtime_attached ? "true" : "false",
-            info->control_plane_attached ? "true" : "false",
-            info->declared_control_family,
-            info->declared_specialization,
-            declared_source,
-            info->inferred_family,
-            info->inferred_specialization,
-            info->inferred_confidence,
-            info->effective_stack_ref,
-            info->effective_overlays_ref,
-            info->last_effect_summary,
-            info->last_authority_summary,
-            info->last_evidence_summary,
-            info->isolation_mode[0] ? info->isolation_mode : "process",
-            info->debug_mode ? "true" : "false",
-            info->last_resolution_trace_ref,
-            info->last_resolution_summary);
+    fprintf(f, "{\n");
+    fprintf(f, "  \"type\": \"yai.workspace.manifest.v1\",\n");
+    fprintf(f, "  \"schema\": \"workspace-runtime.v1\",\n");
+    fprintf(f, "  \"ws_id\": \"%s\",\n", info->ws_id);
+    fprintf(f, "  \"state\": \"%s\",\n", info->state[0] ? info->state : "created");
+    fprintf(f, "  \"created_at\": %ld,\n", info->created_at);
+    fprintf(f, "  \"updated_at\": %ld,\n", info->updated_at);
+    fprintf(f, "  \"layout\": \"v3\",\n");
+    fprintf(f, "  \"containment_layout\": \"%s\",\n", info->containment_layout[0] ? info->containment_layout : "v1");
+    fprintf(f, "  \"root_path\": \"%s\",\n", info->root_path);
+    fprintf(f, "  \"identity\": {\"workspace_id\": \"%s\", \"workspace_alias\": \"%s\", \"workspace_root\": \"%s\"},\n",
+            info->ws_id, info->workspace_alias[0] ? info->workspace_alias : info->ws_id, info->root_path);
+    fprintf(f, "  \"lifecycle\": {\"workspace_state\": \"%s\", \"created_at\": %ld, \"activated_at\": %ld, \"last_attached_at\": %ld, \"last_updated_at\": %ld},\n",
+            info->state[0] ? info->state : "created", info->created_at, info->activated_at, info->last_attached_at, info->updated_at);
+    fprintf(f, "  \"root_model\": {\"workspace_store_root\": \"%s\", \"workspace_root\": \"%s\", \"runtime_state_root\": \"%s\", \"metadata_root\": \"%s\", \"state_root\": \"%s\", \"traces_root\": \"%s\", \"artifacts_root\": \"%s\", \"runtime_local_root\": \"%s\", \"root_anchor_mode\": \"%s\"},\n",
+            info->workspace_store_root, info->root_path, info->runtime_state_root, info->metadata_root, info->state_root, info->traces_root, info->artifacts_root, info->runtime_local_root, info->root_anchor_mode[0] ? info->root_anchor_mode : "managed_default_root");
+    fprintf(f, "  \"containment\": {\"ready\": %s, \"state_surface\": \"%s\", \"traces_index\": \"%s\", \"artifacts_index\": \"%s\", \"runtime_surface\": \"%s\", \"binding_surface\": \"%s\"},\n",
+            info->containment_ready ? "true" : "false", info->state_surface_path, info->traces_index_path, info->artifacts_index_path, info->runtime_surface_path, info->binding_state_path);
+    fprintf(f, "  \"security_envelope\": {\n");
+    fprintf(f, "    \"security_envelope_version\": \"%s\",\n", info->security_envelope_version[0] ? info->security_envelope_version : "v1");
+    fprintf(f, "    \"security_level_declared\": \"%s\",\n", info->security_level_declared[0] ? info->security_level_declared : "scoped");
+    fprintf(f, "    \"security_level_effective\": \"%s\",\n", info->security_level_effective[0] ? info->security_level_effective : "logical");
+    fprintf(f, "    \"security_enforcement_mode\": \"%s\",\n", info->security_enforcement_mode[0] ? info->security_enforcement_mode : "runtime_scoped");
+    fprintf(f, "    \"security_backend_mode\": \"%s\",\n", info->security_backend_mode[0] ? info->security_backend_mode : "none");
+    fprintf(f, "    \"scopes\": {\"process\": %s, \"filesystem\": %s, \"socket\": %s, \"network\": %s, \"resource\": %s, \"privilege\": %s, \"runtime_route\": %s, \"binding\": %s},\n",
+            info->scope_process ? "true" : "false",
+            info->scope_filesystem ? "true" : "false",
+            info->scope_socket ? "true" : "false",
+            info->scope_network ? "true" : "false",
+            info->scope_resource ? "true" : "false",
+            info->scope_privilege ? "true" : "false",
+            info->scope_runtime_route ? "true" : "false",
+            info->scope_binding ? "true" : "false");
+    fprintf(f, "    \"capabilities\": {\"sandbox_ready\": %s, \"hardened_fs\": %s, \"process_isolation\": %s, \"network_policy\": %s}\n",
+            info->capability_sandbox_ready ? "true" : "false",
+            info->capability_hardened_fs ? "true" : "false",
+            info->capability_process_isolation ? "true" : "false",
+            info->capability_network_policy ? "true" : "false");
+    fprintf(f, "  },\n");
+    fprintf(f, "  \"execution_profile\": {\n");
+    fprintf(f, "    \"execution_mode_requested\": \"%s\",\n", info->execution_mode_requested[0] ? info->execution_mode_requested : "scoped");
+    fprintf(f, "    \"execution_mode_effective\": \"%s\",\n", info->execution_mode_effective[0] ? info->execution_mode_effective : "scoped");
+    fprintf(f, "    \"execution_mode_degraded\": %s,\n", info->execution_mode_degraded ? "true" : "false");
+    fprintf(f, "    \"execution_degraded_reason\": \"%s\",\n", info->execution_degraded_reason[0] ? info->execution_degraded_reason : "none");
+    fprintf(f, "    \"execution_unsupported_scopes\": \"%s\",\n", info->execution_unsupported_scopes[0] ? info->execution_unsupported_scopes : "none");
+    fprintf(f, "    \"execution_advisory_scopes\": \"%s\",\n", info->execution_advisory_scopes[0] ? info->execution_advisory_scopes : "none");
+    fprintf(f, "    \"process_intent\": \"%s\",\n", info->process_intent[0] ? info->process_intent : "shared_runtime");
+    fprintf(f, "    \"channel_mode\": \"%s\",\n", info->channel_mode[0] ? info->channel_mode : "global_control_scoped_route");
+    fprintf(f, "    \"artifact_policy_mode\": \"%s\",\n", info->artifact_policy_mode[0] ? info->artifact_policy_mode : "workspace_owned");
+    fprintf(f, "    \"network_intent\": \"%s\",\n", info->network_intent[0] ? info->network_intent : "advisory_none");
+    fprintf(f, "    \"resource_intent\": \"%s\",\n", info->resource_intent[0] ? info->resource_intent : "advisory_none");
+    fprintf(f, "    \"privilege_intent\": \"%s\",\n", info->privilege_intent[0] ? info->privilege_intent : "inherited_host");
+    fprintf(f, "    \"attach_descriptor_ref\": \"%s\",\n", info->attach_descriptor_ref);
+    fprintf(f, "    \"execution_profile_ref\": \"%s\"\n", info->execution_profile_ref);
+    fprintf(f, "  },\n");
+    fprintf(f, "  \"boundaries\": {\"execution_boundary\": true, \"context_boundary\": true, \"policy_boundary\": true, \"runtime_binding_boundary\": true, \"shell_binding_scope\": \"session\"},\n");
+    fprintf(f, "  \"binding\": {\"session_binding\": \"%s\", \"runtime_attached\": %s, \"runtime_endpoint\": \"\", \"control_plane_attached\": %s},\n",
+            info->session_binding, info->runtime_attached ? "true" : "false", info->control_plane_attached ? "true" : "false");
+    fprintf(f, "  \"declared_context\": {\"declared_control_family\": \"%s\", \"declared_specialization\": \"%s\", \"declared_profile\": \"\", \"declared_context_source\": \"%s\"},\n",
+            info->declared_control_family, info->declared_specialization, info->declared_context_source[0] ? info->declared_context_source : "unset");
+    fprintf(f, "  \"inferred_context\": {\"last_inferred_family\": \"%s\", \"last_inferred_specialization\": \"%s\", \"last_inference_confidence\": %.3f},\n",
+            info->inferred_family, info->inferred_specialization, info->inferred_confidence);
+    fprintf(f, "  \"effective_state\": {\"effective_stack_ref\": \"%s\", \"effective_overlays_ref\": \"%s\", \"last_effect_summary\": \"%s\", \"last_authority_summary\": \"%s\", \"last_evidence_summary\": \"%s\"},\n",
+            info->effective_stack_ref, info->effective_overlays_ref, info->last_effect_summary, info->last_authority_summary, info->last_evidence_summary);
+    fprintf(f, "  \"runtime\": {\"isolation_mode\": \"%s\", \"debug_mode\": %s, \"last_resolution_trace_ref\": \"%s\"},\n",
+            info->isolation_mode[0] ? info->isolation_mode : "process", info->debug_mode ? "true" : "false", info->last_resolution_trace_ref);
+    fprintf(f, "  \"inspect\": {\"last_resolution_summary\": \"%s\"},\n", info->last_resolution_summary);
+    fprintf(f, "  \"runtime_owner\": \"yai\",\n");
+    fprintf(f, "  \"attachments\": [],\n");
+    fprintf(f, "  \"capabilities\": {\"workspace_scope\": true, \"attachment_ready\": true}\n");
+    fprintf(f, "}\n");
     fclose(f);
     return 0;
 }
@@ -901,6 +1235,181 @@ static int yai_workspace_write_manifest_ws_id(const char *ws_id, const yai_works
     return yai_workspace_write_manifest_path(manifest, info);
 }
 
+static int yai_workspace_write_containment_surfaces(const yai_workspace_runtime_info_t *info)
+{
+    FILE *f;
+    if (!info || !info->ws_id[0])
+        return -1;
+
+    f = fopen(info->state_surface_path, "w");
+    if (!f)
+        return -1;
+    fprintf(f,
+            "{\n"
+            "  \"type\": \"yai.workspace.state.v1\",\n"
+            "  \"workspace_id\": \"%s\",\n"
+            "  \"declared\": {\"family\": \"%s\", \"specialization\": \"%s\", \"source\": \"%s\"},\n"
+            "  \"inferred\": {\"family\": \"%s\", \"specialization\": \"%s\", \"confidence\": %.3f},\n"
+            "  \"effective\": {\"stack_ref\": \"%s\", \"overlays_ref\": \"%s\", \"effect\": \"%s\", \"authority\": \"%s\", \"evidence\": \"%s\"},\n"
+            "  \"inspect\": {\"last_summary\": \"%s\", \"last_trace_ref\": \"%s\"},\n"
+            "  \"refs\": {\"trace_index\": \"%s\", \"artifact_index\": \"%s\", \"runtime_state\": \"%s\"}\n"
+            "}\n",
+            info->ws_id,
+            info->declared_control_family,
+            info->declared_specialization,
+            info->declared_context_source[0] ? info->declared_context_source : "unset",
+            info->inferred_family,
+            info->inferred_specialization,
+            info->inferred_confidence,
+            info->effective_stack_ref,
+            info->effective_overlays_ref,
+            info->last_effect_summary,
+            info->last_authority_summary,
+            info->last_evidence_summary,
+            info->last_resolution_summary,
+            info->last_resolution_trace_ref,
+            info->traces_index_path,
+            info->artifacts_index_path,
+            info->runtime_surface_path);
+    fclose(f);
+
+    f = fopen(info->traces_index_path, "w");
+    if (!f)
+        return -1;
+    fprintf(f,
+            "{\n"
+            "  \"type\": \"yai.workspace.traces.index.v1\",\n"
+            "  \"workspace_id\": \"%s\",\n"
+            "  \"ownership\": \"workspace-owned\",\n"
+            "  \"entries\": [\n"
+            "    {\"trace_ref\": \"%s\", \"summary\": \"%s\"}\n"
+            "  ]\n"
+            "}\n",
+            info->ws_id,
+            info->last_resolution_trace_ref,
+            info->last_resolution_summary);
+    fclose(f);
+
+    f = fopen(info->artifacts_index_path, "w");
+    if (!f)
+        return -1;
+    fprintf(f,
+            "{\n"
+            "  \"type\": \"yai.workspace.artifacts.index.v1\",\n"
+            "  \"workspace_id\": \"%s\",\n"
+            "  \"ownership\": \"workspace-owned\",\n"
+            "  \"entries\": []\n"
+            "}\n",
+            info->ws_id);
+    fclose(f);
+
+    f = fopen(info->runtime_surface_path, "w");
+    if (!f)
+        return -1;
+    fprintf(f,
+            "{\n"
+            "  \"type\": \"yai.workspace.runtime.state.v1\",\n"
+            "  \"workspace_id\": \"%s\",\n"
+            "  \"routing\": {\"scope\": \"workspace\", \"namespace\": \"%s\"},\n"
+            "  \"attachments\": {\"runtime_attached\": %s, \"control_plane_attached\": %s},\n"
+            "  \"security\": {\"level_effective\": \"%s\", \"enforcement_mode\": \"%s\", \"backend_mode\": \"%s\"},\n"
+            "  \"execution\": {\"mode_requested\": \"%s\", \"mode_effective\": \"%s\", \"degraded\": %s, \"degraded_reason\": \"%s\", \"unsupported_scopes\": \"%s\"},\n"
+            "  \"isolation_mode\": \"%s\",\n"
+            "  \"debug_mode\": %s\n"
+            "}\n",
+            info->ws_id,
+            info->workspace_namespace,
+            info->runtime_attached ? "true" : "false",
+            info->control_plane_attached ? "true" : "false",
+            info->security_level_effective[0] ? info->security_level_effective : "logical",
+            info->security_enforcement_mode[0] ? info->security_enforcement_mode : "runtime_scoped",
+            info->security_backend_mode[0] ? info->security_backend_mode : "none",
+            info->execution_mode_requested[0] ? info->execution_mode_requested : "scoped",
+            info->execution_mode_effective[0] ? info->execution_mode_effective : "scoped",
+            info->execution_mode_degraded ? "true" : "false",
+            info->execution_degraded_reason[0] ? info->execution_degraded_reason : "none",
+            info->execution_unsupported_scopes[0] ? info->execution_unsupported_scopes : "none",
+            info->isolation_mode[0] ? info->isolation_mode : "process",
+            info->debug_mode ? "true" : "false");
+    fclose(f);
+
+    f = fopen(info->attach_descriptor_ref, "w");
+    if (!f)
+        return -1;
+    fprintf(f,
+            "{\n"
+            "  \"type\": \"yai.workspace.attach.descriptor.v1\",\n"
+            "  \"workspace_id\": \"%s\",\n"
+            "  \"binding_scope\": \"session\",\n"
+            "  \"runtime_attached\": %s,\n"
+            "  \"control_plane_attached\": %s,\n"
+            "  \"channel_mode\": \"%s\",\n"
+            "  \"artifact_policy_mode\": \"%s\",\n"
+            "  \"process_intent\": \"%s\",\n"
+            "  \"mode_requested\": \"%s\",\n"
+            "  \"mode_effective\": \"%s\"\n"
+            "}\n",
+            info->ws_id,
+            info->runtime_attached ? "true" : "false",
+            info->control_plane_attached ? "true" : "false",
+            info->channel_mode[0] ? info->channel_mode : "global_control_scoped_route",
+            info->artifact_policy_mode[0] ? info->artifact_policy_mode : "workspace_owned",
+            info->process_intent[0] ? info->process_intent : "shared_runtime",
+            info->execution_mode_requested[0] ? info->execution_mode_requested : "scoped",
+            info->execution_mode_effective[0] ? info->execution_mode_effective : "scoped");
+    fclose(f);
+
+    f = fopen(info->execution_profile_ref, "w");
+    if (!f)
+        return -1;
+    fprintf(f,
+            "{\n"
+            "  \"type\": \"yai.workspace.execution.profile.v1\",\n"
+            "  \"workspace_id\": \"%s\",\n"
+            "  \"mode_requested\": \"%s\",\n"
+            "  \"mode_effective\": \"%s\",\n"
+            "  \"degraded\": %s,\n"
+            "  \"degraded_reason\": \"%s\",\n"
+            "  \"unsupported_scopes\": \"%s\",\n"
+            "  \"advisory_scopes\": \"%s\",\n"
+            "  \"backend_mode\": \"%s\",\n"
+            "  \"enforcement_mode\": \"%s\",\n"
+            "  \"intents\": {\"network\": \"%s\", \"resource\": \"%s\", \"privilege\": \"%s\"}\n"
+            "}\n",
+            info->ws_id,
+            info->execution_mode_requested[0] ? info->execution_mode_requested : "scoped",
+            info->execution_mode_effective[0] ? info->execution_mode_effective : "scoped",
+            info->execution_mode_degraded ? "true" : "false",
+            info->execution_degraded_reason[0] ? info->execution_degraded_reason : "none",
+            info->execution_unsupported_scopes[0] ? info->execution_unsupported_scopes : "none",
+            info->execution_advisory_scopes[0] ? info->execution_advisory_scopes : "none",
+            info->security_backend_mode[0] ? info->security_backend_mode : "none",
+            info->security_enforcement_mode[0] ? info->security_enforcement_mode : "runtime_scoped",
+            info->network_intent[0] ? info->network_intent : "advisory_none",
+            info->resource_intent[0] ? info->resource_intent : "advisory_none",
+            info->privilege_intent[0] ? info->privilege_intent : "inherited_host");
+    fclose(f);
+
+    f = fopen(info->binding_state_path, "w");
+    if (!f)
+        return -1;
+    fprintf(f,
+            "{\n"
+            "  \"type\": \"yai.workspace.binding.state.v1\",\n"
+            "  \"workspace_id\": \"%s\",\n"
+            "  \"session_binding\": \"%s\",\n"
+            "  \"binding_scope\": \"session\",\n"
+            "  \"binding_valid\": %s,\n"
+            "  \"boundary_reason\": \"%s\"\n"
+            "}\n",
+            info->ws_id,
+            info->session_binding,
+            info->namespace_valid ? "true" : "false",
+            info->boundary_reason[0] ? info->boundary_reason : "none");
+    fclose(f);
+    return 0;
+}
+
 int yai_session_read_workspace_info(const char *ws_id, yai_workspace_runtime_info_t *out)
 {
     char manifest[MAX_PATH_LEN];
@@ -913,17 +1422,24 @@ int yai_session_read_workspace_info(const char *ws_id, yai_workspace_runtime_inf
 
     memset(out, 0, sizeof(*out));
     snprintf(out->ws_id, sizeof(out->ws_id), "%s", ws_id);
+    snprintf(out->workspace_namespace, sizeof(out->workspace_namespace), "ws/%s", ws_id);
+    out->namespace_valid = 1;
+    snprintf(out->boundary_reason, sizeof(out->boundary_reason), "%s", "none");
     snprintf(out->state, sizeof(out->state), "missing");
     snprintf(out->layout, sizeof(out->layout), "v3");
     snprintf(out->workspace_alias, sizeof(out->workspace_alias), "%s", ws_id);
     snprintf(out->isolation_mode, sizeof(out->isolation_mode), "process");
     snprintf(out->root_anchor_mode, sizeof(out->root_anchor_mode), "%s", "managed_default_root");
+    snprintf(out->containment_layout, sizeof(out->containment_layout), "%s", "v1");
+    out->containment_ready = 0;
+    yai_workspace_security_defaults(out);
     if (yai_workspace_store_root_path(out->workspace_store_root, sizeof(out->workspace_store_root)) != 0)
         out->workspace_store_root[0] = '\0';
     if (yai_workspace_runtime_state_root_path(ws_id, out->runtime_state_root, sizeof(out->runtime_state_root)) != 0)
         out->runtime_state_root[0] = '\0';
     if (yai_workspace_metadata_root_path(ws_id, out->metadata_root, sizeof(out->metadata_root)) != 0)
         out->metadata_root[0] = '\0';
+    (void)yai_workspace_containment_surface_paths(out);
 
     if (yai_workspace_manifest_path(ws_id, manifest, sizeof(manifest)) != 0)
         return -1;
@@ -939,10 +1455,38 @@ int yai_session_read_workspace_info(const char *ws_id, yai_workspace_runtime_inf
     out->exists = 1;
     (void)yai_session_extract_json_string(buf, "state", out->state, sizeof(out->state));
     (void)yai_session_extract_json_string(buf, "layout", out->layout, sizeof(out->layout));
+    (void)yai_session_extract_json_string(buf, "containment_layout", out->containment_layout, sizeof(out->containment_layout));
+    (void)yai_session_extract_json_string(buf, "security_envelope_version", out->security_envelope_version, sizeof(out->security_envelope_version));
+    (void)yai_session_extract_json_string(buf, "security_level_declared", out->security_level_declared, sizeof(out->security_level_declared));
+    (void)yai_session_extract_json_string(buf, "security_level_effective", out->security_level_effective, sizeof(out->security_level_effective));
+    (void)yai_session_extract_json_string(buf, "security_enforcement_mode", out->security_enforcement_mode, sizeof(out->security_enforcement_mode));
+    (void)yai_session_extract_json_string(buf, "security_backend_mode", out->security_backend_mode, sizeof(out->security_backend_mode));
+    (void)yai_session_extract_json_string(buf, "execution_mode_requested", out->execution_mode_requested, sizeof(out->execution_mode_requested));
+    (void)yai_session_extract_json_string(buf, "execution_mode_effective", out->execution_mode_effective, sizeof(out->execution_mode_effective));
+    (void)yai_session_extract_json_string(buf, "execution_degraded_reason", out->execution_degraded_reason, sizeof(out->execution_degraded_reason));
+    (void)yai_session_extract_json_string(buf, "execution_unsupported_scopes", out->execution_unsupported_scopes, sizeof(out->execution_unsupported_scopes));
+    (void)yai_session_extract_json_string(buf, "execution_advisory_scopes", out->execution_advisory_scopes, sizeof(out->execution_advisory_scopes));
+    (void)yai_session_extract_json_string(buf, "process_intent", out->process_intent, sizeof(out->process_intent));
+    (void)yai_session_extract_json_string(buf, "channel_mode", out->channel_mode, sizeof(out->channel_mode));
+    (void)yai_session_extract_json_string(buf, "artifact_policy_mode", out->artifact_policy_mode, sizeof(out->artifact_policy_mode));
+    (void)yai_session_extract_json_string(buf, "network_intent", out->network_intent, sizeof(out->network_intent));
+    (void)yai_session_extract_json_string(buf, "resource_intent", out->resource_intent, sizeof(out->resource_intent));
+    (void)yai_session_extract_json_string(buf, "privilege_intent", out->privilege_intent, sizeof(out->privilege_intent));
+    (void)yai_session_extract_json_string(buf, "attach_descriptor_ref", out->attach_descriptor_ref, sizeof(out->attach_descriptor_ref));
+    (void)yai_session_extract_json_string(buf, "execution_profile_ref", out->execution_profile_ref, sizeof(out->execution_profile_ref));
     (void)yai_session_extract_json_string(buf, "root_path", out->root_path, sizeof(out->root_path));
     (void)yai_session_extract_json_string(buf, "workspace_store_root", out->workspace_store_root, sizeof(out->workspace_store_root));
     (void)yai_session_extract_json_string(buf, "runtime_state_root", out->runtime_state_root, sizeof(out->runtime_state_root));
     (void)yai_session_extract_json_string(buf, "metadata_root", out->metadata_root, sizeof(out->metadata_root));
+    (void)yai_session_extract_json_string(buf, "state_root", out->state_root, sizeof(out->state_root));
+    (void)yai_session_extract_json_string(buf, "traces_root", out->traces_root, sizeof(out->traces_root));
+    (void)yai_session_extract_json_string(buf, "artifacts_root", out->artifacts_root, sizeof(out->artifacts_root));
+    (void)yai_session_extract_json_string(buf, "runtime_local_root", out->runtime_local_root, sizeof(out->runtime_local_root));
+    (void)yai_session_extract_json_string(buf, "state_surface", out->state_surface_path, sizeof(out->state_surface_path));
+    (void)yai_session_extract_json_string(buf, "traces_index", out->traces_index_path, sizeof(out->traces_index_path));
+    (void)yai_session_extract_json_string(buf, "artifacts_index", out->artifacts_index_path, sizeof(out->artifacts_index_path));
+    (void)yai_session_extract_json_string(buf, "runtime_surface", out->runtime_surface_path, sizeof(out->runtime_surface_path));
+    (void)yai_session_extract_json_string(buf, "binding_surface", out->binding_state_path, sizeof(out->binding_state_path));
     (void)yai_session_extract_json_string(buf, "root_anchor_mode", out->root_anchor_mode, sizeof(out->root_anchor_mode));
     (void)yai_session_extract_json_string(buf, "workspace_alias", out->workspace_alias, sizeof(out->workspace_alias));
     (void)yai_session_extract_json_string(buf, "session_binding", out->session_binding, sizeof(out->session_binding));
@@ -969,11 +1513,71 @@ int yai_session_read_workspace_info(const char *ws_id, yai_workspace_runtime_inf
     (void)yai_session_extract_json_bool(buf, "runtime_attached", &out->runtime_attached);
     (void)yai_session_extract_json_bool(buf, "control_plane_attached", &out->control_plane_attached);
     (void)yai_session_extract_json_bool(buf, "debug_mode", &out->debug_mode);
+    (void)yai_session_extract_json_bool(buf, "scope_process", &out->scope_process);
+    (void)yai_session_extract_json_bool(buf, "scope_filesystem", &out->scope_filesystem);
+    (void)yai_session_extract_json_bool(buf, "scope_socket", &out->scope_socket);
+    (void)yai_session_extract_json_bool(buf, "scope_network", &out->scope_network);
+    (void)yai_session_extract_json_bool(buf, "scope_resource", &out->scope_resource);
+    (void)yai_session_extract_json_bool(buf, "scope_privilege", &out->scope_privilege);
+    (void)yai_session_extract_json_bool(buf, "scope_runtime_route", &out->scope_runtime_route);
+    (void)yai_session_extract_json_bool(buf, "scope_binding", &out->scope_binding);
+    (void)yai_session_extract_json_bool(buf, "execution_mode_degraded", &out->execution_mode_degraded);
+    (void)yai_session_extract_json_bool(buf, "capability_sandbox_ready", &out->capability_sandbox_ready);
+    (void)yai_session_extract_json_bool(buf, "capability_hardened_fs", &out->capability_hardened_fs);
+    (void)yai_session_extract_json_bool(buf, "capability_process_isolation", &out->capability_process_isolation);
+    (void)yai_session_extract_json_bool(buf, "capability_network_policy", &out->capability_network_policy);
 
     if (out->root_path[0] == '\0')
     {
         if (out->workspace_store_root[0])
             snprintf(out->root_path, sizeof(out->root_path), "%s/%s", out->workspace_store_root, ws_id);
+    }
+    out->containment_ready = yai_session_path_exists(out->state_surface_path) &&
+                             yai_session_path_exists(out->traces_index_path) &&
+                             yai_session_path_exists(out->artifacts_index_path) &&
+                             yai_session_path_exists(out->runtime_surface_path) &&
+                             yai_session_path_exists(out->binding_state_path) &&
+                             yai_session_path_exists(out->attach_descriptor_ref) &&
+                             yai_session_path_exists(out->execution_profile_ref);
+    if (!out->containment_ready)
+    {
+        out->namespace_valid = 0;
+        if (strcmp(out->boundary_reason, "none") == 0)
+            snprintf(out->boundary_reason, sizeof(out->boundary_reason), "%s", "containment_surface_missing");
+    }
+    if (!yai_workspace_security_level_is_valid(out->security_level_declared))
+        snprintf(out->security_level_declared, sizeof(out->security_level_declared), "%s", "scoped");
+    yai_workspace_security_recompute_effective(out);
+
+    if (out->session_binding[0] && strcmp(out->session_binding, ws_id) != 0)
+    {
+        out->namespace_valid = 0;
+        snprintf(out->boundary_reason, sizeof(out->boundary_reason), "%s", "session_binding_mismatch");
+        out->session_binding[0] = '\0';
+    }
+    {
+        char expected_runtime_root[MAX_PATH_LEN];
+        char expected_metadata_root[MAX_PATH_LEN];
+        if (yai_workspace_runtime_state_root_path(ws_id, expected_runtime_root, sizeof(expected_runtime_root)) == 0)
+        {
+            if (!yai_is_ws_runtime_path_valid(ws_id, out->runtime_state_root, expected_runtime_root))
+            {
+                out->namespace_valid = 0;
+                if (strcmp(out->boundary_reason, "none") == 0)
+                    snprintf(out->boundary_reason, sizeof(out->boundary_reason), "%s", "runtime_state_root_mismatch");
+                snprintf(out->runtime_state_root, sizeof(out->runtime_state_root), "%s", expected_runtime_root);
+            }
+        }
+        if (yai_workspace_metadata_root_path(ws_id, expected_metadata_root, sizeof(expected_metadata_root)) == 0)
+        {
+            if (!yai_is_ws_runtime_path_valid(ws_id, out->metadata_root, expected_metadata_root))
+            {
+                out->namespace_valid = 0;
+                if (strcmp(out->boundary_reason, "none") == 0)
+                    snprintf(out->boundary_reason, sizeof(out->boundary_reason), "%s", "metadata_root_mismatch");
+                snprintf(out->metadata_root, sizeof(out->metadata_root), "%s", expected_metadata_root);
+            }
+        }
     }
     yai_workspace_fill_shell_relation(out);
 
@@ -1053,6 +1657,7 @@ int yai_session_handle_workspace_action(
     const char *ws_id,
     const char *action,
     const char *root_path_opt,
+    const char *security_level_opt,
     yai_workspace_runtime_info_t *info_out)
 {
     const char *home = yai_get_home();
@@ -1063,6 +1668,11 @@ int yai_session_handle_workspace_action(
     char events_dir[MAX_PATH_LEN];
     char exec_dir[MAX_PATH_LEN];
     char logs_dir[MAX_PATH_LEN];
+    char metadata_dir[MAX_PATH_LEN];
+    char state_dir[MAX_PATH_LEN];
+    char traces_dir[MAX_PATH_LEN];
+    char artifacts_dir[MAX_PATH_LEN];
+    char runtime_dir[MAX_PATH_LEN];
     char root_path[MAX_PATH_LEN] = {0};
     char root_anchor_mode[32] = {0};
     char manifest_path[MAX_PATH_LEN];
@@ -1080,7 +1690,12 @@ int yai_session_handle_workspace_action(
         snprintf(auth_dir, sizeof(auth_dir), "%s/authority", ws_dir) <= 0 ||
         snprintf(events_dir, sizeof(events_dir), "%s/events", ws_dir) <= 0 ||
         snprintf(exec_dir, sizeof(exec_dir), "%s/exec", ws_dir) <= 0 ||
-        snprintf(logs_dir, sizeof(logs_dir), "%s/logs", ws_dir) <= 0)
+        snprintf(logs_dir, sizeof(logs_dir), "%s/logs", ws_dir) <= 0 ||
+        snprintf(metadata_dir, sizeof(metadata_dir), "%s/metadata", ws_dir) <= 0 ||
+        snprintf(state_dir, sizeof(state_dir), "%s/state", ws_dir) <= 0 ||
+        snprintf(traces_dir, sizeof(traces_dir), "%s/traces", ws_dir) <= 0 ||
+        snprintf(artifacts_dir, sizeof(artifacts_dir), "%s/artifacts", ws_dir) <= 0 ||
+        snprintf(runtime_dir, sizeof(runtime_dir), "%s/runtime", ws_dir) <= 0)
         return -1;
 
     if (strcmp(action, "destroy") == 0)
@@ -1120,6 +1735,11 @@ int yai_session_handle_workspace_action(
         mkdir_if_missing(events_dir, 0755) != 0 ||
         mkdir_if_missing(exec_dir, 0755) != 0 ||
         mkdir_if_missing(logs_dir, 0755) != 0 ||
+        mkdir_if_missing(metadata_dir, 0755) != 0 ||
+        mkdir_if_missing(state_dir, 0755) != 0 ||
+        mkdir_if_missing(traces_dir, 0755) != 0 ||
+        mkdir_if_missing(artifacts_dir, 0755) != 0 ||
+        mkdir_if_missing(runtime_dir, 0755) != 0 ||
         mkdir_parents(root_path, 0755) != 0)
         return -1;
 
@@ -1128,6 +1748,14 @@ int yai_session_handle_workspace_action(
     snprintf(info.workspace_alias, sizeof(info.workspace_alias), "%s", ws_id);
     snprintf(info.state, sizeof(info.state), "%s", "created");
     snprintf(info.layout, sizeof(info.layout), "%s", "v3");
+    snprintf(info.containment_layout, sizeof(info.containment_layout), "%s", "v1");
+    yai_workspace_security_defaults(&info);
+    if (security_level_opt && security_level_opt[0])
+    {
+        if (!yai_workspace_security_level_is_valid(security_level_opt))
+            return -1;
+        snprintf(info.security_level_declared, sizeof(info.security_level_declared), "%s", security_level_opt);
+    }
     snprintf(info.root_path, sizeof(info.root_path), "%s", root_path);
     snprintf(info.root_anchor_mode, sizeof(info.root_anchor_mode), "%s", root_anchor_mode[0] ? root_anchor_mode : "managed_default_root");
     if (yai_workspace_store_root_path(info.workspace_store_root, sizeof(info.workspace_store_root)) != 0)
@@ -1136,20 +1764,29 @@ int yai_session_handle_workspace_action(
         return -1;
     if (yai_workspace_metadata_root_path(ws_id, info.metadata_root, sizeof(info.metadata_root)) != 0)
         return -1;
+    if (yai_workspace_containment_surface_paths(&info) != 0)
+        return -1;
     snprintf(info.isolation_mode, sizeof(info.isolation_mode), "%s", "process");
     info.created_at = (long)now;
     info.updated_at = (long)now;
     info.exists = 1;
+    info.namespace_valid = 1;
+    info.containment_ready = 1;
+    snprintf(info.workspace_namespace, sizeof(info.workspace_namespace), "ws/%s", ws_id);
+    snprintf(info.boundary_reason, sizeof(info.boundary_reason), "%s", "none");
+    yai_workspace_security_recompute_effective(&info);
 
     if (snprintf(manifest_path, sizeof(manifest_path), "%s/manifest.json", ws_dir) <= 0)
         return -1;
     if (yai_workspace_write_manifest_path(manifest_path, &info) != 0)
         return -1;
+    if (yai_workspace_write_containment_surfaces(&info) != 0)
+        return -1;
 
     if (info_out)
     {
-        if (yai_session_read_workspace_info(ws_id, info_out) != 0)
-            return -1;
+        *info_out = info;
+        yai_workspace_fill_shell_relation(info_out);
     }
 
     return 0;
@@ -1188,6 +1825,11 @@ int yai_session_set_active_workspace(const char *ws_id, char *err, size_t err_ca
         why = "manifest_write_failed";
         goto fail;
     }
+    if (yai_workspace_write_containment_surfaces(&info) != 0)
+    {
+        why = "containment_write_failed";
+        goto fail;
+    }
 
     /* Best-effort shell integration bootstrap.
      * Keep activation successful even if user shell files are read-only/missing. */
@@ -1214,6 +1856,7 @@ int yai_session_clear_active_workspace(void)
         info.session_binding[0] = '\0';
         info.updated_at = (long)time(NULL);
         (void)yai_workspace_write_manifest_ws_id(info.ws_id, &info);
+        (void)yai_workspace_write_containment_surfaces(&info);
     }
 
     if (yai_workspace_binding_path(path, sizeof(path)) != 0)
@@ -1248,6 +1891,8 @@ int yai_session_clear_workspace_runtime_state(char *out_ws_id, size_t out_ws_id_
     info.updated_at = (long)time(NULL);
 
     if (yai_workspace_write_manifest_ws_id(info.ws_id, &info) != 0)
+        return -1;
+    if (yai_workspace_write_containment_surfaces(&info) != 0)
         return -1;
 
     if (out_ws_id && out_ws_id_cap > 0)
@@ -1310,7 +1955,49 @@ int yai_session_resolve_current_workspace(yai_workspace_runtime_info_t *info_out
 
     if (info_out->workspace_alias[0] == '\0')
         snprintf(info_out->workspace_alias, sizeof(info_out->workspace_alias), "%s", ws_alias);
+    if (!info_out->namespace_valid)
+    {
+        snprintf(status_out, status_cap, "%s", "invalid");
+        if (err && err_cap > 0)
+            snprintf(err, err_cap, "%s", info_out->boundary_reason[0] ? info_out->boundary_reason : "workspace_namespace_invalid");
+        return -1;
+    }
     snprintf(status_out, status_cap, "%s", "active");
+    return 0;
+}
+
+int yai_session_enforce_workspace_scope(const char *target_ws_id,
+                                        char *err,
+                                        size_t err_cap)
+{
+    yai_workspace_runtime_info_t current;
+    char status[24];
+    char bind_err[96];
+
+    if (err && err_cap > 0)
+        err[0] = '\0';
+    if (!target_ws_id || !target_ws_id[0] || !yai_ws_id_is_valid(target_ws_id))
+    {
+        if (err && err_cap > 0)
+            snprintf(err, err_cap, "%s", "target_workspace_invalid");
+        return -1;
+    }
+
+    if (yai_session_resolve_current_workspace(&current, status, sizeof(status), bind_err, sizeof(bind_err)) != 0)
+    {
+        if (strcmp(status, "no_active") == 0)
+            return 0;
+        if (err && err_cap > 0)
+            snprintf(err, err_cap, "%s", bind_err[0] ? bind_err : "workspace_binding_invalid");
+        return -1;
+    }
+
+    if (strcmp(current.ws_id, target_ws_id) != 0)
+    {
+        if (err && err_cap > 0)
+            snprintf(err, err_cap, "%s", "cross_workspace_scope_denied");
+        return -1;
+    }
     return 0;
 }
 
@@ -1356,7 +2043,8 @@ int yai_session_build_prompt_context_json(char *out, size_t out_cap)
                  "\"state\":\"%s\","
                  "\"workspace_root\":\"%s\","
                  "\"root_anchor_mode\":\"%s\","
-                 "\"declared\":{\"family\":\"%s\",\"specialization\":\"%s\"}"
+                 "\"declared\":{\"family\":\"%s\",\"specialization\":\"%s\"},"
+                 "\"execution\":{\"mode_requested\":\"%s\",\"mode_effective\":\"%s\",\"degraded\":%s}"
                  "}",
                  info.ws_id,
                  info.workspace_alias,
@@ -1364,7 +2052,10 @@ int yai_session_build_prompt_context_json(char *out, size_t out_cap)
                  info.root_path,
                  info.root_anchor_mode[0] ? info.root_anchor_mode : "managed_default_root",
                  info.declared_control_family,
-                 info.declared_specialization);
+                 info.declared_specialization,
+                 info.execution_mode_requested[0] ? info.execution_mode_requested : "scoped",
+                 info.execution_mode_effective[0] ? info.execution_mode_effective : "scoped",
+                 info.execution_mode_degraded ? "true" : "false");
     return (n > 0 && (size_t)n < out_cap) ? 0 : -1;
 }
 
@@ -1534,6 +2225,20 @@ int yai_session_build_workspace_status_json(char *out, size_t out_cap)
                  "\"active\":%s,"
                  "\"binding_status\":\"%s\","
                  "\"binding_valid\":%s,"
+                 "\"namespace_scope\":\"workspace\","
+                 "\"namespace_valid\":%s,"
+                 "\"boundary_reason\":\"%s\","
+                 "\"containment_layout\":\"%s\","
+                 "\"containment_ready\":%s,"
+                 "\"security_level_declared\":\"%s\","
+                 "\"security_level_effective\":\"%s\","
+                 "\"security_enforcement_mode\":\"%s\","
+                 "\"security_backend_mode\":\"%s\","
+                 "\"execution_mode_requested\":\"%s\","
+                 "\"execution_mode_effective\":\"%s\","
+                 "\"execution_mode_degraded\":%s,"
+                 "\"execution_degraded_reason\":\"%s\","
+                 "\"execution_unsupported_scopes\":\"%s\","
                  "\"runtime_attached\":%s,"
                  "\"isolation_mode\":\"%s\","
                  "\"debug_mode\":%s,"
@@ -1548,6 +2253,19 @@ int yai_session_build_workspace_status_json(char *out, size_t out_cap)
                  (rc == 0 && strcmp(status, "active") == 0) ? "true" : "false",
                  status[0] ? status : "invalid",
                  yai_workspace_binding_validity(status) ? "true" : "false",
+                 (rc == 0 && info.namespace_valid) ? "true" : "false",
+                 (rc == 0 && info.boundary_reason[0]) ? info.boundary_reason : "none",
+                 (rc == 0 && info.containment_layout[0]) ? info.containment_layout : "v1",
+                 (rc == 0 && info.containment_ready) ? "true" : "false",
+                 (rc == 0 && info.security_level_declared[0]) ? info.security_level_declared : "scoped",
+                 (rc == 0 && info.security_level_effective[0]) ? info.security_level_effective : "logical",
+                 (rc == 0 && info.security_enforcement_mode[0]) ? info.security_enforcement_mode : "runtime_scoped",
+                 (rc == 0 && info.security_backend_mode[0]) ? info.security_backend_mode : "none",
+                 (rc == 0 && info.execution_mode_requested[0]) ? info.execution_mode_requested : "scoped",
+                 (rc == 0 && info.execution_mode_effective[0]) ? info.execution_mode_effective : "scoped",
+                 (rc == 0 && info.execution_mode_degraded) ? "true" : "false",
+                 (rc == 0 && info.execution_degraded_reason[0]) ? info.execution_degraded_reason : "none",
+                 (rc == 0 && info.execution_unsupported_scopes[0]) ? info.execution_unsupported_scopes : "none",
                  (rc == 0 && info.runtime_attached) ? "true" : "false",
                  (rc == 0 && info.isolation_mode[0]) ? info.isolation_mode : "process",
                  (rc == 0 && info.debug_mode) ? "true" : "false",
@@ -1566,6 +2284,16 @@ int yai_session_build_workspace_inspect_json(char *out, size_t out_cap)
     yai_workspace_runtime_info_t info;
     char status[24];
     char err[96];
+    char sci_experiment[192];
+    char sci_parameter[192];
+    char sci_repro[192];
+    char sci_dataset[192];
+    char sci_publication[192];
+    char dig_outbound[192];
+    char dig_sink[192];
+    char dig_publication[192];
+    char dig_retrieval[192];
+    char dig_distribution[192];
     int rc;
     int n;
     if (!out || out_cap == 0)
@@ -1573,6 +2301,16 @@ int yai_session_build_workspace_inspect_json(char *out, size_t out_cap)
     rc = yai_session_resolve_current_workspace(&info, status, sizeof(status), err, sizeof(err));
     if (rc != 0 || strcmp(status, "active") != 0)
     {
+        (void)snprintf(sci_experiment, sizeof(sci_experiment), "%s", "not available");
+        (void)snprintf(sci_parameter, sizeof(sci_parameter), "%s", "not available");
+        (void)snprintf(sci_repro, sizeof(sci_repro), "%s", "not available");
+        (void)snprintf(sci_dataset, sizeof(sci_dataset), "%s", "not available");
+        (void)snprintf(sci_publication, sizeof(sci_publication), "%s", "not available");
+        (void)snprintf(dig_outbound, sizeof(dig_outbound), "%s", "not available");
+        (void)snprintf(dig_sink, sizeof(dig_sink), "%s", "not available");
+        (void)snprintf(dig_publication, sizeof(dig_publication), "%s", "not available");
+        (void)snprintf(dig_retrieval, sizeof(dig_retrieval), "%s", "not available");
+        (void)snprintf(dig_distribution, sizeof(dig_distribution), "%s", "not available");
         n = snprintf(out,
                      out_cap,
                      "{"
@@ -1580,19 +2318,58 @@ int yai_session_build_workspace_inspect_json(char *out, size_t out_cap)
                      "\"binding_status\":\"%s\","
                      "\"identity\":{\"workspace_id\":\"\",\"workspace_alias\":\"\",\"root_path\":\"\",\"state\":\"\"},"
                      "\"root_model\":{\"workspace_store_root\":\"\",\"runtime_state_root\":\"\",\"metadata_root\":\"\",\"root_anchor_mode\":\"\"},"
+                     "\"containment\":{\"layout\":\"v1\",\"ready\":false,\"state_surface\":\"\",\"traces_index\":\"\",\"artifacts_index\":\"\",\"runtime_surface\":\"\",\"binding_surface\":\"\"},"
+                     "\"security\":{\"level_declared\":\"scoped\",\"level_effective\":\"logical\",\"enforcement_mode\":\"runtime_scoped\",\"backend_mode\":\"none\",\"scopes\":{\"process\":false,\"filesystem\":true,\"socket\":false,\"network\":false,\"resource\":false,\"privilege\":false,\"runtime_route\":true,\"binding\":true},\"capabilities\":{\"sandbox_ready\":true,\"hardened_fs\":true,\"process_isolation\":false,\"network_policy\":false}},"
+                     "\"execution\":{\"mode_requested\":\"scoped\",\"mode_effective\":\"logical\",\"degraded\":true,\"degraded_reason\":\"binding_unavailable\",\"unsupported_scopes\":\"process,socket,network,resource,privilege\",\"advisory_scopes\":\"process,socket,network,resource,privilege\",\"process_intent\":\"shared_runtime\",\"channel_mode\":\"global_control_scoped_route\",\"artifact_policy_mode\":\"workspace_owned\",\"network_intent\":\"advisory_none\",\"resource_intent\":\"advisory_none\",\"privilege_intent\":\"inherited_host\",\"attach_descriptor_ref\":\"\",\"execution_profile_ref\":\"\"},"
+                     "\"boundary\":{\"namespace\":\"\",\"namespace_scope\":\"workspace\",\"namespace_valid\":false,\"state\":\"invalid\",\"reason\":\"binding_unavailable\"},"
                      "\"shell\":{\"cwd\":\"\",\"cwd_relation\":\"workspace_root_unset\"},"
                      "\"session\":{\"session_binding\":\"%s\",\"runtime_attached\":false,\"control_plane_attached\":false,\"isolation_mode\":\"process\",\"debug_mode\":false},"
                      "\"normative\":{\"declared\":{\"family\":\"\",\"specialization\":\"\",\"source\":\"unset\"},"
                      "\"inferred\":{\"family\":\"\",\"specialization\":\"\",\"confidence\":0.000},"
                      "\"effective\":{\"stack_ref\":\"\",\"overlays_ref\":\"\",\"effect_summary\":\"\",\"authority_summary\":\"\",\"evidence_summary\":\"\"}},"
+                     "\"scientific\":{\"experiment_context_summary\":\"%s\",\"parameter_governance_summary\":\"%s\",\"reproducibility_summary\":\"%s\",\"dataset_integrity_summary\":\"%s\",\"publication_control_summary\":\"%s\"},"
+                     "\"digital\":{\"outbound_context_summary\":\"%s\",\"sink_target_summary\":\"%s\",\"publication_control_summary\":\"%s\",\"retrieval_control_summary\":\"%s\",\"distribution_control_summary\":\"%s\"},"
                      "\"inspect\":{\"last_resolution_summary\":\"\",\"last_resolution_trace_ref\":\"\"},"
                      "\"reason\":\"%s\""
                      "}",
                      status[0] ? status : "invalid",
                      status[0] ? status : "invalid",
+                     sci_experiment,
+                     sci_parameter,
+                     sci_repro,
+                     sci_dataset,
+                     sci_publication,
+                     dig_outbound,
+                     dig_sink,
+                     dig_publication,
+                     dig_retrieval,
+                     dig_distribution,
                      err[0] ? err : "binding_error");
         return (n > 0 && (size_t)n < out_cap) ? 0 : -1;
     }
+
+    yai_workspace_build_scientific_summaries(&info,
+                                             sci_experiment,
+                                             sizeof(sci_experiment),
+                                             sci_parameter,
+                                             sizeof(sci_parameter),
+                                             sci_repro,
+                                             sizeof(sci_repro),
+                                             sci_dataset,
+                                             sizeof(sci_dataset),
+                                             sci_publication,
+                                             sizeof(sci_publication));
+    yai_workspace_build_digital_summaries(&info,
+                                          dig_outbound,
+                                          sizeof(dig_outbound),
+                                          dig_sink,
+                                          sizeof(dig_sink),
+                                          dig_publication,
+                                          sizeof(dig_publication),
+                                          dig_retrieval,
+                                          sizeof(dig_retrieval),
+                                          dig_distribution,
+                                          sizeof(dig_distribution));
 
     n = snprintf(out,
                  out_cap,
@@ -1601,11 +2378,17 @@ int yai_session_build_workspace_inspect_json(char *out, size_t out_cap)
                  "\"binding_status\":\"active\","
                  "\"identity\":{\"workspace_id\":\"%s\",\"workspace_alias\":\"%s\",\"root_path\":\"%s\",\"state\":\"%s\"},"
                  "\"root_model\":{\"workspace_store_root\":\"%s\",\"runtime_state_root\":\"%s\",\"metadata_root\":\"%s\",\"root_anchor_mode\":\"%s\"},"
+                 "\"containment\":{\"layout\":\"%s\",\"ready\":%s,\"state_surface\":\"%s\",\"traces_index\":\"%s\",\"artifacts_index\":\"%s\",\"runtime_surface\":\"%s\",\"binding_surface\":\"%s\"},"
+                 "\"security\":{\"level_declared\":\"%s\",\"level_effective\":\"%s\",\"enforcement_mode\":\"%s\",\"backend_mode\":\"%s\",\"scopes\":{\"process\":%s,\"filesystem\":%s,\"socket\":%s,\"network\":%s,\"resource\":%s,\"privilege\":%s,\"runtime_route\":%s,\"binding\":%s},\"capabilities\":{\"sandbox_ready\":%s,\"hardened_fs\":%s,\"process_isolation\":%s,\"network_policy\":%s}},"
+                 "\"execution\":{\"mode_requested\":\"%s\",\"mode_effective\":\"%s\",\"degraded\":%s,\"degraded_reason\":\"%s\",\"unsupported_scopes\":\"%s\",\"advisory_scopes\":\"%s\",\"process_intent\":\"%s\",\"channel_mode\":\"%s\",\"artifact_policy_mode\":\"%s\",\"network_intent\":\"%s\",\"resource_intent\":\"%s\",\"privilege_intent\":\"%s\",\"attach_descriptor_ref\":\"%s\",\"execution_profile_ref\":\"%s\"},"
+                 "\"boundary\":{\"namespace\":\"%s\",\"namespace_scope\":\"workspace\",\"namespace_valid\":%s,\"state\":\"%s\",\"reason\":\"%s\"},"
                  "\"shell\":{\"cwd\":\"%s\",\"cwd_relation\":\"%s\"},"
                  "\"session\":{\"session_binding\":\"%s\",\"runtime_attached\":%s,\"control_plane_attached\":%s,\"isolation_mode\":\"%s\",\"debug_mode\":%s},"
                  "\"normative\":{\"declared\":{\"family\":\"%s\",\"specialization\":\"%s\",\"source\":\"%s\"},"
                  "\"inferred\":{\"family\":\"%s\",\"specialization\":\"%s\",\"confidence\":%.3f},"
                  "\"effective\":{\"stack_ref\":\"%s\",\"overlays_ref\":\"%s\",\"effect_summary\":\"%s\",\"authority_summary\":\"%s\",\"evidence_summary\":\"%s\"}},"
+                 "\"scientific\":{\"experiment_context_summary\":\"%s\",\"parameter_governance_summary\":\"%s\",\"reproducibility_summary\":\"%s\",\"dataset_integrity_summary\":\"%s\",\"publication_control_summary\":\"%s\"},"
+                 "\"digital\":{\"outbound_context_summary\":\"%s\",\"sink_target_summary\":\"%s\",\"publication_control_summary\":\"%s\",\"retrieval_control_summary\":\"%s\",\"distribution_control_summary\":\"%s\"},"
                  "\"inspect\":{\"last_resolution_summary\":\"%s\",\"last_resolution_trace_ref\":\"%s\"}"
                  "}",
                  info.ws_id,
@@ -1616,6 +2399,47 @@ int yai_session_build_workspace_inspect_json(char *out, size_t out_cap)
                  info.runtime_state_root,
                  info.metadata_root,
                  info.root_anchor_mode[0] ? info.root_anchor_mode : "managed_default_root",
+                 info.containment_layout[0] ? info.containment_layout : "v1",
+                 info.containment_ready ? "true" : "false",
+                 info.state_surface_path,
+                 info.traces_index_path,
+                 info.artifacts_index_path,
+                 info.runtime_surface_path,
+                 info.binding_state_path,
+                 info.security_level_declared[0] ? info.security_level_declared : "scoped",
+                 info.security_level_effective[0] ? info.security_level_effective : "logical",
+                 info.security_enforcement_mode[0] ? info.security_enforcement_mode : "runtime_scoped",
+                 info.security_backend_mode[0] ? info.security_backend_mode : "none",
+                 info.scope_process ? "true" : "false",
+                 info.scope_filesystem ? "true" : "false",
+                 info.scope_socket ? "true" : "false",
+                 info.scope_network ? "true" : "false",
+                 info.scope_resource ? "true" : "false",
+                 info.scope_privilege ? "true" : "false",
+                 info.scope_runtime_route ? "true" : "false",
+                 info.scope_binding ? "true" : "false",
+                 info.capability_sandbox_ready ? "true" : "false",
+                 info.capability_hardened_fs ? "true" : "false",
+                 info.capability_process_isolation ? "true" : "false",
+                 info.capability_network_policy ? "true" : "false",
+                 info.execution_mode_requested[0] ? info.execution_mode_requested : "scoped",
+                 info.execution_mode_effective[0] ? info.execution_mode_effective : "scoped",
+                 info.execution_mode_degraded ? "true" : "false",
+                 info.execution_degraded_reason[0] ? info.execution_degraded_reason : "none",
+                 info.execution_unsupported_scopes[0] ? info.execution_unsupported_scopes : "none",
+                 info.execution_advisory_scopes[0] ? info.execution_advisory_scopes : "none",
+                 info.process_intent[0] ? info.process_intent : "shared_runtime",
+                 info.channel_mode[0] ? info.channel_mode : "global_control_scoped_route",
+                 info.artifact_policy_mode[0] ? info.artifact_policy_mode : "workspace_owned",
+                 info.network_intent[0] ? info.network_intent : "advisory_none",
+                 info.resource_intent[0] ? info.resource_intent : "advisory_none",
+                 info.privilege_intent[0] ? info.privilege_intent : "inherited_host",
+                 info.attach_descriptor_ref,
+                 info.execution_profile_ref,
+                 info.workspace_namespace,
+                 info.namespace_valid ? "true" : "false",
+                 info.namespace_valid ? "enforced" : "invalid",
+                 info.boundary_reason[0] ? info.boundary_reason : "none",
                  info.shell_cwd,
                  info.shell_path_relation[0] ? info.shell_path_relation : "unknown",
                  info.session_binding,
@@ -1634,6 +2458,16 @@ int yai_session_build_workspace_inspect_json(char *out, size_t out_cap)
                  info.last_effect_summary,
                  info.last_authority_summary,
                  info.last_evidence_summary,
+                 sci_experiment,
+                 sci_parameter,
+                 sci_repro,
+                 sci_dataset,
+                 sci_publication,
+                 dig_outbound,
+                 dig_sink,
+                 dig_publication,
+                 dig_retrieval,
+                 dig_distribution,
                  info.last_resolution_summary,
                  info.last_resolution_trace_ref);
     return (n > 0 && (size_t)n < out_cap) ? 0 : -1;
@@ -1775,6 +2609,12 @@ int yai_session_set_workspace_declared_context(const char *family,
             snprintf(err, err_cap, "%s", "manifest_write_failed");
         return -1;
     }
+    if (yai_workspace_write_containment_surfaces(&info) != 0)
+    {
+        if (err && err_cap > 0)
+            snprintf(err, err_cap, "%s", "containment_write_failed");
+        return -1;
+    }
 
     if (out_json && out_cap > 0)
     {
@@ -1795,6 +2635,16 @@ int yai_session_build_workspace_policy_effective_json(char *out, size_t out_cap)
     yai_workspace_runtime_info_t info;
     char status[24];
     char err[96];
+    char sci_experiment[192];
+    char sci_parameter[192];
+    char sci_repro[192];
+    char sci_dataset[192];
+    char sci_publication[192];
+    char dig_outbound[192];
+    char dig_sink[192];
+    char dig_publication[192];
+    char dig_retrieval[192];
+    char dig_distribution[192];
     int n;
     if (!out || out_cap == 0)
         return -1;
@@ -1806,11 +2656,45 @@ int yai_session_build_workspace_policy_effective_json(char *out, size_t out_cap)
                      err[0] ? err : "binding_error");
         return (n > 0 && (size_t)n < out_cap) ? 0 : -1;
     }
+    yai_workspace_build_scientific_summaries(&info,
+                                             sci_experiment,
+                                             sizeof(sci_experiment),
+                                             sci_parameter,
+                                             sizeof(sci_parameter),
+                                             sci_repro,
+                                             sizeof(sci_repro),
+                                             sci_dataset,
+                                             sizeof(sci_dataset),
+                                             sci_publication,
+                                             sizeof(sci_publication));
+    yai_workspace_build_digital_summaries(&info,
+                                          dig_outbound,
+                                          sizeof(dig_outbound),
+                                          dig_sink,
+                                          sizeof(dig_sink),
+                                          dig_publication,
+                                          sizeof(dig_publication),
+                                          dig_retrieval,
+                                          sizeof(dig_retrieval),
+                                          dig_distribution,
+                                          sizeof(dig_distribution));
     n = snprintf(out,
                  out_cap,
                  "{"
                  "\"type\":\"yai.workspace.policy.effective.v1\","
                  "\"workspace_id\":\"%s\","
+                 "\"workspace_namespace\":\"%s\","
+                 "\"namespace_valid\":%s,"
+                 "\"containment_ready\":%s,"
+                 "\"security_level_effective\":\"%s\","
+                 "\"execution_mode_requested\":\"%s\","
+                 "\"execution_mode_effective\":\"%s\","
+                 "\"execution_mode_degraded\":%s,"
+                 "\"execution_degraded_reason\":\"%s\","
+                 "\"execution_unsupported_scopes\":\"%s\","
+                 "\"execution_profile_ref\":\"%s\","
+                 "\"traces_index_ref\":\"%s\","
+                 "\"artifacts_index_ref\":\"%s\","
                  "\"family_effective\":\"%s\","
                  "\"specialization_effective\":\"%s\","
                  "\"effective_stack_ref\":\"%s\","
@@ -1818,16 +2702,40 @@ int yai_session_build_workspace_policy_effective_json(char *out, size_t out_cap)
                  "\"precedence\":\"specialization+overlays\","
                  "\"effect_summary\":\"%s\","
                  "\"authority_summary\":\"%s\","
-                 "\"evidence_summary\":\"%s\""
+                 "\"evidence_summary\":\"%s\","
+                 "\"scientific\":{\"experiment_context_summary\":\"%s\",\"parameter_governance_summary\":\"%s\",\"reproducibility_summary\":\"%s\",\"dataset_integrity_summary\":\"%s\",\"publication_control_summary\":\"%s\"},"
+                 "\"digital\":{\"outbound_context_summary\":\"%s\",\"sink_target_summary\":\"%s\",\"publication_control_summary\":\"%s\",\"retrieval_control_summary\":\"%s\",\"distribution_control_summary\":\"%s\"}"
                  "}",
                  info.ws_id,
+                 info.workspace_namespace,
+                 info.namespace_valid ? "true" : "false",
+                 info.containment_ready ? "true" : "false",
+                 info.security_level_effective[0] ? info.security_level_effective : "logical",
+                 info.execution_mode_requested[0] ? info.execution_mode_requested : "scoped",
+                 info.execution_mode_effective[0] ? info.execution_mode_effective : "scoped",
+                 info.execution_mode_degraded ? "true" : "false",
+                 info.execution_degraded_reason[0] ? info.execution_degraded_reason : "none",
+                 info.execution_unsupported_scopes[0] ? info.execution_unsupported_scopes : "none",
+                 info.execution_profile_ref,
+                 info.traces_index_path,
+                 info.artifacts_index_path,
                  info.inferred_family[0] ? info.inferred_family : info.declared_control_family,
                  info.inferred_specialization[0] ? info.inferred_specialization : info.declared_specialization,
                  info.effective_stack_ref,
                  info.effective_overlays_ref,
                  info.last_effect_summary,
                  info.last_authority_summary,
-                 info.last_evidence_summary);
+                 info.last_evidence_summary,
+                 sci_experiment,
+                 sci_parameter,
+                 sci_repro,
+                 sci_dataset,
+                 sci_publication,
+                 dig_outbound,
+                 dig_sink,
+                 dig_publication,
+                 dig_retrieval,
+                 dig_distribution);
     return (n > 0 && (size_t)n < out_cap) ? 0 : -1;
 }
 
@@ -1836,6 +2744,16 @@ int yai_session_build_workspace_debug_resolution_json(char *out, size_t out_cap)
     yai_workspace_runtime_info_t info;
     char status[24];
     char err[96];
+    char sci_experiment[192];
+    char sci_parameter[192];
+    char sci_repro[192];
+    char sci_dataset[192];
+    char sci_publication[192];
+    char dig_outbound[192];
+    char dig_sink[192];
+    char dig_publication[192];
+    char dig_retrieval[192];
+    char dig_distribution[192];
     int n;
     const char *context_source;
     if (!out || out_cap == 0)
@@ -1849,11 +2767,44 @@ int yai_session_build_workspace_debug_resolution_json(char *out, size_t out_cap)
         return (n > 0 && (size_t)n < out_cap) ? 0 : -1;
     }
     context_source = info.declared_context_source[0] ? info.declared_context_source : "unset";
+    yai_workspace_build_scientific_summaries(&info,
+                                             sci_experiment,
+                                             sizeof(sci_experiment),
+                                             sci_parameter,
+                                             sizeof(sci_parameter),
+                                             sci_repro,
+                                             sizeof(sci_repro),
+                                             sci_dataset,
+                                             sizeof(sci_dataset),
+                                             sci_publication,
+                                             sizeof(sci_publication));
+    yai_workspace_build_digital_summaries(&info,
+                                          dig_outbound,
+                                          sizeof(dig_outbound),
+                                          dig_sink,
+                                          sizeof(dig_sink),
+                                          dig_publication,
+                                          sizeof(dig_publication),
+                                          dig_retrieval,
+                                          sizeof(dig_retrieval),
+                                          dig_distribution,
+                                          sizeof(dig_distribution));
     n = snprintf(out,
                  out_cap,
                  "{"
                  "\"type\":\"yai.workspace.debug.resolution.v1\","
                  "\"workspace_id\":\"%s\","
+                 "\"workspace_namespace\":\"%s\","
+                 "\"namespace_valid\":%s,"
+                 "\"containment_ready\":%s,"
+                 "\"security_level_effective\":\"%s\","
+                 "\"execution_mode_requested\":\"%s\","
+                 "\"execution_mode_effective\":\"%s\","
+                 "\"execution_mode_degraded\":%s,"
+                 "\"execution_degraded_reason\":\"%s\","
+                 "\"execution_unsupported_scopes\":\"%s\","
+                 "\"attach_descriptor_ref\":\"%s\","
+                 "\"state_surface_ref\":\"%s\","
                  "\"context_source\":\"%s\","
                  "\"declared\":{\"family\":\"%s\",\"specialization\":\"%s\"},"
                  "\"inferred\":{\"family\":\"%s\",\"specialization\":\"%s\",\"confidence\":%.3f},"
@@ -1861,9 +2812,22 @@ int yai_session_build_workspace_debug_resolution_json(char *out, size_t out_cap)
                  "\"precedence_outcome\":\"%s\","
                  "\"effect_outcome\":\"%s\","
                  "\"last_resolution_trace_ref\":\"%s\","
-                 "\"last_resolution_summary\":\"%s\""
+                 "\"last_resolution_summary\":\"%s\","
+                 "\"scientific\":{\"experiment_context_summary\":\"%s\",\"parameter_governance_summary\":\"%s\",\"reproducibility_summary\":\"%s\",\"dataset_integrity_summary\":\"%s\",\"publication_control_summary\":\"%s\"},"
+                 "\"digital\":{\"outbound_context_summary\":\"%s\",\"sink_target_summary\":\"%s\",\"publication_control_summary\":\"%s\",\"retrieval_control_summary\":\"%s\",\"distribution_control_summary\":\"%s\"}"
                  "}",
                  info.ws_id,
+                 info.workspace_namespace,
+                 info.namespace_valid ? "true" : "false",
+                 info.containment_ready ? "true" : "false",
+                 info.security_level_effective[0] ? info.security_level_effective : "logical",
+                 info.execution_mode_requested[0] ? info.execution_mode_requested : "scoped",
+                 info.execution_mode_effective[0] ? info.execution_mode_effective : "scoped",
+                 info.execution_mode_degraded ? "true" : "false",
+                 info.execution_degraded_reason[0] ? info.execution_degraded_reason : "none",
+                 info.execution_unsupported_scopes[0] ? info.execution_unsupported_scopes : "none",
+                 info.attach_descriptor_ref,
+                 info.state_surface_path,
                  context_source,
                  info.declared_control_family,
                  info.declared_specialization,
@@ -1875,7 +2839,17 @@ int yai_session_build_workspace_debug_resolution_json(char *out, size_t out_cap)
                  "specialization+overlays",
                  info.last_effect_summary,
                  info.last_resolution_trace_ref,
-                 info.last_resolution_summary);
+                 info.last_resolution_summary,
+                 sci_experiment,
+                 sci_parameter,
+                 sci_repro,
+                 sci_dataset,
+                 sci_publication,
+                 dig_outbound,
+                 dig_sink,
+                 dig_publication,
+                 dig_retrieval,
+                 dig_distribution);
     return (n > 0 && (size_t)n < out_cap) ? 0 : -1;
 }
 
@@ -1901,6 +2875,8 @@ int yai_session_record_resolution_snapshot(const char *ws_id,
             snprintf(err, err_cap, "%s", "workspace_manifest_missing");
         return -1;
     }
+    if (yai_session_enforce_workspace_scope(ws_id, err, err_cap) != 0)
+        return -1;
 
     stack = &law_out->decision.stack;
     snprintf(info.inferred_family, sizeof(info.inferred_family), "%s", law_out->decision.family_id);
@@ -1942,6 +2918,12 @@ int yai_session_record_resolution_snapshot(const char *ws_id,
     {
         if (err && err_cap > 0)
             snprintf(err, err_cap, "%s", "manifest_write_failed");
+        return -1;
+    }
+    if (yai_workspace_write_containment_surfaces(&info) != 0)
+    {
+        if (err && err_cap > 0)
+            snprintf(err, err_cap, "%s", "containment_write_failed");
         return -1;
     }
     return 0;

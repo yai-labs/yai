@@ -4,7 +4,7 @@ WS-3 introduces inspectability primitives so developers can query workspace stat
 
 ## Typical Flow
 
-1. Activate workspace
+1. Set workspace
 2. `yai.workspace.current`
 3. `yai.workspace.status`
 4. `yai.workspace.domain_get`

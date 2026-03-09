@@ -104,10 +104,10 @@ r = call(WS_DEFAULT, "yai.workspace.create", [WS_DEFAULT])
 assert r["status"] == "ok"
 assert r["data"]["workspace_store_root"].endswith("/.yai/workspaces")
 assert r["data"]["runtime_state_root"].endswith(f"/.yai/run/{WS_DEFAULT}")
-assert r["data"]["metadata_root"].endswith(f"/.yai/run/{WS_DEFAULT}")
+assert r["data"]["metadata_root"].endswith(f"/.yai/run/{WS_DEFAULT}/metadata")
 assert r["data"]["root_anchor_mode"] in ("managed_default_root", "managed_custom_root")
 
-r = call("system", "yai.workspace.activate", [WS_DEFAULT])
+r = call("system", "yai.workspace.set", [WS_DEFAULT])
 assert r["status"] == "ok"
 assert r["data"]["binding_scope"] == "session"
 
@@ -120,13 +120,18 @@ assert r["data"]["shell_path_relation"] in ("inside_workspace_root", "outside_wo
 r = call("system", "yai.workspace.inspect")
 assert r["status"] == "ok"
 assert "root_model" in r["data"]
+assert "boundary" in r["data"]
 assert "shell" in r["data"]
 assert r["data"]["root_model"]["runtime_state_root"].endswith(f"/.yai/run/{WS_DEFAULT}")
+assert r["data"]["boundary"]["namespace"] == f"ws/{WS_DEFAULT}"
+assert r["data"]["boundary"]["namespace_valid"] is True
 assert r["data"]["shell"]["cwd_relation"] in ("inside_workspace_root", "outside_workspace_root", "workspace_root_unset", "cwd_unavailable")
 
 r = call("system", "yai.workspace.status")
 assert r["status"] == "ok"
 assert r["data"]["workspace_root"].endswith(f"/.yai/workspaces/{WS_DEFAULT}")
+assert r["data"]["namespace_scope"] == "workspace"
+assert r["data"]["namespace_valid"] is True
 assert r["data"]["shell_path_relation"] in ("inside_workspace_root", "outside_workspace_root", "workspace_root_unset", "cwd_unavailable")
 
 # explicit absolute root workspace
@@ -138,4 +143,3 @@ assert r["data"]["root_anchor_mode"] == "explicit_absolute"
 PY
 
 echo "workspace_architecture_boundary_v1: ok"
-

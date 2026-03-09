@@ -109,7 +109,7 @@ assert r["status"] == "error", r
 assert r["code"] == "BAD_ARGS", r
 
 # activate workspace
-r = call("system", "yai.workspace.activate", [WS])
+r = call("system", "yai.workspace.set", [WS])
 assert r["status"] == "ok", r
 
 # invalid family

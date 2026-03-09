@@ -9,11 +9,11 @@ This runbook executes the first real workspace-driven normative flow.
 
 ## Steps
 
-1. Create and activate workspace:
+1. Create and set workspace:
 
 ```bash
 yai ws create ws_real_demo
-yai ws activate ws_real_demo
+yai ws set ws_real_demo
 ```
 
 2. Declare workspace domain context:
@@ -55,5 +55,7 @@ yai ws inspect
 ## Cleanup
 
 ```bash
-yai ws clear
+yai ws clear              # clear runtime-local state, keep binding
+yai ws unset              # unbind active workspace from session
+yai ws destroy ws_real_demo
 ```

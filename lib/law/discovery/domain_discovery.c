@@ -100,16 +100,29 @@ static void choose_specialization(const yai_law_classification_ctx_t *ctx,
     else if (strstr(ctx->command, "fraud") || strstr(ctx->resource, "anomaly")) (void)yai_law_safe_snprintf(out->specialization_id, sizeof(out->specialization_id), "%s", "fraud-risk-controls");
     else (void)yai_law_safe_snprintf(out->specialization_id, sizeof(out->specialization_id), "%s", "payments");
   } else if (strcmp(family_id, "scientific") == 0) {
+    push_specialization_candidate(out, "experiment-configuration");
     push_specialization_candidate(out, "parameter-governance");
+    push_specialization_candidate(out, "dataset-integrity");
     push_specialization_candidate(out, "black-box-evaluation");
     push_specialization_candidate(out, "result-publication-control");
     push_specialization_candidate(out, "reproducibility-control");
     if (ctx->black_box_mode || strstr(ctx->command, "black-box") || strstr(ctx->command, "black_box")) {
       (void)yai_law_safe_snprintf(out->specialization_id, sizeof(out->specialization_id), "%s", "black-box-evaluation");
+    } else if (ctx->has_publication_intent || strstr(ctx->command, "publish") || strstr(ctx->command, "export")) {
+      (void)yai_law_safe_snprintf(out->specialization_id, sizeof(out->specialization_id), "%s", "result-publication-control");
+    } else if (ctx->has_repro_context || strstr(ctx->command, "repro") || strstr(ctx->command, "lineage")) {
+      (void)yai_law_safe_snprintf(out->specialization_id, sizeof(out->specialization_id), "%s", "reproducibility-control");
+    } else if ((ctx->has_dataset_ref && strcmp(ctx->action, "publish") == 0) ||
+               strstr(ctx->command, "dataset.verify") ||
+               strstr(ctx->command, "dataset.audit") ||
+               strstr(ctx->command, "dataset.integrity")) {
+      (void)yai_law_safe_snprintf(out->specialization_id, sizeof(out->specialization_id), "%s", "dataset-integrity");
+    } else if (strstr(ctx->command, "configure") || strstr(ctx->command, "config") || strstr(ctx->command, "setup")) {
+      (void)yai_law_safe_snprintf(out->specialization_id, sizeof(out->specialization_id), "%s", "experiment-configuration");
+    } else if (ctx->has_locked_parameters || ctx->has_params_hash || strstr(ctx->command, "parameter") || strstr(ctx->command, "params")) {
+      (void)yai_law_safe_snprintf(out->specialization_id, sizeof(out->specialization_id), "%s", "parameter-governance");
     } else if (strstr(ctx->command, "result")) {
       (void)yai_law_safe_snprintf(out->specialization_id, sizeof(out->specialization_id), "%s", "result-publication-control");
-    } else if (strstr(ctx->command, "repro")) {
-      (void)yai_law_safe_snprintf(out->specialization_id, sizeof(out->specialization_id), "%s", "reproducibility-control");
     } else {
       (void)yai_law_safe_snprintf(out->specialization_id, sizeof(out->specialization_id), "%s", "parameter-governance");
     }
@@ -117,11 +130,22 @@ static void choose_specialization(const yai_law_classification_ctx_t *ctx,
     push_specialization_candidate(out, "network-egress");
     push_specialization_candidate(out, "remote-publication");
     push_specialization_candidate(out, "external-commentary");
+    push_specialization_candidate(out, "artifact-distribution");
     push_specialization_candidate(out, "remote-retrieval");
-    if (strstr(ctx->command, "comment")) (void)yai_law_safe_snprintf(out->specialization_id, sizeof(out->specialization_id), "%s", "external-commentary");
-    else if (strstr(ctx->command, "retrieve")) (void)yai_law_safe_snprintf(out->specialization_id, sizeof(out->specialization_id), "%s", "remote-retrieval");
-    else if (strstr(ctx->command, "publish")) (void)yai_law_safe_snprintf(out->specialization_id, sizeof(out->specialization_id), "%s", "remote-publication");
-    else (void)yai_law_safe_snprintf(out->specialization_id, sizeof(out->specialization_id), "%s", "network-egress");
+    push_specialization_candidate(out, "digital-sink-control");
+    if (ctx->has_commentary_intent || strstr(ctx->command, "comment")) {
+      (void)yai_law_safe_snprintf(out->specialization_id, sizeof(out->specialization_id), "%s", "external-commentary");
+    } else if (ctx->has_distribution_intent || strstr(ctx->command, "distribution") || strstr(ctx->command, "deliver")) {
+      (void)yai_law_safe_snprintf(out->specialization_id, sizeof(out->specialization_id), "%s", "artifact-distribution");
+    } else if (ctx->has_retrieve_intent || strstr(ctx->command, "retrieve")) {
+      (void)yai_law_safe_snprintf(out->specialization_id, sizeof(out->specialization_id), "%s", "remote-retrieval");
+    } else if (ctx->has_sink_ref || strstr(ctx->command, "sink") || strstr(ctx->resource, "sink")) {
+      (void)yai_law_safe_snprintf(out->specialization_id, sizeof(out->specialization_id), "%s", "digital-sink-control");
+    } else if (ctx->has_publication_intent || strstr(ctx->command, "publish")) {
+      (void)yai_law_safe_snprintf(out->specialization_id, sizeof(out->specialization_id), "%s", "remote-publication");
+    } else {
+      (void)yai_law_safe_snprintf(out->specialization_id, sizeof(out->specialization_id), "%s", "network-egress");
+    }
   }
 
   if (!specialization_exists(family_id, out->specialization_id)) {
