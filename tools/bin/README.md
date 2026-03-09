@@ -23,9 +23,11 @@ Runtime wrappers kept in this repo:
 - `yai-proof-check`
 - `yai-suite`
 - `yai-verify`
+- `yai-ws-token` (workspace prompt token helper, binding-based)
 
 
 Notes:
 - Wrappers are infra-first.
 - `yai-changelog-check` keeps a CI fallback to local validator when `infra` is not checked out by the runner.
 - Law consumption model is embedded-surface runtime (`embedded/law`) with no active legacy bridge fallback.
+- `yai-ws-token` prints only `icon + alias` (no `ws:` prefix), and only when session binding is active and valid.

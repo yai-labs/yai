@@ -6,6 +6,22 @@ Provide a compact, stable prompt-facing context payload derived from current wor
 
 This is not full inspect output. It is a lightweight session summary.
 
+## Shell Token (Git-style)
+
+For terminal prompts, use the helper:
+
+- `tools/bin/yai-ws-token`
+
+It emits a compact token based on active session binding only:
+
+- `◉ <alias>` (default)
+- no `ws:` prefix
+- empty output when no active/valid binding
+
+This keeps shell UX aligned with Git-like context display while preserving the model:
+
+- token represents binding, not cwd path.
+
 ## Contract
 
 Runtime command:
@@ -45,6 +61,32 @@ Primary fields:
 - malformed binding id -> `invalid`
 - binding to missing workspace manifest -> `stale`
 - env override `YAI_ACTIVE_WORKSPACE` takes precedence over binding file
+
+## zsh / bash snippets
+
+zsh:
+
+```sh
+yai_ws_token() {
+  local t
+  t="$("/Users/francescomaiomascio/Developer/YAI/yai/tools/bin/yai-ws-token")"
+  [[ -n "$t" ]] && printf " %s" "$t"
+}
+
+PROMPT='%~ $(git branch --show-current 2>/dev/null)$(yai_ws_token) %# '
+```
+
+bash:
+
+```sh
+yai_ws_token() {
+  local t
+  t="$("/Users/francescomaiomascio/Developer/YAI/yai/tools/bin/yai-ws-token")"
+  [[ -n "$t" ]] && printf " %s" "$t"
+}
+
+PS1='\w $(git branch --show-current 2>/dev/null)$(yai_ws_token) \$ '
+```
 
 ## Next step readiness
 

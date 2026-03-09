@@ -15,6 +15,7 @@ This is intentionally Git-like:
 - Token alias comes from workspace identity alias.
 - Token remains valid even if cwd is outside workspace root.
 - Token disappears when binding is cleared.
+- Token is exposed through `tools/bin/yai-ws-token` in compact form: `◉ <alias>`.
 
 ## Diagnostics
 
@@ -24,4 +25,3 @@ Inspect surfaces expose:
 - cwd relation to workspace root (`inside_workspace_root`, `outside_workspace_root`)
 
 This prevents path/binding confusion during operations and debugging.
-
