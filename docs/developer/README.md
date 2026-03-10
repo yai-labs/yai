@@ -14,6 +14,15 @@ Workspace runtime model:
 - `docs/developer/workspace-prompt-context.md`
 - `docs/developer/workspace-policy-inspection.md`
 - `docs/developer/workspace-governance-apply-walkthrough.md`
+- `docs/developer/event-evidence-sink-walkthrough.md`
+- `docs/developer/governance-persistence-walkthrough.md`
+- `docs/developer/authority-artifact-persistence-walkthrough.md`
+- `docs/developer/brain-graph-and-transient-cognition-walkthrough.md`
+- `docs/developer/operator-query-walkthrough.md`
+- `docs/developer/enforcement-record-closure-walkthrough.md`
+- `docs/developer/runtime-record-to-graph-walkthrough.md`
+- `docs/developer/filesystem-decommission-walkthrough.md`
+- `docs/developer/filesystem-cleanup-execution-walkthrough.md`
 - `docs/developer/workspace-first-real-scenario.md`
 
 Pre-pilot closeout pack:
@@ -22,3 +31,4 @@ Pre-pilot closeout pack:
 - `docs/developer/runbooks/pre-pilot-governed-flow-runbook.md`
 - `docs/developer/runbooks/pre-pilot-expected-outputs.md`
 - `docs/developer/checklists/pre-pilot-readiness-checklist.md`
+- `docs/developer/checklists/data-plane-pre-pilot-readiness-checklist.md`

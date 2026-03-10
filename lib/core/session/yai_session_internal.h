@@ -43,6 +43,19 @@ int yai_session_set_workspace_declared_context(const char *family,
                                                size_t err_cap);
 int yai_session_build_workspace_policy_effective_json(char *out, size_t out_cap);
 int yai_session_build_workspace_debug_resolution_json(char *out, size_t out_cap);
+int yai_session_build_workspace_data_query_json(const char *query_family,
+                                                char *out,
+                                                size_t out_cap,
+                                                char *err,
+                                                size_t err_cap);
+int yai_session_run_workspace_lifecycle_maintenance_json(char *out,
+                                                         size_t out_cap,
+                                                         char *err,
+                                                         size_t err_cap);
+int yai_session_build_workspace_lifecycle_status_json(char *out,
+                                                      size_t out_cap,
+                                                      char *err,
+                                                      size_t err_cap);
 int yai_session_workspace_policy_attachment_update(const char *object_id,
                                                    int attach_mode,
                                                    char *out_json,

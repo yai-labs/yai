@@ -24,7 +24,7 @@ cleanup() {
 }
 trap cleanup EXIT
 
-"$YAI" >/tmp/yai_workspace_hostile_baseline_runtime.log 2>&1 &
+(cd "$REPO" && "$YAI" >/tmp/yai_workspace_hostile_baseline_runtime.log 2>&1) &
 RUNTIME_PID=$!
 
 for _ in $(seq 1 50); do
@@ -145,6 +145,6 @@ assert i["data"]["execution"]["degraded"] is True, i
 assert i["data"]["execution"]["degraded_reason"] == "sandbox_backend_unavailable", i
 PY
 
-./tools/dev/validate_workspace_structure.py "$WS_A" "$WS_B" "$WS_DEG"
+"$REPO"/tools/dev/validate_workspace_structure.py "$WS_A" "$WS_B" "$WS_DEG"
 
 echo "workspace_hostile_path_baseline_v1: ok"

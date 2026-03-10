@@ -49,6 +49,16 @@ Use `workspace.debug_resolution` to see the latest compact resolution rationale 
 
 Use `workspace.inspect` for full workspace-level state inspection.
 
+DP-5 adds `governance_persistence` references in inspect/effective/debug
+surfaces, pointing to persisted governance object/lifecycle/attachment stores.
+
+DP-6 adds `authority_artifact_persistence` references in inspect/effective/debug
+surfaces, pointing to persisted authority state/resolution and artifact metadata/linkage stores.
+
+DP-7 adds `brain_persistence` references in inspect/effective/debug surfaces,
+separating persistent graph truth (`graph_truth_authoritative=true`) from
+transient cognition heat (`transient_authoritative=false`).
+
 
 Operational-state checks during inspection:
 

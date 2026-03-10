@@ -2,8 +2,8 @@
 
 ## Scope for this tranche
 
-Dataplane and persistence remain out of scope.
-Runtime produces deterministic evidence shape and trace context.
+Runtime produces deterministic evidence shape and trace context, and DP-4 now
+persists canonical event/decision/evidence records in workspace-scoped sinks.
 
 ## Compositional evidence model
 
@@ -29,6 +29,9 @@ For each resolved call, runtime prepares:
 - authority summary and escalation markers
 - aggregated evidence envelope fields
 - resolution trace JSON (classification, discovery, precedence, overlay/compliance attachments)
+- runtime event record (`yai.runtime_event.v1`)
+- decision record (`yai.decision_record.v1`)
+- evidence record (`yai.evidence_record.v1`)
 
 Evidence envelope now flags overlay-driven hardening explicitly:
 - `approval_chain_required`
@@ -39,5 +42,7 @@ Evidence envelope now flags overlay-driven hardening explicitly:
 ## Where generated
 
 - decision/evidence mapping: `lib/law/mapping/decision_to_evidence.c`
+- decision record mapping: `lib/law/mapping/decision_to_audit.c`
 - trace generation: `lib/law/debug/resolution_trace.c`
+- sink append + workspace surface wiring: `lib/core/session/session_utils.c`
 - runtime return wiring: `lib/core/session/session.c`

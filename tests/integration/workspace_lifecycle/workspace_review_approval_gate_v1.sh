@@ -26,7 +26,7 @@ cleanup() {
 }
 trap cleanup EXIT
 
-"$YAI" up >/tmp/yai_workspace_review_approval_gate_runtime.log 2>&1 &
+(cd "$REPO" && "$YAI" up >/tmp/yai_workspace_review_approval_gate_runtime.log 2>&1) &
 RUNTIME_PID=$!
 
 for _ in $(seq 1 100); do

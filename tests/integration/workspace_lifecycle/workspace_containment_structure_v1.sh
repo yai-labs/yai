@@ -23,7 +23,7 @@ cleanup() {
 }
 trap cleanup EXIT
 
-"$YAI" >/tmp/yai_workspace_containment_structure_runtime.log 2>&1 &
+(cd "$REPO" && "$YAI" >/tmp/yai_workspace_containment_structure_runtime.log 2>&1) &
 RUNTIME_PID=$!
 for _ in $(seq 1 50); do
   [[ -S "$SOCK" ]] && break
@@ -139,6 +139,6 @@ for ws in (WSA, WSB):
 assert str((run_root / WSA / "traces/index.json")) != str((run_root / WSB / "traces/index.json"))
 PY
 
-./tools/dev/validate_workspace_structure.py "$WSA" "$WSB"
+"$REPO"/tools/dev/validate_workspace_structure.py "$WSA" "$WSB"
 
 echo "workspace_containment_structure_v1: ok"

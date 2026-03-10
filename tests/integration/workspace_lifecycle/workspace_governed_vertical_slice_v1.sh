@@ -4,7 +4,8 @@ set -euo pipefail
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
 YAI="$REPO/build/bin/yai"
 SOCK="${YAI_RUNTIME_INGRESS:-$HOME/.yai/run/control.sock}"
-WS="ws_vertical_slice_v1"
+# Must match the review-gate workspace targets declared in law examples.
+WS="ws_digital_outbound_stage"
 BIND_FILE="$HOME/.yai/session/active_workspace.json"
 ATTACH_OBJ="enterprise.ecohmedia.digital-outbound.review-gate"
 
@@ -24,7 +25,7 @@ cleanup() {
 }
 trap cleanup EXIT
 
-"$YAI" >/tmp/yai_workspace_governed_vertical_slice_runtime.log 2>&1 &
+(cd "$REPO" && "$YAI" >/tmp/yai_workspace_governed_vertical_slice_runtime.log 2>&1) &
 RUNTIME_PID=$!
 
 for _ in $(seq 1 100); do

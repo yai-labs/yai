@@ -464,6 +464,25 @@ int yai_session_handle_control_call(
         else if (strstr(payload, "yai.workspace.clear")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.clear");
         else if (strstr(payload, "yai.workspace.status")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.status");
         else if (strstr(payload, "yai.workspace.inspect")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.inspect");
+        else if (strstr(payload, "yai.workspace.query")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.query");
+        else if (strstr(payload, "yai.workspace.governance.list")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.governance.list");
+        else if (strstr(payload, "yai.workspace.events.tail")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.events.tail");
+        else if (strstr(payload, "yai.workspace.evidence.list")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.evidence.list");
+        else if (strstr(payload, "yai.workspace.enforcement.status")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.enforcement.status");
+        else if (strstr(payload, "yai.workspace.authority.list")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.authority.list");
+        else if (strstr(payload, "yai.workspace.artifacts.list")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.artifacts.list");
+        else if (strstr(payload, "yai.workspace.graph.summary")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.graph.summary");
+        else if (strstr(payload, "yai.workspace.graph.workspace")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.graph.workspace");
+        else if (strstr(payload, "yai.workspace.graph.governance")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.graph.governance");
+        else if (strstr(payload, "yai.workspace.graph.decision")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.graph.decision");
+        else if (strstr(payload, "yai.workspace.graph.artifact")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.graph.artifact");
+        else if (strstr(payload, "yai.workspace.graph.authority")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.graph.authority");
+        else if (strstr(payload, "yai.workspace.graph.evidence")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.graph.evidence");
+        else if (strstr(payload, "yai.workspace.graph.lineage")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.graph.lineage");
+        else if (strstr(payload, "yai.workspace.graph.recent")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.graph.recent");
+        else if (strstr(payload, "yai.workspace.lifecycle.model")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.lifecycle.model");
+        else if (strstr(payload, "yai.workspace.lifecycle.maintain")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.lifecycle.maintain");
+        else if (strstr(payload, "yai.workspace.lifecycle.status")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.lifecycle.status");
         else if (strstr(payload, "yai.workspace.domain_get")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.domain_get");
         else if (strstr(payload, "yai.workspace.domain.get")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.domain.get");
         else if (strstr(payload, "yai.workspace.domain_set")) snprintf(command_id, sizeof(command_id), "%s", "yai.workspace.domain_set");
@@ -723,6 +742,99 @@ int yai_session_handle_control_call(
                 return -1;
             }
             yai_session_send_exec_reply(client_fd, env, "ok", "OK", "workspace_inspect", command_id, "runtime", data);
+            return 0;
+        }
+
+        if (strcmp(command_id, "yai.workspace.query") == 0 ||
+            strcmp(command_id, "yai.workspace.governance.list") == 0 ||
+            strcmp(command_id, "yai.workspace.events.tail") == 0 ||
+            strcmp(command_id, "yai.workspace.evidence.list") == 0 ||
+            strcmp(command_id, "yai.workspace.enforcement.status") == 0 ||
+            strcmp(command_id, "yai.workspace.authority.list") == 0 ||
+            strcmp(command_id, "yai.workspace.artifacts.list") == 0 ||
+            strcmp(command_id, "yai.workspace.graph.summary") == 0 ||
+            strcmp(command_id, "yai.workspace.graph.workspace") == 0 ||
+            strcmp(command_id, "yai.workspace.graph.governance") == 0 ||
+            strcmp(command_id, "yai.workspace.graph.decision") == 0 ||
+            strcmp(command_id, "yai.workspace.graph.artifact") == 0 ||
+            strcmp(command_id, "yai.workspace.graph.authority") == 0 ||
+            strcmp(command_id, "yai.workspace.graph.evidence") == 0 ||
+            strcmp(command_id, "yai.workspace.graph.lineage") == 0 ||
+            strcmp(command_id, "yai.workspace.graph.recent") == 0 ||
+            strcmp(command_id, "yai.workspace.lifecycle.model") == 0)
+        {
+            const char *query_family = "workspace";
+            if (strcmp(command_id, "yai.workspace.governance.list") == 0) query_family = "governance";
+            else if (strcmp(command_id, "yai.workspace.events.tail") == 0) query_family = "events";
+            else if (strcmp(command_id, "yai.workspace.evidence.list") == 0) query_family = "evidence";
+            else if (strcmp(command_id, "yai.workspace.enforcement.status") == 0) query_family = "enforcement";
+            else if (strcmp(command_id, "yai.workspace.authority.list") == 0) query_family = "authority";
+            else if (strcmp(command_id, "yai.workspace.artifacts.list") == 0) query_family = "artifacts";
+            else if (strcmp(command_id, "yai.workspace.graph.summary") == 0) query_family = "graph";
+            else if (strcmp(command_id, "yai.workspace.graph.workspace") == 0) query_family = "graph.workspace";
+            else if (strcmp(command_id, "yai.workspace.graph.governance") == 0) query_family = "graph.governance";
+            else if (strcmp(command_id, "yai.workspace.graph.decision") == 0) query_family = "graph.decision";
+            else if (strcmp(command_id, "yai.workspace.graph.artifact") == 0) query_family = "graph.artifact";
+            else if (strcmp(command_id, "yai.workspace.graph.authority") == 0) query_family = "graph.authority";
+            else if (strcmp(command_id, "yai.workspace.graph.evidence") == 0) query_family = "graph.evidence";
+            else if (strcmp(command_id, "yai.workspace.graph.lineage") == 0) query_family = "graph.lineage";
+            else if (strcmp(command_id, "yai.workspace.graph.recent") == 0) query_family = "graph.recent";
+            else if (strcmp(command_id, "yai.workspace.lifecycle.model") == 0) query_family = "lifecycle";
+            else if (action_arg[0]) query_family = action_arg;
+
+            if (yai_session_build_workspace_data_query_json(query_family,
+                                                            data,
+                                                            sizeof(data),
+                                                            err,
+                                                            sizeof(err)) != 0)
+            {
+                yai_session_send_exec_reply(client_fd,
+                                            env,
+                                            "error",
+                                            "BAD_ARGS",
+                                            err[0] ? err : "workspace_query_failed",
+                                            command_id,
+                                            "runtime",
+                                            NULL);
+                return -1;
+            }
+            yai_session_send_exec_reply(client_fd, env, "ok", "OK", "workspace_query_result", command_id, "runtime", data);
+            return 0;
+        }
+
+        if (strcmp(command_id, "yai.workspace.lifecycle.maintain") == 0)
+        {
+            if (yai_session_run_workspace_lifecycle_maintenance_json(data, sizeof(data), err, sizeof(err)) != 0)
+            {
+                yai_session_send_exec_reply(client_fd,
+                                            env,
+                                            "error",
+                                            "INTERNAL_ERROR",
+                                            err[0] ? err : "workspace_lifecycle_maintenance_failed",
+                                            command_id,
+                                            "runtime",
+                                            NULL);
+                return -1;
+            }
+            yai_session_send_exec_reply(client_fd, env, "ok", "OK", "workspace_lifecycle_maintenance_applied", command_id, "runtime", data);
+            return 0;
+        }
+
+        if (strcmp(command_id, "yai.workspace.lifecycle.status") == 0)
+        {
+            if (yai_session_build_workspace_lifecycle_status_json(data, sizeof(data), err, sizeof(err)) != 0)
+            {
+                yai_session_send_exec_reply(client_fd,
+                                            env,
+                                            "error",
+                                            "INTERNAL_ERROR",
+                                            err[0] ? err : "workspace_lifecycle_status_failed",
+                                            command_id,
+                                            "runtime",
+                                            NULL);
+                return -1;
+            }
+            yai_session_send_exec_reply(client_fd, env, "ok", "OK", "workspace_lifecycle_status", command_id, "runtime", data);
             return 0;
         }
 

@@ -99,6 +99,36 @@ int yai_mind_graph_stats_get(yai_mind_graph_stats_t *stats_out);
 int yai_mind_memory_query_run(const yai_mind_memory_query_t *query,
                               yai_mind_memory_result_t *result_out);
 
+int yai_mind_storage_bridge_query(const yai_mind_memory_query_t *query,
+                                  yai_mind_memory_result_t *result);
+int yai_mind_storage_bridge_resolution_hook(const char *workspace_id,
+                                            const char *family_id,
+                                            const char *specialization_id,
+                                            const char *effect,
+                                            const char *authority_profile,
+                                            const char *resource_hint,
+                                            const char *governance_refs_csv,
+                                            const char *authority_ref,
+                                            const char *artifact_ref,
+                                            const char *event_ref,
+                                            const char *decision_ref,
+                                            const char *evidence_ref,
+                                            char *err,
+                                            size_t err_cap);
+int yai_mind_storage_bridge_last_refs(const char *workspace_id,
+                                      char *graph_node_ref,
+                                      size_t graph_node_ref_cap,
+                                      char *graph_edge_ref,
+                                      size_t graph_edge_ref_cap,
+                                      char *transient_state_ref,
+                                      size_t transient_state_ref_cap,
+                                      char *transient_working_set_ref,
+                                      size_t transient_working_set_ref_cap,
+                                      char *graph_store_ref,
+                                      size_t graph_store_ref_cap,
+                                      char *transient_store_ref,
+                                      size_t transient_store_ref_cap);
+
 int yai_mind_graph_backend_use_inmemory(void);
 int yai_mind_graph_backend_use_rpc(const char *endpoint);
 const char *yai_mind_graph_backend_name(void);

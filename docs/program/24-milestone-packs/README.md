@@ -56,6 +56,11 @@ An MP is a closure artifact for a concrete phase and should make review/audit st
 - `docs/program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.4.md`
 - `docs/program/24-milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md`
 
+## Current track: Data plane
+
+- `docs/program/24-milestone-packs/data-plane/README.md`
+- `docs/program/24-milestone-packs/data-plane/DP-CLOSEOUT-v0.1.0.md`
+
 ## Template
 
 - `docs/program/25-templates/milestone-packs/MP-000-template.md`

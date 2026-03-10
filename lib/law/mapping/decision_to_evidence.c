@@ -41,3 +41,43 @@ int yai_law_decision_to_evidence(const yai_law_decision_t *decision,
 
   return 0;
 }
+
+int yai_law_evidence_to_record_blob(const yai_law_decision_t *decision,
+                                    const yai_law_evidence_envelope_t *evidence,
+                                    char *out,
+                                    size_t out_cap) {
+  if (!decision || !evidence || !out || out_cap == 0) return -1;
+  return yai_law_safe_snprintf(
+      out,
+      out_cap,
+      "{\"type\":\"yai.evidence_record.v1\",\"schema_version\":\"v1\","
+      "\"decision_ref\":\"%s\",\"trace_ref\":\"%s\",\"workspace_scope\":\"workspace\","
+      "\"domain_id\":\"%s\",\"family_id\":\"%s\",\"specialization_id\":\"%s\","
+      "\"final_effect\":\"%s\",\"provider\":\"%s\",\"resource\":\"%s\","
+      "\"authority_context\":\"%s\","
+      "\"evidence_profile\":\"%s\","
+      "\"requirements\":{\"review_trace_required\":%s,\"retention_required\":%s,"
+      "\"provenance_required\":%s,\"approval_chain_required\":%s,"
+      "\"dependency_chain_required\":%s,\"lawful_basis_required\":%s,"
+      "\"oversight_trace_required\":%s},"
+      "\"lifecycle\":{\"data_class\":\"evidence_record\",\"tier\":\"hot\","
+      "\"retention_profile\":\"evidence.default.v1\",\"partition_scope\":\"workspace_id,time_window\","
+      "\"lineage_required\":true,\"compactable\":true,\"archive_eligible\":true}}",
+      evidence->decision_id,
+      evidence->trace_id,
+      evidence->domain_id,
+      evidence->family_id,
+      evidence->specialization_id,
+      evidence->final_effect,
+      evidence->provider,
+      evidence->resource,
+      evidence->authority_context,
+      decision->stack.evidence_profile,
+      evidence->review_trace_required ? "true" : "false",
+      evidence->retention_required ? "true" : "false",
+      evidence->provenance_required ? "true" : "false",
+      evidence->approval_chain_required ? "true" : "false",
+      evidence->dependency_chain_required ? "true" : "false",
+      evidence->lawful_basis_required ? "true" : "false",
+      evidence->oversight_trace_required ? "true" : "false");
+}

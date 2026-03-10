@@ -24,7 +24,7 @@ cleanup() {
 }
 trap cleanup EXIT
 
-"$YAI" >/tmp/yai_workspace_execution_hooks_runtime.log 2>&1 &
+(cd "$REPO" && "$YAI" >/tmp/yai_workspace_execution_hooks_runtime.log 2>&1) &
 RUNTIME_PID=$!
 
 for _ in $(seq 1 50); do
@@ -158,6 +158,6 @@ assert i["data"]["execution"]["attach_descriptor_ref"] != "", i
 assert i["data"]["execution"]["execution_profile_ref"] != "", i
 PY
 
-./tools/dev/validate_workspace_structure.py "$WS_SCOPED" "$WS_ISO" "$WS_SBX"
+"$REPO"/tools/dev/validate_workspace_structure.py "$WS_SCOPED" "$WS_ISO" "$WS_SBX"
 
 echo "workspace_execution_containment_hooks_v1: ok"

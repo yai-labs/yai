@@ -1,5 +1,7 @@
 #pragma once
 
+#include <stddef.h>
+
 #include <yai/law/decision_map.h>
 
 typedef struct yai_law_evidence_envelope {
@@ -27,3 +29,8 @@ int yai_law_decision_to_evidence(const yai_law_decision_t *decision,
                                  const char *resource,
                                  const char *authority_context,
                                  yai_law_evidence_envelope_t *out);
+
+int yai_law_evidence_to_record_blob(const yai_law_decision_t *decision,
+                                    const yai_law_evidence_envelope_t *evidence,
+                                    char *out,
+                                    size_t out_cap);

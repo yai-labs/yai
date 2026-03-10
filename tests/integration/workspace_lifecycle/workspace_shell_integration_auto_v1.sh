@@ -23,7 +23,7 @@ cleanup() {
 trap cleanup EXIT
 
 mkdir -p "$TMP_HOME"
-HOME="$TMP_HOME" YAI_RUNTIME_INGRESS="$SOCK" "$YAI" >/tmp/yai_workspace_shell_auto_runtime.log 2>&1 &
+HOME="$TMP_HOME" YAI_RUNTIME_INGRESS="$SOCK" (cd "$REPO" && "$YAI" >/tmp/yai_workspace_shell_auto_runtime.log 2>&1) &
 RUNTIME_PID=$!
 
 for _ in $(seq 1 50); do

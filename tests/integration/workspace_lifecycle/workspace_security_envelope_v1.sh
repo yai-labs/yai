@@ -22,7 +22,7 @@ cleanup() {
 }
 trap cleanup EXIT
 
-"$YAI" >/tmp/yai_workspace_security_envelope_runtime.log 2>&1 &
+(cd "$REPO" && "$YAI" >/tmp/yai_workspace_security_envelope_runtime.log 2>&1) &
 RUNTIME_PID=$!
 
 for _ in $(seq 1 50); do
@@ -130,6 +130,6 @@ assert d["data"]["security_level_effective"] in ("scoped", "logical", "isolated"
 assert d["data"]["execution_mode_effective"] in ("scoped", "logical", "isolated", "sandboxed"), d
 PY
 
-./tools/dev/validate_workspace_structure.py "$WS"
+"$REPO"/tools/dev/validate_workspace_structure.py "$WS"
 
 echo "workspace_security_envelope_v1: ok"
