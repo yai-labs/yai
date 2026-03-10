@@ -32,3 +32,18 @@ Pre-pilot closeout pack:
 - `docs/developer/runbooks/pre-pilot-expected-outputs.md`
 - `docs/developer/checklists/pre-pilot-readiness-checklist.md`
 - `docs/developer/checklists/data-plane-pre-pilot-readiness-checklist.md`
+
+## Operational terminology guardrails
+
+Developer walkthroughs in this path are canonical only if they use unified
+runtime semantics:
+
+- capability families: `core`, `exec`, `data`, `graph`, `knowledge`
+- workspace-first binding for operational context
+- readiness semantics that distinguish:
+  - runtime liveness,
+  - active workspace selection,
+  - bound/degraded/unbound capability state.
+
+Legacy subsystem wording (`brain`, `mind`) may appear only as historical aliases
+inside explicitly marked historical material.

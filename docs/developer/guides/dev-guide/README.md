@@ -9,9 +9,17 @@ Developer-facing guidance for product runtime work in `yai`.
 - `testing.md`
 - `debugging.md`
 - `release.md`
+- `agent-contract.md`
+- `agent-playbook.md`
+
+## Historical guides (non-canonical)
+
 - `mind-build.md`
 - `mind-testing.md`
 - `mind-workflow.md`
+
+Historical guides remain for migration traceability and are not the active
+runtime-operational truth path.
 
 ## Governance/process pointers (canonical in infra)
 
@@ -25,7 +33,5 @@ Developer-facing guidance for product runtime work in `yai`.
 
 ## Still local
 
-- `agent-contract.md`
-- `agent-playbook.md`
 - `tooling-layout.md`
 - `checklists/*.md`

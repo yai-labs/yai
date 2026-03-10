@@ -19,13 +19,9 @@ A good runbook must be deterministic:
 - verifiable outcomes,
 - rollback/failure handling.
 
-## Typical runbooks in this repo
+## Canonical operational runbooks (active truth path)
 
 - `docs/program/23-runbooks/contract-baseline-lock.md`
-- `docs/program/23-runbooks/specs-refactor-foundation.md`
-- `docs/program/23-runbooks/root-hardening.md`
-- `docs/program/23-runbooks/workspaces-lifecycle.md`
-- `docs/program/23-runbooks/engine-attach.md`
 - `docs/program/23-runbooks/data-plane.md`
 - `docs/program/23-runbooks/data-plane-storage-classes.md`
 - `docs/program/23-runbooks/data-plane-storage-topology.md`
@@ -43,9 +39,23 @@ A good runbook must be deterministic:
 - `docs/program/23-runbooks/filesystem-cleanup-and-archive-execution.md`
 - `docs/program/23-runbooks/data-lifecycle-retention-and-tiering.md`
 - `docs/program/23-runbooks/unified-runtime-topology-refoundation.md`
+- `docs/program/23-runbooks/operations.md`
+
+These runbooks are expected to reflect:
+- unified runtime ownership (`core`, `exec`, `data`, `graph`, `knowledge`),
+- workspace-first binding,
+- canonical readiness/binding semantics.
+
+## Historical / superseded runbooks (non-canonical)
+
+The following remain for traceability only and must not be used as current
+operational guidance for unified runtime behavior:
+
+- `docs/program/23-runbooks/root-hardening.md`
+- `docs/program/23-runbooks/workspaces-lifecycle.md`
+- `docs/program/23-runbooks/engine-attach.md`
 - `docs/program/23-runbooks/mind-redis-stm.md`
 - `docs/program/23-runbooks/kernel-sovereignty.md`
-- `docs/program/23-runbooks/operations.md`
 
 ## Program Convergence Backbone
 

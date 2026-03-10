@@ -1,23 +1,25 @@
-# Workflow — YAI Mind
+# Workflow — Mind (Historical)
 
-## Issue → Branch → PR
+This document is retained for migration traceability only.
+It is not part of the active operational truth path for the unified runtime.
 
-- Create/assign an issue.
-- Create a branch:
-  - docs/governance work: `docs-gov/...`
-  - features: `feat/...`
-  - fixes: `fix/...`
-- Open a PR early for large work.
+## Status
 
-## PR requirements
+- historical/superseded workflow notes
+- non-canonical for current contributor guidance
 
-- Scope is tight and explained.
-- CI passes (fmt/clippy/test).
-- Docs-only branches do not touch `src/`.
+## Canonical replacement path
 
-## Repository mapping (high level)
+Use these active guides instead:
 
-- `law` — canonical contracts, schemas, compliance packs
-- `yai` — runtime enforcement, toolchain, runbooks
-- `cli` — user interface surface
-- `yai-mind` — cognition + memory + providers within L3 boundary
+- `docs/developer/guides/dev-guide/repo-workflow.md`
+- `docs/developer/guides/dev-guide/build.md`
+- `docs/developer/guides/dev-guide/testing.md`
+- `docs/developer/workspace-first-real-scenario.md`
+- `docs/program/23-runbooks/unified-runtime-topology-refoundation.md`
+
+## Guardrail
+
+Do not use this page to infer current runtime ownership or topology.
+Current runtime model is unified and workspace-first, with canonical families:
+`core`, `exec`, `data`, `graph`, `knowledge`.
