@@ -1,4 +1,4 @@
-# Session-only workspace prompt hook for zsh.
+# Session-only workspace prompt hook for zsh (LEFT prompt only).
 # Usage:
 #   source /path/to/yai/tools/dev/yai-prompt.zsh
 #   yai_prompt_enable
@@ -33,34 +33,42 @@ yai_prompt_token_cmd() {
 yai_prompt_segment() {
   local cmd
   cmd="$(yai_prompt_token_cmd)" || return 0
-  YAI_WS_BIND_SCOPE=tty "$cmd" 2>/dev/null || true
+  "$cmd" 2>/dev/null || true
 }
 
-yai_prompt_precmd() {
-  local tok base
+prompt_yai_ws() {
+  emulate -L zsh
+  local tok
   tok="$(yai_prompt_segment)"
-  base="${YAI_PROMPT_RPROMPT_BASE:-$RPROMPT}"
-  if [[ -n "$tok" ]]; then
-    RPROMPT="${tok}${base:+ ${base}}"
-  else
-    RPROMPT="${base}"
-  fi
+  [[ -n "$tok" ]] || return 0
+  p10k segment -f 255 -b 35 -t "$tok"
 }
 
 yai_prompt_enable() {
-  setopt prompt_subst
-  if [[ -z "${YAI_PROMPT_RPROMPT_BASE+x}" ]]; then
-    typeset -g YAI_PROMPT_RPROMPT_BASE="$RPROMPT"
+  typeset -ga POWERLEVEL9K_LEFT_PROMPT_ELEMENTS
+  typeset -ga POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS
+
+  # Kill right-side workspace token unconditionally.
+  POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(${POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS:#yai_ws})
+
+  # Keep a single yai_ws on the left, right before vcs when available.
+  POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(${POWERLEVEL9K_LEFT_PROMPT_ELEMENTS:#yai_ws})
+  if (( ${POWERLEVEL9K_LEFT_PROMPT_ELEMENTS[(I)vcs]} <= ${#POWERLEVEL9K_LEFT_PROMPT_ELEMENTS} )); then
+    integer _yai_i=${POWERLEVEL9K_LEFT_PROMPT_ELEMENTS[(I)vcs]}
+    POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
+      ${POWERLEVEL9K_LEFT_PROMPT_ELEMENTS[1,$((_yai_i-1))]}
+      yai_ws
+      ${POWERLEVEL9K_LEFT_PROMPT_ELEMENTS[_yai_i,-1]}
+    )
+    unset _yai_i
+  else
+    POWERLEVEL9K_LEFT_PROMPT_ELEMENTS+=(yai_ws)
   fi
-  precmd_functions=(${precmd_functions:#yai_prompt_precmd})
-  precmd_functions+=(yai_prompt_precmd)
-  yai_prompt_precmd
 }
 
 yai_prompt_disable() {
-  precmd_functions=(${precmd_functions:#yai_prompt_precmd})
-  if [[ -n "${YAI_PROMPT_RPROMPT_BASE+x}" ]]; then
-    RPROMPT="$YAI_PROMPT_RPROMPT_BASE"
-    unset YAI_PROMPT_RPROMPT_BASE
-  fi
+  typeset -ga POWERLEVEL9K_LEFT_PROMPT_ELEMENTS
+  typeset -ga POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS
+  POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(${POWERLEVEL9K_LEFT_PROMPT_ELEMENTS:#yai_ws})
+  POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(${POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS:#yai_ws})
 }
