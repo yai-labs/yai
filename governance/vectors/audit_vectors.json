@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "cases": [
+    {
+      "name": "command-ping",
+      "record": {
+        "event_id": 1,
+        "state_from": 1,
+        "state_to": 2,
+        "command_id": 1,
+        "timestamp_ns": 0,
+        "logical_clock": 0,
+        "seq": 1,
+        "result_code": 1
+      }
+    }
+  ]
+}

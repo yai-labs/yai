@@ -12,3 +12,8 @@ Exit condition:
 
 - no active runtime dependency on `embedded/law`
 - manifests/registry/schema/overlays resolved from `governance/`
+
+Archive note:
+
+- deprecated `embedded-export.manifest.json` is preserved only under
+  `transitional/embedded-law/manifests/` for historical traceability.
