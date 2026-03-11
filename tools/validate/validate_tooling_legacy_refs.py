@@ -59,8 +59,8 @@ def main() -> int:
         for f in files:
             rel = f.relative_to(repo).as_posix()
             if rel in {
-                "tools/validate/validate_no_legacy_tooling_references.py",
-                "tools/validate/validate_unified_repo_root_framing.py",
+                "tools/validate/validate_tooling_legacy_refs.py",
+                "tools/validate/validate_root_framing.py",
                 "tools/validate/validate_root_topology.py",
             }:
                 continue
@@ -74,12 +74,12 @@ def main() -> int:
                 errors.append(f"{rel}: forbidden legacy token '{token}'")
 
     if errors:
-        print("no_legacy_tooling_references: FAIL")
+        print("tooling_legacy_refs: FAIL")
         for e in errors:
             print(" -", e)
         return 1
 
-    print("no_legacy_tooling_references: ok")
+    print("tooling_legacy_refs: ok")
     return 0
 
 

@@ -40,12 +40,12 @@ def main() -> int:
                 errors.append(f"{rel}: forbidden legacy token '{token}'")
 
     if errors:
-        print("unified_repo_root_framing: FAIL")
+        print("root_framing: FAIL")
         for e in errors:
             print(" -", e)
         return 1
 
-    print("unified_repo_root_framing: ok")
+    print("root_framing: ok")
     return 0
 
 

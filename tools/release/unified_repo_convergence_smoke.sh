@@ -9,9 +9,10 @@ run() {
 }
 
 run make -C "$ROOT" governance-check
-run python3 "$ROOT/tools/validate/validate_unified_repo_root_framing.py"
-run python3 "$ROOT/tools/validate/validate_no_legacy_tooling_references.py"
-run python3 "$ROOT/tools/validate/validate_governance_manifest_spine.py"
+run python3 "$ROOT/tools/validate/validate_root_framing.py"
+run python3 "$ROOT/tools/validate/validate_tooling_legacy_refs.py"
+run python3 "$ROOT/tools/validate/validate_governance_manifests.py"
+run python3 "$ROOT/tools/validate/validate_aux_naming.py"
 run python3 "$ROOT/tools/validate/validate_governance_contracts_schema.py"
 run python3 "$ROOT/tools/validate/validate_governance_ingestion_pipeline.py"
 run "$ROOT/tests/unit/governance/run_governance_unit_tests.sh"

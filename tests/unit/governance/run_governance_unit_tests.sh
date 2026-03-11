@@ -20,12 +20,13 @@ python3 "$ROOT/tools/gen/build_compliance_descriptors.py" >/dev/null
 python3 "$ROOT/tools/validate/validate_compliance_descriptors.py"
 python3 "$ROOT/tools/gen/build_overlay_descriptors.py" >/dev/null
 python3 "$ROOT/tools/validate/validate_overlay_descriptors.py"
-python3 "$ROOT/tools/gen/build_overlay_compliance_runtime_view.py" >/dev/null
+python3 "$ROOT/tools/gen/build_overlay_compliance_view.py" >/dev/null
 python3 "$ROOT/tools/validate/validate_overlay_compliance_runtime_view.py"
-python3 "$ROOT/tools/validate/validate_governance_manifest_spine.py"
+python3 "$ROOT/tools/validate/validate_governance_manifests.py"
 python3 "$ROOT/tools/validate/validate_governance_contracts_schema.py"
 python3 "$ROOT/tools/validate/validate_governance_ingestion_pipeline.py"
-python3 "$ROOT/tools/validate/validate_no_legacy_tooling_references.py"
+python3 "$ROOT/tools/validate/validate_tooling_legacy_refs.py"
+python3 "$ROOT/tools/validate/validate_aux_naming.py"
 
 for t in \
   test_no_legacy_primary_path \

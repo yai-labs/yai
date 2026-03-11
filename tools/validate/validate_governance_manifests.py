@@ -25,7 +25,7 @@ def main() -> int:
     for rel in required:
         p = mroot / rel
         if not p.exists():
-            raise SystemExit(f"governance_manifest_spine: missing {p.relative_to(root)}")
+            raise SystemExit(f"governance_manifests: missing {p.relative_to(root)}")
 
     governance_manifest = _must_json(mroot / "governance.manifest.json")
     runtime_entrypoints = _must_json(mroot / "runtime.entrypoints.json")
@@ -33,13 +33,13 @@ def main() -> int:
     publish_layers = _must_json(mroot / "publish.layers.json")
 
     if governance_manifest.get("resolution_entrypoints_ref") != "manifests/runtime.entrypoints.json":
-        raise SystemExit("governance_manifest_spine: governance.manifest.json invalid resolution_entrypoints_ref")
+        raise SystemExit("governance_manifests: governance.manifest.json invalid resolution_entrypoints_ref")
     if governance_manifest.get("compatibility") != "manifests/compatibility.matrix.json":
-        raise SystemExit("governance_manifest_spine: governance.manifest.json invalid compatibility ref")
+        raise SystemExit("governance_manifests: governance.manifest.json invalid compatibility ref")
 
     entries = runtime_entrypoints.get("entrypoints", [])
     if not entries:
-        raise SystemExit("governance_manifest_spine: runtime.entrypoints.json has no entrypoints")
+        raise SystemExit("governance_manifests: runtime.entrypoints.json has no entrypoints")
     first = entries[0]
     for key in [
         "governance_manifest_ref",
@@ -50,7 +50,7 @@ def main() -> int:
         "compatibility_ref",
     ]:
         if not str(first.get(key, "")).startswith("manifests/"):
-            raise SystemExit(f"governance_manifest_spine: entrypoint missing manifests ref for {key}")
+            raise SystemExit(f"governance_manifests: entrypoint missing manifests ref for {key}")
 
     runtime_target = None
     for target in publish_index.get("targets", []):
@@ -58,15 +58,15 @@ def main() -> int:
             runtime_target = target
             break
     if runtime_target is None:
-        raise SystemExit("governance_manifest_spine: publish.index.json missing runtime-governance target")
+        raise SystemExit("governance_manifests: publish.index.json missing runtime-governance target")
     if "manifests" not in runtime_target.get("includes", []):
-        raise SystemExit("governance_manifest_spine: runtime-governance target must include manifests")
+        raise SystemExit("governance_manifests: runtime-governance target must include manifests")
 
     runtime_surface = publish_layers.get("runtime_surface", {})
     if runtime_surface.get("manifests") != "manifests/":
-        raise SystemExit("governance_manifest_spine: publish.layers.json runtime_surface.manifests mismatch")
+        raise SystemExit("governance_manifests: publish.layers.json runtime_surface.manifests mismatch")
 
-    print("governance_manifest_spine: ok")
+    print("governance_manifests: ok")
     return 0
 
 

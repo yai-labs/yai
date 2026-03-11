@@ -9,7 +9,7 @@ Versioning: Semantic Versioning.
 
 ### Added
 - `tools/release/unified_repo_convergence_smoke.sh` for final single-repo convergence smoke checks.
-- `tools/validate/validate_unified_repo_root_framing.py` for root-level canonical framing checks.
+- `tools/validate/validate_root_framing.py` for root-level canonical framing checks.
 - `tools/bin/yai-governance-compat-check` canonical governance compatibility check entrypoint.
 
 ### Changed
