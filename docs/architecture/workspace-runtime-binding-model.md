@@ -37,6 +37,10 @@ RF-0.3 enforcement lock:
 - local daemon binding/cache validity gates delegated enforcement eligibility;
 - invalid/stale binding context cannot elevate local enforcement authority.
 
+RF-0.4 observation lock:
+- daemon can emit runtime/process observation state under owner binding context;
+- observation visibility does not imply local action authority.
+
 ## Workspace-local vs Runtime-global
 
 Workspace-local:

@@ -17,6 +17,7 @@ The YD-1 refoundation slice locks these invariants:
 - `exec` is the active mediation layer for owner/daemon source-plane flows.
 - edge delegated behavior is owner-issued, scope-limited, and revocable.
 - delegated local enforcement follows explicit RF-0.3 outcome semantics.
+- edge observation includes assets, processes and runtime signals (RF-0.4).
 
 ## Canonical runtime flow
 
@@ -56,6 +57,8 @@ RF-0.2 policy hierarchy lock is defined in
 `docs/architecture/global-to-edge-policy-hierarchy-model.md`.
 RF-0.3 delegated edge enforcement model is defined in
 `docs/architecture/delegated-edge-enforcement-model.md`.
+RF-0.4 edge observation model is defined in
+`docs/architecture/process-and-asset-runtime-observation-model.md`.
 Source-plane entity/contract model is defined in
 `docs/architecture/source-plane-model.md`.
 Owner ingest runtime flow is defined in

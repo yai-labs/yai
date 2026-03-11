@@ -51,6 +51,13 @@ RF-0.3 enforcement outcome baseline:
   (`observe_only|allow|block|hold|execute|escalate|defer|deny_due_to_*`);
 - canonical policy/conflict adjudication remains owner-side.
 
+RF-0.4 edge observation baseline:
+- source-plane input is not asset-only; owner truth is grounded on governed edge
+  observation of assets, processes, and runtime signals;
+- observation scope does not imply mediation/enforcement scope;
+- runtime observables (freshness, spool/retry pressure, connectivity,
+  policy/grant staleness) are canonical owner-side decision inputs.
+
 ### 3) Control/Data Path Separation
 Mandatory path:
 

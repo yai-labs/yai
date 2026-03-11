@@ -16,6 +16,8 @@ enforcement/conflict truth, no local graph truth.
 2. `observation` plane
    Performs polling scan on active filesystem bindings and detects new/changed
    assets through local fingerprints (`size` + `mtime` baseline).
+   RF-0.4 extends this plane semantics to process/runtime observables
+   (still owner-scoped and governed).
 3. `spool` plane
    Persists acquisition units on disk under `spool/queue` and tracks
    `delivered` / `failed` units.
@@ -41,6 +43,14 @@ RF-0.3 local outcomes baseline:
 
 - observe_only / allow / block / hold / execute / escalate / defer
 - deny_due_to_missing_scope / deny_due_to_expired_grant
+
+RF-0.4 observation classes baseline:
+
+- asset observables
+- process observables
+- runtime observables
+
+Observation scope remains distinct from mediation/enforcement scope.
 
 ## Local Layout
 

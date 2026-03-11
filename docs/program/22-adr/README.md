@@ -33,6 +33,7 @@ An ADR should answer:
 - `ADR-015-daemon-architecture-refoundation-slice.md`
 - `ADR-016-global-to-edge-policy-hierarchy-lock.md`
 - `ADR-017-delegated-edge-enforcement-model.md`
+- `ADR-018-process-and-asset-runtime-observation-model.md`
 
 ## Template policy
 

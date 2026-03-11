@@ -22,6 +22,8 @@ operational completion.
 - No runtime federation in v1.
 - No final authority/enforcement/graph truth at source node.
 - Edge runtime execution is delegated and owner-scoped only.
+- Edge observation is asset + process + runtime-state aware (RF-0.4).
+- Observation scope is distinct from mediation/enforcement scope.
 
 ## Canonical entities
 
@@ -217,6 +219,18 @@ Model-level call/reply contract type IDs are reserved for each operation:
 Enrollment reply now includes owner-issued trust bootstrap fields
 (`owner_trust_artifact_id`, `owner_trust_artifact_token`) for subsequent
 attach/emit/status operations.
+
+## RF-0.4 Observation Lock
+
+Source-plane observation classes are canonical:
+
+- asset observables
+- process observables
+- runtime observables
+
+The daemon can emit owner-relevant runtime/process context (health, freshness,
+spool/retry pressure, policy/grant staleness, integration reachability), but
+this does not grant autonomous local action authority.
 
 These define operation intent and shape anchors for YD-4/YD-5 transport and
 owner-ingest work.

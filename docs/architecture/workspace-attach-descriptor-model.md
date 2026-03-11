@@ -31,3 +31,7 @@ YD-1 lock:
 - attach descriptor authority is owner-side only;
 - daemon-side attach activity is transport/mediation input and not descriptor truth.
 - delegated edge-runtime execution is valid only within owner-issued attach/policy scope.
+
+RF-0.4:
+- attach context can scope what edge runtime is allowed to observe;
+- observation scope remains distinct from mediation/enforcement scope.
