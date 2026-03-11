@@ -91,3 +91,5 @@ Define the operational control loop for running, validating, and recovering the 
 - Treat daemon-side execution as delegated and owner-scoped, never sovereign.
 - RF-0.2 policy hierarchy lock baseline:
   `docs/program/23-runbooks/global-to-edge-policy-hierarchy-baseline.md`.
+- RF-0.3 delegated edge enforcement baseline:
+  `docs/program/23-runbooks/delegated-edge-enforcement-baseline.md`.

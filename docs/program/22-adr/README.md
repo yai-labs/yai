@@ -32,6 +32,7 @@ An ADR should answer:
 - `ADR-014-secure-peering-plane.md`
 - `ADR-015-daemon-architecture-refoundation-slice.md`
 - `ADR-016-global-to-edge-policy-hierarchy-lock.md`
+- `ADR-017-delegated-edge-enforcement-model.md`
 
 ## Template policy
 

@@ -30,6 +30,18 @@ Plus delegated local runtime hooks (owner-scoped only):
    Local action mediation and delegated enforcement points may execute only
    under owner-issued policy snapshots, grants, and capability envelopes.
 
+RF-0.3 enforcement modes:
+
+- observe-only
+- post-event local enforcement
+- preventive local enforcement
+- escalated enforcement
+
+RF-0.3 local outcomes baseline:
+
+- observe_only / allow / block / hold / execute / escalate / defer
+- deny_due_to_missing_scope / deny_due_to_expired_grant
+
 ## Local Layout
 
 YD-5 actively uses daemon-local roots:

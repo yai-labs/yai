@@ -33,6 +33,10 @@ RF-0.2 delegation lock:
 - edge-local binding/cache artifacts are delegated execution inputs only;
 - they do not become workspace policy or binding truth.
 
+RF-0.3 enforcement lock:
+- local daemon binding/cache validity gates delegated enforcement eligibility;
+- invalid/stale binding context cannot elevate local enforcement authority.
+
 ## Workspace-local vs Runtime-global
 
 Workspace-local:

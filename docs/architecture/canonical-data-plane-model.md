@@ -46,6 +46,11 @@ RF-0.2 hierarchy rule:
 - delegated edge policy plane is derived from owner global policy plane;
 - delegated edge state cannot override canonical owner truth classes.
 
+RF-0.3 enforcement outcome baseline:
+- daemon-local enforcement outcomes are delegated runtime events
+  (`observe_only|allow|block|hold|execute|escalate|defer|deny_due_to_*`);
+- canonical policy/conflict adjudication remains owner-side.
+
 ### 3) Control/Data Path Separation
 Mandatory path:
 

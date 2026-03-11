@@ -28,6 +28,26 @@ typedef struct yai_source_plane_mediation_state {
   char stage[64];
 } yai_source_plane_mediation_state_t;
 
+/* RF-0.3 delegated edge enforcement semantics. */
+typedef enum yai_edge_enforcement_mode {
+  YAI_EDGE_ENFORCE_OBSERVE_ONLY = 0,
+  YAI_EDGE_ENFORCE_POST_EVENT = 1,
+  YAI_EDGE_ENFORCE_PREVENTIVE = 2,
+  YAI_EDGE_ENFORCE_ESCALATED = 3
+} yai_edge_enforcement_mode_t;
+
+typedef enum yai_edge_enforcement_outcome {
+  YAI_EDGE_OUTCOME_OBSERVE_ONLY = 0,
+  YAI_EDGE_OUTCOME_ALLOW = 1,
+  YAI_EDGE_OUTCOME_BLOCK = 2,
+  YAI_EDGE_OUTCOME_HOLD = 3,
+  YAI_EDGE_OUTCOME_EXECUTE = 4,
+  YAI_EDGE_OUTCOME_ESCALATE = 5,
+  YAI_EDGE_OUTCOME_DEFER = 6,
+  YAI_EDGE_OUTCOME_DENY_MISSING_SCOPE = 7,
+  YAI_EDGE_OUTCOME_DENY_EXPIRED_GRANT = 8
+} yai_edge_enforcement_outcome_t;
+
 /* Returns canonical exec route id for a source-plane command. */
 const char *yai_exec_source_plane_route_for_command(const char *command_id);
 

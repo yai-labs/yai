@@ -33,6 +33,7 @@ static void print_help(void)
   puts("guardrails:");
   puts("  - yai-daemon is subordinate to owner workspace sovereignty");
   puts("  - local action mediation/enforcement is delegated and owner-scoped");
+  puts("  - local outcomes baseline: observe_only|allow|block|hold|execute|escalate");
   puts("  - no final authority/policy/graph/conflict truth locally");
   puts("  - no federated runtime/multi-owner semantics in v1");
 }

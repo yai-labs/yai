@@ -68,6 +68,8 @@ RF-0.2 prepares semantics for:
 
 without claiming full implementation in this tranche.
 
+RF-0.3 consumes this hierarchy and defines enforcement levels/outcomes.
+
 ## References
 
 - `docs/architecture/source-plane-model-refoundation-rf01.md`

@@ -225,6 +225,11 @@ Delegated edge-runtime semantics baseline:
 - edge can observe and mediate local actions only under owner-issued scope;
 - edge-side outcomes are non-canonical until owner acceptance.
 
+RF-0.3 delegated edge enforcement baseline:
+- modes: observe-only, post-event, preventive, escalated;
+- outcomes: observe_only, allow, block, hold, execute, escalate, defer,
+  deny_due_to_missing_scope, deny_due_to_expired_grant.
+
 ## Persistence slice
 
 The YD-3 persistence baseline does not add a second store topology.
