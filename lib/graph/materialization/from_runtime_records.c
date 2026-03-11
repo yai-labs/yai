@@ -408,6 +408,30 @@ int yai_graph_materialize_source_record(const char *workspace_id,
     if (out_node_ref && out_node_ref_cap > 0) snprintf(out_node_ref, out_node_ref_cap, "bgn-%s-%s", YAI_GRAPH_WORKSPACE_PEER_MEMBERSHIP_CLASS, a_slug);
     if (out_edge_ref && out_edge_ref_cap > 0) snprintf(out_edge_ref, out_edge_ref_cap, "bge-member-of-workspace-%s", a_slug);
   }
+  else if (strcmp(record_class, YAI_SOURCE_RECORD_CLASS_INGEST_OUTCOME) == 0)
+  {
+    const char *outcome_id = json_string(root, "source_ingest_outcome_id");
+    yai_graph_slug(outcome_id, a_slug, sizeof(a_slug));
+    yai_graph_slug(source_node_id, src_slug, sizeof(src_slug));
+    yai_graph_slug(source_binding_id, b_slug, sizeof(b_slug));
+    (void)yai_mind_graph_node_create(YAI_GRAPH_SOURCE_INGEST_OUTCOME_CLASS,
+                                     a_slug,
+                                     outcome_id ? outcome_id : "source_ingest_outcome_unset",
+                                     &candidate_node);
+    (void)yai_mind_graph_node_create(YAI_GRAPH_SOURCE_NODE_CLASS,
+                                     src_slug,
+                                     source_node_id ? source_node_id : "source_node_unset",
+                                     &src_node);
+    (void)yai_mind_graph_node_create(YAI_GRAPH_SOURCE_BINDING_CLASS,
+                                     b_slug,
+                                     source_binding_id ? source_binding_id : "source_binding_unset",
+                                     &binding_node);
+    (void)yai_mind_graph_edge_create(candidate_node, src_node, "ingest_outcome_for_node", 1.0f, &rel_edge);
+    (void)yai_mind_graph_edge_create(candidate_node, binding_node, "ingest_outcome_for_binding", 1.0f, &rel_edge);
+    if (slot) { slot->source_node_count += 3; slot->source_edge_count += 2; }
+    if (out_node_ref && out_node_ref_cap > 0) snprintf(out_node_ref, out_node_ref_cap, "bgn-%s-%s", YAI_GRAPH_SOURCE_INGEST_OUTCOME_CLASS, a_slug);
+    if (out_edge_ref && out_edge_ref_cap > 0) snprintf(out_edge_ref, out_edge_ref_cap, "bge-ingest-outcome-for-node-%s", a_slug);
+  }
 
   cJSON_Delete(root);
   return 0;

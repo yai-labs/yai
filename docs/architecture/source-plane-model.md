@@ -172,6 +172,7 @@ Runtime data-plane record classes introduced by YD-3:
 - `source_owner_link`
 - `source_enrollment_grant`
 - `workspace_peer_membership`
+- `source_ingest_outcome`
 
 These are appendable through `yai_data_records_*` hooks and visible in summary
 counts.

@@ -183,6 +183,354 @@ static int append_source_record(const char *ws_id,
   return 0;
 }
 
+#define YAI_SOURCE_EMIT_SEEN_MAX 2048
+#define YAI_SOURCE_EMIT_ASSET_MAX 2048
+
+typedef struct yai_source_emit_seen {
+  int used;
+  char workspace_id[64];
+  char source_node_id[YAI_SOURCE_NODE_ID_MAX];
+  char source_binding_id[YAI_SOURCE_BINDING_ID_MAX];
+  char idempotency_key[YAI_SOURCE_HASH_MAX];
+  int64_t first_seen_epoch;
+  int64_t last_seen_epoch;
+  int replay_count;
+} yai_source_emit_seen_t;
+
+typedef struct yai_source_asset_seen {
+  int used;
+  char workspace_id[64];
+  char asset_key[256];
+  char source_node_id[YAI_SOURCE_NODE_ID_MAX];
+  char source_binding_id[YAI_SOURCE_BINDING_ID_MAX];
+  int64_t last_observed_epoch;
+  int64_t last_seen_epoch;
+  int observation_count;
+} yai_source_asset_seen_t;
+
+typedef struct yai_emit_integrity_result {
+  char classification[48];
+  char handling_action[48];
+  char ordering_status[32];
+  char replay_status[32];
+  char overlap_status[32];
+  char asset_key_ref[256];
+  int replay_detected;
+  int overlap_detected;
+  int conflict_detected;
+  int ordering_late;
+  int review_required;
+} yai_emit_integrity_result_t;
+
+static yai_source_emit_seen_t g_emit_seen[YAI_SOURCE_EMIT_SEEN_MAX];
+static yai_source_asset_seen_t g_asset_seen[YAI_SOURCE_EMIT_ASSET_MAX];
+static unsigned long g_ingest_outcome_seq = 0;
+
+static void emit_integrity_default(yai_emit_integrity_result_t *out)
+{
+  if (!out)
+  {
+    return;
+  }
+  memset(out, 0, sizeof(*out));
+  (void)snprintf(out->classification, sizeof(out->classification), "%s", "clean");
+  (void)snprintf(out->handling_action, sizeof(out->handling_action), "%s", "accept");
+  (void)snprintf(out->ordering_status, sizeof(out->ordering_status), "%s", "in_order");
+  (void)snprintf(out->replay_status, sizeof(out->replay_status), "%s", "first_ingest");
+  (void)snprintf(out->overlap_status, sizeof(out->overlap_status), "%s", "distinct");
+}
+
+static int find_emit_seen_slot(const char *workspace_id,
+                               const char *idempotency_key,
+                               int *first_free)
+{
+  size_t i = 0;
+  int free_idx = -1;
+  for (i = 0; i < YAI_SOURCE_EMIT_SEEN_MAX; ++i)
+  {
+    if (!g_emit_seen[i].used)
+    {
+      if (free_idx < 0)
+      {
+        free_idx = (int)i;
+      }
+      continue;
+    }
+    if (strcmp(g_emit_seen[i].workspace_id, workspace_id) == 0 &&
+        strcmp(g_emit_seen[i].idempotency_key, idempotency_key) == 0)
+    {
+      if (first_free)
+      {
+        *first_free = free_idx;
+      }
+      return (int)i;
+    }
+  }
+  if (first_free)
+  {
+    *first_free = free_idx;
+  }
+  return -1;
+}
+
+static int find_asset_seen_slot(const char *workspace_id,
+                                const char *asset_key,
+                                int *first_free)
+{
+  size_t i = 0;
+  int free_idx = -1;
+  for (i = 0; i < YAI_SOURCE_EMIT_ASSET_MAX; ++i)
+  {
+    if (!g_asset_seen[i].used)
+    {
+      if (free_idx < 0)
+      {
+        free_idx = (int)i;
+      }
+      continue;
+    }
+    if (strcmp(g_asset_seen[i].workspace_id, workspace_id) == 0 &&
+        strcmp(g_asset_seen[i].asset_key, asset_key) == 0)
+    {
+      if (first_free)
+      {
+        *first_free = free_idx;
+      }
+      return (int)i;
+    }
+  }
+  if (first_free)
+  {
+    *first_free = free_idx;
+  }
+  return -1;
+}
+
+static int build_asset_key_from_payload(cJSON *payload,
+                                        char *out,
+                                        size_t out_cap)
+{
+  cJSON *assets = NULL;
+  cJSON *first = NULL;
+  const char *fingerprint = NULL;
+  const char *locator = NULL;
+  const char *asset_id = NULL;
+  if (!out || out_cap == 0)
+  {
+    return -1;
+  }
+  out[0] = '\0';
+  if (!payload)
+  {
+    return 0;
+  }
+  assets = cJSON_GetObjectItem(payload, "source_assets");
+  if (assets && cJSON_IsArray(assets) && cJSON_GetArraySize(assets) > 0)
+  {
+    first = cJSON_GetArrayItem(assets, 0);
+  }
+  if (!first)
+  {
+    first = cJSON_GetObjectItem(payload, "source_asset");
+  }
+  if (!first || !cJSON_IsObject(first))
+  {
+    return 0;
+  }
+  fingerprint = json_string(first, "provenance_fingerprint");
+  locator = json_string(first, "locator");
+  asset_id = json_string(first, "source_asset_id");
+  if (fingerprint && fingerprint[0])
+  {
+    (void)snprintf(out, out_cap, "fingerprint:%s", fingerprint);
+  }
+  else if (locator && locator[0])
+  {
+    (void)snprintf(out, out_cap, "locator:%s", locator);
+  }
+  else if (asset_id && asset_id[0])
+  {
+    (void)snprintf(out, out_cap, "asset_id:%s", asset_id);
+  }
+  return 0;
+}
+
+static int64_t payload_latest_observed_epoch(cJSON *payload)
+{
+  cJSON *events = NULL;
+  cJSON *single = NULL;
+  int64_t latest = -1;
+  int i = 0;
+  if (!payload)
+  {
+    return -1;
+  }
+  events = cJSON_GetObjectItem(payload, "source_acquisition_events");
+  if (events && cJSON_IsArray(events))
+  {
+    int n = cJSON_GetArraySize(events);
+    for (i = 0; i < n; ++i)
+    {
+      cJSON *ev = cJSON_GetArrayItem(events, i);
+      int64_t ts = json_i64(ev, "observed_at_epoch", -1);
+      if (ts > latest) latest = ts;
+    }
+  }
+  single = cJSON_GetObjectItem(payload, "source_acquisition_event");
+  if (single && cJSON_IsObject(single))
+  {
+    int64_t ts = json_i64(single, "observed_at_epoch", -1);
+    if (ts > latest) latest = ts;
+  }
+  return latest;
+}
+
+static int classify_emit_integrity(const char *workspace_id,
+                                   const char *source_node_id,
+                                   const char *source_binding_id,
+                                   const char *idempotency_key,
+                                   cJSON *payload,
+                                   int accepted_total,
+                                   yai_emit_integrity_result_t *out)
+{
+  int emit_idx = -1;
+  int emit_free = -1;
+  int asset_idx = -1;
+  int asset_free = -1;
+  int64_t now = (int64_t)time(NULL);
+  int64_t observed_latest = -1;
+  char asset_key[256];
+  emit_integrity_default(out);
+  asset_key[0] = '\0';
+
+  if (!workspace_id || !source_node_id || !source_binding_id || !idempotency_key || !out)
+  {
+    return -1;
+  }
+
+  (void)build_asset_key_from_payload(payload, asset_key, sizeof(asset_key));
+  if (asset_key[0])
+  {
+    (void)snprintf(out->asset_key_ref, sizeof(out->asset_key_ref), "%s", asset_key);
+  }
+  observed_latest = payload_latest_observed_epoch(payload);
+
+  emit_idx = find_emit_seen_slot(workspace_id, idempotency_key, &emit_free);
+  if (emit_idx >= 0)
+  {
+    out->replay_detected = 1;
+    g_emit_seen[emit_idx].replay_count += 1;
+    g_emit_seen[emit_idx].last_seen_epoch = now;
+    if (strcmp(g_emit_seen[emit_idx].source_node_id, source_node_id) == 0 &&
+        strcmp(g_emit_seen[emit_idx].source_binding_id, source_binding_id) == 0)
+    {
+      (void)snprintf(out->classification, sizeof(out->classification), "%s", "duplicate_replay");
+      (void)snprintf(out->replay_status, sizeof(out->replay_status), "%s", "replay_same_peer");
+      (void)snprintf(out->handling_action, sizeof(out->handling_action), "%s", "accept_with_flag");
+    }
+    else
+    {
+      (void)snprintf(out->classification, sizeof(out->classification), "%s", "overlap_informational");
+      (void)snprintf(out->replay_status, sizeof(out->replay_status), "%s", "replay_cross_peer");
+      (void)snprintf(out->overlap_status, sizeof(out->overlap_status), "%s", "informational");
+      (void)snprintf(out->handling_action, sizeof(out->handling_action), "%s", "accept_with_flag");
+      out->overlap_detected = 1;
+    }
+  }
+  else if (emit_free >= 0)
+  {
+    memset(&g_emit_seen[emit_free], 0, sizeof(g_emit_seen[emit_free]));
+    g_emit_seen[emit_free].used = 1;
+    snprintf(g_emit_seen[emit_free].workspace_id, sizeof(g_emit_seen[emit_free].workspace_id), "%s", workspace_id);
+    snprintf(g_emit_seen[emit_free].source_node_id, sizeof(g_emit_seen[emit_free].source_node_id), "%s", source_node_id);
+    snprintf(g_emit_seen[emit_free].source_binding_id, sizeof(g_emit_seen[emit_free].source_binding_id), "%s", source_binding_id);
+    snprintf(g_emit_seen[emit_free].idempotency_key, sizeof(g_emit_seen[emit_free].idempotency_key), "%s", idempotency_key);
+    g_emit_seen[emit_free].first_seen_epoch = now;
+    g_emit_seen[emit_free].last_seen_epoch = now;
+    g_emit_seen[emit_free].replay_count = 0;
+  }
+
+  if (asset_key[0])
+  {
+    asset_idx = find_asset_seen_slot(workspace_id, asset_key, &asset_free);
+    if (asset_idx >= 0)
+    {
+      if (strcmp(g_asset_seen[asset_idx].source_node_id, source_node_id) != 0)
+      {
+        out->overlap_detected = 1;
+        if (out->replay_detected)
+        {
+          (void)snprintf(out->classification, sizeof(out->classification), "%s", "conflict_requires_review");
+          (void)snprintf(out->handling_action, sizeof(out->handling_action), "%s", "review_stub");
+          (void)snprintf(out->overlap_status, sizeof(out->overlap_status), "%s", "ambiguous");
+          out->review_required = 1;
+          out->conflict_detected = 1;
+        }
+        else
+        {
+          (void)snprintf(out->classification, sizeof(out->classification), "%s", "overlap_ambiguous");
+          (void)snprintf(out->handling_action, sizeof(out->handling_action), "%s", "accept_with_flag");
+          (void)snprintf(out->overlap_status, sizeof(out->overlap_status), "%s", "ambiguous");
+        }
+      }
+      if (observed_latest > 0 && g_asset_seen[asset_idx].last_observed_epoch > 0 &&
+          observed_latest + 30 < g_asset_seen[asset_idx].last_observed_epoch)
+      {
+        out->ordering_late = 1;
+        (void)snprintf(out->ordering_status, sizeof(out->ordering_status), "%s", "late");
+        if (strcmp(out->classification, "clean") == 0)
+        {
+          (void)snprintf(out->classification, sizeof(out->classification), "%s", "ordering_late");
+          (void)snprintf(out->handling_action, sizeof(out->handling_action), "%s", "accept_with_flag");
+        }
+      }
+      if (observed_latest > g_asset_seen[asset_idx].last_observed_epoch)
+      {
+        g_asset_seen[asset_idx].last_observed_epoch = observed_latest;
+      }
+      g_asset_seen[asset_idx].last_seen_epoch = now;
+      g_asset_seen[asset_idx].observation_count += 1;
+    }
+    else if (asset_free >= 0)
+    {
+      memset(&g_asset_seen[asset_free], 0, sizeof(g_asset_seen[asset_free]));
+      g_asset_seen[asset_free].used = 1;
+      snprintf(g_asset_seen[asset_free].workspace_id, sizeof(g_asset_seen[asset_free].workspace_id), "%s", workspace_id);
+      snprintf(g_asset_seen[asset_free].asset_key, sizeof(g_asset_seen[asset_free].asset_key), "%s", asset_key);
+      snprintf(g_asset_seen[asset_free].source_node_id, sizeof(g_asset_seen[asset_free].source_node_id), "%s", source_node_id);
+      snprintf(g_asset_seen[asset_free].source_binding_id, sizeof(g_asset_seen[asset_free].source_binding_id), "%s", source_binding_id);
+      g_asset_seen[asset_free].last_observed_epoch = observed_latest;
+      g_asset_seen[asset_free].last_seen_epoch = now;
+      g_asset_seen[asset_free].observation_count = 1;
+    }
+  }
+
+  if (accepted_total >= 25)
+  {
+    (void)snprintf(out->replay_status, sizeof(out->replay_status), "%s", "backlog_flush");
+    if (strcmp(out->classification, "clean") == 0)
+    {
+      (void)snprintf(out->classification, sizeof(out->classification), "%s", "overlap_informational");
+      (void)snprintf(out->handling_action, sizeof(out->handling_action), "%s", "accept_with_flag");
+    }
+  }
+  return 0;
+}
+
+static int make_ingest_outcome_id(char *out, size_t out_cap)
+{
+  if (!out || out_cap == 0)
+  {
+    return -1;
+  }
+  g_ingest_outcome_seq += 1;
+  if (snprintf(out, out_cap, "sio-%lld-%lu", (long long)time(NULL), g_ingest_outcome_seq) >= (int)out_cap)
+  {
+    return -1;
+  }
+  return 0;
+}
+
 static void mediation_json(const yai_source_plane_mediation_state_t *med,
                            char *out,
                            size_t out_cap)
@@ -625,6 +973,10 @@ static int handle_emit(const char *workspace_id,
   int accepted_assets = 0;
   int accepted_events = 0;
   int accepted_candidates = 0;
+  int accepted_total = 0;
+  char outcome_id[96];
+  yai_emit_integrity_result_t integrity;
+  cJSON *outcome = NULL;
   char err[160];
 
   if (!workspace_id || !yai_ws_id_is_valid(workspace_id) || !payload)
@@ -688,22 +1040,87 @@ static int handle_emit(const char *workspace_id,
     (void)set_reason(reason, reason_cap, "source_emit_empty_payload");
     return -2;
   }
+  accepted_total = accepted_assets + accepted_events + accepted_candidates;
 
   if (!idempotency_key)
   {
     idempotency_key = "unset";
   }
+  emit_integrity_default(&integrity);
+  if (classify_emit_integrity(workspace_id,
+                              source_node_id,
+                              source_binding_id,
+                              idempotency_key,
+                              payload,
+                              accepted_total,
+                              &integrity) != 0)
+  {
+    (void)set_reason(reason, reason_cap, "source_emit_integrity_classification_failed");
+    return -4;
+  }
+  if (make_ingest_outcome_id(outcome_id, sizeof(outcome_id)) != 0)
+  {
+    (void)set_reason(reason, reason_cap, "source_emit_outcome_id_generation_failed");
+    return -4;
+  }
+  outcome = cJSON_CreateObject();
+  if (!outcome)
+  {
+    (void)set_reason(reason, reason_cap, "source_emit_outcome_allocation_failed");
+    return -4;
+  }
+  cJSON_AddStringToObject(outcome, "type", "yai.source_ingest_outcome.v1");
+  cJSON_AddStringToObject(outcome, "source_ingest_outcome_id", outcome_id);
+  cJSON_AddStringToObject(outcome, "owner_workspace_id", workspace_id);
+  cJSON_AddStringToObject(outcome, "source_node_id", source_node_id);
+  cJSON_AddStringToObject(outcome, "source_binding_id", source_binding_id);
+  cJSON_AddStringToObject(outcome, "idempotency_key", idempotency_key);
+  cJSON_AddStringToObject(outcome, "classification", integrity.classification);
+  cJSON_AddStringToObject(outcome, "handling_action", integrity.handling_action);
+  cJSON_AddStringToObject(outcome, "ordering_status", integrity.ordering_status);
+  cJSON_AddStringToObject(outcome, "replay_status", integrity.replay_status);
+  cJSON_AddStringToObject(outcome, "overlap_status", integrity.overlap_status);
+  cJSON_AddStringToObject(outcome, "asset_key_ref", integrity.asset_key_ref[0] ? integrity.asset_key_ref : "unset");
+  cJSON_AddNumberToObject(outcome, "accepted_asset_count", accepted_assets);
+  cJSON_AddNumberToObject(outcome, "accepted_event_count", accepted_events);
+  cJSON_AddNumberToObject(outcome, "accepted_candidate_count", accepted_candidates);
+  cJSON_AddNumberToObject(outcome, "accepted_total_count", accepted_total);
+  cJSON_AddBoolToObject(outcome, "review_required", integrity.review_required ? 1 : 0);
+  cJSON_AddNumberToObject(outcome, "observed_at_epoch", (double)time(NULL));
+  if (append_source_record(workspace_id,
+                           YAI_SOURCE_RECORD_CLASS_INGEST_OUTCOME,
+                           outcome,
+                           err,
+                           sizeof(err)) != 0)
+  {
+    cJSON_Delete(outcome);
+    (void)set_reason(reason, reason_cap, err[0] ? err : "source_emit_outcome_persistence_failed");
+    return -4;
+  }
+  cJSON_Delete(outcome);
   (void)yai_owner_peer_registry_note_emit(workspace_id,
                                           source_node_id,
                                           source_binding_id,
                                           1,
                                           err,
                                           sizeof(err));
+  (void)yai_owner_peer_registry_note_integrity(workspace_id,
+                                               source_node_id,
+                                               source_binding_id,
+                                               integrity.classification,
+                                               integrity.handling_action,
+                                               integrity.ordering_late,
+                                               integrity.replay_detected,
+                                               integrity.overlap_detected,
+                                               integrity.conflict_detected,
+                                               integrity.review_required,
+                                               err,
+                                               sizeof(err));
   mediation_json(med, med_json, sizeof(med_json));
 
   if (snprintf(out_json,
                out_cap,
-               "{\"type\":\"yai.source.emit.reply.v1\",\"workspace_id\":\"%s\",\"source_node_id\":\"%s\",\"source_binding_id\":\"%s\",\"idempotency_key\":\"%s\",\"accepted\":{\"source_asset\":%d,\"source_acquisition_event\":%d,\"source_evidence_candidate\":%d},\"mediation\":%s}",
+               "{\"type\":\"yai.source.emit.reply.v1\",\"workspace_id\":\"%s\",\"source_node_id\":\"%s\",\"source_binding_id\":\"%s\",\"idempotency_key\":\"%s\",\"accepted\":{\"source_asset\":%d,\"source_acquisition_event\":%d,\"source_evidence_candidate\":%d},\"integrity\":{\"classification\":\"%s\",\"handling_action\":\"%s\",\"ordering_status\":\"%s\",\"replay_status\":\"%s\",\"overlap_status\":\"%s\",\"review_required\":%s},\"mediation\":%s}",
                workspace_id,
                source_node_id,
                source_binding_id,
@@ -711,6 +1128,12 @@ static int handle_emit(const char *workspace_id,
                accepted_assets,
                accepted_events,
                accepted_candidates,
+               integrity.classification,
+               integrity.handling_action,
+               integrity.ordering_status,
+               integrity.replay_status,
+               integrity.overlap_status,
+               integrity.review_required ? "true" : "false",
                med_json) <= 0)
   {
     (void)set_reason(reason, reason_cap, "source_emit_response_encode_failed");

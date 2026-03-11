@@ -28,6 +28,7 @@
 #define YAI_SOURCE_RECORD_CLASS_OWNER_LINK "source_owner_link"
 #define YAI_SOURCE_RECORD_CLASS_ENROLLMENT_GRANT "source_enrollment_grant"
 #define YAI_SOURCE_RECORD_CLASS_WORKSPACE_PEER_MEMBERSHIP "workspace_peer_membership"
+#define YAI_SOURCE_RECORD_CLASS_INGEST_OUTCOME "source_ingest_outcome"
 
 typedef enum yai_source_contract_operation {
   YAI_SOURCE_CONTRACT_INVALID = 0,

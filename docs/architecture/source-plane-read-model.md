@@ -22,6 +22,7 @@ YD-6 extends read surfaces for:
 - `source_evidence_candidate`
 - `source_owner_link`
 - `workspace_peer_membership`
+- `source_ingest_outcome`
 
 Read model is owner-side only. `yai-daemon` does not host canonical graph truth.
 
@@ -41,6 +42,7 @@ OP-3 extends peer-aware read surfaces with:
 
 - `yai.workspace.query source.peer` (`source_peer_inspect`)
 - `yai.workspace.query source.coverage` (`source_peer_coverage_summary`)
+- `yai.workspace.query source.conflicts` (`source_peer_conflict_summary`)
 
 These expose per-peer inspect rows and workspace coverage/overlap baseline
 without introducing conflict resolution yet.
@@ -64,6 +66,7 @@ Nodes:
 - `source_acquisition_event`
 - `source_evidence_candidate`
 - `workspace_peer_membership`
+- `source_ingest_outcome`
 - `source_scope`
 - owner workspace anchor
 
@@ -83,6 +86,8 @@ Edges:
 - `membership_covers_scope` (`workspace_peer_membership -> source_scope`)
 - `binding_scope` (`source_binding -> source_scope`)
 - `overlap_on_scope` (`source_node -> source_scope`, overlap-signaled only)
+- `ingest_outcome_for_node` (`source_ingest_outcome -> source_node`)
+- `ingest_outcome_for_binding` (`source_ingest_outcome -> source_binding`)
 
 ## Semantics guardrails
 

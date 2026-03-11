@@ -37,7 +37,7 @@ int yai_data_query_summary_json(const char *workspace_id,
   size_t events = 0, decisions = 0, evidence = 0, governance = 0, authority = 0, authority_resolution = 0;
   size_t enforcement_outcome = 0, enforcement_linkage = 0;
   size_t source_node = 0, source_daemon_instance = 0, source_binding = 0;
-  size_t source_asset = 0, source_acquisition_event = 0, source_evidence_candidate = 0, source_owner_link = 0;
+  size_t source_asset = 0, source_acquisition_event = 0, source_evidence_candidate = 0, source_ingest_outcome = 0, source_owner_link = 0;
   size_t source_enrollment_grant = 0;
   size_t workspace_peer_membership = 0;
   if (!out_json || out_cap == 0) return -1;
@@ -64,12 +64,17 @@ int yai_data_query_summary_json(const char *workspace_id,
                            &source_evidence_candidate,
                            err,
                            err_cap) != 0) return -1;
+  if (yai_data_query_count(workspace_id,
+                           YAI_SOURCE_RECORD_CLASS_INGEST_OUTCOME,
+                           &source_ingest_outcome,
+                           err,
+                           err_cap) != 0) return -1;
   if (yai_data_query_count(workspace_id, YAI_SOURCE_RECORD_CLASS_OWNER_LINK, &source_owner_link, err, err_cap) != 0) return -1;
   if (yai_data_query_count(workspace_id, YAI_SOURCE_RECORD_CLASS_ENROLLMENT_GRANT, &source_enrollment_grant, err, err_cap) != 0) return -1;
   if (yai_data_query_count(workspace_id, YAI_SOURCE_RECORD_CLASS_WORKSPACE_PEER_MEMBERSHIP, &workspace_peer_membership, err, err_cap) != 0) return -1;
   if (snprintf(out_json,
                out_cap,
-               "{\"workspace_id\":\"%s\",\"counts\":{\"events\":%zu,\"decisions\":%zu,\"evidence\":%zu,\"governance\":%zu,\"authority\":%zu,\"authority_resolution\":%zu,\"enforcement_outcome\":%zu,\"enforcement_linkage\":%zu,\"source_node\":%zu,\"source_daemon_instance\":%zu,\"source_binding\":%zu,\"source_asset\":%zu,\"source_acquisition_event\":%zu,\"source_evidence_candidate\":%zu,\"source_owner_link\":%zu,\"source_enrollment_grant\":%zu,\"workspace_peer_membership\":%zu}}",
+               "{\"workspace_id\":\"%s\",\"counts\":{\"events\":%zu,\"decisions\":%zu,\"evidence\":%zu,\"governance\":%zu,\"authority\":%zu,\"authority_resolution\":%zu,\"enforcement_outcome\":%zu,\"enforcement_linkage\":%zu,\"source_node\":%zu,\"source_daemon_instance\":%zu,\"source_binding\":%zu,\"source_asset\":%zu,\"source_acquisition_event\":%zu,\"source_evidence_candidate\":%zu,\"source_ingest_outcome\":%zu,\"source_owner_link\":%zu,\"source_enrollment_grant\":%zu,\"workspace_peer_membership\":%zu}}",
                workspace_id,
                events,
                decisions,
@@ -85,6 +90,7 @@ int yai_data_query_summary_json(const char *workspace_id,
                source_asset,
                source_acquisition_event,
                source_evidence_candidate,
+               source_ingest_outcome,
                source_owner_link,
                source_enrollment_grant,
                workspace_peer_membership) <= 0) {

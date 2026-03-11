@@ -48,6 +48,16 @@ Returns:
 - overlap count
 - gap count
 
+### 4) `yai.workspace.query source.conflicts`
+
+Baseline conflict/order/replay view from persisted ingest outcomes.
+
+Returns recent rows with:
+- classification (`clean`, `duplicate_replay`, `overlap_ambiguous`, ...)
+- handling action (`accept`, `accept_with_flag`, `review_stub`)
+- ordering and replay status
+- review-required markers
+
 ## Graph Extension
 
 `workspace_peer_membership` records now materialize coverage topology nodes/edges:

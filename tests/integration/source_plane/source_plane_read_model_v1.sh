@@ -82,7 +82,10 @@ def call(ws_id, body, trace):
         raise RuntimeError("bad control response")
     body = recv_exact(s, plen).decode("utf-8")
     s.close()
-    return json.loads(body)
+    try:
+        return json.loads(body)
+    except Exception as exc:
+        raise RuntimeError(f"json decode failed trace={trace} plen={plen} body={body}") from exc
 
 def expect_ok(reply, why):
     if reply.get("status") != "ok":
@@ -175,6 +178,73 @@ status = call(ws, {
 }, "status")
 expect_ok(status, "source.status")
 
+enroll_b = call(ws, {
+  "type":"yai.control.call.v1",
+  "command_id":"yai.source.enroll",
+  "target_plane":"runtime",
+  "workspace_id": ws,
+  "source_label":"yd6-node-b",
+  "owner_ref":"uds:///tmp/yai-owner.sock"
+}, "enroll-b")
+expect_ok(enroll_b, "source.enroll.b")
+node_b = enroll_b.get("data", {}).get("source_node_id")
+daemon_b = enroll_b.get("data", {}).get("daemon_instance_id")
+trust_artifact_id_b = enroll_b.get("data", {}).get("owner_trust_artifact_id")
+trust_artifact_token_b = enroll_b.get("data", {}).get("owner_trust_artifact_token")
+
+attach_b = call(ws, {
+  "type":"yai.control.call.v1",
+  "command_id":"yai.source.attach",
+  "target_plane":"runtime",
+  "workspace_id": ws,
+  "source_node_id": node_b,
+  "owner_trust_artifact_id": trust_artifact_id_b,
+  "owner_trust_artifact_token": trust_artifact_token_b,
+  "binding_scope":"workspace",
+  "coverage_ref":"coverage://office/performance/kpi",
+  "overlap_state":"overlap_possible"
+}, "attach-b")
+expect_ok(attach_b, "source.attach.b")
+binding_b = attach_b.get("data", {}).get("source_binding_id")
+
+emit_dup = call(ws, {
+  "type":"yai.control.call.v1",
+  "command_id":"yai.source.emit",
+  "target_plane":"runtime",
+  "workspace_id": ws,
+  "source_node_id": node_id,
+  "source_binding_id": binding_id,
+  "owner_trust_artifact_id": trust_artifact_id,
+  "owner_trust_artifact_token": trust_artifact_token,
+  "idempotency_key":"yd6-emit-001",
+  "source_assets":[
+    {"type":"yai.source_asset.v1","source_asset_id":"sa-yd6-a2","source_binding_id":binding_id,"locator":"file:///tmp/yd6-a.txt","asset_type":"file","provenance_fingerprint":"sha256:yd6a","observation_state":"observed"}
+  ],
+  "source_acquisition_events":[
+    {"type":"yai.source_acquisition_event.v1","source_acquisition_event_id":"se-yd6-a2","source_node_id":node_id,"source_binding_id":binding_id,"source_asset_id":"sa-yd6-a2","event_type":"discovered","observed_at_epoch":1773190010,"idempotency_key":"yd6-emit-001","delivery_status":"received"}
+  ]
+}, "emit-dup")
+expect_ok(emit_dup, "source.emit.dup")
+
+emit_cross = call(ws, {
+  "type":"yai.control.call.v1",
+  "command_id":"yai.source.emit",
+  "target_plane":"runtime",
+  "workspace_id": ws,
+  "source_node_id": node_b,
+  "source_binding_id": binding_b,
+  "owner_trust_artifact_id": trust_artifact_id_b,
+  "owner_trust_artifact_token": trust_artifact_token_b,
+  "idempotency_key":"yd6-emit-001",
+  "source_assets":[
+    {"type":"yai.source_asset.v1","source_asset_id":"sa-yd6-b1","source_binding_id":binding_b,"locator":"file:///tmp/yd6-b.txt","asset_type":"file","provenance_fingerprint":"sha256:yd6a","observation_state":"observed"}
+  ],
+  "source_acquisition_events":[
+    {"type":"yai.source_acquisition_event.v1","source_acquisition_event_id":"se-yd6-b1","source_node_id":node_b,"source_binding_id":binding_b,"source_asset_id":"sa-yd6-b1","event_type":"discovered","observed_at_epoch":1773190020,"idempotency_key":"yd6-emit-001","delivery_status":"received"}
+  ]
+}, "emit-cross")
+expect_ok(emit_cross, "source.emit.cross")
+
 source_query = call(ws, {
   "type":"yai.control.call.v1",
   "command_id":"yai.workspace.query",
@@ -193,6 +263,8 @@ if sq.get("source_graph_node_count", 0) < 1:
     raise RuntimeError(f"source summary missing source_graph_node_count: {source_query}")
 if sq.get("workspace_peer_membership_count", 0) < 1:
     raise RuntimeError(f"source summary missing workspace_peer_membership_count: {source_query}")
+if sq.get("source_ingest_outcome_count", 0) < 3:
+    raise RuntimeError(f"source summary missing source_ingest_outcome_count: {source_query}")
 coord = source_query.get("data", {}).get("coordination", {})
 if coord.get("peer_count", 0) < 1:
     raise RuntimeError(f"source coordination missing peer_count: {source_query}")
@@ -203,6 +275,11 @@ if coverage.get("scope_count", 0) < 1:
     raise RuntimeError(f"source coordination missing coverage scope_count: {source_query}")
 if coverage.get("overlap", 0) < 1:
     raise RuntimeError(f"source coordination missing overlap count: {source_query}")
+integrity = coord.get("integrity", {})
+if integrity.get("replay_detected", 0) < 1:
+    raise RuntimeError(f"source coordination missing replay_detected: {source_query}")
+if integrity.get("overlap_detected", 0) < 1:
+    raise RuntimeError(f"source coordination missing overlap_detected: {source_query}")
 
 source_peer = call(ws, {
   "type":"yai.control.call.v1",
@@ -229,6 +306,17 @@ if coverage_summary.get("coverage_scope_count", 0) < 1:
     raise RuntimeError(f"source.coverage missing coverage_scope_count: {source_coverage}")
 if coverage_summary.get("overlap_count", 0) < 1:
     raise RuntimeError(f"source.coverage missing overlap_count: {source_coverage}")
+
+source_conflicts = call(ws, {
+  "type":"yai.control.call.v1",
+  "command_id":"yai.workspace.query",
+  "target_plane":"runtime",
+  "argv":["source.conflicts"]
+}, "query-source-conflicts")
+expect_ok(source_conflicts, "workspace.query source.conflicts")
+conf_rows = source_conflicts.get("data", {}).get("rows", [])
+if len(conf_rows) < 3:
+    raise RuntimeError(f"source.conflicts missing rows: {source_conflicts}")
 
 graph_ws = call(ws, {
   "type":"yai.control.call.v1",
