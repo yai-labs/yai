@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "yai.governance.control-families.family-matrix-entry.v1",
+  "title": "Control Family Matrix Entry v1",
+  "type": "object",
+  "required": [
+    "family_id",
+    "canonical_name",
+    "descriptor_ref",
+    "default_specialization",
+    "specialization_count"
+  ],
+  "properties": {
+    "family_id": { "type": "string", "pattern": "^D[0-9]+$" },
+    "canonical_name": { "type": "string", "minLength": 1 },
+    "descriptor_ref": { "type": "string", "minLength": 1 },
+    "default_specialization": { "type": "string", "minLength": 1 },
+    "specialization_count": { "type": "integer", "minimum": 0 },
+    "lead_vertical": { "type": "boolean" }
+  }
+}

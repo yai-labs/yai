@@ -1,0 +1,78 @@
+{
+  "kind": "family.matrix.v1",
+  "version": "v1",
+  "entries": [
+    {
+      "family_id": "D1",
+      "canonical_name": "digital",
+      "descriptor_ref": "control-families/descriptors/digital.descriptor.v1.json",
+      "default_specialization": "network-egress",
+      "specialization_count": 6,
+      "lead_vertical": false
+    },
+    {
+      "family_id": "D2",
+      "canonical_name": "physical",
+      "descriptor_ref": "control-families/descriptors/physical.descriptor.v1.json",
+      "default_specialization": "actuation-governance",
+      "specialization_count": 3,
+      "lead_vertical": false
+    },
+    {
+      "family_id": "D3",
+      "canonical_name": "biological",
+      "descriptor_ref": "control-families/descriptors/biological.descriptor.v1.json",
+      "default_specialization": "chain-of-custody",
+      "specialization_count": 3,
+      "lead_vertical": false
+    },
+    {
+      "family_id": "D4",
+      "canonical_name": "social-institutional",
+      "descriptor_ref": "control-families/descriptors/social-institutional.descriptor.v1.json",
+      "default_specialization": "procedural-authorization",
+      "specialization_count": 3,
+      "lead_vertical": false
+    },
+    {
+      "family_id": "D5",
+      "canonical_name": "economic",
+      "descriptor_ref": "control-families/descriptors/economic.descriptor.v1.json",
+      "default_specialization": "payments",
+      "specialization_count": 9,
+      "lead_vertical": true
+    },
+    {
+      "family_id": "D6",
+      "canonical_name": "operational",
+      "descriptor_ref": "control-families/descriptors/operational.descriptor.v1.json",
+      "default_specialization": "incident-response",
+      "specialization_count": 3,
+      "lead_vertical": false
+    },
+    {
+      "family_id": "D7",
+      "canonical_name": "cognitive-cultural",
+      "descriptor_ref": "control-families/descriptors/cognitive-cultural.descriptor.v1.json",
+      "default_specialization": "publication-enforcement",
+      "specialization_count": 3,
+      "lead_vertical": false
+    },
+    {
+      "family_id": "D8",
+      "canonical_name": "scientific",
+      "descriptor_ref": "control-families/descriptors/scientific.descriptor.v1.json",
+      "default_specialization": "experiment-configuration",
+      "specialization_count": 6,
+      "lead_vertical": false
+    },
+    {
+      "family_id": "D9",
+      "canonical_name": "environmental-climatological",
+      "descriptor_ref": "control-families/descriptors/environmental-climatological.descriptor.v1.json",
+      "default_specialization": "telemetry-integrity",
+      "specialization_count": 3,
+      "lead_vertical": false
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "yai.governance.control-families.family-descriptor.v1",
+  "title": "Control Family Descriptor v1",
+  "type": "object",
+  "required": [
+    "kind",
+    "version",
+    "family_id",
+    "canonical_name",
+    "display_name",
+    "status",
+    "maturity",
+    "materialized_manifest_ref",
+    "hierarchy",
+    "resolution",
+    "applicability"
+  ],
+  "properties": {
+    "kind": { "const": "control_family_descriptor.v1" },
+    "version": { "const": "v1" },
+    "family_id": { "type": "string", "pattern": "^D[0-9]+$" },
+    "canonical_name": { "type": "string", "minLength": 1 },
+    "display_name": { "type": "string", "minLength": 1 },
+    "slug": { "type": "string", "minLength": 1 },
+    "internal_id": { "type": "string" },
+    "legacy_label": { "type": "string" },
+    "status": { "type": "string", "minLength": 1 },
+    "maturity": { "type": "string", "minLength": 1 },
+    "classification_ref": { "type": "string", "minLength": 1 },
+    "specializations_ref": { "type": "string", "minLength": 1 },
+    "materialized_manifest_ref": { "type": "string", "minLength": 1 },
+    "legacy_family_manifest_ref": { "type": "string" },
+    "hierarchy": {
+      "type": "object",
+      "required": ["specializations"],
+      "properties": {
+        "parent": { "type": "string" },
+        "specializations": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "resolution": {
+      "type": "object",
+      "required": ["default_specialization"],
+      "properties": {
+        "default_specialization": { "type": "string", "minLength": 1 },
+        "overlay_refs": { "type": "object" },
+        "authority_profile": { "type": "object" },
+        "evidence_profile": { "type": "object" }
+      }
+    },
+    "applicability": {
+      "type": "object",
+      "required": ["domains"],
+      "properties": {
+        "domains": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "risk_focus": { "type": "array", "items": { "type": "string" } },
+        "lead_vertical": { "type": "boolean" }
+      }
+    },
+    "hooks": { "type": "object" },
+    "source": { "type": "object" }
+  }
+}

@@ -1,97 +1,87 @@
 {
-  "kind": "families.index",
+  "kind": "families.descriptors.index",
   "version": "v1",
-  "families": [
+  "entries": [
     {
       "family_id": "D1",
       "canonical_name": "digital",
-      "manifest_ref": "control-families/digital/manifest.json",
-      "status": "active-wave-1-pillar",
-      "maturity": "structured",
       "descriptor_ref": "control-families/descriptors/digital.descriptor.v1.json",
       "materialized_manifest_ref": "control-families/digital/manifest.json",
-      "legacy_family_manifest_ref": "control-families/digital/family.manifest.json"
+      "legacy_family_manifest_ref": "control-families/digital/family.manifest.json",
+      "status": "active-wave-1-pillar",
+      "maturity": "structured"
     },
     {
       "family_id": "D2",
       "canonical_name": "physical",
-      "manifest_ref": "control-families/physical/manifest.json",
-      "status": "active",
-      "maturity": "seed",
       "descriptor_ref": "control-families/descriptors/physical.descriptor.v1.json",
       "materialized_manifest_ref": "control-families/physical/manifest.json",
-      "legacy_family_manifest_ref": "control-families/physical/family.manifest.json"
+      "legacy_family_manifest_ref": "control-families/physical/family.manifest.json",
+      "status": "active",
+      "maturity": "seed"
     },
     {
       "family_id": "D3",
       "canonical_name": "biological",
-      "manifest_ref": "control-families/biological/manifest.json",
-      "status": "active",
-      "maturity": "seed",
       "descriptor_ref": "control-families/descriptors/biological.descriptor.v1.json",
       "materialized_manifest_ref": "control-families/biological/manifest.json",
-      "legacy_family_manifest_ref": "control-families/biological/family.manifest.json"
+      "legacy_family_manifest_ref": "control-families/biological/family.manifest.json",
+      "status": "active",
+      "maturity": "seed"
     },
     {
       "family_id": "D4",
       "canonical_name": "social-institutional",
-      "manifest_ref": "control-families/social-institutional/manifest.json",
-      "status": "active",
-      "maturity": "seed",
       "descriptor_ref": "control-families/descriptors/social-institutional.descriptor.v1.json",
       "materialized_manifest_ref": "control-families/social-institutional/manifest.json",
-      "legacy_family_manifest_ref": "control-families/social-institutional/family.manifest.json"
+      "legacy_family_manifest_ref": "control-families/social-institutional/family.manifest.json",
+      "status": "active",
+      "maturity": "seed"
     },
     {
       "family_id": "D5",
       "canonical_name": "economic",
-      "manifest_ref": "control-families/economic/manifest.json",
-      "status": "active-wave-1",
-      "maturity": "dense",
-      "lead_vertical": "true",
       "descriptor_ref": "control-families/descriptors/economic.descriptor.v1.json",
       "materialized_manifest_ref": "control-families/economic/manifest.json",
-      "legacy_family_manifest_ref": "control-families/economic/family.manifest.json"
+      "legacy_family_manifest_ref": "control-families/economic/family.manifest.json",
+      "status": "active-wave-1",
+      "maturity": "dense"
     },
     {
       "family_id": "D6",
       "canonical_name": "operational",
-      "manifest_ref": "control-families/operational/manifest.json",
-      "status": "active",
-      "maturity": "seed",
       "descriptor_ref": "control-families/descriptors/operational.descriptor.v1.json",
       "materialized_manifest_ref": "control-families/operational/manifest.json",
-      "legacy_family_manifest_ref": "control-families/operational/family.manifest.json"
+      "legacy_family_manifest_ref": "control-families/operational/family.manifest.json",
+      "status": "active",
+      "maturity": "seed"
     },
     {
       "family_id": "D7",
       "canonical_name": "cognitive-cultural",
-      "manifest_ref": "control-families/cognitive-cultural/manifest.json",
-      "status": "active",
-      "maturity": "seed",
       "descriptor_ref": "control-families/descriptors/cognitive-cultural.descriptor.v1.json",
       "materialized_manifest_ref": "control-families/cognitive-cultural/manifest.json",
-      "legacy_family_manifest_ref": "control-families/cognitive-cultural/family.manifest.json"
+      "legacy_family_manifest_ref": "control-families/cognitive-cultural/family.manifest.json",
+      "status": "active",
+      "maturity": "seed"
     },
     {
       "family_id": "D8",
       "canonical_name": "scientific",
-      "manifest_ref": "control-families/scientific/manifest.json",
-      "status": "active-wave-1-pillar",
-      "maturity": "structured",
       "descriptor_ref": "control-families/descriptors/scientific.descriptor.v1.json",
       "materialized_manifest_ref": "control-families/scientific/manifest.json",
-      "legacy_family_manifest_ref": "control-families/scientific/family.manifest.json"
+      "legacy_family_manifest_ref": "control-families/scientific/family.manifest.json",
+      "status": "active-wave-1-pillar",
+      "maturity": "structured"
     },
     {
       "family_id": "D9",
       "canonical_name": "environmental-climatological",
-      "manifest_ref": "control-families/environmental-climatological/manifest.json",
-      "status": "active",
-      "maturity": "seed",
       "descriptor_ref": "control-families/descriptors/environmental-climatological.descriptor.v1.json",
       "materialized_manifest_ref": "control-families/environmental-climatological/manifest.json",
-      "legacy_family_manifest_ref": "control-families/environmental-climatological/family.manifest.json"
+      "legacy_family_manifest_ref": "control-families/environmental-climatological/family.manifest.json",
+      "status": "active",
+      "maturity": "seed"
     }
   ]
 }
