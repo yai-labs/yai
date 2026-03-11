@@ -9,6 +9,8 @@ Canonical roots:
 
 - `cmd/`
 - `governance/`
+- `foundation/`
+- `formal/`
 - `include/`
 - `lib/`
 - `docs/`
@@ -20,22 +22,22 @@ Canonical roots:
 Non-canonical/transitional root:
 
 - `archive_tmp/` (temporary migration residue only)
-- `embedded/` (legacy surface, not final-state topology)
 
 ## Five Primary Masses
 
 1. Runtime implementation: `cmd/`, `include/`, `lib/`
 2. Governance content: `governance/`
-3. Documentation/reference: `docs/`
-4. Validation/tooling: `tests/`, `tools/`, `data/`
-5. Migration-control: `transitional/`
+3. Foundation + formal methods: `foundation/`, `formal/`
+4. Documentation/reference: `docs/`
+5. Validation/tooling + migration-control: `tests/`, `tools/`, `data/`, `transitional/`
 
 ## Canonical Role Lock
 
 - `governance/` is the canonical destination for former standalone law content.
+- `foundation/` defines conceptual system basis.
+- `formal/` defines formal verification artifacts and traceability models.
 - `docs/` is the single central documentation space.
 - `transitional/` is the only migration-only area.
-- no new canonical content must be introduced under `embedded/`.
 
 ## A2 Outcome
 

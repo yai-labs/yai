@@ -6,14 +6,16 @@
 
 - runtime and headers: `cmd/`, `lib/`, `include/`
 - governance spine: `governance/`
+- platform foundation domain: `foundation/`
+- platform formal domain: `formal/`
 - docs authority: `docs/`
 - verification/tooling: `tests/`, `tools/`
 
 ## Repository status
 
 - split-repository topology is sunset
-- `yai-law` is no longer an operational prerequisite for build/test/release in this repository
-- embedded governance export surface is removed from active architecture
+- the former separate governance repository is no longer an operational prerequisite for build/test/release in this repository
+- embedded legacy surfaces are removed from active root topology (historical traces are transitional-only)
 
 ## Governance model
 

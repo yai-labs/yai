@@ -8,7 +8,7 @@ This document defines governance operating rules for the unified YAI repository.
 - runtime/tooling consumers: `lib/`, `tools/`, `tests/`
 - canonical docs authority: `docs/`
 
-No external law repository is required for canonical operation.
+No external governance repository is required for canonical operation.
 
 ## Operating rules
 

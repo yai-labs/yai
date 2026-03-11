@@ -2,9 +2,9 @@
 from pathlib import Path
 
 REQUIRED = {
-    "README.md": ["single canonical repository", "governance/"],
-    "FOUNDATION.md": ["single canonical system root", "governance/"],
-    "GOVERNANCE.md": ["No external law repository is required"],
+    "README.md": ["single canonical repository", "governance/", "foundation/", "formal/"],
+    "FOUNDATION.md": ["single canonical system root", "governance/", "foundation/", "formal/"],
+    "GOVERNANCE.md": ["No external governance repository is required"],
     "COMPATIBILITY.md": ["single-repository", "governance/contracts/"],
     "VERSIONING.md": ["single-repository", "v1.0.0"],
 }

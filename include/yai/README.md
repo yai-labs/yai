@@ -19,9 +19,6 @@ Target domains:
 - `platform/`
 - `support/`
 
-Transitional compatibility namespaces (legacy):
+Notes:
 
-- `core/` -> converging to `runtime/`
-- `daemon/` -> converging to `edge/`
-- `exec/` -> converging to `orchestration/`, `agents/`, and mesh/runtime surfaces
-- `law/` -> converging to `governance/`
+- `governance/` is canonical for policy-engine public headers.

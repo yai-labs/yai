@@ -747,7 +747,7 @@ static void yai_format_iso8601_utc(time_t now, char *out, size_t out_cap)
 }
 
 static int yai_workspace_append_event_evidence_records(const char *ws_id,
-                                                       const yai_law_resolution_output_t *law_out,
+                                                       const yai_governance_resolution_output_t *law_out,
                                                        char *event_ref_out,
                                                        size_t event_ref_cap,
                                                        char *decision_ref_out,
@@ -839,12 +839,12 @@ static int yai_workspace_append_event_evidence_records(const char *ws_id,
         return -1;
     }
 
-    if (yai_law_decision_to_audit_blob(&law_out->decision, decision_blob, sizeof(decision_blob)) != 0)
+    if (yai_governance_decision_to_audit_blob(&law_out->decision, decision_blob, sizeof(decision_blob)) != 0)
     {
         if (err && err_cap > 0) (void)snprintf(err, err_cap, "%s", "decision_record_encode_failed");
         return -1;
     }
-    if (yai_law_evidence_to_record_blob(&law_out->decision, &law_out->evidence, evidence_blob, sizeof(evidence_blob)) != 0)
+    if (yai_governance_evidence_to_record_blob(&law_out->decision, &law_out->evidence, evidence_blob, sizeof(evidence_blob)) != 0)
     {
         if (err && err_cap > 0) (void)snprintf(err, err_cap, "%s", "evidence_record_encode_failed");
         return -1;

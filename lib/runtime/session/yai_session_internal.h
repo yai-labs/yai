@@ -71,7 +71,7 @@ int yai_session_workspace_policy_apply_dry_run(const char *object_id,
                                                char *err,
                                                size_t err_cap);
 int yai_session_record_resolution_snapshot(const char *ws_id,
-                                          const yai_law_resolution_output_t *law_out,
+                                          const yai_governance_resolution_output_t *law_out,
                                           const yai_enforcement_decision_t *enforcement_out,
                                           char *err,
                                           size_t err_cap);

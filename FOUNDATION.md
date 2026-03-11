@@ -26,6 +26,8 @@ This repository is the single canonical system root.
 - `lib/`
 - `include/`
 - `governance/`
+- `foundation/`
+- `formal/`
 - `docs/`
 - `tests/`
 - `tools/`

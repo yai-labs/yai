@@ -142,7 +142,7 @@ static int yai_workspace_append_governance_persistence(const char *ws_id,
                  sizeof(object_row),
                  "{\"type\":\"yai.governance_object_state.v1\",\"schema_version\":\"v1\","
                  "\"object_state_id\":\"%s\",\"governance_object_id\":\"%s\","
-                 "\"object_kind\":\"%s\",\"owner\":\"embedded.law\","
+                 "\"object_kind\":\"%s\",\"owner\":\"embedded.governance\","
                  "\"organization_scope\":\"workspace_runtime\","
                  "\"workspace_targets\":\"%s\",\"domain_targets\":\"%s\",\"specialization_targets\":\"%s\","
                  "\"source_refs\":\"%s\",\"status\":\"%s\",\"review_state\":\"%s\","
@@ -391,7 +391,7 @@ static void yai_slugify_token(const char *in, char *out, size_t out_cap)
 }
 
 static int yai_workspace_append_authority_artifact_persistence(const char *ws_id,
-                                                               const yai_law_resolution_output_t *law_out,
+                                                               const yai_governance_resolution_output_t *law_out,
                                                                const char *governance_refs_csv,
                                                                const char *event_ref,
                                                                const char *decision_ref,
@@ -760,7 +760,7 @@ static int yai_env_truthy(const char *name)
 }
 
 static int yai_workspace_append_enforcement_record_set(const char *ws_id,
-                                                       const yai_law_resolution_output_t *law_out,
+                                                       const yai_governance_resolution_output_t *law_out,
                                                        const char *governance_refs_csv,
                                                        const char *event_ref,
                                                        const char *decision_ref,

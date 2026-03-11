@@ -1,0 +1,101 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+from pathlib import Path
+
+CANONICAL_REQUIRED = {
+    "cmd",
+    "include",
+    "lib",
+    "governance",
+    "foundation",
+    "formal",
+    "docs",
+    "tests",
+    "tools",
+    "data",
+    "transitional",
+}
+
+FORBIDDEN_ROOT_NAMES = {
+    "embedded",
+    "grammar",
+    "schema",
+    "registry",
+    "manifests",
+    "overlays",
+    "domains",
+    "packs",
+    "ingestion",
+    "vectors",
+    "control-families",
+    "domain-specializations",
+    "classification",
+}
+
+FORBIDDEN_ROOT_FILES = {
+    "LAW_COMPATIBILITY.md",
+    "law-compatibility.v1.json",
+}
+
+REQUIRED_FOUNDATION_SUBDIRS = {"axioms", "invariants", "boundaries", "extensions", "terminology"}
+REQUIRED_FORMAL_SUBDIRS = {"tla", "schema", "configs"}
+
+
+IGNORED_ROOT = {
+    ".git",
+    ".github",
+    ".vscode",
+    ".pr",
+    "__pycache__",
+    "build",
+    "dist",
+}
+
+
+def present_root_entries(repo: Path) -> set[str]:
+    return {p.name for p in repo.iterdir() if p.name not in IGNORED_ROOT}
+
+
+def main() -> int:
+    repo = Path(__file__).resolve().parents[2]
+    root_entries = present_root_entries(repo)
+    errors: list[str] = []
+
+    missing = sorted(CANONICAL_REQUIRED - root_entries)
+    for entry in missing:
+        errors.append(f"missing canonical root entry: {entry}")
+
+    forbidden_dirs = sorted(FORBIDDEN_ROOT_NAMES & root_entries)
+    for entry in forbidden_dirs:
+        errors.append(f"forbidden root directory present: {entry}")
+
+    forbidden_files = sorted(FORBIDDEN_ROOT_FILES & root_entries)
+    for entry in forbidden_files:
+        errors.append(f"forbidden root file present: {entry}")
+
+    # C2 semantic boundary guardrails.
+    if (repo / "governance" / "foundation").exists():
+        errors.append("forbidden governance duplicate present: governance/foundation")
+    if (repo / "governance" / "formal").exists():
+        errors.append("forbidden governance duplicate present: governance/formal")
+
+    for name in sorted(REQUIRED_FOUNDATION_SUBDIRS):
+        if not (repo / "foundation" / name).exists():
+            errors.append(f"foundation/ missing required subdir: {name}")
+    for name in sorted(REQUIRED_FORMAL_SUBDIRS):
+        if not (repo / "formal" / name).exists():
+            errors.append(f"formal/ missing required subdir: {name}")
+
+    if errors:
+        print("root_topology: FAIL")
+        for e in errors:
+            print(" -", e)
+        return 1
+
+    print("root_topology: ok")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

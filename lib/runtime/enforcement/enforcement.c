@@ -162,7 +162,7 @@ int yai_validate_envelope_v1(
 
 int yai_enforcement_finalize_control_call(const yai_rpc_envelope_t *env,
                                           const char *workspace_id,
-                                          const yai_law_resolution_output_t *law_out,
+                                          const yai_governance_resolution_output_t *law_out,
                                           const yai_runtime_capability_state_t *caps,
                                           yai_enforcement_decision_t *out,
                                           char *err,

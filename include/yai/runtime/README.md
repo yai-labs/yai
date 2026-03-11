@@ -17,7 +17,4 @@ Canonical runtime headers:
 - `events.h`
 - `vault.h`
 
-Migration note:
-
-- legacy runtime headers under `include/yai/core/` are transitional sources
-- canonical runtime namespace is `include/yai/runtime/`
+Canonical runtime namespace is `include/yai/runtime/`.

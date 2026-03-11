@@ -7,8 +7,8 @@
 #include <yai/data/records.h>
 #include <yai/data/binding.h>
 #include <yai/data/query.h>
-#include <yai/exec/runtime.h>
-#include <yai/exec/peer_registry.h>
+#include <yai/orchestration/runtime.h>
+#include <yai/orchestration/peer_registry.h>
 #include <yai/graph/materialization.h>
 #include <yai/graph/query.h>
 #include <yai/knowledge/memory.h>
@@ -35,9 +35,9 @@
 static int yai_governance_root_path(char *out, size_t out_cap, const char *rel);
 static int yai_read_text(const char *path, char *out, size_t out_cap);
 static int mkdir_if_missing(const char *path, mode_t mode);
-int yai_law_decision_to_audit_blob(const yai_law_decision_t *decision, char *out, size_t out_cap);
-int yai_law_evidence_to_record_blob(const yai_law_decision_t *decision,
-                                    const yai_law_evidence_envelope_t *evidence,
+int yai_governance_decision_to_audit_blob(const yai_governance_decision_t *decision, char *out, size_t out_cap);
+int yai_governance_evidence_to_record_blob(const yai_governance_decision_t *decision,
+                                    const yai_governance_evidence_envelope_t *evidence,
                                     char *out,
                                     size_t out_cap);
 
@@ -77,13 +77,13 @@ typedef struct {
 #include "utils/session_utils_surface_views.inc.c"
 
 int yai_session_record_resolution_snapshot(const char *ws_id,
-                                          const yai_law_resolution_output_t *law_out,
+                                          const yai_governance_resolution_output_t *law_out,
                                           const yai_enforcement_decision_t *enforcement_out,
                                           char *err,
                                           size_t err_cap)
 {
     yai_workspace_runtime_info_t info;
-    const yai_law_effective_stack_t *stack;
+    const yai_governance_effective_stack_t *stack;
     int i;
     char overlays[192];
     char event_ref[96];

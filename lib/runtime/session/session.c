@@ -7,8 +7,8 @@
 #include <yai/runtime/lifecycle.h>
 #include <yai/runtime/workspace.h>
 #include <yai/data/binding.h>
-#include <yai/exec/runtime.h>
-#include <yai/exec/source_ingest.h>
+#include <yai/orchestration/runtime.h>
+#include <yai/orchestration/source_ingest.h>
 #include <yai/governance/resolver.h>
 #include <yai/governance/policy_effects.h>
 
@@ -390,7 +390,7 @@ int yai_session_handle_control_call(
     char binding_err[96];
     char prompt_json[1024];
     char law_payload[YAI_MAX_PAYLOAD + 512];
-    yai_law_resolution_output_t law_out;
+    yai_governance_resolution_output_t law_out;
     char data[YAI_MAX_PAYLOAD + 2048];
     char err[256];
     const char *status = "ok";
@@ -1176,7 +1176,7 @@ int yai_session_handle_control_call(
 
         if (strcmp(command_id, "yai.workspace.run") == 0)
         {
-            /* Execution macro: keep workspace-aware command semantics but resolve through runtime law path. */
+            /* Execution macro: keep workspace-aware command semantics but resolve through runtime governance path. */
             workspace_run_macro = 1;
             snprintf(command_id, sizeof(command_id), "%s", "yai.runtime.ping");
         }
@@ -1235,7 +1235,7 @@ int yai_session_handle_control_call(
         (void)snprintf(law_payload, sizeof(law_payload), "%s", payload);
     }
 
-    if (yai_law_resolve_control_call(runtime_ws_id,
+    if (yai_governance_resolve_control_call(runtime_ws_id,
                                      law_payload,
                                      env->trace_id,
                                      &law_out,
