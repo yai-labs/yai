@@ -3,6 +3,90 @@
 #include <stdlib.h>
 #include <string.h>
 
+static const char *yai_governance_find_family_entry(const char *json, const char *canonical_name) {
+  char needle[160];
+  const char *p;
+  if (!json || !canonical_name) return NULL;
+  if (yai_governance_safe_snprintf(needle, sizeof(needle), "\"canonical_name\": \"%s\"", canonical_name) != 0) return NULL;
+  p = strstr(json, needle);
+  if (!p) return NULL;
+  while (p > json && *p != '{') p--;
+  return (*p == '{') ? p : NULL;
+}
+
+static int yai_governance_extract_entry_string(const char *obj_start,
+                                        const char *key,
+                                        char *out,
+                                        size_t out_cap) {
+  char needle[96];
+  const char *p;
+  const char *q;
+  if (!obj_start || !key || !out || out_cap == 0) return -1;
+  if (yai_governance_safe_snprintf(needle, sizeof(needle), "\"%s\"", key) != 0) return -1;
+  p = strstr(obj_start, needle);
+  if (!p) return -1;
+  p = strchr(p, ':');
+  if (!p) return -1;
+  p++;
+  while (*p == ' ' || *p == '\t' || *p == '\n' || *p == '\r') p++;
+  if (*p != '"') return -1;
+  p++;
+  q = strchr(p, '"');
+  if (!q) return -1;
+  {
+    size_t len = (size_t)(q - p);
+    if (len >= out_cap) len = out_cap - 1;
+    memcpy(out, p, len);
+    out[len] = '\0';
+  }
+  return 0;
+}
+
+int yai_governance_load_control_family_descriptor(const yai_governance_runtime_t *rt,
+                                           const char *lookup_id,
+                                           char *out_json,
+                                           size_t out_cap) {
+  char family[96];
+  char index_json[16384];
+  char descriptor_ref[256];
+  const char *entry;
+  if (!rt || !lookup_id || !out_json || out_cap == 0) return -1;
+
+  family[0] = '\0';
+  if (yai_governance_domain_model_lookup(lookup_id,
+                                  NULL,
+                                  0,
+                                  family,
+                                  sizeof(family),
+                                  NULL,
+                                  0,
+                                  NULL,
+                                  0,
+                                  NULL,
+                                  0) != 0 ||
+      family[0] == '\0') {
+    (void)yai_governance_safe_snprintf(family, sizeof(family), "%s", lookup_id);
+  }
+
+  if (yai_governance_read_governance_surface_file(rt,
+                                           "control-families/index/families.descriptors.index.json",
+                                           index_json,
+                                           sizeof(index_json)) != 0) {
+    return -1;
+  }
+
+  entry = yai_governance_find_family_entry(index_json, family);
+  if (!entry) return -1;
+
+  descriptor_ref[0] = '\0';
+  if (yai_governance_extract_entry_string(entry, "descriptor_ref", descriptor_ref, sizeof(descriptor_ref)) != 0 ||
+      descriptor_ref[0] == '\0') {
+    return -1;
+  }
+
+  return yai_governance_read_governance_surface_file(rt, descriptor_ref, out_json, out_cap);
+}
+
 int yai_governance_load_domain_manifest(const yai_governance_runtime_t *rt,
                                  const char *domain_id,
                                  char *out_json,

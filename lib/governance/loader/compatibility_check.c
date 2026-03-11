@@ -31,6 +31,12 @@ int yai_governance_compatibility_check(yai_governance_runtime_t *rt, char *err, 
 
   if (yai_governance_require_file(rt, "classification/classification-map.json", json, sizeof(json)) != 0 ||
       yai_governance_require_file(rt, "control-families/index/families.index.json", json, sizeof(json)) != 0 ||
+      yai_governance_require_file(rt, "control-families/index/families.descriptors.index.json", json, sizeof(json)) != 0 ||
+      yai_governance_require_file(rt, "control-families/index/family.matrix.v1.json", json, sizeof(json)) != 0 ||
+      yai_governance_require_file(rt, "control-families/schema/family-descriptor.v1.schema.json", json, sizeof(json)) != 0 ||
+      yai_governance_require_file(rt, "control-families/schema/family-registry-entry.v1.schema.json", json, sizeof(json)) != 0 ||
+      yai_governance_require_file(rt, "control-families/schema/family-hierarchy-node.v1.schema.json", json, sizeof(json)) != 0 ||
+      yai_governance_require_file(rt, "control-families/schema/family-matrix-entry.v1.schema.json", json, sizeof(json)) != 0 ||
       yai_governance_require_file(rt, "domain-specializations/index/specializations.index.json", json, sizeof(json)) != 0 ||
       yai_governance_require_governance_surface(rt, "compliance/index/compliance.index.json", json, sizeof(json)) != 0 ||
       yai_governance_require_governance_surface(rt, "overlays/regulatory/index/regulatory.index.json", json, sizeof(json)) != 0 ||
