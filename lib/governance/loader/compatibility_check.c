@@ -109,12 +109,12 @@ int yai_governance_compatibility_check(yai_governance_runtime_t *rt, char *err, 
     return -1;
   }
 
-  if (yai_governance_require_governance_surface(rt, "ingestion/templates/enterprise_governance_source.template.v1.json", json, sizeof(json)) != 0 ||
-      yai_governance_require_governance_surface(rt, "ingestion/sources/src.ecohmedia.digital-outbound.source.v1.json", json, sizeof(json)) != 0 ||
-      yai_governance_require_governance_surface(rt, "ingestion/parsed/src.ecohmedia.digital-outbound.parsed.v1.json", json, sizeof(json)) != 0 ||
-      yai_governance_require_governance_surface(rt, "ingestion/normalized/src.ecohmedia.digital-outbound.normalized.v1.json", json, sizeof(json)) != 0 ||
-      yai_governance_require_governance_surface(rt, "ingestion/candidates/enterprise.ecohmedia.src-ecohmedia-digital-outbound.candidate.v1.json", json, sizeof(json)) != 0 ||
-      yai_governance_require_governance_surface(rt, "ingestion/review/enterprise.ecohmedia.src-ecohmedia-digital-outbound.candidate.v1.review.v1.json", json, sizeof(json)) != 0) {
+  if (yai_governance_require_governance_surface(rt, "ingestion/templates/governance_source.template.v1.json", json, sizeof(json)) != 0 ||
+      yai_governance_require_governance_surface(rt, "ingestion/sources/src.sample.digital-outbound.source.v1.json", json, sizeof(json)) != 0 ||
+      yai_governance_require_governance_surface(rt, "ingestion/parsed/src.sample.digital-outbound.parsed.v1.json", json, sizeof(json)) != 0 ||
+      yai_governance_require_governance_surface(rt, "ingestion/normalized/src.sample.digital-outbound.normalized.v1.json", json, sizeof(json)) != 0 ||
+      yai_governance_require_governance_surface(rt, "ingestion/candidates/enterprise.sample.src-sample-digital-outbound.candidate.v1.json", json, sizeof(json)) != 0 ||
+      yai_governance_require_governance_surface(rt, "ingestion/review/enterprise.sample.src-sample-digital-outbound.candidate.v1.review.v1.json", json, sizeof(json)) != 0) {
     if (err && err_cap) (void)yai_governance_safe_snprintf(err, err_cap, "missing canonical governance ingestion pipeline assets");
     return -1;
   }

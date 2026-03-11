@@ -1,9 +1,9 @@
 {
   "kind": "enterprise_governance_normalized",
   "schema_version": "v1",
-  "normalized_id": "norm.src-ecohmedia-digital-outbound",
+  "normalized_id": "norm.src-sample-digital-outbound",
   "source_refs": [
-    "src.ecohmedia.digital-outbound"
+    "src.sample.digital-outbound"
   ],
   "parsed_fact_refs": [
     "fact-0001",
@@ -17,7 +17,7 @@
   ],
   "organization_scope": {
     "organization_ids": [
-      "ecohmedia"
+      "sample"
     ],
     "environment_classes": [
       "production",
@@ -135,5 +135,5 @@
   "conflict_hints": [],
   "build_readiness": "ready_with_review",
   "notes": "Controlled intake grammar source",
-  "generated_at": "2026-03-11T18:44:07+00:00"
+  "generated_at": "2026-03-11T18:59:11+00:00"
 }

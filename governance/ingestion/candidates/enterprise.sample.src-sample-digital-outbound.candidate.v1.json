@@ -1,16 +1,16 @@
 {
   "kind": "enterprise_custom_governance",
   "schema_version": "v1",
-  "id": "enterprise.ecohmedia.src-ecohmedia-digital-outbound.candidate.v1",
-  "name": "EcohMedia Digital Outbound Governance Source Candidate",
+  "id": "enterprise.sample.src-sample-digital-outbound.candidate.v1",
+  "name": "Sample Digital Outbound Governance Source Candidate",
   "version": "2026.03",
   "owner": {
-    "organization_id": "ecohmedia",
+    "organization_id": "sample",
     "owner_team": "governance-platform"
   },
   "organization_scope": {
     "organization_ids": [
-      "ecohmedia"
+      "sample"
     ],
     "environment_classes": [
       "production",
@@ -35,7 +35,7 @@
     "overlay_refs": [],
     "specialization_policy_refs": [],
     "ingestion_source_refs": [
-      "governance/ingestion/sources/src.ecohmedia.digital-outbound.source.v1.json"
+      "governance/ingestion/sources/src.sample.digital-outbound.source.v1.json"
     ],
     "parsed_fact_refs": [
       "fact-0001",
@@ -47,7 +47,7 @@
       "fact-0007",
       "fact-0008"
     ],
-    "normalized_ref": "governance/ingestion/normalized/src.ecohmedia.digital-outbound.normalized.v1.json"
+    "normalized_ref": "governance/ingestion/normalized/src.sample.digital-outbound.normalized.v1.json"
   },
   "policy_refs": [
     "ingestion/fact/authority_escalation",
@@ -110,11 +110,11 @@
   ],
   "provenance": {
     "source_type": "deterministic_ingestion",
-    "source_ref": "governance/ingestion/sources/src.ecohmedia.digital-outbound.source.v1.json",
+    "source_ref": "governance/ingestion/sources/src.sample.digital-outbound.source.v1.json",
     "created_by": "tools/gen/deterministic_governance_ingestion.py",
     "updated_by": "tools/gen/deterministic_governance_ingestion.py",
-    "normalized_ref": "governance/ingestion/normalized/src.ecohmedia.digital-outbound.normalized.v1.json",
-    "generated_at": "2026-03-11T18:44:07+00:00"
+    "normalized_ref": "governance/ingestion/normalized/src.sample.digital-outbound.normalized.v1.json",
+    "generated_at": "2026-03-11T18:59:11+00:00"
   },
   "notes": "candidate built from deterministic ingestion; unresolved=1 conflicts=0"
 }

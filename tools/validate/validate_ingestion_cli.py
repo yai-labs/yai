@@ -7,6 +7,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 CLI = ROOT / "tools" / "bin" / "yai-govern"
+CID = "enterprise.sample.src-sample-digital-outbound.candidate.v1"
+REVIEW_FILE = ROOT / "governance" / "ingestion" / "review" / f"{CID}.review.v1.json"
 
 
 def run(*args: str) -> int:
@@ -19,17 +21,21 @@ def main() -> int:
         print(f"[ingestion-cli] FAIL: missing {CLI.relative_to(ROOT)}")
         return 1
 
+    # Keep validation deterministic even if previous runs advanced review lifecycle.
+    if REVIEW_FILE.exists():
+        REVIEW_FILE.unlink()
+
     checks = [
         ("source", "list"),
-        ("source", "inspect", "src.ecohmedia.digital-outbound"),
-        ("parse", "src.ecohmedia.digital-outbound"),
-        ("parsed", "inspect", "src.ecohmedia.digital-outbound"),
-        ("normalize", "src.ecohmedia.digital-outbound"),
-        ("normalized", "inspect", "norm.src-ecohmedia-digital-outbound"),
-        ("build", "norm.src-ecohmedia-digital-outbound"),
-        ("candidate", "inspect", "enterprise.ecohmedia.src-ecohmedia-digital-outbound.candidate.v1"),
-        ("validate", "enterprise.ecohmedia.src-ecohmedia-digital-outbound.candidate.v1"),
-        ("status", "enterprise.ecohmedia.src-ecohmedia-digital-outbound.candidate.v1"),
+        ("source", "inspect", "src.sample.digital-outbound"),
+        ("parse", "src.sample.digital-outbound"),
+        ("parsed", "inspect", "src.sample.digital-outbound"),
+        ("normalize", "src.sample.digital-outbound"),
+        ("normalized", "inspect", "norm.src-sample-digital-outbound"),
+        ("build", "norm.src-sample-digital-outbound"),
+        ("candidate", "inspect", CID),
+        ("validate", CID),
+        ("status", CID),
     ]
 
     for c in checks:

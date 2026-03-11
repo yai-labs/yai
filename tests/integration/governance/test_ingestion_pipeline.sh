@@ -3,9 +3,9 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
 CLI="$ROOT/tools/bin/yai-govern"
-SRC_ID="src.ecohmedia.digital-outbound"
-NORM_ID="norm.src-ecohmedia-digital-outbound"
-CID="enterprise.ecohmedia.src-ecohmedia-digital-outbound.candidate.v1"
+SRC_ID="src.sample.digital-outbound"
+NORM_ID="norm.src-sample-digital-outbound"
+CID="enterprise.sample.src-sample-digital-outbound.candidate.v1"
 
 "$CLI" source inspect "$SRC_ID" >/dev/null
 "$CLI" parse "$SRC_ID" >/dev/null

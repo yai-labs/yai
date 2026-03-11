@@ -8,7 +8,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 CLI = ROOT / "tools" / "bin" / "yai-govern"
-CID = "enterprise.ecohmedia.src-ecohmedia-digital-outbound.candidate.v1"
+CID = "enterprise.sample.src-sample-digital-outbound.candidate.v1"
 REVIEW_FILE = ROOT / "governance" / "ingestion" / "review" / f"{CID.replace('/', '_')}.review.v1.json"
 
 

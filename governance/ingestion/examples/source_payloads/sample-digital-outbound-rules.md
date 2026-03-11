@@ -1,5 +1,5 @@
 ---
-source_name: EcohMedia Digital Outbound Rules
+source_name: Sample Digital Outbound Rules
 domain: digital
 specialization: remote-publication
 ---

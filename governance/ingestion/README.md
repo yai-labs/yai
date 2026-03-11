@@ -12,6 +12,12 @@ Stages:
 - `templates/`: source authoring templates.
 - `examples/`: non-authoritative example payloads.
 
+Conventions:
+
+- canonical sample IDs are neutral (`src.sample.*`, `enterprise.sample.*`);
+- customer-branded payloads belong in `tests/fixtures/` or docs examples, not in
+  canonical ingestion pipeline paths.
+
 Canonical tooling entrypoints:
 
 - `tools/bin/yai-govern`

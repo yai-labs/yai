@@ -11,6 +11,8 @@ ING = ROOT / "governance" / "ingestion"
 GRAMMAR_SCHEMA = ROOT / "governance" / "grammar" / "schema"
 MANIFESTS = ROOT / "governance" / "manifests"
 REGISTRY = ROOT / "governance" / "registry"
+CLI = ROOT / "tools" / "bin" / "yai-govern"
+CID = "enterprise.sample.src-sample-digital-outbound.candidate.v1"
 
 
 def _require(path: Path) -> None:
@@ -28,17 +30,26 @@ def _run_py(script: Path) -> None:
         out = (proc.stdout + "\n" + proc.stderr).strip()
         raise SystemExit(f"governance_ingestion_pipeline: {script.name} failed\n{out}")
 
+def _ensure_review_state() -> None:
+    review = ING / "review" / f"{CID}.review.v1.json"
+    if review.exists():
+        return
+    proc = subprocess.run([sys.executable, str(CLI), "review", "status", CID], cwd=str(ROOT), capture_output=True, text=True)
+    if proc.returncode != 0:
+        out = (proc.stdout + "\n" + proc.stderr).strip()
+        raise SystemExit(f"governance_ingestion_pipeline: cannot seed review state\n{out}")
+
 
 def main() -> int:
     for d in ["sources", "candidates", "parsed", "normalized", "review", "templates", "examples"]:
         _require(ING / d)
 
     for p in [
-        ING / "templates" / "enterprise_governance_source.template.v1.json",
-        ING / "sources" / "src.ecohmedia.digital-outbound.source.v1.json",
-        ING / "parsed" / "src.ecohmedia.digital-outbound.parsed.v1.json",
-        ING / "normalized" / "src.ecohmedia.digital-outbound.normalized.v1.json",
-        ING / "candidates" / "enterprise.ecohmedia.src-ecohmedia-digital-outbound.candidate.v1.json",
+        ING / "templates" / "governance_source.template.v1.json",
+        ING / "sources" / "src.sample.digital-outbound.source.v1.json",
+        ING / "parsed" / "src.sample.digital-outbound.parsed.v1.json",
+        ING / "normalized" / "src.sample.digital-outbound.normalized.v1.json",
+        ING / "candidates" / "enterprise.sample.src-sample-digital-outbound.candidate.v1.json",
         GRAMMAR_SCHEMA / "enterprise_governance_source.v1.schema.json",
         GRAMMAR_SCHEMA / "governance_parsed_facts.v1.schema.json",
         GRAMMAR_SCHEMA / "enterprise_governance_normalized.v1.schema.json",
@@ -48,11 +59,12 @@ def main() -> int:
     ]:
         _require(p)
 
-    source = _read_json(ING / "sources" / "src.ecohmedia.digital-outbound.source.v1.json")
-    parsed = _read_json(ING / "parsed" / "src.ecohmedia.digital-outbound.parsed.v1.json")
-    normalized = _read_json(ING / "normalized" / "src.ecohmedia.digital-outbound.normalized.v1.json")
-    candidate = _read_json(ING / "candidates" / "enterprise.ecohmedia.src-ecohmedia-digital-outbound.candidate.v1.json")
-    review = _read_json(ING / "review" / "enterprise.ecohmedia.src-ecohmedia-digital-outbound.candidate.v1.review.v1.json")
+    source = _read_json(ING / "sources" / "src.sample.digital-outbound.source.v1.json")
+    parsed = _read_json(ING / "parsed" / "src.sample.digital-outbound.parsed.v1.json")
+    normalized = _read_json(ING / "normalized" / "src.sample.digital-outbound.normalized.v1.json")
+    candidate = _read_json(ING / "candidates" / "enterprise.sample.src-sample-digital-outbound.candidate.v1.json")
+    _ensure_review_state()
+    review = _read_json(ING / "review" / "enterprise.sample.src-sample-digital-outbound.candidate.v1.review.v1.json")
 
     if source.get("kind") != "enterprise_governance_source":
         raise SystemExit("governance_ingestion_pipeline: invalid source kind")

@@ -1,16 +1,16 @@
 {
   "kind": "enterprise_governance_source",
   "schema_version": "v1",
-  "source_id": "src.ecohmedia.digital-outbound",
+  "source_id": "src.sample.digital-outbound",
   "source_type": "operational-rule-sheet",
-  "title": "EcohMedia Digital Outbound Governance Source",
+  "title": "Sample Digital Outbound Governance Source",
   "owner": {
-    "organization_id": "ecohmedia",
+    "organization_id": "sample",
     "owner_team": "governance-platform"
   },
   "organization_scope": {
     "organization_ids": [
-      "ecohmedia"
+      "sample"
     ],
     "environment_classes": [
       "production",
@@ -31,10 +31,10 @@
   ],
   "declared_intent": "govern outbound publication and distribution",
   "source_format": "markdown_rule_sheet",
-  "source_payload_ref": "governance/ingestion/examples/source_payloads/ecohmedia-digital-outbound-rules.md",
+  "source_payload_ref": "governance/ingestion/examples/source_payloads/sample-digital-outbound-rules.md",
   "provenance": {
     "source_system": "policy-intake",
-    "source_uri": "ecohmedia://governance/digital-outbound-rules"
+    "source_uri": "sample://governance/digital-outbound-rules"
   },
   "ingestion_status": "submitted",
   "confidence_hint": 0.92,
