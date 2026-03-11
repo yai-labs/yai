@@ -214,7 +214,7 @@ DOXYFILE := Doxyfile
 DOXYGEN ?= doxygen
 DOXY_OUT ?= $(DIST_ROOT)/docs/doxygen
 
-.PHONY: all yai yai-daemon foundations support platform protocol core exec knowledge data graph daemon \
+.PHONY: all yai yai-daemon foundations support platform protocol core exec knowledge data graph daemon yd1-baseline \
         test test-unit test-integration test-e2e test-core test-brain test-protocol test-law \
         test-demo-matrix verify-final-demo-matrix \
         clean clean-dist clean-all build build-all dist dist-all bundle verify \
@@ -335,6 +335,14 @@ dirs:
 build: yai yai-daemon
 	@echo "--- [YAI] primary entrypoints build complete (yai + yai-daemon) ---"
 
+yd1-baseline: yai yai-daemon
+	@echo "[YD-1] daemon architecture refoundation baseline built"
+	@echo "  owner runtime: build/bin/yai"
+	@echo "  edge/source runtime: build/bin/yai-daemon"
+	@echo "  refs:"
+	@echo "    docs/architecture/daemon-architecture-refoundation-model.md"
+	@echo "    docs/program/22-adr/ADR-015-daemon-architecture-refoundation-slice.md"
+
 legacy-build:
 	@echo "--- [YAI] legacy-build removed: legacy top-level planes were decommissioned ---"
 
@@ -408,7 +416,8 @@ help:
 	@echo "Primary build targets:"
 	@echo "  all            (yai + yai-daemon + foundation libs)"
 	@echo "  yai            (build/bin/yai)"
-	@echo "  yai-daemon     (build/bin/yai-daemon baseline daemon skeleton)"
+	@echo "  yai-daemon     (build/bin/yai-daemon standalone edge/source runtime)"
+	@echo "  yd1-baseline   (build anchors + YD-1 architecture refs)"
 	@echo "  daemon         (build daemon static library)"
 	@echo "  foundations    (support/platform/protocol archives)"
 	@echo "  test-unit      (core/protocol/knowledge+graph unit suites)"

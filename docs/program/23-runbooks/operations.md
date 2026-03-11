@@ -82,3 +82,10 @@ Define the operational control loop for running, validating, and recovering the 
 - Do not treat protocol success over unsecured remote exposure as acceptance evidence.
 - NP-4 operational bootstrap is defined in
   `docs/program/23-runbooks/owner-peer-overlay-bootstrap.md`.
+
+## 10) YD-1 Architecture Baseline
+
+- YD-1 topology lock and naming baseline are documented in
+  `docs/program/23-runbooks/daemon-architecture-refoundation-baseline.md`.
+- Keep owner/daemon role boundaries explicit during operations and qualification.
+- Treat daemon-side execution as delegated and owner-scoped, never sovereign.

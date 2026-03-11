@@ -12,7 +12,7 @@
 
 static void print_help(void)
 {
-  puts("yai-daemon - edge acquisition daemon (YD-2 baseline)");
+  puts("yai-daemon - subordinate edge runtime daemon (YD-2 baseline)");
   printf("version: %s\n", YAI_VERSION_STRING);
   puts("");
   puts("usage: yai-daemon [options]");
@@ -31,8 +31,9 @@ static void print_help(void)
   puts("  YAI_DAEMON_BINDINGS_MANIFEST, YAI_DAEMON_TICK_MS, YAI_DAEMON_MAX_TICKS");
   puts("");
   puts("guardrails:");
-  puts("  - yai-daemon is edge acquisition only");
-  puts("  - no final authority/enforcement/graph-truth locally");
+  puts("  - yai-daemon is subordinate to owner workspace sovereignty");
+  puts("  - local action mediation/enforcement is delegated and owner-scoped");
+  puts("  - no final authority/policy/graph/conflict truth locally");
   puts("  - no federated runtime/multi-owner semantics in v1");
 }
 

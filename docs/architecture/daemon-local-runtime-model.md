@@ -2,9 +2,9 @@
 
 ## Scope
 
-`yai-daemon` is an edge-side acquisition runtime. In v1 it is intentionally
-non-authoritative: no workspace truth, no final authority/enforcement, no
-local graph truth.
+`yai-daemon` is a subordinate edge runtime. In v1 it is intentionally
+non-sovereign: no workspace truth, no policy truth, no final authority/
+enforcement/conflict truth, no local graph truth.
 
 ## Runtime Planes
 
@@ -23,6 +23,12 @@ local graph truth.
    Sends source-plane operations to owner runtime:
    `yai.source.enroll`, `yai.source.attach`, `yai.source.emit`,
    `yai.source.status`.
+
+Plus delegated local runtime hooks (owner-scoped only):
+
+5. `edge mediation` plane
+   Local action mediation and delegated enforcement points may execute only
+   under owner-issued policy snapshots, grants, and capability envelopes.
 
 ## Local Layout
 
@@ -78,3 +84,11 @@ Daemon health state:
 - After max attempts, unit is moved to `spool/failed`.
 
 This is intentionally minimal v1 behavior for deterministic edge validation.
+
+## Sovereignty Boundary
+
+Edge runtime can execute delegated local behavior but remains subordinate:
+
+- global/workspace policy truth remains owner-side
+- canonical graph/persistence/conflict truth remains owner-side
+- daemon-local outcomes are advisory until owner acceptance/materialization

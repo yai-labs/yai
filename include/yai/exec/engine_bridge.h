@@ -7,6 +7,9 @@
 
 typedef yai_vault_t yai_exec_vault_t;
 
+/* Bridge APIs are mediation plumbing only.
+ * Canonical workspace truth remains owner runtime core/data/graph.
+ */
 int yai_bridge_init(const char *ws_id);
 yai_exec_vault_t *yai_bridge_attach(const char *ws_id, const char *channel);
 void yai_bridge_detach(void);

@@ -34,7 +34,9 @@ typedef struct yai_mind_protocol_response {
 int yai_mind_transport_init(void);
 int yai_mind_transport_shutdown(void);
 int yai_mind_transport_is_initialized(void);
-/* Canonical exec-owned transport entrypoints. */
+/* YD-1 transport lock:
+ * transport is exec-owned mediation plumbing and does not carry owner truth semantics.
+ */
 int yai_exec_transport_start(void);
 int yai_exec_transport_stop(void);
 int yai_exec_transport_is_ready(void);

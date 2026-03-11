@@ -29,6 +29,8 @@ An ADR should answer:
 - `ADR-011-contract-baseline-lock.md`
 - `ADR-012-audit-convergence-gates.md`
 - `ADR-013-distributed-acquisition-centralized-control.md`
+- `ADR-014-secure-peering-plane.md`
+- `ADR-015-daemon-architecture-refoundation-slice.md`
 
 ## Template policy
 

@@ -22,7 +22,12 @@ Runtime uses binding to resolve workspace context before control-call resolution
 Workspace commands (`current/status/inspect/domain/policy/debug/run`) consume this binding model.
 
 In distributed acquisition v1, this binding truth remains owner-runtime (`yai`)
-only; source nodes and `yai-daemon` do not become independent binding truth.
+only; source nodes and subordinate `yai-daemon` runtimes do not become
+independent binding truth.
+
+YD-1 boundary lock:
+- runtime binding is owner-side only;
+- `yai-daemon` never sets canonical active workspace truth.
 
 ## Workspace-local vs Runtime-global
 

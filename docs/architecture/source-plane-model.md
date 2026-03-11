@@ -6,7 +6,8 @@ Effective date: 2026-03-10
 
 ## Purpose
 
-Define the canonical source-plane model that links `yai-daemon` (edge acquisition)
+Define the canonical source-plane model that links `yai-daemon` (subordinate
+edge runtime)
 to owner runtime truth in `yai`.
 
 This model is the baseline for YD-3 and is intentionally scoped to entities,
@@ -20,6 +21,7 @@ operational completion.
 - Control plane stays centralized owner-side.
 - No runtime federation in v1.
 - No final authority/enforcement/graph truth at source node.
+- Edge runtime execution is delegated and owner-scoped only.
 
 ## Canonical entities
 
@@ -37,7 +39,7 @@ Minimum fields:
 
 ### 2) `source_daemon_instance`
 
-Runtime instance identity of `yai-daemon` on a source node.
+Runtime instance identity of subordinate `yai-daemon` on a source node.
 
 Minimum fields:
 
@@ -60,6 +62,7 @@ Minimum fields:
 - binding scope/type
 - attachment status
 - constraints placeholder
+- delegated capability envelope placeholder
 
 ### 4) `source_asset`
 
@@ -88,6 +91,7 @@ Minimum fields:
 - observed timestamp
 - idempotency marker
 - delivery status
+- delegated action marker placeholder
 
 ### 6) `source_evidence_candidate`
 
@@ -217,6 +221,10 @@ attach/emit/status operations.
 These define operation intent and shape anchors for YD-4/YD-5 transport and
 owner-ingest work.
 
+Delegated edge-runtime semantics baseline:
+- edge can observe and mediate local actions only under owner-issued scope;
+- edge-side outcomes are non-canonical until owner acceptance.
+
 ## Persistence slice
 
 The YD-3 persistence baseline does not add a second store topology.
@@ -246,12 +254,14 @@ without re-inventing source entities.
 - full remote transport flow
 - full enroll/attach wire execution
 - complete source scan/spool/retry behavior
+- full delegated enforcement distribution
 - complete source-plane graph materialization
 - complete CLI/SDK source-plane UX surfaces
 
 ## References
 
 - `docs/architecture/distributed-acquisition-plane-model.md`
+- `docs/architecture/source-plane-model-refoundation-rf01.md`
 - `docs/architecture/source-owner-ingest-model.md`
 - `docs/architecture/source-plane-read-model.md`
 - `docs/architecture/owner-peer-registry-and-coordination-model.md`

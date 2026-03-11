@@ -3,7 +3,18 @@
 `yai` is the runtime host of the platform and executes the internal modules `core`, `exec`, `data`, `graph`, and `knowledge`.
 
 For distributed source acquisition v1, `yai` remains the centralized owner
-runtime while edge acquisition is handled by standalone `yai-daemon` processes.
+runtime while edge acquisition/execution is handled by standalone subordinate
+`yai-daemon` runtimes under owner-issued scope.
+
+## YD-1 Topology Lock
+
+The YD-1 refoundation slice locks these invariants:
+
+- `yai` is the only owner runtime and canonical workspace source of truth.
+- `yai-daemon` is the standalone subordinate edge runtime.
+- topology is `distributed acquisition / centralized control`.
+- daemon state is operational/advisory and never canonical workspace/policy/graph/conflict truth.
+- `exec` is the active mediation layer for owner/daemon source-plane flows.
 
 ## Canonical runtime flow
 
@@ -35,6 +46,10 @@ This runtime model covers the unified runtime topology target where:
 Workspace model details are defined in `docs/architecture/workspace-model.md`.
 Distributed acquisition topology details are defined in
 `docs/architecture/distributed-acquisition-plane-model.md`.
+YD-1 daemon refoundation lock is defined in
+`docs/architecture/daemon-architecture-refoundation-model.md`.
+RF-0.1 semantic refoundation lock is defined in
+`docs/architecture/source-plane-model-refoundation-rf01.md`.
 Source-plane entity/contract model is defined in
 `docs/architecture/source-plane-model.md`.
 Owner ingest runtime flow is defined in

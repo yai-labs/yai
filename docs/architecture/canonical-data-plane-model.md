@@ -37,6 +37,11 @@ No component writes durable state without governed mediation.
 `Kernel` is the authority gate; `Engine` performs sink operations only after governed dispatch.
 Source-node daemons can feed acquisition payloads but do not own final sink authority.
 
+YD-1 daemon boundary:
+- `yai-daemon` can acquire, spool, retry, and deliver source-plane payloads;
+- `yai-daemon` can mediate delegated local actions only under owner-issued scope;
+- only owner runtime `yai` can accept payloads into canonical records/graph/policy/conflict truth.
+
 ### 3) Control/Data Path Separation
 Mandatory path:
 
@@ -96,3 +101,8 @@ Allowed only through phase-specific closure checks; no backend shortcuts.
 - contract anchor presence checks in docs/program.
 
 DP-1 does not claim backend completion; it claims model refoundation readiness for DP-2.
+
+Secure peering dependency note (NP-1):
+- data-plane source records may be ingested over local trusted paths today.
+- Internet/multi-site ingestion must be treated as dependent on secure peering plane
+  readiness (separate from protocol payload correctness).

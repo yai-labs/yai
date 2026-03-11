@@ -25,7 +25,7 @@ runtime federation or secondary truth owners.
 
 YAI adopts this v1 topology model:
 
-- distributed acquisition plane on source nodes via standalone `yai-daemon`
+- distributed acquisition plane on source nodes via standalone subordinate `yai-daemon`
 - centralized control plane on owner runtime `yai`
 
 `yai` remains canonical owner/runtime source of truth for:
@@ -34,8 +34,8 @@ YAI adopts this v1 topology model:
 - authority/evidence/enforcement final outcomes
 - canonical persistence and graph truth
 
-`yai-daemon` is an edge acquisition process and is explicitly not an owner
-runtime.
+`yai-daemon` is a subordinate edge runtime and is explicitly not an owner
+runtime or independent sovereign policy/truth authority.
 
 `exec` is the active runtime layer for owner/daemon mediation (transport,
 routing handoff, and acquisition gating).
@@ -58,6 +58,7 @@ routing handoff, and acquisition gating).
 ### Negative
 
 - Edge autonomy is intentionally limited in v1.
+- Delegated edge execution is always owner-scoped.
 - Federation-style capabilities are explicitly deferred.
 - Requires explicit docs/runtime alignment to avoid local-only assumptions.
 

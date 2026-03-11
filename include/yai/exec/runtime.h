@@ -19,7 +19,11 @@ typedef struct yai_exec_config {
   bool enforce_tla_safety;
 } yai_exec_config_t;
 
-/* Source-plane mediation is exec-owned in distributed acquisition v1. */
+/* YD-1 boundary lock:
+ * - exec mediates owner/daemon source-plane operations
+ * - exec is not canonical workspace truth
+ * - final truth persists only in owner runtime/data/graph planes
+ */
 const char *yai_exec_runtime_state_name(yai_exec_runtime_state_t state);
 int yai_exec_runtime_probe(void);
 int yai_exec_config_load_initial(const char *config_path, yai_exec_config_t *out_cfg);

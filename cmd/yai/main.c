@@ -313,7 +313,9 @@ static void yai_print_help(void)
   puts("  - this binary hosts the YAI service process");
   puts("  - operator entrypoint is CLI: `yai up|status|down` from repo cli");
   puts("  - this binary exposes fallback lifecycle only (up/down)");
-  puts("  - edge acquisition companion binary is `yai-daemon` (YD-2 skeleton)");
+  puts("  - edge/source companion binary is `yai-daemon` (standalone edge runtime)");
+  puts("  - topology lock: distributed acquisition / centralized control");
+  puts("  - daemon role: subordinate edge runtime under owner workspace sovereignty");
   puts("  - local control ingress: $HOME/.yai/run/control.sock");
   puts("  - peer source-plane ingress: $HOME/.yai/run/peer.sock");
   puts("  - client flow: cli -> sdk -> yai ingress");
