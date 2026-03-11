@@ -17,16 +17,16 @@ int yai_law_compatibility_check(yai_law_runtime_t *rt, char *err, size_t err_cap
 
   if (!rt) return -1;
 
-  if (yai_law_require_file(rt, "COMPATIBILITY.json", json, sizeof(json)) != 0) {
-    if (err && err_cap) (void)yai_law_safe_snprintf(err, err_cap, "missing compatibility file");
+  if (yai_law_require_governance_surface(rt, "manifests/compatibility.matrix.json", json, sizeof(json)) != 0) {
+    if (err && err_cap) (void)yai_law_safe_snprintf(err, err_cap, "missing canonical compatibility matrix");
     return -1;
   }
 
-  (void)yai_law_json_extract_string(json, "compatibility_profile", rt->compatibility.profile, sizeof(rt->compatibility.profile));
+  (void)yai_law_json_extract_string(json, "schema_set", rt->compatibility.profile, sizeof(rt->compatibility.profile));
   (void)yai_law_json_extract_string(json, "law_version", rt->compatibility.law_version, sizeof(rt->compatibility.law_version));
 
   if (rt->compatibility.profile[0] == 0) {
-    (void)yai_law_safe_snprintf(rt->compatibility.profile, sizeof(rt->compatibility.profile), "%s", "runtime-consumer.v3");
+    (void)yai_law_safe_snprintf(rt->compatibility.profile, sizeof(rt->compatibility.profile), "%s", "runtime-consumer.v4");
   }
 
   if (yai_law_require_file(rt, "classification/classification-map.json", json, sizeof(json)) != 0 ||
@@ -93,8 +93,8 @@ int yai_law_compatibility_check(yai_law_runtime_t *rt, char *err, size_t err_cap
     return -1;
   }
 
-  if (yai_law_require_file(rt, "generated/runtime-resolution-view.json", json, sizeof(json)) != 0) {
-    if (err && err_cap) (void)yai_law_safe_snprintf(err, err_cap, "missing generated runtime-resolution-view");
+  if (yai_law_require_governance_surface(rt, "overlays/index/overlay-compliance.runtime.v1.json", json, sizeof(json)) != 0) {
+    if (err && err_cap) (void)yai_law_safe_snprintf(err, err_cap, "missing canonical overlay-compliance runtime view");
     return -1;
   }
 

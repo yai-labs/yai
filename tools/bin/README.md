@@ -35,7 +35,7 @@ Runtime wrappers kept in this repo:
 Notes:
 - Wrappers are infra-first.
 - `yai-changelog-check` keeps a CI fallback to local validator when `infra` is not checked out by the runner.
-- Law consumption model is embedded-surface runtime (`embedded/law`) with no active legacy bridge fallback.
+- Governance/runtime source-of-truth is `governance/`; legacy embedded fallback is explicit-only via `YAI_GOVERNANCE_ALLOW_LEGACY=1`.
 - `yai-ws-token` prints only `icon + alias` (no `ws:` prefix), and only when cwd is inside a workspace `root_path`.
 - `yai-ws-token` resolves workspace from `~/.yai/run/*/manifest.json` by longest matching `root_path` prefix.
 - For zsh session-only integration (no permanent prompt override), use `tools/dev/yai-prompt.zsh`.

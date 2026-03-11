@@ -200,9 +200,13 @@ static int yai_workspace_build_runtime_capabilities_json(const yai_workspace_run
 
 static int yai_embedded_law_path(char *out, size_t out_cap, const char *rel)
 {
-    const char *root = getenv("YAI_LAW_EMBED_ROOT");
+    const char *root = getenv("YAI_GOVERNANCE_ROOT");
+    const char *legacy_root = getenv("YAI_LAW_EMBED_ROOT");
+    const char *allow_legacy = getenv("YAI_GOVERNANCE_ALLOW_LEGACY");
+    int legacy_enabled = (allow_legacy && strcmp(allow_legacy, "1") == 0) ? 1 : 0;
     const char *base = NULL;
-    const char *candidates[] = {"embedded/law", "../yai/embedded/law", "../../yai/embedded/law"};
+    const char *candidates[] = {"governance", "../yai/governance", "../../yai/governance"};
+    const char *legacy_candidates[] = {"embedded/law", "../yai/embedded/law", "../../yai/embedded/law"};
     int i;
     FILE *probe = NULL;
     if (!out || out_cap == 0)
@@ -227,8 +231,31 @@ static int yai_embedded_law_path(char *out, size_t out_cap, const char *rel)
             }
         }
     }
+    if (!base && legacy_enabled)
+    {
+        if (legacy_root && legacy_root[0])
+        {
+            base = legacy_root;
+        }
+        else
+        {
+            for (i = 0; i < (int)(sizeof(legacy_candidates) / sizeof(legacy_candidates[0])); i++)
+            {
+                char p[MAX_PATH_LEN];
+                if (snprintf(p, sizeof(p), "%s/classification/classification-map.json", legacy_candidates[i]) <= 0)
+                    continue;
+                probe = fopen(p, "rb");
+                if (probe)
+                {
+                    fclose(probe);
+                    base = legacy_candidates[i];
+                    break;
+                }
+            }
+        }
+    }
     if (!base)
-        base = "embedded/law";
+        return -1;
     if (snprintf(out, out_cap, "%s/%s", base, rel ? rel : "") <= 0)
         return -1;
     return 0;

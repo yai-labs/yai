@@ -20,6 +20,7 @@ python3 "$ROOT/tools/validate/validate_governance_ingestion_pipeline.py"
 
 for t in \
   test_no_legacy_primary_path \
+  test_explicit_legacy_fallback \
   test_manifest_loader \
   test_contract_surface \
   test_contracts_schema_loader \

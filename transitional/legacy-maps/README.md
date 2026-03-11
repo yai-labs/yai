@@ -23,3 +23,4 @@ Current anchors:
 - `b6-manifests-publish-unification-map.md`
 - `b7-contracts-schema-unification-map.md`
 - `b8-ingestion-authoring-integration-map.md`
+- `b9-runtime-loader-path-cutover-map.md`

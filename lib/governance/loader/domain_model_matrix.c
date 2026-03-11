@@ -5,10 +5,14 @@
 
 static int read_domain_model_matrix(char *json, size_t cap) {
   const char *env_file = getenv("YAI_GOVERNANCE_DOMAIN_MODEL");
+  const char *allow_legacy = getenv("YAI_GOVERNANCE_ALLOW_LEGACY");
+  int legacy_enabled = (allow_legacy && strcmp(allow_legacy, "1") == 0) ? 1 : 0;
   const char *candidates[] = {
     "governance/domains/index/domain-model.matrix.v1.json",
-    "embedded/law/domains/index/domain-model.matrix.v1.json",
     "../yai/governance/domains/index/domain-model.matrix.v1.json"
+  };
+  const char *legacy_candidates[] = {
+    "embedded/law/domains/index/domain-model.matrix.v1.json"
   };
   size_t i;
 
@@ -17,6 +21,12 @@ static int read_domain_model_matrix(char *json, size_t cap) {
 
   for (i = 0; i < (sizeof(candidates) / sizeof(candidates[0])); ++i) {
     if (yai_law_read_text_file(candidates[i], json, cap) == 0) return 0;
+  }
+
+  if (legacy_enabled) {
+    for (i = 0; i < (sizeof(legacy_candidates) / sizeof(legacy_candidates[0])); ++i) {
+      if (yai_law_read_text_file(legacy_candidates[i], json, cap) == 0) return 0;
+    }
   }
   return -1;
 }

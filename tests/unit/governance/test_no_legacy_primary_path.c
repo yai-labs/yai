@@ -17,7 +17,7 @@ int main(void) {
     return 1;
   }
 
-  if (strcmp(rt.root, "embedded/law") != 0) {
+  if (strncmp(rt.root, "governance", 10) != 0) {
     fprintf(stderr, "no_legacy_primary_path: unexpected primary root: %s\n", rt.root);
     return 1;
   }

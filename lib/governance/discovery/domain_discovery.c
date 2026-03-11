@@ -41,7 +41,8 @@ static void map_family_to_domain_id(const char *family_id, char *out, size_t out
 static int read_classification_map(char *json, size_t cap) {
   if (!json || cap == 0) return -1;
   if (yai_law_read_text_file("governance/classification/classification-map.json", json, cap) == 0) return 0;
-  return yai_law_read_text_file("embedded/law/classification/classification-map.json", json, cap);
+  if (yai_law_read_governance_surface_file(NULL, "classification/classification-map.json", json, cap) == 0) return 0;
+  return -1;
 }
 
 static void apply_classification_map_boost(const yai_law_classification_ctx_t *ctx,
