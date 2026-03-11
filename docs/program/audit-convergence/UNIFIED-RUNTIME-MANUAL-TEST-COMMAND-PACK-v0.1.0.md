@@ -57,17 +57,17 @@ Acceptable transitional outcome:
 cd /Users/francescomaiomascio/Developer/YAI/yai
 make clean
 make yai -j4
-tests/integration/workspace_lifecycle/workspace_session_binding_contract.sh
-tests/integration/workspace_lifecycle/workspace_inspect_surfaces.sh
-tests/integration/workspace_lifecycle/workspace_real_flow.sh
-tests/integration/workspace_lifecycle/workspace_runtime_contract.sh
-tests/integration/workspace_lifecycle/workspace_db_first_read_cutover.sh
-tests/integration/workspace_lifecycle/workspace_event_evidence_sink_hardening.sh
-tests/integration/workspace_lifecycle/workspace_governance_persistence.sh
-tests/integration/workspace_lifecycle/workspace_authority_artifact_persistence.sh
-tests/integration/workspace_lifecycle/workspace_brain_graph_transient.sh
-tests/integration/workspace_lifecycle/workspace_graph_materialization_hooks.sh
-tests/integration/workspace_lifecycle/workspace_graph_read_surfaces.sh
+tests/integration/workspace/workspace_session_binding_contract.sh
+tests/integration/workspace/workspace_inspect_surfaces.sh
+tests/integration/workspace/workspace_real_flow.sh
+tests/integration/workspace/workspace_runtime_contract.sh
+tests/integration/workspace/workspace_db_first_read_cutover.sh
+tests/integration/workspace/workspace_event_evidence_sink_hardening.sh
+tests/integration/workspace/workspace_governance_persistence.sh
+tests/integration/workspace/workspace_authority_artifact_persistence.sh
+tests/integration/workspace/workspace_brain_graph_transient.sh
+tests/integration/workspace/workspace_graph_materialization_hooks.sh
+tests/integration/workspace/workspace_graph_read_surfaces.sh
 ```
 
 Healthy signal:
@@ -225,8 +225,8 @@ The canonical graph query/read contract is currently verified by integration sur
 
 ```bash
 cd /Users/francescomaiomascio/Developer/YAI/yai
-tests/integration/workspace_lifecycle/workspace_graph_materialization_hooks.sh
-tests/integration/workspace_lifecycle/workspace_graph_read_surfaces.sh
+tests/integration/workspace/workspace_graph_materialization_hooks.sh
+tests/integration/workspace/workspace_graph_read_surfaces.sh
 ```
 
 Healthy signal:
@@ -319,7 +319,7 @@ Interpretation:
 ## Fast sanity bundle (copy-paste)
 
 ```bash
-cd /Users/francescomaiomascio/Developer/YAI/yai && make yai -j4 && tests/integration/workspace_lifecycle/workspace_runtime_contract.sh && tests/integration/workspace_lifecycle/workspace_graph_read_surfaces.sh
+cd /Users/francescomaiomascio/Developer/YAI/yai && make yai -j4 && tests/integration/workspace/workspace_runtime_contract.sh && tests/integration/workspace/workspace_graph_read_surfaces.sh
 cd /Users/francescomaiomascio/Developer/YAI/law && make check && make validate-law-registry
 cd /Users/francescomaiomascio/Developer/YAI/sdk && make test
 cd /Users/francescomaiomascio/Developer/YAI/cli && export YAI_SDK_COMPAT_REGISTRY_DIR="../law" && make test

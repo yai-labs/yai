@@ -10,7 +10,7 @@
 - `tests/integration/law_resolution` -> `tests/integration/governance`
 - `tests/integration/runtime_handshake` -> `tests/integration/runtime`
 - `tests/integration/source_plane` -> `tests/integration/source-plane`
-- `tests/integration/workspace_lifecycle` -> `tests/integration/workspace`
+- `tests/integration/workspace` -> `tests/integration/workspace`
 - `tests/domains/*` -> removed
 
 ## Protocol topology

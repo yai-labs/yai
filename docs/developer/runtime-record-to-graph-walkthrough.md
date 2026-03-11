@@ -50,7 +50,7 @@ Transient knowledge state:
 
 ## Smoke command
 
-- `tests/integration/workspace_lifecycle/workspace_graph_materialization_hooks.sh`
+- `tests/integration/workspace/workspace_graph_materialization_hooks.sh`
 
 The smoke validates:
 - node/edge persistence from runtime refs,

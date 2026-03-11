@@ -93,6 +93,7 @@ PY
 python3 "$ROOT/tools/validate/validate_root_framing.py"
 python3 "$ROOT/tools/validate/validate_tooling_legacy_refs.py"
 python3 "$ROOT/tools/validate/validate_aux_naming.py"
+python3 "$ROOT/tools/validate/validate_final_naming_consistency.py"
 python3 "$ROOT/tools/validate/validate_root_topology.py"
 python3 "$ROOT/tools/validate/validate_runtime_core_collapse.py"
 python3 "$ROOT/tools/validate/validate_edge_daemon_collapse.py"

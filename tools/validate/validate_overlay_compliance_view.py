@@ -54,4 +54,4 @@ for matrix_key in ("precedence", "evidence"):
     if not any(oid in txt for oid in known_overlay_ids):
         raise SystemExit(f"matrix appears detached from overlay ids: {rel}")
 
-print("overlay_compliance_runtime_view: ok")
+print("overlay_compliance_view: ok")

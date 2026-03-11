@@ -33,7 +33,7 @@ for _ in $(seq 1 120); do
   [[ -S "$SOCK" ]] && break
   sleep 0.1
 done
-[[ -S "$SOCK" ]] || { echo "workspace_brain_graph_transient_dp7_v1: FAIL (missing ingress socket)"; exit 1; }
+[[ -S "$SOCK" ]] || { echo "workspace_brain_graph_transient: FAIL (missing ingress socket)"; exit 1; }
 
 python3 - "$SOCK" "$WS" "$HOME" <<'PY'
 import json
@@ -192,4 +192,4 @@ r = call("system", "yai.workspace.unset")
 assert r["status"] == "ok", r
 PY
 
-echo "workspace_brain_graph_transient_dp7_v1: ok"
+echo "workspace_brain_graph_transient: ok"

@@ -9,7 +9,7 @@ related:
   - docs/program/23-runbooks/workspace-runtime-command-mapping-and-canonicalization.md
   - docs/program/24-milestone-packs/workspace-verticalization-closeout/WSV-6-WORKSPACE-SURFACE-CLOSEOUT.md
   - docs/program/audit-convergence/WORKSPACE-VERTICALIZATION-MANUAL-TEST-COMMAND-PACK-v0.1.0.md
-  - tests/integration/workspace_lifecycle/workspace_verticalization_closeout.sh
+  - tests/integration/workspace/workspace_verticalization_closeout.sh
 ---
 
 # Workspace Verticalization Ecosystem Verification Matrix (v0.1.0)
@@ -18,7 +18,7 @@ Legend: `PASS`, `PASS WITH DEBT`, `FAIL`
 
 | Domain | Repo(s) | Canonical truth expected | Automatic check / verification method | Manual check / operator path | Evidence expected | Result | Residual issue / blocker | Owner / follow-up |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| WSV taxonomy alignment | yai, yai-law, yai-cli, yai-sdk | Same `ws` families: lifecycle, graph, db, data, knowledge, policy, domain, recovery, debug, query fallback | `tests/integration/workspace_lifecycle/workspace_verticalization_closeout.sh` | `./dist/bin/yai help ws` in `cli` | Script `ok`; help shows all families | PASS | none | closed |
+| WSV taxonomy alignment | yai, yai-law, yai-cli, yai-sdk | Same `ws` families: lifecycle, graph, db, data, knowledge, policy, domain, recovery, debug, query fallback | `tests/integration/workspace/workspace_verticalization_closeout.sh` | `./dist/bin/yai help ws` in `cli` | Script `ok`; help shows all families | PASS | none | closed |
 | Runtime lifecycle/binding substrate | yai | Runtime exposes `create/open/set/switch/current/status/inspect/unset/clear/reset/destroy` IDs | `rg` in `lib/core/session/session.c` (scripted in WSV6 guardrail) | `yai ws create/open/set/switch/current/status/inspect/unset/clear/reset/destroy` | IDs present in dispatch and handlers | PASS | none | closed |
 | Runtime graph substrate | yai | Runtime exposes `graph summary/workspace/governance/decision/evidence/authority/artifact/lineage/recent` | `rg "yai.workspace.graph.*"` in `lib/core/session/session.c` | `yai ws graph ...` | IDs present + query-family routing | PASS | none | closed |
 | Runtime db/data/knowledge/recovery/debug substrate | yai | Runtime exposes query/events tail + policy/domain/debug + recovery basis | `rg` for `workspace.query/events.tail/policy_*/domain_*/debug_resolution/open/lifecycle.maintain` | `yai ws db ...`, `yai ws data ...`, `yai ws knowledge ...`, `yai ws recovery ...`, `yai ws debug resolution` | IDs present in dispatch | PASS WITH DEBT | Several ws-db/ws-knowledge/ws-recovery commands are composition-backed, not all direct runtime IDs | next hardening wave |

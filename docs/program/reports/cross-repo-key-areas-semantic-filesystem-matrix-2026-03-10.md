@@ -39,7 +39,7 @@ This report maps each macroarea to concrete repository paths and files.
 |---|---|---|---|
 | Policy engine (normative + execution) | Define policy semantics and execute deterministic resolution/effects | `law` + `yai` (+ surfaced by `sdk`/`cli`) | `../law/manifests/`, `../law/grammar/`, `../law/registry/`, `../law/schema/`, `../law/control-families/`, `../law/specializations/`, `../law/overlays/`; `lib/law/`, `include/yai/law/`, `embedded/law/`, `tests/unit/law/`, `tests/integration/law_resolution/` |
 | Runtime core-exec chain | Runtime host lifecycle, ingress, command dispatch, authority gate, execution orchestration | `yai` | `cmd/yai/main.c`, `lib/core/`, `lib/exec/`, `lib/protocol/`, `include/yai/core/`, `include/yai/exec/`, `include/yai/protocol/` |
-| Workspace model | Workspace-first binding, recovery/load, containment, state transitions, governance attach/apply boundaries | `yai` (+ contracts in `law`, models in `sdk`, UX in `cli`) | `lib/core/workspace/`, `include/yai/core/workspace.h`, `tests/integration/workspace_lifecycle/`, `docs/architecture/workspace-*.md`, `../law/schema/workspace_governance_attachment.v1.schema.json`, `../sdk/include/yai_sdk/workspace.h`, `../cli/docs/guide/workspace-consumer-role.md` |
+| Workspace model | Workspace-first binding, recovery/load, containment, state transitions, governance attach/apply boundaries | `yai` (+ contracts in `law`, models in `sdk`, UX in `cli`) | `lib/core/workspace/`, `include/yai/core/workspace.h`, `tests/integration/workspace/`, `docs/architecture/workspace-*.md`, `../law/schema/workspace_governance_attachment.v1.schema.json`, `../sdk/include/yai_sdk/workspace.h`, `../cli/docs/guide/workspace-consumer-role.md` |
 | Data plane: storage/db/data | Persistence, records, retention/archive, query surfaces and bindings | `yai` (+ surfaced in `sdk`) | `lib/data/store/duckdb_store.c`, `lib/data/store/file_store.c`, `lib/data/records/`, `lib/data/query/`, `lib/data/lifecycle/`, `include/yai/data/`, `data/` |
 | Data plane: graph | Relational truth/materialization/query lineage surfaces | `yai` (+ surfaced in `sdk`) | `lib/graph/state/`, `lib/graph/query/`, `lib/graph/materialization/`, `include/yai/graph/`, `../sdk/include/yai_sdk/graph.h` |
 | Data plane: knowledge | cognition/memory/provider support and semantic substrate | `yai` (+ surfaced in `sdk`) | `lib/knowledge/cognition/`, `lib/knowledge/memory/`, `lib/knowledge/providers/`, `include/yai/knowledge/`, `../sdk/include/yai_sdk/knowledge.h` |
@@ -77,8 +77,8 @@ Operational message: the policy engine is intentionally split: `law` decides wha
 | Workspace state + registry + runtime binding | `lib/core/workspace/workspace_registry.c`, `lib/core/workspace/workspace_binding.c`, `lib/core/workspace/workspace_runtime.c` |
 | Recovery/load semantics | `lib/core/workspace/workspace_recovery.c`, `docs/architecture/workspace-binding-persistence-model.md` |
 | Security/containment boundary | `docs/architecture/workspace-boundary-model.md`, `docs/architecture/workspace-containment-levels.md`, `docs/architecture/workspace-security-envelope-model.md` |
-| Governance attach/apply semantics | `docs/architecture/workspace-governance-targeting-and-apply-model.md`, `tests/integration/workspace_lifecycle/workspace_governance_apply_semantics.sh` |
-| Verification battery | `tests/integration/workspace_lifecycle/*.sh` |
+| Governance attach/apply semantics | `docs/architecture/workspace-governance-targeting-and-apply-model.md`, `tests/integration/workspace/workspace_governance_apply_semantics.sh` |
+| Verification battery | `tests/integration/workspace/*.sh` |
 
 ## 7) Data Plane Area (DB, Knowledge, Graph, Storage)
 
@@ -120,7 +120,7 @@ Important precision: TLA in `law` is currently a formal continuity layer linked 
 |---|---|---|---|
 | New policy semantics/precedence/overlay rules | `law/grammar`, `law/manifests`, `law/registry` | `cli/src`, `sdk/src` | keep normative changes isolated before consumer updates |
 | Runtime enforcement behavior | `yai/lib/law`, `yai/lib/core/enforcement`, `yai/lib/core/dispatch` | `law/foundation` (unless semantics change) | execution logic belongs to runtime authority |
-| Workspace behavior | `yai/lib/core/workspace`, `yai/tests/integration/workspace_lifecycle` | `cli` (except output/help alignment) | workspace boundary is runtime-owned |
+| Workspace behavior | `yai/lib/core/workspace`, `yai/tests/integration/workspace` | `cli` (except output/help alignment) | workspace boundary is runtime-owned |
 | Data plane internals | `yai/lib/data`, `yai/lib/graph`, `yai/lib/knowledge` | `law/docs/authoring` | implementation and storage are runtime concerns |
 | Operator UX/commands | `cli/src/parse`, `cli/src/render`, `cli/docs/guide` | `yai/lib/*` business logic | CLI must consume, not reimplement runtime |
 | App integration API | `sdk/include/yai_sdk`, `sdk/src/models`, `sdk/src/rpc` | `law` normative artifacts | SDK abstracts runtime model to stable client contract |

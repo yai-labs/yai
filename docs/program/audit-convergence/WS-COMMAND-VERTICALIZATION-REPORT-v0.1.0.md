@@ -132,17 +132,17 @@ Validated in current hard-verification run (yai integration):
 - Recovery/read semantics: surfaced in inspect/runtime_capabilities and db-first read-path checks
 
 Evidence scripts used (green):
-- `tests/integration/workspace_lifecycle/workspace_session_binding_contract.sh`
-- `tests/integration/workspace_lifecycle/workspace_inspect_surfaces.sh`
-- `tests/integration/workspace_lifecycle/workspace_real_flow.sh`
-- `tests/integration/workspace_lifecycle/workspace_runtime_contract.sh`
-- `tests/integration/workspace_lifecycle/workspace_db_first_read_cutover.sh`
-- `tests/integration/workspace_lifecycle/workspace_event_evidence_sink_hardening.sh`
-- `tests/integration/workspace_lifecycle/workspace_governance_persistence.sh`
-- `tests/integration/workspace_lifecycle/workspace_authority_artifact_persistence.sh`
-- `tests/integration/workspace_lifecycle/workspace_brain_graph_transient.sh`
-- `tests/integration/workspace_lifecycle/workspace_graph_materialization_hooks.sh`
-- `tests/integration/workspace_lifecycle/workspace_graph_read_surfaces.sh`
+- `tests/integration/workspace/workspace_session_binding_contract.sh`
+- `tests/integration/workspace/workspace_inspect_surfaces.sh`
+- `tests/integration/workspace/workspace_real_flow.sh`
+- `tests/integration/workspace/workspace_runtime_contract.sh`
+- `tests/integration/workspace/workspace_db_first_read_cutover.sh`
+- `tests/integration/workspace/workspace_event_evidence_sink_hardening.sh`
+- `tests/integration/workspace/workspace_governance_persistence.sh`
+- `tests/integration/workspace/workspace_authority_artifact_persistence.sh`
+- `tests/integration/workspace/workspace_brain_graph_transient.sh`
+- `tests/integration/workspace/workspace_graph_materialization_hooks.sh`
+- `tests/integration/workspace/workspace_graph_read_surfaces.sh`
 
 ## 7) Critical gaps to verticalize next (for rich WS inspectability)
 1. **Registry/runtime drift**: many runtime workspace graph/query IDs are implemented in `yai` but absent from `law/registry/commands.v1.json`.

@@ -16,9 +16,9 @@ cd /Users/francescomaiomascio/Developer/YAI/cli
 
 # boundary scripts from yai repo
 cd /Users/francescomaiomascio/Developer/YAI/yai
-./tests/integration/workspace_lifecycle/workspace_hostile_path_baseline.sh
-./tests/integration/workspace_lifecycle/workspace_isolation_guards.sh
-./tests/integration/workspace_lifecycle/workspace_negative_paths.sh
+./tests/integration/workspace/workspace_hostile_path_baseline.sh
+./tests/integration/workspace/workspace_isolation_guards.sh
+./tests/integration/workspace/workspace_negative_paths.sh
 ```
 
 ## Acceptance

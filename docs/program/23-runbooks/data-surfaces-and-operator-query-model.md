@@ -86,10 +86,10 @@ Minimum pack exposed by DP-8:
 ## 7) Verification
 
 Validation scenario:
-- `tests/integration/workspace_lifecycle/workspace_operator_query_surfaces.sh`
+- `tests/integration/workspace/workspace_operator_query_surfaces.sh`
 
 Matrix integration:
-- `tests/integration/workspace_lifecycle/workspace_demo_matrix.sh`
+- `tests/integration/workspace/workspace_demo_matrix.sh`
 
 Acceptance for DP-8 baseline:
 - all query families return deterministic `yai.workspace.query.result.v1`

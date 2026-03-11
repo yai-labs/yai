@@ -16,20 +16,20 @@ Expected: registry/contracts/manifests/domain corpus remain coherent with worksp
 - `make yai`
 - `make test-law`
 - integration workspace lifecycle scripts:
-  - `tests/integration/workspace_lifecycle/workspace_runtime_contract.sh`
-  - `tests/integration/workspace_lifecycle/workspace_session_binding_contract.sh`
-  - `tests/integration/workspace_lifecycle/workspace_inspect_surfaces.sh`
-  - `tests/integration/workspace_lifecycle/workspace_real_flow.sh`
-  - `tests/integration/workspace_lifecycle/workspace_negative_paths.sh`
-  - `tests/integration/workspace_lifecycle/workspace_architecture_boundary.sh`
-  - `tests/integration/workspace_lifecycle/workspace_isolation_guards.sh`
-  - `tests/integration/workspace_lifecycle/workspace_containment_structure.sh`
-  - `tests/integration/workspace_lifecycle/workspace_security_envelope.sh`
-  - `tests/integration/workspace_lifecycle/workspace_execution_containment_hooks.sh`
-  - `tests/integration/workspace_lifecycle/workspace_hostile_path_baseline.sh`
-  - `tests/integration/workspace_lifecycle/workspace_scientific_flow.sh`
-  - `tests/integration/workspace_lifecycle/workspace_digital_flow.sh`
-  - `tests/integration/workspace_lifecycle/workspace_demo_matrix.sh`
+  - `tests/integration/workspace/workspace_runtime_contract.sh`
+  - `tests/integration/workspace/workspace_session_binding_contract.sh`
+  - `tests/integration/workspace/workspace_inspect_surfaces.sh`
+  - `tests/integration/workspace/workspace_real_flow.sh`
+  - `tests/integration/workspace/workspace_negative_paths.sh`
+  - `tests/integration/workspace/workspace_architecture_boundary.sh`
+  - `tests/integration/workspace/workspace_isolation_guards.sh`
+  - `tests/integration/workspace/workspace_containment_structure.sh`
+  - `tests/integration/workspace/workspace_security_envelope.sh`
+  - `tests/integration/workspace/workspace_execution_containment_hooks.sh`
+  - `tests/integration/workspace/workspace_hostile_path_baseline.sh`
+  - `tests/integration/workspace/workspace_scientific_flow.sh`
+  - `tests/integration/workspace/workspace_digital_flow.sh`
+  - `tests/integration/workspace/workspace_demo_matrix.sh`
   - `tools/dev/verify_final_demo_matrix.sh`
 
 Expected: lifecycle, vertical, and hostile-path scenarios converge as one governed workspace proof pack.

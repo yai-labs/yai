@@ -20,18 +20,18 @@ make -j4 yai
 ## Primary one-shot execution
 
 ```bash
-tests/integration/workspace_lifecycle/workspace_governed_vertical_slice.sh
+tests/integration/workspace/workspace_governed_vertical_slice.sh
 ```
 
 Expected terminal tail:
 
-- `workspace_governed_vertical_slice_v1: ok`
+- `workspace_governed_vertical_slice: ok`
 
 ## Focused verification pack
 
 ```bash
-tests/integration/workspace_lifecycle/workspace_event_surface_semantics.sh
-tests/integration/workspace_lifecycle/workspace_flow_state_readability.sh
+tests/integration/workspace/workspace_event_surface_semantics.sh
+tests/integration/workspace/workspace_flow_state_readability.sh
 ```
 
 Expected:
@@ -42,12 +42,12 @@ Expected:
 ## Matrix inclusion check
 
 ```bash
-rg -n "workspace_governed_vertical_slice_v1" tests/integration/workspace_lifecycle/workspace_demo_matrix.sh docs/architecture/final-governed-workspace-demo-matrix.md Makefile
+rg -n "workspace_governed_vertical_slice" tests/integration/workspace/workspace_demo_matrix.sh docs/architecture/final-governed-workspace-demo-matrix.md Makefile
 ```
 
 Expected:
 
-- all three files reference `workspace_governed_vertical_slice_v1`
+- all three files reference `workspace_governed_vertical_slice`
 
 ## Optional operator-style flow from CLI surface
 

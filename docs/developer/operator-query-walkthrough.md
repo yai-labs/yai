@@ -21,7 +21,7 @@ Runtime path:
 Run:
 
 ```bash
-cd tests/integration/workspace_lifecycle
+cd tests/integration/workspace
 ./workspace_operator_query_surfaces.sh
 ```
 

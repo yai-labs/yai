@@ -36,7 +36,7 @@ full persisted record set (not only runtime output).
 ## Smoke command
 
 Use:
-- `tests/integration/workspace_lifecycle/workspace_enforcement_record_closure.sh`
+- `tests/integration/workspace/workspace_enforcement_record_closure.sh`
 
 The smoke executes both:
 1. complete baseline

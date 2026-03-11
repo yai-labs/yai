@@ -9,7 +9,7 @@ related:
   - docs/program/23-runbooks/workspace-runtime-command-mapping-and-canonicalization.md
   - docs/program/audit-convergence/WORKSPACE-VERTICALIZATION-ECOSYSTEM-VERIFICATION-MATRIX-v0.1.0.md
   - docs/program/audit-convergence/WORKSPACE-VERTICALIZATION-MANUAL-TEST-COMMAND-PACK-v0.1.0.md
-  - tests/integration/workspace_lifecycle/workspace_verticalization_closeout.sh
+  - tests/integration/workspace/workspace_verticalization_closeout.sh
 ---
 
 # WSV-6 Workspace Surface Closeout
@@ -48,12 +48,12 @@ Workspace-bound capabilities are now canonically surfaced under `yai ws ...`, wi
 - Matrix: `docs/program/audit-convergence/WORKSPACE-VERTICALIZATION-ECOSYSTEM-VERIFICATION-MATRIX-v0.1.0.md`
 - Manual pack: `docs/program/audit-convergence/WORKSPACE-VERTICALIZATION-MANUAL-TEST-COMMAND-PACK-v0.1.0.md`
 - Representative cross-repo check script:
-  - `tests/integration/workspace_lifecycle/workspace_verticalization_closeout.sh`
+  - `tests/integration/workspace/workspace_verticalization_closeout.sh`
 
 ## Automated evidence summary
 
 Executed evidence in this closeout cycle:
-- `tests/integration/workspace_lifecycle/workspace_verticalization_closeout.sh` -> **PASS**
+- `tests/integration/workspace/workspace_verticalization_closeout.sh` -> **PASS**
 - `cli` suite (`make test`) -> **PASS** (help/parser/routing/guardrails include new ws families)
 - `sdk` suite (`make test`) -> **PASS** (typed workspace surface smokes)
 - `sdk` examples (`make examples`) -> **PASS** (includes `example_04_workspace_verticalized`)

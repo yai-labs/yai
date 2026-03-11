@@ -32,7 +32,7 @@ for _ in $(seq 1 100); do
   [[ -S "$SOCK" ]] && break
   sleep 0.1
 done
-[[ -S "$SOCK" ]] || { echo "workspace_governed_vertical_slice_v1: FAIL (missing ingress socket)"; exit 1; }
+[[ -S "$SOCK" ]] || { echo "workspace_governed_vertical_slice: FAIL (missing ingress socket)"; exit 1; }
 
 python3 - "$SOCK" "$WS" "$ATTACH_OBJ" <<'PY'
 import json
@@ -188,4 +188,4 @@ r = call("system", "yai.workspace.unset")
 assert r["status"] == "ok", r
 PY
 
-echo "workspace_governed_vertical_slice_v1: ok"
+echo "workspace_governed_vertical_slice: ok"

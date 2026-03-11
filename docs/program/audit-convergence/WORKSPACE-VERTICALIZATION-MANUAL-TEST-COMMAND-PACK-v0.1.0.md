@@ -6,7 +6,7 @@ updated: 2026-03-10
 scope: [yai, yai-law, yai-cli, yai-sdk]
 related:
   - docs/program/audit-convergence/WORKSPACE-VERTICALIZATION-ECOSYSTEM-VERIFICATION-MATRIX-v0.1.0.md
-  - tests/integration/workspace_lifecycle/workspace_verticalization_closeout.sh
+  - tests/integration/workspace/workspace_verticalization_closeout.sh
 ---
 
 # Workspace Verticalization Manual Test Command Pack (v0.1.0)
@@ -234,7 +234,7 @@ Healthy signal:
 
 ```bash
 cd /Users/francescomaiomascio/Developer/YAI/yai
-tests/integration/workspace_lifecycle/workspace_verticalization_closeout.sh
+tests/integration/workspace/workspace_verticalization_closeout.sh
 
 python3 - <<'PY'
 import json
@@ -254,7 +254,7 @@ Healthy signal:
 
 ```bash
 cd /Users/francescomaiomascio/Developer/YAI/yai
-tests/integration/workspace_lifecycle/workspace_verticalization_closeout.sh
+tests/integration/workspace/workspace_verticalization_closeout.sh
 
 cd /Users/francescomaiomascio/Developer/YAI/cli
 export YAI_SDK_COMPAT_REGISTRY_DIR="../law"

@@ -26,4 +26,4 @@ After a governed action, inspect/query payloads must report:
 - `read_path.filesystem_primary = false`
 
 Script:
-- `tests/integration/workspace_lifecycle/workspace_db_first_read_cutover.sh`
+- `tests/integration/workspace/workspace_db_first_read_cutover.sh`

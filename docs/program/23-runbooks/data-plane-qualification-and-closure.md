@@ -71,12 +71,12 @@ Authoritative matrix:
 - `docs/program/audit-convergence/DATA-PLANE-VERIFICATION-MATRIX-v0.1.0.md`
 
 Primary execution evidence:
-- `tests/integration/workspace_lifecycle/workspace_demo_matrix.sh`
-- `tests/integration/workspace_lifecycle/workspace_event_evidence_sink_hardening.sh`
-- `tests/integration/workspace_lifecycle/workspace_governance_persistence.sh`
-- `tests/integration/workspace_lifecycle/workspace_authority_artifact_persistence.sh`
-- `tests/integration/workspace_lifecycle/workspace_brain_graph_transient.sh`
-- `tests/integration/workspace_lifecycle/workspace_operator_query_surfaces.sh`
+- `tests/integration/workspace/workspace_demo_matrix.sh`
+- `tests/integration/workspace/workspace_event_evidence_sink_hardening.sh`
+- `tests/integration/workspace/workspace_governance_persistence.sh`
+- `tests/integration/workspace/workspace_authority_artifact_persistence.sh`
+- `tests/integration/workspace/workspace_brain_graph_transient.sh`
+- `tests/integration/workspace/workspace_operator_query_surfaces.sh`
 
 ## 5) End-to-end qualification scenario
 

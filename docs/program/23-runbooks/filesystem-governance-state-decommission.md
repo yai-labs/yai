@@ -94,8 +94,8 @@ Rules:
 
 ## 11) Verification baseline
 Verification evidence for "read path no longer depends on decommission targets":
-- `tests/integration/workspace_lifecycle/workspace_db_first_read_cutover.sh`
-- `tests/integration/workspace_lifecycle/workspace_demo_matrix.sh`
+- `tests/integration/workspace/workspace_db_first_read_cutover.sh`
+- `tests/integration/workspace/workspace_demo_matrix.sh`
 
 Required payload invariants (already enforced by DP-12):
 - `read_path.mode = db_first`

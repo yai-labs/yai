@@ -37,11 +37,11 @@ Current SDK exposure loci:
 - `/Users/francescomaiomascio/Developer/YAI/sdk/include/yai_sdk/knowledge.h`
 
 Integration evidence used:
-- `tests/integration/workspace_lifecycle/workspace_graph_read_surfaces.sh`
-- `tests/integration/workspace_lifecycle/workspace_db_first_read_cutover.sh`
-- `tests/integration/workspace_lifecycle/workspace_graph_materialization_hooks.sh`
-- `tests/integration/workspace_lifecycle/workspace_session_binding_contract.sh`
-- `tests/integration/workspace_lifecycle/workspace_runtime_contract.sh`
+- `tests/integration/workspace/workspace_graph_read_surfaces.sh`
+- `tests/integration/workspace/workspace_db_first_read_cutover.sh`
+- `tests/integration/workspace/workspace_graph_materialization_hooks.sh`
+- `tests/integration/workspace/workspace_session_binding_contract.sh`
+- `tests/integration/workspace/workspace_runtime_contract.sh`
 
 ## 2) Canonicalization decision statement
 

@@ -111,7 +111,7 @@ If graph materialization fails:
 ## 10) Verification
 
 Integration smoke:
-- `tests/integration/workspace_lifecycle/workspace_graph_materialization_hooks.sh`
+- `tests/integration/workspace/workspace_graph_materialization_hooks.sh`
 
 Checks include:
 - node/edge class coverage,
@@ -121,7 +121,7 @@ Checks include:
 - graph truth separated from transient state authority semantics.
 
 Matrix integration:
-- `tests/integration/workspace_lifecycle/workspace_demo_matrix.sh`
+- `tests/integration/workspace/workspace_demo_matrix.sh`
 
 ## 11) Handoff
 

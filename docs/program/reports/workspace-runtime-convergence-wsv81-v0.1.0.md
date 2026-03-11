@@ -5,7 +5,7 @@ owner: runtime-governance
 updated: 2026-03-10
 scope: [yai, yai-cli]
 related:
-  - tests/integration/workspace_lifecycle/workspace_runtime_reachability.sh
+  - tests/integration/workspace/workspace_runtime_reachability.sh
   - docs/program/reports/workspace-verticalization-wsv8-closure-plan-v0.1.0.md
 ---
 
@@ -25,7 +25,7 @@ API contract update:
 ## Verification
 
 Green representative check:
-- `tests/integration/workspace_lifecycle/workspace_runtime_reachability.sh`
+- `tests/integration/workspace/workspace_runtime_reachability.sh`
 
 Validated path:
 1. start runtime host (`yai up`) with explicit ingress override

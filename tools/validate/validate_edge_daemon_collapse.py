@@ -22,7 +22,7 @@ FORBIDDEN_TOKENS = [
     "include/yai/daemon",
     "lib/daemon/",
     "cmd/yai-daemon/",
-    "daemon_local_runtime_scan_spool_retry_v1.sh",
+    "daemon_local_runtime_scan_spool_retry.sh",
 ]
 
 

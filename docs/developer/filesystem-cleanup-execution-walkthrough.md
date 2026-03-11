@@ -18,5 +18,5 @@
   - `read_path.filesystem_primary = false`
 
 ## Verification
-- `tests/integration/workspace_lifecycle/workspace_db_first_read_cutover.sh`
-- `tests/integration/workspace_lifecycle/workspace_demo_matrix.sh`
+- `tests/integration/workspace/workspace_db_first_read_cutover.sh`
+- `tests/integration/workspace/workspace_demo_matrix.sh`

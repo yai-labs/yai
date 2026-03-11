@@ -34,7 +34,7 @@ governance engine runtime loading to canonical `governance/` paths.
 ## Tooling updates
 
 - generator: `tools/gen/build_overlay_compliance_view.py`
-- validator: `tools/validate/validate_overlay_compliance_runtime_view.py`
+- validator: `tools/validate/validate_overlay_compliance_view.py`
 - generated view: `governance/overlays/index/overlay-compliance.runtime.v1.json`
 
 ## Runtime-test evidence
