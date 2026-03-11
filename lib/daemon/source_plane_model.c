@@ -50,5 +50,8 @@ int yai_source_record_class_is_known(const char *record_class)
          strcmp(record_class, YAI_SOURCE_RECORD_CLASS_MESH_TRANSPORT_CHANNEL_STATE) == 0 ||
          strcmp(record_class, YAI_SOURCE_RECORD_CLASS_MESH_OWNER_REMOTE_INGRESS) == 0 ||
          strcmp(record_class, YAI_SOURCE_RECORD_CLASS_MESH_OWNER_REMOTE_INGRESS_SESSION) == 0 ||
-         strcmp(record_class, YAI_SOURCE_RECORD_CLASS_MESH_OWNER_REMOTE_INGRESS_DECISION) == 0;
+         strcmp(record_class, YAI_SOURCE_RECORD_CLASS_MESH_OWNER_REMOTE_INGRESS_DECISION) == 0 ||
+         strcmp(record_class, YAI_SOURCE_RECORD_CLASS_MESH_OVERLAY_PRESENCE) == 0 ||
+         strcmp(record_class, YAI_SOURCE_RECORD_CLASS_MESH_OVERLAY_TARGET_ASSOCIATION) == 0 ||
+         strcmp(record_class, YAI_SOURCE_RECORD_CLASS_MESH_OVERLAY_PATH_MUTATION) == 0;
 }

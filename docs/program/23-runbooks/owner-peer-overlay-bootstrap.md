@@ -76,5 +76,6 @@ Provide a concrete bootstrap sequence for deploying owner `yai` and peer
 ## Related
 
 - `docs/architecture/secure-overlay-integration-model.md`
+- `docs/architecture/overlay-integration-model.md`
 - `docs/architecture/peer-enrollment-and-trust-bootstrap-model.md`
 - `docs/program/23-runbooks/peer-enrollment-baseline.md`

@@ -48,6 +48,9 @@
 #define YAI_SOURCE_RECORD_CLASS_MESH_OWNER_REMOTE_INGRESS "mesh_owner_remote_ingress"
 #define YAI_SOURCE_RECORD_CLASS_MESH_OWNER_REMOTE_INGRESS_SESSION "mesh_owner_remote_ingress_session"
 #define YAI_SOURCE_RECORD_CLASS_MESH_OWNER_REMOTE_INGRESS_DECISION "mesh_owner_remote_ingress_decision"
+#define YAI_SOURCE_RECORD_CLASS_MESH_OVERLAY_PRESENCE "mesh_overlay_presence"
+#define YAI_SOURCE_RECORD_CLASS_MESH_OVERLAY_TARGET_ASSOCIATION "mesh_overlay_target_association"
+#define YAI_SOURCE_RECORD_CLASS_MESH_OVERLAY_PATH_MUTATION "mesh_overlay_path_mutation"
 
 typedef enum yai_source_contract_operation {
   YAI_SOURCE_CONTRACT_INVALID = 0,
@@ -371,6 +374,43 @@ typedef struct yai_source_mesh_owner_remote_ingress_decision {
   char canonicalization_state[YAI_SOURCE_STATUS_MAX];
   int64_t decided_at_epoch;
 } yai_source_mesh_owner_remote_ingress_decision_t;
+
+typedef struct yai_source_mesh_overlay_presence {
+  char mesh_overlay_presence_id[YAI_SOURCE_REF_MAX];
+  char mesh_id[YAI_SOURCE_REF_MAX];
+  char mesh_node_id[YAI_SOURCE_NODE_ID_MAX];
+  char owner_workspace_id[YAI_SOURCE_WORKSPACE_ID_MAX];
+  char overlay_identity_ref[YAI_SOURCE_REF_MAX];
+  char endpoint_ref[YAI_SOURCE_REF_MAX];
+  char overlay_state[YAI_SOURCE_STATUS_MAX];
+  char path_state[YAI_SOURCE_STATUS_MAX];
+  int64_t observed_at_epoch;
+} yai_source_mesh_overlay_presence_t;
+
+typedef struct yai_source_mesh_overlay_target_association {
+  char mesh_overlay_target_association_id[YAI_SOURCE_REF_MAX];
+  char mesh_id[YAI_SOURCE_REF_MAX];
+  char owner_workspace_id[YAI_SOURCE_WORKSPACE_ID_MAX];
+  char source_mesh_node_id[YAI_SOURCE_NODE_ID_MAX];
+  char target_mesh_node_id[YAI_SOURCE_NODE_ID_MAX];
+  char source_endpoint_ref[YAI_SOURCE_REF_MAX];
+  char target_endpoint_ref[YAI_SOURCE_REF_MAX];
+  char target_role[YAI_SOURCE_KIND_MAX];
+  char association_state[YAI_SOURCE_STATUS_MAX];
+  int64_t refreshed_at_epoch;
+} yai_source_mesh_overlay_target_association_t;
+
+typedef struct yai_source_mesh_overlay_path_mutation {
+  char mesh_overlay_path_mutation_id[YAI_SOURCE_REF_MAX];
+  char mesh_id[YAI_SOURCE_REF_MAX];
+  char owner_workspace_id[YAI_SOURCE_WORKSPACE_ID_MAX];
+  char mesh_node_id[YAI_SOURCE_NODE_ID_MAX];
+  char previous_endpoint_ref[YAI_SOURCE_REF_MAX];
+  char next_endpoint_ref[YAI_SOURCE_REF_MAX];
+  char mutation_state[YAI_SOURCE_STATUS_MAX];
+  char rebind_state[YAI_SOURCE_STATUS_MAX];
+  int64_t mutated_at_epoch;
+} yai_source_mesh_overlay_path_mutation_t;
 
 const char *yai_source_contract_operation_name(yai_source_contract_operation_t op);
 int yai_source_record_class_is_known(const char *record_class);

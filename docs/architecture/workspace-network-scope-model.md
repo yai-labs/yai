@@ -23,4 +23,5 @@ Customer-grade non-local owner/peer operation is modeled as:
 See:
 
 - `docs/architecture/secure-overlay-integration-model.md`
+- `docs/architecture/overlay-integration-model.md`
 - `docs/program/23-runbooks/owner-peer-overlay-bootstrap.md`

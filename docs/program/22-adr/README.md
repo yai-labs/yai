@@ -44,6 +44,7 @@ An ADR should answer:
 - `ADR-026-sovereign-mesh-authority-foundation.md`
 - `ADR-027-secure-overlay-transport-plane.md`
 - `ADR-028-owner-remote-peer-ingress.md`
+- `ADR-029-overlay-integration.md`
 
 ## Template policy
 

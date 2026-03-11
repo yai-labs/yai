@@ -13,6 +13,8 @@ This NP-4 slice is now anchored by MT-1 transport-plane architecture:
 `docs/architecture/secure-overlay-transport-plane-model.md`.
 Owner-side hardened remote ingress boundary is defined in MT-2:
 `docs/architecture/owner-remote-peer-ingress-model.md`.
+Deployment-native overlay realization is locked in MT-3:
+`docs/architecture/overlay-integration-model.md`.
 
 NP-4 does not build a VPN product inside YAI. It defines how YAI is deployed on
 an existing secure overlay so owner/peer source-plane traffic is customer-grade

@@ -113,6 +113,7 @@ NP-1 does not claim full remote trust chain or full PKI closure.
 - NP-2: owner remote ingress + endpoint hardening
 - NP-3: peer identity/bootstrap contract + trust gating
 - NP-4: overlay integration run/ops hardening
+- MT-3: overlay-native deployment integration model
 
 ## Cross references
 

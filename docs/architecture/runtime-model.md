@@ -81,6 +81,8 @@ MT-1 secure overlay transport plane is defined in
 `docs/architecture/secure-overlay-transport-plane-model.md`.
 MT-2 owner remote peer ingress model is defined in
 `docs/architecture/owner-remote-peer-ingress-model.md`.
+MT-3 overlay integration model is defined in
+`docs/architecture/overlay-integration-model.md`.
 Source-plane entity/contract model is defined in
 `docs/architecture/source-plane-model.md`.
 Owner ingest runtime flow is defined in
@@ -158,3 +160,10 @@ canonical truth transfer.
 Owner remote peer endpoint is a governed ingress boundary. Reachability enables
 peer presentation, while ingress logic decides accept/restrict/defer/reject
 based on legitimacy, delegated scope, validity state, and contribution class.
+
+## MT-3 overlay integration lock
+
+Private secure overlay is integrated as native distributed deployment substrate
+for owner/peer runtime targeting and path-state visibility. Overlay identity
+and reachability remain transport concerns and never replace enrollment, trust,
+delegated scope, ingress governance, or workspace sovereignty.

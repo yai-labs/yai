@@ -138,3 +138,5 @@ MT-1 provides the transport-architecture lock for:
 
 Owner ingress boundary details are defined in:
 `docs/architecture/owner-remote-peer-ingress-model.md`.
+Overlay-native deployment integration details are defined in:
+`docs/architecture/overlay-integration-model.md`.

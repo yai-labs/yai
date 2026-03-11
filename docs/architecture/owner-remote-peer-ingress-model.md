@@ -117,3 +117,6 @@ MT-2 anchors:
 - QW peering/WAN qualification scenarios
 
 Authority remains governed by SW/MF locks.
+
+Overlay-native deployment integration is defined in:
+`docs/architecture/overlay-integration-model.md`.

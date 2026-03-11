@@ -227,6 +227,9 @@ Runtime data-plane record classes introduced by YD-3:
 - `mesh_owner_remote_ingress`
 - `mesh_owner_remote_ingress_session`
 - `mesh_owner_remote_ingress_decision`
+- `mesh_overlay_presence`
+- `mesh_overlay_target_association`
+- `mesh_overlay_path_mutation`
 
 These are appendable through `yai_data_records_*` hooks and visible in summary
 counts.

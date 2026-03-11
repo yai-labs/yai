@@ -125,6 +125,14 @@ MT-2 owner ingress lock:
 - ingress acceptance does not imply canonicalization, final adjudication, or
   sovereign truth transfer.
 
+MT-3 overlay integration lock:
+- overlay descriptors, target associations, endpoint mutation and path-state
+  transitions are first-class distributed runtime classes;
+- overlay-associated classes remain transport/deployment operational classes and
+  cannot be interpreted as legitimacy/trust/authority classes;
+- overlay-aware targeting improves remote operability without relocating owner
+  canonical truth or final authority.
+
 ### 3) Control/Data Path Separation
 Mandatory path:
 
