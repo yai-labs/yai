@@ -25,6 +25,19 @@ required = [
     "governance/manifests/governance-attachability.constraints.v1.json",
     "governance/manifests/customer-policy-packs.index.json",
     "governance/manifests/enterprise-custom-governance.index.json",
+    "governance/contracts/control/schema/control_plane.v1.json",
+    "governance/contracts/control/schema/control_call.v1.json",
+    "governance/contracts/control/schema/exec_reply.v1.json",
+    "governance/contracts/providers/schema/providers.v1.json",
+    "governance/contracts/vault/schema/vault_abi.json",
+    "governance/schema/policy.v1.schema.json",
+    "governance/schema/decision_record.v1.schema.json",
+    "governance/schema/governance_review_state.v1.schema.json",
+    "governance/schema/evidence_index.v1.schema.json",
+    "governance/schema/workspace_governance_attachment.v1.schema.json",
+    "governance/schema/retention.policy.v1.json",
+    "governance/schema/containment_metrics.v1.schema.json",
+    "governance/schema/verification_report.v1.schema.json",
 ]
 
 errors = []

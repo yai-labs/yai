@@ -75,6 +75,7 @@ def render_law_ids(spec: dict, generated: str) -> str:
 
 def pick_default_spec(root: Path) -> Path:
     candidates = [
+        root / "governance" / "contracts" / "vault" / "schema" / "vault_abi.json",
         root.parent / "law" / "contracts" / "vault" / "schema" / "vault_abi.json",
         root / "embedded" / "law" / "contracts" / "vault" / "schema" / "vault_abi.json",
         root / "deps" / "law" / "contracts" / "vault" / "schema" / "vault_abi.json",
@@ -87,6 +88,8 @@ def pick_default_spec(root: Path) -> Path:
 
 
 def resolve_out_root(out_dir: Path) -> Path:
+    if (out_dir / "governance" / "contracts").exists() or (out_dir / "governance" / "formal").exists():
+        return out_dir / "governance"
     if (out_dir / "contracts").exists() or (out_dir / "formal").exists():
         return out_dir
     if (out_dir / "law").exists():

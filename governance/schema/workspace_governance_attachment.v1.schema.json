@@ -1,0 +1,198 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "yai.law.workspace_governance_attachment.v1",
+  "title": "Workspace Governance Attachment v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "attachment_id",
+    "workspace_id",
+    "governance_object_id",
+    "attachment_state",
+    "activation_state",
+    "source_candidate_or_approved_ref",
+    "eligibility_result",
+    "compatibility_result",
+    "precedence_result",
+    "status",
+    "runtime_binding_model",
+    "runtime_family_targets",
+    "topology_target"
+  ],
+  "properties": {
+    "attachment_id": {
+      "type": "string",
+      "minLength": 3
+    },
+    "workspace_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "governance_object_id": {
+      "type": "string",
+      "minLength": 3
+    },
+    "attachment_state": {
+      "type": "string",
+      "enum": [
+        "candidate_only",
+        "approved_not_attached",
+        "attached_inactive",
+        "attached_active",
+        "attach_rejected",
+        "detached",
+        "superseded"
+      ]
+    },
+    "activation_state": {
+      "type": "string",
+      "enum": [
+        "inactive",
+        "active",
+        "deactivated"
+      ]
+    },
+    "applied_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "applied_by": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_candidate_or_approved_ref": {
+      "type": "string",
+      "minLength": 3
+    },
+    "eligibility_result": {
+      "type": "string",
+      "enum": [
+        "eligible",
+        "eligible_with_warnings",
+        "ineligible"
+      ]
+    },
+    "compatibility_result": {
+      "type": "string",
+      "enum": [
+        "dry_run_passed",
+        "dry_run_failed",
+        "conflict_blocking"
+      ]
+    },
+    "precedence_result": {
+      "type": "string",
+      "minLength": 1
+    },
+    "conflict_summary": {
+      "type": "string"
+    },
+    "dry_run_trace_ref": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "activation_notes": {
+      "type": "string"
+    },
+    "replaced_attachment_ref": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ok",
+        "warning",
+        "blocked"
+      ]
+    },
+    "runtime_binding_model": {
+      "type": "string",
+      "enum": [
+        "workspace-first"
+      ]
+    },
+    "runtime_family_targets": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "core",
+          "exec",
+          "data",
+          "graph",
+          "knowledge"
+        ]
+      },
+      "minItems": 1
+    },
+    "topology_target": {
+      "type": "string",
+      "const": "unified-runtime-v1"
+    },
+    "disallowed_subsystem_targets": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "brain",
+          "mind"
+        ]
+      }
+    },
+    "source_attachment_governance": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "source_node_id": {
+          "type": "string",
+          "minLength": 3
+        },
+        "source_binding_id": {
+          "type": "string",
+          "minLength": 3
+        },
+        "trust_level": {
+          "type": "string",
+          "enum": [
+            "trusted",
+            "review_required",
+            "restricted"
+          ]
+        },
+        "provenance_status": {
+          "type": "string",
+          "enum": [
+            "complete",
+            "partial",
+            "missing"
+          ]
+        },
+        "attachment_decision": {
+          "type": "string",
+          "enum": [
+            "allow",
+            "review",
+            "deny"
+          ]
+        },
+        "evidence_expectation": {
+          "type": "string",
+          "enum": [
+            "baseline",
+            "heightened"
+          ]
+        }
+      }
+    }
+  }
+}

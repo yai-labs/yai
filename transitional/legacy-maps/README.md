@@ -21,3 +21,4 @@ Current anchors:
 - `b4-domain-model-refoundation-map.md`
 - `b5-compliance-overlay-engine-absorption-map.md`
 - `b6-manifests-publish-unification-map.md`
+- `b7-contracts-schema-unification-map.md`

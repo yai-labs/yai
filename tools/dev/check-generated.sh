@@ -2,36 +2,40 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+GOV_ROOT="$ROOT/governance"
 LAW_ROOT="${YAI_LAW_ROOT:-}"
 
-if [[ -z "$LAW_ROOT" ]]; then
-  CANDIDATE="$(cd "$ROOT/.." && pwd)/law"
-  [[ -d "$CANDIDATE" ]] && LAW_ROOT="$CANDIDATE"
-fi
-if [[ -z "$LAW_ROOT" ]]; then
-  CANDIDATE="$ROOT/embedded/law"
-  [[ -d "$CANDIDATE" ]] && LAW_ROOT="$CANDIDATE"
-fi
-if [[ -z "$LAW_ROOT" ]]; then
-  echo "no law source found (expected ../law or embedded/law)" >&2
-  exit 2
+if [[ ! -d "$GOV_ROOT/contracts" ]]; then
+  if [[ -z "$LAW_ROOT" ]]; then
+    CANDIDATE="$(cd "$ROOT/.." && pwd)/law"
+    [[ -d "$CANDIDATE" ]] && LAW_ROOT="$CANDIDATE"
+  fi
+  if [[ -z "$LAW_ROOT" ]]; then
+    CANDIDATE="$ROOT/embedded/law"
+    [[ -d "$CANDIDATE" ]] && LAW_ROOT="$CANDIDATE"
+  fi
+  if [[ -z "$LAW_ROOT" ]]; then
+    echo "no contract/schema source found (expected governance/ or ../law or embedded/law)" >&2
+    exit 2
+  fi
+  GOV_ROOT="$LAW_ROOT"
 fi
 
-SPEC_CONTRACTS="$LAW_ROOT/contracts/vault/schema/vault_abi.json"
-SPEC_LEGACY="$LAW_ROOT/specs/vault/schema/vault_abi.json"
+SPEC_CONTRACTS="$GOV_ROOT/contracts/vault/schema/vault_abi.json"
+SPEC_LEGACY="$GOV_ROOT/specs/vault/schema/vault_abi.json"
 if [[ -f "$SPEC_CONTRACTS" ]]; then
   SPEC="$SPEC_CONTRACTS"
 elif [[ -f "$SPEC_LEGACY" ]]; then
   SPEC="$SPEC_LEGACY"
 else
-  echo "vault ABI spec not found under $LAW_ROOT" >&2
+  echo "vault ABI spec not found under $GOV_ROOT" >&2
   exit 2
 fi
 
-ACTUAL_HEADER="$LAW_ROOT/contracts/vault/include/yai_vault_abi.h"
-ACTUAL_TLA="$LAW_ROOT/formal/tla/LAW_IDS.tla"
+ACTUAL_HEADER="$GOV_ROOT/contracts/vault/include/yai_vault_abi.h"
+ACTUAL_TLA="$GOV_ROOT/formal/tla/LAW_IDS.tla"
 if [[ ! -f "$ACTUAL_HEADER" || ! -f "$ACTUAL_TLA" ]]; then
-  echo "generated targets missing under $LAW_ROOT" >&2
+  echo "generated targets missing under $GOV_ROOT" >&2
   exit 2
 fi
 
@@ -40,10 +44,17 @@ TMP_DIR="$(mktemp -d)"
 cleanup() { rm -rf "$TMP_DIR"; }
 trap cleanup EXIT
 
-"$GEN" --spec "$SPEC" --out-dir "$TMP_DIR"
-
-TMP_HEADER="$TMP_DIR/contracts/vault/include/yai_vault_abi.h"
-TMP_TLA="$TMP_DIR/formal/tla/LAW_IDS.tla"
+if [[ "$GOV_ROOT" == "$ROOT/governance" ]]; then
+  GEN_OUT="$TMP_DIR/governance"
+  mkdir -p "$GEN_OUT/contracts" "$GEN_OUT/formal"
+  "$GEN" --spec "$SPEC" --out-dir "$GEN_OUT"
+  TMP_HEADER="$TMP_DIR/governance/contracts/vault/include/yai_vault_abi.h"
+  TMP_TLA="$TMP_DIR/governance/formal/tla/LAW_IDS.tla"
+else
+  "$GEN" --spec "$SPEC" --out-dir "$TMP_DIR"
+  TMP_HEADER="$TMP_DIR/contracts/vault/include/yai_vault_abi.h"
+  TMP_TLA="$TMP_DIR/formal/tla/LAW_IDS.tla"
+fi
 
 strip_generated() {
   sed -E '/^\/\* Generated: /d; /^\\\* Generated: /d' "$1"
@@ -63,4 +74,4 @@ compare_file() {
 compare_file "$ACTUAL_HEADER" "$TMP_HEADER" "yai_vault_abi.h"
 compare_file "$ACTUAL_TLA" "$TMP_TLA" "LAW_IDS.tla"
 
-echo "ok: generated artifacts match ($LAW_ROOT)"
+echo "ok: generated artifacts match ($GOV_ROOT)"

@@ -2,14 +2,22 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
+CONTRACT_ROOT="${YAI_GOVERNANCE_CONTRACT_ROOT:-$ROOT/governance/contracts}"
 LAW_ROOT="${LAW_COMPAT_ROOT:-}"
+if [[ ! -d "$CONTRACT_ROOT/protocol/include" ]]; then
+  if [[ -z "$LAW_ROOT" ]]; then
+    CANDIDATE="$(cd "$ROOT/.." && pwd)/law"
+    [[ -d "$CANDIDATE" ]] && LAW_ROOT="$CANDIDATE"
+  fi
+  if [[ -z "$LAW_ROOT" ]]; then
+    echo "contract root not found (expected governance/contracts or ../law/contracts)" >&2
+    exit 2
+  fi
+  CONTRACT_ROOT="$LAW_ROOT/contracts"
+fi
 if [[ -z "$LAW_ROOT" ]]; then
   CANDIDATE="$(cd "$ROOT/.." && pwd)/law"
   [[ -d "$CANDIDATE" ]] && LAW_ROOT="$CANDIDATE"
-fi
-if [[ -z "$LAW_ROOT" ]]; then
-  echo "LAW root not found (expected ../law)" >&2
-  exit 2
 fi
 
 OUT_ROOT="$ROOT/build/test/knowledge"
@@ -66,7 +74,7 @@ OBJS=()
 for src in "${BRAIN_SRCS[@]}"; do
   obj="$OBJ_DIR/${src%.c}.o"
   mkdir -p "$(dirname "$obj")"
-  cc -Wall -Wextra -std=c11 -O2 -I"$ROOT/include" -I"$ROOT/include/yai" -I"$LAW_ROOT/contracts/protocol/include" -c "$ROOT/$src" -o "$obj"
+  cc -Wall -Wextra -std=c11 -O2 -I"$ROOT/include" -I"$ROOT/include/yai" -I"$CONTRACT_ROOT/protocol/include" -c "$ROOT/$src" -o "$obj"
   OBJS+=("$obj")
 done
 

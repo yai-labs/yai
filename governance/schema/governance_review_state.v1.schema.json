@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "yai.law.governance_review_state.v1",
+  "title": "Governance Review State v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "kind",
+    "schema_version",
+    "object_id",
+    "lifecycle_state",
+    "validation_state",
+    "review_state",
+    "approval_state",
+    "status_reason",
+    "next_allowed_actions",
+    "updated_at"
+  ],
+  "properties": {
+    "kind": { "type": "string", "const": "governance_review_state" },
+    "schema_version": { "type": "string", "const": "v1" },
+    "object_id": { "type": "string", "minLength": 3 },
+    "lifecycle_state": {
+      "type": "string",
+      "enum": [
+        "candidate",
+        "validated_candidate",
+        "review_ready",
+        "under_review",
+        "approved",
+        "apply_eligible",
+        "applied",
+        "rejected",
+        "withdrawn",
+        "superseded",
+        "retired"
+      ]
+    },
+    "validation_state": {
+      "type": "string",
+      "enum": [
+        "unknown",
+        "valid",
+        "invalid"
+      ]
+    },
+    "review_state": {
+      "type": "string",
+      "enum": [
+        "in_review",
+        "under_review",
+        "approved",
+        "rejected",
+        "withdrawn",
+        "superseded"
+      ]
+    },
+    "approval_state": {
+      "type": "string",
+      "enum": [
+        "not_approved",
+        "approved",
+        "approved_with_conditions",
+        "rejected",
+        "withdrawn"
+      ]
+    },
+    "approval_conditions": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "review_notes": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "reviewed_by": { "type": ["string", "null"] },
+    "reviewed_at": { "type": ["string", "null"], "format": "date-time" },
+    "approved_by": { "type": ["string", "null"] },
+    "approved_at": { "type": ["string", "null"], "format": "date-time" },
+    "rejected_by": { "type": ["string", "null"] },
+    "rejected_at": { "type": ["string", "null"], "format": "date-time" },
+    "withdrawn_by": { "type": ["string", "null"] },
+    "withdrawn_at": { "type": ["string", "null"], "format": "date-time" },
+    "supersedes_ref": { "type": ["string", "null"] },
+    "superseded_by_ref": { "type": ["string", "null"] },
+    "status_reason": { "type": "string" },
+    "blockers": { "type": "array", "items": { "type": "string" } },
+    "warnings": { "type": "array", "items": { "type": "string" } },
+    "next_allowed_actions": { "type": "array", "items": { "type": "string" } },
+    "updated_at": { "type": "string", "format": "date-time" },
+    "runtime_binding_model": {
+      "type": "string",
+      "enum": ["workspace-first"]
+    },
+    "runtime_family_targets": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["core", "exec", "data", "graph", "knowledge"]
+      }
+    },
+    "topology_target": {
+      "type": "string",
+      "const": "unified-runtime-v1"
+    },
+    "disallowed_subsystem_targets": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["brain", "mind"]
+      }
+    }
+  }
+}

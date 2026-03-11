@@ -133,3 +133,10 @@ int yai_law_load_runtime(yai_law_runtime_t *out, char *err, size_t err_cap) {
   }
   return 0;
 }
+
+int yai_law_read_surface_json(const yai_law_runtime_t *rt,
+                              const char *rel_path,
+                              char *out_json,
+                              size_t out_cap) {
+  return yai_law_read_governance_surface_file(rt, rel_path, out_json, out_cap);
+}

@@ -62,6 +62,27 @@ int yai_law_compatibility_check(yai_law_runtime_t *rt, char *err, size_t err_cap
     return -1;
   }
 
+  if (yai_law_require_governance_surface(rt, "contracts/control/schema/control_plane.v1.json", json, sizeof(json)) != 0 ||
+      yai_law_require_governance_surface(rt, "contracts/control/schema/control_call.v1.json", json, sizeof(json)) != 0 ||
+      yai_law_require_governance_surface(rt, "contracts/control/schema/exec_reply.v1.json", json, sizeof(json)) != 0 ||
+      yai_law_require_governance_surface(rt, "contracts/providers/schema/providers.v1.json", json, sizeof(json)) != 0 ||
+      yai_law_require_governance_surface(rt, "contracts/vault/schema/vault_abi.json", json, sizeof(json)) != 0) {
+    if (err && err_cap) (void)yai_law_safe_snprintf(err, err_cap, "missing canonical governance contracts");
+    return -1;
+  }
+
+  if (yai_law_require_governance_surface(rt, "schema/policy.v1.schema.json", json, sizeof(json)) != 0 ||
+      yai_law_require_governance_surface(rt, "schema/decision_record.v1.schema.json", json, sizeof(json)) != 0 ||
+      yai_law_require_governance_surface(rt, "schema/governance_review_state.v1.schema.json", json, sizeof(json)) != 0 ||
+      yai_law_require_governance_surface(rt, "schema/evidence_index.v1.schema.json", json, sizeof(json)) != 0 ||
+      yai_law_require_governance_surface(rt, "schema/workspace_governance_attachment.v1.schema.json", json, sizeof(json)) != 0 ||
+      yai_law_require_governance_surface(rt, "schema/retention.policy.v1.json", json, sizeof(json)) != 0 ||
+      yai_law_require_governance_surface(rt, "schema/containment_metrics.v1.schema.json", json, sizeof(json)) != 0 ||
+      yai_law_require_governance_surface(rt, "schema/verification_report.v1.schema.json", json, sizeof(json)) != 0) {
+    if (err && err_cap) (void)yai_law_safe_snprintf(err, err_cap, "missing canonical governance schema");
+    return -1;
+  }
+
   if (yai_law_require_file(rt, "generated/runtime-resolution-view.json", json, sizeof(json)) != 0) {
     if (err && err_cap) (void)yai_law_safe_snprintf(err, err_cap, "missing generated runtime-resolution-view");
     return -1;

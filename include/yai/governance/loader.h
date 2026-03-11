@@ -20,3 +20,7 @@ int yai_law_load_domain_manifest(const yai_law_runtime_t *rt,
 int yai_law_load_compliance_index(const yai_law_runtime_t *rt,
                                   char *out_json,
                                   size_t out_cap);
+int yai_law_read_surface_json(const yai_law_runtime_t *rt,
+                              const char *rel_path,
+                              char *out_json,
+                              size_t out_cap);

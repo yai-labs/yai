@@ -15,11 +15,13 @@ python3 "$ROOT/tools/validate/validate_domain_model_matrix.py"
 python3 "$ROOT/tools/gen/build_overlay_compliance_runtime_view.py" >/dev/null
 python3 "$ROOT/tools/validate/validate_overlay_compliance_runtime_view.py"
 python3 "$ROOT/tools/validate/validate_governance_manifest_spine.py"
+python3 "$ROOT/tools/validate/validate_governance_contracts_schema.py"
 
 for t in \
   test_no_legacy_primary_path \
   test_manifest_loader \
   test_contract_surface \
+  test_contracts_schema_loader \
   test_domain_loader \
   test_compliance_loader \
   test_discovery \

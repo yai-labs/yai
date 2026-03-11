@@ -3,6 +3,7 @@
 # =========================================
 
 ROOT_DIR := $(abspath .)
+GOVERNANCE_CONTRACT_ROOT ?= $(ROOT_DIR)/governance/contracts
 LAW_COMPAT_ROOT ?= $(if $(wildcard $(ROOT_DIR)/../law/contracts),$(ROOT_DIR)/../law,$(ROOT_DIR)/embedded/law)
 
 BUILD_DIR ?= $(ROOT_DIR)/build
@@ -18,6 +19,9 @@ CC ?= cc
 PKG_CONFIG ?= pkg-config
 CPPFLAGS ?= -I$(ROOT_DIR) -I$(ROOT_DIR)/include -I$(ROOT_DIR)/include/yai \
             -I$(ROOT_DIR)/lib/third_party/cjson \
+            -I$(GOVERNANCE_CONTRACT_ROOT)/protocol/include \
+            -I$(GOVERNANCE_CONTRACT_ROOT)/protocol/runtime/include \
+            -I$(GOVERNANCE_CONTRACT_ROOT)/vault/include \
             -I$(LAW_COMPAT_ROOT)/contracts/protocol/include \
             -I$(LAW_COMPAT_ROOT)/contracts/protocol/runtime/include \
             -I$(LAW_COMPAT_ROOT)/contracts/vault/include
