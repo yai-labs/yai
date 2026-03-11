@@ -241,7 +241,7 @@ DOXY_OUT ?= $(DIST_ROOT)/docs/doxygen
         test-demo-matrix verify-final-demo-matrix \
         clean clean-dist clean-all build build-all dist dist-all bundle verify \
         preflight-release docs docs-clean docs-verify proof-verify release-guards \
-        release-guards-dev changelog-verify dirs help legacy-build \
+        release-guards-dev changelog-verify b13-convergence-check dirs help legacy-build \
         governance-sync governance-check
 
 all: yai yai-daemon foundations
@@ -432,6 +432,9 @@ changelog-verify:
 	HEAD_SHA="$$(git rev-parse HEAD)"; \
 	tools/bin/yai-changelog-check --pr --base "$$BASE_SHA" --head "$$HEAD_SHA"
 
+b13-convergence-check:
+	@tools/release/unified_repo_convergence_smoke.sh
+
 clean:
 	rm -rf $(BUILD_DIR)
 
@@ -457,6 +460,7 @@ help:
 	@echo "  test-governance  (governance loader/discovery/resolution + smoke)"
 	@echo "  test-e2e       (entrypoint e2e smoke)"
 	@echo "  test           (full test baseline)"
+	@echo "  b13-convergence-check (single-repo final convergence smoke)"
 	@echo "  clean          (remove build artifacts)"
 	@echo "  dist, dist-all, bundle"
 	@echo "  verify, docs, docs-verify, proof-verify, release-guards, changelog-verify"

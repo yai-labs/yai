@@ -60,7 +60,10 @@ def main() -> int:
         files = [root] if root.is_file() else [p for p in root.rglob("*") if should_scan(p)]
         for f in files:
             rel = f.relative_to(repo).as_posix()
-            if rel == "tools/validate/validate_no_legacy_tooling_references.py":
+            if rel in {
+                "tools/validate/validate_no_legacy_tooling_references.py",
+                "tools/validate/validate_unified_repo_root_framing.py",
+            }:
                 continue
             text = f.read_text(encoding="utf-8", errors="ignore")
             for token in FORBIDDEN:

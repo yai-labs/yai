@@ -1,46 +1,38 @@
 # Foundation
 
-YAI is a sovereign governed runtime system: authority is explicit, execution is deterministic, and effects are traceable.
+YAI is a governed runtime system where authority is explicit, execution is deterministic,
+and externally relevant effects are traceable.
 
-This repository is being refounded as the canonical root of the final unified system.
+This repository is the single canonical system root.
 
-## Layer Model
+## Layer model
 
-- **L0 — Governance Contracts**: canonical governance/model content in `governance/` (target canonical root)
-- **L1 — Kernel**: authority enforcement, boundary checks, and policy gating
-- **L2 — Engine**: deterministic execution under kernel-governed constraints
-- **L3 — Mind / Clients**: proposers and orchestrators that never override authority
+- **L0 Governance**: contracts, schemas, manifests, registry, and policy content in `governance/`
+- **L1 Kernel**: authority boundaries and enforcement gates
+- **L2 Engine**: deterministic execution under governance constraints
+- **L3 Agents/Clients**: consumers of governed services, never authority owners
 
-## Non-Negotiable Principles
+## Non-negotiable principles
 
-- **Auditability**: externally relevant actions must be reconstructible from logs/events.
-- **No silent side effects**: state/effect changes require an explicit command path and policy checks.
-- **Effect boundary**: authority boundaries are explicit and enforced at runtime interfaces.
-- **Spec-first**: normative behavior is governance-defined; implementation is never normative.
-- **Single-root convergence**: runtime, governance, docs, tests, and tooling converge in one repository topology.
+- **Single source of truth**: runtime, governance, docs, tests, and tooling converge in one repo
+- **No silent side effects**: effectful transitions require explicit command and policy path
+- **Auditability**: decisions and evidence must be reconstructible from persistent records
+- **Bounded authority**: authority scope is explicit and enforced at runtime boundaries
+- **Spec-first implementation**: governance artifacts are normative; code must conform
 
-## Runtime Guarantees
-
-- Authority decisions are made in governed planes, never inferred ad hoc by clients.
-- Workspace isolation is first-class and enforced across process/socket boundaries.
-- Deterministic components remain deterministic even when integrated with probabilistic clients.
-
-## Canonical Root Topology
-
-The canonical macro-areas of this repository are:
+## Canonical topology
 
 - `cmd/`
-- `governance/`
-- `include/`
 - `lib/`
+- `include/`
+- `governance/`
 - `docs/`
 - `tests/`
 - `tools/`
 - `data/`
-- `transitional/` (migration-only)
 
-`embedded/` is transitional legacy and not part of the final canonical target.
+`transitional/` is migration-only and not part of canonical 1.0.0 topology.
 
 ## License
 
-Foundation and governance artifacts in this repository are distributed under Apache-2.0.
+Apache-2.0.

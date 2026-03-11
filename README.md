@@ -1,36 +1,36 @@
 # yai
 
-`yai` is being refounded as the unified system repository target.
+`yai` is the single canonical repository of the unified YAI system.
 
-## Program intent
+## Canonical roots
 
-The target model is a single repository that hosts:
+- runtime and headers: `cmd/`, `lib/`, `include/`
+- governance spine: `governance/`
+- docs authority: `docs/`
+- verification/tooling: `tests/`, `tools/`
 
-- runtime implementation (`cmd/`, `include/`, `lib/`)
-- governance content (canonical destination: `governance/`)
-- documentation and references (`docs/`)
-- validation and tooling (`tests/`, `tools/`)
-- controlled migration area (`transitional/`)
+## Repository status
 
-Program overview:
+- split-repository topology is sunset
+- `yai-law` is no longer an operational prerequisite for build/test/release in this repository
+- embedded governance export surface is removed from active architecture
 
-- `docs/program/repo-unico-overview-32-consegne.md`
+## Governance model
 
-## Root rules (A1)
+Governance is native and internal to this repository. Policy, contracts, schemas, manifests,
+registry, overlays, compliance, and ingestion authoring live under `governance/` and are consumed
+by runtime/tooling from canonical paths.
 
-- `governance/` is the canonical governance root for the final unified model.
-- `transitional/` is migration-only and must not become a permanent feature root.
-- `embedded/` is transitional legacy and must be decommissioned through planned cutover.
-- canonical naming is `governance`; `law` naming is legacy compatibility-only.
+## Program baseline
 
-## Current convergence model
-
-- Block A (A1-A19): refound `yai` root/tree/domains for final unified topology.
-- Block B (B1-B13): absorb `law` content into `governance/`, then sunset dual-repo layout.
+- roadmap closure: `docs/program/repo-unico-overview-32-consegne.md`
+- migration closure markers: `transitional/migration-markers/`
 
 ## Start here
 
 - `docs/README.md`
-- `docs/program/repo-unico-overview-32-consegne.md`
 - `governance/README.md`
-- `transitional/README.md`
+- `FOUNDATION.md`
+- `GOVERNANCE.md`
+- `VERSIONING.md`
+- `COMPATIBILITY.md`

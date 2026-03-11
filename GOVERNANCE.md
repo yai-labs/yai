@@ -1,39 +1,31 @@
 # Governance
 
-## Scope
+This document defines governance operating rules for the unified YAI repository.
 
-This document governs the `yai` unified repository convergence model.
+## Canonical governance authority
 
-- Canonical governance destination: `governance/`
-- Canonical naming namespace: `governance` (`law` is transitional compatibility naming)
-- Runtime implementation: `cmd/`, `include/`, `lib/`
-- Canonical documentation center: `docs/`
-- Migration-only area: `transitional/`
+- governance content root: `governance/`
+- runtime/tooling consumers: `lib/`, `tools/`, `tests/`
+- canonical docs authority: `docs/`
 
-If implementation and contracts diverge, implementation must be corrected.
+No external law repository is required for canonical operation.
 
-## Spec-First Process
+## Operating rules
 
-For contract-facing changes:
-1. Define/update normative governance content in canonical governance roots.
-2. Align runtime implementation in `yai`.
-3. Verify with CI, qualification waves, and runtime checks.
-4. Keep migration markers only under `transitional/`.
+1. Update normative governance artifacts first (`governance/`).
+2. Align runtime/tooling consumers to canonical paths.
+3. Validate with canonical validators and smoke suites.
+4. Keep migration traces only under `transitional/`.
 
-## Documentation Residency
+## Boundaries
 
-`docs/` is first-class and central in this repository.
+- `governance/` defines policy/contract/schema semantics.
+- runtime enforces and materializes governed behavior.
+- docs explain, but do not supersede normative artifacts.
 
-Cross-repo references may exist during migration, but canonical architecture/program guidance must remain readable from this root.
+## Transitional policy
 
-## Required Review Areas
-
-- Governance/model updates and compatibility impact
-- Kernel authority/enforcement boundaries
-- Engine external effect gating
-- Runtime protocol behavior
-- Edge/mesh/workspace behavior under sovereignty boundaries
-- Migration safety (`embedded/` and legacy paths must not be re-canonized)
+`transitional/` is non-canonical and shrink-to-zero. It may hold migration evidence only.
 
 ## License
 

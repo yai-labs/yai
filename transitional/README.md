@@ -1,40 +1,28 @@
-# Transitional Migration Spine (A19)
+# Transitional Migration Spine
 
-`transitional/` is a controlled, non-canonical migration area.
+`transitional/` is a non-canonical migration archive.
 
 Purpose:
 
-- isolate temporary migration artifacts from canonical roots
-- keep old-to-new cutover evidence visible and reviewable
-- track remaining compatibility paths until final removal
+- preserve migration evidence and crosswalks
+- keep historical cutover markers auditable
+- avoid contaminating canonical runtime/governance/docs/tooling roots
 
-Canonical roots remain authoritative:
+Canonical roots remain:
 
 - `governance/`
 - `docs/`
-- `include/`
-- `lib/`
-- `tests/`
-- `tools/`
+- `cmd/`, `lib/`, `include/`
+- `tests/`, `tools/`
+
+## Status
+
+- not part of canonical 1.0.0 runtime/governance model
+- shrink-to-zero policy remains active after convergence
 
 ## Structure
 
-- `embedded-law/`: embedded-law migration markers and decommission notes
-- `legacy-docs/`: references to non-canonical/historical docs kept for traceability
-- `legacy-maps/`: old-to-new path and naming crosswalks
-- `migration-markers/`: tranche markers and closure checklists
-
-## Rules
-
-- no new canonical feature development under `transitional/`
-- every file must have an owner tranche and a removal target
-- prefer links/maps over duplicated content
-- shrink this area incrementally as Block B progresses
-
-## Exit Criteria
-
-This area is considered converged when:
-
-- runtime/tooling no longer require transitional compatibility paths
-- legacy references in active docs are eliminated or archived
-- migration maps are either consumed by final docs or retired
+- `embedded-law/`: historical embedded shutdown traces
+- `legacy-docs/`: archived doc references
+- `legacy-maps/`: old-to-new path maps
+- `migration-markers/`: tranche closure markers
