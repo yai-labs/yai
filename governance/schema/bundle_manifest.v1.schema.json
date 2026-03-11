@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "yai-law:schema/bundle_manifest.v1.schema.json",
+  "$id": "yai-governance:schema/bundle_manifest.v1.schema.json",
   "title": "YAI Evidence Bundle Manifest v1",
   "type": "object",
   "required": [
@@ -66,5 +66,5 @@
     }
   },
   "additionalProperties": true,
-  "description": "Bundle manifest schema for law evidence bundles across unified runtime artifacts (core/exec/data/graph/knowledge)."
+  "description": "Bundle manifest schema for governance evidence bundles across unified runtime artifacts (core/exec/data/graph/knowledge)."
 }

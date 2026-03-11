@@ -7,7 +7,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 CATALOG = ROOT / "governance" / "registry" / "agent-safe-primitives.v1.json"
-ALLOWED_OWNERS = {"core", "exec", "data", "graph", "knowledge", "law", "support"}
+ALLOWED_OWNERS = {"core", "exec", "data", "graph", "knowledge", "governance", "support"}
 ALLOWED_BINDING_MODELS = {"workspace-first", "global-baseline", "authoring-only"}
 
 

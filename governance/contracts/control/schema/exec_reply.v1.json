@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "yai-law:contracts/control/schema/exec_reply.v1.json",
+  "$id": "yai-governance:contracts/control/schema/exec_reply.v1.json",
   "title": "YAI Exec Reply v1",
   "type": "object",
   "additionalProperties": false,

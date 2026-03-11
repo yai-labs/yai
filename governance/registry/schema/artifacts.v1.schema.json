@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "yai-law:registry/schema/artifacts.v1.schema.json",
+  "$id": "yai-governance:registry/schema/artifacts.v1.schema.json",
   "title": "YAI Artifacts Registry v1",
   "type": "object",
   "required": ["v", "artifacts"],

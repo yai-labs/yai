@@ -3,7 +3,7 @@
 `authority/` defines the operational governance authority layer of the unified
 YAI repository.
 
-If `foundation/`, `contracts/`, `registry/`, `schema/`, `formal/`, and `packs/`
+If `../foundation/`, `contracts/`, `registry/`, `schema/`, `../formal/`, and `packs/`
 define normative governance content, `authority/` defines how that content is
 published, classified, evolved, and interpreted.
 
@@ -41,10 +41,10 @@ Without this layer, the repository would contain contracts but not a disciplined
 
 It is therefore upstream of repository policy, but not a substitute for:
 
-* `foundation/` as normative core
+* `../foundation/` as normative core
 * `contracts/` as public interface authority
 * `registry/` and `schema/` as machine-readable canonical references
-* `formal/` as proof-support and traceability support
+* `../formal/` as proof-support and traceability support
 * `packs/` as published overlays
 
 ## Contents

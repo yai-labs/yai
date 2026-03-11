@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "law/grammar/schema/domain_manifest.v1",
+  "$id": "governance/grammar/schema/domain_manifest.v1",
   "title": "domain_manifest.v1",
   "description": "Domain manifest",
   "type": "object",

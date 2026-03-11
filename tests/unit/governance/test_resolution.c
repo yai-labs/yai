@@ -1,14 +1,14 @@
 #include <stdio.h>
 #include <string.h>
 
-#include <yai/law/resolver.h>
-#include <yai/law/policy_effects.h>
+#include <yai/governance/resolver.h>
+#include <yai/governance/policy_effects.h>
 
 int main(void) {
-  yai_law_resolution_output_t out;
+  yai_governance_resolution_output_t out;
   char err[256] = {0};
 
-  if (yai_law_resolve_control_call("ws-a", "{\"command\":\"curl\",\"resource\":\"endpoint\"}", "trace-a", &out, err, sizeof(err)) != 0) {
+  if (yai_governance_resolve_control_call("ws-a", "{\"command\":\"curl\",\"resource\":\"endpoint\"}", "trace-a", &out, err, sizeof(err)) != 0) {
     fprintf(stderr, "resolution failed: %s\n", err);
     return 1;
   }
@@ -17,7 +17,7 @@ int main(void) {
   if (strstr(out.trace_json, "\"routing_mode\":\"family-specialization\"") == NULL) return 1;
   if (strstr(out.trace_json, "\"family_candidates\"") == NULL) return 1;
 
-  if (yai_law_resolve_control_call("ws-b", "{\"command\":\"experiment.run\",\"params_hash\":\"ok\",\"dataset\":\"d\"}", "trace-b", &out, err, sizeof(err)) != 0) return 1;
+  if (yai_governance_resolve_control_call("ws-b", "{\"command\":\"experiment.run\",\"params_hash\":\"ok\",\"dataset\":\"d\"}", "trace-b", &out, err, sizeof(err)) != 0) return 1;
   if (strcmp(out.decision.domain_id, "D8-scientific") != 0) return 1;
   if (strcmp(out.decision.family_id, "scientific") != 0) return 1;
   if (strcmp(out.decision.specialization_id, "parameter-governance") != 0) return 1;

@@ -7,10 +7,10 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#include <yai/law/loader.h>
+#include <yai/governance/loader.h>
 
 int main(void) {
-  yai_law_runtime_t rt;
+  yai_governance_runtime_t rt;
   char err[256] = {0};
   char tmp[256];
   char dir[512];
@@ -18,7 +18,7 @@ int main(void) {
   char out[256];
   FILE *f;
 
-  if (yai_law_load_runtime(&rt, err, sizeof(err)) != 0) {
+  if (yai_governance_load_runtime(&rt, err, sizeof(err)) != 0) {
     fprintf(stderr, "explicit_legacy_fallback: runtime load failed: %s\n", err);
     return 1;
   }
@@ -49,7 +49,7 @@ int main(void) {
   unsetenv("YAI_GOVERNANCE_CANONICAL_ONLY");
   unsetenv("YAI_GOVERNANCE_ALLOW_LEGACY");
 
-  if (yai_law_read_surface_json(&rt, "legacy-only/flag.json", out, sizeof(out)) == 0) {
+  if (yai_governance_read_surface_json(&rt, "legacy-only/flag.json", out, sizeof(out)) == 0) {
     fprintf(stderr, "explicit_legacy_fallback: legacy read unexpectedly enabled by default\n");
     return 1;
   }
@@ -58,7 +58,7 @@ int main(void) {
     fprintf(stderr, "explicit_legacy_fallback: setenv failed\n");
     return 1;
   }
-  if (yai_law_read_surface_json(&rt, "legacy-only/flag.json", out, sizeof(out)) != 0) {
+  if (yai_governance_read_surface_json(&rt, "legacy-only/flag.json", out, sizeof(out)) != 0) {
     fprintf(stderr, "explicit_legacy_fallback: legacy read not enabled when explicit\n");
     return 1;
   }

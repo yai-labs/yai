@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "yai.law.governance_review_state.v1",
+  "$id": "yai.governance.governance_review_state.v1",
   "title": "Governance Review State v1",
   "type": "object",
   "additionalProperties": false,

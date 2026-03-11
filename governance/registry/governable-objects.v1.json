@@ -1913,7 +1913,7 @@
       "dependencies": [],
       "conflicts_with": [],
       "runtime_family_targets": [
-        "law"
+        "governance"
       ],
       "runtime_binding_model": "authoring-only",
       "topology_target": "unified-runtime-v1",
@@ -1947,7 +1947,7 @@
       "dependencies": [],
       "conflicts_with": [],
       "runtime_family_targets": [
-        "law"
+        "governance"
       ],
       "runtime_binding_model": "authoring-only",
       "topology_target": "unified-runtime-v1",
@@ -1981,7 +1981,7 @@
       "dependencies": [],
       "conflicts_with": [],
       "runtime_family_targets": [
-        "law"
+        "governance"
       ],
       "runtime_binding_model": "authoring-only",
       "topology_target": "unified-runtime-v1",
@@ -2015,7 +2015,7 @@
       "dependencies": [],
       "conflicts_with": [],
       "runtime_family_targets": [
-        "law"
+        "governance"
       ],
       "runtime_binding_model": "authoring-only",
       "topology_target": "unified-runtime-v1",
@@ -2049,7 +2049,7 @@
       "dependencies": [],
       "conflicts_with": [],
       "runtime_family_targets": [
-        "law"
+        "governance"
       ],
       "runtime_binding_model": "authoring-only",
       "topology_target": "unified-runtime-v1",
@@ -2083,7 +2083,7 @@
       "dependencies": [],
       "conflicts_with": [],
       "runtime_family_targets": [
-        "law"
+        "governance"
       ],
       "runtime_binding_model": "authoring-only",
       "topology_target": "unified-runtime-v1",

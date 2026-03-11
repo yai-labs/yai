@@ -2,7 +2,7 @@
 
 #include <stddef.h>
 
-typedef struct yai_law_classification_ctx {
+typedef struct yai_governance_classification_ctx {
   char ws_id[64];
   char command[128];
   char action[64];
@@ -27,8 +27,8 @@ typedef struct yai_law_classification_ctx {
   int has_sink_ref;
   int sink_trusted;
   int sink_external;
-} yai_law_classification_ctx_t;
+} yai_governance_classification_ctx_t;
 
-int yai_law_classify_event(const char *ws_id,
+int yai_governance_classify_event(const char *ws_id,
                            const char *payload,
-                           yai_law_classification_ctx_t *out);
+                           yai_governance_classification_ctx_t *out);

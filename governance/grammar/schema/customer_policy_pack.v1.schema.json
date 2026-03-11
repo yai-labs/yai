@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "law/grammar/schema/customer_policy_pack.v1",
+  "$id": "governance/grammar/schema/customer_policy_pack.v1",
   "title": "customer_policy_pack.v1",
   "description": "Canonical customer/workspace policy pack manifest",
   "type": "object",
@@ -131,7 +131,7 @@
     "compatibility": {
       "type": "object",
       "properties": {
-        "law_range": {
+        "governance_range": {
           "type": "string"
         },
         "runtime_targets": {
@@ -148,7 +148,7 @@
         }
       },
       "required": [
-        "law_range",
+        "governance_range",
         "runtime_targets"
       ],
       "additionalProperties": true

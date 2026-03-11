@@ -105,7 +105,7 @@
   "status": "approved",
   "review_state": "approved",
   "compatibility": {
-    "law_range": ">=0.1.0",
+    "governance_range": ">=0.1.0",
     "runtime_targets": [
       "yai"
     ],

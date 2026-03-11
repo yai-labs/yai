@@ -1,8 +1,8 @@
 # gdpr-eu/
 
-`packs/compliance/gdpr-eu/` contains the GDPR/EU compliance pack lineage published under `law`.
+`packs/compliance/gdpr-eu/` contains the GDPR/EU compliance pack lineage published under governance.
 
-This lineage groups versioned machine-readable overlays intended to specialize the canonical YAI law surface for GDPR- and EU-aligned compliance contexts.
+This lineage groups versioned machine-readable overlays intended to specialize the canonical YAI governance surface for GDPR- and EU-aligned compliance contexts.
 
 ## Scope
 
@@ -15,7 +15,7 @@ Artifacts under `gdpr-eu/` are intended to provide scoped compliance material su
 * purpose classification support
 * data-class classification support
 
-These artifacts are publishable overlays, not replacements for the foundational law of the repository.
+These artifacts are publishable overlays, not replacements for the foundational governance of the repository.
 
 ## Normative role
 
@@ -31,7 +31,7 @@ It must remain aligned with:
 * `contracts/compliance/`
 * `contracts/control/` where authority-facing compliance enforcement is relevant
 
-A lineage artifact may refine GDPR/EU-specific behavior for a bounded compliance context, but it must not contradict the canonical law surface of `law`.
+A lineage artifact may refine GDPR/EU-specific behavior for a bounded compliance context, but it must not contradict the canonical governance surface.
 
 ## Versioning model
 
@@ -60,4 +60,4 @@ Consumers should:
 * treat lineage artifacts as scoped overlays
 * avoid assuming that a lineage pack supersedes repository-wide authority
 
-The foundational law, canonical schemas, and canonical registries remain the higher-authority surfaces unless an explicit repository rule states otherwise.
+The foundational governance, canonical schemas, and canonical registries remain the higher-authority surfaces unless an explicit repository rule states otherwise.

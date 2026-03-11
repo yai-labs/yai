@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "law/grammar/schema/resolution_trace.v1",
+  "$id": "governance/grammar/schema/resolution_trace.v1",
   "title": "resolution_trace.v1",
   "description": "Resolution trace",
   "type": "object",

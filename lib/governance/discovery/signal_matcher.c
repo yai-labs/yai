@@ -10,7 +10,7 @@ static const char *normalize_family(const char *id) {
   return id;
 }
 
-int yai_law_match_signal_score(const yai_law_classification_ctx_t *ctx,
+int yai_governance_match_signal_score(const yai_governance_classification_ctx_t *ctx,
                                const char *domain_id,
                                double *score,
                                char *rationale,
@@ -31,7 +31,7 @@ int yai_law_match_signal_score(const yai_law_classification_ctx_t *ctx,
         strstr(ctx->resource, "endpoint")) s += 0.22;
     if (ctx->has_sink_ref) s += 0.10;
     if (ctx->sink_external) s += 0.06;
-    if (rationale) (void)yai_law_safe_snprintf(rationale, rationale_cap, "%s", "digital egress/retrieve/sink signal match");
+    if (rationale) (void)yai_governance_safe_snprintf(rationale, rationale_cap, "%s", "digital egress/retrieve/sink signal match");
   } else if (strcmp(family, "scientific") == 0) {
     if (strstr(ctx->action, "experiment") || strstr(ctx->action, "parameter") || strcmp(ctx->action, "infer") == 0) s += 0.40;
     if (strstr(ctx->provider, "experiment") || strstr(ctx->resource, "dataset") || strstr(ctx->resource, "experiment")) s += 0.35;
@@ -39,15 +39,15 @@ int yai_law_match_signal_score(const yai_law_classification_ctx_t *ctx,
     if (ctx->has_repro_context) s += 0.12;
     if (ctx->has_dataset_ref) s += 0.10;
     if (ctx->has_publication_intent) s += 0.08;
-    if (rationale) (void)yai_law_safe_snprintf(rationale, rationale_cap, "%s", "scientific reproducibility signal match");
+    if (rationale) (void)yai_governance_safe_snprintf(rationale, rationale_cap, "%s", "scientific reproducibility signal match");
   } else if (strcmp(family, "economic") == 0) {
     if (strcmp(ctx->action, "authorize") == 0 || strstr(ctx->action, "settle")) s += 0.40;
     if (strstr(ctx->provider, "payment") || strstr(ctx->provider, "ledger") || strstr(ctx->provider, "gateway")) s += 0.35;
     if (strstr(ctx->resource, "ledger") || strstr(ctx->resource, "counterparty") || strstr(ctx->resource, "instrument")) s += 0.25;
-    if (rationale) (void)yai_law_safe_snprintf(rationale, rationale_cap, "%s", "economic authorization/settlement signal match");
+    if (rationale) (void)yai_governance_safe_snprintf(rationale, rationale_cap, "%s", "economic authorization/settlement signal match");
   } else {
     s = 0.10;
-    if (rationale) (void)yai_law_safe_snprintf(rationale, rationale_cap, "%s", "fallback low-confidence match");
+    if (rationale) (void)yai_governance_safe_snprintf(rationale, rationale_cap, "%s", "fallback low-confidence match");
   }
 
   *score = s;

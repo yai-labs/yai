@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "law/grammar/schema/effective_stack.v1",
+  "$id": "governance/grammar/schema/effective_stack.v1",
   "title": "effective_stack.v1",
   "description": "Resolved policy stack",
   "type": "object",

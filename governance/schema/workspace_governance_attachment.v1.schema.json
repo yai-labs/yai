@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "yai.law.workspace_governance_attachment.v1",
+  "$id": "yai.governance.workspace_governance_attachment.v1",
   "title": "Workspace Governance Attachment v1",
   "type": "object",
   "additionalProperties": false,

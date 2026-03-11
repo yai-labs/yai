@@ -124,7 +124,7 @@ def call(ws_id, command_id, argv=None):
 r = call(WS, "yai.workspace.create", [WS]); assert r["status"] == "ok", r
 r = call("system", "yai.workspace.set", [WS]); assert r["status"] == "ok", r
 
-# Keep trying until family is accepted by embedded law pack load timing.
+# Keep trying until family is accepted by embedded governance pack load timing.
 for _ in range(20):
     r = call("system", "yai.workspace.domain_set", ["--family", "digital", "--specialization", "remote-publication"])
     if r["status"] == "ok":

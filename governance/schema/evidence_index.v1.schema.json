@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "yai-law:schema/evidence_index.v1.schema.json",
+  "$id": "yai-governance:schema/evidence_index.v1.schema.json",
   "title": "YAI Evidence Index v1",
   "type": "object",
   "required": [

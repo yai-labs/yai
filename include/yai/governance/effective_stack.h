@@ -6,7 +6,7 @@
 #define YAI_GOVERNANCE_COMPLIANCE_MAX 8
 #define YAI_GOVERNANCE_CONTRIBUTOR_MAX 12
 
-typedef struct yai_law_effective_stack {
+typedef struct yai_governance_effective_stack {
   char stack_id[64];
   char domain_id[64];
   char family_id[64];
@@ -32,4 +32,4 @@ typedef struct yai_law_effective_stack {
   char authority_profile[128];
   char evidence_profile[128];
   char precedence_trace[192];
-} yai_law_effective_stack_t;
+} yai_governance_effective_stack_t;

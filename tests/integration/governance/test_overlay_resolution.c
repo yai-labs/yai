@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 
-#include <yai/law/policy_effects.h>
-#include <yai/law/resolver.h>
+#include <yai/governance/policy_effects.h>
+#include <yai/governance/resolver.h>
 
 static int has_req(char reqs[][64], int n, const char *id) {
   for (int i = 0; i < n; ++i) {
@@ -12,10 +12,10 @@ static int has_req(char reqs[][64], int n, const char *id) {
 }
 
 int main(void) {
-  yai_law_resolution_output_t out;
+  yai_governance_resolution_output_t out;
   char err[256] = {0};
 
-  if (yai_law_resolve_control_call(
+  if (yai_governance_resolve_control_call(
           "ws-ov1",
           "{\"command\":\"payment.authorize\",\"resource\":\"ledger\",\"provider\":\"untrusted-gateway\",\"contract\":\"true\"}",
           "trace-ov1",
@@ -33,7 +33,7 @@ int main(void) {
   if (!has_req(out.decision.authority_requirements, out.decision.authority_requirement_count, "escalation_required")) return 1;
   if (!has_req(out.decision.evidence_requirements, out.decision.evidence_requirement_count, "dependency_chain_ref")) return 1;
 
-  if (yai_law_resolve_control_call(
+  if (yai_governance_resolve_control_call(
           "ws-ov2",
           "{\"command\":\"github.publish.personal-data\",\"resource\":\"personal_profile\",\"provider\":\"github-api\",\"contract\":\"true\"}",
           "trace-ov2",
@@ -51,7 +51,7 @@ int main(void) {
   if (!has_req(out.decision.evidence_requirements, out.decision.evidence_requirement_count, "lawful_basis_trace")) return 1;
   if (out.evidence.lawful_basis_required != 1) return 1;
 
-  if (yai_law_resolve_control_call(
+  if (yai_governance_resolve_control_call(
           "ws-ov3",
           "{\"command\":\"experiment.run.high-risk\",\"params_hash\":\"abc\",\"dataset\":\"d1\",\"provider\":\"experiment-runner\"}",
           "trace-ov3",

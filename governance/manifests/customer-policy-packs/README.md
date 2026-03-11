@@ -18,5 +18,5 @@ one customer-facing runtime input contract.
 ## Validation
 
 ```bash
-./tools/bin/law-authoring-validate
+./tools/bin/yai-govern-ingest-validate
 ```

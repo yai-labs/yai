@@ -1,6 +1,6 @@
 # 2026Q1
 
-`packs/compliance/gdpr-eu/2026Q1/` contains the published `2026Q1` GDPR/EU compliance pack for `law`.
+`packs/compliance/gdpr-eu/2026Q1/` contains the published `2026Q1` GDPR/EU compliance pack for governance.
 
 This versioned pack provides a scoped, machine-readable compliance overlay intended for deliberate downstream pinning and controlled adoption.
 
@@ -30,7 +30,7 @@ It must remain aligned with:
 * `contracts/compliance/`
 * `contracts/control/` where authority-facing enforcement is relevant
 
-This pack does not replace the foundational law, canonical schemas, or canonical registries of the repository.
+This pack does not replace the foundational governance, canonical schemas, or canonical registries of the repository.
 It specializes them for a bounded GDPR/EU compliance context.
 
 ## Consumer expectation
@@ -54,4 +54,4 @@ Any change to this pack version that affects retention defaults, taxonomy meanin
 * `REGISTRY.md` where canonical references are affected
 * relevant compatibility or publication notes when scope changes
 
-Silent drift between this pack and the canonical law surfaces it depends on is non-compliant by definition.
+Silent drift between this pack and the canonical governance surfaces it depends on is non-compliant by definition.

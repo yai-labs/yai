@@ -41,10 +41,10 @@ def main() -> int:
         schema / "verification_report.v1.schema.json",
     ]
     required_cross = [
-        manifests / "law.manifest.json",
+        manifests / "governance.manifest.json",
         manifests / "runtime.entrypoints.json",
         manifests / "governance-attachability.constraints.v1.json",
-        grammar_schema / "law_manifest.v1.schema.json",
+        grammar_schema / "governance_manifest.v1.schema.json",
         grammar_schema / "runtime_entrypoint.v1.schema.json",
         registry_schema / "commands.v1.schema.json",
         registry_schema / "primitives.v1.schema.json",

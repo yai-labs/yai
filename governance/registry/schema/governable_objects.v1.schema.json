@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "yai-law:registry/schema/governable_objects.v1.schema.json",
+  "$id": "yai-governance:registry/schema/governable_objects.v1.schema.json",
   "title": "YAI Governable Objects Registry v1",
   "type": "object",
   "required": ["kind", "version", "generated_by", "objects"],
@@ -169,7 +169,7 @@
               "data",
               "graph",
               "knowledge",
-              "law",
+              "governance",
               "platform",
               "protocol",
               "support"

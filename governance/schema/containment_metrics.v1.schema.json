@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "yai-law:schema/containment_metrics.v1.schema.json",
+  "$id": "yai-governance:schema/containment_metrics.v1.schema.json",
   "title": "YAI Containment Metrics v1",
   "type": "object",
   "required": [

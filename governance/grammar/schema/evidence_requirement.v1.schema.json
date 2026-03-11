@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "law/grammar/schema/evidence_requirement.v1",
+  "$id": "governance/grammar/schema/evidence_requirement.v1",
   "title": "evidence_requirement.v1",
   "description": "Evidence requirement",
   "type": "object",

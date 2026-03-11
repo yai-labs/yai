@@ -1,7 +1,7 @@
 {
   "kind": "compatibility.matrix",
   "version": "v2",
-  "law_version": "0.1.0",
+  "governance_version": "0.1.0",
   "runtime_targets": [
     {
       "id": "yai",

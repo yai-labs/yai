@@ -2,23 +2,23 @@
 
 #include <string.h>
 
-int yai_law_classify_event(const char *ws_id,
+int yai_governance_classify_event(const char *ws_id,
                            const char *payload,
-                           yai_law_classification_ctx_t *out) {
+                           yai_governance_classification_ctx_t *out) {
   if (!out || !payload) return -1;
   memset(out, 0, sizeof(*out));
 
   if (ws_id && ws_id[0]) {
-    (void)yai_law_safe_snprintf(out->ws_id, sizeof(out->ws_id), "%s", ws_id);
+    (void)yai_governance_safe_snprintf(out->ws_id, sizeof(out->ws_id), "%s", ws_id);
   }
 
-  if (yai_law_classify_action(payload, out->action, sizeof(out->action)) != 0) return -1;
-  if (yai_law_classify_provider(payload, out->provider, sizeof(out->provider)) != 0) return -1;
-  if (yai_law_classify_resource(payload, out->resource, sizeof(out->resource)) != 0) return -1;
-  if (yai_law_classify_protocol(payload, out->protocol, sizeof(out->protocol)) != 0) return -1;
-  (void)yai_law_json_extract_string(payload, "workspace_declared_family", out->declared_family, sizeof(out->declared_family));
-  (void)yai_law_json_extract_string(payload, "workspace_declared_specialization", out->declared_specialization, sizeof(out->declared_specialization));
-  if (yai_law_extract_workspace_context(payload,
+  if (yai_governance_classify_action(payload, out->action, sizeof(out->action)) != 0) return -1;
+  if (yai_governance_classify_provider(payload, out->provider, sizeof(out->provider)) != 0) return -1;
+  if (yai_governance_classify_resource(payload, out->resource, sizeof(out->resource)) != 0) return -1;
+  if (yai_governance_classify_protocol(payload, out->protocol, sizeof(out->protocol)) != 0) return -1;
+  (void)yai_governance_json_extract_string(payload, "workspace_declared_family", out->declared_family, sizeof(out->declared_family));
+  (void)yai_governance_json_extract_string(payload, "workspace_declared_specialization", out->declared_specialization, sizeof(out->declared_specialization));
+  if (yai_governance_extract_workspace_context(payload,
                                         out->workspace_mode,
                                         sizeof(out->workspace_mode),
                                         &out->black_box_mode,
@@ -39,19 +39,19 @@ int yai_law_classify_event(const char *ws_id,
     return -1;
   }
 
-  if (yai_law_json_extract_string(payload, "command", out->command, sizeof(out->command)) != 0) {
-    if (strstr(payload, "curl")) (void)yai_law_safe_snprintf(out->command, sizeof(out->command), "%s", "curl");
-    else if (strstr(payload, "otel")) (void)yai_law_safe_snprintf(out->command, sizeof(out->command), "%s", "otel.export");
-    else if (strstr(payload, "s3")) (void)yai_law_safe_snprintf(out->command, sizeof(out->command), "%s", "s3.put_object");
-    else if (strstr(payload, "payment")) (void)yai_law_safe_snprintf(out->command, sizeof(out->command), "%s", "payment.authorize");
-    else if (strstr(payload, "transfer")) (void)yai_law_safe_snprintf(out->command, sizeof(out->command), "%s", "transfer.authorize");
-    else if (strstr(payload, "settlement")) (void)yai_law_safe_snprintf(out->command, sizeof(out->command), "%s", "settlement.finalize");
-    else if (strstr(payload, "github")) (void)yai_law_safe_snprintf(out->command, sizeof(out->command), "%s", "github.issues.comment.create");
-    else if (strstr(payload, "distribution") || strstr(payload, "deliver")) (void)yai_law_safe_snprintf(out->command, sizeof(out->command), "%s", "artifact.distribution.push");
-    else if (strstr(payload, "sink") || strstr(payload, "destination")) (void)yai_law_safe_snprintf(out->command, sizeof(out->command), "%s", "digital.sink.validate");
-    else if (strstr(payload, "retrieve") || strstr(payload, "fetch")) (void)yai_law_safe_snprintf(out->command, sizeof(out->command), "%s", "remote.retrieve");
-    else if (strstr(payload, "experiment")) (void)yai_law_safe_snprintf(out->command, sizeof(out->command), "%s", "experiment.run");
-    else (void)yai_law_safe_snprintf(out->command, sizeof(out->command), "%s", "unknown");
+  if (yai_governance_json_extract_string(payload, "command", out->command, sizeof(out->command)) != 0) {
+    if (strstr(payload, "curl")) (void)yai_governance_safe_snprintf(out->command, sizeof(out->command), "%s", "curl");
+    else if (strstr(payload, "otel")) (void)yai_governance_safe_snprintf(out->command, sizeof(out->command), "%s", "otel.export");
+    else if (strstr(payload, "s3")) (void)yai_governance_safe_snprintf(out->command, sizeof(out->command), "%s", "s3.put_object");
+    else if (strstr(payload, "payment")) (void)yai_governance_safe_snprintf(out->command, sizeof(out->command), "%s", "payment.authorize");
+    else if (strstr(payload, "transfer")) (void)yai_governance_safe_snprintf(out->command, sizeof(out->command), "%s", "transfer.authorize");
+    else if (strstr(payload, "settlement")) (void)yai_governance_safe_snprintf(out->command, sizeof(out->command), "%s", "settlement.finalize");
+    else if (strstr(payload, "github")) (void)yai_governance_safe_snprintf(out->command, sizeof(out->command), "%s", "github.issues.comment.create");
+    else if (strstr(payload, "distribution") || strstr(payload, "deliver")) (void)yai_governance_safe_snprintf(out->command, sizeof(out->command), "%s", "artifact.distribution.push");
+    else if (strstr(payload, "sink") || strstr(payload, "destination")) (void)yai_governance_safe_snprintf(out->command, sizeof(out->command), "%s", "digital.sink.validate");
+    else if (strstr(payload, "retrieve") || strstr(payload, "fetch")) (void)yai_governance_safe_snprintf(out->command, sizeof(out->command), "%s", "remote.retrieve");
+    else if (strstr(payload, "experiment")) (void)yai_governance_safe_snprintf(out->command, sizeof(out->command), "%s", "experiment.run");
+    else (void)yai_governance_safe_snprintf(out->command, sizeof(out->command), "%s", "unknown");
   }
 
   return 0;

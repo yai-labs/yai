@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "law/grammar/schema/domain_action_set.v1",
+  "$id": "governance/grammar/schema/domain_action_set.v1",
   "title": "domain_action_set.v1",
   "description": "Domain action taxonomy",
   "type": "object",

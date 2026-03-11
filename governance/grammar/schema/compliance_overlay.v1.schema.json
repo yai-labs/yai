@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "law/grammar/schema/compliance_overlay.v1",
+  "$id": "governance/grammar/schema/compliance_overlay.v1",
   "title": "compliance_overlay.v1",
   "description": "Compliance overlay",
   "type": "object",

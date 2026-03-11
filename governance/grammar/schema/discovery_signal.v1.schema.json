@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "law/grammar/schema/discovery_signal.v1",
+  "$id": "governance/grammar/schema/discovery_signal.v1",
   "title": "discovery_signal.v1",
   "description": "Discovery signal",
   "type": "object",

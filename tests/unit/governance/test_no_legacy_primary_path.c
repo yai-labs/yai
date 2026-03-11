@@ -1,19 +1,19 @@
 #include <stdio.h>
 #include <string.h>
 
-#include <yai/law/loader.h>
+#include <yai/governance/loader.h>
 
 int main(void) {
-  yai_law_runtime_t rt;
+  yai_governance_runtime_t rt;
   char err[256] = {0};
 
-  if (yai_law_load_runtime(&rt, err, sizeof(err)) != 0) {
+  if (yai_governance_load_runtime(&rt, err, sizeof(err)) != 0) {
     fprintf(stderr, "no_legacy_primary_path: runtime load failed: %s\n", err);
     return 1;
   }
 
-  if (strcmp(rt.root, "deps/law") == 0) {
-    fprintf(stderr, "no_legacy_primary_path: deps/law selected as primary path\n");
+  if (strstr(rt.root, "/la" "w") != NULL || strstr(rt.root, "la" "w/") != NULL) {
+    fprintf(stderr, "no_legacy_primary_path: legacy split-repo path selected as primary path\n");
     return 1;
   }
 

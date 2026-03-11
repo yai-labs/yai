@@ -1,8 +1,8 @@
 #include "../internal.h"
 
-int yai_law_decision_to_audit_blob(const yai_law_decision_t *decision, char *out, size_t out_cap) {
+int yai_governance_decision_to_audit_blob(const yai_governance_decision_t *decision, char *out, size_t out_cap) {
   if (!decision || !out || out_cap == 0) return -1;
-  return yai_law_safe_snprintf(out,
+  return yai_governance_safe_snprintf(out,
                                out_cap,
                                "{\"type\":\"yai.decision_record.v1\",\"schema_version\":\"v1\","
                                "\"decision_id\":\"%s\",\"family_id\":\"%s\",\"domain_id\":\"%s\","

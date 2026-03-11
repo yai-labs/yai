@@ -520,7 +520,7 @@ def _build_candidate(source_path: Path, normalized_path: Path | None, out: Path 
         "status": "candidate",
         "review_state": review_state,
         "compatibility": {
-            "law_range": ">=0.1.0",
+            "governance_range": ">=0.1.0",
             "runtime_targets": ["yai"],
             "export_profiles": ["runtime-consumer.v4"],
         },

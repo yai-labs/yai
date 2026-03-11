@@ -19,7 +19,7 @@ static void add_unique(char arr[][64], int *count, int cap, const char *id) {
   (*count)++;
 }
 
-int yai_law_overlay_merge_apply(yai_law_effective_stack_t *stack) {
+int yai_governance_overlay_merge_apply(yai_governance_effective_stack_t *stack) {
   int i;
   if (!stack) return -1;
   for (i = 0; i < stack->regulatory_overlay_count; ++i) {

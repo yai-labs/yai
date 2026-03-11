@@ -4,7 +4,7 @@ set -euo pipefail
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
 YAI="$REPO/build/bin/yai"
 SOCK="${YAI_RUNTIME_INGRESS:-$HOME/.yai/run/control.sock}"
-# Must match the review-gate workspace targets declared in law examples.
+# Must match the review-gate workspace targets declared in governance examples.
 WS="ws_digital_outbound_stage"
 BIND_FILE="$HOME/.yai/session/active_workspace.json"
 ATTACH_OBJ="enterprise.ecohmedia.digital-outbound.review-gate"

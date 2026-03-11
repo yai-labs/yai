@@ -26,8 +26,6 @@
         "archive_tmp/**",
         "docs/**",
         "authority/**",
-        "foundation/**",
-        "formal/**",
         "tools/**",
         "contracts/**",
         "registry/**"

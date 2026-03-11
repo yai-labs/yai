@@ -2,7 +2,7 @@
 
 #include <string.h>
 
-int yai_law_classify_action(const char *payload, char *out, size_t out_cap) {
+int yai_governance_classify_action(const char *payload, char *out, size_t out_cap) {
   const char *v = "transform";
   if (!payload || !out || out_cap == 0) return -1;
 
@@ -31,6 +31,6 @@ int yai_law_classify_action(const char *payload, char *out, size_t out_cap) {
     v = strstr(payload, "params") ? "parameter-modify" : "experiment-run";
   }
 
-  if (yai_law_safe_snprintf(out, out_cap, "%s", v) != 0) return -1;
+  if (yai_governance_safe_snprintf(out, out_cap, "%s", v) != 0) return -1;
   return 0;
 }

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "law/grammar/schema/policy_condition.v1",
+  "$id": "governance/grammar/schema/policy_condition.v1",
   "title": "policy_condition.v1",
   "description": "Policy condition",
   "type": "object",

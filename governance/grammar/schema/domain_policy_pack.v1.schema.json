@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "law/grammar/schema/domain_policy_pack.v1",
+  "$id": "governance/grammar/schema/domain_policy_pack.v1",
   "title": "domain_policy_pack.v1",
   "description": "Domain policy pack",
   "type": "object",

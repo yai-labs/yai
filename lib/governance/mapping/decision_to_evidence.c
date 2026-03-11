@@ -4,24 +4,24 @@
 
 #include <string.h>
 
-int yai_law_decision_to_evidence(const yai_law_decision_t *decision,
+int yai_governance_decision_to_evidence(const yai_governance_decision_t *decision,
                                  const char *trace_id,
                                  const char *provider,
                                  const char *resource,
                                  const char *authority_context,
-                                 yai_law_evidence_envelope_t *out) {
+                                 yai_governance_evidence_envelope_t *out) {
   if (!decision || !trace_id || !out) return -1;
   memset(out, 0, sizeof(*out));
 
-  (void)yai_law_safe_snprintf(out->trace_id, sizeof(out->trace_id), "%s", trace_id);
-  (void)yai_law_safe_snprintf(out->decision_id, sizeof(out->decision_id), "%s", decision->decision_id);
-  (void)yai_law_safe_snprintf(out->domain_id, sizeof(out->domain_id), "%s", decision->domain_id);
-  (void)yai_law_safe_snprintf(out->family_id, sizeof(out->family_id), "%s", decision->family_id);
-  (void)yai_law_safe_snprintf(out->specialization_id, sizeof(out->specialization_id), "%s", decision->specialization_id);
-  (void)yai_law_safe_snprintf(out->final_effect, sizeof(out->final_effect), "%s", yai_governance_effect_name(decision->final_effect));
-  (void)yai_law_safe_snprintf(out->provider, sizeof(out->provider), "%s", provider ? provider : "unknown");
-  (void)yai_law_safe_snprintf(out->resource, sizeof(out->resource), "%s", resource ? resource : "unknown");
-  (void)yai_law_safe_snprintf(out->authority_context, sizeof(out->authority_context), "%s", authority_context ? authority_context : "unknown");
+  (void)yai_governance_safe_snprintf(out->trace_id, sizeof(out->trace_id), "%s", trace_id);
+  (void)yai_governance_safe_snprintf(out->decision_id, sizeof(out->decision_id), "%s", decision->decision_id);
+  (void)yai_governance_safe_snprintf(out->domain_id, sizeof(out->domain_id), "%s", decision->domain_id);
+  (void)yai_governance_safe_snprintf(out->family_id, sizeof(out->family_id), "%s", decision->family_id);
+  (void)yai_governance_safe_snprintf(out->specialization_id, sizeof(out->specialization_id), "%s", decision->specialization_id);
+  (void)yai_governance_safe_snprintf(out->final_effect, sizeof(out->final_effect), "%s", yai_governance_effect_name(decision->final_effect));
+  (void)yai_governance_safe_snprintf(out->provider, sizeof(out->provider), "%s", provider ? provider : "unknown");
+  (void)yai_governance_safe_snprintf(out->resource, sizeof(out->resource), "%s", resource ? resource : "unknown");
+  (void)yai_governance_safe_snprintf(out->authority_context, sizeof(out->authority_context), "%s", authority_context ? authority_context : "unknown");
   out->review_trace_required = decision->final_effect == YAI_GOVERNANCE_EFFECT_REVIEW_REQUIRED ? 1 : 0;
   out->retention_required = 0;
   out->provenance_required = 0;
@@ -42,12 +42,12 @@ int yai_law_decision_to_evidence(const yai_law_decision_t *decision,
   return 0;
 }
 
-int yai_law_evidence_to_record_blob(const yai_law_decision_t *decision,
-                                    const yai_law_evidence_envelope_t *evidence,
+int yai_governance_evidence_to_record_blob(const yai_governance_decision_t *decision,
+                                    const yai_governance_evidence_envelope_t *evidence,
                                     char *out,
                                     size_t out_cap) {
   if (!decision || !evidence || !out || out_cap == 0) return -1;
-  return yai_law_safe_snprintf(
+  return yai_governance_safe_snprintf(
       out,
       out_cap,
       "{\"type\":\"yai.evidence_record.v1\",\"schema_version\":\"v1\","

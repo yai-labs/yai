@@ -16,7 +16,4 @@ Canonical implementation slices include:
 - `authority_model/`
 - `internal/`
 
-Transitional note:
-
-- `lib/law/` is compatibility-only during migration and must not receive new
-  canonical implementation logic.
+`lib/governance/` is the only canonical implementation namespace for policy-engine logic.

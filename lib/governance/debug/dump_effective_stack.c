@@ -1,8 +1,8 @@
 #include "../internal.h"
 
-int yai_law_dump_effective_stack(const yai_law_effective_stack_t *stack, char *out, size_t out_cap) {
+int yai_governance_dump_effective_stack(const yai_governance_effective_stack_t *stack, char *out, size_t out_cap) {
   if (!stack || !out || out_cap == 0) return -1;
-  return yai_law_safe_snprintf(out,
+  return yai_governance_safe_snprintf(out,
                                out_cap,
                                "stack=%s family=%s domain=%s specialization=%s rules=%d compliance=%d overlays=%d (reg=%d sec=%d ctx=%d) auth_contrib=%d ev_contrib=%d authority=%s evidence=%s precedence=%s",
                                stack->stack_id,

@@ -9,7 +9,7 @@ def main() -> int:
 
     publish_idx = json.loads((manifests / "publish.index.json").read_text(encoding="utf-8"))
     layers = json.loads((manifests / "publish.layers.json").read_text(encoding="utf-8"))
-    law_manifest = json.loads((manifests / "law.manifest.json").read_text(encoding="utf-8"))
+    governance_manifest = json.loads((manifests / "governance.manifest.json").read_text(encoding="utf-8"))
     runtime_entrypoints = json.loads((manifests / "runtime.entrypoints.json").read_text(encoding="utf-8"))
 
     runtime = None
@@ -40,15 +40,15 @@ def main() -> int:
         if not (root / "governance" / rel).exists():
             raise SystemExit(f"governance_manifest_surface_contract: missing runtime surface path: governance/{rel}")
 
-    if law_manifest.get("resolution_entrypoints_ref") != "manifests/runtime.entrypoints.json":
-        raise SystemExit("governance_manifest_surface_contract: invalid law manifest resolution_entrypoints_ref")
+    if governance_manifest.get("resolution_entrypoints_ref") != "manifests/runtime.entrypoints.json":
+        raise SystemExit("governance_manifest_surface_contract: invalid governance manifest resolution_entrypoints_ref")
 
     entries = runtime_entrypoints.get("entrypoints", [])
     if not entries:
         raise SystemExit("governance_manifest_surface_contract: no runtime entrypoints")
     first = entries[0]
-    if first.get("law_manifest_ref") != "manifests/law.manifest.json":
-        raise SystemExit("governance_manifest_surface_contract: invalid entrypoint law_manifest_ref")
+    if first.get("governance_manifest_ref") != "manifests/governance.manifest.json":
+        raise SystemExit("governance_manifest_surface_contract: invalid entrypoint governance_manifest_ref")
     if first.get("resolution_order_ref") != "manifests/domain-resolution-order.json":
         raise SystemExit("governance_manifest_surface_contract: invalid entrypoint resolution_order_ref")
 

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "law/grammar/schema/domain_catalog_entry.v1",
+  "$id": "governance/grammar/schema/domain_catalog_entry.v1",
   "title": "domain_catalog_entry.v1",
   "description": "Domain catalog entry",
   "type": "object",

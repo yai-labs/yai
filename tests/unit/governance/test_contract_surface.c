@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include <string.h>
 
-#include <yai/law/loader.h>
+#include <yai/governance/loader.h>
 
 int main(void) {
-  yai_law_runtime_t rt;
+  yai_governance_runtime_t rt;
   char err[256] = {0};
-  if (yai_law_load_runtime(&rt, err, sizeof(err)) != 0) {
+  if (yai_governance_load_runtime(&rt, err, sizeof(err)) != 0) {
     fprintf(stderr, "contract_surface: runtime load failed: %s\n", err);
     return 1;
   }
@@ -23,7 +23,7 @@ int main(void) {
     fprintf(stderr, "contract_surface: missing entrypoint contract refs\n");
     return 1;
   }
-  if (strncmp(rt.entrypoint.law_manifest_ref, "governance/manifests/", 21) != 0 ||
+  if (strncmp(rt.entrypoint.governance_manifest_ref, "governance/manifests/", 21) != 0 ||
       strncmp(rt.entrypoint.resolution_order_ref, "governance/manifests/", 21) != 0 ||
       strncmp(rt.entrypoint.compatibility_ref, "governance/manifests/", 21) != 0) {
     fprintf(stderr, "contract_surface: manifest refs are not canonical governance paths\n");

@@ -1,8 +1,8 @@
 #include "../internal.h"
 
-int yai_law_build_trace_json(const yai_law_classification_ctx_t *ctx,
-                             const yai_law_discovery_result_t *disc,
-                             const yai_law_decision_t *decision,
+int yai_governance_build_trace_json(const yai_governance_classification_ctx_t *ctx,
+                             const yai_governance_discovery_result_t *disc,
+                             const yai_governance_decision_t *decision,
                              char *out,
                              size_t out_cap) {
   const char *f1 = "";
@@ -24,10 +24,10 @@ int yai_law_build_trace_json(const yai_law_classification_ctx_t *ctx,
   if (decision->stack.regulatory_overlay_count > 0) r0 = decision->stack.regulatory_overlays[0];
   if (decision->stack.sector_overlay_count > 0) sec0 = decision->stack.sector_overlays[0];
   if (decision->stack.contextual_overlay_count > 0) ctx0 = decision->stack.contextual_overlays[0];
-  return yai_law_safe_snprintf(
+  return yai_governance_safe_snprintf(
       out,
       out_cap,
-      "{\"type\":\"yai.law.resolution_trace.v1\",\"routing_mode\":\"family-specialization\",\"action\":\"%s\",\"provider\":\"%s\",\"resource\":\"%s\",\"protocol\":\"%s\",\"matched_domain\":\"%s\",\"compat_domain_id\":\"%s\",\"matched_family\":\"%s\",\"matched_specialization\":\"%s\",\"family_candidates\":[\"%s\",\"%s\",\"%s\"],\"specialization_candidates\":[\"%s\",\"%s\",\"%s\"],\"confidence\":%.3f,\"ambiguous\":%s,\"regulatory_overlay_count\":%d,\"sector_overlay_count\":%d,\"contextual_overlay_count\":%d,\"regulatory_overlay_head\":\"%s\",\"sector_overlay_head\":\"%s\",\"contextual_overlay_head\":\"%s\",\"authority_contributor_count\":%d,\"evidence_contributor_count\":%d,\"final_effect\":\"%s\",\"rationale\":\"%s\",\"precedence_trace\":\"%s\",\"authority_profile\":\"%s\",\"evidence_profile\":\"%s\",\"scientific_flags\":{\"params_hash\":%s,\"locked_parameters\":%s,\"repro_context\":%s,\"dataset_ref\":%s,\"publication_intent\":%s,\"result_ref\":%s},\"digital_flags\":{\"retrieve_intent\":%s,\"egress_intent\":%s,\"commentary_intent\":%s,\"distribution_intent\":%s,\"sink_ref\":%s,\"sink_trusted\":%s,\"sink_external\":%s}}",
+      "{\"type\":\"yai.governance.resolution_trace.v1\",\"routing_mode\":\"family-specialization\",\"action\":\"%s\",\"provider\":\"%s\",\"resource\":\"%s\",\"protocol\":\"%s\",\"matched_domain\":\"%s\",\"compat_domain_id\":\"%s\",\"matched_family\":\"%s\",\"matched_specialization\":\"%s\",\"family_candidates\":[\"%s\",\"%s\",\"%s\"],\"specialization_candidates\":[\"%s\",\"%s\",\"%s\"],\"confidence\":%.3f,\"ambiguous\":%s,\"regulatory_overlay_count\":%d,\"sector_overlay_count\":%d,\"contextual_overlay_count\":%d,\"regulatory_overlay_head\":\"%s\",\"sector_overlay_head\":\"%s\",\"contextual_overlay_head\":\"%s\",\"authority_contributor_count\":%d,\"evidence_contributor_count\":%d,\"final_effect\":\"%s\",\"rationale\":\"%s\",\"precedence_trace\":\"%s\",\"authority_profile\":\"%s\",\"evidence_profile\":\"%s\",\"scientific_flags\":{\"params_hash\":%s,\"locked_parameters\":%s,\"repro_context\":%s,\"dataset_ref\":%s,\"publication_intent\":%s,\"result_ref\":%s},\"digital_flags\":{\"retrieve_intent\":%s,\"egress_intent\":%s,\"commentary_intent\":%s,\"distribution_intent\":%s,\"sink_ref\":%s,\"sink_trusted\":%s,\"sink_external\":%s}}",
       ctx->action,
       ctx->provider,
       ctx->resource,

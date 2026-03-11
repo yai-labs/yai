@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "yai-law:contracts/control/schema/authority.json",
+  "$id": "yai-governance:contracts/control/schema/authority.json",
   "title": "YAI Authority Envelope (Deprecated Alias)",
   "description": "Deprecated alias. Use authority.v1.json as normative source.",
   "$ref": "authority.v1.json"

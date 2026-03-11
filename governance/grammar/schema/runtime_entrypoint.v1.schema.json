@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "law/grammar/schema/runtime_entrypoint.v1",
+  "$id": "governance/grammar/schema/runtime_entrypoint.v1",
   "title": "runtime_entrypoint.v1",
   "description": "Unified runtime consumption entrypoint contract",
   "type": "object",
@@ -30,7 +30,7 @@
           "type": "array",
           "items": {
             "type": "string",
-            "enum": ["core", "exec", "data", "graph", "knowledge", "law", "platform", "protocol", "support"]
+            "enum": ["core", "exec", "data", "graph", "knowledge", "governance", "platform", "protocol", "support"]
           },
           "minItems": 5
         },
@@ -47,7 +47,7 @@
         "type": "object",
         "required": [
           "entrypoint_id",
-          "law_manifest_ref",
+          "governance_manifest_ref",
           "classification_ref",
           "families_ref",
           "specializations_ref",
@@ -60,7 +60,7 @@
         ],
         "properties": {
           "entrypoint_id": {"type": "string"},
-          "law_manifest_ref": {"type": "string"},
+          "governance_manifest_ref": {"type": "string"},
           "classification_ref": {"type": "string"},
           "families_ref": {"type": "string"},
           "specializations_ref": {"type": "string"},
@@ -84,7 +84,7 @@
             "type": "array",
             "items": {
               "type": "string",
-              "enum": ["core", "exec", "data", "graph", "knowledge", "law", "platform", "protocol", "support"]
+              "enum": ["core", "exec", "data", "graph", "knowledge", "governance", "platform", "protocol", "support"]
             },
             "minItems": 1
           },

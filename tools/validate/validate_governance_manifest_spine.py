@@ -11,7 +11,7 @@ def main() -> int:
     root = Path(__file__).resolve().parents[2]
     mroot = root / "governance" / "manifests"
     required = [
-        "law.manifest.json",
+        "governance.manifest.json",
         "runtime.entrypoints.json",
         "publish.index.json",
         "publish.layers.json",
@@ -27,22 +27,22 @@ def main() -> int:
         if not p.exists():
             raise SystemExit(f"governance_manifest_spine: missing {p.relative_to(root)}")
 
-    law_manifest = _must_json(mroot / "law.manifest.json")
+    governance_manifest = _must_json(mroot / "governance.manifest.json")
     runtime_entrypoints = _must_json(mroot / "runtime.entrypoints.json")
     publish_index = _must_json(mroot / "publish.index.json")
     publish_layers = _must_json(mroot / "publish.layers.json")
 
-    if law_manifest.get("resolution_entrypoints_ref") != "manifests/runtime.entrypoints.json":
-        raise SystemExit("governance_manifest_spine: law.manifest.json invalid resolution_entrypoints_ref")
-    if law_manifest.get("compatibility") != "manifests/compatibility.matrix.json":
-        raise SystemExit("governance_manifest_spine: law.manifest.json invalid compatibility ref")
+    if governance_manifest.get("resolution_entrypoints_ref") != "manifests/runtime.entrypoints.json":
+        raise SystemExit("governance_manifest_spine: governance.manifest.json invalid resolution_entrypoints_ref")
+    if governance_manifest.get("compatibility") != "manifests/compatibility.matrix.json":
+        raise SystemExit("governance_manifest_spine: governance.manifest.json invalid compatibility ref")
 
     entries = runtime_entrypoints.get("entrypoints", [])
     if not entries:
         raise SystemExit("governance_manifest_spine: runtime.entrypoints.json has no entrypoints")
     first = entries[0]
     for key in [
-        "law_manifest_ref",
+        "governance_manifest_ref",
         "customer_policy_pack_index_ref",
         "governance_attachability_constraints_ref",
         "resolution_order_ref",

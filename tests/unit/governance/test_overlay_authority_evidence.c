@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 
-#include <yai/law/resolver.h>
-#include <yai/law/policy_effects.h>
+#include <yai/governance/resolver.h>
+#include <yai/governance/policy_effects.h>
 
 static int has_req(char reqs[][64], int n, const char *id) {
   for (int i = 0; i < n; ++i) {
@@ -12,10 +12,10 @@ static int has_req(char reqs[][64], int n, const char *id) {
 }
 
 int main(void) {
-  yai_law_resolution_output_t out;
+  yai_governance_resolution_output_t out;
   char err[256] = {0};
 
-  if (yai_law_resolve_control_call(
+  if (yai_governance_resolve_control_call(
           "ws-ov-ae",
           "{\"command\":\"payment.transfer.personal-data\",\"resource\":\"personal_ledger\",\"provider\":\"payment-gateway\",\"contract\":\"true\"}",
           "trace-ov-ae",

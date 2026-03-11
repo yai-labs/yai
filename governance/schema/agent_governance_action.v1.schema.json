@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "yai.law.agent_governance_action.v1",
+  "$id": "yai.governance.agent_governance_action.v1",
   "title": "Agent Governance Action Contract v1",
   "type": "object",
   "additionalProperties": false,

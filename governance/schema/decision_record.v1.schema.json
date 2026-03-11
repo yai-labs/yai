@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "yai-law:schema/decision_record.v1.schema.json",
+  "$id": "yai-governance:schema/decision_record.v1.schema.json",
   "title": "YAI Decision Record v1 (JSONL line)",
   "type": "object",
   "required": [

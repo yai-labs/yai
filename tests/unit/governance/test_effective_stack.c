@@ -1,12 +1,12 @@
 #include <stdio.h>
 
-#include <yai/law/resolver.h>
+#include <yai/governance/resolver.h>
 
 int main(void) {
-  yai_law_resolution_output_t out;
+  yai_governance_resolution_output_t out;
   char err[256] = {0};
 
-  if (yai_law_resolve_control_call("ws", "{\"command\":\"github.issues.comment.create\",\"contract\":\"true\"}", "trace-s", &out, err, sizeof(err)) != 0) return 1;
+  if (yai_governance_resolve_control_call("ws", "{\"command\":\"github.issues.comment.create\",\"contract\":\"true\"}", "trace-s", &out, err, sizeof(err)) != 0) return 1;
   if (out.decision.stack.applied_rule_count <= 0) return 1;
   if (out.decision.stack.compliance_count <= 0) return 1;
   if (out.decision.stack.overlay_count <= 0) return 1;

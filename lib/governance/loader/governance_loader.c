@@ -8,12 +8,12 @@
 #include <string.h>
 #include <sys/stat.h>
 
-static int yai_law_path_exists(const char *path) {
+static int yai_governance_path_exists(const char *path) {
   struct stat st;
   return (path && stat(path, &st) == 0) ? 1 : 0;
 }
 
-int yai_law_safe_snprintf(char *out, size_t out_cap, const char *fmt, ...) {
+int yai_governance_safe_snprintf(char *out, size_t out_cap, const char *fmt, ...) {
   va_list ap;
   int n;
   if (!out || out_cap == 0 || !fmt) return -1;
@@ -24,7 +24,7 @@ int yai_law_safe_snprintf(char *out, size_t out_cap, const char *fmt, ...) {
   return 0;
 }
 
-int yai_law_read_text_file(const char *path, char *out, size_t out_cap) {
+int yai_governance_read_text_file(const char *path, char *out, size_t out_cap) {
   FILE *f;
   size_t n;
   if (!path || !out || out_cap < 2) return -1;
@@ -36,7 +36,7 @@ int yai_law_read_text_file(const char *path, char *out, size_t out_cap) {
   return 0;
 }
 
-int yai_law_read_governance_surface_file(const yai_law_runtime_t *rt,
+int yai_governance_read_governance_surface_file(const yai_governance_runtime_t *rt,
                                          const char *rel_path,
                                          char *out,
                                          size_t out_cap) {
@@ -47,8 +47,8 @@ int yai_law_read_governance_surface_file(const yai_law_runtime_t *rt,
   if (!rel_path || !out || out_cap < 2) return -1;
 
   /* Canonical-first lookup. */
-  if (yai_law_safe_snprintf(path, sizeof(path), "governance/%s", rel_path) == 0 &&
-      yai_law_read_text_file(path, out, out_cap) == 0) {
+  if (yai_governance_safe_snprintf(path, sizeof(path), "governance/%s", rel_path) == 0 &&
+      yai_governance_read_text_file(path, out, out_cap) == 0) {
     return 0;
   }
 
@@ -60,20 +60,20 @@ int yai_law_read_governance_surface_file(const yai_law_runtime_t *rt,
   if (!legacy_enabled) return -1;
 
   if (rt && rt->root[0] &&
-      yai_law_safe_snprintf(path, sizeof(path), "%s/%s", rt->root, rel_path) == 0 &&
-      yai_law_read_text_file(path, out, out_cap) == 0) {
+      yai_governance_safe_snprintf(path, sizeof(path), "%s/%s", rt->root, rel_path) == 0 &&
+      yai_governance_read_text_file(path, out, out_cap) == 0) {
     return 0;
   }
 
   return -1;
 }
 
-int yai_law_json_extract_string(const char *json, const char *key, char *out, size_t out_cap) {
+int yai_governance_json_extract_string(const char *json, const char *key, char *out, size_t out_cap) {
   char needle[128];
   const char *p;
   const char *q;
   if (!json || !key || !out || out_cap == 0) return -1;
-  if (yai_law_safe_snprintf(needle, sizeof(needle), "\"%s\"", key) != 0) return -1;
+  if (yai_governance_safe_snprintf(needle, sizeof(needle), "\"%s\"", key) != 0) return -1;
   p = strstr(json, needle);
   if (!p) return -1;
   p = strchr(p, ':');
@@ -93,61 +93,61 @@ int yai_law_json_extract_string(const char *json, const char *key, char *out, si
   return 0;
 }
 
-int yai_law_json_contains(const char *json, const char *needle) {
+int yai_governance_json_contains(const char *json, const char *needle) {
   if (!json || !needle) return 0;
   return strstr(json, needle) != NULL;
 }
 
-static int yai_law_resolve_root(char *out, size_t out_cap) {
+static int yai_governance_resolve_root(char *out, size_t out_cap) {
   const char *gov_env = getenv("YAI_GOVERNANCE_ROOT");
   const char *env = getenv("YAI_GOVERNANCE_LEGACY_ROOT");
   const char *allow_legacy = getenv("YAI_GOVERNANCE_ALLOW_LEGACY");
   int legacy_enabled = (allow_legacy && strcmp(allow_legacy, "1") == 0) ? 1 : 0;
   const char *canonical_candidates[] = {"governance", "../yai/governance", "../../yai/governance"};
   size_t i;
-  if (gov_env && gov_env[0] && yai_law_path_exists(gov_env)) {
-    return yai_law_safe_snprintf(out, out_cap, "%s", gov_env);
+  if (gov_env && gov_env[0] && yai_governance_path_exists(gov_env)) {
+    return yai_governance_safe_snprintf(out, out_cap, "%s", gov_env);
   }
   for (i = 0; i < sizeof(canonical_candidates) / sizeof(canonical_candidates[0]); i++) {
-    if (yai_law_path_exists(canonical_candidates[i])) {
-      return yai_law_safe_snprintf(out, out_cap, "%s", canonical_candidates[i]);
+    if (yai_governance_path_exists(canonical_candidates[i])) {
+      return yai_governance_safe_snprintf(out, out_cap, "%s", canonical_candidates[i]);
     }
   }
   if (!legacy_enabled) return -1;
-  if (env && env[0] && yai_law_path_exists(env)) {
-    return yai_law_safe_snprintf(out, out_cap, "%s", env);
+  if (env && env[0] && yai_governance_path_exists(env)) {
+    return yai_governance_safe_snprintf(out, out_cap, "%s", env);
   }
   return -1;
 }
 
-int yai_law_manifest_load(yai_law_runtime_t *rt, char *err, size_t err_cap);
-int yai_law_compatibility_check(yai_law_runtime_t *rt, char *err, size_t err_cap);
+int yai_governance_manifest_load(yai_governance_runtime_t *rt, char *err, size_t err_cap);
+int yai_governance_compatibility_check(yai_governance_runtime_t *rt, char *err, size_t err_cap);
 
-int yai_law_load_runtime(yai_law_runtime_t *out, char *err, size_t err_cap) {
+int yai_governance_load_runtime(yai_governance_runtime_t *out, char *err, size_t err_cap) {
   if (!out) return -1;
   memset(out, 0, sizeof(*out));
 
-  if (yai_law_resolve_root(out->root, sizeof(out->root)) != 0) {
+  if (yai_governance_resolve_root(out->root, sizeof(out->root)) != 0) {
     if (err && err_cap) {
-      (void)yai_law_safe_snprintf(err,
+      (void)yai_governance_safe_snprintf(err,
                                   err_cap,
                                   "governance root not found (set YAI_GOVERNANCE_ROOT or enable explicit legacy fallback)");
     }
     return -1;
   }
 
-  if (yai_law_manifest_load(out, err, err_cap) != 0) return -1;
-  if (yai_law_compatibility_check(out, err, err_cap) != 0) return -1;
-  if (yai_law_overlay_loader_validate(out, err, err_cap) != 0) {
-    if (err && err_cap && !err[0]) (void)yai_law_safe_snprintf(err, err_cap, "%s", "overlay_index_load_failed");
+  if (yai_governance_manifest_load(out, err, err_cap) != 0) return -1;
+  if (yai_governance_compatibility_check(out, err, err_cap) != 0) return -1;
+  if (yai_governance_overlay_loader_validate(out, err, err_cap) != 0) {
+    if (err && err_cap && !err[0]) (void)yai_governance_safe_snprintf(err, err_cap, "%s", "overlay_index_load_failed");
     return -1;
   }
   return 0;
 }
 
-int yai_law_read_surface_json(const yai_law_runtime_t *rt,
+int yai_governance_read_surface_json(const yai_governance_runtime_t *rt,
                               const char *rel_path,
                               char *out_json,
                               size_t out_cap) {
-  return yai_law_read_governance_surface_file(rt, rel_path, out_json, out_cap);
+  return yai_governance_read_governance_surface_file(rt, rel_path, out_json, out_cap);
 }

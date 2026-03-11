@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "law/grammar/schema/enterprise_governance_normalized.v1",
+  "$id": "governance/grammar/schema/enterprise_governance_normalized.v1",
   "title": "enterprise_governance_normalized.v1",
   "type": "object",
   "properties": {

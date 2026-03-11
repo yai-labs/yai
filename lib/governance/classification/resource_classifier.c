@@ -2,7 +2,7 @@
 
 #include <string.h>
 
-int yai_law_classify_resource(const char *payload, char *out, size_t out_cap) {
+int yai_governance_classify_resource(const char *payload, char *out, size_t out_cap) {
   const char *v = "workspace";
   if (!payload || !out || out_cap == 0) return -1;
 
@@ -17,5 +17,5 @@ int yai_law_classify_resource(const char *payload, char *out, size_t out_cap) {
   else if (strstr(payload, "dataset")) v = "dataset";
   else if (strstr(payload, "params") || strstr(payload, "experiment")) v = "experiment_config";
 
-  return yai_law_safe_snprintf(out, out_cap, "%s", v);
+  return yai_governance_safe_snprintf(out, out_cap, "%s", v);
 }

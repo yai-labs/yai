@@ -19,7 +19,7 @@ typedef enum {
     YAI_E_ARMING_REQUIRED  = 201, // Comando critico senza flag --arming
     YAI_E_ROLE_REQUIRED    = 202, // Privilegi insufficienti
     
-    YAI_E_LAW_VIOLATION    = 300, // IL CUORE DI YAI: Violazione degli assiomi
+    YAI_E_GOVERNANCE_VIOLATION    = 300, // IL CUORE DI YAI: Violazione della governance canonica
     
     YAI_E_INTERNAL_ERROR   = 500  // Crash o errore logica interna
 } yai_error_t;

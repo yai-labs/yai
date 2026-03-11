@@ -12,10 +12,10 @@ static int read_domain_model_matrix(char *json, size_t cap) {
   size_t i;
 
   if (!json || cap == 0) return -1;
-  if (env_file && env_file[0] != '\0' && yai_law_read_text_file(env_file, json, cap) == 0) return 0;
+  if (env_file && env_file[0] != '\0' && yai_governance_read_text_file(env_file, json, cap) == 0) return 0;
 
   for (i = 0; i < (sizeof(candidates) / sizeof(candidates[0])); ++i) {
-    if (yai_law_read_text_file(candidates[i], json, cap) == 0) return 0;
+    if (yai_governance_read_text_file(candidates[i], json, cap) == 0) return 0;
   }
   return -1;
 }
@@ -24,7 +24,7 @@ static const char *find_object_for_lookup(const char *json, const char *lookup_i
   char needle[192];
   const char *p;
   if (!json || !lookup_id) return NULL;
-  if (yai_law_safe_snprintf(needle, sizeof(needle), "\"lookup_id\": \"%s\"", lookup_id) != 0) return NULL;
+  if (yai_governance_safe_snprintf(needle, sizeof(needle), "\"lookup_id\": \"%s\"", lookup_id) != 0) return NULL;
   p = strstr(json, needle);
   if (!p) return NULL;
   while (p > json && *p != '{') p--;
@@ -41,7 +41,7 @@ static int extract_string_between(const char *start,
   const char *q;
 
   if (!start || !limit || !key || !out || out_cap == 0 || start >= limit) return -1;
-  if (yai_law_safe_snprintf(needle, sizeof(needle), "\"%s\"", key) != 0) return -1;
+  if (yai_governance_safe_snprintf(needle, sizeof(needle), "\"%s\"", key) != 0) return -1;
   p = strstr(start, needle);
   if (!p || p >= limit) return -1;
   p = strchr(p, ':');
@@ -62,11 +62,11 @@ static int extract_string_between(const char *start,
   return 0;
 }
 
-int yai_law_read_domain_model_matrix(char *out_json, size_t out_cap) {
+int yai_governance_read_domain_model_matrix(char *out_json, size_t out_cap) {
   return read_domain_model_matrix(out_json, out_cap);
 }
 
-int yai_law_domain_model_lookup(const char *lookup_id,
+int yai_governance_domain_model_lookup(const char *lookup_id,
                                 char *kind,
                                 size_t kind_cap,
                                 char *family,
@@ -109,7 +109,7 @@ int yai_law_domain_model_lookup(const char *lookup_id,
   return 0;
 }
 
-int yai_law_domain_model_runtime_families(char out[][64], int max_out, int *out_count) {
+int yai_governance_domain_model_runtime_families(char out[][64], int max_out, int *out_count) {
   char json[32768];
   const char *p;
   const char *end;
@@ -150,7 +150,7 @@ int yai_law_domain_model_runtime_families(char out[][64], int max_out, int *out_
   return (count > 0) ? 0 : -1;
 }
 
-int yai_law_domain_model_family_resolution(const char *family,
+int yai_governance_domain_model_family_resolution(const char *family,
                                            char *domain_id,
                                            size_t domain_cap,
                                            char *default_specialization,
@@ -177,7 +177,7 @@ int yai_law_domain_model_family_resolution(const char *family,
   entries = strstr(section, "\"entries\"");
   if (!entries) entries = json + strlen(json);
 
-  if (yai_law_safe_snprintf(needle, sizeof(needle), "\"family\": \"%s\"", family) != 0) return -1;
+  if (yai_governance_safe_snprintf(needle, sizeof(needle), "\"family\": \"%s\"", family) != 0) return -1;
   obj = strstr(section, needle);
   if (!obj || obj >= entries) return -1;
   while (obj > section && *obj != '{') obj--;
@@ -229,13 +229,13 @@ int yai_law_domain_model_family_resolution(const char *family,
   return 0;
 }
 
-int yai_law_domain_model_specialization_exists(const char *family, const char *specialization_id) {
+int yai_governance_domain_model_specialization_exists(const char *family, const char *specialization_id) {
   char cands[16][96];
   int count = 0;
   int i;
 
   if (!family || !specialization_id) return 0;
-  if (yai_law_domain_model_family_resolution(family, NULL, 0, NULL, 0, cands, 16, &count) != 0) return 0;
+  if (yai_governance_domain_model_family_resolution(family, NULL, 0, NULL, 0, cands, 16, &count) != 0) return 0;
   for (i = 0; i < count; ++i) {
     if (strcmp(cands[i], specialization_id) == 0) return 1;
   }

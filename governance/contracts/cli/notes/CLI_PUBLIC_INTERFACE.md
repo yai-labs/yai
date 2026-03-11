@@ -23,27 +23,27 @@ They are interpreted as aliases, not ontology primitives.
 
 The following surfaces are part of the canonical governance control path:
 
-- `yai law list [kind]`
-- `yai law inspect <object-id>`
-- `yai law validate [registry|objects|all]`
-- `yai law gov source import --path <file-or-dir> [--path ...]`
-- `yai law gov source list`
-- `yai law gov source inspect <source-id>`
-- `yai law gov parse <source-id>`
-- `yai law gov parsed list|inspect <parsed-id>`
-- `yai law gov normalize <parsed-id>`
-- `yai law gov normalized list|inspect <normalized-id>`
-- `yai law gov build <normalized-id>`
-- `yai law gov candidate list|inspect <candidate-id>`
-- `yai law gov validate <candidate-id>`
-- `yai law gov diff <candidate-id> --against <candidate-id>`
-- `yai law gov status <source-id|candidate-id>`
-- `yai law gov review status|inspect|submit|approve|reject|withdraw <candidate-id>`
+- `yai govern list [kind]`
+- `yai govern inspect <object-id>`
+- `yai govern validate [registry|objects|all]`
+- `yai govern gov source import --path <file-or-dir> [--path ...]`
+- `yai govern gov source list`
+- `yai govern gov source inspect <source-id>`
+- `yai govern gov parse <source-id>`
+- `yai govern gov parsed list|inspect <parsed-id>`
+- `yai govern gov normalize <parsed-id>`
+- `yai govern gov normalized list|inspect <normalized-id>`
+- `yai govern gov build <normalized-id>`
+- `yai govern gov candidate list|inspect <candidate-id>`
+- `yai govern gov validate <candidate-id>`
+- `yai govern gov diff <candidate-id> --against <candidate-id>`
+- `yai govern gov status <source-id|candidate-id>`
+- `yai govern gov review status|inspect|submit|approve|reject|withdraw <candidate-id>`
 - `yai ws policy dry-run <object-id>`
 - `yai ws policy attach <object-id>`
 - `yai ws policy activate <object-id>`
 - `yai ws policy detach <object-id>`
 - `yai ws policy effective`
 
-These surfaces are object-centric and must resolve IDs via law registry indexes,
+These surfaces are object-centric and must resolve IDs via governance registry indexes,
 not direct repository path UX.

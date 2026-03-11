@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "yai.law.agent_safe_primitives.v1",
+  "$id": "yai.governance.agent_safe_primitives.v1",
   "title": "Agent Safe Primitives Catalog v1",
   "type": "object",
   "additionalProperties": false,
@@ -49,7 +49,7 @@
           "notes": { "type": "string" },
           "runtime_family_owner": {
             "type": "string",
-            "enum": ["core", "exec", "data", "graph", "knowledge", "law", "support"]
+            "enum": ["core", "exec", "data", "graph", "knowledge", "governance", "support"]
           },
           "runtime_binding_model": {
             "type": "string",

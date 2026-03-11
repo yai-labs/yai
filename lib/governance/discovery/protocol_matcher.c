@@ -10,7 +10,7 @@ static const char *normalize_family(const char *id) {
   return id;
 }
 
-int yai_law_protocol_match_bonus(const yai_law_classification_ctx_t *ctx, const char *domain_id, double *bonus) {
+int yai_governance_protocol_match_bonus(const yai_governance_classification_ctx_t *ctx, const char *domain_id, double *bonus) {
   const char *family;
   if (!ctx || !domain_id || !bonus) return -1;
   *bonus = 0.0;

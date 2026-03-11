@@ -138,7 +138,7 @@
         "knowledge"
       ],
       "template_object": [
-        "law"
+        "governance"
       ]
     },
     "workspace_binding_required_by_kind": {
@@ -456,7 +456,7 @@
     "data",
     "graph",
     "knowledge",
-    "law",
+    "governance",
     "platform",
     "protocol",
     "support"

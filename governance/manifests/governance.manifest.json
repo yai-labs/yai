@@ -1,7 +1,7 @@
 {
-  "kind": "law.manifest",
+  "kind": "governance.manifest",
   "version": "v1",
-  "law_version": "0.1.0",
+  "governance_version": "0.1.0",
   "compatibility": "manifests/compatibility.matrix.json",
   "foundation_refs": [
     "foundation/axioms",

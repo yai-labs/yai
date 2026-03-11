@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "law/grammar/schema/overlay_scope.v1",
+  "$id": "governance/grammar/schema/overlay_scope.v1",
   "title": "overlay_scope.v1",
   "description": "Overlay scope descriptor",
   "type": "object",

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "yai-law:schema/verification_report.v1.schema.json",
+  "$id": "yai-governance:schema/verification_report.v1.schema.json",
   "title": "YAI Verification Report v1",
   "type": "object",
   "required": [

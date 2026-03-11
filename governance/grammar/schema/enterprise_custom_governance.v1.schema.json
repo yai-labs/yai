@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "law/grammar/schema/enterprise_custom_governance.v1",
+  "$id": "governance/grammar/schema/enterprise_custom_governance.v1",
   "title": "enterprise_custom_governance.v1",
   "description": "Canonical enterprise custom governance object manifest",
   "type": "object",
@@ -128,7 +128,7 @@
     "compatibility": {
       "type": "object",
       "properties": {
-        "law_range": {"type": "string"},
+        "governance_range": {"type": "string"},
         "runtime_targets": {
           "type": "array",
           "items": {"type": "string"}
@@ -138,7 +138,7 @@
           "items": {"type": "string"}
         }
       },
-      "required": ["law_range", "runtime_targets"],
+      "required": ["governance_range", "runtime_targets"],
       "additionalProperties": true
     },
     "apply_modes": {

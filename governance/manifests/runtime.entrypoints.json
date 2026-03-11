@@ -4,7 +4,7 @@
   "entrypoints": [
     {
       "entrypoint_id": "default-runtime",
-      "law_manifest_ref": "manifests/law.manifest.json",
+      "governance_manifest_ref": "manifests/governance.manifest.json",
       "classification_ref": "classification/classification-map.json",
       "families_ref": "control-families/index/families.index.json",
       "specializations_ref": "domain-specializations/index/specializations.index.json",
@@ -83,7 +83,7 @@
       "data",
       "graph",
       "knowledge",
-      "law",
+      "governance",
       "platform",
       "protocol",
       "support"

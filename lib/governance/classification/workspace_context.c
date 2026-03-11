@@ -2,7 +2,7 @@
 
 #include <string.h>
 
-int yai_law_extract_workspace_context(const char *payload,
+int yai_governance_extract_workspace_context(const char *payload,
                                       char *out_mode,
                                       size_t out_mode_cap,
                                       int *black_box_mode,
@@ -46,6 +46,6 @@ int yai_law_extract_workspace_context(const char *payload,
   *sink_trusted = (strstr(payload, "trusted") || strstr(payload, "internal") || strstr(payload, "approved_sink")) ? 1 : 0;
   *sink_external = (strstr(payload, "external") || strstr(payload, "public") || strstr(payload, "third_party")) ? 1 : 0;
 
-  if (*black_box_mode) return yai_law_safe_snprintf(out_mode, out_mode_cap, "%s", "black_box");
-  return yai_law_safe_snprintf(out_mode, out_mode_cap, "%s", "default");
+  if (*black_box_mode) return yai_governance_safe_snprintf(out_mode, out_mode_cap, "%s", "black_box");
+  return yai_governance_safe_snprintf(out_mode, out_mode_cap, "%s", "default");
 }

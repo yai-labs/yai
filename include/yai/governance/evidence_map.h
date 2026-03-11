@@ -4,7 +4,7 @@
 
 #include <yai/governance/decision_map.h>
 
-typedef struct yai_law_evidence_envelope {
+typedef struct yai_governance_evidence_envelope {
   char trace_id[64];
   char decision_id[64];
   char domain_id[64];
@@ -21,16 +21,16 @@ typedef struct yai_law_evidence_envelope {
   int dependency_chain_required;
   int lawful_basis_required;
   int oversight_trace_required;
-} yai_law_evidence_envelope_t;
+} yai_governance_evidence_envelope_t;
 
-int yai_law_decision_to_evidence(const yai_law_decision_t *decision,
+int yai_governance_decision_to_evidence(const yai_governance_decision_t *decision,
                                  const char *trace_id,
                                  const char *provider,
                                  const char *resource,
                                  const char *authority_context,
-                                 yai_law_evidence_envelope_t *out);
+                                 yai_governance_evidence_envelope_t *out);
 
-int yai_law_evidence_to_record_blob(const yai_law_decision_t *decision,
-                                    const yai_law_evidence_envelope_t *evidence,
+int yai_governance_evidence_to_record_blob(const yai_governance_decision_t *decision,
+                                    const yai_governance_evidence_envelope_t *evidence,
                                     char *out,
                                     size_t out_cap);

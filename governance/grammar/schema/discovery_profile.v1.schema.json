@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "law/grammar/schema/discovery_profile.v1",
+  "$id": "governance/grammar/schema/discovery_profile.v1",
   "title": "discovery_profile.v1",
   "description": "Domain discovery profile",
   "type": "object",

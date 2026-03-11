@@ -14,13 +14,13 @@ The CLI surface remains stable even when internal runtime packaging changes.
 
 The deterministic governance ingestion pipeline is exposed through:
 
-- `yai law gov source ...`
-- `yai law gov parse ...`
-- `yai law gov parsed ...`
-- `yai law gov normalize ...`
-- `yai law gov normalized ...`
-- `yai law gov build ...`
-- `yai law gov candidate ...`
-- `yai law gov validate ...`
-- `yai law gov diff ...`
-- `yai law gov status ...`
+- `yai govern gov source ...`
+- `yai govern gov parse ...`
+- `yai govern gov parsed ...`
+- `yai govern gov normalize ...`
+- `yai govern gov normalized ...`
+- `yai govern gov build ...`
+- `yai govern gov candidate ...`
+- `yai govern gov validate ...`
+- `yai govern gov diff ...`
+- `yai govern gov status ...`

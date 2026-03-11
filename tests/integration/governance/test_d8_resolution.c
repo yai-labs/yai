@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <string.h>
 
-#include <yai/law/resolver.h>
+#include <yai/governance/resolver.h>
 
 int main(void) {
-  yai_law_resolution_output_t out;
+  yai_governance_resolution_output_t out;
   char err[256] = {0};
 
-  if (yai_law_resolve_control_call("ws-d8", "{\"command\":\"experiment.run\",\"params_hash\":\"abc\",\"dataset\":\"d1\"}", "trace-d8", &out, err, sizeof(err)) != 0) {
+  if (yai_governance_resolve_control_call("ws-d8", "{\"command\":\"experiment.run\",\"params_hash\":\"abc\",\"dataset\":\"d1\"}", "trace-d8", &out, err, sizeof(err)) != 0) {
     fprintf(stderr, "d8 resolution error: %s\n", err);
     return 1;
   }

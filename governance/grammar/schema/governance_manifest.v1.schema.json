@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "law/grammar/schema/law_manifest.v1",
-  "title": "law_manifest.v1",
-  "description": "Root law manifest",
+  "$id": "governance/grammar/schema/governance_manifest.v1",
+  "title": "governance_manifest.v1",
+  "description": "Root governance manifest",
   "type": "object",
   "properties": {
     "kind": {
@@ -12,7 +12,7 @@
       "type": "string",
       "pattern": "^v[0-9]+$"
     },
-    "law_version": {
+    "governance_version": {
       "type": "string"
     },
     "compatibility": {
@@ -43,7 +43,7 @@
   "required": [
     "kind",
     "version",
-    "law_version",
+    "governance_version",
     "domain_index_ref",
     "compliance_index_ref"
   ],
