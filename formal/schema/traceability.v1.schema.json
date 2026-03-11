@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "formal/schema/traceability.v1.schema.json",
-  "title": "YAI Formal Traceability Matrix v1",
+  "title": "YAI Formal Traceability Matrix v1 (legacy compatibility)",
   "type": "object",
   "required": [
     "v",

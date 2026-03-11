@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "linkage": [
+    {
+      "invariant_class": "authority.command_gate",
+      "formal_module": "yai_authority",
+      "runtime_outcomes": ["AUTHORITY_BLOCK", "OK"],
+      "runtime_functions": ["yai_authority_command_gate"]
+    },
+    {
+      "invariant_class": "authority.policy_gate",
+      "formal_module": "yai_authority",
+      "runtime_outcomes": ["POLICY_BLOCK", "OK"],
+      "runtime_functions": ["yai_authority_policy_gate", "yai_enforcement_finalize_control_call"]
+    },
+    {
+      "invariant_class": "containment.mode",
+      "formal_module": "yai_containment",
+      "runtime_outcomes": ["normal", "restricted", "observe_only"],
+      "runtime_functions": ["yai_runtime_containment_state_apply", "yai_runtime_containment_state_allows"]
+    },
+    {
+      "invariant_class": "grants.validity",
+      "formal_module": "yai_grants",
+      "runtime_outcomes": ["valid", "refresh_required", "expired", "revoked"],
+      "runtime_functions": ["yai_runtime_grants_state_refresh_validity"]
+    },
+    {
+      "invariant_class": "protocol.control_envelope",
+      "formal_module": "yai_protocol_control",
+      "runtime_outcomes": ["ok", "bad_version", "missing_ws", "type_not_allowed"],
+      "runtime_functions": ["yai_validate_envelope_v1"]
+    },
+    {
+      "invariant_class": "review.escalation",
+      "formal_module": "yai_review_escalation",
+      "runtime_outcomes": ["clear", "review_required", "blocked"],
+      "runtime_functions": ["yai_enforcement_finalize_control_call"]
+    }
+  ]
+}

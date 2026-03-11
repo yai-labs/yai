@@ -55,12 +55,12 @@ def render_header(spec: dict, generated: str) -> str:
     return "\n".join(lines)
 
 
-def render_law_ids(spec: dict, generated: str) -> str:
+def render_yai_ids(spec: dict, generated: str) -> str:
     header = spec["header"]
     lines = [
         "\\* AUTO-GENERATED: vault/vault_abi.json",
         f"\\* Generated: {generated}",
-        "---- MODULE GOVERNANCE_IDS ----",
+        "---- MODULE yai_ids ----",
         f"VaultAbiVersion == {spec['version']}",
         f"VaultLayoutBytes == {spec['layout_bytes']}",
         f"VaultHeaderSize == {header['size']}",
@@ -106,16 +106,16 @@ def main() -> int:
 
     generated = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     header_text = render_header(spec, generated)
-    law_text = render_law_ids(spec, generated)
+    yai_ids_text = render_yai_ids(spec, generated)
 
     formal_root = resolve_formal_root(out_dir)
     header_path = out_dir / "include" / "yai" / "protocol" / "contracts" / "yai_vault_abi.h"
-    law_path = formal_root / "formal" / "tla" / "GOVERNANCE_IDS.tla"
+    yai_ids_path = formal_root / "formal" / "modules" / "yai_ids.tla"
 
     header_path.parent.mkdir(parents=True, exist_ok=True)
-    law_path.parent.mkdir(parents=True, exist_ok=True)
+    yai_ids_path.parent.mkdir(parents=True, exist_ok=True)
     header_path.write_text(header_text, encoding="utf-8")
-    law_path.write_text(law_text, encoding="utf-8")
+    yai_ids_path.write_text(yai_ids_text, encoding="utf-8")
     return 0
 
 

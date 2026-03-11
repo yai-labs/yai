@@ -15,6 +15,25 @@ typedef struct yai_hardened_config {
   bool enforce_tla_safety;
 } yai_hardened_config_t;
 
+typedef enum yai_enforcement_invariant_class {
+  YAI_ENFORCE_INV_AUTHORITY_COMMAND_GATE = 0,
+  YAI_ENFORCE_INV_AUTHORITY_POLICY_GATE = 1,
+  YAI_ENFORCE_INV_RESOLUTION_PRECEDENCE = 2,
+  YAI_ENFORCE_INV_POLICY_APPLICATION = 3,
+  YAI_ENFORCE_INV_GRANTS_VALIDITY = 4,
+  YAI_ENFORCE_INV_CONTAINMENT_MODE = 5,
+  YAI_ENFORCE_INV_PROTOCOL_CONTROL_ENVELOPE = 6,
+  YAI_ENFORCE_INV_REVIEW_ESCALATION = 7
+} yai_enforcement_invariant_class_t;
+
+typedef enum yai_enforcement_outcome_class {
+  YAI_ENFORCE_OUTCOME_ALLOW = 0,
+  YAI_ENFORCE_OUTCOME_REVIEW_REQUIRED = 1,
+  YAI_ENFORCE_OUTCOME_DENY = 2,
+  YAI_ENFORCE_OUTCOME_BLOCKED = 3,
+  YAI_ENFORCE_OUTCOME_QUARANTINED = 4
+} yai_enforcement_outcome_class_t;
+
 /* Transitional rpc.v1 envelope validation errors. */
 #define YAI_E_OK                0
 #define YAI_E_BAD_ARG          -1
@@ -48,3 +67,7 @@ int yai_enforcement_finalize_control_call(const yai_rpc_envelope_t *env,
                                           yai_enforcement_decision_t *out,
                                           char *err,
                                           size_t err_cap);
+
+const char *yai_enforcement_invariant_class_name(yai_enforcement_invariant_class_t invariant_class);
+const char *yai_enforcement_outcome_class_name(yai_enforcement_outcome_class_t outcome_class);
+yai_enforcement_outcome_class_t yai_enforcement_outcome_from_decision(const yai_enforcement_decision_t *decision);

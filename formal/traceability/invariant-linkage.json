@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "invariants": [
+    {
+      "id": "F-001-authority-gating",
+      "modules": ["yai_authority", "yai_enforcement"],
+      "configs": ["yai_enforcement.focus.cfg"],
+      "runtime_surfaces": ["yai_authority_command_gate", "yai_enforcement_finalize_control_call"]
+    },
+    {
+      "id": "F-002-resolution-determinism",
+      "modules": ["yai_resolution", "yai_policy_application"],
+      "configs": ["yai_system.quick.cfg", "yai_governance_resolution.cfg"],
+      "runtime_surfaces": ["governance_resolver", "runtime_policy_state_apply"]
+    },
+    {
+      "id": "F-003-grant-validity",
+      "modules": ["yai_grants", "yai_containment"],
+      "configs": ["yai_system.quick.cfg", "yai_system.deep.cfg"],
+      "runtime_surfaces": ["runtime_grants_refresh", "runtime_containment_state_apply"]
+    },
+    {
+      "id": "F-004-control-envelope",
+      "modules": ["yai_protocol_control", "yai_enforcement"],
+      "configs": ["yai_enforcement.focus.cfg"],
+      "runtime_surfaces": ["yai_validate_envelope_v1"]
+    },
+    {
+      "id": "F-005-workspace-binding",
+      "modules": ["yai_workspace_state", "yai_runtime_state"],
+      "configs": ["yai_system.deep.cfg"],
+      "runtime_surfaces": ["runtime_capabilities_bind_workspace"]
+    }
+  ]
+}

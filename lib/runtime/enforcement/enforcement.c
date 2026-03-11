@@ -273,3 +273,42 @@ int yai_enforcement_finalize_control_call(const yai_rpc_envelope_t *env,
     snprintf(out->review_state, sizeof(out->review_state), "%s", "clear");
     return 0;
 }
+
+const char *yai_enforcement_invariant_class_name(yai_enforcement_invariant_class_t invariant_class)
+{
+    switch (invariant_class) {
+    case YAI_ENFORCE_INV_AUTHORITY_COMMAND_GATE: return "authority.command_gate";
+    case YAI_ENFORCE_INV_AUTHORITY_POLICY_GATE: return "authority.policy_gate";
+    case YAI_ENFORCE_INV_RESOLUTION_PRECEDENCE: return "resolution.precedence";
+    case YAI_ENFORCE_INV_POLICY_APPLICATION: return "policy.application";
+    case YAI_ENFORCE_INV_GRANTS_VALIDITY: return "grants.validity";
+    case YAI_ENFORCE_INV_CONTAINMENT_MODE: return "containment.mode";
+    case YAI_ENFORCE_INV_PROTOCOL_CONTROL_ENVELOPE: return "protocol.control_envelope";
+    case YAI_ENFORCE_INV_REVIEW_ESCALATION: return "review.escalation";
+    default: return "unknown";
+    }
+}
+
+const char *yai_enforcement_outcome_class_name(yai_enforcement_outcome_class_t outcome_class)
+{
+    switch (outcome_class) {
+    case YAI_ENFORCE_OUTCOME_ALLOW: return "allow";
+    case YAI_ENFORCE_OUTCOME_REVIEW_REQUIRED: return "review_required";
+    case YAI_ENFORCE_OUTCOME_DENY: return "deny";
+    case YAI_ENFORCE_OUTCOME_BLOCKED: return "blocked";
+    case YAI_ENFORCE_OUTCOME_QUARANTINED: return "quarantined";
+    default: return "unknown";
+    }
+}
+
+yai_enforcement_outcome_class_t yai_enforcement_outcome_from_decision(const yai_enforcement_decision_t *decision)
+{
+    if (!decision) return YAI_ENFORCE_OUTCOME_DENY;
+    if (strcmp(decision->code, "OK") == 0) return YAI_ENFORCE_OUTCOME_ALLOW;
+    if (strcmp(decision->code, "REVIEW_REQUIRED") == 0) return YAI_ENFORCE_OUTCOME_REVIEW_REQUIRED;
+    if (strcmp(decision->code, "POLICY_BLOCK") == 0 || strcmp(decision->code, "AUTHORITY_BLOCK") == 0) {
+        return YAI_ENFORCE_OUTCOME_BLOCKED;
+    }
+    if (strcmp(decision->code, "CONTAINMENT_QUARANTINE") == 0) return YAI_ENFORCE_OUTCOME_QUARANTINED;
+    return YAI_ENFORCE_OUTCOME_DENY;
+}
