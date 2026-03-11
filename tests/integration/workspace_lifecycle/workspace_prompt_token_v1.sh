@@ -6,52 +6,42 @@ TOKEN="$ROOT/tools/bin/yai-ws-token"
 
 WS="ws_prompt_token_v1"
 ALIAS="demo_prompt"
-SESSION_DIR="$HOME/.yai/session"
-BIND_FILE="$SESSION_DIR/active_workspace.json"
 RUN_DIR="$HOME/.yai/run/$WS"
 MANIFEST="$RUN_DIR/manifest.json"
-BACKUP="$(mktemp)"
+WS_ROOT="$(mktemp -d)"
+OUTSIDE_DIR="$(mktemp -d)"
 
 cleanup() {
-  if [[ -f "$BACKUP" ]]; then
-    if [[ -f "$BIND_FILE" ]]; then
-      rm -f "$BIND_FILE" || true
-    fi
-    if [[ -s "$BACKUP" ]]; then
-      cp "$BACKUP" "$BIND_FILE"
-    fi
-    rm -f "$BACKUP" || true
-  fi
+  rm -rf "$WS_ROOT" || true
+  rm -rf "$OUTSIDE_DIR" || true
   rm -rf "$RUN_DIR" || true
 }
 trap cleanup EXIT
 
-mkdir -p "$SESSION_DIR"
-if [[ -f "$BIND_FILE" ]]; then
-  cp "$BIND_FILE" "$BACKUP"
-fi
-rm -f "$BIND_FILE"
-
-# 1) no active workspace -> no token
-out="$("$TOKEN")"
-[[ -z "$out" ]] || { echo "workspace_prompt_token_v1: FAIL (expected empty without binding)"; exit 1; }
-
-# 2) active binding + manifest -> token present
 mkdir -p "$RUN_DIR"
 cat >"$MANIFEST" <<EOF
-{"type":"yai.workspace.manifest.v1","ws_id":"$WS"}
-EOF
-cat >"$BIND_FILE" <<EOF
-{"type":"yai.workspace.binding.v1","workspace_id":"$WS","workspace_alias":"$ALIAS","bound_at":0,"source":"explicit"}
+{"type":"yai.workspace.manifest.v1","ws_id":"$WS","workspace_alias":"$ALIAS","root_path":"$WS_ROOT"}
 EOF
 
+# 1) outside workspace root -> empty token
+pushd "$OUTSIDE_DIR" >/dev/null
 out="$("$TOKEN")"
+popd >/dev/null
+[[ -z "$out" ]] || { echo "workspace_prompt_token_v1: FAIL (expected empty outside workspace root)"; exit 1; }
+
+# 2) inside workspace root -> token present
+mkdir -p "$WS_ROOT/subdir"
+pushd "$WS_ROOT/subdir" >/dev/null
+out="$("$TOKEN")"
+popd >/dev/null
 [[ "$out" == "◉ $ALIAS" ]] || { echo "workspace_prompt_token_v1: FAIL (unexpected token '$out')"; exit 1; }
 [[ "$out" != ws:* ]] || { echo "workspace_prompt_token_v1: FAIL (token must not use ws: prefix)"; exit 1; }
 
-# 3) stale-like binding (missing manifest) still shows session binding token
+# 3) missing manifest -> empty token
 rm -f "$MANIFEST"
+pushd "$WS_ROOT/subdir" >/dev/null
 out="$("$TOKEN")"
-[[ "$out" == "◉ $ALIAS" ]] || { echo "workspace_prompt_token_v1: FAIL (expected token on active binding without manifest)"; exit 1; }
+popd >/dev/null
+[[ -z "$out" ]] || { echo "workspace_prompt_token_v1: FAIL (expected empty token with missing manifest)"; exit 1; }
 
 echo "workspace_prompt_token_v1: ok"

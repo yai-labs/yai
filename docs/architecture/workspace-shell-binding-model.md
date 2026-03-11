@@ -2,19 +2,18 @@
 
 ## Principle
 
-Shell prompt token represents active workspace binding, not cwd.
+Shell prompt token represents workspace scope from current shell cwd.
 
 This is intentionally Git-like:
 
-- branch indicator != path root
-- workspace token != workspace root path
+- branch indicator depends on current repository path
+- workspace token depends on current workspace root path
 
 ## Semantics
 
-- Token present only when binding is active.
+- Token present only when cwd is inside a workspace root.
 - Token alias comes from workspace identity alias.
-- Token remains valid even if cwd is outside workspace root.
-- Token disappears when binding is cleared.
+- Token disappears when cwd exits workspace root.
 - Token is exposed through `tools/bin/yai-ws-token` in compact form: `◉ <alias>`.
 
 ## Diagnostics

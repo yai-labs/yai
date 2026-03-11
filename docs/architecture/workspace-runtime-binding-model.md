@@ -5,7 +5,8 @@
 Binding resolution order:
 
 1. `YAI_ACTIVE_WORKSPACE` (explicit override)
-2. `~/.yai/session/active_workspace.json`
+2. cwd-mapped workspace (`~/.yai/run/*/manifest.json`, deepest `root_path` match)
+3. `~/.yai/session/active_workspace.json` (compatibility fallback)
 
 Binding status values:
 

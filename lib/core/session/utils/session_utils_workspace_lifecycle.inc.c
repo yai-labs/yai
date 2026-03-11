@@ -1115,6 +1115,51 @@ int yai_session_clear_workspace_runtime_state(char *out_ws_id, size_t out_ws_id_
     return 0;
 }
 
+static int yai_workspace_resolve_from_cwd(yai_workspace_runtime_info_t *best_out)
+{
+    char run_dir[MAX_PATH_LEN];
+    char cwd[MAX_PATH_LEN];
+    DIR *d;
+    struct dirent *ent;
+    size_t best_len = 0;
+
+    if (!best_out)
+        return -1;
+    memset(best_out, 0, sizeof(*best_out));
+
+    if (!getcwd(cwd, sizeof(cwd)))
+        return -1;
+    if (yai_session_build_run_path(run_dir, sizeof(run_dir), "") != 0)
+        return -1;
+
+    d = opendir(run_dir);
+    if (!d)
+        return -1;
+
+    while ((ent = readdir(d)) != NULL)
+    {
+        yai_workspace_runtime_info_t info;
+        size_t root_len;
+
+        if (strcmp(ent->d_name, ".") == 0 || strcmp(ent->d_name, "..") == 0)
+            continue;
+        if (yai_session_read_workspace_info(ent->d_name, &info) != 0 || !info.exists)
+            continue;
+        if (!info.root_path[0] || !yai_path_is_under(info.root_path, cwd))
+            continue;
+
+        root_len = strlen(info.root_path);
+        if (root_len >= best_len)
+        {
+            best_len = root_len;
+            *best_out = info;
+        }
+    }
+
+    closedir(d);
+    return best_len > 0 ? 0 : -1;
+}
+
 int yai_session_resolve_current_workspace(yai_workspace_runtime_info_t *info_out,
                                           char *status_out,
                                           size_t status_cap,
@@ -1124,6 +1169,7 @@ int yai_session_resolve_current_workspace(yai_workspace_runtime_info_t *info_out
     char ws_id[MAX_WS_ID_LEN] = {0};
     char ws_alias[64] = {0};
     const char *env_ws = getenv("YAI_ACTIVE_WORKSPACE");
+    int resolved_by_cwd = 0;
 
     if (!info_out || !status_out || status_cap == 0)
         return -1;
@@ -1146,21 +1192,29 @@ int yai_session_resolve_current_workspace(yai_workspace_runtime_info_t *info_out
     }
     else
     {
-        if (yai_workspace_binding_read(ws_id, sizeof(ws_id), ws_alias, sizeof(ws_alias)) != 0)
+        if (yai_workspace_resolve_from_cwd(info_out) == 0)
         {
-            snprintf(status_out, status_cap, "%s", "no_active");
-            return 0;
+            resolved_by_cwd = 1;
         }
-        if (!yai_ws_id_is_valid(ws_id))
+        else
         {
-            snprintf(status_out, status_cap, "%s", "invalid");
-            if (err && err_cap > 0)
-                snprintf(err, err_cap, "%s", "binding_workspace_id_invalid");
-            return -1;
+            if (yai_workspace_binding_read(ws_id, sizeof(ws_id), ws_alias, sizeof(ws_alias)) != 0)
+            {
+                snprintf(status_out, status_cap, "%s", "no_active");
+                return 0;
+            }
+            if (!yai_ws_id_is_valid(ws_id))
+            {
+                snprintf(status_out, status_cap, "%s", "invalid");
+                if (err && err_cap > 0)
+                    snprintf(err, err_cap, "%s", "binding_workspace_id_invalid");
+                return -1;
+            }
         }
     }
 
-    if (yai_session_read_workspace_info(ws_id, info_out) != 0 || !info_out->exists)
+    if (!resolved_by_cwd &&
+        (yai_session_read_workspace_info(ws_id, info_out) != 0 || !info_out->exists))
     {
         snprintf(status_out, status_cap, "%s", "stale");
         if (err && err_cap > 0)
@@ -1168,7 +1222,7 @@ int yai_session_resolve_current_workspace(yai_workspace_runtime_info_t *info_out
         return -1;
     }
 
-    if (info_out->workspace_alias[0] == '\0')
+    if (info_out->workspace_alias[0] == '\0' && ws_alias[0] != '\0')
         snprintf(info_out->workspace_alias, sizeof(info_out->workspace_alias), "%s", ws_alias);
     if (!info_out->namespace_valid)
     {

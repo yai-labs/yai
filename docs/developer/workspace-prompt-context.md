@@ -2,7 +2,7 @@
 
 ## Goal
 
-Provide a compact, stable prompt-facing context payload derived from current workspace binding.
+Provide a compact, stable prompt-facing context payload derived from current workspace scope.
 
 This is not full inspect output. It is a lightweight session summary.
 
@@ -12,17 +12,16 @@ For terminal prompts, use the helper:
 
 - `tools/bin/yai-ws-token`
 
-It emits a compact token based on active session binding only:
+It emits a compact token based on current directory workspace scope:
 
 - `◉ <alias>` (default)
 - no `ws:` prefix
-- empty output when no active/valid binding
-- interactive shells resolve per-terminal binding first (`~/.yai/session/by-tty/<tty>.json`)
-- non-interactive/scripted calls fall back to `~/.yai/session/active_workspace.json`
+- empty output when cwd is outside any workspace root
+- resolves from `~/.yai/run/*/manifest.json` using `root_path` containment (deepest match)
 
-This keeps shell UX aligned with Git-like context display while preserving the model:
+This keeps shell UX aligned with Git branch behavior:
 
-- token represents binding, not cwd path.
+- token is shown only when shell cwd is inside a workspace root.
 
 ## Contract
 

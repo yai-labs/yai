@@ -8,15 +8,15 @@ if [[ "${1:-}" == "--help" ]]; then
   cat <<'EOF'
 usage: yai-ws-token [--icon <icon>] [--ascii]
 
-Prints a compact workspace prompt token using active session binding:
+Prints a compact workspace prompt token using current directory workspace scope:
   <icon> <workspace_alias>
 
 Resolution order:
-  1) per-TTY binding (~/.yai/session/by-tty/<tty>.json) when available
-  2) session-global binding (~/.yai/session/active_workspace.json) only when no TTY
-     is available (non-interactive/scripted contexts)
+  1) YAI_ACTIVE_WORKSPACE env override (if valid workspace manifest exists)
+  2) current cwd mapped to workspace root_path from ~/.yai/run/*/manifest.json
+     (deepest root wins)
 
-Output is empty when no active/valid workspace binding is present for the current session.
+Output is empty when cwd is outside any known workspace root.
 EOF
   exit 0
 fi
@@ -42,45 +42,69 @@ import sys
 
 home_dir = sys.argv[1]
 icon = sys.argv[2]
-session_dir = pathlib.Path(home_dir) / ".yai" / "session"
-bind_scope = os.environ.get("YAI_WS_BIND_SCOPE", "").strip().lower()
+run_dir = pathlib.Path(home_dir) / ".yai" / "run"
+cwd = pathlib.Path(os.getcwd()).resolve()
+ws_env = os.environ.get("YAI_ACTIVE_WORKSPACE", "").strip()
 
-def tty_tag() -> str:
-    override = os.environ.get("YAI_WS_TTY_TAG_OVERRIDE", "").strip()
-    if override:
-        return re.sub(r"[^A-Za-z0-9]", "_", override) or "unknown_tty"
-    for fd in (0, 1, 2):
+
+def valid_ws_id(v: str) -> bool:
+    return bool(v and re.fullmatch(r"[A-Za-z0-9._-]+", v))
+
+
+def load_manifest_for_ws(ws_id: str):
+    p = run_dir / ws_id / "manifest.json"
+    if not p.is_file():
+        return None
+    try:
+        payload = json.loads(p.read_text(encoding="utf-8"))
+    except Exception:
+        return None
+    root_raw = str(payload.get("root_path", "")).strip()
+    if not root_raw:
+        return None
+    try:
+        root = pathlib.Path(root_raw).resolve()
+    except Exception:
+        return None
+    alias = str(payload.get("workspace_alias", "")).strip() or ws_id
+    return (ws_id, alias, root)
+
+
+if valid_ws_id(ws_env):
+    m = load_manifest_for_ws(ws_env)
+    if m is not None:
+        _, alias, root = m
         try:
-            tty = os.ttyname(fd)
-            if tty:
-                return re.sub(r"[^A-Za-z0-9]", "_", tty) or "unknown_tty"
-        except OSError:
-            continue
-    return ""
+            cwd.relative_to(root)
+            print(f"{icon} {alias}")
+            sys.exit(0)
+        except Exception:
+            pass
 
-tag = tty_tag()
-if bind_scope in ("global", "shared"):
-    bind_path = session_dir / "active_workspace.json"
-elif tag:
-    # Interactive mode: keep binding session-scoped to current terminal.
-    bind_path = session_dir / "by-tty" / f"{tag}.json"
-else:
-    # Non-interactive mode: fallback to global binding for scripts/tests.
-    bind_path = session_dir / "active_workspace.json"
-
-if not bind_path.is_file():
+if not run_dir.is_dir():
     sys.exit(0)
 
-try:
-    payload = json.loads(bind_path.read_text(encoding="utf-8"))
-except Exception:
-    sys.exit(0)
+best = None
+best_len = -1
+for entry in run_dir.iterdir():
+    if not entry.is_dir():
+        continue
+    ws_id = entry.name
+    if not valid_ws_id(ws_id):
+        continue
+    m = load_manifest_for_ws(ws_id)
+    if m is None:
+        continue
+    _, alias, root = m
+    try:
+        cwd.relative_to(root)
+    except Exception:
+        continue
+    n = len(str(root))
+    if n >= best_len:
+        best_len = n
+        best = alias
 
-ws_id = str(payload.get("workspace_id", "")).strip()
-ws_alias = str(payload.get("workspace_alias", "")).strip() or ws_id
-
-if not ws_id or not re.fullmatch(r"[A-Za-z0-9._-]+", ws_id):
-    sys.exit(0)
-
-print(f"{icon} {ws_alias}")
+if best:
+    print(f"{icon} {best}")
 PY
