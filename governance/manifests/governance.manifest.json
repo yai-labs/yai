@@ -23,6 +23,8 @@
   "control_family_descriptors_ref": "families/index/families.descriptors.index.json",
   "control_family_matrix_ref": "families/index/family.matrix.v1.json",
   "domain_specialization_index_ref": "domain-specializations/index/specializations.index.json",
+  "domain_specialization_descriptors_ref": "domain-specializations/index/specializations.descriptors.index.json",
+  "domain_specialization_matrix_ref": "domain-specializations/index/specialization.matrix.v1.json",
   "overlay_indexes": {
     "regulatory": "overlays/regulatory/index/regulatory.index.json",
     "sector": "overlays/sector/index/sector.index.json",

@@ -14,6 +14,17 @@ static const char *yai_governance_find_family_entry(const char *json, const char
   return (*p == '{') ? p : NULL;
 }
 
+static const char *yai_governance_find_entry_by_key(const char *json, const char *key, const char *value) {
+  char needle[192];
+  const char *p;
+  if (!json || !key || !value) return NULL;
+  if (yai_governance_safe_snprintf(needle, sizeof(needle), "\"%s\": \"%s\"", key, value) != 0) return NULL;
+  p = strstr(json, needle);
+  if (!p) return NULL;
+  while (p > json && *p != '{') p--;
+  return (*p == '{') ? p : NULL;
+}
+
 static int yai_governance_extract_entry_string(const char *obj_start,
                                         const char *key,
                                         char *out,
@@ -87,6 +98,65 @@ int yai_governance_load_control_family_descriptor(const yai_governance_runtime_t
   return yai_governance_read_governance_surface_file(rt, descriptor_ref, out_json, out_cap);
 }
 
+int yai_governance_load_specialization_descriptor(const yai_governance_runtime_t *rt,
+                                           const char *lookup_id,
+                                           char *out_json,
+                                           size_t out_cap) {
+  char kind[32];
+  char specialization[96];
+  char index_json[32768];
+  char descriptor_ref[256];
+  const char *entry;
+
+  if (!rt || !lookup_id || !out_json || out_cap == 0) return -1;
+
+  kind[0] = '\0';
+  specialization[0] = '\0';
+  if (yai_governance_domain_model_lookup(lookup_id,
+                                  kind,
+                                  sizeof(kind),
+                                  NULL,
+                                  0,
+                                  NULL,
+                                  0,
+                                  NULL,
+                                  0,
+                                  NULL,
+                                  0) == 0 &&
+      strcmp(kind, "specialization") == 0) {
+    (void)yai_governance_safe_snprintf(specialization, sizeof(specialization), "%s", lookup_id);
+  } else {
+    /* Accept canonical_name lookups too (e.g. economic.payments). */
+    const char *dot = strrchr(lookup_id, '.');
+    if (dot && dot[1] != '\0') {
+      (void)yai_governance_safe_snprintf(specialization, sizeof(specialization), "%s", dot + 1);
+    } else {
+      (void)yai_governance_safe_snprintf(specialization, sizeof(specialization), "%s", lookup_id);
+    }
+  }
+
+  if (yai_governance_read_governance_surface_file(rt,
+                                           "domain-specializations/index/specializations.descriptors.index.json",
+                                           index_json,
+                                           sizeof(index_json)) != 0) {
+    return -1;
+  }
+
+  entry = yai_governance_find_entry_by_key(index_json, "specialization_id", specialization);
+  if (!entry) {
+    entry = yai_governance_find_entry_by_key(index_json, "canonical_name", lookup_id);
+  }
+  if (!entry) return -1;
+
+  descriptor_ref[0] = '\0';
+  if (yai_governance_extract_entry_string(entry, "descriptor_ref", descriptor_ref, sizeof(descriptor_ref)) != 0 ||
+      descriptor_ref[0] == '\0') {
+    return -1;
+  }
+
+  return yai_governance_read_governance_surface_file(rt, descriptor_ref, out_json, out_cap);
+}
+
 int yai_governance_load_domain_manifest(const yai_governance_runtime_t *rt,
                                  const char *domain_id,
                                  char *out_json,
@@ -94,10 +164,7 @@ int yai_governance_load_domain_manifest(const yai_governance_runtime_t *rt,
   char path[512];
   char manifest_ref[256];
   int rc;
-  const char *roots_primary[] = {
-    "domain-specializations",
-    "domains"
-  };
+  const char *roots_primary[] = {"domains"};
   const char *legacy_seed = "transitional/domain-family-seed";
   const char *allow_seed = getenv("YAI_GOVERNANCE_ENABLE_TRANSITIONAL_SEED");
   if (!allow_seed || allow_seed[0] == '\0') {
@@ -132,7 +199,13 @@ int yai_governance_load_domain_manifest(const yai_governance_runtime_t *rt,
     }
   }
 
-  /* Legacy fallback: folder scan order retained for compatibility only. */
+  /* Compatibility fallback: canonical materialized specializations + domains. */
+  if (yai_governance_safe_snprintf(path, sizeof(path), "%s/domain-specializations/materialized/%s/manifest.json", rt->root, domain_id) != 0) {
+    return -1;
+  }
+  rc = yai_governance_read_text_file(path, out_json, out_cap);
+  if (rc == 0) return 0;
+
   for (i = 0; i < (sizeof(roots_primary) / sizeof(roots_primary[0])); ++i) {
     if (yai_governance_safe_snprintf(path, sizeof(path), "%s/%s/%s/manifest.json", rt->root, roots_primary[i], domain_id) != 0) {
       return -1;

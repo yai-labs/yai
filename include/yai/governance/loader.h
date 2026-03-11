@@ -21,6 +21,10 @@ int yai_governance_load_control_family_descriptor(const yai_governance_runtime_t
                                            const char *lookup_id,
                                            char *out_json,
                                            size_t out_cap);
+int yai_governance_load_specialization_descriptor(const yai_governance_runtime_t *rt,
+                                           const char *lookup_id,
+                                           char *out_json,
+                                           size_t out_cap);
 int yai_governance_load_compliance_index(const yai_governance_runtime_t *rt,
                                   char *out_json,
                                   size_t out_cap);
