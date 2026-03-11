@@ -1,7 +1,7 @@
 ---
 id: MP-SPECS-REFACTOR-FOUNDATION-0.1.0
 status: active
-runbook: docs/runbooks/operations/program/specs-refactor-foundation.md
+runbook: docs/program/milestone-packs/runtime-baselines/specs-refactor-foundation.md
 phase: index
 adrs:
   - docs/program/adr/ADR-011-contract-baseline-lock.md
@@ -14,7 +14,7 @@ issues:
 # Specs Refactor Foundation Milestone Packs
 
 Runbook reference:
-- `docs/runbooks/operations/program/specs-refactor-foundation.md`
+- `docs/program/milestone-packs/runtime-baselines/specs-refactor-foundation.md`
 
 Wave binding:
 - `https://github.com/yai-labs/yai/issues/142`

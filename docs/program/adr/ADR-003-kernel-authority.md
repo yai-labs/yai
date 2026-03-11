@@ -4,7 +4,7 @@ status: accepted
 effective_date: 2026-02-18
 supersedes: []
 applies_to:
-  runbook: docs/runbooks/operations/program/root-hardening.md
+  runbook: docs/program/milestone-packs/runtime-baselines/root-hardening.md
   phase: 0.1.2
   anchor: "#phase-0-1-2-envelope-authority-gate"
 law_refs:
@@ -48,7 +48,7 @@ Separating authority from execution preserves deterministic policy behavior and 
 - Proposals:
   - `docs/program/rfc/RFC-001-runtime-topology-and-authority.md`
 - Implemented by runbooks:
-  - `docs/runbooks/operations/program/root-hardening.md`
+  - `docs/program/milestone-packs/runtime-baselines/root-hardening.md`
 - Milestone packs:
   - `docs/program/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`
 

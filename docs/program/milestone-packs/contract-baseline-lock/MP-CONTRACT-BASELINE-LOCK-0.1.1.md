@@ -1,7 +1,7 @@
 ---
 id: MP-CONTRACT-BASELINE-LOCK-0.1.1
 status: active
-runbook: docs/runbooks/operations/program/contract-baseline-lock.md
+runbook: docs/program/milestone-packs/runtime-baselines/contract-baseline-lock.md
 phase: "0.1.1 — CI Parity on Contract Surfaces"
 adrs:
   - docs/program/adr/ADR-011-contract-baseline-lock.md
@@ -23,7 +23,7 @@ issues:
 
 ## Metadata
 
-- Runbook: `docs/runbooks/operations/program/contract-baseline-lock.md`
+- Runbook: `docs/program/milestone-packs/runtime-baselines/contract-baseline-lock.md`
 - Phase: `0.1.1 — CI Parity on Contract Surfaces`
 - Wave issue: `#141`
 - Owner: `governance`

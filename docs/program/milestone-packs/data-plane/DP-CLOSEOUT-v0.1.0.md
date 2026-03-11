@@ -13,15 +13,15 @@ Qualify DP-1..DP-9 as one coherent, verifiable baseline for first pre-pilot usag
 
 ## 2) Included runbook closure set
 
-- `docs/runbooks/operations/program/data-plane.md`
-- `docs/runbooks/operations/program/data-plane-storage-classes.md`
-- `docs/runbooks/operations/program/data-plane-storage-topology.md`
-- `docs/runbooks/operations/program/evidence-and-event-persistence.md`
-- `docs/runbooks/operations/program/governance-and-compliance-persistence.md`
-- `docs/runbooks/operations/program/authority-and-artifact-persistence.md`
-- `docs/runbooks/operations/program/brain-memory-and-graph-sinks.md`
-- `docs/runbooks/operations/program/data-surfaces-and-operator-query-model.md`
-- `docs/runbooks/operations/program/data-plane-qualification-and-closure.md`
+- `docs/program/milestone-packs/runtime-baselines/data-plane.md`
+- `docs/program/milestone-packs/runtime-baselines/data-plane-storage-classes.md`
+- `docs/program/milestone-packs/runtime-baselines/data-plane-storage-topology.md`
+- `docs/program/milestone-packs/runtime-baselines/evidence-and-event-persistence.md`
+- `docs/program/milestone-packs/runtime-baselines/governance-and-compliance-persistence.md`
+- `docs/program/milestone-packs/runtime-baselines/authority-and-artifact-persistence.md`
+- `docs/program/milestone-packs/runtime-baselines/brain-memory-and-graph-sinks.md`
+- `docs/program/milestone-packs/runtime-baselines/data-surfaces-and-operator-query-model.md`
+- `docs/program/milestone-packs/runtime-baselines/data-plane-qualification-and-closure.md`
 
 ## 3) Verification anchors
 

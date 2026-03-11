@@ -107,7 +107,7 @@ Secure overlay operationalization (NP-4):
 - private overlay integration is the canonical deployment model for customer-grade
   non-local owner/peer operation.
 - owner/peer bootstrap sequence is defined in
-  `docs/runbooks/operations/program/owner-peer-overlay-bootstrap.md`.
+  `docs/program/milestone-packs/runtime-baselines/owner-peer-overlay-bootstrap.md`.
 
 ## SW-2 distribution lock
 

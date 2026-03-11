@@ -1,7 +1,7 @@
 ---
 id: MP-ENGINE-ATTACH-0.1.2
 status: draft
-runbook: docs/runbooks/operations/program/engine-attach.md
+runbook: docs/program/milestone-packs/runtime-baselines/engine-attach.md
 phase: "0.1.2 — EA-2 workspace contract validation"
 adrs:
   - docs/program/adr/ADR-007-workspace-isolation.md
@@ -24,7 +24,7 @@ issues:
 # MP-ENGINE-ATTACH-0.1.2
 
 ## Metadata
-- Runbook: `docs/runbooks/operations/program/engine-attach.md`
+- Runbook: `docs/program/milestone-packs/runtime-baselines/engine-attach.md`
 - Phase: `0.1.2 — EA-2 workspace contract validation`
 - Status: `draft`
 

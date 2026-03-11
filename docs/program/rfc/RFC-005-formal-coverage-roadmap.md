@@ -16,7 +16,7 @@ related:
     - docs/program/adr/ADR-006-unified-rpc.md
     - docs/program/adr/ADR-011-contract-baseline-lock.md
   runbooks:
-    - docs/runbooks/operations/program/root-hardening.md
+    - docs/program/milestone-packs/runtime-baselines/root-hardening.md
   milestone_packs:
     - docs/program/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md
   specs:
@@ -64,7 +64,7 @@ Define a prioritized formal roadmap that starts from protocol/control criticalit
 
 - Spec anchors (if any): `../law/formal/spec_map.md`, `../law/formal/tla/YAI_KERNEL.tla`, `../law/formal/bindings/BINDING_PROTOCOL.md`, `../law/formal/bindings/BINDING_CLI.md`
 - Targets ADR: `docs/program/adr/ADR-006-unified-rpc.md`, `docs/program/adr/ADR-011-contract-baseline-lock.md`
-- Downstream runbook: `docs/runbooks/operations/program/root-hardening.md`
+- Downstream runbook: `docs/program/milestone-packs/runtime-baselines/root-hardening.md`
 - Downstream MP: `docs/program/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md`
 
 ## References

@@ -2,7 +2,7 @@
 
 DP-1 has started and refounded the canonical Data Plane model in:
 
-- `docs/runbooks/operations/program/data-plane.md`
+- `docs/program/milestone-packs/runtime-baselines/data-plane.md`
 
 This architecture note remains a boundary reminder:
 

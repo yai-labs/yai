@@ -45,6 +45,6 @@ Canonical Topology: Root -> Kernel -> Engine with Mind as planned/external L3 pl
 ## Traceability
 
 - ADRs: `docs/program/adr/ADR-002-root-entrypoint.md`, `docs/program/adr/ADR-003-kernel-authority.md`, `docs/program/adr/ADR-004-engine-execution.md`, `docs/program/adr/ADR-008-connection-lifecycle.md`, `docs/program/adr/ADR-010-boot-entrypoint.md`
-- Runbooks: `docs/runbooks/operations/program/root-hardening.md`, `docs/runbooks/operations/program/workspaces-lifecycle.md`
+- Runbooks: `docs/program/milestone-packs/runtime-baselines/root-hardening.md`, `docs/program/milestone-packs/runtime-baselines/workspaces-lifecycle.md`
 - MPs: `docs/program/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`, `docs/program/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md`
 - L0 anchors: `../law/contracts/protocol/include/transport.h`, `../law/contracts/protocol/include/session.h`, `../law/contracts/protocol/runtime/include/rpc_runtime.h`

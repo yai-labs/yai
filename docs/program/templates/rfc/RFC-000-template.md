@@ -44,7 +44,7 @@ tags: []
 
 - Spec anchors (if any): `../law/...`
 - Target ADR(s): `docs/program/adr/ADR-...` (optional)
-- Downstream runbook(s): `docs/runbooks/operations/program/...` (optional)
+- Downstream runbook(s): `docs/program/milestone-packs/runtime-baselines/...` (optional)
 - Downstream MP(s): `docs/program/milestone-packs/...` (optional)
 
 ## References

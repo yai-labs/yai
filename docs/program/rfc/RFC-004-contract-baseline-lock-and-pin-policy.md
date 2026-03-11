@@ -15,7 +15,7 @@ related:
   adr:
     - docs/program/adr/ADR-011-contract-baseline-lock.md
   runbooks:
-    - docs/runbooks/operations/program/root-hardening.md
+    - docs/program/milestone-packs/runtime-baselines/root-hardening.md
   milestone_packs:
     - docs/program/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md
   specs:
@@ -64,7 +64,7 @@ Define a formal baseline-lock policy with explicit pin responsibilities for `yai
 
 - Spec anchors (if any): `../law/formal/traceability.v1.json`, `../law/formal/spec_map.md`, `../law/foundation/invariants/I-001-traceability.md`, `../law/foundation/invariants/I-007-compliance-context-required.md`
 - Targets ADR: `docs/program/adr/ADR-011-contract-baseline-lock.md`
-- Downstream runbook: `docs/runbooks/operations/program/root-hardening.md`
+- Downstream runbook: `docs/program/milestone-packs/runtime-baselines/root-hardening.md`
 - Downstream MP: `docs/program/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`
 
 ## References

@@ -1,7 +1,7 @@
 ---
 id: MP-WORKSPACES-LIFECYCLE-0.1.1
 status: draft
-runbook: docs/runbooks/operations/program/workspaces-lifecycle.md
+runbook: docs/program/milestone-packs/runtime-baselines/workspaces-lifecycle.md
 phase: "0.1.1 — Workspace create/open guardrails"
 adrs:
   - docs/program/adr/ADR-007-workspace-isolation.md
@@ -23,7 +23,7 @@ issues:
 # MP-WORKSPACES-LIFECYCLE-0.1.1
 
 ## Metadata
-- Runbook: `docs/runbooks/operations/program/workspaces-lifecycle.md`
+- Runbook: `docs/program/milestone-packs/runtime-baselines/workspaces-lifecycle.md`
 - Phase: `0.1.1 — Workspace create/open guardrails`
 - Status: `draft`
 

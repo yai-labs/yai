@@ -94,7 +94,7 @@ Exception handling:
 
 ### Wave 0 - Stabilize current in-flight baseline
 Primary runbook:
-- `docs/runbooks/operations/program/contract-baseline-lock.md`
+- `docs/program/milestone-packs/runtime-baselines/contract-baseline-lock.md`
 
 Target from current execution point:
 - close phases `0.1.1` -> `0.1.4` with strict evidence.
@@ -108,7 +108,7 @@ Exit:
 
 ### Wave 1 - Backbone convergence (specs + governance bindings)
 Primary runbook:
-- `docs/runbooks/operations/program/specs-refactor-foundation.md`
+- `docs/program/milestone-packs/runtime-baselines/specs-refactor-foundation.md`
 
 Scope:
 - keep structural phases deterministic,
@@ -124,7 +124,7 @@ Exit:
 
 ### Wave 2 - Root boundary hardening (core mediation)
 Primary runbook:
-- `docs/runbooks/operations/program/root-hardening.md`
+- `docs/program/milestone-packs/runtime-baselines/root-hardening.md`
 
 Scope:
 - envelope validation,
@@ -137,7 +137,7 @@ Exit:
 
 ### Wave 3 - Workspace lifecycle as governed effects
 Primary runbook:
-- `docs/runbooks/operations/program/workspaces-lifecycle.md`
+- `docs/program/milestone-packs/runtime-baselines/workspaces-lifecycle.md`
 
 Scope:
 - governed create/list/destroy,
@@ -149,7 +149,7 @@ Exit:
 
 ### Wave 4 - Engine attach integration
 Primary runbook:
-- `docs/runbooks/operations/program/engine-attach.md`
+- `docs/program/milestone-packs/runtime-baselines/engine-attach.md`
 
 Scope:
 - attach handshake path,
@@ -161,7 +161,7 @@ Exit:
 
 ### Wave 5 - Data plane governance
 Primary runbook:
-- `docs/runbooks/operations/program/data-plane.md`
+- `docs/program/milestone-packs/runtime-baselines/data-plane.md`
 
 Scope:
 - storage contract surfaces,
@@ -173,7 +173,7 @@ Exit:
 
 ### Wave 6 - Mind integration (proposer-only)
 Primary runbook:
-- `docs/runbooks/operations/program/mind-redis-stm.md`
+- `docs/program/milestone-packs/runtime-baselines/mind-redis-stm.md`
 
 Scope:
 - Mind proposer path only,

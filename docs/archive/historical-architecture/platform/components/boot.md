@@ -33,7 +33,7 @@ implemented
 ## Traceability
 
 - ADR refs: `docs/program/adr/ADR-010-boot-entrypoint.md`
-- Runbook refs: `docs/runbooks/operations/program/root-hardening.md`
+- Runbook refs: `docs/program/milestone-packs/runtime-baselines/root-hardening.md`
 - MP refs: `docs/program/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`
 - L0 anchors: `../law/foundation/invariants/I-001-traceability.md`
 

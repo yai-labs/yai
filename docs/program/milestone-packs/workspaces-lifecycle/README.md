@@ -1,7 +1,7 @@
 ---
 id: MP-WORKSPACES-LIFECYCLE-INDEX
 status: active
-runbook: docs/runbooks/operations/program/workspaces-lifecycle.md
+runbook: docs/program/milestone-packs/runtime-baselines/workspaces-lifecycle.md
 phase: index
 adrs:
   - docs/program/adr/ADR-006-unified-rpc.md
@@ -22,7 +22,7 @@ issues:
 This track is the Workspace Lifecycle execution line and binds runbook rev4 phases to claims and mandatory evidence commands.
 
 References:
-- Runbook: `docs/runbooks/operations/program/workspaces-lifecycle.md`
+- Runbook: `docs/program/milestone-packs/runtime-baselines/workspaces-lifecycle.md`
 - Plan: `docs/program/reports/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
 - Matrix: `docs/program/reports/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
 - Claims: `ops/evidence/validation/audits/claims/infra-grammar.v0.1.json`

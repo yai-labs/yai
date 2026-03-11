@@ -38,7 +38,7 @@ partial
 ## Traceability
 
 - ADR refs: `docs/program/adr/ADR-005-mind-proposer.md`, `docs/program/adr/ADR-003-kernel-authority.md`
-- Runbook refs: `docs/runbooks/operations/program/mind-redis-stm.md`, `docs/runbooks/operations/program/root-hardening.md`
+- Runbook refs: `docs/program/milestone-packs/runtime-baselines/mind-redis-stm.md`, `docs/program/milestone-packs/runtime-baselines/root-hardening.md`
 - MP refs: `docs/program/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md`
 - L0 anchors: `../law/foundation/boundaries/L3-mind.md`, `../law/foundation/invariants/I-004-cognitive-reconfiguration.md`
 

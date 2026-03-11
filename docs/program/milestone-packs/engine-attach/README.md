@@ -1,7 +1,7 @@
 ---
 id: MP-ENGINE-ATTACH-INDEX
 status: active
-runbook: docs/runbooks/operations/program/engine-attach.md
+runbook: docs/program/milestone-packs/runtime-baselines/engine-attach.md
 phase: index
 adrs:
   - docs/program/adr/ADR-009-engine-attachment.md
@@ -23,7 +23,7 @@ References:
 - Plan: `docs/program/reports/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
 - Matrix: `docs/program/reports/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
 - Claims: `ops/evidence/validation/audits/claims/infra-grammar.v0.1.json`
-- Runbook: `docs/runbooks/operations/program/engine-attach.md`
+- Runbook: `docs/program/milestone-packs/runtime-baselines/engine-attach.md`
 
 Policy:
 - Mandatory command outcomes are required for closure.

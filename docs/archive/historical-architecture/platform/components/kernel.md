@@ -35,7 +35,7 @@ implemented
 ## Traceability
 
 - ADR refs: `docs/program/adr/ADR-003-kernel-authority.md`, `docs/program/adr/ADR-007-workspace-isolation.md`, `docs/program/adr/ADR-008-connection-lifecycle.md`
-- Runbook refs: `docs/runbooks/operations/program/root-hardening.md`, `docs/runbooks/operations/program/workspaces-lifecycle.md`
+- Runbook refs: `docs/program/milestone-packs/runtime-baselines/root-hardening.md`, `docs/program/milestone-packs/runtime-baselines/workspaces-lifecycle.md`
 - MP refs: `docs/program/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.2.md`, `docs/program/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.4.md`
 - L0 anchors: `../law/foundation/boundaries/L1-kernel.md`, `../law/contracts/protocol/include/session.h`
 

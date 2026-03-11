@@ -1,7 +1,7 @@
 ---
 id: MP-ENGINE-ATTACH-0.1.0
 status: draft
-runbook: docs/runbooks/operations/program/engine-attach.md
+runbook: docs/program/milestone-packs/runtime-baselines/engine-attach.md
 phase: "0.1.0 — phase-engine-attach-v4 (compat anchor)"
 adrs:
   - docs/program/adr/ADR-009-engine-attachment.md
@@ -25,7 +25,7 @@ issues:
 # MP-ENGINE-ATTACH-0.1.0
 
 ## Metadata
-- Runbook: `docs/runbooks/operations/program/engine-attach.md`
+- Runbook: `docs/program/milestone-packs/runtime-baselines/engine-attach.md`
 - Phase: `0.1.0 — phase-engine-attach-v4 (compat anchor)`
 - Status: `draft`
 

@@ -1,7 +1,7 @@
 ---
 id: MP-ENGINE-ATTACH-0.1.4
 status: draft
-runbook: docs/runbooks/operations/program/engine-attach.md
+runbook: docs/program/milestone-packs/runtime-baselines/engine-attach.md
 phase: "0.1.4 — EA-4 data-plane coupling checks"
 adrs:
   - docs/program/adr/ADR-009-engine-attachment.md
@@ -24,7 +24,7 @@ issues:
 # MP-ENGINE-ATTACH-0.1.4
 
 ## Metadata
-- Runbook: `docs/runbooks/operations/program/engine-attach.md`
+- Runbook: `docs/program/milestone-packs/runtime-baselines/engine-attach.md`
 - Phase: `0.1.4 — EA-4 data-plane coupling checks`
 - Status: `draft`
 

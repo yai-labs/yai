@@ -1,7 +1,7 @@
 ---
 id: MP-ROOT-HARDENING-0.1.0
 status: active
-runbook: docs/runbooks/operations/program/root-hardening.md
+runbook: docs/program/milestone-packs/runtime-baselines/root-hardening.md
 phase: "0.1.0 — Protocol Guardrails"
 adrs:
   - docs/program/adr/ADR-002-root-entrypoint.md
@@ -24,7 +24,7 @@ issues:
 # MP-ROOT-HARDENING-0.1.0
 
 ## Metadata
-- Runbook: `docs/runbooks/operations/program/root-hardening.md`
+- Runbook: `docs/program/milestone-packs/runtime-baselines/root-hardening.md`
 - Phase: `0.1.0 — Protocol Guardrails`
 - Wave issue: `#191`
 - Status: `active`

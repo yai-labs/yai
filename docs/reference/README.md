@@ -1,11 +1,12 @@
 # Reference
 
-Technical reference documentation.
+Technical lookup-oriented documentation.
 
-- `cli/`
-- `protocol/`
-- `schemas/`
-- `registries/`
-- `commands/`
+- `cli/` command-line reference.
+- `protocol/` protocol and contract reference.
+- `schemas/` schema indexes and schema-oriented references.
+- `registries/` registry and index references.
+- `commands/` command taxonomy references.
+- `sdk/` SDK and integration reference.
 
-Legacy interface narratives are archived or folded into the sections above.
+Historical notes and migration narratives must live under `docs/archive/`.

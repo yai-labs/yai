@@ -1,7 +1,7 @@
 ---
 id: MP-CONTRACT-BASELINE-LOCK-0.1.0
 status: active
-runbook: docs/runbooks/operations/program/contract-baseline-lock.md
+runbook: docs/program/milestone-packs/runtime-baselines/contract-baseline-lock.md
 phase: index
 adrs:
   - docs/program/adr/ADR-011-contract-baseline-lock.md
@@ -16,7 +16,7 @@ issues:
 This is the foundational MP track for ADR-011.
 
 Runbook reference:
-- `docs/runbooks/operations/program/contract-baseline-lock.md`
+- `docs/program/milestone-packs/runtime-baselines/contract-baseline-lock.md`
 
 Phase sequence (Wave 0 closure status):
 - `docs/program/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.0.md`

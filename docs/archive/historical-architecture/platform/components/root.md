@@ -37,7 +37,7 @@ implemented
 ## Traceability
 
 - ADR refs: `docs/program/adr/ADR-001-single-runtime.md`, `docs/program/adr/ADR-002-root-entrypoint.md`
-- Runbook refs: `docs/runbooks/operations/program/root-hardening.md`
+- Runbook refs: `docs/program/milestone-packs/runtime-baselines/root-hardening.md`
 - MP refs: `docs/program/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`, `docs/program/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.1.md`
 - L0 anchors: `../law/contracts/protocol/include/transport.h`, `../law/contracts/protocol/include/auth.h`
 

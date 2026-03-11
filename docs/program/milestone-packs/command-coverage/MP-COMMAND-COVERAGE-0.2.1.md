@@ -12,7 +12,7 @@ adrs:
   - docs/program/adr/ADR-012-audit-convergence-gates.md
 spec_anchors:
   - ../law/registry/commands.v1.json
-  - docs/runbooks/operations/program/workspaces-lifecycle-command-map.v2.md
+  - docs/program/milestone-packs/runtime-baselines/workspaces-lifecycle-command-map.v2.md
 target_group: root+kernel+boot
 target_command_count: 15
 ---

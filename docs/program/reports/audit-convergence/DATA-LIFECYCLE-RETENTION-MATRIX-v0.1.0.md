@@ -4,7 +4,7 @@ status: draft
 owner: runtime
 updated: 2026-03-10
 related:
-  - docs/runbooks/operations/program/data-lifecycle-retention-and-tiering.md
+  - docs/program/milestone-packs/runtime-baselines/data-lifecycle-retention-and-tiering.md
 ---
 
 # Data Lifecycle / Retention Matrix (v0.1.0)

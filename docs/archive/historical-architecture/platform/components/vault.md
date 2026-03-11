@@ -33,7 +33,7 @@ partial
 ## Traceability
 
 - ADR refs: `docs/program/adr/ADR-001-single-runtime.md`
-- Runbook refs: `docs/runbooks/operations/program/root-hardening.md`
+- Runbook refs: `docs/program/milestone-packs/runtime-baselines/root-hardening.md`
 - MP refs: `docs/program/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`
 - L0 anchors: `../law/foundation/boundaries/L0-vault.md`, `../law/contracts/vault/include/yai_vault_abi.h`
 

@@ -24,4 +24,4 @@ See:
 
 - `docs/architecture/secure-overlay-integration-model.md`
 - `docs/architecture/overlay-integration-model.md`
-- `docs/runbooks/operations/program/owner-peer-overlay-bootstrap.md`
+- `docs/program/milestone-packs/runtime-baselines/owner-peer-overlay-bootstrap.md`

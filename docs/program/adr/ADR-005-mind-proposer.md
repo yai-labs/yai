@@ -4,7 +4,7 @@ status: accepted
 effective_date: 2026-02-18
 supersedes: []
 applies_to:
-  runbook: docs/runbooks/operations/program/mind-redis-stm.md
+  runbook: docs/program/milestone-packs/runtime-baselines/mind-redis-stm.md
   phase: v5.3
   anchor: "#phase-mind-proposer"
 law_refs:
@@ -51,7 +51,7 @@ This model preserves cognitive isolation while keeping effectful operations unde
 - Proposals:
   - `docs/program/rfc/RFC-001-runtime-topology-and-authority.md`
 - Implemented by runbooks:
-  - `docs/runbooks/operations/program/root-hardening.md`
+  - `docs/program/milestone-packs/runtime-baselines/root-hardening.md`
 - Milestone packs:
   - `docs/program/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`
 

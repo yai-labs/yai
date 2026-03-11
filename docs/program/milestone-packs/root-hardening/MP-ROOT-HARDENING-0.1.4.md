@@ -1,7 +1,7 @@
 ---
 id: MP-ROOT-HARDENING-0.1.4
 status: active
-runbook: docs/runbooks/operations/program/root-hardening.md
+runbook: docs/program/milestone-packs/runtime-baselines/root-hardening.md
 phase: "0.1.4 — Kernel Hard Reject on Invalid ws_id"
 adrs:
   - docs/program/adr/ADR-002-root-entrypoint.md
@@ -25,7 +25,7 @@ issues:
 # MP-ROOT-HARDENING-0.1.4
 
 ## Metadata
-- Runbook: `docs/runbooks/operations/program/root-hardening.md`
+- Runbook: `docs/program/milestone-packs/runtime-baselines/root-hardening.md`
 - Phase: `0.1.4 — Kernel Hard Reject on Invalid ws_id`
 - Wave issue: `#191`
 - Status: `active`

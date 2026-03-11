@@ -4,17 +4,25 @@ Canonical documentation for the unified YAI platform.
 
 ## Navigation
 
-- `architecture/` system architecture by domain.
-- `guides/` audience guides (developer, operator, user).
-- `runbooks/` operational procedures, qualification, demos, remediation.
-- `reference/` technical reference surfaces (CLI, protocol, schemas, registries, commands).
-- `program/` RFC/ADR/milestone/templates/policies/reports.
-- `product/` product scenarios, demos, and pre-pilot assets.
-- `generated/` generated documentation artifacts.
-- `archive/` legacy, migration, and historical architecture material.
+- `architecture/`: active architecture by system domain.
+- `guides/`: audience guides (developer, operator, user).
+- `runbooks/`: executable operational procedures.
+- `reference/`: technical lookup reference.
+- `program/`: RFC/ADR/milestone/templates/policies/reports.
+- `product/`: scenarios, demos, pre-pilot product narratives.
+- `generated/`: generated documentation artifacts.
+- `archive/`: historical, legacy, and migration-only material.
 
-## Rules
+## Placement Rules
 
-- New architecture docs go under `docs/architecture/` only.
-- New user/developer/operator docs go under `docs/guides/`.
-- Historical or superseded material must go under `docs/archive/`.
+- Place new architecture docs only in `docs/architecture/`.
+- Place user/developer/operator how-to docs in `docs/guides/`.
+- Place step-by-step execution procedures in `docs/runbooks/`.
+- Place lookup material in `docs/reference/`.
+- Place work-governance artifacts in `docs/program/`.
+- Place superseded or migration-only material in `docs/archive/`.
+
+## Guardrails
+
+- Do not create new top-level folders under `docs/` without updating hierarchy validation.
+- Do not place migration notes in live architecture/reference/guides areas.

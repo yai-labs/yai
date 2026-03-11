@@ -96,4 +96,4 @@ MF-2 compatibility:
 
 - `docs/architecture/workspace-peer-orchestration-model.md`
 - `docs/architecture/source-plane-read-model.md`
-- `docs/runbooks/operations/program/workspace-peer-coordination-baseline.md`
+- `docs/program/milestone-packs/runtime-baselines/workspace-peer-coordination-baseline.md`

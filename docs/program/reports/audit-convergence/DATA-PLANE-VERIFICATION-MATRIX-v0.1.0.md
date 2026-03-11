@@ -16,10 +16,10 @@ Legend:
 
 | Check | Status | Evidence | Notes / Residual gap |
 |---|---|---|---|
-| Storage classes defined | confirmed | `docs/runbooks/operations/program/data-plane-storage-classes.md` | Baseline complete. |
-| Backend role model defined | confirmed | `docs/runbooks/operations/program/data-plane-storage-classes.md` | Role fit defined; backend final choices still selective. |
-| Canonical topology defined | confirmed | `docs/runbooks/operations/program/data-plane-storage-topology.md` | Single-node topology baseline. |
-| Non-bypass rules declared | confirmed | `docs/runbooks/operations/program/data-plane.md` | Enforced through runtime contract path. |
+| Storage classes defined | confirmed | `docs/program/milestone-packs/runtime-baselines/data-plane-storage-classes.md` | Baseline complete. |
+| Backend role model defined | confirmed | `docs/program/milestone-packs/runtime-baselines/data-plane-storage-classes.md` | Role fit defined; backend final choices still selective. |
+| Canonical topology defined | confirmed | `docs/program/milestone-packs/runtime-baselines/data-plane-storage-topology.md` | Single-node topology baseline. |
+| Non-bypass rules declared | confirmed | `docs/program/milestone-packs/runtime-baselines/data-plane.md` | Enforced through runtime contract path. |
 
 ## B) Persistence integrity
 
@@ -48,7 +48,7 @@ Legend:
 |---|---|---|---|
 | Operator query families exposed | confirmed | `workspace_operator_query_surfaces.sh` | governance/events/evidence/authority/artifacts/graph/workspace. |
 | Deterministic result shapes | confirmed | `workspace_operator_query_surfaces.sh` | table/timeline/detail_record/summary_card. |
-| No backend leakage in canonical contract | confirmed | `docs/runbooks/operations/program/data-surfaces-and-operator-query-model.md` | Backend roles remain internal detail. |
+| No backend leakage in canonical contract | confirmed | `docs/program/milestone-packs/runtime-baselines/data-surfaces-and-operator-query-model.md` | Backend roles remain internal detail. |
 | CLI matrix readability preserved | confirmed | `workspace_demo_matrix.sh` | End-to-end scenario remains green. |
 
 ## E) Safety and discipline

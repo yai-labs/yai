@@ -4,7 +4,7 @@ status: accepted
 effective_date: 2026-02-18
 supersedes: []
 applies_to:
-  runbook: docs/runbooks/operations/program/root-hardening.md
+  runbook: docs/program/milestone-packs/runtime-baselines/root-hardening.md
   phase: 0.1.0
   anchor: "#phase-0-1-0-protocol-guardrails"
 law_refs:
@@ -51,7 +51,7 @@ A single runtime reduces authority ambiguity, improves observability, and streng
 - Proposals:
   - `docs/program/rfc/RFC-001-runtime-topology-and-authority.md`
 - Implemented by runbooks:
-  - `docs/runbooks/operations/program/root-hardening.md`
+  - `docs/program/milestone-packs/runtime-baselines/root-hardening.md`
 - Milestone packs:
   - `docs/program/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`
 

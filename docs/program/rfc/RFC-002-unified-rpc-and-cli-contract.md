@@ -16,7 +16,7 @@ related:
     - docs/program/adr/ADR-006-unified-rpc.md
     - docs/program/adr/ADR-011-contract-baseline-lock.md
   runbooks:
-    - docs/runbooks/operations/program/root-hardening.md
+    - docs/program/milestone-packs/runtime-baselines/root-hardening.md
   milestone_packs:
     - docs/program/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md
   specs:
@@ -65,7 +65,7 @@ Adopt one canonical RPC surface and enforce CLI-to-spec alignment through explic
 
 - Spec anchors (if any): `../law/contracts/protocol/include/transport.h`, `../law/contracts/protocol/include/protocol.h`, `../law/contracts/protocol/runtime/include/rpc_runtime.h`, `../law/registry/commands.v1.json`
 - Targets ADR: `docs/program/adr/ADR-006-unified-rpc.md`, `docs/program/adr/ADR-011-contract-baseline-lock.md`
-- Downstream runbook: `docs/runbooks/operations/program/root-hardening.md`
+- Downstream runbook: `docs/program/milestone-packs/runtime-baselines/root-hardening.md`
 - Downstream MP: `docs/program/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`
 
 ## References

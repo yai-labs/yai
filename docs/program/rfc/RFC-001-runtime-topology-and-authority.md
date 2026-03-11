@@ -19,7 +19,7 @@ related:
     - docs/program/adr/ADR-004-engine-execution.md
     - docs/program/adr/ADR-005-mind-proposer.md
   runbooks:
-    - docs/runbooks/operations/program/root-hardening.md
+    - docs/program/milestone-packs/runtime-baselines/root-hardening.md
   milestone_packs:
     - docs/program/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md
   specs:
@@ -66,7 +66,7 @@ Define and document the rationale for one machine-level runtime with strict Root
 
 - Spec anchors (if any): `../law/foundation/axioms/A-002-authority.md`, `../law/foundation/boundaries/L1-kernel.md`, `../law/foundation/boundaries/L2-engine.md`
 - Targets ADR: `docs/program/adr/ADR-001-single-runtime.md`, `docs/program/adr/ADR-002-root-entrypoint.md`, `docs/program/adr/ADR-003-kernel-authority.md`, `docs/program/adr/ADR-004-engine-execution.md`, `docs/program/adr/ADR-005-mind-proposer.md`
-- Downstream runbook: `docs/runbooks/operations/program/root-hardening.md`
+- Downstream runbook: `docs/program/milestone-packs/runtime-baselines/root-hardening.md`
 - Downstream MP: `docs/program/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`
 
 ## References

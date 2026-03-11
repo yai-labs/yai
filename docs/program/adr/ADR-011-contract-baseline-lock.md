@@ -4,7 +4,7 @@ status: draft
 effective_date: 2026-02-19
 supersedes: []
 applies_to:
-  runbook: docs/runbooks/operations/program/contract-baseline-lock.md
+  runbook: docs/program/milestone-packs/runtime-baselines/contract-baseline-lock.md
   phase: 0.1.0
   anchor: "#phase-0-1-0-pin-baseline-freeze"
 law_refs:
@@ -54,8 +54,8 @@ A lock provides a stable legal/technical floor so later runbook phases can evolv
   - `docs/program/rfc/RFC-004-contract-baseline-lock-and-pin-policy.md`
   - `docs/program/rfc/RFC-005-formal-coverage-roadmap.md`
 - Implemented by runbooks:
-  - `docs/runbooks/operations/program/contract-baseline-lock.md`
-  - `docs/runbooks/operations/program/root-hardening.md` (downstream hardening)
+  - `docs/program/milestone-packs/runtime-baselines/contract-baseline-lock.md`
+  - `docs/program/milestone-packs/runtime-baselines/root-hardening.md` (downstream hardening)
 - Milestone packs:
   - `docs/program/milestone-packs/contract-baseline-lock/MP-CONTRACT-BASELINE-LOCK-0.1.0.md` (planned)
 

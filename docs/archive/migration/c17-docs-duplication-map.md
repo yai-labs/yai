@@ -5,7 +5,7 @@
 - `docs/developer/` + `docs/developers/` -> `docs/guides/developer/`
 - `docs/reference/` -> `docs/reference/`
 - `docs/archive/historical-architecture/platform/architecture/*` -> `docs/archive/historical-architecture/platform/`
-- `docs/runbooks/operations/program/` -> `docs/runbooks/operations/program/`
+- `docs/program/milestone-packs/runtime-baselines/` -> `docs/program/milestone-packs/runtime-baselines/`
 
 ## Program naming normalization
 

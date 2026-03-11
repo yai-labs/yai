@@ -18,8 +18,8 @@ related:
     - docs/program/adr/ADR-009-engine-attachment.md
     - docs/program/adr/ADR-010-boot-entrypoint.md
   runbooks:
-    - docs/runbooks/operations/program/workspaces-lifecycle.md
-    - docs/runbooks/operations/program/engine-attach.md
+    - docs/program/milestone-packs/runtime-baselines/workspaces-lifecycle.md
+    - docs/program/milestone-packs/runtime-baselines/engine-attach.md
   milestone_packs: []
   specs:
     - ../law/foundation/boundaries/L1-kernel.md
@@ -66,7 +66,7 @@ Define one lifecycle proposal that aligns isolation guarantees with Kernel bound
 
 - Spec anchors (if any): `../law/foundation/boundaries/L1-kernel.md`, `../law/contracts/protocol/include/session.h`, `../law/foundation/invariants/I-002-determinism.md`, `../law/foundation/invariants/I-006-external-effect-boundary.md`
 - Targets ADR: `docs/program/adr/ADR-007-workspace-isolation.md`, `docs/program/adr/ADR-008-connection-lifecycle.md`, `docs/program/adr/ADR-009-engine-attachment.md`, `docs/program/adr/ADR-010-boot-entrypoint.md`
-- Downstream runbook: `docs/runbooks/operations/program/workspaces-lifecycle.md`
+- Downstream runbook: `docs/program/milestone-packs/runtime-baselines/workspaces-lifecycle.md`
 
 ## References
 - `docs/program/spine.md`

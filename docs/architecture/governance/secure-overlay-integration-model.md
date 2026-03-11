@@ -138,5 +138,5 @@ Not responsible for:
 - `docs/architecture/secure-peering-plane-model.md`
 - `docs/architecture/owner-ingress-model.md`
 - `docs/architecture/peer-enrollment-and-trust-bootstrap-model.md`
-- `docs/runbooks/operations/program/owner-peer-overlay-bootstrap.md`
-- `docs/runbooks/operations/program/secure-peering-deployment-baseline.md`
+- `docs/program/milestone-packs/runtime-baselines/owner-peer-overlay-bootstrap.md`
+- `docs/program/milestone-packs/runtime-baselines/secure-peering-deployment-baseline.md`

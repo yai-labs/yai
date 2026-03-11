@@ -4,8 +4,8 @@ status: draft
 owner: runtime
 updated: 2026-03-10
 related:
-  - docs/runbooks/operations/program/filesystem-governance-state-decommission.md
-  - docs/runbooks/operations/program/db-first-read-path-cutover.md
+  - docs/program/milestone-packs/runtime-baselines/filesystem-governance-state-decommission.md
+  - docs/program/milestone-packs/runtime-baselines/db-first-read-path-cutover.md
 ---
 
 # Filesystem Governance State Decommission Matrix (v0.1.0)

@@ -4,7 +4,7 @@ status: draft
 effective_date: 2026-02-18
 supersedes: []
 applies_to:
-  runbook: docs/runbooks/operations/program/engine-attach.md
+  runbook: docs/program/milestone-packs/runtime-baselines/engine-attach.md
   phase: v4
   anchor: "#phase-engine-attach-v4"
 law_refs:
@@ -46,8 +46,8 @@ Shared attachment improves operability and keeps execution behavior aligned with
 - Proposals:
   - `docs/program/rfc/RFC-003-workspace-lifecycle-and-isolation.md`
 - Implemented by runbooks:
-  - `docs/runbooks/operations/program/workspaces-lifecycle.md`
-  - `docs/runbooks/operations/program/engine-attach.md`
+  - `docs/program/milestone-packs/runtime-baselines/workspaces-lifecycle.md`
+  - `docs/program/milestone-packs/runtime-baselines/engine-attach.md`
 - Milestone packs:
   - `docs/program/milestone-packs/engine-attach/MP-ENGINE-ATTACH-0.1.0.md` *(planned)*
 

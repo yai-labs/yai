@@ -4,7 +4,7 @@ status: accepted
 effective_date: 2026-03-10
 supersedes: []
 applies_to:
-  runbook: docs/runbooks/operations/program/engine-attach.md
+  runbook: docs/program/milestone-packs/runtime-baselines/engine-attach.md
   phase: YD-1
   anchor: "#source-plane-refoundation"
 law_refs:

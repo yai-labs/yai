@@ -1,7 +1,7 @@
 ---
 id: MP-CONTRACT-BASELINE-LOCK-0.1.0
 status: active
-runbook: docs/runbooks/operations/program/contract-baseline-lock.md
+runbook: docs/program/milestone-packs/runtime-baselines/contract-baseline-lock.md
 phase: "0.1.0 — Pin Baseline Freeze"
 adrs:
   - docs/program/adr/ADR-011-contract-baseline-lock.md
@@ -18,7 +18,7 @@ issue_reason: "Phase tracked by governance runbook issue #125."
 
 ## Metadata
 
-- Runbook: `docs/runbooks/operations/program/contract-baseline-lock.md`
+- Runbook: `docs/program/milestone-packs/runtime-baselines/contract-baseline-lock.md`
 - Phase: `0.1.0 — Pin Baseline Freeze`
 - Owner: `governance`
 - Status: `active`

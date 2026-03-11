@@ -9,8 +9,8 @@ scope:
   - ../sdk
   - ../cli
 related:
-  - docs/runbooks/operations/program/unified-runtime-topology-refoundation.md
-  - ../law/docs/runbooks/operations/program/law-topology-realign-against-unified-runtime.md
+  - docs/program/milestone-packs/runtime-baselines/unified-runtime-topology-refoundation.md
+  - ../law/docs/program/milestone-packs/runtime-baselines/law-topology-realign-against-unified-runtime.md
   - docs/architecture/cross-repo-naming-and-terminology-contract.md
   - docs/program/reports/audit-convergence/UNIFIED-RUNTIME-ECOSYSTEM-VERIFICATION-MATRIX-v0.1.0.md
   - docs/program/reports/audit-convergence/UNIFIED-RUNTIME-MANUAL-TEST-COMMAND-PACK-v0.1.0.md

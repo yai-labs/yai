@@ -1,7 +1,7 @@
 ---
 id: MP-ENGINE-ATTACH-0.1.3
 status: draft
-runbook: docs/runbooks/operations/program/engine-attach.md
+runbook: docs/program/milestone-packs/runtime-baselines/engine-attach.md
 phase: "0.1.3 — EA-3 lifecycle integration closure"
 adrs:
   - docs/program/adr/ADR-008-connection-lifecycle.md
@@ -24,7 +24,7 @@ issues:
 # MP-ENGINE-ATTACH-0.1.3
 
 ## Metadata
-- Runbook: `docs/runbooks/operations/program/engine-attach.md`
+- Runbook: `docs/program/milestone-packs/runtime-baselines/engine-attach.md`
 - Phase: `0.1.3 — EA-3 lifecycle integration closure`
 - Status: `draft`
 

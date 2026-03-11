@@ -139,4 +139,4 @@ peer role/scope).
 - `docs/architecture/source-plane-read-model.md`
 - `docs/architecture/peer-enrollment-and-trust-bootstrap-model.md`
 - `docs/architecture/owner-peer-registry-and-coordination-model.md`
-- `docs/runbooks/operations/program/workspace-multi-peer-baseline.md`
+- `docs/program/milestone-packs/runtime-baselines/workspace-multi-peer-baseline.md`

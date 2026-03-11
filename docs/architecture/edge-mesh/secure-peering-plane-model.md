@@ -56,7 +56,7 @@ NP-4 operationalization:
 - secure overlay integration is now the canonical deployment baseline for
   customer-grade non-local operation.
 - operator bootstrap sequence is formalized in
-  `docs/runbooks/operations/program/owner-peer-overlay-bootstrap.md`.
+  `docs/program/milestone-packs/runtime-baselines/owner-peer-overlay-bootstrap.md`.
 
 ## Endpoint taxonomy
 
@@ -122,4 +122,4 @@ NP-1 does not claim full remote trust chain or full PKI closure.
 - `docs/architecture/workspace-network-scope-model.md`
 - `docs/architecture/secure-overlay-integration-model.md`
 - `docs/program/adr/ADR-014-secure-peering-plane.md`
-- `docs/runbooks/operations/program/secure-peering-deployment-baseline.md`
+- `docs/program/milestone-packs/runtime-baselines/secure-peering-deployment-baseline.md`

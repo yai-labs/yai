@@ -1,7 +1,7 @@
 ---
 id: MP-SPECS-REFACTOR-FOUNDATION-0.1.5
 status: draft
-runbook: docs/runbooks/operations/program/specs-refactor-foundation.md
+runbook: docs/program/milestone-packs/runtime-baselines/specs-refactor-foundation.md
 phase: "0.1.5 — CI Hard Guardrails"
 adrs:
   - docs/program/adr/ADR-011-contract-baseline-lock.md
@@ -23,7 +23,7 @@ issues:
 # MP-SPECS-REFACTOR-FOUNDATION-0.1.5
 
 ## Metadata
-- Runbook: `docs/runbooks/operations/program/specs-refactor-foundation.md`
+- Runbook: `docs/program/milestone-packs/runtime-baselines/specs-refactor-foundation.md`
 - Phase: `0.1.5 — CI Hard Guardrails`
 - Wave issue: `#142`
 - Specs branch issue: `law#9`

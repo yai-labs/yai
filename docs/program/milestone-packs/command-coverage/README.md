@@ -18,7 +18,7 @@ Purpose:
 - Track broad registry command-surface expansion and implementation waves that are not strictly WS-lifecycle scoped.
 
 Relation to WS runbook:
-- `docs/runbooks/operations/program/workspaces-lifecycle.md` defines WS semantics/invariants.
+- `docs/program/milestone-packs/runtime-baselines/workspaces-lifecycle.md` defines WS semantics/invariants.
 - This track defines coverage work across non-WS groups.
 
 Command coverage sequence:

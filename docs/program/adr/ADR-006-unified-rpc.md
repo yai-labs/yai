@@ -4,7 +4,7 @@ status: accepted
 effective_date: 2026-02-18
 supersedes: []
 applies_to:
-  runbook: docs/runbooks/operations/program/root-hardening.md
+  runbook: docs/program/milestone-packs/runtime-baselines/root-hardening.md
   phase: 0.1.0
   anchor: "#phase-0-1-0-protocol-guardrails"
 law_refs:
@@ -50,7 +50,7 @@ A strict contract baseline makes drift observable and converts gate output into 
   - `docs/program/rfc/RFC-002-unified-rpc-and-cli-contract.md`
   - `docs/program/rfc/RFC-005-formal-coverage-roadmap.md`
 - Implemented by runbooks:
-  - `docs/runbooks/operations/program/root-hardening.md`
+  - `docs/program/milestone-packs/runtime-baselines/root-hardening.md`
 - Milestone packs:
   - `docs/program/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.0.md`
   - `docs/program/milestone-packs/root-hardening/MP-ROOT-HARDENING-0.1.5.md`

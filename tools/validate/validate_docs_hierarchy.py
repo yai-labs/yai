@@ -14,6 +14,10 @@ REQUIRED_DIRS = [
     "docs/product",
     "docs/generated",
     "docs/archive",
+    "docs/reference/sdk",
+    "docs/archive/migration",
+    "docs/archive/legacy",
+    "docs/archive/historical-architecture",
 ]
 
 REQUIRED_READMES = [
@@ -26,6 +30,8 @@ REQUIRED_READMES = [
     "docs/product/README.md",
     "docs/generated/README.md",
     "docs/archive/README.md",
+    "docs/runbooks/operations/README.md",
+    "docs/guides/developer/README.md",
 ]
 
 FORBIDDEN_DOC_DIRS = [
@@ -43,6 +49,12 @@ FORBIDDEN_DOC_DIRS = [
     "docs/program/26-policies",
     "docs/program/27-security",
     "docs/_generated",
+    "docs/runbooks/operations/program",
+    "docs/guides/developer/dev-guide",
+]
+
+FORBIDDEN_DOC_FILES = [
+    "docs/reference/interfaces-legacy-notes.md",
 ]
 
 
@@ -60,6 +72,10 @@ def main() -> int:
     for rel in FORBIDDEN_DOC_DIRS:
         if (ROOT / rel).exists():
             errors.append(f"forbidden legacy docs area still present: {rel}")
+
+    for rel in FORBIDDEN_DOC_FILES:
+        if (ROOT / rel).exists():
+            errors.append(f"forbidden legacy docs file still present: {rel}")
 
     if errors:
         print("docs_hierarchy: FAIL")

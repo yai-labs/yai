@@ -1,7 +1,7 @@
 ---
 id: MP-ROOT-HARDENING-0.1.5
 status: draft
-runbook: docs/runbooks/operations/program/root-hardening.md
+runbook: docs/program/milestone-packs/runtime-baselines/root-hardening.md
 phase: "0.1.5 — Test Matrix + Torture Suite"
 adrs:
   - docs/program/adr/ADR-002-root-entrypoint.md
@@ -27,7 +27,7 @@ issues:
 # MP-ROOT-HARDENING-0.1.5
 
 ## Metadata
-- Runbook: `docs/runbooks/operations/program/root-hardening.md`
+- Runbook: `docs/program/milestone-packs/runtime-baselines/root-hardening.md`
 - Phase: `0.1.5 — Test Matrix + Torture Suite`
 - Wave issue: `#191`
 - Status: `draft`

@@ -5,8 +5,8 @@ owner: runtime-governance
 updated: 2026-03-10
 scope: [yai, yai-law, yai-cli, yai-sdk]
 related:
-  - docs/runbooks/operations/program/workspace-command-taxonomy-refoundation.md
-  - docs/runbooks/operations/program/workspace-runtime-command-mapping-and-canonicalization.md
+  - docs/program/milestone-packs/runtime-baselines/workspace-command-taxonomy-refoundation.md
+  - docs/program/milestone-packs/runtime-baselines/workspace-runtime-command-mapping-and-canonicalization.md
   - docs/program/milestone-packs/workspace-verticalization-closeout/WSV-6-WORKSPACE-SURFACE-CLOSEOUT.md
   - docs/program/reports/audit-convergence/WORKSPACE-VERTICALIZATION-MANUAL-TEST-COMMAND-PACK-v0.1.0.md
   - tests/integration/workspace/workspace_verticalization_closeout.sh
