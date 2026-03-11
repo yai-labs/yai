@@ -140,6 +140,13 @@ QG-1 query-surface lock:
   canonical adjudication planes;
 - summary-oriented read models are required alongside low-level tails/signals.
 
+QG-2 unified-graph lock:
+- graph projection unifies workspace sovereign anchors with distributed runtime
+  classes and relation families;
+- projection must preserve state-layer semantics
+  (`observed|accepted|canonicalized|degraded/conflict`);
+- graph unification cannot be interpreted as distributed sovereign consensus.
+
 ### 3) Control/Data Path Separation
 Mandatory path:
 

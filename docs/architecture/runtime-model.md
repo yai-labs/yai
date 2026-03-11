@@ -85,6 +85,8 @@ MT-3 overlay integration model is defined in
 `docs/architecture/overlay-integration-model.md`.
 QG-1 source/edge query surface model is defined in
 `docs/architecture/source-and-edge-query-surfaces-model.md`.
+QG-2 unified graph model is defined in
+`docs/architecture/unified-graph-workspace-edge-model.md`.
 Source-plane entity/contract model is defined in
 `docs/architecture/source-plane-model.md`.
 Owner ingest runtime flow is defined in
@@ -175,3 +177,10 @@ delegated scope, ingress governance, or workspace sovereignty.
 Owner runtime exposes governed inspect/query surfaces for source, edge, mesh,
 delegated scope, ingress, transport, and overlay state. Structured inspect
 visibility is distinct from raw signals and from final canonical truth.
+
+## QG-2 unified graph lock
+
+Owner runtime projects a unified graph that correlates sovereign workspace/case
+anchors with governed distributed state (edge/mesh/delegation/transport/
+ingress/overlay). Graph representation keeps observed/accepted/canonicalized
+adjudication boundaries explicit.

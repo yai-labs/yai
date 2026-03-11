@@ -106,6 +106,11 @@ QG-1 query lock:
 - inspect summaries under workspace binding are governed visibility, not final
   authority resolution.
 
+QG-2 graph lock:
+- workspace binding context anchors unified graph projection scope;
+- graph summaries under workspace binding correlate distributed runtime state
+  without changing sovereign owner adjudication.
+
 ## Workspace-local vs Runtime-global
 
 Workspace-local:

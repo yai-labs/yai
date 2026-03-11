@@ -52,6 +52,7 @@ A good runbook must be deterministic:
 - `docs/program/23-runbooks/owner-remote-peer-ingress-baseline.md`
 - `docs/program/23-runbooks/overlay-integration-baseline.md`
 - `docs/program/23-runbooks/source-and-edge-query-surfaces-baseline.md`
+- `docs/program/23-runbooks/unified-graph-workspace-edge-baseline.md`
 
 These runbooks are expected to reflect:
 - unified runtime ownership (`core`, `exec`, `data`, `graph`, `knowledge`),

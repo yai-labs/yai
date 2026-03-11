@@ -73,6 +73,10 @@ QG-1 extends source/edge query surfaces with normalized inspect families for:
 - mesh legitimacy/authority-scope state
 - runtime summary-oriented operational views
 
+QG-2 extends graph projection semantics to unify workspace sovereign anchors
+with distributed source/edge/mesh/delegation/transport/ingress/overlay classes
+in one owner-side relational space with explicit adjudication-layer markers.
+
 Existing graph workspace summary now includes source-plane counters:
 
 - `source_graph_node_count`
@@ -161,3 +165,4 @@ The test validates persistence -> query -> graph chain:
 - `docs/architecture/owner-peer-registry-and-coordination-model.md`
 - `docs/architecture/workspace-to-edge-policy-distribution-model.md`
 - `docs/architecture/source-and-edge-query-surfaces-model.md`
+- `docs/architecture/unified-graph-workspace-edge-model.md`
