@@ -4,8 +4,8 @@
 #include <stddef.h>
 #include <stdint.h>
 
-#include <yai/protocol/rpc_runtime.h>
-#include <yai/protocol/transport_contract.h>
+#include <yai/protocol/rpc/runtime.h>
+#include <yai/protocol/contracts/transport_contract.h>
 
 #define MAX_SESSIONS 32
 #define MAX_WS_ID_LEN 64

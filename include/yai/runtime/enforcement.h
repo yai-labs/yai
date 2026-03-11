@@ -7,7 +7,7 @@
 #include <yai/runtime/authority.h>
 #include <yai/runtime/lifecycle.h>
 #include <yai/governance/resolver.h>
-#include <yai/protocol/rpc_runtime.h>
+#include <yai/protocol/rpc/runtime.h>
 
 typedef struct yai_hardened_config {
   char storage_backend[32];

@@ -52,7 +52,12 @@ YAI_DAEMON_BIN := $(BIN_DIR)/yai-daemon
 
 SUPPORT_SRCS := lib/support/ids.c lib/support/logger.c lib/support/errors.c lib/support/strings.c lib/support/paths.c
 PLATFORM_SRCS := lib/platform/os.c lib/platform/fs.c lib/platform/clock.c lib/platform/uds.c
-PROTOCOL_SRCS := lib/protocol/rpc_runtime.c lib/protocol/rpc_codec.c lib/protocol/rpc_binary.c lib/protocol/message_types.c lib/protocol/source_plane_contract.c
+PROTOCOL_SRCS := \
+	lib/protocol/rpc/runtime.c \
+	lib/protocol/rpc/codec.c \
+	lib/protocol/binary/rpc_binary.c \
+	lib/protocol/contracts/message_types.c \
+	lib/protocol/contracts/source_plane_contract.c
 CORE_SRCS := \
 	lib/runtime/lifecycle/bootstrap.c \
 	lib/runtime/lifecycle/preboot.c \
@@ -230,7 +235,7 @@ DOXYGEN ?= doxygen
 DOXY_OUT ?= $(DIST_ROOT)/docs/doxygen
 
 .PHONY: all yai yai-daemon foundations support platform protocol core exec providers knowledge data graph daemon yd1-baseline \
-        test test-unit test-integration test-e2e test-core test-brain test-protocol test-governance test-law \
+        test test-unit test-integration test-e2e test-core test-knowledge test-orchestration test-protocol test-governance \
         test-demo-matrix verify-final-demo-matrix \
         clean clean-dist clean-all build build-all dist dist-all bundle verify \
         preflight-release docs docs-clean docs-verify proof-verify release-guards \
@@ -259,31 +264,31 @@ protocol: $(PROTOCOL_LIB)
 test: test-unit test-integration test-e2e
 	@echo "[YAI] unified test baseline complete"
 
-test-unit: test-core test-protocol test-brain test-governance
+test-unit: test-core test-orchestration test-protocol test-knowledge test-governance
 	@echo "[YAI] unit suites complete"
 
 test-integration:
-	@tests/integration/core_exec/run_core_exec_smoke.sh
-	@tests/integration/core_brain/run_core_brain_smoke.sh
-	@tests/integration/core_brain/run_core_brain_c_tests.sh
-	@tests/integration/workspace_lifecycle/workspace_runtime_contract_v1.sh
-	@tests/integration/workspace_lifecycle/workspace_session_binding_contract_v1.sh
-	@tests/integration/workspace_lifecycle/workspace_inspect_surfaces_v1.sh
-	@tests/integration/workspace_lifecycle/workspace_real_flow_v1.sh
-	@tests/integration/workspace_lifecycle/workspace_scientific_flow_v1.sh
-	@tests/integration/workspace_lifecycle/workspace_digital_flow_v1.sh
-	@tests/integration/workspace_lifecycle/workspace_event_surface_semantics_v1.sh
-	@tests/integration/workspace_lifecycle/workspace_flow_state_readability_v1.sh
-	@tests/integration/workspace_lifecycle/workspace_governed_vertical_slice_v1.sh
-	@tests/integration/workspace_lifecycle/workspace_negative_paths_v1.sh
-	@tests/integration/source_plane/source_owner_ingest_bridge_v1.sh
-	@tests/integration/source_plane/daemon_local_runtime_scan_spool_retry_v1.sh
-	@tests/integration/source_plane/source_plane_read_model_v1.sh
-	@tests/integration/runtime_handshake/run_runtime_handshake_smoke.sh
+	@tests/integration/runtime/run_runtime_exec_smoke.sh
+	@tests/integration/orchestration/run_orchestration_smoke.sh
+	@tests/integration/orchestration/run_orchestration_c_tests.sh
+	@tests/integration/workspace/workspace_runtime_contract_v1.sh
+	@tests/integration/workspace/workspace_session_binding_contract_v1.sh
+	@tests/integration/workspace/workspace_inspect_surfaces_v1.sh
+	@tests/integration/workspace/workspace_real_flow_v1.sh
+	@tests/integration/workspace/workspace_scientific_flow_v1.sh
+	@tests/integration/workspace/workspace_digital_flow_v1.sh
+	@tests/integration/workspace/workspace_event_surface_semantics_v1.sh
+	@tests/integration/workspace/workspace_flow_state_readability_v1.sh
+	@tests/integration/workspace/workspace_governed_vertical_slice_v1.sh
+	@tests/integration/workspace/workspace_negative_paths_v1.sh
+	@tests/integration/source-plane/source_owner_ingest_bridge_v1.sh
+	@tests/integration/source-plane/daemon_local_runtime_scan_spool_retry_v1.sh
+	@tests/integration/source-plane/source_plane_read_model_v1.sh
+	@tests/integration/runtime/run_runtime_handshake_smoke.sh
 	@echo "[YAI] integration suites complete"
 
 test-demo-matrix:
-	@tests/integration/workspace_lifecycle/workspace_final_demo_matrix_v1.sh
+	@tests/integration/workspace/workspace_final_demo_matrix_v1.sh
 	@echo "[YAI] final demo matrix suites complete"
 
 verify-final-demo-matrix:
@@ -296,19 +301,19 @@ test-e2e:
 test-core: yai
 	@./build/bin/yai --help >/dev/null
 
-test-brain:
-	@tests/unit/brain/run_brain_unit_tests.sh
+test-knowledge:
+	@tests/unit/knowledge/run_knowledge_unit_tests.sh
+
+test-orchestration:
+	@tests/unit/orchestration/run_orchestration_unit_tests.sh
 
 test-protocol:
-	@tests/unit/exec/run_exec_unit_tests.sh
 	@tests/unit/protocol/run_protocol_unit_tests.sh
 
 test-governance:
-	@tests/unit/law/run_law_unit_tests.sh
-	@tests/integration/law_resolution/run_law_resolution_smoke.sh
+	@tests/unit/governance/run_governance_unit_tests.sh
+	@tests/integration/governance/run_governance_resolution_smoke.sh
 	@echo "[YAI] governance-native resolution suites complete"
-
-test-law: test-governance
 
 $(YAI_BIN): $(YAI_OBJ) $(CORE_LIB) $(EXEC_LIB) $(KNOWLEDGE_LIB) $(PROVIDERS_LIB) $(DATA_LIB) $(GRAPH_LIB) $(DAEMON_LIB) $(SUPPORT_LIB) $(PLATFORM_LIB) $(PROTOCOL_LIB) | dirs
 	$(CC) $(LDFLAGS) $(YAI_OBJ) -o $@ $(CORE_LIB) $(EXEC_LIB) $(KNOWLEDGE_LIB) $(PROVIDERS_LIB) $(DATA_LIB) $(GRAPH_LIB) $(DAEMON_LIB) $(SUPPORT_LIB) $(PLATFORM_LIB) $(PROTOCOL_LIB) $(LDLIBS)
@@ -445,10 +450,12 @@ help:
 	@echo "  daemon         (build daemon static library)"
 	@echo "  foundations    (support/platform/protocol/providers archives)"
 	@echo "  providers      (build provider infrastructure archive)"
-	@echo "  test-unit      (core/protocol/providers/knowledge+graph unit suites)"
-	@echo "  test-integration (runtime/core-exec/workspace + legacy core_brain scripts)"
+	@echo "  test-unit      (core/orchestration/protocol/knowledge/governance unit suites)"
+	@echo "  test-integration (runtime/orchestration/workspace/source-plane integration suites)"
+	@echo "  test-knowledge (knowledge unit suite)"
+	@echo "  test-orchestration (orchestration unit suite)"
+	@echo "  test-protocol  (protocol unit suite)"
 	@echo "  test-governance  (governance loader/discovery/resolution + smoke)"
-	@echo "  test-law         (legacy alias -> test-governance)"
 	@echo "  test-e2e       (entrypoint e2e smoke)"
 	@echo "  test           (full test baseline)"
 	@echo "  clean          (remove build artifacts)"
@@ -457,5 +464,5 @@ help:
 
 
 test-vertical-slice:
-	@tests/integration/workspace_lifecycle/workspace_governed_vertical_slice_v1.sh
+	@tests/integration/workspace/workspace_governed_vertical_slice_v1.sh
 	@echo "[YAI] governed vertical slice complete"

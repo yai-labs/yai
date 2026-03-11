@@ -3,8 +3,8 @@
 #include <stddef.h>
 #include <sys/types.h>
 
-#include <yai/protocol/rpc_runtime.h>
-#include <yai/protocol/transport_contract.h>
+#include <yai/protocol/rpc/runtime.h>
+#include <yai/protocol/contracts/transport_contract.h>
 
 #define YAI_CONTROL_BACKLOG 16
 

@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-YAI="$REPO/build/bin/yai"
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
+YAI="$ROOT/build/bin/yai"
 SOCK="${YAI_RUNTIME_INGRESS:-$HOME/.yai/run/control.sock}"
 
 if [[ ! -x "$YAI" ]]; then
-  make -C "$REPO" yai >/dev/null
+  make -C "$ROOT" yai >/dev/null
 fi
 
 RUNTIME_PID=""
@@ -18,9 +18,7 @@ cleanup() {
 }
 trap cleanup EXIT
 
-"$YAI" --help >/dev/null
-
-"$YAI" >/tmp/yai_e2e_up.log 2>&1 &
+"$YAI" >/tmp/yai_orchestration_smoke_up.log 2>&1 &
 RUNTIME_PID=$!
 
 for _ in $(seq 1 50); do
@@ -31,10 +29,9 @@ for _ in $(seq 1 50); do
 done
 
 if [[ ! -S "$SOCK" ]]; then
-  echo "run_entrypoint_e2e: FAIL (missing ingress socket $SOCK)"
+  echo "orchestration_smoke: FAIL (missing ingress socket $SOCK)"
   exit 1
 fi
 
-python3 "$REPO/tests/integration/runtime/test_handshake.py"
-
-echo "run_entrypoint_e2e: ok"
+python3 "$ROOT/tests/integration/runtime/test_handshake.py"
+echo "orchestration_smoke: ok"

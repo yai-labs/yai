@@ -13,7 +13,7 @@
 #include <yai/exec/peer_registry.h>
 #include <yai/exec/source_plane.h>
 #include <yai/graph/materialization.h>
-#include <yai/protocol/source_plane_contract.h>
+#include <yai/protocol/contracts/source_plane_contract.h>
 
 #include "cJSON.h"
 

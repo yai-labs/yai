@@ -6,7 +6,7 @@
 #include <string.h>
 
 #include <yai_vault_abi.h>
-#include <yai/protocol/message_types.h>
+#include <yai/protocol/contracts/message_types.h>
 
 #ifdef __cplusplus
 extern "C" {

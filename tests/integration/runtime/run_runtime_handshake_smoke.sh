@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
 YAI="$REPO/build/bin/yai"
 SOCK="${YAI_RUNTIME_INGRESS:-$HOME/.yai/run/control.sock}"
 
@@ -18,9 +18,7 @@ cleanup() {
 }
 trap cleanup EXIT
 
-"$YAI" --help >/dev/null
-
-"$YAI" >/tmp/yai_e2e_up.log 2>&1 &
+"$YAI" >/tmp/yai_runtime_handshake_up.log 2>&1 &
 RUNTIME_PID=$!
 
 for _ in $(seq 1 50); do
@@ -31,10 +29,9 @@ for _ in $(seq 1 50); do
 done
 
 if [[ ! -S "$SOCK" ]]; then
-  echo "run_entrypoint_e2e: FAIL (missing ingress socket $SOCK)"
+  echo "runtime_handshake_smoke: FAIL (missing ingress socket $SOCK)"
   exit 1
 fi
 
 python3 "$REPO/tests/integration/runtime/test_handshake.py"
-
-echo "run_entrypoint_e2e: ok"
+echo "runtime_handshake_smoke: ok"

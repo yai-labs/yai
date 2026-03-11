@@ -1,4 +1,4 @@
 #pragma once
 
-/* Compatibility transport contract surface exported from law authority. */
-#include <transport.h>
+/* Transitional shim. Canonical header lives under protocol/contracts/. */
+#include <yai/protocol/contracts/transport_contract.h>

@@ -1,3 +1,4 @@
 #pragma once
 
-#define YAI_PROTOCOL_RUNTIME_VERSION 1
+/* Transitional shim. Canonical internal header lives under protocol/internal/. */
+#include "internal/runtime_version.h"

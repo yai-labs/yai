@@ -1,4 +1,4 @@
 #pragma once
 
-/* Compatibility runtime RPC surface exported from law authority. */
-#include <rpc_runtime.h>
+/* Transitional shim. Canonical header lives under protocol/rpc/. */
+#include <yai/protocol/rpc/runtime.h>
