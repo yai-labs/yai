@@ -25,7 +25,8 @@ Terms:
 Binding resolution order:
 
 1. `YAI_ACTIVE_WORKSPACE` env override (if set)
-2. session binding file `~/.yai/session/active_workspace.json`
+2. per-terminal session binding file `~/.yai/session/by-tty/<tty>.json` (when TTY is available)
+3. session-global binding file `~/.yai/session/active_workspace.json` (non-interactive fallback)
 
 If env override is invalid, state is `invalid`.
 If binding points to missing workspace manifest, state is `stale`.
@@ -34,7 +35,8 @@ If binding points to missing workspace manifest, state is `stale`.
 
 Binding file contract:
 
-- path: `~/.yai/session/active_workspace.json`
+- path (interactive): `~/.yai/session/by-tty/<tty>.json`
+- path (fallback): `~/.yai/session/active_workspace.json`
 - type: `yai.workspace.binding.v1`
 - fields:
   - `workspace_id`

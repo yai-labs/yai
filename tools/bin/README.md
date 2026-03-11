@@ -31,4 +31,5 @@ Notes:
 - `yai-changelog-check` keeps a CI fallback to local validator when `infra` is not checked out by the runner.
 - Law consumption model is embedded-surface runtime (`embedded/law`) with no active legacy bridge fallback.
 - `yai-ws-token` prints only `icon + alias` (no `ws:` prefix), and only when session binding is active and valid.
+- `yai-ws-token` resolves binding per terminal session first (`~/.yai/session/by-tty/<tty>.json`) and uses global session binding (`~/.yai/session/active_workspace.json`) only in non-interactive contexts.
 - For zsh session-only integration (no permanent prompt override), use `tools/dev/yai-prompt.zsh`.

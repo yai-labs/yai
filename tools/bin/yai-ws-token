@@ -3,7 +3,6 @@ set -euo pipefail
 
 ICON="${YAI_WS_PROMPT_ICON:-◉}"
 HOME_DIR="${HOME:-}"
-BIND_FILE="${HOME_DIR}/.yai/session/active_workspace.json"
 
 if [[ "${1:-}" == "--help" ]]; then
   cat <<'EOF'
@@ -12,7 +11,12 @@ usage: yai-ws-token [--icon <icon>] [--ascii]
 Prints a compact workspace prompt token using active session binding:
   <icon> <workspace_alias>
 
-Output is empty when no active/valid workspace binding is present.
+Resolution order:
+  1) per-TTY binding (~/.yai/session/by-tty/<tty>.json) when available
+  2) session-global binding (~/.yai/session/active_workspace.json) only when no TTY
+     is available (non-interactive/scripted contexts)
+
+Output is empty when no active/valid workspace binding is present for the current session.
 EOF
   exit 0
 fi
@@ -25,18 +29,47 @@ if [[ "${1:-}" == "--ascii" || "${2:-}" == "--ascii" ]]; then
   ICON="${YAI_WS_PROMPT_ICON_ASCII:-*}"
 fi
 
-if [[ -z "$HOME_DIR" || ! -f "$BIND_FILE" ]]; then
+if [[ -z "$HOME_DIR" ]]; then
   exit 0
 fi
 
-python3 - "$BIND_FILE" "$ICON" <<'PY'
+python3 - "$HOME_DIR" "$ICON" <<'PY'
 import json
+import os
 import pathlib
 import re
 import sys
 
-bind_path = pathlib.Path(sys.argv[1])
+home_dir = sys.argv[1]
 icon = sys.argv[2]
+session_dir = pathlib.Path(home_dir) / ".yai" / "session"
+bind_scope = os.environ.get("YAI_WS_BIND_SCOPE", "").strip().lower()
+
+def tty_tag() -> str:
+    override = os.environ.get("YAI_WS_TTY_TAG_OVERRIDE", "").strip()
+    if override:
+        return re.sub(r"[^A-Za-z0-9]", "_", override) or "unknown_tty"
+    for fd in (0, 1, 2):
+        try:
+            tty = os.ttyname(fd)
+            if tty:
+                return re.sub(r"[^A-Za-z0-9]", "_", tty) or "unknown_tty"
+        except OSError:
+            continue
+    return ""
+
+tag = tty_tag()
+if bind_scope in ("global", "shared"):
+    bind_path = session_dir / "active_workspace.json"
+elif tag:
+    # Interactive mode: keep binding session-scoped to current terminal.
+    bind_path = session_dir / "by-tty" / f"{tag}.json"
+else:
+    # Non-interactive mode: fallback to global binding for scripts/tests.
+    bind_path = session_dir / "active_workspace.json"
+
+if not bind_path.is_file():
+    sys.exit(0)
 
 try:
     payload = json.loads(bind_path.read_text(encoding="utf-8"))

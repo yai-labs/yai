@@ -17,6 +17,8 @@ It emits a compact token based on active session binding only:
 - `◉ <alias>` (default)
 - no `ws:` prefix
 - empty output when no active/valid binding
+- interactive shells resolve per-terminal binding first (`~/.yai/session/by-tty/<tty>.json`)
+- non-interactive/scripted calls fall back to `~/.yai/session/active_workspace.json`
 
 This keeps shell UX aligned with Git-like context display while preserving the model:
 
