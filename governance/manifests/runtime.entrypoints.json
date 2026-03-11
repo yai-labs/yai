@@ -7,6 +7,8 @@
       "governance_manifest_ref": "manifests/governance.manifest.json",
       "classification_ref": "classification/classification-map.json",
       "families_ref": "control-families/index/families.index.json",
+      "families_descriptors_ref": "control-families/index/families.descriptors.index.json",
+      "family_matrix_ref": "control-families/index/family.matrix.v1.json",
       "specializations_ref": "domain-specializations/index/specializations.index.json",
       "domains_ref": "domain-specializations/index/specializations.index.json",
       "compliance_ref": "overlays/regulatory/index/regulatory.index.json",

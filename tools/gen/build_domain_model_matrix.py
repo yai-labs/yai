@@ -7,7 +7,7 @@ GOV = ROOT / "governance"
 
 classification_map = json.loads((GOV / "classification" / "classification-map.json").read_text())
 domains_index = json.loads((GOV / "domains" / "index" / "domains.index.json").read_text())
-families_index = json.loads((GOV / "control-families" / "index" / "families.index.json").read_text())
+families_index = json.loads((GOV / "control-families" / "index" / "families.descriptors.index.json").read_text())
 spec_index = json.loads((GOV / "domain-specializations" / "index" / "specializations.index.json").read_text())
 
 family_to_domain = {}
@@ -18,11 +18,22 @@ for d in domains_index.get("domains", []):
         family_to_domain[fam] = did
 
 family_manifest = {}
-for f in families_index.get("families", []):
+family_descriptor = {}
+for f in families_index.get("entries", []):
     fam = f.get("canonical_name")
-    ref = f.get("manifest_ref")
-    if fam and ref:
-        family_manifest[fam] = ref
+    if not fam:
+        continue
+    dref = f.get("descriptor_ref")
+    mref = f.get("materialized_manifest_ref") or f.get("manifest_ref")
+    if dref:
+        family_descriptor[fam] = dref
+        try:
+            dobj = json.loads((ROOT / "governance" / dref).read_text())
+            mref = dobj.get("materialized_manifest_ref", mref)
+        except Exception:
+            pass
+    if mref:
+        family_manifest[fam] = mref
 
 specs_by_family = {}
 for s in spec_index.get("specializations", []):
@@ -58,6 +69,7 @@ for fam in runtime_families:
             "family": fam,
             "domain_id": did,
             "default_specialization": default_spec,
+            "family_descriptor_ref": family_descriptor.get(fam, ""),
             "manifest_ref": fmanifest,
             "specialization_candidates": [s["id"] for s in specs],
         }
@@ -69,6 +81,7 @@ for fam in runtime_families:
             "kind": "family",
             "family": fam,
             "domain_id": did,
+            "family_descriptor_ref": family_descriptor.get(fam, ""),
             "manifest_ref": fmanifest,
             "default_specialization": default_spec,
         }
@@ -79,6 +92,7 @@ for fam in runtime_families:
             "kind": "domain",
             "family": fam,
             "domain_id": did,
+            "family_descriptor_ref": family_descriptor.get(fam, ""),
             "manifest_ref": fmanifest,
             "default_specialization": default_spec,
         }

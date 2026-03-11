@@ -31,6 +31,8 @@ for e in entries:
     ids.add(lid)
     if not e.get("manifest_ref"):
         raise SystemExit(f"entry manifest_ref missing: {lid}")
+    if e.get("kind") in {"family", "domain"} and not e.get("family_descriptor_ref"):
+        raise SystemExit(f"entry family_descriptor_ref missing: {lid}")
 
 fam_resolution = {fr.get("family"): fr for fr in obj.get("family_resolution", [])}
 for fam in runtime_families:

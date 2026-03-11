@@ -20,6 +20,8 @@
   ],
   "classification_index_ref": "classification/classification-map.json",
   "control_family_index_ref": "control-families/index/families.index.json",
+  "control_family_descriptors_ref": "control-families/index/families.descriptors.index.json",
+  "control_family_matrix_ref": "control-families/index/family.matrix.v1.json",
   "domain_specialization_index_ref": "domain-specializations/index/specializations.index.json",
   "overlay_indexes": {
     "regulatory": "overlays/regulatory/index/regulatory.index.json",

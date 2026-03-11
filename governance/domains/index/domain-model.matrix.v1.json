@@ -12,6 +12,7 @@
       "family": "economic",
       "domain_id": "D5-economic",
       "default_specialization": "payments",
+      "family_descriptor_ref": "control-families/descriptors/economic.descriptor.v1.json",
       "manifest_ref": "control-families/economic/manifest.json",
       "specialization_candidates": [
         "payments",
@@ -29,6 +30,7 @@
       "family": "digital",
       "domain_id": "D1-digital",
       "default_specialization": "network-egress",
+      "family_descriptor_ref": "control-families/descriptors/digital.descriptor.v1.json",
       "manifest_ref": "control-families/digital/manifest.json",
       "specialization_candidates": [
         "network-egress",
@@ -43,6 +45,7 @@
       "family": "scientific",
       "domain_id": "D8-scientific",
       "default_specialization": "parameter-governance",
+      "family_descriptor_ref": "control-families/descriptors/scientific.descriptor.v1.json",
       "manifest_ref": "control-families/scientific/manifest.json",
       "specialization_candidates": [
         "experiment-configuration",
@@ -60,6 +63,7 @@
       "kind": "family",
       "family": "economic",
       "domain_id": "D5-economic",
+      "family_descriptor_ref": "control-families/descriptors/economic.descriptor.v1.json",
       "manifest_ref": "control-families/economic/manifest.json",
       "default_specialization": "payments"
     },
@@ -68,6 +72,7 @@
       "kind": "domain",
       "family": "economic",
       "domain_id": "D5-economic",
+      "family_descriptor_ref": "control-families/descriptors/economic.descriptor.v1.json",
       "manifest_ref": "control-families/economic/manifest.json",
       "default_specialization": "payments"
     },
@@ -76,6 +81,7 @@
       "kind": "family",
       "family": "digital",
       "domain_id": "D1-digital",
+      "family_descriptor_ref": "control-families/descriptors/digital.descriptor.v1.json",
       "manifest_ref": "control-families/digital/manifest.json",
       "default_specialization": "network-egress"
     },
@@ -84,6 +90,7 @@
       "kind": "domain",
       "family": "digital",
       "domain_id": "D1-digital",
+      "family_descriptor_ref": "control-families/descriptors/digital.descriptor.v1.json",
       "manifest_ref": "control-families/digital/manifest.json",
       "default_specialization": "network-egress"
     },
@@ -92,6 +99,7 @@
       "kind": "family",
       "family": "scientific",
       "domain_id": "D8-scientific",
+      "family_descriptor_ref": "control-families/descriptors/scientific.descriptor.v1.json",
       "manifest_ref": "control-families/scientific/manifest.json",
       "default_specialization": "parameter-governance"
     },
@@ -100,6 +108,7 @@
       "kind": "domain",
       "family": "scientific",
       "domain_id": "D8-scientific",
+      "family_descriptor_ref": "control-families/descriptors/scientific.descriptor.v1.json",
       "manifest_ref": "control-families/scientific/manifest.json",
       "default_specialization": "parameter-governance"
     },
