@@ -41,7 +41,7 @@ Runtime-sensitive path classes covered:
 
 ## 4) Decision matrix
 Canonical matrix is:
-- `docs/program/reports/audit-convergence/FILESYSTEM-GOVERNANCE-DECOMMISSION-MATRIX-v0.1.0.md`
+- `docs/program/reports/filesystem-governance-convergence-report.md`
 
 Required fields per row:
 - path
@@ -103,7 +103,7 @@ Required payload invariants (already enforced by DP-12):
 - explicit fallback markers when partial/degraded
 
 ## 12) Developer walkthrough
-- `docs/guides/developer/filesystem-decommission-walkthrough.md`
+- `docs/guides/developer/developer-operational-walkthroughs-guide.md`
 
 ## 13) Handoff to DP-14
 DP-14 executes the matrix mechanically:

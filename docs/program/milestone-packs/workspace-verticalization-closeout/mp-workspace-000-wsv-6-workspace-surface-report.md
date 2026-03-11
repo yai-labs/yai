@@ -7,8 +7,8 @@ scope: [yai, yai-law, yai-cli, yai-sdk]
 related:
   - docs/program/milestone-packs/runtime-baselines/mp-runtime-000-workspace-command-taxonomy-architecture.md
   - docs/program/milestone-packs/runtime-baselines/mp-runtime-000-workspace-runtime-command-mapping-and-canonicalization.md
-  - docs/program/reports/audit-convergence/WORKSPACE-VERTICALIZATION-ECOSYSTEM-VERIFICATION-MATRIX-v0.1.0.md
-  - docs/program/reports/audit-convergence/WORKSPACE-VERTICALIZATION-MANUAL-TEST-COMMAND-PACK-v0.1.0.md
+  - docs/program/reports/workspace-verticalization-report.md
+  - docs/program/reports/workspace-verticalization-report.md
   - tests/integration/workspace/workspace_verticalization_closeout.sh
 ---
 
@@ -45,8 +45,8 @@ Workspace-bound capabilities are now canonically surfaced under `yai ws ...`, wi
 
 ## Verification artifacts
 
-- Matrix: `docs/program/reports/audit-convergence/WORKSPACE-VERTICALIZATION-ECOSYSTEM-VERIFICATION-MATRIX-v0.1.0.md`
-- Manual pack: `docs/program/reports/audit-convergence/WORKSPACE-VERTICALIZATION-MANUAL-TEST-COMMAND-PACK-v0.1.0.md`
+- Matrix: `docs/program/reports/workspace-verticalization-report.md`
+- Manual pack: `docs/program/reports/workspace-verticalization-report.md`
 - Representative cross-repo check script:
   - `tests/integration/workspace/workspace_verticalization_closeout.sh`
 

@@ -1,12 +1,16 @@
 # Program
 
-Program-management documentation for the unified repository.
+Program-governance documentation for delivery, decisions, and convergence.
 
-- `rfc/` request-for-comment proposals.
-- `adr/` architecture decision records.
-- `milestone-packs/` milestone delivery packs.
-- `templates/` RFC/ADR/runbook templates.
-- `policies/` program policies and security policy overlays.
-- `reports/` execution and convergence reports.
+## Canonical Sources
 
-Historical migration overviews are archived under `docs/archive/migration/`.
+- RFC index: `rfc/README.md`
+- ADR index: `adr/README.md`
+- Milestone packs index: `milestone-packs/README.md`
+- Program reports spine: `reports/README.md`
+
+## Rules
+
+- RFC/ADR/MP families are canonical and version-traceable.
+- Reports must consolidate evidence and avoid overlapping shard proliferation.
+- Migration overviews remain under `docs/archive/migration/`.

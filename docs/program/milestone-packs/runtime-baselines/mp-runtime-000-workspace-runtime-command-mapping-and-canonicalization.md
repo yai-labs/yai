@@ -4,7 +4,7 @@ status: active
 owner: runtime-cli-sdk-law
 related:
   - docs/program/milestone-packs/runtime-baselines/mp-runtime-000-workspace-command-taxonomy-architecture.md
-  - docs/program/reports/workspace-runtime-command-mapping-matrix.md
+  - docs/program/reports/workspace-verticalization-report.md
 effective_date: 2026-03-10
 ---
 
@@ -72,7 +72,7 @@ Normative anchor from WSV-1:
 ## 4) Full runtime-to-canonical mapping matrix
 
 Authoritative matrix:
-- [workspace-runtime-command-mapping-matrix.md](/Users/francescomaiomascio/Developer/YAI/yai/docs/program/reports/workspace-runtime-command-mapping-matrix.md)
+- [workspace-runtime-command-mapping-matrix.md](/Users/francescomaiomascio/Developer/YAI/yai/docs/program/reports/workspace-verticalization-report.md)
 
 The matrix provides, per row:
 - runtime command id

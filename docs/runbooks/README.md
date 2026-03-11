@@ -2,9 +2,15 @@
 
 Executable, repeatable operating procedures.
 
-- `operations/` day-to-day and incident operations procedures.
-- `qualification/` qualification and validation execution.
-- `demos/` guided demo execution paths.
-- `remediation/` recovery and remediation playbooks.
+## Canonical Sources
 
-Program governance artifacts (RFC/ADR/milestone/report) belong in `docs/program/`.
+- Operations: `operations/core-operations-runbook.md`
+- Qualification: `qualification/core-qualification-runbook.md`
+- Demos: `demos/demo-execution-runbook.md`
+- Remediation: `remediation/core-remediation-runbook.md`
+
+## Rules
+
+- Scenario-specific steps should be appendices inside canonical runbooks.
+- Duplicate baseline-style runbooks are not allowed in live docs.
+- Program governance artifacts stay in `docs/program/`.

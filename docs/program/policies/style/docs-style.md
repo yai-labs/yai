@@ -19,7 +19,12 @@ This policy defines the minimum style baseline for documentation in this reposit
 ## Naming
 
 - Use kebab-case for files and directories.
-- Use fixed prefixes for governance artifacts: `ADR-`, `RFC-`, `RB-`, `MP-`, `SC-`, `QT-`.
+- Use canonical governance naming grammar:
+  - `adr-<domain>-<nnn>-<slug>.md`
+  - `rfc-<domain>-<nnn>-<slug>.md`
+  - `mp-<domain>-<nnn>-<slug>(-vX-Y-Z).md`
+  - runbooks and guides must use canonical terminal classes.
+- Avoid fragmented micro-doc creation when an existing canonical spine can absorb the content.
 
 ## Review
 

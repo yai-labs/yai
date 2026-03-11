@@ -25,7 +25,7 @@ Qualify DP-1..DP-9 as one coherent, verifiable baseline for first pre-pilot usag
 
 ## 3) Verification anchors
 
-- `docs/program/reports/audit-convergence/DATA-PLANE-VERIFICATION-MATRIX-v0.1.0.md`
+- `docs/program/reports/data-plane-convergence-report.md`
 - `tests/integration/workspace/workspace_demo_matrix.sh`
 - `tests/integration/workspace/workspace_event_evidence_sink_hardening.sh`
 - `tests/integration/workspace/workspace_governance_persistence.sh`
@@ -57,7 +57,7 @@ Readiness checklist:
 - `docs/guides/developer/checklists/data-plane-pre-pilot-readiness-checklist.md`
 
 Developer/operator walkthrough:
-- `docs/guides/developer/operator-query-walkthrough.md`
+- `docs/guides/developer/developer-operational-walkthroughs-guide.md`
 
 Handoff target:
 - first Fabio-oriented pre-pilot slice over live persisted governance/event/evidence/authority/artifact/graph summaries.

@@ -122,7 +122,7 @@ Lifecycle/retention policy expression must be:
 - versioned + validable
 
 Canonical policy model matrix:
-- `docs/program/reports/audit-convergence/DATA-LIFECYCLE-RETENTION-MATRIX-v0.1.0.md`
+- `docs/program/reports/data-plane-convergence-report.md`
 
 ## 14) Verification model (DP-15A)
 DP-15A formal verification targets:

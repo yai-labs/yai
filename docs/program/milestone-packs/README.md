@@ -63,13 +63,13 @@ An MP is a closure artifact for a concrete phase and should make review/audit st
 
 ## Current track: Unified runtime closeout
 
-- Canonical entrypoint: `docs/program/reports/audit-convergence/UNIFIED-RUNTIME-CLOSEOUT-INDEX-v0.1.0.md`
+- Canonical entrypoint: `docs/program/reports/runtime-convergence-report.md`
 - Program closeout statement: `docs/program/milestone-packs/unified-runtime-closeout/mp-runtime-000-cl-1-unified-runtime-ecosystem-report.md`
 
 ## Current track: Workspace verticalization closeout
 
-- Matrix: `docs/program/reports/audit-convergence/WORKSPACE-VERTICALIZATION-ECOSYSTEM-VERIFICATION-MATRIX-v0.1.0.md`
-- Manual pack: `docs/program/reports/audit-convergence/WORKSPACE-VERTICALIZATION-MANUAL-TEST-COMMAND-PACK-v0.1.0.md`
+- Matrix: `docs/program/reports/workspace-verticalization-report.md`
+- Manual pack: `docs/program/reports/workspace-verticalization-report.md`
 - Program closeout statement: `docs/program/milestone-packs/workspace-verticalization-closeout/mp-workspace-000-wsv-6-workspace-surface-report.md`
 
 ## Template

@@ -28,7 +28,7 @@ Rules:
 
 Tracked in:
 - `../archive/data-plane-filesystem/notes/RELOCATION_MAP.md`
-- `docs/program/reports/filesystem-cleanup-relocation-map.md`
+- `docs/program/reports/filesystem-governance-convergence-report.md`
 
 ## 4) Operational cleanup outcome
 - Transitional seed residue removed from `law` operational path.

@@ -1,29 +1,27 @@
 # Documentation
 
-Canonical documentation for the unified YAI platform.
+Canonical documentation platform for the unified YAI repository.
 
 ## Navigation
 
-- `architecture/`: active architecture by system domain.
-- `guides/`: audience guides (developer, operator, user).
+- `architecture/`: canonical system architecture.
+- `guides/`: audience-focused guides.
 - `runbooks/`: executable operational procedures.
 - `reference/`: technical lookup reference.
 - `program/`: RFC/ADR/milestone/templates/policies/reports.
-- `product/`: scenarios, demos, pre-pilot product narratives.
+- `product/`: scenarios and product-facing narratives.
 - `generated/`: generated documentation artifacts.
 - `archive/`: historical, legacy, and migration-only material.
 
-## Placement Rules
+## Canonicality Rules
 
-- Place new architecture docs only in `docs/architecture/`.
-- Place user/developer/operator how-to docs in `docs/guides/`.
-- Place step-by-step execution procedures in `docs/runbooks/`.
-- Place lookup material in `docs/reference/`.
-- Place work-governance artifacts in `docs/program/`.
-- Place superseded or migration-only material in `docs/archive/`.
+- Each major theme must have a single canonical source-of-truth document.
+- Satellite docs may support canonical docs but must not duplicate them.
+- Report/migration/closeout-style docs cannot be used as architecture source-of-truth.
+- Live docs must follow naming grammar and avoid noisy historical suffixes.
 
 ## Guardrails
 
-- Do not create new top-level folders under `docs/` without updating hierarchy validation.
-- Do not place migration notes in live architecture/reference/guides areas.
-- Live docs must follow canonical naming grammar (no `-model`, `-baseline`, `-closeout`, `-refoundation`, `-legacy-notes`, `-residue` suffixes).
+- Do not create new top-level docs areas without updating validation.
+- Do not add migration artifacts to live architecture/guides/reference domains.
+- Prefer extending canonical spine docs before adding micro-fragment documents.

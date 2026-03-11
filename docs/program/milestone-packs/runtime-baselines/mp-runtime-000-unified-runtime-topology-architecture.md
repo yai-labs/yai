@@ -139,7 +139,7 @@ Non-acceptable split:
 ## 4. Old → New Implementation Matrix
 
 Normative implementation matrix is in:
-- `docs/program/reports/unified-runtime-topology-mapping-matrix.md`
+- `docs/program/reports/runtime-convergence-report.md`
 
 This annex is required for RF-2 mechanical execution and covers all current critical paths in:
 - `include/yai/brain/*`

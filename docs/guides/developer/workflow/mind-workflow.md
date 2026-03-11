@@ -15,7 +15,7 @@ Use these active guides instead:
 - `docs/guides/developer/workflow/repo-workflow.md`
 - `docs/guides/developer/build-test/build.md`
 - `docs/guides/developer/build-test/testing.md`
-- `docs/guides/developer/workspace-first-real-scenario.md`
+- `docs/guides/developer/developer-workspace-operations-guide.md`
 - `docs/program/milestone-packs/runtime-baselines/mp-runtime-000-unified-runtime-topology-architecture.md`
 
 ## Guardrail

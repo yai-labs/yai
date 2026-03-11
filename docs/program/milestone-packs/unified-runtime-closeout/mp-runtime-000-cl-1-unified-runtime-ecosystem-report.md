@@ -12,14 +12,14 @@ related:
   - docs/program/milestone-packs/runtime-baselines/mp-runtime-000-unified-runtime-topology-architecture.md
   - ../law/docs/program/milestone-packs/runtime-baselines/law-topology-realign-against-unified-runtime.md
   - docs/architecture/cross-repo-naming-and-terminology-contract.md
-  - docs/program/reports/audit-convergence/UNIFIED-RUNTIME-ECOSYSTEM-VERIFICATION-MATRIX-v0.1.0.md
-  - docs/program/reports/audit-convergence/UNIFIED-RUNTIME-MANUAL-TEST-COMMAND-PACK-v0.1.0.md
+  - docs/program/reports/runtime-convergence-report.md
+  - docs/program/reports/runtime-convergence-report.md
 ---
 
 # CL-1 — Unified Runtime Verification and Ecosystem Closeout
 
 Canonical entrypoint for verification execution:
-- `docs/program/reports/audit-convergence/UNIFIED-RUNTIME-CLOSEOUT-INDEX-v0.1.0.md`
+- `docs/program/reports/runtime-convergence-report.md`
 
 This CL-1 document is the program closeout statement layer.
 Operational evidence and manual validation commands are maintained under `docs/program/reports/audit-convergence/`.
@@ -40,7 +40,7 @@ Verified truth sources:
 - CLI outcomes (taxonomy/help + output/status/inspect + operator truth path)
 
 Verification evidence is captured in:
-- `docs/program/reports/audit-convergence/UNIFIED-RUNTIME-ECOSYSTEM-VERIFICATION-MATRIX-v0.1.0.md`
+- `docs/program/reports/runtime-convergence-report.md`
 
 ## B) Canonical ecosystem runtime statement
 

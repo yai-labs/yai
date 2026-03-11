@@ -12,7 +12,7 @@ depends_on:
   - RB-BRAIN-MEMORY-GRAPH-SINKS
   - RB-DP-8-DATA-SURFACES
 related:
-  - docs/program/reports/audit-convergence/DATA-PLANE-VERIFICATION-MATRIX-v0.1.0.md
+  - docs/program/reports/data-plane-convergence-report.md
   - docs/program/milestone-packs/data-plane/mp-data-000-dp-report-v0-1-0.md
   - docs/guides/developer/checklists/data-plane-pre-pilot-readiness-checklist.md
 tags:
@@ -68,7 +68,7 @@ Out of scope for this closure:
 ## 4) Verification references
 
 Authoritative matrix:
-- `docs/program/reports/audit-convergence/DATA-PLANE-VERIFICATION-MATRIX-v0.1.0.md`
+- `docs/program/reports/data-plane-convergence-report.md`
 
 Primary execution evidence:
 - `tests/integration/workspace/workspace_demo_matrix.sh`
