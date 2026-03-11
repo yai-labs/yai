@@ -115,3 +115,4 @@ Architecture refoundation extensions (6/8):
 Flow/state readability extension:
 
 - `docs/architecture/workspace-flow-state-model.md`
+- `docs/architecture/workspace-peer-orchestration-model.md`

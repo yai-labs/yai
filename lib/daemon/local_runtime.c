@@ -613,11 +613,16 @@ static int ensure_binding_attached(yai_daemon_local_runtime_t *local, yai_daemon
 
   snprintf(payload,
            sizeof(payload),
-           "{\"type\":\"yai.control.call.v1\",\"command_id\":\"yai.source.attach\",\"target_plane\":\"runtime\",\"workspace_id\":\"%s\",\"source_node_id\":\"%s\",\"owner_trust_artifact_id\":\"%s\",\"owner_trust_artifact_token\":\"%s\",\"binding_scope\":\"%s\"}",
+           "{\"type\":\"yai.control.call.v1\",\"command_id\":\"yai.source.attach\",\"target_plane\":\"runtime\",\"workspace_id\":\"%s\",\"source_node_id\":\"%s\",\"daemon_instance_id\":\"%s\",\"owner_trust_artifact_id\":\"%s\",\"owner_trust_artifact_token\":\"%s\",\"peer_role\":\"%s\",\"peer_scope\":\"%s\",\"coverage_ref\":\"%s\",\"overlap_state\":\"%s\",\"binding_scope\":\"%s\"}",
            binding->workspace_id,
            local->source_node_id,
+           local->daemon_instance_id,
            local->owner_trust_artifact_id,
            local->owner_trust_artifact_token,
+           "general",
+           "workspace/default",
+           "coverage://workspace/default",
+           "distinct",
            binding->scope[0] ? binding->scope : "workspace");
   rc = rpc_control_call(local->owner_socket, binding->workspace_id, payload, reply, sizeof(reply));
   if (rc != 0 || !json_reply_ok(reply)) return -1;
@@ -756,12 +761,20 @@ static int send_status_update(yai_daemon_local_runtime_t *local, const char *wor
   if (ensure_owner_registered(local, workspace_id) != 0) return -1;
   snprintf(payload,
            sizeof(payload),
-           "{\"type\":\"yai.control.call.v1\",\"command_id\":\"yai.source.status\",\"target_plane\":\"runtime\",\"workspace_id\":\"%s\",\"source_node_id\":\"%s\",\"daemon_instance_id\":\"%s\",\"owner_trust_artifact_id\":\"%s\",\"owner_trust_artifact_token\":\"%s\",\"health\":\"%s\"}",
+           "{\"type\":\"yai.control.call.v1\",\"command_id\":\"yai.source.status\",\"target_plane\":\"runtime\",\"workspace_id\":\"%s\",\"source_node_id\":\"%s\",\"source_binding_id\":\"%s\",\"daemon_instance_id\":\"%s\",\"owner_trust_artifact_id\":\"%s\",\"owner_trust_artifact_token\":\"%s\",\"peer_role\":\"%s\",\"peer_scope\":\"%s\",\"coverage_ref\":\"%s\",\"overlap_state\":\"%s\",\"backlog_queued\":%u,\"backlog_retry_due\":%u,\"backlog_failed\":%u,\"health\":\"%s\"}",
            workspace_id,
            local->source_node_id,
+           (local->binding_count > 0 && local->bindings[0].binding_id[0]) ? local->bindings[0].binding_id : "binding-unset",
            local->daemon_instance_id,
            local->owner_trust_artifact_id,
            local->owner_trust_artifact_token,
+           "general",
+           "workspace/default",
+           "coverage://workspace/default",
+           "unknown",
+           local->spool_queued,
+           local->spool_retry_due,
+           local->spool_failed,
            local->health_state[0] ? local->health_state : YAI_DAEMON_HEALTH_READY);
   rc = rpc_control_call(local->owner_socket, workspace_id, payload, reply, sizeof(reply));
   if (rc != 0 || !json_reply_ok(reply)) return -1;

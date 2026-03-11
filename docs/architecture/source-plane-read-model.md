@@ -21,6 +21,7 @@ YD-6 extends read surfaces for:
 - `source_acquisition_event`
 - `source_evidence_candidate`
 - `source_owner_link`
+- `workspace_peer_membership`
 
 Read model is owner-side only. `yai-daemon` does not host canonical graph truth.
 
@@ -29,7 +30,9 @@ Read model is owner-side only. `yai-daemon` does not host canonical graph truth.
 `yai.workspace.query source` returns `source_plane_summary` with:
 
 - class counts (`source_*_count`)
+- peer orchestration counts (`workspace_peer_membership_count`)
 - source record tails (`source_nodes`, `source_bindings`, `source_assets`, ...)
+- peer orchestration tails (`workspace_peer_memberships`)
 - graph counters (`source_graph_node_count`, `source_graph_edge_count`)
 - DB-first read-path metadata
 - workspace graph summary context
@@ -52,6 +55,7 @@ Nodes:
 - `source_asset`
 - `source_acquisition_event`
 - `source_evidence_candidate`
+- `workspace_peer_membership`
 - owner workspace anchor
 
 Edges:
@@ -64,6 +68,9 @@ Edges:
 - `observed` (`source_acquisition_event -> source_asset`)
 - `emitted_by` (`source_acquisition_event -> source_node`)
 - `derived_from` (`source_evidence_candidate -> source_acquisition_event`)
+- `member_of_workspace` (`workspace_peer_membership -> owner_workspace`)
+- `membership_source_node` (`workspace_peer_membership -> source_node`)
+- `membership_binding` (`workspace_peer_membership -> source_binding`)
 
 ## Semantics guardrails
 
@@ -71,6 +78,7 @@ Edges:
 - `source_evidence_candidate` is not final owner evidence truth.
 - Source-plane graph projection is materialized by owner runtime only.
 - No local source-node graph is treated as canonical owner graph.
+- `workspace_peer_membership` is coordination metadata, not authority finality.
 
 ## Verification baseline
 

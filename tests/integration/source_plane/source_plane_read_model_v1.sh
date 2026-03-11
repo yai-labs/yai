@@ -186,6 +186,8 @@ if sq.get("source_asset_count", 0) < 1:
     raise RuntimeError(f"source summary missing source_asset_count: {source_query}")
 if sq.get("source_graph_node_count", 0) < 1:
     raise RuntimeError(f"source summary missing source_graph_node_count: {source_query}")
+if sq.get("workspace_peer_membership_count", 0) < 1:
+    raise RuntimeError(f"source summary missing workspace_peer_membership_count: {source_query}")
 
 graph_ws = call(ws, {
   "type":"yai.control.call.v1",

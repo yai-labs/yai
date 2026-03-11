@@ -124,3 +124,21 @@ int yai_source_id_enrollment_grant(char *out,
 {
   return make_id(out, out_cap, "sg", source_node_id, daemon_instance_id);
 }
+
+int yai_source_id_workspace_peer_membership(char *out,
+                                            size_t out_cap,
+                                            const char *workspace_id,
+                                            const char *source_node_id,
+                                            const char *source_binding_id)
+{
+  char join[224];
+  if (!workspace_id || !source_node_id || !source_binding_id)
+  {
+    return -1;
+  }
+  if (snprintf(join, sizeof(join), "%s:%s", workspace_id, source_binding_id) >= (int)sizeof(join))
+  {
+    return -1;
+  }
+  return make_id(out, out_cap, "spm", source_node_id, join);
+}

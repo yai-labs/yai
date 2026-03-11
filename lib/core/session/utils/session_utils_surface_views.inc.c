@@ -890,6 +890,7 @@ int yai_session_build_workspace_data_query_json(const char *query_family,
     char source_asset_tail_json[2048];
     char source_event_tail_json[2048];
     char source_candidate_tail_json[2048];
+    char source_peer_membership_tail_json[2048];
     size_t source_node_count = 0;
     size_t source_daemon_count = 0;
     size_t source_binding_count = 0;
@@ -897,6 +898,7 @@ int yai_session_build_workspace_data_query_json(const char *query_family,
     size_t source_event_count = 0;
     size_t source_candidate_count = 0;
     size_t source_owner_link_count = 0;
+    size_t source_peer_membership_count = 0;
     size_t source_graph_node_count = 0;
     size_t source_graph_edge_count = 0;
     char source_query_err[96];
@@ -1046,6 +1048,7 @@ int yai_session_build_workspace_data_query_json(const char *query_family,
     source_asset_tail_json[0] = '\0';
     source_event_tail_json[0] = '\0';
     source_candidate_tail_json[0] = '\0';
+    source_peer_membership_tail_json[0] = '\0';
     source_query_err[0] = '\0';
     (void)yai_data_query_count(info.ws_id, "source_node", &source_node_count, source_query_err, sizeof(source_query_err));
     (void)yai_data_query_count(info.ws_id, "source_daemon_instance", &source_daemon_count, source_query_err, sizeof(source_query_err));
@@ -1054,12 +1057,14 @@ int yai_session_build_workspace_data_query_json(const char *query_family,
     (void)yai_data_query_count(info.ws_id, "source_acquisition_event", &source_event_count, source_query_err, sizeof(source_query_err));
     (void)yai_data_query_count(info.ws_id, "source_evidence_candidate", &source_candidate_count, source_query_err, sizeof(source_query_err));
     (void)yai_data_query_count(info.ws_id, "source_owner_link", &source_owner_link_count, source_query_err, sizeof(source_query_err));
+    (void)yai_data_query_count(info.ws_id, "workspace_peer_membership", &source_peer_membership_count, source_query_err, sizeof(source_query_err));
     (void)yai_data_query_tail_json(info.ws_id, "source_node", 5, source_node_tail_json, sizeof(source_node_tail_json), source_query_err, sizeof(source_query_err));
     (void)yai_data_query_tail_json(info.ws_id, "source_daemon_instance", 5, source_daemon_tail_json, sizeof(source_daemon_tail_json), source_query_err, sizeof(source_query_err));
     (void)yai_data_query_tail_json(info.ws_id, "source_binding", 5, source_binding_tail_json, sizeof(source_binding_tail_json), source_query_err, sizeof(source_query_err));
     (void)yai_data_query_tail_json(info.ws_id, "source_asset", 5, source_asset_tail_json, sizeof(source_asset_tail_json), source_query_err, sizeof(source_query_err));
     (void)yai_data_query_tail_json(info.ws_id, "source_acquisition_event", 5, source_event_tail_json, sizeof(source_event_tail_json), source_query_err, sizeof(source_query_err));
     (void)yai_data_query_tail_json(info.ws_id, "source_evidence_candidate", 5, source_candidate_tail_json, sizeof(source_candidate_tail_json), source_query_err, sizeof(source_query_err));
+    (void)yai_data_query_tail_json(info.ws_id, "workspace_peer_membership", 5, source_peer_membership_tail_json, sizeof(source_peer_membership_tail_json), source_query_err, sizeof(source_query_err));
     (void)yai_graph_materialization_workspace_source_counts(info.ws_id,
                                                             &source_graph_node_count,
                                                             &source_graph_edge_count);
@@ -1468,9 +1473,9 @@ int yai_session_build_workspace_data_query_json(const char *query_family,
                      "\"workspace_id\":\"%s\","
                      "\"summary\":{\"source_node_count\":%zu,\"source_daemon_instance_count\":%zu,\"source_binding_count\":%zu,"
                      "\"source_asset_count\":%zu,\"source_acquisition_event_count\":%zu,\"source_evidence_candidate_count\":%zu,"
-                     "\"source_owner_link_count\":%zu,\"source_graph_node_count\":%zu,\"source_graph_edge_count\":%zu},"
+                     "\"source_owner_link_count\":%zu,\"workspace_peer_membership_count\":%zu,\"source_graph_node_count\":%zu,\"source_graph_edge_count\":%zu},"
                      "\"records\":{\"source_nodes\":%s,\"source_daemon_instances\":%s,\"source_bindings\":%s,"
-                     "\"source_assets\":%s,\"source_acquisition_events\":%s,\"source_evidence_candidates\":%s},"
+                     "\"source_assets\":%s,\"source_acquisition_events\":%s,\"source_evidence_candidates\":%s,\"workspace_peer_memberships\":%s},"
                      "\"read_path\":{\"mode\":\"db_first\",\"primary_source\":\"data_plane_persisted_records\",\"db_first_ready\":%s,\"fallback_active\":%s,\"fallback_reason\":\"%s\",\"filesystem_primary\":false},"
                      "\"graph\":{\"workspace_summary\":%s}"
                      "}",
@@ -1482,6 +1487,7 @@ int yai_session_build_workspace_data_query_json(const char *query_family,
                      source_event_count,
                      source_candidate_count,
                      source_owner_link_count,
+                     source_peer_membership_count,
                      source_graph_node_count,
                      source_graph_edge_count,
                      source_node_tail_json[0] ? source_node_tail_json : "[]",
@@ -1490,6 +1496,7 @@ int yai_session_build_workspace_data_query_json(const char *query_family,
                      source_asset_tail_json[0] ? source_asset_tail_json : "[]",
                      source_event_tail_json[0] ? source_event_tail_json : "[]",
                      source_candidate_tail_json[0] ? source_candidate_tail_json : "[]",
+                     source_peer_membership_tail_json[0] ? source_peer_membership_tail_json : "[]",
                      db_first_ready ? "true" : "false",
                      fallback_active ? "true" : "false",
                      read_fallback_reason,

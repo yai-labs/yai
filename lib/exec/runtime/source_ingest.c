@@ -49,6 +49,21 @@ static const char *json_string(cJSON *root, const char *key)
   return NULL;
 }
 
+static int64_t json_i64(cJSON *root, const char *key, int64_t fallback)
+{
+  cJSON *v = NULL;
+  if (!root || !key)
+  {
+    return fallback;
+  }
+  v = cJSON_GetObjectItem(root, key);
+  if (v && cJSON_IsNumber(v))
+  {
+    return (int64_t)v->valuedouble;
+  }
+  return fallback;
+}
+
 static const char *json_string_or(cJSON *root, const char *key, const char *fallback)
 {
   const char *v = json_string(root, key);
@@ -390,8 +405,16 @@ static int handle_attach(const char *workspace_id,
   const char *constraints_ref = json_string(payload, "constraints_ref");
   const char *owner_workspace_id = json_string(payload, "owner_workspace_id");
   char source_binding_id[YAI_SOURCE_BINDING_ID_MAX];
+  char workspace_peer_membership_id[YAI_SOURCE_WORKSPACE_PEER_MEMBERSHIP_ID_MAX];
+  const char *peer_role = json_string_or(payload, "peer_role", "general");
+  const char *peer_scope = json_string_or(payload, "peer_scope", "workspace/default");
+  const char *peer_state = json_string_or(payload, "peer_state", "active");
+  const char *daemon_instance_id = json_string_or(payload, "daemon_instance_id", "daemon-instance-unset");
+  const char *coverage_ref = json_string_or(payload, "coverage_ref", "coverage://workspace/default");
+  const char *overlap_state = json_string_or(payload, "overlap_state", "distinct");
   char med_json[384];
   cJSON *binding = NULL;
+  cJSON *membership = NULL;
   char err[160];
   const char *target_ws = owner_workspace_id && owner_workspace_id[0] ? owner_workspace_id : workspace_id;
 
@@ -424,6 +447,15 @@ static int handle_attach(const char *workspace_id,
     (void)set_reason(reason, reason_cap, "source_attach_binding_id_generation_failed");
     return -4;
   }
+  if (yai_source_id_workspace_peer_membership(workspace_peer_membership_id,
+                                              sizeof(workspace_peer_membership_id),
+                                              target_ws,
+                                              source_node_id,
+                                              source_binding_id) != 0)
+  {
+    (void)set_reason(reason, reason_cap, "workspace_peer_membership_id_generation_failed");
+    return -4;
+  }
 
   binding = cJSON_CreateObject();
   if (!binding)
@@ -439,22 +471,62 @@ static int handle_attach(const char *workspace_id,
   cJSON_AddStringToObject(binding, "attachment_status", "attached");
   cJSON_AddStringToObject(binding, "constraints_ref", constraints_ref);
 
+  membership = cJSON_CreateObject();
+  if (!membership)
+  {
+    cJSON_Delete(binding);
+    (void)set_reason(reason, reason_cap, "workspace_peer_membership_allocation_failed");
+    return -4;
+  }
+  cJSON_AddStringToObject(membership, "type", "yai.workspace_peer_membership.v1");
+  cJSON_AddStringToObject(membership, "workspace_peer_membership_id", workspace_peer_membership_id);
+  cJSON_AddStringToObject(membership, "owner_workspace_id", target_ws);
+  cJSON_AddStringToObject(membership, "source_node_id", source_node_id);
+  cJSON_AddStringToObject(membership, "source_binding_id", source_binding_id);
+  cJSON_AddStringToObject(membership, "daemon_instance_id", daemon_instance_id);
+  cJSON_AddStringToObject(membership, "peer_role", peer_role);
+  cJSON_AddStringToObject(membership, "peer_scope", peer_scope);
+  cJSON_AddStringToObject(membership, "peer_state", peer_state);
+  cJSON_AddNumberToObject(membership, "backlog_queued", 0);
+  cJSON_AddNumberToObject(membership, "backlog_retry_due", 0);
+  cJSON_AddNumberToObject(membership, "backlog_failed", 0);
+  cJSON_AddStringToObject(membership, "coverage_ref", coverage_ref);
+  cJSON_AddStringToObject(membership, "overlap_state", overlap_state);
+  cJSON_AddNumberToObject(membership, "updated_at_epoch", (double)time(NULL));
+
   if (append_source_record(workspace_id, YAI_SOURCE_RECORD_CLASS_BINDING, binding, err, sizeof(err)) != 0)
   {
     cJSON_Delete(binding);
+    cJSON_Delete(membership);
     (void)set_reason(reason, reason_cap, err[0] ? err : "source_attach_persistence_failed");
     return -4;
   }
+  if (append_source_record(workspace_id,
+                           YAI_SOURCE_RECORD_CLASS_WORKSPACE_PEER_MEMBERSHIP,
+                           membership,
+                           err,
+                           sizeof(err)) != 0)
+  {
+    cJSON_Delete(binding);
+    cJSON_Delete(membership);
+    (void)set_reason(reason, reason_cap, err[0] ? err : "workspace_peer_membership_persistence_failed");
+    return -4;
+  }
   cJSON_Delete(binding);
+  cJSON_Delete(membership);
   mediation_json(med, med_json, sizeof(med_json));
 
   if (snprintf(out_json,
                out_cap,
-               "{\"type\":\"yai.source.attach.reply.v1\",\"workspace_id\":\"%s\",\"owner_workspace_id\":\"%s\",\"source_node_id\":\"%s\",\"source_binding_id\":\"%s\",\"attachment_status\":\"attached\",\"mediation\":%s}",
+               "{\"type\":\"yai.source.attach.reply.v1\",\"workspace_id\":\"%s\",\"owner_workspace_id\":\"%s\",\"source_node_id\":\"%s\",\"source_binding_id\":\"%s\",\"workspace_peer_membership_id\":\"%s\",\"peer_role\":\"%s\",\"peer_scope\":\"%s\",\"peer_state\":\"%s\",\"attachment_status\":\"attached\",\"mediation\":%s}",
                workspace_id,
                target_ws,
                source_node_id,
                source_binding_id,
+               workspace_peer_membership_id,
+               peer_role,
+               peer_scope,
+               peer_state,
                med_json) <= 0)
   {
     (void)set_reason(reason, reason_cap, "source_attach_response_encode_failed");
@@ -631,10 +703,20 @@ static int handle_status(const char *workspace_id,
                          size_t reason_cap)
 {
   const char *source_node_id = json_string(payload, "source_node_id");
+  const char *source_binding_id = json_string_or(payload, "source_binding_id", "binding-unset");
   const char *daemon_instance_id = json_string(payload, "daemon_instance_id");
   const char *health = json_string(payload, "health");
+  const char *peer_role = json_string_or(payload, "peer_role", "general");
+  const char *peer_scope = json_string_or(payload, "peer_scope", "workspace/default");
+  const char *coverage_ref = json_string_or(payload, "coverage_ref", "coverage://workspace/default");
+  const char *overlap_state = json_string_or(payload, "overlap_state", "unknown");
+  int64_t backlog_queued = json_i64(payload, "backlog_queued", -1);
+  int64_t backlog_retry_due = json_i64(payload, "backlog_retry_due", -1);
+  int64_t backlog_failed = json_i64(payload, "backlog_failed", -1);
+  char workspace_peer_membership_id[YAI_SOURCE_WORKSPACE_PEER_MEMBERSHIP_ID_MAX];
   char med_json[384];
   cJSON *inst = NULL;
+  cJSON *membership = NULL;
   char err[160];
 
   if (!workspace_id || !yai_ws_id_is_valid(workspace_id) || !payload ||
@@ -657,10 +739,22 @@ static int handle_status(const char *workspace_id,
   {
     health = "unknown";
   }
+  if (yai_source_id_workspace_peer_membership(workspace_peer_membership_id,
+                                              sizeof(workspace_peer_membership_id),
+                                              workspace_id,
+                                              source_node_id,
+                                              source_binding_id) != 0)
+  {
+    (void)set_reason(reason, reason_cap, "workspace_peer_membership_id_generation_failed");
+    return -4;
+  }
 
   inst = cJSON_CreateObject();
-  if (!inst)
+  membership = cJSON_CreateObject();
+  if (!inst || !membership)
   {
+    cJSON_Delete(inst);
+    cJSON_Delete(membership);
     (void)set_reason(reason, reason_cap, "source_status_allocation_failed");
     return -4;
   }
@@ -672,22 +766,58 @@ static int handle_status(const char *workspace_id,
   cJSON_AddStringToObject(inst, "health", health);
   cJSON_AddStringToObject(inst, "build_marker", "yd4-v1");
 
+  cJSON_AddStringToObject(membership, "type", "yai.workspace_peer_membership.v1");
+  cJSON_AddStringToObject(membership, "workspace_peer_membership_id", workspace_peer_membership_id);
+  cJSON_AddStringToObject(membership, "owner_workspace_id", workspace_id);
+  cJSON_AddStringToObject(membership, "source_node_id", source_node_id);
+  cJSON_AddStringToObject(membership, "source_binding_id", source_binding_id);
+  cJSON_AddStringToObject(membership, "daemon_instance_id", daemon_instance_id);
+  cJSON_AddStringToObject(membership, "peer_role", peer_role);
+  cJSON_AddStringToObject(membership, "peer_scope", peer_scope);
+  cJSON_AddStringToObject(membership, "peer_state", health);
+  cJSON_AddNumberToObject(membership, "backlog_queued", (double)backlog_queued);
+  cJSON_AddNumberToObject(membership, "backlog_retry_due", (double)backlog_retry_due);
+  cJSON_AddNumberToObject(membership, "backlog_failed", (double)backlog_failed);
+  cJSON_AddStringToObject(membership, "coverage_ref", coverage_ref);
+  cJSON_AddStringToObject(membership, "overlap_state", overlap_state);
+  cJSON_AddNumberToObject(membership, "updated_at_epoch", (double)time(NULL));
+
   if (append_source_record(workspace_id, YAI_SOURCE_RECORD_CLASS_DAEMON_INSTANCE, inst, err, sizeof(err)) != 0)
   {
     cJSON_Delete(inst);
+    cJSON_Delete(membership);
     (void)set_reason(reason, reason_cap, err[0] ? err : "source_status_persistence_failed");
     return -4;
   }
+  if (append_source_record(workspace_id,
+                           YAI_SOURCE_RECORD_CLASS_WORKSPACE_PEER_MEMBERSHIP,
+                           membership,
+                           err,
+                           sizeof(err)) != 0)
+  {
+    cJSON_Delete(inst);
+    cJSON_Delete(membership);
+    (void)set_reason(reason, reason_cap, err[0] ? err : "workspace_peer_membership_persistence_failed");
+    return -4;
+  }
   cJSON_Delete(inst);
+  cJSON_Delete(membership);
   mediation_json(med, med_json, sizeof(med_json));
 
   if (snprintf(out_json,
                out_cap,
-               "{\"type\":\"yai.source.status.reply.v1\",\"workspace_id\":\"%s\",\"source_node_id\":\"%s\",\"daemon_instance_id\":\"%s\",\"health\":\"%s\",\"mediation\":%s}",
+               "{\"type\":\"yai.source.status.reply.v1\",\"workspace_id\":\"%s\",\"source_node_id\":\"%s\",\"daemon_instance_id\":\"%s\",\"source_binding_id\":\"%s\",\"workspace_peer_membership_id\":\"%s\",\"health\":\"%s\",\"backlog_queued\":%lld,\"backlog_retry_due\":%lld,\"backlog_failed\":%lld,\"coverage_ref\":\"%s\",\"overlap_state\":\"%s\",\"mediation\":%s}",
                workspace_id,
                source_node_id,
                daemon_instance_id,
+               source_binding_id,
+               workspace_peer_membership_id,
                health,
+               (long long)backlog_queued,
+               (long long)backlog_retry_due,
+               (long long)backlog_failed,
+               coverage_ref,
+               overlap_state,
                med_json) <= 0)
   {
     (void)set_reason(reason, reason_cap, "source_status_response_encode_failed");

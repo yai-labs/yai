@@ -129,6 +129,29 @@ Minimum fields:
 - `trust_artifact_token`
 - `issued_at_epoch`
 
+### 9) `workspace_peer_membership`
+
+Owner-side orchestration relation for one peer inside one workspace.
+This relation is distinct from `source_binding`: membership captures
+peer coordination semantics at case level (role/scope/health/backlog/coverage).
+
+Minimum fields:
+
+- `workspace_peer_membership_id`
+- `owner_workspace_id`
+- `source_node_id`
+- `source_binding_id`
+- `daemon_instance_id`
+- `peer_role`
+- `peer_scope`
+- `peer_state`
+- `backlog_queued`
+- `backlog_retry_due`
+- `backlog_failed`
+- `coverage_ref`
+- `overlap_state`
+- `updated_at_epoch`
+
 ## Distinctions (non-negotiable)
 
 - `source_node` != `source_daemon_instance`
@@ -148,6 +171,7 @@ Runtime data-plane record classes introduced by YD-3:
 - `source_evidence_candidate`
 - `source_owner_link`
 - `source_enrollment_grant`
+- `workspace_peer_membership`
 
 These are appendable through `yai_data_records_*` hooks and visible in summary
 counts.
@@ -164,6 +188,7 @@ YD-3 introduces dedicated source ID helpers:
 - `sc-*` source evidence candidate IDs
 - `sl-*` source owner link IDs
 - `sg-*` source enrollment grant IDs
+- `spm-*` workspace peer membership IDs
 
 IDs are deterministic enough for local consistency and are shaped for future
 cross-plane traceability.

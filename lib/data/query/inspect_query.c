@@ -39,6 +39,7 @@ int yai_data_query_summary_json(const char *workspace_id,
   size_t source_node = 0, source_daemon_instance = 0, source_binding = 0;
   size_t source_asset = 0, source_acquisition_event = 0, source_evidence_candidate = 0, source_owner_link = 0;
   size_t source_enrollment_grant = 0;
+  size_t workspace_peer_membership = 0;
   if (!out_json || out_cap == 0) return -1;
   out_json[0] = '\0';
   if (yai_data_query_count(workspace_id, "events", &events, err, err_cap) != 0) return -1;
@@ -65,9 +66,10 @@ int yai_data_query_summary_json(const char *workspace_id,
                            err_cap) != 0) return -1;
   if (yai_data_query_count(workspace_id, YAI_SOURCE_RECORD_CLASS_OWNER_LINK, &source_owner_link, err, err_cap) != 0) return -1;
   if (yai_data_query_count(workspace_id, YAI_SOURCE_RECORD_CLASS_ENROLLMENT_GRANT, &source_enrollment_grant, err, err_cap) != 0) return -1;
+  if (yai_data_query_count(workspace_id, YAI_SOURCE_RECORD_CLASS_WORKSPACE_PEER_MEMBERSHIP, &workspace_peer_membership, err, err_cap) != 0) return -1;
   if (snprintf(out_json,
                out_cap,
-               "{\"workspace_id\":\"%s\",\"counts\":{\"events\":%zu,\"decisions\":%zu,\"evidence\":%zu,\"governance\":%zu,\"authority\":%zu,\"authority_resolution\":%zu,\"enforcement_outcome\":%zu,\"enforcement_linkage\":%zu,\"source_node\":%zu,\"source_daemon_instance\":%zu,\"source_binding\":%zu,\"source_asset\":%zu,\"source_acquisition_event\":%zu,\"source_evidence_candidate\":%zu,\"source_owner_link\":%zu,\"source_enrollment_grant\":%zu}}",
+               "{\"workspace_id\":\"%s\",\"counts\":{\"events\":%zu,\"decisions\":%zu,\"evidence\":%zu,\"governance\":%zu,\"authority\":%zu,\"authority_resolution\":%zu,\"enforcement_outcome\":%zu,\"enforcement_linkage\":%zu,\"source_node\":%zu,\"source_daemon_instance\":%zu,\"source_binding\":%zu,\"source_asset\":%zu,\"source_acquisition_event\":%zu,\"source_evidence_candidate\":%zu,\"source_owner_link\":%zu,\"source_enrollment_grant\":%zu,\"workspace_peer_membership\":%zu}}",
                workspace_id,
                events,
                decisions,
@@ -84,7 +86,8 @@ int yai_data_query_summary_json(const char *workspace_id,
                source_acquisition_event,
                source_evidence_candidate,
                source_owner_link,
-               source_enrollment_grant) <= 0) {
+               source_enrollment_grant,
+               workspace_peer_membership) <= 0) {
     if (err && err_cap > 0) snprintf(err, err_cap, "%s", "summary_encode_failed");
     return -1;
   }

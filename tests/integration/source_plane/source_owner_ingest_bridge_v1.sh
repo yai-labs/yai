@@ -169,8 +169,11 @@ attach = call(ws, {
 expect_ok(attach, "source.attach")
 expect_exec_mediation(attach, "source.attach")
 binding_id = attach.get("data", {}).get("source_binding_id")
+membership_id = attach.get("data", {}).get("workspace_peer_membership_id")
 if not binding_id:
   raise RuntimeError(f"source.attach missing binding id: {attach}")
+if not membership_id:
+  raise RuntimeError(f"source.attach missing workspace peer membership id: {attach}")
 
 emit = call(ws, {
   "type":"yai.control.call.v1",

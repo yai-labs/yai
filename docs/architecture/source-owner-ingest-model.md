@@ -64,6 +64,7 @@ Record classes written in YD-4 baseline:
 - `source_evidence_candidate`
 - `source_owner_link`
 - `source_enrollment_grant`
+- `workspace_peer_membership`
 
 ## Validation baseline
 
@@ -72,6 +73,8 @@ Record classes written in YD-4 baseline:
 - required source identifiers must be present per operation
 - `attach`, `emit`, and `status` require owner-issued trust artifact token
 - emit payload must include at least one supported source record item
+- attach/status can carry peer orchestration metadata
+  (`peer_role`, `peer_scope`, backlog counters, `coverage_ref`, `overlap_state`)
 
 ## Reply baseline
 

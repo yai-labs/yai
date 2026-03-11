@@ -361,6 +361,31 @@ int yai_graph_materialize_source_record(const char *workspace_id,
     if (out_node_ref && out_node_ref_cap > 0) snprintf(out_node_ref, out_node_ref_cap, "bgn-%s-%s", YAI_GRAPH_SOURCE_OWNER_LINK_CLASS, a_slug);
     if (out_edge_ref && out_edge_ref_cap > 0) snprintf(out_edge_ref, out_edge_ref_cap, "bge-attached-to-%s", src_slug);
   }
+  else if (strcmp(record_class, YAI_SOURCE_RECORD_CLASS_WORKSPACE_PEER_MEMBERSHIP) == 0)
+  {
+    const char *membership_id = json_string(root, "workspace_peer_membership_id");
+    yai_graph_slug(membership_id, a_slug, sizeof(a_slug));
+    yai_graph_slug(source_node_id, src_slug, sizeof(src_slug));
+    yai_graph_slug(source_binding_id, b_slug, sizeof(b_slug));
+    (void)yai_mind_graph_node_create(YAI_GRAPH_WORKSPACE_PEER_MEMBERSHIP_CLASS,
+                                     a_slug,
+                                     membership_id ? membership_id : "workspace_peer_membership_unset",
+                                     &candidate_node);
+    (void)yai_mind_graph_node_create(YAI_GRAPH_SOURCE_NODE_CLASS,
+                                     src_slug,
+                                     source_node_id ? source_node_id : "source_node_unset",
+                                     &src_node);
+    (void)yai_mind_graph_node_create(YAI_GRAPH_SOURCE_BINDING_CLASS,
+                                     b_slug,
+                                     source_binding_id ? source_binding_id : "source_binding_unset",
+                                     &binding_node);
+    (void)yai_mind_graph_edge_create(candidate_node, ws_node, "member_of_workspace", 1.0f, &rel_edge);
+    (void)yai_mind_graph_edge_create(candidate_node, src_node, "membership_source_node", 1.0f, &rel_edge);
+    (void)yai_mind_graph_edge_create(candidate_node, binding_node, "membership_binding", 1.0f, &rel_edge);
+    if (slot) { slot->source_node_count += 4; slot->source_edge_count += 3; }
+    if (out_node_ref && out_node_ref_cap > 0) snprintf(out_node_ref, out_node_ref_cap, "bgn-%s-%s", YAI_GRAPH_WORKSPACE_PEER_MEMBERSHIP_CLASS, a_slug);
+    if (out_edge_ref && out_edge_ref_cap > 0) snprintf(out_edge_ref, out_edge_ref_cap, "bge-member-of-workspace-%s", a_slug);
+  }
 
   cJSON_Delete(root);
   return 0;

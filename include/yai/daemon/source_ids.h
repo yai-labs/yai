@@ -19,3 +19,8 @@ int yai_source_id_enrollment_grant(char *out,
                                    size_t out_cap,
                                    const char *source_node_id,
                                    const char *daemon_instance_id);
+int yai_source_id_workspace_peer_membership(char *out,
+                                            size_t out_cap,
+                                            const char *workspace_id,
+                                            const char *source_node_id,
+                                            const char *source_binding_id);
