@@ -6,7 +6,8 @@ This policy defines compatibility guarantees for the unified single-repository Y
 
 Compatibility is governance-driven from canonical in-repo roots:
 
-- contracts: `governance/contracts/`
+- protocol contracts/schema: `lib/protocol/contracts/schema/`
+- protocol headers/ABI: `include/yai/protocol/contracts/`
 - schemas: `governance/schema/`
 - manifests: `governance/manifests/`
 - registry/grammar: `governance/registry/`, `governance/grammar/`

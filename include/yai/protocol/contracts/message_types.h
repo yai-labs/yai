@@ -1,8 +1,8 @@
 /* SPDX-License-Identifier: Apache-2.0 */
 #pragma once
 
-/* Compatibility command-id surface exported from governance authority. */
-#include <yai_protocol_ids.h>
+/* Canonical command-id surface exported from protocol spine. */
+#include <yai/protocol/contracts/yai_protocol_ids.h>
 #include <yai/protocol/contracts/source_plane_contract.h>
 
 /* Source-plane transport intents (YD-4 baseline). */

@@ -3,6 +3,18 @@
 
 #include <yai/governance/loader.h>
 
+static int read_file(const char *path, char *out, size_t cap) {
+  FILE *f = NULL;
+  size_t n = 0;
+  if (!path || !out || cap < 2) return -1;
+  f = fopen(path, "rb");
+  if (!f) return -1;
+  n = fread(out, 1, cap - 1, f);
+  out[n] = '\0';
+  fclose(f);
+  return 0;
+}
+
 static int contains(const char *json, const char *needle) {
   return json && needle && strstr(json, needle) != NULL;
 }
@@ -17,7 +29,7 @@ int main(void) {
     return 1;
   }
 
-  if (yai_governance_read_surface_json(&rt, "contracts/control/schema/control_plane.v1.json", json, sizeof(json)) != 0) {
+  if (read_file("lib/protocol/contracts/schema/control/control_plane.v1.json", json, sizeof(json)) != 0) {
     fprintf(stderr, "contracts_schema_loader: missing control plane contract\n");
     return 1;
   }
@@ -26,7 +38,7 @@ int main(void) {
     return 1;
   }
 
-  if (yai_governance_read_surface_json(&rt, "contracts/providers/schema/providers.v1.json", json, sizeof(json)) != 0) {
+  if (read_file("lib/protocol/contracts/schema/providers/providers.v1.json", json, sizeof(json)) != 0) {
     fprintf(stderr, "contracts_schema_loader: missing providers contract\n");
     return 1;
   }

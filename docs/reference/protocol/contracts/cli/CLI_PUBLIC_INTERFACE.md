@@ -12,7 +12,7 @@ Public CLI shape can remain stable while internal runtime topology converges to:
 ## Boundary rule
 
 CLI is a client surface.
-It must not redefine authority semantics or bypass `contracts/control/` and `contracts/protocol/`.
+It must not redefine authority semantics or bypass canonical protocol control schemas and protocol contract headers.
 
 ## Historical aliases
 

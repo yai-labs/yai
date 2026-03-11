@@ -1,6 +1,6 @@
 # Control Contracts
 
-`contracts/control/` defines canonical control-plane schemas.
+`lib/protocol/contracts/schema/control/` defines canonical control-plane schemas.
 
 Primary ontology:
 - `core` is the authority/control plane.

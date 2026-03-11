@@ -88,12 +88,12 @@ int yai_governance_compatibility_check(yai_governance_runtime_t *rt, char *err, 
     return -1;
   }
 
-  if (yai_governance_require_governance_surface(rt, "contracts/control/schema/control_plane.v1.json", json, sizeof(json)) != 0 ||
-      yai_governance_require_governance_surface(rt, "contracts/control/schema/control_call.v1.json", json, sizeof(json)) != 0 ||
-      yai_governance_require_governance_surface(rt, "contracts/control/schema/exec_reply.v1.json", json, sizeof(json)) != 0 ||
-      yai_governance_require_governance_surface(rt, "contracts/providers/schema/providers.v1.json", json, sizeof(json)) != 0 ||
-      yai_governance_require_governance_surface(rt, "contracts/vault/schema/vault_abi.json", json, sizeof(json)) != 0) {
-    if (err && err_cap) (void)yai_governance_safe_snprintf(err, err_cap, "missing canonical governance contracts");
+  if (yai_governance_require_file(rt, "../lib/protocol/contracts/schema/control/control_plane.v1.json", json, sizeof(json)) != 0 ||
+      yai_governance_require_file(rt, "../lib/protocol/contracts/schema/control/control_call.v1.json", json, sizeof(json)) != 0 ||
+      yai_governance_require_file(rt, "../lib/protocol/contracts/schema/control/exec_reply.v1.json", json, sizeof(json)) != 0 ||
+      yai_governance_require_file(rt, "../lib/protocol/contracts/schema/providers/providers.v1.json", json, sizeof(json)) != 0 ||
+      yai_governance_require_file(rt, "../lib/protocol/contracts/schema/vault/vault_abi.json", json, sizeof(json)) != 0) {
+    if (err && err_cap) (void)yai_governance_safe_snprintf(err, err_cap, "missing canonical protocol contracts");
     return -1;
   }
 

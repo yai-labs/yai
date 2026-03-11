@@ -14,6 +14,7 @@ FORBIDDEN = [
     "law-embed-check",
     "resolve-law-",
     "yai-law-",
+    "governance/contracts",
 ]
 
 # README may mention removed wrappers in historical notes.
@@ -60,6 +61,7 @@ def main() -> int:
             if rel in {
                 "tools/validate/validate_no_legacy_tooling_references.py",
                 "tools/validate/validate_unified_repo_root_framing.py",
+                "tools/validate/validate_root_topology.py",
             }:
                 continue
             text = f.read_text(encoding="utf-8", errors="ignore")

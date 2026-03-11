@@ -1,7 +1,7 @@
 # YAI CLI Output Contract v1
 
 Canonical envelope source:
-- `contracts/control/schema/exec_reply.v1.json`
+- `lib/protocol/contracts/schema/control/exec_reply.v1.json`
 
 ## Primary semantic interpretation
 

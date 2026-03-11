@@ -13,10 +13,10 @@ Law:
 - `foundation/invariants/I-007-compliance-context-required.md`
 
 Schemas:
-- `contracts/control/schema/control_plane.v1.json`
-- `contracts/control/schema/control_call.v1.json`
-- `contracts/control/schema/exec_reply.v1.json`
-- `contracts/control/schema/authority.v1.json`
+- `lib/protocol/contracts/schema/control/control_plane.v1.json`
+- `lib/protocol/contracts/schema/control/control_call.v1.json`
+- `lib/protocol/contracts/schema/control/exec_reply.v1.json`
+- `lib/protocol/contracts/schema/control/authority.v1.json`
 
 ## Obligations
 

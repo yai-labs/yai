@@ -2,6 +2,7 @@
 
 Canonical contract destination in the unified repository:
 
-- `governance/contracts/`
+- `lib/protocol/contracts/schema/`
+- `include/yai/protocol/contracts/`
 
-Canonical runtime consumers must resolve contracts from `governance/` paths only.
+Canonical runtime consumers must resolve exchange contracts from protocol paths.

@@ -3,7 +3,7 @@
 # =========================================
 
 ROOT_DIR := $(abspath .)
-GOVERNANCE_CONTRACT_ROOT ?= $(ROOT_DIR)/governance/contracts
+PROTOCOL_CONTRACT_ROOT ?= $(ROOT_DIR)/include/yai/protocol/contracts
 GOVERNANCE_COMPAT_ROOT ?= $(ROOT_DIR)/governance
 
 BUILD_DIR ?= $(ROOT_DIR)/build
@@ -19,9 +19,7 @@ CC ?= cc
 PKG_CONFIG ?= pkg-config
 CPPFLAGS ?= -I$(ROOT_DIR) -I$(ROOT_DIR)/include -I$(ROOT_DIR)/include/yai \
             -I$(ROOT_DIR)/lib/third_party/cjson \
-            -I$(GOVERNANCE_CONTRACT_ROOT)/protocol/include \
-            -I$(GOVERNANCE_CONTRACT_ROOT)/protocol/runtime/include \
-            -I$(GOVERNANCE_CONTRACT_ROOT)/vault/include
+            -I$(PROTOCOL_CONTRACT_ROOT)
 CFLAGS ?= -Wall -Wextra -std=c11 -O2
 LDFLAGS ?=
 LDLIBS ?= -lm

@@ -1,6 +1,6 @@
 # Providers Contracts
 
-`contracts/providers/` defines provider-facing contract structures.
+`lib/protocol/contracts/schema/providers/` defines provider-facing contract structures.
 
 Primary semantic placement is under the `brain` plane (cognitive provider interactions), governed by `core` authority and constrained by `exec` external-effect rules.
 

@@ -1,6 +1,6 @@
 # Protocol Contracts
 
-`contracts/protocol/` defines shared wire/runtime protocol contracts.
+`include/yai/protocol/contracts/` defines shared wire/runtime protocol contracts.
 
 Protocol is a cross-cutting layer.
 It is not an authority domain.

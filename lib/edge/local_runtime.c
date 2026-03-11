@@ -16,9 +16,9 @@
 
 #include <cJSON.h>
 
-#include <protocol.h>
-#include <transport.h>
-#include <yai_protocol_ids.h>
+#include <yai/protocol/contracts/protocol.h>
+#include <yai/protocol/contracts/transport.h>
+#include <yai/protocol/contracts/yai_protocol_ids.h>
 
 #include <yai/edge/local_runtime.h>
 #include <yai/edge/edge_binding.h>

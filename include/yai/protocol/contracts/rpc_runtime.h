@@ -7,8 +7,8 @@
 #pragma once
 
 #include <stdbool.h>
-#include <transport.h>
-#include <protocol.h>
+#include <yai/protocol/contracts/transport.h>
+#include <yai/protocol/contracts/protocol.h>
 
 #ifdef __cplusplus
 extern "C" {

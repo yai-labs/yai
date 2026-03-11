@@ -5,7 +5,7 @@ REQUIRED = {
     "README.md": ["single canonical repository", "governance/", "foundation/", "formal/"],
     "FOUNDATION.md": ["single canonical system root", "governance/", "foundation/", "formal/"],
     "GOVERNANCE.md": ["No external governance repository is required"],
-    "COMPATIBILITY.md": ["single-repository", "governance/contracts/"],
+    "COMPATIBILITY.md": ["single-repository", "lib/protocol/contracts/schema/"],
     "VERSIONING.md": ["single-repository", "v1.0.0"],
 }
 

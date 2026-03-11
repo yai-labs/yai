@@ -1,6 +1,6 @@
 # Protocol Runtime Surface
 
-`contracts/protocol/runtime/` contains runtime-scoped protocol helper contracts.
+`include/yai/protocol/contracts/` contains runtime-scoped protocol helper contracts.
 
 ## Canonical artifact
 

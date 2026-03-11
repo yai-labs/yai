@@ -1,5 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 */
 #pragma once
 
-/* Compatibility transport contract surface exported from governance authority. */
-#include <transport.h>
+/* Canonical transport contract surface exported from protocol spine. */
+#include <yai/protocol/contracts/transport.h>

@@ -1,6 +1,6 @@
 # Vault Contracts
 
-`contracts/vault/` defines the L0 vault ABI compatibility surface.
+`lib/protocol/contracts/schema/vault/` and `include/yai/protocol/contracts/` define the L0 vault ABI compatibility surface.
 
 This surface is intentionally conservative.
 It remains stable while runtime ontology converges.

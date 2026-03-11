@@ -15,20 +15,22 @@ def _require(path: Path, root: Path):
 def main() -> int:
     root = Path(__file__).resolve().parents[2]
     gov = root / "governance"
-    contracts = gov / "contracts"
+    protocol_contracts = root / "lib" / "protocol" / "contracts" / "schema"
+    protocol_headers = root / "include" / "yai" / "protocol" / "contracts"
     schema = gov / "schema"
     manifests = gov / "manifests"
     grammar_schema = gov / "grammar" / "schema"
     registry_schema = gov / "registry" / "schema"
 
     required_contracts = [
-        contracts / "control" / "schema" / "control_plane.v1.json",
-        contracts / "control" / "schema" / "control_call.v1.json",
-        contracts / "control" / "schema" / "exec_reply.v1.json",
-        contracts / "providers" / "schema" / "providers.v1.json",
-        contracts / "vault" / "schema" / "vault_abi.json",
-        contracts / "protocol" / "include" / "protocol.h",
-        contracts / "protocol" / "runtime" / "include" / "rpc_runtime.h",
+        protocol_contracts / "control" / "control_plane.v1.json",
+        protocol_contracts / "control" / "control_call.v1.json",
+        protocol_contracts / "control" / "exec_reply.v1.json",
+        protocol_contracts / "providers" / "providers.v1.json",
+        protocol_contracts / "vault" / "vault_abi.json",
+        protocol_headers / "protocol.h",
+        protocol_headers / "rpc_runtime.h",
+        protocol_headers / "yai_vault_abi.h",
     ]
     required_schema = [
         schema / "policy.v1.schema.json",
@@ -53,8 +55,8 @@ def main() -> int:
     for p in required_contracts + required_schema + required_cross:
         _require(p, root)
 
-    control_plane = _load_json(contracts / "control" / "schema" / "control_plane.v1.json")
-    providers = _load_json(contracts / "providers" / "schema" / "providers.v1.json")
+    control_plane = _load_json(protocol_contracts / "control" / "control_plane.v1.json")
+    providers = _load_json(protocol_contracts / "providers" / "providers.v1.json")
     runtime_entrypoints = _load_json(manifests / "runtime.entrypoints.json")
     attachability = _load_json(manifests / "governance-attachability.constraints.v1.json")
     review_state = _load_json(schema / "governance_review_state.v1.schema.json")

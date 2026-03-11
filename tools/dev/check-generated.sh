@@ -3,14 +3,16 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 GOV_ROOT="$ROOT/governance"
+PROTOCOL_LIB_ROOT="$ROOT/lib/protocol/contracts/schema"
+PROTOCOL_INCLUDE_ROOT="$ROOT/include/yai/protocol/contracts"
 FORMAL_ROOT="$ROOT/formal"
 
-if [[ ! -d "$GOV_ROOT/contracts" ]]; then
-  echo "no contract/schema source found (expected governance/)" >&2
+if [[ ! -d "$PROTOCOL_LIB_ROOT" || ! -d "$PROTOCOL_INCLUDE_ROOT" ]]; then
+  echo "no contract/schema source found (expected lib/protocol + include/yai/protocol/contracts)" >&2
   exit 2
 fi
 
-SPEC_CONTRACTS="$GOV_ROOT/contracts/vault/schema/vault_abi.json"
+SPEC_CONTRACTS="$PROTOCOL_LIB_ROOT/vault/vault_abi.json"
 SPEC_LEGACY="$GOV_ROOT/specs/vault/schema/vault_abi.json"
 if [[ -f "$SPEC_CONTRACTS" ]]; then
   SPEC="$SPEC_CONTRACTS"
@@ -21,10 +23,10 @@ else
   exit 2
 fi
 
-ACTUAL_HEADER="$GOV_ROOT/contracts/vault/include/yai_vault_abi.h"
+ACTUAL_HEADER="$PROTOCOL_INCLUDE_ROOT/yai_vault_abi.h"
 ACTUAL_TLA="$FORMAL_ROOT/tla/GOVERNANCE_IDS.tla"
 if [[ ! -f "$ACTUAL_HEADER" || ! -f "$ACTUAL_TLA" ]]; then
-  echo "generated targets missing under governance/contracts + formal/tla canonical roots" >&2
+  echo "generated targets missing under include/lib protocol contracts + formal/tla canonical roots" >&2
   exit 2
 fi
 
@@ -33,17 +35,11 @@ TMP_DIR="$(mktemp -d)"
 cleanup() { rm -rf "$TMP_DIR"; }
 trap cleanup EXIT
 
-if [[ "$GOV_ROOT" == "$ROOT/governance" ]]; then
-  GEN_OUT="$TMP_DIR"
-  mkdir -p "$GEN_OUT/governance/contracts" "$GEN_OUT/formal"
-  "$GEN" --spec "$SPEC" --out-dir "$GEN_OUT"
-  TMP_HEADER="$TMP_DIR/governance/contracts/vault/include/yai_vault_abi.h"
-  TMP_TLA="$TMP_DIR/formal/tla/GOVERNANCE_IDS.tla"
-else
-  "$GEN" --spec "$SPEC" --out-dir "$TMP_DIR"
-  TMP_HEADER="$TMP_DIR/governance/contracts/vault/include/yai_vault_abi.h"
-  TMP_TLA="$TMP_DIR/formal/tla/GOVERNANCE_IDS.tla"
-fi
+GEN_OUT="$TMP_DIR"
+mkdir -p "$GEN_OUT/lib/protocol/contracts/schema" "$GEN_OUT/include/yai/protocol/contracts" "$GEN_OUT/formal"
+"$GEN" --spec "$SPEC" --out-dir "$GEN_OUT"
+TMP_HEADER="$TMP_DIR/include/yai/protocol/contracts/yai_vault_abi.h"
+TMP_TLA="$TMP_DIR/formal/tla/GOVERNANCE_IDS.tla"
 
 strip_generated() {
   sed -E '/^\/\* Generated: /d; /^\\\* Generated: /d' "$1"
@@ -63,4 +59,4 @@ compare_file() {
 compare_file "$ACTUAL_HEADER" "$TMP_HEADER" "yai_vault_abi.h"
 compare_file "$ACTUAL_TLA" "$TMP_TLA" "GOVERNANCE_IDS.tla"
 
-echo "ok: generated artifacts match (governance/contracts + formal/tla)"
+echo "ok: generated artifacts match (protocol contracts + formal/tla)"

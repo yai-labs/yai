@@ -2,9 +2,9 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
-CONTRACT_ROOT="${YAI_GOVERNANCE_CONTRACT_ROOT:-$ROOT/governance/contracts}"
-if [[ ! -d "$CONTRACT_ROOT/protocol/include" ]]; then
-  echo "contract root not found (expected governance/contracts)" >&2
+CONTRACT_ROOT="${YAI_PROTOCOL_CONTRACT_ROOT:-$ROOT/include/yai/protocol/contracts}"
+if [[ ! -d "$CONTRACT_ROOT" ]]; then
+  echo "contract root not found (expected include/yai/protocol/contracts)" >&2
   exit 2
 fi
 
@@ -68,7 +68,7 @@ OBJS=()
 for src in "${BRAIN_SRCS[@]}"; do
   obj="$OBJ_DIR/${src%.c}.o"
   mkdir -p "$(dirname "$obj")"
-  cc -Wall -Wextra -std=c11 -O2 -I"$ROOT/include" -I"$ROOT/include/yai" -I"$ROOT/lib/third_party/cjson" -I"$CONTRACT_ROOT/protocol/include" -c "$ROOT/$src" -o "$obj"
+  cc -Wall -Wextra -std=c11 -O2 -I"$ROOT/include" -I"$ROOT/include/yai" -I"$ROOT/lib/third_party/cjson" -I"$CONTRACT_ROOT" -c "$ROOT/$src" -o "$obj"
   OBJS+=("$obj")
 done
 

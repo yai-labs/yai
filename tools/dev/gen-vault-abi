@@ -75,20 +75,12 @@ def render_law_ids(spec: dict, generated: str) -> str:
 
 def pick_default_spec(root: Path) -> Path:
     candidates = [
-        root / "governance" / "contracts" / "vault" / "schema" / "vault_abi.json",
+        root / "lib" / "protocol" / "contracts" / "schema" / "vault" / "vault_abi.json",
     ]
     for c in candidates:
         if c.exists():
             return c
     return candidates[0]
-
-
-def resolve_contract_root(out_dir: Path) -> Path:
-    if (out_dir / "governance" / "contracts").exists():
-        return out_dir / "governance"
-    if (out_dir / "contracts").exists():
-        return out_dir
-    return out_dir / "governance"
 
 
 def resolve_formal_root(out_dir: Path) -> Path:
@@ -116,9 +108,8 @@ def main() -> int:
     header_text = render_header(spec, generated)
     law_text = render_law_ids(spec, generated)
 
-    contracts_root = resolve_contract_root(out_dir)
     formal_root = resolve_formal_root(out_dir)
-    header_path = contracts_root / "contracts" / "vault" / "include" / "yai_vault_abi.h"
+    header_path = out_dir / "include" / "yai" / "protocol" / "contracts" / "yai_vault_abi.h"
     law_path = formal_root / "formal" / "tla" / "GOVERNANCE_IDS.tla"
 
     header_path.parent.mkdir(parents=True, exist_ok=True)

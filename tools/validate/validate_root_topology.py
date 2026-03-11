@@ -79,6 +79,8 @@ def main() -> int:
         errors.append("forbidden governance duplicate present: governance/foundation")
     if (repo / "governance" / "formal").exists():
         errors.append("forbidden governance duplicate present: governance/formal")
+    if (repo / "governance" / "contracts").exists():
+        errors.append("forbidden secondary protocol root present: governance/contracts")
 
     for name in sorted(REQUIRED_FOUNDATION_SUBDIRS):
         if not (repo / "foundation" / name).exists():
