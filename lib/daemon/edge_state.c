@@ -48,6 +48,13 @@ int yai_daemon_edge_state_init(yai_daemon_edge_state_t *state,
   (void)copy_string(state->mediation_state, sizeof(state->mediation_state), "placeholder_ready");
   (void)copy_string(state->spool_retry_state, sizeof(state->spool_retry_state), "placeholder_ready");
   (void)copy_string(state->health_state, sizeof(state->health_state), "starting");
+  (void)copy_string(state->connectivity_state, sizeof(state->connectivity_state), "unknown");
+  (void)copy_string(state->freshness_state, sizeof(state->freshness_state), "unknown");
+  (void)copy_string(state->spool_pressure_state, sizeof(state->spool_pressure_state), "low");
+  (void)copy_string(state->retry_pressure_state, sizeof(state->retry_pressure_state), "low");
+  (void)copy_string(state->policy_staleness_state, sizeof(state->policy_staleness_state), "pending");
+  (void)copy_string(state->grant_validity_state, sizeof(state->grant_validity_state), "missing_or_pending");
+  (void)copy_string(state->degradation_state, sizeof(state->degradation_state), "initializing");
 
   state->started_at_epoch = now_epoch();
   state->last_tick_epoch = state->started_at_epoch;
@@ -118,7 +125,17 @@ int yai_daemon_edge_state_refresh_from_local(yai_daemon_edge_state_t *state,
   state->spool_queued = local->spool_queued;
   state->spool_retry_due = local->spool_retry_due;
   state->spool_failed = local->spool_failed;
+  state->retry_consecutive_failures = local->retry_consecutive_failures;
+  state->last_observation_epoch = local->last_observation_epoch;
+  state->last_successful_emit_epoch = local->last_successful_emit_epoch;
   (void)copy_string(state->health_state, sizeof(state->health_state), local->health_state);
+  (void)copy_string(state->connectivity_state, sizeof(state->connectivity_state), local->connectivity_state);
+  (void)copy_string(state->freshness_state, sizeof(state->freshness_state), local->freshness_state);
+  (void)copy_string(state->spool_pressure_state, sizeof(state->spool_pressure_state), local->spool_pressure_state);
+  (void)copy_string(state->retry_pressure_state, sizeof(state->retry_pressure_state), local->retry_pressure_state);
+  (void)copy_string(state->policy_staleness_state, sizeof(state->policy_staleness_state), local->policy_staleness_state);
+  (void)copy_string(state->grant_validity_state, sizeof(state->grant_validity_state), local->grant_validity_state);
+  (void)copy_string(state->degradation_state, sizeof(state->degradation_state), local->degradation_state);
 
   if (!local->owner_connected)
   {
@@ -165,6 +182,13 @@ int yai_daemon_edge_state_json(const yai_daemon_edge_state_t *state,
                "  \"mediation_state\": \"%s\",\n"
                "  \"spool_retry_state\": \"%s\",\n"
                "  \"health_state\": \"%s\",\n"
+               "  \"connectivity_state\": \"%s\",\n"
+               "  \"freshness_state\": \"%s\",\n"
+               "  \"spool_pressure_state\": \"%s\",\n"
+               "  \"retry_pressure_state\": \"%s\",\n"
+               "  \"policy_staleness_state\": \"%s\",\n"
+               "  \"grant_validity_state\": \"%s\",\n"
+               "  \"degradation_state\": \"%s\",\n"
                "  \"owner_connected\": %s,\n"
                "  \"tick_count\": %u,\n"
                "  \"started_at_epoch\": %lld,\n"
@@ -172,7 +196,10 @@ int yai_daemon_edge_state_json(const yai_daemon_edge_state_t *state,
                "  \"last_owner_contact_epoch\": %lld,\n"
                "  \"spool_queued\": %u,\n"
                "  \"spool_retry_due\": %u,\n"
-               "  \"spool_failed\": %u\n"
+               "  \"spool_failed\": %u,\n"
+               "  \"retry_consecutive_failures\": %u,\n"
+               "  \"last_observation_epoch\": %lld,\n"
+               "  \"last_successful_emit_epoch\": %lld\n"
                "}\n",
                state->phase,
                state->runtime_status,
@@ -188,6 +215,13 @@ int yai_daemon_edge_state_json(const yai_daemon_edge_state_t *state,
                state->mediation_state,
                state->spool_retry_state,
                state->health_state,
+               state->connectivity_state,
+               state->freshness_state,
+               state->spool_pressure_state,
+               state->retry_pressure_state,
+               state->policy_staleness_state,
+               state->grant_validity_state,
+               state->degradation_state,
                state->owner_connected ? "true" : "false",
                state->tick_count,
                (long long)state->started_at_epoch,
@@ -195,10 +229,12 @@ int yai_daemon_edge_state_json(const yai_daemon_edge_state_t *state,
                (long long)state->last_owner_contact_epoch,
                state->spool_queued,
                state->spool_retry_due,
-               state->spool_failed) >= (int)out_cap)
+               state->spool_failed,
+               state->retry_consecutive_failures,
+               (long long)state->last_observation_epoch,
+               (long long)state->last_successful_emit_epoch) >= (int)out_cap)
   {
     return -1;
   }
   return 0;
 }
-

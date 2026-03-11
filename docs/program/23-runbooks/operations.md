@@ -95,3 +95,5 @@ Define the operational control loop for running, validating, and recovering the 
   `docs/program/23-runbooks/delegated-edge-enforcement-baseline.md`.
 - RF-0.4 process and asset runtime observation baseline:
   `docs/program/23-runbooks/process-and-asset-runtime-observation-baseline.md`.
+- ER-2 edge state/spool/retry/health baseline:
+  `docs/program/23-runbooks/edge-state-spool-retry-health-baseline.md`.

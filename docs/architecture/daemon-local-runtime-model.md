@@ -68,10 +68,11 @@ YD-5 actively uses daemon-local roots:
 
 Runtime state files:
 
-- `state/health.v1.json` (v2 payload with health+spool counters)
+- `state/health.v1.json` (v3 payload with health+spool+resilience counters)
 - `state/bindings.v1.json`
 - `state/observed-assets.v1.tsv`
 - `state/edge-runtime-state.v1.json` (ER-1 lifecycle + edge state baseline)
+- `state/edge-operational-state.v1.json` (ER-2 spool/retry/health/freshness)
 
 ## ER-1 Lifecycle Baseline
 
@@ -90,6 +91,24 @@ Runtime state files:
 ER-1 also introduces explicit edge service surfaces as runtime modules:
 observation, state, delegated_policy, mediation, spool_retry, health,
 owner_link.
+
+## ER-2 Resilience Baseline
+
+ER-2 makes local durability and resilience first-class runtime behavior:
+
+- spool queue is canonical edge-local durability surface (`spool/queue`);
+- retry/redelivery follows bounded backoff and terminal-failure demotion;
+- health is computed with explicit connectivity/freshness/pressure signals;
+- disconnected/degraded operation keeps local continuity without creating
+  owner-side truth.
+
+ER-2 operational states include:
+
+- connectivity: `connected|disconnected|unconfigured`
+- freshness: `fresh|aging|stale|unknown`
+- pressures: `spool_pressure` and `retry_pressure` as `low|medium|high`
+- policy/grant placeholders: `policy_staleness_state`, `grant_validity_state`
+- degradation reason baseline (e.g. `delivery_degraded`, `retry_saturated`)
 
 ## Binding/Unit/Health States
 

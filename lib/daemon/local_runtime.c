@@ -48,6 +48,16 @@ static const yai_daemon_paths_t *g_paths = NULL;
 static char g_instance_id[96];
 static uint32_t g_local_seq = 0;
 
+/* ER-2 baseline thresholds (v1, configurable later). */
+#define YAI_DAEMON_SPOOL_PRESSURE_MEDIUM 50U
+#define YAI_DAEMON_SPOOL_PRESSURE_HIGH 200U
+#define YAI_DAEMON_RETRY_PRESSURE_MEDIUM 20U
+#define YAI_DAEMON_RETRY_PRESSURE_HIGH 100U
+#define YAI_DAEMON_FRESH_AGE_SEC 15
+#define YAI_DAEMON_AGING_AGE_SEC 60
+
+static int parse_unit_file(const char *path, yai_daemon_unit_t *unit);
+
 static int64_t now_epoch(void)
 {
   return (int64_t)time(NULL);
@@ -286,6 +296,10 @@ static int build_paths(yai_daemon_local_runtime_t *local)
   if (snprintf(local->failed_dir, sizeof(local->failed_dir), "%s/failed", g_paths->spool_dir) >= (int)sizeof(local->failed_dir)) return -1;
   if (snprintf(local->observed_index_file, sizeof(local->observed_index_file), "%s/observed-assets.v1.tsv", g_paths->state_dir) >= (int)sizeof(local->observed_index_file)) return -1;
   if (snprintf(local->bindings_state_file, sizeof(local->bindings_state_file), "%s/bindings.v1.json", g_paths->state_dir) >= (int)sizeof(local->bindings_state_file)) return -1;
+  if (snprintf(local->operational_state_file,
+               sizeof(local->operational_state_file),
+               "%s/edge-operational-state.v1.json",
+               g_paths->state_dir) >= (int)sizeof(local->operational_state_file)) return -1;
   if (ensure_dir(local->queue_dir) != 0 || ensure_dir(local->delivered_dir) != 0 || ensure_dir(local->failed_dir) != 0) return -1;
   return 0;
 }
@@ -294,16 +308,29 @@ static int refresh_spool_counts(yai_daemon_local_runtime_t *local)
 {
   DIR *d = NULL;
   struct dirent *de;
+  int64_t now = now_epoch();
   if (!local) return -1;
   local->spool_queued = 0;
   local->spool_delivered = 0;
   local->spool_failed = 0;
+  local->spool_retry_due = 0;
 
   d = opendir(local->queue_dir);
   if (d) {
     while ((de = readdir(d)) != NULL) {
+      char path[1024];
+      yai_daemon_unit_t unit;
       if (de->d_name[0] == '.') continue;
       local->spool_queued++;
+      if (snprintf(path, sizeof(path), "%s/%s", local->queue_dir, de->d_name) >= (int)sizeof(path)) {
+        continue;
+      }
+      if (parse_unit_file(path, &unit) == 0 &&
+          unit.next_attempt_epoch <= now &&
+          strcmp(unit.status, YAI_DAEMON_UNIT_STATUS_QUEUED) != 0)
+      {
+        local->spool_retry_due++;
+      }
     }
     closedir(d);
   }
@@ -488,6 +515,123 @@ static int write_bindings_state(const yai_daemon_local_runtime_t *local)
   return rc;
 }
 
+static const char *pressure_state(uint32_t value, uint32_t medium, uint32_t high)
+{
+  if (value >= high)
+  {
+    return YAI_DAEMON_PRESSURE_HIGH;
+  }
+  if (value >= medium)
+  {
+    return YAI_DAEMON_PRESSURE_MEDIUM;
+  }
+  return YAI_DAEMON_PRESSURE_LOW;
+}
+
+static const char *freshness_state_for_age(int64_t age_sec)
+{
+  if (age_sec < 0)
+  {
+    return YAI_DAEMON_FRESHNESS_UNKNOWN;
+  }
+  if (age_sec <= YAI_DAEMON_FRESH_AGE_SEC)
+  {
+    return YAI_DAEMON_FRESHNESS_FRESH;
+  }
+  if (age_sec <= YAI_DAEMON_AGING_AGE_SEC)
+  {
+    return YAI_DAEMON_FRESHNESS_AGING;
+  }
+  return YAI_DAEMON_FRESHNESS_STALE;
+}
+
+static int update_operational_states(yai_daemon_local_runtime_t *local)
+{
+  int64_t now = now_epoch();
+  int64_t contact_age = -1;
+  const char *connectivity = YAI_DAEMON_CONNECTIVITY_DISCONNECTED;
+  const char *freshness = YAI_DAEMON_FRESHNESS_UNKNOWN;
+  const char *spool_pressure = YAI_DAEMON_PRESSURE_LOW;
+  const char *retry_pressure = YAI_DAEMON_PRESSURE_LOW;
+  const char *policy_staleness = YAI_DAEMON_POLICY_STALENESS_PENDING;
+  const char *grant_state = YAI_DAEMON_GRANT_STATE_MISSING_OR_PENDING;
+  const char *degradation = "nominal";
+
+  if (!local)
+  {
+    return -1;
+  }
+
+  if (!local->owner_socket[0])
+  {
+    connectivity = YAI_DAEMON_CONNECTIVITY_UNCONFIGURED;
+  }
+  else if (local->owner_connected)
+  {
+    connectivity = YAI_DAEMON_CONNECTIVITY_CONNECTED;
+  }
+
+  if (local->last_owner_contact_epoch > 0)
+  {
+    contact_age = now - local->last_owner_contact_epoch;
+  }
+  freshness = freshness_state_for_age(contact_age);
+
+  spool_pressure = pressure_state(local->spool_queued,
+                                  YAI_DAEMON_SPOOL_PRESSURE_MEDIUM,
+                                  YAI_DAEMON_SPOOL_PRESSURE_HIGH);
+  retry_pressure = pressure_state(local->spool_retry_due,
+                                  YAI_DAEMON_RETRY_PRESSURE_MEDIUM,
+                                  YAI_DAEMON_RETRY_PRESSURE_HIGH);
+
+  if (local->owner_registered && local->owner_connected)
+  {
+    policy_staleness = YAI_DAEMON_POLICY_STALENESS_FRESH_OR_UNKNOWN;
+  }
+  else if (local->owner_registered)
+  {
+    policy_staleness = YAI_DAEMON_POLICY_STALENESS_REFRESH_PENDING;
+  }
+
+  if (local->owner_trust_artifact_token[0] &&
+      strcmp(local->owner_trust_artifact_token, "pending") != 0)
+  {
+    grant_state = YAI_DAEMON_GRANT_STATE_PRESENT_NO_EXPIRY;
+  }
+
+  if (strcmp(connectivity, YAI_DAEMON_CONNECTIVITY_CONNECTED) != 0 && local->spool_queued > 0)
+  {
+    degradation = "delivery_degraded";
+  }
+  if (strcmp(retry_pressure, YAI_DAEMON_PRESSURE_HIGH) == 0)
+  {
+    degradation = "retry_saturated";
+  }
+  else if (strcmp(spool_pressure, YAI_DAEMON_PRESSURE_HIGH) == 0)
+  {
+    degradation = "spool_pressured";
+  }
+  else if (strcmp(freshness, YAI_DAEMON_FRESHNESS_STALE) == 0 &&
+           strcmp(connectivity, YAI_DAEMON_CONNECTIVITY_CONNECTED) != 0)
+  {
+    degradation = "stale_disconnected";
+  }
+  else if (strcmp(connectivity, YAI_DAEMON_CONNECTIVITY_UNCONFIGURED) == 0)
+  {
+    degradation = "owner_endpoint_unconfigured";
+  }
+
+  (void)snprintf(local->connectivity_state, sizeof(local->connectivity_state), "%s", connectivity);
+  (void)snprintf(local->freshness_state, sizeof(local->freshness_state), "%s", freshness);
+  (void)snprintf(local->spool_pressure_state, sizeof(local->spool_pressure_state), "%s", spool_pressure);
+  (void)snprintf(local->retry_pressure_state, sizeof(local->retry_pressure_state), "%s", retry_pressure);
+  (void)snprintf(local->policy_staleness_state, sizeof(local->policy_staleness_state), "%s", policy_staleness);
+  (void)snprintf(local->grant_validity_state, sizeof(local->grant_validity_state), "%s", grant_state);
+  (void)snprintf(local->degradation_state, sizeof(local->degradation_state), "%s", degradation);
+
+  return 0;
+}
+
 static void file_fingerprint(const struct stat *st, char *out, size_t out_cap)
 {
   if (!st || !out || out_cap == 0) return;
@@ -549,7 +693,10 @@ static int create_unit_from_file(yai_daemon_local_runtime_t *local,
   }
   rc = write_json_file(queue_file, unit);
   cJSON_Delete(unit);
-  if (rc == 0) local->scan_discovered++;
+  if (rc == 0) {
+    local->scan_discovered++;
+    local->last_observation_epoch = t;
+  }
   return rc;
 }
 
@@ -749,6 +896,8 @@ static int emit_unit(yai_daemon_local_runtime_t *local, const yai_daemon_unit_t 
   if (rc != 0 || !json_reply_ok(reply)) return -1;
   local->owner_connected = 1;
   local->last_owner_contact_epoch = now_epoch();
+  local->last_successful_emit_epoch = local->last_owner_contact_epoch;
+  local->retry_consecutive_failures = 0;
   return 0;
 }
 
@@ -815,6 +964,7 @@ static int process_queue(yai_daemon_local_runtime_t *local)
       snprintf(unit.last_error, sizeof(unit.last_error), "%s", "attach_failed");
       (void)write_unit_file(path, &unit);
       local->emit_failures++;
+      local->retry_consecutive_failures++;
       continue;
     }
     local->emit_attempts++;
@@ -845,6 +995,7 @@ static int process_queue(yai_daemon_local_runtime_t *local)
       (void)write_unit_file(path, &unit);
     }
     local->emit_failures++;
+    local->retry_consecutive_failures++;
   }
   closedir(d);
   return 0;
@@ -856,14 +1007,17 @@ int yai_daemon_local_runtime_health_json(const yai_daemon_local_runtime_t *local
   if (snprintf(out,
                out_cap,
                "{"
-               "\"type\":\"yai.daemon.health.v2\","
+               "\"type\":\"yai.daemon.health.v3\","
                "\"instance_id\":\"%s\","
                "\"state\":\"%s\","
                "\"bindings_active\":%zu,"
                "\"spool\":{\"queued\":%u,\"retry_due\":%u,\"delivered\":%u,\"failed\":%u},"
+               "\"resilience\":{\"connectivity_state\":\"%s\",\"freshness_state\":\"%s\",\"spool_pressure\":\"%s\",\"retry_pressure\":\"%s\",\"degradation_state\":\"%s\"},"
+               "\"policy\":{\"staleness\":\"%s\",\"grant_validity\":\"%s\"},"
                "\"scan_discovered\":%u,"
                "\"emit\":{\"attempts\":%u,\"success\":%u,\"failures\":%u},"
-               "\"owner\":{\"connected\":%s,\"registered\":%s,\"last_contact_epoch\":%lld}"
+               "\"owner\":{\"connected\":%s,\"registered\":%s,\"last_contact_epoch\":%lld},"
+               "\"timeline\":{\"runtime_started_epoch\":%lld,\"last_observation_epoch\":%lld,\"last_successful_emit_epoch\":%lld}"
                "}",
                g_instance_id,
                local->health_state[0] ? local->health_state : YAI_DAEMON_HEALTH_STARTING,
@@ -872,13 +1026,23 @@ int yai_daemon_local_runtime_health_json(const yai_daemon_local_runtime_t *local
                local->spool_retry_due,
                local->spool_delivered,
                local->spool_failed,
+               local->connectivity_state[0] ? local->connectivity_state : YAI_DAEMON_CONNECTIVITY_DISCONNECTED,
+               local->freshness_state[0] ? local->freshness_state : YAI_DAEMON_FRESHNESS_UNKNOWN,
+               local->spool_pressure_state[0] ? local->spool_pressure_state : YAI_DAEMON_PRESSURE_LOW,
+               local->retry_pressure_state[0] ? local->retry_pressure_state : YAI_DAEMON_PRESSURE_LOW,
+               local->degradation_state[0] ? local->degradation_state : "nominal",
+               local->policy_staleness_state[0] ? local->policy_staleness_state : YAI_DAEMON_POLICY_STALENESS_PENDING,
+               local->grant_validity_state[0] ? local->grant_validity_state : YAI_DAEMON_GRANT_STATE_MISSING_OR_PENDING,
                local->scan_discovered,
                local->emit_attempts,
                local->emit_success,
                local->emit_failures,
                local->owner_connected ? "true" : "false",
                local->owner_registered ? "true" : "false",
-               (long long)local->last_owner_contact_epoch) >= (int)out_cap) return -1;
+               (long long)local->last_owner_contact_epoch,
+               (long long)local->runtime_started_epoch,
+               (long long)local->last_observation_epoch,
+               (long long)local->last_successful_emit_epoch) >= (int)out_cap) return -1;
   return 0;
 }
 
@@ -888,6 +1052,54 @@ static int write_health_file(const yai_daemon_local_runtime_t *local)
   if (!local || !g_paths) return -1;
   if (yai_daemon_local_runtime_health_json(local, payload, sizeof(payload)) != 0) return -1;
   return yai_daemon_write_file(g_paths->health_file, payload);
+}
+
+static int write_operational_state_file(const yai_daemon_local_runtime_t *local)
+{
+  char payload[4096];
+  if (!local || !local->operational_state_file[0])
+  {
+    return -1;
+  }
+  if (snprintf(payload,
+               sizeof(payload),
+               "{"
+               "\"type\":\"yai.daemon.edge.operational.state.v1\","
+               "\"instance_id\":\"%s\","
+               "\"health_state\":\"%s\","
+               "\"connectivity_state\":\"%s\","
+               "\"freshness_state\":\"%s\","
+               "\"spool_pressure_state\":\"%s\","
+               "\"retry_pressure_state\":\"%s\","
+               "\"policy_staleness_state\":\"%s\","
+               "\"grant_validity_state\":\"%s\","
+               "\"degradation_state\":\"%s\","
+               "\"spool\":{\"queued\":%u,\"retry_due\":%u,\"failed\":%u},"
+               "\"owner\":{\"connected\":%s,\"registered\":%s},"
+               "\"timeline\":{\"runtime_started_epoch\":%lld,\"last_owner_contact_epoch\":%lld,\"last_observation_epoch\":%lld,\"last_successful_emit_epoch\":%lld}"
+               "}",
+               g_instance_id,
+               local->health_state,
+               local->connectivity_state,
+               local->freshness_state,
+               local->spool_pressure_state,
+               local->retry_pressure_state,
+               local->policy_staleness_state,
+               local->grant_validity_state,
+               local->degradation_state,
+               local->spool_queued,
+               local->spool_retry_due,
+               local->spool_failed,
+               local->owner_connected ? "true" : "false",
+               local->owner_registered ? "true" : "false",
+               (long long)local->runtime_started_epoch,
+               (long long)local->last_owner_contact_epoch,
+               (long long)local->last_observation_epoch,
+               (long long)local->last_successful_emit_epoch) >= (int)sizeof(payload))
+  {
+    return -1;
+  }
+  return yai_daemon_write_file(local->operational_state_file, payload);
 }
 
 int yai_daemon_local_runtime_init(yai_daemon_local_runtime_t *local,
@@ -910,6 +1122,15 @@ int yai_daemon_local_runtime_init(yai_daemon_local_runtime_t *local,
   if (yai_source_id_daemon_instance(local->daemon_instance_id, sizeof(local->daemon_instance_id), local->source_node_id) != 0) return -1;
   if (cfg->owner_ref[0]) (void)yai_source_id_owner_link(local->owner_link_id, sizeof(local->owner_link_id), local->source_node_id, cfg->owner_ref);
   snprintf(local->health_state, sizeof(local->health_state), "%s", YAI_DAEMON_HEALTH_STARTING);
+  snprintf(local->connectivity_state, sizeof(local->connectivity_state), "%s",
+           local->owner_socket[0] ? YAI_DAEMON_CONNECTIVITY_DISCONNECTED : YAI_DAEMON_CONNECTIVITY_UNCONFIGURED);
+  snprintf(local->freshness_state, sizeof(local->freshness_state), "%s", YAI_DAEMON_FRESHNESS_UNKNOWN);
+  snprintf(local->spool_pressure_state, sizeof(local->spool_pressure_state), "%s", YAI_DAEMON_PRESSURE_LOW);
+  snprintf(local->retry_pressure_state, sizeof(local->retry_pressure_state), "%s", YAI_DAEMON_PRESSURE_LOW);
+  snprintf(local->policy_staleness_state, sizeof(local->policy_staleness_state), "%s", YAI_DAEMON_POLICY_STALENESS_PENDING);
+  snprintf(local->grant_validity_state, sizeof(local->grant_validity_state), "%s", YAI_DAEMON_GRANT_STATE_MISSING_OR_PENDING);
+  snprintf(local->degradation_state, sizeof(local->degradation_state), "%s", "initializing");
+  local->runtime_started_epoch = now_epoch();
   (void)load_observed_index(local);
   return 0;
 }
@@ -935,11 +1156,26 @@ int yai_daemon_local_runtime_start(yai_daemon_local_runtime_t *local)
     snprintf(local->bindings[i].status, sizeof(local->bindings[i].status), "%s", YAI_DAEMON_BINDING_STATUS_ACTIVE);
   }
   (void)write_bindings_state(local);
-  if (local->binding_count == 0) snprintf(local->health_state, sizeof(local->health_state), "%s", YAI_DAEMON_HEALTH_DEGRADED);
-  else if (local->owner_socket[0] == '\0') snprintf(local->health_state, sizeof(local->health_state), "%s", YAI_DAEMON_HEALTH_DISCONNECTED);
-  else snprintf(local->health_state, sizeof(local->health_state), "%s", YAI_DAEMON_HEALTH_READY);
   (void)refresh_spool_counts(local);
+  (void)update_operational_states(local);
+  if (local->binding_count == 0)
+  {
+    snprintf(local->health_state, sizeof(local->health_state), "%s", YAI_DAEMON_HEALTH_DEGRADED);
+  }
+  else if (strcmp(local->connectivity_state, YAI_DAEMON_CONNECTIVITY_CONNECTED) == 0)
+  {
+    snprintf(local->health_state, sizeof(local->health_state), "%s", YAI_DAEMON_HEALTH_READY);
+  }
+  else if (strcmp(local->connectivity_state, YAI_DAEMON_CONNECTIVITY_UNCONFIGURED) == 0)
+  {
+    snprintf(local->health_state, sizeof(local->health_state), "%s", YAI_DAEMON_HEALTH_DISCONNECTED);
+  }
+  else
+  {
+    snprintf(local->health_state, sizeof(local->health_state), "%s", YAI_DAEMON_HEALTH_DEGRADED);
+  }
   (void)write_health_file(local);
+  (void)write_operational_state_file(local);
   return 0;
 }
 
@@ -956,21 +1192,26 @@ int yai_daemon_local_runtime_tick(yai_daemon_local_runtime_t *local, uint32_t ti
   (void)persist_observed_index(local);
   (void)process_queue(local);
   (void)refresh_spool_counts(local);
-  local->spool_retry_due = local->spool_queued;
-  if (local->owner_socket[0] == '\0') {
-    snprintf(local->health_state, sizeof(local->health_state), "%s", YAI_DAEMON_HEALTH_DISCONNECTED);
-  } else if (local->owner_connected) {
+  (void)update_operational_states(local);
+  if (strcmp(local->connectivity_state, YAI_DAEMON_CONNECTIVITY_CONNECTED) == 0 &&
+      strcmp(local->degradation_state, "nominal") == 0)
+  {
     snprintf(local->health_state, sizeof(local->health_state), "%s", YAI_DAEMON_HEALTH_READY);
-  } else if (local->spool_queued > 0) {
-    snprintf(local->health_state, sizeof(local->health_state), "%s", YAI_DAEMON_HEALTH_DEGRADED);
-  } else {
+  }
+  else if (strcmp(local->connectivity_state, YAI_DAEMON_CONNECTIVITY_UNCONFIGURED) == 0)
+  {
     snprintf(local->health_state, sizeof(local->health_state), "%s", YAI_DAEMON_HEALTH_DISCONNECTED);
+  }
+  else
+  {
+    snprintf(local->health_state, sizeof(local->health_state), "%s", YAI_DAEMON_HEALTH_DEGRADED);
   }
   if ((tick_count % 5U) == 0U && local->binding_count > 0) {
     (void)send_status_update(local, local->bindings[0].workspace_id);
   }
   (void)write_bindings_state(local);
   (void)write_health_file(local);
+  (void)write_operational_state_file(local);
   return 0;
 }
 
@@ -979,6 +1220,8 @@ int yai_daemon_local_runtime_stop(yai_daemon_local_runtime_t *local)
   if (!local) return -1;
   snprintf(local->health_state, sizeof(local->health_state), "%s", YAI_DAEMON_HEALTH_STOPPING);
   (void)refresh_spool_counts(local);
+  (void)update_operational_states(local);
   (void)write_health_file(local);
+  (void)write_operational_state_file(local);
   return 0;
 }

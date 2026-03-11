@@ -59,6 +59,8 @@ RF-0.3 delegated edge enforcement model is defined in
 `docs/architecture/delegated-edge-enforcement-model.md`.
 RF-0.4 edge observation model is defined in
 `docs/architecture/process-and-asset-runtime-observation-model.md`.
+ER-2 edge resilience/state model is defined in
+`docs/architecture/daemon-local-runtime-model.md`.
 Source-plane entity/contract model is defined in
 `docs/architecture/source-plane-model.md`.
 Owner ingest runtime flow is defined in

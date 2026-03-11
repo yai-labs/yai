@@ -24,6 +24,26 @@
 #define YAI_DAEMON_HEALTH_DISCONNECTED "disconnected"
 #define YAI_DAEMON_HEALTH_STOPPING "stopping"
 
+#define YAI_DAEMON_CONNECTIVITY_CONNECTED "connected"
+#define YAI_DAEMON_CONNECTIVITY_DISCONNECTED "disconnected"
+#define YAI_DAEMON_CONNECTIVITY_UNCONFIGURED "unconfigured"
+
+#define YAI_DAEMON_FRESHNESS_FRESH "fresh"
+#define YAI_DAEMON_FRESHNESS_AGING "aging"
+#define YAI_DAEMON_FRESHNESS_STALE "stale"
+#define YAI_DAEMON_FRESHNESS_UNKNOWN "unknown"
+
+#define YAI_DAEMON_PRESSURE_LOW "low"
+#define YAI_DAEMON_PRESSURE_MEDIUM "medium"
+#define YAI_DAEMON_PRESSURE_HIGH "high"
+
+#define YAI_DAEMON_POLICY_STALENESS_PENDING "pending"
+#define YAI_DAEMON_POLICY_STALENESS_REFRESH_PENDING "refresh_pending"
+#define YAI_DAEMON_POLICY_STALENESS_FRESH_OR_UNKNOWN "fresh_or_unknown"
+
+#define YAI_DAEMON_GRANT_STATE_MISSING_OR_PENDING "missing_or_pending"
+#define YAI_DAEMON_GRANT_STATE_PRESENT_NO_EXPIRY "present_no_expiry_v1"
+
 #define YAI_DAEMON_MAX_BINDINGS 32
 #define YAI_DAEMON_MAX_OBSERVED 4096
 
@@ -56,6 +76,7 @@ typedef struct yai_daemon_local_runtime {
   char failed_dir[512];
   char observed_index_file[512];
   char bindings_state_file[512];
+  char operational_state_file[512];
 
   yai_daemon_binding_rt_t bindings[YAI_DAEMON_MAX_BINDINGS];
   size_t binding_count;
@@ -70,9 +91,21 @@ typedef struct yai_daemon_local_runtime {
   uint32_t emit_attempts;
   uint32_t emit_success;
   uint32_t emit_failures;
+  uint32_t retry_consecutive_failures;
+  int64_t runtime_started_epoch;
+  int64_t last_observation_epoch;
+  int64_t last_successful_emit_epoch;
   int owner_connected;
   int owner_registered;
   int64_t last_owner_contact_epoch;
+
+  char connectivity_state[32];
+  char freshness_state[32];
+  char spool_pressure_state[32];
+  char retry_pressure_state[32];
+  char policy_staleness_state[48];
+  char grant_validity_state[48];
+  char degradation_state[64];
 } yai_daemon_local_runtime_t;
 
 int yai_daemon_local_runtime_init(yai_daemon_local_runtime_t *local,

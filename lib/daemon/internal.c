@@ -9,6 +9,31 @@
 
 #include "internal.h"
 
+static int ensure_dir_component(const char *path)
+{
+  struct stat st;
+  if (!path || !path[0])
+  {
+    return -1;
+  }
+  if (stat(path, &st) == 0)
+  {
+    return S_ISDIR(st.st_mode) ? 0 : -1;
+  }
+  if (mkdir(path, 0755) == 0)
+  {
+    return 0;
+  }
+  if (errno == EEXIST)
+  {
+    if (stat(path, &st) == 0 && S_ISDIR(st.st_mode))
+    {
+      return 0;
+    }
+  }
+  return -1;
+}
+
 int yai_daemon_write_file(const char *path, const char *payload)
 {
   FILE *f = NULL;
@@ -47,7 +72,7 @@ int yai_daemon_mkdir_recursive(const char *path)
     if (tmp[i] == '/')
     {
       tmp[i] = '\0';
-      if (mkdir(tmp, 0755) != 0 && errno != EEXIST)
+      if (tmp[0] != '\0' && ensure_dir_component(tmp) != 0)
       {
         return -1;
       }
@@ -55,7 +80,7 @@ int yai_daemon_mkdir_recursive(const char *path)
     }
   }
 
-  if (mkdir(tmp, 0755) != 0 && errno != EEXIST)
+  if (ensure_dir_component(tmp) != 0)
   {
     return -1;
   }

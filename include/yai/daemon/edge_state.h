@@ -36,6 +36,13 @@ typedef struct yai_daemon_edge_state {
   char mediation_state[48];
   char spool_retry_state[48];
   char health_state[48];
+  char connectivity_state[32];
+  char freshness_state[32];
+  char spool_pressure_state[32];
+  char retry_pressure_state[32];
+  char policy_staleness_state[48];
+  char grant_validity_state[48];
+  char degradation_state[64];
 
   int owner_connected;
   uint32_t tick_count;
@@ -45,6 +52,9 @@ typedef struct yai_daemon_edge_state {
   uint32_t spool_queued;
   uint32_t spool_retry_due;
   uint32_t spool_failed;
+  uint32_t retry_consecutive_failures;
+  int64_t last_observation_epoch;
+  int64_t last_successful_emit_epoch;
 } yai_daemon_edge_state_t;
 
 int yai_daemon_edge_state_init(yai_daemon_edge_state_t *state,
@@ -61,4 +71,3 @@ int yai_daemon_edge_state_refresh_from_local(yai_daemon_edge_state_t *state,
 int yai_daemon_edge_state_json(const yai_daemon_edge_state_t *state,
                                char *out,
                                size_t out_cap);
-

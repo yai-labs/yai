@@ -227,10 +227,12 @@ int yai_daemon_runtime_tick(yai_daemon_runtime_t *rt)
   {
     yai_daemon_logf(rt,
                     "debug",
-                    "heartbeat tick=%u phase=%s health=%s owner_connected=%d",
+                    "heartbeat tick=%u phase=%s health=%s connectivity=%s freshness=%s owner_connected=%d",
                     rt->tick_count,
                     rt->edge_state.phase,
                     rt->edge_state.health_state,
+                    rt->edge_state.connectivity_state,
+                    rt->edge_state.freshness_state,
                     rt->edge_state.owner_connected);
   }
   return 0;

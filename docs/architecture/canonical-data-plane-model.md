@@ -58,6 +58,13 @@ RF-0.4 edge observation baseline:
 - runtime observables (freshness, spool/retry pressure, connectivity,
   policy/grant staleness) are canonical owner-side decision inputs.
 
+ER-2 local durability/resilience baseline:
+- daemon-local spool/retry state is first-class for continuity under intermittent
+  connectivity;
+- spooled/retried units remain subordinate operational state until owner-side
+  acceptance;
+- edge continuity never upgrades into owner authority or canonical truth.
+
 ### 3) Control/Data Path Separation
 Mandatory path:
 
