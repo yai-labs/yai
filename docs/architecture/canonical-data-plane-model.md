@@ -117,6 +117,14 @@ MT-1 secure transport lock:
   promote canonical truth ownership;
 - secure connectivity enables delivery paths, not sovereign decision transfer.
 
+MT-2 owner ingress lock:
+- owner remote ingress classes are boundary-governed acceptance classes
+  (`ready|degraded|restricted|unavailable` baseline);
+- ingress decisions are legitimacy/scope/validity/contribution-class aware and
+  may accept/restrict/defer/reject;
+- ingress acceptance does not imply canonicalization, final adjudication, or
+  sovereign truth transfer.
+
 ### 3) Control/Data Path Separation
 Mandatory path:
 

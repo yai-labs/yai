@@ -71,6 +71,8 @@ Owner endpoint classes:
 - purpose: remote source-plane peer operations (`enroll`, `attach`, `emit`, `status`)
 - expected transport: secure private overlay path
 - exposure: restricted private overlay
+- governed ingress boundary model:
+  `docs/architecture/owner-remote-peer-ingress-model.md`
 
 3. `admin-diagnostics-ingress` (optional, future)
 - purpose: operational diagnostics beyond local control path

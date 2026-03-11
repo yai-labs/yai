@@ -94,6 +94,12 @@ MT-1 transport lock:
 - transport reachability under binding context does not imply enrollment/trust
   completion or authority elevation.
 
+MT-2 ingress lock:
+- workspace binding context anchors owner-side remote ingress acceptance policy;
+- remote contribution intake can be class-limited and validity-limited per
+  workspace context;
+- ingress acceptance under workspace binding does not imply canonical truth.
+
 ## Workspace-local vs Runtime-global
 
 Workspace-local:

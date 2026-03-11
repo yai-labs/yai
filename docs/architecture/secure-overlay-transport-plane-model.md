@@ -135,3 +135,6 @@ MT-1 provides the transport-architecture lock for:
 - MT-3 concrete secure overlay integration (WireGuard/equivalent)
 - QW-2 secure peering qualification
 - QW-5 WAN resilience qualification
+
+Owner ingress boundary details are defined in:
+`docs/architecture/owner-remote-peer-ingress-model.md`.

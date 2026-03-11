@@ -45,6 +45,9 @@
 #define YAI_SOURCE_RECORD_CLASS_MESH_TRANSPORT_ENDPOINT "mesh_transport_endpoint"
 #define YAI_SOURCE_RECORD_CLASS_MESH_TRANSPORT_PATH_STATE "mesh_transport_path_state"
 #define YAI_SOURCE_RECORD_CLASS_MESH_TRANSPORT_CHANNEL_STATE "mesh_transport_channel_state"
+#define YAI_SOURCE_RECORD_CLASS_MESH_OWNER_REMOTE_INGRESS "mesh_owner_remote_ingress"
+#define YAI_SOURCE_RECORD_CLASS_MESH_OWNER_REMOTE_INGRESS_SESSION "mesh_owner_remote_ingress_session"
+#define YAI_SOURCE_RECORD_CLASS_MESH_OWNER_REMOTE_INGRESS_DECISION "mesh_owner_remote_ingress_decision"
 
 typedef enum yai_source_contract_operation {
   YAI_SOURCE_CONTRACT_INVALID = 0,
@@ -332,6 +335,42 @@ typedef struct yai_source_mesh_transport_channel_state {
   char reconnect_required[YAI_SOURCE_STATUS_MAX];
   int64_t updated_at_epoch;
 } yai_source_mesh_transport_channel_state_t;
+
+typedef struct yai_source_mesh_owner_remote_ingress {
+  char mesh_owner_remote_ingress_id[YAI_SOURCE_REF_MAX];
+  char owner_workspace_id[YAI_SOURCE_WORKSPACE_ID_MAX];
+  char mesh_id[YAI_SOURCE_REF_MAX];
+  char owner_mesh_node_id[YAI_SOURCE_NODE_ID_MAX];
+  char ingress_endpoint_ref[YAI_SOURCE_REF_MAX];
+  char ingress_state[YAI_SOURCE_STATUS_MAX];
+  char ingress_readiness[YAI_SOURCE_STATUS_MAX];
+  char acceptance_mode[YAI_SOURCE_STATUS_MAX];
+  char restriction_reason[YAI_SOURCE_REF_MAX];
+  int64_t updated_at_epoch;
+} yai_source_mesh_owner_remote_ingress_t;
+
+typedef struct yai_source_mesh_owner_remote_ingress_session {
+  char mesh_owner_remote_ingress_session_id[YAI_SOURCE_REF_MAX];
+  char mesh_owner_remote_ingress_id[YAI_SOURCE_REF_MAX];
+  char source_mesh_node_id[YAI_SOURCE_NODE_ID_MAX];
+  char presented_legitimacy_state[YAI_SOURCE_STATUS_MAX];
+  char presented_scope_ref[YAI_SOURCE_REF_MAX];
+  char presented_validity_state[YAI_SOURCE_STATUS_MAX];
+  char contribution_class[YAI_SOURCE_KIND_MAX];
+  char transport_path_state_ref[YAI_SOURCE_REF_MAX];
+  char session_state[YAI_SOURCE_STATUS_MAX];
+  int64_t presented_at_epoch;
+} yai_source_mesh_owner_remote_ingress_session_t;
+
+typedef struct yai_source_mesh_owner_remote_ingress_decision {
+  char mesh_owner_remote_ingress_decision_id[YAI_SOURCE_REF_MAX];
+  char mesh_owner_remote_ingress_session_id[YAI_SOURCE_REF_MAX];
+  char decision_state[YAI_SOURCE_STATUS_MAX];
+  char decision_reason[YAI_SOURCE_REF_MAX];
+  char accepted_contribution_class[YAI_SOURCE_KIND_MAX];
+  char canonicalization_state[YAI_SOURCE_STATUS_MAX];
+  int64_t decided_at_epoch;
+} yai_source_mesh_owner_remote_ingress_decision_t;
 
 const char *yai_source_contract_operation_name(yai_source_contract_operation_t op);
 int yai_source_record_class_is_known(const char *record_class);

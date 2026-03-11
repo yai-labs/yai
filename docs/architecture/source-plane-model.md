@@ -224,6 +224,9 @@ Runtime data-plane record classes introduced by YD-3:
 - `mesh_transport_endpoint`
 - `mesh_transport_path_state`
 - `mesh_transport_channel_state`
+- `mesh_owner_remote_ingress`
+- `mesh_owner_remote_ingress_session`
+- `mesh_owner_remote_ingress_decision`
 
 These are appendable through `yai_data_records_*` hooks and visible in summary
 counts.
