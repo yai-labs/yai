@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <strings.h>
 #include <sys/socket.h>
 #include <sys/stat.h>
 #include <unistd.h>
@@ -100,6 +101,41 @@ static int yai_runtime_is_reachable(void)
   rc = yai_rpc_handshake(&client, 0);
   yai_rpc_close(&client);
   return rc == 0 ? 1 : 0;
+}
+
+static int yai_env_truthy(const char *name)
+{
+  const char *v = name ? getenv(name) : NULL;
+  if (!v || !v[0])
+  {
+    return 0;
+  }
+  return strcmp(v, "1") == 0 ||
+         strcasecmp(v, "true") == 0 ||
+         strcasecmp(v, "yes") == 0 ||
+         strcasecmp(v, "on") == 0;
+}
+
+static int yai_secure_peering_preflight(void)
+{
+  int required = yai_env_truthy(YAI_SECURE_PEERING_REQUIRED_ENV);
+  int ready = yai_env_truthy(YAI_SECURE_PEERING_READY_ENV);
+  if (!required)
+  {
+    return 0;
+  }
+  if (ready)
+  {
+    return 0;
+  }
+  fprintf(stderr,
+          "yai: secure peering required but not ready (%s=1, %s missing)\n",
+          YAI_SECURE_PEERING_REQUIRED_ENV,
+          YAI_SECURE_PEERING_READY_ENV);
+  fprintf(stderr,
+          "yai: hint: bring up private overlay (WireGuard/equivalent) and set %s=1\n",
+          YAI_SECURE_PEERING_READY_ENV);
+  return -1;
 }
 
 static int yai_runtime_write_pidfile(const char *pidfile_path)
@@ -318,6 +354,7 @@ static void yai_print_help(void)
   puts("  - daemon role: subordinate edge runtime under owner workspace sovereignty");
   puts("  - local control ingress: $HOME/.yai/run/control.sock");
   puts("  - peer source-plane ingress: $HOME/.yai/run/peer.sock");
+  puts("  - secure peering gate: YAI_SECURE_PEERING_REQUIRED=1 requires YAI_SECURE_PEERING_READY=1");
   puts("  - client flow: cli -> sdk -> yai ingress");
   puts("  - core, exec, data, graph and knowledge are internal runtime modules");
 }
@@ -432,6 +469,11 @@ static int yai_run_runtime(void)
   if (yai_runtime_is_reachable())
   {
     fprintf(stderr, "yai: runtime already active on %s\n", socket_path);
+    return 1;
+  }
+
+  if (yai_secure_peering_preflight() != 0)
+  {
     return 1;
   }
 

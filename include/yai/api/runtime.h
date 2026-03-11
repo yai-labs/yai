@@ -29,3 +29,11 @@ typedef enum yai_runtime_mode
 
 /* Optional absolute override for runtime pidfile resolution. */
 #define YAI_RUNTIME_PIDFILE_ENV "YAI_RUNTIME_PIDFILE"
+
+/*
+ * Secure peering baseline gate (NP-4/MT-3 readiness).
+ * If REQUIRED is truthy and READY is not truthy, runtime startup must fail
+ * before exposing peer ingress.
+ */
+#define YAI_SECURE_PEERING_REQUIRED_ENV "YAI_SECURE_PEERING_REQUIRED"
+#define YAI_SECURE_PEERING_READY_ENV "YAI_SECURE_PEERING_READY"
