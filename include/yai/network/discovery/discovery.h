@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 
-#include <yai/network/topology/reachability.h>
+#include <yai/network/topology/registry.h>
 
 #ifdef __cplusplus
 extern "C" {

@@ -55,13 +55,13 @@ BRAIN_SRCS=(
   lib/knowledge/memory/authority.c
   lib/knowledge/episodic/episodic.c
   lib/network/providers/catalog.c
-  lib/network/providers/registry.c
-  lib/network/providers/policy.c
-  lib/network/providers/selection.c
-  lib/network/providers/inference.c
-  lib/network/providers/embedding.c
-  lib/network/providers/mocks.c
-  lib/network/providers/embedding_mock.c
+  lib/network/providers/provider_registry.c
+  lib/network/providers/provider_policy.c
+  lib/network/providers/provider_selection.c
+  lib/network/providers/inference/client_inference.c
+  lib/network/providers/embedding/client_embedding.c
+  lib/network/providers/mocks/mock_provider.c
+  lib/network/providers/embedding/embedder_mock.c
   lib/orchestration/transport/transport_runtime.c
   lib/orchestration/transport/transport_protocol.c
   lib/orchestration/transport/uds_server.c

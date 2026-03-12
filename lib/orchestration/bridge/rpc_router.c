@@ -5,8 +5,8 @@
 #include <yai/orchestration/transport.h>
 
 
-#include <yai/orchestration/storage_policy.h>
-#include <yai/network/policy/provider_policy.h>
+#include <yai/orchestration/internal/storage_bridge.h>
+#include <yai/network/providers/policy.h>
 #include "rpc_router.h"
 
 #include "cJSON.h"

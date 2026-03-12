@@ -6,9 +6,9 @@
 #include <unistd.h>
 
 #include <yai/api/version.h>
-#include <yai/runtime/daemon/config.h>
-#include <yai/runtime/daemon/lifecycle.h>
-#include <yai/runtime/daemon/runtime.h>
+#include <yai/daemon/config.h>
+#include <yai/daemon/lifecycle.h>
+#include <yai/daemon/daemon.h>
 
 static void print_help(void)
 {

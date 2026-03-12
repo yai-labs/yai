@@ -123,12 +123,12 @@ GOVERNANCE_SRCS := \
 ORCHESTRATION_RUNTIME_SRCS := \
 	lib/orchestration/runtime/runtime_control.c \
 	lib/orchestration/runtime/config_loader.c \
-	lib/orchestration/runtime/runtime_model.c \
+	lib/orchestration/internal/orchestration_model.c \
 	lib/orchestration/runtime/grounding_context.c \
-	lib/orchestration/runtime/source_plane_contract.c \
-	lib/orchestration/runtime/peer_registry.c \
+	lib/orchestration/bridge/network_bridge.c \
+	lib/orchestration/runtime/peer_registry_bridge.c \
 	lib/orchestration/runtime/ingestion.c \
-	lib/orchestration/gates/storage_policy.c \
+	lib/orchestration/bridge/storage_bridge.c \
 	lib/orchestration/bridge/runtime_bridge.c \
 	lib/orchestration/bridge/transport_client.c \
 	lib/orchestration/bridge/rpc_router.c \
@@ -150,31 +150,33 @@ ORCHESTRATION_SRCS := \
 	lib/orchestration/actions/rag_prompts.c \
 	lib/orchestration/execution/rag_pipeline.c
 NETWORK_SRCS := \
-	lib/network/topology/peer_identity.c \
+	lib/network/authority/identity.c \
+	lib/network/topology/topology.c \
 	lib/network/topology/membership.c \
-	lib/network/topology/reachability.c \
-	lib/network/topology/trust.c \
+	lib/network/topology/peer_registry.c \
+	lib/network/authority/trust.c \
 	lib/network/topology/authority_binding.c \
 	lib/network/discovery/discovery.c \
 	lib/network/discovery/enrollment.c \
-	lib/network/mesh/coordination.c \
-	lib/network/mesh/mesh_runtime.c \
-	lib/network/mesh/containment.c \
-	lib/network/overlay/transport_runtime.c \
-	lib/network/overlay/session_state.c \
-	lib/network/overlay/replay_state.c \
-	lib/network/overlay/conflict_ordering.c \
-	lib/network/policy/network_policy.c \
-	lib/network/policy/provider_policy.c \
-	lib/network/policy/resource_policy.c
+	lib/network/routing/coordination.c \
+	lib/network/topologies/mesh/mesh_topology.c \
+	lib/network/topologies/mesh/mesh_peering.c \
+	lib/network/authority/containment_state.c \
+	lib/network/transport/transport_runtime.c \
+	lib/network/transport/transport_client.c \
+	lib/network/transport/overlay_transport.c \
+	lib/network/routing/replay_state.c \
+	lib/network/routing/conflict_state.c \
+	lib/network/topologies/mesh/mesh_policy.c
 PROVIDERS_SRCS := \
 	lib/network/providers/catalog.c \
 	lib/network/providers/provider_registry.c \
 	lib/network/providers/provider_selection.c \
-	lib/network/providers/client_inference.c \
-	lib/network/providers/client_embedding.c \
-	lib/network/providers/mock_provider.c \
-	lib/network/providers/embedding_mock.c
+	lib/network/providers/provider_policy.c \
+	lib/network/providers/inference/client_inference.c \
+	lib/network/providers/embedding/client_embedding.c \
+	lib/network/providers/mocks/mock_provider.c \
+	lib/network/providers/embedding/embedder_mock.c
 KNOWLEDGE_SRCS := \
 	lib/knowledge/runtime_compat.c \
 	lib/knowledge/cognition/cognition.c \
@@ -212,17 +214,22 @@ GRAPH_SRCS := \
 	lib/graph/materialization/from_runtime_records.c \
 	lib/graph/query/workspace_summary.c
 DAEMON_SRCS := \
-	lib/runtime/daemon/config.c \
-	lib/runtime/daemon/paths.c \
-	lib/runtime/daemon/runtime.c \
-	lib/runtime/daemon/state.c \
-	lib/runtime/daemon/services.c \
-	lib/runtime/daemon/binding.c \
-	lib/runtime/daemon/actions.c \
-	lib/runtime/daemon/local_runtime.c \
-	lib/runtime/daemon/lifecycle.c \
-	lib/runtime/daemon/internal.c \
-	lib/runtime/daemon/ids.c \
+	lib/runtime/local/config.c \
+	lib/runtime/local/paths.c \
+	lib/runtime/local/services.c \
+	lib/runtime/local/state.c \
+	lib/runtime/local/source_ids.c \
+	lib/daemon/config.c \
+	lib/daemon/daemon.c \
+	lib/daemon/process.c \
+	lib/daemon/bootstrap.c \
+	lib/daemon/runtime_binding.c \
+	lib/daemon/network_binding.c \
+	lib/daemon/actions.c \
+	lib/daemon/lifecycle.c \
+	lib/daemon/mediation.c \
+	lib/daemon/observation.c \
+	lib/daemon/internal.c \
 	lib/third_party/cjson/cJSON.c
 
 SUPPORT_OBJS := $(patsubst %.c,$(OBJ_DIR)/%.o,$(SUPPORT_SRCS))
@@ -256,7 +263,7 @@ DOXYGEN ?= doxygen
 DOXY_OUT ?= $(DIST_ROOT)/docs/doxygen
 
 .PHONY: all yai yai-daemon yai-edge foundations support platform protocol core orchestration exec network mesh providers knowledge data graph edge daemon yd1-baseline \
-        test test-unit test-integration test-e2e test-core test-runtime test-knowledge test-orchestration test-protocol test-governance test-providers test-edge test-mesh \
+        test test-unit test-integration test-e2e test-core test-runtime test-knowledge test-orchestration test-protocol test-governance test-providers test-daemon test-edge test-mesh \
         test-demo-matrix verify-final-demo-matrix \
         clean clean-dist clean-all build build-all dist dist-all bundle verify \
         preflight-release docs docs-clean docs-verify proof-verify release-guards \
@@ -294,7 +301,7 @@ protocol: $(PROTOCOL_LIB)
 test: test-unit test-integration test-e2e
 	@echo "[YAI] unified test baseline complete"
 
-test-unit: test-core test-runtime test-orchestration test-protocol test-knowledge test-governance test-providers test-edge test-mesh
+test-unit: test-core test-runtime test-orchestration test-protocol test-knowledge test-governance test-providers test-daemon test-mesh
 	@echo "[YAI] unit suites complete"
 
 test-integration:
@@ -302,8 +309,8 @@ test-integration:
 	@tests/integration/orchestration/run_orchestration_smoke.sh
 	@tests/integration/orchestration/run_orchestration_c_tests.sh
 	@tests/integration/runtime/run_runtime_state_smoke.sh
-	@tests/integration/edge/run_edge_smoke.sh
-	@tests/integration/mesh/run_mesh_smoke.sh
+	@tests/integration/daemon/run_daemon_smoke.sh
+	@tests/integration/network/mesh/run_mesh_smoke.sh
 	@tests/integration/workspace/workspace_runtime_contract.sh
 	@tests/integration/workspace/workspace_session_binding_contract.sh
 	@tests/integration/workspace/workspace_inspect_surfaces.sh
@@ -315,7 +322,7 @@ test-integration:
 	@tests/integration/workspace/workspace_governed_vertical_slice.sh
 	@tests/integration/workspace/workspace_negative_paths.sh
 	@tests/integration/source-plane/source_owner_ingest_bridge.sh
-	@tests/integration/source-plane/edge_local_runtime_scan_spool_retry.sh
+	@tests/integration/source-plane/daemon_local_runtime_scan_spool_retry.sh
 	@tests/integration/source-plane/source_plane_read_model.sh
 	@tests/integration/runtime/run_runtime_handshake_smoke.sh
 	@echo "[YAI] integration suites complete"
@@ -352,13 +359,16 @@ test-governance:
 	@echo "[YAI] governance-native resolution suites complete"
 
 test-providers:
-	@tests/unit/providers/run_providers_unit_tests.sh
+	@tests/unit/network/providers/run_providers_unit_tests.sh
 
-test-edge:
-	@tests/unit/edge/run_edge_unit_tests.sh
+test-daemon:
+	@tests/unit/daemon/run_daemon_unit_tests.sh
+
+test-edge: test-daemon
+	@echo "[YAI] edge test target is legacy alias; use test-daemon"
 
 test-mesh:
-	@tests/unit/mesh/run_mesh_unit_tests.sh
+	@tests/unit/network/mesh/run_mesh_unit_tests.sh
 
 $(YAI_BIN): $(YAI_OBJ) $(CORE_LIB) $(ORCHESTRATION_LIB) $(KNOWLEDGE_LIB) $(PROVIDERS_LIB) $(DATA_LIB) $(GRAPH_LIB) $(NETWORK_LIB) $(DAEMON_LIB) $(SUPPORT_LIB) $(PLATFORM_LIB) $(PROTOCOL_LIB) | dirs
 	$(CC) $(LDFLAGS) $(YAI_OBJ) -o $@ $(CORE_LIB) $(ORCHESTRATION_LIB) $(KNOWLEDGE_LIB) $(PROVIDERS_LIB) $(DATA_LIB) $(GRAPH_LIB) $(NETWORK_LIB) $(DAEMON_LIB) $(SUPPORT_LIB) $(PLATFORM_LIB) $(PROTOCOL_LIB) $(LDLIBS)

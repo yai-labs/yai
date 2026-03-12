@@ -1,7 +1,7 @@
 /* SPDX-License-Identifier: Apache-2.0 */
 #pragma once
 
-#include <yai/network/policy/provider_policy.h>
+#include <yai/network/providers/policy.h>
 
 #ifdef __cplusplus
 extern "C" {

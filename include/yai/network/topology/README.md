@@ -1,3 +1,3 @@
 # yai/network/topology
 
-Canonical network topology primitives: kinds, peers, identity, membership, and reachability.
+Canonical topology primitives: topology kind, peers, registry and membership.
