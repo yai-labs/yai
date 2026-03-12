@@ -5,8 +5,8 @@ effective_date: 2026-02-19
 revision: 1
 owner: runtime
 law_refs:
-  - ../law/foundation/invariants/I-001-traceability.md
-  - ../law/foundation/invariants/I-002-determinism.md
+  - ../governance/foundation/invariants/I-001-traceability.md
+  - ../governance/foundation/invariants/I-002-determinism.md
 ---
 
 # Boot Component
@@ -33,9 +33,9 @@ implemented
 ## Traceability
 
 - ADR refs: `docs/program/adr/adr-runtime-010-boot-entrypoint.md`
-- Runbook refs: `docs/program/milestone-packs/runtime-baselines/mp-runtime-000-root-hardening.md`
-- MP refs: `docs/program/milestone-packs/root-hardening/mp-runtime-000-root-hardening-v0-1-0.md`
-- L0 anchors: `../law/foundation/invariants/I-001-traceability.md`
+- Runbook refs: `docs/archive/legacy/program/milestone-packs/runtime-baselines/operations-foundation/mp-runtime-000-root-hardening.md`
+- MP refs: `docs/archive/legacy/program/milestone-packs/root-hardening/mp-runtime-000-root-hardening-v0-1-5.md`
+- L0 anchors: `../governance/foundation/invariants/I-001-traceability.md`
 
 ## Known Drift / Gaps
 

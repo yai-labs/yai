@@ -4,15 +4,15 @@ status: accepted
 effective_date: 2026-02-18
 supersedes: []
 applies_to:
-  runbook: docs/program/milestone-packs/runtime-baselines/mp-runtime-000-workspaces-lifecycle.md
+  runbook: docs/archive/legacy/program/milestone-packs/runtime-baselines/workspace/mp-runtime-000-workspaces-lifecycle.md
   phase: 0.1.1
   anchor: "#phase-0-1-1-ws-create-guardrails"
 law_refs:
-  - ../law/foundation/invariants/I-001-traceability.md
-  - ../law/foundation/invariants/I-002-determinism.md
-  - ../law/foundation/invariants/I-003-governance.md
-  - ../law/contracts/protocol/include/session.h
-  - ../law/contracts/protocol/include/transport.h
+  - ../governance/foundation/invariants/I-001-traceability.md
+  - ../governance/foundation/invariants/I-002-determinism.md
+  - ../governance/foundation/invariants/I-003-governance.md
+  - ../governance/contracts/protocol/include/session.h
+  - ../governance/contracts/protocol/include/transport.h
 ---
 # ADR-008 - Connection Lifecycle Semantics
 
@@ -51,11 +51,11 @@ A strict lifecycle avoids hidden state transitions and improves forensic clarity
 - Proposals:
   - `docs/program/rfc/rfc-workspace-003-workspace-lifecycle-and-isolation.md`
 - Implemented by runbooks:
-  - `docs/program/milestone-packs/runtime-baselines/mp-runtime-000-workspaces-lifecycle.md`
-  - `docs/program/milestone-packs/runtime-baselines/mp-runtime-000-engine-attach.md`
+  - `docs/archive/legacy/program/milestone-packs/runtime-baselines/workspace/mp-runtime-000-workspaces-lifecycle.md`
+  - `docs/archive/legacy/program/milestone-packs/runtime-baselines/operations-foundation/mp-runtime-000-engine-attach.md`
 - Milestone packs:
-  - `docs/program/milestone-packs/workspaces-lifecycle/mp-workspace-000-workspaces-lifecycle-v0-1-0.md` *(planned)*
-  - `docs/program/milestone-packs/engine-attach/mp-orchestration-000-engine-attach-v0-1-0.md` *(planned)*
+  - `docs/archive/legacy/program/milestone-packs/workspaces-lifecycle/mp-workspace-000-workspaces-lifecycle-v0-1-4.md` *(planned)*
+  - `docs/archive/legacy/program/milestone-packs/engine-attach/mp-orchestration-000-engine-attach-v0-1-5.md` *(planned)*
 
 ## Status
 

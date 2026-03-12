@@ -43,7 +43,7 @@ YAI locks this hierarchy:
 
 - prevents policy sovereignty drift to edge
 - provides stable baseline for grant expiry/refresh/revoke
-- aligns runtime, law and qualification semantics
+- aligns runtime, governance and qualification semantics
 
 ### Negative
 

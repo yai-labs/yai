@@ -1,22 +1,29 @@
 ---
-id: ADR-012
+role: support
 status: draft
-effective_date: 2026-02-21
-supersedes: []
-applies_to:
-  runbook: docs/program/reports/audit-convergence/EXECUTION-PLAN-v0.1.0.md
-  phase: governance
-  anchor: "#4-two-official-gates"
-law_refs:
-  - ../law/foundation/invariants/I-001-traceability.md
-  - ../law/foundation/invariants/I-002-determinism.md
-  - ../law/foundation/invariants/I-003-governance.md
-  - ../law/foundation/invariants/I-006-external-effect-boundary.md
-  - ../law/foundation/boundaries/L1-kernel.md
+audience: governance
+owner_domain: program-adr
+id: ADR-012
+runbook: docs/program/reports/audit-convergence-report.md
+phase: governance
 ---
 
 # ADR-012 - Audit Convergence Gates for v0.1.0
 
+# Purpose
+Captures architecture decision records used for governance traceability.
+
+# Scope
+Covers decision context, accepted direction, and downstream implications.
+
+# Relationships
+- Related RFCs
+- Associated implementation evidence and reports
+
+# Canonical Role
+Program support artifact with decision authority in governance context.
+
+# Main Body
 ## Context
 The Infra Grammar audit exposed a program-level coordination gap:
 runbooks and milestone packs were valuable but not converging through one explicit closure model.
@@ -59,9 +66,9 @@ The explicit GREEN definition prevents over-claiming and keeps delivery aligned 
 
 ## Traceability
 - Execution plan:
-  - `docs/program/reports/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
+  - `docs/program/reports/audit-convergence-report.md`
 - Convergence matrix:
-  - `docs/program/reports/audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
+  - `docs/program/reports/audit-convergence-report.md`
 - Claims registry:
   - `ops/evidence/validation/audits/claims/infra-grammar.v0.1.json`
 - Related ADR:
@@ -70,3 +77,7 @@ The explicit GREEN definition prevents over-claiming and keeps delivery aligned 
 
 ## Status
 Draft; proposed as governance baseline for v0.1.0 program delivery.
+
+# Related Docs
+- `docs/program/adr/README.md`
+- Linked RFC/report artifacts

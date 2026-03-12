@@ -29,7 +29,7 @@ peering semantics not provided by the application protocol alone.
 
 - Runtime and SDK/CLI must model endpoint roles explicitly.
 - Deployment documentation must state overlay requirement for customer-grade remote operation.
-- Law/governance must express trust/provenance assumptions for remote source attachment.
+- Governance/governance must express trust/provenance assumptions for remote source attachment.
 
 ## Rejected alternatives
 

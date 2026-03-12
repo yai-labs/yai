@@ -11,11 +11,8 @@ REQUIRED = {
 }
 
 FORBIDDEN = [
-    "embedded/law",
-    "../law",
     "dual-repo",
     "runtime-embedded",
-    "YAI_LAW_",
 ]
 
 

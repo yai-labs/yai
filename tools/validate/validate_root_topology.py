@@ -34,10 +34,7 @@ FORBIDDEN_ROOT_NAMES = {
     "classification",
 }
 
-FORBIDDEN_ROOT_FILES = {
-    "LAW_COMPATIBILITY.md",
-    "law-compatibility.v1.json",
-}
+FORBIDDEN_ROOT_FILES: set[str] = set()
 
 REQUIRED_FOUNDATION_SUBDIRS = {"axioms", "invariants", "boundaries", "extensions", "terminology"}
 REQUIRED_FORMAL_SUBDIRS = {

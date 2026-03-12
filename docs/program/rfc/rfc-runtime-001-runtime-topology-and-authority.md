@@ -1,39 +1,27 @@
 ---
-id: RFC-001
-title: Runtime topology and authority boundaries
+role: support
 status: draft
-owners:
-  - "@francescomaiomascio"
-legacy_owner: core-architecture
-links:
-  replaces: PRP-001
-
-effective_date: 2026-02-19
-revision: 1
-supersedes: []
-related:
-  adr:
-    - docs/program/adr/adr-runtime-001-single-runtime.md
-    - docs/program/adr/adr-runtime-002-root-entrypoint.md
-    - docs/program/adr/adr-runtime-003-kernel-authority.md
-    - docs/program/adr/adr-orchestration-004-engine-execution.md
-    - docs/program/adr/adr-runtime-005-mind-proposer.md
-  runbooks:
-    - docs/program/milestone-packs/runtime-baselines/mp-runtime-000-root-hardening.md
-  milestone_packs:
-    - docs/program/milestone-packs/root-hardening/mp-runtime-000-root-hardening-v0-1-0.md
-  specs:
-    - ../law/foundation/axioms/A-002-authority.md
-    - ../law/foundation/boundaries/L1-kernel.md
-    - ../law/foundation/boundaries/L2-engine.md
-tags:
-  - topology
-  - authority
-  - runtime
+audience: governance
+owner_domain: program-rfc
+id: RFC-001
 ---
 
 # RFC-001 - Runtime topology and authority boundaries
 
+# Purpose
+Captures governance-level request-for-comment context and decisions.
+
+# Scope
+Covers rationale, constraints, and acceptance direction for platform evolution.
+
+# Relationships
+- Related ADRs
+- Associated implementation evidence and reports
+
+# Canonical Role
+Program support artifact; not a runtime architecture source-of-truth.
+
+# Main Body
 ## Problem
 Architecture decisions around runtime scope and authority are spread across multiple ADRs. The project needs one pre-decision framing that explains why a machine-level runtime is preferred and how authority boundaries are enforced end-to-end.
 
@@ -50,7 +38,7 @@ Define and document the rationale for one machine-level runtime with strict Root
 
 ## Risks
 - Migration complexity from workspace-first habits. Mitigation: phased rollout through runbook phases.
-- Confusion on authority ownership. Mitigation: explicit law anchors and boundary diagrams.
+- Confusion on authority ownership. Mitigation: explicit governance anchors and boundary diagrams.
 
 ## Rollout Sketch
 1. Publish topology proposal with explicit L0 anchors.
@@ -59,17 +47,21 @@ Define and document the rationale for one machine-level runtime with strict Root
 
 ## Exit Criteria
 - [ ] Proposal clearly maps alternatives and selects a preferred topology.
-- [ ] Law anchors for authority boundaries are explicit and complete.
+- [ ] Governance anchors for authority boundaries are explicit and complete.
 - [ ] Target ADR set is confirmed and linked.
 
 ## Traceability
 
-- Spec anchors (if any): `../law/foundation/axioms/A-002-authority.md`, `../law/foundation/boundaries/L1-kernel.md`, `../law/foundation/boundaries/L2-engine.md`
+- Spec anchors (if any): `../governance/foundation/axioms/A-002-authority.md`, `../governance/foundation/boundaries/L1-kernel.md`, `../governance/foundation/boundaries/L2-engine.md`
 - Targets ADR: `docs/program/adr/adr-runtime-001-single-runtime.md`, `docs/program/adr/adr-runtime-002-root-entrypoint.md`, `docs/program/adr/adr-runtime-003-kernel-authority.md`, `docs/program/adr/adr-orchestration-004-engine-execution.md`, `docs/program/adr/adr-runtime-005-mind-proposer.md`
-- Downstream runbook: `docs/program/milestone-packs/runtime-baselines/mp-runtime-000-root-hardening.md`
-- Downstream MP: `docs/program/milestone-packs/root-hardening/mp-runtime-000-root-hardening-v0-1-0.md`
+- Downstream runbook: `docs/archive/legacy/program/milestone-packs/runtime-baselines/operations-foundation/mp-runtime-000-root-hardening.md`
+- Downstream MP: `docs/archive/legacy/program/milestone-packs/root-hardening/mp-runtime-000-root-hardening-v0-1-5.md`
 
 ## References
 - `docs/program/spine.md`
 - `docs/program/traceability.md`
 - `docs/program/adr/adr-runtime-001-single-runtime.md`
+
+# Related Docs
+- `docs/program/rfc/README.md`
+- Linked ADR and report artifacts

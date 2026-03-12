@@ -16,9 +16,9 @@ INPUT                  = boot/include \
                          kernel/include \
                          engine/include \
                          runtime/protocol \
-                         ../law/contracts/protocol/include \
-                         ../law/contracts/protocol/runtime/include \
-                         ../law/contracts/vault/include \
+                         ../governance/contracts/protocol/include \
+                         ../governance/contracts/protocol/runtime/include \
+                         ../governance/contracts/vault/include \
                          README.md \
                          docs/70-guides/dev-guide/doxygen-mainpage.md
 
@@ -28,7 +28,7 @@ USE_MDFILE_AS_MAINPAGE = docs/70-guides/dev-guide/doxygen-mainpage.md
 
 EXCLUDE                = build \
                          dist \
-                         ../law/contracts
+                         ../governance/contracts
 
 # Output layout
 GENERATE_TREEVIEW      = YES

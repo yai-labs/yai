@@ -1,16 +1,50 @@
+---
+role: reference
+status: active
+audience: developer
+owner_domain: reference
+---
+
 # Reference
 
-Technical lookup-oriented documentation.
+# Purpose
+Provides lookup-oriented technical reference for stable platform surfaces.
 
-## Canonical Sources
+# Scope
+Covers protocol, schemas, registries, commands, CLI, and SDK reference families.
 
-- Protocol contracts: `protocol/contracts/README.md`
-- Schemas: `schemas/specs-overview.md`
-- Registries: `registries/`
-- Commands and CLI: `commands/`, `cli/`
-- SDK: `sdk/README.md`
+# Relationships
+- `docs/architecture/README.md`
+- `docs/runbooks/README.md`
 
-## Rules
+# Canonical Role
+Primary reference index for consumer lookup.
 
-- Reference docs must be lookup-first and non-narrative.
-- Migration and legacy explanations belong in `docs/archive/`.
+# Main Body
+Reference is intentionally dry and compressed to essential lookup material.
+
+## Scope
+Lookup-oriented technical reference for protocol, schemas, registries, commands, CLI, and SDK surfaces.
+
+## What Belongs Here
+- Stable reference/contract lookup docs.
+
+## What Does Not Belong Here
+- Migration history, report prose, or walkthrough narratives.
+
+## Navigation Order
+1. `protocol/`
+2. `schemas/`
+3. `registries/`
+4. `commands/`
+5. `cli/`
+6. `sdk/`
+
+## Extension Rules
+- Keep one entry README per family.
+- Prefer tightening existing family docs over adding parallel references.
+
+# Related Docs
+- `protocol/README.md`
+- `schemas/README.md`
+- `commands/README.md`

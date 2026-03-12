@@ -1,18 +1,34 @@
 ---
-id: ADR-README
+role: support
 status: active
-law_refs:
-  - ../law/foundation/invariants/I-001-traceability.md
+audience: governance
+owner_domain: program-adr
+id: ADR-README
 ---
+
 # ADR Index
 
+# Purpose
+Captures architecture decision records used for governance traceability.
+
+# Scope
+Covers decision context, accepted direction, and downstream implications.
+
+# Relationships
+- Related RFCs
+- Associated implementation evidence and reports
+
+# Canonical Role
+Program support artifact with decision authority in governance context.
+
+# Main Body
 Architecture Decision Records (ADRs) capture irreversible or high-impact technical choices.
 
 An ADR should answer:
 - what was decided,
 - why alternatives were rejected,
 - what consequences are accepted,
-- which law/spec anchors govern the decision.
+- which governance/spec anchors govern the decision.
 
 ## Canonical ADR set
 
@@ -28,13 +44,13 @@ An ADR should answer:
 - `adr-runtime-010-boot-entrypoint.md`
 - `adr-contracts-011-contract-runbook-lock.md`
 - `adr-program-012-audit-convergence-gates.md`
-- `adr-distributed-013-distributed-acquisition-centralized-control.md`
+- `adr-distributed-013-acquisition-centralized-control.md`
 - `adr-distributed-014-secure-peering-plane.md`
 - `adr-distributed-015-daemon-architecture-slice.md`
 - `adr-governance-016-global-to-edge-policy-hierarchy-lock.md`
 - `adr-distributed-017-delegated-edge-enforcement-architecture.md`
-- `adr-runtime-018-process-and-asset-runtime-observation-architecture.md`
-- `adr-distributed-019-edge-binding-and-action-point-architecture.md`
+- `adr-runtime-018-runtime-observation-architecture.md`
+- `adr-distributed-019-edge-binding-action-point-architecture.md`
 - `adr-workspace-020-workspace-authority-and-truth-plane.md`
 - `adr-governance-021-workspace-to-edge-policy-distribution.md`
 - `adr-distributed-022-edge-policy-validity-expiry-refresh.md`
@@ -60,8 +76,12 @@ No template copy should be kept inside this ADR directory.
 
 When adding a new ADR:
 - update this index,
-- ensure law/spec references are explicit,
+- ensure governance/spec references are explicit,
 - add downstream runbook linkage when available.
 
 Program-level convergence governance is defined in:
-- `docs/program/reports/audit-convergence/EXECUTION-PLAN-v0.1.0.md`
+- `docs/program/reports/audit-convergence-report.md`
+
+# Related Docs
+- `docs/program/adr/README.md`
+- Linked RFC/report artifacts

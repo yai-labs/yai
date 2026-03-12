@@ -4,14 +4,14 @@ status: historical
 effective_date: 2026-02-18
 supersedes: []
 applies_to:
-  runbook: docs/program/milestone-packs/runtime-baselines/mp-runtime-000-root-hardening.md
+  runbook: docs/archive/legacy/program/milestone-packs/runtime-baselines/operations-foundation/mp-runtime-000-root-hardening.md
   phase: 0.1.1
   anchor: "#phase-0-1-1-byte-perfect-router"
 law_refs:
-  - ../law/foundation/axioms/A-002-authority.md
-  - ../law/foundation/invariants/I-003-governance.md
-  - ../law/foundation/boundaries/L1-kernel.md
-  - ../law/contracts/protocol/include/transport.h
+  - ../governance/foundation/axioms/A-002-authority.md
+  - ../governance/foundation/invariants/I-003-governance.md
+  - ../governance/foundation/boundaries/L1-kernel.md
+  - ../governance/contracts/protocol/include/transport.h
 ---
 # ADR-002 - Root Control Plane as Canonical Entry Point
 
@@ -49,9 +49,9 @@ This preserves authority ordering and keeps routing and policy enforcement machi
 - Proposals:
   - `docs/program/rfc/rfc-runtime-001-runtime-topology-and-authority.md`
 - Implemented by runbooks:
-  - `docs/program/milestone-packs/runtime-baselines/mp-runtime-000-root-hardening.md`
+  - `docs/archive/legacy/program/milestone-packs/runtime-baselines/operations-foundation/mp-runtime-000-root-hardening.md`
 - Milestone packs:
-  - `docs/program/milestone-packs/root-hardening/mp-runtime-000-root-hardening-v0-1-0.md`
+  - `docs/archive/legacy/program/milestone-packs/root-hardening/mp-runtime-000-root-hardening-v0-1-5.md`
 
 ## Status
 

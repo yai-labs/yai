@@ -4,14 +4,14 @@ status: accepted
 effective_date: 2026-02-18
 supersedes: []
 applies_to:
-  runbook: docs/program/milestone-packs/runtime-baselines/mp-runtime-000-root-hardening.md
+  runbook: docs/archive/legacy/program/milestone-packs/runtime-baselines/operations-foundation/mp-runtime-000-root-hardening.md
   phase: boot-baseline
   anchor: "#phase-root-boot-baseline"
 law_refs:
-  - ../law/foundation/axioms/A-002-authority.md
-  - ../law/foundation/invariants/I-003-governance.md
-  - ../law/foundation/boundaries/L1-kernel.md
-  - ../law/contracts/protocol/include/transport.h
+  - ../governance/foundation/axioms/A-002-authority.md
+  - ../governance/foundation/invariants/I-003-governance.md
+  - ../governance/foundation/boundaries/L1-kernel.md
+  - ../governance/contracts/protocol/include/transport.h
 ---
 # ADR-010 - Boot as Canonical Machine Entry
 
@@ -49,10 +49,10 @@ A single entrypoint improves reproducibility, policy enforcement, and incident d
 - Proposals:
   - `docs/program/rfc/rfc-workspace-003-workspace-lifecycle-and-isolation.md`
 - Implemented by runbooks:
-  - `docs/program/milestone-packs/runtime-baselines/mp-runtime-000-workspaces-lifecycle.md`
-  - `docs/program/milestone-packs/runtime-baselines/mp-runtime-000-engine-attach.md`
+  - `docs/archive/legacy/program/milestone-packs/runtime-baselines/workspace/mp-runtime-000-workspaces-lifecycle.md`
+  - `docs/archive/legacy/program/milestone-packs/runtime-baselines/operations-foundation/mp-runtime-000-engine-attach.md`
 - Milestone packs:
-  - `docs/program/milestone-packs/workspaces-lifecycle/mp-workspace-000-workspaces-lifecycle-v0-1-0.md` *(planned)*
+  - `docs/archive/legacy/program/milestone-packs/workspaces-lifecycle/mp-workspace-000-workspaces-lifecycle-v0-1-4.md` *(planned)*
 
 ## Status
 

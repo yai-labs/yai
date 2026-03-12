@@ -32,7 +32,7 @@ Non-canonical/transitional root:
 
 ## Canonical Role Lock
 
-- `governance/` is the canonical destination for former standalone law content.
+- `governance/` is the canonical destination for former standalone governance content.
 - `foundation/` defines conceptual system basis.
 - `formal/` defines formal verification artifacts and traceability models.
 - `docs/` is the single central documentation space.

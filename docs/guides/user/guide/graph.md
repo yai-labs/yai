@@ -4,8 +4,8 @@ Editorial pointer only.
 
 Canonical sources:
 
-- `../law/runtime/mind/graph/notes/GRAPH_V1.md`
-- `../law/runtime/mind/graph/schema/graph.v1.json`
+- `../governance/runtime/mind/graph/notes/GRAPH_V1.md`
+- `../governance/runtime/mind/graph/schema/graph.v1.json`
 
 ## Graph Integrity (Normative)
 Semantic Graph state excludes operational traces (activation/events telemetry).

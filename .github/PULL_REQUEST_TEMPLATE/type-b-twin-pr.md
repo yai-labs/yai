@@ -15,7 +15,7 @@
 
 ## Twin PR links (required)
 - cli PR: <link or N/A>
-- law PR: <link or N/A>
+- governance PR: <link or N/A>
 
 ## Objective
 <single objective across repos>

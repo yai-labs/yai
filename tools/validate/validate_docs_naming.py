@@ -16,6 +16,13 @@ DISALLOWED_SUFFIXES = (
     "-residue.md",
 )
 
+# Live canonical architecture/guides/runbooks/reference docs must not drift
+# toward report/migration artifacts. Program reports are the canonical home.
+DISALLOWED_LIVE_CLASSES = (
+    "-report.md",
+    "-migration.md",
+)
+
 FORBIDDEN_ARCH_DIRS = [
     DOCS / "architecture" / "edge-mesh",
     DOCS / "architecture" / "data-graph",
@@ -54,6 +61,15 @@ def main() -> int:
             if name.endswith(suffix):
                 errors.append(f"disallowed live-doc suffix '{suffix}': {rel}")
                 break
+
+        rel_parts = md.relative_to(DOCS).parts
+        if rel_parts and rel_parts[0] in {"architecture", "guides", "runbooks", "reference"}:
+            for suffix in DISALLOWED_LIVE_CLASSES:
+                if name.endswith(suffix):
+                    errors.append(
+                        f"disallowed live-doc class '{suffix}' under {rel_parts[0]}: {rel}"
+                    )
+                    break
 
     adr_dir = DOCS / "program" / "adr"
     if adr_dir.exists():

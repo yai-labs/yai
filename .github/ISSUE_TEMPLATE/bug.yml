@@ -84,9 +84,9 @@ body:
   - type: textarea
     id: lawrefs
     attributes:
-      label: Law/Specs references (if relevant)
+      label: Governance/Specs references (if relevant)
       placeholder: |
-        deps/law/specs/protocol/include/transport.h
-        deps/law/contracts/invariants/I-002-determinism.md
+        governance/specs/protocol/include/transport.h
+        governance/contracts/invariants/I-002-determinism.md
     validations:
       required: false

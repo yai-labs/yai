@@ -58,6 +58,6 @@ YAI adopts a fixed YD-1 topology contract:
 
 ## References
 
-- `docs/program/adr/adr-distributed-013-distributed-acquisition-centralized-control.md`
+- `docs/program/adr/adr-distributed-013-acquisition-centralized-control.md`
 - `docs/architecture/daemon-architecture-refoundation-model.md`
 - `docs/architecture/exec-source-plane-role.md`

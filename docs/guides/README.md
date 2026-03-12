@@ -1,17 +1,49 @@
+---
+role: support
+status: active
+audience: developer
+owner_domain: guides
+---
+
 # Guides
 
-Audience-focused operational guidance.
+# Purpose
+Provides audience-oriented guidance for developers, operators, and users.
 
-## Canonical Sources
+# Scope
+Covers practical usage/workflow guidance that supports canonical architecture and runbooks.
 
-- Developer onboarding and workflow: `developer/onboarding/README.md`, `developer/workflow/README.md`
-- Developer debugging: `developer/debugging/debugging.md`
-- Developer operations: `developer/developer-operational-walkthroughs-guide.md`
-- Workspace developer operations: `developer/developer-workspace-operations-guide.md`
-- User onboarding and usage: `user/getting-started/README.md`, `user/guide/README.md`
+# Relationships
+- `docs/architecture/README.md`
+- `docs/runbooks/README.md`
 
-## Rules
+# Canonical Role
+Support layer for adoption and execution.
 
-- Walkthroughs must be consolidated under canonical guide spines.
-- New guide files require non-overlapping scope with an existing source guide.
-- Execution procedures belong in `docs/runbooks/`, not guides.
+# Main Body
+Guides are compressed to high-signal operational learning surfaces.
+
+## Scope
+Audience-oriented guidance for developers, operators, and users.
+
+## What Belongs Here
+- Workflow, onboarding, debugging, tooling, and user/operator usage guides.
+
+## What Does Not Belong Here
+- Canonical architecture source docs.
+- Runbook procedure authority.
+- Historical tranche documentation.
+
+## Navigation Order
+1. `developer/`
+2. `operator/`
+3. `user/`
+
+## Extension Rules
+- Add only docs with clear audience need and non-overlapping scope.
+- Move episodic or historical guidance to `docs/archive/**`.
+
+# Related Docs
+- `developer/README.md`
+- `operator/README.md`
+- `user/README.md`

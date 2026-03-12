@@ -5,9 +5,9 @@ effective_date: 2026-02-19
 revision: 1
 owner: architecture
 law_refs:
-  - ../law/foundation/boundaries/L1-kernel.md
-  - ../law/foundation/boundaries/L2-engine.md
-  - ../law/foundation/invariants/I-001-traceability.md
+  - ../governance/foundation/boundaries/L1-kernel.md
+  - ../governance/foundation/boundaries/L2-engine.md
+  - ../governance/foundation/invariants/I-001-traceability.md
 ---
 
 # Runtime Model
@@ -45,6 +45,6 @@ Canonical Topology: Root -> Kernel -> Engine with Mind as planned/external L3 pl
 ## Traceability
 
 - ADRs: `docs/program/adr/adr-runtime-002-root-entrypoint.md`, `docs/program/adr/adr-runtime-003-kernel-authority.md`, `docs/program/adr/adr-orchestration-004-engine-execution.md`, `docs/program/adr/adr-workspace-008-connection-lifecycle.md`, `docs/program/adr/adr-runtime-010-boot-entrypoint.md`
-- Runbooks: `docs/program/milestone-packs/runtime-baselines/mp-runtime-000-root-hardening.md`, `docs/program/milestone-packs/runtime-baselines/mp-runtime-000-workspaces-lifecycle.md`
-- MPs: `docs/program/milestone-packs/root-hardening/mp-runtime-000-root-hardening-v0-1-0.md`, `docs/program/milestone-packs/root-hardening/mp-runtime-000-root-hardening-v0-1-1.md`
-- L0 anchors: `../law/contracts/protocol/include/transport.h`, `../law/contracts/protocol/include/session.h`, `../law/contracts/protocol/runtime/include/rpc_runtime.h`
+- Runbooks: `docs/archive/legacy/program/milestone-packs/runtime-baselines/operations-foundation/mp-runtime-000-root-hardening.md`, `docs/archive/legacy/program/milestone-packs/runtime-baselines/workspace/mp-runtime-000-workspaces-lifecycle.md`
+- MPs: `docs/archive/legacy/program/milestone-packs/root-hardening/mp-runtime-000-root-hardening-v0-1-5.md`, `docs/archive/legacy/program/milestone-packs/root-hardening/mp-runtime-000-root-hardening-v0-1-5.md`
+- L0 anchors: `../governance/contracts/protocol/include/transport.h`, `../governance/contracts/protocol/include/session.h`, `../governance/contracts/protocol/runtime/include/rpc_runtime.h`

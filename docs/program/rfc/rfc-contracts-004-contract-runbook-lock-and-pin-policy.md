@@ -1,37 +1,27 @@
 ---
-id: RFC-004
-title: Contract baseline lock and cross-repo pin policy
+role: support
 status: draft
-owners:
-  - "@francescomaiomascio"
-legacy_owner: release-governance
-links:
-  replaces: PRP-004
-
-effective_date: 2026-02-19
-revision: 1
-supersedes: []
-related:
-  adr:
-    - docs/program/adr/adr-contracts-011-contract-runbook-lock.md
-  runbooks:
-    - docs/program/milestone-packs/runtime-baselines/mp-runtime-000-root-hardening.md
-  milestone_packs:
-    - docs/program/milestone-packs/root-hardening/mp-runtime-000-root-hardening-v0-1-0.md
-  specs:
-    - ../law/formal/traceability.v1.json
-    - ../law/formal/spec_map.md
-    - ../law/foundation/invariants/I-001-traceability.md
-    - ../law/foundation/invariants/I-007-compliance-context-required.md
-tags:
-  - baseline
-  - pin
-  - governance
-  - ci
+audience: governance
+owner_domain: program-rfc
+id: RFC-004
 ---
 
 # RFC-004 - Contract baseline lock and cross-repo pin policy
 
+# Purpose
+Captures governance-level request-for-comment context and decisions.
+
+# Scope
+Covers rationale, constraints, and acceptance direction for platform evolution.
+
+# Relationships
+- Related ADRs
+- Associated implementation evidence and reports
+
+# Canonical Role
+Program support artifact; not a runtime architecture source-of-truth.
+
+# Main Body
 ## Problem
 Cross-repo updates can become inconsistent when pins are not updated in lockstep with contract changes, reducing trust in evidence and delivery claims.
 
@@ -40,7 +30,7 @@ Cross-repo updates can become inconsistent when pins are not updated in lockstep
 - Out of scope: Detailed runtime topology and per-command behavior.
 
 ## Proposed Change
-Define a formal baseline-lock policy with explicit pin responsibilities for `yai`, `cli`, and `law`, including required checks before milestone closure.
+Define a formal baseline-lock policy with explicit pin responsibilities for `yai`, `cli`, and `governance`, including required checks before milestone closure.
 
 ## Options Compared
 - Option A: Strict lockstep pin policy with mandatory checks.
@@ -62,12 +52,16 @@ Define a formal baseline-lock policy with explicit pin responsibilities for `yai
 
 ## Traceability
 
-- Spec anchors (if any): `../law/formal/traceability.v1.json`, `../law/formal/spec_map.md`, `../law/foundation/invariants/I-001-traceability.md`, `../law/foundation/invariants/I-007-compliance-context-required.md`
+- Spec anchors (if any): `../governance/formal/traceability.v1.json`, `../governance/formal/spec_map.md`, `../governance/foundation/invariants/I-001-traceability.md`, `../governance/foundation/invariants/I-007-compliance-context-required.md`
 - Targets ADR: `docs/program/adr/adr-contracts-011-contract-runbook-lock.md`
-- Downstream runbook: `docs/program/milestone-packs/runtime-baselines/mp-runtime-000-root-hardening.md`
-- Downstream MP: `docs/program/milestone-packs/root-hardening/mp-runtime-000-root-hardening-v0-1-0.md`
+- Downstream runbook: `docs/archive/legacy/program/milestone-packs/runtime-baselines/operations-foundation/mp-runtime-000-root-hardening.md`
+- Downstream MP: `docs/archive/legacy/program/milestone-packs/root-hardening/mp-runtime-000-root-hardening-v0-1-5.md`
 
 ## References
 - `docs/program/spine.md`
 - `docs/program/adr/adr-contracts-011-contract-runbook-lock.md`
-- `../infra/tools/bin/law-sync`
+- `../infra/tools/bin/governance-sync`
+
+# Related Docs
+- `docs/program/rfc/README.md`
+- Linked ADR and report artifacts

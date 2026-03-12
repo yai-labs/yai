@@ -2000,7 +2000,7 @@
       "id": "T-004",
       "layer": 1,
       "family": "Governance",
-      "domain": "Law",
+      "domain": "Governance",
       "name": "Contract",
       "definition": "Versioned rule (constraints + required evidence) referenceable by id.",
       "ops": [

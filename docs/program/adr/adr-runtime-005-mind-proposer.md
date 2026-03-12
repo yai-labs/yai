@@ -4,14 +4,14 @@ status: accepted
 effective_date: 2026-02-18
 supersedes: []
 applies_to:
-  runbook: docs/program/milestone-packs/runtime-baselines/mp-runtime-000-mind-redis-stm.md
+  runbook: docs/archive/legacy/program/milestone-packs/runtime-baselines/operations-foundation/mp-runtime-000-mind-redis-stm.md
   phase: v5.3
   anchor: "#phase-mind-proposer"
 law_refs:
-  - ../law/foundation/invariants/I-002-determinism.md
-  - ../law/foundation/invariants/I-004-cognitive-reconfiguration.md
-  - ../law/foundation/invariants/I-006-external-effect-boundary.md
-  - ../law/foundation/boundaries/L3-mind.md
+  - ../governance/foundation/invariants/I-002-determinism.md
+  - ../governance/foundation/invariants/I-004-cognitive-reconfiguration.md
+  - ../governance/foundation/invariants/I-006-external-effect-boundary.md
+  - ../governance/foundation/boundaries/L3-mind.md
 ---
 # ADR-005 - Mind as Workspace-Scoped Proposer (L3)
 
@@ -51,9 +51,9 @@ This model preserves cognitive isolation while keeping effectful operations unde
 - Proposals:
   - `docs/program/rfc/rfc-runtime-001-runtime-topology-and-authority.md`
 - Implemented by runbooks:
-  - `docs/program/milestone-packs/runtime-baselines/mp-runtime-000-root-hardening.md`
+  - `docs/archive/legacy/program/milestone-packs/runtime-baselines/operations-foundation/mp-runtime-000-root-hardening.md`
 - Milestone packs:
-  - `docs/program/milestone-packs/root-hardening/mp-runtime-000-root-hardening-v0-1-0.md`
+  - `docs/archive/legacy/program/milestone-packs/root-hardening/mp-runtime-000-root-hardening-v0-1-5.md`
 
 ## Status
 

@@ -1,27 +1,26 @@
-# Documentation
+# Docs
 
-Canonical documentation platform for the unified YAI repository.
+## Scope
+Canonical entrypoint for the selected live documentation surface.
 
-## Navigation
+## What Belongs Here
+- Section spines for architecture, guides, runbooks, reference, and program.
+- Canonical navigation contracts and live-set policy.
 
-- `architecture/`: canonical system architecture.
-- `guides/`: audience-focused guides.
-- `runbooks/`: executable operational procedures.
-- `reference/`: technical lookup reference.
-- `program/`: RFC/ADR/milestone/templates/policies/reports.
-- `product/`: scenarios and product-facing narratives.
-- `generated/`: generated documentation artifacts.
-- `archive/`: historical, legacy, and migration-only material.
+## What Does Not Belong Here
+- Historical migration material (`docs/archive/**`).
+- Redundant report/milestone detail already declassed from live docs.
 
-## Canonicality Rules
+## Navigation Order
+1. `architecture/`
+2. `guides/`
+3. `runbooks/`
+4. `reference/`
+5. `program/`
+6. `README_LIVE_SET.md`
+7. `archive/`
 
-- Each major theme must have a single canonical source-of-truth document.
-- Satellite docs may support canonical docs but must not duplicate them.
-- Report/migration/closeout-style docs cannot be used as architecture source-of-truth.
-- Live docs must follow naming grammar and avoid noisy historical suffixes.
-
-## Guardrails
-
-- Do not create new top-level docs areas without updating validation.
-- Do not add migration artifacts to live architecture/guides/reference domains.
-- Prefer extending canonical spine docs before adding micro-fragment documents.
+## Extension Rules
+- Keep live docs compact and authoritative.
+- Prefer updating canonical spine docs over creating new standalone pages.
+- Non-canonical program history should remain in `docs/archive/**`.

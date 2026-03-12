@@ -1,22 +1,29 @@
 ---
-id: ADR-003
+role: support
 status: accepted
-effective_date: 2026-02-18
-supersedes: []
-applies_to:
-  runbook: docs/program/milestone-packs/runtime-baselines/mp-runtime-000-root-hardening.md
-  phase: 0.1.2
-  anchor: "#phase-0-1-2-envelope-authority-gate"
-law_refs:
-  - ../law/foundation/axioms/A-002-authority.md
-  - ../law/foundation/invariants/I-003-governance.md
-  - ../law/foundation/invariants/I-006-external-effect-boundary.md
-  - ../law/foundation/boundaries/L1-kernel.md
-  - ../law/contracts/protocol/include/auth.h
-  - ../law/contracts/protocol/include/session.h
+audience: governance
+owner_domain: program-adr
+id: ADR-003
+runbook: docs/archive/legacy/program/milestone-packs/runtime-baselines/operations-foundation/mp-runtime-000-root-hardening.md
+phase: 0.1.2
 ---
+
 # ADR-003 - Kernel as Authority Plane (L1)
 
+# Purpose
+Captures architecture decision records used for governance traceability.
+
+# Scope
+Covers decision context, accepted direction, and downstream implications.
+
+# Relationships
+- Related RFCs
+- Associated implementation evidence and reports
+
+# Canonical Role
+Program support artifact with decision authority in governance context.
+
+# Main Body
 ## Context
 
 Authority checks were historically mixed with execution paths. This weakened guarantees around role/arming/workspace enforcement.
@@ -48,10 +55,14 @@ Separating authority from execution preserves deterministic policy behavior and 
 - Proposals:
   - `docs/program/rfc/rfc-runtime-001-runtime-topology-and-authority.md`
 - Implemented by runbooks:
-  - `docs/program/milestone-packs/runtime-baselines/mp-runtime-000-root-hardening.md`
+  - `docs/archive/legacy/program/milestone-packs/runtime-baselines/operations-foundation/mp-runtime-000-root-hardening.md`
 - Milestone packs:
-  - `docs/program/milestone-packs/root-hardening/mp-runtime-000-root-hardening-v0-1-0.md`
+  - `docs/archive/legacy/program/milestone-packs/root-hardening/mp-runtime-000-root-hardening-v0-1-5.md`
 
 ## Status
 
 Accepted and active.
+
+# Related Docs
+- `docs/program/adr/README.md`
+- Linked RFC/report artifacts

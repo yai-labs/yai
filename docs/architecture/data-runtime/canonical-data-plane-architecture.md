@@ -1,5 +1,26 @@
+---
+role: canonical
+status: active
+audience: architect
+owner_domain: architecture
+---
+
 # Canonical Data Plane Model (DP-1)
 
+# Purpose
+Defines canonical architecture semantics for the domain.
+
+# Scope
+Covers boundaries, responsibilities, and integration semantics for this domain section.
+
+# Relationships
+- Parent section README
+- Adjacent architecture source documents
+
+# Canonical Role
+Authoritative architecture source for its scope.
+
+# Main Body
 ## Purpose
 Define the canonical model for YAI data-plane refoundation before backend-specific implementation work.
 
@@ -17,7 +38,7 @@ This document is the DP-1 source of truth for:
 - Separation between control-plane decisions and data-plane persistence actions.
 - Workspace-scoped persistence boundary definition.
 - High-level storage classes and ownership intent.
-- Cross-repo responsibility map (`law`, `sdk`, `cli`, `yai`).
+- Cross-repo responsibility map (`governance`, `sdk`, `cli`, `yai`).
 
 ### Out of scope (DP-1)
 - Concrete backend implementation (DB/graph engines).
@@ -183,7 +204,7 @@ Source-plane extension (YD-3 baseline):
 
 ## Cross-Repo Responsibility Baseline
 
-- `law`: canonical contracts, schemas, policy/lifecycle constraints.
+- `governance`: canonical contracts, schemas, policy/lifecycle constraints.
 - `yai`: authority mediation and runtime sink orchestration.
 - `sdk`: consumer-safe data surface contracts.
 - `cli`: operator-safe command surface and readable outcome summaries.
@@ -218,3 +239,7 @@ Secure peering dependency note (NP-1):
 - data-plane source records may be ingested over local trusted paths today.
 - Internet/multi-site ingestion must be treated as dependent on secure peering plane
   readiness (separate from protocol payload correctness).
+
+# Related Docs
+- `docs/architecture/README.md`
+- Domain-adjacent architecture documents

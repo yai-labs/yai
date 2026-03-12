@@ -1,21 +1,29 @@
 ---
-id: ADR-001
+role: support
 status: accepted
-effective_date: 2026-02-18
-supersedes: []
-applies_to:
-  runbook: docs/program/milestone-packs/runtime-baselines/mp-runtime-000-root-hardening.md
-  phase: 0.1.0
-  anchor: "#phase-0-1-0-protocol-guardrails"
-law_refs:
-  - ../law/foundation/axioms/A-002-authority.md
-  - ../law/foundation/invariants/I-003-governance.md
-  - ../law/foundation/invariants/I-006-external-effect-boundary.md
-  - ../law/foundation/boundaries/L1-kernel.md
-  - ../law/foundation/boundaries/L2-engine.md
+audience: governance
+owner_domain: program-adr
+id: ADR-001
+runbook: docs/archive/legacy/program/milestone-packs/runtime-baselines/operations-foundation/mp-runtime-000-root-hardening.md
+phase: 0.1.0
 ---
+
 # ADR-001 - Single Runtime Per Machine
 
+# Purpose
+Captures architecture decision records used for governance traceability.
+
+# Scope
+Covers decision context, accepted direction, and downstream implications.
+
+# Relationships
+- Related RFCs
+- Associated implementation evidence and reports
+
+# Canonical Role
+Program support artifact with decision authority in governance context.
+
+# Main Body
 ## Context
 
 YAI is evolving from a mixed execution model toward a machine-level runtime. The previous shape allowed multiple implicit entry paths and per-workspace execution assumptions that made governance and evidence weaker.
@@ -51,10 +59,14 @@ A single runtime reduces authority ambiguity, improves observability, and streng
 - Proposals:
   - `docs/program/rfc/rfc-runtime-001-runtime-topology-and-authority.md`
 - Implemented by runbooks:
-  - `docs/program/milestone-packs/runtime-baselines/mp-runtime-000-root-hardening.md`
+  - `docs/archive/legacy/program/milestone-packs/runtime-baselines/operations-foundation/mp-runtime-000-root-hardening.md`
 - Milestone packs:
-  - `docs/program/milestone-packs/root-hardening/mp-runtime-000-root-hardening-v0-1-0.md`
+  - `docs/archive/legacy/program/milestone-packs/root-hardening/mp-runtime-000-root-hardening-v0-1-5.md`
 
 ## Status
 
 Accepted and active.
+
+# Related Docs
+- `docs/program/adr/README.md`
+- Linked RFC/report artifacts

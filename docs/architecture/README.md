@@ -1,29 +1,56 @@
-# Architecture Docs
+---
+role: canonical
+status: active
+audience: architect
+owner_domain: architecture
+---
 
-Canonical architecture documentation for the unified platform.
+# Architecture
 
-## Canonical Sources (one primary source per domain)
+# Purpose
+Defines authoritative architecture semantics for the platform.
 
-- System overview: `overview/repository-scope.md`
-- Runtime: `runtime/runtime-architecture.md`
-- Workspace: `workspace/workspace-architecture.md`
-- Governance: `governance/governance-architecture.md`
-- Distributed runtime: `distributed-runtime/distributed-runtime-architecture.md`
-- Protocol: `protocol/secure-overlay-transport-plane-architecture.md`
-- Data runtime: `data-runtime/canonical-data-plane-architecture.md`
-- Intelligence runtime: `intelligence-runtime/daemon-local-runtime-architecture.md`
-- System theory boundary: `system-theory/README.md`
+# Scope
+Covers system topology, boundaries, interactions, and runtime model authority.
 
-## Workspace 5-Spine Model
+# Relationships
+- `docs/README.md`
+- `docs/runbooks/README.md`
+- `docs/reference/README.md`
 
+# Canonical Role
+Primary source-of-truth for architecture.
+
+# Main Body
+Architecture remains rich but compressed to canonical spines and necessary satellites.
+
+## Scope
+Authoritative architecture surface for system topology, boundaries, interactions, and constraints.
+
+## What Belongs Here
+- Canonical architecture source documents.
+- Required section-level entry docs and minimal supporting satellites.
+
+## What Does Not Belong Here
+- Program reporting history.
+- Migration/closeout/refoundation notes.
+
+## Navigation Order
+1. `overview/`
+2. `runtime/`
+3. `workspace/`
+4. `distributed-runtime/`
+5. `governance/`
+6. `protocol/`
+7. `data-runtime/`
+8. `intelligence-runtime/`
+9. `system-theory/`
+
+## Extension Rules
+- One canonical owner doc per architecture domain.
+- New architecture docs require non-overlapping scope with existing canonical docs.
+
+# Related Docs
+- `overview/repository-scope.md`
+- `runtime/runtime-architecture.md`
 - `workspace/workspace-architecture.md`
-- `workspace/workspace-boundaries-and-containment-architecture.md`
-- `workspace/workspace-state-and-lifecycle-architecture.md`
-- `workspace/workspace-security-and-scope-architecture.md`
-- `workspace/workspace-peer-and-distribution-architecture.md`
-
-## Rules
-
-- New architecture docs must extend an existing canonical source before creating a new file.
-- Satellite docs are allowed only when they do not duplicate canonical source-of-truth semantics.
-- Migration or historical architecture materials belong in `docs/archive/`.

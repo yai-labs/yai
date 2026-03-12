@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "yai-governance:registry/schema/primitives.v1.schema.json",
-  "title": "YAI Law Primitives Registry v1 (English)",
+  "title": "YAI Governance Primitives Registry v1 (English)",
   "type": "object",
   "required": [
     "v",

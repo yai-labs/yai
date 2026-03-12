@@ -1,21 +1,21 @@
 # HD-2 Hardening Closeout Report
 
 Date: 2026-03-09
-Scope: `law` + `yai`
+Scope: `governance` + `yai`
 
 ## 1. Embedded hardening results
 
 - Default embedded export now excludes `transitional/domain-family-seed`.
 - Embedded contract profile aligned to `runtime-consumer.v4`.
-- `embedded/law/README.md` is generated as a runtime-contract marker and preserved on sync.
+- `governance/runtime-package/README.md` is generated as a runtime-contract marker and preserved on sync.
 - Export summaries now derive bridge status from publish-layer manifests.
 
 ## 2. Transitional dependence status
 
-- `yai` runtime transitional lookup is now opt-in via `YAI_LAW_ENABLE_TRANSITIONAL_SEED=1`.
-- `yai` embed sync transitional payload inclusion is now opt-in via `YAI_LAW_INCLUDE_TRANSITIONAL_SEED=1`.
-- `law` export transitional payload inclusion is now opt-in via `LAW_EXPORT_INCLUDE_TRANSITIONAL_SEED=1`.
-- Residual transitional material remains in canonical `law/transitional/` as compatibility archive and is not part of the default runtime-facing surface.
+- `yai` runtime transitional lookup is now opt-in via `YAI_GOVERNANCE_ENABLE_TRANSITIONAL_SEED=1`.
+- `yai` embed sync transitional payload inclusion is now opt-in via `YAI_GOVERNANCE_INCLUDE_TRANSITIONAL_SEED=1`.
+- `governance` export transitional payload inclusion is now opt-in via `GOVERNANCE_EXPORT_INCLUDE_TRANSITIONAL_SEED=1`.
+- Residual transitional material remains in canonical `governance/transitional/` as compatibility archive and is not part of the default runtime-facing surface.
 
 ## 3. Runtime semantic cleanup
 
@@ -27,15 +27,15 @@ Scope: `law` + `yai`
 
 Executed checks:
 
-- `tools/bin/yai-law-compat-check` -> OK
-- `tests/unit/law/run_law_unit_tests.sh` -> OK
+- `tools/bin/yai-governance-compat-check` -> OK
+- `tests/unit/governance/run_law_unit_tests.sh` -> OK
 - `tests/integration/law_resolution/run_law_resolution_smoke.sh` -> OK
-- `python3 tools/validate/validate_publish_surface.py` (`law`) -> OK
-- `python3 tools/validate/validate_manifests.py` (`law`) -> OK
+- `python3 tools/validate/validate_publish_surface.py` (`governance`) -> OK
+- `python3 tools/validate/validate_manifests.py` (`governance`) -> OK
 
 Note:
 
-- `tools/bin/law-validate` still includes a legacy assumption for `domains/D*` and fails after six-layer migration. This is tracked as non-blocking validator debt.
+- `tools/bin/governance-validate` still includes a legacy assumption for `domains/D*` and fails after six-layer migration. This is tracked as non-blocking validator debt.
 
 ## 5. Closeout verdict
 
@@ -48,4 +48,4 @@ The convergence cycle can be considered closed for the current hardening scope:
 
 Residual non-blocking debt:
 
-- Update or split legacy aggregate validator (`tools/bin/law-validate`) to fully match six-layer canonical topology.
+- Update or split legacy aggregate validator (`tools/bin/governance-validate`) to fully match six-layer canonical topology.

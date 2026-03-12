@@ -15,7 +15,7 @@
 ```
 
 ## Contract Alignment
-- [ ] No contract changes in `deps/law`
+- [ ] No contract changes in `governance`
 - [ ] Contract changes included and linked
 
 ## Risk / Rollback

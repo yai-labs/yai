@@ -91,10 +91,10 @@ node_modules/
 # -----------------------------------------------------------------------------
 # Formal tooling scratch (legacy paths; keep ignored)
 # -----------------------------------------------------------------------------
-law/formal/states/
-law/formal/*.fp
-law/formal/*.st
-law/formal/*.toolbox/
+governance/formal/states/
+governance/formal/*.fp
+governance/formal/*.st
+governance/formal/*.toolbox/
 
 # -----------------------------------------------------------------------------
 # Local-only drafts

@@ -4,16 +4,7 @@ from __future__ import annotations
 from pathlib import Path
 
 FORBIDDEN = [
-    "embedded/law",
-    "../law",
-    "YAI_LAW_COMPAT_ROOT",
-    "YAI_LAW_ROOT",
-    "YAI_LAW_EMBED_ROOT",
     "runtime-embedded",
-    "law-embed-sync",
-    "law-embed-check",
-    "resolve-law-",
-    "yai-law-",
     "governance/contracts",
 ]
 

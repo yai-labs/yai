@@ -4,15 +4,15 @@ status: draft
 effective_date: 2026-02-19
 supersedes: []
 applies_to:
-  runbook: docs/program/milestone-packs/runtime-baselines/mp-runtime-000-contract-runbook-lock.md
+  runbook: docs/archive/legacy/program/milestone-packs/runtime-baselines/operations-foundation/mp-runtime-000-contract-runbook-lock.md
   phase: 0.1.0
   anchor: "#phase-0-1-0-pin-baseline-freeze"
 law_refs:
-  - ../law/foundation/invariants/I-001-traceability.md
-  - ../law/foundation/invariants/I-002-determinism.md
-  - ../law/foundation/invariants/I-003-governance.md
-  - ../law/foundation/invariants/I-006-external-effect-boundary.md
-  - ../law/foundation/boundaries/L1-kernel.md
+  - ../governance/foundation/invariants/I-001-traceability.md
+  - ../governance/foundation/invariants/I-002-determinism.md
+  - ../governance/foundation/invariants/I-003-governance.md
+  - ../governance/foundation/invariants/I-006-external-effect-boundary.md
+  - ../governance/foundation/boundaries/L1-kernel.md
 ---
 # ADR-011 - Contract Baseline Lock for Milestone 1
 
@@ -26,7 +26,7 @@ Milestone 1 exposed three recurring risks:
 
 ## Decision
 
-Milestone 1 enforces a contract baseline lock across `law`, `yai`, and `cli`.
+Milestone 1 enforces a contract baseline lock across `governance`, `yai`, and `cli`.
 
 Controls:
 
@@ -54,10 +54,10 @@ A lock provides a stable legal/technical floor so later runbook phases can evolv
   - `docs/program/rfc/rfc-contracts-004-contract-runbook-lock-and-pin-policy.md`
   - `docs/program/rfc/rfc-formal-005-formal-coverage-roadmap.md`
 - Implemented by runbooks:
-  - `docs/program/milestone-packs/runtime-baselines/mp-runtime-000-contract-runbook-lock.md`
-  - `docs/program/milestone-packs/runtime-baselines/mp-runtime-000-root-hardening.md` (downstream hardening)
+  - `docs/archive/legacy/program/milestone-packs/runtime-baselines/operations-foundation/mp-runtime-000-contract-runbook-lock.md`
+  - `docs/archive/legacy/program/milestone-packs/runtime-baselines/operations-foundation/mp-runtime-000-root-hardening.md` (downstream hardening)
 - Milestone packs:
-  - `docs/program/milestone-packs/contract-baseline-lock/mp-contracts-000-contract-runbook-lock-v0-1-0.md` (planned)
+  - `docs/archive/legacy/program/milestone-packs/contract-baseline-lock/mp-contracts-000-contract-runbook-lock-v0-1-4.md` (planned)
 
 ## Status
 

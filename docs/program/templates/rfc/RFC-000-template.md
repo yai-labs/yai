@@ -42,7 +42,7 @@ tags: []
 
 ## Traceability
 
-- Spec anchors (if any): `../law/...`
+- Spec anchors (if any): `../governance/...`
 - Target ADR(s): `docs/program/adr/adr-<domain>-<nnn>-<slug>.md` (optional)
 - Downstream runbook(s): `docs/program/milestone-packs/runtime-baselines/...` (optional)
 - Downstream MP(s): `docs/program/milestone-packs/...` (optional)

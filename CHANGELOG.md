@@ -14,13 +14,13 @@ Versioning: Semantic Versioning.
 
 ### Changed
 - Finalized single-repo convergence framing in root policy docs (`README.md`, `FOUNDATION.md`, `GOVERNANCE.md`, `COMPATIBILITY.md`, `VERSIONING.md`).
-- Completed embedded shutdown and removed active `embedded/law` architecture surface.
-- Eliminated legacy sync/tooling assumptions (`../law`, `YAI_LAW_*`, legacy resolver scripts) from canonical wrappers and active test/tool flows.
+- Completed embedded shutdown and removed active `governance/runtime-package` architecture surface.
+- Eliminated legacy sync/tooling assumptions (`../governance`, `YAI_GOVERNANCE_*`, legacy resolver scripts) from canonical wrappers and active test/tool flows.
 - Canonicalized publish target naming to `runtime-governance`.
 
 ### Removed
-- `embedded/law/**` from active repository topology.
-- legacy resolver scripts: `tools/dev/resolve-law-compat.sh`, `tools/dev/resolve-law-embed.sh`.
+- `governance/runtime-package/**` from active repository topology.
+- legacy resolver scripts: `tools/dev/resolve-governance-compat.sh`, `tools/dev/resolve-governance-embed.sh`.
 
 ## [1.0.0] - 2026-03-11
 

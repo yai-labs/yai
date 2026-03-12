@@ -1,14 +1,27 @@
 ---
-id: RFC-INDEX
-title: RFC Series Index
+role: support
 status: active
-owner: governance
-effective_date: 2026-02-24
-revision: 1
+audience: governance
+owner_domain: program-rfc
+id: RFC-INDEX
 ---
 
 # RFC Series (Canonical)
 
+# Purpose
+Captures governance-level request-for-comment context and decisions.
+
+# Scope
+Covers rationale, constraints, and acceptance direction for platform evolution.
+
+# Relationships
+- Related ADRs
+- Associated implementation evidence and reports
+
+# Canonical Role
+Program support artifact; not a runtime architecture source-of-truth.
+
+# Main Body
 This directory is the canonical home for governance RFCs migrated from legacy PRP proposals.
 
 ## Mapping PRP -> RFC
@@ -26,3 +39,7 @@ This directory is the canonical home for governance RFCs migrated from legacy PR
 - RFC numbering is preserved from PRP numbering (001..005).
 - PRP IDs are retained only as historical mapping metadata.
 - New proposal work should start directly as RFC.
+
+# Related Docs
+- `docs/program/rfc/README.md`
+- Linked ADR and report artifacts

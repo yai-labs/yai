@@ -1,17 +1,57 @@
+---
+role: support
+status: active
+audience: developer
+owner_domain: guides
+---
+
 # Developer Guides
 
-Developer-facing guidance is split by function.
+# Purpose
+Provides developer-focused guidance for onboarding, workflows, tooling, debugging, governance process, and operational walkthroughs.
 
-- `onboarding/`: contributor startup material.
-- `workflow/`: contribution and release workflows.
-- `build-test/`: build/test execution guidance.
-- `tooling/`: tooling contracts and layout guidance.
-- `governance/`: program and governance contribution rules.
-- `debugging/`: troubleshooting and diagnosis guides.
-- `checklists/`: readiness and review checklists.
+# Scope
+Covers day-to-day development execution and developer-facing operational practices.
 
-What does not belong here:
+# Relationships
+- `docs/architecture/README.md`
+- `docs/runbooks/README.md`
+- `docs/program/README.md`
 
-- Step-by-step operational procedures (`docs/runbooks/`).
-- Canonical architecture models (`docs/architecture/`).
-- Historical migration notes (`docs/archive/`).
+# Canonical Role
+Primary developer guidance index with functional sub-sections.
+
+# Main Body
+Developer guidance is verticalized into canonical functional families.
+
+## Scope
+Developer-facing guidance for onboarding, workflows, tooling, debugging, governance process, and operational walkthroughs.
+
+## What Belongs Here
+- `onboarding/`, `workflow/`, `build-test/`, `tooling/`, `debugging/`, `governance/`, `operational-guides/`, `checklists/`.
+- How-to and usage guidance for developers.
+
+## What Does Not Belong Here
+- Canonical architecture source docs.
+- Program governance artifacts (ADR/RFC/MP).
+- Historical notes and migration traces.
+
+## Navigation Order
+1. `onboarding/`
+2. `workflow/`
+3. `build-test/`
+4. `tooling/`
+5. `debugging/`
+6. `operational-guides/`
+7. `governance/`
+8. `checklists/`
+
+## Extension Rules
+- Prefer existing subsections over root-level files.
+- Keep one canonical guide per theme.
+- Use concise, classification-oriented filenames.
+
+# Related Docs
+- `workflow/README.md`
+- `debugging/README.md`
+- `tooling/README.md`

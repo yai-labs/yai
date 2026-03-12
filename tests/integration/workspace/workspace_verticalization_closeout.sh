@@ -33,7 +33,7 @@ rg -n "yai\\.workspace\\.graph\\.(summary|workspace|governance|decision|evidence
 rg -n "yai\\.workspace\\.(query|events\\.tail|status|inspect|domain_get|domain_set|policy_effective|policy_attach|policy_activate|policy_detach|policy_dry_run|debug_resolution|open|create|set|switch|unset|clear|reset|destroy)" \
   "$YAI_ROOT/lib/runtime/session/session.c" >/dev/null
 
-# 2) Law registry has canonical ws topics/families.
+# 2) Governance registry has canonical ws topics/families.
 python3 - "$GOVERNANCE_ROOT/registry/commands.v1.json" <<'PY'
 import json, sys
 from collections import defaultdict

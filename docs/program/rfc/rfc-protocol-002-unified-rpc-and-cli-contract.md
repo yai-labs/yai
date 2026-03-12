@@ -1,38 +1,27 @@
 ---
-id: RFC-002
-title: Unified RPC envelope and CLI contract alignment
+role: support
 status: draft
-owners:
-  - "@francescomaiomascio"
-legacy_owner: core-protocol
-links:
-  replaces: PRP-002
-
-effective_date: 2026-02-19
-revision: 1
-supersedes: []
-related:
-  adr:
-    - docs/program/adr/adr-protocol-006-unified-rpc.md
-    - docs/program/adr/adr-contracts-011-contract-runbook-lock.md
-  runbooks:
-    - docs/program/milestone-packs/runtime-baselines/mp-runtime-000-root-hardening.md
-  milestone_packs:
-    - docs/program/milestone-packs/root-hardening/mp-runtime-000-root-hardening-v0-1-0.md
-  specs:
-    - ../law/contracts/protocol/include/transport.h
-    - ../law/contracts/protocol/include/protocol.h
-    - ../law/contracts/protocol/runtime/include/rpc_runtime.h
-    - ../law/registry/commands.v1.json
-tags:
-  - rpc
-  - cli
-  - contract
-  - anti-drift
+audience: governance
+owner_domain: program-rfc
+id: RFC-002
 ---
 
 # RFC-002 - Unified RPC envelope and CLI contract alignment
 
+# Purpose
+Captures governance-level request-for-comment context and decisions.
+
+# Scope
+Covers rationale, constraints, and acceptance direction for platform evolution.
+
+# Relationships
+- Related ADRs
+- Associated implementation evidence and reports
+
+# Canonical Role
+Program support artifact; not a runtime architecture source-of-truth.
+
+# Main Body
 ## Problem
 Contract drift between protocol/runtime headers and CLI command definitions can produce green CI with incomplete semantic alignment.
 
@@ -63,12 +52,16 @@ Adopt one canonical RPC surface and enforce CLI-to-spec alignment through explic
 
 ## Traceability
 
-- Spec anchors (if any): `../law/contracts/protocol/include/transport.h`, `../law/contracts/protocol/include/protocol.h`, `../law/contracts/protocol/runtime/include/rpc_runtime.h`, `../law/registry/commands.v1.json`
+- Spec anchors (if any): `../governance/contracts/protocol/include/transport.h`, `../governance/contracts/protocol/include/protocol.h`, `../governance/contracts/protocol/runtime/include/rpc_runtime.h`, `../governance/registry/commands.v1.json`
 - Targets ADR: `docs/program/adr/adr-protocol-006-unified-rpc.md`, `docs/program/adr/adr-contracts-011-contract-runbook-lock.md`
-- Downstream runbook: `docs/program/milestone-packs/runtime-baselines/mp-runtime-000-root-hardening.md`
-- Downstream MP: `docs/program/milestone-packs/root-hardening/mp-runtime-000-root-hardening-v0-1-0.md`
+- Downstream runbook: `docs/archive/legacy/program/milestone-packs/runtime-baselines/operations-foundation/mp-runtime-000-root-hardening.md`
+- Downstream MP: `docs/archive/legacy/program/milestone-packs/root-hardening/mp-runtime-000-root-hardening-v0-1-5.md`
 
 ## References
 - `docs/program/spine.md`
 - `docs/program/adr/adr-protocol-006-unified-rpc.md`
 - `docs/program/adr/adr-contracts-011-contract-runbook-lock.md`
+
+# Related Docs
+- `docs/program/rfc/README.md`
+- Linked ADR and report artifacts

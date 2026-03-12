@@ -3,7 +3,7 @@
 ## Boundary role
 
 Lx defines separation between:
-- normative law surfaces (binding)
+- normative governance surfaces (binding)
 - explanatory/documentary surfaces (non-binding)
 
 ## Normative surfaces
@@ -24,4 +24,4 @@ Historical terms may appear only as migration aliases.
 
 ## Drift rule
 
-If docs diverge from normative law, docs are wrong and must be corrected.
+If docs diverge from normative governance, docs are wrong and must be corrected.

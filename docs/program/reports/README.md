@@ -1,20 +1,35 @@
+---
+role: support
+status: active
+audience: governance
+owner_domain: program
+---
+
 # Program Reports
 
-Canonical report spine for convergence and delivery status.
+# Purpose
+Provides canonical program-level convergence evidence.
 
-## Canonical Sources
+# Scope
+Covers only active canonical program reports.
 
-- Runtime convergence: `runtime-convergence-report.md`
-- Workspace verticalization: `workspace-verticalization-report.md`
-- Data-plane convergence: `data-plane-convergence-report.md`
-- Filesystem/governance convergence: `filesystem-governance-convergence-report.md`
-- Cross-repo convergence: `cross-repo-convergence-report.md`
+# Relationships
+- `docs/program/README.md`
+- Architecture and runbook canonical surfaces
 
-## Supporting Program Backbone
+# Canonical Role
+Minimal live report spine.
 
-- `audit-convergence/EXECUTION-PLAN-v0.1.0.md`
-- `audit-convergence/AUDIT-CONVERGENCE-MATRIX-v0.1.0.md`
+# Main Body
+Reports are compressed to canonical core.
+
+## Navigation Order
+1. `runtime-convergence-report.md`
+2. `audit-convergence-report.md`
 
 ## Rules
+- Do not add parallel report shards into live docs.
+- Archive non-canonical report history under `docs/archive/**`.
 
-- New report files must consolidate existing evidence rather than duplicate thematic reports.
+# Related Docs
+- `docs/program/README.md`

@@ -1,5 +1,26 @@
+---
+role: canonical
+status: active
+audience: architect
+owner_domain: architecture
+---
+
 # Runtime Model
 
+# Purpose
+Defines canonical architecture semantics for the domain.
+
+# Scope
+Covers boundaries, responsibilities, and integration semantics for this domain section.
+
+# Relationships
+- Parent section README
+- Adjacent architecture source documents
+
+# Canonical Role
+Authoritative architecture source for its scope.
+
+# Main Body
 `yai` is the runtime host of the platform and executes the internal modules `core`, `exec`, `data`, `graph`, and `knowledge`.
 
 For distributed source acquisition v1, `yai` remains the centralized owner
@@ -24,7 +45,7 @@ The YD-1 refoundation slice locks these invariants:
 1. Ingress request reaches runtime control surface.
 2. Workspace identity/binding/context is resolved from active runtime workspace state.
 3. Runtime builds classification context from the operation.
-4. Embedded law is loaded and validated.
+4. Embedded governance is loaded and validated.
 5. Discovery selects family/specialization policy context.
 6. Normative stack is resolved (specialization + overlays + authority/evidence composition).
 7. Final effect is handed to enforcement.
@@ -32,8 +53,8 @@ The YD-1 refoundation slice locks these invariants:
 
 ## Repository boundaries
 
-- Normative source of truth is in sibling repo `law`.
-- `yai` consumes the runtime-facing export under `embedded/law/`.
+- Normative source of truth is in sibling repo `governance`.
+- `yai` consumes the runtime-facing export under `governance/runtime-package/`.
 - `ops` is qualification/publication bureau and not runtime normative authority.
 
 ## Scope note
@@ -107,7 +128,7 @@ Secure overlay operationalization (NP-4):
 - private overlay integration is the canonical deployment model for customer-grade
   non-local owner/peer operation.
 - owner/peer bootstrap sequence is defined in
-  `docs/program/milestone-packs/runtime-baselines/mp-runtime-000-owner-peer-overlay-bootstrap.md`.
+  `docs/archive/legacy/program/milestone-packs/runtime-baselines/workspace/mp-runtime-000-owner-peer-overlay-bootstrap.md`.
 
 ## SW-2 distribution lock
 
@@ -192,3 +213,7 @@ adjudication boundaries explicit.
 AI/agent execution context is projected from owner-governed inspect and graph
 surfaces as task-scoped grounded context. Grounded AI remains non-sovereign and
 cannot replace owner final authority/canonical truth.
+
+# Related Docs
+- `docs/architecture/README.md`
+- Domain-adjacent architecture documents

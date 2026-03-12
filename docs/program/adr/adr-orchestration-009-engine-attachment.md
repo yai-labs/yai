@@ -4,14 +4,14 @@ status: draft
 effective_date: 2026-02-18
 supersedes: []
 applies_to:
-  runbook: docs/program/milestone-packs/runtime-baselines/mp-runtime-000-engine-attach.md
+  runbook: docs/archive/legacy/program/milestone-packs/runtime-baselines/operations-foundation/mp-runtime-000-engine-attach.md
   phase: v4
   anchor: "#phase-engine-attach-v4"
 law_refs:
-  - ../law/foundation/invariants/I-003-governance.md
-  - ../law/foundation/invariants/I-006-external-effect-boundary.md
-  - ../law/foundation/boundaries/L1-kernel.md
-  - ../law/foundation/boundaries/L2-engine.md
+  - ../governance/foundation/invariants/I-003-governance.md
+  - ../governance/foundation/invariants/I-006-external-effect-boundary.md
+  - ../governance/foundation/boundaries/L1-kernel.md
+  - ../governance/foundation/boundaries/L2-engine.md
 ---
 # ADR-009 - Engine Attachment Model
 
@@ -46,10 +46,10 @@ Shared attachment improves operability and keeps execution behavior aligned with
 - Proposals:
   - `docs/program/rfc/rfc-workspace-003-workspace-lifecycle-and-isolation.md`
 - Implemented by runbooks:
-  - `docs/program/milestone-packs/runtime-baselines/mp-runtime-000-workspaces-lifecycle.md`
-  - `docs/program/milestone-packs/runtime-baselines/mp-runtime-000-engine-attach.md`
+  - `docs/archive/legacy/program/milestone-packs/runtime-baselines/workspace/mp-runtime-000-workspaces-lifecycle.md`
+  - `docs/archive/legacy/program/milestone-packs/runtime-baselines/operations-foundation/mp-runtime-000-engine-attach.md`
 - Milestone packs:
-  - `docs/program/milestone-packs/engine-attach/mp-orchestration-000-engine-attach-v0-1-0.md` *(planned)*
+  - `docs/archive/legacy/program/milestone-packs/engine-attach/mp-orchestration-000-engine-attach-v0-1-5.md` *(planned)*
 
 ## Status
 

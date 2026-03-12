@@ -1,5 +1,26 @@
+---
+role: canonical
+status: active
+audience: architect
+owner_domain: architecture
+---
+
 # Daemon Local Runtime Model (YD-5)
 
+# Purpose
+Defines canonical architecture semantics for the domain.
+
+# Scope
+Covers boundaries, responsibilities, and integration semantics for this domain section.
+
+# Relationships
+- Parent section README
+- Adjacent architecture source documents
+
+# Canonical Role
+Authoritative architecture source for its scope.
+
+# Main Body
 ## Scope
 
 `yai-daemon` is a subordinate edge runtime. In v1 it is intentionally
@@ -152,3 +173,7 @@ Edge runtime can execute delegated local behavior but remains subordinate:
 - global/workspace policy truth remains owner-side
 - canonical graph/persistence/conflict truth remains owner-side
 - daemon-local outcomes are advisory until owner acceptance/materialization
+
+# Related Docs
+- `docs/architecture/README.md`
+- Domain-adjacent architecture documents

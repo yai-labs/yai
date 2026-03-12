@@ -1,39 +1,27 @@
 ---
-id: RFC-003
-title: Workspace lifecycle and isolation guarantees
+role: support
 status: draft
-owners:
-  - "@francescomaiomascio"
-legacy_owner: runtime-kernel
-links:
-  replaces: PRP-003
-
-effective_date: 2026-02-19
-revision: 1
-supersedes: []
-related:
-  adr:
-    - docs/program/adr/adr-workspace-007-workspace-isolation.md
-    - docs/program/adr/adr-workspace-008-connection-lifecycle.md
-    - docs/program/adr/adr-orchestration-009-engine-attachment.md
-    - docs/program/adr/adr-runtime-010-boot-entrypoint.md
-  runbooks:
-    - docs/program/milestone-packs/runtime-baselines/mp-runtime-000-workspaces-lifecycle.md
-    - docs/program/milestone-packs/runtime-baselines/mp-runtime-000-engine-attach.md
-  milestone_packs: []
-  specs:
-    - ../law/foundation/boundaries/L1-kernel.md
-    - ../law/contracts/protocol/include/session.h
-    - ../law/foundation/invariants/I-002-determinism.md
-    - ../law/foundation/invariants/I-006-external-effect-boundary.md
-tags:
-  - workspace
-  - isolation
-  - lifecycle
+audience: governance
+owner_domain: program-rfc
+id: RFC-003
 ---
 
 # RFC-003 - Workspace lifecycle and isolation guarantees
 
+# Purpose
+Captures governance-level request-for-comment context and decisions.
+
+# Scope
+Covers rationale, constraints, and acceptance direction for platform evolution.
+
+# Relationships
+- Related ADRs
+- Associated implementation evidence and reports
+
+# Canonical Role
+Program support artifact; not a runtime architecture source-of-truth.
+
+# Main Body
 ## Problem
 Workspace lifecycle behavior is currently captured at ADR level but lacks a consolidated pre-decision analysis that spans lock, connection lifecycle, boot/attach flow, and runtime routing.
 
@@ -64,11 +52,15 @@ Define one lifecycle proposal that aligns isolation guarantees with Kernel bound
 
 ## Traceability
 
-- Spec anchors (if any): `../law/foundation/boundaries/L1-kernel.md`, `../law/contracts/protocol/include/session.h`, `../law/foundation/invariants/I-002-determinism.md`, `../law/foundation/invariants/I-006-external-effect-boundary.md`
+- Spec anchors (if any): `../governance/foundation/boundaries/L1-kernel.md`, `../governance/contracts/protocol/include/session.h`, `../governance/foundation/invariants/I-002-determinism.md`, `../governance/foundation/invariants/I-006-external-effect-boundary.md`
 - Targets ADR: `docs/program/adr/adr-workspace-007-workspace-isolation.md`, `docs/program/adr/adr-workspace-008-connection-lifecycle.md`, `docs/program/adr/adr-orchestration-009-engine-attachment.md`, `docs/program/adr/adr-runtime-010-boot-entrypoint.md`
-- Downstream runbook: `docs/program/milestone-packs/runtime-baselines/mp-runtime-000-workspaces-lifecycle.md`
+- Downstream runbook: `docs/archive/legacy/program/milestone-packs/runtime-baselines/workspace/mp-runtime-000-workspaces-lifecycle.md`
 
 ## References
 - `docs/program/spine.md`
 - `docs/program/adr/adr-workspace-007-workspace-isolation.md`
 - `docs/program/adr/adr-workspace-008-connection-lifecycle.md`
+
+# Related Docs
+- `docs/program/rfc/README.md`
+- Linked ADR and report artifacts

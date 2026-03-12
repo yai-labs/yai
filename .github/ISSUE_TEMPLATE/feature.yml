@@ -52,9 +52,9 @@ body:
   - type: textarea
     id: references
     attributes:
-      label: Law/Specs references
+      label: Governance/Specs references
       placeholder: |
-        deps/law/...
+        governance/...
         docs/...
     validations:
       required: false
@@ -65,5 +65,5 @@ body:
       label: Cross-repo impact
       options:
         - label: This change requires a twin PR in cli
-        - label: This change requires a twin PR in law
+        - label: This change requires a twin PR in governance
         - label: This change is isolated to this repo only

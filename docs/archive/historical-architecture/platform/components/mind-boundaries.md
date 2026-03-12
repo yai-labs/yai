@@ -5,8 +5,8 @@ effective_date: 2026-02-23
 revision: 1
 owner: mind
 law_refs:
-  - ../law/foundation/boundaries/L3-mind.md
-  - ../law/foundation/invariants/I-004-cognitive-reconfiguration.md
+  - ../governance/foundation/boundaries/L3-mind.md
+  - ../governance/foundation/invariants/I-004-cognitive-reconfiguration.md
 ---
 
 # Boundaries — Mind (L3)
@@ -38,9 +38,9 @@ partial
 ## Traceability
 
 - ADR refs: `docs/program/adr/adr-runtime-005-mind-proposer.md`, `docs/program/adr/adr-runtime-003-kernel-authority.md`
-- Runbook refs: `docs/program/milestone-packs/runtime-baselines/mp-runtime-000-mind-redis-stm.md`, `docs/program/milestone-packs/runtime-baselines/mp-runtime-000-root-hardening.md`
-- MP refs: `docs/program/milestone-packs/root-hardening/mp-runtime-000-root-hardening-v0-1-5.md`
-- L0 anchors: `../law/foundation/boundaries/L3-mind.md`, `../law/foundation/invariants/I-004-cognitive-reconfiguration.md`
+- Runbook refs: `docs/archive/legacy/program/milestone-packs/runtime-baselines/operations-foundation/mp-runtime-000-mind-redis-stm.md`, `docs/archive/legacy/program/milestone-packs/runtime-baselines/operations-foundation/mp-runtime-000-root-hardening.md`
+- MP refs: `docs/archive/legacy/program/milestone-packs/root-hardening/mp-runtime-000-root-hardening-v0-1-5.md`
+- L0 anchors: `../governance/foundation/boundaries/L3-mind.md`, `../governance/foundation/invariants/I-004-cognitive-reconfiguration.md`
 
 ## Known Drift / Gaps
 

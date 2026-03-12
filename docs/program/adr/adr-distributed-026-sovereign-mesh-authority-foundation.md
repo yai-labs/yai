@@ -28,7 +28,7 @@ Boundary locks:
 ## Consequences
 
 - MT waves can integrate remote peering/overlay without authority ambiguity.
-- DX law alignment can model legitimacy/trust/revocation coherently.
+- DX governance alignment can model legitimacy/trust/revocation coherently.
 - QW trust/WAN qualification can validate degraded/revoked legitimacy cases.
 
 ## Non-goals

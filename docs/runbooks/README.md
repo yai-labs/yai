@@ -1,16 +1,49 @@
+---
+role: procedural
+status: active
+audience: operator
+owner_domain: runbooks
+---
+
 # Runbooks
 
-Executable, repeatable operating procedures.
+# Purpose
+Defines executable procedures for operations, qualification, demos, and remediation.
 
-## Canonical Sources
+# Scope
+Covers ordered steps, prerequisites, expected outputs, and escalation behavior.
 
-- Operations: `operations/core-operations-runbook.md`
-- Qualification: `qualification/core-qualification-runbook.md`
-- Demos: `demos/demo-execution-runbook.md`
-- Remediation: `remediation/core-remediation-runbook.md`
+# Relationships
+- `docs/architecture/README.md`
+- `docs/program/README.md`
 
-## Rules
+# Canonical Role
+Primary procedural authority for platform operation.
 
-- Scenario-specific steps should be appendices inside canonical runbooks.
-- Duplicate baseline-style runbooks are not allowed in live docs.
-- Program governance artifacts stay in `docs/program/`.
+# Main Body
+Runbooks stay compact and execution-focused.
+
+## Scope
+Executable procedures for operations, qualification, demos, and remediation.
+
+## What Belongs Here
+- Core runbooks with repeatable execution contracts.
+
+## What Does Not Belong Here
+- Architecture authority docs.
+- Program reporting and historical material.
+
+## Navigation Order
+1. `operations/`
+2. `qualification/`
+3. `demos/`
+4. `remediation/`
+
+## Extension Rules
+- Add runbooks only when they define a distinct executable procedure.
+- Keep variants as appendices/satellites, not new parallel runbooks.
+
+# Related Docs
+- `operations/README.md`
+- `qualification/README.md`
+- `remediation/README.md`

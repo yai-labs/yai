@@ -1,0 +1,3 @@
+core
+governance-kernel
+verify

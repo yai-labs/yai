@@ -5,7 +5,7 @@ They must not redefine or conflict with base axioms, invariants, or boundaries.
 
 ## Structure
 
-- `compliance/` - compliance-law extensions bound to the compliance specs
+- `compliance/` - compliance-governance extensions bound to the compliance specs
 
 ## Change Procedure
 
