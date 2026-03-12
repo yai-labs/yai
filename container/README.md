@@ -20,6 +20,12 @@
 - Path resolution is container-relative by default and rejects traversal escape outside projected root.
 - Mounts are governed objects with policy, visibility, attachability and class.
 
+## Interactive domain model (C-4)
+
+- A bound session becomes container-scoped operational context, not host-scoped context.
+- Session enter/leave/rebind primitives expose container root/path/runtime views by default.
+- Escape from the container domain is explicit and policy-governed.
+
 ## Legacy status
 
 `workspace` is legacy migration vocabulary only.

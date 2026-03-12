@@ -23,6 +23,7 @@ CID="sys-smoke"
 OUT_ACTIVE="$("$BIN" show "$CID")"
 echo "$OUT_ACTIVE" | grep -q "lifecycle=active"
 echo "$OUT_ACTIVE" | grep -q "session_bound=1"
+echo "$OUT_ACTIVE" | grep -q "active_session=1001 mode=normal"
 echo "$OUT_ACTIVE" | grep -q "policy_view=1 grants_view=1"
 PROJECTED_ROOT="$(echo "$OUT_ACTIVE" | sed -n 's/^projected-root=\([^ ]*\) backing-store=.*/\1/p')"
 BACKING_STORE="$(echo "$OUT_ACTIVE" | sed -n 's/^projected-root=[^ ]* backing-store=\(.*\)$/\1/p')"
@@ -59,10 +60,27 @@ if "$BIN" visible "$CID" /mounts/ops/report.txt >/dev/null 2>&1; then
 fi
 "$BIN" visible "$CID" /mounts/ops/report.txt 1 >/dev/null
 
-"$BIN" recover "$CID"
-OUT_RECOVERY="$("$BIN" show "$CID")"
-echo "$OUT_RECOVERY" | grep -q "lifecycle=recovery"
-echo "$OUT_RECOVERY" | grep -q "recovery-flags=1"
+"$BIN" enter "$CID" 1001 | grep -q "mode=normal"
+if "$BIN" escape "$CID" 1001 admin >/dev/null 2>&1; then
+  echo "expected admin escape to fail for normal session" >&2
+  exit 1
+fi
+
+"$BIN" bind "$CID" 2001 privileged 255
+OUT_PRIV="$("$BIN" show "$CID")"
+echo "$OUT_PRIV" | grep -q "active_session=2001 mode=privileged"
+"$BIN" enter "$CID" 2001 | grep -q "mode=privileged"
+"$BIN" escape "$CID" 2001 admin >/dev/null
+
+"$BIN" rebind "$CID" 2001 3001 recovery 127
+OUT_REBOUND="$("$BIN" show "$CID")"
+echo "$OUT_REBOUND" | grep -q "active_session=3001 mode=recovery"
+"$BIN" recovery-enter "$CID" 3001 >/dev/null
+"$BIN" leave "$CID" 3001
+OUT_LEFT="$("$BIN" show "$CID")"
+echo "$OUT_LEFT" | grep -q "session_bound=0"
+echo "$OUT_LEFT" | grep -q "lifecycle=recovery"
+echo "$OUT_LEFT" | grep -q "recovery-flags=1"
 
 "$BIN" seal "$CID"
 "$BIN" destroy "$CID"
