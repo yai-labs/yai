@@ -1,10 +1,9 @@
-# Governance Manifests
+# manifests
 
-Canonical manifest surfaces for compatibility, publish layers, runtime
-entrypoints, and governance attachability.
+Published runtime/tooling manifest surfaces.
 
-This directory is the source of truth for publish/index/layer/runtime
-manifest semantics used by governance loaders and resolvers.
-
-Generated/export summaries are derived artifacts and must not be used as
-authoritative runtime inputs.
+Contains:
+- runtime entrypoints
+- publish indexes
+- attachability constraints
+- customer/enterprise published packs

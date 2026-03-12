@@ -1,19 +1,6 @@
-# Overlays
+# overlays
 
-Canonical overlay engine surfaces.
+Canonical contextual/composition overlays.
 
-Runtime composition is driven by:
-
-- regulatory overlays: `regulatory/*` + `regulatory/index/*`
-- sector overlays: `sector/*` + `sector/index/*`
-- contextual overlays: `contextual/*` + `contextual/index/*`
-
-Core matrices:
-
-- attachment: `overlay-attachment-matrix.json`
-- precedence: `overlay-precedence-matrix.json`
-- evidence: `overlay-evidence-matrix.json`
-
-Generated runtime view:
-
-- `index/overlay-compliance.runtime.v1.json`
+Contains overlay profiles, catalogs, indexes, and templates.
+No duplicated compliance pack content.

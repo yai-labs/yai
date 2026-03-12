@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "yai-governance:contracts/control/schema/authority.v1.json",
+  "$id": "yai-governance:protocol/control/authority.v1.json",
   "title": "YAI Authority Envelope v1",
   "type": "object",
   "additionalProperties": false,
