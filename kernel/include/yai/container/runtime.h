@@ -17,7 +17,6 @@
 #include <yai/container/state.h>
 #include <yai/container/tree.h>
 
-/* Container manager primitives (canonical runtime surface). */
 int yai_container_create(const yai_container_record_t *record);
 int yai_container_open(const char *container_id);
 int yai_container_attach(const char *container_id, uint64_t session_id);
@@ -26,7 +25,6 @@ int yai_container_recover(const char *container_id, uint64_t reason_flags);
 int yai_container_seal_runtime(const char *container_id, int64_t sealed_at);
 int yai_container_destroy(const char *container_id, int64_t destroyed_at);
 
-/* Container runtime surface primitives. */
 int yai_container_get_identity(const char *container_id, yai_container_identity_t *out_identity);
 int yai_container_get_state(const char *container_id, yai_container_state_t *out_state);
 int yai_container_get_root_view(const char *container_id, yai_container_root_t *out_root);

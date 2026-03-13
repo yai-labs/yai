@@ -3,7 +3,7 @@
 #include <stddef.h>
 #include <stdint.h>
 
-#include "container_state.h"
+#include "state.h"
 
 #define YAI_CONTAINER_SERVICE_NAME_MAX 63u
 #define YAI_CONTAINER_SERVICE_SURFACE_MAX 64u
