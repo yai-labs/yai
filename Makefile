@@ -143,33 +143,33 @@ SYSTEM_CORE_SRCS := \
 
 CONTAINER_SRCS := \
 	kernel/session/bindings.c \
-	kernel/container/workspace/control_reply.c \
-	kernel/container/workspace/control_session.c \
-	kernel/container/workspace/control_surface.c \
+	kernel/container/workspace/reply.c \
+	kernel/container/workspace/session.c \
+	kernel/container/workspace/surface.c \
 	kernel/session/session_binding.c \
-	kernel/container/workspace/project_tree.c \
+	kernel/container/workspace/tree.c \
 	kernel/container/workspace/scope_registry.c \
 	kernel/container/workspace/scope_runtime.c \
 	kernel/container/workspace/scope_binding.c \
 	kernel/container/workspace/scope_recovery.c \
 	kernel/container/config.c \
-	kernel/container/container.c \
-	kernel/container/grants_view.c \
+	kernel/container/manager.c \
+	kernel/container/grants.c \
 	kernel/container/identity.c \
 	kernel/container/internal/model.c \
 	kernel/container/lifecycle.c \
-	kernel/container/mount_registry.c \
+	kernel/container/mounts_registry.c \
 	kernel/container/mounts.c \
 	kernel/container/namespaces.c \
-	kernel/container/policy_view.c \
+	kernel/container/policy.c \
 	kernel/container/recovery.c \
 	kernel/container/registry.c \
 	kernel/container/rootfs.c \
 	kernel/container/rootfs/paths.c \
 	kernel/container/rootfs/root_projection.c \
 	kernel/container/rootfs/tree.c \
-	kernel/container/runtime_surface.c \
-	kernel/container/runtime_view.c \
+	kernel/container/surface.c \
+	kernel/container/view.c \
 	kernel/container/services.c \
 	kernel/container/state.c \
 	system/container/yai-containerd/main.c
