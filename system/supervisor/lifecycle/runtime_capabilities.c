@@ -5,7 +5,7 @@
 #include <yai/orchestration/transport.h>
 #include <yai/cognition/cognition.h>
 #include <yai/cognition/memory.h>
-#include <yai/network/providers/catalog.h>
+#include <yai/fabric/catalog/catalog.h>
 #include <yai/policy/policy_state.h>
 #include <yai/policy/grants_state.h>
 #include <yai/policy/containment_state.h>

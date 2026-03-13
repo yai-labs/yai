@@ -2,9 +2,9 @@
 
 #include <stdint.h>
 
-#include "paths.h"
-#include "root.h"
-#include "container_runtime_view.h"
+#include <yai/container/paths.h>
+#include <yai/container/root.h>
+#include <yai/container/runtime_view.h>
 
 typedef enum {
   YAI_CONTAINER_SESSION_MODE_GLOBAL = 0,

@@ -1,11 +1,10 @@
 #include <stdio.h>
 
 #include "yai/abi/errors.h"
-#include "yai/kernel/containment.h"
+#include <yai/security/containment.h>
 #include "yai/kernel/grants.h"
 #include "yai/kernel/kernel.h"
 #include "yai/kernel/lifecycle.h"
-#include "yai/kernel/registry.h"
 #include "yai/kernel/session.h"
 #include "yai/kernel/state.h"
 
@@ -25,9 +24,8 @@ int main(void) {
     struct yai_kernel_grant_request grant_req;
     struct yai_kernel_session_request session_req;
     struct yai_kernel_session admitted;
-    struct yai_kernel_containment_request containment_req;
-    struct yai_kernel_containment_state containment_state;
-    struct yai_container_registry_entry container_entry;
+    struct yai_security_containment_request containment_req;
+    struct yai_security_containment_state containment_state;
     const struct yai_kernel_state* kernel_state;
 
     int rc;
@@ -74,15 +72,15 @@ int main(void) {
     containment_req.mode = YAI_CONTAINMENT_CONTAINED;
     containment_req.escape_policy = YAI_ESCAPE_CONTROLLED_ADMIN;
     containment_req.flags = 0;
-    if (expect_ok("containment request", yai_kernel_containment_request(&containment_req, &containment_state))) return 1;
+    if (expect_ok("containment request", yai_security_containment_request(&containment_req, &containment_state))) return 1;
     if (containment_state.state != YAI_CONTAINMENT_STATE_REQUESTED) {
         fprintf(stderr, "kernel-smoke: containment not REQUESTED after request\n");
         return 1;
     }
-    if (expect_ok("containment activate", yai_kernel_containment_activate(container_id, 0))) return 1;
-    if (expect_ok("container registry lookup", yai_container_registry_get(container_id, &container_entry))) return 1;
-    if (container_entry.state != YAI_CONTAINER_STATE_ACTIVE) {
-        fprintf(stderr, "kernel-smoke: container registry state not ACTIVE\n");
+    if (expect_ok("containment activate", yai_security_containment_activate(container_id, 0))) return 1;
+    if (expect_ok("containment get", yai_security_containment_get(container_id, &containment_state))) return 1;
+    if (containment_state.state != YAI_CONTAINMENT_STATE_ACTIVE) {
+        fprintf(stderr, "kernel-smoke: containment not ACTIVE after activate\n");
         return 1;
     }
 
@@ -95,10 +93,10 @@ int main(void) {
     if (expect_ok("session admit", yai_kernel_session_admit(session_id, &session_req, &admitted))) return 1;
     if (expect_ok("session bind container", yai_kernel_session_bind_container(session_id, container_id))) return 1;
 
-    if (expect_ok("escape check", yai_kernel_containment_can_escape(container_id, YAI_ESCAPE_CONTROLLED_ADMIN))) return 1;
+    if (expect_ok("escape check", yai_security_containment_can_escape(container_id, YAI_ESCAPE_CONTROLLED_ADMIN))) return 1;
 
     if (expect_ok("grant revoke escape", yai_kernel_grant_revoke(0x5003u, 200, 0))) return 1;
-    rc = yai_kernel_containment_can_escape(container_id, YAI_ESCAPE_CONTROLLED_ADMIN);
+    rc = yai_security_containment_can_escape(container_id, YAI_ESCAPE_CONTROLLED_ADMIN);
     if (rc == YAI_OK) {
         fprintf(stderr, "kernel-smoke: escape should be denied after grant revoke\n");
         return 1;

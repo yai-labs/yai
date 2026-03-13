@@ -7,7 +7,7 @@
 #include <sys/types.h>
 
 #include "internal/model.h"
-#include <yai/kernel/container_state.h>
+#include <yai/container/state.h>
 
 static int ensure_dir(const char *path) {
   struct stat st;

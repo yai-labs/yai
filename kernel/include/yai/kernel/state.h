@@ -1,8 +1,11 @@
+#pragma once
+
 #ifndef YAI_KERNEL_STATE_H
 #define YAI_KERNEL_STATE_H
 
 #include <stdint.h>
 
+#include <yai/container/lifecycle.h>
 #include "lifecycle.h"
 #include "registry.h"
 

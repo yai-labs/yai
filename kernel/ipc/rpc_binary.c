@@ -1,4 +1,5 @@
 #include <yai/ipc/binary.h>
+#include <yai/ipc/ids.h>
 #include <yai/ipc/message_types.h>
 
 int yai_rpc_binary_validate_envelope(const yai_rpc_binary_frame_t *frame) {

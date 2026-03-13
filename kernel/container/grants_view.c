@@ -1,7 +1,7 @@
 #include <string.h>
 
 #include "internal/model.h"
-#include <yai/kernel/container_grants.h>
+#include <yai/container/grants.h>
 
 int yai_container_grants_view_get(const char *container_id,
                                   yai_container_grants_view_t *out_view) {

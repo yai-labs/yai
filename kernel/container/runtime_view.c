@@ -1,7 +1,7 @@
 #include <string.h>
 
 #include "internal/model.h"
-#include <yai/kernel/container_runtime_view.h>
+#include <yai/container/runtime_view.h>
 
 int yai_container_get_identity_view(const char *container_id,
                                     yai_container_identity_t *out_identity) {

@@ -1,4 +1,4 @@
-#include <yai/kernel/container_identity.h>
+#include <yai/container/identity.h>
 
 const char *yai_container_class_name(yai_container_class_t value) {
   switch (value) {

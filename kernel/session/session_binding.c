@@ -3,11 +3,11 @@
 #include <stdio.h>
 #include <stdint.h>
 
-#include "../runtime/internal/model.h"
+#include "../container/internal/model.h"
 #include <yai/container/paths.h>
-#include <yai/kernel/container_recovery.h>
-#include <yai/kernel/container_registry.h>
-#include <yai/kernel/container_runtime_view.h>
+#include <yai/container/recovery.h>
+#include <yai/container/registry.h>
+#include <yai/container/runtime_view.h>
 #include <yai/kernel/session_runtime.h>
 
 static int mode_privileged(yai_container_session_mode_t mode) {

@@ -5,7 +5,7 @@
 #include <time.h>
 
 #include <yai/daemon/daemon.h>
-#include <yai/platform/os.h>
+#include <yai/hal/os.h>
 #include <yai/orchestration/network_bridge.h>
 
 #include "../internal/internal.h"

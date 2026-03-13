@@ -7,7 +7,7 @@
 #include <time.h>
 
 #include <yai/api/version.h>
-#include <yai/kernel/container.h>
+#include <yai/container/runtime.h>
 
 static void print_help(void) {
   puts("yai-containerd - canonical container manager service surface");

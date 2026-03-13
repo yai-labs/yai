@@ -1,9 +1,11 @@
+#pragma once
+
 #ifndef YAI_KERNEL_POLICY_H
 #define YAI_KERNEL_POLICY_H
 
 #include <stdint.h>
 
-#include "containment.h"
+#include <yai/security/containment.h>
 #include "mount_policy.h"
 #include "objects.h"
 #include "session.h"

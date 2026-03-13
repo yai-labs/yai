@@ -5,10 +5,10 @@
 #include <string.h>
 #include <sys/stat.h>
 
-#include "../internal/model.h"
-#include <yai/kernel/container_grants.h>
-#include <yai/kernel/container_policy.h>
-#include <yai/kernel/container_services.h>
+#include "internal/model.h"
+#include <yai/container/grants.h>
+#include <yai/container/policy.h>
+#include <yai/container/services.h>
 
 static int fill_registry_entry(const yai_container_record_t *record,
                                yai_container_registry_entry_t *out_entry) {

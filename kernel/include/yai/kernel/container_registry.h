@@ -3,16 +3,16 @@
 #include <stddef.h>
 #include <stdint.h>
 
-#include "container_config.h"
-#include "container_grants.h"
-#include "identity.h"
-#include "lifecycle.h"
-#include "container_policy.h"
-#include "root.h"
-#include "container_services.h"
-#include "session.h"
-#include "state.h"
-#include "tree.h"
+#include <yai/container/config.h>
+#include <yai/container/grants.h>
+#include <yai/container/identity.h>
+#include <yai/container/lifecycle.h>
+#include <yai/container/policy.h>
+#include <yai/container/root.h>
+#include <yai/container/services.h>
+#include "session_runtime.h"
+#include <yai/container/state.h>
+#include <yai/container/tree.h>
 
 #define YAI_CONTAINER_REGISTRY_LIST_MAX 256u
 

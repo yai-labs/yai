@@ -2,7 +2,7 @@
 
 #include <string.h>
 
-#include <yai/kernel/container.h>
+#include <yai/container/runtime.h>
 
 int yai_container_root_projection_initialize(const char *container_id);
 int yai_container_session_bind(const char *container_id, uint64_t session_id);

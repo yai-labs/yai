@@ -1,21 +1,21 @@
 #pragma once
 
 #include "bindings.h"
-#include "container_config.h"
-#include "container_grants.h"
-#include "identity.h"
-#include "lifecycle.h"
-#include "mounts.h"
-#include "paths.h"
-#include "container_policy.h"
-#include "container_recovery.h"
-#include "registry.h"
-#include "root.h"
-#include "container_runtime_view.h"
-#include "container_services.h"
-#include "session.h"
-#include "state.h"
-#include "tree.h"
+#include <yai/container/config.h>
+#include <yai/container/grants.h>
+#include <yai/container/identity.h>
+#include <yai/container/lifecycle.h>
+#include <yai/container/mounts.h>
+#include <yai/container/paths.h>
+#include <yai/container/policy.h>
+#include <yai/container/recovery.h>
+#include <yai/container/registry.h>
+#include <yai/container/root.h>
+#include <yai/container/runtime_view.h>
+#include <yai/container/services.h>
+#include "session_runtime.h"
+#include <yai/container/state.h>
+#include <yai/container/tree.h>
 
 /* Container manager primitives (canonical runtime surface). */
 int yai_container_create(const yai_container_record_t *record);

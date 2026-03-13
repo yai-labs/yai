@@ -1,12 +1,12 @@
 #pragma once
 
-#include "identity.h"
+#include <yai/container/identity.h>
 #include "bindings.h"
-#include "container_grants.h"
-#include "container_policy.h"
-#include "container_services.h"
-#include "state.h"
-#include "container_recovery.h"
+#include <yai/container/grants.h>
+#include <yai/container/policy.h>
+#include <yai/container/services.h>
+#include <yai/container/state.h>
+#include <yai/container/recovery.h>
 
 typedef struct {
   yai_container_health_state_t health_state;

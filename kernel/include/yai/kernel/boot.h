@@ -1,9 +1,11 @@
+#pragma once
+
 #ifndef YAI_KERNEL_BOOT_H
 #define YAI_KERNEL_BOOT_H
 
 #include <stdint.h>
 
-#include "lifecycle.h"
+#include <yai/container/lifecycle.h>
 
 #define YAI_KERNEL_BOOT_HANDOFF_MAGIC 0x594149424F4F5431ULL /* "YAIBOOT1" */
 #define YAI_KERNEL_BOOT_HANDOFF_VERSION 1u

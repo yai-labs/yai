@@ -4,7 +4,7 @@
 
 #include "internal/model.h"
 #include <yai/container/mounts.h>
-#include <yai/kernel/container_registry.h>
+#include <yai/container/registry.h>
 
 #define YAI_CONTAINER_MOUNT_FILE_MAX 128u
 

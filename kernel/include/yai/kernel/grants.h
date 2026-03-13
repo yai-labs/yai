@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef YAI_KERNEL_GRANTS_H
 #define YAI_KERNEL_GRANTS_H
 

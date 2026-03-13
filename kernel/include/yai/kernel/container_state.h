@@ -2,7 +2,7 @@
 
 #include <stdint.h>
 
-#include "lifecycle.h"
+#include <yai/container/lifecycle.h>
 
 typedef enum {
   YAI_CONTAINER_RUNTIME_STATE_NONE = 0,

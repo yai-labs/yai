@@ -2,7 +2,7 @@
 
 #include <stddef.h>
 
-#include <yai/kernel/container.h>
+#include <yai/container/runtime.h>
 
 int yai_container_model_upsert(const yai_container_record_t *record);
 int yai_container_model_get(const char *container_id, yai_container_record_t *out_record);

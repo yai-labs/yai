@@ -113,3 +113,5 @@ tools/lib/
 
 # If prompts.csv is canonical, REMOVE this line and commit the file instead.
 data/datasets/global-stress/v1/prompts.csv
+# local build output
+kernel/build/

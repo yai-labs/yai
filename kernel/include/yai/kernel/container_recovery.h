@@ -2,7 +2,7 @@
 
 #include <stdint.h>
 
-#include "state.h"
+#include <yai/container/state.h>
 
 typedef enum {
   YAI_CONTAINER_RECOVERY_CLASS_NONE = 0,
