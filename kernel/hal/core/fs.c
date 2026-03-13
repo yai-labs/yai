@@ -1,7 +1,7 @@
 #include <errno.h>
 #include <sys/stat.h>
 
-#include <yai/platform/fs.h>
+#include <yai/hal/fs.h>
 
 int yai_fs_path_exists(const char *path) {
   struct stat st;

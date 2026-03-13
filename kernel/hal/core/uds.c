@@ -4,7 +4,7 @@
 #include <sys/un.h>
 #include <unistd.h>
 
-#include <yai/platform/uds.h>
+#include <yai/hal/uds.h>
 
 int yai_uds_listen_at(const char *path) {
   int fd;
