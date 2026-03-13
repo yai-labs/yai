@@ -68,7 +68,7 @@ YAI_CLI_MAIN := user/bin/yai/main.c
 YAI_CTL_MAIN := user/bin/yai-ctl/main.c
 YAI_SH_MAIN := user/bin/yai-sh/main.c
 
-YAI_DAEMOND_MAIN := system/daemon/yai-daemond/main.c
+YAI_DAEMOND_MAIN := system/daemon/cmd/yai-daemond/main.c
 YAI_CONTAINERD_MAIN := system/container/yai-containerd/main.c
 YAI_DATAD_MAIN := system/data/yai-datad/main.c
 YAI_GRAPHD_MAIN := system/graph/yai-graphd/main.c
