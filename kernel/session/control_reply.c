@@ -1,6 +1,6 @@
 #define _POSIX_C_SOURCE 200809L
 
-#include <yai/kernel/session_control.h>
+#include <yai/container/workspace_control.h>
 #include "internal/control_session_internal.h"
 #include <yai/services/dispatch.h>
 

@@ -3,7 +3,7 @@
 
 #include <yai/services/dispatch.h>
 #include <yai/kernel/authority.h>
-#include <yai/kernel/session_control.h>
+#include <yai/container/workspace_control.h>
 #include <yai/container/workspace.h>
 
 #include <yai/ipc/errors.h>
