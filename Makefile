@@ -147,11 +147,11 @@ CONTAINER_SRCS := \
 	kernel/session/control_session.c \
 	kernel/session/control_surface.c \
 	kernel/session/session_binding.c \
-	kernel/session/scope/project_tree.c \
-	kernel/session/scope/scope_registry.c \
-	kernel/session/scope/scope_runtime.c \
-	kernel/session/scope/scope_binding.c \
-	kernel/session/scope/scope_recovery.c \
+	kernel/container/workspace/project_tree.c \
+	kernel/container/workspace/scope_registry.c \
+	kernel/container/workspace/scope_runtime.c \
+	kernel/container/workspace/scope_binding.c \
+	kernel/container/workspace/scope_recovery.c \
 	kernel/container/config.c \
 	kernel/container/container.c \
 	kernel/container/grants_view.c \
