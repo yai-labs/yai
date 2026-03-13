@@ -58,23 +58,23 @@ typedef struct {
     char manifest_ref[MAX_PATH_LEN];
 } yai_governable_object_meta_t;
 
-#include "internal/utils/session_utils_lifecycle_policy.inc.c"
+#include "internal/lifecycle_policy.inc.c"
 
-#include "internal/utils/session_utils_helpers_events.inc.c"
+#include "internal/helpers_events.inc.c"
 
-#include "internal/utils/session_utils_helpers_domains.inc.c"
+#include "internal/helpers_domains.inc.c"
 
-#include "internal/utils/session_utils_lifecycle_execution.inc.c"
+#include "internal/lifecycle_execution.inc.c"
 
-#include "internal/utils/session_utils_runtime_io.inc.c"
+#include "internal/runtime_io.inc.c"
 
-#include "internal/utils/session_utils_container_lifecycle.inc.c"
+#include "internal/container_lifecycle.inc.c"
 
-#include "internal/utils/session_utils_surface_core.inc.c"
+#include "internal/surface_core.inc.c"
 
-#include "internal/utils/session_utils_surface_mutations.inc.c"
+#include "internal/surface_mutations.inc.c"
 
-#include "internal/utils/session_utils_surface_views.inc.c"
+#include "internal/surface_views.inc.c"
 
 int yai_session_record_resolution_snapshot(const char *ws_id,
                                           const yai_governance_resolution_output_t *law_out,
