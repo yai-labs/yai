@@ -23,7 +23,7 @@
 #include <yai/daemon/sources/source_runtime.h>
 #include <yai/daemon/sources/mediation_mode.h>
 #include <yai/daemon/sources/action_points.h>
-#include <yai/daemon/runtime/runtime_source_ids.h>
+#include <yai/source/source_ids.h>
 #include <yai/ipc/source_plane.h>
 #include <yai/daemon/daemon.h>
 

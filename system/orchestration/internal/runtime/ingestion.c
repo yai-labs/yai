@@ -7,7 +7,7 @@
 
 #include <yai/container/workspace.h>
 #include <yai/data/records.h>
-#include <yai/daemon/runtime/runtime_source_ids.h>
+#include <yai/source/source_ids.h>
 #include <yai/ipc/source_plane.h>
 #include <yai/orchestration/ingestion.h>
 #include <yai/orchestration/internal/peer_registry_bridge.h>
