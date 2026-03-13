@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: Apache-2.0 */
 
-#include <yai/network/routing/conflict.h>
+#include <yai/net/conflict.h>
 
 #include <stdio.h>
 #include <string.h>

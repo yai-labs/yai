@@ -3,7 +3,7 @@
 #include <stddef.h>
 #include <stdint.h>
 
-#include <yai/network/discovery/discovery.h>
+#include <yai/net/discovery.h>
 
 typedef struct {
   int initialized;

@@ -1,16 +1,16 @@
 #define _POSIX_C_SOURCE 200809L
 
-#include <yai/container/workspace_runtime.h>
+#include <yai/con/workspace_runtime.h>
 #include "internal/control_session_internal.h"
 #include <yai/api/runtime.h>
-#include <yai/policy/enforcement.h>
-#include <yai/supervisor/lifecycle.h>
-#include <yai/container/workspace.h>
+#include <yai/pol/enforcement.h>
+#include <yai/sup/lifecycle.h>
+#include <yai/con/workspace.h>
 #include <yai/data/binding.h>
-#include <yai/orchestration/runtime.h>
-#include <yai/orchestration/ingestion.h>
-#include <yai/policy/governance/resolver.h>
-#include <yai/policy/governance/policy_effects.h>
+#include <yai/orch/runtime.h>
+#include <yai/orch/ingestion.h>
+#include <yai/pol/governance/resolver.h>
+#include <yai/pol/governance/policy_effects.h>
 
 #include <yai/ipc/transport.h>
 #include <yai/ipc/rpc.h>

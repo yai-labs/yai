@@ -5,7 +5,7 @@
 
 #include <stdint.h>
 
-#include <yai/container/lifecycle.h>
+#include <yai/con/lifecycle.h>
 
 #define YAI_KERNEL_BOOT_HANDOFF_MAGIC 0x594149424F4F5431ULL /* "YAIBOOT1" */
 #define YAI_KERNEL_BOOT_HANDOFF_VERSION 1u

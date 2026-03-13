@@ -5,7 +5,7 @@
 
 #include <stdint.h>
 
-#include <yai/security/containment.h>
+#include <yai/sec/containment.h>
 #include "mount_policy.h"
 #include "objects.h"
 #include "session.h"

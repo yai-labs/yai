@@ -4,11 +4,11 @@
 #include <stdint.h>
 
 #include "../container/internal/model.h"
-#include <yai/container/paths.h>
-#include <yai/container/recovery.h>
-#include <yai/container/registry.h>
-#include <yai/container/runtime_view.h>
-#include <yai/container/session.h>
+#include <yai/con/paths.h>
+#include <yai/con/recovery.h>
+#include <yai/con/registry.h>
+#include <yai/con/runtime_view.h>
+#include <yai/con/session.h>
 
 static int mode_privileged(yai_container_session_mode_t mode) {
   return (mode == YAI_CONTAINER_SESSION_MODE_PRIVILEGED ||

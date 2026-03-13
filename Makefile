@@ -18,11 +18,10 @@ TEST_DIR ?= $(BUILD_DIR)/test
 DIST_ROOT ?= $(ROOT_DIR)/dist
 BIN_DIST ?= $(DIST_ROOT)/bin
 
-PROTOCOL_CONTRACT_ROOT ?= $(ROOT_DIR)/legacy_include/yai/protocol
+PROTOCOL_CONTRACT_ROOT ?= $(ROOT_DIR)/target_fs/sys/ifc/proto
 
 CPPFLAGS ?= -I$(ROOT_DIR) \
             -I$(ROOT_DIR)/system/include \
-            -I$(ROOT_DIR)/legacy_include \
             -I$(ROOT_DIR)/kernel/include \
             -I$(ROOT_DIR)/user/include \
             -I$(ROOT_DIR)/sdk/c/libyai/include \

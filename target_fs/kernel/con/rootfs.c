@@ -1,5 +1,5 @@
 #include "yai/abi/errors.h"
-#include <yai/container/rootfs.h>
+#include <yai/con/rootfs.h>
 
 static yai_rootfs_handle_t g_next_rootfs = 1;
 

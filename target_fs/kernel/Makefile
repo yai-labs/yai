@@ -9,7 +9,6 @@ AR ?= ar
 
 CPPFLAGS ?= -I$(ROOT_DIR) \
             -I$(ROOT_DIR)/kernel/include \
-            -I$(ROOT_DIR)/legacy_include \
             -I$(ROOT_DIR)/vendor/cjson
 CFLAGS ?= -std=c11 -Wall -Wextra -Werror -O2
 LDFLAGS ?=

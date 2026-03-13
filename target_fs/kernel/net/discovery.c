@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: Apache-2.0 */
 
-#include <yai/network/discovery/discovery.h>
+#include <yai/net/discovery.h>
 
 int yai_mesh_discovery_apply(yai_mesh_peer_registry_t *registry,
                              const yai_mesh_discovery_event_t *event)

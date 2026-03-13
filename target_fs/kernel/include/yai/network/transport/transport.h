@@ -1,4 +1,4 @@
 #pragma once
 
-#include <yai/network/transport/client.h>
-#include <yai/network/transport/overlay.h>
+#include <yai/net/client.h>
+#include <yai/net/overlay.h>

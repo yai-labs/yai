@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: Apache-2.0 */
 
-#include <yai/network/routing/replay.h>
+#include <yai/net/replay.h>
 
 #include <stdio.h>
 #include <string.h>

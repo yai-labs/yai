@@ -1,5 +1,5 @@
 #include "yai/abi/errors.h"
-#include <yai/container/namespace.h>
+#include <yai/con/namespace.h>
 
 static uint64_t g_next_ns = 1;
 

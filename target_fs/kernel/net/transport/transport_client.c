@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: Apache-2.0 */
 
-#include <yai/network/transport/client.h>
+#include <yai/net/client.h>
 
 #include <stdio.h>
 #include <string.h>

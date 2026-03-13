@@ -1,21 +1,21 @@
 #pragma once
 
-#include <yai/container/bindings.h>
-#include <yai/container/config.h>
-#include <yai/container/grants.h>
-#include <yai/container/identity.h>
-#include <yai/container/lifecycle.h>
-#include <yai/container/mounts.h>
-#include <yai/container/paths.h>
-#include <yai/container/policy.h>
-#include <yai/container/recovery.h>
-#include <yai/container/registry.h>
-#include <yai/container/root.h>
-#include <yai/container/runtime_view.h>
-#include <yai/container/services.h>
-#include <yai/container/session.h>
-#include <yai/container/state.h>
-#include <yai/container/tree.h>
+#include <yai/con/bindings.h>
+#include <yai/con/config.h>
+#include <yai/con/grants.h>
+#include <yai/con/identity.h>
+#include <yai/con/lifecycle.h>
+#include <yai/con/mounts.h>
+#include <yai/con/paths.h>
+#include <yai/con/policy.h>
+#include <yai/con/recovery.h>
+#include <yai/con/registry.h>
+#include <yai/con/root.h>
+#include <yai/con/runtime_view.h>
+#include <yai/con/services.h>
+#include <yai/con/session.h>
+#include <yai/con/state.h>
+#include <yai/con/tree.h>
 
 int yai_container_create(const yai_container_record_t *record);
 int yai_container_open(const char *container_id);

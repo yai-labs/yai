@@ -1,7 +1,7 @@
 #include <string.h>
 
 #include "internal/model.h"
-#include <yai/container/config.h>
+#include <yai/con/config.h>
 
 void yai_container_config_defaults(yai_container_config_t *config) {
   if (!config) {

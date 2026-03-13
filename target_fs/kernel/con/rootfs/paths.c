@@ -5,7 +5,7 @@
 #include <string.h>
 
 #include "../internal/model.h"
-#include <yai/container/paths.h>
+#include <yai/con/paths.h>
 
 static int append_segment(char *out, size_t out_cap, size_t *io_len, const char *seg) {
   int n = 0;

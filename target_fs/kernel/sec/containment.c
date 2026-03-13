@@ -1,10 +1,10 @@
 #include <string.h>
 
 #include "yai/abi/errors.h"
-#include <yai/container/cgroup.h>
-#include <yai/container/namespace.h>
-#include <yai/container/rootfs.h>
-#include <yai/security/containment.h>
+#include <yai/con/cgroup.h>
+#include <yai/con/namespace.h>
+#include <yai/con/rootfs.h>
+#include <yai/sec/containment.h>
 #include "yai/kernel/lifecycle.h"
 #include "yai/kernel/mount_policy.h"
 #include "yai/kernel/policy.h"

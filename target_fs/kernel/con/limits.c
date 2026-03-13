@@ -1,6 +1,6 @@
 #include "yai/abi/errors.h"
-#include <yai/container/cgroup.h>
-#include <yai/container/limits.h>
+#include <yai/con/cgroup.h>
+#include <yai/con/limits.h>
 
 int yai_kernel_limits_validate(uint64_t limits_flags) {
     (void)limits_flags;

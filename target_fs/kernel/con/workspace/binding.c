@@ -1,7 +1,7 @@
 /* SPDX-License-Identifier: Apache-2.0 */
 
-#include <yai/supervisor/lifecycle.h>
-#include <yai/container/workspace.h>
+#include <yai/sup/lifecycle.h>
+#include <yai/con/workspace.h>
 #include <yai/data/binding.h>
 
 #include <stdio.h>

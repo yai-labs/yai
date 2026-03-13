@@ -3,7 +3,7 @@
 #include <stdint.h>
 #include <stddef.h>
 
-#include <yai/network/discovery/discovery.h>
+#include <yai/net/discovery.h>
 
 typedef struct {
   int self_joined;

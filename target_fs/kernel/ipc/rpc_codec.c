@@ -2,7 +2,7 @@
 #include <string.h>
 #include <unistd.h>
 
-#include <yai/services/dispatch.h>
+#include <yai/svc/dispatch.h>
 #include <yai/ipc/message_types.h>
 #include <yai/ipc/codec.h>
 #include <yai/ipc/transport.h>

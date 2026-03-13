@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 #include "yai/abi/errors.h"
-#include <yai/security/containment.h>
+#include <yai/sec/containment.h>
 #include "yai/kernel/grants.h"
 #include "yai/kernel/kernel.h"
 #include "yai/kernel/lifecycle.h"

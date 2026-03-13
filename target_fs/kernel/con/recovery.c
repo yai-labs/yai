@@ -8,10 +8,10 @@
 #include <time.h>
 
 #include "internal/model.h"
-#include <yai/container/recovery.h>
-#include <yai/container/registry.h>
-#include <yai/container/root.h>
-#include <yai/container/state.h>
+#include <yai/con/recovery.h>
+#include <yai/con/registry.h>
+#include <yai/con/root.h>
+#include <yai/con/state.h>
 
 static int ensure_dir(const char *path) {
   struct stat st;

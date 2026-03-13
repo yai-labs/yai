@@ -1,4 +1,4 @@
-#include <yai/container/lifecycle.h>
+#include <yai/con/lifecycle.h>
 
 int yai_container_lifecycle_transition_allowed(yai_container_lifecycle_state_t from,
                                                yai_container_lifecycle_state_t to) {

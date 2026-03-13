@@ -1,7 +1,7 @@
 #include <string.h>
 
 #include "internal/model.h"
-#include <yai/container/policy.h>
+#include <yai/con/policy.h>
 
 int yai_container_policy_view_get(const char *container_id,
                                   yai_container_policy_view_t *out_view) {

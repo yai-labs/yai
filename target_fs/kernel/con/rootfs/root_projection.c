@@ -6,7 +6,7 @@
 #include <sys/types.h>
 
 #include "../internal/model.h"
-#include <yai/container/tree.h>
+#include <yai/con/tree.h>
 
 #ifndef YAI_CONTAINER_ZONE_COUNT
 #define YAI_CONTAINER_ZONE_COUNT 8

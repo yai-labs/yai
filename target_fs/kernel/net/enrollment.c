@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: Apache-2.0 */
 
-#include <yai/network/discovery/enrollment.h>
+#include <yai/net/enrollment.h>
 
 #include <string.h>
 

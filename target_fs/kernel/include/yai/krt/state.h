@@ -5,7 +5,7 @@
 
 #include <stdint.h>
 
-#include <yai/container/lifecycle.h>
+#include <yai/con/lifecycle.h>
 #include "lifecycle.h"
 #include "registry.h"
 

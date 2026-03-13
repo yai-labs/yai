@@ -8,7 +8,7 @@
 #include "grants.h"
 #include "handles.h"
 #include "objects.h"
-#include <yai/security/containment.h>
+#include <yai/sec/containment.h>
 #include "session.h"
 
 #define YAI_REGISTRY_KEY_MAX 48

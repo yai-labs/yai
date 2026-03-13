@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: Apache-2.0 */
 
-#include <yai/network/routing/coordination.h>
+#include <yai/net/coordination.h>
 
 #include <stdio.h>
 #include <string.h>

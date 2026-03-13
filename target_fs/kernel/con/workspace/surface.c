@@ -1,18 +1,18 @@
 #define _POSIX_C_SOURCE 200809L
 
-#include <yai/container/workspace_runtime.h>
+#include <yai/con/workspace_runtime.h>
 #include "internal/control_session_internal.h"
-#include <yai/supervisor/lifecycle.h>
-#include <yai/container/workspace.h>
+#include <yai/sup/lifecycle.h>
+#include <yai/con/workspace.h>
 #include <yai/data/records.h>
 #include <yai/data/binding.h>
 #include <yai/data/query.h>
-#include <yai/orchestration/runtime.h>
-#include <yai/orchestration/internal/peer_registry_bridge.h>
+#include <yai/orch/runtime.h>
+#include <yai/orch/internal/peer_registry_bridge.h>
 #include <yai/graph/materialization.h>
 #include <yai/graph/query.h>
 #include <yai/cognition/memory.h>
-#include <yai/policy/governance/policy_effects.h>
+#include <yai/pol/governance/policy_effects.h>
 #include "cJSON.h"
 
 #include <dirent.h>

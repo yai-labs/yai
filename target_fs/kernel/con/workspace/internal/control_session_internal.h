@@ -1,9 +1,9 @@
 #ifndef YAI_SESSION_INTERNAL_H
 #define YAI_SESSION_INTERNAL_H
 
-#include <yai/container/workspace_runtime.h>
-#include <yai/policy/enforcement.h>
-#include <yai/policy/governance/resolver.h>
+#include <yai/con/workspace_runtime.h>
+#include <yai/pol/enforcement.h>
+#include <yai/pol/governance/resolver.h>
 
 int yai_session_extract_json_string(const char *json, const char *key, char *out, size_t out_cap);
 int yai_session_extract_argv_first(const char *json, char *out, size_t out_cap);

@@ -5,8 +5,8 @@
 #include <time.h>
 
 #include "internal/model.h"
-#include <yai/container/registry.h>
-#include <yai/container/services.h>
+#include <yai/con/registry.h>
+#include <yai/con/services.h>
 
 #define YAI_CONTAINER_SERVICE_MAX 64u
 

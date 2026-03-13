@@ -1,5 +1,5 @@
-#include <yai/container/bindings.h>
-#include <yai/container/registry.h>
+#include <yai/con/bindings.h>
+#include <yai/con/registry.h>
 
 int yai_container_bindings_set(const char *container_id,
                                const yai_container_bindings_t *bindings) {

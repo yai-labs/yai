@@ -1,7 +1,7 @@
 #define _XOPEN_SOURCE 700
 #define _POSIX_C_SOURCE 200809L
 
-#include <yai/supervisor/lifecycle.h>
+#include <yai/sup/lifecycle.h>
 #include <yai/kernel/vault.h>
 
 #include <errno.h>

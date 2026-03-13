@@ -2,13 +2,13 @@
 
 #include <stdint.h>
 
-#include <yai/network/discovery/discovery.h>
-#include <yai/network/discovery/enrollment.h>
-#include <yai/network/routing/conflict.h>
-#include <yai/network/routing/coordination.h>
-#include <yai/network/routing/replay.h>
-#include <yai/network/transport/client.h>
-#include <yai/network/transport/overlay.h>
+#include <yai/net/discovery.h>
+#include <yai/net/enrollment.h>
+#include <yai/net/conflict.h>
+#include <yai/net/coordination.h>
+#include <yai/net/replay.h>
+#include <yai/net/client.h>
+#include <yai/net/overlay.h>
 
 typedef struct {
   int initialized;

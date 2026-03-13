@@ -3,8 +3,8 @@
 #include <time.h>
 
 #include "internal/model.h"
-#include <yai/container/mounts.h>
-#include <yai/container/registry.h>
+#include <yai/con/mounts.h>
+#include <yai/con/registry.h>
 
 #define YAI_CONTAINER_MOUNT_FILE_MAX 128u
 
