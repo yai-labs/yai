@@ -1,20 +1,22 @@
-# observability
+# obs
 
-`sys/observability/` is the L2 observability root.
+`target_fs/sys/obs/` is the observability service surface.
 
-## Canonical services
+## Scope
 
-- `yai-metricsd/`
-- `yai-auditd/`
+This domain keeps only service entrypoints for observability-facing processes.
 
-## Responsibilities
+## What stays here
 
-- metrics collection and reporting
-- audit trails and trace surfaces
-- service health visibility for supervision and operations
+- `cmd/auditd/`: audit service entrypoint
+- `cmd/metricsd/`: metrics service entrypoint
+- this README as service-surface documentation
 
-## Boundaries
+## What does not stay here
 
-- observability does not own business/domain decisions
-- observability consumes and publishes signals, it does not authorize effects
-- kernel trace hooks remain kernel-owned primitives
+Metrics, reporting and traces runtime logic belong to `target_fs/krt/obs/`.
+
+## Boundary
+
+`sys/obs` is the service shell.
+`krt/obs` owns observability runtime behavior.

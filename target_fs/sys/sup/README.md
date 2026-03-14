@@ -1,20 +1,22 @@
-# supervisor
+# sup
 
-`sys/supervisor/` is the L2 control root for system admission, lifecycle and recovery.
+`target_fs/sys/sup/` is the supervisor service surface.
 
-## Canonical service
+## Scope
 
-- `yai-supervisord/`
+This domain keeps only the supervisor service entrypoint.
 
-## Responsibilities
+## What stays here
 
-- system admission mediation
-- system registry coordination
-- lifecycle supervision across L2 services
-- recovery coordination and escalation handoff
+- `cmd/supervisord/`: canonical supervisor service entrypoint
+- this README as service-surface documentation
 
-## Boundaries
+## What does not stay here
 
-- consumes kernel admission and registry primitives, does not re-implement them
-- does not own domain engines (graph, data, policy, governance)
-- does not replace `containerd` or `orchestratord`
+Admission, lifecycle, recovery and registry runtime logic belong to
+`target_fs/krt/sup/`.
+
+## Boundary
+
+`sys/sup` is the service shell.
+`krt/sup` owns supervisor runtime behavior.

@@ -1,30 +1,25 @@
-# orchestration
+# orch
 
-`sys/orchestration/` is the canonical L2 orchestration plane.
+`target_fs/sys/orch/` is the orchestration service surface.
 
-## Canonical service
+## Scope
 
-- `yai-orchestratord/`
+This domain keeps the orchestration entry shell and high-level coordination notes.
 
-## Active domains
+## What stays here
 
-- `planner/` plan decomposition and ordering
-- `execution/` execution pipeline and action assembly
-- `workflow/` workflow session state
-- `coordination/` orchestration-level coordination surface
-- `scheduling/` scheduling surface
-- `supervision/` supervision surface
-- `internal/` service glue (runtime/bridge/transport/model)
-- `include/yai/orchestration/` canonical orchestration headers
+- `cmd/orchestratord/`: canonical orchestration service entrypoint
+- `coordination/`: service-surface coordination notes
+- `scheduling/`: service-surface scheduling notes
+- `supervision/`: service-surface supervision notes
+- this README as service-surface documentation
 
-## Boundaries
+## What does not stay here
 
-- orchestration consumes kernel and container primitives, it does not own them
-- orchestration is not a container manager
-- orchestration does not own kernel admission/containment/grants roots
-- orchestration is not a user-facing SDK/CLI plane
+Execution, workflow, planner, cognition, agent internals, bridges, transport and
+runtime control belong to `target_fs/krt/orch/`.
 
-## Cutover status
+## Boundary
 
-DR-1 hard cut applied: active orchestration code moved out of
-`runtime/compatibility/lib/orchestration/` into this root.
+`sys/orch` is the service shell.
+`krt/orch` owns orchestration runtime implementation.

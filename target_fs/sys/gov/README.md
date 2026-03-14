@@ -1,19 +1,22 @@
-# governance
+# gov
 
-`sys/governance/` is the L2 governance authority root.
+`target_fs/sys/gov/` is the governance service surface.
 
-## Canonical service
+## Scope
 
-- `yai-governanced/`
+This domain keeps only the governance service entrypoint.
 
-## Responsibilities
+## What stays here
 
-- authority resolution and escalation paths
-- governance decisions lifecycle
-- publication of governance outcomes for consuming services
+- `cmd/governanced/`: canonical governance service entrypoint
+- this README as service-surface documentation
 
-## Boundaries
+## What does not stay here
 
-- complements `sys/policy`; does not duplicate policy engine internals
-- does not own orchestration execution internals
-- does not own kernel privileged primitives
+Governance loading, discovery, classification, mapping, resolution and
+publication logic belong to `target_fs/krt/pol/governance/`.
+
+## Boundary
+
+`sys/gov` is the entry shell.
+`krt/pol/governance` owns governance runtime behavior.

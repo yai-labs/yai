@@ -1,35 +1,23 @@
-# network
+# net
 
-`sys/network/` is the L2 network control root.
+`target_fs/sys/net/` is the network service surface.
 
-## Canonical service
+## Scope
 
-- `yai-netd/`
+This domain keeps only the service shell for the network plane.
 
-## Responsibilities
+## What stays here
 
-- discovery, topology and routing control
-- transport and mesh coordination
-- provider-facing network integration surfaces
-- service entrypoint ownership via `yai-netd/`
+- `cmd/netd/`: canonical network service entrypoint
+- optional service-facing notes for boot/integration
+- this README as service-surface documentation
 
-## Active domains
+## What does not stay here
 
-- `discovery/`
-- `topology/`
-- `mesh/`
-- `routing/`
-- `transport/`
-- `providers/`
-- `include/yai/network/` canonical network headers
+Discovery, routing, transport, mesh, provider runtime and topology logic belong
+to `target_fs/krt/net/`.
 
-## Boundaries
+## Boundary
 
-- kernel owns low-level socket/net primitives
-- `sys/network` owns high-level control-plane behavior
-- does not own orchestration workflow semantics
-
-## Cutover status
-
-DR-2 hard cut applied: active network implementation moved out of
-`runtime/compatibility/lib/network/` into this root.
+`sys/net` is the service shell.
+`krt/net` owns the runtime implementation.

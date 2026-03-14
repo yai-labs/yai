@@ -1,22 +1,22 @@
 # graph
 
-sys/graph/ is the canonical L2 graph plane.
+`target_fs/sys/graph/` is the graph service surface.
 
-## Canonical service
+## Scope
 
-- yai-graphd/: executable graph service entrypoint (`yai-graphd`)
+This domain keeps only the graph service entrypoint.
 
-## Canonical module layout
+## What stays here
 
-- materialization/: graph projection/materialization flows
-- query/: graph query surfaces
-- lineage/: lineage reconstruction/exposure surfaces
-- summary/: summary facets for activation/policy/authority/episodic/semantic views
-- internal/: backend, counters, and graph state internals
-- include/yai/graph/: canonical public headers
+- `cmd/graphd/`: canonical graph service entrypoint
+- this README as service-surface documentation
 
-## DR-3 hard-cut status
+## What does not stay here
 
-- active graph implementation relocated from runtime/compatibility/lib/graph/
-- compatibility graph subtree is drained and non-canonical
-- no parallel compatibility-centered graph plane is kept active
+Graph internals, lineage, materialization, query logic and summary runtime
+belong to `target_fs/krt/graph/`.
+
+## Boundary
+
+`sys/graph` is the service shell.
+`krt/graph` owns graph runtime implementation.

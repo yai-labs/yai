@@ -1,19 +1,22 @@
-# policy
+# pol
 
-`sys/policy/` is the L2 policy service root.
+`target_fs/sys/pol/` is the policy service surface.
 
-## Canonical service
+## Scope
 
-- `yai-policyd/`
+This domain keeps only the policy service entrypoint.
 
-## Responsibilities
+## What stays here
 
-- policy engine execution and overlays
-- grants policy shaping and review surfaces
-- system-service level enforcement decisions
+- `cmd/policyd/`: canonical policy service entrypoint
+- this README as service-surface documentation
 
-## Boundaries
+## What does not stay here
 
-- kernel keeps low-level policy hooks and privileged grants validity checks
-- `sys/policy` owns high-level policy composition and enforcement semantics
-- does not own governance final authority publication flows
+Policy engine, enforcement, grants, overlays, review and state runtime belong to
+`target_fs/krt/pol/`.
+
+## Boundary
+
+`sys/pol` is the service shell.
+`krt/pol` owns policy runtime implementation.
