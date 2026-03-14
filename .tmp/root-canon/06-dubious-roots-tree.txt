@@ -1,0 +1,144 @@
+
+--- cfg ---
+target_fs/cfg
+├── README.md
+└── policy
+    └── configs
+
+3 directories, 1 file
+
+--- dat ---
+target_fs/dat
+├── README.md
+├── datasets
+│   ├── global-stress
+│   └── manifest.json
+├── fixtures
+└── local
+    └── knowledge.db
+
+5 directories, 3 files
+
+--- dts ---
+target_fs/dts
+├── README.md
+├── foundation
+│   └── foundation.md
+├── governance
+│   └── governance.md
+├── readme
+│   └── root.md
+├── security
+│   └── security.md
+└── versioning
+    ├── VERSION
+    └── versioning.md
+
+6 directories, 7 files
+
+--- mk ---
+target_fs/mk
+├── README.md
+├── profiles
+└── rules
+
+3 directories, 1 file
+
+--- spc ---
+target_fs/spc
+├── README.md
+├── axi
+│   ├── README.md
+│   ├── axioms
+│   ├── boundaries
+│   ├── foundation.README.md
+│   ├── invariants
+│   └── terminology
+├── cpl
+│   ├── README.md
+│   ├── compliance
+│   ├── cross-domain
+│   ├── indexes
+│   ├── regulatory
+│   ├── sector
+│   └── templates
+├── examples
+├── fmt
+│   ├── README.md
+│   ├── assurance
+│   ├── formal
+│   ├── tla
+│   └── traceability
+├── gov
+│   ├── README.md
+│   ├── authority
+│   ├── composition
+│   ├── overlays
+│   ├── packs
+│   ├── policy.README.md
+│   ├── review
+│   └── runtime
+├── ing
+│   ├── README.md
+│   ├── examples
+│   ├── model_ingestion
+│   ├── pipeline
+│   └── templates
+├── man
+│   ├── README.md
+│   ├── customers
+│   ├── enterprise
+│   ├── indexes
+│   ├── model_manifests
+│   ├── publish
+│   └── runtime
+├── ont
+│   ├── README.md
+│   ├── domains
+│   ├── families
+│   ├── indexes
+│   ├── model_ontology
+│   └── specializations
+├── reg
+│   ├── README.md
+│   ├── artifacts
+│   ├── commands
+│   ├── governable
+│   ├── identifiers
+│   ├── model_registry
+│   ├── primitives
+│   └── providers
+├── sch
+│   ├── README.md
+│   ├── authority
+│   ├── compliance
+│   ├── evidence
+│   ├── governance
+│   ├── ingestion
+│   ├── manifests
+│   ├── model_schema
+│   ├── ontology
+│   ├── overlays
+│   ├── policy
+│   ├── registry
+│   └── runtime
+└── tax
+    ├── README.md
+    ├── actions
+    ├── assets
+    ├── maps
+    ├── model_taxonomy
+    ├── risks
+    ├── scenarios
+    ├── signals
+    └── subdomains
+
+74 directories, 13 files
+
+--- tps ---
+target_fs/tps
+├── README.md
+└── compat
+    └── legacy_include
+
+3 directories, 1 file

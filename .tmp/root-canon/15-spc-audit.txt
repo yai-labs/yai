@@ -1,0 +1,208 @@
+target_fs/spc
+├── README.md
+├── axi
+│   ├── README.md
+│   ├── axioms
+│   │   ├── A-001-execution.md
+│   │   ├── A-002-authority.md
+│   │   ├── A-003-state.md
+│   │   └── A-004-adaptability.md
+│   ├── boundaries
+│   │   ├── L0-vault.md
+│   │   ├── L1-runtime-core.md
+│   │   ├── L2-orchestration.md
+│   │   ├── L3-agents.md
+│   │   └── Lx-docs.md
+│   ├── foundation.README.md
+│   ├── invariants
+│   │   ├── I-001-traceability.md
+│   │   ├── I-002-determinism.md
+│   │   ├── I-003-governance.md
+│   │   ├── I-004-cognitive-reconfiguration.md
+│   │   ├── I-005-abstract-cost-accountability.md
+│   │   ├── I-006-external-effect-boundary.md
+│   │   └── I-007-compliance-context-required.md
+│   └── terminology
+│       └── glossary.md
+├── cpl
+│   ├── README.md
+│   ├── compliance
+│   │   ├── README.md
+│   │   ├── cross-domain
+│   │   ├── indexes
+│   │   ├── regulatory
+│   │   ├── sector
+│   │   └── templates
+│   ├── cross-domain
+│   ├── indexes
+│   ├── regulatory
+│   ├── sector
+│   └── templates
+│       ├── C-001-compliance-context.md
+│       ├── C-002-cross-domain-composition.md
+│       ├── C-003-retention-governance.md
+│       ├── C-004-human-review-escalation.md
+│       └── README.md
+├── examples
+├── fmt
+│   ├── README.md
+│   ├── assurance
+│   │   ├── artifacts
+│   │   ├── audit
+│   │   └── checks
+│   ├── formal
+│   │   ├── formal_artifact_index.v1.schema.json
+│   │   ├── formal_module.v1.schema.json
+│   │   ├── formal_resolution_trace.v1.schema.json
+│   │   ├── formal_traceability.v1.schema.json
+│   │   └── formal_traceability_map.v1.schema.json
+│   ├── tla
+│   │   ├── yai_authority.tla
+│   │   ├── yai_containment.tla
+│   │   ├── yai_enforcement.tla
+│   │   ├── yai_grants.tla
+│   │   ├── yai_ids.tla
+│   │   ├── yai_policy_application.tla
+│   │   ├── yai_protocol_control.tla
+│   │   ├── yai_resolution.tla
+│   │   ├── yai_review_escalation.tla
+│   │   ├── yai_runtime_state.tla
+│   │   ├── yai_system.tla
+│   │   ├── yai_traceability.tla
+│   │   └── yai_workspace_state.tla
+│   └── traceability
+│       ├── README.md
+│       ├── enforcement-linkage.json
+│       ├── invariant-linkage.json
+│       └── model.map.json
+├── gov
+│   ├── README.md
+│   ├── authority
+│   │   ├── README.md
+│   │   ├── constitution
+│   │   ├── decisions
+│   │   ├── policies
+│   │   ├── roles
+│   │   └── scopes
+│   ├── composition
+│   │   ├── README.md
+│   │   ├── rules
+│   │   └── semantics
+│   ├── overlays
+│   │   ├── README.md
+│   │   ├── indexes
+│   │   ├── profiles
+│   │   └── templates
+│   ├── packs
+│   │   ├── README.md
+│   │   └── index.v1.json
+│   ├── policy.README.md
+│   ├── review
+│   │   ├── README.md
+│   │   ├── index.v1.json
+│   │   └── vectors
+│   └── runtime
+│       ├── README.md
+│       └── index.v1.json
+├── ing
+│   ├── README.md
+│   ├── examples
+│   ├── model_ingestion
+│   │   ├── README.md
+│   │   ├── examples
+│   │   ├── pipeline
+│   │   └── templates
+│   ├── pipeline
+│   └── templates
+├── man
+│   ├── README.md
+│   ├── customers
+│   ├── enterprise
+│   ├── indexes
+│   ├── model_manifests
+│   │   ├── README.md
+│   │   ├── customers
+│   │   ├── enterprise
+│   │   ├── indexes
+│   │   ├── publish
+│   │   └── runtime
+│   ├── publish
+│   └── runtime
+├── ont
+│   ├── README.md
+│   ├── domains
+│   │   ├── D-EXT-001-domain-overlay-model.md
+│   │   ├── D-EXT-002-domain-family-composition.md
+│   │   └── README.md
+│   ├── families
+│   ├── indexes
+│   ├── model_ontology
+│   │   ├── README.md
+│   │   ├── domains
+│   │   ├── families
+│   │   ├── indexes
+│   │   └── specializations
+│   └── specializations
+├── reg
+│   ├── README.md
+│   ├── artifacts
+│   ├── commands
+│   ├── governable
+│   ├── identifiers
+│   ├── model_registry
+│   │   ├── README.md
+│   │   ├── artifacts
+│   │   ├── commands
+│   │   ├── governable
+│   │   ├── identifiers
+│   │   └── primitives
+│   ├── primitives
+│   └── providers
+│       └── providers.v1.json
+├── sch
+│   ├── README.md
+│   ├── authority
+│   ├── compliance
+│   ├── evidence
+│   ├── governance
+│   ├── ingestion
+│   ├── manifests
+│   ├── model_schema
+│   │   ├── README.md
+│   │   ├── authority
+│   │   ├── compliance
+│   │   ├── evidence
+│   │   ├── governance
+│   │   ├── ingestion
+│   │   ├── manifests
+│   │   ├── ontology
+│   │   ├── overlays
+│   │   ├── policy
+│   │   ├── registry
+│   │   └── runtime
+│   ├── ontology
+│   ├── overlays
+│   ├── policy
+│   ├── registry
+│   └── runtime
+└── tax
+    ├── README.md
+    ├── actions
+    ├── assets
+    ├── maps
+    ├── model_taxonomy
+    │   ├── README.md
+    │   ├── actions
+    │   ├── assets
+    │   ├── maps
+    │   ├── risks
+    │   ├── scenarios
+    │   └── signals
+    ├── risks
+    ├── scenarios
+    ├── signals
+    └── subdomains
+        ├── specialization-taxonomy.v1.json
+        └── subdomain-taxonomy.v1.json
+
+127 directories, 79 files

@@ -1,0 +1,9 @@
+target_fs/sys/fabric/catalog/catalog.c:3:#include <yai/net/providers/catalog.h>
+target_fs/sys/fabric/policy/provider_policy.c:4:#include <yai/net/providers/policy.h>
+target_fs/sys/fabric/policy/provider_policy.c:5:#include <yai/orch/runtime.h>
+target_fs/sys/fabric/providers/embedding/client_embedding.c:3:#include <yai/net/providers/embedding.h>
+target_fs/sys/fabric/providers/embedding/embedder_mock.c:3:#include <yai/net/providers/embedding.h>
+target_fs/sys/fabric/providers/inference/client_inference.c:3:#include <yai/net/providers/inference.h>
+target_fs/sys/fabric/providers/mocks/mock_provider.c:3:#include <yai/net/providers/mocks.h>
+target_fs/sys/fabric/providers/registry.c:3:#include <yai/net/providers/registry.h>
+target_fs/sys/fabric/selection/provider_selection.c:3:#include <yai/net/providers/selection.h>

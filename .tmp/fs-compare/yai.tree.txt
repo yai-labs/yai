@@ -1,0 +1,550 @@
+.
+├── boot
+│   ├── bootloader
+│   ├── handoff
+│   └── initrd
+├── config
+│   └── policy
+│       └── configs
+├── data
+│   ├── datasets
+│   │   └── global-stress
+│   │       └── v1
+│   ├── fixtures
+│   └── local
+├── docs
+│   ├── architecture
+│   │   ├── data
+│   │   ├── edge
+│   │   ├── formal
+│   │   ├── foundation
+│   │   ├── graph
+│   │   ├── knowledge
+│   │   ├── mesh
+│   │   ├── orchestration
+│   │   ├── overview
+│   │   ├── protocol
+│   │   ├── runtime
+│   │   └── workspace
+│   ├── archive
+│   │   ├── generated
+│   │   ├── legacy
+│   │   │   ├── formal
+│   │   │   ├── meta
+│   │   │   └── root-meta
+│   │   └── migration
+│   ├── foundation
+│   ├── governance
+│   ├── guides
+│   │   ├── developer
+│   │   │   ├── build-test
+│   │   │   ├── checklists
+│   │   │   ├── debugging
+│   │   │   ├── governance
+│   │   │   ├── operational-guides
+│   │   │   ├── tooling
+│   │   │   └── workflow
+│   │   └── user
+│   │       └── guide
+│   ├── policy
+│   ├── program
+│   │   ├── adr
+│   │   ├── archive
+│   │   │   ├── legacy
+│   │   │   ├── milestone-packs
+│   │   │   └── reports
+│   │   ├── policies
+│   │   │   ├── security
+│   │   │   └── style
+│   │   ├── reports
+│   │   ├── rfc
+│   │   └── templates
+│   │       ├── adr
+│   │       ├── rfc
+│   │       └── runbooks
+│   ├── reference
+│   │   ├── commands
+│   │   ├── protocol
+│   │   └── schemas
+│   ├── runbooks
+│   │   ├── demos
+│   │   ├── operations
+│   │   ├── qualification
+│   │   └── remediation
+│   ├── security
+│   └── versioning
+├── kernel
+│   ├── arch
+│   ├── con
+│   │   ├── internal
+│   │   ├── rootfs
+│   │   ├── runtime
+│   │   └── workspace
+│   │       └── internal
+│   ├── core
+│   ├── data
+│   │   ├── archive
+│   │   ├── evidence
+│   │   ├── internal
+│   │   ├── records
+│   │   ├── retention
+│   │   └── store
+│   ├── dmn
+│   │   ├── control
+│   │   ├── health
+│   │   ├── internal
+│   │   ├── runtime
+│   │   ├── sources
+│   │   └── spool
+│   ├── drv
+│   │   └── core
+│   ├── fs
+│   ├── grants
+│   ├── graph
+│   │   ├── internal
+│   │   ├── lineage
+│   │   ├── materialization
+│   │   ├── query
+│   │   └── summary
+│   ├── hal
+│   │   └── core
+│   ├── include
+│   │   └── yai
+│   │       ├── abi
+│   │       ├── api
+│   │       ├── arch
+│   │       ├── con
+│   │       ├── container
+│   │       ├── dmn
+│   │       ├── drivers
+│   │       ├── drv
+│   │       ├── fs
+│   │       ├── hal
+│   │       ├── ipc
+│   │       ├── kernel
+│   │       ├── krt
+│   │       ├── life
+│   │       ├── mm
+│   │       ├── net
+│   │       ├── network
+│   │       ├── pol
+│   │       ├── proc
+│   │       ├── proto
+│   │       ├── reg
+│   │       ├── sched
+│   │       ├── scheduler
+│   │       ├── sec
+│   │       ├── security
+│   │       ├── sess
+│   │       ├── sup
+│   │       └── trace
+│   ├── ipc
+│   ├── lib
+│   │   ├── core
+│   │   └── internal
+│   ├── life
+│   ├── mm
+│   ├── net
+│   │   ├── mesh
+│   │   ├── providers
+│   │   │   ├── embedding
+│   │   │   ├── inference
+│   │   │   └── mocks
+│   │   ├── route
+│   │   ├── session
+│   │   │   └── internal
+│   │   ├── topology
+│   │   └── transport
+│   ├── obs
+│   │   ├── metrics
+│   │   ├── reporting
+│   │   └── traces
+│   ├── orch
+│   │   ├── execution
+│   │   ├── internal
+│   │   │   ├── agents
+│   │   │   ├── bridge
+│   │   │   ├── cognition
+│   │   │   ├── runtime
+│   │   │   └── transport
+│   │   ├── planner
+│   │   └── workflow
+│   ├── pol
+│   │   ├── enforcement
+│   │   ├── engine
+│   │   ├── governance
+│   │   │   ├── authority
+│   │   │   ├── core
+│   │   │   ├── decisions
+│   │   │   ├── escalation
+│   │   │   └── publication
+│   │   ├── grants
+│   │   ├── overlays
+│   │   ├── review
+│   │   └── state
+│   ├── proc
+│   ├── reg
+│   ├── sched
+│   ├── sec
+│   │   └── internal
+│   ├── sess
+│   │   └── internal
+│   │       └── utils
+│   ├── state
+│   ├── sup
+│   │   ├── admission
+│   │   ├── lifecycle
+│   │   ├── recovery
+│   │   └── registry
+│   ├── svc
+│   │   ├── dispatch
+│   │   ├── manifests
+│   │   ├── registry
+│   │   └── sockets
+│   ├── tests
+│   └── trace
+├── mk
+│   ├── profiles
+│   └── rules
+├── sdk
+│   ├── c
+│   │   └── libyai
+│   │       ├── catalog
+│   │       ├── client
+│   │       ├── include
+│   │       ├── models
+│   │       ├── platform
+│   │       ├── protocol
+│   │       ├── registry
+│   │       ├── reply
+│   │       ├── rpc
+│   │       ├── source
+│   │       └── third_party
+│   ├── examples
+│   └── python
+├── spec
+│   ├── axi
+│   │   ├── axioms
+│   │   ├── boundaries
+│   │   ├── invariants
+│   │   └── terminology
+│   ├── cpl
+│   │   ├── compliance
+│   │   │   ├── cross-domain
+│   │   │   ├── indexes
+│   │   │   ├── regulatory
+│   │   │   ├── sector
+│   │   │   └── templates
+│   │   ├── cross-domain
+│   │   ├── indexes
+│   │   ├── regulatory
+│   │   ├── sector
+│   │   └── templates
+│   ├── examples
+│   ├── fmt
+│   │   ├── assurance
+│   │   │   ├── artifacts
+│   │   │   ├── audit
+│   │   │   └── checks
+│   │   ├── formal
+│   │   ├── tla
+│   │   └── traceability
+│   ├── gov
+│   │   ├── authority
+│   │   │   ├── constitution
+│   │   │   ├── decisions
+│   │   │   ├── policies
+│   │   │   ├── roles
+│   │   │   └── scopes
+│   │   ├── composition
+│   │   │   ├── rules
+│   │   │   └── semantics
+│   │   ├── overlays
+│   │   │   ├── indexes
+│   │   │   ├── profiles
+│   │   │   └── templates
+│   │   ├── packs
+│   │   ├── review
+│   │   │   └── vectors
+│   │   └── runtime
+│   ├── ing
+│   │   ├── examples
+│   │   ├── model_ingestion
+│   │   │   ├── examples
+│   │   │   ├── pipeline
+│   │   │   └── templates
+│   │   ├── pipeline
+│   │   └── templates
+│   ├── man
+│   │   ├── customers
+│   │   ├── enterprise
+│   │   ├── indexes
+│   │   ├── model_manifests
+│   │   │   ├── customers
+│   │   │   ├── enterprise
+│   │   │   ├── indexes
+│   │   │   ├── publish
+│   │   │   └── runtime
+│   │   ├── publish
+│   │   └── runtime
+│   ├── ont
+│   │   ├── domains
+│   │   ├── families
+│   │   ├── indexes
+│   │   ├── model_ontology
+│   │   │   ├── domains
+│   │   │   ├── families
+│   │   │   ├── indexes
+│   │   │   └── specializations
+│   │   └── specializations
+│   ├── reg
+│   │   ├── artifacts
+│   │   ├── commands
+│   │   ├── governable
+│   │   ├── identifiers
+│   │   ├── model_registry
+│   │   │   ├── artifacts
+│   │   │   ├── commands
+│   │   │   ├── governable
+│   │   │   ├── identifiers
+│   │   │   └── primitives
+│   │   ├── primitives
+│   │   └── providers
+│   ├── sch
+│   │   ├── authority
+│   │   ├── compliance
+│   │   ├── evidence
+│   │   ├── governance
+│   │   ├── ingestion
+│   │   ├── manifests
+│   │   ├── model_schema
+│   │   │   ├── authority
+│   │   │   ├── compliance
+│   │   │   ├── evidence
+│   │   │   ├── governance
+│   │   │   ├── ingestion
+│   │   │   ├── manifests
+│   │   │   ├── ontology
+│   │   │   ├── overlays
+│   │   │   ├── policy
+│   │   │   ├── registry
+│   │   │   └── runtime
+│   │   ├── ontology
+│   │   ├── overlays
+│   │   ├── policy
+│   │   ├── registry
+│   │   └── runtime
+│   └── tax
+│       ├── actions
+│       ├── assets
+│       ├── maps
+│       ├── model_taxonomy
+│       │   ├── actions
+│       │   ├── assets
+│       │   ├── maps
+│       │   ├── risks
+│       │   ├── scenarios
+│       │   └── signals
+│       ├── risks
+│       ├── scenarios
+│       ├── signals
+│       └── subdomains
+├── sys
+│   ├── con
+│   │   └── cmd
+│   │       └── containerd
+│   ├── data
+│   │   └── cmd
+│   │       └── datad
+│   ├── dmn
+│   │   └── cmd
+│   │       └── daemond
+│   ├── gov
+│   │   └── cmd
+│   │       └── governanced
+│   ├── graph
+│   │   └── cmd
+│   │       └── graphd
+│   ├── ifc
+│   │   ├── abi
+│   │   │   └── control
+│   │   ├── legacy
+│   │   ├── proto
+│   │   │   └── control
+│   │   ├── src
+│   │   └── wire
+│   ├── include
+│   │   └── yai
+│   │       └── ifc
+│   ├── init
+│   ├── net
+│   │   └── cmd
+│   │       └── netd
+│   ├── obs
+│   │   └── cmd
+│   │       ├── auditd
+│   │       └── metricsd
+│   ├── orch
+│   │   └── cmd
+│   │       └── orchestratord
+│   ├── pol
+│   │   └── cmd
+│   │       └── policyd
+│   ├── sup
+│   │   └── cmd
+│   │       └── supervisord
+│   └── svc
+├── tests
+│   ├── build
+│   │   └── test
+│   │       ├── unit_daemon
+│   │       └── unit_mesh
+│   ├── integration
+│   │   ├── container
+│   │   └── source-plane
+│   ├── kernel
+│   ├── legacy
+│   │   ├── build
+│   │   │   └── test
+│   │   ├── e2e
+│   │   ├── fixtures
+│   │   ├── qualification
+│   │   │   ├── fixtures
+│   │   │   ├── lan
+│   │   │   └── lib
+│   │   ├── runtime
+│   │   │   ├── integration
+│   │   │   └── unit
+│   │   ├── shared
+│   │   ├── source-plane
+│   │   ├── unit
+│   │   │   ├── daemon
+│   │   │   ├── governance
+│   │   │   ├── knowledge
+│   │   │   ├── network
+│   │   │   ├── orchestration
+│   │   │   └── protocol
+│   │   └── workspace
+│   ├── protocol
+│   │   └── transport
+│   ├── qualification
+│   │   ├── lan
+│   │   ├── peering
+│   │   ├── realflow
+│   │   └── scale
+│   ├── sdk
+│   │   └── c
+│   │       └── libyai
+│   ├── system
+│   │   ├── container
+│   │   ├── daemon
+│   │   ├── governance
+│   │   ├── network
+│   │   │   └── mesh
+│   │   └── orchestration
+│   └── user
+│       └── shell
+│           ├── integration
+│           ├── unit
+│           └── vectors
+├── third_party
+│   ├── compat
+│   │   └── legacy_include
+│   │       └── yai
+│   └── vendor
+│       └── cjson
+├── tools
+│   ├── bin
+│   ├── build
+│   ├── dev
+│   ├── formal
+│   ├── gen
+│   ├── out
+│   ├── release
+│   └── validate
+├── ui
+│   ├── apps
+│   │   ├── operator-console
+│   │   ├── policy-explorer
+│   │   └── system-monitor
+│   ├── assets
+│   ├── backends
+│   │   ├── framebuffer
+│   │   ├── lvgl
+│   │   ├── null
+│   │   └── sdl
+│   ├── foundation
+│   │   ├── input
+│   │   ├── layout
+│   │   ├── scene
+│   │   ├── styling
+│   │   └── ui-model
+│   ├── include
+│   │   └── yai
+│   │       └── desktop
+│   ├── lib
+│   │   ├── apps
+│   │   ├── foundation
+│   │   ├── protocol
+│   │   ├── runtime
+│   │   └── shell
+│   ├── protocol
+│   │   ├── events
+│   │   ├── state
+│   │   ├── surfaces
+│   │   └── widgets
+│   ├── runtime
+│   │   ├── assets
+│   │   ├── compositor
+│   │   ├── loop
+│   │   ├── renderer
+│   │   ├── session
+│   │   └── state
+│   └── shell
+│       ├── inspector
+│       ├── navigation
+│       ├── panels
+│       │   ├── command
+│       │   ├── events
+│       │   ├── graph
+│       │   ├── logs
+│       │   ├── overview
+│       │   ├── policy
+│       │   └── providers
+│       └── workspace
+└── usr
+    ├── bin
+    │   ├── yai
+    │   ├── yai-ctl
+    │   └── yai-sh
+    ├── cmd
+    │   ├── container
+    │   ├── data
+    │   ├── graph
+    │   ├── network
+    │   ├── observability
+    │   ├── orchestration
+    │   ├── policy
+    │   └── runtime
+    ├── include
+    │   └── yai
+    │       ├── commands
+    │       ├── shell
+    │       └── user
+    ├── share
+    │   ├── completions
+    │   ├── man
+    │   ├── prompts
+    │   └── themes
+    └── shell
+        ├── builtins
+        ├── core
+        ├── help
+        ├── parse
+        ├── prompt
+        ├── render
+        ├── session
+        ├── term
+        └── watch
+
+548 directories

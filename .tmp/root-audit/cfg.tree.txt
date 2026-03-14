@@ -1,0 +1,12 @@
+target_fs/cfg
+├── README.md
+├── build
+├── policy
+│   └── configs
+│       ├── yai_enforcement.focus.cfg
+│       ├── yai_governance_resolution.cfg
+│       ├── yai_system.deep.cfg
+│       └── yai_system.quick.cfg
+└── runtime
+
+5 directories, 5 files

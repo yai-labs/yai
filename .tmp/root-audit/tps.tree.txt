@@ -1,0 +1,18 @@
+target_fs/tps
+├── README.md
+└── compat
+    └── include
+        └── legacy_include
+            └── yai
+                ├── cognition
+                ├── data
+                ├── fabric
+                ├── graph
+                ├── net
+                ├── observability
+                ├── orchestration
+                ├── policy
+                ├── services
+                └── supervisor
+
+15 directories, 1 file

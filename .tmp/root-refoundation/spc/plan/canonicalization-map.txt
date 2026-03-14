@@ -1,0 +1,7 @@
+cpl/compliance      -> cpl/
+ont/model_ontology  -> ont/
+reg/model_registry  -> reg/
+tax/model_taxonomy  -> tax/
+man/model_manifests -> man/
+sch/model_schema    -> sch/
+ing/model_ingestion -> ing/

@@ -1,0 +1,5 @@
+target_fs/cfg/README.md
+target_fs/cfg/policy/configs/yai_enforcement.focus.cfg
+target_fs/cfg/policy/configs/yai_governance_resolution.cfg
+target_fs/cfg/policy/configs/yai_system.deep.cfg
+target_fs/cfg/policy/configs/yai_system.quick.cfg

@@ -1,0 +1,17 @@
+.clang-format
+.clippy.toml
+.cocciconfig
+.editorconfig
+.get_maintainer.ignore
+.gitattributes
+.gitignore
+.mailmap
+.pylintrc
+.rustfmt.toml
+COPYING
+CREDITS
+Kbuild
+Kconfig
+MAINTAINERS
+Makefile
+README

@@ -1,0 +1,51 @@
+# Root-generated and build artifacts
+/build/
+/dist/
+/.tmp/
+
+# Generic build outputs
+*.a
+*.o
+*.o.*
+*.so
+*.so.dbg
+*.dylib
+*.ko
+*.mod
+*.mod.c
+*.su
+*.i
+*.s
+*.ll
+*.lst
+*.gcno
+*.gcda
+*.pyc
+*.tar
+*.gz
+*.xz
+*.zst
+
+# Generated metadata
+compile_commands.json
+rust-project.json
+Module.symvers
+modules.order
+
+# Editor / index leftovers
+*~
+\#*#
+tags
+TAGS
+cscope.*
+ncscope.*
+GPATH
+GRTAGS
+GSYMS
+GTAGS
+
+# Keep canonical repo surface files
+!.editorconfig
+!.gitattributes
+!.gitignore
+!.clang-format

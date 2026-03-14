@@ -1,0 +1,15 @@
+target_fs/dts
+├── README.md
+├── foundation
+│   └── foundation.md
+├── governance
+│   └── governance.md
+├── readme
+│   └── root.md
+├── security
+│   └── security.md
+└── versioning
+    ├── VERSION
+    └── versioning.md
+
+6 directories, 7 files

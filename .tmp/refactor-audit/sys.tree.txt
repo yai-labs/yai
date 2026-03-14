@@ -1,0 +1,100 @@
+target_fs/sys
+├── con
+│   ├── README.md
+│   ├── cmd
+│   └── image
+├── data
+│   ├── README.md
+│   ├── archive
+│   ├── cmd
+│   ├── evidence
+│   ├── internal
+│   ├── records
+│   ├── retention
+│   └── store
+├── dmn
+│   ├── README.md
+│   ├── cmd
+│   ├── control
+│   ├── health
+│   ├── internal
+│   ├── runtime
+│   ├── sources
+│   └── spool
+├── fabric
+│   ├── catalog
+│   ├── policy
+│   ├── providers
+│   └── selection
+├── gov
+│   ├── README.md
+│   ├── authority
+│   ├── cmd
+│   ├── core
+│   ├── decisions
+│   ├── escalation
+│   └── publication
+├── graph
+│   ├── README.md
+│   ├── cmd
+│   ├── internal
+│   ├── lineage
+│   ├── materialization
+│   ├── query
+│   └── summary
+├── ifc
+│   ├── README.md
+│   ├── abi
+│   ├── legacy
+│   ├── proto
+│   ├── src
+│   └── wire
+├── include
+│   └── yai
+├── init
+│   └── README.md
+├── net
+│   ├── README.md
+│   ├── cmd
+│   ├── netd
+│   └── session
+├── obs
+│   ├── README.md
+│   ├── cmd
+│   ├── metrics
+│   ├── reporting
+│   └── traces
+├── orch
+│   ├── README.md
+│   ├── cmd
+│   ├── coordination
+│   ├── execution
+│   ├── internal
+│   ├── planner
+│   ├── scheduling
+│   ├── supervision
+│   └── workflow
+├── pol
+│   ├── README.md
+│   ├── cmd
+│   ├── enforcement
+│   ├── engine
+│   ├── grants
+│   ├── overlays
+│   ├── review
+│   └── state
+├── sup
+│   ├── README.md
+│   ├── admission
+│   ├── cmd
+│   ├── lifecycle
+│   ├── recovery
+│   └── registry
+└── svc
+    ├── README.md
+    ├── dispatch
+    ├── manifests
+    ├── registry
+    └── sockets
+
+85 directories, 13 files

@@ -1,0 +1,12 @@
+boot     dirs=4 files=4
+cfg      dirs=3 files=5
+dat      dirs=7 files=10
+dts      dirs=6 files=7
+krt      dirs=165 files=493
+mk       dirs=3 files=1
+sdk      dirs=21 files=68
+spc      dirs=231 files=523
+sys      dirs=46 files=37
+tps      dirs=27 files=116
+ui       dirs=50 files=69
+usr      dirs=35 files=59

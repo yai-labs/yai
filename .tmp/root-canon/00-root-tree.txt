@@ -1,0 +1,15 @@
+target_fs
+├── boot
+├── cfg
+├── dat
+├── dts
+├── krt
+├── mk
+├── sdk
+├── spc
+├── sys
+├── tps
+├── ui
+└── usr
+
+13 directories, 0 files

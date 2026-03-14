@@ -1,0 +1,12 @@
+target_fs/sys/con/cmd/containerd/main.c
+target_fs/sys/data/cmd/datad/README.md
+target_fs/sys/data/cmd/datad/main.c
+target_fs/sys/dmn/cmd/daemond/main.c
+target_fs/sys/gov/cmd/governanced/main.c
+target_fs/sys/graph/cmd/graphd/main.c
+target_fs/sys/net/cmd/netd/main.c
+target_fs/sys/obs/cmd/auditd/main.c
+target_fs/sys/obs/cmd/metricsd/main.c
+target_fs/sys/orch/cmd/orchestratord/main.c
+target_fs/sys/pol/cmd/policyd/main.c
+target_fs/sys/sup/cmd/supervisord/main.c

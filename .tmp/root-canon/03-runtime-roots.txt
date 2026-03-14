@@ -1,0 +1,6 @@
+target_fs/boot
+target_fs/krt
+target_fs/sys
+target_fs/usr
+target_fs/ui
+target_fs/sdk

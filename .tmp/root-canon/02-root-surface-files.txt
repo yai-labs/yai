@@ -1,0 +1,13 @@
+target_fs/boot/README.md
+target_fs/cfg/README.md
+target_fs/dat/README.md
+target_fs/dts/README.md
+target_fs/krt/Kconfig
+target_fs/krt/Makefile
+target_fs/krt/README.md
+target_fs/mk/README.md
+target_fs/sdk/README.md
+target_fs/spc/README.md
+target_fs/tps/README.md
+target_fs/ui/README.md
+target_fs/usr/README.md

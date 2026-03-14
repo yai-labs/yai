@@ -1,0 +1,6 @@
+*.[ch] diff=cpp
+*.rs diff=rust
+*.md text
+Kconfig text
+Makefile text
+Makefile.* text

@@ -1,0 +1,17 @@
+target_fs/sys/data/archive/archive.c:5:#include <yai/data/archive.h>
+target_fs/sys/data/cmd/datad/main.c:7:#include <yai/api/version.h>
+target_fs/sys/data/cmd/datad/main.c:8:#include <yai/data/binding.h>
+target_fs/sys/data/cmd/datad/main.c:9:#include <yai/data/query.h>
+target_fs/sys/data/evidence/evidence_records.c:3:#include <yai/data/evidence.h>
+target_fs/sys/data/evidence/evidence_records.c:4:#include <yai/data/query.h>
+target_fs/sys/data/evidence/evidence_records.c:5:#include <yai/data/store.h>
+target_fs/sys/data/internal/query_surfaces.c:3:#include <yai/data/query.h>
+target_fs/sys/data/internal/query_surfaces.c:4:#include <yai/ipc/source_plane.h>
+target_fs/sys/data/internal/scope_binding.c:5:#include <yai/data/binding.h>
+target_fs/sys/data/internal/store_binding.c:5:#include <yai/data/binding.h>
+target_fs/sys/data/records/event_records.c:3:#include <yai/data/records.h>
+target_fs/sys/data/records/event_records.c:4:#include <yai/ipc/source_plane.h>
+target_fs/sys/data/retention/retention.c:5:#include <yai/data/retention.h>
+target_fs/sys/data/store/duckdb_store.c:11:#include <yai/data/binding.h>
+target_fs/sys/data/store/file_store.c:5:#include <yai/data/store.h>
+target_fs/sys/data/store/file_store.c:6:#include <yai/data/binding.h>

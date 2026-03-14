@@ -1,0 +1,26 @@
+# SPDX-License-Identifier: Apache-2.0
+#
+# For a description of the syntax of this configuration file,
+# see Documentation/kbuild/kconfig-language.rst.
+
+mainmenu "YAI-OS/$(ARCH) Root Configuration"
+
+source "scripts/Kconfig.include"
+
+source "init/Kconfig"
+source "kernel/Kconfig"
+source "mm/Kconfig"
+source "net/Kconfig"
+source "drivers/Kconfig"
+source "fs/Kconfig"
+source "security/Kconfig"
+source "crypto/Kconfig"
+source "lib/Kconfig"
+source "Documentation/Kconfig"
+source "io_uring/Kconfig"
+
+source "container/Kconfig"
+source "graph/Kconfig"
+source "policy/Kconfig"
+source "governance/Kconfig"
+source "usr/Kconfig"
