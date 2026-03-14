@@ -3,8 +3,6 @@
 #ifndef INCLUDE_FIRMWARE_MANIFEST_H
 #define INCLUDE_FIRMWARE_MANIFEST_H
 
-struct yai_manifest_stub {
-    int reserved;
-};
+#include <firmware/manifest/manifest.h>
 
 #endif

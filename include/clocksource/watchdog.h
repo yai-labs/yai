@@ -3,8 +3,6 @@
 #ifndef INCLUDE_CLOCKSOURCE_WATCHDOG_H
 #define INCLUDE_CLOCKSOURCE_WATCHDOG_H
 
-struct yai_watchdog_stub {
-    int reserved;
-};
+#include <clocksource/watchdog/watchdog.h>
 
 #endif
