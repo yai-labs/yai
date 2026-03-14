@@ -1,0 +1,14 @@
+#pragma once
+
+#ifndef INCLUDE_SYS_MODE_H
+#define INCLUDE_SYS_MODE_H
+
+enum yai_system_mode {
+    YAI_SYSTEM_MODE_BOOT = 0,
+    YAI_SYSTEM_MODE_INIT,
+    YAI_SYSTEM_MODE_RUNTIME,
+    YAI_SYSTEM_MODE_RECOVERY,
+    YAI_SYSTEM_MODE_MAINTENANCE
+};
+
+#endif
