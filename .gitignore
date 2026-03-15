@@ -49,3 +49,6 @@ GTAGS
 !.gitattributes
 !.gitignore
 !.clang-format
+
+# Local editor settings
+.vscode/
