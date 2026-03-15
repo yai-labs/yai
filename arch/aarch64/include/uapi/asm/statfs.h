@@ -19,6 +19,6 @@
 
 #define ARCH_PACK_COMPAT_STATFS64 __attribute__((packed,aligned(4)))
 
-#include <asm-generic/statfs.h>
+#include <yai/statfs.h>
 
 #endif

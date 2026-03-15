@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: GPL-2.0
 /* Copyright (c) 2024 Rivos Inc. */
 
-#include <asm/sbi.h>
+#include <yai/sbi.h>
 #define CREATE_TRACE_POINTS
-#include <asm/trace.h>
+#include <yai/trace.h>
 
 long __sbi_base_ecall(int fid)
 {

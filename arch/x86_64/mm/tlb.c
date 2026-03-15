@@ -1,28 +1,28 @@
 // SPDX-License-Identifier: GPL-2.0-only
-#include <linux/init.h>
+#include <yai/init.h>
 
-#include <linux/mm.h>
-#include <linux/spinlock.h>
-#include <linux/smp.h>
-#include <linux/interrupt.h>
-#include <linux/export.h>
-#include <linux/cpu.h>
-#include <linux/debugfs.h>
-#include <linux/sched/smt.h>
-#include <linux/task_work.h>
-#include <linux/mmu_notifier.h>
-#include <linux/mmu_context.h>
-#include <linux/kvm_types.h>
+#include <yai/mm.h>
+#include <yai/spinlock.h>
+#include <yai/smp.h>
+#include <yai/interrupt.h>
+#include <yai/export.h>
+#include <yai/cpu.h>
+#include <yai/debugfs.h>
+#include <yai/sched/smt.h>
+#include <yai/task_work.h>
+#include <yai/mmu_notifier.h>
+#include <yai/mmu_context.h>
+#include <yai/kvm_types.h>
 
-#include <asm/tlbflush.h>
-#include <asm/mmu_context.h>
-#include <asm/nospec-branch.h>
-#include <asm/cache.h>
-#include <asm/cacheflush.h>
-#include <asm/apic.h>
-#include <asm/msr.h>
-#include <asm/perf_event.h>
-#include <asm/tlb.h>
+#include <yai/tlbflush.h>
+#include <yai/mmu_context.h>
+#include <yai/nospec-branch.h>
+#include <yai/cache.h>
+#include <yai/cacheflush.h>
+#include <yai/apic.h>
+#include <yai/msr.h>
+#include <yai/perf_event.h>
+#include <yai/tlb.h>
 
 #include "mm_internal.h"
 

@@ -2,7 +2,7 @@
 #ifndef _ASM_X86_PROCESSOR_H
 #define _ASM_X86_PROCESSOR_H
 
-#include <asm/processor-flags.h>
+#include <yai/processor-flags.h>
 
 /* Forward declaration, a strange C thing */
 struct task_struct;
@@ -10,32 +10,32 @@ struct mm_struct;
 struct io_bitmap;
 struct vm86;
 
-#include <asm/math_emu.h>
-#include <asm/segment.h>
-#include <asm/types.h>
+#include <yai/math_emu.h>
+#include <yai/segment.h>
+#include <yai/types.h>
 #include <uapi/asm/sigcontext.h>
-#include <asm/current.h>
-#include <asm/cpufeatures.h>
-#include <asm/cpuid/api.h>
-#include <asm/page.h>
-#include <asm/pgtable_types.h>
-#include <asm/percpu.h>
-#include <asm/desc_defs.h>
-#include <asm/nops.h>
-#include <asm/special_insns.h>
-#include <asm/fpu/types.h>
-#include <asm/unwind_hints.h>
-#include <asm/vmxfeatures.h>
-#include <asm/vdso/processor.h>
-#include <asm/shstk.h>
+#include <yai/current.h>
+#include <yai/cpufeatures.h>
+#include <yai/cpuid/api.h>
+#include <yai/page.h>
+#include <yai/pgtable_types.h>
+#include <yai/percpu.h>
+#include <yai/desc_defs.h>
+#include <yai/nops.h>
+#include <yai/special_insns.h>
+#include <yai/fpu/types.h>
+#include <yai/unwind_hints.h>
+#include <yai/vmxfeatures.h>
+#include <yai/vdso/processor.h>
+#include <yai/shstk.h>
 
-#include <linux/personality.h>
-#include <linux/cache.h>
-#include <linux/threads.h>
-#include <linux/math64.h>
-#include <linux/err.h>
-#include <linux/irqflags.h>
-#include <linux/mem_encrypt.h>
+#include <yai/personality.h>
+#include <yai/cache.h>
+#include <yai/threads.h>
+#include <yai/math64.h>
+#include <yai/err.h>
+#include <yai/irqflags.h>
+#include <yai/mem_encrypt.h>
 
 /*
  * We handle most unaligned accesses in hardware.  On the other hand
@@ -563,7 +563,7 @@ static __always_inline bool on_thread_stack(void)
 }
 
 #ifdef CONFIG_PARAVIRT_XXL
-#include <asm/paravirt.h>
+#include <yai/paravirt.h>
 #else
 
 static inline void load_sp0(unsigned long sp0)

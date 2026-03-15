@@ -4,18 +4,18 @@
  * Copyright (C) 1999, 2004 Manfred Spraul
  */
 
-#include <linux/spinlock.h>
-#include <linux/init.h>
-#include <linux/security.h>
-#include <linux/slab.h>
-#include <linux/ipc.h>
-#include <linux/msg.h>
-#include <linux/ipc_namespace.h>
-#include <linux/utsname.h>
-#include <linux/proc_ns.h>
-#include <linux/uaccess.h>
-#include <linux/sched.h>
-#include <linux/nstree.h>
+#include <yai/spinlock.h>
+#include <yai/init.h>
+#include <yai/security.h>
+#include <yai/slab.h>
+#include <yai/ipc.h>
+#include <yai/msg.h>
+#include <yai/ipc_namespace.h>
+#include <yai/utsname.h>
+#include <yai/proc_ns.h>
+#include <yai/uaccess.h>
+#include <yai/sched.h>
+#include <yai/nstree.h>
 
 #include "util.h"
 

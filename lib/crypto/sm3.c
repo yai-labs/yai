@@ -9,11 +9,11 @@
  */
 
 #include <crypto/sm3.h>
-#include <linux/export.h>
-#include <linux/kernel.h>
-#include <linux/module.h>
-#include <linux/string.h>
-#include <linux/unaligned.h>
+#include <yai/export.h>
+#include <yai/kernel.h>
+#include <yai/module.h>
+#include <yai/string.h>
+#include <yai/unaligned.h>
 
 static const u32 ____cacheline_aligned K[64] = {
 	0x79cc4519, 0xf3988a32, 0xe7311465, 0xce6228cb,

@@ -2,11 +2,11 @@
 #ifndef _ASM_X86_MMU_H
 #define _ASM_X86_MMU_H
 
-#include <linux/spinlock.h>
-#include <linux/rwsem.h>
-#include <linux/mutex.h>
-#include <linux/atomic.h>
-#include <linux/bits.h>
+#include <yai/spinlock.h>
+#include <yai/rwsem.h>
+#include <yai/mutex.h>
+#include <yai/atomic.h>
+#include <yai/bits.h>
 
 /* Uprobes on this MM assume 32-bit code */
 #define MM_CONTEXT_UPROBE_IA32		0

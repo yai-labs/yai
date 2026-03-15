@@ -2,7 +2,7 @@
 #ifndef _ASM_X86_SPARSEMEM_H
 #define _ASM_X86_SPARSEMEM_H
 
-#include <linux/types.h>
+#include <yai/types.h>
 
 #ifdef CONFIG_SPARSEMEM
 /*

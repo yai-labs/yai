@@ -10,24 +10,24 @@
  *		Christoph Lameter <cl@gentwo.org>
  *  Copyright (C) 2008-2014 Christoph Lameter
  */
-#include <linux/fs.h>
-#include <linux/mm.h>
-#include <linux/err.h>
-#include <linux/module.h>
-#include <linux/slab.h>
-#include <linux/cpu.h>
-#include <linux/cpumask.h>
-#include <linux/vmstat.h>
-#include <linux/proc_fs.h>
-#include <linux/seq_file.h>
-#include <linux/debugfs.h>
-#include <linux/sched.h>
-#include <linux/math64.h>
-#include <linux/writeback.h>
-#include <linux/compaction.h>
-#include <linux/mm_inline.h>
-#include <linux/page_owner.h>
-#include <linux/sched/isolation.h>
+#include <yai/fs.h>
+#include <yai/mm.h>
+#include <yai/err.h>
+#include <yai/module.h>
+#include <yai/slab.h>
+#include <yai/cpu.h>
+#include <yai/cpumask.h>
+#include <yai/vmstat.h>
+#include <yai/proc_fs.h>
+#include <yai/seq_file.h>
+#include <yai/debugfs.h>
+#include <yai/sched.h>
+#include <yai/math64.h>
+#include <yai/writeback.h>
+#include <yai/compaction.h>
+#include <yai/mm_inline.h>
+#include <yai/page_owner.h>
+#include <yai/sched/isolation.h>
 
 #include "internal.h"
 

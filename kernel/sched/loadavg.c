@@ -6,7 +6,7 @@
  * figure. Its a silly number but people think its important. We go through
  * great pains to make it work on big machines and tickless kernels.
  */
-#include <linux/sched/nohz.h>
+#include <yai/sched/nohz.h>
 #include "sched.h"
 
 /*

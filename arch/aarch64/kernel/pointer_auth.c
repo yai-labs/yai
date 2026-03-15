@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: GPL-2.0
 
-#include <linux/compat.h>
-#include <linux/errno.h>
-#include <linux/prctl.h>
-#include <linux/random.h>
-#include <linux/sched.h>
-#include <asm/cpufeature.h>
-#include <asm/pointer_auth.h>
+#include <yai/compat.h>
+#include <yai/errno.h>
+#include <yai/prctl.h>
+#include <yai/random.h>
+#include <yai/sched.h>
+#include <yai/cpufeature.h>
+#include <yai/pointer_auth.h>
 
 int ptrauth_prctl_reset_keys(struct task_struct *tsk, unsigned long arg)
 {

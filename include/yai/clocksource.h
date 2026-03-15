@@ -18,8 +18,8 @@
 #include <yai/init.h>
 #include <yai/of.h>
 #include <yai/clocksource_ids.h>
-#include <asm/div64.h>
-#include <asm/io.h>
+#include <yai/div64.h>
+#include <yai/io.h>
 
 struct clocksource_base;
 struct clocksource;
@@ -27,7 +27,7 @@ struct module;
 
 #if defined(CONFIG_ARCH_CLOCKSOURCE_DATA) || \
     defined(CONFIG_GENERIC_GETTIMEOFDAY)
-#include <asm/clocksource.h>
+#include <yai/clocksource.h>
 #endif
 
 #include <vdso/clocksource.h>

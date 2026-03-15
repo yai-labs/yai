@@ -3,10 +3,10 @@
 #ifndef _ASM_X86_CPU_ENTRY_AREA_H
 #define _ASM_X86_CPU_ENTRY_AREA_H
 
-#include <linux/percpu-defs.h>
-#include <asm/processor.h>
-#include <asm/intel_ds.h>
-#include <asm/pgtable_areas.h>
+#include <yai/percpu-defs.h>
+#include <yai/processor.h>
+#include <yai/intel_ds.h>
+#include <yai/pgtable_areas.h>
 
 #ifdef CONFIG_X86_64
 

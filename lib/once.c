@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: GPL-2.0
-#include <linux/slab.h>
-#include <linux/spinlock.h>
-#include <linux/once.h>
-#include <linux/random.h>
-#include <linux/module.h>
+#include <yai/slab.h>
+#include <yai/spinlock.h>
+#include <yai/once.h>
+#include <yai/random.h>
+#include <yai/module.h>
 
 struct once_work {
 	struct work_struct work;

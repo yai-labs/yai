@@ -4,19 +4,19 @@
  * Copyright (C) 2006 Pavel Emelyanov <xemul@openvz.org> OpenVZ, SWsoft Inc.
  */
 
-#include <linux/ipc.h>
-#include <linux/msg.h>
-#include <linux/ipc_namespace.h>
-#include <linux/rcupdate.h>
-#include <linux/nsproxy.h>
-#include <linux/slab.h>
-#include <linux/cred.h>
-#include <linux/fs.h>
-#include <linux/mount.h>
-#include <linux/user_namespace.h>
-#include <linux/proc_ns.h>
-#include <linux/nstree.h>
-#include <linux/sched/task.h>
+#include <yai/ipc.h>
+#include <yai/msg.h>
+#include <yai/ipc_namespace.h>
+#include <yai/rcupdate.h>
+#include <yai/nsproxy.h>
+#include <yai/slab.h>
+#include <yai/cred.h>
+#include <yai/fs.h>
+#include <yai/mount.h>
+#include <yai/user_namespace.h>
+#include <yai/proc_ns.h>
+#include <yai/nstree.h>
+#include <yai/sched/task.h>
 
 #include "util.h"
 

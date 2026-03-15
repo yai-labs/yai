@@ -25,29 +25,29 @@
  * Davidlohr Bueso <davidlohr.bueso@hp.com>, June 2013.
  */
 
-#include <linux/slab.h>
-#include <linux/mm.h>
-#include <linux/hugetlb.h>
-#include <linux/shm.h>
-#include <uapi/linux/shm.h>
-#include <linux/init.h>
-#include <linux/file.h>
-#include <linux/mman.h>
-#include <linux/shmem_fs.h>
-#include <linux/security.h>
-#include <linux/syscalls.h>
-#include <linux/audit.h>
-#include <linux/capability.h>
-#include <linux/ptrace.h>
-#include <linux/seq_file.h>
-#include <linux/rwsem.h>
-#include <linux/nsproxy.h>
-#include <linux/mount.h>
-#include <linux/ipc_namespace.h>
-#include <linux/rhashtable.h>
-#include <linux/nstree.h>
+#include <yai/slab.h>
+#include <yai/mm.h>
+#include <yai/hugetlb.h>
+#include <yai/shm.h>
+#include <yai/shm.h>
+#include <yai/init.h>
+#include <yai/file.h>
+#include <yai/mman.h>
+#include <yai/shmem_fs.h>
+#include <yai/security.h>
+#include <yai/syscalls.h>
+#include <yai/audit.h>
+#include <yai/capability.h>
+#include <yai/ptrace.h>
+#include <yai/seq_file.h>
+#include <yai/rwsem.h>
+#include <yai/nsproxy.h>
+#include <yai/mount.h>
+#include <yai/ipc_namespace.h>
+#include <yai/rhashtable.h>
+#include <yai/nstree.h>
 
-#include <linux/uaccess.h>
+#include <yai/uaccess.h>
 
 #include "util.h"
 

@@ -6,7 +6,7 @@
 #ifndef __RISCV_KVM_TLB_H_
 #define __RISCV_KVM_TLB_H_
 
-#include <linux/kvm_types.h>
+#include <yai/kvm_types.h>
 
 enum kvm_riscv_hfence_type {
 	KVM_RISCV_HFENCE_UNKNOWN = 0,

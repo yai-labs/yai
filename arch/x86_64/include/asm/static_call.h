@@ -2,7 +2,7 @@
 #ifndef _ASM_STATIC_CALL_H
 #define _ASM_STATIC_CALL_H
 
-#include <asm/text-patching.h>
+#include <yai/text-patching.h>
 
 /*
  * For CONFIG_HAVE_STATIC_CALL_INLINE, this is a temporary trampoline which

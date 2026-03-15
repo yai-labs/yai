@@ -2,16 +2,16 @@
 
 #define pr_fmt(fmt) "x86/split lock detection: " fmt
 
-#include <linux/semaphore.h>
-#include <linux/workqueue.h>
-#include <linux/delay.h>
-#include <linux/cpuhotplug.h>
-#include <linux/kvm_types.h>
-#include <asm/cpu_device_id.h>
-#include <asm/cmdline.h>
-#include <asm/traps.h>
-#include <asm/cpu.h>
-#include <asm/msr.h>
+#include <yai/semaphore.h>
+#include <yai/workqueue.h>
+#include <yai/delay.h>
+#include <yai/cpuhotplug.h>
+#include <yai/kvm_types.h>
+#include <yai/cpu_device_id.h>
+#include <yai/cmdline.h>
+#include <yai/traps.h>
+#include <yai/cpu.h>
+#include <yai/msr.h>
 
 enum split_lock_detect_state {
 	sld_off = 0,

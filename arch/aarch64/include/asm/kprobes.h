@@ -8,12 +8,12 @@
 #ifndef _ARM_KPROBES_H
 #define _ARM_KPROBES_H
 
-#include <asm-generic/kprobes.h>
+#include <yai/kprobes.h>
 
 #ifdef CONFIG_KPROBES
-#include <linux/types.h>
-#include <linux/ptrace.h>
-#include <linux/percpu.h>
+#include <yai/types.h>
+#include <yai/ptrace.h>
+#include <yai/percpu.h>
 
 #define __ARCH_WANT_KPROBES_INSN_SLOT
 #define MAX_INSN_SIZE			2
@@ -21,7 +21,7 @@
 #define flush_insn_slot(p)		do { } while (0)
 #define kretprobe_blacklist_size	0
 
-#include <asm/probes.h>
+#include <yai/probes.h>
 
 struct prev_kprobe {
 	struct kprobe *kp;

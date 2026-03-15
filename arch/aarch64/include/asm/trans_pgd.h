@@ -8,9 +8,9 @@
 #ifndef _ASM_TRANS_TABLE_H
 #define _ASM_TRANS_TABLE_H
 
-#include <linux/bits.h>
-#include <linux/types.h>
-#include <asm/pgtable-types.h>
+#include <yai/bits.h>
+#include <yai/types.h>
+#include <yai/pgtable-types.h>
 
 /*
  * trans_alloc_page

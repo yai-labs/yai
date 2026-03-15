@@ -6,10 +6,10 @@
   #error "Cannot use runtime-const infrastructure from modules"
 #endif
 
-#include <asm/cacheflush.h>
+#include <yai/cacheflush.h>
 
 /* Sigh. You can still run arm64 in BE mode */
-#include <asm/byteorder.h>
+#include <yai/byteorder.h>
 
 #define runtime_const_ptr(sym) ({				\
 	typeof(sym) __ret;					\

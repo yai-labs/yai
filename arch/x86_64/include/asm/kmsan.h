@@ -11,9 +11,9 @@
 
 #ifndef MODULE
 
-#include <asm/cpu_entry_area.h>
-#include <asm/processor.h>
-#include <linux/mmzone.h>
+#include <yai/cpu_entry_area.h>
+#include <yai/processor.h>
+#include <yai/mmzone.h>
 
 DECLARE_PER_CPU(char[CPU_ENTRY_AREA_SIZE], cpu_entry_area_shadow);
 DECLARE_PER_CPU(char[CPU_ENTRY_AREA_SIZE], cpu_entry_area_origin);

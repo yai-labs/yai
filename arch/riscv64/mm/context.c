@@ -5,17 +5,17 @@
  * Copyright (C) 2021 Western Digital Corporation or its affiliates.
  */
 
-#include <linux/bitops.h>
-#include <linux/cpumask.h>
-#include <linux/mm.h>
-#include <linux/percpu.h>
-#include <linux/slab.h>
-#include <linux/spinlock.h>
-#include <linux/static_key.h>
-#include <asm/tlbflush.h>
-#include <asm/cacheflush.h>
-#include <asm/mmu_context.h>
-#include <asm/switch_to.h>
+#include <yai/bitops.h>
+#include <yai/cpumask.h>
+#include <yai/mm.h>
+#include <yai/percpu.h>
+#include <yai/slab.h>
+#include <yai/spinlock.h>
+#include <yai/static_key.h>
+#include <yai/tlbflush.h>
+#include <yai/cacheflush.h>
+#include <yai/mmu_context.h>
+#include <yai/switch_to.h>
 
 #ifdef CONFIG_MMU
 

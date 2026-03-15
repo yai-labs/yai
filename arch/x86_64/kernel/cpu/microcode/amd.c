@@ -21,24 +21,24 @@
  */
 #define pr_fmt(fmt) "microcode: " fmt
 
-#include <linux/earlycpio.h>
-#include <linux/firmware.h>
-#include <linux/bsearch.h>
-#include <linux/uaccess.h>
-#include <linux/vmalloc.h>
-#include <linux/initrd.h>
-#include <linux/kernel.h>
-#include <linux/pci.h>
+#include <yai/earlycpio.h>
+#include <yai/firmware.h>
+#include <yai/bsearch.h>
+#include <yai/uaccess.h>
+#include <yai/vmalloc.h>
+#include <yai/initrd.h>
+#include <yai/kernel.h>
+#include <yai/pci.h>
 
 #include <crypto/sha2.h>
 
-#include <asm/microcode.h>
-#include <asm/processor.h>
-#include <asm/cmdline.h>
-#include <asm/setup.h>
-#include <asm/cpu.h>
-#include <asm/msr.h>
-#include <asm/tlb.h>
+#include <yai/microcode.h>
+#include <yai/processor.h>
+#include <yai/cmdline.h>
+#include <yai/setup.h>
+#include <yai/cpu.h>
+#include <yai/msr.h>
+#include <yai/tlb.h>
 
 #include "internal.h"
 

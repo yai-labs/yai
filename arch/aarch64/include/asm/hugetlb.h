@@ -10,9 +10,9 @@
 #ifndef __ASM_HUGETLB_H
 #define __ASM_HUGETLB_H
 
-#include <asm/cacheflush.h>
-#include <asm/mte.h>
-#include <asm/page.h>
+#include <yai/cacheflush.h>
+#include <yai/mte.h>
+#include <yai/page.h>
 
 #ifdef CONFIG_ARCH_ENABLE_HUGEPAGE_MIGRATION
 #define arch_hugetlb_migration_supported arch_hugetlb_migration_supported
@@ -65,7 +65,7 @@ extern void huge_ptep_modify_prot_commit(struct vm_area_struct *vma,
 					 unsigned long addr, pte_t *ptep,
 					 pte_t old_pte, pte_t new_pte);
 
-#include <asm-generic/hugetlb.h>
+#include <yai/hugetlb.h>
 
 static inline void __flush_hugetlb_tlb_range(struct vm_area_struct *vma,
 					     unsigned long start,

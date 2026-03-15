@@ -4,7 +4,7 @@
  */
 
 #include <kunit/test.h>
-#include <asm/checksum.h>
+#include <yai/checksum.h>
 #include <net/ip6_checksum.h>
 
 #define MAX_LEN 512

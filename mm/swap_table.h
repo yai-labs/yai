@@ -2,8 +2,8 @@
 #ifndef _MM_SWAP_TABLE_H
 #define _MM_SWAP_TABLE_H
 
-#include <linux/rcupdate.h>
-#include <linux/atomic.h>
+#include <yai/rcupdate.h>
+#include <yai/atomic.h>
 #include "swap.h"
 
 /* A typical flat array in each cluster as swap table */

@@ -11,7 +11,7 @@
  *	 to avoid revealing of sensitive data due to paging etc.
  */
 
-#include <linux/export.h>
+#include <yai/export.h>
 
 #include "mpi-internal.h"
 

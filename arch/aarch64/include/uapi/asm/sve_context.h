@@ -9,7 +9,7 @@
 #ifndef _UAPI__ASM_SVE_CONTEXT_H
 #define _UAPI__ASM_SVE_CONTEXT_H
 
-#include <linux/types.h>
+#include <yai/types.h>
 
 #define __SVE_VQ_BYTES		16	/* number of bytes per quadword */
 

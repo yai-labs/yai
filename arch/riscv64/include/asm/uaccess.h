@@ -8,9 +8,9 @@
 #ifndef _ASM_RISCV_UACCESS_H
 #define _ASM_RISCV_UACCESS_H
 
-#include <asm/asm-extable.h>
-#include <asm/cpufeature.h>
-#include <asm/pgtable.h>		/* for TASK_SIZE */
+#include <yai/asm-extable.h>
+#include <yai/cpufeature.h>
+#include <yai/pgtable.h>		/* for TASK_SIZE */
 
 #ifdef CONFIG_RISCV_ISA_SUPM
 static inline unsigned long __untagged_addr_remote(struct mm_struct *mm, unsigned long addr)
@@ -48,13 +48,13 @@ static inline unsigned long __untagged_addr_remote(struct mm_struct *mm, unsigne
  * User space memory access functions
  */
 #ifdef CONFIG_MMU
-#include <linux/errno.h>
-#include <linux/compiler.h>
-#include <linux/thread_info.h>
-#include <asm/byteorder.h>
-#include <asm/extable.h>
-#include <asm/asm.h>
-#include <asm-generic/access_ok.h>
+#include <yai/errno.h>
+#include <yai/compiler.h>
+#include <yai/thread_info.h>
+#include <yai/byteorder.h>
+#include <yai/extable.h>
+#include <yai/asm.h>
+#include <yai/access_ok.h>
 
 #define __enable_user_access()							\
 	__asm__ __volatile__ ("csrs sstatus, %0" : : "r" (SR_SUM) : "memory")
@@ -488,6 +488,6 @@ static inline void user_access_restore(unsigned long enabled) { }
 		goto label;
 
 #else /* CONFIG_MMU */
-#include <asm-generic/uaccess.h>
+#include <yai/uaccess.h>
 #endif /* CONFIG_MMU */
 #endif /* _ASM_RISCV_UACCESS_H */

@@ -6,7 +6,7 @@
 
 #ifndef __ASSEMBLY__
 
-#include <asm/sigcontext.h>
+#include <yai/sigcontext.h>
 #undef __HAVE_ARCH_SIG_BITOPS
 
 #endif /* __ASSEMBLY__ */

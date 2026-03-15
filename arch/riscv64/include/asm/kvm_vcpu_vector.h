@@ -10,11 +10,11 @@
 #ifndef __KVM_VCPU_RISCV_VECTOR_H
 #define __KVM_VCPU_RISCV_VECTOR_H
 
-#include <linux/types.h>
+#include <yai/types.h>
 
 #ifdef CONFIG_RISCV_ISA_V
-#include <asm/vector.h>
-#include <asm/kvm_host.h>
+#include <yai/vector.h>
+#include <yai/kvm_host.h>
 
 static __always_inline void __kvm_riscv_vector_save(struct kvm_cpu_context *context)
 {

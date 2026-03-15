@@ -32,10 +32,10 @@
 #define KVM_NR_SPSR	5
 
 #ifndef __ASSEMBLER__
-#include <linux/psci.h>
-#include <linux/types.h>
-#include <asm/ptrace.h>
-#include <asm/sve_context.h>
+#include <yai/psci.h>
+#include <yai/types.h>
+#include <yai/ptrace.h>
+#include <yai/sve_context.h>
 
 #define __KVM_HAVE_IRQ_LINE
 #define __KVM_HAVE_VCPU_EVENTS

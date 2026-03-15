@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: GPL-2.0
-#include <linux/kernel.h>
-#include <linux/mm.h>
-#include <linux/slab.h>
-#include <linux/uaccess.h>
-#include <linux/ktime.h>
-#include <linux/debugfs.h>
-#include <linux/highmem.h>
+#include <yai/kernel.h>
+#include <yai/mm.h>
+#include <yai/slab.h>
+#include <yai/uaccess.h>
+#include <yai/ktime.h>
+#include <yai/debugfs.h>
+#include <yai/highmem.h>
 #include "gup_test.h"
 
 static void put_back_pages(unsigned int cmd, struct page **pages,

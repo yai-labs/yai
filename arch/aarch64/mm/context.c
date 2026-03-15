@@ -6,16 +6,16 @@
  * Copyright (C) 2012 ARM Ltd.
  */
 
-#include <linux/bitfield.h>
-#include <linux/bitops.h>
-#include <linux/sched.h>
-#include <linux/slab.h>
-#include <linux/mm.h>
+#include <yai/bitfield.h>
+#include <yai/bitops.h>
+#include <yai/sched.h>
+#include <yai/slab.h>
+#include <yai/mm.h>
 
-#include <asm/cpufeature.h>
-#include <asm/mmu_context.h>
-#include <asm/smp.h>
-#include <asm/tlbflush.h>
+#include <yai/cpufeature.h>
+#include <yai/mmu_context.h>
+#include <yai/smp.h>
+#include <yai/tlbflush.h>
 
 static u32 asid_bits;
 static DEFINE_RAW_SPINLOCK(cpu_asid_lock);

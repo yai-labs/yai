@@ -10,19 +10,19 @@
  * Self Test
  **************************************************************************/
 
-#include <linux/init.h>
-#include <linux/jhash.h>
-#include <linux/kernel.h>
-#include <linux/kthread.h>
-#include <linux/module.h>
-#include <linux/rcupdate.h>
-#include <linux/rcupdate_wait.h>
-#include <linux/rhashtable.h>
-#include <linux/slab.h>
-#include <linux/sched.h>
-#include <linux/random.h>
-#include <linux/vmalloc.h>
-#include <linux/wait.h>
+#include <yai/init.h>
+#include <yai/jhash.h>
+#include <yai/kernel.h>
+#include <yai/kthread.h>
+#include <yai/module.h>
+#include <yai/rcupdate.h>
+#include <yai/rcupdate_wait.h>
+#include <yai/rhashtable.h>
+#include <yai/slab.h>
+#include <yai/sched.h>
+#include <yai/random.h>
+#include <yai/vmalloc.h>
+#include <yai/wait.h>
 
 #define MAX_ENTRIES	1000000
 #define TEST_INSERT_FAIL INT_MAX

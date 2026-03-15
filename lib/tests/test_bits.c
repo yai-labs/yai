@@ -4,8 +4,8 @@
  */
 
 #include <kunit/test.h>
-#include <linux/bits.h>
-#include <linux/types.h>
+#include <yai/bits.h>
+#include <yai/types.h>
 
 #define assert_type(t, x) _Generic(x, t: x, default: 0)
 

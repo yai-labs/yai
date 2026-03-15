@@ -13,8 +13,8 @@
  *	         mapping between bits and polynomial coefficients
  */
 
-#include <asm/byteorder.h>
-#include <linux/minmax.h>
+#include <yai/byteorder.h>
+#include <yai/minmax.h>
 
 #define CRC_BITS	(8 * sizeof(crc_t))	/* a.k.a. 'n' */
 

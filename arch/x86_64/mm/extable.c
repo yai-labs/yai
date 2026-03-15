@@ -1,17 +1,17 @@
 // SPDX-License-Identifier: GPL-2.0-only
-#include <linux/extable.h>
-#include <linux/uaccess.h>
-#include <linux/sched/debug.h>
-#include <linux/bitfield.h>
+#include <yai/extable.h>
+#include <yai/uaccess.h>
+#include <yai/sched/debug.h>
+#include <yai/bitfield.h>
 #include <xen/xen.h>
 
-#include <asm/fpu/api.h>
-#include <asm/fred.h>
-#include <asm/sev.h>
-#include <asm/traps.h>
-#include <asm/kdebug.h>
-#include <asm/insn-eval.h>
-#include <asm/sgx.h>
+#include <yai/fpu/api.h>
+#include <yai/fred.h>
+#include <yai/sev.h>
+#include <yai/traps.h>
+#include <yai/kdebug.h>
+#include <yai/insn-eval.h>
+#include <yai/sgx.h>
 
 static inline unsigned long *pt_regs_nr(struct pt_regs *regs, int nr)
 {

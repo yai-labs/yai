@@ -7,10 +7,10 @@
  * Author: David Woodhouse <dwmw2@infradead.org>
  */
 
-#include <linux/init.h>
-#include <linux/export.h>
-#include <asm/processor.h>
-#include <asm/hypervisor.h>
+#include <yai/init.h>
+#include <yai/export.h>
+#include <yai/processor.h>
+#include <yai/hypervisor.h>
 
 static uint32_t bhyve_cpuid_base;
 static uint32_t bhyve_cpuid_max;

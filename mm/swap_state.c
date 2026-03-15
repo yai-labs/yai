@@ -7,21 +7,21 @@
  *
  *  Rewritten to use page cache, (C) 1998 Stephen Tweedie
  */
-#include <linux/mm.h>
-#include <linux/gfp.h>
-#include <linux/kernel_stat.h>
-#include <linux/mempolicy.h>
-#include <linux/swap.h>
-#include <linux/leafops.h>
-#include <linux/init.h>
-#include <linux/pagemap.h>
-#include <linux/pagevec.h>
-#include <linux/backing-dev.h>
-#include <linux/blkdev.h>
-#include <linux/migrate.h>
-#include <linux/vmalloc.h>
-#include <linux/huge_mm.h>
-#include <linux/shmem_fs.h>
+#include <yai/mm.h>
+#include <yai/gfp.h>
+#include <yai/kernel_stat.h>
+#include <yai/mempolicy.h>
+#include <yai/swap.h>
+#include <yai/leafops.h>
+#include <yai/init.h>
+#include <yai/pagemap.h>
+#include <yai/pagevec.h>
+#include <yai/backing-dev.h>
+#include <yai/blkdev.h>
+#include <yai/migrate.h>
+#include <yai/vmalloc.h>
+#include <yai/huge_mm.h>
+#include <yai/shmem_fs.h>
 #include "internal.h"
 #include "swap_table.h"
 #include "swap.h"

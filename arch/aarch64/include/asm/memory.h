@@ -10,9 +10,9 @@
 #ifndef __ASM_MEMORY_H
 #define __ASM_MEMORY_H
 
-#include <linux/const.h>
-#include <linux/sizes.h>
-#include <asm/page-def.h>
+#include <yai/const.h>
+#include <yai/sizes.h>
+#include <yai/page-def.h>
 
 /*
  * Size of the PCI I/O space. This must remain a power of two so that
@@ -214,14 +214,14 @@
 
 #ifndef __ASSEMBLER__
 
-#include <linux/bitops.h>
-#include <linux/compiler.h>
-#include <linux/mmdebug.h>
-#include <linux/types.h>
-#include <asm/boot.h>
-#include <asm/bug.h>
-#include <asm/sections.h>
-#include <asm/sysreg.h>
+#include <yai/bitops.h>
+#include <yai/compiler.h>
+#include <yai/mmdebug.h>
+#include <yai/types.h>
+#include <yai/boot.h>
+#include <yai/bug.h>
+#include <yai/sections.h>
+#include <yai/sysreg.h>
 
 static inline u64 __pure read_tcr(void)
 {
@@ -376,7 +376,7 @@ static inline void *phys_to_virt(phys_addr_t x)
 }
 
 /* Needed already here for resolving __phys_to_pfn() in virt_to_pfn() */
-#include <asm-generic/memory_model.h>
+#include <yai/memory_model.h>
 
 static inline unsigned long virt_to_pfn(const void *kaddr)
 {

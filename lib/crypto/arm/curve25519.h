@@ -7,12 +7,12 @@
  * manually reworked for use in kernel space.
  */
 
-#include <asm/hwcap.h>
-#include <asm/neon.h>
-#include <asm/simd.h>
+#include <yai/hwcap.h>
+#include <yai/neon.h>
+#include <yai/simd.h>
 #include <crypto/internal/simd.h>
-#include <linux/types.h>
-#include <linux/jump_label.h>
+#include <yai/types.h>
+#include <yai/jump_label.h>
 
 asmlinkage void curve25519_neon(u8 mypublic[CURVE25519_KEY_SIZE],
 				const u8 secret[CURVE25519_KEY_SIZE],

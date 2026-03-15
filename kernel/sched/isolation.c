@@ -7,8 +7,8 @@
  * Copyright (C) 2017-2018 SUSE, Frederic Weisbecker
  *
  */
-#include <linux/sched/isolation.h>
-#include <linux/pci.h>
+#include <yai/sched/isolation.h>
+#include <yai/pci.h>
 #include "sched.h"
 
 enum hk_flags {

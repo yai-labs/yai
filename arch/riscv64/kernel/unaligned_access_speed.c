@@ -3,16 +3,16 @@
  * Copyright 2024 Rivos Inc.
  */
 
-#include <linux/cpu.h>
-#include <linux/cpumask.h>
-#include <linux/jump_label.h>
-#include <linux/kthread.h>
-#include <linux/mm.h>
-#include <linux/smp.h>
-#include <linux/types.h>
-#include <asm/cpufeature.h>
-#include <asm/hwprobe.h>
-#include <asm/vector.h>
+#include <yai/cpu.h>
+#include <yai/cpumask.h>
+#include <yai/jump_label.h>
+#include <yai/kthread.h>
+#include <yai/mm.h>
+#include <yai/smp.h>
+#include <yai/types.h>
+#include <yai/cpufeature.h>
+#include <yai/hwprobe.h>
+#include <yai/vector.h>
 
 #include "copy-unaligned.h"
 

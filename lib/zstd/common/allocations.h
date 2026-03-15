@@ -17,7 +17,7 @@
 
 #include "compiler.h" /* MEM_STATIC */
 #define ZSTD_STATIC_LINKING_ONLY
-#include <linux/zstd.h> /* ZSTD_customMem */
+#include <yai/zstd.h> /* ZSTD_customMem */
 
 #ifndef ZSTD_ALLOCATIONS_H
 #define ZSTD_ALLOCATIONS_H

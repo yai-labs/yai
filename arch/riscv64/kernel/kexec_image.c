@@ -6,14 +6,14 @@
 
 #define pr_fmt(fmt)	"kexec_file(Image): " fmt
 
-#include <linux/err.h>
-#include <linux/errno.h>
-#include <linux/kernel.h>
-#include <linux/kexec.h>
-#include <linux/pe.h>
-#include <linux/string.h>
-#include <asm/byteorder.h>
-#include <asm/image.h>
+#include <yai/err.h>
+#include <yai/errno.h>
+#include <yai/kernel.h>
+#include <yai/kexec.h>
+#include <yai/pe.h>
+#include <yai/string.h>
+#include <yai/byteorder.h>
+#include <yai/image.h>
 
 static int image_probe(const char *kernel_buf, unsigned long kernel_len)
 {

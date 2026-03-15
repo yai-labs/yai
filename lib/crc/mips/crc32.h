@@ -8,9 +8,9 @@
  * Copyright (C) 2018 MIPS Tech, LLC
  */
 
-#include <linux/cpufeature.h>
-#include <asm/mipsregs.h>
-#include <linux/unaligned.h>
+#include <yai/cpufeature.h>
+#include <yai/mipsregs.h>
+#include <yai/unaligned.h>
 
 #ifndef TOOLCHAIN_SUPPORTS_CRC
 #define _ASM_SET_CRC(OP, SZ, TYPE)					  \

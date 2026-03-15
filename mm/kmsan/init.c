@@ -9,9 +9,9 @@
 
 #include "kmsan.h"
 
-#include <asm/sections.h>
-#include <linux/mm.h>
-#include <linux/memblock.h>
+#include <yai/sections.h>
+#include <yai/mm.h>
+#include <yai/memblock.h>
 
 #include "../internal.h"
 

@@ -9,11 +9,11 @@
  * modified to support multiple Base64 variants.
  */
 
-#include <linux/kernel.h>
-#include <linux/types.h>
-#include <linux/export.h>
-#include <linux/string.h>
-#include <linux/base64.h>
+#include <yai/kernel.h>
+#include <yai/types.h>
+#include <yai/export.h>
+#include <yai/string.h>
+#include <yai/base64.h>
 
 static const char base64_tables[][65] = {
 	[BASE64_STD] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",

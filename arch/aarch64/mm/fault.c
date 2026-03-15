@@ -7,42 +7,42 @@
  * Copyright (C) 2012 ARM Ltd.
  */
 
-#include <linux/acpi.h>
-#include <linux/bitfield.h>
-#include <linux/extable.h>
-#include <linux/kfence.h>
-#include <linux/signal.h>
-#include <linux/mm.h>
-#include <linux/hardirq.h>
-#include <linux/init.h>
-#include <linux/kasan.h>
-#include <linux/kprobes.h>
-#include <linux/uaccess.h>
-#include <linux/page-flags.h>
-#include <linux/sched/signal.h>
-#include <linux/sched/debug.h>
-#include <linux/highmem.h>
-#include <linux/perf_event.h>
-#include <linux/pkeys.h>
-#include <linux/preempt.h>
-#include <linux/hugetlb.h>
+#include <yai/acpi.h>
+#include <yai/bitfield.h>
+#include <yai/extable.h>
+#include <yai/kfence.h>
+#include <yai/signal.h>
+#include <yai/mm.h>
+#include <yai/hardirq.h>
+#include <yai/init.h>
+#include <yai/kasan.h>
+#include <yai/kprobes.h>
+#include <yai/uaccess.h>
+#include <yai/page-flags.h>
+#include <yai/sched/signal.h>
+#include <yai/sched/debug.h>
+#include <yai/highmem.h>
+#include <yai/perf_event.h>
+#include <yai/pkeys.h>
+#include <yai/preempt.h>
+#include <yai/hugetlb.h>
 
-#include <asm/acpi.h>
-#include <asm/bug.h>
-#include <asm/cmpxchg.h>
-#include <asm/cpufeature.h>
-#include <asm/efi.h>
-#include <asm/exception.h>
-#include <asm/daifflags.h>
-#include <asm/debug-monitors.h>
-#include <asm/esr.h>
-#include <asm/kprobes.h>
-#include <asm/mte.h>
-#include <asm/processor.h>
-#include <asm/sysreg.h>
-#include <asm/system_misc.h>
-#include <asm/tlbflush.h>
-#include <asm/traps.h>
+#include <yai/acpi.h>
+#include <yai/bug.h>
+#include <yai/cmpxchg.h>
+#include <yai/cpufeature.h>
+#include <yai/efi.h>
+#include <yai/exception.h>
+#include <yai/daifflags.h>
+#include <yai/debug-monitors.h>
+#include <yai/esr.h>
+#include <yai/kprobes.h>
+#include <yai/mte.h>
+#include <yai/processor.h>
+#include <yai/sysreg.h>
+#include <yai/system_misc.h>
+#include <yai/tlbflush.h>
+#include <yai/traps.h>
 
 struct fault_info {
 	int	(*fn)(unsigned long far, unsigned long esr,

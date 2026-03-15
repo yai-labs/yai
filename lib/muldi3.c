@@ -2,8 +2,8 @@
 /*
  */
 
-#include <linux/export.h>
-#include <linux/libgcc.h>
+#include <yai/export.h>
+#include <yai/libgcc.h>
 
 #define W_TYPE_SIZE 32
 

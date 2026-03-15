@@ -6,10 +6,10 @@
  * Copyright 1997 Linus Torvalds
  * Copyright 2002 Andi Kleen <ak@suse.de>
  */
-#include <linux/export.h>
-#include <linux/uaccess.h>
-#include <linux/highmem.h>
-#include <linux/libnvdimm.h>
+#include <yai/export.h>
+#include <yai/uaccess.h>
+#include <yai/highmem.h>
+#include <yai/libnvdimm.h>
 
 /*
  * Zero Userspace

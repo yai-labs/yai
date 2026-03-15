@@ -12,13 +12,13 @@
 
 #ifndef __ASSEMBLER__
 
-#include <uapi/linux/time.h>
-#include <asm/vgtod.h>
-#include <asm/unistd.h>
-#include <asm/msr.h>
-#include <asm/pvclock.h>
+#include <yai/time.h>
+#include <yai/vgtod.h>
+#include <yai/unistd.h>
+#include <yai/msr.h>
+#include <yai/pvclock.h>
 #include <clocksource/hyperv_timer.h>
-#include <asm/vdso/sys_call.h>
+#include <yai/vdso/sys_call.h>
 
 #define VDSO_HAS_TIME 1
 

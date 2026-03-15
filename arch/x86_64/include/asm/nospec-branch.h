@@ -3,15 +3,15 @@
 #ifndef _ASM_X86_NOSPEC_BRANCH_H_
 #define _ASM_X86_NOSPEC_BRANCH_H_
 
-#include <linux/static_key.h>
-#include <linux/objtool.h>
-#include <linux/linkage.h>
+#include <yai/static_key.h>
+#include <yai/objtool.h>
+#include <yai/linkage.h>
 
-#include <asm/alternative.h>
-#include <asm/cpufeatures.h>
-#include <asm/msr-index.h>
-#include <asm/unwind_hints.h>
-#include <asm/percpu.h>
+#include <yai/alternative.h>
+#include <yai/cpufeatures.h>
+#include <yai/msr-index.h>
+#include <yai/unwind_hints.h>
+#include <yai/percpu.h>
 
 /*
  * Call depth tracking for Intel SKL CPUs to address the RSB underflow
@@ -74,7 +74,7 @@
 
 #if defined(CONFIG_MITIGATION_CALL_DEPTH_TRACKING) && !defined(COMPILE_OFFSETS)
 
-#include <asm/asm-offsets.h>
+#include <yai/asm-offsets.h>
 
 #define CREDIT_CALL_DEPTH					\
 	movq	$-1, PER_CPU_VAR(__x86_call_depth);
@@ -115,7 +115,7 @@
  *
  * We define a CPP macro such that it can be used from both .S files and
  * inline assembly. It's possible to do a .macro and then include that
- * from C via asm(".include <asm/nospec-branch.h>") but let's not go there.
+ * from C via asm(".include <yai/nospec-branch.h>") but let's not go there.
  */
 
 #define RETPOLINE_THUNK_SIZE	32
@@ -423,17 +423,17 @@ static inline void call_depth_return_thunk(void) {}
 
 #define GEN(reg) \
 	extern retpoline_thunk_t __x86_indirect_thunk_ ## reg;
-#include <asm/GEN-for-each-reg.h>
+#include <yai/GEN-for-each-reg.h>
 #undef GEN
 
 #define GEN(reg)						\
 	extern retpoline_thunk_t __x86_indirect_call_thunk_ ## reg;
-#include <asm/GEN-for-each-reg.h>
+#include <yai/GEN-for-each-reg.h>
 #undef GEN
 
 #define GEN(reg)						\
 	extern retpoline_thunk_t __x86_indirect_jump_thunk_ ## reg;
-#include <asm/GEN-for-each-reg.h>
+#include <yai/GEN-for-each-reg.h>
 #undef GEN
 
 #ifdef CONFIG_X86_64
@@ -584,7 +584,7 @@ DECLARE_STATIC_KEY_FALSE(switch_mm_cond_l1d_flush);
 
 extern u16 x86_verw_sel;
 
-#include <asm/segment.h>
+#include <yai/segment.h>
 
 /**
  * x86_clear_cpu_buffers - Buffer clearing support for different x86 CPU vulns

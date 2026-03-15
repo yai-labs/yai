@@ -2,8 +2,8 @@
 #ifndef _ASM_X86_AGP_H
 #define _ASM_X86_AGP_H
 
-#include <linux/pgtable.h>
-#include <asm/cacheflush.h>
+#include <yai/pgtable.h>
+#include <yai/cacheflush.h>
 
 /*
  * Functions to keep the agpgart mappings coherent with the MMU. The

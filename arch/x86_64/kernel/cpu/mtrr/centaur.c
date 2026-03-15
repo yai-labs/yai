@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: GPL-2.0
-#include <linux/init.h>
-#include <linux/mm.h>
+#include <yai/init.h>
+#include <yai/mm.h>
 
-#include <asm/mtrr.h>
-#include <asm/msr.h>
+#include <yai/mtrr.h>
+#include <yai/msr.h>
 
 #include "mtrr.h"
 

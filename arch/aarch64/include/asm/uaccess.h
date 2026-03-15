@@ -7,24 +7,24 @@
 #ifndef __ASM_UACCESS_H
 #define __ASM_UACCESS_H
 
-#include <asm/alternative.h>
-#include <asm/kernel-pgtable.h>
-#include <asm/sysreg.h>
+#include <yai/alternative.h>
+#include <yai/kernel-pgtable.h>
+#include <yai/sysreg.h>
 
 /*
  * User space memory access functions
  */
-#include <linux/bitops.h>
-#include <linux/kasan-checks.h>
-#include <linux/string.h>
+#include <yai/bitops.h>
+#include <yai/kasan-checks.h>
+#include <yai/string.h>
 
-#include <asm/asm-extable.h>
-#include <asm/cpufeature.h>
-#include <asm/mmu.h>
-#include <asm/mte.h>
-#include <asm/ptrace.h>
-#include <asm/memory.h>
-#include <asm/extable.h>
+#include <yai/asm-extable.h>
+#include <yai/cpufeature.h>
+#include <yai/mmu.h>
+#include <yai/mte.h>
+#include <yai/ptrace.h>
+#include <yai/memory.h>
+#include <yai/extable.h>
 
 static inline int __access_ok(const void __user *ptr, unsigned long size);
 
@@ -50,7 +50,7 @@ static inline int access_ok(const void __user *addr, unsigned long size)
 }
 #define access_ok access_ok
 
-#include <asm-generic/access_ok.h>
+#include <yai/access_ok.h>
 
 /*
  * User access enabling/disabling.

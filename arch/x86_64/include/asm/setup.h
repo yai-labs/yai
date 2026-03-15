@@ -6,13 +6,13 @@
 
 #define COMMAND_LINE_SIZE 2048
 
-#include <linux/linkage.h>
-#include <asm/page_types.h>
-#include <asm/ibt.h>
+#include <yai/linkage.h>
+#include <yai/page_types.h>
+#include <yai/ibt.h>
 
 #ifdef __i386__
 
-#include <linux/pfn.h>
+#include <yai/pfn.h>
 /*
  * Reserved space for vmalloc and iomap - defined in asm/page.h
  */
@@ -28,10 +28,10 @@
 #define NEW_CL_POINTER		0x228	/* Relative to real mode data */
 
 #ifndef __ASSEMBLER__
-#include <linux/cache.h>
+#include <yai/cache.h>
 
-#include <asm/bootparam.h>
-#include <asm/x86_init.h>
+#include <yai/bootparam.h>
+#include <yai/x86_init.h>
 
 /* Interrupt control for vSMPowered x86_64 systems */
 #ifdef CONFIG_X86_64
@@ -69,12 +69,12 @@ extern void x86_ce4100_early_setup(void);
 static inline void x86_ce4100_early_setup(void) { }
 #endif
 
-#include <linux/kexec_handover.h>
+#include <yai/kexec_handover.h>
 
 #ifndef _SETUP
 
-#include <asm/espfix.h>
-#include <linux/kernel.h>
+#include <yai/espfix.h>
+#include <yai/kernel.h>
 
 /*
  * This is set up by the setup-routine at boot-time

@@ -5,7 +5,7 @@
 #include <yai/types.h>
 
 #ifdef CONFIG_HAVE_ARCH_BITREVERSE
-#include <asm/bitrev.h>
+#include <yai/bitrev.h>
 
 #define __bitrev32 __arch_bitrev32
 #define __bitrev16 __arch_bitrev16

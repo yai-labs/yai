@@ -5,18 +5,18 @@
 #ifndef __ASM_MTE_H
 #define __ASM_MTE_H
 
-#include <asm/compiler.h>
-#include <asm/mte-def.h>
+#include <yai/compiler.h>
+#include <yai/mte-def.h>
 
 #ifndef __ASSEMBLER__
 
-#include <linux/bitfield.h>
-#include <linux/kasan-enabled.h>
-#include <linux/page-flags.h>
-#include <linux/sched.h>
-#include <linux/types.h>
+#include <yai/bitfield.h>
+#include <yai/kasan-enabled.h>
+#include <yai/page-flags.h>
+#include <yai/sched.h>
+#include <yai/types.h>
 
-#include <asm/pgtable-types.h>
+#include <yai/pgtable-types.h>
 
 void mte_clear_page_tags(void *addr);
 unsigned long mte_copy_tags_from_user(void *to, const void __user *from,

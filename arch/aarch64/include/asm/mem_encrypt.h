@@ -2,7 +2,7 @@
 #ifndef __ASM_MEM_ENCRYPT_H
 #define __ASM_MEM_ENCRYPT_H
 
-#include <asm/rsi.h>
+#include <yai/rsi.h>
 
 struct device;
 

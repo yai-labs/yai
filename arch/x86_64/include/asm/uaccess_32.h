@@ -5,9 +5,9 @@
 /*
  * User space memory access functions
  */
-#include <linux/string.h>
-#include <asm/asm.h>
-#include <asm/page.h>
+#include <yai/string.h>
+#include <yai/asm.h>
+#include <yai/page.h>
 
 unsigned long __must_check __copy_user_ll
 		(void *to, const void *from, unsigned long n);

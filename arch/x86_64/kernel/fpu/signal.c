@@ -3,17 +3,17 @@
  * FPU signal frame handling routines.
  */
 
-#include <linux/compat.h>
-#include <linux/cpu.h>
-#include <linux/pagemap.h>
+#include <yai/compat.h>
+#include <yai/cpu.h>
+#include <yai/pagemap.h>
 
-#include <asm/fpu/signal.h>
-#include <asm/fpu/regset.h>
-#include <asm/fpu/xstate.h>
+#include <yai/fpu/signal.h>
+#include <yai/fpu/regset.h>
+#include <yai/fpu/xstate.h>
 
-#include <asm/sigframe.h>
-#include <asm/trapnr.h>
-#include <asm/trace/fpu.h>
+#include <yai/sigframe.h>
+#include <yai/trapnr.h>
+#include <yai/trace/fpu.h>
 
 #include "context.h"
 #include "internal.h"

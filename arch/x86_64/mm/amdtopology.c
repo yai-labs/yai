@@ -7,25 +7,25 @@
  *
  * Copyright 2002,2003 Andi Kleen, SuSE Labs.
  */
-#include <linux/kernel.h>
-#include <linux/init.h>
-#include <linux/string.h>
-#include <linux/nodemask.h>
-#include <linux/memblock.h>
-#include <linux/numa_memblks.h>
+#include <yai/kernel.h>
+#include <yai/init.h>
+#include <yai/string.h>
+#include <yai/nodemask.h>
+#include <yai/memblock.h>
+#include <yai/numa_memblks.h>
 
-#include <asm/io.h>
-#include <linux/pci_ids.h>
-#include <linux/acpi.h>
-#include <asm/types.h>
-#include <asm/mmzone.h>
-#include <asm/proto.h>
-#include <asm/e820/api.h>
-#include <asm/pci-direct.h>
-#include <asm/numa.h>
-#include <asm/mpspec.h>
-#include <asm/apic.h>
-#include <asm/amd/nb.h>
+#include <yai/io.h>
+#include <yai/pci_ids.h>
+#include <yai/acpi.h>
+#include <yai/types.h>
+#include <yai/mmzone.h>
+#include <yai/proto.h>
+#include <yai/e820/api.h>
+#include <yai/pci-direct.h>
+#include <yai/numa.h>
+#include <yai/mpspec.h>
+#include <yai/apic.h>
+#include <yai/amd/nb.h>
 
 static unsigned char __initdata nodeids[8];
 

@@ -6,11 +6,11 @@
  * Author: AKASHI Takahiro <takahiro.akashi@linaro.org>
  */
 
-#include <linux/crash_dump.h>
-#include <linux/errno.h>
-#include <linux/io.h>
-#include <linux/uio.h>
-#include <asm/memory.h>
+#include <yai/crash_dump.h>
+#include <yai/errno.h>
+#include <yai/io.h>
+#include <yai/uio.h>
+#include <yai/memory.h>
 
 ssize_t copy_oldmem_page(struct iov_iter *iter, unsigned long pfn,
 			 size_t csize, unsigned long offset)

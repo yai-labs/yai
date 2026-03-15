@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: GPL-2.0-only
 
-#include <linux/types.h>
-#include <linux/slab.h>
-#include <linux/syscore_ops.h>
-#include <asm/cpufeature.h>
-#include <asm/mtrr.h>
-#include <asm/processor.h>
+#include <yai/types.h>
+#include <yai/slab.h>
+#include <yai/syscore_ops.h>
+#include <yai/cpufeature.h>
+#include <yai/mtrr.h>
+#include <yai/processor.h>
 #include "mtrr.h"
 
 void mtrr_set_if(void)

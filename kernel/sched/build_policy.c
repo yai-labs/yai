@@ -13,30 +13,30 @@
  */
 
 /* Headers: */
-#include <linux/sched/clock.h>
-#include <linux/sched/cputime.h>
-#include <linux/sched/hotplug.h>
-#include <linux/sched/isolation.h>
-#include <linux/sched/posix-timers.h>
-#include <linux/sched/rt.h>
+#include <yai/sched/clock.h>
+#include <yai/sched/cputime.h>
+#include <yai/sched/hotplug.h>
+#include <yai/sched/isolation.h>
+#include <yai/sched/posix-timers.h>
+#include <yai/sched/rt.h>
 
-#include <linux/cpuidle.h>
-#include <linux/jiffies.h>
-#include <linux/kobject.h>
-#include <linux/livepatch.h>
-#include <linux/pm.h>
-#include <linux/psi.h>
-#include <linux/rhashtable.h>
-#include <linux/seq_buf.h>
-#include <linux/seqlock_api.h>
-#include <linux/slab.h>
-#include <linux/suspend.h>
-#include <linux/tsacct_kern.h>
-#include <linux/vtime.h>
-#include <linux/sysrq.h>
-#include <linux/percpu-rwsem.h>
+#include <yai/cpuidle.h>
+#include <yai/jiffies.h>
+#include <yai/kobject.h>
+#include <yai/livepatch.h>
+#include <yai/pm.h>
+#include <yai/psi.h>
+#include <yai/rhashtable.h>
+#include <yai/seq_buf.h>
+#include <yai/seqlock_api.h>
+#include <yai/slab.h>
+#include <yai/suspend.h>
+#include <yai/tsacct_kern.h>
+#include <yai/vtime.h>
+#include <yai/sysrq.h>
+#include <yai/percpu-rwsem.h>
 
-#include <uapi/linux/sched/types.h>
+#include <yai/sched/types.h>
 
 #include "sched.h"
 #include "smp.h"

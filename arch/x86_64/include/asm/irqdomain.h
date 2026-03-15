@@ -2,8 +2,8 @@
 #ifndef _ASM_IRQDOMAIN_H
 #define _ASM_IRQDOMAIN_H
 
-#include <linux/irqdomain.h>
-#include <asm/hw_irq.h>
+#include <yai/irqdomain.h>
+#include <yai/hw_irq.h>
 
 #ifdef CONFIG_X86_LOCAL_APIC
 enum {

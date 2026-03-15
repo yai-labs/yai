@@ -2,8 +2,8 @@
 #ifndef _ASM_ARM64_XEN_EVENTS_H
 #define _ASM_ARM64_XEN_EVENTS_H
 
-#include <asm/ptrace.h>
-#include <asm/atomic.h>
+#include <yai/ptrace.h>
+#include <yai/atomic.h>
 
 enum ipi_vector {
 	XEN_PLACEHOLDER_VECTOR,

@@ -11,7 +11,7 @@
 #define YAI_NUBUS_H
 
 #include <yai/device.h>
-#include <asm/nubus.h>
+#include <yai/nubus.h>
 #include <yai/uapi/nubus.h>
 
 struct proc_dir_entry;

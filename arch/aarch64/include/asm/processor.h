@@ -27,25 +27,25 @@
 
 #ifndef __ASSEMBLER__
 
-#include <linux/build_bug.h>
-#include <linux/cache.h>
-#include <linux/init.h>
-#include <linux/stddef.h>
-#include <linux/string.h>
-#include <linux/thread_info.h>
+#include <yai/build_bug.h>
+#include <yai/cache.h>
+#include <yai/init.h>
+#include <yai/stddef.h>
+#include <yai/string.h>
+#include <yai/thread_info.h>
 
 #include <vdso/processor.h>
 
-#include <asm/alternative.h>
-#include <asm/cpufeature.h>
-#include <asm/hw_breakpoint.h>
-#include <asm/kasan.h>
-#include <asm/lse.h>
-#include <asm/pgtable-hwdef.h>
-#include <asm/pointer_auth.h>
-#include <asm/ptrace.h>
-#include <asm/spectre.h>
-#include <asm/types.h>
+#include <yai/alternative.h>
+#include <yai/cpufeature.h>
+#include <yai/hw_breakpoint.h>
+#include <yai/kasan.h>
+#include <yai/lse.h>
+#include <yai/pgtable-hwdef.h>
+#include <yai/pointer_auth.h>
+#include <yai/ptrace.h>
+#include <yai/spectre.h>
+#include <yai/types.h>
 
 /*
  * TASK_SIZE - the maximum size of a user space task.
@@ -406,14 +406,14 @@ extern void __init minsigstksz_setup(void);
 
 /*
  * Not at the top of the file due to a direct #include cycle between
- * <asm/fpsimd.h> and <asm/processor.h>.  Deferring this #include
+ * <yai/fpsimd.h> and <yai/processor.h>.  Deferring this #include
  * ensures that contents of processor.h are visible to fpsimd.h even if
  * processor.h is included first.
  *
  * These prctl helpers are the only things in this file that require
  * fpsimd.h.  The core code expects them to be in this header.
  */
-#include <asm/fpsimd.h>
+#include <yai/fpsimd.h>
 
 /* Userspace interface for PR_S[MV]E_{SET,GET}_VL prctl()s: */
 #define SVE_SET_VL(arg)	sve_set_current_vl(arg)

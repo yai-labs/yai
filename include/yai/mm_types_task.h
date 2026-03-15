@@ -11,10 +11,10 @@
 #include <yai/align.h>
 #include <yai/types.h>
 
-#include <asm/page.h>
+#include <yai/page.h>
 
 #ifdef CONFIG_ARCH_WANT_BATCHED_UNMAP_TLB_FLUSH
-#include <asm/tlbbatch.h>
+#include <yai/tlbbatch.h>
 #endif
 
 #define ALLOC_SPLIT_PTLOCKS	(SPINLOCK_SIZE > BITS_PER_LONG/8)

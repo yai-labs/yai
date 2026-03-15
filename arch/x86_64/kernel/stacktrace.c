@@ -3,14 +3,14 @@
  *
  *  Copyright (C) 2006-2009 Red Hat, Inc., Ingo Molnar <mingo@redhat.com>
  */
-#include <linux/sched.h>
-#include <linux/sched/debug.h>
-#include <linux/sched/task_stack.h>
-#include <linux/stacktrace.h>
-#include <linux/export.h>
-#include <linux/uaccess.h>
-#include <asm/stacktrace.h>
-#include <asm/unwind.h>
+#include <yai/sched.h>
+#include <yai/sched/debug.h>
+#include <yai/sched/task_stack.h>
+#include <yai/stacktrace.h>
+#include <yai/export.h>
+#include <yai/uaccess.h>
+#include <yai/stacktrace.h>
+#include <yai/unwind.h>
 
 void arch_stack_walk(stack_trace_consume_fn consume_entry, void *cookie,
 		     struct task_struct *task, struct pt_regs *regs)

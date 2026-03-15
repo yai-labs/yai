@@ -7,16 +7,16 @@
  * Based on arch/x86/mm/hugetlbpage.c.
  */
 
-#include <linux/init.h>
-#include <linux/fs.h>
-#include <linux/mm.h>
-#include <linux/hugetlb.h>
-#include <linux/pagemap.h>
-#include <linux/err.h>
-#include <linux/sysctl.h>
-#include <asm/mman.h>
-#include <asm/tlb.h>
-#include <asm/tlbflush.h>
+#include <yai/init.h>
+#include <yai/fs.h>
+#include <yai/mm.h>
+#include <yai/hugetlb.h>
+#include <yai/pagemap.h>
+#include <yai/err.h>
+#include <yai/sysctl.h>
+#include <yai/mman.h>
+#include <yai/tlb.h>
+#include <yai/tlbflush.h>
 
 /*
  * HugeTLB Support Matrix

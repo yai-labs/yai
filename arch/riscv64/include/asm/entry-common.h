@@ -3,9 +3,9 @@
 #ifndef _ASM_RISCV_ENTRY_COMMON_H
 #define _ASM_RISCV_ENTRY_COMMON_H
 
-#include <asm/stacktrace.h>
-#include <asm/thread_info.h>
-#include <asm/vector.h>
+#include <yai/stacktrace.h>
+#include <yai/thread_info.h>
+#include <yai/vector.h>
 
 static inline void arch_exit_to_user_mode_prepare(struct pt_regs *regs,
 						  unsigned long ti_work)

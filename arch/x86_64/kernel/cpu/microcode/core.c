@@ -17,28 +17,28 @@
 
 #define pr_fmt(fmt) "microcode: " fmt
 
-#include <linux/stop_machine.h>
-#include <linux/device/faux.h>
-#include <linux/syscore_ops.h>
-#include <linux/miscdevice.h>
-#include <linux/capability.h>
-#include <linux/firmware.h>
-#include <linux/cpumask.h>
-#include <linux/kernel.h>
-#include <linux/delay.h>
-#include <linux/mutex.h>
-#include <linux/cpu.h>
-#include <linux/nmi.h>
-#include <linux/fs.h>
-#include <linux/mm.h>
+#include <yai/stop_machine.h>
+#include <yai/device/faux.h>
+#include <yai/syscore_ops.h>
+#include <yai/miscdevice.h>
+#include <yai/capability.h>
+#include <yai/firmware.h>
+#include <yai/cpumask.h>
+#include <yai/kernel.h>
+#include <yai/delay.h>
+#include <yai/mutex.h>
+#include <yai/cpu.h>
+#include <yai/nmi.h>
+#include <yai/fs.h>
+#include <yai/mm.h>
 
-#include <asm/apic.h>
-#include <asm/cpu_device_id.h>
-#include <asm/perf_event.h>
-#include <asm/processor.h>
-#include <asm/cmdline.h>
-#include <asm/msr.h>
-#include <asm/setup.h>
+#include <yai/apic.h>
+#include <yai/cpu_device_id.h>
+#include <yai/perf_event.h>
+#include <yai/processor.h>
+#include <yai/cmdline.h>
+#include <yai/msr.h>
+#include <yai/setup.h>
 
 #include "internal.h"
 

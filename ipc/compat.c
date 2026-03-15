@@ -21,17 +21,17 @@
  * by Jakub Jelinek.
  *
  */
-#include <linux/compat.h>
-#include <linux/errno.h>
-#include <linux/highuid.h>
-#include <linux/init.h>
-#include <linux/msg.h>
-#include <linux/shm.h>
-#include <linux/syscalls.h>
-#include <linux/ptrace.h>
+#include <yai/compat.h>
+#include <yai/errno.h>
+#include <yai/highuid.h>
+#include <yai/init.h>
+#include <yai/msg.h>
+#include <yai/shm.h>
+#include <yai/syscalls.h>
+#include <yai/ptrace.h>
 
-#include <linux/mutex.h>
-#include <linux/uaccess.h>
+#include <yai/mutex.h>
+#include <yai/uaccess.h>
 
 #include "util.h"
 

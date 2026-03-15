@@ -3,7 +3,7 @@
 #define _ASM_X86_SIGNAL_H
 
 #ifndef __ASSEMBLER__
-#include <linux/linkage.h>
+#include <yai/linkage.h>
 
 /* Most things should be clean enough to redefine this at will, if care
    is taken to make libc match.  */
@@ -34,7 +34,7 @@ typedef struct {
 
 #define __ARCH_HAS_SA_RESTORER
 
-#include <asm/asm.h>
+#include <yai/asm.h>
 #include <uapi/asm/sigcontext.h>
 
 #ifdef __i386__

@@ -7,21 +7,21 @@
  * Jiang Liu <jiang.liu@linux.intel.com>
  *	Enable support of hierarchical irqdomains
  */
-#include <linux/interrupt.h>
-#include <linux/irq.h>
-#include <linux/seq_file.h>
-#include <linux/init.h>
-#include <linux/compiler.h>
-#include <linux/slab.h>
-#include <asm/irqdomain.h>
-#include <asm/hw_irq.h>
-#include <asm/traps.h>
-#include <asm/apic.h>
-#include <asm/i8259.h>
-#include <asm/desc.h>
-#include <asm/irq_remapping.h>
+#include <yai/interrupt.h>
+#include <yai/irq.h>
+#include <yai/seq_file.h>
+#include <yai/init.h>
+#include <yai/compiler.h>
+#include <yai/slab.h>
+#include <yai/irqdomain.h>
+#include <yai/hw_irq.h>
+#include <yai/traps.h>
+#include <yai/apic.h>
+#include <yai/i8259.h>
+#include <yai/desc.h>
+#include <yai/irq_remapping.h>
 
-#include <asm/trace/irq_vectors.h>
+#include <yai/trace/irq_vectors.h>
 
 struct apic_chip_data {
 	struct irq_cfg		hw_irq_cfg;

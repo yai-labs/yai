@@ -11,11 +11,11 @@
 
 #ifndef __ASSEMBLER__
 
-#include <linux/linkage.h>
-#include <linux/preempt.h>
-#include <linux/types.h>
+#include <yai/linkage.h>
+#include <yai/preempt.h>
+#include <yai/types.h>
 
-#include <asm/virt.h>
+#include <yai/virt.h>
 
 DECLARE_PER_CPU(struct sdei_registered_event *, sdei_active_normal_event);
 DECLARE_PER_CPU(struct sdei_registered_event *, sdei_active_critical_event);

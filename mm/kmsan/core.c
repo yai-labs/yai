@@ -7,24 +7,24 @@
  *
  */
 
-#include <asm/page.h>
-#include <linux/compiler.h>
-#include <linux/export.h>
-#include <linux/highmem.h>
-#include <linux/interrupt.h>
-#include <linux/kernel.h>
-#include <linux/kmsan_types.h>
-#include <linux/memory.h>
-#include <linux/mm.h>
-#include <linux/mm_types.h>
-#include <linux/mmzone.h>
-#include <linux/percpu-defs.h>
-#include <linux/preempt.h>
-#include <linux/slab.h>
-#include <linux/stackdepot.h>
-#include <linux/stacktrace.h>
-#include <linux/types.h>
-#include <linux/vmalloc.h>
+#include <yai/page.h>
+#include <yai/compiler.h>
+#include <yai/export.h>
+#include <yai/highmem.h>
+#include <yai/interrupt.h>
+#include <yai/kernel.h>
+#include <yai/kmsan_types.h>
+#include <yai/memory.h>
+#include <yai/mm.h>
+#include <yai/mm_types.h>
+#include <yai/mmzone.h>
+#include <yai/percpu-defs.h>
+#include <yai/preempt.h>
+#include <yai/slab.h>
+#include <yai/stackdepot.h>
+#include <yai/stacktrace.h>
+#include <yai/types.h>
+#include <yai/vmalloc.h>
 
 #include "../slab.h"
 #include "kmsan.h"

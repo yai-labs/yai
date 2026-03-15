@@ -6,26 +6,26 @@
  * Copyright (C) 2001 Peter Bergner.
  */
 
-#include <linux/kernel.h>
-#include <linux/slab.h>
-#include <linux/init.h>
-#include <linux/bitops.h>
-#include <linux/poison.h>
-#include <linux/pfn.h>
-#include <linux/debugfs.h>
-#include <linux/kmemleak.h>
-#include <linux/seq_file.h>
-#include <linux/memblock.h>
-#include <linux/mutex.h>
+#include <yai/kernel.h>
+#include <yai/slab.h>
+#include <yai/init.h>
+#include <yai/bitops.h>
+#include <yai/poison.h>
+#include <yai/pfn.h>
+#include <yai/debugfs.h>
+#include <yai/kmemleak.h>
+#include <yai/seq_file.h>
+#include <yai/memblock.h>
+#include <yai/mutex.h>
 
 #ifdef CONFIG_KEXEC_HANDOVER
-#include <linux/libfdt.h>
-#include <linux/kexec_handover.h>
-#include <linux/kho/abi/memblock.h>
+#include <yai/libfdt.h>
+#include <yai/kexec_handover.h>
+#include <yai/kho/abi/memblock.h>
 #endif /* CONFIG_KEXEC_HANDOVER */
 
-#include <asm/sections.h>
-#include <linux/io.h>
+#include <yai/sections.h>
+#include <yai/io.h>
 
 #include "internal.h"
 

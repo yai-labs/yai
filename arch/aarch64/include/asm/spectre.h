@@ -13,11 +13,11 @@
 #define __BP_HARDEN_HYP_VECS_SZ	((BP_HARDEN_EL2_SLOTS - 1) * SZ_2K)
 
 #ifndef __ASSEMBLER__
-#include <linux/smp.h>
-#include <asm/percpu.h>
+#include <yai/smp.h>
+#include <yai/percpu.h>
 
-#include <asm/cpufeature.h>
-#include <asm/virt.h>
+#include <yai/cpufeature.h>
+#include <yai/virt.h>
 
 /* Watch out, ordering is important here. */
 enum mitigation_state {

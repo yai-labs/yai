@@ -6,17 +6,17 @@
 #ifndef _ASM_RISCV_PROCESSOR_H
 #define _ASM_RISCV_PROCESSOR_H
 
-#include <linux/const.h>
-#include <linux/cache.h>
-#include <linux/prctl.h>
+#include <yai/const.h>
+#include <yai/cache.h>
+#include <yai/prctl.h>
 
 #include <vdso/processor.h>
 
-#include <asm/ptrace.h>
-#include <asm/insn-def.h>
-#include <asm/alternative-macros.h>
-#include <asm/hwcap.h>
-#include <asm/usercfi.h>
+#include <yai/ptrace.h>
+#include <yai/insn-def.h>
+#include <yai/alternative-macros.h>
+#include <yai/hwcap.h>
+#include <yai/usercfi.h>
 
 #define arch_get_mmap_end(addr, len, flags)			\
 ({								\

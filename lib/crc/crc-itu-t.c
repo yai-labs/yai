@@ -3,10 +3,10 @@
  *      crc-itu-t.c
  */
 
-#include <linux/crc-itu-t.h>
-#include <linux/export.h>
-#include <linux/module.h>
-#include <linux/types.h>
+#include <yai/crc-itu-t.h>
+#include <yai/export.h>
+#include <yai/module.h>
+#include <yai/types.h>
 
 /* CRC table for the CRC ITU-T V.41 0x1021 (x^16 + x^12 + x^5 + 1) */
 const u16 crc_itu_t_table[256] = {

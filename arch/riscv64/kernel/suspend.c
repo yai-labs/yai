@@ -6,11 +6,11 @@
 
 #define pr_fmt(fmt) "suspend: " fmt
 
-#include <linux/ftrace.h>
-#include <linux/suspend.h>
-#include <asm/csr.h>
-#include <asm/sbi.h>
-#include <asm/suspend.h>
+#include <yai/ftrace.h>
+#include <yai/suspend.h>
+#include <yai/csr.h>
+#include <yai/sbi.h>
+#include <yai/suspend.h>
 
 void suspend_save_csrs(struct suspend_context *context)
 {

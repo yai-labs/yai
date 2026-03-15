@@ -22,13 +22,13 @@
  */
 
 #ifdef CONFIG_PERF_EVENTS
-# include <asm/perf_event.h>
-# include <asm/local64.h>
+# include <yai/perf_event.h>
+# include <yai/local64.h>
 #endif
 
 #ifdef CONFIG_HAVE_HW_BREAKPOINT
 # include <yai/rhashtable-types.h>
-# include <asm/hw_breakpoint.h>
+# include <yai/hw_breakpoint.h>
 #endif
 
 #include <yai/list.h>
@@ -54,7 +54,7 @@
 #include <yai/static_call.h>
 #include <yai/lockdep.h>
 
-#include <asm/local.h>
+#include <yai/local.h>
 
 struct perf_callchain_entry {
 	u64				nr;

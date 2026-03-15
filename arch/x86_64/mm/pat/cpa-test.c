@@ -5,16 +5,16 @@
  * Clears the a test pte bit on random pages in the direct mapping,
  * then reverts and compares page tables forwards and afterwards.
  */
-#include <linux/memblock.h>
-#include <linux/kthread.h>
-#include <linux/random.h>
-#include <linux/kernel.h>
-#include <linux/init.h>
-#include <linux/mm.h>
-#include <linux/vmalloc.h>
+#include <yai/memblock.h>
+#include <yai/kthread.h>
+#include <yai/random.h>
+#include <yai/kernel.h>
+#include <yai/init.h>
+#include <yai/mm.h>
+#include <yai/vmalloc.h>
 
-#include <asm/cacheflush.h>
-#include <asm/kdebug.h>
+#include <yai/cacheflush.h>
+#include <yai/kdebug.h>
 
 /*
  * Only print the results of the first pass:

@@ -7,12 +7,12 @@
  */
 
 #include <crypto/internal/simd.h>
-#include <linux/jump_label.h>
-#include <linux/kernel.h>
+#include <yai/jump_label.h>
+#include <yai/kernel.h>
 
-#include <asm/cputype.h>
-#include <asm/hwcap.h>
-#include <asm/simd.h>
+#include <yai/cputype.h>
+#include <yai/hwcap.h>
+#include <yai/simd.h>
 
 asmlinkage void chacha_block_xor_neon(const struct chacha_state *state,
 				      u8 *dst, const u8 *src, int nrounds);

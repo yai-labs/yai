@@ -19,6 +19,6 @@
 
 #define EXEC_PAGESIZE	65536
 
-#include <asm-generic/param.h>
+#include <yai/param.h>
 
 #endif

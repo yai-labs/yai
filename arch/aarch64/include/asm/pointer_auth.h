@@ -2,13 +2,13 @@
 #ifndef __ASM_POINTER_AUTH_H
 #define __ASM_POINTER_AUTH_H
 
-#include <linux/bitops.h>
-#include <linux/prctl.h>
-#include <linux/random.h>
+#include <yai/bitops.h>
+#include <yai/prctl.h>
+#include <yai/random.h>
 
-#include <asm/cpufeature.h>
-#include <asm/memory.h>
-#include <asm/sysreg.h>
+#include <yai/cpufeature.h>
+#include <yai/memory.h>
+#include <yai/sysreg.h>
 
 /*
  * The EL0/EL1 pointer bits used by a pointer authentication code.

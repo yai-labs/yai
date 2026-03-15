@@ -8,18 +8,18 @@
 /*
  * The mincore() system call.
  */
-#include <linux/pagemap.h>
-#include <linux/gfp.h>
-#include <linux/pagewalk.h>
-#include <linux/mman.h>
-#include <linux/syscalls.h>
-#include <linux/swap.h>
-#include <linux/leafops.h>
-#include <linux/shmem_fs.h>
-#include <linux/hugetlb.h>
-#include <linux/pgtable.h>
+#include <yai/pagemap.h>
+#include <yai/gfp.h>
+#include <yai/pagewalk.h>
+#include <yai/mman.h>
+#include <yai/syscalls.h>
+#include <yai/swap.h>
+#include <yai/leafops.h>
+#include <yai/shmem_fs.h>
+#include <yai/hugetlb.h>
+#include <yai/pgtable.h>
 
-#include <linux/uaccess.h>
+#include <yai/uaccess.h>
 #include "swap.h"
 #include "internal.h"
 

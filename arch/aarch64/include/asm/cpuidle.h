@@ -2,10 +2,10 @@
 #ifndef __ASM_CPUIDLE_H
 #define __ASM_CPUIDLE_H
 
-#include <asm/proc-fns.h>
+#include <yai/proc-fns.h>
 
 #ifdef CONFIG_ARM64_PSEUDO_NMI
-#include <asm/arch_gicv3.h>
+#include <yai/arch_gicv3.h>
 
 struct arm_cpuidle_irq_context {
 	unsigned long pmr;

@@ -2,11 +2,11 @@
 #ifndef _ASM_X86_NUMA_H
 #define _ASM_X86_NUMA_H
 
-#include <linux/nodemask.h>
-#include <linux/errno.h>
+#include <yai/nodemask.h>
+#include <yai/errno.h>
 
-#include <asm/topology.h>
-#include <asm/apicdef.h>
+#include <yai/topology.h>
+#include <yai/apicdef.h>
 
 #ifdef CONFIG_NUMA
 

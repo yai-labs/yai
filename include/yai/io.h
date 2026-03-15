@@ -7,7 +7,7 @@
 #ifndef __ASM_GENERIC_IO_H
 #define __ASM_GENERIC_IO_H
 
-#include <asm/page.h> /* I/O is all done through memory accesses */
+#include <yai/page.h> /* I/O is all done through memory accesses */
 #include <yai/string.h> /* for memset() and memcpy() */
 #include <yai/sizes.h>
 #include <yai/types.h>
@@ -17,7 +17,7 @@
 #include <yai/asm-generic/iomap.h>
 #endif
 
-#include <asm/mmiowb.h>
+#include <yai/mmiowb.h>
 #include <yai/asm-generic/pci_iomap.h>
 
 #ifndef __io_br

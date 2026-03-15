@@ -5,7 +5,7 @@
 #ifndef _ASM_X86_FPU_TYPES_H
 #define _ASM_X86_FPU_TYPES_H
 
-#include <asm/page_types.h>
+#include <yai/page_types.h>
 
 /*
  * The legacy x87 FPU state format, as saved by FSAVE and

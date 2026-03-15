@@ -21,10 +21,10 @@
  *
  */
 
-#include <linux/init.h>
-#include <linux/export.h>
-#include <asm/processor.h>
-#include <asm/hypervisor.h>
+#include <yai/init.h>
+#include <yai/export.h>
+#include <yai/processor.h>
+#include <yai/hypervisor.h>
 
 static const __initconst struct hypervisor_x86 * const hypervisors[] =
 {

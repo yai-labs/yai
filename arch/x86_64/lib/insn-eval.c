@@ -3,18 +3,18 @@
  *
  * Copyright (C) Intel Corporation 2017
  */
-#include <linux/kernel.h>
-#include <linux/string.h>
-#include <linux/ratelimit.h>
-#include <linux/mmu_context.h>
-#include <asm/desc_defs.h>
-#include <asm/desc.h>
-#include <asm/inat.h>
-#include <asm/insn.h>
-#include <asm/insn-eval.h>
-#include <asm/ldt.h>
-#include <asm/msr.h>
-#include <asm/vm86.h>
+#include <yai/kernel.h>
+#include <yai/string.h>
+#include <yai/ratelimit.h>
+#include <yai/mmu_context.h>
+#include <yai/desc_defs.h>
+#include <yai/desc.h>
+#include <yai/inat.h>
+#include <yai/insn.h>
+#include <yai/insn-eval.h>
+#include <yai/ldt.h>
+#include <yai/msr.h>
+#include <yai/vm86.h>
 
 #undef pr_fmt
 #define pr_fmt(fmt) "insn: " fmt

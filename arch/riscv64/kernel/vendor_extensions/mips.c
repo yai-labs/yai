@@ -3,13 +3,13 @@
  * Copyright (C) 2025 MIPS.
  */
 
-#include <asm/cpufeature.h>
-#include <asm/vendor_extensions.h>
-#include <asm/vendor_extensions/mips.h>
+#include <yai/cpufeature.h>
+#include <yai/vendor_extensions.h>
+#include <yai/vendor_extensions/mips.h>
 
-#include <linux/array_size.h>
-#include <linux/cpumask.h>
-#include <linux/types.h>
+#include <yai/array_size.h>
+#include <yai/cpumask.h>
+#include <yai/types.h>
 
 /* All MIPS vendor extensions supported in Linux */
 static const struct riscv_isa_ext_data riscv_isa_vendor_ext_mips[] = {

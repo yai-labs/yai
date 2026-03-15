@@ -4,9 +4,9 @@
 
 /* Kprobes and Optprobes common header */
 
-#include <asm/asm.h>
-#include <asm/frame.h>
-#include <asm/insn.h>
+#include <yai/asm.h>
+#include <yai/frame.h>
+#include <yai/insn.h>
 
 #ifdef CONFIG_X86_64
 

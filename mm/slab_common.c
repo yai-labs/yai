@@ -4,30 +4,30 @@
  *
  * (C) 2012 Christoph Lameter <cl@gentwo.org>
  */
-#include <linux/slab.h>
+#include <yai/slab.h>
 
-#include <linux/mm.h>
-#include <linux/poison.h>
-#include <linux/interrupt.h>
-#include <linux/memory.h>
-#include <linux/cache.h>
-#include <linux/compiler.h>
-#include <linux/kfence.h>
-#include <linux/module.h>
-#include <linux/cpu.h>
-#include <linux/uaccess.h>
-#include <linux/seq_file.h>
-#include <linux/dma-mapping.h>
-#include <linux/swiotlb.h>
-#include <linux/proc_fs.h>
-#include <linux/debugfs.h>
-#include <linux/kmemleak.h>
-#include <linux/kasan.h>
-#include <asm/cacheflush.h>
-#include <asm/tlbflush.h>
-#include <asm/page.h>
-#include <linux/memcontrol.h>
-#include <linux/stackdepot.h>
+#include <yai/mm.h>
+#include <yai/poison.h>
+#include <yai/interrupt.h>
+#include <yai/memory.h>
+#include <yai/cache.h>
+#include <yai/compiler.h>
+#include <yai/kfence.h>
+#include <yai/module.h>
+#include <yai/cpu.h>
+#include <yai/uaccess.h>
+#include <yai/seq_file.h>
+#include <yai/dma-mapping.h>
+#include <yai/swiotlb.h>
+#include <yai/proc_fs.h>
+#include <yai/debugfs.h>
+#include <yai/kmemleak.h>
+#include <yai/kasan.h>
+#include <yai/cacheflush.h>
+#include <yai/tlbflush.h>
+#include <yai/page.h>
+#include <yai/memcontrol.h>
+#include <yai/stackdepot.h>
 #include <trace/events/rcu.h>
 
 #include "../kernel/rcu/rcu.h"
@@ -1239,7 +1239,7 @@ void kfree_sensitive(const void *p)
 EXPORT_SYMBOL(kfree_sensitive);
 
 #ifdef CONFIG_BPF_SYSCALL
-#include <linux/btf.h>
+#include <yai/btf.h>
 
 __bpf_kfunc_start_defs();
 

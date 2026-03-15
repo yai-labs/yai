@@ -8,7 +8,7 @@
 #ifndef _CS5535_H
 #define _CS5535_H
 
-#include <asm/msr.h>
+#include <yai/msr.h>
 
 /* MSRs */
 #define MSR_GLIU_P2D_RO0	0x10000029

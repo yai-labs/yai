@@ -3,18 +3,18 @@
 
 */
 
-#include <linux/clocksource.h>
-#include <linux/kernel.h>
-#include <linux/percpu.h>
-#include <linux/notifier.h>
-#include <linux/sched.h>
-#include <linux/gfp.h>
-#include <linux/memblock.h>
-#include <linux/nmi.h>
+#include <yai/clocksource.h>
+#include <yai/kernel.h>
+#include <yai/percpu.h>
+#include <yai/notifier.h>
+#include <yai/sched.h>
+#include <yai/gfp.h>
+#include <yai/memblock.h>
+#include <yai/nmi.h>
 
-#include <asm/fixmap.h>
-#include <asm/pvclock.h>
-#include <asm/vgtod.h>
+#include <yai/fixmap.h>
+#include <yai/pvclock.h>
+#include <yai/vgtod.h>
 
 static u8 valid_flags __read_mostly = 0;
 static struct pvclock_vsyscall_time_info *pvti_cpu0_va __read_mostly;

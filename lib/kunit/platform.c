@@ -3,10 +3,10 @@
  * Test managed platform driver
  */
 
-#include <linux/completion.h>
-#include <linux/device/bus.h>
-#include <linux/device/driver.h>
-#include <linux/platform_device.h>
+#include <yai/completion.h>
+#include <yai/device/bus.h>
+#include <yai/device/driver.h>
+#include <yai/platform_device.h>
 
 #include <kunit/platform_device.h>
 #include <kunit/resource.h>

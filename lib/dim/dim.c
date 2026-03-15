@@ -3,7 +3,7 @@
  * Copyright (c) 2019, Mellanox Technologies inc.  All rights reserved.
  */
 
-#include <linux/dim.h>
+#include <yai/dim.h>
 
 bool dim_on_top(struct dim *dim)
 {

@@ -3,7 +3,7 @@
 #define _ASM_X86_CPU_DEVICE_ID
 
 /*
- * Can't use <linux/bitfield.h> because it generates expressions that
+ * Can't use <yai/bitfield.h> because it generates expressions that
  * cannot be used in structure initializers. Bitfield construction
  * here must match the union in struct cpuinfo_86:
  *	union {
@@ -42,11 +42,11 @@
  * The wildcard initializers are in mod_devicetable.h because
  * file2alias needs them. Sigh.
  */
-#include <linux/mod_devicetable.h>
+#include <yai/mod_devicetable.h>
 /* Get the INTEL_FAM* model defines */
-#include <asm/intel-family.h>
+#include <yai/intel-family.h>
 /* And the X86_VENDOR_* ones */
-#include <asm/processor.h>
+#include <yai/processor.h>
 
 /* Centaur FAM6 models */
 #define X86_CENTAUR_FAM6_C7_A		0xa

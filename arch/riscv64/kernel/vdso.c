@@ -6,14 +6,14 @@
  * Copyright (C) 2015 Regents of the University of California
  */
 
-#include <linux/elf.h>
-#include <linux/mm.h>
-#include <linux/slab.h>
-#include <linux/binfmts.h>
-#include <linux/err.h>
-#include <asm/page.h>
-#include <asm/vdso.h>
-#include <linux/vdso_datastore.h>
+#include <yai/elf.h>
+#include <yai/mm.h>
+#include <yai/slab.h>
+#include <yai/binfmts.h>
+#include <yai/err.h>
+#include <yai/page.h>
+#include <yai/vdso.h>
+#include <yai/vdso_datastore.h>
 #include <vdso/datapage.h>
 #include <vdso/vsyscall.h>
 

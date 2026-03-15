@@ -7,7 +7,7 @@
 #ifndef _ASM_RISCV_IRQFLAGS_H
 #define _ASM_RISCV_IRQFLAGS_H
 
-#include <asm/csr.h>
+#include <yai/csr.h>
 
 /* read interrupt enabled status */
 static inline unsigned long arch_local_save_flags(void)

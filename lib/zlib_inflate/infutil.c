@@ -1,7 +1,7 @@
-#include <linux/zutil.h>
-#include <linux/errno.h>
-#include <linux/slab.h>
-#include <linux/vmalloc.h>
+#include <yai/zutil.h>
+#include <yai/errno.h>
+#include <yai/slab.h>
+#include <yai/vmalloc.h>
 
 /* Utility function: initialize zlib, unpack binary blob, clean up zlib,
  * return len or negative error code.

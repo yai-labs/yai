@@ -17,8 +17,8 @@
 #ifndef _ASM_MSHYPERV_H
 #define _ASM_MSHYPERV_H
 
-#include <linux/types.h>
-#include <linux/arm-smccc.h>
+#include <yai/types.h>
+#include <yai/arm-smccc.h>
 #include <hyperv/hvhdk.h>
 
 /*
@@ -61,6 +61,6 @@ static inline u64 hv_get_non_nested_msr(unsigned int reg)
 				ARM_SMCCC_OWNER_VENDOR_HYP,	\
 				HV_SMCCC_FUNC_NUMBER)
 
-#include <asm-generic/mshyperv.h>
+#include <yai/mshyperv.h>
 
 #endif

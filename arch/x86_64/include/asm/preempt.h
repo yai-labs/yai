@@ -2,10 +2,10 @@
 #ifndef __ASM_PREEMPT_H
 #define __ASM_PREEMPT_H
 
-#include <asm/rmwcc.h>
-#include <asm/percpu.h>
+#include <yai/rmwcc.h>
+#include <yai/percpu.h>
 
-#include <linux/static_call_types.h>
+#include <yai/static_call_types.h>
 
 DECLARE_PER_CPU_CACHE_HOT(int, __preempt_count);
 

@@ -63,10 +63,10 @@
 
 #ifndef __ASSEMBLER__
 
-#include <asm/ptrace.h>
-#include <asm/sections.h>
-#include <asm/sysreg.h>
-#include <asm/cpufeature.h>
+#include <yai/ptrace.h>
+#include <yai/sections.h>
+#include <yai/sysreg.h>
+#include <yai/cpufeature.h>
 
 /*
  * __boot_cpu_mode records what mode CPUs were booted in.

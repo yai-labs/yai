@@ -31,42 +31,42 @@
  *	workaround has been removed.
  */
 
-#include <linux/mm.h>
-#include <linux/interrupt.h>
-#include <linux/irq.h>
-#include <linux/init.h>
-#include <linux/delay.h>
-#include <linux/sched.h>
-#include <linux/pci.h>
-#include <linux/mc146818rtc.h>
-#include <linux/compiler.h>
-#include <linux/acpi.h>
-#include <linux/export.h>
-#include <linux/syscore_ops.h>
-#include <linux/freezer.h>
-#include <linux/kthread.h>
-#include <linux/jiffies.h>	/* time_after() */
-#include <linux/slab.h>
-#include <linux/memblock.h>
-#include <linux/msi.h>
+#include <yai/mm.h>
+#include <yai/interrupt.h>
+#include <yai/irq.h>
+#include <yai/init.h>
+#include <yai/delay.h>
+#include <yai/sched.h>
+#include <yai/pci.h>
+#include <yai/mc146818rtc.h>
+#include <yai/compiler.h>
+#include <yai/acpi.h>
+#include <yai/export.h>
+#include <yai/syscore_ops.h>
+#include <yai/freezer.h>
+#include <yai/kthread.h>
+#include <yai/jiffies.h>	/* time_after() */
+#include <yai/slab.h>
+#include <yai/memblock.h>
+#include <yai/msi.h>
 
-#include <asm/irqdomain.h>
-#include <asm/io.h>
-#include <asm/smp.h>
-#include <asm/cpu.h>
-#include <asm/desc.h>
-#include <asm/proto.h>
-#include <asm/acpi.h>
-#include <asm/dma.h>
-#include <asm/timer.h>
-#include <asm/time.h>
-#include <asm/i8259.h>
-#include <asm/setup.h>
-#include <asm/irq_remapping.h>
-#include <asm/hw_irq.h>
-#include <asm/apic.h>
-#include <asm/pgtable.h>
-#include <asm/x86_init.h>
+#include <yai/irqdomain.h>
+#include <yai/io.h>
+#include <yai/smp.h>
+#include <yai/cpu.h>
+#include <yai/desc.h>
+#include <yai/proto.h>
+#include <yai/acpi.h>
+#include <yai/dma.h>
+#include <yai/timer.h>
+#include <yai/time.h>
+#include <yai/i8259.h>
+#include <yai/setup.h>
+#include <yai/irq_remapping.h>
+#include <yai/hw_irq.h>
+#include <yai/apic.h>
+#include <yai/pgtable.h>
+#include <yai/x86_init.h>
 
 #define	for_each_ioapic(idx)		\
 	for ((idx) = 0; (idx) < nr_ioapics; (idx)++)

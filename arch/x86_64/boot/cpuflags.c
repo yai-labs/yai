@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: GPL-2.0
-#include <linux/types.h>
+#include <yai/types.h>
 #include "bitops.h"
 
-#include <asm/processor-flags.h>
-#include <asm/msr-index.h>
+#include <yai/processor-flags.h>
+#include <yai/msr-index.h>
 #include "cpuflags.h"
 
 struct cpu_features cpu;

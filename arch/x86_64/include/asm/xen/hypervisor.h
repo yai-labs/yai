@@ -36,8 +36,8 @@
 extern struct shared_info *HYPERVISOR_shared_info;
 extern struct start_info *xen_start_info;
 
-#include <asm/bug.h>
-#include <asm/processor.h>
+#include <yai/bug.h>
+#include <yai/processor.h>
 
 #define XEN_SIGNATURE "XenVMMXenVMM"
 

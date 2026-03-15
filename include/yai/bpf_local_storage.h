@@ -15,7 +15,7 @@
 #include <yai/types.h>
 #include <yai/bpf_mem_alloc.h>
 #include <yai/uapi/btf.h>
-#include <asm/rqspinlock.h>
+#include <yai/rqspinlock.h>
 
 #define BPF_LOCAL_STORAGE_CACHE_SIZE	16
 

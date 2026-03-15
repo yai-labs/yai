@@ -3,7 +3,7 @@
 #ifndef _UAPI_ASM_X86_AMD_HSMP_H_
 #define _UAPI_ASM_X86_AMD_HSMP_H_
 
-#include <linux/types.h>
+#include <yai/types.h>
 
 #pragma pack(4)
 

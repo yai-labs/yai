@@ -8,10 +8,10 @@
 
 #include <kunit/static_stub.h>
 #include <kunit/test.h>
-#include <linux/ktime.h>
-#include <linux/prandom.h>
-#include <linux/slab.h>
-#include <linux/timekeeping.h>
+#include <yai/ktime.h>
+#include <yai/prandom.h>
+#include <yai/slab.h>
+#include <yai/timekeeping.h>
 
 #include "string-stream.h"
 

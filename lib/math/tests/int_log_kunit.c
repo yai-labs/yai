@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0-only
 #include <kunit/test.h>
-#include <linux/int_log.h>
+#include <yai/int_log.h>
 
 struct test_case_params {
 	u32 value;

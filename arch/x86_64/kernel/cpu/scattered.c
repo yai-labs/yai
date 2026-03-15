@@ -2,11 +2,11 @@
  *	Routines to identify additional cpu features that are scattered in
  *	cpuid space.
  */
-#include <linux/cpu.h>
+#include <yai/cpu.h>
 
-#include <asm/memtype.h>
-#include <asm/apic.h>
-#include <asm/processor.h>
+#include <yai/memtype.h>
+#include <yai/apic.h>
+#include <yai/processor.h>
 
 #include "cpu.h"
 

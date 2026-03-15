@@ -6,9 +6,9 @@
  * Copyright 1997 Andi Kleen <ak@muc.de>
  * Copyright 1997 Linus Torvalds
  */
-#include <linux/export.h>
-#include <linux/uaccess.h>
-#include <asm/asm.h>
+#include <yai/export.h>
+#include <yai/uaccess.h>
+#include <yai/asm.h>
 
 #ifdef CONFIG_X86_INTEL_USERCOPY
 /*

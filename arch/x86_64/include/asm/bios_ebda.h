@@ -2,7 +2,7 @@
 #ifndef _ASM_X86_BIOS_EBDA_H
 #define _ASM_X86_BIOS_EBDA_H
 
-#include <asm/io.h>
+#include <yai/io.h>
 
 /*
  * Returns physical address of EBDA.  Returns 0 if there is no EBDA.

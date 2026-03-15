@@ -6,9 +6,9 @@
 #ifndef _ASM_RISCV_SMP_H
 #define _ASM_RISCV_SMP_H
 
-#include <linux/cpumask.h>
-#include <linux/irqreturn.h>
-#include <linux/thread_info.h>
+#include <yai/cpumask.h>
+#include <yai/irqreturn.h>
+#include <yai/thread_info.h>
 
 #define INVALID_HARTID ULONG_MAX
 
@@ -17,7 +17,7 @@ extern unsigned long boot_cpu_hartid;
 
 #ifdef CONFIG_SMP
 
-#include <linux/jump_label.h>
+#include <yai/jump_label.h>
 
 /*
  * Mapping between linux logical cpu index and hartid.

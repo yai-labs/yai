@@ -11,16 +11,16 @@
 #ifndef _ASM_RISCV_IO_H
 #define _ASM_RISCV_IO_H
 
-#include <linux/types.h>
-#include <linux/pgtable.h>
-#include <asm/mmiowb.h>
-#include <asm/early_ioremap.h>
+#include <yai/types.h>
+#include <yai/pgtable.h>
+#include <yai/mmiowb.h>
+#include <yai/early_ioremap.h>
 
 /*
  * MMIO access functions are separated out to break dependency cycles
  * when using {read,write}* fns in low-level headers
  */
-#include <asm/mmio.h>
+#include <yai/mmio.h>
 
 /*
  *  I/O port access constants.
@@ -137,7 +137,7 @@ __io_writes_outs(outs, u64, q, __io_pbr(), __io_paw())
 #define outsq(addr, buffer, count) __outsq(PCI_IOBASE + (addr), buffer, count)
 #endif
 
-#include <asm-generic/io.h>
+#include <yai/io.h>
 
 #ifdef CONFIG_MMU
 #define arch_memremap_wb(addr, size, flags)	\

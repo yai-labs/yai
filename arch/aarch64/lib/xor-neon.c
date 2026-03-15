@@ -6,9 +6,9 @@
  * Copyright (C) 2018,Tianjin KYLIN Information Technology Co., Ltd.
  */
 
-#include <linux/raid/xor.h>
-#include <linux/module.h>
-#include <asm/neon-intrinsics.h>
+#include <yai/raid/xor.h>
+#include <yai/module.h>
+#include <yai/neon-intrinsics.h>
 
 static void xor_arm64_neon_2(unsigned long bytes, unsigned long * __restrict p1,
 	const unsigned long * __restrict p2)

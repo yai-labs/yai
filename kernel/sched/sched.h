@@ -5,75 +5,75 @@
 #ifndef _KERNEL_SCHED_SCHED_H
 #define _KERNEL_SCHED_SCHED_H
 
-#include <linux/prandom.h>
-#include <linux/sched/affinity.h>
-#include <linux/sched/autogroup.h>
-#include <linux/sched/cpufreq.h>
-#include <linux/sched/deadline.h>
-#include <linux/sched.h>
-#include <linux/sched/loadavg.h>
-#include <linux/sched/mm.h>
-#include <linux/sched/rseq_api.h>
-#include <linux/sched/signal.h>
-#include <linux/sched/smt.h>
-#include <linux/sched/stat.h>
-#include <linux/sched/sysctl.h>
-#include <linux/sched/task_flags.h>
-#include <linux/sched/task.h>
-#include <linux/sched/topology.h>
-#include <linux/atomic.h>
-#include <linux/bitmap.h>
-#include <linux/bug.h>
-#include <linux/capability.h>
-#include <linux/cgroup_api.h>
-#include <linux/cgroup.h>
-#include <linux/context_tracking.h>
-#include <linux/cpufreq.h>
-#include <linux/cpumask_api.h>
-#include <linux/cpuset.h>
-#include <linux/ctype.h>
-#include <linux/file.h>
-#include <linux/fs_api.h>
-#include <linux/hrtimer_api.h>
-#include <linux/interrupt.h>
-#include <linux/irq_work.h>
-#include <linux/jiffies.h>
-#include <linux/kref_api.h>
-#include <linux/kthread.h>
-#include <linux/ktime_api.h>
-#include <linux/lockdep_api.h>
-#include <linux/lockdep.h>
-#include <linux/memblock.h>
-#include <linux/memcontrol.h>
-#include <linux/minmax.h>
-#include <linux/mm.h>
-#include <linux/module.h>
-#include <linux/mutex_api.h>
-#include <linux/plist.h>
-#include <linux/poll.h>
-#include <linux/proc_fs.h>
-#include <linux/profile.h>
-#include <linux/psi.h>
-#include <linux/rcupdate.h>
-#include <linux/seq_file.h>
-#include <linux/seqlock.h>
-#include <linux/softirq.h>
-#include <linux/spinlock_api.h>
-#include <linux/static_key.h>
-#include <linux/stop_machine.h>
-#include <linux/syscalls_api.h>
-#include <linux/syscalls.h>
-#include <linux/tick.h>
-#include <linux/topology.h>
-#include <linux/types.h>
-#include <linux/u64_stats_sync_api.h>
-#include <linux/uaccess.h>
-#include <linux/vmstat.h>
-#include <linux/wait_api.h>
-#include <linux/wait_bit.h>
-#include <linux/workqueue_api.h>
-#include <linux/delayacct.h>
-#include <linux/mmu_context.h>
+#include <yai/prandom.h>
+#include <yai/sched/affinity.h>
+#include <yai/sched/autogroup.h>
+#include <yai/sched/cpufreq.h>
+#include <yai/sched/deadline.h>
+#include <yai/sched.h>
+#include <yai/sched/loadavg.h>
+#include <yai/sched/mm.h>
+#include <yai/sched/rseq_api.h>
+#include <yai/sched/signal.h>
+#include <yai/sched/smt.h>
+#include <yai/sched/stat.h>
+#include <yai/sched/sysctl.h>
+#include <yai/sched/task_flags.h>
+#include <yai/sched/task.h>
+#include <yai/sched/topology.h>
+#include <yai/atomic.h>
+#include <yai/bitmap.h>
+#include <yai/bug.h>
+#include <yai/capability.h>
+#include <yai/cgroup_api.h>
+#include <yai/cgroup.h>
+#include <yai/context_tracking.h>
+#include <yai/cpufreq.h>
+#include <yai/cpumask_api.h>
+#include <yai/cpuset.h>
+#include <yai/ctype.h>
+#include <yai/file.h>
+#include <yai/fs_api.h>
+#include <yai/hrtimer_api.h>
+#include <yai/interrupt.h>
+#include <yai/irq_work.h>
+#include <yai/jiffies.h>
+#include <yai/kref_api.h>
+#include <yai/kthread.h>
+#include <yai/ktime_api.h>
+#include <yai/lockdep_api.h>
+#include <yai/lockdep.h>
+#include <yai/memblock.h>
+#include <yai/memcontrol.h>
+#include <yai/minmax.h>
+#include <yai/mm.h>
+#include <yai/module.h>
+#include <yai/mutex_api.h>
+#include <yai/plist.h>
+#include <yai/poll.h>
+#include <yai/proc_fs.h>
+#include <yai/profile.h>
+#include <yai/psi.h>
+#include <yai/rcupdate.h>
+#include <yai/seq_file.h>
+#include <yai/seqlock.h>
+#include <yai/softirq.h>
+#include <yai/spinlock_api.h>
+#include <yai/static_key.h>
+#include <yai/stop_machine.h>
+#include <yai/syscalls_api.h>
+#include <yai/syscalls.h>
+#include <yai/tick.h>
+#include <yai/topology.h>
+#include <yai/types.h>
+#include <yai/u64_stats_sync_api.h>
+#include <yai/uaccess.h>
+#include <yai/vmstat.h>
+#include <yai/wait_api.h>
+#include <yai/wait_bit.h>
+#include <yai/workqueue_api.h>
+#include <yai/delayacct.h>
+#include <yai/mmu_context.h>
 
 #include <trace/events/power.h>
 #include <trace/events/sched.h>
@@ -87,10 +87,10 @@ struct sched_group;
 struct cpuidle_state;
 
 #if defined(CONFIG_PARAVIRT) && !defined(CONFIG_HAVE_PV_STEAL_CLOCK_GEN)
-# include <asm/paravirt.h>
+# include <yai/paravirt.h>
 #endif
 
-#include <asm/barrier.h>
+#include <yai/barrier.h>
 
 #include "cpupri.h"
 #include "cpudeadline.h"
@@ -2097,7 +2097,7 @@ queue_balance_callback(struct rq *rq,
 /* A mask of all the SD flags that have the SDF_SHARED_CHILD metaflag */
 #define SD_FLAG(name, mflags) (name * !!((mflags) & SDF_SHARED_CHILD)) |
 static const unsigned int SD_SHARED_CHILD_MASK =
-#include <linux/sched/sd_flags.h>
+#include <yai/sched/sd_flags.h>
 0;
 #undef SD_FLAG
 

@@ -157,7 +157,7 @@ static inline int get_cpu_cacheinfo_id(int cpu, int level)
 #define cpu_dcache_is_aliasing()	false
 #define cpu_icache_is_aliasing()	cpu_dcache_is_aliasing()
 #else
-#include <asm/cachetype.h>
+#include <yai/cachetype.h>
 
 #ifndef cpu_icache_is_aliasing
 #define cpu_icache_is_aliasing()	cpu_dcache_is_aliasing()

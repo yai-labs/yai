@@ -7,19 +7,19 @@
  */
 
 #define pr_fmt(fmt) "kasan: " fmt
-#include <linux/kasan.h>
-#include <linux/kernel.h>
-#include <linux/sched/task.h>
-#include <linux/memblock.h>
-#include <linux/start_kernel.h>
-#include <linux/mm.h>
+#include <yai/kasan.h>
+#include <yai/kernel.h>
+#include <yai/sched/task.h>
+#include <yai/memblock.h>
+#include <yai/start_kernel.h>
+#include <yai/mm.h>
 
-#include <asm/mmu_context.h>
-#include <asm/kernel-pgtable.h>
-#include <asm/page.h>
-#include <asm/pgalloc.h>
-#include <asm/sections.h>
-#include <asm/tlbflush.h>
+#include <yai/mmu_context.h>
+#include <yai/kernel-pgtable.h>
+#include <yai/page.h>
+#include <yai/pgalloc.h>
+#include <yai/sections.h>
+#include <yai/tlbflush.h>
 
 #if defined(CONFIG_KASAN_GENERIC) || defined(CONFIG_KASAN_SW_TAGS)
 

@@ -5,13 +5,13 @@
 #ifndef __ASM_MTE_KASAN_H
 #define __ASM_MTE_KASAN_H
 
-#include <asm/compiler.h>
-#include <asm/cputype.h>
-#include <asm/mte-def.h>
+#include <yai/compiler.h>
+#include <yai/cputype.h>
+#include <yai/mte-def.h>
 
 #ifndef __ASSEMBLER__
 
-#include <linux/types.h>
+#include <yai/types.h>
 
 #ifdef CONFIG_KASAN_HW_TAGS
 

@@ -5,16 +5,16 @@
 #ifndef __ASM_HARDIRQ_H
 #define __ASM_HARDIRQ_H
 
-#include <linux/cache.h>
-#include <linux/percpu.h>
-#include <linux/threads.h>
-#include <asm/barrier.h>
-#include <asm/irq.h>
-#include <asm/kvm_arm.h>
-#include <asm/sysreg.h>
+#include <yai/cache.h>
+#include <yai/percpu.h>
+#include <yai/threads.h>
+#include <yai/barrier.h>
+#include <yai/irq.h>
+#include <yai/kvm_arm.h>
+#include <yai/sysreg.h>
 
 #define ack_bad_irq ack_bad_irq
-#include <asm-generic/hardirq.h>
+#include <yai/hardirq.h>
 
 #define __ARCH_IRQ_EXIT_IRQS_DISABLED	1
 

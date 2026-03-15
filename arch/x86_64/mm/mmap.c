@@ -11,16 +11,16 @@
  * Copyright 2007 Jiri Kosina, SUSE Labs.
  */
 
-#include <linux/personality.h>
-#include <linux/mm.h>
-#include <linux/random.h>
-#include <linux/limits.h>
-#include <linux/sched/signal.h>
-#include <linux/sched/mm.h>
-#include <linux/compat.h>
-#include <linux/elf-randomize.h>
-#include <asm/elf.h>
-#include <asm/io.h>
+#include <yai/personality.h>
+#include <yai/mm.h>
+#include <yai/random.h>
+#include <yai/limits.h>
+#include <yai/sched/signal.h>
+#include <yai/sched/mm.h>
+#include <yai/compat.h>
+#include <yai/elf-randomize.h>
+#include <yai/elf.h>
+#include <yai/io.h>
 
 #include "physaddr.h"
 

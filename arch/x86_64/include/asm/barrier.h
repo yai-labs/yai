@@ -2,8 +2,8 @@
 #ifndef _ASM_X86_BARRIER_H
 #define _ASM_X86_BARRIER_H
 
-#include <asm/alternative.h>
-#include <asm/nops.h>
+#include <yai/alternative.h>
+#include <yai/nops.h>
 
 /*
  * Force strict CPU ordering.
@@ -78,6 +78,6 @@ do {									\
 /* Writing to CR3 provides a full memory barrier in switch_mm(). */
 #define smp_mb__after_switch_mm()	do { } while (0)
 
-#include <asm-generic/barrier.h>
+#include <yai/barrier.h>
 
 #endif /* _ASM_X86_BARRIER_H */

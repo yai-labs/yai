@@ -6,16 +6,16 @@
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
-#include <linux/types.h>
-#include <linux/slab.h>
-#include <linux/init.h>
-#include <linux/errno.h>
-#include <linux/export.h>
-#include <linux/spinlock.h>
-#include <linux/pci_ids.h>
+#include <yai/types.h>
+#include <yai/slab.h>
+#include <yai/init.h>
+#include <yai/errno.h>
+#include <yai/export.h>
+#include <yai/spinlock.h>
+#include <yai/pci_ids.h>
 
-#include <asm/amd/nb.h>
-#include <asm/cpuid/api.h>
+#include <yai/amd/nb.h>
+#include <yai/cpuid/api.h>
 
 static u32 *flush_words;
 

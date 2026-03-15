@@ -3,8 +3,8 @@
 #define _UAPI_ASM_X86_SIGNAL_H
 
 #ifndef __ASSEMBLER__
-#include <linux/types.h>
-#include <linux/compiler.h>
+#include <yai/types.h>
+#include <yai/compiler.h>
 
 /* Avoid too many header ordering problems.  */
 struct siginfo;
@@ -66,7 +66,7 @@ typedef unsigned long sigset_t;
 #define MINSIGSTKSZ	2048
 #define SIGSTKSZ	8192
 
-#include <asm-generic/signal-defs.h>
+#include <yai/signal-defs.h>
 
 #ifndef __ASSEMBLER__
 

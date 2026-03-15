@@ -5,8 +5,8 @@
  * Copyright (c) 2015 Markus Stockhausen <stockhausen@collogia.de>
  */
 
-#include <asm/switch_to.h>
-#include <linux/preempt.h>
+#include <yai/switch_to.h>
+#include <yai/preempt.h>
 
 #ifdef CONFIG_SPE
 /*

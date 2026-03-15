@@ -2,16 +2,16 @@
 #ifndef _ASM_X86_DESC_H
 #define _ASM_X86_DESC_H
 
-#include <asm/desc_defs.h>
-#include <asm/ldt.h>
-#include <asm/mmu.h>
-#include <asm/fixmap.h>
-#include <asm/irq_vectors.h>
-#include <asm/cpu_entry_area.h>
+#include <yai/desc_defs.h>
+#include <yai/ldt.h>
+#include <yai/mmu.h>
+#include <yai/fixmap.h>
+#include <yai/irq_vectors.h>
+#include <yai/cpu_entry_area.h>
 
-#include <linux/debug_locks.h>
-#include <linux/smp.h>
-#include <linux/percpu.h>
+#include <yai/debug_locks.h>
+#include <yai/smp.h>
+#include <yai/percpu.h>
 
 static inline void fill_ldt(struct desc_struct *desc, const struct user_desc *info)
 {
@@ -105,7 +105,7 @@ static inline int desc_empty(const void *ptr)
 }
 
 #ifdef CONFIG_PARAVIRT_XXL
-#include <asm/paravirt.h>
+#include <yai/paravirt.h>
 #else
 #define load_TR_desc()				native_load_tr_desc()
 #define load_gdt(dtr)				native_load_gdt(dtr)

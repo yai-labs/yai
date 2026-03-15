@@ -6,7 +6,7 @@
 #ifndef __RISCV_KVM_VMID_H_
 #define __RISCV_KVM_VMID_H_
 
-#include <linux/kvm_types.h>
+#include <yai/kvm_types.h>
 
 struct kvm_vmid {
 	/*

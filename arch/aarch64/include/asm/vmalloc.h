@@ -1,8 +1,8 @@
 #ifndef _ASM_ARM64_VMALLOC_H
 #define _ASM_ARM64_VMALLOC_H
 
-#include <asm/page.h>
-#include <asm/pgtable.h>
+#include <yai/page.h>
+#include <yai/pgtable.h>
 
 #ifdef CONFIG_HAVE_ARCH_HUGE_VMAP
 

@@ -6,25 +6,25 @@
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
-#include <linux/moduleloader.h>
-#include <linux/elf.h>
-#include <linux/vmalloc.h>
-#include <linux/fs.h>
-#include <linux/string.h>
-#include <linux/kernel.h>
-#include <linux/kasan.h>
-#include <linux/bug.h>
-#include <linux/mm.h>
-#include <linux/gfp.h>
-#include <linux/jump_label.h>
-#include <linux/random.h>
-#include <linux/memory.h>
-#include <linux/stackprotector.h>
+#include <yai/moduleloader.h>
+#include <yai/elf.h>
+#include <yai/vmalloc.h>
+#include <yai/fs.h>
+#include <yai/string.h>
+#include <yai/kernel.h>
+#include <yai/kasan.h>
+#include <yai/bug.h>
+#include <yai/mm.h>
+#include <yai/gfp.h>
+#include <yai/jump_label.h>
+#include <yai/random.h>
+#include <yai/memory.h>
+#include <yai/stackprotector.h>
 
-#include <asm/text-patching.h>
-#include <asm/page.h>
-#include <asm/setup.h>
-#include <asm/unwind.h>
+#include <yai/text-patching.h>
+#include <yai/page.h>
+#include <yai/setup.h>
+#include <yai/unwind.h>
 
 #if 0
 #define DEBUGP(fmt, ...)				\

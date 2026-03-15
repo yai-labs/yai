@@ -8,25 +8,25 @@
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
-#include <linux/list.h>
-#include <linux/rculist.h>
-#include <linux/spinlock.h>
-#include <linux/hash.h>
-#include <linux/export.h>
-#include <linux/kernel.h>
-#include <linux/uaccess.h>
-#include <linux/ptrace.h>
-#include <linux/preempt.h>
-#include <linux/percpu.h>
-#include <linux/kdebug.h>
-#include <linux/mutex.h>
-#include <linux/io.h>
-#include <linux/slab.h>
-#include <asm/cacheflush.h>
-#include <asm/tlbflush.h>
-#include <linux/errno.h>
-#include <asm/debugreg.h>
-#include <linux/mmiotrace.h>
+#include <yai/list.h>
+#include <yai/rculist.h>
+#include <yai/spinlock.h>
+#include <yai/hash.h>
+#include <yai/export.h>
+#include <yai/kernel.h>
+#include <yai/uaccess.h>
+#include <yai/ptrace.h>
+#include <yai/preempt.h>
+#include <yai/percpu.h>
+#include <yai/kdebug.h>
+#include <yai/mutex.h>
+#include <yai/io.h>
+#include <yai/slab.h>
+#include <yai/cacheflush.h>
+#include <yai/tlbflush.h>
+#include <yai/errno.h>
+#include <yai/debugreg.h>
+#include <yai/mmiotrace.h>
 
 #define KMMIO_PAGE_HASH_BITS 4
 #define KMMIO_PAGE_TABLE_SIZE (1 << KMMIO_PAGE_HASH_BITS)

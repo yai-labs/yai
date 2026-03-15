@@ -8,25 +8,25 @@
  * Refer to include/linux/hmm.h for information about heterogeneous memory
  * management or HMM for short.
  */
-#include <linux/pagewalk.h>
-#include <linux/hmm.h>
-#include <linux/hmm-dma.h>
-#include <linux/init.h>
-#include <linux/rmap.h>
-#include <linux/swap.h>
-#include <linux/slab.h>
-#include <linux/sched.h>
-#include <linux/mmzone.h>
-#include <linux/pagemap.h>
-#include <linux/leafops.h>
-#include <linux/hugetlb.h>
-#include <linux/memremap.h>
-#include <linux/sched/mm.h>
-#include <linux/jump_label.h>
-#include <linux/dma-mapping.h>
-#include <linux/pci-p2pdma.h>
-#include <linux/mmu_notifier.h>
-#include <linux/memory_hotplug.h>
+#include <yai/pagewalk.h>
+#include <yai/hmm.h>
+#include <yai/hmm-dma.h>
+#include <yai/init.h>
+#include <yai/rmap.h>
+#include <yai/swap.h>
+#include <yai/slab.h>
+#include <yai/sched.h>
+#include <yai/mmzone.h>
+#include <yai/pagemap.h>
+#include <yai/leafops.h>
+#include <yai/hugetlb.h>
+#include <yai/memremap.h>
+#include <yai/sched/mm.h>
+#include <yai/jump_label.h>
+#include <yai/dma-mapping.h>
+#include <yai/pci-p2pdma.h>
+#include <yai/mmu_notifier.h>
+#include <yai/memory_hotplug.h>
 
 #include "internal.h"
 

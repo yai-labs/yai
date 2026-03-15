@@ -5,8 +5,8 @@
 #ifndef __ASM_GCS_H
 #define __ASM_GCS_H
 
-#include <asm/types.h>
-#include <asm/uaccess.h>
+#include <yai/types.h>
+#include <yai/uaccess.h>
 
 struct kernel_clone_args;
 struct ksignal;

@@ -8,7 +8,7 @@
 #ifndef __ASM_SYSCALL_WRAPPER_H
 #define __ASM_SYSCALL_WRAPPER_H
 
-#include <asm/ptrace.h>
+#include <yai/ptrace.h>
 
 asmlinkage long __riscv_sys_ni_syscall(const struct pt_regs *);
 

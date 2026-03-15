@@ -8,22 +8,22 @@
  *
  * Copyright IBM Corp. 2007-2010 Mel Gorman <mel@csn.ul.ie>
  */
-#include <linux/cpu.h>
-#include <linux/swap.h>
-#include <linux/migrate.h>
-#include <linux/compaction.h>
-#include <linux/mm_inline.h>
-#include <linux/sched/signal.h>
-#include <linux/backing-dev.h>
-#include <linux/sysctl.h>
-#include <linux/sysfs.h>
-#include <linux/page-isolation.h>
-#include <linux/kasan.h>
-#include <linux/kthread.h>
-#include <linux/freezer.h>
-#include <linux/page_owner.h>
-#include <linux/psi.h>
-#include <linux/cpuset.h>
+#include <yai/cpu.h>
+#include <yai/swap.h>
+#include <yai/migrate.h>
+#include <yai/compaction.h>
+#include <yai/mm_inline.h>
+#include <yai/sched/signal.h>
+#include <yai/backing-dev.h>
+#include <yai/sysctl.h>
+#include <yai/sysfs.h>
+#include <yai/page-isolation.h>
+#include <yai/kasan.h>
+#include <yai/kthread.h>
+#include <yai/freezer.h>
+#include <yai/page_owner.h>
+#include <yai/psi.h>
+#include <yai/cpuset.h>
 #include "internal.h"
 
 #ifdef CONFIG_COMPACTION

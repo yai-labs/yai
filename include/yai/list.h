@@ -8,7 +8,7 @@
 #include <yai/poison.h>
 #include <yai/const.h>
 
-#include <asm/barrier.h>
+#include <yai/barrier.h>
 
 /*
  * Circular doubly linked list implementation.

@@ -2,9 +2,9 @@
 #ifndef _UAPI_ASM_X86_PTRACE_H
 #define _UAPI_ASM_X86_PTRACE_H
 
-#include <linux/compiler.h>	/* For __user */
-#include <asm/ptrace-abi.h>
-#include <asm/processor-flags.h>
+#include <yai/compiler.h>	/* For __user */
+#include <yai/ptrace-abi.h>
+#include <yai/processor-flags.h>
 
 
 #ifndef __ASSEMBLER__

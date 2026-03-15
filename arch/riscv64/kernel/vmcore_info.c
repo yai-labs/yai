@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-only
 
-#include <linux/vmcore_info.h>
-#include <linux/pagemap.h>
+#include <yai/vmcore_info.h>
+#include <yai/pagemap.h>
 
 void arch_crash_save_vmcoreinfo(void)
 {

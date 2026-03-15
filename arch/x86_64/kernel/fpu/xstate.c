@@ -4,29 +4,29 @@
  *
  * Author: Suresh Siddha <suresh.b.siddha@intel.com>
  */
-#include <linux/bitops.h>
-#include <linux/compat.h>
-#include <linux/cpu.h>
-#include <linux/mman.h>
-#include <linux/kvm_types.h>
-#include <linux/nospec.h>
-#include <linux/pkeys.h>
-#include <linux/seq_file.h>
-#include <linux/proc_fs.h>
-#include <linux/vmalloc.h>
-#include <linux/coredump.h>
-#include <linux/sort.h>
+#include <yai/bitops.h>
+#include <yai/compat.h>
+#include <yai/cpu.h>
+#include <yai/mman.h>
+#include <yai/kvm_types.h>
+#include <yai/nospec.h>
+#include <yai/pkeys.h>
+#include <yai/seq_file.h>
+#include <yai/proc_fs.h>
+#include <yai/vmalloc.h>
+#include <yai/coredump.h>
+#include <yai/sort.h>
 
-#include <asm/fpu/api.h>
-#include <asm/fpu/regset.h>
-#include <asm/fpu/signal.h>
-#include <asm/fpu/xcr.h>
+#include <yai/fpu/api.h>
+#include <yai/fpu/regset.h>
+#include <yai/fpu/signal.h>
+#include <yai/fpu/xcr.h>
 
-#include <asm/cpuid/api.h>
-#include <asm/msr.h>
-#include <asm/tlbflush.h>
-#include <asm/prctl.h>
-#include <asm/elf.h>
+#include <yai/cpuid/api.h>
+#include <yai/msr.h>
+#include <yai/tlbflush.h>
+#include <yai/prctl.h>
+#include <yai/elf.h>
 
 #include <uapi/asm/elf.h>
 

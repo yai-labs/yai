@@ -22,16 +22,16 @@
  * domain levels without requiring any conditionals in the code.
  */
 #define pr_fmt(fmt) "CPU topo: " fmt
-#include <linux/cpu.h>
+#include <yai/cpu.h>
 
 #include <xen/xen.h>
 
-#include <asm/apic.h>
-#include <asm/io_apic.h>
-#include <asm/mpspec.h>
-#include <asm/msr.h>
-#include <asm/smp.h>
-#include <asm/numa.h>
+#include <yai/apic.h>
+#include <yai/io_apic.h>
+#include <yai/mpspec.h>
+#include <yai/msr.h>
+#include <yai/smp.h>
+#include <yai/numa.h>
 
 #include "cpu.h"
 

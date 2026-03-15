@@ -6,34 +6,34 @@
  * Copyright (C) 2002  Christoph Hellwig
  */
 
-#include <linux/mman.h>
-#include <linux/pagemap.h>
-#include <linux/syscalls.h>
-#include <linux/mempolicy.h>
-#include <linux/page-isolation.h>
-#include <linux/page_idle.h>
-#include <linux/userfaultfd_k.h>
-#include <linux/hugetlb.h>
-#include <linux/falloc.h>
-#include <linux/fadvise.h>
-#include <linux/sched.h>
-#include <linux/sched/mm.h>
-#include <linux/mm_inline.h>
-#include <linux/mmu_context.h>
-#include <linux/string.h>
-#include <linux/uio.h>
-#include <linux/ksm.h>
-#include <linux/fs.h>
-#include <linux/file.h>
-#include <linux/blkdev.h>
-#include <linux/backing-dev.h>
-#include <linux/pagewalk.h>
-#include <linux/swap.h>
-#include <linux/leafops.h>
-#include <linux/shmem_fs.h>
-#include <linux/mmu_notifier.h>
+#include <yai/mman.h>
+#include <yai/pagemap.h>
+#include <yai/syscalls.h>
+#include <yai/mempolicy.h>
+#include <yai/page-isolation.h>
+#include <yai/page_idle.h>
+#include <yai/userfaultfd_k.h>
+#include <yai/hugetlb.h>
+#include <yai/falloc.h>
+#include <yai/fadvise.h>
+#include <yai/sched.h>
+#include <yai/sched/mm.h>
+#include <yai/mm_inline.h>
+#include <yai/mmu_context.h>
+#include <yai/string.h>
+#include <yai/uio.h>
+#include <yai/ksm.h>
+#include <yai/fs.h>
+#include <yai/file.h>
+#include <yai/blkdev.h>
+#include <yai/backing-dev.h>
+#include <yai/pagewalk.h>
+#include <yai/swap.h>
+#include <yai/leafops.h>
+#include <yai/shmem_fs.h>
+#include <yai/mmu_notifier.h>
 
-#include <asm/tlb.h>
+#include <yai/tlb.h>
 
 #include "internal.h"
 #include "swap.h"

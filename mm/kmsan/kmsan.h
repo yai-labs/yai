@@ -10,15 +10,15 @@
 #ifndef __MM_KMSAN_KMSAN_H
 #define __MM_KMSAN_KMSAN_H
 
-#include <linux/irqflags.h>
-#include <linux/kmsan.h>
-#include <linux/mm.h>
-#include <linux/nmi.h>
-#include <linux/pgtable.h>
-#include <linux/printk.h>
-#include <linux/sched.h>
-#include <linux/stackdepot.h>
-#include <linux/stacktrace.h>
+#include <yai/irqflags.h>
+#include <yai/kmsan.h>
+#include <yai/mm.h>
+#include <yai/nmi.h>
+#include <yai/pgtable.h>
+#include <yai/printk.h>
+#include <yai/sched.h>
+#include <yai/stackdepot.h>
+#include <yai/stacktrace.h>
 
 #define KMSAN_ALLOCA_MAGIC_ORIGIN 0xabcd0100
 #define KMSAN_CHAIN_MAGIC_ORIGIN 0xabcd0200

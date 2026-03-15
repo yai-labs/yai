@@ -1,16 +1,16 @@
 // SPDX-License-Identifier: GPL-2.0-only
-#include <linux/kernel.h>
-#include <linux/module.h>
-#include <linux/export.h>
-#include <linux/mm.h>
-#include <linux/vmalloc.h>
-#include <linux/slab.h>
-#include <linux/sizes.h>
-#include <linux/io.h>
+#include <yai/kernel.h>
+#include <yai/module.h>
+#include <yai/export.h>
+#include <yai/mm.h>
+#include <yai/vmalloc.h>
+#include <yai/slab.h>
+#include <yai/sizes.h>
+#include <yai/io.h>
 
-#include <asm/page.h>
+#include <yai/page.h>
 #ifdef CONFIG_MIPS
-#include <asm/bootinfo.h>
+#include <yai/bootinfo.h>
 #endif
 
 struct foo {

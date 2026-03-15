@@ -15,18 +15,18 @@
 #include "misc.h"
 
 /* These actually do the work of building the kernel identity maps. */
-#include <linux/pgtable.h>
-#include <asm/cmpxchg.h>
-#include <asm/trap_pf.h>
-#include <asm/trapnr.h>
-#include <asm/init.h>
+#include <yai/pgtable.h>
+#include <yai/cmpxchg.h>
+#include <yai/trap_pf.h>
+#include <yai/trapnr.h>
+#include <yai/init.h>
 /* Use the static base for this part of the boot process */
 #undef __PAGE_OFFSET
 #define __PAGE_OFFSET __PAGE_OFFSET_BASE
 #include "../../mm/ident_map.c"
 
 #define _SETUP
-#include <asm/setup.h>	/* For COMMAND_LINE_SIZE */
+#include <yai/setup.h>	/* For COMMAND_LINE_SIZE */
 #undef _SETUP
 
 extern unsigned long get_cmd_line_ptr(void);

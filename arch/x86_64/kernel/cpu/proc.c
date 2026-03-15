@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: GPL-2.0
-#include <linux/smp.h>
-#include <linux/timex.h>
-#include <linux/string.h>
-#include <linux/seq_file.h>
-#include <linux/cpufreq.h>
-#include <asm/prctl.h>
-#include <linux/proc_fs.h>
+#include <yai/smp.h>
+#include <yai/timex.h>
+#include <yai/string.h>
+#include <yai/seq_file.h>
+#include <yai/cpufreq.h>
+#include <yai/prctl.h>
+#include <yai/proc_fs.h>
 
 #include "cpu.h"
 

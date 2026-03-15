@@ -2,7 +2,7 @@
 #ifndef _ASM_X86_HWCAP2_H
 #define _ASM_X86_HWCAP2_H
 
-#include <linux/const.h>
+#include <yai/const.h>
 
 /* MONITOR/MWAIT enabled in Ring 3 */
 #define HWCAP2_RING3MWAIT		_BITUL(0)

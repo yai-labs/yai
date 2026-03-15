@@ -5,17 +5,17 @@
  * Copyright (C) 2017 Linaro Ltd. <ard.biesheuvel@linaro.org>
  * Copyright (C) 2021 SiFive
  */
-#include <linux/compiler.h>
-#include <linux/irqflags.h>
-#include <linux/percpu.h>
-#include <linux/preempt.h>
-#include <linux/types.h>
+#include <yai/compiler.h>
+#include <yai/irqflags.h>
+#include <yai/percpu.h>
+#include <yai/preempt.h>
+#include <yai/types.h>
 
-#include <asm/vector.h>
-#include <asm/switch_to.h>
-#include <asm/simd.h>
+#include <yai/vector.h>
+#include <yai/switch_to.h>
+#include <yai/simd.h>
 #ifdef CONFIG_RISCV_ISA_V_PREEMPTIVE
-#include <asm/asm-prototypes.h>
+#include <yai/asm-prototypes.h>
 #endif
 
 static inline void riscv_v_flags_set(u32 flags)

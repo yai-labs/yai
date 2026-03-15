@@ -2,8 +2,8 @@
 #ifndef _ASM_X86_TIMEX_H
 #define _ASM_X86_TIMEX_H
 
-#include <asm/processor.h>
-#include <asm/tsc.h>
+#include <yai/processor.h>
+#include <yai/tsc.h>
 
 static inline unsigned long random_get_entropy(void)
 {

@@ -70,12 +70,12 @@
 # include "xxhash.c"
 # include "zstd/decompress_sources.h"
 #else
-#include <linux/decompress/unzstd.h>
+#include <yai/decompress/unzstd.h>
 #endif
 
-#include <linux/decompress/mm.h>
-#include <linux/kernel.h>
-#include <linux/zstd.h>
+#include <yai/decompress/mm.h>
+#include <yai/kernel.h>
+#include <yai/zstd.h>
 
 /* 128MB is the maximum window size supported by zstd. */
 #define ZSTD_WINDOWSIZE_MAX	(1 << ZSTD_WINDOWLOG_MAX)

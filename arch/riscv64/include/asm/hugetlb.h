@@ -2,8 +2,8 @@
 #ifndef _ASM_RISCV_HUGETLB_H
 #define _ASM_RISCV_HUGETLB_H
 
-#include <asm/cacheflush.h>
-#include <asm/page.h>
+#include <yai/cacheflush.h>
+#include <yai/page.h>
 
 static inline void arch_clear_hugetlb_flags(struct folio *folio)
 {
@@ -52,6 +52,6 @@ pte_t arch_make_huge_pte(pte_t entry, unsigned int shift, vm_flags_t flags);
 
 #endif /*CONFIG_RISCV_ISA_SVNAPOT*/
 
-#include <asm-generic/hugetlb.h>
+#include <yai/hugetlb.h>
 
 #endif /* _ASM_RISCV_HUGETLB_H */

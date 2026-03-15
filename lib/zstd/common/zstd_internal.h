@@ -26,11 +26,11 @@
 #include "debug.h"                 /* assert, DEBUGLOG, RAWLOG, g_debuglevel */
 #include "error_private.h"
 #define ZSTD_STATIC_LINKING_ONLY
-#include <linux/zstd.h>
+#include <yai/zstd.h>
 #define FSE_STATIC_LINKING_ONLY
 #include "fse.h"
 #include "huf.h"
-#include <linux/xxhash.h>                /* XXH_reset, update, digest */
+#include <yai/xxhash.h>                /* XXH_reset, update, digest */
 #define ZSTD_TRACE 0
 
 /* ---- static assert (debug) --- */

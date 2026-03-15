@@ -5,7 +5,7 @@
  * This file must not contain any executable code.
  */
 
-#include <asm/cpufeature.h>
+#include <yai/cpufeature.h>
 
 const char *const x86_power_flags[32] = {
 	"ts",	/* temperature sensor */

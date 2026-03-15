@@ -5,14 +5,14 @@
  * Copyright (C) 2013 ARM Ltd.
  */
 
-#include <linux/acpi.h>
-#include <linux/cache.h>
-#include <linux/errno.h>
-#include <linux/of.h>
-#include <linux/string.h>
-#include <asm/acpi.h>
-#include <asm/cpu_ops.h>
-#include <asm/smp_plat.h>
+#include <yai/acpi.h>
+#include <yai/cache.h>
+#include <yai/errno.h>
+#include <yai/of.h>
+#include <yai/string.h>
+#include <yai/acpi.h>
+#include <yai/cpu_ops.h>
+#include <yai/smp_plat.h>
 
 extern const struct cpu_operations smp_spin_table_ops;
 #ifdef CONFIG_ARM64_ACPI_PARKING_PROTOCOL

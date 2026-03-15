@@ -5,12 +5,12 @@
 /*
  * Architecture specific compatibility types
  */
-#include <linux/types.h>
-#include <linux/sched.h>
-#include <linux/sched/task_stack.h>
-#include <asm/processor.h>
-#include <asm/user32.h>
-#include <asm/unistd.h>
+#include <yai/types.h>
+#include <yai/sched.h>
+#include <yai/sched/task_stack.h>
+#include <yai/processor.h>
+#include <yai/user32.h>
+#include <yai/unistd.h>
 
 #define compat_mode_t	compat_mode_t
 typedef u16		compat_mode_t;
@@ -27,7 +27,7 @@ typedef u16		 compat_ipc_pid_t;
 
 #define compat_statfs	compat_statfs
 
-#include <asm-generic/compat.h>
+#include <yai/compat.h>
 
 #define COMPAT_UTS_MACHINE	"i686\0\0"
 

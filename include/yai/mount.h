@@ -11,7 +11,7 @@
 #define _LINUX_MOUNT_H
 
 #include <yai/types.h>
-#include <asm/barrier.h>
+#include <yai/barrier.h>
 
 struct super_block;
 struct dentry;

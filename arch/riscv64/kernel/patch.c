@@ -3,18 +3,18 @@
  * Copyright (C) 2020 SiFive
  */
 
-#include <linux/spinlock.h>
-#include <linux/mm.h>
-#include <linux/memory.h>
-#include <linux/string.h>
-#include <linux/uaccess.h>
-#include <linux/stop_machine.h>
-#include <asm/kprobes.h>
-#include <asm/cacheflush.h>
-#include <asm/fixmap.h>
-#include <asm/ftrace.h>
-#include <asm/text-patching.h>
-#include <asm/sections.h>
+#include <yai/spinlock.h>
+#include <yai/mm.h>
+#include <yai/memory.h>
+#include <yai/string.h>
+#include <yai/uaccess.h>
+#include <yai/stop_machine.h>
+#include <yai/kprobes.h>
+#include <yai/cacheflush.h>
+#include <yai/fixmap.h>
+#include <yai/ftrace.h>
+#include <yai/text-patching.h>
+#include <yai/sections.h>
 
 struct patch_insn {
 	void *addr;

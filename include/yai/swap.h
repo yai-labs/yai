@@ -14,7 +14,7 @@
 #include <yai/atomic.h>
 #include <yai/page-flags.h>
 #include <yai/uapi/mempolicy.h>
-#include <asm/page.h>
+#include <yai/page.h>
 
 struct notifier_block;
 

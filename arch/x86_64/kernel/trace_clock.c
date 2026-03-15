@@ -2,9 +2,9 @@
 /*
  * X86 trace clocks
  */
-#include <asm/trace_clock.h>
-#include <asm/barrier.h>
-#include <asm/tsc.h>
+#include <yai/trace_clock.h>
+#include <yai/barrier.h>
+#include <yai/tsc.h>
 
 /*
  * trace_clock_x86_tsc(): A clock that is just the cycle counter.

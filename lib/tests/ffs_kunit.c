@@ -3,7 +3,7 @@
  * KUnit tests for ffs()-family functions
  */
 #include <kunit/test.h>
-#include <linux/bitops.h>
+#include <yai/bitops.h>
 
 /*
  * Test data structures

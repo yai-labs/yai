@@ -1,23 +1,23 @@
 // SPDX-License-Identifier: GPL-2.0
 /*  Copyright(c) 2016-20 Intel Corporation. */
 
-#include <linux/file.h>
-#include <linux/freezer.h>
-#include <linux/highmem.h>
-#include <linux/kthread.h>
-#include <linux/kvm_types.h>
-#include <linux/miscdevice.h>
-#include <linux/node.h>
-#include <linux/pagemap.h>
-#include <linux/ratelimit.h>
-#include <linux/sched/mm.h>
-#include <linux/sched/signal.h>
-#include <linux/slab.h>
-#include <linux/sysfs.h>
-#include <linux/vmalloc.h>
-#include <asm/msr.h>
-#include <asm/sgx.h>
-#include <asm/archrandom.h>
+#include <yai/file.h>
+#include <yai/freezer.h>
+#include <yai/highmem.h>
+#include <yai/kthread.h>
+#include <yai/kvm_types.h>
+#include <yai/miscdevice.h>
+#include <yai/node.h>
+#include <yai/pagemap.h>
+#include <yai/ratelimit.h>
+#include <yai/sched/mm.h>
+#include <yai/sched/signal.h>
+#include <yai/slab.h>
+#include <yai/sysfs.h>
+#include <yai/vmalloc.h>
+#include <yai/msr.h>
+#include <yai/sgx.h>
+#include <yai/archrandom.h>
 #include "driver.h"
 #include "encl.h"
 #include "encls.h"

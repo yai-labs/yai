@@ -6,10 +6,10 @@
 #ifndef _ASM_RISCV_FIXMAP_H
 #define _ASM_RISCV_FIXMAP_H
 
-#include <linux/kernel.h>
-#include <linux/sizes.h>
-#include <linux/pgtable.h>
-#include <asm/page.h>
+#include <yai/kernel.h>
+#include <yai/sizes.h>
+#include <yai/pgtable.h>
+#include <yai/page.h>
 
 #ifdef CONFIG_MMU
 /*
@@ -61,7 +61,7 @@ enum fixed_addresses {
 extern void __set_fixmap(enum fixed_addresses idx,
 			 phys_addr_t phys, pgprot_t prot);
 
-#include <asm-generic/fixmap.h>
+#include <yai/fixmap.h>
 
 #endif /* CONFIG_MMU */
 #endif /* _ASM_RISCV_FIXMAP_H */

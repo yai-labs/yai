@@ -1,15 +1,15 @@
 // SPDX-License-Identifier: GPL-2.0
 // Copyright (C) 2019 Andes Technology Corporation
 
-#include <linux/pfn.h>
-#include <linux/init_task.h>
-#include <linux/kasan.h>
-#include <linux/kernel.h>
-#include <linux/memblock.h>
-#include <linux/pgtable.h>
-#include <asm/tlbflush.h>
-#include <asm/fixmap.h>
-#include <asm/pgalloc.h>
+#include <yai/pfn.h>
+#include <yai/init_task.h>
+#include <yai/kasan.h>
+#include <yai/kernel.h>
+#include <yai/memblock.h>
+#include <yai/pgtable.h>
+#include <yai/tlbflush.h>
+#include <yai/fixmap.h>
+#include <yai/pgalloc.h>
 
 /*
  * Kasan shadow region must lie at a fixed address across sv39, sv48 and sv57

@@ -14,47 +14,47 @@
  *          (lots of bits borrowed from Ingo Molnar & Andrew Morton)
  */
 
-#include <linux/stddef.h>
-#include <linux/mm.h>
-#include <linux/highmem.h>
-#include <linux/interrupt.h>
-#include <linux/jiffies.h>
-#include <linux/compiler.h>
-#include <linux/kernel.h>
-#include <linux/kasan.h>
-#include <linux/kmsan.h>
-#include <linux/module.h>
-#include <linux/suspend.h>
-#include <linux/ratelimit.h>
-#include <linux/oom.h>
-#include <linux/topology.h>
-#include <linux/sysctl.h>
-#include <linux/cpu.h>
-#include <linux/cpuset.h>
-#include <linux/pagevec.h>
-#include <linux/memory_hotplug.h>
-#include <linux/nodemask.h>
-#include <linux/vmstat.h>
-#include <linux/fault-inject.h>
-#include <linux/compaction.h>
+#include <yai/stddef.h>
+#include <yai/mm.h>
+#include <yai/highmem.h>
+#include <yai/interrupt.h>
+#include <yai/jiffies.h>
+#include <yai/compiler.h>
+#include <yai/kernel.h>
+#include <yai/kasan.h>
+#include <yai/kmsan.h>
+#include <yai/module.h>
+#include <yai/suspend.h>
+#include <yai/ratelimit.h>
+#include <yai/oom.h>
+#include <yai/topology.h>
+#include <yai/sysctl.h>
+#include <yai/cpu.h>
+#include <yai/cpuset.h>
+#include <yai/pagevec.h>
+#include <yai/memory_hotplug.h>
+#include <yai/nodemask.h>
+#include <yai/vmstat.h>
+#include <yai/fault-inject.h>
+#include <yai/compaction.h>
 #include <trace/events/kmem.h>
 #include <trace/events/oom.h>
-#include <linux/prefetch.h>
-#include <linux/mm_inline.h>
-#include <linux/mmu_notifier.h>
-#include <linux/migrate.h>
-#include <linux/sched/mm.h>
-#include <linux/page_owner.h>
-#include <linux/page_table_check.h>
-#include <linux/memcontrol.h>
-#include <linux/ftrace.h>
-#include <linux/lockdep.h>
-#include <linux/psi.h>
-#include <linux/khugepaged.h>
-#include <linux/delayacct.h>
-#include <linux/cacheinfo.h>
-#include <linux/pgalloc_tag.h>
-#include <asm/div64.h>
+#include <yai/prefetch.h>
+#include <yai/mm_inline.h>
+#include <yai/mmu_notifier.h>
+#include <yai/migrate.h>
+#include <yai/sched/mm.h>
+#include <yai/page_owner.h>
+#include <yai/page_table_check.h>
+#include <yai/memcontrol.h>
+#include <yai/ftrace.h>
+#include <yai/lockdep.h>
+#include <yai/psi.h>
+#include <yai/khugepaged.h>
+#include <yai/delayacct.h>
+#include <yai/cacheinfo.h>
+#include <yai/pgalloc_tag.h>
+#include <yai/div64.h>
 #include "internal.h"
 #include "shuffle.h"
 #include "page_reporting.h"
@@ -205,7 +205,7 @@ DEFINE_STATIC_KEY_TRUE(vm_numa_stat_key);
  * N.B., Do NOT reference the '_numa_mem_' per cpu variable directly.
  * It will not be defined when CONFIG_HAVE_MEMORYLESS_NODES is not defined.
  * Use the accessor functions set_numa_mem(), numa_mem_id() and cpu_to_mem()
- * defined in <linux/topology.h>.
+ * defined in <yai/topology.h>.
  */
 DEFINE_PER_CPU(int, _numa_mem_);		/* Kernel "local memory" node */
 EXPORT_PER_CPU_SYMBOL(_numa_mem_);

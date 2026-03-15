@@ -34,9 +34,9 @@
  *	Dependencies
  **************************************/
 #include "lz4defs.h"
-#include <linux/module.h>
-#include <linux/kernel.h>
-#include <linux/unaligned.h>
+#include <yai/module.h>
+#include <yai/kernel.h>
+#include <yai/unaligned.h>
 
 static const int LZ4_minLength = (MFLIMIT + 1);
 static const int LZ4_64Klimit = ((64 * KB) + (MFLIMIT - 1));

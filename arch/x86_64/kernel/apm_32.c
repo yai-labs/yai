@@ -194,44 +194,44 @@
 
 #define pr_fmt(fmt) "apm: " fmt
 
-#include <linux/module.h>
+#include <yai/module.h>
 
-#include <linux/poll.h>
-#include <linux/types.h>
-#include <linux/stddef.h>
-#include <linux/timer.h>
-#include <linux/fcntl.h>
-#include <linux/slab.h>
-#include <linux/stat.h>
-#include <linux/proc_fs.h>
-#include <linux/seq_file.h>
-#include <linux/miscdevice.h>
-#include <linux/apm_bios.h>
-#include <linux/init.h>
-#include <linux/time.h>
-#include <linux/sched/signal.h>
-#include <linux/sched/cputime.h>
-#include <linux/pm.h>
-#include <linux/capability.h>
-#include <linux/device.h>
-#include <linux/kernel.h>
-#include <linux/freezer.h>
-#include <linux/smp.h>
-#include <linux/dmi.h>
-#include <linux/suspend.h>
-#include <linux/kthread.h>
-#include <linux/jiffies.h>
-#include <linux/acpi.h>
-#include <linux/syscore_ops.h>
-#include <linux/i8253.h>
-#include <linux/cpuidle.h>
+#include <yai/poll.h>
+#include <yai/types.h>
+#include <yai/stddef.h>
+#include <yai/timer.h>
+#include <yai/fcntl.h>
+#include <yai/slab.h>
+#include <yai/stat.h>
+#include <yai/proc_fs.h>
+#include <yai/seq_file.h>
+#include <yai/miscdevice.h>
+#include <yai/apm_bios.h>
+#include <yai/init.h>
+#include <yai/time.h>
+#include <yai/sched/signal.h>
+#include <yai/sched/cputime.h>
+#include <yai/pm.h>
+#include <yai/capability.h>
+#include <yai/device.h>
+#include <yai/kernel.h>
+#include <yai/freezer.h>
+#include <yai/smp.h>
+#include <yai/dmi.h>
+#include <yai/suspend.h>
+#include <yai/kthread.h>
+#include <yai/jiffies.h>
+#include <yai/acpi.h>
+#include <yai/syscore_ops.h>
+#include <yai/i8253.h>
+#include <yai/cpuidle.h>
 
-#include <linux/uaccess.h>
-#include <asm/desc.h>
-#include <asm/olpc.h>
-#include <asm/reboot.h>
-#include <asm/nospec-branch.h>
-#include <asm/ibt.h>
+#include <yai/uaccess.h>
+#include <yai/desc.h>
+#include <yai/olpc.h>
+#include <yai/reboot.h>
+#include <yai/nospec-branch.h>
+#include <yai/ibt.h>
 
 #if defined(CONFIG_APM_DISPLAY_BLANK) && defined(CONFIG_VT)
 extern int (*console_blank_hook)(int);
@@ -289,7 +289,7 @@ extern int (*console_blank_hook)(int);
  */
 #define APM_ZERO_SEGS
 
-#include <asm/apm.h>
+#include <yai/apm.h>
 
 /*
  * Define to re-initialize the interrupt 0 timer to 100 Hz after a suspend.
@@ -299,9 +299,9 @@ extern int (*console_blank_hook)(int);
 #undef INIT_TIMER_AFTER_SUSPEND
 
 #ifdef INIT_TIMER_AFTER_SUSPEND
-#include <linux/timex.h>
-#include <asm/io.h>
-#include <linux/delay.h>
+#include <yai/timex.h>
+#include <yai/io.h>
+#include <yai/delay.h>
 #endif
 
 /*

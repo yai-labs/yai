@@ -7,34 +7,34 @@
 
 #define pr_fmt(fmt) "kfence: " fmt
 
-#include <linux/atomic.h>
-#include <linux/bug.h>
-#include <linux/debugfs.h>
-#include <linux/hash.h>
-#include <linux/irq_work.h>
-#include <linux/jhash.h>
-#include <linux/kasan-enabled.h>
-#include <linux/kcsan-checks.h>
-#include <linux/kfence.h>
-#include <linux/kmemleak.h>
-#include <linux/list.h>
-#include <linux/lockdep.h>
-#include <linux/log2.h>
-#include <linux/memblock.h>
-#include <linux/moduleparam.h>
-#include <linux/nodemask.h>
-#include <linux/notifier.h>
-#include <linux/panic_notifier.h>
-#include <linux/random.h>
-#include <linux/rcupdate.h>
-#include <linux/reboot.h>
-#include <linux/sched/clock.h>
-#include <linux/seq_file.h>
-#include <linux/slab.h>
-#include <linux/spinlock.h>
-#include <linux/string.h>
+#include <yai/atomic.h>
+#include <yai/bug.h>
+#include <yai/debugfs.h>
+#include <yai/hash.h>
+#include <yai/irq_work.h>
+#include <yai/jhash.h>
+#include <yai/kasan-enabled.h>
+#include <yai/kcsan-checks.h>
+#include <yai/kfence.h>
+#include <yai/kmemleak.h>
+#include <yai/list.h>
+#include <yai/lockdep.h>
+#include <yai/log2.h>
+#include <yai/memblock.h>
+#include <yai/moduleparam.h>
+#include <yai/nodemask.h>
+#include <yai/notifier.h>
+#include <yai/panic_notifier.h>
+#include <yai/random.h>
+#include <yai/rcupdate.h>
+#include <yai/reboot.h>
+#include <yai/sched/clock.h>
+#include <yai/seq_file.h>
+#include <yai/slab.h>
+#include <yai/spinlock.h>
+#include <yai/string.h>
 
-#include <asm/kfence.h>
+#include <yai/kfence.h>
 
 #include "kfence.h"
 

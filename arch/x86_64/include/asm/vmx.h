@@ -12,13 +12,13 @@
 #define VMX_H
 
 
-#include <linux/bitops.h>
-#include <linux/bug.h>
-#include <linux/types.h>
+#include <yai/bitops.h>
+#include <yai/bug.h>
+#include <yai/types.h>
 
 #include <uapi/asm/vmx.h>
-#include <asm/trapnr.h>
-#include <asm/vmxfeatures.h>
+#include <yai/trapnr.h>
+#include <yai/vmxfeatures.h>
 
 #define VMCS_CONTROL_BIT(x)	BIT(VMX_FEATURE_##x & 0x1f)
 

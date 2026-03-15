@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: GPL-2.0-only
-#include <linux/types.h>
-#include <linux/init.h>
-#include <linux/libfdt.h>
-#include <linux/ctype.h>
-#include <asm/csr.h>
+#include <yai/types.h>
+#include <yai/init.h>
+#include <yai/libfdt.h>
+#include <yai/ctype.h>
+#include <yai/csr.h>
 
 #include "pi.h"
 

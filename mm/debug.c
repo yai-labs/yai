@@ -6,14 +6,14 @@
  *
  */
 
-#include <linux/kernel.h>
-#include <linux/mm.h>
-#include <linux/trace_events.h>
-#include <linux/memcontrol.h>
+#include <yai/kernel.h>
+#include <yai/mm.h>
+#include <yai/trace_events.h>
+#include <yai/memcontrol.h>
 #include <trace/events/mmflags.h>
-#include <linux/migrate.h>
-#include <linux/page_owner.h>
-#include <linux/ctype.h>
+#include <yai/migrate.h>
+#include <yai/page_owner.h>
+#include <yai/ctype.h>
 
 #include "internal.h"
 #include <trace/events/migrate.h>

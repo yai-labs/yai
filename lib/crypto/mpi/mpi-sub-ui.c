@@ -32,7 +32,7 @@
  * see https://www.gnu.org/licenses/.
  */
 
-#include <linux/export.h>
+#include <yai/export.h>
 
 #include "mpi-internal.h"
 

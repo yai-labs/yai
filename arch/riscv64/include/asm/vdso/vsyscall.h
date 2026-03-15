@@ -7,7 +7,7 @@
 #include <vdso/datapage.h>
 
 /* The asm-generic header needs to be included after the definitions above */
-#include <asm-generic/vdso/vsyscall.h>
+#include <yai/vdso/vsyscall.h>
 
 #endif /* !__ASSEMBLER__ */
 

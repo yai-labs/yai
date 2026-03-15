@@ -33,10 +33,10 @@
  *   Author: Coly Li <colyli@suse.de>
  */
 
-#include <linux/crc64.h>
-#include <linux/export.h>
-#include <linux/module.h>
-#include <linux/types.h>
+#include <yai/crc64.h>
+#include <yai/export.h>
+#include <yai/module.h>
+#include <yai/types.h>
 
 #include "crc64table.h"
 

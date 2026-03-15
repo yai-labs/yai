@@ -13,35 +13,35 @@
  *	Hugh Dickins
  */
 
-#include <linux/errno.h>
-#include <linux/mm.h>
-#include <linux/mm_inline.h>
-#include <linux/fs.h>
-#include <linux/mman.h>
-#include <linux/sched.h>
-#include <linux/sched/mm.h>
-#include <linux/sched/cputime.h>
-#include <linux/rwsem.h>
-#include <linux/pagemap.h>
-#include <linux/rmap.h>
-#include <linux/spinlock.h>
-#include <linux/xxhash.h>
-#include <linux/delay.h>
-#include <linux/kthread.h>
-#include <linux/wait.h>
-#include <linux/slab.h>
-#include <linux/rbtree.h>
-#include <linux/memory.h>
-#include <linux/mmu_notifier.h>
-#include <linux/swap.h>
-#include <linux/ksm.h>
-#include <linux/hashtable.h>
-#include <linux/freezer.h>
-#include <linux/oom.h>
-#include <linux/numa.h>
-#include <linux/pagewalk.h>
+#include <yai/errno.h>
+#include <yai/mm.h>
+#include <yai/mm_inline.h>
+#include <yai/fs.h>
+#include <yai/mman.h>
+#include <yai/sched.h>
+#include <yai/sched/mm.h>
+#include <yai/sched/cputime.h>
+#include <yai/rwsem.h>
+#include <yai/pagemap.h>
+#include <yai/rmap.h>
+#include <yai/spinlock.h>
+#include <yai/xxhash.h>
+#include <yai/delay.h>
+#include <yai/kthread.h>
+#include <yai/wait.h>
+#include <yai/slab.h>
+#include <yai/rbtree.h>
+#include <yai/memory.h>
+#include <yai/mmu_notifier.h>
+#include <yai/swap.h>
+#include <yai/ksm.h>
+#include <yai/hashtable.h>
+#include <yai/freezer.h>
+#include <yai/oom.h>
+#include <yai/numa.h>
+#include <yai/pagewalk.h>
 
-#include <asm/tlbflush.h>
+#include <yai/tlbflush.h>
 #include "internal.h"
 #include "mm_slot.h"
 

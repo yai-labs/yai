@@ -12,10 +12,10 @@
 
 #ifndef BOOT_BITOPS_H
 #define BOOT_BITOPS_H
-#define _LINUX_BITOPS_H		/* Inhibit inclusion of <linux/bitops.h> */
+#define _LINUX_BITOPS_H		/* Inhibit inclusion of <yai/bitops.h> */
 
-#include <linux/types.h>
-#include <asm/asm.h>
+#include <yai/types.h>
+#include <yai/asm.h>
 
 static inline bool constant_test_bit(int nr, const void *addr)
 {

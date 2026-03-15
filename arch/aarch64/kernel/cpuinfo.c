@@ -4,26 +4,26 @@
  *
  * Copyright (C) 2014 ARM Ltd.
  */
-#include <asm/arch_timer.h>
-#include <asm/cache.h>
-#include <asm/cpu.h>
-#include <asm/cputype.h>
-#include <asm/cpufeature.h>
-#include <asm/fpsimd.h>
+#include <yai/arch_timer.h>
+#include <yai/cache.h>
+#include <yai/cpu.h>
+#include <yai/cputype.h>
+#include <yai/cpufeature.h>
+#include <yai/fpsimd.h>
 
-#include <linux/bitops.h>
-#include <linux/bug.h>
-#include <linux/compat.h>
-#include <linux/elf.h>
-#include <linux/init.h>
-#include <linux/kernel.h>
-#include <linux/personality.h>
-#include <linux/preempt.h>
-#include <linux/printk.h>
-#include <linux/seq_file.h>
-#include <linux/sched.h>
-#include <linux/smp.h>
-#include <linux/delay.h>
+#include <yai/bitops.h>
+#include <yai/bug.h>
+#include <yai/compat.h>
+#include <yai/elf.h>
+#include <yai/init.h>
+#include <yai/kernel.h>
+#include <yai/personality.h>
+#include <yai/preempt.h>
+#include <yai/printk.h>
+#include <yai/seq_file.h>
+#include <yai/sched.h>
+#include <yai/smp.h>
+#include <yai/delay.h>
 
 /*
  * In case the boot CPU is hotpluggable, we record its initial state and

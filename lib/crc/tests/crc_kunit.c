@@ -8,14 +8,14 @@
  */
 #include <kunit/run-in-irq-context.h>
 #include <kunit/test.h>
-#include <linux/crc7.h>
-#include <linux/crc16.h>
-#include <linux/crc-t10dif.h>
-#include <linux/crc32.h>
-#include <linux/crc32c.h>
-#include <linux/crc64.h>
-#include <linux/prandom.h>
-#include <linux/vmalloc.h>
+#include <yai/crc7.h>
+#include <yai/crc16.h>
+#include <yai/crc-t10dif.h>
+#include <yai/crc32.h>
+#include <yai/crc32c.h>
+#include <yai/crc64.h>
+#include <yai/prandom.h>
+#include <yai/vmalloc.h>
 
 #define CRC_KUNIT_SEED			42
 #define CRC_KUNIT_MAX_LEN		16384

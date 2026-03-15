@@ -6,8 +6,8 @@
 #ifndef _ORC_TYPES_H
 #define _ORC_TYPES_H
 
-#include <linux/types.h>
-#include <linux/compiler.h>
+#include <yai/types.h>
+#include <yai/compiler.h>
 
 /*
  * The ORC_REG_* registers are base registers which are used to find other
@@ -46,7 +46,7 @@
 #define ORC_TYPE_REGS_PARTIAL		4
 
 #ifndef __ASSEMBLER__
-#include <asm/byteorder.h>
+#include <yai/byteorder.h>
 
 /*
  * This struct is more or less a vastly simplified version of the DWARF Call

@@ -2,7 +2,7 @@
 #ifndef _ASM_X86_EXTABLE_H
 #define _ASM_X86_EXTABLE_H
 
-#include <asm/extable_fixup_types.h>
+#include <yai/extable_fixup_types.h>
 
 /*
  * The exception table consists of two addresses relative to the

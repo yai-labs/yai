@@ -2,8 +2,8 @@
 /*
  */
 
-#include <linux/module.h>
-#include <linux/libgcc.h>
+#include <yai/module.h>
+#include <yai/libgcc.h>
 
 word_type notrace __ucmpdi2(unsigned long long a, unsigned long long b)
 {

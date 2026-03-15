@@ -13,10 +13,10 @@
  * in place is silly to begin with because none of the callbacks except for
  * APIC::read/write() have a WARN_ON_ONCE() in them. Sigh...
  */
-#include <linux/cpumask.h>
-#include <linux/thread_info.h>
+#include <yai/cpumask.h>
+#include <yai/thread_info.h>
 
-#include <asm/apic.h>
+#include <yai/apic.h>
 
 #include "local.h"
 

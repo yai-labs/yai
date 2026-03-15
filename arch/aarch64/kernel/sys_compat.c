@@ -7,18 +7,18 @@
  * Copyright (C) 2012 ARM Ltd.
  */
 
-#include <linux/compat.h>
-#include <linux/cpufeature.h>
-#include <linux/sched.h>
-#include <linux/sched/signal.h>
-#include <linux/slab.h>
-#include <linux/syscalls.h>
-#include <linux/uaccess.h>
+#include <yai/compat.h>
+#include <yai/cpufeature.h>
+#include <yai/sched.h>
+#include <yai/sched/signal.h>
+#include <yai/slab.h>
+#include <yai/syscalls.h>
+#include <yai/uaccess.h>
 
-#include <asm/cacheflush.h>
-#include <asm/system_misc.h>
-#include <asm/tlbflush.h>
-#include <asm/unistd.h>
+#include <yai/cacheflush.h>
+#include <yai/system_misc.h>
+#include <yai/tlbflush.h>
+#include <yai/unistd.h>
 
 static long
 __do_compat_cache_op(unsigned long start, unsigned long end)

@@ -10,7 +10,7 @@
 #include <kunit/test-bug.h>
 #include <kunit/static_stub.h>
 
-#include <linux/device.h>
+#include <yai/device.h>
 #include <kunit/device.h>
 
 #include "string-stream.h"

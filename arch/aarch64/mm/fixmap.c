@@ -3,18 +3,18 @@
  * Fixmap manipulation code
  */
 
-#include <linux/bug.h>
-#include <linux/init.h>
-#include <linux/kernel.h>
-#include <linux/libfdt.h>
-#include <linux/memory.h>
-#include <linux/mm.h>
-#include <linux/sizes.h>
+#include <yai/bug.h>
+#include <yai/init.h>
+#include <yai/kernel.h>
+#include <yai/libfdt.h>
+#include <yai/memory.h>
+#include <yai/mm.h>
+#include <yai/sizes.h>
 
-#include <asm/fixmap.h>
-#include <asm/kernel-pgtable.h>
-#include <asm/pgalloc.h>
-#include <asm/tlbflush.h>
+#include <yai/fixmap.h>
+#include <yai/kernel-pgtable.h>
+#include <yai/pgalloc.h>
+#include <yai/tlbflush.h>
 
 /* ensure that the fixmap region does not grow down into the PCI I/O region */
 static_assert(FIXADDR_TOT_START > PCI_IO_END);

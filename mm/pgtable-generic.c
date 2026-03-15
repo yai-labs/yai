@@ -7,16 +7,16 @@
  *  Copyright (C) 2010  Linus Torvalds
  */
 
-#include <linux/pagemap.h>
-#include <linux/hugetlb.h>
-#include <linux/pgtable.h>
-#include <linux/swap.h>
-#include <linux/swapops.h>
-#include <linux/mm_inline.h>
-#include <linux/iommu.h>
-#include <linux/pgalloc.h>
+#include <yai/pagemap.h>
+#include <yai/hugetlb.h>
+#include <yai/pgtable.h>
+#include <yai/swap.h>
+#include <yai/swapops.h>
+#include <yai/mm_inline.h>
+#include <yai/iommu.h>
+#include <yai/pgalloc.h>
 
-#include <asm/tlb.h>
+#include <yai/tlb.h>
 
 /*
  * If a p?d_bad entry is found while walking page tables, report

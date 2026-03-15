@@ -7,9 +7,9 @@
 
 #include <crypto/algapi.h> // for crypto_xor_cpy
 #include <crypto/chacha.h>
-#include <linux/export.h>
-#include <linux/kernel.h>
-#include <linux/module.h>
+#include <yai/export.h>
+#include <yai/kernel.h>
+#include <yai/module.h>
 
 static void __maybe_unused
 chacha_crypt_generic(struct chacha_state *state, u8 *dst, const u8 *src,

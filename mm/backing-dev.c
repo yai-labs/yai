@@ -1,20 +1,20 @@
 // SPDX-License-Identifier: GPL-2.0-only
 
-#include <linux/blkdev.h>
-#include <linux/wait.h>
-#include <linux/rbtree.h>
-#include <linux/kthread.h>
-#include <linux/backing-dev.h>
-#include <linux/blk-cgroup.h>
-#include <linux/freezer.h>
-#include <linux/fs.h>
-#include <linux/pagemap.h>
-#include <linux/mm.h>
-#include <linux/sched/mm.h>
-#include <linux/sched.h>
-#include <linux/module.h>
-#include <linux/writeback.h>
-#include <linux/device.h>
+#include <yai/blkdev.h>
+#include <yai/wait.h>
+#include <yai/rbtree.h>
+#include <yai/kthread.h>
+#include <yai/backing-dev.h>
+#include <yai/blk-cgroup.h>
+#include <yai/freezer.h>
+#include <yai/fs.h>
+#include <yai/pagemap.h>
+#include <yai/mm.h>
+#include <yai/sched/mm.h>
+#include <yai/sched.h>
+#include <yai/module.h>
+#include <yai/writeback.h>
+#include <yai/device.h>
 #include <trace/events/writeback.h>
 #include "internal.h"
 
@@ -36,8 +36,8 @@ LIST_HEAD(bdi_list);
 struct workqueue_struct *bdi_wq;
 
 #ifdef CONFIG_DEBUG_FS
-#include <linux/debugfs.h>
-#include <linux/seq_file.h>
+#include <yai/debugfs.h>
+#include <yai/seq_file.h>
 
 struct wb_stats {
 	unsigned long nr_dirty;
@@ -586,7 +586,7 @@ static void wb_exit(struct bdi_writeback *wb)
 
 #ifdef CONFIG_CGROUP_WRITEBACK
 
-#include <linux/memcontrol.h>
+#include <yai/memcontrol.h>
 
 /*
  * cgwb_lock protects bdi->cgwb_tree, blkcg->cgwb_list, offline_cgwbs and

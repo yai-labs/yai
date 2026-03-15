@@ -6,9 +6,9 @@
 #ifndef _ASM_RISCV_PGTABLE_64_H
 #define _ASM_RISCV_PGTABLE_64_H
 
-#include <linux/bits.h>
-#include <linux/const.h>
-#include <asm/errata_list.h>
+#include <yai/bits.h>
+#include <yai/const.h>
+#include <yai/errata_list.h>
 
 extern bool pgtable_l4_enabled;
 extern bool pgtable_l5_enabled;

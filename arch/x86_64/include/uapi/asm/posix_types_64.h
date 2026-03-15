@@ -15,6 +15,6 @@ typedef unsigned short __kernel_old_gid_t;
 typedef unsigned long	__kernel_old_dev_t;
 #define __kernel_old_dev_t __kernel_old_dev_t
 
-#include <asm-generic/posix_types.h>
+#include <yai/posix_types.h>
 
 #endif /* _ASM_X86_POSIX_TYPES_64_H */

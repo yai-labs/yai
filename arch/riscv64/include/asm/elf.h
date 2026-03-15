@@ -8,13 +8,13 @@
 #ifndef _ASM_RISCV_ELF_H
 #define _ASM_RISCV_ELF_H
 
-#include <uapi/linux/elf.h>
-#include <linux/compat.h>
+#include <yai/elf.h>
+#include <yai/compat.h>
 #include <uapi/asm/elf.h>
-#include <asm/auxvec.h>
-#include <asm/byteorder.h>
-#include <asm/cacheinfo.h>
-#include <asm/cpufeature.h>
+#include <yai/auxvec.h>
+#include <yai/byteorder.h>
+#include <yai/cacheinfo.h>
+#include <yai/cpufeature.h>
 
 /*
  * These are used to set parameters in the core dumps.

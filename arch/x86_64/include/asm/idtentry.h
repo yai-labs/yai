@@ -3,15 +3,15 @@
 #define _ASM_X86_IDTENTRY_H
 
 /* Interrupts/Exceptions */
-#include <asm/trapnr.h>
+#include <yai/trapnr.h>
 
 #define IDT_ALIGN	(8 * (1 + HAS_KERNEL_IBT))
 
 #ifndef __ASSEMBLER__
-#include <linux/entry-common.h>
-#include <linux/hardirq.h>
+#include <yai/entry-common.h>
+#include <yai/hardirq.h>
 
-#include <asm/irq_stack.h>
+#include <yai/irq_stack.h>
 
 typedef void (*idtentry_t)(struct pt_regs *regs);
 

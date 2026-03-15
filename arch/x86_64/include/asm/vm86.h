@@ -2,7 +2,7 @@
 #ifndef _ASM_X86_VM86_H
 #define _ASM_X86_VM86_H
 
-#include <asm/ptrace.h>
+#include <yai/ptrace.h>
 #include <uapi/asm/vm86.h>
 
 /*

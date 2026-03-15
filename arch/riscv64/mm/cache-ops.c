@@ -3,7 +3,7 @@
  * Copyright (c) 2021 Western Digital Corporation or its affiliates.
  */
 
-#include <asm/dma-noncoherent.h>
+#include <yai/dma-noncoherent.h>
 
 struct riscv_nonstd_cache_ops noncoherent_cache_ops __ro_after_init;
 

@@ -2,8 +2,8 @@
 #ifndef _ASM_X86_PVCLOCK_H
 #define _ASM_X86_PVCLOCK_H
 
-#include <asm/clocksource.h>
-#include <asm/pvclock-abi.h>
+#include <yai/clocksource.h>
+#include <yai/pvclock-abi.h>
 
 struct timespec64;
 /* some helper functions for xen and kvm pv clock sources */

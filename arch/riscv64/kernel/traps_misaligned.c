@@ -2,23 +2,23 @@
 /*
  * Copyright (C) 2020 Western Digital Corporation or its affiliates.
  */
-#include <linux/kernel.h>
-#include <linux/init.h>
-#include <linux/mm.h>
-#include <linux/module.h>
-#include <linux/perf_event.h>
-#include <linux/irq.h>
-#include <linux/stringify.h>
+#include <yai/kernel.h>
+#include <yai/init.h>
+#include <yai/mm.h>
+#include <yai/module.h>
+#include <yai/perf_event.h>
+#include <yai/irq.h>
+#include <yai/stringify.h>
 
-#include <asm/processor.h>
-#include <asm/ptrace.h>
-#include <asm/csr.h>
-#include <asm/entry-common.h>
-#include <asm/hwprobe.h>
-#include <asm/cpufeature.h>
-#include <asm/sbi.h>
-#include <asm/vector.h>
-#include <asm/insn.h>
+#include <yai/processor.h>
+#include <yai/ptrace.h>
+#include <yai/csr.h>
+#include <yai/entry-common.h>
+#include <yai/hwprobe.h>
+#include <yai/cpufeature.h>
+#include <yai/sbi.h>
+#include <yai/vector.h>
+#include <yai/insn.h>
 
 #ifdef CONFIG_FPU
 

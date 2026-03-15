@@ -6,34 +6,34 @@
  *  Nick Kossifidis <mick@ics.forth.gr>
  */
 
-#include <linux/init.h>
-#include <linux/mm.h>
-#include <linux/memblock.h>
-#include <linux/initrd.h>
-#include <linux/swap.h>
-#include <linux/swiotlb.h>
-#include <linux/sizes.h>
-#include <linux/of_fdt.h>
-#include <linux/of_reserved_mem.h>
-#include <linux/libfdt.h>
-#include <linux/set_memory.h>
-#include <linux/dma-map-ops.h>
-#include <linux/crash_dump.h>
-#include <linux/hugetlb.h>
-#include <linux/kfence.h>
-#include <linux/execmem.h>
+#include <yai/init.h>
+#include <yai/mm.h>
+#include <yai/memblock.h>
+#include <yai/initrd.h>
+#include <yai/swap.h>
+#include <yai/swiotlb.h>
+#include <yai/sizes.h>
+#include <yai/of_fdt.h>
+#include <yai/of_reserved_mem.h>
+#include <yai/libfdt.h>
+#include <yai/set_memory.h>
+#include <yai/dma-map-ops.h>
+#include <yai/crash_dump.h>
+#include <yai/hugetlb.h>
+#include <yai/kfence.h>
+#include <yai/execmem.h>
 
-#include <asm/alternative.h>
-#include <asm/fixmap.h>
-#include <asm/io.h>
-#include <asm/kasan.h>
-#include <asm/module.h>
-#include <asm/numa.h>
-#include <asm/pgtable.h>
-#include <asm/sections.h>
-#include <asm/soc.h>
-#include <asm/sparsemem.h>
-#include <asm/tlbflush.h>
+#include <yai/alternative.h>
+#include <yai/fixmap.h>
+#include <yai/io.h>
+#include <yai/kasan.h>
+#include <yai/module.h>
+#include <yai/numa.h>
+#include <yai/pgtable.h>
+#include <yai/sections.h>
+#include <yai/soc.h>
+#include <yai/sparsemem.h>
+#include <yai/tlbflush.h>
 
 #include "../kernel/head.h"
 

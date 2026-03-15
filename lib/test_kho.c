@@ -10,16 +10,16 @@
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
-#include <linux/mm.h>
-#include <linux/gfp.h>
-#include <linux/slab.h>
-#include <linux/kexec.h>
-#include <linux/libfdt.h>
-#include <linux/module.h>
-#include <linux/printk.h>
-#include <linux/vmalloc.h>
-#include <linux/kexec_handover.h>
-#include <linux/kho/abi/kexec_handover.h>
+#include <yai/mm.h>
+#include <yai/gfp.h>
+#include <yai/slab.h>
+#include <yai/kexec.h>
+#include <yai/libfdt.h>
+#include <yai/module.h>
+#include <yai/printk.h>
+#include <yai/vmalloc.h>
+#include <yai/kexec_handover.h>
+#include <yai/kho/abi/kexec_handover.h>
 
 #include <net/checksum.h>
 

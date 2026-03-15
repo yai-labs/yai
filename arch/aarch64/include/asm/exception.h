@@ -7,10 +7,10 @@
 #ifndef __ASM_EXCEPTION_H
 #define __ASM_EXCEPTION_H
 
-#include <asm/esr.h>
-#include <asm/ptrace.h>
+#include <yai/esr.h>
+#include <yai/ptrace.h>
 
-#include <linux/interrupt.h>
+#include <yai/interrupt.h>
 
 #define __exception_irq_entry	__irq_entry
 

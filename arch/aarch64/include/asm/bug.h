@@ -7,9 +7,9 @@
 #ifndef _ARCH_ARM64_ASM_BUG_H
 #define _ARCH_ARM64_ASM_BUG_H
 
-#include <linux/stringify.h>
+#include <yai/stringify.h>
 
-#include <asm/asm-bug.h>
+#include <yai/asm-bug.h>
 
 #define __BUG_FLAGS(flags)				\
 	asm volatile (__stringify(ASM_BUG_FLAGS(flags)));
@@ -23,6 +23,6 @@
 
 #define HAVE_ARCH_BUG
 
-#include <asm-generic/bug.h>
+#include <yai/bug.h>
 
 #endif /* ! _ARCH_ARM64_ASM_BUG_H */

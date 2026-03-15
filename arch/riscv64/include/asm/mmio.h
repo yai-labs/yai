@@ -11,9 +11,9 @@
 #ifndef _ASM_RISCV_MMIO_H
 #define _ASM_RISCV_MMIO_H
 
-#include <linux/types.h>
-#include <asm/fence.h>
-#include <asm/mmiowb.h>
+#include <yai/types.h>
+#include <yai/fence.h>
+#include <yai/mmiowb.h>
 
 /* Generic IO read/write.  These perform native-endian accesses. */
 #define __raw_writeb __raw_writeb

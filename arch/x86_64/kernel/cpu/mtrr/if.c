@@ -1,16 +1,16 @@
 // SPDX-License-Identifier: GPL-2.0
-#include <linux/capability.h>
-#include <linux/seq_file.h>
-#include <linux/uaccess.h>
-#include <linux/proc_fs.h>
-#include <linux/ctype.h>
-#include <linux/string.h>
-#include <linux/slab.h>
-#include <linux/init.h>
+#include <yai/capability.h>
+#include <yai/seq_file.h>
+#include <yai/uaccess.h>
+#include <yai/proc_fs.h>
+#include <yai/ctype.h>
+#include <yai/string.h>
+#include <yai/slab.h>
+#include <yai/init.h>
 
 #define LINE_SIZE 80
 
-#include <asm/mtrr.h>
+#include <yai/mtrr.h>
 
 #include "mtrr.h"
 

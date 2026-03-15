@@ -3,14 +3,14 @@
  * Copyright (C) 2022-2024 Jason A. Donenfeld <Jason@zx2c4.com>. All Rights Reserved.
  */
 
-#include <linux/array_size.h>
-#include <linux/minmax.h>
+#include <yai/array_size.h>
+#include <yai/minmax.h>
 #include <vdso/datapage.h>
 #include <vdso/getrandom.h>
 #include <vdso/unaligned.h>
-#include <asm/vdso/getrandom.h>
-#include <uapi/linux/mman.h>
-#include <uapi/linux/random.h>
+#include <yai/vdso/getrandom.h>
+#include <yai/mman.h>
+#include <yai/random.h>
 
 /* Bring in default accessors */
 #include <vdso/vsyscall.h>

@@ -8,8 +8,8 @@
 
 #include <kunit/static_stub.h>
 #include <kunit/test.h>
-#include <linux/list.h>
-#include <linux/slab.h>
+#include <yai/list.h>
+#include <yai/slab.h>
 
 #include "string-stream.h"
 

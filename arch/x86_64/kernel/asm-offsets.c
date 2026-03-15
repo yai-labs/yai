@@ -6,20 +6,20 @@
  */
 #define COMPILE_OFFSETS
 
-#include <linux/crypto.h>
+#include <yai/crypto.h>
 #include <crypto/aria.h>
-#include <linux/sched.h>
-#include <linux/stddef.h>
-#include <linux/hardirq.h>
-#include <linux/suspend.h>
-#include <linux/kbuild.h>
-#include <asm/processor.h>
-#include <asm/thread_info.h>
-#include <asm/sigframe.h>
-#include <asm/bootparam.h>
-#include <asm/suspend.h>
-#include <asm/tlbflush.h>
-#include <asm/tdx.h>
+#include <yai/sched.h>
+#include <yai/stddef.h>
+#include <yai/hardirq.h>
+#include <yai/suspend.h>
+#include <yai/kbuild.h>
+#include <yai/processor.h>
+#include <yai/thread_info.h>
+#include <yai/sigframe.h>
+#include <yai/bootparam.h>
+#include <yai/suspend.h>
+#include <yai/tlbflush.h>
+#include <yai/tdx.h>
 
 #ifdef CONFIG_XEN
 #include <xen/interface/xen.h>

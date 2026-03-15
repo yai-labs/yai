@@ -4,12 +4,12 @@
  * Adapted from arch/arm64/kernel/efi.c
  */
 
-#include <linux/efi.h>
-#include <linux/init.h>
+#include <yai/efi.h>
+#include <yai/init.h>
 
-#include <asm/efi.h>
-#include <asm/pgtable.h>
-#include <asm/pgtable-bits.h>
+#include <yai/efi.h>
+#include <yai/pgtable.h>
+#include <yai/pgtable-bits.h>
 
 /*
  * Only regions of type EFI_RUNTIME_SERVICES_CODE need to be

@@ -18,7 +18,7 @@
 
 
 
-#include <linux/types.h>
+#include <yai/types.h>
 
 struct ist_info {
 	__u32 signature;

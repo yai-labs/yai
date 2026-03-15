@@ -6,11 +6,11 @@
 #ifndef ASM_X86_FRED_H
 #define ASM_X86_FRED_H
 
-#include <linux/const.h>
+#include <yai/const.h>
 
-#include <asm/asm.h>
-#include <asm/msr.h>
-#include <asm/trapnr.h>
+#include <yai/asm.h>
+#include <yai/msr.h>
+#include <yai/trapnr.h>
 
 /*
  * FRED event return instruction opcodes for ERET{S,U}; supported in
@@ -36,10 +36,10 @@
 #ifndef __ASSEMBLER__
 
 #ifdef CONFIG_X86_FRED
-#include <linux/kernel.h>
-#include <linux/sched/task_stack.h>
+#include <yai/kernel.h>
+#include <yai/sched/task_stack.h>
 
-#include <asm/ptrace.h>
+#include <yai/ptrace.h>
 
 struct fred_info {
 	/* Event data: CR2, DR6, ... */

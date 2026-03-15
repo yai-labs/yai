@@ -8,17 +8,17 @@
  * Author: Arjan van de Ven <arjan@linux.intel.com>
  */
 
-#include <linux/debugfs.h>
-#include <linux/kasan.h>
-#include <linux/mm.h>
-#include <linux/init.h>
-#include <linux/sched.h>
-#include <linux/seq_file.h>
-#include <linux/highmem.h>
-#include <linux/pci.h>
-#include <linux/ptdump.h>
+#include <yai/debugfs.h>
+#include <yai/kasan.h>
+#include <yai/mm.h>
+#include <yai/init.h>
+#include <yai/sched.h>
+#include <yai/seq_file.h>
+#include <yai/highmem.h>
+#include <yai/pci.h>
+#include <yai/ptdump.h>
 
-#include <asm/e820/types.h>
+#include <yai/e820/types.h>
 
 /*
  * The dumper groups pagetable entries of the same type into one, and for

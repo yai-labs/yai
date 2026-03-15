@@ -35,14 +35,14 @@
 #include <yai/interval_tree.h>
 #include <yai/rbtree.h>
 #include <yai/xarray.h>
-#include <asm/signal.h>
+#include <yai/signal.h>
 
 #include <yai/kvm.h>
 #include <yai/kvm_para.h>
 
 #include <yai/kvm_types.h>
 
-#include <asm/kvm_host.h>
+#include <yai/kvm_host.h>
 #include <yai/kvm_dirty_ring.h>
 
 #ifndef KVM_MAX_VCPU_IDS

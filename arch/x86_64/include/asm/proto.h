@@ -2,7 +2,7 @@
 #ifndef _ASM_X86_PROTO_H
 #define _ASM_X86_PROTO_H
 
-#include <asm/ldt.h>
+#include <yai/ldt.h>
 
 struct task_struct;
 

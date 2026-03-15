@@ -2,8 +2,8 @@
 #ifndef __ASM_SYNC_BITOPS_H__
 #define __ASM_SYNC_BITOPS_H__
 
-#include <asm/bitops.h>
-#include <asm/cmpxchg.h>
+#include <yai/bitops.h>
+#include <yai/cmpxchg.h>
 
 /* sync_bitops functions are equivalent to the SMP implementation of the
  * original functions, independently from CONFIG_SMP being defined.

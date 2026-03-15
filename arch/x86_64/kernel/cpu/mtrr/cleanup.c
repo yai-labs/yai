@@ -4,19 +4,19 @@
  *
  *  Copyright (C) 2009 Yinghai Lu
  */
-#include <linux/init.h>
-#include <linux/pci.h>
-#include <linux/smp.h>
-#include <linux/cpu.h>
-#include <linux/mutex.h>
-#include <linux/uaccess.h>
-#include <linux/kvm_para.h>
-#include <linux/range.h>
+#include <yai/init.h>
+#include <yai/pci.h>
+#include <yai/smp.h>
+#include <yai/cpu.h>
+#include <yai/mutex.h>
+#include <yai/uaccess.h>
+#include <yai/kvm_para.h>
+#include <yai/range.h>
 
-#include <asm/processor.h>
-#include <asm/e820/api.h>
-#include <asm/mtrr.h>
-#include <asm/msr.h>
+#include <yai/processor.h>
+#include <yai/e820/api.h>
+#include <yai/mtrr.h>
+#include <yai/msr.h>
 
 #include "mtrr.h"
 

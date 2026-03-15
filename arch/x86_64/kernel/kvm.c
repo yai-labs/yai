@@ -9,44 +9,44 @@
 
 #define pr_fmt(fmt) "kvm-guest: " fmt
 
-#include <linux/context_tracking.h>
-#include <linux/init.h>
-#include <linux/irq.h>
-#include <linux/kernel.h>
-#include <linux/kvm_para.h>
-#include <linux/cpu.h>
-#include <linux/mm.h>
-#include <linux/highmem.h>
-#include <linux/hardirq.h>
-#include <linux/notifier.h>
-#include <linux/reboot.h>
-#include <linux/hash.h>
-#include <linux/sched.h>
-#include <linux/slab.h>
-#include <linux/kprobes.h>
-#include <linux/nmi.h>
-#include <linux/swait.h>
-#include <linux/syscore_ops.h>
-#include <linux/cc_platform.h>
-#include <linux/efi.h>
-#include <linux/kvm_types.h>
-#include <linux/sched/cputime.h>
-#include <asm/timer.h>
-#include <asm/cpu.h>
-#include <asm/traps.h>
-#include <asm/desc.h>
-#include <asm/tlbflush.h>
-#include <asm/apic.h>
-#include <asm/apicdef.h>
-#include <asm/hypervisor.h>
-#include <asm/mtrr.h>
-#include <asm/tlb.h>
-#include <asm/cpuidle_haltpoll.h>
-#include <asm/msr.h>
-#include <asm/ptrace.h>
-#include <asm/reboot.h>
-#include <asm/svm.h>
-#include <asm/e820/api.h>
+#include <yai/context_tracking.h>
+#include <yai/init.h>
+#include <yai/irq.h>
+#include <yai/kernel.h>
+#include <yai/kvm_para.h>
+#include <yai/cpu.h>
+#include <yai/mm.h>
+#include <yai/highmem.h>
+#include <yai/hardirq.h>
+#include <yai/notifier.h>
+#include <yai/reboot.h>
+#include <yai/hash.h>
+#include <yai/sched.h>
+#include <yai/slab.h>
+#include <yai/kprobes.h>
+#include <yai/nmi.h>
+#include <yai/swait.h>
+#include <yai/syscore_ops.h>
+#include <yai/cc_platform.h>
+#include <yai/efi.h>
+#include <yai/kvm_types.h>
+#include <yai/sched/cputime.h>
+#include <yai/timer.h>
+#include <yai/cpu.h>
+#include <yai/traps.h>
+#include <yai/desc.h>
+#include <yai/tlbflush.h>
+#include <yai/apic.h>
+#include <yai/apicdef.h>
+#include <yai/hypervisor.h>
+#include <yai/mtrr.h>
+#include <yai/tlb.h>
+#include <yai/cpuidle_haltpoll.h>
+#include <yai/msr.h>
+#include <yai/ptrace.h>
+#include <yai/reboot.h>
+#include <yai/svm.h>
+#include <yai/e820/api.h>
 
 DEFINE_STATIC_KEY_FALSE_RO(kvm_async_pf_enabled);
 
@@ -812,7 +812,7 @@ PV_CALLEE_SAVE_REGS_THUNK(__kvm_vcpu_is_preempted);
 
 #else
 
-#include <asm/asm-offsets.h>
+#include <yai/asm-offsets.h>
 
 extern bool __raw_callee_save___kvm_vcpu_is_preempted(long);
 
@@ -1078,7 +1078,7 @@ static void kvm_kick_cpu(int cpu)
 	kvm_hypercall2(KVM_HC_KICK_CPU, flags, apicid);
 }
 
-#include <asm/qspinlock.h>
+#include <yai/qspinlock.h>
 
 static void kvm_wait(u8 *ptr, u8 val)
 {

@@ -30,13 +30,13 @@
  * moved to there from here.  May be used independent of
  * CONFIG_NUMA.
  */
-#include <linux/numa.h>
-#include <linux/cpumask.h>
+#include <yai/numa.h>
+#include <yai/cpumask.h>
 
 #ifdef CONFIG_NUMA
 
-#include <asm/mpspec.h>
-#include <asm/percpu.h>
+#include <yai/mpspec.h>
+#include <yai/percpu.h>
 
 /* Mappings between logical cpu number and node number */
 DECLARE_EARLY_PER_CPU(int, x86_cpu_to_node_map);
@@ -100,7 +100,7 @@ static inline void setup_node_to_cpumask_map(void) { }
 
 #endif
 
-#include <asm-generic/topology.h>
+#include <yai/topology.h>
 
 /* Topology information */
 enum x86_topology_domains {
@@ -215,7 +215,7 @@ static inline int topology_max_smt_threads(void)
 	return __max_smt_threads;
 }
 
-#include <linux/cpu_smt.h>
+#include <yai/cpu_smt.h>
 
 extern unsigned int __amd_nodes_per_pkg;
 
@@ -264,7 +264,7 @@ void x86_pci_root_bus_resources(int bus, struct list_head *resources);
 extern bool x86_topology_update;
 
 #ifdef CONFIG_SCHED_MC_PRIO
-#include <asm/percpu.h>
+#include <yai/percpu.h>
 
 DECLARE_PER_CPU_READ_MOSTLY(int, sched_core_priority);
 extern bool __read_mostly sysctl_sched_itmt_enabled;
@@ -294,7 +294,7 @@ static inline void sched_clear_itmt_support(void)
 #endif /* CONFIG_SCHED_MC_PRIO */
 
 #if defined(CONFIG_SMP) && defined(CONFIG_X86_64)
-#include <asm/cpufeature.h>
+#include <yai/cpufeature.h>
 
 DECLARE_STATIC_KEY_FALSE(arch_scale_freq_key);
 

@@ -5,14 +5,14 @@
 #ifndef _ASM_X86_FPU_SIGNAL_H
 #define _ASM_X86_FPU_SIGNAL_H
 
-#include <linux/compat.h>
-#include <linux/user.h>
+#include <yai/compat.h>
+#include <yai/user.h>
 
-#include <asm/fpu/types.h>
+#include <yai/fpu/types.h>
 
 #ifdef CONFIG_X86_64
 # include <uapi/asm/sigcontext.h>
-# include <asm/user32.h>
+# include <yai/user32.h>
 #else
 # define user_i387_ia32_struct	user_i387_struct
 # define user32_fxsr_struct	user_fxsr_struct

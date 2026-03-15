@@ -3,7 +3,7 @@
 #ifndef __LINUX_ISA_DMA_H
 #define __LINUX_ISA_DMA_H
 
-#include <asm/dma.h>
+#include <yai/dma.h>
 
 #if defined(CONFIG_PCI) && defined(CONFIG_X86_32)
 extern int isa_dma_bridge_buggy;

@@ -17,18 +17,18 @@
  * Copyright (C) 1999 Ingo Molnar <mingo@redhat.com>
  */
 
-#include <linux/mm.h>
-#include <linux/export.h>
-#include <linux/swap.h>
-#include <linux/bio.h>
-#include <linux/pagemap.h>
-#include <linux/mempool.h>
-#include <linux/init.h>
-#include <linux/hash.h>
-#include <linux/highmem.h>
-#include <linux/kgdb.h>
-#include <asm/tlbflush.h>
-#include <linux/vmalloc.h>
+#include <yai/mm.h>
+#include <yai/export.h>
+#include <yai/swap.h>
+#include <yai/bio.h>
+#include <yai/pagemap.h>
+#include <yai/mempool.h>
+#include <yai/init.h>
+#include <yai/hash.h>
+#include <yai/highmem.h>
+#include <yai/kgdb.h>
+#include <yai/tlbflush.h>
+#include <yai/vmalloc.h>
 
 #ifdef CONFIG_KMAP_LOCAL
 static inline int kmap_local_calc_idx(int idx)
@@ -461,7 +461,7 @@ EXPORT_SYMBOL(zero_user_segments);
 
 #ifdef CONFIG_KMAP_LOCAL
 
-#include <asm/kmap_size.h>
+#include <yai/kmap_size.h>
 
 /*
  * With DEBUG_KMAP_LOCAL the stack depth is doubled and every second

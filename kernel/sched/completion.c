@@ -13,9 +13,9 @@
  * Waiting for completion is a typically sync point, but not an exclusion point.
  */
 
-#include <linux/linkage.h>
-#include <linux/sched/debug.h>
-#include <linux/completion.h>
+#include <yai/linkage.h>
+#include <yai/sched/debug.h>
+#include <yai/completion.h>
 #include "sched.h"
 
 static void complete_with_flags(struct completion *x, int wake_flags)

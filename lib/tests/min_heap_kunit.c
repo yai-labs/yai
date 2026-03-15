@@ -4,9 +4,9 @@
  */
 
 #include <kunit/test.h>
-#include <linux/min_heap.h>
-#include <linux/module.h>
-#include <linux/random.h>
+#include <yai/min_heap.h>
+#include <yai/module.h>
+#include <yai/random.h>
 
 struct min_heap_test_case {
 	const char *str;

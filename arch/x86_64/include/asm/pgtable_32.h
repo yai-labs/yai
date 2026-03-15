@@ -2,7 +2,7 @@
 #ifndef _ASM_X86_PGTABLE_32_H
 #define _ASM_X86_PGTABLE_32_H
 
-#include <asm/pgtable_32_types.h>
+#include <yai/pgtable_32_types.h>
 
 /*
  * The Linux memory management assumes a three-level page table setup. On
@@ -14,12 +14,12 @@
  * the i386 page table tree.
  */
 #ifndef __ASSEMBLER__
-#include <asm/processor.h>
-#include <linux/threads.h>
+#include <yai/processor.h>
+#include <yai/threads.h>
 
-#include <linux/bitops.h>
-#include <linux/list.h>
-#include <linux/spinlock.h>
+#include <yai/bitops.h>
+#include <yai/list.h>
+#include <yai/spinlock.h>
 
 struct mm_struct;
 struct vm_area_struct;
@@ -32,9 +32,9 @@ void paging_init(void);
 void sync_initial_page_table(void);
 
 #ifdef CONFIG_X86_PAE
-# include <asm/pgtable-3level.h>
+# include <yai/pgtable-3level.h>
 #else
-# include <asm/pgtable-2level.h>
+# include <yai/pgtable-2level.h>
 #endif
 
 /* Clear a kernel PTE and flush it from the TLB */

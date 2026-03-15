@@ -2,8 +2,8 @@
 #ifndef __X86_KERNEL_FPU_CONTEXT_H
 #define __X86_KERNEL_FPU_CONTEXT_H
 
-#include <asm/fpu/xstate.h>
-#include <asm/trace/fpu.h>
+#include <yai/fpu/xstate.h>
+#include <yai/trace/fpu.h>
 
 /* Functions related to FPU context tracking */
 

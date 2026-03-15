@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: GPL-2.0
 
-#include <linux/cpumask.h>
-#include <linux/delay.h>
-#include <linux/smp.h>
-#include <linux/string_choices.h>
+#include <yai/cpumask.h>
+#include <yai/delay.h>
+#include <yai/smp.h>
+#include <yai/string_choices.h>
 
-#include <asm/io_apic.h>
+#include <yai/io_apic.h>
 
 #include "local.h"
 

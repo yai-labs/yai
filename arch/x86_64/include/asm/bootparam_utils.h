@@ -2,7 +2,7 @@
 #ifndef _ASM_X86_BOOTPARAM_UTILS_H
 #define _ASM_X86_BOOTPARAM_UTILS_H
 
-#include <asm/bootparam.h>
+#include <yai/bootparam.h>
 
 /*
  * This file is included from multiple environments.  Do not

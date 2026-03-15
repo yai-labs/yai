@@ -10,20 +10,20 @@
  *
  */
 
-#include <linux/clocksource.h>
-#include <linux/clockchips.h>
-#include <linux/interrupt.h>
-#include <linux/irq.h>
-#include <linux/i8253.h>
-#include <linux/time.h>
-#include <linux/export.h>
+#include <yai/clocksource.h>
+#include <yai/clockchips.h>
+#include <yai/interrupt.h>
+#include <yai/irq.h>
+#include <yai/i8253.h>
+#include <yai/time.h>
+#include <yai/export.h>
 
-#include <asm/vsyscall.h>
-#include <asm/x86_init.h>
-#include <asm/i8259.h>
-#include <asm/timer.h>
-#include <asm/hpet.h>
-#include <asm/time.h>
+#include <yai/vsyscall.h>
+#include <yai/x86_init.h>
+#include <yai/i8259.h>
+#include <yai/timer.h>
+#include <yai/hpet.h>
+#include <yai/time.h>
 
 unsigned long profile_pc(struct pt_regs *regs)
 {

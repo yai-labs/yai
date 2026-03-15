@@ -1,33 +1,33 @@
-#include <linux/gfp.h>
-#include <linux/initrd.h>
-#include <linux/ioport.h>
-#include <linux/swap.h>
-#include <linux/memblock.h>
-#include <linux/swapfile.h>
-#include <linux/swapops.h>
-#include <linux/kmemleak.h>
-#include <linux/sched/task.h>
-#include <linux/execmem.h>
+#include <yai/gfp.h>
+#include <yai/initrd.h>
+#include <yai/ioport.h>
+#include <yai/swap.h>
+#include <yai/memblock.h>
+#include <yai/swapfile.h>
+#include <yai/swapops.h>
+#include <yai/kmemleak.h>
+#include <yai/sched/task.h>
+#include <yai/execmem.h>
 
-#include <asm/set_memory.h>
-#include <asm/cpu_device_id.h>
-#include <asm/e820/api.h>
-#include <asm/init.h>
-#include <asm/page.h>
-#include <asm/page_types.h>
-#include <asm/sections.h>
-#include <asm/setup.h>
-#include <asm/tlbflush.h>
-#include <asm/tlb.h>
-#include <asm/proto.h>
-#include <asm/dma.h>		/* for MAX_DMA_PFN */
-#include <asm/kaslr.h>
-#include <asm/hypervisor.h>
-#include <asm/cpufeature.h>
-#include <asm/pti.h>
-#include <asm/text-patching.h>
-#include <asm/memtype.h>
-#include <asm/mmu_context.h>
+#include <yai/set_memory.h>
+#include <yai/cpu_device_id.h>
+#include <yai/e820/api.h>
+#include <yai/init.h>
+#include <yai/page.h>
+#include <yai/page_types.h>
+#include <yai/sections.h>
+#include <yai/setup.h>
+#include <yai/tlbflush.h>
+#include <yai/tlb.h>
+#include <yai/proto.h>
+#include <yai/dma.h>		/* for MAX_DMA_PFN */
+#include <yai/kaslr.h>
+#include <yai/hypervisor.h>
+#include <yai/cpufeature.h>
+#include <yai/pti.h>
+#include <yai/text-patching.h>
+#include <yai/memtype.h>
+#include <yai/mmu_context.h>
 
 /*
  * We need to define the tracepoints somewhere, and tlb.c

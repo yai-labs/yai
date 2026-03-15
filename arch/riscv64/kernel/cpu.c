@@ -3,20 +3,20 @@
  * Copyright (C) 2012 Regents of the University of California
  */
 
-#include <linux/acpi.h>
-#include <linux/cpu.h>
-#include <linux/ctype.h>
-#include <linux/init.h>
-#include <linux/seq_file.h>
-#include <linux/of.h>
-#include <asm/acpi.h>
-#include <asm/cpufeature.h>
-#include <asm/csr.h>
-#include <asm/hwcap.h>
-#include <asm/sbi.h>
-#include <asm/smp.h>
-#include <asm/pgtable.h>
-#include <asm/vendor_extensions.h>
+#include <yai/acpi.h>
+#include <yai/cpu.h>
+#include <yai/ctype.h>
+#include <yai/init.h>
+#include <yai/seq_file.h>
+#include <yai/of.h>
+#include <yai/acpi.h>
+#include <yai/cpufeature.h>
+#include <yai/csr.h>
+#include <yai/hwcap.h>
+#include <yai/sbi.h>
+#include <yai/smp.h>
+#include <yai/pgtable.h>
+#include <yai/vendor_extensions.h>
 
 bool arch_match_cpu_phys_id(int cpu, u64 phys_id)
 {

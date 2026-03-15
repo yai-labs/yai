@@ -6,16 +6,16 @@
  * Author: AKASHI Takahiro <takahiro.akashi@linaro.org>
  */
 
-#include <linux/ftrace.h>
-#include <linux/module.h>
-#include <linux/swab.h>
-#include <linux/uaccess.h>
+#include <yai/ftrace.h>
+#include <yai/module.h>
+#include <yai/swab.h>
+#include <yai/uaccess.h>
 
-#include <asm/cacheflush.h>
-#include <asm/debug-monitors.h>
-#include <asm/ftrace.h>
-#include <asm/insn.h>
-#include <asm/text-patching.h>
+#include <yai/cacheflush.h>
+#include <yai/debug-monitors.h>
+#include <yai/ftrace.h>
+#include <yai/insn.h>
+#include <yai/text-patching.h>
 
 #ifdef CONFIG_DYNAMIC_FTRACE_WITH_ARGS
 struct fregs_offset {

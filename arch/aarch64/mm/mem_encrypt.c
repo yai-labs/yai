@@ -13,12 +13,12 @@
  * "Hello, boils and ghouls!"
  */
 
-#include <linux/bug.h>
-#include <linux/compiler.h>
-#include <linux/err.h>
-#include <linux/mm.h>
+#include <yai/bug.h>
+#include <yai/compiler.h>
+#include <yai/err.h>
+#include <yai/mm.h>
 
-#include <asm/mem_encrypt.h>
+#include <yai/mem_encrypt.h>
 
 static const struct arm64_mem_crypt_ops *crypt_ops;
 

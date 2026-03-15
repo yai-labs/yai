@@ -5,10 +5,10 @@
  *
  * Copyright (C) 2012, Red Hat, Inc.  Rafael Aquini <aquini@redhat.com>
  */
-#include <linux/mm.h>
-#include <linux/slab.h>
-#include <linux/export.h>
-#include <linux/balloon.h>
+#include <yai/mm.h>
+#include <yai/slab.h>
+#include <yai/export.h>
+#include <yai/balloon.h>
 
 /*
  * Lock protecting the balloon_dev_info of all devices. We don't really

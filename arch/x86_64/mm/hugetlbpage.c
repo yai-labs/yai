@@ -5,19 +5,19 @@
  * Copyright (C) 2002, Rohit Seth <rohit.seth@intel.com>
  */
 
-#include <linux/init.h>
-#include <linux/fs.h>
-#include <linux/mm.h>
-#include <linux/sched/mm.h>
-#include <linux/hugetlb.h>
-#include <linux/pagemap.h>
-#include <linux/err.h>
-#include <linux/sysctl.h>
-#include <linux/compat.h>
-#include <asm/mman.h>
-#include <asm/tlb.h>
-#include <asm/tlbflush.h>
-#include <asm/elf.h>
+#include <yai/init.h>
+#include <yai/fs.h>
+#include <yai/mm.h>
+#include <yai/sched/mm.h>
+#include <yai/hugetlb.h>
+#include <yai/pagemap.h>
+#include <yai/err.h>
+#include <yai/sysctl.h>
+#include <yai/compat.h>
+#include <yai/mman.h>
+#include <yai/tlb.h>
+#include <yai/tlbflush.h>
+#include <yai/elf.h>
 
 
 #ifdef CONFIG_X86_64

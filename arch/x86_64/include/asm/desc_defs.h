@@ -60,7 +60,7 @@
 
 #ifndef __ASSEMBLER__
 
-#include <linux/types.h>
+#include <yai/types.h>
 
 /* 8 byte segment descriptor */
 struct desc_struct {

@@ -6,12 +6,12 @@
  * Author: Lasse Collin <lasse.collin@tukaani.org>
  */
 
-#include <linux/kernel.h>
-#include <linux/module.h>
-#include <linux/fs.h>
-#include <linux/uaccess.h>
-#include <linux/crc32.h>
-#include <linux/xz.h>
+#include <yai/kernel.h>
+#include <yai/module.h>
+#include <yai/fs.h>
+#include <yai/uaccess.h>
+#include <yai/crc32.h>
+#include <yai/xz.h>
 
 /* Maximum supported dictionary size */
 #define DICT_MAX (1 << 20)

@@ -1,23 +1,23 @@
 // SPDX-License-Identifier: GPL-2.0
-#include <linux/ftrace.h>
-#include <linux/percpu.h>
-#include <linux/slab.h>
-#include <linux/uaccess.h>
-#include <linux/pgtable.h>
-#include <linux/cpuidle.h>
-#include <asm/alternative.h>
-#include <asm/cacheflush.h>
-#include <asm/cpufeature.h>
-#include <asm/cpuidle.h>
-#include <asm/daifflags.h>
-#include <asm/debug-monitors.h>
-#include <asm/exec.h>
-#include <asm/fpsimd.h>
-#include <asm/mte.h>
-#include <asm/memory.h>
-#include <asm/mmu_context.h>
-#include <asm/smp_plat.h>
-#include <asm/suspend.h>
+#include <yai/ftrace.h>
+#include <yai/percpu.h>
+#include <yai/slab.h>
+#include <yai/uaccess.h>
+#include <yai/pgtable.h>
+#include <yai/cpuidle.h>
+#include <yai/alternative.h>
+#include <yai/cacheflush.h>
+#include <yai/cpufeature.h>
+#include <yai/cpuidle.h>
+#include <yai/daifflags.h>
+#include <yai/debug-monitors.h>
+#include <yai/exec.h>
+#include <yai/fpsimd.h>
+#include <yai/mte.h>
+#include <yai/memory.h>
+#include <yai/mmu_context.h>
+#include <yai/smp_plat.h>
+#include <yai/suspend.h>
 
 /*
  * This is allocated by cpu_suspend_init(), and used to store a pointer to

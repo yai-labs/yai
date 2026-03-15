@@ -10,8 +10,8 @@
  * Copyright (c) Russ Anderson <rja@sgi.com>
  */
 
-#include <linux/efi.h>
-#include <linux/rtc.h>
+#include <yai/efi.h>
+#include <yai/rtc.h>
 
 /*
  * Values for the BIOS calls.  It is passed as the first * argument in the

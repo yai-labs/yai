@@ -6,14 +6,14 @@
 
 #ifndef __ASSEMBLER__
 
-#include <asm/asm.h>
-#include <asm/errno.h>
-#include <asm/cpumask.h>
+#include <yai/asm.h>
+#include <yai/errno.h>
+#include <yai/cpumask.h>
 #include <uapi/asm/msr.h>
-#include <asm/shared/msr.h>
+#include <yai/shared/msr.h>
 
-#include <linux/types.h>
-#include <linux/percpu.h>
+#include <yai/types.h>
+#include <yai/percpu.h>
 
 struct msr_info {
 	u32			msr_no;
@@ -40,8 +40,8 @@ struct saved_msrs {
 /*
  * Be very careful with includes. This header is prone to include loops.
  */
-#include <asm/atomic.h>
-#include <linux/tracepoint-defs.h>
+#include <yai/atomic.h>
+#include <yai/tracepoint-defs.h>
 
 #ifdef CONFIG_TRACEPOINTS
 DECLARE_TRACEPOINT(read_msr);
@@ -170,9 +170,9 @@ static inline u64 native_read_pmc(int counter)
 }
 
 #ifdef CONFIG_PARAVIRT_XXL
-#include <asm/paravirt.h>
+#include <yai/paravirt.h>
 #else
-#include <linux/errno.h>
+#include <yai/errno.h>
 /*
  * Access to machine-specific registers (available on 586 and better only)
  * Note: the rd* operations modify the parameters directly (without using

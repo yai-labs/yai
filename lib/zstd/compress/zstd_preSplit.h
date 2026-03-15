@@ -12,7 +12,7 @@
 #ifndef ZSTD_PRESPLIT_H
 #define ZSTD_PRESPLIT_H
 
-#include <linux/types.h>  /* size_t */
+#include <yai/types.h>  /* size_t */
 
 #define ZSTD_SLIPBLOCK_WORKSPACESIZE 8208
 

@@ -3,35 +3,35 @@
  * Copyright 2002 Andi Kleen, SuSE Labs.
  * Thanks to Ben LaHaise for precious feedback.
  */
-#include <linux/highmem.h>
-#include <linux/memblock.h>
-#include <linux/sched.h>
-#include <linux/mm.h>
-#include <linux/interrupt.h>
-#include <linux/seq_file.h>
-#include <linux/proc_fs.h>
-#include <linux/debugfs.h>
-#include <linux/pfn.h>
-#include <linux/percpu.h>
-#include <linux/gfp.h>
-#include <linux/pci.h>
-#include <linux/vmalloc.h>
-#include <linux/libnvdimm.h>
-#include <linux/vmstat.h>
-#include <linux/kernel.h>
-#include <linux/cc_platform.h>
-#include <linux/set_memory.h>
-#include <linux/memregion.h>
+#include <yai/highmem.h>
+#include <yai/memblock.h>
+#include <yai/sched.h>
+#include <yai/mm.h>
+#include <yai/interrupt.h>
+#include <yai/seq_file.h>
+#include <yai/proc_fs.h>
+#include <yai/debugfs.h>
+#include <yai/pfn.h>
+#include <yai/percpu.h>
+#include <yai/gfp.h>
+#include <yai/pci.h>
+#include <yai/vmalloc.h>
+#include <yai/libnvdimm.h>
+#include <yai/vmstat.h>
+#include <yai/kernel.h>
+#include <yai/cc_platform.h>
+#include <yai/set_memory.h>
+#include <yai/memregion.h>
 
-#include <asm/e820/api.h>
-#include <asm/processor.h>
-#include <asm/tlbflush.h>
-#include <asm/sections.h>
-#include <asm/setup.h>
-#include <linux/uaccess.h>
-#include <asm/pgalloc.h>
-#include <asm/proto.h>
-#include <asm/memtype.h>
+#include <yai/e820/api.h>
+#include <yai/processor.h>
+#include <yai/tlbflush.h>
+#include <yai/sections.h>
+#include <yai/setup.h>
+#include <yai/uaccess.h>
+#include <yai/pgalloc.h>
+#include <yai/proto.h>
+#include <yai/memtype.h>
 
 #include "../mm_internal.h"
 

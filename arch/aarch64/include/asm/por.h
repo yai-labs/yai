@@ -6,7 +6,7 @@
 #ifndef _ASM_ARM64_POR_H
 #define _ASM_ARM64_POR_H
 
-#include <asm/sysreg.h>
+#include <yai/sysreg.h>
 
 #define POR_EL0_INIT	POR_ELx_PERM_PREP(0, POE_RWX)
 

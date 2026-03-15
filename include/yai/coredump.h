@@ -5,7 +5,7 @@
 #include <yai/types.h>
 #include <yai/mm.h>
 #include <yai/fs.h>
-#include <asm/siginfo.h>
+#include <yai/siginfo.h>
 
 #ifdef CONFIG_COREDUMP
 struct core_vma_metadata {

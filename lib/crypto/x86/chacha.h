@@ -5,10 +5,10 @@
  * Copyright (C) 2015 Martin Willi
  */
 
-#include <asm/simd.h>
-#include <linux/jump_label.h>
-#include <linux/kernel.h>
-#include <linux/sizes.h>
+#include <yai/simd.h>
+#include <yai/jump_label.h>
+#include <yai/kernel.h>
+#include <yai/sizes.h>
 
 asmlinkage void chacha_block_xor_ssse3(const struct chacha_state *state,
 				       u8 *dst, const u8 *src,

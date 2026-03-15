@@ -9,21 +9,21 @@
 
 #define pr_fmt(fmt) "Modules: " fmt
 
-#include <linux/bitops.h>
-#include <linux/elf.h>
-#include <linux/ftrace.h>
-#include <linux/kasan.h>
-#include <linux/kernel.h>
-#include <linux/mm.h>
-#include <linux/moduleloader.h>
-#include <linux/random.h>
-#include <linux/scs.h>
+#include <yai/bitops.h>
+#include <yai/elf.h>
+#include <yai/ftrace.h>
+#include <yai/kasan.h>
+#include <yai/kernel.h>
+#include <yai/mm.h>
+#include <yai/moduleloader.h>
+#include <yai/random.h>
+#include <yai/scs.h>
 
-#include <asm/alternative.h>
-#include <asm/insn.h>
-#include <asm/scs.h>
-#include <asm/sections.h>
-#include <asm/text-patching.h>
+#include <yai/alternative.h>
+#include <yai/insn.h>
+#include <yai/scs.h>
+#include <yai/sections.h>
+#include <yai/text-patching.h>
 
 enum aarch64_reloc_op {
 	RELOC_OP_NONE,

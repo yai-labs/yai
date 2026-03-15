@@ -7,8 +7,8 @@
 #ifndef __ASM_ESR_H
 #define __ASM_ESR_H
 
-#include <asm/memory.h>
-#include <asm/sysreg.h>
+#include <yai/memory.h>
+#include <yai/sysreg.h>
 
 #define ESR_ELx_EC_UNKNOWN	UL(0x00)
 #define ESR_ELx_EC_WFx		UL(0x01)
@@ -433,7 +433,7 @@
 #define ESR_ELx_IT_GCSPOPX		7
 
 #ifndef __ASSEMBLER__
-#include <asm/types.h>
+#include <yai/types.h>
 
 static inline unsigned long esr_brk_comment(unsigned long esr)
 {

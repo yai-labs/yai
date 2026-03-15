@@ -8,12 +8,12 @@
  *
  */
 
-#include <asm/delay.h>
-#include <linux/pci.h>
-#include <linux/interrupt.h>
-#include <asm/reboot_fixups.h>
-#include <asm/msr.h>
-#include <linux/cs5535.h>
+#include <yai/delay.h>
+#include <yai/pci.h>
+#include <yai/interrupt.h>
+#include <yai/reboot_fixups.h>
+#include <yai/msr.h>
+#include <yai/cs5535.h>
 
 static void cs5530a_warm_reset(struct pci_dev *dev)
 {

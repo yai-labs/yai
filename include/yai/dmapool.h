@@ -13,7 +13,7 @@
 
 #include <yai/nodemask_types.h>
 #include <yai/scatterlist.h>
-#include <asm/io.h>
+#include <yai/io.h>
 
 struct device;
 

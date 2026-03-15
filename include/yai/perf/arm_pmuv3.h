@@ -313,6 +313,6 @@
 		}						\
 	} while (0)
 
-#include <asm/arm_pmuv3.h>
+#include <yai/arm_pmuv3.h>
 
 #endif

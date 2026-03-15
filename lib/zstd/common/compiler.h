@@ -12,7 +12,7 @@
 #ifndef ZSTD_COMPILER_H
 #define ZSTD_COMPILER_H
 
-#include <linux/types.h>
+#include <yai/types.h>
 
 #include "portability_macros.h"
 

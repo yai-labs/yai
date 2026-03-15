@@ -8,16 +8,16 @@
 #ifndef __ASM_IO_H
 #define __ASM_IO_H
 
-#include <linux/types.h>
-#include <linux/pgtable.h>
+#include <yai/types.h>
+#include <yai/pgtable.h>
 
-#include <asm/byteorder.h>
-#include <asm/barrier.h>
-#include <asm/memory.h>
-#include <asm/early_ioremap.h>
-#include <asm/alternative.h>
-#include <asm/cpufeature.h>
-#include <asm/rsi.h>
+#include <yai/byteorder.h>
+#include <yai/barrier.h>
+#include <yai/memory.h>
+#include <yai/early_ioremap.h>
+#include <yai/alternative.h>
+#include <yai/cpufeature.h>
+#include <yai/rsi.h>
 
 /*
  * Generic IO read/write.  These perform native-endian accesses.
@@ -303,7 +303,7 @@ static inline void __iomem *ioremap_prot(phys_addr_t phys, size_t size,
 #define iowrite32be(v,p)	({ __iowmb(); __raw_writel((__force __u32)cpu_to_be32(v), p); })
 #define iowrite64be(v,p)	({ __iowmb(); __raw_writeq((__force __u64)cpu_to_be64(v), p); })
 
-#include <asm-generic/io.h>
+#include <yai/io.h>
 
 #define ioremap_cache ioremap_cache
 static inline void __iomem *ioremap_cache(phys_addr_t addr, size_t size)

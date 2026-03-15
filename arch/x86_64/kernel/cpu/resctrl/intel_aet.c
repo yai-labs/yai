@@ -11,27 +11,27 @@
 
 #define pr_fmt(fmt)   "resctrl: " fmt
 
-#include <linux/bits.h>
-#include <linux/compiler_types.h>
-#include <linux/container_of.h>
-#include <linux/cpumask.h>
-#include <linux/err.h>
-#include <linux/errno.h>
-#include <linux/gfp_types.h>
-#include <linux/init.h>
-#include <linux/intel_pmt_features.h>
-#include <linux/intel_vsec.h>
-#include <linux/io.h>
-#include <linux/minmax.h>
-#include <linux/printk.h>
-#include <linux/rculist.h>
-#include <linux/rcupdate.h>
-#include <linux/resctrl.h>
-#include <linux/resctrl_types.h>
-#include <linux/slab.h>
-#include <linux/stddef.h>
-#include <linux/topology.h>
-#include <linux/types.h>
+#include <yai/bits.h>
+#include <yai/compiler_types.h>
+#include <yai/container_of.h>
+#include <yai/cpumask.h>
+#include <yai/err.h>
+#include <yai/errno.h>
+#include <yai/gfp_types.h>
+#include <yai/init.h>
+#include <yai/intel_pmt_features.h>
+#include <yai/intel_vsec.h>
+#include <yai/io.h>
+#include <yai/minmax.h>
+#include <yai/printk.h>
+#include <yai/rculist.h>
+#include <yai/rcupdate.h>
+#include <yai/resctrl.h>
+#include <yai/resctrl_types.h>
+#include <yai/slab.h>
+#include <yai/stddef.h>
+#include <yai/topology.h>
+#include <yai/types.h>
 
 #include "internal.h"
 

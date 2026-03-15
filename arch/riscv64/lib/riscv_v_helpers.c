@@ -3,14 +3,14 @@
  * Copyright (C) 2023 SiFive
  * Author: Andy Chiu <andy.chiu@sifive.com>
  */
-#include <linux/linkage.h>
-#include <asm/asm.h>
+#include <yai/linkage.h>
+#include <yai/asm.h>
 
-#include <asm/vector.h>
-#include <asm/simd.h>
+#include <yai/vector.h>
+#include <yai/simd.h>
 
 #ifdef CONFIG_MMU
-#include <asm/asm-prototypes.h>
+#include <yai/asm-prototypes.h>
 #endif
 
 #ifdef CONFIG_MMU

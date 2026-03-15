@@ -8,7 +8,7 @@
 #ifndef __ASM_PTRACE_H
 #define __ASM_PTRACE_H
 
-#include <asm/cpufeature.h>
+#include <yai/cpufeature.h>
 
 #include <uapi/asm/ptrace.h>
 
@@ -21,7 +21,7 @@
 #define INIT_PSTATE_EL2 \
 	(PSR_D_BIT | PSR_A_BIT | PSR_I_BIT | PSR_F_BIT | PSR_MODE_EL2h)
 
-#include <linux/irqchip/arm-gic-v3-prio.h>
+#include <yai/irqchip/arm-gic-v3-prio.h>
 
 #define GIC_PRIO_IRQON		GICV3_PRIO_UNMASKED
 #define GIC_PRIO_IRQOFF		GICV3_PRIO_IRQ
@@ -95,10 +95,10 @@
 #define NO_SYSCALL (-1)
 
 #ifndef __ASSEMBLER__
-#include <linux/bug.h>
-#include <linux/types.h>
+#include <yai/bug.h>
+#include <yai/types.h>
 
-#include <asm/stacktrace/frame.h>
+#include <yai/stacktrace/frame.h>
 
 /* sizeof(struct user) for AArch32 */
 #define COMPAT_USER_SZ	296

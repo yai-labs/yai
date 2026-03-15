@@ -3,12 +3,12 @@
  * Copyright (C) 2019 SiFive
  */
 
-#include <linux/pagewalk.h>
-#include <linux/pgtable.h>
-#include <linux/vmalloc.h>
-#include <asm/tlbflush.h>
-#include <asm/bitops.h>
-#include <asm/set_memory.h>
+#include <yai/pagewalk.h>
+#include <yai/pgtable.h>
+#include <yai/vmalloc.h>
+#include <yai/tlbflush.h>
+#include <yai/bitops.h>
+#include <yai/set_memory.h>
 
 struct pageattr_masks {
 	pgprot_t set_mask;

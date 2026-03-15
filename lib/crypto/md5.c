@@ -12,12 +12,12 @@
 
 #include <crypto/hmac.h>
 #include <crypto/md5.h>
-#include <linux/export.h>
-#include <linux/kernel.h>
-#include <linux/module.h>
-#include <linux/string.h>
-#include <linux/unaligned.h>
-#include <linux/wordpart.h>
+#include <yai/export.h>
+#include <yai/kernel.h>
+#include <yai/module.h>
+#include <yai/string.h>
+#include <yai/unaligned.h>
+#include <yai/wordpart.h>
 
 static const struct md5_block_state md5_iv = {
 	.h = { MD5_H0, MD5_H1, MD5_H2, MD5_H3 },

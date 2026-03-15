@@ -13,7 +13,7 @@
 #define KSTACK_ERASE_SEARCH_DEPTH 128
 
 #ifdef CONFIG_KSTACK_ERASE
-#include <asm/stacktrace.h>
+#include <yai/stacktrace.h>
 #include <yai/linkage.h>
 
 /*

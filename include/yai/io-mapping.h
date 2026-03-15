@@ -11,7 +11,7 @@
 #include <yai/bug.h>
 #include <yai/io.h>
 #include <yai/pgtable.h>
-#include <asm/page.h>
+#include <yai/page.h>
 
 /*
  * The io_mapping mechanism provides an abstraction for mapping
@@ -30,7 +30,7 @@ struct io_mapping {
 #ifdef CONFIG_HAVE_ATOMIC_IOMAP
 
 #include <yai/pfn.h>
-#include <asm/iomap.h>
+#include <yai/iomap.h>
 /*
  * For small address space machines, mapping large objects
  * into the kernel virtual space isn't practical. Where

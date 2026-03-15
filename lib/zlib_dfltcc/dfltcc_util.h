@@ -3,8 +3,8 @@
 #define DFLTCC_UTIL_H
 
 #include "dfltcc.h"
-#include <linux/kmsan-checks.h>
-#include <linux/zutil.h>
+#include <yai/kmsan-checks.h>
+#include <yai/zutil.h>
 
 /*
  * C wrapper for the DEFLATE CONVERSION CALL instruction.

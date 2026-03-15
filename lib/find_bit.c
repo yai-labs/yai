@@ -12,13 +12,13 @@
  * size and improve performance, 2015.
  */
 
-#include <linux/bitops.h>
-#include <linux/bitmap.h>
-#include <linux/export.h>
-#include <linux/math.h>
-#include <linux/minmax.h>
-#include <linux/swab.h>
-#include <linux/random.h>
+#include <yai/bitops.h>
+#include <yai/bitmap.h>
+#include <yai/export.h>
+#include <yai/math.h>
+#include <yai/minmax.h>
+#include <yai/swab.h>
+#include <yai/random.h>
 
 /*
  * Common helper for find_bit() function family

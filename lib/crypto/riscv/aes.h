@@ -5,8 +5,8 @@
  * Copyright 2024 Google LLC
  */
 
-#include <asm/simd.h>
-#include <asm/vector.h>
+#include <yai/simd.h>
+#include <yai/vector.h>
 
 static __ro_after_init DEFINE_STATIC_KEY_FALSE(have_zvkned);
 

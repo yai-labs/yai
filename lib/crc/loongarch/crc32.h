@@ -9,8 +9,8 @@
  * Copyright (C) 2020-2023 Loongson Technology Corporation Limited
  */
 
-#include <asm/cpu-features.h>
-#include <linux/unaligned.h>
+#include <yai/cpu-features.h>
+#include <yai/unaligned.h>
 
 #define _CRC32(crc, value, size, type)			\
 do {							\

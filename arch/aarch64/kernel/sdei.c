@@ -2,23 +2,23 @@
 // Copyright (C) 2017 Arm Ltd.
 #define pr_fmt(fmt) "sdei: " fmt
 
-#include <linux/arm-smccc.h>
-#include <linux/arm_sdei.h>
-#include <linux/hardirq.h>
-#include <linux/irqflags.h>
-#include <linux/sched/task_stack.h>
-#include <linux/scs.h>
-#include <linux/uaccess.h>
+#include <yai/arm-smccc.h>
+#include <yai/arm_sdei.h>
+#include <yai/hardirq.h>
+#include <yai/irqflags.h>
+#include <yai/sched/task_stack.h>
+#include <yai/scs.h>
+#include <yai/uaccess.h>
 
-#include <asm/alternative.h>
-#include <asm/exception.h>
-#include <asm/kprobes.h>
-#include <asm/mmu.h>
-#include <asm/ptrace.h>
-#include <asm/sections.h>
-#include <asm/stacktrace.h>
-#include <asm/sysreg.h>
-#include <asm/vmap_stack.h>
+#include <yai/alternative.h>
+#include <yai/exception.h>
+#include <yai/kprobes.h>
+#include <yai/mmu.h>
+#include <yai/ptrace.h>
+#include <yai/sections.h>
+#include <yai/stacktrace.h>
+#include <yai/sysreg.h>
+#include <yai/vmap_stack.h>
 
 unsigned long sdei_exit_mode;
 

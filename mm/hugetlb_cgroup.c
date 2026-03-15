@@ -10,11 +10,11 @@
  *
  */
 
-#include <linux/cgroup.h>
-#include <linux/page_counter.h>
-#include <linux/slab.h>
-#include <linux/hugetlb.h>
-#include <linux/hugetlb_cgroup.h>
+#include <yai/cgroup.h>
+#include <yai/page_counter.h>
+#include <yai/slab.h>
+#include <yai/hugetlb.h>
+#include <yai/hugetlb_cgroup.h>
 
 #define MEMFILE_PRIVATE(x, val)	(((x) << 16) | (val))
 #define MEMFILE_IDX(val)	(((val) >> 16) & 0xffff)

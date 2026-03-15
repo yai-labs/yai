@@ -2,7 +2,7 @@
 #ifndef _ASM_RQSPINLOCK_H
 #define _ASM_RQSPINLOCK_H
 
-#include <asm/barrier.h>
+#include <yai/barrier.h>
 
 /*
  * Hardcode res_smp_cond_load_acquire implementations for arm64 to a custom
@@ -88,6 +88,6 @@
 
 #define res_smp_cond_load_acquire(v, c) smp_cond_load_acquire_timewait(v, c, 0, 1)
 
-#include <asm-generic/rqspinlock.h>
+#include <yai/rqspinlock.h>
 
 #endif /* _ASM_RQSPINLOCK_H */

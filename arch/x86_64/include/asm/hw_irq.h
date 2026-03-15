@@ -14,17 +14,17 @@
  * unified by tglx
  */
 
-#include <asm/irq_vectors.h>
+#include <yai/irq_vectors.h>
 
 #ifndef __ASSEMBLER__
 
-#include <linux/percpu.h>
-#include <linux/profile.h>
-#include <linux/smp.h>
+#include <yai/percpu.h>
+#include <yai/profile.h>
+#include <yai/smp.h>
 
-#include <linux/atomic.h>
-#include <asm/irq.h>
-#include <asm/sections.h>
+#include <yai/atomic.h>
+#include <yai/irq.h>
+#include <yai/sections.h>
 
 #ifdef	CONFIG_IRQ_DOMAIN_HIERARCHY
 struct irq_data;

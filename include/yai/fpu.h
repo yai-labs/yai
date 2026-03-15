@@ -7,6 +7,6 @@
 #error FP code must be compiled separately. See Documentation/core-api/floating-point.rst.
 #endif
 
-#include <asm/fpu.h>
+#include <yai/fpu.h>
 
 #endif

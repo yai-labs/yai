@@ -5,18 +5,18 @@
 /*
  * User space memory access functions
  */
-#include <linux/compiler.h>
-#include <linux/lockdep.h>
-#include <linux/kasan-checks.h>
-#include <asm/alternative.h>
-#include <asm/cpufeatures.h>
-#include <asm/page.h>
-#include <asm/percpu.h>
+#include <yai/compiler.h>
+#include <yai/lockdep.h>
+#include <yai/kasan-checks.h>
+#include <yai/alternative.h>
+#include <yai/cpufeatures.h>
+#include <yai/page.h>
+#include <yai/percpu.h>
 
 #ifdef MODULE
   #define runtime_const_ptr(sym) (sym)
 #else
-  #include <asm/runtime-const.h>
+  #include <yai/runtime-const.h>
 #endif
 extern unsigned long USER_PTR_MAX;
 

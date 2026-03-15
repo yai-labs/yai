@@ -17,20 +17,20 @@
  * Authors: Will Deacon <will@kernel.org> and Marc Zyngier <maz@kernel.org>
  */
 
-#include <linux/arm-smccc.h>
-#include <linux/bpf.h>
-#include <linux/cpu.h>
-#include <linux/device.h>
-#include <linux/nospec.h>
-#include <linux/prctl.h>
-#include <linux/sched/task_stack.h>
+#include <yai/arm-smccc.h>
+#include <yai/bpf.h>
+#include <yai/cpu.h>
+#include <yai/device.h>
+#include <yai/nospec.h>
+#include <yai/prctl.h>
+#include <yai/sched/task_stack.h>
 
-#include <asm/debug-monitors.h>
-#include <asm/insn.h>
-#include <asm/spectre.h>
-#include <asm/traps.h>
-#include <asm/vectors.h>
-#include <asm/virt.h>
+#include <yai/debug-monitors.h>
+#include <yai/insn.h>
+#include <yai/spectre.h>
+#include <yai/traps.h>
+#include <yai/vectors.h>
+#include <yai/virt.h>
 
 /*
  * We try to ensure that the mitigation state can never change as the result of

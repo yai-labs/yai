@@ -13,7 +13,7 @@
 #include <yai/netdevice.h>
 #include <yai/pci.h>
 #include <yai/skbuff.h>
-#include <asm/byteorder.h>
+#include <yai/byteorder.h>
 #include <yai/io.h>
 #include <yai/compiler.h>
 #include <yai/kernel.h>

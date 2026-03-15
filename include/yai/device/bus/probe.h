@@ -31,7 +31,7 @@
 #include <yai/device/devres.h>
 #include <yai/device/driver.h>
 #include <yai/cleanup.h>
-#include <asm/device.h>
+#include <yai/device.h>
 
 struct device;
 struct device_private;

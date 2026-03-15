@@ -13,18 +13,18 @@
 #define _ASM_X86_UV_UV_HUB_H
 
 #ifdef CONFIG_X86_64
-#include <linux/numa.h>
-#include <linux/percpu.h>
-#include <linux/timer.h>
-#include <linux/io.h>
-#include <linux/topology.h>
-#include <asm/types.h>
-#include <asm/percpu.h>
-#include <asm/uv/uv.h>
-#include <asm/uv/uv_mmrs.h>
-#include <asm/uv/bios.h>
-#include <asm/irq_vectors.h>
-#include <asm/io_apic.h>
+#include <yai/numa.h>
+#include <yai/percpu.h>
+#include <yai/timer.h>
+#include <yai/io.h>
+#include <yai/topology.h>
+#include <yai/types.h>
+#include <yai/percpu.h>
+#include <yai/uv/uv.h>
+#include <yai/uv/uv_mmrs.h>
+#include <yai/uv/bios.h>
+#include <yai/irq_vectors.h>
+#include <yai/io_apic.h>
 
 
 /*

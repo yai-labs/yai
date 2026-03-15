@@ -18,35 +18,35 @@
  *  kernel subsystems and hints as to where to find out what things do.
  */
 
-#include <linux/oom.h>
-#include <linux/mm.h>
-#include <linux/err.h>
-#include <linux/gfp.h>
-#include <linux/sched.h>
-#include <linux/sched/mm.h>
-#include <linux/sched/task.h>
-#include <linux/sched/debug.h>
-#include <linux/swap.h>
-#include <linux/syscalls.h>
-#include <linux/timex.h>
-#include <linux/jiffies.h>
-#include <linux/cpuset.h>
-#include <linux/export.h>
-#include <linux/notifier.h>
-#include <linux/memcontrol.h>
-#include <linux/mempolicy.h>
-#include <linux/security.h>
-#include <linux/ptrace.h>
-#include <linux/freezer.h>
-#include <linux/ftrace.h>
-#include <linux/ratelimit.h>
-#include <linux/kthread.h>
-#include <linux/init.h>
-#include <linux/mmu_notifier.h>
-#include <linux/cred.h>
-#include <linux/nmi.h>
+#include <yai/oom.h>
+#include <yai/mm.h>
+#include <yai/err.h>
+#include <yai/gfp.h>
+#include <yai/sched.h>
+#include <yai/sched/mm.h>
+#include <yai/sched/task.h>
+#include <yai/sched/debug.h>
+#include <yai/swap.h>
+#include <yai/syscalls.h>
+#include <yai/timex.h>
+#include <yai/jiffies.h>
+#include <yai/cpuset.h>
+#include <yai/export.h>
+#include <yai/notifier.h>
+#include <yai/memcontrol.h>
+#include <yai/mempolicy.h>
+#include <yai/security.h>
+#include <yai/ptrace.h>
+#include <yai/freezer.h>
+#include <yai/ftrace.h>
+#include <yai/ratelimit.h>
+#include <yai/kthread.h>
+#include <yai/init.h>
+#include <yai/mmu_notifier.h>
+#include <yai/cred.h>
+#include <yai/nmi.h>
 
-#include <asm/tlb.h>
+#include <yai/tlb.h>
 #include "internal.h"
 #include "slab.h"
 

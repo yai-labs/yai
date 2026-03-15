@@ -1,14 +1,14 @@
 // SPDX-License-Identifier: GPL-2.0
-#include <linux/compiler.h>
-#include <linux/errno.h>
-#include <linux/export.h>
-#include <linux/fault-inject-usercopy.h>
-#include <linux/instrumented.h>
-#include <linux/kernel.h>
-#include <linux/nospec.h>
-#include <linux/string.h>
-#include <linux/uaccess.h>
-#include <linux/wordpart.h>
+#include <yai/compiler.h>
+#include <yai/errno.h>
+#include <yai/export.h>
+#include <yai/fault-inject-usercopy.h>
+#include <yai/instrumented.h>
+#include <yai/kernel.h>
+#include <yai/nospec.h>
+#include <yai/string.h>
+#include <yai/uaccess.h>
+#include <yai/wordpart.h>
 
 /* out-of-line parts */
 

@@ -1,19 +1,19 @@
 // SPDX-License-Identifier: GPL-2.0
 /*  Copyright(c) 2016-20 Intel Corporation. */
 
-#include <asm/mman.h>
-#include <asm/sgx.h>
+#include <yai/mman.h>
+#include <yai/sgx.h>
 #include <crypto/sha2.h>
-#include <linux/mman.h>
-#include <linux/delay.h>
-#include <linux/file.h>
-#include <linux/hashtable.h>
-#include <linux/highmem.h>
-#include <linux/ratelimit.h>
-#include <linux/sched/signal.h>
-#include <linux/shmem_fs.h>
-#include <linux/slab.h>
-#include <linux/suspend.h>
+#include <yai/mman.h>
+#include <yai/delay.h>
+#include <yai/file.h>
+#include <yai/hashtable.h>
+#include <yai/highmem.h>
+#include <yai/ratelimit.h>
+#include <yai/sched/signal.h>
+#include <yai/shmem_fs.h>
+#include <yai/slab.h>
+#include <yai/suspend.h>
 #include "driver.h"
 #include "encl.h"
 #include "encls.h"

@@ -7,19 +7,19 @@
  *	Srikar Dronamraju
  *	Jim Keniston
  */
-#include <linux/kernel.h>
-#include <linux/sched.h>
-#include <linux/ptrace.h>
-#include <linux/uprobes.h>
-#include <linux/uaccess.h>
-#include <linux/syscalls.h>
+#include <yai/kernel.h>
+#include <yai/sched.h>
+#include <yai/ptrace.h>
+#include <yai/uprobes.h>
+#include <yai/uaccess.h>
+#include <yai/syscalls.h>
 
-#include <linux/kdebug.h>
-#include <asm/processor.h>
-#include <asm/insn.h>
-#include <asm/insn-eval.h>
-#include <asm/mmu_context.h>
-#include <asm/nops.h>
+#include <yai/kdebug.h>
+#include <yai/processor.h>
+#include <yai/insn.h>
+#include <yai/insn-eval.h>
+#include <yai/mmu_context.h>
+#include <yai/nops.h>
 
 /* Post-execution fixups. */
 

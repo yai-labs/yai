@@ -7,11 +7,11 @@
 
 #ifndef __ASSEMBLER__
 
-#include <asm/barrier.h>
-#include <asm/unistd_compat_32.h>
-#include <asm/errno.h>
+#include <yai/barrier.h>
+#include <yai/unistd_compat_32.h>
+#include <yai/errno.h>
 
-#include <asm/vdso/compat_barrier.h>
+#include <yai/vdso/compat_barrier.h>
 
 #define VDSO_HAS_CLOCK_GETRES		1
 

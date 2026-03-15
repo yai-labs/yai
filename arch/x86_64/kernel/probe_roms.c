@@ -1,27 +1,27 @@
 // SPDX-License-Identifier: GPL-2.0
-#include <linux/sched.h>
-#include <linux/mm.h>
-#include <linux/uaccess.h>
-#include <linux/mmzone.h>
-#include <linux/ioport.h>
-#include <linux/seq_file.h>
-#include <linux/console.h>
-#include <linux/init.h>
-#include <linux/edd.h>
-#include <linux/dmi.h>
-#include <linux/pfn.h>
-#include <linux/pci.h>
-#include <linux/export.h>
+#include <yai/sched.h>
+#include <yai/mm.h>
+#include <yai/uaccess.h>
+#include <yai/mmzone.h>
+#include <yai/ioport.h>
+#include <yai/seq_file.h>
+#include <yai/console.h>
+#include <yai/init.h>
+#include <yai/edd.h>
+#include <yai/dmi.h>
+#include <yai/pfn.h>
+#include <yai/pci.h>
+#include <yai/export.h>
 
-#include <asm/probe_roms.h>
-#include <asm/pci-direct.h>
-#include <asm/e820/api.h>
-#include <asm/mmzone.h>
-#include <asm/setup.h>
-#include <asm/sections.h>
-#include <asm/io.h>
-#include <asm/setup_arch.h>
-#include <asm/sev.h>
+#include <yai/probe_roms.h>
+#include <yai/pci-direct.h>
+#include <yai/e820/api.h>
+#include <yai/mmzone.h>
+#include <yai/setup.h>
+#include <yai/sections.h>
+#include <yai/io.h>
+#include <yai/setup_arch.h>
+#include <yai/sev.h>
 
 static struct resource system_rom_resource = {
 	.name	= "System ROM",

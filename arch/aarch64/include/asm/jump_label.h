@@ -10,8 +10,8 @@
 
 #ifndef __ASSEMBLER__
 
-#include <linux/types.h>
-#include <asm/insn.h>
+#include <yai/types.h>
+#include <yai/insn.h>
 
 #define HAVE_JUMP_LABEL_BATCH
 #define JUMP_LABEL_NOP_SIZE		AARCH64_INSN_SIZE

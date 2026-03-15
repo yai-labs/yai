@@ -5,7 +5,7 @@
  * Copyright (c) 2025, Google LLC.
  * Pasha Tatashin <pasha.tatashin@soleen.com>
  */
-#include <linux/list_private.h>
+#include <yai/list_private.h>
 #include <kunit/test.h>
 
 /*

@@ -11,20 +11,20 @@
  *  Always use brw_page, life becomes simpler. 12 May 1998 Eric Biederman
  */
 
-#include <linux/mm.h>
-#include <linux/kernel_stat.h>
-#include <linux/gfp.h>
-#include <linux/pagemap.h>
-#include <linux/swap.h>
-#include <linux/bio.h>
-#include <linux/swapops.h>
-#include <linux/writeback.h>
-#include <linux/blkdev.h>
-#include <linux/psi.h>
-#include <linux/uio.h>
-#include <linux/sched/task.h>
-#include <linux/delayacct.h>
-#include <linux/zswap.h>
+#include <yai/mm.h>
+#include <yai/kernel_stat.h>
+#include <yai/gfp.h>
+#include <yai/pagemap.h>
+#include <yai/swap.h>
+#include <yai/bio.h>
+#include <yai/swapops.h>
+#include <yai/writeback.h>
+#include <yai/blkdev.h>
+#include <yai/psi.h>
+#include <yai/uio.h>
+#include <yai/sched/task.h>
+#include <yai/delayacct.h>
+#include <yai/zswap.h>
 #include "swap.h"
 
 static void __end_swap_bio_write(struct bio *bio)

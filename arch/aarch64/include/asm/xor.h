@@ -6,10 +6,10 @@
  * Copyright (C) 2018,Tianjin KYLIN Information Technology Co., Ltd.
  */
 
-#include <linux/hardirq.h>
-#include <asm-generic/xor.h>
-#include <asm/hwcap.h>
-#include <asm/simd.h>
+#include <yai/hardirq.h>
+#include <yai/xor.h>
+#include <yai/hwcap.h>
+#include <yai/simd.h>
 
 #ifdef CONFIG_KERNEL_MODE_NEON
 

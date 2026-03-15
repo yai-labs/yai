@@ -2,21 +2,21 @@
 /*
  * sparse memory mappings.
  */
-#include <linux/mm.h>
-#include <linux/slab.h>
-#include <linux/mmzone.h>
-#include <linux/memblock.h>
-#include <linux/compiler.h>
-#include <linux/highmem.h>
-#include <linux/export.h>
-#include <linux/spinlock.h>
-#include <linux/vmalloc.h>
-#include <linux/swap.h>
-#include <linux/swapops.h>
-#include <linux/bootmem_info.h>
-#include <linux/vmstat.h>
+#include <yai/mm.h>
+#include <yai/slab.h>
+#include <yai/mmzone.h>
+#include <yai/memblock.h>
+#include <yai/compiler.h>
+#include <yai/highmem.h>
+#include <yai/export.h>
+#include <yai/spinlock.h>
+#include <yai/vmalloc.h>
+#include <yai/swap.h>
+#include <yai/swapops.h>
+#include <yai/bootmem_info.h>
+#include <yai/vmstat.h>
 #include "internal.h"
-#include <asm/dma.h>
+#include <yai/dma.h>
 
 /*
  * Permanent SPARSEMEM data:

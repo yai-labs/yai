@@ -8,27 +8,27 @@
  *	(C) Copyright 2002 Red Hat Inc, All Rights Reserved
  */
 
-#include <linux/mm.h>
-#include <linux/mm_inline.h>
-#include <linux/hugetlb.h>
-#include <linux/shm.h>
-#include <linux/ksm.h>
-#include <linux/mman.h>
-#include <linux/swap.h>
-#include <linux/capability.h>
-#include <linux/fs.h>
-#include <linux/leafops.h>
-#include <linux/highmem.h>
-#include <linux/security.h>
-#include <linux/syscalls.h>
-#include <linux/mmu_notifier.h>
-#include <linux/uaccess.h>
-#include <linux/userfaultfd_k.h>
-#include <linux/mempolicy.h>
-#include <linux/pgalloc.h>
+#include <yai/mm.h>
+#include <yai/mm_inline.h>
+#include <yai/hugetlb.h>
+#include <yai/shm.h>
+#include <yai/ksm.h>
+#include <yai/mman.h>
+#include <yai/swap.h>
+#include <yai/capability.h>
+#include <yai/fs.h>
+#include <yai/leafops.h>
+#include <yai/highmem.h>
+#include <yai/security.h>
+#include <yai/syscalls.h>
+#include <yai/mmu_notifier.h>
+#include <yai/uaccess.h>
+#include <yai/userfaultfd_k.h>
+#include <yai/mempolicy.h>
+#include <yai/pgalloc.h>
 
-#include <asm/cacheflush.h>
-#include <asm/tlb.h>
+#include <yai/cacheflush.h>
+#include <yai/tlb.h>
 
 #include "internal.h"
 

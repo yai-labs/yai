@@ -6,7 +6,7 @@
 #ifndef _ASM_RISCV_TLBBATCH_H
 #define _ASM_RISCV_TLBBATCH_H
 
-#include <linux/cpumask.h>
+#include <yai/cpumask.h>
 
 struct arch_tlbflush_unmap_batch {
 	struct cpumask cpumask;

@@ -6,11 +6,11 @@
 #ifndef __KVM_NACL_H
 #define __KVM_NACL_H
 
-#include <linux/jump_label.h>
-#include <linux/percpu.h>
-#include <asm/byteorder.h>
-#include <asm/csr.h>
-#include <asm/sbi.h>
+#include <yai/jump_label.h>
+#include <yai/percpu.h>
+#include <yai/byteorder.h>
+#include <yai/csr.h>
+#include <yai/sbi.h>
 
 struct kvm_vcpu_arch;
 

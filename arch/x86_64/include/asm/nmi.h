@@ -2,10 +2,10 @@
 #ifndef _ASM_X86_NMI_H
 #define _ASM_X86_NMI_H
 
-#include <linux/irq_work.h>
-#include <linux/pm.h>
-#include <asm/irq.h>
-#include <asm/io.h>
+#include <yai/irq_work.h>
+#include <yai/pm.h>
+#include <yai/irq.h>
+#include <yai/io.h>
 
 #ifdef CONFIG_X86_LOCAL_APIC
 

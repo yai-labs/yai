@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: GPL-2.0
-#include <linux/mm.h>
-#include <linux/rmap.h>
-#include <linux/hugetlb.h>
-#include <linux/swap.h>
-#include <linux/leafops.h>
+#include <yai/mm.h>
+#include <yai/rmap.h>
+#include <yai/hugetlb.h>
+#include <yai/swap.h>
+#include <yai/leafops.h>
 
 #include "internal.h"
 

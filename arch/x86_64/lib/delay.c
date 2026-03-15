@@ -12,19 +12,19 @@
  *	we have to worry about.
  */
 
-#include <linux/export.h>
-#include <linux/sched.h>
-#include <linux/timex.h>
-#include <linux/preempt.h>
-#include <linux/delay.h>
+#include <yai/export.h>
+#include <yai/sched.h>
+#include <yai/timex.h>
+#include <yai/preempt.h>
+#include <yai/delay.h>
 
-#include <asm/processor.h>
-#include <asm/delay.h>
-#include <asm/timer.h>
-#include <asm/mwait.h>
+#include <yai/processor.h>
+#include <yai/delay.h>
+#include <yai/timer.h>
+#include <yai/mwait.h>
 
 #ifdef CONFIG_SMP
-# include <asm/smp.h>
+# include <yai/smp.h>
 #endif
 
 static void delay_loop(u64 __loops);

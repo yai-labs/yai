@@ -8,9 +8,9 @@
 #ifndef __ASM_KERNEL_PGTABLE_H
 #define __ASM_KERNEL_PGTABLE_H
 
-#include <asm/boot.h>
-#include <asm/pgtable-hwdef.h>
-#include <asm/sparsemem.h>
+#include <yai/boot.h>
+#include <yai/pgtable-hwdef.h>
+#include <yai/sparsemem.h>
 
 /*
  * The physical and virtual addresses of the start of the kernel image are

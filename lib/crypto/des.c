@@ -9,17 +9,17 @@
 
 #include <crypto/des.h>
 #include <crypto/internal/des.h>
-#include <linux/bitops.h>
-#include <linux/compiler.h>
-#include <linux/crypto.h>
-#include <linux/errno.h>
-#include <linux/export.h>
-#include <linux/fips.h>
-#include <linux/init.h>
-#include <linux/module.h>
-#include <linux/string.h>
-#include <linux/types.h>
-#include <linux/unaligned.h>
+#include <yai/bitops.h>
+#include <yai/compiler.h>
+#include <yai/crypto.h>
+#include <yai/errno.h>
+#include <yai/export.h>
+#include <yai/fips.h>
+#include <yai/init.h>
+#include <yai/module.h>
+#include <yai/string.h>
+#include <yai/types.h>
+#include <yai/unaligned.h>
 
 #define ROL(x, r) ((x) = rol32((x), (r)))
 #define ROR(x, r) ((x) = ror32((x), (r)))

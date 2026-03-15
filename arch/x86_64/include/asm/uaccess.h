@@ -4,25 +4,25 @@
 /*
  * User space memory access functions
  */
-#include <linux/compiler.h>
-#include <linux/instrumented.h>
-#include <linux/kasan-checks.h>
-#include <linux/mm_types.h>
-#include <linux/string.h>
-#include <linux/mmap_lock.h>
-#include <asm/asm.h>
-#include <asm/page.h>
-#include <asm/smap.h>
-#include <asm/extable.h>
-#include <asm/tlbflush.h>
+#include <yai/compiler.h>
+#include <yai/instrumented.h>
+#include <yai/kasan-checks.h>
+#include <yai/mm_types.h>
+#include <yai/string.h>
+#include <yai/mmap_lock.h>
+#include <yai/asm.h>
+#include <yai/page.h>
+#include <yai/smap.h>
+#include <yai/extable.h>
+#include <yai/tlbflush.h>
 
 #ifdef CONFIG_X86_32
-# include <asm/uaccess_32.h>
+# include <yai/uaccess_32.h>
 #else
-# include <asm/uaccess_64.h>
+# include <yai/uaccess_64.h>
 #endif
 
-#include <asm-generic/access_ok.h>
+#include <yai/access_ok.h>
 
 extern int __get_user_1(void);
 extern int __get_user_2(void);

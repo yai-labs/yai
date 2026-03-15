@@ -3,8 +3,8 @@
  * Copyright (C) 2017 Zihao Yu
  */
 
-#include <linux/export.h>
-#include <linux/uaccess.h>
+#include <yai/export.h>
+#include <yai/uaccess.h>
 
 /*
  * Assembly functions that may be used (directly or indirectly) by modules

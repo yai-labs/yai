@@ -5,7 +5,7 @@
  * Author: SeongJae Park <sj@kernel.org>
  */
 
-#include <linux/damon.h>
+#include <yai/damon.h>
 
 #include "modules-common.h"
 

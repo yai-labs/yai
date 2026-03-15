@@ -9,8 +9,8 @@
 
 #ifndef __ASSEMBLER__
 
-#include <linux/types.h>
-#include <asm/asm.h>
+#include <yai/types.h>
+#include <yai/asm.h>
 
 #define HAVE_JUMP_LABEL_BATCH
 

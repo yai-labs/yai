@@ -5,17 +5,17 @@
 #ifndef __ASM_STACKTRACE_H
 #define __ASM_STACKTRACE_H
 
-#include <linux/percpu.h>
-#include <linux/sched.h>
-#include <linux/sched/task_stack.h>
-#include <linux/llist.h>
+#include <yai/percpu.h>
+#include <yai/sched.h>
+#include <yai/sched/task_stack.h>
+#include <yai/llist.h>
 
-#include <asm/memory.h>
-#include <asm/pointer_auth.h>
-#include <asm/ptrace.h>
-#include <asm/sdei.h>
+#include <yai/memory.h>
+#include <yai/pointer_auth.h>
+#include <yai/ptrace.h>
+#include <yai/sdei.h>
 
-#include <asm/stacktrace/common.h>
+#include <yai/stacktrace/common.h>
 
 extern void dump_backtrace(struct pt_regs *regs, struct task_struct *tsk,
 			   const char *loglvl);

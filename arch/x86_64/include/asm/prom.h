@@ -10,13 +10,13 @@
 #define _ASM_X86_PROM_H
 #ifndef __ASSEMBLER__
 
-#include <linux/of.h>
-#include <linux/types.h>
-#include <linux/pci.h>
+#include <yai/of.h>
+#include <yai/types.h>
+#include <yai/pci.h>
 
-#include <asm/irq.h>
-#include <linux/atomic.h>
-#include <asm/setup.h>
+#include <yai/irq.h>
+#include <yai/atomic.h>
+#include <yai/setup.h>
 
 #ifdef CONFIG_OF
 extern int of_ioapic;

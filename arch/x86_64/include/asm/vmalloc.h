@@ -1,9 +1,9 @@
 #ifndef _ASM_X86_VMALLOC_H
 #define _ASM_X86_VMALLOC_H
 
-#include <asm/cpufeature.h>
-#include <asm/page.h>
-#include <asm/pgtable_areas.h>
+#include <yai/cpufeature.h>
+#include <yai/page.h>
+#include <yai/pgtable_areas.h>
 
 #ifdef CONFIG_HAVE_ARCH_HUGE_VMAP
 

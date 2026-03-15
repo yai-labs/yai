@@ -2,7 +2,7 @@
 #ifndef __ASM_CURRENT_H
 #define __ASM_CURRENT_H
 
-#include <linux/compiler.h>
+#include <yai/compiler.h>
 
 #ifndef __ASSEMBLER__
 

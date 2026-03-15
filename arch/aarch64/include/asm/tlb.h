@@ -8,13 +8,13 @@
 #ifndef __ASM_TLB_H
 #define __ASM_TLB_H
 
-#include <linux/pagemap.h>
+#include <yai/pagemap.h>
 
 
 #define tlb_flush tlb_flush
 static void tlb_flush(struct mmu_gather *tlb);
 
-#include <asm-generic/tlb.h>
+#include <yai/tlb.h>
 
 /*
  * get the tlbi levels in arm64.  Default value is TLBI_TTL_UNKNOWN if more than

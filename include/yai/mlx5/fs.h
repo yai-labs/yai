@@ -48,7 +48,7 @@
 #include <yai/file_ref.h>
 #include <yai/unicode.h>
 
-#include <asm/byteorder.h>
+#include <yai/byteorder.h>
 #include <yai/uapi/fs.h>
 
 struct bdi_writeback;

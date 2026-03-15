@@ -6,15 +6,15 @@
 #ifndef _ASM_RISCV_CMPXCHG_H
 #define _ASM_RISCV_CMPXCHG_H
 
-#include <linux/bug.h>
+#include <yai/bug.h>
 
-#include <asm/alternative-macros.h>
-#include <asm/fence.h>
-#include <asm/hwcap.h>
-#include <asm/insn-def.h>
-#include <asm/cpufeature-macros.h>
-#include <asm/processor.h>
-#include <asm/errata_list.h>
+#include <yai/alternative-macros.h>
+#include <yai/fence.h>
+#include <yai/hwcap.h>
+#include <yai/insn-def.h>
+#include <yai/cpufeature-macros.h>
+#include <yai/processor.h>
+#include <yai/errata_list.h>
 
 #define __arch_xchg_masked(sc_sfx, swap_sfx, prepend, sc_append,		\
 			   swap_append, r, p, n)				\

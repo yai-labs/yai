@@ -6,36 +6,36 @@
  * Copyright (C) 2012 ARM Ltd.
  */
 
-#include <linux/cache.h>
-#include <linux/compat.h>
-#include <linux/errno.h>
-#include <linux/irq-entry-common.h>
-#include <linux/kernel.h>
-#include <linux/signal.h>
-#include <linux/freezer.h>
-#include <linux/stddef.h>
-#include <linux/uaccess.h>
-#include <linux/sizes.h>
-#include <linux/string.h>
-#include <linux/ratelimit.h>
-#include <linux/rseq.h>
-#include <linux/syscalls.h>
-#include <linux/pkeys.h>
+#include <yai/cache.h>
+#include <yai/compat.h>
+#include <yai/errno.h>
+#include <yai/irq-entry-common.h>
+#include <yai/kernel.h>
+#include <yai/signal.h>
+#include <yai/freezer.h>
+#include <yai/stddef.h>
+#include <yai/uaccess.h>
+#include <yai/sizes.h>
+#include <yai/string.h>
+#include <yai/ratelimit.h>
+#include <yai/rseq.h>
+#include <yai/syscalls.h>
+#include <yai/pkeys.h>
 
-#include <asm/daifflags.h>
-#include <asm/debug-monitors.h>
-#include <asm/elf.h>
-#include <asm/exception.h>
-#include <asm/cacheflush.h>
-#include <asm/gcs.h>
-#include <asm/ucontext.h>
-#include <asm/unistd.h>
-#include <asm/fpsimd.h>
-#include <asm/ptrace.h>
-#include <asm/syscall.h>
-#include <asm/signal32.h>
-#include <asm/traps.h>
-#include <asm/vdso.h>
+#include <yai/daifflags.h>
+#include <yai/debug-monitors.h>
+#include <yai/elf.h>
+#include <yai/exception.h>
+#include <yai/cacheflush.h>
+#include <yai/gcs.h>
+#include <yai/ucontext.h>
+#include <yai/unistd.h>
+#include <yai/fpsimd.h>
+#include <yai/ptrace.h>
+#include <yai/syscall.h>
+#include <yai/signal32.h>
+#include <yai/traps.h>
+#include <yai/vdso.h>
 
 #define GCS_SIGNAL_CAP(addr) (((unsigned long)addr) & GCS_CAP_ADDR_MASK)
 

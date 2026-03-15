@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: GPL-2.0
 #include <kunit/test.h>
-#include <linux/fcntl.h>
-#include <linux/file.h>
-#include <linux/fs.h>
-#include <linux/init_syscalls.h>
-#include <linux/stringify.h>
-#include <linux/timekeeping.h>
+#include <yai/fcntl.h>
+#include <yai/file.h>
+#include <yai/fs.h>
+#include <yai/init_syscalls.h>
+#include <yai/stringify.h>
+#include <yai/timekeeping.h>
 #include "initramfs_internal.h"
 
 struct initramfs_test_cpio {

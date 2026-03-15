@@ -6,22 +6,22 @@
  *  Copyright (C) 2007 Eric Biederman <ebiederm@xmission.com>
  */
 
-#include <linux/init.h>
-#include <linux/start_kernel.h>
-#include <linux/mm.h>
-#include <linux/memblock.h>
+#include <yai/init.h>
+#include <yai/start_kernel.h>
+#include <yai/mm.h>
+#include <yai/memblock.h>
 
-#include <asm/desc.h>
-#include <asm/setup.h>
-#include <asm/sections.h>
-#include <asm/e820/api.h>
-#include <asm/page.h>
-#include <asm/apic.h>
-#include <asm/io_apic.h>
-#include <asm/bios_ebda.h>
-#include <asm/microcode.h>
-#include <asm/tlbflush.h>
-#include <asm/bootparam_utils.h>
+#include <yai/desc.h>
+#include <yai/setup.h>
+#include <yai/sections.h>
+#include <yai/e820/api.h>
+#include <yai/page.h>
+#include <yai/apic.h>
+#include <yai/io_apic.h>
+#include <yai/bios_ebda.h>
+#include <yai/microcode.h>
+#include <yai/tlbflush.h>
+#include <yai/bootparam_utils.h>
 
 static void __init i386_default_early_setup(void)
 {

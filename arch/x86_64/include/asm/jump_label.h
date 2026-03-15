@@ -4,13 +4,13 @@
 
 #define HAVE_JUMP_LABEL_BATCH
 
-#include <asm/asm.h>
-#include <asm/nops.h>
+#include <yai/asm.h>
+#include <yai/nops.h>
 
 #ifndef __ASSEMBLER__
 
-#include <linux/stringify.h>
-#include <linux/types.h>
+#include <yai/stringify.h>
+#include <yai/types.h>
 
 #define JUMP_TABLE_ENTRY(key, label)			\
 	".pushsection __jump_table,  \"aw\" \n\t"	\

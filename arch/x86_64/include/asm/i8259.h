@@ -2,8 +2,8 @@
 #ifndef _ASM_X86_I8259_H
 #define _ASM_X86_I8259_H
 
-#include <linux/delay.h>
-#include <asm/io.h>
+#include <yai/delay.h>
+#include <yai/io.h>
 
 extern unsigned int cached_irq_mask;
 

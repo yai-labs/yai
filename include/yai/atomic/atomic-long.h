@@ -7,7 +7,7 @@
 #define _LINUX_ATOMIC_LONG_H
 
 #include <yai/compiler.h>
-#include <asm/types.h>
+#include <yai/types.h>
 
 #ifdef CONFIG_64BIT
 typedef atomic64_t atomic_long_t;

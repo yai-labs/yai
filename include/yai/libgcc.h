@@ -6,7 +6,7 @@
 #ifndef __LIB_LIBGCC_H
 #define __LIB_LIBGCC_H
 
-#include <asm/byteorder.h>
+#include <yai/byteorder.h>
 
 typedef int word_type __attribute__ ((mode (__word__)));
 
@@ -35,7 +35,7 @@ long long notrace __muldi3(long long u, long long v);
 word_type notrace __ucmpdi2(unsigned long long a, unsigned long long b);
 
 #ifdef CONFIG_HAVE_ARCH_LIBGCC_H
-#include <asm/libgcc.h>
+#include <yai/libgcc.h>
 #endif
 
 #endif /* __ASM_LIBGCC_H */

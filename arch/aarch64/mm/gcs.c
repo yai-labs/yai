@@ -1,14 +1,14 @@
 // SPDX-License-Identifier: GPL-2.0-only
 
-#include <linux/mm.h>
-#include <linux/mman.h>
-#include <linux/syscalls.h>
-#include <linux/types.h>
+#include <yai/mm.h>
+#include <yai/mman.h>
+#include <yai/syscalls.h>
+#include <yai/types.h>
 
-#include <asm/cmpxchg.h>
-#include <asm/cpufeature.h>
-#include <asm/gcs.h>
-#include <asm/page.h>
+#include <yai/cmpxchg.h>
+#include <yai/cpufeature.h>
+#include <yai/gcs.h>
+#include <yai/page.h>
 
 static unsigned long alloc_gcs(unsigned long addr, unsigned long size)
 {

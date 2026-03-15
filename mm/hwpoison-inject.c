@@ -1,14 +1,14 @@
 // SPDX-License-Identifier: GPL-2.0-only
 /* Inject a hwpoison memory failure on a arbitrary pfn */
-#include <linux/module.h>
-#include <linux/debugfs.h>
-#include <linux/kernel.h>
-#include <linux/mm.h>
-#include <linux/swap.h>
-#include <linux/pagemap.h>
-#include <linux/hugetlb.h>
-#include <linux/page-flags.h>
-#include <linux/memcontrol.h>
+#include <yai/module.h>
+#include <yai/debugfs.h>
+#include <yai/kernel.h>
+#include <yai/mm.h>
+#include <yai/swap.h>
+#include <yai/pagemap.h>
+#include <yai/hugetlb.h>
+#include <yai/page-flags.h>
+#include <yai/memcontrol.h>
 #include "internal.h"
 
 static u32 hwpoison_filter_enable;

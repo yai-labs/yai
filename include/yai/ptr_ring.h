@@ -24,7 +24,7 @@
 #include <yai/compiler.h>
 #include <yai/slab.h>
 #include <yai/mm.h>
-#include <asm/errno.h>
+#include <yai/errno.h>
 #endif
 
 struct ptr_ring {

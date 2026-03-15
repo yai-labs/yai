@@ -8,29 +8,29 @@
  *	- Channing Corn (tests & fixes),
  *	- Andrew D. Balsa (code cleanup).
  */
-#include <linux/init.h>
-#include <linux/cpu.h>
-#include <linux/module.h>
-#include <linux/nospec.h>
-#include <linux/prctl.h>
-#include <linux/sched/smt.h>
-#include <linux/pgtable.h>
-#include <linux/bpf.h>
-#include <linux/kvm_types.h>
+#include <yai/init.h>
+#include <yai/cpu.h>
+#include <yai/module.h>
+#include <yai/nospec.h>
+#include <yai/prctl.h>
+#include <yai/sched/smt.h>
+#include <yai/pgtable.h>
+#include <yai/bpf.h>
+#include <yai/kvm_types.h>
 
-#include <asm/spec-ctrl.h>
-#include <asm/cmdline.h>
-#include <asm/bugs.h>
-#include <asm/processor.h>
-#include <asm/processor-flags.h>
-#include <asm/fpu/api.h>
-#include <asm/msr.h>
-#include <asm/vmx.h>
-#include <asm/cpu_device_id.h>
-#include <asm/e820/api.h>
-#include <asm/hypervisor.h>
-#include <asm/tlbflush.h>
-#include <asm/cpu.h>
+#include <yai/spec-ctrl.h>
+#include <yai/cmdline.h>
+#include <yai/bugs.h>
+#include <yai/processor.h>
+#include <yai/processor-flags.h>
+#include <yai/fpu/api.h>
+#include <yai/msr.h>
+#include <yai/vmx.h>
+#include <yai/cpu_device_id.h>
+#include <yai/e820/api.h>
+#include <yai/hypervisor.h>
+#include <yai/tlbflush.h>
+#include <yai/cpu.h>
 
 #include "cpu.h"
 

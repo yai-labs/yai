@@ -7,9 +7,9 @@
  */
 
 #include <crypto/internal/poly1305.h>
-#include <linux/export.h>
-#include <linux/kernel.h>
-#include <linux/unaligned.h>
+#include <yai/export.h>
+#include <yai/kernel.h>
+#include <yai/unaligned.h>
 
 void poly1305_core_setkey(struct poly1305_core_key *key,
 			  const u8 raw_key[POLY1305_BLOCK_SIZE])

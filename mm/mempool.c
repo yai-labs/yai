@@ -7,15 +7,15 @@
  *  started by Ingo Molnar, Copyright (C) 2001
  *  debugging by David Rientjes, Copyright (C) 2015
  */
-#include <linux/fault-inject.h>
-#include <linux/mm.h>
-#include <linux/slab.h>
-#include <linux/highmem.h>
-#include <linux/kasan.h>
-#include <linux/kmemleak.h>
-#include <linux/export.h>
-#include <linux/mempool.h>
-#include <linux/writeback.h>
+#include <yai/fault-inject.h>
+#include <yai/mm.h>
+#include <yai/slab.h>
+#include <yai/highmem.h>
+#include <yai/kasan.h>
+#include <yai/kmemleak.h>
+#include <yai/export.h>
+#include <yai/mempool.h>
+#include <yai/writeback.h>
 #include "slab.h"
 
 static DECLARE_FAULT_ATTR(fail_mempool_alloc);

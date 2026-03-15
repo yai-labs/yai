@@ -3,11 +3,11 @@
  * Copyright (C) 2015-2019 Jason A. Donenfeld <Jason@zx2c4.com>. All Rights Reserved.
  */
 
-#include <asm/cpu_device_id.h>
-#include <asm/fpu/api.h>
-#include <linux/jump_label.h>
-#include <linux/kernel.h>
-#include <linux/sizes.h>
+#include <yai/cpu_device_id.h>
+#include <yai/fpu/api.h>
+#include <yai/jump_label.h>
+#include <yai/kernel.h>
+#include <yai/sizes.h>
 
 struct poly1305_arch_internal {
 	union {

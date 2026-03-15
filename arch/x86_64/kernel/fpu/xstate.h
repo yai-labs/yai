@@ -2,10 +2,10 @@
 #ifndef __X86_KERNEL_FPU_XSTATE_H
 #define __X86_KERNEL_FPU_XSTATE_H
 
-#include <asm/cpufeature.h>
-#include <asm/fpu/xstate.h>
-#include <asm/fpu/xcr.h>
-#include <asm/msr.h>
+#include <yai/cpufeature.h>
+#include <yai/fpu/xstate.h>
+#include <yai/fpu/xcr.h>
+#include <yai/msr.h>
 
 #ifdef CONFIG_X86_64
 DECLARE_PER_CPU(u64, xfd_state);

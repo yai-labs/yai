@@ -1,10 +1,10 @@
 /* SPDX-License-Identifier: GPL-2.0 */
 #ifndef _ASM_X86_TIMER_H
 #define _ASM_X86_TIMER_H
-#include <linux/pm.h>
-#include <linux/percpu.h>
-#include <linux/interrupt.h>
-#include <linux/math64.h>
+#include <yai/pm.h>
+#include <yai/percpu.h>
+#include <yai/interrupt.h>
+#include <yai/math64.h>
 
 unsigned long long native_sched_clock(void);
 extern void recalibrate_cpu_khz(void);

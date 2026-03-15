@@ -3,8 +3,8 @@
 #ifndef _RISCV_KERNEL_KPROBES_DECODE_INSN_H
 #define _RISCV_KERNEL_KPROBES_DECODE_INSN_H
 
-#include <asm/sections.h>
-#include <asm/kprobes.h>
+#include <yai/sections.h>
+#include <yai/kprobes.h>
 
 enum probe_insn {
 	INSN_REJECTED,

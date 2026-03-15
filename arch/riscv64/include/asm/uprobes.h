@@ -3,9 +3,9 @@
 #ifndef _ASM_RISCV_UPROBES_H
 #define _ASM_RISCV_UPROBES_H
 
-#include <asm/probes.h>
-#include <asm/text-patching.h>
-#include <asm/bug.h>
+#include <yai/probes.h>
+#include <yai/text-patching.h>
+#include <yai/bug.h>
 
 #define MAX_UINSN_BYTES		8
 

@@ -2,16 +2,16 @@
 #define CREATE_TRACE_POINTS
 #include <trace/events/mmap_lock.h>
 
-#include <linux/mm.h>
-#include <linux/cgroup.h>
-#include <linux/memcontrol.h>
-#include <linux/mmap_lock.h>
-#include <linux/mutex.h>
-#include <linux/percpu.h>
-#include <linux/rcupdate.h>
-#include <linux/smp.h>
-#include <linux/trace_events.h>
-#include <linux/local_lock.h>
+#include <yai/mm.h>
+#include <yai/cgroup.h>
+#include <yai/memcontrol.h>
+#include <yai/mmap_lock.h>
+#include <yai/mutex.h>
+#include <yai/percpu.h>
+#include <yai/rcupdate.h>
+#include <yai/smp.h>
+#include <yai/trace_events.h>
+#include <yai/local_lock.h>
 
 EXPORT_TRACEPOINT_SYMBOL(mmap_lock_start_locking);
 EXPORT_TRACEPOINT_SYMBOL(mmap_lock_acquire_returned);
@@ -434,7 +434,7 @@ fallback:
 #endif /* CONFIG_PER_VMA_LOCK */
 
 #ifdef CONFIG_LOCK_MM_AND_FIND_VMA
-#include <linux/extable.h>
+#include <yai/extable.h>
 
 static inline bool get_mmap_lock_carefully(struct mm_struct *mm, struct pt_regs *regs)
 {

@@ -10,7 +10,7 @@
  * Author: Jim Kukunas <james.t.kukunas@linux.intel.com>
  */
 
-#include <linux/raid/pq.h>
+#include <yai/raid/pq.h>
 #include "loongarch.h"
 
 /*

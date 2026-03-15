@@ -2,7 +2,7 @@
 #ifndef _PFXLEN_H
 #define _PFXLEN_H
 
-#include <asm/byteorder.h>
+#include <yai/byteorder.h>
 #include <yai/netfilter.h>
 #include <net/tcp.h>
 

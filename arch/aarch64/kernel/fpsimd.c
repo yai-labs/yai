@@ -6,44 +6,44 @@
  * Author: Catalin Marinas <catalin.marinas@arm.com>
  */
 
-#include <linux/bitmap.h>
-#include <linux/bitops.h>
-#include <linux/bottom_half.h>
-#include <linux/bug.h>
-#include <linux/cache.h>
-#include <linux/compat.h>
-#include <linux/compiler.h>
-#include <linux/cpu.h>
-#include <linux/cpu_pm.h>
-#include <linux/ctype.h>
-#include <linux/kernel.h>
-#include <linux/linkage.h>
-#include <linux/irqflags.h>
-#include <linux/init.h>
-#include <linux/percpu.h>
-#include <linux/prctl.h>
-#include <linux/preempt.h>
-#include <linux/ptrace.h>
-#include <linux/sched/signal.h>
-#include <linux/sched/task_stack.h>
-#include <linux/signal.h>
-#include <linux/slab.h>
-#include <linux/stddef.h>
-#include <linux/sysctl.h>
-#include <linux/swab.h>
+#include <yai/bitmap.h>
+#include <yai/bitops.h>
+#include <yai/bottom_half.h>
+#include <yai/bug.h>
+#include <yai/cache.h>
+#include <yai/compat.h>
+#include <yai/compiler.h>
+#include <yai/cpu.h>
+#include <yai/cpu_pm.h>
+#include <yai/ctype.h>
+#include <yai/kernel.h>
+#include <yai/linkage.h>
+#include <yai/irqflags.h>
+#include <yai/init.h>
+#include <yai/percpu.h>
+#include <yai/prctl.h>
+#include <yai/preempt.h>
+#include <yai/ptrace.h>
+#include <yai/sched/signal.h>
+#include <yai/sched/task_stack.h>
+#include <yai/signal.h>
+#include <yai/slab.h>
+#include <yai/stddef.h>
+#include <yai/sysctl.h>
+#include <yai/swab.h>
 
-#include <asm/esr.h>
-#include <asm/exception.h>
-#include <asm/fpsimd.h>
-#include <asm/cpufeature.h>
-#include <asm/cputype.h>
-#include <asm/neon.h>
-#include <asm/processor.h>
-#include <asm/simd.h>
-#include <asm/sigcontext.h>
-#include <asm/sysreg.h>
-#include <asm/traps.h>
-#include <asm/virt.h>
+#include <yai/esr.h>
+#include <yai/exception.h>
+#include <yai/fpsimd.h>
+#include <yai/cpufeature.h>
+#include <yai/cputype.h>
+#include <yai/neon.h>
+#include <yai/processor.h>
+#include <yai/simd.h>
+#include <yai/sigcontext.h>
+#include <yai/sysreg.h>
+#include <yai/traps.h>
+#include <yai/virt.h>
 
 #define FPEXC_IOF	(1 << 0)
 #define FPEXC_DZF	(1 << 1)

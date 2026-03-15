@@ -8,7 +8,7 @@
 #ifndef _LINUX_BITOPS_COUNT_ZEROS_H_
 #define _LINUX_BITOPS_COUNT_ZEROS_H_
 
-#include <asm/bitops.h>
+#include <yai/bitops.h>
 
 /**
  * count_leading_zeros - Count the number of zeros from the MSB back

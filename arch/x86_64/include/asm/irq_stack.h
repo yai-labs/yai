@@ -2,10 +2,10 @@
 #ifndef _ASM_X86_IRQ_STACK_H
 #define _ASM_X86_IRQ_STACK_H
 
-#include <linux/ptrace.h>
-#include <linux/objtool.h>
+#include <yai/ptrace.h>
+#include <yai/objtool.h>
 
-#include <asm/processor.h>
+#include <yai/processor.h>
 
 #ifdef CONFIG_X86_64
 

@@ -4,7 +4,7 @@
 
 #include <yai/types.h>
 #ifdef CONFIG_PM_TRACE
-#include <asm/pm-trace.h>
+#include <yai/pm-trace.h>
 
 extern int pm_trace_enabled;
 extern bool pm_trace_rtc_abused;

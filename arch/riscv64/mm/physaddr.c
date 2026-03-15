@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: GPL-2.0
 
-#include <linux/types.h>
-#include <linux/mmdebug.h>
-#include <linux/mm.h>
-#include <asm/page.h>
-#include <asm/sections.h>
+#include <yai/types.h>
+#include <yai/mmdebug.h>
+#include <yai/mm.h>
+#include <yai/page.h>
+#include <yai/sections.h>
 
 phys_addr_t __virt_to_phys(unsigned long x)
 {

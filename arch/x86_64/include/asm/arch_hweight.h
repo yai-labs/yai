@@ -2,7 +2,7 @@
 #ifndef _ASM_X86_HWEIGHT_H
 #define _ASM_X86_HWEIGHT_H
 
-#include <asm/cpufeatures.h>
+#include <yai/cpufeatures.h>
 
 #ifdef CONFIG_64BIT
 #define REG_IN "D"

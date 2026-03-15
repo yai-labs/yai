@@ -5,15 +5,15 @@
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
 #include <kunit/test.h>
-#include <linux/device.h>
-#include <linux/init.h>
-#include <linux/kernel.h>
-#include <linux/mm.h>
-#include <linux/module.h>
-#include <linux/overflow.h>
-#include <linux/slab.h>
-#include <linux/types.h>
-#include <linux/vmalloc.h>
+#include <yai/device.h>
+#include <yai/init.h>
+#include <yai/kernel.h>
+#include <yai/mm.h>
+#include <yai/module.h>
+#include <yai/overflow.h>
+#include <yai/slab.h>
+#include <yai/types.h>
+#include <yai/vmalloc.h>
 
 struct some_bytes {
 	union {

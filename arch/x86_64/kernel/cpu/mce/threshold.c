@@ -2,14 +2,14 @@
 /*
  * Common corrected MCE threshold handler code:
  */
-#include <linux/interrupt.h>
-#include <linux/kernel.h>
+#include <yai/interrupt.h>
+#include <yai/kernel.h>
 
-#include <asm/irq_vectors.h>
-#include <asm/traps.h>
-#include <asm/apic.h>
-#include <asm/mce.h>
-#include <asm/trace/irq_vectors.h>
+#include <yai/irq_vectors.h>
+#include <yai/traps.h>
+#include <yai/apic.h>
+#include <yai/mce.h>
+#include <yai/trace/irq_vectors.h>
 
 #include "internal.h"
 

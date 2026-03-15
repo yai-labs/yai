@@ -2,12 +2,12 @@
 #ifndef _ASM_X86_FPU_SCHED_H
 #define _ASM_X86_FPU_SCHED_H
 
-#include <linux/sched.h>
+#include <yai/sched.h>
 
-#include <asm/cpufeature.h>
-#include <asm/fpu/types.h>
+#include <yai/cpufeature.h>
+#include <yai/fpu/types.h>
 
-#include <asm/trace/fpu.h>
+#include <yai/trace/fpu.h>
 
 extern void save_fpregs_to_fpstate(struct fpu *fpu);
 extern void fpu__drop(struct task_struct *tsk);

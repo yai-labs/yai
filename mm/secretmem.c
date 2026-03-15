@@ -5,23 +5,23 @@
  * Author: Mike Rapoport <rppt@linux.ibm.com>
  */
 
-#include <linux/mm.h>
-#include <linux/fs.h>
-#include <linux/swap.h>
-#include <linux/mount.h>
-#include <linux/memfd.h>
-#include <linux/bitops.h>
-#include <linux/printk.h>
-#include <linux/pagemap.h>
-#include <linux/syscalls.h>
-#include <linux/pseudo_fs.h>
-#include <linux/secretmem.h>
-#include <linux/set_memory.h>
-#include <linux/sched/signal.h>
+#include <yai/mm.h>
+#include <yai/fs.h>
+#include <yai/swap.h>
+#include <yai/mount.h>
+#include <yai/memfd.h>
+#include <yai/bitops.h>
+#include <yai/printk.h>
+#include <yai/pagemap.h>
+#include <yai/syscalls.h>
+#include <yai/pseudo_fs.h>
+#include <yai/secretmem.h>
+#include <yai/set_memory.h>
+#include <yai/sched/signal.h>
 
-#include <uapi/linux/magic.h>
+#include <yai/magic.h>
 
-#include <asm/tlbflush.h>
+#include <yai/tlbflush.h>
 
 #include "internal.h"
 

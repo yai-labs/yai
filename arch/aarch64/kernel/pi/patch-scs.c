@@ -4,12 +4,12 @@
  * Author: Ard Biesheuvel <ardb@google.com>
  */
 
-#include <linux/errno.h>
-#include <linux/init.h>
-#include <linux/linkage.h>
-#include <linux/types.h>
+#include <yai/errno.h>
+#include <yai/init.h>
+#include <yai/linkage.h>
+#include <yai/types.h>
 
-#include <asm/scs.h>
+#include <yai/scs.h>
 
 #include "pi.h"
 

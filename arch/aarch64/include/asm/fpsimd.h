@@ -5,22 +5,22 @@
 #ifndef __ASM_FP_H
 #define __ASM_FP_H
 
-#include <asm/errno.h>
-#include <asm/percpu.h>
-#include <asm/ptrace.h>
-#include <asm/processor.h>
-#include <asm/sigcontext.h>
-#include <asm/sysreg.h>
+#include <yai/errno.h>
+#include <yai/percpu.h>
+#include <yai/ptrace.h>
+#include <yai/processor.h>
+#include <yai/sigcontext.h>
+#include <yai/sysreg.h>
 
 #ifndef __ASSEMBLER__
 
-#include <linux/bitmap.h>
-#include <linux/build_bug.h>
-#include <linux/bug.h>
-#include <linux/cache.h>
-#include <linux/init.h>
-#include <linux/stddef.h>
-#include <linux/types.h>
+#include <yai/bitmap.h>
+#include <yai/build_bug.h>
+#include <yai/bug.h>
+#include <yai/cache.h>
+#include <yai/init.h>
+#include <yai/stddef.h>
+#include <yai/types.h>
 
 /* Masks for extracting the FPSR and FPCR from the FPSCR */
 #define VFP_FPSCR_STAT_MASK	0xf800009f

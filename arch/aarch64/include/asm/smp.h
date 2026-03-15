@@ -5,7 +5,7 @@
 #ifndef __ASM_SMP_H
 #define __ASM_SMP_H
 
-#include <linux/const.h>
+#include <yai/const.h>
 
 /* Values for secondary_data.status */
 #define CPU_STUCK_REASON_SHIFT		(8)
@@ -25,9 +25,9 @@
 
 #ifndef __ASSEMBLER__
 
-#include <linux/threads.h>
-#include <linux/cpumask.h>
-#include <linux/thread_info.h>
+#include <yai/threads.h>
+#include <yai/cpumask.h>
+#include <yai/thread_info.h>
 
 #define raw_smp_processor_id() (current_thread_info()->cpu)
 

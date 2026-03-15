@@ -4,7 +4,7 @@
  *
  * membarrier system call
  */
-#include <uapi/linux/membarrier.h>
+#include <yai/membarrier.h>
 #include "sched.h"
 
 /*

@@ -24,23 +24,23 @@
  * Boot stub deals with identity mappings, physical and virtual addresses are
  * the same, so override these defines.
  *
- * <asm/page.h> will not define them if they are already defined.
+ * <yai/page.h> will not define them if they are already defined.
  */
 #define __pa(x)  ((unsigned long)(x))
 #define __va(x)  ((void *)((unsigned long)(x)))
 
-#include <linux/linkage.h>
-#include <linux/screen_info.h>
-#include <linux/elf.h>
-#include <asm/page.h>
-#include <asm/boot.h>
-#include <asm/bootparam.h>
-#include <asm/desc_defs.h>
+#include <yai/linkage.h>
+#include <yai/screen_info.h>
+#include <yai/elf.h>
+#include <yai/page.h>
+#include <yai/boot.h>
+#include <yai/bootparam.h>
+#include <yai/desc_defs.h>
 
 #include "tdx.h"
 
 #define BOOT_CTYPE_H
-#include <linux/acpi.h>
+#include <yai/acpi.h>
 
 #define BOOT_BOOT_H
 #include "../ctype.h"

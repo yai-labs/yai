@@ -31,32 +31,32 @@
  *   below for details. )
  */
 
-#include <linux/seq_file.h>
-#include <linux/memblock.h>
-#include <linux/debugfs.h>
-#include <linux/ioport.h>
-#include <linux/kernel.h>
-#include <linux/slab.h>
-#include <linux/io.h>
-#include <linux/mm.h>
-#include <linux/highmem.h>
-#include <linux/fs.h>
-#include <linux/rbtree.h>
-#include <linux/kvm_types.h>
+#include <yai/seq_file.h>
+#include <yai/memblock.h>
+#include <yai/debugfs.h>
+#include <yai/ioport.h>
+#include <yai/kernel.h>
+#include <yai/slab.h>
+#include <yai/io.h>
+#include <yai/mm.h>
+#include <yai/highmem.h>
+#include <yai/fs.h>
+#include <yai/rbtree.h>
+#include <yai/kvm_types.h>
 
-#include <asm/cpu_device_id.h>
-#include <asm/cacheflush.h>
-#include <asm/cacheinfo.h>
-#include <asm/processor.h>
-#include <asm/tlbflush.h>
-#include <asm/x86_init.h>
-#include <asm/fcntl.h>
-#include <asm/e820/api.h>
-#include <asm/mtrr.h>
-#include <asm/page.h>
-#include <asm/msr.h>
-#include <asm/memtype.h>
-#include <asm/io.h>
+#include <yai/cpu_device_id.h>
+#include <yai/cacheflush.h>
+#include <yai/cacheinfo.h>
+#include <yai/processor.h>
+#include <yai/tlbflush.h>
+#include <yai/x86_init.h>
+#include <yai/fcntl.h>
+#include <yai/e820/api.h>
+#include <yai/mtrr.h>
+#include <yai/page.h>
+#include <yai/msr.h>
+#include <yai/memtype.h>
+#include <yai/io.h>
 
 #include "memtype.h"
 #include "../mm_internal.h"

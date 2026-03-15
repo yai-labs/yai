@@ -10,7 +10,7 @@
 
 #ifdef CONFIG_AMD_MEM_ENCRYPT
 
-#include <asm/shared/msr.h>
+#include <yai/shared/msr.h>
 
 void snp_accept_memory(phys_addr_t start, phys_addr_t end);
 u64 sev_get_status(void);

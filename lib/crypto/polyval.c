@@ -6,10 +6,10 @@
  */
 
 #include <crypto/polyval.h>
-#include <linux/export.h>
-#include <linux/module.h>
-#include <linux/string.h>
-#include <linux/unaligned.h>
+#include <yai/export.h>
+#include <yai/module.h>
+#include <yai/string.h>
+#include <yai/unaligned.h>
 
 /*
  * POLYVAL is an almost-XOR-universal hash function.  Similar to GHASH, POLYVAL

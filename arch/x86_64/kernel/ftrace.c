@@ -12,27 +12,27 @@
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
-#include <linux/spinlock.h>
-#include <linux/hardirq.h>
-#include <linux/uaccess.h>
-#include <linux/ftrace.h>
-#include <linux/percpu.h>
-#include <linux/sched.h>
-#include <linux/slab.h>
-#include <linux/init.h>
-#include <linux/list.h>
-#include <linux/module.h>
-#include <linux/memory.h>
-#include <linux/vmalloc.h>
-#include <linux/set_memory.h>
-#include <linux/execmem.h>
+#include <yai/spinlock.h>
+#include <yai/hardirq.h>
+#include <yai/uaccess.h>
+#include <yai/ftrace.h>
+#include <yai/percpu.h>
+#include <yai/sched.h>
+#include <yai/slab.h>
+#include <yai/init.h>
+#include <yai/list.h>
+#include <yai/module.h>
+#include <yai/memory.h>
+#include <yai/vmalloc.h>
+#include <yai/set_memory.h>
+#include <yai/execmem.h>
 
 #include <trace/syscall.h>
 
-#include <asm/kprobes.h>
-#include <asm/ftrace.h>
-#include <asm/nops.h>
-#include <asm/text-patching.h>
+#include <yai/kprobes.h>
+#include <yai/ftrace.h>
+#include <yai/nops.h>
+#include <yai/text-patching.h>
 
 #ifdef CONFIG_DYNAMIC_FTRACE
 

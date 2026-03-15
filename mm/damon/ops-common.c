@@ -5,13 +5,13 @@
  * Author: SeongJae Park <sj@kernel.org>
  */
 
-#include <linux/migrate.h>
-#include <linux/mmu_notifier.h>
-#include <linux/page_idle.h>
-#include <linux/pagemap.h>
-#include <linux/rmap.h>
-#include <linux/swap.h>
-#include <linux/leafops.h>
+#include <yai/migrate.h>
+#include <yai/mmu_notifier.h>
+#include <yai/page_idle.h>
+#include <yai/pagemap.h>
+#include <yai/rmap.h>
+#include <yai/swap.h>
+#include <yai/leafops.h>
 
 #include "../internal.h"
 #include "ops-common.h"

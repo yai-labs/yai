@@ -2,11 +2,11 @@
 #ifndef _ASM_X86_PGTABLE_64_DEFS_H
 #define _ASM_X86_PGTABLE_64_DEFS_H
 
-#include <asm/sparsemem.h>
+#include <yai/sparsemem.h>
 
 #ifndef __ASSEMBLER__
-#include <linux/types.h>
-#include <asm/kaslr.h>
+#include <yai/types.h>
+#include <yai/kaslr.h>
 
 /*
  * These are used to make use of C type-checking..

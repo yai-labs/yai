@@ -13,7 +13,7 @@
 #ifndef __ASM_STACKPROTECTOR_H
 #define __ASM_STACKPROTECTOR_H
 
-#include <asm/pointer_auth.h>
+#include <yai/pointer_auth.h>
 
 extern unsigned long __stack_chk_guard;
 

@@ -7,30 +7,30 @@
  * Author: Tom Lendacky <thomas.lendacky@amd.com>
  */
 
-#include <linux/linkage.h>
-#include <linux/init.h>
-#include <linux/mm.h>
-#include <linux/dma-direct.h>
-#include <linux/swiotlb.h>
-#include <linux/mem_encrypt.h>
-#include <linux/device.h>
-#include <linux/kernel.h>
-#include <linux/bitops.h>
-#include <linux/dma-mapping.h>
-#include <linux/cc_platform.h>
+#include <yai/linkage.h>
+#include <yai/init.h>
+#include <yai/mm.h>
+#include <yai/dma-direct.h>
+#include <yai/swiotlb.h>
+#include <yai/mem_encrypt.h>
+#include <yai/device.h>
+#include <yai/kernel.h>
+#include <yai/bitops.h>
+#include <yai/dma-mapping.h>
+#include <yai/cc_platform.h>
 
-#include <asm/tlbflush.h>
-#include <asm/fixmap.h>
-#include <asm/setup.h>
-#include <asm/mem_encrypt.h>
-#include <asm/bootparam.h>
-#include <asm/set_memory.h>
-#include <asm/cacheflush.h>
-#include <asm/processor-flags.h>
-#include <asm/msr.h>
-#include <asm/cmdline.h>
-#include <asm/sev.h>
-#include <asm/ia32.h>
+#include <yai/tlbflush.h>
+#include <yai/fixmap.h>
+#include <yai/setup.h>
+#include <yai/mem_encrypt.h>
+#include <yai/bootparam.h>
+#include <yai/set_memory.h>
+#include <yai/cacheflush.h>
+#include <yai/processor-flags.h>
+#include <yai/msr.h>
+#include <yai/cmdline.h>
+#include <yai/sev.h>
+#include <yai/ia32.h>
 
 #include "mm_internal.h"
 

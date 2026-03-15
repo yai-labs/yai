@@ -8,30 +8,30 @@
  *      (c) 2008 Alexey Starikovskiy <astarikovskiy@suse.de>
  */
 
-#include <linux/mm.h>
-#include <linux/init.h>
-#include <linux/delay.h>
-#include <linux/memblock.h>
-#include <linux/kernel_stat.h>
-#include <linux/mc146818rtc.h>
-#include <linux/bitops.h>
-#include <linux/acpi.h>
-#include <linux/smp.h>
-#include <linux/pci.h>
+#include <yai/mm.h>
+#include <yai/init.h>
+#include <yai/delay.h>
+#include <yai/memblock.h>
+#include <yai/kernel_stat.h>
+#include <yai/mc146818rtc.h>
+#include <yai/bitops.h>
+#include <yai/acpi.h>
+#include <yai/smp.h>
+#include <yai/pci.h>
 
-#include <asm/i8259.h>
-#include <asm/io_apic.h>
-#include <asm/acpi.h>
-#include <asm/irqdomain.h>
-#include <asm/mtrr.h>
-#include <asm/mpspec.h>
-#include <asm/proto.h>
-#include <asm/bios_ebda.h>
-#include <asm/e820/api.h>
-#include <asm/setup.h>
-#include <asm/smp.h>
+#include <yai/i8259.h>
+#include <yai/io_apic.h>
+#include <yai/acpi.h>
+#include <yai/irqdomain.h>
+#include <yai/mtrr.h>
+#include <yai/mpspec.h>
+#include <yai/proto.h>
+#include <yai/bios_ebda.h>
+#include <yai/e820/api.h>
+#include <yai/setup.h>
+#include <yai/smp.h>
 
-#include <asm/apic.h>
+#include <yai/apic.h>
 /*
  * Checksum an MP configuration block.
  */

@@ -20,10 +20,10 @@
 #ifndef _UAPI__ASM_PTRACE_H
 #define _UAPI__ASM_PTRACE_H
 
-#include <linux/types.h>
+#include <yai/types.h>
 
-#include <asm/hwcap.h>
-#include <asm/sve_context.h>
+#include <yai/hwcap.h>
+#include <yai/sve_context.h>
 
 
 /*
@@ -128,7 +128,7 @@ struct user_sve_header {
 
 /*
  * Common SVE_PT_* flags:
- * These must be kept in sync with prctl interface in <linux/prctl.h>
+ * These must be kept in sync with prctl interface in <yai/prctl.h>
  */
 #define SVE_PT_VL_INHERIT		((1 << 17) /* PR_SVE_VL_INHERIT */ >> 16)
 #define SVE_PT_VL_ONEXEC		((1 << 18) /* PR_SVE_SET_VL_ONEXEC */ >> 16)
@@ -140,7 +140,7 @@ struct user_sve_header {
  * metadata in the header:  SVE_PT_SIZE(vq, flags) gives the total size
  * of the state in bytes, including the header.
  *
- * Refer to <asm/sigcontext.h> for details of how to pass the correct
+ * Refer to <yai/sigcontext.h> for details of how to pass the correct
  * "vq" argument to these macros.
  */
 
@@ -183,7 +183,7 @@ struct user_sve_header {
  *	-	----				-----------
  *	ZREGS		\
  *	ZREG		|
- *	PREGS		| refer to <asm/sigcontext.h>
+ *	PREGS		| refer to <yai/sigcontext.h>
  *	PREG		|
  *	FFR		/
  *
@@ -281,7 +281,7 @@ struct user_za_header {
 
 /*
  * Common ZA_PT_* flags:
- * These must be kept in sync with prctl interface in <linux/prctl.h>
+ * These must be kept in sync with prctl interface in <yai/prctl.h>
  */
 #define ZA_PT_VL_INHERIT		((1 << 17) /* PR_SME_VL_INHERIT */ >> 16)
 #define ZA_PT_VL_ONEXEC			((1 << 18) /* PR_SME_SET_VL_ONEXEC */ >> 16)
@@ -293,7 +293,7 @@ struct user_za_header {
  * metadata in the header:  ZA_PT_SIZE(vq, flags) gives the total size
  * of the state in bytes, including the header.
  *
- * Refer to <asm/sigcontext.h> for details of how to pass the correct
+ * Refer to <yai/sigcontext.h> for details of how to pass the correct
  * "vq" argument to these macros.
  */
 

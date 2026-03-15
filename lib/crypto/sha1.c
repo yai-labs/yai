@@ -5,13 +5,13 @@
 
 #include <crypto/hmac.h>
 #include <crypto/sha1.h>
-#include <linux/bitops.h>
-#include <linux/export.h>
-#include <linux/kernel.h>
-#include <linux/module.h>
-#include <linux/string.h>
-#include <linux/unaligned.h>
-#include <linux/wordpart.h>
+#include <yai/bitops.h>
+#include <yai/export.h>
+#include <yai/kernel.h>
+#include <yai/module.h>
+#include <yai/string.h>
+#include <yai/unaligned.h>
+#include <yai/wordpart.h>
 #include "fips.h"
 
 static const struct sha1_block_state sha1_iv = {

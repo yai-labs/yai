@@ -31,31 +31,31 @@
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
-#include <linux/capability.h>
-#include <linux/errno.h>
-#include <linux/interrupt.h>
-#include <linux/syscalls.h>
-#include <linux/sched.h>
-#include <linux/sched/task_stack.h>
-#include <linux/kernel.h>
-#include <linux/signal.h>
-#include <linux/string.h>
-#include <linux/mm.h>
-#include <linux/smp.h>
-#include <linux/highmem.h>
-#include <linux/ptrace.h>
-#include <linux/audit.h>
-#include <linux/stddef.h>
-#include <linux/slab.h>
-#include <linux/security.h>
+#include <yai/capability.h>
+#include <yai/errno.h>
+#include <yai/interrupt.h>
+#include <yai/syscalls.h>
+#include <yai/sched.h>
+#include <yai/sched/task_stack.h>
+#include <yai/kernel.h>
+#include <yai/signal.h>
+#include <yai/string.h>
+#include <yai/mm.h>
+#include <yai/smp.h>
+#include <yai/highmem.h>
+#include <yai/ptrace.h>
+#include <yai/audit.h>
+#include <yai/stddef.h>
+#include <yai/slab.h>
+#include <yai/security.h>
 
-#include <linux/uaccess.h>
-#include <asm/io.h>
-#include <asm/tlbflush.h>
-#include <asm/irq.h>
-#include <asm/traps.h>
-#include <asm/vm86.h>
-#include <asm/switch_to.h>
+#include <yai/uaccess.h>
+#include <yai/io.h>
+#include <yai/tlbflush.h>
+#include <yai/irq.h>
+#include <yai/traps.h>
+#include <yai/vm86.h>
+#include <yai/switch_to.h>
 
 /*
  * Known problems:

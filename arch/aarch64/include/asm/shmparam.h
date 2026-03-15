@@ -12,6 +12,6 @@
  */
 #define COMPAT_SHMLBA	(4 * PAGE_SIZE)
 
-#include <asm-generic/shmparam.h>
+#include <yai/shmparam.h>
 
 #endif /* __ASM_SHMPARAM_H */

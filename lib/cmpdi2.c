@@ -2,9 +2,9 @@
 /*
  */
 
-#include <linux/export.h>
+#include <yai/export.h>
 
-#include <linux/libgcc.h>
+#include <yai/libgcc.h>
 
 word_type notrace __cmpdi2(long long a, long long b)
 {

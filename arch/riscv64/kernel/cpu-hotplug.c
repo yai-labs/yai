@@ -3,18 +3,18 @@
  * Copyright (C) 2020 Western Digital Corporation or its affiliates.
  */
 
-#include <linux/kernel.h>
-#include <linux/mm.h>
-#include <linux/sched.h>
-#include <linux/err.h>
-#include <linux/irq.h>
-#include <linux/cpuhotplug.h>
-#include <linux/cpu.h>
-#include <linux/sched/hotplug.h>
-#include <asm/irq.h>
-#include <asm/cpu_ops.h>
-#include <asm/numa.h>
-#include <asm/smp.h>
+#include <yai/kernel.h>
+#include <yai/mm.h>
+#include <yai/sched.h>
+#include <yai/err.h>
+#include <yai/irq.h>
+#include <yai/cpuhotplug.h>
+#include <yai/cpu.h>
+#include <yai/sched/hotplug.h>
+#include <yai/irq.h>
+#include <yai/cpu_ops.h>
+#include <yai/numa.h>
+#include <yai/smp.h>
 
 bool cpu_has_hotplug(unsigned int cpu)
 {

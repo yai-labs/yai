@@ -68,7 +68,7 @@ struct u64_stats_sync {
 };
 
 #if BITS_PER_LONG == 64
-#include <asm/local64.h>
+#include <yai/local64.h>
 
 typedef struct {
 	local64_t	v;

@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: GPL-2.0
-#include <linux/unistd.h>
-#include <linux/kernel.h>
-#include <linux/fs.h>
-#include <linux/initrd.h>
+#include <yai/unistd.h>
+#include <yai/kernel.h>
+#include <yai/fs.h>
+#include <yai/initrd.h>
 
 #include "do_mounts.h"
 

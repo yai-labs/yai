@@ -1,14 +1,14 @@
 // SPDX-License-Identifier: GPL-2.0-only
 
-#include <linux/mm.h>
-#include <linux/cma.h>
-#include <linux/compiler.h>
-#include <linux/mm_inline.h>
+#include <yai/mm.h>
+#include <yai/cma.h>
+#include <yai/compiler.h>
+#include <yai/mm_inline.h>
 
-#include <asm/page.h>
-#include <asm/setup.h>
+#include <yai/page.h>
+#include <yai/setup.h>
 
-#include <linux/hugetlb.h>
+#include <yai/hugetlb.h>
 #include "internal.h"
 #include "hugetlb_cma.h"
 

@@ -2,8 +2,8 @@
 #ifndef _ASM_X86_SECTIONS_H
 #define _ASM_X86_SECTIONS_H
 
-#include <asm-generic/sections.h>
-#include <asm/extable.h>
+#include <yai/sections.h>
+#include <yai/extable.h>
 
 extern char __relocate_kernel_start[], __relocate_kernel_end[];
 extern char __brk_base[], __brk_limit[];

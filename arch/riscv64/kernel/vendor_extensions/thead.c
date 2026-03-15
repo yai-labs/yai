@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: GPL-2.0-only
 
-#include <asm/cpufeature.h>
-#include <asm/vendor_extensions.h>
-#include <asm/vendor_extensions/thead.h>
+#include <yai/cpufeature.h>
+#include <yai/vendor_extensions.h>
+#include <yai/vendor_extensions/thead.h>
 
-#include <linux/array_size.h>
-#include <linux/cpumask.h>
-#include <linux/types.h>
+#include <yai/array_size.h>
+#include <yai/cpumask.h>
+#include <yai/types.h>
 
 /* All T-Head vendor extensions supported in Linux */
 static const struct riscv_isa_ext_data riscv_isa_vendor_ext_thead[] = {

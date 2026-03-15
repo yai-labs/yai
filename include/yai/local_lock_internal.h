@@ -7,7 +7,7 @@
 #include <yai/irqflags.h>
 #include <yai/lockdep.h>
 #include <yai/debug_locks.h>
-#include <asm/current.h>
+#include <yai/current.h>
 
 #ifndef CONFIG_PREEMPT_RT
 

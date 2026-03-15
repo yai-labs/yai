@@ -4,8 +4,8 @@
  *
  * Copyright 2025 Google LLC
  */
-#include <asm/fpu/api.h>
-#include <linux/static_call.h>
+#include <yai/fpu/api.h>
+#include <yai/static_call.h>
 
 DEFINE_STATIC_CALL(sha512_blocks_x86, sha512_blocks_generic);
 

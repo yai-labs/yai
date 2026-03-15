@@ -3,9 +3,9 @@
 #define _ASM_X86_SIGFRAME_H
 
 #include <uapi/asm/sigcontext.h>
-#include <asm/siginfo.h>
-#include <asm/ucontext.h>
-#include <linux/compat.h>
+#include <yai/siginfo.h>
+#include <yai/ucontext.h>
+#include <yai/compat.h>
 
 #ifdef CONFIG_X86_32
 #define sigframe_ia32		sigframe
@@ -14,7 +14,7 @@
 #else /* !CONFIG_X86_32 */
 
 #ifdef CONFIG_IA32_EMULATION
-#include <asm/ia32.h>
+#include <yai/ia32.h>
 #endif /* CONFIG_IA32_EMULATION */
 
 #endif /* CONFIG_X86_32 */

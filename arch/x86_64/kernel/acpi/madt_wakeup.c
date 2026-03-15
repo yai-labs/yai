@@ -1,19 +1,19 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
-#include <linux/acpi.h>
-#include <linux/cpu.h>
-#include <linux/delay.h>
-#include <linux/io.h>
-#include <linux/kexec.h>
-#include <linux/memblock.h>
-#include <linux/pgtable.h>
-#include <linux/sched/hotplug.h>
-#include <asm/apic.h>
-#include <asm/barrier.h>
-#include <asm/init.h>
-#include <asm/intel_pt.h>
-#include <asm/nmi.h>
-#include <asm/processor.h>
-#include <asm/reboot.h>
+#include <yai/acpi.h>
+#include <yai/cpu.h>
+#include <yai/delay.h>
+#include <yai/io.h>
+#include <yai/kexec.h>
+#include <yai/memblock.h>
+#include <yai/pgtable.h>
+#include <yai/sched/hotplug.h>
+#include <yai/apic.h>
+#include <yai/barrier.h>
+#include <yai/init.h>
+#include <yai/intel_pt.h>
+#include <yai/nmi.h>
+#include <yai/processor.h>
+#include <yai/reboot.h>
 
 /* Physical address of the Multiprocessor Wakeup Structure mailbox */
 static u64 acpi_mp_wake_mailbox_paddr __ro_after_init;

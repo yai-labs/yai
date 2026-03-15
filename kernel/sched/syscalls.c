@@ -7,11 +7,11 @@
  *  Copyright (C) 1991-2002  Linus Torvalds
  *  Copyright (C) 1998-2024  Ingo Molnar, Red Hat
  */
-#include <linux/sched.h>
-#include <linux/cpuset.h>
-#include <linux/sched/debug.h>
+#include <yai/sched.h>
+#include <yai/cpuset.h>
+#include <yai/sched/debug.h>
 
-#include <uapi/linux/sched/types.h>
+#include <yai/sched/types.h>
 
 #include "sched.h"
 #include "autogroup.h"

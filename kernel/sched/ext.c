@@ -6,7 +6,7 @@
  * Copyright (c) 2022 Tejun Heo <tj@kernel.org>
  * Copyright (c) 2022 David Vernet <dvernet@meta.com>
  */
-#include <linux/btf_ids.h>
+#include <yai/btf_ids.h>
 #include "ext_idle.h"
 
 /*
@@ -5282,9 +5282,9 @@ static int scx_enable(struct sched_ext_ops *ops, struct bpf_link *link)
 /********************************************************************************
  * bpf_struct_ops plumbing.
  */
-#include <linux/bpf_verifier.h>
-#include <linux/bpf.h>
-#include <linux/btf.h>
+#include <yai/bpf_verifier.h>
+#include <yai/bpf.h>
+#include <yai/btf.h>
 
 static const struct btf_type *task_struct_type;
 

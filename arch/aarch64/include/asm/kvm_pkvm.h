@@ -6,11 +6,11 @@
 #ifndef __ARM64_KVM_PKVM_H__
 #define __ARM64_KVM_PKVM_H__
 
-#include <linux/arm_ffa.h>
-#include <linux/memblock.h>
-#include <linux/scatterlist.h>
-#include <asm/kvm_host.h>
-#include <asm/kvm_pgtable.h>
+#include <yai/arm_ffa.h>
+#include <yai/memblock.h>
+#include <yai/scatterlist.h>
+#include <yai/kvm_host.h>
+#include <yai/kvm_pgtable.h>
 
 /* Maximum number of VMs that can co-exist under pKVM. */
 #define KVM_MAX_PVMS 255

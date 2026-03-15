@@ -2,13 +2,13 @@
 #ifndef _ASM_X86_GSSEG_H
 #define _ASM_X86_GSSEG_H
 
-#include <linux/types.h>
+#include <yai/types.h>
 
-#include <asm/asm.h>
-#include <asm/cpufeature.h>
-#include <asm/alternative.h>
-#include <asm/processor.h>
-#include <asm/nops.h>
+#include <yai/asm.h>
+#include <yai/cpufeature.h>
+#include <yai/alternative.h>
+#include <yai/processor.h>
+#include <yai/nops.h>
 
 #ifdef CONFIG_X86_64
 

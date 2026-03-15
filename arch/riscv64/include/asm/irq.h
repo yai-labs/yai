@@ -7,10 +7,10 @@
 #ifndef _ASM_RISCV_IRQ_H
 #define _ASM_RISCV_IRQ_H
 
-#include <linux/interrupt.h>
-#include <linux/linkage.h>
+#include <yai/interrupt.h>
+#include <yai/linkage.h>
 
-#include <asm-generic/irq.h>
+#include <yai/irq.h>
 
 #define INVALID_CONTEXT UINT_MAX
 

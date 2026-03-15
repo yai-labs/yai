@@ -2,7 +2,7 @@
 #ifndef _ASM_X86_HARDIRQ_H
 #define _ASM_X86_HARDIRQ_H
 
-#include <linux/threads.h>
+#include <yai/threads.h>
 
 typedef struct {
 #if IS_ENABLED(CONFIG_CPU_MITIGATIONS) && IS_ENABLED(CONFIG_KVM_INTEL)

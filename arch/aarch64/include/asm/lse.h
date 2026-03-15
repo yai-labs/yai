@@ -2,17 +2,17 @@
 #ifndef __ASM_LSE_H
 #define __ASM_LSE_H
 
-#include <asm/atomic_ll_sc.h>
+#include <yai/atomic_ll_sc.h>
 
 #define __LSE_PREAMBLE	".arch_extension lse\n"
 
-#include <linux/compiler_types.h>
-#include <linux/export.h>
-#include <linux/stringify.h>
-#include <asm/alternative.h>
-#include <asm/alternative-macros.h>
-#include <asm/atomic_lse.h>
-#include <asm/cpucaps.h>
+#include <yai/compiler_types.h>
+#include <yai/export.h>
+#include <yai/stringify.h>
+#include <yai/alternative.h>
+#include <yai/alternative-macros.h>
+#include <yai/atomic_lse.h>
+#include <yai/cpucaps.h>
 
 #define __lse_ll_sc_body(op, ...)					\
 ({									\

@@ -6,7 +6,7 @@
 #ifndef __ASM_RSI_SMC_H_
 #define __ASM_RSI_SMC_H_
 
-#include <linux/arm-smccc.h>
+#include <yai/arm-smccc.h>
 
 /*
  * This file describes the Realm Services Interface (RSI) Application Binary

@@ -7,7 +7,7 @@
  * Scheduler internal SMP callback types and methods between the scheduler
  * and other internal parts of the core kernel:
  */
-#include <linux/types.h>
+#include <yai/types.h>
 
 extern void sched_ttwu_pending(void *arg);
 

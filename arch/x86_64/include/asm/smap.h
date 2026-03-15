@@ -9,9 +9,9 @@
 #ifndef _ASM_X86_SMAP_H
 #define _ASM_X86_SMAP_H
 
-#include <asm/nops.h>
-#include <asm/cpufeatures.h>
-#include <asm/alternative.h>
+#include <yai/nops.h>
+#include <yai/cpufeatures.h>
+#include <yai/alternative.h>
 
 #ifdef __ASSEMBLER__
 

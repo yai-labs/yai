@@ -2,9 +2,9 @@
 #ifndef ASM_X86_CMPXCHG_H
 #define ASM_X86_CMPXCHG_H
 
-#include <linux/compiler.h>
-#include <asm/cpufeatures.h>
-#include <asm/alternative.h> /* Provides LOCK_PREFIX */
+#include <yai/compiler.h>
+#include <yai/cpufeatures.h>
+#include <yai/alternative.h> /* Provides LOCK_PREFIX */
 
 /*
  * Non-existent functions to indicate usage errors at link time
@@ -140,9 +140,9 @@ extern void __add_wrong_size(void)
 	__raw_cmpxchg((ptr), (old), (new), (size), "")
 
 #ifdef CONFIG_X86_32
-# include <asm/cmpxchg_32.h>
+# include <yai/cmpxchg_32.h>
 #else
-# include <asm/cmpxchg_64.h>
+# include <yai/cmpxchg_64.h>
 #endif
 
 #define arch_cmpxchg(ptr, old, new)					\

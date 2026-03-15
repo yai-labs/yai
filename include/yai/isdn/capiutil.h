@@ -13,7 +13,7 @@
 #ifndef __CAPIUTIL_H__
 #define __CAPIUTIL_H__
 
-#include <asm/types.h>
+#include <yai/types.h>
 
 #define CAPIMSG_BASELEN		8
 #define CAPIMSG_U8(m, off)	(m[off])

@@ -2,11 +2,11 @@
 #ifndef _ASM_X86_MWAIT_H
 #define _ASM_X86_MWAIT_H
 
-#include <linux/sched.h>
-#include <linux/sched/idle.h>
+#include <yai/sched.h>
+#include <yai/sched/idle.h>
 
-#include <asm/cpufeature.h>
-#include <asm/nospec-branch.h>
+#include <yai/cpufeature.h>
+#include <yai/nospec-branch.h>
 
 #define MWAIT_SUBSTATE_MASK		0xf
 #define MWAIT_CSTATE_MASK		0xf

@@ -13,25 +13,25 @@
  */
 #define pr_fmt(fmt) "AGP: " fmt
 
-#include <linux/kernel.h>
-#include <linux/kcore.h>
-#include <linux/types.h>
-#include <linux/init.h>
-#include <linux/memblock.h>
-#include <linux/mmzone.h>
-#include <linux/pci_ids.h>
-#include <linux/pci.h>
-#include <linux/bitops.h>
-#include <linux/suspend.h>
-#include <asm/e820/api.h>
-#include <asm/io.h>
-#include <asm/iommu.h>
-#include <asm/gart.h>
-#include <asm/pci-direct.h>
-#include <asm/dma.h>
-#include <asm/amd/nb.h>
-#include <asm/x86_init.h>
-#include <linux/crash_dump.h>
+#include <yai/kernel.h>
+#include <yai/kcore.h>
+#include <yai/types.h>
+#include <yai/init.h>
+#include <yai/memblock.h>
+#include <yai/mmzone.h>
+#include <yai/pci_ids.h>
+#include <yai/pci.h>
+#include <yai/bitops.h>
+#include <yai/suspend.h>
+#include <yai/e820/api.h>
+#include <yai/io.h>
+#include <yai/iommu.h>
+#include <yai/gart.h>
+#include <yai/pci-direct.h>
+#include <yai/dma.h>
+#include <yai/amd/nb.h>
+#include <yai/x86_init.h>
+#include <yai/crash_dump.h>
 
 /*
  * Using 512M as goal, in case kexec will load kernel_big

@@ -2,14 +2,14 @@
 #ifndef _ASM_X86_SECCOMP_H
 #define _ASM_X86_SECCOMP_H
 
-#include <asm/unistd.h>
+#include <yai/unistd.h>
 
 #ifdef CONFIG_X86_32
 #define __NR_seccomp_sigreturn		__NR_sigreturn
 #endif
 
 #ifdef CONFIG_COMPAT
-#include <asm/unistd_32_ia32.h>
+#include <yai/unistd_32_ia32.h>
 #define __NR_seccomp_read_32		__NR_ia32_read
 #define __NR_seccomp_write_32		__NR_ia32_write
 #define __NR_seccomp_exit_32		__NR_ia32_exit
@@ -36,6 +36,6 @@
 # define SECCOMP_ARCH_NATIVE_NAME	"ia32"
 #endif
 
-#include <asm-generic/seccomp.h>
+#include <yai/seccomp.h>
 
 #endif /* _ASM_X86_SECCOMP_H */

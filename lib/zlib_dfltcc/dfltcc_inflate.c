@@ -3,9 +3,9 @@
 #include "../zlib_inflate/inflate.h"
 #include "dfltcc_util.h"
 #include "dfltcc_inflate.h"
-#include <asm/setup.h>
-#include <linux/export.h>
-#include <linux/zutil.h>
+#include <yai/setup.h>
+#include <yai/export.h>
+#include <yai/zutil.h>
 
 /*
  * Expand.

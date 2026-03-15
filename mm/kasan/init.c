@@ -6,16 +6,16 @@
  * Author: Andrey Ryabinin <ryabinin.a.a@gmail.com>
  */
 
-#include <linux/memblock.h>
-#include <linux/init.h>
-#include <linux/kasan.h>
-#include <linux/kernel.h>
-#include <linux/mm.h>
-#include <linux/pfn.h>
-#include <linux/slab.h>
-#include <linux/pgalloc.h>
+#include <yai/memblock.h>
+#include <yai/init.h>
+#include <yai/kasan.h>
+#include <yai/kernel.h>
+#include <yai/mm.h>
+#include <yai/pfn.h>
+#include <yai/slab.h>
+#include <yai/pgalloc.h>
 
-#include <asm/page.h>
+#include <yai/page.h>
 
 #include "kasan.h"
 

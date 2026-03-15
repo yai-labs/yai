@@ -9,9 +9,9 @@
 #ifndef _BPF_JIT_H
 #define _BPF_JIT_H
 
-#include <linux/bpf.h>
-#include <linux/filter.h>
-#include <asm/cacheflush.h>
+#include <yai/bpf.h>
+#include <yai/filter.h>
+#include <yai/cacheflush.h>
 
 /* verify runtime detection extension status */
 #define rv_ext_enabled(ext) \

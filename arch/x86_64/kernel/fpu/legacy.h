@@ -2,7 +2,7 @@
 #ifndef __X86_KERNEL_FPU_LEGACY_H
 #define __X86_KERNEL_FPU_LEGACY_H
 
-#include <asm/fpu/types.h>
+#include <yai/fpu/types.h>
 
 extern unsigned int mxcsr_feature_mask;
 

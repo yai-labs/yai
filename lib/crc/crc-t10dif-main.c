@@ -6,10 +6,10 @@
  * Written by Martin K. Petersen <martin.petersen@oracle.com>
  */
 
-#include <linux/crc-t10dif.h>
-#include <linux/export.h>
-#include <linux/module.h>
-#include <linux/types.h>
+#include <yai/crc-t10dif.h>
+#include <yai/export.h>
+#include <yai/module.h>
+#include <yai/types.h>
 
 /*
  * Table generated using the following polynomial:

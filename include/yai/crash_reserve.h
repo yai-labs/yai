@@ -6,7 +6,7 @@
 #include <yai/elfcore.h>
 #include <yai/elf.h>
 #ifdef CONFIG_ARCH_HAS_GENERIC_CRASHKERNEL_RESERVATION
-#include <asm/crash_reserve.h>
+#include <yai/crash_reserve.h>
 #endif
 
 /* Location of a reserved region to hold the crash kernel.

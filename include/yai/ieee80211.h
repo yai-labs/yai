@@ -19,7 +19,7 @@
 #include <yai/if_ether.h>
 #include <yai/etherdevice.h>
 #include <yai/bitfield.h>
-#include <asm/byteorder.h>
+#include <yai/byteorder.h>
 #include <yai/unaligned.h>
 
 /*

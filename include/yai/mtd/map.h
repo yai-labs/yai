@@ -14,7 +14,7 @@
 #include <yai/string.h>
 #include <yai/types.h>
 #include <yai/unaligned.h>
-#include <asm/barrier.h>
+#include <yai/barrier.h>
 
 struct device_node;
 struct module;

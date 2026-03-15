@@ -11,9 +11,9 @@
 #ifndef _MC146818RTC_H
 #define _MC146818RTC_H
 
-#include <asm/io.h>
+#include <yai/io.h>
 #include <yai/rtc.h>			/* get the user-level API */
-#include <asm/mc146818rtc.h>		/* register access macros */
+#include <yai/mc146818rtc.h>		/* register access macros */
 #include <yai/bcd.h>
 #include <yai/delay.h>
 #include <yai/pm-trace.h>
@@ -115,7 +115,7 @@ struct cmos_rtc_board_info {
 # define RTC_VRT 0x80		/* valid RAM and time */
 /**********************************************************************/
 
-#ifndef ARCH_RTC_LOCATION	/* Override by <asm/mc146818rtc.h>? */
+#ifndef ARCH_RTC_LOCATION	/* Override by <yai/mc146818rtc.h>? */
 
 #define RTC_IO_EXTENT	0x8
 #define RTC_IO_EXTENT_USED	0x2

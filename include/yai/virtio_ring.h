@@ -2,7 +2,7 @@
 #ifndef _LINUX_VIRTIO_RING_H
 #define _LINUX_VIRTIO_RING_H
 
-#include <asm/barrier.h>
+#include <yai/barrier.h>
 #include <yai/virtio.h>
 #include <yai/irqreturn.h>
 #include <yai/uapi/virtio_ring.h>

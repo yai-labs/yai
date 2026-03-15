@@ -3,15 +3,15 @@
  * Copyright (C) 2017 SiFive
  */
 
-#include <linux/acpi.h>
-#include <linux/of.h>
-#include <linux/prctl.h>
-#include <asm/acpi.h>
-#include <asm/cacheflush.h>
+#include <yai/acpi.h>
+#include <yai/of.h>
+#include <yai/prctl.h>
+#include <yai/acpi.h>
+#include <yai/cacheflush.h>
 
 #ifdef CONFIG_SMP
 
-#include <asm/sbi.h>
+#include <yai/sbi.h>
 
 static void ipi_remote_fence_i(void *info)
 {

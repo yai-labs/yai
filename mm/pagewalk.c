@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: GPL-2.0
-#include <linux/pagewalk.h>
-#include <linux/highmem.h>
-#include <linux/sched.h>
-#include <linux/hugetlb.h>
-#include <linux/mmu_context.h>
-#include <linux/swap.h>
-#include <linux/leafops.h>
+#include <yai/pagewalk.h>
+#include <yai/highmem.h>
+#include <yai/sched.h>
+#include <yai/hugetlb.h>
+#include <yai/mmu_context.h>
+#include <yai/swap.h>
+#include <yai/leafops.h>
 
-#include <asm/tlbflush.h>
+#include <yai/tlbflush.h>
 
 #include "internal.h"
 

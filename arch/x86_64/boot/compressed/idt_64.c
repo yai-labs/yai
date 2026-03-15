@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-only
-#include <asm/trap_pf.h>
-#include <asm/segment.h>
-#include <asm/trapnr.h>
+#include <yai/trap_pf.h>
+#include <yai/segment.h>
+#include <yai/trapnr.h>
 #include "misc.h"
 
 static void set_idt_entry(int vector, void (*handler)(void))
@@ -21,7 +21,7 @@ static void set_idt_entry(int vector, void (*handler)(void))
 	memcpy(&boot_idt[vector], &entry, sizeof(entry));
 }
 
-/* Have this here so we don't need to include <asm/desc.h> */
+/* Have this here so we don't need to include <yai/desc.h> */
 static void load_boot_idt(const struct desc_ptr *dtr)
 {
 	asm volatile("lidt %0"::"m" (*dtr));

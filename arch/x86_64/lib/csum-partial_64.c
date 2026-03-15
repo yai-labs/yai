@@ -6,10 +6,10 @@
  * in an architecture-specific manner due to speed.
  */
 
-#include <linux/compiler.h>
-#include <linux/export.h>
-#include <asm/checksum.h>
-#include <asm/word-at-a-time.h>
+#include <yai/compiler.h>
+#include <yai/export.h>
+#include <yai/checksum.h>
+#include <yai/word-at-a-time.h>
 
 static inline __wsum csum_finalize_sum(u64 temp64)
 {

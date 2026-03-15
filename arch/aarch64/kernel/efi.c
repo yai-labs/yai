@@ -7,16 +7,16 @@
  * Copyright (C) 2013, 2014 Linaro Ltd.
  */
 
-#include <linux/efi.h>
-#include <linux/init.h>
-#include <linux/kmemleak.h>
-#include <linux/kthread.h>
-#include <linux/screen_info.h>
-#include <linux/vmalloc.h>
+#include <yai/efi.h>
+#include <yai/init.h>
+#include <yai/kmemleak.h>
+#include <yai/kthread.h>
+#include <yai/screen_info.h>
+#include <yai/vmalloc.h>
 
-#include <asm/efi.h>
-#include <asm/stacktrace.h>
-#include <asm/vmap_stack.h>
+#include <yai/efi.h>
+#include <yai/stacktrace.h>
+#include <yai/vmap_stack.h>
 
 static bool region_is_misaligned(const efi_memory_desc_t *md)
 {

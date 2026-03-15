@@ -9,17 +9,17 @@
  * Leonid Moiseichuk, Mel Gorman, Minchan Kim and Pekka Enberg.
  */
 
-#include <linux/cgroup.h>
-#include <linux/fs.h>
-#include <linux/log2.h>
-#include <linux/sched.h>
-#include <linux/mm.h>
-#include <linux/vmstat.h>
-#include <linux/eventfd.h>
-#include <linux/slab.h>
-#include <linux/swap.h>
-#include <linux/printk.h>
-#include <linux/vmpressure.h>
+#include <yai/cgroup.h>
+#include <yai/fs.h>
+#include <yai/log2.h>
+#include <yai/sched.h>
+#include <yai/mm.h>
+#include <yai/vmstat.h>
+#include <yai/eventfd.h>
+#include <yai/slab.h>
+#include <yai/swap.h>
+#include <yai/printk.h>
+#include <yai/vmpressure.h>
 
 /*
  * The window size (vmpressure_win) is the number of scanned pages before

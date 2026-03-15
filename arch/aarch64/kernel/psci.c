@@ -8,18 +8,18 @@
 
 #define pr_fmt(fmt) "psci: " fmt
 
-#include <linux/init.h>
-#include <linux/of.h>
-#include <linux/smp.h>
-#include <linux/delay.h>
-#include <linux/psci.h>
-#include <linux/mm.h>
+#include <yai/init.h>
+#include <yai/of.h>
+#include <yai/smp.h>
+#include <yai/delay.h>
+#include <yai/psci.h>
+#include <yai/mm.h>
 
-#include <uapi/linux/psci.h>
+#include <yai/psci.h>
 
-#include <asm/cpu_ops.h>
-#include <asm/errno.h>
-#include <asm/smp_plat.h>
+#include <yai/cpu_ops.h>
+#include <yai/errno.h>
+#include <yai/smp_plat.h>
 
 static int __init cpu_psci_cpu_init(unsigned int cpu)
 {

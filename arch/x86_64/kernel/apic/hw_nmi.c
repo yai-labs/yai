@@ -9,17 +9,17 @@
  *  Bits copied from original nmi.c file
  *
  */
-#include <linux/thread_info.h>
-#include <asm/apic.h>
-#include <asm/nmi.h>
+#include <yai/thread_info.h>
+#include <yai/apic.h>
+#include <yai/nmi.h>
 
-#include <linux/cpumask.h>
-#include <linux/kdebug.h>
-#include <linux/notifier.h>
-#include <linux/kprobes.h>
-#include <linux/nmi.h>
-#include <linux/init.h>
-#include <linux/delay.h>
+#include <yai/cpumask.h>
+#include <yai/kdebug.h>
+#include <yai/notifier.h>
+#include <yai/kprobes.h>
+#include <yai/nmi.h>
+#include <yai/init.h>
+#include <yai/delay.h>
 
 #include "local.h"
 

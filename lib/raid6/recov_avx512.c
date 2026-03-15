@@ -6,7 +6,7 @@
  * Author: Megha Dey <megha.dey@linux.intel.com>
  */
 
-#include <linux/raid/pq.h>
+#include <yai/raid/pq.h>
 #include "x86.h"
 
 static int raid6_has_avx512(void)

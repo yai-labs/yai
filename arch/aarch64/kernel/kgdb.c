@@ -8,17 +8,17 @@
  * Author: Vijaya Kumar K <vijaya.kumar@caviumnetworks.com>
  */
 
-#include <linux/bug.h>
-#include <linux/irq.h>
-#include <linux/kdebug.h>
-#include <linux/kgdb.h>
-#include <linux/kprobes.h>
-#include <linux/sched/task_stack.h>
+#include <yai/bug.h>
+#include <yai/irq.h>
+#include <yai/kdebug.h>
+#include <yai/kgdb.h>
+#include <yai/kprobes.h>
+#include <yai/sched/task_stack.h>
 
-#include <asm/debug-monitors.h>
-#include <asm/insn.h>
-#include <asm/text-patching.h>
-#include <asm/traps.h>
+#include <yai/debug-monitors.h>
+#include <yai/insn.h>
+#include <yai/text-patching.h>
+#include <yai/traps.h>
 
 struct dbg_reg_def_t dbg_reg_def[DBG_MAX_REG_NUM] = {
 	{ "x0", 8, offsetof(struct pt_regs, regs[0])},

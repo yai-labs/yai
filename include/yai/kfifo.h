@@ -41,8 +41,8 @@
 #include <yai/stddef.h>
 #include <yai/types.h>
 
-#include <asm/barrier.h>
-#include <asm/errno.h>
+#include <yai/barrier.h>
+#include <yai/errno.h>
 
 struct scatterlist;
 

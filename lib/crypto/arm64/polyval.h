@@ -4,8 +4,8 @@
  *
  * Copyright 2025 Google LLC
  */
-#include <asm/simd.h>
-#include <linux/cpufeature.h>
+#include <yai/simd.h>
+#include <yai/cpufeature.h>
 
 #define NUM_H_POWERS 8
 

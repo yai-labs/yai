@@ -6,7 +6,7 @@
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
 #include <kunit/test.h>
-#include <linux/util_macros.h>
+#include <yai/util_macros.h>
 
 #define FIND_CLOSEST_RANGE_CHECK(from, to, array, exp_idx)		\
 {									\

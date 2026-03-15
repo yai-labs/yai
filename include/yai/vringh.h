@@ -19,7 +19,7 @@
 #include <yai/dma-direction.h>
 #include <yai/vhost_iotlb.h>
 #endif
-#include <asm/barrier.h>
+#include <yai/barrier.h>
 
 /* virtio_ring with information needed for host access. */
 struct vringh {

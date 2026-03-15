@@ -12,10 +12,10 @@
  *  Richard Purdie <rpurdie@openedhand.com>
  */
 
-#include <linux/module.h>
-#include <linux/kernel.h>
-#include <linux/unaligned.h>
-#include <linux/lzo.h>
+#include <yai/module.h>
+#include <yai/kernel.h>
+#include <yai/unaligned.h>
+#include <yai/lzo.h>
 #include "lzodefs.h"
 
 #undef LZO_UNSAFE

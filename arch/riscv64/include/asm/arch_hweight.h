@@ -6,8 +6,8 @@
 #ifndef _ASM_RISCV_HWEIGHT_H
 #define _ASM_RISCV_HWEIGHT_H
 
-#include <asm/alternative-macros.h>
-#include <asm/hwcap.h>
+#include <yai/alternative-macros.h>
+#include <yai/hwcap.h>
 
 #if (BITS_PER_LONG == 64)
 #define CPOPW	"cpopw "

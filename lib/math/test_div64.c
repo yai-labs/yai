@@ -5,14 +5,14 @@
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
-#include <linux/init.h>
-#include <linux/ktime.h>
-#include <linux/module.h>
-#include <linux/printk.h>
-#include <linux/time64.h>
-#include <linux/types.h>
+#include <yai/init.h>
+#include <yai/ktime.h>
+#include <yai/module.h>
+#include <yai/printk.h>
+#include <yai/time64.h>
+#include <yai/types.h>
 
-#include <asm/div64.h>
+#include <yai/div64.h>
 
 #define TEST_DIV64_N_ITER 1024
 

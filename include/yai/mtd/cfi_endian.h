@@ -3,7 +3,7 @@
  * Copyright © 2001-2010 David Woodhouse <dwmw2@infradead.org>
  */
 
-#include <asm/byteorder.h>
+#include <yai/byteorder.h>
 
 #define CFI_HOST_ENDIAN 1
 #define CFI_LITTLE_ENDIAN 2

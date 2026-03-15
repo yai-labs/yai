@@ -28,6 +28,6 @@
 #define __ARCH_WANT_SYS_CLONE
 #define __ARCH_WANT_NEW_STAT
 
-#include <asm/unistd_64.h>
+#include <yai/unistd_64.h>
 
 #define NR_syscalls (__NR_syscalls)

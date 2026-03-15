@@ -6,9 +6,9 @@
  */
 
 
-#include <linux/stddef.h>
-#include <linux/mm.h>
-#include <linux/mmzone.h>
+#include <yai/stddef.h>
+#include <yai/mm.h>
+#include <yai/mmzone.h>
 
 struct pglist_data *first_online_pgdat(void)
 {

@@ -22,7 +22,7 @@
 #include <yai/seqlock_types.h>
 #include <yai/spinlock.h>
 
-#include <asm/processor.h>
+#include <yai/processor.h>
 
 /*
  * The seqlock seqcount_t interface does not prescribe a precise sequence of

@@ -2,19 +2,19 @@
 /*
  * Copyright (c) 2014, The Linux Foundation. All rights reserved.
  */
-#include <linux/kernel.h>
-#include <linux/mm.h>
-#include <linux/module.h>
-#include <linux/mem_encrypt.h>
-#include <linux/sched.h>
-#include <linux/vmalloc.h>
-#include <linux/pagewalk.h>
+#include <yai/kernel.h>
+#include <yai/mm.h>
+#include <yai/module.h>
+#include <yai/mem_encrypt.h>
+#include <yai/sched.h>
+#include <yai/vmalloc.h>
+#include <yai/pagewalk.h>
 
-#include <asm/cacheflush.h>
-#include <asm/pgtable-prot.h>
-#include <asm/set_memory.h>
-#include <asm/tlbflush.h>
-#include <asm/kfence.h>
+#include <yai/cacheflush.h>
+#include <yai/pgtable-prot.h>
+#include <yai/set_memory.h>
+#include <yai/tlbflush.h>
+#include <yai/kfence.h>
 
 struct page_change_data {
 	pgprot_t set_mask;

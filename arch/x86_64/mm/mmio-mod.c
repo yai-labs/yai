@@ -10,17 +10,17 @@
 
 #define pr_fmt(fmt) "mmiotrace: " fmt
 
-#include <linux/moduleparam.h>
-#include <linux/debugfs.h>
-#include <linux/slab.h>
-#include <linux/uaccess.h>
-#include <linux/io.h>
-#include <linux/mmiotrace.h>
-#include <linux/pgtable.h>
-#include <asm/e820/api.h> /* for ISA_START_ADDRESS */
-#include <linux/atomic.h>
-#include <linux/percpu.h>
-#include <linux/cpu.h>
+#include <yai/moduleparam.h>
+#include <yai/debugfs.h>
+#include <yai/slab.h>
+#include <yai/uaccess.h>
+#include <yai/io.h>
+#include <yai/mmiotrace.h>
+#include <yai/pgtable.h>
+#include <yai/e820/api.h> /* for ISA_START_ADDRESS */
+#include <yai/atomic.h>
+#include <yai/percpu.h>
+#include <yai/cpu.h>
 
 #include "pf_in.h"
 

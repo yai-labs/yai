@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: GPL-2.0
-#include <linux/kernel.h>
-#include <linux/sched.h>
-#include <linux/sched/clock.h>
-#include <linux/mm.h>
-#include <asm/cpufeature.h>
-#include <asm/msr.h>
+#include <yai/kernel.h>
+#include <yai/sched.h>
+#include <yai/sched/clock.h>
+#include <yai/mm.h>
+#include <yai/cpufeature.h>
+#include <yai/msr.h>
 #include "cpu.h"
 
 static void early_init_transmeta(struct cpuinfo_x86 *c)

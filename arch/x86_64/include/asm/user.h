@@ -3,12 +3,12 @@
 #define _ASM_X86_USER_H
 
 #ifdef CONFIG_X86_32
-# include <asm/user_32.h>
+# include <yai/user_32.h>
 #else
-# include <asm/user_64.h>
+# include <yai/user_64.h>
 #endif
 
-#include <asm/types.h>
+#include <yai/types.h>
 
 struct user_ymmh_regs {
 	/* 16 * 16 bytes for each YMMH-reg */

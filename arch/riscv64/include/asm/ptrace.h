@@ -7,8 +7,8 @@
 #define _ASM_RISCV_PTRACE_H
 
 #include <uapi/asm/ptrace.h>
-#include <asm/csr.h>
-#include <linux/compiler.h>
+#include <yai/csr.h>
+#include <yai/compiler.h>
 
 #ifndef __ASSEMBLER__
 

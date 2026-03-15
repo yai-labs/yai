@@ -1,17 +1,17 @@
 // SPDX-License-Identifier: GPL-2.0-only
-#include <linux/array_size.h>
-#include <linux/bitops.h>
-#include <linux/cleanup.h>
-#include <linux/console.h>
-#include <linux/log2.h>
-#include <linux/kernel.h>
-#include <linux/ftrace.h>
-#include <linux/nmi.h>
-#include <linux/sched/debug.h>
-#include <linux/string.h>
-#include <linux/sysctl.h>
+#include <yai/array_size.h>
+#include <yai/bitops.h>
+#include <yai/cleanup.h>
+#include <yai/console.h>
+#include <yai/log2.h>
+#include <yai/kernel.h>
+#include <yai/ftrace.h>
+#include <yai/nmi.h>
+#include <yai/sched/debug.h>
+#include <yai/string.h>
+#include <yai/sysctl.h>
 
-#include <linux/sys_info.h>
+#include <yai/sys_info.h>
 
 static const char * const si_names[] = {
 	[ilog2(SYS_INFO_TASKS)]			= "tasks",

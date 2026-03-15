@@ -7,26 +7,26 @@
  * Author: Will Deacon <will.deacon@arm.com>
  */
 
-#include <linux/cpu.h>
-#include <linux/debugfs.h>
-#include <linux/hardirq.h>
-#include <linux/init.h>
-#include <linux/ptrace.h>
-#include <linux/kprobes.h>
-#include <linux/stat.h>
-#include <linux/uaccess.h>
-#include <linux/sched/task_stack.h>
+#include <yai/cpu.h>
+#include <yai/debugfs.h>
+#include <yai/hardirq.h>
+#include <yai/init.h>
+#include <yai/ptrace.h>
+#include <yai/kprobes.h>
+#include <yai/stat.h>
+#include <yai/uaccess.h>
+#include <yai/sched/task_stack.h>
 
-#include <asm/cpufeature.h>
-#include <asm/cputype.h>
-#include <asm/daifflags.h>
-#include <asm/debug-monitors.h>
-#include <asm/exception.h>
-#include <asm/kgdb.h>
-#include <asm/kprobes.h>
-#include <asm/system_misc.h>
-#include <asm/traps.h>
-#include <asm/uprobes.h>
+#include <yai/cpufeature.h>
+#include <yai/cputype.h>
+#include <yai/daifflags.h>
+#include <yai/debug-monitors.h>
+#include <yai/exception.h>
+#include <yai/kgdb.h>
+#include <yai/kprobes.h>
+#include <yai/system_misc.h>
+#include <yai/traps.h>
+#include <yai/uprobes.h>
 
 /* Determine debug architecture. */
 u8 debug_monitors_arch(void)

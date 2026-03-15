@@ -34,10 +34,10 @@
  *	Dependencies
  **************************************/
 #include "lz4defs.h"
-#include <linux/init.h>
-#include <linux/module.h>
-#include <linux/kernel.h>
-#include <linux/unaligned.h>
+#include <yai/init.h>
+#include <yai/module.h>
+#include <yai/kernel.h>
+#include <yai/unaligned.h>
 
 /*-*****************************
  *	Decompression functions

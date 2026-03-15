@@ -9,8 +9,8 @@
 
 #include <uapi/yai/sched.h>
 
-#include <asm/current.h>
-#include <asm/processor.h>
+#include <yai/current.h>
+#include <yai/processor.h>
 #include <yai/thread_info.h>
 #include <yai/preempt.h>
 #include <yai/cpumask_types.h>
@@ -48,7 +48,7 @@
 #include <yai/uidgid_types.h>
 #include <yai/tracepoint-defs.h>
 #include <yai/unwind_deferred_types.h>
-#include <asm/kmap_size.h>
+#include <yai/kmap_size.h>
 #include <yai/time64.h>
 #ifndef COMPILE_OFFSETS
 #include <generated/rq-offsets.h>

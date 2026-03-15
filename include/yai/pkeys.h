@@ -7,7 +7,7 @@
 #define ARCH_DEFAULT_PKEY	0
 
 #ifdef CONFIG_ARCH_HAS_PKEYS
-#include <asm/pkeys.h>
+#include <yai/pkeys.h>
 #else /* ! CONFIG_ARCH_HAS_PKEYS */
 #define arch_max_pkey() (1)
 #define execute_only_pkey(mm) (0)

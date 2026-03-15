@@ -4,11 +4,11 @@
  * Copyright (C) Huawei Futurewei Technologies.
  */
 
-#include <linux/vmcore_info.h>
-#include <asm/cpufeature.h>
-#include <asm/memory.h>
-#include <asm/pgtable-hwdef.h>
-#include <asm/pointer_auth.h>
+#include <yai/vmcore_info.h>
+#include <yai/cpufeature.h>
+#include <yai/memory.h>
+#include <yai/pgtable-hwdef.h>
+#include <yai/pointer_auth.h>
 
 static inline u64 get_tcr_el1_t1sz(void);
 

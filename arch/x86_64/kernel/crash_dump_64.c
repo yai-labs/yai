@@ -6,11 +6,11 @@
  *	Copyright (C) IBM Corporation, 2004. All rights reserved
  */
 
-#include <linux/errno.h>
-#include <linux/crash_dump.h>
-#include <linux/uio.h>
-#include <linux/io.h>
-#include <linux/cc_platform.h>
+#include <yai/errno.h>
+#include <yai/crash_dump.h>
+#include <yai/uio.h>
+#include <yai/io.h>
+#include <yai/cc_platform.h>
 
 static ssize_t __copy_oldmem_page(struct iov_iter *iter, unsigned long pfn,
 				  size_t csize, unsigned long offset,

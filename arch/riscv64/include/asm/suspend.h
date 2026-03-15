@@ -7,7 +7,7 @@
 #ifndef _ASM_RISCV_SUSPEND_H
 #define _ASM_RISCV_SUSPEND_H
 
-#include <asm/ptrace.h>
+#include <yai/ptrace.h>
 
 struct suspend_context {
 	/* Saved and restored by low-level functions */

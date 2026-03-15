@@ -5,12 +5,12 @@
 #ifdef CONFIG_PARAVIRT
 
 #ifndef __ASSEMBLER__
-#include <linux/types.h>
+#include <yai/types.h>
 
-#include <asm/paravirt-base.h>
-#include <asm/desc_defs.h>
-#include <asm/pgtable_types.h>
-#include <asm/nospec-branch.h>
+#include <yai/paravirt-base.h>
+#include <yai/desc_defs.h>
+#include <yai/pgtable_types.h>
+#include <yai/nospec-branch.h>
 
 struct thread_struct;
 struct mm_struct;

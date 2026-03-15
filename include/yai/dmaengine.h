@@ -12,7 +12,7 @@
 #include <yai/scatterlist.h>
 #include <yai/bitmap.h>
 #include <yai/types.h>
-#include <asm/page.h>
+#include <yai/page.h>
 
 /**
  * typedef dma_cookie_t - an opaque DMA cookie

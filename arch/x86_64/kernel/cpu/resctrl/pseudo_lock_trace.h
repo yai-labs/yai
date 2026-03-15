@@ -5,7 +5,7 @@
 #if !defined(_X86_RESCTRL_PSEUDO_LOCK_TRACE_H) || defined(TRACE_HEADER_MULTI_READ)
 #define _X86_RESCTRL_PSEUDO_LOCK_TRACE_H
 
-#include <linux/tracepoint.h>
+#include <yai/tracepoint.h>
 
 TRACE_EVENT(pseudo_lock_mem_latency,
 	    TP_PROTO(u32 latency),

@@ -9,7 +9,7 @@
  * and is included directly into both code-bases.
  */
 
-#include <asm/setup_data.h>
+#include <yai/setup_data.h>
 
 #ifndef __BOOT_COMPRESSED
 #define has_cpuflag(f)			cpu_feature_enabled(f)

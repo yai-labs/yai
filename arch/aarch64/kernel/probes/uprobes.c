@@ -2,11 +2,11 @@
 /*
  * Copyright (C) 2014-2016 Pratyush Anand <panand@redhat.com>
  */
-#include <linux/highmem.h>
-#include <linux/ptrace.h>
-#include <linux/uprobes.h>
-#include <asm/cacheflush.h>
-#include <asm/gcs.h>
+#include <yai/highmem.h>
+#include <yai/ptrace.h>
+#include <yai/uprobes.h>
+#include <yai/cacheflush.h>
+#include <yai/gcs.h>
 
 #include "decode-insn.h"
 

@@ -3,12 +3,12 @@
  * Fast batching percpu counters.
  */
 
-#include <linux/percpu_counter.h>
-#include <linux/mutex.h>
-#include <linux/init.h>
-#include <linux/cpu.h>
-#include <linux/module.h>
-#include <linux/debugobjects.h>
+#include <yai/percpu_counter.h>
+#include <yai/mutex.h>
+#include <yai/init.h>
+#include <yai/cpu.h>
+#include <yai/module.h>
+#include <yai/debugobjects.h>
 
 #ifdef CONFIG_HOTPLUG_CPU
 static LIST_HEAD(percpu_counters);

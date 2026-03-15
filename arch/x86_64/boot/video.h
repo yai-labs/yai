@@ -13,7 +13,7 @@
 #ifndef BOOT_VIDEO_H
 #define BOOT_VIDEO_H
 
-#include <linux/types.h>
+#include <yai/types.h>
 
 /*
  * This code uses an extended set of video mode numbers. These include:

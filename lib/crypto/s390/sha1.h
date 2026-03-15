@@ -4,8 +4,8 @@
  *
  * Copyright 2025 Google LLC
  */
-#include <asm/cpacf.h>
-#include <linux/cpufeature.h>
+#include <yai/cpacf.h>
+#include <yai/cpufeature.h>
 
 static __ro_after_init DEFINE_STATIC_KEY_FALSE(have_cpacf_sha1);
 

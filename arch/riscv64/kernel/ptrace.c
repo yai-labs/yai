@@ -7,19 +7,19 @@
  * Copied from arch/tile/kernel/ptrace.c
  */
 
-#include <asm/vector.h>
-#include <asm/ptrace.h>
-#include <asm/syscall.h>
-#include <asm/thread_info.h>
-#include <asm/switch_to.h>
-#include <linux/audit.h>
-#include <linux/compat.h>
-#include <linux/ptrace.h>
-#include <linux/elf.h>
-#include <linux/regset.h>
-#include <linux/sched.h>
-#include <linux/sched/task_stack.h>
-#include <asm/usercfi.h>
+#include <yai/vector.h>
+#include <yai/ptrace.h>
+#include <yai/syscall.h>
+#include <yai/thread_info.h>
+#include <yai/switch_to.h>
+#include <yai/audit.h>
+#include <yai/compat.h>
+#include <yai/ptrace.h>
+#include <yai/elf.h>
+#include <yai/regset.h>
+#include <yai/sched.h>
+#include <yai/sched/task_stack.h>
+#include <yai/usercfi.h>
 
 enum riscv_regset {
 	REGSET_X,

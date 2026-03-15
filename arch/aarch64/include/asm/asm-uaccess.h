@@ -2,12 +2,12 @@
 #ifndef __ASM_ASM_UACCESS_H
 #define __ASM_ASM_UACCESS_H
 
-#include <asm/alternative-macros.h>
-#include <asm/asm-extable.h>
-#include <asm/assembler.h>
-#include <asm/kernel-pgtable.h>
-#include <asm/mmu.h>
-#include <asm/sysreg.h>
+#include <yai/alternative-macros.h>
+#include <yai/asm-extable.h>
+#include <yai/assembler.h>
+#include <yai/kernel-pgtable.h>
+#include <yai/mmu.h>
+#include <yai/sysreg.h>
 
 /*
  * User access enabling/disabling macros.

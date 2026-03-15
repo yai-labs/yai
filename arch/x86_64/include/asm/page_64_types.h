@@ -3,7 +3,7 @@
 #define _ASM_X86_PAGE_64_DEFS_H
 
 #ifndef __ASSEMBLER__
-#include <asm/kaslr.h>
+#include <yai/kaslr.h>
 #endif
 
 #ifdef CONFIG_KASAN

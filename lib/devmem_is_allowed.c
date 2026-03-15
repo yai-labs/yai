@@ -8,9 +8,9 @@
  * Copyright (C) 2012 ARM Ltd.
  */
 
-#include <linux/mm.h>
-#include <linux/ioport.h>
-#include <linux/io.h>
+#include <yai/mm.h>
+#include <yai/ioport.h>
+#include <yai/io.h>
 
 /*
  * devmem_is_allowed() checks to see if /dev/mem access to a certain address

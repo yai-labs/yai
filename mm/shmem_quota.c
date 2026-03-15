@@ -21,18 +21,18 @@
  *
  * Copyright (C) 2023 Red Hat, Inc.
  */
-#include <linux/errno.h>
-#include <linux/fs.h>
-#include <linux/mount.h>
-#include <linux/kernel.h>
-#include <linux/init.h>
-#include <linux/module.h>
-#include <linux/slab.h>
-#include <linux/rbtree.h>
-#include <linux/shmem_fs.h>
+#include <yai/errno.h>
+#include <yai/fs.h>
+#include <yai/mount.h>
+#include <yai/kernel.h>
+#include <yai/init.h>
+#include <yai/module.h>
+#include <yai/slab.h>
+#include <yai/rbtree.h>
+#include <yai/shmem_fs.h>
 
-#include <linux/quotaops.h>
-#include <linux/quota.h>
+#include <yai/quotaops.h>
+#include <yai/quota.h>
 
 /*
  * The following constants define the amount of time given a user

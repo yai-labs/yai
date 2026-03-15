@@ -2,9 +2,9 @@
 #ifndef _ASM_X86_SET_MEMORY_H
 #define _ASM_X86_SET_MEMORY_H
 
-#include <asm/page.h>
-#include <asm-generic/set_memory.h>
-#include <asm/pgtable.h>
+#include <yai/page.h>
+#include <yai/set_memory.h>
+#include <yai/pgtable.h>
 
 #define set_memory_rox set_memory_rox
 int set_memory_rox(unsigned long addr, int numpages);

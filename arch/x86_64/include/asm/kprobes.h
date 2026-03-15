@@ -9,14 +9,14 @@
  * See arch/x86/kernel/kprobes.c for x86 kprobes history.
  */
 
-#include <asm-generic/kprobes.h>
+#include <yai/kprobes.h>
 
 #ifdef CONFIG_KPROBES
-#include <linux/types.h>
-#include <linux/ptrace.h>
-#include <linux/percpu.h>
-#include <asm/text-patching.h>
-#include <asm/insn.h>
+#include <yai/types.h>
+#include <yai/ptrace.h>
+#include <yai/percpu.h>
+#include <yai/text-patching.h>
+#include <yai/insn.h>
 
 #define  __ARCH_WANT_KPROBES_INSN_SLOT
 

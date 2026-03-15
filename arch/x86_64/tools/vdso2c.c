@@ -63,9 +63,9 @@
 
 #include <tools/le_byteshift.h>
 
-#include <linux/elf.h>
-#include <linux/types.h>
-#include <linux/kernel.h>
+#include <yai/elf.h>
+#include <yai/types.h>
+#include <yai/kernel.h>
 
 const char *outfilename;
 

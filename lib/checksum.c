@@ -28,10 +28,10 @@
 /* Revised by Kenneth Albanowski for m68knommu. Basic problem: unaligned access
  kills, so most of the assembly has to go. */
 
-#include <linux/export.h>
+#include <yai/export.h>
 #include <net/checksum.h>
 
-#include <asm/byteorder.h>
+#include <yai/byteorder.h>
 
 #ifndef do_csum
 static unsigned int do_csum(const unsigned char *buff, int len)

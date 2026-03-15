@@ -7,7 +7,7 @@
  *
  * Copyright (C) 2023 Google LLC
  */
-#include <linux/bug.h>
+#include <yai/bug.h>
 
 struct pt_regs;
 

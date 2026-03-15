@@ -18,7 +18,7 @@
 #ifndef __ASM_STACKTRACE_NVHE_H
 #define __ASM_STACKTRACE_NVHE_H
 
-#include <asm/stacktrace/common.h>
+#include <yai/stacktrace/common.h>
 
 /**
  * kvm_nvhe_unwind_init() - Start an unwind from the given nVHE HYP fp and pc

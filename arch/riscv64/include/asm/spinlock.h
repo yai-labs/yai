@@ -10,9 +10,9 @@
 #ifdef CONFIG_RISCV_COMBO_SPINLOCKS
 
 #define __no_arch_spinlock_redefine
-#include <asm/ticket_spinlock.h>
-#include <asm/qspinlock.h>
-#include <asm/jump_label.h>
+#include <yai/ticket_spinlock.h>
+#include <yai/qspinlock.h>
+#include <yai/jump_label.h>
 
 /*
  * TODO: Use an alternative instead of a static key when we are able to parse
@@ -37,14 +37,14 @@ SPINLOCK_BASE_DECLARE(value_unlocked, int, arch_spinlock_t)
 
 #elif defined(CONFIG_RISCV_QUEUED_SPINLOCKS)
 
-#include <asm/qspinlock.h>
+#include <yai/qspinlock.h>
 
 #else
 
-#include <asm/ticket_spinlock.h>
+#include <yai/ticket_spinlock.h>
 
 #endif
 
-#include <asm/qrwlock.h>
+#include <yai/qrwlock.h>
 
 #endif /* __ASM_RISCV_SPINLOCK_H */

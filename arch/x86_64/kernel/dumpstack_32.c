@@ -3,20 +3,20 @@
  *  Copyright (C) 1991, 1992  Linus Torvalds
  *  Copyright (C) 2000, 2001, 2002 Andi Kleen, SuSE Labs
  */
-#include <linux/sched/debug.h>
-#include <linux/kallsyms.h>
-#include <linux/kprobes.h>
-#include <linux/uaccess.h>
-#include <linux/hardirq.h>
-#include <linux/kdebug.h>
-#include <linux/export.h>
-#include <linux/ptrace.h>
-#include <linux/kexec.h>
-#include <linux/sysfs.h>
-#include <linux/bug.h>
-#include <linux/nmi.h>
+#include <yai/sched/debug.h>
+#include <yai/kallsyms.h>
+#include <yai/kprobes.h>
+#include <yai/uaccess.h>
+#include <yai/hardirq.h>
+#include <yai/kdebug.h>
+#include <yai/export.h>
+#include <yai/ptrace.h>
+#include <yai/kexec.h>
+#include <yai/sysfs.h>
+#include <yai/bug.h>
+#include <yai/nmi.h>
 
-#include <asm/stacktrace.h>
+#include <yai/stacktrace.h>
 
 const char *stack_type_name(enum stack_type type)
 {

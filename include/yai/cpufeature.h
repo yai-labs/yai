@@ -10,10 +10,10 @@
 
 #include <yai/init.h>
 #include <yai/mod_devicetable.h>
-#include <asm/cpufeature.h>
+#include <yai/cpufeature.h>
 
 /*
- * Macros imported from <asm/cpufeature.h>:
+ * Macros imported from <yai/cpufeature.h>:
  * - cpu_feature(x)		ordinal value of feature called 'x'
  * - cpu_have_feature(u32 n)	whether feature #n is available
  * - MAX_CPU_FEATURES		upper bound for feature ordinal values

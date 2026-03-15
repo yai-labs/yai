@@ -7,19 +7,19 @@
  * Jiang Liu <jiang.liu@linux.intel.com>
  *	Convert to hierarchical irqdomain
  */
-#include <linux/mm.h>
-#include <linux/interrupt.h>
-#include <linux/irq.h>
-#include <linux/pci.h>
-#include <linux/dmar.h>
-#include <linux/hpet.h>
-#include <linux/msi.h>
-#include <asm/irqdomain.h>
-#include <asm/hpet.h>
-#include <asm/hw_irq.h>
-#include <asm/apic.h>
-#include <asm/irq_remapping.h>
-#include <asm/xen/hypervisor.h>
+#include <yai/mm.h>
+#include <yai/interrupt.h>
+#include <yai/irq.h>
+#include <yai/pci.h>
+#include <yai/dmar.h>
+#include <yai/hpet.h>
+#include <yai/msi.h>
+#include <yai/irqdomain.h>
+#include <yai/hpet.h>
+#include <yai/hw_irq.h>
+#include <yai/apic.h>
+#include <yai/irq_remapping.h>
+#include <yai/xen/hypervisor.h>
 
 struct irq_domain *x86_pci_msi_default_domain __ro_after_init;
 

@@ -2,11 +2,11 @@
 #ifndef _ASM_X86_IO_APIC_H
 #define _ASM_X86_IO_APIC_H
 
-#include <linux/types.h>
-#include <asm/mpspec.h>
-#include <asm/apicdef.h>
-#include <asm/irq_vectors.h>
-#include <asm/x86_init.h>
+#include <yai/types.h>
+#include <yai/mpspec.h>
+#include <yai/apicdef.h>
+#include <yai/irq_vectors.h>
+#include <yai/x86_init.h>
 /*
  * Intel IO-APIC support for SMP and UP systems.
  *

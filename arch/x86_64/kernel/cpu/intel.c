@@ -1,30 +1,30 @@
 // SPDX-License-Identifier: GPL-2.0
 
-#include <linux/bitops.h>
-#include <linux/init.h>
-#include <linux/kernel.h>
-#include <linux/minmax.h>
-#include <linux/smp.h>
-#include <linux/string.h>
-#include <linux/types.h>
+#include <yai/bitops.h>
+#include <yai/init.h>
+#include <yai/kernel.h>
+#include <yai/minmax.h>
+#include <yai/smp.h>
+#include <yai/string.h>
+#include <yai/types.h>
 
 #ifdef CONFIG_X86_64
-#include <linux/topology.h>
+#include <yai/topology.h>
 #endif
 
-#include <asm/bugs.h>
-#include <asm/cpu_device_id.h>
-#include <asm/cpufeature.h>
-#include <asm/cpu.h>
-#include <asm/cpuid/api.h>
-#include <asm/hwcap2.h>
-#include <asm/intel-family.h>
-#include <asm/microcode.h>
-#include <asm/msr.h>
-#include <asm/numa.h>
-#include <asm/resctrl.h>
-#include <asm/thermal.h>
-#include <asm/uaccess.h>
+#include <yai/bugs.h>
+#include <yai/cpu_device_id.h>
+#include <yai/cpufeature.h>
+#include <yai/cpu.h>
+#include <yai/cpuid/api.h>
+#include <yai/hwcap2.h>
+#include <yai/intel-family.h>
+#include <yai/microcode.h>
+#include <yai/msr.h>
+#include <yai/numa.h>
+#include <yai/resctrl.h>
+#include <yai/thermal.h>
+#include <yai/uaccess.h>
 
 #include "cpu.h"
 

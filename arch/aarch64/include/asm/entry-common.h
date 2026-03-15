@@ -3,13 +3,13 @@
 #ifndef _ASM_ARM64_ENTRY_COMMON_H
 #define _ASM_ARM64_ENTRY_COMMON_H
 
-#include <linux/thread_info.h>
+#include <yai/thread_info.h>
 
-#include <asm/cpufeature.h>
-#include <asm/daifflags.h>
-#include <asm/fpsimd.h>
-#include <asm/mte.h>
-#include <asm/stacktrace.h>
+#include <yai/cpufeature.h>
+#include <yai/daifflags.h>
+#include <yai/fpsimd.h>
+#include <yai/mte.h>
+#include <yai/stacktrace.h>
 
 #define ARCH_EXIT_TO_USER_MODE_WORK (_TIF_MTE_ASYNC_FAULT | _TIF_FOREIGN_FPSTATE)
 

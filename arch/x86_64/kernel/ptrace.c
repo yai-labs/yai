@@ -5,42 +5,42 @@
  *	Gareth Hughes <gareth@valinux.com>, May 2000
  */
 
-#include <linux/kernel.h>
-#include <linux/sched.h>
-#include <linux/sched/task_stack.h>
-#include <linux/mm.h>
-#include <linux/smp.h>
-#include <linux/errno.h>
-#include <linux/slab.h>
-#include <linux/ptrace.h>
-#include <linux/user.h>
-#include <linux/elf.h>
-#include <linux/security.h>
-#include <linux/audit.h>
-#include <linux/seccomp.h>
-#include <linux/signal.h>
-#include <linux/perf_event.h>
-#include <linux/hw_breakpoint.h>
-#include <linux/rcupdate.h>
-#include <linux/export.h>
-#include <linux/context_tracking.h>
-#include <linux/nospec.h>
+#include <yai/kernel.h>
+#include <yai/sched.h>
+#include <yai/sched/task_stack.h>
+#include <yai/mm.h>
+#include <yai/smp.h>
+#include <yai/errno.h>
+#include <yai/slab.h>
+#include <yai/ptrace.h>
+#include <yai/user.h>
+#include <yai/elf.h>
+#include <yai/security.h>
+#include <yai/audit.h>
+#include <yai/seccomp.h>
+#include <yai/signal.h>
+#include <yai/perf_event.h>
+#include <yai/hw_breakpoint.h>
+#include <yai/rcupdate.h>
+#include <yai/export.h>
+#include <yai/context_tracking.h>
+#include <yai/nospec.h>
 
-#include <linux/uaccess.h>
-#include <asm/processor.h>
-#include <asm/fpu/signal.h>
-#include <asm/fpu/regset.h>
-#include <asm/fpu/xstate.h>
-#include <asm/debugreg.h>
-#include <asm/ldt.h>
-#include <asm/desc.h>
-#include <asm/prctl.h>
-#include <asm/proto.h>
-#include <asm/hw_breakpoint.h>
-#include <asm/traps.h>
-#include <asm/syscall.h>
-#include <asm/fsgsbase.h>
-#include <asm/io_bitmap.h>
+#include <yai/uaccess.h>
+#include <yai/processor.h>
+#include <yai/fpu/signal.h>
+#include <yai/fpu/regset.h>
+#include <yai/fpu/xstate.h>
+#include <yai/debugreg.h>
+#include <yai/ldt.h>
+#include <yai/desc.h>
+#include <yai/prctl.h>
+#include <yai/proto.h>
+#include <yai/hw_breakpoint.h>
+#include <yai/traps.h>
+#include <yai/syscall.h>
+#include <yai/fsgsbase.h>
+#include <yai/io_bitmap.h>
 
 #include "tls.h"
 
@@ -854,10 +854,10 @@ long arch_ptrace(struct task_struct *child, long request,
 
 #ifdef CONFIG_IA32_EMULATION
 
-#include <linux/compat.h>
-#include <linux/syscalls.h>
-#include <asm/ia32.h>
-#include <asm/user32.h>
+#include <yai/compat.h>
+#include <yai/syscalls.h>
+#include <yai/ia32.h>
+#include <yai/user32.h>
 
 #define R32(l,q)							\
 	case offsetof(struct user32, regs.l):				\

@@ -2,9 +2,9 @@
 #ifndef _ASM_X86_IOMMU_H
 #define _ASM_X86_IOMMU_H
 
-#include <linux/acpi.h>
+#include <yai/acpi.h>
 
-#include <asm/e820/api.h>
+#include <yai/e820/api.h>
 
 extern int force_iommu, no_iommu;
 extern int iommu_detected;

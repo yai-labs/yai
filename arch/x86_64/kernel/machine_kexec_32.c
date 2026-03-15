@@ -4,24 +4,24 @@
  * Copyright (C) 2002-2005 Eric Biederman  <ebiederm@xmission.com>
  */
 
-#include <linux/mm.h>
-#include <linux/kexec.h>
-#include <linux/delay.h>
-#include <linux/numa.h>
-#include <linux/ftrace.h>
-#include <linux/suspend.h>
-#include <linux/gfp.h>
-#include <linux/io.h>
+#include <yai/mm.h>
+#include <yai/kexec.h>
+#include <yai/delay.h>
+#include <yai/numa.h>
+#include <yai/ftrace.h>
+#include <yai/suspend.h>
+#include <yai/gfp.h>
+#include <yai/io.h>
 
-#include <asm/pgalloc.h>
-#include <asm/tlbflush.h>
-#include <asm/mmu_context.h>
-#include <asm/apic.h>
-#include <asm/io_apic.h>
-#include <asm/cpufeature.h>
-#include <asm/desc.h>
-#include <asm/set_memory.h>
-#include <asm/debugreg.h>
+#include <yai/pgalloc.h>
+#include <yai/tlbflush.h>
+#include <yai/mmu_context.h>
+#include <yai/apic.h>
+#include <yai/io_apic.h>
+#include <yai/cpufeature.h>
+#include <yai/desc.h>
+#include <yai/set_memory.h>
+#include <yai/debugreg.h>
 
 static void load_segments(void)
 {

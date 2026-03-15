@@ -7,11 +7,11 @@
  *
  */
 
-#include <linux/const.h>
-#include <linux/bits.h>
-#include <linux/types.h>
-#include <linux/ioctl.h>
-#include <linux/stddef.h>
+#include <yai/const.h>
+#include <yai/bits.h>
+#include <yai/types.h>
+#include <yai/ioctl.h>
+#include <yai/stddef.h>
 
 #define KVM_PIO_PAGE_OFFSET 1
 #define KVM_COALESCED_MMIO_PAGE_OFFSET 2
@@ -41,7 +41,7 @@
 #define VC_VECTOR 29
 #define SX_VECTOR 30
 
-/* Select x86 specific features in <linux/kvm.h> */
+/* Select x86 specific features in <yai/kvm.h> */
 #define __KVM_HAVE_PIT
 #define __KVM_HAVE_IOAPIC
 #define __KVM_HAVE_IRQ_LINE

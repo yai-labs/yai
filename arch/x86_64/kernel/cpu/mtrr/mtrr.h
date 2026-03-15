@@ -3,8 +3,8 @@
  * local MTRR defines.
  */
 
-#include <linux/types.h>
-#include <linux/stddef.h>
+#include <yai/types.h>
+#include <yai/stddef.h>
 
 #define MTRR_CHANGE_MASK_FIXED     0x01
 #define MTRR_CHANGE_MASK_VARIABLE  0x02

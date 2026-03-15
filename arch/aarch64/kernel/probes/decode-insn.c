@@ -5,12 +5,12 @@
  * Copyright (C) 2013 Linaro Limited.
  */
 
-#include <linux/kernel.h>
-#include <linux/kprobes.h>
-#include <linux/module.h>
-#include <linux/kallsyms.h>
-#include <asm/insn.h>
-#include <asm/sections.h>
+#include <yai/kernel.h>
+#include <yai/kprobes.h>
+#include <yai/module.h>
+#include <yai/kallsyms.h>
+#include <yai/insn.h>
+#include <yai/sections.h>
 
 #include "decode-insn.h"
 #include "simulate-insn.h"

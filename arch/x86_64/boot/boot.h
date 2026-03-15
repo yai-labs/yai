@@ -18,11 +18,11 @@
 
 #ifndef __ASSEMBLER__
 
-#include <linux/stdarg.h>
-#include <linux/types.h>
-#include <linux/edd.h>
-#include <asm/setup.h>
-#include <asm/asm.h>
+#include <yai/stdarg.h>
+#include <yai/types.h>
+#include <yai/edd.h>
+#include <yai/setup.h>
+#include <yai/asm.h>
 #include "bitops.h"
 #include "ctype.h"
 #include "cpuflags.h"

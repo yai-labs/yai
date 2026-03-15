@@ -6,25 +6,25 @@
  *  (C) Copyright 2002 Christoph Hellwig
  */
 
-#include <linux/capability.h>
-#include <linux/mman.h>
-#include <linux/mm.h>
-#include <linux/sched/user.h>
-#include <linux/swap.h>
-#include <linux/swapops.h>
-#include <linux/pagemap.h>
-#include <linux/pagevec.h>
-#include <linux/pagewalk.h>
-#include <linux/mempolicy.h>
-#include <linux/syscalls.h>
-#include <linux/sched.h>
-#include <linux/export.h>
-#include <linux/rmap.h>
-#include <linux/mmzone.h>
-#include <linux/hugetlb.h>
-#include <linux/memcontrol.h>
-#include <linux/mm_inline.h>
-#include <linux/secretmem.h>
+#include <yai/capability.h>
+#include <yai/mman.h>
+#include <yai/mm.h>
+#include <yai/sched/user.h>
+#include <yai/swap.h>
+#include <yai/swapops.h>
+#include <yai/pagemap.h>
+#include <yai/pagevec.h>
+#include <yai/pagewalk.h>
+#include <yai/mempolicy.h>
+#include <yai/syscalls.h>
+#include <yai/sched.h>
+#include <yai/export.h>
+#include <yai/rmap.h>
+#include <yai/mmzone.h>
+#include <yai/hugetlb.h>
+#include <yai/memcontrol.h>
+#include <yai/mm_inline.h>
+#include <yai/secretmem.h>
 
 #include "internal.h"
 

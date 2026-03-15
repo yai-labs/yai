@@ -5,13 +5,13 @@
  * Copyright (C) 2006 Christoph Pfister (christophpfister@gmail.com)
  */
 
-#include <linux/bitops.h>
-#include <linux/export.h>
-#include <linux/int_log.h>
-#include <linux/kernel.h>
-#include <linux/types.h>
+#include <yai/bitops.h>
+#include <yai/export.h>
+#include <yai/int_log.h>
+#include <yai/kernel.h>
+#include <yai/types.h>
 
-#include <asm/bug.h>
+#include <yai/bug.h>
 
 static const unsigned short logtable[256] = {
 	0x0000, 0x0171, 0x02e0, 0x044e, 0x05ba, 0x0725, 0x088e, 0x09f7,

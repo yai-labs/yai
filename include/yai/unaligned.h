@@ -7,7 +7,7 @@
  * and should work almost anywhere.
  */
 #include <yai/unaligned/packed_struct.h>
-#include <asm/byteorder.h>
+#include <yai/byteorder.h>
 #include <vdso/unaligned.h>
 
 #define get_unaligned(ptr)	__get_unaligned_t(typeof(*(ptr)), (ptr))

@@ -4,24 +4,24 @@
  */
 
 #include <kunit/test.h>
-#include <linux/kernel.h>
-#include <linux/module.h>
-#include <linux/printk.h>
-#include <linux/random.h>
-#include <linux/rtc.h>
-#include <linux/slab.h>
-#include <linux/sprintf.h>
-#include <linux/string.h>
+#include <yai/kernel.h>
+#include <yai/module.h>
+#include <yai/printk.h>
+#include <yai/random.h>
+#include <yai/rtc.h>
+#include <yai/slab.h>
+#include <yai/sprintf.h>
+#include <yai/string.h>
 
-#include <linux/bitmap.h>
-#include <linux/dcache.h>
-#include <linux/socket.h>
-#include <linux/in.h>
+#include <yai/bitmap.h>
+#include <yai/dcache.h>
+#include <yai/socket.h>
+#include <yai/in.h>
 
-#include <linux/gfp.h>
-#include <linux/mm.h>
+#include <yai/gfp.h>
+#include <yai/mm.h>
 
-#include <linux/property.h>
+#include <yai/property.h>
 
 #define BUF_SIZE 256
 #define PAD_SIZE 16

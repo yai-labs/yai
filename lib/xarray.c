@@ -6,11 +6,11 @@
  * Author: Matthew Wilcox <willy@infradead.org>
  */
 
-#include <linux/bitmap.h>
-#include <linux/export.h>
-#include <linux/list.h>
-#include <linux/slab.h>
-#include <linux/xarray.h>
+#include <yai/bitmap.h>
+#include <yai/export.h>
+#include <yai/list.h>
+#include <yai/slab.h>
+#include <yai/xarray.h>
 
 #include "radix-tree.h"
 

@@ -10,6 +10,6 @@ typedef long long __kernel_si_clock_t __attribute__((aligned(4)));
 # endif
 #endif
 
-#include <asm-generic/siginfo.h>
+#include <yai/siginfo.h>
 
 #endif /* _ASM_X86_SIGINFO_H */

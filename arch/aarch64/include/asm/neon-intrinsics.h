@@ -6,7 +6,7 @@
 #ifndef __ASM_NEON_INTRINSICS_H
 #define __ASM_NEON_INTRINSICS_H
 
-#include <asm-generic/int-ll64.h>
+#include <yai/int-ll64.h>
 
 /*
  * In the kernel, u64/s64 are [un]signed long long, not [un]signed long.

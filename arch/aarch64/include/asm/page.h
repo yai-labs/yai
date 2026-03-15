@@ -8,13 +8,13 @@
 #ifndef __ASM_PAGE_H
 #define __ASM_PAGE_H
 
-#include <asm/page-def.h>
+#include <yai/page-def.h>
 
 #ifndef __ASSEMBLER__
 
-#include <linux/personality.h> /* for READ_IMPLIES_EXEC */
-#include <linux/types.h> /* for gfp_t */
-#include <asm/pgtable-types.h>
+#include <yai/personality.h> /* for READ_IMPLIES_EXEC */
+#include <yai/types.h> /* for gfp_t */
+#include <yai/pgtable-types.h>
 
 struct page;
 struct vm_area_struct;
@@ -42,12 +42,12 @@ typedef struct page *pgtable_t;
 
 int pfn_is_map_memory(unsigned long pfn);
 
-#include <asm/memory.h>
+#include <yai/memory.h>
 
 #endif /* !__ASSEMBLER__ */
 
 #define VM_DATA_DEFAULT_FLAGS	(VM_DATA_FLAGS_TSK_EXEC | VM_MTE_ALLOWED)
 
-#include <asm-generic/getorder.h>
+#include <yai/getorder.h>
 
 #endif

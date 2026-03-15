@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0
-#include <linux/export.h>
-#include <linux/bitops.h>
-#include <asm/types.h>
+#include <yai/export.h>
+#include <yai/bitops.h>
+#include <yai/types.h>
 
 /**
  * DOC: __sw_hweightN - returns the hamming weight of a N-bit word

@@ -4,23 +4,23 @@
  * are supported by the hardware.  See Documentation/arch/riscv/hwprobe.rst for
  * more details.
  */
-#include <linux/syscalls.h>
-#include <linux/completion.h>
-#include <linux/atomic.h>
-#include <linux/once.h>
-#include <asm/cacheflush.h>
-#include <asm/cpufeature.h>
-#include <asm/hwprobe.h>
-#include <asm/processor.h>
-#include <asm/delay.h>
-#include <asm/sbi.h>
-#include <asm/switch_to.h>
-#include <asm/uaccess.h>
-#include <asm/unistd.h>
-#include <asm/vector.h>
-#include <asm/vendor_extensions/mips_hwprobe.h>
-#include <asm/vendor_extensions/sifive_hwprobe.h>
-#include <asm/vendor_extensions/thead_hwprobe.h>
+#include <yai/syscalls.h>
+#include <yai/completion.h>
+#include <yai/atomic.h>
+#include <yai/once.h>
+#include <yai/cacheflush.h>
+#include <yai/cpufeature.h>
+#include <yai/hwprobe.h>
+#include <yai/processor.h>
+#include <yai/delay.h>
+#include <yai/sbi.h>
+#include <yai/switch_to.h>
+#include <yai/uaccess.h>
+#include <yai/unistd.h>
+#include <yai/vector.h>
+#include <yai/vendor_extensions/mips_hwprobe.h>
+#include <yai/vendor_extensions/sifive_hwprobe.h>
+#include <yai/vendor_extensions/thead_hwprobe.h>
 #include <vdso/vsyscall.h>
 
 

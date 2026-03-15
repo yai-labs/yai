@@ -20,15 +20,15 @@
 #define PREBOOT
 #include "lzo/lzo1x_decompress_safe.c"
 #else
-#include <linux/decompress/unlzo.h>
+#include <yai/decompress/unlzo.h>
 #endif
 
-#include <linux/types.h>
-#include <linux/lzo.h>
-#include <linux/decompress/mm.h>
+#include <yai/types.h>
+#include <yai/lzo.h>
+#include <yai/decompress/mm.h>
 
-#include <linux/compiler.h>
-#include <linux/unaligned.h>
+#include <yai/compiler.h>
+#include <yai/unaligned.h>
 
 static const unsigned char lzop_magic[] = {
 	0x89, 0x4c, 0x5a, 0x4f, 0x00, 0x0d, 0x0a, 0x1a, 0x0a };

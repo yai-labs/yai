@@ -9,15 +9,15 @@
  *
  */
 
-#include <linux/interrupt.h>
+#include <yai/interrupt.h>
 
-#include <asm/acrn.h>
-#include <asm/apic.h>
-#include <asm/cpufeatures.h>
-#include <asm/desc.h>
-#include <asm/hypervisor.h>
-#include <asm/idtentry.h>
-#include <asm/irq_regs.h>
+#include <yai/acrn.h>
+#include <yai/apic.h>
+#include <yai/cpufeatures.h>
+#include <yai/desc.h>
+#include <yai/hypervisor.h>
+#include <yai/idtentry.h>
+#include <yai/irq_regs.h>
 
 static u32 __init acrn_detect(void)
 {

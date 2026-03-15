@@ -1,27 +1,27 @@
 // SPDX-License-Identifier: GPL-2.0
-#include <linux/compat.h>
-#include <linux/errno.h>
-#include <linux/sched.h>
-#include <linux/sched/mm.h>
-#include <linux/syscalls.h>
-#include <linux/mm.h>
-#include <linux/fs.h>
-#include <linux/smp.h>
-#include <linux/sem.h>
-#include <linux/msg.h>
-#include <linux/shm.h>
-#include <linux/stat.h>
-#include <linux/mman.h>
-#include <linux/file.h>
-#include <linux/utsname.h>
-#include <linux/personality.h>
-#include <linux/random.h>
-#include <linux/uaccess.h>
-#include <linux/elf.h>
-#include <linux/hugetlb.h>
+#include <yai/compat.h>
+#include <yai/errno.h>
+#include <yai/sched.h>
+#include <yai/sched/mm.h>
+#include <yai/syscalls.h>
+#include <yai/mm.h>
+#include <yai/fs.h>
+#include <yai/smp.h>
+#include <yai/sem.h>
+#include <yai/msg.h>
+#include <yai/shm.h>
+#include <yai/stat.h>
+#include <yai/mman.h>
+#include <yai/file.h>
+#include <yai/utsname.h>
+#include <yai/personality.h>
+#include <yai/random.h>
+#include <yai/uaccess.h>
+#include <yai/elf.h>
+#include <yai/hugetlb.h>
 
-#include <asm/elf.h>
-#include <asm/ia32.h>
+#include <yai/elf.h>
+#include <yai/ia32.h>
 
 /*
  * Align a virtual address to avoid aliasing in the I$ on AMD F15h.

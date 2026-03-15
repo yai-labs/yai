@@ -5,17 +5,17 @@
  *
  * Author: Andi Kleen
  */
-#include <linux/kernel.h>
-#include <linux/seq_file.h>
-#include <linux/init.h>
-#include <linux/debugfs.h>
-#include <linux/uaccess.h>
+#include <yai/kernel.h>
+#include <yai/seq_file.h>
+#include <yai/init.h>
+#include <yai/debugfs.h>
+#include <yai/uaccess.h>
 
-#include <asm/mce.h>
-#include <asm/cpu_device_id.h>
-#include <asm/traps.h>
-#include <asm/insn.h>
-#include <asm/insn-eval.h>
+#include <yai/mce.h>
+#include <yai/cpu_device_id.h>
+#include <yai/traps.h>
+#include <yai/insn.h>
+#include <yai/insn-eval.h>
 
 #include "internal.h"
 

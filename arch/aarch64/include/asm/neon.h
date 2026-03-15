@@ -8,8 +8,8 @@
 #ifndef __ASM_NEON_H
 #define __ASM_NEON_H
 
-#include <linux/types.h>
-#include <asm/fpsimd.h>
+#include <yai/types.h>
+#include <yai/fpsimd.h>
 
 #define cpu_has_neon()		system_supports_fpsimd()
 

@@ -6,8 +6,8 @@
  */
 #include <crypto/mldsa.h>
 #include <kunit/test.h>
-#include <linux/random.h>
-#include <linux/unaligned.h>
+#include <yai/random.h>
+#include <yai/unaligned.h>
 
 #define Q 8380417 /* The prime q = 2^23 - 2^13 + 1 */
 

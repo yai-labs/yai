@@ -3,9 +3,9 @@
  * Copyright (C) 2017 ARM Ltd.
  */
 
-#include <linux/uaccess.h>
-#include <asm/barrier.h>
-#include <asm/cacheflush.h>
+#include <yai/uaccess.h>
+#include <yai/barrier.h>
+#include <yai/cacheflush.h>
 
 void memcpy_flushcache(void *dst, const void *src, size_t cnt)
 {

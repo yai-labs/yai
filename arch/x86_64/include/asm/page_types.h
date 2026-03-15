@@ -2,9 +2,9 @@
 #ifndef _ASM_X86_PAGE_DEFS_H
 #define _ASM_X86_PAGE_DEFS_H
 
-#include <linux/const.h>
-#include <linux/types.h>
-#include <linux/mem_encrypt.h>
+#include <yai/const.h>
+#include <yai/types.h>
+#include <yai/mem_encrypt.h>
 
 #include <vdso/page.h>
 
@@ -34,10 +34,10 @@
 #define __START_KERNEL		(__START_KERNEL_map + LOAD_PHYSICAL_ADDR)
 
 #ifdef CONFIG_X86_64
-#include <asm/page_64_types.h>
+#include <yai/page_64_types.h>
 #define IOREMAP_MAX_ORDER       (PUD_SHIFT)
 #else
-#include <asm/page_32_types.h>
+#include <yai/page_32_types.h>
 #define IOREMAP_MAX_ORDER       (PMD_SHIFT)
 #endif	/* CONFIG_X86_64 */
 

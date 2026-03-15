@@ -2,11 +2,11 @@
 #ifndef _X86_POSTED_INTR_H
 #define _X86_POSTED_INTR_H
 
-#include <asm/cmpxchg.h>
-#include <asm/rwonce.h>
-#include <asm/irq_vectors.h>
+#include <yai/cmpxchg.h>
+#include <yai/rwonce.h>
+#include <yai/irq_vectors.h>
 
-#include <linux/bitmap.h>
+#include <yai/bitmap.h>
 
 #define POSTED_INTR_ON  0
 #define POSTED_INTR_SN  1

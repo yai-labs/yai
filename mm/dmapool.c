@@ -19,22 +19,22 @@
  * keep a count of how many are currently allocated from each page.
  */
 
-#include <linux/device.h>
-#include <linux/dma-mapping.h>
-#include <linux/dmapool.h>
-#include <linux/kernel.h>
-#include <linux/list.h>
-#include <linux/export.h>
-#include <linux/mutex.h>
-#include <linux/poison.h>
-#include <linux/sched.h>
-#include <linux/sched/mm.h>
-#include <linux/slab.h>
-#include <linux/stat.h>
-#include <linux/spinlock.h>
-#include <linux/string.h>
-#include <linux/types.h>
-#include <linux/wait.h>
+#include <yai/device.h>
+#include <yai/dma-mapping.h>
+#include <yai/dmapool.h>
+#include <yai/kernel.h>
+#include <yai/list.h>
+#include <yai/export.h>
+#include <yai/mutex.h>
+#include <yai/poison.h>
+#include <yai/sched.h>
+#include <yai/sched/mm.h>
+#include <yai/slab.h>
+#include <yai/stat.h>
+#include <yai/spinlock.h>
+#include <yai/string.h>
+#include <yai/types.h>
+#include <yai/wait.h>
 
 #ifdef CONFIG_SLUB_DEBUG_ON
 #define DMAPOOL_DEBUG 1

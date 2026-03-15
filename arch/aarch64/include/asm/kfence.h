@@ -8,7 +8,7 @@
 #ifndef __ASM_KFENCE_H
 #define __ASM_KFENCE_H
 
-#include <asm/set_memory.h>
+#include <yai/set_memory.h>
 
 static inline bool kfence_protect_page(unsigned long addr, bool protect)
 {

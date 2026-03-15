@@ -12,9 +12,9 @@
 
 #include <crypto/curve25519.h>
 #include <crypto/utils.h>
-#include <linux/export.h>
-#include <linux/init.h>
-#include <linux/module.h>
+#include <yai/export.h>
+#include <yai/init.h>
+#include <yai/module.h>
 
 static const u8 curve25519_null_point[CURVE25519_KEY_SIZE] __aligned(32) = { 0 };
 static const u8 curve25519_base_point[CURVE25519_KEY_SIZE] __aligned(32) = { 9 };

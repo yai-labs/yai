@@ -14,7 +14,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-#include <asm/insn.h>
+#include <yai/insn.h>
 #include <inat.c>
 #include <insn.c>
 

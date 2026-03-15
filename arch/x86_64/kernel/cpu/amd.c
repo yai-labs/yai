@@ -1,32 +1,32 @@
 // SPDX-License-Identifier: GPL-2.0-only
-#include <linux/export.h>
-#include <linux/bitops.h>
-#include <linux/elf.h>
-#include <linux/mm.h>
-#include <linux/kvm_types.h>
-#include <linux/io.h>
-#include <linux/sched.h>
-#include <linux/sched/clock.h>
-#include <linux/random.h>
-#include <linux/topology.h>
-#include <linux/platform_data/x86/amd-fch.h>
-#include <asm/processor.h>
-#include <asm/apic.h>
-#include <asm/cacheinfo.h>
-#include <asm/cpu.h>
-#include <asm/cpu_device_id.h>
-#include <asm/spec-ctrl.h>
-#include <asm/smp.h>
-#include <asm/numa.h>
-#include <asm/pci-direct.h>
-#include <asm/delay.h>
-#include <asm/debugreg.h>
-#include <asm/resctrl.h>
-#include <asm/msr.h>
-#include <asm/sev.h>
+#include <yai/export.h>
+#include <yai/bitops.h>
+#include <yai/elf.h>
+#include <yai/mm.h>
+#include <yai/kvm_types.h>
+#include <yai/io.h>
+#include <yai/sched.h>
+#include <yai/sched/clock.h>
+#include <yai/random.h>
+#include <yai/topology.h>
+#include <yai/platform_data/x86/amd-fch.h>
+#include <yai/processor.h>
+#include <yai/apic.h>
+#include <yai/cacheinfo.h>
+#include <yai/cpu.h>
+#include <yai/cpu_device_id.h>
+#include <yai/spec-ctrl.h>
+#include <yai/smp.h>
+#include <yai/numa.h>
+#include <yai/pci-direct.h>
+#include <yai/delay.h>
+#include <yai/debugreg.h>
+#include <yai/resctrl.h>
+#include <yai/msr.h>
+#include <yai/sev.h>
 
 #ifdef CONFIG_X86_64
-# include <asm/mmconfig.h>
+# include <yai/mmconfig.h>
 #endif
 
 #include "cpu.h"

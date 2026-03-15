@@ -1,16 +1,16 @@
 // SPDX-License-Identifier: GPL-2.0
 
-#include <linux/spinlock.h>
-#include <linux/percpu.h>
-#include <linux/kallsyms.h>
-#include <linux/kcore.h>
-#include <linux/pgtable.h>
+#include <yai/spinlock.h>
+#include <yai/percpu.h>
+#include <yai/kallsyms.h>
+#include <yai/kcore.h>
+#include <yai/pgtable.h>
 
-#include <asm/cpu_entry_area.h>
-#include <asm/fixmap.h>
-#include <asm/desc.h>
-#include <asm/kasan.h>
-#include <asm/setup.h>
+#include <yai/cpu_entry_area.h>
+#include <yai/fixmap.h>
+#include <yai/desc.h>
+#include <yai/kasan.h>
+#include <yai/setup.h>
 
 static DEFINE_PER_CPU_PAGE_ALIGNED(struct entry_stack_page, entry_stack_storage);
 

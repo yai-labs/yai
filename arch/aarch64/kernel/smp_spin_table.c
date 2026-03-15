@@ -5,18 +5,18 @@
  * Copyright (C) 2013 ARM Ltd.
  */
 
-#include <linux/delay.h>
-#include <linux/init.h>
-#include <linux/of.h>
-#include <linux/smp.h>
-#include <linux/types.h>
-#include <linux/mm.h>
+#include <yai/delay.h>
+#include <yai/init.h>
+#include <yai/of.h>
+#include <yai/smp.h>
+#include <yai/types.h>
+#include <yai/mm.h>
 
-#include <asm/cacheflush.h>
-#include <asm/cpu_ops.h>
-#include <asm/cputype.h>
-#include <asm/io.h>
-#include <asm/smp_plat.h>
+#include <yai/cacheflush.h>
+#include <yai/cpu_ops.h>
+#include <yai/cputype.h>
+#include <yai/io.h>
+#include <yai/smp_plat.h>
 
 extern void secondary_holding_pen(void);
 volatile unsigned long __section(".mmuoff.data.read")

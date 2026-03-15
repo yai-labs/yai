@@ -6,7 +6,7 @@
 #define __ASM_HWCAP_H
 
 #include <uapi/asm/hwcap.h>
-#include <asm/cpufeature.h>
+#include <yai/cpufeature.h>
 
 #define COMPAT_HWCAP_SWP	(1 << 0)
 #define COMPAT_HWCAP_HALF	(1 << 1)
@@ -47,7 +47,7 @@
 #define COMPAT_HWCAP2_SSBS	(1 << 6)
 
 #ifndef __ASSEMBLER__
-#include <linux/log2.h>
+#include <yai/log2.h>
 
 /*
  * For userspace we represent hwcaps as a collection of HWCAP{,2}_x bitfields

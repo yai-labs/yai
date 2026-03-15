@@ -3,7 +3,7 @@
 #ifndef _X86_VIRT_TDX_AUTO_GENERATED_TDX_GLOBAL_METADATA_H
 #define _X86_VIRT_TDX_AUTO_GENERATED_TDX_GLOBAL_METADATA_H
 
-#include <linux/types.h>
+#include <yai/types.h>
 
 struct tdx_sys_info_features {
 	u64 tdx_features0;

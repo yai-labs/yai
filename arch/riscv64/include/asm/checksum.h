@@ -7,8 +7,8 @@
 #ifndef __ASM_RISCV_CHECKSUM_H
 #define __ASM_RISCV_CHECKSUM_H
 
-#include <linux/in6.h>
-#include <linux/uaccess.h>
+#include <yai/in6.h>
+#include <yai/uaccess.h>
 
 #define ip_fast_csum ip_fast_csum
 
@@ -24,7 +24,7 @@ __sum16 csum_ipv6_magic(const struct in6_addr *saddr,
 #endif
 
 /* Define riscv versions of functions before importing asm-generic/checksum.h */
-#include <asm-generic/checksum.h>
+#include <yai/checksum.h>
 
 /**
  * Quickly compute an IP checksum with the assumption that IPv4 headers will

@@ -10,9 +10,9 @@
 #define CMDLINE_DISABLE_RISCV_USERCFI		3
 
 #ifndef __ASSEMBLER__
-#include <linux/types.h>
-#include <linux/prctl.h>
-#include <linux/errno.h>
+#include <yai/types.h>
+#include <yai/prctl.h>
+#include <yai/errno.h>
 
 struct task_struct;
 struct kernel_clone_args;

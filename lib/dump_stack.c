@@ -4,16 +4,16 @@
  * which don't implement their own.
  */
 
-#include <linux/kernel.h>
-#include <linux/buildid.h>
-#include <linux/export.h>
-#include <linux/sched.h>
-#include <linux/sched/debug.h>
-#include <linux/smp.h>
-#include <linux/atomic.h>
-#include <linux/kexec.h>
-#include <linux/utsname.h>
-#include <linux/stop_machine.h>
+#include <yai/kernel.h>
+#include <yai/buildid.h>
+#include <yai/export.h>
+#include <yai/sched.h>
+#include <yai/sched/debug.h>
+#include <yai/smp.h>
+#include <yai/atomic.h>
+#include <yai/kexec.h>
+#include <yai/utsname.h>
+#include <yai/stop_machine.h>
 
 static char dump_stack_arch_desc_str[128];
 

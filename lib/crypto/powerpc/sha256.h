@@ -8,8 +8,8 @@
  * Copyright (c) 2015 Markus Stockhausen <stockhausen@collogia.de>
  */
 
-#include <asm/switch_to.h>
-#include <linux/preempt.h>
+#include <yai/switch_to.h>
+#include <yai/preempt.h>
 
 /*
  * MAX_BYTES defines the number of bytes that are allowed to be processed

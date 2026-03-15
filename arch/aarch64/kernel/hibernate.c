@@ -10,29 +10,29 @@
  * Copyright (C) 2006 Rafael J. Wysocki <rjw@sisk.pl>
  */
 #define pr_fmt(x) "hibernate: " x
-#include <linux/cpu.h>
-#include <linux/kvm_host.h>
-#include <linux/pm.h>
-#include <linux/sched.h>
-#include <linux/suspend.h>
-#include <linux/utsname.h>
+#include <yai/cpu.h>
+#include <yai/kvm_host.h>
+#include <yai/pm.h>
+#include <yai/sched.h>
+#include <yai/suspend.h>
+#include <yai/utsname.h>
 
-#include <asm/barrier.h>
-#include <asm/cacheflush.h>
-#include <asm/cputype.h>
-#include <asm/daifflags.h>
-#include <asm/irqflags.h>
-#include <asm/kexec.h>
-#include <asm/memory.h>
-#include <asm/mmu_context.h>
-#include <asm/mte.h>
-#include <asm/sections.h>
-#include <asm/smp.h>
-#include <asm/smp_plat.h>
-#include <asm/suspend.h>
-#include <asm/sysreg.h>
-#include <asm/trans_pgd.h>
-#include <asm/virt.h>
+#include <yai/barrier.h>
+#include <yai/cacheflush.h>
+#include <yai/cputype.h>
+#include <yai/daifflags.h>
+#include <yai/irqflags.h>
+#include <yai/kexec.h>
+#include <yai/memory.h>
+#include <yai/mmu_context.h>
+#include <yai/mte.h>
+#include <yai/sections.h>
+#include <yai/smp.h>
+#include <yai/smp_plat.h>
+#include <yai/suspend.h>
+#include <yai/sysreg.h>
+#include <yai/trans_pgd.h>
+#include <yai/virt.h>
 
 /*
  * Hibernate core relies on this value being 0 on resume, and marks it

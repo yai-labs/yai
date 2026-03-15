@@ -1,17 +1,17 @@
 // SPDX-License-Identifier: GPL-2.0-only
-#include <linux/kernel.h>
-#include <linux/mm.h>
-#include <linux/smp.h>
-#include <linux/spinlock.h>
-#include <linux/stop_machine.h>
-#include <linux/uaccess.h>
+#include <yai/kernel.h>
+#include <yai/mm.h>
+#include <yai/smp.h>
+#include <yai/spinlock.h>
+#include <yai/stop_machine.h>
+#include <yai/uaccess.h>
 
-#include <asm/cacheflush.h>
-#include <asm/fixmap.h>
-#include <asm/insn.h>
-#include <asm/kprobes.h>
-#include <asm/text-patching.h>
-#include <asm/sections.h>
+#include <yai/cacheflush.h>
+#include <yai/fixmap.h>
+#include <yai/insn.h>
+#include <yai/kprobes.h>
+#include <yai/text-patching.h>
+#include <yai/sections.h>
 
 static DEFINE_RAW_SPINLOCK(patch_lock);
 

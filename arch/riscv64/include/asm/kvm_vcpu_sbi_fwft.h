@@ -9,7 +9,7 @@
 #ifndef __KVM_VCPU_RISCV_FWFT_H
 #define __KVM_VCPU_RISCV_FWFT_H
 
-#include <asm/sbi.h>
+#include <yai/sbi.h>
 
 struct kvm_sbi_fwft_feature;
 

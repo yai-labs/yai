@@ -2,7 +2,7 @@
 #ifndef __LINUX_PARPORT_PC_H
 #define __LINUX_PARPORT_PC_H
 
-#include <asm/io.h>
+#include <yai/io.h>
 
 /* --- register definitions ------------------------------- */
 

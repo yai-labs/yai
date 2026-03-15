@@ -8,10 +8,10 @@
  */
 
 #include <kunit/test.h>
-#include <linux/completion.h>
-#include <linux/kernel.h>
-#include <linux/kthread.h>
-#include <linux/sched/task.h>
+#include <yai/completion.h>
+#include <yai/kernel.h>
+#include <yai/kthread.h>
+#include <yai/sched/task.h>
 
 #include "try-catch-impl.h"
 

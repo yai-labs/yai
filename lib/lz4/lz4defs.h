@@ -35,18 +35,18 @@
  *	Sven Schmidt <4sschmid@informatik.uni-hamburg.de>
  */
 
-#include <linux/unaligned.h>
+#include <yai/unaligned.h>
 
-#include <linux/bitops.h>
-#include <linux/string.h>	 /* memset, memcpy */
-#include <linux/lz4.h>
+#include <yai/bitops.h>
+#include <yai/string.h>	 /* memset, memcpy */
+#include <yai/lz4.h>
 
 #define FORCE_INLINE __always_inline
 
 /*-************************************
  *	Basic Types
  **************************************/
-#include <linux/types.h>
+#include <yai/types.h>
 
 typedef	uint8_t BYTE;
 typedef uint16_t U16;

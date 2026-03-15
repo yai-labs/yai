@@ -12,8 +12,8 @@
 #ifndef __ASM_DCC_H
 #define __ASM_DCC_H
 
-#include <asm/barrier.h>
-#include <asm/sysreg.h>
+#include <yai/barrier.h>
+#include <yai/sysreg.h>
 
 static inline u32 __dcc_getstatus(void)
 {

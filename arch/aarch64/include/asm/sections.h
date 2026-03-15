@@ -5,7 +5,7 @@
 #ifndef __ASM_SECTIONS_H
 #define __ASM_SECTIONS_H
 
-#include <asm-generic/sections.h>
+#include <yai/sections.h>
 
 extern char __alt_instructions[], __alt_instructions_end[];
 extern char __hibernate_exit_text_start[], __hibernate_exit_text_end[];

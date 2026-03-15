@@ -6,8 +6,8 @@
 #ifndef __ASM_PERF_EVENT_H
 #define __ASM_PERF_EVENT_H
 
-#include <asm/stack_pointer.h>
-#include <asm/ptrace.h>
+#include <yai/stack_pointer.h>
+#include <yai/ptrace.h>
 
 #ifdef CONFIG_PERF_EVENTS
 #define perf_arch_bpf_user_pt_regs(regs) &regs->user_regs

@@ -10,8 +10,8 @@
 #ifndef _ASM_X86_FLOPPY_H
 #define _ASM_X86_FLOPPY_H
 
-#include <linux/sizes.h>
-#include <linux/vmalloc.h>
+#include <yai/sizes.h>
+#include <yai/vmalloc.h>
 
 /*
  * The DMA channel used by the floppy controller cannot access data at

@@ -6,9 +6,9 @@
 #ifndef _ASM_UPROBES_H
 #define _ASM_UPROBES_H
 
-#include <asm/debug-monitors.h>
-#include <asm/insn.h>
-#include <asm/probes.h>
+#include <yai/debug-monitors.h>
+#include <yai/insn.h>
+#include <yai/probes.h>
 
 #define UPROBE_SWBP_INSN	cpu_to_le32(BRK64_OPCODE_UPROBES)
 #define UPROBE_SWBP_INSN_SIZE	AARCH64_INSN_SIZE

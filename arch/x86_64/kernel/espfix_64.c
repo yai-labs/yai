@@ -23,16 +23,16 @@
  * actual ministack invocation is in entry_64.S.
  */
 
-#include <linux/init.h>
-#include <linux/init_task.h>
-#include <linux/kernel.h>
-#include <linux/percpu.h>
-#include <linux/gfp.h>
-#include <linux/random.h>
-#include <linux/pgtable.h>
-#include <asm/pgalloc.h>
-#include <asm/setup.h>
-#include <asm/espfix.h>
+#include <yai/init.h>
+#include <yai/init_task.h>
+#include <yai/kernel.h>
+#include <yai/percpu.h>
+#include <yai/gfp.h>
+#include <yai/random.h>
+#include <yai/pgtable.h>
+#include <yai/pgalloc.h>
+#include <yai/setup.h>
+#include <yai/espfix.h>
 
 /*
  * Note: we only need 6*8 = 48 bytes for the espfix stack, but round

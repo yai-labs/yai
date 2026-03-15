@@ -3,13 +3,13 @@
  * Copyright (C) 2025 MIPS.
  */
 
-#include <asm/vendor_extensions.h>
-#include <asm/vendor_extensions/mips.h>
-#include <asm/vendor_extensions/mips_hwprobe.h>
-#include <asm/vendor_extensions/vendor_hwprobe.h>
+#include <yai/vendor_extensions.h>
+#include <yai/vendor_extensions/mips.h>
+#include <yai/vendor_extensions/mips_hwprobe.h>
+#include <yai/vendor_extensions/vendor_hwprobe.h>
 
-#include <linux/cpumask.h>
-#include <linux/types.h>
+#include <yai/cpumask.h>
+#include <yai/types.h>
 
 #include <uapi/asm/hwprobe.h>
 #include <uapi/asm/vendor/mips.h>

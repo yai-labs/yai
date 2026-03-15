@@ -4,7 +4,7 @@
 
 #ifdef CONFIG_X86_ESPFIX64
 
-#include <asm/percpu.h>
+#include <yai/percpu.h>
 
 DECLARE_PER_CPU_READ_MOSTLY(unsigned long, espfix_stack);
 DECLARE_PER_CPU_READ_MOSTLY(unsigned long, espfix_waddr);

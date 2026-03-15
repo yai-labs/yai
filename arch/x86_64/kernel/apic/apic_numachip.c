@@ -10,13 +10,13 @@
  * Send feedback to <support@numascale.com>
  *
  */
-#include <linux/types.h>
-#include <linux/init.h>
-#include <linux/pgtable.h>
+#include <yai/types.h>
+#include <yai/init.h>
+#include <yai/pgtable.h>
 
-#include <asm/msr.h>
-#include <asm/numachip/numachip.h>
-#include <asm/numachip/numachip_csr.h>
+#include <yai/msr.h>
+#include <yai/numachip/numachip.h>
+#include <yai/numachip/numachip_csr.h>
 
 
 #include "local.h"

@@ -5,8 +5,8 @@
 
 #ifndef __ASSEMBLER__
 
-#include <asm/unistd.h>
-#include <asm/vdso/vsyscall.h>
+#include <yai/unistd.h>
+#include <yai/vdso/vsyscall.h>
 #include <vdso/datapage.h>
 
 /**

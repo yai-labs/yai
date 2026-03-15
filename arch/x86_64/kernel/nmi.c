@@ -11,32 +11,32 @@
 /*
  * Handle hardware traps and faults.
  */
-#include <linux/spinlock.h>
-#include <linux/kprobes.h>
-#include <linux/kdebug.h>
-#include <linux/sched/debug.h>
-#include <linux/nmi.h>
-#include <linux/debugfs.h>
-#include <linux/delay.h>
-#include <linux/hardirq.h>
-#include <linux/ratelimit.h>
-#include <linux/slab.h>
-#include <linux/export.h>
-#include <linux/atomic.h>
-#include <linux/sched/clock.h>
-#include <linux/kvm_types.h>
+#include <yai/spinlock.h>
+#include <yai/kprobes.h>
+#include <yai/kdebug.h>
+#include <yai/sched/debug.h>
+#include <yai/nmi.h>
+#include <yai/debugfs.h>
+#include <yai/delay.h>
+#include <yai/hardirq.h>
+#include <yai/ratelimit.h>
+#include <yai/slab.h>
+#include <yai/export.h>
+#include <yai/atomic.h>
+#include <yai/sched/clock.h>
+#include <yai/kvm_types.h>
 
-#include <asm/cpu_entry_area.h>
-#include <asm/traps.h>
-#include <asm/mach_traps.h>
-#include <asm/nmi.h>
-#include <asm/x86_init.h>
-#include <asm/reboot.h>
-#include <asm/cache.h>
-#include <asm/nospec-branch.h>
-#include <asm/microcode.h>
-#include <asm/sev.h>
-#include <asm/fred.h>
+#include <yai/cpu_entry_area.h>
+#include <yai/traps.h>
+#include <yai/mach_traps.h>
+#include <yai/nmi.h>
+#include <yai/x86_init.h>
+#include <yai/reboot.h>
+#include <yai/cache.h>
+#include <yai/nospec-branch.h>
+#include <yai/microcode.h>
+#include <yai/sev.h>
+#include <yai/fred.h>
 
 #define CREATE_TRACE_POINTS
 #include <trace/events/nmi.h>

@@ -7,8 +7,8 @@
 #ifndef _LIB_TEST_HMM_UAPI_H
 #define _LIB_TEST_HMM_UAPI_H
 
-#include <linux/types.h>
-#include <linux/ioctl.h>
+#include <yai/types.h>
+#include <yai/ioctl.h>
 
 /*
  * Structure to pass to the HMM test driver to mimic a device accessing

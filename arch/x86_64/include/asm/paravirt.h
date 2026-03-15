@@ -5,19 +5,19 @@
  * para-virtualization: those hooks are defined here. */
 
 #ifndef __ASSEMBLER__
-#include <asm/paravirt-base.h>
+#include <yai/paravirt-base.h>
 #endif
-#include <asm/paravirt_types.h>
+#include <yai/paravirt_types.h>
 
 #ifdef CONFIG_PARAVIRT
-#include <asm/pgtable_types.h>
-#include <asm/asm.h>
-#include <asm/nospec-branch.h>
+#include <yai/pgtable_types.h>
+#include <yai/asm.h>
+#include <yai/nospec-branch.h>
 
 #ifndef __ASSEMBLER__
-#include <linux/types.h>
-#include <linux/cpumask.h>
-#include <asm/frame.h>
+#include <yai/types.h>
+#include <yai/cpumask.h>
+#include <yai/frame.h>
 
 /* The paravirtualized I/O functions */
 static inline void slow_down_io(void)

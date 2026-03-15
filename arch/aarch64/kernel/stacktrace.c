@@ -4,21 +4,21 @@
  *
  * Copyright (C) 2012 ARM Ltd.
  */
-#include <linux/kernel.h>
-#include <linux/efi.h>
-#include <linux/export.h>
-#include <linux/filter.h>
-#include <linux/ftrace.h>
-#include <linux/kprobes.h>
-#include <linux/sched.h>
-#include <linux/sched/debug.h>
-#include <linux/sched/task_stack.h>
-#include <linux/stacktrace.h>
+#include <yai/kernel.h>
+#include <yai/efi.h>
+#include <yai/export.h>
+#include <yai/filter.h>
+#include <yai/ftrace.h>
+#include <yai/kprobes.h>
+#include <yai/sched.h>
+#include <yai/sched/debug.h>
+#include <yai/sched/task_stack.h>
+#include <yai/stacktrace.h>
 
-#include <asm/efi.h>
-#include <asm/irq.h>
-#include <asm/stack_pointer.h>
-#include <asm/stacktrace.h>
+#include <yai/efi.h>
+#include <yai/irq.h>
+#include <yai/stack_pointer.h>
+#include <yai/stacktrace.h>
 
 enum kunwind_source {
 	KUNWIND_SOURCE_UNKNOWN,

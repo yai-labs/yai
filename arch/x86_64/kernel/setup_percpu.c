@@ -1,27 +1,27 @@
 // SPDX-License-Identifier: GPL-2.0
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
-#include <linux/kernel.h>
-#include <linux/export.h>
-#include <linux/init.h>
-#include <linux/memblock.h>
-#include <linux/percpu.h>
-#include <linux/kexec.h>
-#include <linux/crash_dump.h>
-#include <linux/smp.h>
-#include <linux/topology.h>
-#include <linux/pfn.h>
-#include <linux/stackprotector.h>
-#include <asm/sections.h>
-#include <asm/processor.h>
-#include <asm/desc.h>
-#include <asm/setup.h>
-#include <asm/mpspec.h>
-#include <asm/apicdef.h>
-#include <asm/highmem.h>
-#include <asm/proto.h>
-#include <asm/cpumask.h>
-#include <asm/cpu.h>
+#include <yai/kernel.h>
+#include <yai/export.h>
+#include <yai/init.h>
+#include <yai/memblock.h>
+#include <yai/percpu.h>
+#include <yai/kexec.h>
+#include <yai/crash_dump.h>
+#include <yai/smp.h>
+#include <yai/topology.h>
+#include <yai/pfn.h>
+#include <yai/stackprotector.h>
+#include <yai/sections.h>
+#include <yai/processor.h>
+#include <yai/desc.h>
+#include <yai/setup.h>
+#include <yai/mpspec.h>
+#include <yai/apicdef.h>
+#include <yai/highmem.h>
+#include <yai/proto.h>
+#include <yai/cpumask.h>
+#include <yai/cpu.h>
 
 DEFINE_PER_CPU_CACHE_HOT(int, cpu_number);
 EXPORT_PER_CPU_SYMBOL(cpu_number);

@@ -9,25 +9,25 @@
 
 #define pr_fmt(fmt)	"kexec-bzImage64: " fmt
 
-#include <linux/string.h>
-#include <linux/printk.h>
-#include <linux/errno.h>
-#include <linux/slab.h>
-#include <linux/kexec.h>
-#include <linux/kernel.h>
-#include <linux/mm.h>
-#include <linux/libfdt.h>
-#include <linux/of_fdt.h>
-#include <linux/efi.h>
-#include <linux/random.h>
-#include <linux/sysfb.h>
+#include <yai/string.h>
+#include <yai/printk.h>
+#include <yai/errno.h>
+#include <yai/slab.h>
+#include <yai/kexec.h>
+#include <yai/kernel.h>
+#include <yai/mm.h>
+#include <yai/libfdt.h>
+#include <yai/of_fdt.h>
+#include <yai/efi.h>
+#include <yai/random.h>
+#include <yai/sysfb.h>
 
-#include <asm/bootparam.h>
-#include <asm/setup.h>
-#include <asm/crash.h>
-#include <asm/efi.h>
-#include <asm/e820/api.h>
-#include <asm/kexec-bzimage64.h>
+#include <yai/bootparam.h>
+#include <yai/setup.h>
+#include <yai/crash.h>
+#include <yai/efi.h>
+#include <yai/e820/api.h>
+#include <yai/kexec-bzimage64.h>
 
 #define MAX_ELFCOREHDR_STR_LEN	30	/* elfcorehdr=0x<64bit-value> */
 #define MAX_DMCRYPTKEYS_STR_LEN	31	/* dmcryptkeys=0x<64bit-value> */

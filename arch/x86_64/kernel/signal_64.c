@@ -6,19 +6,19 @@
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
-#include <linux/kernel.h>
-#include <linux/errno.h>
-#include <linux/unistd.h>
-#include <linux/uaccess.h>
-#include <linux/syscalls.h>
+#include <yai/kernel.h>
+#include <yai/errno.h>
+#include <yai/unistd.h>
+#include <yai/uaccess.h>
+#include <yai/syscalls.h>
 
-#include <asm/ucontext.h>
-#include <asm/fpu/signal.h>
-#include <asm/sighandling.h>
+#include <yai/ucontext.h>
+#include <yai/fpu/signal.h>
+#include <yai/sighandling.h>
 
-#include <asm/syscall.h>
-#include <asm/sigframe.h>
-#include <asm/signal.h>
+#include <yai/syscall.h>
+#include <yai/sigframe.h>
+#include <yai/signal.h>
 
 /*
  * If regs->ss will cause an IRET fault, change it.  Otherwise leave it

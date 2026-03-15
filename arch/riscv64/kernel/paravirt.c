@@ -5,23 +5,23 @@
 
 #define pr_fmt(fmt) "riscv-pv: " fmt
 
-#include <linux/cpuhotplug.h>
-#include <linux/compiler.h>
-#include <linux/errno.h>
-#include <linux/init.h>
-#include <linux/jump_label.h>
-#include <linux/kconfig.h>
-#include <linux/kernel.h>
-#include <linux/percpu-defs.h>
-#include <linux/printk.h>
-#include <linux/static_call.h>
-#include <linux/types.h>
-#include <linux/sched/cputime.h>
+#include <yai/cpuhotplug.h>
+#include <yai/compiler.h>
+#include <yai/errno.h>
+#include <yai/init.h>
+#include <yai/jump_label.h>
+#include <yai/kconfig.h>
+#include <yai/kernel.h>
+#include <yai/percpu-defs.h>
+#include <yai/printk.h>
+#include <yai/static_call.h>
+#include <yai/types.h>
+#include <yai/sched/cputime.h>
 
-#include <asm/barrier.h>
-#include <asm/page.h>
-#include <asm/paravirt.h>
-#include <asm/sbi.h>
+#include <yai/barrier.h>
+#include <yai/page.h>
+#include <yai/paravirt.h>
+#include <yai/sbi.h>
 
 static bool steal_acc = true;
 static int __init parse_no_stealacc(char *arg)

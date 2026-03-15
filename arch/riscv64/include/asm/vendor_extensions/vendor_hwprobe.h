@@ -6,7 +6,7 @@
 #ifndef _ASM_RISCV_SYS_HWPROBE_H
 #define _ASM_RISCV_SYS_HWPROBE_H
 
-#include <asm/cpufeature.h>
+#include <yai/cpufeature.h>
 
 #define VENDOR_EXT_KEY(ext)								\
 	do {										\

@@ -5,8 +5,8 @@
  * Copyright 2025 Google LLC
  */
 
-#include <asm/hwcap.h>
-#include <asm/alternative-macros.h>
+#include <yai/hwcap.h>
+#include <yai/alternative-macros.h>
 
 #include "crc-clmul.h"
 

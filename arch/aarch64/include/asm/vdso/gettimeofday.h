@@ -9,11 +9,11 @@
 
 #ifndef __ASSEMBLER__
 
-#include <asm/alternative.h>
-#include <asm/arch_timer.h>
-#include <asm/barrier.h>
-#include <asm/unistd.h>
-#include <asm/sysreg.h>
+#include <yai/alternative.h>
+#include <yai/arch_timer.h>
+#include <yai/barrier.h>
+#include <yai/unistd.h>
+#include <yai/sysreg.h>
 
 #define VDSO_HAS_CLOCK_GETRES		1
 

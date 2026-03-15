@@ -3,11 +3,11 @@
 #ifndef __ASM_VMAP_STACK_H
 #define __ASM_VMAP_STACK_H
 
-#include <linux/gfp.h>
-#include <linux/vmalloc.h>
-#include <linux/pgtable.h>
-#include <asm/memory.h>
-#include <asm/thread_info.h>
+#include <yai/gfp.h>
+#include <yai/vmalloc.h>
+#include <yai/pgtable.h>
+#include <yai/memory.h>
+#include <yai/thread_info.h>
 
 /*
  * To ensure that VMAP'd stack overflow detection works correctly, all VMAP'd

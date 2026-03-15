@@ -2,12 +2,12 @@
 /*
  * Simple CPU accounting cgroup controller
  */
-#include <linux/sched/cputime.h>
-#include <linux/tsacct_kern.h>
+#include <yai/sched/cputime.h>
+#include <yai/tsacct_kern.h>
 #include "sched.h"
 
 #ifdef CONFIG_VIRT_CPU_ACCOUNTING_NATIVE
- #include <asm/cputime.h>
+ #include <yai/cputime.h>
 #endif
 
 #ifdef CONFIG_IRQ_TIME_ACCOUNTING

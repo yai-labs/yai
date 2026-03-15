@@ -13,38 +13,38 @@
  * Christoph Lameter
  */
 
-#include <linux/migrate.h>
-#include <linux/export.h>
-#include <linux/swap.h>
-#include <linux/leafops.h>
-#include <linux/pagemap.h>
-#include <linux/buffer_head.h>
-#include <linux/mm_inline.h>
-#include <linux/ksm.h>
-#include <linux/rmap.h>
-#include <linux/topology.h>
-#include <linux/cpu.h>
-#include <linux/cpuset.h>
-#include <linux/writeback.h>
-#include <linux/mempolicy.h>
-#include <linux/vmalloc.h>
-#include <linux/security.h>
-#include <linux/backing-dev.h>
-#include <linux/compaction.h>
-#include <linux/syscalls.h>
-#include <linux/compat.h>
-#include <linux/hugetlb.h>
-#include <linux/gfp.h>
-#include <linux/page_idle.h>
-#include <linux/page_owner.h>
-#include <linux/sched/mm.h>
-#include <linux/ptrace.h>
-#include <linux/memory.h>
-#include <linux/sched/sysctl.h>
-#include <linux/memory-tiers.h>
-#include <linux/pagewalk.h>
+#include <yai/migrate.h>
+#include <yai/export.h>
+#include <yai/swap.h>
+#include <yai/leafops.h>
+#include <yai/pagemap.h>
+#include <yai/buffer_head.h>
+#include <yai/mm_inline.h>
+#include <yai/ksm.h>
+#include <yai/rmap.h>
+#include <yai/topology.h>
+#include <yai/cpu.h>
+#include <yai/cpuset.h>
+#include <yai/writeback.h>
+#include <yai/mempolicy.h>
+#include <yai/vmalloc.h>
+#include <yai/security.h>
+#include <yai/backing-dev.h>
+#include <yai/compaction.h>
+#include <yai/syscalls.h>
+#include <yai/compat.h>
+#include <yai/hugetlb.h>
+#include <yai/gfp.h>
+#include <yai/page_idle.h>
+#include <yai/page_owner.h>
+#include <yai/sched/mm.h>
+#include <yai/ptrace.h>
+#include <yai/memory.h>
+#include <yai/sched/sysctl.h>
+#include <yai/memory-tiers.h>
+#include <yai/pagewalk.h>
 
-#include <asm/tlbflush.h>
+#include <yai/tlbflush.h>
 
 #include <trace/events/migrate.h>
 

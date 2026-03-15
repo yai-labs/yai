@@ -2,7 +2,7 @@
 #define __ASM_LINKAGE_H
 
 #ifdef __ASSEMBLER__
-#include <asm/assembler.h>
+#include <yai/assembler.h>
 #endif
 
 #define __ALIGN		.balign CONFIG_FUNCTION_ALIGNMENT

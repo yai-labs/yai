@@ -5,14 +5,14 @@
  * Copyright (C) 2014 ARM Ltd.
  */
 
-#include <linux/arm-smccc.h>
-#include <linux/types.h>
-#include <linux/cpu.h>
-#include <asm/cpu.h>
-#include <asm/cputype.h>
-#include <asm/cpufeature.h>
-#include <asm/kvm_asm.h>
-#include <asm/smp_plat.h>
+#include <yai/arm-smccc.h>
+#include <yai/types.h>
+#include <yai/cpu.h>
+#include <yai/cpu.h>
+#include <yai/cputype.h>
+#include <yai/cpufeature.h>
+#include <yai/kvm_asm.h>
+#include <yai/smp_plat.h>
 
 static u64 target_impl_cpu_num;
 static struct target_impl_cpu *target_impl_cpus;

@@ -11,15 +11,15 @@
  * However, if you change this file, please make sure the tools/bootconfig
  * has no issue on building and running.
  */
-#include <linux/bootconfig.h>
+#include <yai/bootconfig.h>
 
 #ifdef __KERNEL__
-#include <linux/bug.h>
-#include <linux/ctype.h>
-#include <linux/errno.h>
-#include <linux/kernel.h>
-#include <linux/memblock.h>
-#include <linux/string.h>
+#include <yai/bug.h>
+#include <yai/ctype.h>
+#include <yai/errno.h>
+#include <yai/kernel.h>
+#include <yai/memblock.h>
+#include <yai/string.h>
 
 #ifdef CONFIG_BOOT_CONFIG_EMBED
 /* embedded_bootconfig_data is defined in bootconfig-data.S */

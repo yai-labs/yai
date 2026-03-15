@@ -6,19 +6,19 @@
  * use by hugetlbfs as well as tmpfs.
  */
 
-#include <linux/fs.h>
-#include <linux/vfs.h>
-#include <linux/pagemap.h>
-#include <linux/file.h>
-#include <linux/mm.h>
-#include <linux/sched/signal.h>
-#include <linux/khugepaged.h>
-#include <linux/syscalls.h>
-#include <linux/hugetlb.h>
-#include <linux/shmem_fs.h>
-#include <linux/memfd.h>
-#include <linux/pid_namespace.h>
-#include <uapi/linux/memfd.h>
+#include <yai/fs.h>
+#include <yai/vfs.h>
+#include <yai/pagemap.h>
+#include <yai/file.h>
+#include <yai/mm.h>
+#include <yai/sched/signal.h>
+#include <yai/khugepaged.h>
+#include <yai/syscalls.h>
+#include <yai/hugetlb.h>
+#include <yai/shmem_fs.h>
+#include <yai/memfd.h>
+#include <yai/pid_namespace.h>
+#include <yai/memfd.h>
 #include "swap.h"
 
 /*

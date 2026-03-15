@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: GPL-2.0
-#include <linux/compiler.h>
-#include <linux/export.h>
-#include <linux/list_sort.h>
-#include <linux/list.h>
+#include <yai/compiler.h>
+#include <yai/export.h>
+#include <yai/list_sort.h>
+#include <yai/list.h>
 
 /*
  * Returns a list organized in an intermediate format suited

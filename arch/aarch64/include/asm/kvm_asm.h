@@ -7,10 +7,10 @@
 #ifndef __ARM_KVM_ASM_H__
 #define __ARM_KVM_ASM_H__
 
-#include <asm/hyp_image.h>
-#include <asm/insn.h>
-#include <asm/virt.h>
-#include <asm/sysreg.h>
+#include <yai/hyp_image.h>
+#include <yai/insn.h>
+#include <yai/virt.h>
+#include <yai/sysreg.h>
 
 #define ARM_EXIT_WITH_SERROR_BIT  31
 #define ARM_EXCEPTION_CODE(x)	  ((x) & ~(1U << ARM_EXIT_WITH_SERROR_BIT))
@@ -48,7 +48,7 @@
 
 #ifndef __ASSEMBLER__
 
-#include <linux/mm.h>
+#include <yai/mm.h>
 
 enum __kvm_host_smccc_func {
 	/* Hypercalls available only prior to pKVM finalisation */

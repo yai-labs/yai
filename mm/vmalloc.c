@@ -8,41 +8,41 @@
  *  Improving global KVA allocator, Uladzislau Rezki, Sony, May 2019
  */
 
-#include <linux/vmalloc.h>
-#include <linux/mm.h>
-#include <linux/module.h>
-#include <linux/highmem.h>
-#include <linux/sched/signal.h>
-#include <linux/slab.h>
-#include <linux/spinlock.h>
-#include <linux/interrupt.h>
-#include <linux/proc_fs.h>
-#include <linux/seq_file.h>
-#include <linux/set_memory.h>
-#include <linux/debugobjects.h>
-#include <linux/kallsyms.h>
-#include <linux/list.h>
-#include <linux/notifier.h>
-#include <linux/rbtree.h>
-#include <linux/xarray.h>
-#include <linux/io.h>
-#include <linux/rcupdate.h>
-#include <linux/pfn.h>
-#include <linux/kmemleak.h>
-#include <linux/atomic.h>
-#include <linux/compiler.h>
-#include <linux/memcontrol.h>
-#include <linux/llist.h>
-#include <linux/uio.h>
-#include <linux/bitops.h>
-#include <linux/rbtree_augmented.h>
-#include <linux/overflow.h>
-#include <linux/pgtable.h>
-#include <linux/hugetlb.h>
-#include <linux/sched/mm.h>
-#include <asm/tlbflush.h>
-#include <asm/shmparam.h>
-#include <linux/page_owner.h>
+#include <yai/vmalloc.h>
+#include <yai/mm.h>
+#include <yai/module.h>
+#include <yai/highmem.h>
+#include <yai/sched/signal.h>
+#include <yai/slab.h>
+#include <yai/spinlock.h>
+#include <yai/interrupt.h>
+#include <yai/proc_fs.h>
+#include <yai/seq_file.h>
+#include <yai/set_memory.h>
+#include <yai/debugobjects.h>
+#include <yai/kallsyms.h>
+#include <yai/list.h>
+#include <yai/notifier.h>
+#include <yai/rbtree.h>
+#include <yai/xarray.h>
+#include <yai/io.h>
+#include <yai/rcupdate.h>
+#include <yai/pfn.h>
+#include <yai/kmemleak.h>
+#include <yai/atomic.h>
+#include <yai/compiler.h>
+#include <yai/memcontrol.h>
+#include <yai/llist.h>
+#include <yai/uio.h>
+#include <yai/bitops.h>
+#include <yai/rbtree_augmented.h>
+#include <yai/overflow.h>
+#include <yai/pgtable.h>
+#include <yai/hugetlb.h>
+#include <yai/sched/mm.h>
+#include <yai/tlbflush.h>
+#include <yai/shmparam.h>
+#include <yai/page_owner.h>
 
 #define CREATE_TRACE_POINTS
 #include <trace/events/vmalloc.h>
@@ -1631,7 +1631,7 @@ find_vmap_lowest_match(struct rb_root *root, unsigned long size,
 }
 
 #if DEBUG_AUGMENT_LOWEST_MATCH_CHECK
-#include <linux/random.h>
+#include <yai/random.h>
 
 static struct vmap_area *
 find_vmap_lowest_linear_match(struct list_head *head, unsigned long size,

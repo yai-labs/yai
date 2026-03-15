@@ -6,14 +6,14 @@
 #ifndef _ASM_RISCV_SWITCH_TO_H
 #define _ASM_RISCV_SWITCH_TO_H
 
-#include <linux/jump_label.h>
-#include <linux/sched/task_stack.h>
-#include <linux/mm_types.h>
-#include <asm/vector.h>
-#include <asm/cpufeature.h>
-#include <asm/processor.h>
-#include <asm/ptrace.h>
-#include <asm/csr.h>
+#include <yai/jump_label.h>
+#include <yai/sched/task_stack.h>
+#include <yai/mm_types.h>
+#include <yai/vector.h>
+#include <yai/cpufeature.h>
+#include <yai/processor.h>
+#include <yai/ptrace.h>
+#include <yai/csr.h>
 
 #ifdef CONFIG_FPU
 extern void __fstate_save(struct task_struct *save_to);

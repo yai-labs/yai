@@ -10,18 +10,18 @@
  * are in one chunk. Holes between them will be included in the node.
  */
 
-#include <linux/kernel.h>
-#include <linux/acpi.h>
-#include <linux/mmzone.h>
-#include <linux/bitmap.h>
-#include <linux/init.h>
-#include <linux/topology.h>
-#include <linux/mm.h>
-#include <asm/proto.h>
-#include <asm/numa.h>
-#include <asm/e820/api.h>
-#include <asm/apic.h>
-#include <asm/uv/uv.h>
+#include <yai/kernel.h>
+#include <yai/acpi.h>
+#include <yai/mmzone.h>
+#include <yai/bitmap.h>
+#include <yai/init.h>
+#include <yai/topology.h>
+#include <yai/mm.h>
+#include <yai/proto.h>
+#include <yai/numa.h>
+#include <yai/e820/api.h>
+#include <yai/apic.h>
+#include <yai/uv/uv.h>
 
 /* Callback for Proximity Domain -> x2APIC mapping */
 void __init

@@ -10,9 +10,9 @@
 #include <assert.h>
 #include <unistd.h>
 #include <stdarg.h>
-#include <linux/kallsyms.h>
+#include <yai/kallsyms.h>
 
-#include <asm/insn.h>
+#include <yai/insn.h>
 #include <inat.c>
 #include <insn.c>
 

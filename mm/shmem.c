@@ -20,27 +20,27 @@
  * Copyright (c) 2004, 2008 Matt Mackall <mpm@selenic.com>
  */
 
-#include <linux/fs.h>
-#include <linux/init.h>
-#include <linux/vfs.h>
-#include <linux/mount.h>
-#include <linux/ramfs.h>
-#include <linux/pagemap.h>
-#include <linux/file.h>
-#include <linux/fileattr.h>
-#include <linux/filelock.h>
-#include <linux/mm.h>
-#include <linux/random.h>
-#include <linux/sched/signal.h>
-#include <linux/export.h>
-#include <linux/shmem_fs.h>
-#include <linux/swap.h>
-#include <linux/uio.h>
-#include <linux/hugetlb.h>
-#include <linux/fs_parser.h>
-#include <linux/swapfile.h>
-#include <linux/iversion.h>
-#include <linux/unicode.h>
+#include <yai/fs.h>
+#include <yai/init.h>
+#include <yai/vfs.h>
+#include <yai/mount.h>
+#include <yai/ramfs.h>
+#include <yai/pagemap.h>
+#include <yai/file.h>
+#include <yai/fileattr.h>
+#include <yai/filelock.h>
+#include <yai/mm.h>
+#include <yai/random.h>
+#include <yai/sched/signal.h>
+#include <yai/export.h>
+#include <yai/shmem_fs.h>
+#include <yai/swap.h>
+#include <yai/uio.h>
+#include <yai/hugetlb.h>
+#include <yai/fs_parser.h>
+#include <yai/swapfile.h>
+#include <yai/iversion.h>
+#include <yai/unicode.h>
 #include "swap.h"
 
 static struct vfsmount *shm_mnt __ro_after_init;
@@ -52,37 +52,37 @@ static struct vfsmount *shm_mnt __ro_after_init;
  * which makes it a completely usable filesystem.
  */
 
-#include <linux/xattr.h>
-#include <linux/exportfs.h>
-#include <linux/posix_acl.h>
-#include <linux/posix_acl_xattr.h>
-#include <linux/mman.h>
-#include <linux/string.h>
-#include <linux/slab.h>
-#include <linux/backing-dev.h>
-#include <linux/writeback.h>
-#include <linux/pagevec.h>
-#include <linux/percpu_counter.h>
-#include <linux/falloc.h>
-#include <linux/splice.h>
-#include <linux/security.h>
-#include <linux/leafops.h>
-#include <linux/mempolicy.h>
-#include <linux/namei.h>
-#include <linux/ctype.h>
-#include <linux/migrate.h>
-#include <linux/highmem.h>
-#include <linux/seq_file.h>
-#include <linux/magic.h>
-#include <linux/syscalls.h>
-#include <linux/fcntl.h>
-#include <uapi/linux/memfd.h>
-#include <linux/rmap.h>
-#include <linux/uuid.h>
-#include <linux/quotaops.h>
-#include <linux/rcupdate_wait.h>
+#include <yai/xattr.h>
+#include <yai/exportfs.h>
+#include <yai/posix_acl.h>
+#include <yai/posix_acl_xattr.h>
+#include <yai/mman.h>
+#include <yai/string.h>
+#include <yai/slab.h>
+#include <yai/backing-dev.h>
+#include <yai/writeback.h>
+#include <yai/pagevec.h>
+#include <yai/percpu_counter.h>
+#include <yai/falloc.h>
+#include <yai/splice.h>
+#include <yai/security.h>
+#include <yai/leafops.h>
+#include <yai/mempolicy.h>
+#include <yai/namei.h>
+#include <yai/ctype.h>
+#include <yai/migrate.h>
+#include <yai/highmem.h>
+#include <yai/seq_file.h>
+#include <yai/magic.h>
+#include <yai/syscalls.h>
+#include <yai/fcntl.h>
+#include <yai/memfd.h>
+#include <yai/rmap.h>
+#include <yai/uuid.h>
+#include <yai/quotaops.h>
+#include <yai/rcupdate_wait.h>
 
-#include <linux/uaccess.h>
+#include <yai/uaccess.h>
 
 #include "internal.h"
 

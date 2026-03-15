@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: GPL-2.0
-#include <linux/cpu.h>
+#include <yai/cpu.h>
 
-#include <asm/apic.h>
-#include <asm/memtype.h>
-#include <asm/msr.h>
-#include <asm/processor.h>
+#include <yai/apic.h>
+#include <yai/memtype.h>
+#include <yai/msr.h>
+#include <yai/processor.h>
 
 #include "cpu.h"
 

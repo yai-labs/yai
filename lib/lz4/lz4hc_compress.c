@@ -35,9 +35,9 @@
  *	Dependencies
  **************************************/
 #include "lz4defs.h"
-#include <linux/module.h>
-#include <linux/kernel.h>
-#include <linux/string.h> /* memset */
+#include <yai/module.h>
+#include <yai/kernel.h>
+#include <yai/string.h> /* memset */
 
 /* *************************************
  *	Local Constants and types

@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: GPL-2.0
 
-#include <linux/linkage.h>
-#include <linux/types.h>
+#include <yai/linkage.h>
+#include <yai/types.h>
 
-#include <asm/desc.h>
-#include <asm/init.h>
-#include <asm/setup.h>
-#include <asm/sev.h>
-#include <asm/trapnr.h>
+#include <yai/desc.h>
+#include <yai/init.h>
+#include <yai/setup.h>
+#include <yai/sev.h>
+#include <yai/trapnr.h>
 
 /*
  * Data structures and code used for IDT setup in head_64.S. The bringup-IDT is

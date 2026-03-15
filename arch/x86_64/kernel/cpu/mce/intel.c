@@ -6,17 +6,17 @@
  * Author: Andi Kleen
  */
 
-#include <linux/gfp.h>
-#include <linux/interrupt.h>
-#include <linux/percpu.h>
-#include <linux/sched.h>
-#include <linux/cpumask.h>
-#include <asm/apic.h>
-#include <asm/cpufeature.h>
-#include <asm/cpu_device_id.h>
-#include <asm/processor.h>
-#include <asm/msr.h>
-#include <asm/mce.h>
+#include <yai/gfp.h>
+#include <yai/interrupt.h>
+#include <yai/percpu.h>
+#include <yai/sched.h>
+#include <yai/cpumask.h>
+#include <yai/apic.h>
+#include <yai/cpufeature.h>
+#include <yai/cpu_device_id.h>
+#include <yai/processor.h>
+#include <yai/msr.h>
+#include <yai/mce.h>
 
 #include "internal.h"
 

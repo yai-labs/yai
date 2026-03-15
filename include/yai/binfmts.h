@@ -4,7 +4,7 @@
 
 #include <yai/sched.h>
 #include <yai/unistd.h>
-#include <asm/exec.h>
+#include <yai/exec.h>
 #include <yai/uapi/binfmts.h>
 
 struct filename;

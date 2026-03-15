@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: GPL-2.0
 
-#include <linux/mm.h>
-#include <linux/smp.h>
-#include <linux/sched.h>
-#include <linux/hugetlb.h>
-#include <linux/mmu_notifier.h>
-#include <asm/sbi.h>
-#include <asm/mmu_context.h>
-#include <asm/cpufeature.h>
+#include <yai/mm.h>
+#include <yai/smp.h>
+#include <yai/sched.h>
+#include <yai/hugetlb.h>
+#include <yai/mmu_notifier.h>
+#include <yai/sbi.h>
+#include <yai/mmu_context.h>
+#include <yai/cpufeature.h>
 
 #define has_svinval()	riscv_has_extension_unlikely(RISCV_ISA_EXT_SVINVAL)
 

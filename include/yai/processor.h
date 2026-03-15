@@ -12,7 +12,7 @@
 #include <yai/types.h>
 #include <yai/workqueue.h>
 
-#include <asm/acpi.h>
+#include <yai/acpi.h>
 
 #define ACPI_PROCESSOR_CLASS		"processor"
 #define ACPI_PROCESSOR_DEVICE_NAME	"Processor"

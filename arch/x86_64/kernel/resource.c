@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: GPL-2.0
-#include <linux/ioport.h>
-#include <linux/printk.h>
-#include <asm/e820/api.h>
-#include <asm/pci_x86.h>
+#include <yai/ioport.h>
+#include <yai/printk.h>
+#include <yai/e820/api.h>
+#include <yai/pci_x86.h>
 
 static void resource_clip(struct resource *res, resource_size_t start,
 			  resource_size_t end)

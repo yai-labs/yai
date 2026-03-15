@@ -2,9 +2,9 @@
 #ifndef _ASM_X86_VIDEO_H
 #define _ASM_X86_VIDEO_H
 
-#include <linux/types.h>
+#include <yai/types.h>
 
-#include <asm/page.h>
+#include <yai/page.h>
 
 struct device;
 
@@ -18,6 +18,6 @@ bool video_is_primary_device(struct device *dev);
 #define video_is_primary_device video_is_primary_device
 #endif
 
-#include <asm-generic/video.h>
+#include <yai/video.h>
 
 #endif /* _ASM_X86_VIDEO_H */

@@ -2,11 +2,11 @@
 #ifndef _ASM_X86_MPSPEC_H
 #define _ASM_X86_MPSPEC_H
 
-#include <linux/types.h>
+#include <yai/types.h>
 
-#include <asm/mpspec_def.h>
-#include <asm/x86_init.h>
-#include <asm/apicdef.h>
+#include <yai/mpspec_def.h>
+#include <yai/x86_init.h>
+#include <yai/apicdef.h>
 
 extern int pic_mode;
 

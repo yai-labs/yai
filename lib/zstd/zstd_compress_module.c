@@ -9,10 +9,10 @@
  * You may select, at your option, one of the above-listed licenses.
  */
 
-#include <linux/kernel.h>
-#include <linux/module.h>
-#include <linux/string.h>
-#include <linux/zstd.h>
+#include <yai/kernel.h>
+#include <yai/module.h>
+#include <yai/string.h>
+#include <yai/zstd.h>
 
 #include "common/zstd_deps.h"
 #include "common/zstd_internal.h"

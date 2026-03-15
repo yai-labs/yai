@@ -4,18 +4,18 @@
  *
  * Originally written by Jérôme Glisse.
  */
-#include <linux/export.h>
-#include <linux/memremap.h>
-#include <linux/migrate.h>
-#include <linux/mm.h>
-#include <linux/mm_inline.h>
-#include <linux/mmu_notifier.h>
-#include <linux/oom.h>
-#include <linux/pagewalk.h>
-#include <linux/rmap.h>
-#include <linux/leafops.h>
-#include <linux/pgalloc.h>
-#include <asm/tlbflush.h>
+#include <yai/export.h>
+#include <yai/memremap.h>
+#include <yai/migrate.h>
+#include <yai/mm.h>
+#include <yai/mm_inline.h>
+#include <yai/mmu_notifier.h>
+#include <yai/oom.h>
+#include <yai/pagewalk.h>
+#include <yai/rmap.h>
+#include <yai/leafops.h>
+#include <yai/pgalloc.h>
+#include <yai/tlbflush.h>
 #include "internal.h"
 
 static int migrate_vma_collect_skip(unsigned long start,

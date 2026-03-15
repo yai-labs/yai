@@ -5,13 +5,13 @@
  * Influenced by arch/arm64/lib/csum.c
  * Copyright (C) 2023-2024 Rivos Inc.
  */
-#include <linux/bitops.h>
-#include <linux/compiler.h>
-#include <linux/jump_label.h>
-#include <linux/kasan-checks.h>
-#include <linux/kernel.h>
+#include <yai/bitops.h>
+#include <yai/compiler.h>
+#include <yai/jump_label.h>
+#include <yai/kasan-checks.h>
+#include <yai/kernel.h>
 
-#include <asm/cpufeature.h>
+#include <yai/cpufeature.h>
 
 #include <net/checksum.h>
 

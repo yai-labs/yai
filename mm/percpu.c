@@ -68,30 +68,30 @@
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
-#include <linux/bitmap.h>
-#include <linux/cpumask.h>
-#include <linux/memblock.h>
-#include <linux/err.h>
-#include <linux/list.h>
-#include <linux/log2.h>
-#include <linux/mm.h>
-#include <linux/module.h>
-#include <linux/mutex.h>
-#include <linux/percpu.h>
-#include <linux/pfn.h>
-#include <linux/slab.h>
-#include <linux/spinlock.h>
-#include <linux/vmalloc.h>
-#include <linux/workqueue.h>
-#include <linux/kmemleak.h>
-#include <linux/sched.h>
-#include <linux/sched/mm.h>
-#include <linux/memcontrol.h>
+#include <yai/bitmap.h>
+#include <yai/cpumask.h>
+#include <yai/memblock.h>
+#include <yai/err.h>
+#include <yai/list.h>
+#include <yai/log2.h>
+#include <yai/mm.h>
+#include <yai/module.h>
+#include <yai/mutex.h>
+#include <yai/percpu.h>
+#include <yai/pfn.h>
+#include <yai/slab.h>
+#include <yai/spinlock.h>
+#include <yai/vmalloc.h>
+#include <yai/workqueue.h>
+#include <yai/kmemleak.h>
+#include <yai/sched.h>
+#include <yai/sched/mm.h>
+#include <yai/memcontrol.h>
 
-#include <asm/cacheflush.h>
-#include <asm/sections.h>
-#include <asm/tlbflush.h>
-#include <asm/io.h>
+#include <yai/cacheflush.h>
+#include <yai/sections.h>
+#include <yai/tlbflush.h>
+#include <yai/io.h>
 
 #define CREATE_TRACE_POINTS
 #include <trace/events/percpu.h>
@@ -3125,7 +3125,7 @@ out_free:
 #endif /* BUILD_EMBED_FIRST_CHUNK */
 
 #ifdef BUILD_PAGE_FIRST_CHUNK
-#include <linux/pgalloc.h>
+#include <yai/pgalloc.h>
 
 #ifndef P4D_TABLE_SIZE
 #define P4D_TABLE_SIZE PAGE_SIZE

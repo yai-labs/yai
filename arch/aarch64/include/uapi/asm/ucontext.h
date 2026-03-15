@@ -17,7 +17,7 @@
 #ifndef _UAPI__ASM_UCONTEXT_H
 #define _UAPI__ASM_UCONTEXT_H
 
-#include <linux/types.h>
+#include <yai/types.h>
 
 struct ucontext {
 	unsigned long	  uc_flags;

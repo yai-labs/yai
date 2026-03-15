@@ -8,8 +8,8 @@
  *	<tomsoft@informatik.tu-chemnitz.de>
  */
 
-#include <asm/apicdef.h>
-#include <asm/irq_vectors.h>
+#include <yai/apicdef.h>
+#include <yai/irq_vectors.h>
 
 /*
  * The irq entry code is in the noinstr section and the start/end of

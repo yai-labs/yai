@@ -6,7 +6,7 @@
 #ifndef _UAPI_ASM_HWPROBE_H
 #define _UAPI_ASM_HWPROBE_H
 
-#include <linux/types.h>
+#include <yai/types.h>
 
 /*
  * Interface for probing hardware capabilities from userspace, see

@@ -6,8 +6,8 @@
  * Author: Alexander Potapenko <glider@google.com>
  */
 
-#include <asm/cpu_entry_area.h>
-#include <linux/percpu-defs.h>
+#include <yai/cpu_entry_area.h>
+#include <yai/percpu-defs.h>
 
 /*
  * Addresses within the CPU entry area (including e.g. exception stacks) do not

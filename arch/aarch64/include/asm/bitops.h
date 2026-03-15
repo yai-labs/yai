@@ -5,27 +5,27 @@
 #ifndef __ASM_BITOPS_H
 #define __ASM_BITOPS_H
 
-#include <linux/compiler.h>
+#include <yai/compiler.h>
 
 #ifndef _LINUX_BITOPS_H
-#error only <linux/bitops.h> can be included directly
+#error only <yai/bitops.h> can be included directly
 #endif
 
-#include <asm-generic/bitops/builtin-__ffs.h>
-#include <asm-generic/bitops/builtin-ffs.h>
-#include <asm-generic/bitops/builtin-__fls.h>
-#include <asm-generic/bitops/builtin-fls.h>
+#include <yai/bitops/builtin-__ffs.h>
+#include <yai/bitops/builtin-ffs.h>
+#include <yai/bitops/builtin-__fls.h>
+#include <yai/bitops/builtin-fls.h>
 
-#include <asm-generic/bitops/ffz.h>
-#include <asm-generic/bitops/fls64.h>
+#include <yai/bitops/ffz.h>
+#include <yai/bitops/fls64.h>
 
-#include <asm-generic/bitops/sched.h>
-#include <asm-generic/bitops/hweight.h>
+#include <yai/bitops/sched.h>
+#include <yai/bitops/hweight.h>
 
-#include <asm-generic/bitops/atomic.h>
-#include <asm-generic/bitops/lock.h>
-#include <asm-generic/bitops/non-atomic.h>
-#include <asm-generic/bitops/le.h>
-#include <asm-generic/bitops/ext2-atomic-setbit.h>
+#include <yai/bitops/atomic.h>
+#include <yai/bitops/lock.h>
+#include <yai/bitops/non-atomic.h>
+#include <yai/bitops/le.h>
+#include <yai/bitops/ext2-atomic-setbit.h>
 
 #endif /* __ASM_BITOPS_H */

@@ -10,7 +10,7 @@
 #include <yai/build_bug.h>
 #include <yai/compiler.h>
 #include <yai/typecheck.h>
-#include <asm/byteorder.h>
+#include <yai/byteorder.h>
 
 /*
  * Bitfield access macros

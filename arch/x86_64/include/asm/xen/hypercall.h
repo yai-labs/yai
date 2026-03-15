@@ -33,20 +33,20 @@
 #ifndef _ASM_X86_XEN_HYPERCALL_H
 #define _ASM_X86_XEN_HYPERCALL_H
 
-#include <linux/kernel.h>
-#include <linux/spinlock.h>
-#include <linux/errno.h>
-#include <linux/string.h>
-#include <linux/types.h>
-#include <linux/pgtable.h>
-#include <linux/instrumentation.h>
+#include <yai/kernel.h>
+#include <yai/spinlock.h>
+#include <yai/errno.h>
+#include <yai/string.h>
+#include <yai/types.h>
+#include <yai/pgtable.h>
+#include <yai/instrumentation.h>
 
 #include <trace/events/xen.h>
 
-#include <asm/alternative.h>
-#include <asm/page.h>
-#include <asm/smap.h>
-#include <asm/nospec-branch.h>
+#include <yai/alternative.h>
+#include <yai/page.h>
+#include <yai/smap.h>
+#include <yai/nospec-branch.h>
 
 #include <xen/interface/xen.h>
 #include <xen/interface/sched.h>

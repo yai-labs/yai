@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0+
 
-#include <linux/kernel.h>
-#include <linux/kprobes.h>
+#include <yai/kernel.h>
+#include <yai/kprobes.h>
 #include <kunit/test.h>
 #include "test-kprobes.h"
 

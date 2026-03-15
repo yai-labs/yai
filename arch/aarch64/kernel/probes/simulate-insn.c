@@ -5,12 +5,12 @@
  * Copyright (C) 2013 Linaro Limited.
  */
 
-#include <linux/bitops.h>
-#include <linux/kernel.h>
-#include <linux/kprobes.h>
+#include <yai/bitops.h>
+#include <yai/kernel.h>
+#include <yai/kprobes.h>
 
-#include <asm/ptrace.h>
-#include <asm/traps.h>
+#include <yai/ptrace.h>
+#include <yai/traps.h>
 
 #include "simulate-insn.h"
 #include "asm/gcs.h"

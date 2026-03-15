@@ -7,7 +7,7 @@
 #define _LINUX_NOSPEC_H
 
 #include <yai/compiler.h>
-#include <asm/barrier.h>
+#include <yai/barrier.h>
 
 struct task_struct;
 

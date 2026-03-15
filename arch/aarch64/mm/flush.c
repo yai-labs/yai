@@ -6,14 +6,14 @@
  * Copyright (C) 2012 ARM Ltd.
  */
 
-#include <linux/export.h>
-#include <linux/mm.h>
-#include <linux/libnvdimm.h>
-#include <linux/pagemap.h>
+#include <yai/export.h>
+#include <yai/mm.h>
+#include <yai/libnvdimm.h>
+#include <yai/pagemap.h>
 
-#include <asm/cacheflush.h>
-#include <asm/cache.h>
-#include <asm/tlbflush.h>
+#include <yai/cacheflush.h>
+#include <yai/cache.h>
+#include <yai/tlbflush.h>
 
 void sync_icache_aliases(unsigned long start, unsigned long end)
 {

@@ -9,8 +9,8 @@
 #ifndef ASM_RISCV_ARCHRANDOM_H
 #define ASM_RISCV_ARCHRANDOM_H
 
-#include <asm/csr.h>
-#include <asm/processor.h>
+#include <yai/csr.h>
+#include <yai/processor.h>
 
 #define SEED_RETRY_LOOPS 100
 

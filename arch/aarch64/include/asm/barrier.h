@@ -9,9 +9,9 @@
 
 #ifndef __ASSEMBLER__
 
-#include <linux/kasan-checks.h>
+#include <yai/kasan-checks.h>
 
-#include <asm/alternative-macros.h>
+#include <yai/alternative-macros.h>
 
 #define __nops(n)	".rept	" #n "\nnop\n.endr\n"
 #define nops(n)		asm volatile(__nops(n))
@@ -219,7 +219,7 @@ do {									\
 	(typeof(*ptr))VAL;						\
 })
 
-#include <asm-generic/barrier.h>
+#include <yai/barrier.h>
 
 #endif	/* __ASSEMBLER__ */
 

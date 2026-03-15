@@ -4,13 +4,13 @@
  * Author: Catalin Marinas <catalin.marinas@arm.com>
  */
 
-#include <linux/gfp.h>
-#include <linux/cache.h>
-#include <linux/dma-map-ops.h>
+#include <yai/gfp.h>
+#include <yai/cache.h>
+#include <yai/dma-map-ops.h>
 #include <xen/xen.h>
 
-#include <asm/cacheflush.h>
-#include <asm/xen/xen-ops.h>
+#include <yai/cacheflush.h>
+#include <yai/xen/xen-ops.h>
 
 void arch_sync_dma_for_device(phys_addr_t paddr, size_t size,
 			      enum dma_data_direction dir)

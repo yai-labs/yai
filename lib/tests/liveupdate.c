@@ -7,11 +7,11 @@
 
 #define pr_fmt(fmt) KBUILD_MODNAME " test: " fmt
 
-#include <linux/cleanup.h>
-#include <linux/errno.h>
-#include <linux/init.h>
-#include <linux/liveupdate.h>
-#include <linux/module.h>
+#include <yai/cleanup.h>
+#include <yai/errno.h>
+#include <yai/init.h>
+#include <yai/liveupdate.h>
+#include <yai/module.h>
 #include "../../kernel/liveupdate/luo_internal.h"
 
 static const struct liveupdate_flb_ops test_flb_ops;

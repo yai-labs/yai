@@ -12,7 +12,7 @@
 #include <yai/types.h>
 #include <yai/workqueue.h>
 
-#include <asm/video.h>
+#include <yai/video.h>
 
 struct backlight_device;
 struct device;

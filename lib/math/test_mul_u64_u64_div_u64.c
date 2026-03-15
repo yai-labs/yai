@@ -5,10 +5,10 @@
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
-#include <linux/init.h>
-#include <linux/module.h>
-#include <linux/printk.h>
-#include <linux/math64.h>
+#include <yai/init.h>
+#include <yai/module.h>
+#include <yai/printk.h>
+#include <yai/math64.h>
 
 typedef struct { u64 a; u64 b; u64 d; u64 result; uint round_up;} test_params;
 

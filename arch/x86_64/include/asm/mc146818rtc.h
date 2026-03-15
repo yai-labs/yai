@@ -5,8 +5,8 @@
 #ifndef _ASM_X86_MC146818RTC_H
 #define _ASM_X86_MC146818RTC_H
 
-#include <asm/io.h>
-#include <asm/processor.h>
+#include <yai/io.h>
+#include <yai/processor.h>
 
 #ifndef RTC_PORT
 #define RTC_PORT(x)	(0x70 + (x))
@@ -30,7 +30,7 @@
  * This only works with compare-and-swap.  There is no other way to
  * atomically claim the lock and set the owner.
  */
-#include <linux/smp.h>
+#include <yai/smp.h>
 extern volatile unsigned long cmos_lock;
 
 /*

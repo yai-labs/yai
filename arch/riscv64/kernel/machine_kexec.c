@@ -4,19 +4,19 @@
  *  Nick Kossifidis <mick@ics.forth.gr>
  */
 
-#include <linux/kexec.h>
-#include <asm/kexec.h>		/* For riscv_kexec_* symbol defines */
-#include <linux/smp.h>		/* For smp_send_stop () */
-#include <asm/cacheflush.h>	/* For local_flush_icache_all() */
-#include <asm/barrier.h>	/* For smp_wmb() */
-#include <asm/page.h>		/* For PAGE_MASK */
-#include <linux/libfdt.h>	/* For fdt_check_header() */
-#include <asm/set_memory.h>	/* For set_memory_x() */
-#include <linux/compiler.h>	/* For unreachable() */
-#include <linux/cpu.h>		/* For cpu_down() */
-#include <linux/reboot.h>
-#include <linux/interrupt.h>
-#include <linux/irq.h>
+#include <yai/kexec.h>
+#include <yai/kexec.h>		/* For riscv_kexec_* symbol defines */
+#include <yai/smp.h>		/* For smp_send_stop () */
+#include <yai/cacheflush.h>	/* For local_flush_icache_all() */
+#include <yai/barrier.h>	/* For smp_wmb() */
+#include <yai/page.h>		/* For PAGE_MASK */
+#include <yai/libfdt.h>	/* For fdt_check_header() */
+#include <yai/set_memory.h>	/* For set_memory_x() */
+#include <yai/compiler.h>	/* For unreachable() */
+#include <yai/cpu.h>		/* For cpu_down() */
+#include <yai/reboot.h>
+#include <yai/interrupt.h>
+#include <yai/irq.h>
 
 /*
  * machine_kexec_prepare - Initialize kexec

@@ -2,31 +2,31 @@
 /*
  * Architecture specific OF callbacks.
  */
-#include <linux/acpi.h>
-#include <linux/export.h>
-#include <linux/io.h>
-#include <linux/interrupt.h>
-#include <linux/list.h>
-#include <linux/of.h>
-#include <linux/of_fdt.h>
-#include <linux/of_address.h>
-#include <linux/of_platform.h>
-#include <linux/of_irq.h>
-#include <linux/libfdt.h>
-#include <linux/slab.h>
-#include <linux/pci.h>
-#include <linux/of_pci.h>
-#include <linux/initrd.h>
+#include <yai/acpi.h>
+#include <yai/export.h>
+#include <yai/io.h>
+#include <yai/interrupt.h>
+#include <yai/list.h>
+#include <yai/of.h>
+#include <yai/of_fdt.h>
+#include <yai/of_address.h>
+#include <yai/of_platform.h>
+#include <yai/of_irq.h>
+#include <yai/libfdt.h>
+#include <yai/slab.h>
+#include <yai/pci.h>
+#include <yai/of_pci.h>
+#include <yai/initrd.h>
 
-#include <asm/irqdomain.h>
-#include <asm/hpet.h>
-#include <asm/apic.h>
-#include <asm/io_apic.h>
-#include <asm/pci_x86.h>
-#include <asm/setup.h>
-#include <asm/i8259.h>
-#include <asm/numa.h>
-#include <asm/prom.h>
+#include <yai/irqdomain.h>
+#include <yai/hpet.h>
+#include <yai/apic.h>
+#include <yai/io_apic.h>
+#include <yai/pci_x86.h>
+#include <yai/setup.h>
+#include <yai/i8259.h>
+#include <yai/numa.h>
+#include <yai/prom.h>
 
 __initdata u64 initial_dtb;
 char __initdata cmd_line[COMMAND_LINE_SIZE];

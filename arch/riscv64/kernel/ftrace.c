@@ -5,13 +5,13 @@
  * Copyright (C) 2017 Andes Technology Corporation
  */
 
-#include <linux/ftrace.h>
-#include <linux/uaccess.h>
-#include <linux/memory.h>
-#include <linux/irqflags.h>
-#include <linux/stop_machine.h>
-#include <asm/cacheflush.h>
-#include <asm/text-patching.h>
+#include <yai/ftrace.h>
+#include <yai/uaccess.h>
+#include <yai/memory.h>
+#include <yai/irqflags.h>
+#include <yai/stop_machine.h>
+#include <yai/cacheflush.h>
+#include <yai/text-patching.h>
 
 #ifdef CONFIG_DYNAMIC_FTRACE
 void ftrace_arch_code_modify_prepare(void)

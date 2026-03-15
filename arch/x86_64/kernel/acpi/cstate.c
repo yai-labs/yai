@@ -5,19 +5,19 @@
  * 	- Added _PDC for SMP C-states on Intel CPUs
  */
 
-#include <linux/kernel.h>
-#include <linux/export.h>
-#include <linux/init.h>
-#include <linux/acpi.h>
-#include <linux/cpu.h>
-#include <linux/sched.h>
+#include <yai/kernel.h>
+#include <yai/export.h>
+#include <yai/init.h>
+#include <yai/acpi.h>
+#include <yai/cpu.h>
+#include <yai/sched.h>
 
 #include <acpi/processor.h>
-#include <asm/cpu_device_id.h>
-#include <asm/cpuid/api.h>
-#include <asm/mwait.h>
-#include <asm/special_insns.h>
-#include <asm/smp.h>
+#include <yai/cpu_device_id.h>
+#include <yai/cpuid/api.h>
+#include <yai/mwait.h>
+#include <yai/special_insns.h>
+#include <yai/smp.h>
 
 /*
  * Initialize bm_flags based on the CPU cache properties

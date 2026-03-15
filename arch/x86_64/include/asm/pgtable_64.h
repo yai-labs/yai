@@ -2,8 +2,8 @@
 #ifndef _ASM_X86_PGTABLE_64_H
 #define _ASM_X86_PGTABLE_64_H
 
-#include <linux/const.h>
-#include <asm/pgtable_64_types.h>
+#include <yai/const.h>
+#include <yai/pgtable_64_types.h>
 
 #ifndef __ASSEMBLER__
 
@@ -11,10 +11,10 @@
  * This file contains the functions and defines necessary to modify and use
  * the x86-64 page table tree.
  */
-#include <asm/processor.h>
-#include <linux/bitops.h>
-#include <linux/threads.h>
-#include <asm/fixmap.h>
+#include <yai/processor.h>
+#include <yai/bitops.h>
+#include <yai/threads.h>
+#include <yai/fixmap.h>
 
 extern p4d_t level4_kernel_pgt[512];
 extern p4d_t level4_ident_pgt[512];
@@ -264,7 +264,7 @@ static inline bool gup_fast_permitted(unsigned long start, unsigned long end)
 	return true;
 }
 
-#include <asm/pgtable-invert.h>
+#include <yai/pgtable-invert.h>
 
 #else /* __ASSEMBLER__ */
 

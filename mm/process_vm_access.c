@@ -5,15 +5,15 @@
  * Copyright (C) 2010-2011 Christopher Yeoh <cyeoh@au1.ibm.com>, IBM Corp.
  */
 
-#include <linux/compat.h>
-#include <linux/mm.h>
-#include <linux/uio.h>
-#include <linux/sched.h>
-#include <linux/sched/mm.h>
-#include <linux/highmem.h>
-#include <linux/ptrace.h>
-#include <linux/slab.h>
-#include <linux/syscalls.h>
+#include <yai/compat.h>
+#include <yai/mm.h>
+#include <yai/uio.h>
+#include <yai/sched.h>
+#include <yai/sched/mm.h>
+#include <yai/highmem.h>
+#include <yai/ptrace.h>
+#include <yai/slab.h>
+#include <yai/syscalls.h>
 
 /**
  * process_vm_rw_pages - read/write pages from task specified

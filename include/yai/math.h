@@ -3,7 +3,7 @@
 #define _LINUX_MATH_H
 
 #include <yai/types.h>
-#include <asm/div64.h>
+#include <yai/div64.h>
 #include <yai/uapi/kernel.h>
 
 /*

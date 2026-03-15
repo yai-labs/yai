@@ -9,7 +9,7 @@
 # error "Please do not include this file directly."
 #endif
 
-#include <asm-generic/qspinlock_types.h>
-#include <asm-generic/qrwlock_types.h>
+#include <yai/qspinlock_types.h>
+#include <yai/qrwlock_types.h>
 
 #endif

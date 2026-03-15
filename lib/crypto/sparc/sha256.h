@@ -8,9 +8,9 @@
  * SHA224 Support Copyright 2007 Intel Corporation <jonathan.lynch@intel.com>
  */
 
-#include <asm/elf.h>
-#include <asm/opcodes.h>
-#include <asm/pstate.h>
+#include <yai/elf.h>
+#include <yai/opcodes.h>
+#include <yai/pstate.h>
 
 static __ro_after_init DEFINE_STATIC_KEY_FALSE(have_sha256_opcodes);
 

@@ -5,16 +5,16 @@
 // NOTE: code in this file runs *very* early, and is not permitted to use
 // global variables or anything that relies on absolute addressing.
 
-#include <linux/libfdt.h>
-#include <linux/init.h>
-#include <linux/linkage.h>
-#include <linux/types.h>
-#include <linux/sizes.h>
-#include <linux/string.h>
+#include <yai/libfdt.h>
+#include <yai/init.h>
+#include <yai/linkage.h>
+#include <yai/types.h>
+#include <yai/sizes.h>
+#include <yai/string.h>
 
-#include <asm/archrandom.h>
-#include <asm/memory.h>
-#include <asm/pgtable.h>
+#include <yai/archrandom.h>
+#include <yai/memory.h>
+#include <yai/pgtable.h>
 
 #include "pi.h"
 

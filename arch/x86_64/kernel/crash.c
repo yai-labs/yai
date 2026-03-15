@@ -13,35 +13,35 @@
 
 #define pr_fmt(fmt)	"kexec: " fmt
 
-#include <linux/types.h>
-#include <linux/kernel.h>
-#include <linux/smp.h>
-#include <linux/reboot.h>
-#include <linux/kexec.h>
-#include <linux/delay.h>
-#include <linux/elf.h>
-#include <linux/elfcore.h>
-#include <linux/export.h>
-#include <linux/slab.h>
-#include <linux/vmalloc.h>
-#include <linux/memblock.h>
+#include <yai/types.h>
+#include <yai/kernel.h>
+#include <yai/smp.h>
+#include <yai/reboot.h>
+#include <yai/kexec.h>
+#include <yai/delay.h>
+#include <yai/elf.h>
+#include <yai/elfcore.h>
+#include <yai/export.h>
+#include <yai/slab.h>
+#include <yai/vmalloc.h>
+#include <yai/memblock.h>
 
-#include <asm/bootparam.h>
-#include <asm/processor.h>
-#include <asm/hardirq.h>
-#include <asm/nmi.h>
-#include <asm/hw_irq.h>
-#include <asm/apic.h>
-#include <asm/e820/types.h>
-#include <asm/io_apic.h>
-#include <asm/hpet.h>
-#include <linux/kdebug.h>
-#include <asm/cpu.h>
-#include <asm/reboot.h>
-#include <asm/intel_pt.h>
-#include <asm/crash.h>
-#include <asm/cmdline.h>
-#include <asm/sev.h>
+#include <yai/bootparam.h>
+#include <yai/processor.h>
+#include <yai/hardirq.h>
+#include <yai/nmi.h>
+#include <yai/hw_irq.h>
+#include <yai/apic.h>
+#include <yai/e820/types.h>
+#include <yai/io_apic.h>
+#include <yai/hpet.h>
+#include <yai/kdebug.h>
+#include <yai/cpu.h>
+#include <yai/reboot.h>
+#include <yai/intel_pt.h>
+#include <yai/crash.h>
+#include <yai/cmdline.h>
+#include <yai/sev.h>
 
 /* Used while preparing memory map entries for second kernel */
 struct crash_memmap_data {

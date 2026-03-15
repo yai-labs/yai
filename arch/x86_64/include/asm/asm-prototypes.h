@@ -1,20 +1,20 @@
 /* SPDX-License-Identifier: GPL-2.0 */
-#include <asm/ftrace.h>
-#include <linux/uaccess.h>
-#include <linux/pgtable.h>
-#include <asm/string.h>
-#include <asm/page.h>
-#include <asm/checksum.h>
-#include <asm/mce.h>
+#include <yai/ftrace.h>
+#include <yai/uaccess.h>
+#include <yai/pgtable.h>
+#include <yai/string.h>
+#include <yai/page.h>
+#include <yai/checksum.h>
+#include <yai/mce.h>
 
-#include <asm-generic/asm-prototypes.h>
+#include <yai/asm-prototypes.h>
 
-#include <asm/special_insns.h>
-#include <asm/preempt.h>
-#include <asm/asm.h>
-#include <asm/fred.h>
-#include <asm/gsseg.h>
-#include <asm/nospec-branch.h>
+#include <yai/special_insns.h>
+#include <yai/preempt.h>
+#include <yai/asm.h>
+#include <yai/fred.h>
+#include <yai/gsseg.h>
+#include <yai/nospec-branch.h>
 
 #ifndef CONFIG_X86_CX8
 extern void cmpxchg8b_emu(void);

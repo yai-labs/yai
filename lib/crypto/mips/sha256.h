@@ -12,8 +12,8 @@
  * SHA224 Support Copyright 2007 Intel Corporation <jonathan.lynch@intel.com>
  */
 
-#include <asm/octeon/crypto.h>
-#include <asm/octeon/octeon.h>
+#include <yai/octeon/crypto.h>
+#include <yai/octeon/octeon.h>
 
 /*
  * We pass everything as 64-bit. OCTEON can handle misaligned data.

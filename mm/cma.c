@@ -16,19 +16,19 @@
 
 #define CREATE_TRACE_POINTS
 
-#include <linux/memblock.h>
-#include <linux/err.h>
-#include <linux/list.h>
-#include <linux/mm.h>
-#include <linux/sizes.h>
-#include <linux/slab.h>
-#include <linux/string.h>
-#include <linux/string_choices.h>
-#include <linux/log2.h>
-#include <linux/cma.h>
-#include <linux/highmem.h>
-#include <linux/io.h>
-#include <linux/kmemleak.h>
+#include <yai/memblock.h>
+#include <yai/err.h>
+#include <yai/list.h>
+#include <yai/mm.h>
+#include <yai/sizes.h>
+#include <yai/slab.h>
+#include <yai/string.h>
+#include <yai/string_choices.h>
+#include <yai/log2.h>
+#include <yai/cma.h>
+#include <yai/highmem.h>
+#include <yai/io.h>
+#include <yai/kmemleak.h>
 #include <trace/events/cma.h>
 
 #include "internal.h"

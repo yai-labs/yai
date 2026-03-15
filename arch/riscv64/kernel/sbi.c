@@ -5,14 +5,14 @@
  * Copyright (c) 2020 Western Digital Corporation or its affiliates.
  */
 
-#include <linux/bits.h>
-#include <linux/init.h>
-#include <linux/mm.h>
-#include <linux/pm.h>
-#include <linux/reboot.h>
-#include <asm/sbi.h>
-#include <asm/smp.h>
-#include <asm/tlbflush.h>
+#include <yai/bits.h>
+#include <yai/init.h>
+#include <yai/mm.h>
+#include <yai/pm.h>
+#include <yai/reboot.h>
+#include <yai/sbi.h>
+#include <yai/smp.h>
+#include <yai/tlbflush.h>
 
 /* default SBI version is 0.1 */
 unsigned long sbi_spec_version __ro_after_init = SBI_SPEC_VERSION_DEFAULT;

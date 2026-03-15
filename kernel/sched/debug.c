@@ -6,8 +6,8 @@
  *
  * Copyright(C) 2007, Red Hat, Inc., Ingo Molnar
  */
-#include <linux/debugfs.h>
-#include <linux/nmi.h>
+#include <yai/debugfs.h>
+#include <yai/nmi.h>
 #include "sched.h"
 
 /*

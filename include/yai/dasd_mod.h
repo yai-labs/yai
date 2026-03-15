@@ -2,7 +2,7 @@
 #ifndef DASD_MOD_H
 #define DASD_MOD_H
 
-#include <asm/dasd.h>
+#include <yai/dasd.h>
 
 struct gendisk;
 

@@ -6,7 +6,7 @@
 #include <yai/uapi/nvram.h>
 
 #ifdef CONFIG_PPC
-#include <asm/machdep.h>
+#include <yai/machdep.h>
 #endif
 
 /**

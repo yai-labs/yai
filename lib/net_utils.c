@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: GPL-2.0
-#include <linux/string.h>
-#include <linux/if_ether.h>
-#include <linux/ctype.h>
-#include <linux/export.h>
-#include <linux/hex.h>
+#include <yai/string.h>
+#include <yai/if_ether.h>
+#include <yai/ctype.h>
+#include <yai/export.h>
+#include <yai/hex.h>
 
 bool mac_pton(const char *s, u8 *mac)
 {

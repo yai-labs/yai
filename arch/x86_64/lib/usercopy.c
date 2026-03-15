@@ -4,11 +4,11 @@
  *  For licencing details see kernel-base/COPYING
  */
 
-#include <linux/uaccess.h>
-#include <linux/export.h>
-#include <linux/instrumented.h>
+#include <yai/uaccess.h>
+#include <yai/export.h>
+#include <yai/instrumented.h>
 
-#include <asm/tlbflush.h>
+#include <yai/tlbflush.h>
 
 /**
  * copy_from_user_nmi - NMI safe copy from user

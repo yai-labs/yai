@@ -6,14 +6,14 @@
  * Author: Catalin Marinas <catalin.marinas@arm.com>
  */
 
-#include <linux/mm.h>
-#include <linux/gfp.h>
-#include <linux/highmem.h>
-#include <linux/slab.h>
+#include <yai/mm.h>
+#include <yai/gfp.h>
+#include <yai/highmem.h>
+#include <yai/slab.h>
 
-#include <asm/pgalloc.h>
-#include <asm/page.h>
-#include <asm/tlbflush.h>
+#include <yai/pgalloc.h>
+#include <yai/page.h>
+#include <yai/tlbflush.h>
 
 static struct kmem_cache *pgd_cache __ro_after_init;
 

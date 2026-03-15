@@ -9,12 +9,12 @@
 #ifndef __ASM_SYSREG_H
 #define __ASM_SYSREG_H
 
-#include <linux/bits.h>
-#include <linux/stringify.h>
-#include <linux/kasan-tags.h>
-#include <linux/kconfig.h>
+#include <yai/bits.h>
+#include <yai/stringify.h>
+#include <yai/kasan-tags.h>
+#include <yai/kconfig.h>
 
-#include <asm/gpr-num.h>
+#include <yai/gpr-num.h>
 
 /*
  * ARMv8 ARM reserves the following encoding for system registers:
@@ -1122,10 +1122,10 @@
 	.endm
 #else
 
-#include <linux/bitfield.h>
-#include <linux/build_bug.h>
-#include <linux/types.h>
-#include <asm/alternative.h>
+#include <yai/bitfield.h>
+#include <yai/build_bug.h>
+#include <yai/types.h>
+#include <yai/alternative.h>
 
 #define DEFINE_MRS_S						\
 	__DEFINE_ASM_GPR_NUMS					\

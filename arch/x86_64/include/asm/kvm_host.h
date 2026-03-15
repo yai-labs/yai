@@ -8,39 +8,39 @@
 #ifndef _ASM_X86_KVM_HOST_H
 #define _ASM_X86_KVM_HOST_H
 
-#include <linux/types.h>
-#include <linux/mm.h>
-#include <linux/mmu_notifier.h>
-#include <linux/tracepoint.h>
-#include <linux/cpumask.h>
-#include <linux/irq_work.h>
-#include <linux/irq.h>
-#include <linux/workqueue.h>
+#include <yai/types.h>
+#include <yai/mm.h>
+#include <yai/mmu_notifier.h>
+#include <yai/tracepoint.h>
+#include <yai/cpumask.h>
+#include <yai/irq_work.h>
+#include <yai/irq.h>
+#include <yai/workqueue.h>
 
-#include <linux/kvm.h>
-#include <linux/kvm_para.h>
-#include <linux/kvm_types.h>
-#include <linux/perf_event.h>
-#include <linux/pvclock_gtod.h>
-#include <linux/clocksource.h>
-#include <linux/irqbypass.h>
-#include <linux/kfifo.h>
-#include <linux/sched/vhost_task.h>
-#include <linux/call_once.h>
-#include <linux/atomic.h>
+#include <yai/kvm.h>
+#include <yai/kvm_para.h>
+#include <yai/kvm_types.h>
+#include <yai/perf_event.h>
+#include <yai/pvclock_gtod.h>
+#include <yai/clocksource.h>
+#include <yai/irqbypass.h>
+#include <yai/kfifo.h>
+#include <yai/sched/vhost_task.h>
+#include <yai/call_once.h>
+#include <yai/atomic.h>
 
-#include <asm/apic.h>
-#include <asm/pvclock-abi.h>
-#include <asm/debugreg.h>
-#include <asm/desc.h>
-#include <asm/mtrr.h>
-#include <asm/msr-index.h>
-#include <asm/msr.h>
-#include <asm/asm.h>
-#include <asm/irq_remapping.h>
-#include <asm/kvm_page_track.h>
-#include <asm/kvm_vcpu_regs.h>
-#include <asm/reboot.h>
+#include <yai/apic.h>
+#include <yai/pvclock-abi.h>
+#include <yai/debugreg.h>
+#include <yai/desc.h>
+#include <yai/mtrr.h>
+#include <yai/msr-index.h>
+#include <yai/msr.h>
+#include <yai/asm.h>
+#include <yai/irq_remapping.h>
+#include <yai/kvm_page_track.h>
+#include <yai/kvm_vcpu_regs.h>
+#include <yai/reboot.h>
 #include <hyperv/hvhdk.h>
 
 #define __KVM_HAVE_ARCH_VCPU_DEBUGFS
@@ -2016,7 +2016,7 @@ extern struct kvm_x86_ops kvm_x86_ops;
 	DECLARE_STATIC_CALL(kvm_x86_##func, *(((struct kvm_x86_ops *)0)->func));
 #define KVM_X86_OP_OPTIONAL KVM_X86_OP
 #define KVM_X86_OP_OPTIONAL_RET0 KVM_X86_OP
-#include <asm/kvm-x86-ops.h>
+#include <yai/kvm-x86-ops.h>
 
 int kvm_x86_vendor_init(struct kvm_x86_init_ops *ops);
 void kvm_x86_vendor_exit(void);

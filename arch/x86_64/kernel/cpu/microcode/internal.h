@@ -2,11 +2,11 @@
 #ifndef _X86_MICROCODE_INTERNAL_H
 #define _X86_MICROCODE_INTERNAL_H
 
-#include <linux/earlycpio.h>
-#include <linux/initrd.h>
+#include <yai/earlycpio.h>
+#include <yai/initrd.h>
 
-#include <asm/cpu.h>
-#include <asm/microcode.h>
+#include <yai/cpu.h>
+#include <yai/microcode.h>
 
 struct device;
 

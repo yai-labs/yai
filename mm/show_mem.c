@@ -5,15 +5,15 @@
  * Copyright (C) 2008 Johannes Weiner <hannes@saeurebad.de>
  */
 
-#include <linux/blkdev.h>
-#include <linux/cma.h>
-#include <linux/cpuset.h>
-#include <linux/highmem.h>
-#include <linux/hugetlb.h>
-#include <linux/mm.h>
-#include <linux/mmzone.h>
-#include <linux/swap.h>
-#include <linux/vmstat.h>
+#include <yai/blkdev.h>
+#include <yai/cma.h>
+#include <yai/cpuset.h>
+#include <yai/highmem.h>
+#include <yai/hugetlb.h>
+#include <yai/mm.h>
+#include <yai/mmzone.h>
+#include <yai/swap.h>
+#include <yai/vmstat.h>
 
 #include "internal.h"
 #include "swap.h"

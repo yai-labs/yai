@@ -7,12 +7,12 @@
  *     - Algorithm 1 Scalar multiplication of a variable point
  */
 
-#include <linux/types.h>
-#include <linux/jump_label.h>
-#include <linux/kernel.h>
+#include <yai/types.h>
+#include <yai/jump_label.h>
+#include <yai/kernel.h>
 
-#include <linux/cpufeature.h>
-#include <linux/processor.h>
+#include <yai/cpufeature.h>
+#include <yai/processor.h>
 
 typedef uint64_t fe51[5];
 

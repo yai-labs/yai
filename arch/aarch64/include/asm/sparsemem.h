@@ -5,7 +5,7 @@
 #ifndef __ASM_SPARSEMEM_H
 #define __ASM_SPARSEMEM_H
 
-#include <asm/pgtable-prot.h>
+#include <yai/pgtable-prot.h>
 
 #define MAX_PHYSMEM_BITS		PHYS_MASK_SHIFT
 #define MAX_POSSIBLE_PHYSMEM_BITS	(52)

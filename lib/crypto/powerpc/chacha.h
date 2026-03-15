@@ -6,11 +6,11 @@
  */
 
 #include <crypto/internal/simd.h>
-#include <linux/kernel.h>
-#include <linux/cpufeature.h>
-#include <linux/sizes.h>
-#include <asm/simd.h>
-#include <asm/switch_to.h>
+#include <yai/kernel.h>
+#include <yai/cpufeature.h>
+#include <yai/sizes.h>
+#include <yai/simd.h>
+#include <yai/switch_to.h>
 
 asmlinkage void chacha_p10le_8x(const struct chacha_state *state, u8 *dst,
 				const u8 *src, unsigned int len, int nrounds);

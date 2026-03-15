@@ -5,8 +5,8 @@
 #ifndef _UAPI_ASM_X86_SGX_H
 #define _UAPI_ASM_X86_SGX_H
 
-#include <linux/types.h>
-#include <linux/ioctl.h>
+#include <yai/types.h>
+#include <yai/ioctl.h>
 
 /**
  * enum sgx_page_flags - page control flags

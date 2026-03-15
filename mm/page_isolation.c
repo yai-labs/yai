@@ -3,13 +3,13 @@
  * linux/mm/page_isolation.c
  */
 
-#include <linux/mm.h>
-#include <linux/page-isolation.h>
-#include <linux/pageblock-flags.h>
-#include <linux/memory.h>
-#include <linux/hugetlb.h>
-#include <linux/page_owner.h>
-#include <linux/migrate.h>
+#include <yai/mm.h>
+#include <yai/page-isolation.h>
+#include <yai/pageblock-flags.h>
+#include <yai/memory.h>
+#include <yai/hugetlb.h>
+#include <yai/page_owner.h>
+#include <yai/migrate.h>
 #include "internal.h"
 
 #define CREATE_TRACE_POINTS

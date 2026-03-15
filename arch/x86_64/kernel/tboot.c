@@ -6,28 +6,28 @@
  * Copyright (c) 2006-2009, Intel Corporation
  */
 
-#include <linux/init_task.h>
-#include <linux/spinlock.h>
-#include <linux/export.h>
-#include <linux/delay.h>
-#include <linux/sched.h>
-#include <linux/init.h>
-#include <linux/dmar.h>
-#include <linux/cpu.h>
-#include <linux/pfn.h>
-#include <linux/mm.h>
-#include <linux/tboot.h>
-#include <linux/debugfs.h>
+#include <yai/init_task.h>
+#include <yai/spinlock.h>
+#include <yai/export.h>
+#include <yai/delay.h>
+#include <yai/sched.h>
+#include <yai/init.h>
+#include <yai/dmar.h>
+#include <yai/cpu.h>
+#include <yai/pfn.h>
+#include <yai/mm.h>
+#include <yai/tboot.h>
+#include <yai/debugfs.h>
 
-#include <asm/realmode.h>
-#include <asm/processor.h>
-#include <asm/bootparam.h>
-#include <asm/pgalloc.h>
-#include <asm/fixmap.h>
-#include <asm/proto.h>
-#include <asm/setup.h>
-#include <asm/e820/api.h>
-#include <asm/io.h>
+#include <yai/realmode.h>
+#include <yai/processor.h>
+#include <yai/bootparam.h>
+#include <yai/pgalloc.h>
+#include <yai/fixmap.h>
+#include <yai/proto.h>
+#include <yai/setup.h>
+#include <yai/e820/api.h>
+#include <yai/io.h>
 
 #include "../realmode/rm/wakeup.h"
 

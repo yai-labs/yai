@@ -6,14 +6,14 @@
 #ifndef __ASM_SIMD_H
 #define __ASM_SIMD_H
 
-#include <linux/cleanup.h>
-#include <linux/compiler.h>
-#include <linux/irqflags.h>
-#include <linux/percpu.h>
-#include <linux/preempt.h>
-#include <linux/types.h>
+#include <yai/cleanup.h>
+#include <yai/compiler.h>
+#include <yai/irqflags.h>
+#include <yai/percpu.h>
+#include <yai/preempt.h>
+#include <yai/types.h>
 
-#include <asm/neon.h>
+#include <yai/neon.h>
 
 #ifdef CONFIG_KERNEL_MODE_NEON
 

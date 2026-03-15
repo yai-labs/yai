@@ -6,13 +6,13 @@
  *	Huang Ying <ying.huang@intel.com>
  */
 
-#include <linux/kernel.h>
-#include <linux/ctype.h>
-#include <linux/errno.h>
-#include <linux/export.h>
-#include <linux/hex.h>
-#include <linux/uuid.h>
-#include <linux/random.h>
+#include <yai/kernel.h>
+#include <yai/ctype.h>
+#include <yai/errno.h>
+#include <yai/export.h>
+#include <yai/hex.h>
+#include <yai/uuid.h>
+#include <yai/random.h>
 
 const guid_t guid_null;
 EXPORT_SYMBOL(guid_null);

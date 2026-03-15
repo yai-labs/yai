@@ -95,7 +95,7 @@ static inline void async_tx_issue_pending(struct dma_async_tx_descriptor *tx)
 	}
 }
 #ifdef CONFIG_ARCH_HAS_ASYNC_TX_FIND_CHANNEL
-#include <asm/async_tx.h>
+#include <yai/async_tx.h>
 #else
 #define async_tx_find_channel(dep, type, dst, dst_count, src, src_count, len) \
 	 __async_tx_find_channel(dep, type)

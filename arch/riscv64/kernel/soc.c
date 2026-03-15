@@ -2,10 +2,10 @@
 /*
  * Copyright (C) 2020 Western Digital Corporation or its affiliates.
  */
-#include <linux/init.h>
-#include <linux/libfdt.h>
-#include <linux/pgtable.h>
-#include <asm/soc.h>
+#include <yai/init.h>
+#include <yai/libfdt.h>
+#include <yai/pgtable.h>
+#include <yai/soc.h>
 
 /*
  * This is called extremly early, before parse_dtb(), to allow initializing

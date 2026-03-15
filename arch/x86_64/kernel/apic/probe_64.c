@@ -8,8 +8,8 @@
  * Martin Bligh, Andi Kleen, James Bottomley, John Stultz, and
  * James Cleverdon.
  */
-#include <linux/thread_info.h>
-#include <asm/apic.h>
+#include <yai/thread_info.h>
+#include <yai/apic.h>
 
 #include "local.h"
 

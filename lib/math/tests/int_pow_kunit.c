@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-only
 
 #include <kunit/test.h>
-#include <linux/math.h>
+#include <yai/math.h>
 
 struct test_case_params {
 	u64 base;

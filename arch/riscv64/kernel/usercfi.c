@@ -4,18 +4,18 @@
  * Deepak Gupta <debug@rivosinc.com>
  */
 
-#include <linux/sched.h>
-#include <linux/bitops.h>
-#include <linux/types.h>
-#include <linux/mm.h>
-#include <linux/mman.h>
-#include <linux/uaccess.h>
-#include <linux/sizes.h>
-#include <linux/user.h>
-#include <linux/syscalls.h>
-#include <linux/prctl.h>
-#include <asm/csr.h>
-#include <asm/usercfi.h>
+#include <yai/sched.h>
+#include <yai/bitops.h>
+#include <yai/types.h>
+#include <yai/mm.h>
+#include <yai/mman.h>
+#include <yai/uaccess.h>
+#include <yai/sizes.h>
+#include <yai/user.h>
+#include <yai/syscalls.h>
+#include <yai/prctl.h>
+#include <yai/csr.h>
+#include <yai/usercfi.h>
 
 unsigned long riscv_nousercfi __read_mostly;
 

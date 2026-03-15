@@ -6,9 +6,9 @@
  *  All Rights Reserved
  */
 
-#include <linux/acpi.h>
-#include <linux/cacheinfo.h>
-#include <linux/of.h>
+#include <yai/acpi.h>
+#include <yai/cacheinfo.h>
+#include <yai/of.h>
 
 #define MAX_CACHE_LEVEL			7	/* Max 7 level supported */
 

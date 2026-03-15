@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: GPL-2.0-only
 
-#include <asm/alternative.h>
-#include <asm/cpufeature.h>
-#include <asm/simd.h>
+#include <yai/alternative.h>
+#include <yai/cpufeature.h>
+#include <yai/simd.h>
 
 // The minimum input length to consider the 4-way interleaved code path
 static const size_t min_len = 1024;

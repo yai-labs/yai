@@ -63,7 +63,7 @@ struct uprobe_consumer {
 };
 
 #ifdef CONFIG_UPROBES
-#include <asm/uprobes.h>
+#include <yai/uprobes.h>
 
 enum uprobe_task_state {
 	UTASK_RUNNING,

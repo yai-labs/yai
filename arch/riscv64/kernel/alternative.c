@@ -6,19 +6,19 @@
  * Copyright (C) 2021 Sifive.
  */
 
-#include <linux/init.h>
-#include <linux/module.h>
-#include <linux/cpu.h>
-#include <linux/uaccess.h>
-#include <asm/alternative.h>
-#include <asm/module.h>
-#include <asm/sections.h>
-#include <asm/vdso.h>
-#include <asm/vendorid_list.h>
-#include <asm/sbi.h>
-#include <asm/csr.h>
-#include <asm/insn.h>
-#include <asm/text-patching.h>
+#include <yai/init.h>
+#include <yai/module.h>
+#include <yai/cpu.h>
+#include <yai/uaccess.h>
+#include <yai/alternative.h>
+#include <yai/module.h>
+#include <yai/sections.h>
+#include <yai/vdso.h>
+#include <yai/vendorid_list.h>
+#include <yai/sbi.h>
+#include <yai/csr.h>
+#include <yai/insn.h>
+#include <yai/text-patching.h>
 
 struct cpu_manufacturer_info_t {
 	unsigned long vendor_id;

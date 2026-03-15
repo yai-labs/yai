@@ -5,32 +5,32 @@
  * Copyright (C) IBM Corporation, 2002, 2004
  * Copyright (C) Hitachi Ltd., 2012
  */
-#include <linux/kprobes.h>
-#include <linux/perf_event.h>
-#include <linux/ptrace.h>
-#include <linux/string.h>
-#include <linux/slab.h>
-#include <linux/hardirq.h>
-#include <linux/preempt.h>
-#include <linux/extable.h>
-#include <linux/kdebug.h>
-#include <linux/kallsyms.h>
-#include <linux/kgdb.h>
-#include <linux/ftrace.h>
-#include <linux/objtool.h>
-#include <linux/pgtable.h>
-#include <linux/static_call.h>
+#include <yai/kprobes.h>
+#include <yai/perf_event.h>
+#include <yai/ptrace.h>
+#include <yai/string.h>
+#include <yai/slab.h>
+#include <yai/hardirq.h>
+#include <yai/preempt.h>
+#include <yai/extable.h>
+#include <yai/kdebug.h>
+#include <yai/kallsyms.h>
+#include <yai/kgdb.h>
+#include <yai/ftrace.h>
+#include <yai/objtool.h>
+#include <yai/pgtable.h>
+#include <yai/static_call.h>
 
-#include <asm/text-patching.h>
-#include <asm/cacheflush.h>
-#include <asm/desc.h>
-#include <linux/uaccess.h>
-#include <asm/alternative.h>
-#include <asm/insn.h>
-#include <asm/debugreg.h>
-#include <asm/set_memory.h>
-#include <asm/sections.h>
-#include <asm/nospec-branch.h>
+#include <yai/text-patching.h>
+#include <yai/cacheflush.h>
+#include <yai/desc.h>
+#include <yai/uaccess.h>
+#include <yai/alternative.h>
+#include <yai/insn.h>
+#include <yai/debugreg.h>
+#include <yai/set_memory.h>
+#include <yai/sections.h>
+#include <yai/nospec-branch.h>
 
 #include "common.h"
 

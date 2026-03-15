@@ -3,54 +3,54 @@
  * Generic hugetlb support.
  * (C) Nadia Yvette Chambers, April 2004
  */
-#include <linux/list.h>
-#include <linux/init.h>
-#include <linux/mm.h>
-#include <linux/seq_file.h>
-#include <linux/highmem.h>
-#include <linux/mmu_notifier.h>
-#include <linux/nodemask.h>
-#include <linux/pagemap.h>
-#include <linux/mempolicy.h>
-#include <linux/compiler.h>
-#include <linux/cpumask.h>
-#include <linux/cpuset.h>
-#include <linux/mutex.h>
-#include <linux/memblock.h>
-#include <linux/minmax.h>
-#include <linux/slab.h>
-#include <linux/sched/mm.h>
-#include <linux/mmdebug.h>
-#include <linux/sched/signal.h>
-#include <linux/rmap.h>
-#include <linux/string_choices.h>
-#include <linux/string_helpers.h>
-#include <linux/swap.h>
-#include <linux/leafops.h>
-#include <linux/jhash.h>
-#include <linux/numa.h>
-#include <linux/llist.h>
-#include <linux/cma.h>
-#include <linux/migrate.h>
-#include <linux/nospec.h>
-#include <linux/delayacct.h>
-#include <linux/memory.h>
-#include <linux/mm_inline.h>
-#include <linux/padata.h>
-#include <linux/pgalloc.h>
+#include <yai/list.h>
+#include <yai/init.h>
+#include <yai/mm.h>
+#include <yai/seq_file.h>
+#include <yai/highmem.h>
+#include <yai/mmu_notifier.h>
+#include <yai/nodemask.h>
+#include <yai/pagemap.h>
+#include <yai/mempolicy.h>
+#include <yai/compiler.h>
+#include <yai/cpumask.h>
+#include <yai/cpuset.h>
+#include <yai/mutex.h>
+#include <yai/memblock.h>
+#include <yai/minmax.h>
+#include <yai/slab.h>
+#include <yai/sched/mm.h>
+#include <yai/mmdebug.h>
+#include <yai/sched/signal.h>
+#include <yai/rmap.h>
+#include <yai/string_choices.h>
+#include <yai/string_helpers.h>
+#include <yai/swap.h>
+#include <yai/leafops.h>
+#include <yai/jhash.h>
+#include <yai/numa.h>
+#include <yai/llist.h>
+#include <yai/cma.h>
+#include <yai/migrate.h>
+#include <yai/nospec.h>
+#include <yai/delayacct.h>
+#include <yai/memory.h>
+#include <yai/mm_inline.h>
+#include <yai/padata.h>
+#include <yai/pgalloc.h>
 
-#include <asm/page.h>
-#include <asm/tlb.h>
-#include <asm/setup.h>
+#include <yai/page.h>
+#include <yai/tlb.h>
+#include <yai/setup.h>
 
-#include <linux/io.h>
-#include <linux/node.h>
-#include <linux/page_owner.h>
+#include <yai/io.h>
+#include <yai/node.h>
+#include <yai/page_owner.h>
 #include "internal.h"
 #include "hugetlb_vmemmap.h"
 #include "hugetlb_cma.h"
 #include "hugetlb_internal.h"
-#include <linux/page-isolation.h>
+#include <yai/page-isolation.h>
 
 int hugetlb_max_hstate __read_mostly;
 unsigned int default_hstate_idx;

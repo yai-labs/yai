@@ -4,15 +4,15 @@
  * Copyright (C) 2017 SiFive
  */
 
-#include <linux/acpi.h>
-#include <linux/of_clk.h>
-#include <linux/clockchips.h>
-#include <linux/clocksource.h>
-#include <linux/delay.h>
-#include <asm/sbi.h>
-#include <asm/processor.h>
-#include <asm/timex.h>
-#include <asm/paravirt.h>
+#include <yai/acpi.h>
+#include <yai/of_clk.h>
+#include <yai/clockchips.h>
+#include <yai/clocksource.h>
+#include <yai/delay.h>
+#include <yai/sbi.h>
+#include <yai/processor.h>
+#include <yai/timex.h>
+#include <yai/paravirt.h>
 
 unsigned long riscv_timebase __ro_after_init;
 EXPORT_SYMBOL_GPL(riscv_timebase);

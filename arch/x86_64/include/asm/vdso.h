@@ -2,13 +2,13 @@
 #ifndef _ASM_X86_VDSO_H
 #define _ASM_X86_VDSO_H
 
-#include <asm/page_types.h>
-#include <linux/linkage.h>
-#include <linux/init.h>
+#include <yai/page_types.h>
+#include <yai/linkage.h>
+#include <yai/init.h>
 
 #ifndef __ASSEMBLER__
 
-#include <linux/mm_types.h>
+#include <yai/mm_types.h>
 
 struct vdso_image {
 	void *data;

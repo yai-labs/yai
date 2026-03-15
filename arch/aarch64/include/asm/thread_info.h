@@ -8,15 +8,15 @@
 #ifndef __ASM_THREAD_INFO_H
 #define __ASM_THREAD_INFO_H
 
-#include <linux/compiler.h>
+#include <yai/compiler.h>
 
 #ifndef __ASSEMBLER__
 
 struct task_struct;
 
-#include <asm/memory.h>
-#include <asm/stack_pointer.h>
-#include <asm/types.h>
+#include <yai/memory.h>
+#include <yai/stack_pointer.h>
+#include <yai/types.h>
 
 /*
  * low level task data that entry.S needs immediate access to.

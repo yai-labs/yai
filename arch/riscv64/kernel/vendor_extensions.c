@@ -3,15 +3,15 @@
  * Copyright 2024 Rivos, Inc
  */
 
-#include <asm/vendorid_list.h>
-#include <asm/vendor_extensions.h>
-#include <asm/vendor_extensions/andes.h>
-#include <asm/vendor_extensions/mips.h>
-#include <asm/vendor_extensions/sifive.h>
-#include <asm/vendor_extensions/thead.h>
+#include <yai/vendorid_list.h>
+#include <yai/vendor_extensions.h>
+#include <yai/vendor_extensions/andes.h>
+#include <yai/vendor_extensions/mips.h>
+#include <yai/vendor_extensions/sifive.h>
+#include <yai/vendor_extensions/thead.h>
 
-#include <linux/array_size.h>
-#include <linux/types.h>
+#include <yai/array_size.h>
+#include <yai/types.h>
 
 struct riscv_isa_vendor_ext_data_list *riscv_isa_vendor_ext_list[] = {
 #ifdef CONFIG_RISCV_ISA_VENDOR_EXT_ANDES

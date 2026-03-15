@@ -26,7 +26,7 @@
 
 #include <net/sch_generic.h>
 
-#include <asm/byteorder.h>
+#include <yai/byteorder.h>
 #include <yai/uapi/filter.h>
 
 struct sk_buff;

@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: GPL-2.0
-#include <linux/static_call.h>
-#include <linux/memory.h>
-#include <linux/bug.h>
-#include <asm/text-patching.h>
+#include <yai/static_call.h>
+#include <yai/memory.h>
+#include <yai/bug.h>
+#include <yai/text-patching.h>
 
 enum insn_type {
 	CALL = 0, /* site call */

@@ -3,8 +3,8 @@
  * Copyright (c) 2018, Mellanox Technologies inc.  All rights reserved.
  */
 
-#include <linux/dim.h>
-#include <linux/rtnetlink.h>
+#include <yai/dim.h>
+#include <yai/rtnetlink.h>
 
 /*
  * Net DIM profiles:

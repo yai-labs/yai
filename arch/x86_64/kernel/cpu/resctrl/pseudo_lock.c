@@ -11,15 +11,15 @@
 
 #define pr_fmt(fmt)	KBUILD_MODNAME ": " fmt
 
-#include <linux/cacheflush.h>
-#include <linux/cpu.h>
-#include <linux/perf_event.h>
-#include <linux/pm_qos.h>
-#include <linux/resctrl.h>
+#include <yai/cacheflush.h>
+#include <yai/cpu.h>
+#include <yai/perf_event.h>
+#include <yai/pm_qos.h>
+#include <yai/resctrl.h>
 
-#include <asm/cpu_device_id.h>
-#include <asm/perf_event.h>
-#include <asm/msr.h>
+#include <yai/cpu_device_id.h>
+#include <yai/perf_event.h>
+#include <yai/msr.h>
 
 #include "../../events/perf_event.h" /* For X86_CONFIG() */
 #include "internal.h"

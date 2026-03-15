@@ -8,7 +8,7 @@
 #include <yai/pm.h>
 #include <yai/mm.h>
 #include <yai/freezer.h>
-#include <asm/errno.h>
+#include <yai/errno.h>
 
 #ifdef CONFIG_VT
 extern void pm_set_vt_switch(int);

@@ -4,9 +4,9 @@
  * (C) Nadia Yvette Chambers, April 2004
  */
 
-#include <linux/swap.h>
-#include <linux/page_owner.h>
-#include <linux/page-isolation.h>
+#include <yai/swap.h>
+#include <yai/page_owner.h>
+#include <yai/page-isolation.h>
 
 #include "hugetlb_vmemmap.h"
 #include "hugetlb_internal.h"

@@ -7,8 +7,8 @@
 #ifndef _ASM_X86_SGX_H
 #define _ASM_X86_SGX_H
 
-#include <linux/bits.h>
-#include <linux/types.h>
+#include <yai/bits.h>
+#include <yai/types.h>
 
 /*
  * This file contains both data structures defined by SGX architecture and Linux

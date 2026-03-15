@@ -3,7 +3,7 @@
 #ifndef __ASM_INSN_DEF_H
 #define __ASM_INSN_DEF_H
 
-#include <asm/brk-imm.h>
+#include <yai/brk-imm.h>
 
 /* A64 instructions are always 32 bits. */
 #define	AARCH64_INSN_SIZE		4

@@ -2,9 +2,9 @@
 #ifndef _ASM_RISCV_VENDOR_EXTENSIONS_SIFIVE_H
 #define _ASM_RISCV_VENDOR_EXTENSIONS_SIFIVE_H
 
-#include <asm/vendor_extensions.h>
+#include <yai/vendor_extensions.h>
 
-#include <linux/types.h>
+#include <yai/types.h>
 
 #define RISCV_ISA_VENDOR_EXT_XSFVQMACCDOD		0
 #define RISCV_ISA_VENDOR_EXT_XSFVQMACCQOQ		1

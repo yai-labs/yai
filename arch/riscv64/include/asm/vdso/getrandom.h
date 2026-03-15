@@ -7,7 +7,7 @@
 
 #ifndef __ASSEMBLER__
 
-#include <asm/unistd.h>
+#include <yai/unistd.h>
 
 static __always_inline ssize_t getrandom_syscall(void *_buffer, size_t _len, unsigned int _flags)
 {

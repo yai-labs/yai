@@ -6,12 +6,12 @@
  * Author: AKASHI Takahiro <takahiro.akashi@linaro.org>
  */
 
-#include <linux/export.h>
-#include <linux/ftrace.h>
-#include <linux/kprobes.h>
-#include <linux/stacktrace.h>
+#include <yai/export.h>
+#include <yai/ftrace.h>
+#include <yai/kprobes.h>
+#include <yai/stacktrace.h>
 
-#include <asm/stack_pointer.h>
+#include <yai/stack_pointer.h>
 
 struct return_address_data {
 	unsigned int level;

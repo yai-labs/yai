@@ -4,22 +4,22 @@
  * because MTRRs can span up to 40 bits (36bits on most modern x86)
  */
 
-#include <linux/export.h>
-#include <linux/init.h>
-#include <linux/io.h>
-#include <linux/mm.h>
-#include <linux/cc_platform.h>
-#include <linux/string_choices.h>
-#include <asm/processor-flags.h>
-#include <asm/cacheinfo.h>
-#include <asm/cpufeature.h>
-#include <asm/cpu_device_id.h>
-#include <asm/hypervisor.h>
-#include <asm/mshyperv.h>
-#include <asm/tlbflush.h>
-#include <asm/mtrr.h>
-#include <asm/msr.h>
-#include <asm/memtype.h>
+#include <yai/export.h>
+#include <yai/init.h>
+#include <yai/io.h>
+#include <yai/mm.h>
+#include <yai/cc_platform.h>
+#include <yai/string_choices.h>
+#include <yai/processor-flags.h>
+#include <yai/cacheinfo.h>
+#include <yai/cpufeature.h>
+#include <yai/cpu_device_id.h>
+#include <yai/hypervisor.h>
+#include <yai/mshyperv.h>
+#include <yai/tlbflush.h>
+#include <yai/mtrr.h>
+#include <yai/msr.h>
+#include <yai/memtype.h>
 
 #include "mtrr.h"
 

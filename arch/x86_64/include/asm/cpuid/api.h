@@ -2,12 +2,12 @@
 #ifndef _ASM_X86_CPUID_API_H
 #define _ASM_X86_CPUID_API_H
 
-#include <asm/cpuid/types.h>
+#include <yai/cpuid/types.h>
 
-#include <linux/build_bug.h>
-#include <linux/types.h>
+#include <yai/build_bug.h>
+#include <yai/types.h>
 
-#include <asm/string.h>
+#include <yai/string.h>
 
 /*
  * Raw CPUID accessors:
@@ -54,7 +54,7 @@ NATIVE_CPUID_REG(ecx)
 NATIVE_CPUID_REG(edx)
 
 #ifdef CONFIG_PARAVIRT_XXL
-# include <asm/paravirt.h>
+# include <yai/paravirt.h>
 #else
 # define __cpuid native_cpuid
 #endif

@@ -4,7 +4,7 @@
  */
 
 #include <kunit/test.h>
-#include <linux/uuid.h>
+#include <yai/uuid.h>
 
 struct test_uuid_data {
 	const char *uuid;

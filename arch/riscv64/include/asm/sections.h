@@ -5,8 +5,8 @@
 #ifndef __ASM_SECTIONS_H
 #define __ASM_SECTIONS_H
 
-#include <asm-generic/sections.h>
-#include <linux/mm.h>
+#include <yai/sections.h>
+#include <yai/mm.h>
 
 extern char _start[];
 extern char _start_kernel[];

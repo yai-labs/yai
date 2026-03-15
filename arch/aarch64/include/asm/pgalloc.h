@@ -8,14 +8,14 @@
 #ifndef __ASM_PGALLOC_H
 #define __ASM_PGALLOC_H
 
-#include <asm/pgtable-hwdef.h>
-#include <asm/processor.h>
-#include <asm/cacheflush.h>
-#include <asm/tlbflush.h>
+#include <yai/pgtable-hwdef.h>
+#include <yai/processor.h>
+#include <yai/cacheflush.h>
+#include <yai/tlbflush.h>
 
 #define __HAVE_ARCH_PGD_FREE
 #define __HAVE_ARCH_PUD_FREE
-#include <asm-generic/pgalloc.h>
+#include <yai/pgalloc.h>
 
 #define PGD_SIZE	(PTRS_PER_PGD * sizeof(pgd_t))
 

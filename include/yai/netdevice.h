@@ -26,9 +26,9 @@
 #include <yai/delay.h>
 #include <yai/atomic.h>
 #include <yai/prefetch.h>
-#include <asm/cache.h>
-#include <asm/byteorder.h>
-#include <asm/local.h>
+#include <yai/cache.h>
+#include <yai/byteorder.h>
+#include <yai/local.h>
 
 #include <yai/percpu.h>
 #include <yai/rculist.h>

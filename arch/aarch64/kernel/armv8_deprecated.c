@@ -3,20 +3,20 @@
  *  Copyright (C) 2014 ARM Limited
  */
 
-#include <linux/cpu.h>
-#include <linux/init.h>
-#include <linux/list.h>
-#include <linux/perf_event.h>
-#include <linux/sched.h>
-#include <linux/slab.h>
-#include <linux/sysctl.h>
-#include <linux/uaccess.h>
+#include <yai/cpu.h>
+#include <yai/init.h>
+#include <yai/list.h>
+#include <yai/perf_event.h>
+#include <yai/sched.h>
+#include <yai/slab.h>
+#include <yai/sysctl.h>
+#include <yai/uaccess.h>
 
-#include <asm/cpufeature.h>
-#include <asm/insn.h>
-#include <asm/sysreg.h>
-#include <asm/system_misc.h>
-#include <asm/traps.h>
+#include <yai/cpufeature.h>
+#include <yai/insn.h>
+#include <yai/sysreg.h>
+#include <yai/system_misc.h>
+#include <yai/traps.h>
 
 #define CREATE_TRACE_POINTS
 #include "trace-events-emulation.h"

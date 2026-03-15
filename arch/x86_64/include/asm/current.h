@@ -2,13 +2,13 @@
 #ifndef _ASM_X86_CURRENT_H
 #define _ASM_X86_CURRENT_H
 
-#include <linux/build_bug.h>
-#include <linux/compiler.h>
+#include <yai/build_bug.h>
+#include <yai/compiler.h>
 
 #ifndef __ASSEMBLER__
 
-#include <linux/cache.h>
-#include <asm/percpu.h>
+#include <yai/cache.h>
+#include <yai/percpu.h>
 
 struct task_struct;
 

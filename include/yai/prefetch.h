@@ -12,8 +12,8 @@
 #define _LINUX_PREFETCH_H
 
 #include <yai/types.h>
-#include <asm/processor.h>
-#include <asm/cache.h>
+#include <yai/processor.h>
+#include <yai/cache.h>
 
 struct page;
 /*

@@ -2,7 +2,7 @@
 #ifndef __RAS_H__
 #define __RAS_H__
 
-#include <asm/errno.h>
+#include <yai/errno.h>
 #include <yai/uuid.h>
 #include <yai/cper.h>
 
@@ -53,7 +53,7 @@ amd_convert_umc_mca_addr_to_sys_addr(struct atl_err *err) { return -EINVAL; }
 #endif /* CONFIG_AMD_ATL */
 
 #if defined(CONFIG_ARM) || defined(CONFIG_ARM64)
-#include <asm/smp_plat.h>
+#include <yai/smp_plat.h>
 /*
  * Include ARM-specific SMP header which provides a function mapping mpidr to
  * CPU logical index.

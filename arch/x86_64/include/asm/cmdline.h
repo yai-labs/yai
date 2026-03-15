@@ -2,7 +2,7 @@
 #ifndef _ASM_X86_CMDLINE_H
 #define _ASM_X86_CMDLINE_H
 
-#include <asm/setup.h>
+#include <yai/setup.h>
 
 extern char builtin_cmdline[COMMAND_LINE_SIZE];
 

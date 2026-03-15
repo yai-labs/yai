@@ -8,9 +8,9 @@
  * Martin Bligh, Andi Kleen, James Bottomley, John Stultz, and
  * James Cleverdon.
  */
-#include <linux/export.h>
+#include <yai/export.h>
 
-#include <asm/apic.h>
+#include <yai/apic.h>
 
 #include "local.h"
 

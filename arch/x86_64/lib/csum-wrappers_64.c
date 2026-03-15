@@ -4,10 +4,10 @@
  *
  * Wrappers of assembly checksum functions for x86-64.
  */
-#include <asm/checksum.h>
-#include <linux/export.h>
-#include <linux/uaccess.h>
-#include <asm/smap.h>
+#include <yai/checksum.h>
+#include <yai/export.h>
+#include <yai/uaccess.h>
+#include <yai/smap.h>
 
 /**
  * csum_and_copy_from_user - Copy and checksum from user space.

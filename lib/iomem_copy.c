@@ -3,11 +3,11 @@
  * Copyright 2024 Kalray, Inc.  All Rights Reserved.
  */
 
-#include <linux/align.h>
-#include <linux/export.h>
-#include <linux/io.h>
-#include <linux/types.h>
-#include <linux/unaligned.h>
+#include <yai/align.h>
+#include <yai/export.h>
+#include <yai/io.h>
+#include <yai/types.h>
+#include <yai/unaligned.h>
 
 #ifndef memset_io
 /**

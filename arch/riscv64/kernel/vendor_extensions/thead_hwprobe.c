@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: GPL-2.0-only
 
-#include <asm/vendor_extensions/thead.h>
-#include <asm/vendor_extensions/thead_hwprobe.h>
-#include <asm/vendor_extensions/vendor_hwprobe.h>
+#include <yai/vendor_extensions/thead.h>
+#include <yai/vendor_extensions/thead_hwprobe.h>
+#include <yai/vendor_extensions/vendor_hwprobe.h>
 
-#include <linux/cpumask.h>
-#include <linux/types.h>
+#include <yai/cpumask.h>
+#include <yai/types.h>
 
 #include <uapi/asm/hwprobe.h>
 #include <uapi/asm/vendor/thead.h>

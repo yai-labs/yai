@@ -9,8 +9,8 @@
  * Author: David Gow <davidgow@google.com>
  */
 
-#include <linux/device.h>
-#include <linux/dma-mapping.h>
+#include <yai/device.h>
+#include <yai/dma-mapping.h>
 
 #include <kunit/test.h>
 #include <kunit/device.h>

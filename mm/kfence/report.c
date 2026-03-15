@@ -5,26 +5,26 @@
  * Copyright (C) 2020, Google LLC.
  */
 
-#include <linux/stdarg.h>
+#include <yai/stdarg.h>
 
-#include <linux/kernel.h>
-#include <linux/lockdep.h>
-#include <linux/math.h>
-#include <linux/printk.h>
-#include <linux/sched/debug.h>
-#include <linux/seq_file.h>
-#include <linux/sprintf.h>
-#include <linux/stacktrace.h>
-#include <linux/string.h>
-#include <linux/string_choices.h>
-#include <linux/sched/clock.h>
+#include <yai/kernel.h>
+#include <yai/lockdep.h>
+#include <yai/math.h>
+#include <yai/printk.h>
+#include <yai/sched/debug.h>
+#include <yai/seq_file.h>
+#include <yai/sprintf.h>
+#include <yai/stacktrace.h>
+#include <yai/string.h>
+#include <yai/string_choices.h>
+#include <yai/sched/clock.h>
 #include <trace/events/error_report.h>
 
-#include <asm/kfence.h>
+#include <yai/kfence.h>
 
 #include "kfence.h"
 
-/* May be overridden by <asm/kfence.h>. */
+/* May be overridden by <yai/kfence.h>. */
 #ifndef ARCH_FUNC_PREFIX
 #define ARCH_FUNC_PREFIX ""
 #endif

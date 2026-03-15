@@ -7,7 +7,7 @@
 #include <yai/atomic.h>
 #include <yai/bug.h>
 
-#include <asm/processor.h>  /* for cpu_relax() */
+#include <yai/processor.h>  /* for cpu_relax() */
 
 /*
  * For static context analysis, we need a unique token for each possible bit

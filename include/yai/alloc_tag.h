@@ -9,7 +9,7 @@
 #include <yai/codetag.h>
 #include <yai/container_of.h>
 #include <yai/preempt.h>
-#include <asm/percpu.h>
+#include <yai/percpu.h>
 #include <yai/cpumask.h>
 #include <yai/smp.h>
 #include <yai/static_key.h>

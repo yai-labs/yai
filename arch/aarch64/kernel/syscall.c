@@ -1,20 +1,20 @@
 // SPDX-License-Identifier: GPL-2.0
 
-#include <linux/compiler.h>
-#include <linux/context_tracking.h>
-#include <linux/errno.h>
-#include <linux/nospec.h>
-#include <linux/ptrace.h>
-#include <linux/randomize_kstack.h>
-#include <linux/syscalls.h>
+#include <yai/compiler.h>
+#include <yai/context_tracking.h>
+#include <yai/errno.h>
+#include <yai/nospec.h>
+#include <yai/ptrace.h>
+#include <yai/randomize_kstack.h>
+#include <yai/syscalls.h>
 
-#include <asm/debug-monitors.h>
-#include <asm/exception.h>
-#include <asm/fpsimd.h>
-#include <asm/syscall.h>
-#include <asm/thread_info.h>
-#include <asm/unistd.h>
-#include <asm/unistd_compat_32.h>
+#include <yai/debug-monitors.h>
+#include <yai/exception.h>
+#include <yai/fpsimd.h>
+#include <yai/syscall.h>
+#include <yai/thread_info.h>
+#include <yai/unistd.h>
+#include <yai/unistd_compat_32.h>
 
 long compat_arm_syscall(struct pt_regs *regs, int scno);
 long sys_ni_syscall(void);

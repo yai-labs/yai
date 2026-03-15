@@ -10,19 +10,19 @@
  *        Andrey Konovalov <andreyknvl@gmail.com>
  */
 
-#include <linux/init.h>
-#include <linux/kasan.h>
-#include <linux/kernel.h>
-#include <linux/kfence.h>
-#include <linux/kmemleak.h>
-#include <linux/memory.h>
-#include <linux/mm.h>
-#include <linux/string.h>
-#include <linux/types.h>
-#include <linux/vmalloc.h>
+#include <yai/init.h>
+#include <yai/kasan.h>
+#include <yai/kernel.h>
+#include <yai/kfence.h>
+#include <yai/kmemleak.h>
+#include <yai/memory.h>
+#include <yai/mm.h>
+#include <yai/string.h>
+#include <yai/types.h>
+#include <yai/vmalloc.h>
 
-#include <asm/cacheflush.h>
-#include <asm/tlbflush.h>
+#include <yai/cacheflush.h>
+#include <yai/tlbflush.h>
 
 #include "kasan.h"
 

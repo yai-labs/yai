@@ -6,7 +6,7 @@
 #ifndef __RISCV_KVM_MMU_H_
 #define __RISCV_KVM_MMU_H_
 
-#include <asm/kvm_gstage.h>
+#include <yai/kvm_gstage.h>
 
 int kvm_riscv_mmu_ioremap(struct kvm *kvm, gpa_t gpa, phys_addr_t hpa,
 			  unsigned long size, bool writable, bool in_atomic);

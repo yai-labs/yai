@@ -11,10 +11,10 @@
 #error Assembly-only header
 #endif
 
-#include <asm/kvm_arm.h>
-#include <asm/ptrace.h>
-#include <asm/sysreg.h>
-#include <linux/irqchip/arm-gic-v3.h>
+#include <yai/kvm_arm.h>
+#include <yai/ptrace.h>
+#include <yai/sysreg.h>
+#include <yai/irqchip/arm-gic-v3.h>
 
 .macro init_el2_hcr	val
 	mov_q	x0, \val

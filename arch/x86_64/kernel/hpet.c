@@ -1,18 +1,18 @@
 // SPDX-License-Identifier: GPL-2.0-only
-#include <linux/clockchips.h>
-#include <linux/interrupt.h>
-#include <linux/export.h>
-#include <linux/delay.h>
-#include <linux/hpet.h>
-#include <linux/cpu.h>
-#include <linux/irq.h>
+#include <yai/clockchips.h>
+#include <yai/interrupt.h>
+#include <yai/export.h>
+#include <yai/delay.h>
+#include <yai/hpet.h>
+#include <yai/cpu.h>
+#include <yai/irq.h>
 
-#include <asm/cpuid/api.h>
-#include <asm/irq_remapping.h>
-#include <asm/hpet.h>
-#include <asm/time.h>
-#include <asm/mwait.h>
-#include <asm/msr.h>
+#include <yai/cpuid/api.h>
+#include <yai/irq_remapping.h>
+#include <yai/hpet.h>
+#include <yai/time.h>
+#include <yai/mwait.h>
+#include <yai/msr.h>
 
 #undef  pr_fmt
 #define pr_fmt(fmt) "hpet: " fmt
@@ -1201,8 +1201,8 @@ void hpet_disable(void)
  * For (3), we use interrupts at 64 Hz, or the user specified periodic frequency,
  * if it's higher.
  */
-#include <linux/mc146818rtc.h>
-#include <linux/rtc.h>
+#include <yai/mc146818rtc.h>
+#include <yai/rtc.h>
 
 #define DEFAULT_RTC_INT_FREQ	64
 #define DEFAULT_RTC_SHIFT	6

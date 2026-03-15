@@ -9,20 +9,20 @@
  * io_apic.c.)
  */
 
-#include <linux/seq_file.h>
-#include <linux/interrupt.h>
-#include <linux/irq.h>
-#include <linux/kernel_stat.h>
-#include <linux/notifier.h>
-#include <linux/cpu.h>
-#include <linux/delay.h>
-#include <linux/uaccess.h>
-#include <linux/percpu.h>
-#include <linux/mm.h>
+#include <yai/seq_file.h>
+#include <yai/interrupt.h>
+#include <yai/irq.h>
+#include <yai/kernel_stat.h>
+#include <yai/notifier.h>
+#include <yai/cpu.h>
+#include <yai/delay.h>
+#include <yai/uaccess.h>
+#include <yai/percpu.h>
+#include <yai/mm.h>
 
-#include <asm/apic.h>
-#include <asm/nospec-branch.h>
-#include <asm/softirq_stack.h>
+#include <yai/apic.h>
+#include <yai/nospec-branch.h>
+#include <yai/softirq_stack.h>
 
 #ifdef CONFIG_DEBUG_STACKOVERFLOW
 

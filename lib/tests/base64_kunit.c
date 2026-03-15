@@ -6,7 +6,7 @@
  */
 
 #include <kunit/test.h>
-#include <linux/base64.h>
+#include <yai/base64.h>
 
 /* ---------- Benchmark helpers ---------- */
 static u64 bench_encode_ns(const u8 *data, int len, char *dst, int reps,

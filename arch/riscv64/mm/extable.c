@@ -7,12 +7,12 @@
  */
 
 
-#include <linux/bitfield.h>
-#include <linux/extable.h>
-#include <linux/module.h>
-#include <linux/uaccess.h>
-#include <asm/asm-extable.h>
-#include <asm/ptrace.h>
+#include <yai/bitfield.h>
+#include <yai/extable.h>
+#include <yai/module.h>
+#include <yai/uaccess.h>
+#include <yai/asm-extable.h>
+#include <yai/ptrace.h>
 
 static inline unsigned long
 get_ex_fixup(const struct exception_table_entry *ex)

@@ -8,15 +8,15 @@
 #ifndef __ASM_ARCH_TIMER_H
 #define __ASM_ARCH_TIMER_H
 
-#include <asm/barrier.h>
-#include <asm/hwcap.h>
-#include <asm/sysreg.h>
+#include <yai/barrier.h>
+#include <yai/hwcap.h>
+#include <yai/sysreg.h>
 
-#include <linux/bug.h>
-#include <linux/init.h>
-#include <linux/jump_label.h>
-#include <linux/percpu.h>
-#include <linux/types.h>
+#include <yai/bug.h>
+#include <yai/init.h>
+#include <yai/jump_label.h>
+#include <yai/percpu.h>
+#include <yai/types.h>
 
 #include <clocksource/arm_arch_timer.h>
 

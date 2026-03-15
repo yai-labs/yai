@@ -4,11 +4,11 @@
  * Copyright (c) 2021, Google LLC.
  * Pasha Tatashin <pasha.tatashin@soleen.com>
  */
-#include <linux/kstrtox.h>
-#include <linux/mm.h>
-#include <linux/page_table_check.h>
-#include <linux/swap.h>
-#include <linux/leafops.h>
+#include <yai/kstrtox.h>
+#include <yai/mm.h>
+#include <yai/page_table_check.h>
+#include <yai/swap.h>
+#include <yai/leafops.h>
 
 #undef pr_fmt
 #define pr_fmt(fmt)	"page_table_check: " fmt

@@ -3,9 +3,9 @@
 # error "Please do not build this file directly, build asm-offsets.c instead"
 #endif
 
-#include <linux/efi.h>
+#include <yai/efi.h>
 
-#include <asm/ucontext.h>
+#include <yai/ucontext.h>
 
 /* workaround for a warning with -Wmissing-prototypes */
 void foo(void);

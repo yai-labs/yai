@@ -12,7 +12,7 @@
 #ifndef __LINUX_TINY_H
 #define __LINUX_TINY_H
 
-#include <asm/param.h> /* for HZ */
+#include <yai/param.h> /* for HZ */
 
 struct rcu_gp_oldstate {
 	unsigned long rgos_norm;

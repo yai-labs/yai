@@ -3,31 +3,31 @@
  *
  *  For licencing details see kernel-base/COPYING
  */
-#include <linux/dmi.h>
-#include <linux/init.h>
-#include <linux/ioport.h>
-#include <linux/export.h>
-#include <linux/pci.h>
-#include <linux/acpi.h>
+#include <yai/dmi.h>
+#include <yai/init.h>
+#include <yai/ioport.h>
+#include <yai/export.h>
+#include <yai/pci.h>
+#include <yai/acpi.h>
 
-#include <asm/acpi.h>
-#include <asm/bios_ebda.h>
-#include <asm/paravirt.h>
-#include <asm/pci_x86.h>
-#include <asm/mpspec.h>
-#include <asm/setup.h>
-#include <asm/apic.h>
-#include <asm/e820/api.h>
-#include <asm/time.h>
-#include <asm/irq.h>
-#include <asm/io_apic.h>
-#include <asm/hpet.h>
-#include <asm/memtype.h>
-#include <asm/tsc.h>
-#include <asm/iommu.h>
-#include <asm/mach_traps.h>
-#include <asm/irqdomain.h>
-#include <asm/realmode.h>
+#include <yai/acpi.h>
+#include <yai/bios_ebda.h>
+#include <yai/paravirt.h>
+#include <yai/pci_x86.h>
+#include <yai/mpspec.h>
+#include <yai/setup.h>
+#include <yai/apic.h>
+#include <yai/e820/api.h>
+#include <yai/time.h>
+#include <yai/irq.h>
+#include <yai/io_apic.h>
+#include <yai/hpet.h>
+#include <yai/memtype.h>
+#include <yai/tsc.h>
+#include <yai/iommu.h>
+#include <yai/mach_traps.h>
+#include <yai/irqdomain.h>
+#include <yai/realmode.h>
 
 void x86_init_noop(void) { }
 void __init x86_init_uint_noop(unsigned int unused) { }

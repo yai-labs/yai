@@ -2,7 +2,7 @@
 #ifndef _ASM_X86_SEMBUF_H
 #define _ASM_X86_SEMBUF_H
 
-#include <asm/ipcbuf.h>
+#include <yai/ipcbuf.h>
 
 /*
  * The semid64_ds structure for x86 architecture.

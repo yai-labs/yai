@@ -8,7 +8,7 @@
 #define _COMMON_HSI_H
 
 #include <yai/types.h>
-#include <asm/byteorder.h>
+#include <yai/byteorder.h>
 #include <yai/bitops.h>
 #include <yai/slab.h>
 

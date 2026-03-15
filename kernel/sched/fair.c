@@ -20,39 +20,39 @@
  *  Adaptive scheduling granularity, math enhancements by Peter Zijlstra
  *  Copyright (C) 2007 Red Hat, Inc., Peter Zijlstra
  */
-#include <linux/energy_model.h>
-#include <linux/mmap_lock.h>
-#include <linux/hugetlb_inline.h>
-#include <linux/jiffies.h>
-#include <linux/mm_api.h>
-#include <linux/highmem.h>
-#include <linux/spinlock_api.h>
-#include <linux/cpumask_api.h>
-#include <linux/lockdep_api.h>
-#include <linux/softirq.h>
-#include <linux/refcount_api.h>
-#include <linux/topology.h>
-#include <linux/sched/clock.h>
-#include <linux/sched/cond_resched.h>
-#include <linux/sched/cputime.h>
-#include <linux/sched/isolation.h>
-#include <linux/sched/nohz.h>
-#include <linux/sched/prio.h>
+#include <yai/energy_model.h>
+#include <yai/mmap_lock.h>
+#include <yai/hugetlb_inline.h>
+#include <yai/jiffies.h>
+#include <yai/mm_api.h>
+#include <yai/highmem.h>
+#include <yai/spinlock_api.h>
+#include <yai/cpumask_api.h>
+#include <yai/lockdep_api.h>
+#include <yai/softirq.h>
+#include <yai/refcount_api.h>
+#include <yai/topology.h>
+#include <yai/sched/clock.h>
+#include <yai/sched/cond_resched.h>
+#include <yai/sched/cputime.h>
+#include <yai/sched/isolation.h>
+#include <yai/sched/nohz.h>
+#include <yai/sched/prio.h>
 
-#include <linux/cpuidle.h>
-#include <linux/interrupt.h>
-#include <linux/memory-tiers.h>
-#include <linux/mempolicy.h>
-#include <linux/mutex_api.h>
-#include <linux/profile.h>
-#include <linux/psi.h>
-#include <linux/ratelimit.h>
-#include <linux/task_work.h>
-#include <linux/rbtree_augmented.h>
+#include <yai/cpuidle.h>
+#include <yai/interrupt.h>
+#include <yai/memory-tiers.h>
+#include <yai/mempolicy.h>
+#include <yai/mutex_api.h>
+#include <yai/profile.h>
+#include <yai/psi.h>
+#include <yai/ratelimit.h>
+#include <yai/task_work.h>
+#include <yai/rbtree_augmented.h>
 
-#include <asm/switch_to.h>
+#include <yai/switch_to.h>
 
-#include <uapi/linux/sched/types.h>
+#include <yai/sched/types.h>
 
 #include "sched.h"
 #include "stats.h"

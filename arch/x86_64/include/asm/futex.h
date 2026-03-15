@@ -4,13 +4,13 @@
 
 #ifdef __KERNEL__
 
-#include <linux/futex.h>
-#include <linux/uaccess.h>
+#include <yai/futex.h>
+#include <yai/uaccess.h>
 
-#include <asm/asm.h>
-#include <asm/errno.h>
-#include <asm/processor.h>
-#include <asm/smap.h>
+#include <yai/asm.h>
+#include <yai/errno.h>
+#include <yai/processor.h>
+#include <yai/smap.h>
 
 #define unsafe_atomic_op1(insn, oval, uaddr, oparg, label)	\
 do {								\

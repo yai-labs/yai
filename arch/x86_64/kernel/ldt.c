@@ -12,22 +12,22 @@
  *	    context.lock
  */
 
-#include <linux/errno.h>
-#include <linux/gfp.h>
-#include <linux/sched.h>
-#include <linux/string.h>
-#include <linux/mm.h>
-#include <linux/smp.h>
-#include <linux/syscalls.h>
-#include <linux/slab.h>
-#include <linux/vmalloc.h>
-#include <linux/uaccess.h>
+#include <yai/errno.h>
+#include <yai/gfp.h>
+#include <yai/sched.h>
+#include <yai/string.h>
+#include <yai/mm.h>
+#include <yai/smp.h>
+#include <yai/syscalls.h>
+#include <yai/slab.h>
+#include <yai/vmalloc.h>
+#include <yai/uaccess.h>
 
-#include <asm/ldt.h>
-#include <asm/tlb.h>
-#include <asm/desc.h>
-#include <asm/mmu_context.h>
-#include <asm/pgtable_areas.h>
+#include <yai/ldt.h>
+#include <yai/tlb.h>
+#include <yai/desc.h>
+#include <yai/mmu_context.h>
+#include <yai/pgtable_areas.h>
 
 #include <xen/xen.h>
 

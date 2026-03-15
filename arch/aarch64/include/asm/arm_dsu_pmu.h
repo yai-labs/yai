@@ -7,12 +7,12 @@
  * Author: Suzuki K Poulose <suzuki.poulose@arm.com>
  */
 
-#include <linux/bitops.h>
-#include <linux/build_bug.h>
-#include <linux/compiler.h>
-#include <linux/types.h>
-#include <asm/barrier.h>
-#include <asm/sysreg.h>
+#include <yai/bitops.h>
+#include <yai/build_bug.h>
+#include <yai/compiler.h>
+#include <yai/types.h>
+#include <yai/barrier.h>
+#include <yai/sysreg.h>
 
 
 #define CLUSTERPMCR_EL1			sys_reg(3, 0, 15, 5, 0)

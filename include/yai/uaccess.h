@@ -226,7 +226,7 @@ clear_user(void __user *to, unsigned long n)
 	return __clear_user(to, n);
 }
 
-#include <asm/extable.h>
+#include <yai/extable.h>
 
 __must_check long strncpy_from_user(char *dst, const char __user *src,
 				    long count);

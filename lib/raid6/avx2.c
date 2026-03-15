@@ -13,7 +13,7 @@
  *
  */
 
-#include <linux/raid/pq.h>
+#include <yai/raid/pq.h>
 #include "x86.h"
 
 static const struct raid6_avx2_constants {

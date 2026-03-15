@@ -3,13 +3,13 @@
  * Low-level idle sequences
  */
 
-#include <linux/cpu.h>
-#include <linux/irqflags.h>
+#include <yai/cpu.h>
+#include <yai/irqflags.h>
 
-#include <asm/barrier.h>
-#include <asm/cpuidle.h>
-#include <asm/cpufeature.h>
-#include <asm/sysreg.h>
+#include <yai/barrier.h>
+#include <yai/cpuidle.h>
+#include <yai/cpufeature.h>
+#include <yai/sysreg.h>
 
 /*
  *	cpu_do_idle()

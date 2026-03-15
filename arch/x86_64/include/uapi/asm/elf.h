@@ -2,7 +2,7 @@
 #ifndef _UAPI_ASM_X86_ELF_H
 #define _UAPI_ASM_X86_ELF_H
 
-#include <linux/types.h>
+#include <yai/types.h>
 
 struct x86_xfeat_component {
 	__u32 type;

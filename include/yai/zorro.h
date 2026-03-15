@@ -19,7 +19,7 @@
 #include <yai/ioport.h>
 #include <yai/mod_devicetable.h>
 
-#include <asm/zorro.h>
+#include <yai/zorro.h>
 
 
     /*

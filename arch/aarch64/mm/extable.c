@@ -3,13 +3,13 @@
  * Based on arch/arm/mm/extable.c
  */
 
-#include <linux/bitfield.h>
-#include <linux/extable.h>
-#include <linux/uaccess.h>
+#include <yai/bitfield.h>
+#include <yai/extable.h>
+#include <yai/uaccess.h>
 
-#include <asm/asm-extable.h>
-#include <asm/esr.h>
-#include <asm/ptrace.h>
+#include <yai/asm-extable.h>
+#include <yai/esr.h>
+#include <yai/ptrace.h>
 
 static bool cpy_faulted_on_uaccess(const struct exception_table_entry *ex,
 				   unsigned long esr)

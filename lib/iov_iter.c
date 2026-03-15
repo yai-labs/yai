@@ -1,17 +1,17 @@
 // SPDX-License-Identifier: GPL-2.0-only
-#include <linux/export.h>
-#include <linux/bvec.h>
-#include <linux/fault-inject-usercopy.h>
-#include <linux/uio.h>
-#include <linux/pagemap.h>
-#include <linux/highmem.h>
-#include <linux/slab.h>
-#include <linux/vmalloc.h>
-#include <linux/splice.h>
-#include <linux/compat.h>
-#include <linux/scatterlist.h>
-#include <linux/instrumented.h>
-#include <linux/iov_iter.h>
+#include <yai/export.h>
+#include <yai/bvec.h>
+#include <yai/fault-inject-usercopy.h>
+#include <yai/uio.h>
+#include <yai/pagemap.h>
+#include <yai/highmem.h>
+#include <yai/slab.h>
+#include <yai/vmalloc.h>
+#include <yai/splice.h>
+#include <yai/compat.h>
+#include <yai/scatterlist.h>
+#include <yai/instrumented.h>
+#include <yai/iov_iter.h>
 
 static __always_inline
 size_t copy_to_user_iter(void __user *iter_to, size_t progress,

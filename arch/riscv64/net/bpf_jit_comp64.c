@@ -5,14 +5,14 @@
  *
  */
 
-#include <linux/bitfield.h>
-#include <linux/bpf.h>
-#include <linux/filter.h>
-#include <linux/memory.h>
-#include <linux/stop_machine.h>
-#include <asm/text-patching.h>
-#include <asm/cfi.h>
-#include <asm/percpu.h>
+#include <yai/bitfield.h>
+#include <yai/bpf.h>
+#include <yai/filter.h>
+#include <yai/memory.h>
+#include <yai/stop_machine.h>
+#include <yai/text-patching.h>
+#include <yai/cfi.h>
+#include <yai/percpu.h>
 #include "bpf_jit.h"
 
 #define RV_MAX_REG_ARGS 8

@@ -8,7 +8,7 @@
 #ifndef _ASM_X86_VGA_H
 #define _ASM_X86_VGA_H
 
-#include <asm/set_memory.h>
+#include <yai/set_memory.h>
 
 /*
  *	On the PC, we can just recalculate addresses and then

@@ -6,7 +6,7 @@
 #ifndef _ASM_RISCV_VENDOR_EXTENSIONS_MIPS_H
 #define _ASM_RISCV_VENDOR_EXTENSIONS_MIPS_H
 
-#include <linux/types.h>
+#include <yai/types.h>
 
 #define RISCV_ISA_VENDOR_EXT_XMIPSEXECTL	0
 

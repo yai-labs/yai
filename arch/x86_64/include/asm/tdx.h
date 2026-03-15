@@ -3,14 +3,14 @@
 #ifndef _ASM_X86_TDX_H
 #define _ASM_X86_TDX_H
 
-#include <linux/init.h>
-#include <linux/bits.h>
-#include <linux/mmzone.h>
+#include <yai/init.h>
+#include <yai/bits.h>
+#include <yai/mmzone.h>
 
-#include <asm/errno.h>
-#include <asm/ptrace.h>
-#include <asm/trapnr.h>
-#include <asm/shared/tdx.h>
+#include <yai/errno.h>
+#include <yai/ptrace.h>
+#include <yai/trapnr.h>
+#include <yai/shared/tdx.h>
 
 /*
  * SW-defined error codes.
@@ -35,8 +35,8 @@
 #ifndef __ASSEMBLER__
 
 #include <uapi/asm/mce.h>
-#include <asm/tdx_global_metadata.h>
-#include <linux/pgtable.h>
+#include <yai/tdx_global_metadata.h>
+#include <yai/pgtable.h>
 
 /*
  * Used by the #VE exception handler to gather the #VE exception
@@ -102,9 +102,9 @@ u64 __seamcall_ret(u64 fn, struct tdx_module_args *args);
 u64 __seamcall_saved_ret(u64 fn, struct tdx_module_args *args);
 void tdx_init(void);
 
-#include <linux/preempt.h>
-#include <asm/archrandom.h>
-#include <asm/processor.h>
+#include <yai/preempt.h>
+#include <yai/archrandom.h>
+#include <yai/processor.h>
 
 typedef u64 (*sc_func_t)(u64 fn, struct tdx_module_args *args);
 

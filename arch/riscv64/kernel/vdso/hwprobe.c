@@ -3,8 +3,8 @@
  * Copyright 2023 Rivos, Inc
  */
 
-#include <linux/string.h>
-#include <linux/types.h>
+#include <yai/string.h>
+#include <yai/types.h>
 #include <vdso/datapage.h>
 #include <vdso/helpers.h>
 

@@ -2,9 +2,9 @@
 #ifndef _ASM_X86_SPECCTRL_H_
 #define _ASM_X86_SPECCTRL_H_
 
-#include <linux/thread_info.h>
-#include <asm/nospec-branch.h>
-#include <asm/msr.h>
+#include <yai/thread_info.h>
+#include <yai/nospec-branch.h>
+#include <yai/msr.h>
 
 /*
  * On VMENTER we must preserve whatever view of the SPEC_CTRL MSR

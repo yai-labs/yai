@@ -18,19 +18,19 @@
  * The architecture is expected to provide a vmemmap_populate() function
  * to instantiate the mapping.
  */
-#include <linux/mm.h>
-#include <linux/mmzone.h>
-#include <linux/memblock.h>
-#include <linux/memremap.h>
-#include <linux/highmem.h>
-#include <linux/slab.h>
-#include <linux/spinlock.h>
-#include <linux/vmalloc.h>
-#include <linux/sched.h>
-#include <linux/pgalloc.h>
+#include <yai/mm.h>
+#include <yai/mmzone.h>
+#include <yai/memblock.h>
+#include <yai/memremap.h>
+#include <yai/highmem.h>
+#include <yai/slab.h>
+#include <yai/spinlock.h>
+#include <yai/vmalloc.h>
+#include <yai/sched.h>
+#include <yai/pgalloc.h>
 
-#include <asm/dma.h>
-#include <asm/tlbflush.h>
+#include <yai/dma.h>
+#include <yai/tlbflush.h>
 
 #include "hugetlb_vmemmap.h"
 

@@ -11,10 +11,10 @@
 #ifndef _IPC_UTIL_H
 #define _IPC_UTIL_H
 
-#include <linux/unistd.h>
-#include <linux/err.h>
-#include <linux/ipc_namespace.h>
-#include <linux/pid.h>
+#include <yai/unistd.h>
+#include <yai/err.h>
+#include <yai/ipc_namespace.h>
+#include <yai/pid.h>
 
 /*
  * The IPC ID contains 2 separate numbers - index and sequence number.
@@ -255,7 +255,7 @@ static inline int sem_check_semmni(struct ipc_namespace *ns) {
 }
 
 #ifdef CONFIG_COMPAT
-#include <linux/compat.h>
+#include <yai/compat.h>
 struct compat_ipc_perm {
 	key_t key;
 	__compat_uid_t uid;

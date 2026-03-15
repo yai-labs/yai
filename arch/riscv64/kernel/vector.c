@@ -3,22 +3,22 @@
  * Copyright (C) 2023 SiFive
  * Author: Andy Chiu <andy.chiu@sifive.com>
  */
-#include <linux/export.h>
-#include <linux/sched/signal.h>
-#include <linux/types.h>
-#include <linux/slab.h>
-#include <linux/sched.h>
-#include <linux/uaccess.h>
-#include <linux/prctl.h>
+#include <yai/export.h>
+#include <yai/sched/signal.h>
+#include <yai/types.h>
+#include <yai/slab.h>
+#include <yai/sched.h>
+#include <yai/uaccess.h>
+#include <yai/prctl.h>
 
-#include <asm/thread_info.h>
-#include <asm/processor.h>
-#include <asm/insn.h>
-#include <asm/vector.h>
-#include <asm/csr.h>
-#include <asm/elf.h>
-#include <asm/ptrace.h>
-#include <asm/bug.h>
+#include <yai/thread_info.h>
+#include <yai/processor.h>
+#include <yai/insn.h>
+#include <yai/vector.h>
+#include <yai/csr.h>
+#include <yai/elf.h>
+#include <yai/ptrace.h>
+#include <yai/bug.h>
 
 static bool riscv_v_implicit_uacc = IS_ENABLED(CONFIG_RISCV_ISA_V_DEFAULT_ENABLE);
 static struct kmem_cache *riscv_v_user_cachep;

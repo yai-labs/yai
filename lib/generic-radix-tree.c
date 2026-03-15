@@ -1,9 +1,9 @@
 
-#include <linux/atomic.h>
-#include <linux/export.h>
-#include <linux/generic-radix-tree.h>
-#include <linux/gfp.h>
-#include <linux/kmemleak.h>
+#include <yai/atomic.h>
+#include <yai/export.h>
+#include <yai/generic-radix-tree.h>
+#include <yai/gfp.h>
+#include <yai/kmemleak.h>
 
 /*
  * Returns pointer to the specified byte @offset within @radix, or NULL if not

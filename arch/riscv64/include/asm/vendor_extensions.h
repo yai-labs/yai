@@ -6,10 +6,10 @@
 #ifndef _ASM_VENDOR_EXTENSIONS_H
 #define _ASM_VENDOR_EXTENSIONS_H
 
-#include <asm/cpufeature.h>
+#include <yai/cpufeature.h>
 
-#include <linux/array_size.h>
-#include <linux/types.h>
+#include <yai/array_size.h>
+#include <yai/types.h>
 
 /*
  * The extension keys of each vendor must be strictly less than this value.

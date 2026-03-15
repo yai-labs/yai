@@ -6,9 +6,9 @@
  * (NOTE: these are not related to SCHED_IDLE batch scheduled
  *        tasks which are handled in sched/fair.c )
  */
-#include <linux/cpuidle.h>
-#include <linux/suspend.h>
-#include <linux/livepatch.h>
+#include <yai/cpuidle.h>
+#include <yai/suspend.h>
+#include <yai/livepatch.h>
 #include "sched.h"
 #include "smp.h"
 

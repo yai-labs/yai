@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: GPL-2.0
 
-#include <linux/sizes.h>
+#include <yai/sizes.h>
 
-#include <asm/cpuid/types.h>
+#include <yai/cpuid/types.h>
 
 #include "cpu.h"
 

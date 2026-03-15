@@ -1,16 +1,16 @@
 // SPDX-License-Identifier: GPL-2.0
-#include <linux/compiler.h>
-#include <linux/export.h>
-#include <linux/fault-inject-usercopy.h>
-#include <linux/kasan-checks.h>
-#include <linux/thread_info.h>
-#include <linux/uaccess.h>
-#include <linux/kernel.h>
-#include <linux/errno.h>
-#include <linux/mm.h>
+#include <yai/compiler.h>
+#include <yai/export.h>
+#include <yai/fault-inject-usercopy.h>
+#include <yai/kasan-checks.h>
+#include <yai/thread_info.h>
+#include <yai/uaccess.h>
+#include <yai/kernel.h>
+#include <yai/errno.h>
+#include <yai/mm.h>
 
-#include <asm/byteorder.h>
-#include <asm/word-at-a-time.h>
+#include <yai/byteorder.h>
+#include <yai/word-at-a-time.h>
 
 #ifdef CONFIG_HAVE_EFFICIENT_UNALIGNED_ACCESS
 #define IS_UNALIGNED(src, dst)	0

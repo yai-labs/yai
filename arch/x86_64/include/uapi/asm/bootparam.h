@@ -2,7 +2,7 @@
 #ifndef _ASM_X86_BOOTPARAM_H
 #define _ASM_X86_BOOTPARAM_H
 
-#include <asm/setup_data.h>
+#include <yai/setup_data.h>
 
 /* ram_size flags */
 #define RAMDISK_IMAGE_START_MASK	0x07FF
@@ -28,11 +28,11 @@
 
 #ifndef __ASSEMBLER__
 
-#include <linux/types.h>
-#include <linux/screen_info.h>
-#include <linux/apm_bios.h>
-#include <linux/edd.h>
-#include <asm/ist.h>
+#include <yai/types.h>
+#include <yai/screen_info.h>
+#include <yai/apm_bios.h>
+#include <yai/edd.h>
+#include <yai/ist.h>
 #include <video/edid.h>
 
 struct setup_header {

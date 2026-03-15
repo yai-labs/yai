@@ -4,8 +4,8 @@
 
 #ifdef CONFIG_X86_32
 
-#include <linux/types.h>
-#include <linux/log2.h>
+#include <yai/types.h>
+#include <yai/log2.h>
 
 /*
  * do_div() is NOT a C function. It wants to return
@@ -97,7 +97,7 @@ static inline u64 add_u64_u32(u64 a, u32 b)
 #define __div64_32
 
 #else
-# include <asm-generic/div64.h>
+# include <yai/div64.h>
 
 /*
  * Will generate an #DE when the result doesn't fit u64, could fix with an

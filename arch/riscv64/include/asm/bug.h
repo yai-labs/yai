@@ -6,11 +6,11 @@
 #ifndef _ASM_RISCV_BUG_H
 #define _ASM_RISCV_BUG_H
 
-#include <linux/compiler.h>
-#include <linux/const.h>
-#include <linux/types.h>
+#include <yai/compiler.h>
+#include <yai/const.h>
+#include <yai/types.h>
 
-#include <asm/asm.h>
+#include <yai/asm.h>
 
 #define __INSN_LENGTH_MASK  _UL(0x3)
 #define __INSN_LENGTH_32    _UL(0x3)
@@ -87,7 +87,7 @@ do {								\
 
 #define HAVE_ARCH_BUG
 
-#include <asm-generic/bug.h>
+#include <yai/bug.h>
 
 struct pt_regs;
 struct task_struct;

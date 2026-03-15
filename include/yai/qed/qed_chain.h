@@ -8,7 +8,7 @@
 #define _QED_CHAIN_H
 
 #include <yai/types.h>
-#include <asm/byteorder.h>
+#include <yai/byteorder.h>
 #include <yai/kernel.h>
 #include <yai/list.h>
 #include <yai/sizes.h>

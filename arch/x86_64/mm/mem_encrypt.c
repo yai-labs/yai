@@ -7,14 +7,14 @@
  * Author: Tom Lendacky <thomas.lendacky@amd.com>
  */
 
-#include <linux/dma-direct.h>
-#include <linux/dma-mapping.h>
-#include <linux/swiotlb.h>
-#include <linux/cc_platform.h>
-#include <linux/mem_encrypt.h>
-#include <linux/virtio_anchor.h>
+#include <yai/dma-direct.h>
+#include <yai/dma-mapping.h>
+#include <yai/swiotlb.h>
+#include <yai/cc_platform.h>
+#include <yai/mem_encrypt.h>
+#include <yai/virtio_anchor.h>
 
-#include <asm/sev.h>
+#include <yai/sev.h>
 
 /* Override for DMA direct allocation check - ARCH_HAS_FORCE_DMA_UNENCRYPTED */
 bool force_dma_unencrypted(struct device *dev)

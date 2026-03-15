@@ -3,21 +3,21 @@
  * AMD Family 10h mmconfig enablement
  */
 
-#include <linux/types.h>
-#include <linux/mm.h>
-#include <linux/string.h>
-#include <linux/pci.h>
-#include <linux/dmi.h>
-#include <linux/range.h>
-#include <linux/acpi.h>
+#include <yai/types.h>
+#include <yai/mm.h>
+#include <yai/string.h>
+#include <yai/pci.h>
+#include <yai/dmi.h>
+#include <yai/range.h>
+#include <yai/acpi.h>
 
-#include <asm/pci-direct.h>
-#include <linux/sort.h>
-#include <asm/io.h>
-#include <asm/msr.h>
-#include <asm/acpi.h>
-#include <asm/mmconfig.h>
-#include <asm/pci_x86.h>
+#include <yai/pci-direct.h>
+#include <yai/sort.h>
+#include <yai/io.h>
+#include <yai/msr.h>
+#include <yai/acpi.h>
+#include <yai/mmconfig.h>
+#include <yai/pci_x86.h>
 
 struct pci_hostbridge_probe {
 	u32 bus;

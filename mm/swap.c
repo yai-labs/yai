@@ -14,29 +14,29 @@
  * Buffermem limits added 12.3.98, Rik van Riel.
  */
 
-#include <linux/mm.h>
-#include <linux/sched.h>
-#include <linux/kernel_stat.h>
-#include <linux/swap.h>
-#include <linux/mman.h>
-#include <linux/pagemap.h>
-#include <linux/pagevec.h>
-#include <linux/init.h>
-#include <linux/export.h>
-#include <linux/mm_inline.h>
-#include <linux/percpu_counter.h>
-#include <linux/memremap.h>
-#include <linux/percpu.h>
-#include <linux/cpu.h>
-#include <linux/notifier.h>
-#include <linux/backing-dev.h>
-#include <linux/memcontrol.h>
-#include <linux/gfp.h>
-#include <linux/uio.h>
-#include <linux/hugetlb.h>
-#include <linux/page_idle.h>
-#include <linux/local_lock.h>
-#include <linux/buffer_head.h>
+#include <yai/mm.h>
+#include <yai/sched.h>
+#include <yai/kernel_stat.h>
+#include <yai/swap.h>
+#include <yai/mman.h>
+#include <yai/pagemap.h>
+#include <yai/pagevec.h>
+#include <yai/init.h>
+#include <yai/export.h>
+#include <yai/mm_inline.h>
+#include <yai/percpu_counter.h>
+#include <yai/memremap.h>
+#include <yai/percpu.h>
+#include <yai/cpu.h>
+#include <yai/notifier.h>
+#include <yai/backing-dev.h>
+#include <yai/memcontrol.h>
+#include <yai/gfp.h>
+#include <yai/uio.h>
+#include <yai/hugetlb.h>
+#include <yai/page_idle.h>
+#include <yai/local_lock.h>
+#include <yai/buffer_head.h>
 
 #include "internal.h"
 

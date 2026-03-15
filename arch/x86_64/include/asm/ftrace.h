@@ -2,7 +2,7 @@
 #ifndef _ASM_X86_FTRACE_H
 #define _ASM_X86_FTRACE_H
 
-#include <asm/ptrace.h>
+#include <yai/ptrace.h>
 
 #ifdef CONFIG_FUNCTION_TRACER
 #ifndef CC_USING_FENTRY
@@ -13,7 +13,7 @@
 
 /* Ignore unused weak functions which will have non zero offsets */
 #ifdef CONFIG_HAVE_FENTRY
-# include <asm/ibt.h>
+# include <yai/ibt.h>
 /* Add offset for endbr64 if IBT enabled */
 # define FTRACE_MCOUNT_MAX_OFFSET	ENDBR_INSN_SIZE
 #endif
@@ -45,7 +45,7 @@ static inline unsigned long arch_ftrace_get_symaddr(unsigned long fentry_ip)
 
 #ifdef CONFIG_HAVE_DYNAMIC_FTRACE_WITH_ARGS
 
-#include <linux/ftrace_regs.h>
+#include <yai/ftrace_regs.h>
 
 static __always_inline struct pt_regs *
 arch_ftrace_get_regs(struct ftrace_regs *fregs)
@@ -142,7 +142,7 @@ static inline bool arch_syscall_match_sym_name(const char *sym, const char *name
 #ifndef COMPILE_OFFSETS
 
 #if defined(CONFIG_FTRACE_SYSCALLS) && defined(CONFIG_IA32_EMULATION)
-#include <linux/compat.h>
+#include <yai/compat.h>
 
 /*
  * Because ia32 syscalls do not map to x86_64 syscall numbers

@@ -54,7 +54,7 @@
  *
  */
 
-#include <linux/sched/clock.h>
+#include <yai/sched/clock.h>
 #include "sched.h"
 
 /*

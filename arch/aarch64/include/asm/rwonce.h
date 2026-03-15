@@ -7,8 +7,8 @@
 
 #if defined(CONFIG_LTO) && !defined(__ASSEMBLER__)
 
-#include <linux/compiler_types.h>
-#include <asm/alternative-macros.h>
+#include <yai/compiler_types.h>
+#include <yai/alternative-macros.h>
 
 #ifndef BUILD_VDSO
 
@@ -64,6 +64,6 @@
 #endif	/* !BUILD_VDSO */
 #endif	/* CONFIG_LTO && !__ASSEMBLER__ */
 
-#include <asm-generic/rwonce.h>
+#include <yai/rwonce.h>
 
 #endif	/* __ASM_RWONCE_H */

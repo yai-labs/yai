@@ -5,10 +5,10 @@
 #ifndef _ASM_X86_TSC_H
 #define _ASM_X86_TSC_H
 
-#include <asm/asm.h>
-#include <asm/cpufeature.h>
-#include <asm/processor.h>
-#include <asm/msr.h>
+#include <yai/asm.h>
+#include <yai/cpufeature.h>
+#include <yai/processor.h>
+#include <yai/msr.h>
 
 /**
  * rdtsc() - returns the current TSC without ordering constraints

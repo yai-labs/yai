@@ -5,9 +5,9 @@
  * Copyright (C) 2017 SiFive
  */
 
-#include <linux/syscalls.h>
-#include <asm/cacheflush.h>
-#include <asm-generic/mman-common.h>
+#include <yai/syscalls.h>
+#include <yai/cacheflush.h>
+#include <yai/mman-common.h>
 
 static long riscv_sys_mmap(unsigned long addr, unsigned long len,
 			   unsigned long prot, unsigned long flags,

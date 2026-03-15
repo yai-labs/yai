@@ -1,38 +1,38 @@
 // SPDX-License-Identifier: GPL-2.0
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
-#include <linux/export.h>
-#include <linux/reboot.h>
-#include <linux/init.h>
-#include <linux/pm.h>
-#include <linux/efi.h>
-#include <linux/dmi.h>
-#include <linux/sched.h>
-#include <linux/tboot.h>
-#include <linux/delay.h>
-#include <linux/objtool.h>
-#include <linux/pgtable.h>
-#include <linux/kexec.h>
-#include <linux/kvm_types.h>
+#include <yai/export.h>
+#include <yai/reboot.h>
+#include <yai/init.h>
+#include <yai/pm.h>
+#include <yai/efi.h>
+#include <yai/dmi.h>
+#include <yai/sched.h>
+#include <yai/tboot.h>
+#include <yai/delay.h>
+#include <yai/objtool.h>
+#include <yai/pgtable.h>
+#include <yai/kexec.h>
+#include <yai/kvm_types.h>
 #include <acpi/reboot.h>
-#include <asm/io.h>
-#include <asm/apic.h>
-#include <asm/io_apic.h>
-#include <asm/desc.h>
-#include <asm/hpet.h>
-#include <asm/proto.h>
-#include <asm/reboot_fixups.h>
-#include <asm/reboot.h>
-#include <asm/pci_x86.h>
-#include <asm/cpu.h>
-#include <asm/nmi.h>
-#include <asm/smp.h>
+#include <yai/io.h>
+#include <yai/apic.h>
+#include <yai/io_apic.h>
+#include <yai/desc.h>
+#include <yai/hpet.h>
+#include <yai/proto.h>
+#include <yai/reboot_fixups.h>
+#include <yai/reboot.h>
+#include <yai/pci_x86.h>
+#include <yai/cpu.h>
+#include <yai/nmi.h>
+#include <yai/smp.h>
 
-#include <linux/ctype.h>
-#include <linux/mc146818rtc.h>
-#include <asm/realmode.h>
-#include <asm/x86_init.h>
-#include <asm/efi.h>
+#include <yai/ctype.h>
+#include <yai/mc146818rtc.h>
+#include <yai/realmode.h>
+#include <yai/x86_init.h>
+#include <yai/efi.h>
 
 /*
  * Power off function, if any

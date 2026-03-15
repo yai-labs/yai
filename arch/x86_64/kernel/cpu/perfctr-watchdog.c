@@ -12,16 +12,16 @@
  *
  */
 
-#include <linux/percpu.h>
-#include <linux/export.h>
-#include <linux/kernel.h>
-#include <linux/bitops.h>
-#include <linux/smp.h>
-#include <asm/nmi.h>
-#include <linux/kprobes.h>
+#include <yai/percpu.h>
+#include <yai/export.h>
+#include <yai/kernel.h>
+#include <yai/bitops.h>
+#include <yai/smp.h>
+#include <yai/nmi.h>
+#include <yai/kprobes.h>
 
-#include <asm/apic.h>
-#include <asm/perf_event.h>
+#include <yai/apic.h>
+#include <yai/perf_event.h>
 
 /*
  * this number is calculated from Intel's MSR_P4_CRU_ESCR5 register and it's

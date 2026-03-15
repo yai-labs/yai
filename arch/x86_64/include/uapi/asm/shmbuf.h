@@ -3,11 +3,11 @@
 #define __ASM_X86_SHMBUF_H
 
 #if !defined(__x86_64__) || !defined(__ILP32__)
-#include <asm-generic/shmbuf.h>
+#include <yai/shmbuf.h>
 #else
 
-#include <asm/ipcbuf.h>
-#include <asm/posix_types.h>
+#include <yai/ipcbuf.h>
+#include <yai/posix_types.h>
 
 /*
  * The shmid64_ds structure for x86 architecture with x32 ABI.

@@ -10,47 +10,47 @@
  * most "normal" filesystems (but you don't /have/ to use this:
  * the NFS filesystem used to do this differently, for example)
  */
-#include <linux/export.h>
-#include <linux/compiler.h>
-#include <linux/dax.h>
-#include <linux/fs.h>
-#include <linux/sched/signal.h>
-#include <linux/uaccess.h>
-#include <linux/capability.h>
-#include <linux/kernel_stat.h>
-#include <linux/gfp.h>
-#include <linux/mm.h>
-#include <linux/swap.h>
-#include <linux/leafops.h>
-#include <linux/syscalls.h>
-#include <linux/mman.h>
-#include <linux/pagemap.h>
-#include <linux/file.h>
-#include <linux/uio.h>
-#include <linux/error-injection.h>
-#include <linux/hash.h>
-#include <linux/writeback.h>
-#include <linux/backing-dev.h>
-#include <linux/pagevec.h>
-#include <linux/security.h>
-#include <linux/cpuset.h>
-#include <linux/hugetlb.h>
-#include <linux/memcontrol.h>
-#include <linux/shmem_fs.h>
-#include <linux/rmap.h>
-#include <linux/delayacct.h>
-#include <linux/psi.h>
-#include <linux/ramfs.h>
-#include <linux/page_idle.h>
-#include <linux/migrate.h>
-#include <linux/pipe_fs_i.h>
-#include <linux/splice.h>
-#include <linux/rcupdate_wait.h>
-#include <linux/sched/mm.h>
-#include <linux/sysctl.h>
-#include <linux/pgalloc.h>
+#include <yai/export.h>
+#include <yai/compiler.h>
+#include <yai/dax.h>
+#include <yai/fs.h>
+#include <yai/sched/signal.h>
+#include <yai/uaccess.h>
+#include <yai/capability.h>
+#include <yai/kernel_stat.h>
+#include <yai/gfp.h>
+#include <yai/mm.h>
+#include <yai/swap.h>
+#include <yai/leafops.h>
+#include <yai/syscalls.h>
+#include <yai/mman.h>
+#include <yai/pagemap.h>
+#include <yai/file.h>
+#include <yai/uio.h>
+#include <yai/error-injection.h>
+#include <yai/hash.h>
+#include <yai/writeback.h>
+#include <yai/backing-dev.h>
+#include <yai/pagevec.h>
+#include <yai/security.h>
+#include <yai/cpuset.h>
+#include <yai/hugetlb.h>
+#include <yai/memcontrol.h>
+#include <yai/shmem_fs.h>
+#include <yai/rmap.h>
+#include <yai/delayacct.h>
+#include <yai/psi.h>
+#include <yai/ramfs.h>
+#include <yai/page_idle.h>
+#include <yai/migrate.h>
+#include <yai/pipe_fs_i.h>
+#include <yai/splice.h>
+#include <yai/rcupdate_wait.h>
+#include <yai/sched/mm.h>
+#include <yai/sysctl.h>
+#include <yai/pgalloc.h>
 
-#include <asm/tlbflush.h>
+#include <yai/tlbflush.h>
 #include "internal.h"
 
 #define CREATE_TRACE_POINTS
@@ -59,9 +59,9 @@
 /*
  * FIXME: remove all knowledge of the buffer layer from the core VM
  */
-#include <linux/buffer_head.h> /* for try_to_free_buffers */
+#include <yai/buffer_head.h> /* for try_to_free_buffers */
 
-#include <asm/mman.h>
+#include <yai/mman.h>
 
 #include "swap.h"
 

@@ -1,16 +1,16 @@
 // SPDX-License-Identifier: GPL-2.0-only
 // based on arch/arm/mm/alignment.c
 
-#include <linux/compiler.h>
-#include <linux/errno.h>
-#include <linux/kernel.h>
-#include <linux/init.h>
-#include <linux/perf_event.h>
-#include <linux/uaccess.h>
+#include <yai/compiler.h>
+#include <yai/errno.h>
+#include <yai/kernel.h>
+#include <yai/init.h>
+#include <yai/perf_event.h>
+#include <yai/uaccess.h>
 
-#include <asm/exception.h>
-#include <asm/ptrace.h>
-#include <asm/traps.h>
+#include <yai/exception.h>
+#include <yai/ptrace.h>
+#include <yai/traps.h>
 
 /*
  * 32-bit misaligned trap handler (c) 1998 San Mehat (CCC) -July 1998

@@ -9,7 +9,7 @@
  */
 #define mmiowb()	RISCV_FENCE(o, w)
 
-#include <linux/smp.h>
-#include <asm-generic/mmiowb.h>
+#include <yai/smp.h>
+#include <yai/mmiowb.h>
 
 #endif	/* _ASM_RISCV_MMIOWB_H */

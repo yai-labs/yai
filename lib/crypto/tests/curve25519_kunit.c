@@ -5,7 +5,7 @@
 
 #include <crypto/curve25519.h>
 #include <kunit/test.h>
-#include <linux/timekeeping.h>
+#include <yai/timekeeping.h>
 
 struct curve25519_test_vector {
 	u8 private[CURVE25519_KEY_SIZE];

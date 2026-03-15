@@ -12,23 +12,23 @@
  */
 
 #include <kunit/test.h>
-#include <linux/jiffies.h>
-#include <linux/kernel.h>
-#include <linux/kfence.h>
-#include <linux/mm.h>
-#include <linux/random.h>
-#include <linux/slab.h>
-#include <linux/spinlock.h>
-#include <linux/string.h>
-#include <linux/string_choices.h>
-#include <linux/tracepoint.h>
+#include <yai/jiffies.h>
+#include <yai/kernel.h>
+#include <yai/kfence.h>
+#include <yai/mm.h>
+#include <yai/random.h>
+#include <yai/slab.h>
+#include <yai/spinlock.h>
+#include <yai/string.h>
+#include <yai/string_choices.h>
+#include <yai/tracepoint.h>
 #include <trace/events/printk.h>
 
-#include <asm/kfence.h>
+#include <yai/kfence.h>
 
 #include "kfence.h"
 
-/* May be overridden by <asm/kfence.h>. */
+/* May be overridden by <yai/kfence.h>. */
 #ifndef arch_kfence_test_address
 #define arch_kfence_test_address(addr) (addr)
 #endif

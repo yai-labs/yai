@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: GPL-2.0
-#include <linux/pagewalk.h>
-#include <linux/hugetlb.h>
-#include <linux/bitops.h>
-#include <linux/mmu_notifier.h>
-#include <linux/mm_inline.h>
-#include <asm/cacheflush.h>
-#include <asm/tlbflush.h>
+#include <yai/pagewalk.h>
+#include <yai/hugetlb.h>
+#include <yai/bitops.h>
+#include <yai/mmu_notifier.h>
+#include <yai/mm_inline.h>
+#include <yai/cacheflush.h>
+#include <yai/tlbflush.h>
 
 /**
  * struct wp_walk - Private struct for pagetable walk callbacks

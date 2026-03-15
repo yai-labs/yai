@@ -2,17 +2,17 @@
 // Copyright 2023 Google LLC
 // Author: Ard Biesheuvel <ardb@google.com>
 
-#include <linux/init.h>
-#include <linux/libfdt.h>
-#include <linux/linkage.h>
-#include <linux/types.h>
-#include <linux/sizes.h>
-#include <linux/string.h>
+#include <yai/init.h>
+#include <yai/libfdt.h>
+#include <yai/linkage.h>
+#include <yai/types.h>
+#include <yai/sizes.h>
+#include <yai/string.h>
 
-#include <asm/memory.h>
-#include <asm/pgalloc.h>
-#include <asm/pgtable.h>
-#include <asm/tlbflush.h>
+#include <yai/memory.h>
+#include <yai/pgalloc.h>
+#include <yai/pgtable.h>
+#include <yai/tlbflush.h>
 
 #include "pi.h"
 

@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: GPL-2.0
-#include <linux/tboot.h>
+#include <yai/tboot.h>
 
-#include <asm/cpu.h>
-#include <asm/cpufeature.h>
-#include <asm/msr-index.h>
-#include <asm/msr.h>
-#include <asm/processor.h>
-#include <asm/vmx.h>
+#include <yai/cpu.h>
+#include <yai/cpufeature.h>
+#include <yai/msr-index.h>
+#include <yai/msr.h>
+#include <yai/processor.h>
+#include <yai/vmx.h>
 
 #undef pr_fmt
 #define pr_fmt(fmt)	"x86/cpu: " fmt

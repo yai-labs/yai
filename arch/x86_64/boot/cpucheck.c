@@ -21,12 +21,12 @@
 #ifdef _SETUP
 # include "boot.h"
 #endif
-#include <linux/types.h>
-#include <asm/cpufeaturemasks.h>
-#include <asm/intel-family.h>
-#include <asm/processor-flags.h>
-#include <asm/msr-index.h>
-#include <asm/shared/msr.h>
+#include <yai/types.h>
+#include <yai/cpufeaturemasks.h>
+#include <yai/intel-family.h>
+#include <yai/processor-flags.h>
+#include <yai/msr-index.h>
+#include <yai/shared/msr.h>
 
 #include "string.h"
 

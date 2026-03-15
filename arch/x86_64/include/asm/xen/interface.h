@@ -189,12 +189,12 @@ struct arch_shared_info {
 #endif	/* !__ASSEMBLER__ */
 
 #ifdef CONFIG_X86_32
-#include <asm/xen/interface_32.h>
+#include <yai/xen/interface_32.h>
 #else
-#include <asm/xen/interface_64.h>
+#include <yai/xen/interface_64.h>
 #endif
 
-#include <asm/pvclock-abi.h>
+#include <yai/pvclock-abi.h>
 
 #ifndef __ASSEMBLER__
 /*
@@ -382,7 +382,7 @@ struct xen_pmu_arch {
  * Prefix forces emulation of some non-trapping instructions.
  * Currently only CPUID.
  */
-#include <asm/emulate_prefix.h>
+#include <yai/emulate_prefix.h>
 
 #define XEN_EMULATE_PREFIX __ASM_FORM(.byte __XEN_EMULATE_PREFIX ;)
 #define XEN_CPUID          XEN_EMULATE_PREFIX __ASM_FORM(cpuid)

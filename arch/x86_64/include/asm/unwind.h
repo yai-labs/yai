@@ -2,11 +2,11 @@
 #ifndef _ASM_X86_UNWIND_H
 #define _ASM_X86_UNWIND_H
 
-#include <linux/sched.h>
-#include <linux/ftrace.h>
-#include <linux/rethook.h>
-#include <asm/ptrace.h>
-#include <asm/stacktrace.h>
+#include <yai/sched.h>
+#include <yai/ftrace.h>
+#include <yai/rethook.h>
+#include <yai/ptrace.h>
+#include <yai/stacktrace.h>
 
 #define IRET_FRAME_OFFSET (offsetof(struct pt_regs, ip))
 #define IRET_FRAME_SIZE   (sizeof(struct pt_regs) - IRET_FRAME_OFFSET)

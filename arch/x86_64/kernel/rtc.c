@@ -2,15 +2,15 @@
 /*
  * RTC related functions
  */
-#include <linux/platform_device.h>
-#include <linux/mc146818rtc.h>
-#include <linux/export.h>
-#include <linux/pnp.h>
+#include <yai/platform_device.h>
+#include <yai/mc146818rtc.h>
+#include <yai/export.h>
+#include <yai/pnp.h>
 
-#include <asm/vsyscall.h>
-#include <asm/x86_init.h>
-#include <asm/time.h>
-#include <asm/setup.h>
+#include <yai/vsyscall.h>
+#include <yai/x86_init.h>
+#include <yai/time.h>
+#include <yai/setup.h>
 
 #ifdef CONFIG_X86_32
 /*

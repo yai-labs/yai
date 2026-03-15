@@ -8,16 +8,16 @@
  *      Dave Young <dyoung@redhat.com>
  */
 
-#include <linux/kobject.h>
-#include <linux/string.h>
-#include <linux/sysfs.h>
-#include <linux/init.h>
-#include <linux/stat.h>
-#include <linux/slab.h>
-#include <linux/mm.h>
-#include <linux/io.h>
+#include <yai/kobject.h>
+#include <yai/string.h>
+#include <yai/sysfs.h>
+#include <yai/init.h>
+#include <yai/stat.h>
+#include <yai/slab.h>
+#include <yai/mm.h>
+#include <yai/io.h>
 
-#include <asm/setup.h>
+#include <yai/setup.h>
 
 static ssize_t version_show(struct kobject *kobj,
 			    struct kobj_attribute *attr, char *buf)

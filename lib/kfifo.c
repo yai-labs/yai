@@ -5,14 +5,14 @@
  * Copyright (C) 2009/2010 Stefani Seibold <stefani@seibold.net>
  */
 
-#include <linux/dma-mapping.h>
-#include <linux/err.h>
-#include <linux/export.h>
-#include <linux/kfifo.h>
-#include <linux/log2.h>
-#include <linux/scatterlist.h>
-#include <linux/slab.h>
-#include <linux/uaccess.h>
+#include <yai/dma-mapping.h>
+#include <yai/err.h>
+#include <yai/export.h>
+#include <yai/kfifo.h>
+#include <yai/log2.h>
+#include <yai/scatterlist.h>
+#include <yai/slab.h>
+#include <yai/uaccess.h>
 
 /*
  * internal helper to calculate the unused elements in a fifo

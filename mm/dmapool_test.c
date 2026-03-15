@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: GPL-2.0
-#include <linux/device.h>
-#include <linux/dma-map-ops.h>
-#include <linux/dma-mapping.h>
-#include <linux/dmapool.h>
-#include <linux/kernel.h>
-#include <linux/ktime.h>
-#include <linux/module.h>
+#include <yai/device.h>
+#include <yai/dma-map-ops.h>
+#include <yai/dma-mapping.h>
+#include <yai/dmapool.h>
+#include <yai/kernel.h>
+#include <yai/ktime.h>
+#include <yai/module.h>
 
 #define NR_TESTS (100)
 

@@ -4,7 +4,7 @@
 #ifndef _RISCV_CRC_CLMUL_H
 #define _RISCV_CRC_CLMUL_H
 
-#include <linux/types.h>
+#include <yai/types.h>
 #include "crc-clmul-consts.h"
 
 u16 crc16_msb_clmul(u16 crc, const void *p, size_t len,

@@ -2,10 +2,10 @@
 #ifndef _ASM_X86_PARAVIRT_SPINLOCK_H
 #define _ASM_X86_PARAVIRT_SPINLOCK_H
 
-#include <asm/paravirt_types.h>
+#include <yai/paravirt_types.h>
 
 #ifdef CONFIG_SMP
-#include <asm/spinlock_types.h>
+#include <yai/spinlock_types.h>
 #endif
 
 struct qspinlock;

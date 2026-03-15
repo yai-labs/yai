@@ -4,12 +4,12 @@
  *
  * Copyright (c) 2011, Tom Herbert <therbert@google.com>
  */
-#include <linux/types.h>
-#include <linux/kernel.h>
-#include <linux/jiffies.h>
-#include <linux/dynamic_queue_limits.h>
-#include <linux/compiler.h>
-#include <linux/export.h>
+#include <yai/types.h>
+#include <yai/kernel.h>
+#include <yai/jiffies.h>
+#include <yai/dynamic_queue_limits.h>
+#include <yai/compiler.h>
+#include <yai/export.h>
 #include <trace/events/napi.h>
 
 #define POSDIFF(A, B) ((int)((A) - (B)) > 0 ? (A) - (B) : 0)

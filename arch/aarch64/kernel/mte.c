@@ -3,26 +3,26 @@
  * Copyright (C) 2020 ARM Ltd.
  */
 
-#include <linux/bitops.h>
-#include <linux/cpu.h>
-#include <linux/kernel.h>
-#include <linux/mm.h>
-#include <linux/prctl.h>
-#include <linux/sched.h>
-#include <linux/sched/mm.h>
-#include <linux/string.h>
-#include <linux/swap.h>
-#include <linux/swapops.h>
-#include <linux/thread_info.h>
-#include <linux/types.h>
-#include <linux/uaccess.h>
-#include <linux/uio.h>
+#include <yai/bitops.h>
+#include <yai/cpu.h>
+#include <yai/kernel.h>
+#include <yai/mm.h>
+#include <yai/prctl.h>
+#include <yai/sched.h>
+#include <yai/sched/mm.h>
+#include <yai/string.h>
+#include <yai/swap.h>
+#include <yai/swapops.h>
+#include <yai/thread_info.h>
+#include <yai/types.h>
+#include <yai/uaccess.h>
+#include <yai/uio.h>
 
-#include <asm/barrier.h>
-#include <asm/cpufeature.h>
-#include <asm/mte.h>
-#include <asm/ptrace.h>
-#include <asm/sysreg.h>
+#include <yai/barrier.h>
+#include <yai/cpufeature.h>
+#include <yai/mte.h>
+#include <yai/ptrace.h>
+#include <yai/sysreg.h>
 
 static DEFINE_PER_CPU_READ_MOSTLY(u64, mte_tcf_preferred);
 

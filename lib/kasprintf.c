@@ -5,11 +5,11 @@
  *  Copyright (C) 1991, 1992  Linus Torvalds
  */
 
-#include <linux/stdarg.h>
-#include <linux/export.h>
-#include <linux/slab.h>
-#include <linux/types.h>
-#include <linux/string.h>
+#include <yai/stdarg.h>
+#include <yai/export.h>
+#include <yai/slab.h>
+#include <yai/types.h>
+#include <yai/string.h>
 
 /* Simplified asprintf. */
 char *kvasprintf(gfp_t gfp, const char *fmt, va_list ap)

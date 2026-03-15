@@ -8,8 +8,8 @@
 #include <yai/overflow.h>
 #include <yai/stdarg.h>
 #include <yai/types.h>
-#include <asm/bug.h>
-#include <asm/percpu.h>
+#include <yai/bug.h>
+#include <yai/percpu.h>
 
 struct device;
 struct device_node;

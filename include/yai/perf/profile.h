@@ -6,7 +6,7 @@
 #include <yai/init.h>
 #include <yai/cache.h>
 
-#include <asm/errno.h>
+#include <yai/errno.h>
 
 #define CPU_PROFILING	1
 #define SCHED_PROFILING	2

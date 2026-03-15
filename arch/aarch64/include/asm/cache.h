@@ -37,12 +37,12 @@
 
 #if !defined(__ASSEMBLER__) && !defined(BUILD_VDSO)
 
-#include <linux/bitops.h>
-#include <linux/kasan-enabled.h>
+#include <yai/bitops.h>
+#include <yai/kasan-enabled.h>
 
-#include <asm/cputype.h>
-#include <asm/mte-def.h>
-#include <asm/sysreg.h>
+#include <yai/cputype.h>
+#include <yai/mte-def.h>
+#include <yai/sysreg.h>
 
 #ifdef CONFIG_KASAN_SW_TAGS
 #define ARCH_SLAB_MINALIGN	(1ULL << KASAN_SHADOW_SCALE_SHIFT)

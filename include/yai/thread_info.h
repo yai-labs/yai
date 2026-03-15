@@ -16,11 +16,11 @@
 
 #ifdef CONFIG_THREAD_INFO_IN_TASK
 /*
- * For CONFIG_THREAD_INFO_IN_TASK kernels we need <asm/current.h> for the
+ * For CONFIG_THREAD_INFO_IN_TASK kernels we need <yai/current.h> for the
  * definition of current, but for !CONFIG_THREAD_INFO_IN_TASK kernels,
- * including <asm/current.h> can cause a circular dependency on some platforms.
+ * including <yai/current.h> can cause a circular dependency on some platforms.
  */
-#include <asm/current.h>
+#include <yai/current.h>
 #define current_thread_info() ((struct thread_info *)current)
 #endif
 
@@ -59,7 +59,7 @@ enum syscall_work_bit {
 #define SYSCALL_WORK_SYSCALL_RSEQ_SLICE		BIT(SYSCALL_WORK_BIT_SYSCALL_RSEQ_SLICE)
 #endif
 
-#include <asm/thread_info.h>
+#include <yai/thread_info.h>
 
 #ifndef TIF_NEED_RESCHED_LAZY
 #ifdef CONFIG_ARCH_HAS_PREEMPT_LAZY

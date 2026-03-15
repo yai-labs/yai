@@ -9,7 +9,7 @@
  *
  */
 
-#include <linux/zutil.h>
+#include <yai/zutil.h>
 #include "inftrees.h"
 #include "inflate.h"
 #include "inffast.h"

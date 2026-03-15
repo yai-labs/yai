@@ -2,7 +2,7 @@
 #ifndef _ASM_X86_MICROCODE_H
 #define _ASM_X86_MICROCODE_H
 
-#include <asm/msr.h>
+#include <yai/msr.h>
 
 struct cpu_signature {
 	unsigned int sig;

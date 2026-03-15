@@ -6,7 +6,7 @@
 #ifndef _ASM_RISCV_FPU_H
 #define _ASM_RISCV_FPU_H
 
-#include <asm/switch_to.h>
+#include <yai/switch_to.h>
 
 #define kernel_fpu_available()	has_fpu()
 

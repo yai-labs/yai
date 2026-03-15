@@ -2,24 +2,24 @@
 
 #define pr_fmt(fmt) "callthunks: " fmt
 
-#include <linux/debugfs.h>
-#include <linux/kallsyms.h>
-#include <linux/memory.h>
-#include <linux/moduleloader.h>
-#include <linux/static_call.h>
+#include <yai/debugfs.h>
+#include <yai/kallsyms.h>
+#include <yai/memory.h>
+#include <yai/moduleloader.h>
+#include <yai/static_call.h>
 
-#include <asm/alternative.h>
-#include <asm/asm-offsets.h>
-#include <asm/cpu.h>
-#include <asm/ftrace.h>
-#include <asm/insn.h>
-#include <asm/kexec.h>
-#include <asm/nospec-branch.h>
-#include <asm/sections.h>
-#include <asm/switch_to.h>
-#include <asm/sync_core.h>
-#include <asm/text-patching.h>
-#include <asm/xen/hypercall.h>
+#include <yai/alternative.h>
+#include <yai/asm-offsets.h>
+#include <yai/cpu.h>
+#include <yai/ftrace.h>
+#include <yai/insn.h>
+#include <yai/kexec.h>
+#include <yai/nospec-branch.h>
+#include <yai/sections.h>
+#include <yai/switch_to.h>
+#include <yai/sync_core.h>
+#include <yai/text-patching.h>
+#include <yai/xen/hypercall.h>
 
 static int __initdata_or_module debug_callthunks;
 

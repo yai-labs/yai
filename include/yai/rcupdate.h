@@ -28,7 +28,7 @@
 #include <yai/bottom_half.h>
 #include <yai/lockdep.h>
 #include <yai/cleanup.h>
-#include <asm/processor.h>
+#include <yai/processor.h>
 #include <yai/context_tracking_irq.h>
 
 token_context_lock(RCU, __reentrant_ctx_lock);

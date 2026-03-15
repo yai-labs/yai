@@ -5,7 +5,7 @@
 #ifndef __ASM_TIMEX_H
 #define __ASM_TIMEX_H
 
-#include <asm/arch_timer.h>
+#include <yai/arch_timer.h>
 
 /*
  * Use the current timer as a cycle counter since this is what we use for
@@ -13,6 +13,6 @@
  */
 #define get_cycles()	arch_timer_read_counter()
 
-#include <asm-generic/timex.h>
+#include <yai/timex.h>
 
 #endif

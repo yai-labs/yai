@@ -2,7 +2,7 @@
 #ifndef _ASM_X86_ASM_H
 #define _ASM_X86_ASM_H
 
-#include <linux/annotate.h>
+#include <yai/annotate.h>
 
 #ifdef __ASSEMBLER__
 # define __ASM_FORM(x, ...)		x,## __VA_ARGS__
@@ -10,7 +10,7 @@
 # define __ASM_FORM_COMMA(x, ...)	x,## __VA_ARGS__,
 # define __ASM_REGPFX			%
 #else
-#include <linux/stringify.h>
+#include <yai/stringify.h>
 # define __ASM_FORM(x, ...)		" " __stringify(x,##__VA_ARGS__) " "
 # define __ASM_FORM_RAW(x, ...)		    __stringify(x,##__VA_ARGS__)
 # define __ASM_FORM_COMMA(x, ...)	" " __stringify(x,##__VA_ARGS__) ","
@@ -127,10 +127,10 @@ static __always_inline __pure void *rip_rel_ptr(void *p)
 #ifdef __KERNEL__
 
 #ifndef COMPILE_OFFSETS
-#include <asm/asm-offsets.h>
+#include <yai/asm-offsets.h>
 #endif
 
-# include <asm/extable_fixup_types.h>
+# include <yai/extable_fixup_types.h>
 
 /* Exception table entry */
 #ifdef __ASSEMBLER__

@@ -3,7 +3,7 @@
 #define __GENERIC_IO_H
 
 #include <yai/linkage.h>
-#include <asm/byteorder.h>
+#include <yai/byteorder.h>
 
 /*
  * These are the "generic" interfaces for doing new-style
@@ -12,7 +12,7 @@
  * wrappers around the old-style IO register access functions:
  * read[bwl]/write[bwl]/in[bwl]/out[bwl]
  *
- * Don't include this directly, include it from <asm/io.h>.
+ * Don't include this directly, include it from <yai/io.h>.
  */
 
 /*

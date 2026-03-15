@@ -5,7 +5,7 @@
 #ifndef __ASM_MODULE_H
 #define __ASM_MODULE_H
 
-#include <asm-generic/module.h>
+#include <yai/module.h>
 
 struct mod_plt_sec {
 	int			plt_shndx;

@@ -7,31 +7,31 @@
  *  2000-12-*   x86-64 compatibility mode signal handling by Andi Kleen
  */
 
-#include <linux/sched.h>
-#include <linux/sched/task_stack.h>
-#include <linux/mm.h>
-#include <linux/smp.h>
-#include <linux/kernel.h>
-#include <linux/errno.h>
-#include <linux/wait.h>
-#include <linux/unistd.h>
-#include <linux/stddef.h>
-#include <linux/personality.h>
-#include <linux/compat.h>
-#include <linux/binfmts.h>
-#include <linux/syscalls.h>
-#include <asm/ucontext.h>
-#include <linux/uaccess.h>
-#include <asm/fpu/signal.h>
-#include <asm/ptrace.h>
-#include <asm/user32.h>
+#include <yai/sched.h>
+#include <yai/sched/task_stack.h>
+#include <yai/mm.h>
+#include <yai/smp.h>
+#include <yai/kernel.h>
+#include <yai/errno.h>
+#include <yai/wait.h>
+#include <yai/unistd.h>
+#include <yai/stddef.h>
+#include <yai/personality.h>
+#include <yai/compat.h>
+#include <yai/binfmts.h>
+#include <yai/syscalls.h>
+#include <yai/ucontext.h>
+#include <yai/uaccess.h>
+#include <yai/fpu/signal.h>
+#include <yai/ptrace.h>
+#include <yai/user32.h>
 #include <uapi/asm/sigcontext.h>
-#include <asm/proto.h>
-#include <asm/vdso.h>
-#include <asm/sigframe.h>
-#include <asm/sighandling.h>
-#include <asm/smap.h>
-#include <asm/gsseg.h>
+#include <yai/proto.h>
+#include <yai/vdso.h>
+#include <yai/sigframe.h>
+#include <yai/sighandling.h>
+#include <yai/smap.h>
+#include <yai/gsseg.h>
 
 /*
  * The first GDT descriptor is reserved as 'NULL descriptor'.  As bits 0
@@ -57,7 +57,7 @@ static inline u16 fixup_rpl(u16 sel)
 }
 
 #ifdef CONFIG_IA32_EMULATION
-#include <asm/unistd_32_ia32.h>
+#include <yai/unistd_32_ia32.h>
 
 static inline void reload_segments(struct sigcontext_32 *sc)
 {

@@ -2,8 +2,8 @@
 #ifndef _ASM_X86_USER_64_H
 #define _ASM_X86_USER_64_H
 
-#include <asm/types.h>
-#include <asm/page.h>
+#include <yai/types.h>
+#include <yai/page.h>
 /* Core file format: The core file is written in such a way that gdb
    can understand it and provide useful information to the user.
    There are quite a number of obstacles to being able to view the

@@ -3,7 +3,7 @@
 #define _LINUX_SOCKET_H
 
 
-#include <asm/socket.h>			/* arch-dependent defines	*/
+#include <yai/socket.h>			/* arch-dependent defines	*/
 #include <yai/sockios.h>		/* the SIOCxxx I/O controls	*/
 #include <yai/uio.h>			/* iovec support		*/
 #include <yai/types.h>		/* pid_t			*/

@@ -3,7 +3,7 @@
 #define __LINUX_PIM_H
 
 #include <yai/skbuff.h>
-#include <asm/byteorder.h>
+#include <yai/byteorder.h>
 
 /* Message types - V1 */
 #define PIM_V1_VERSION		cpu_to_be32(0x10000000)

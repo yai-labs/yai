@@ -5,10 +5,10 @@
 #ifndef __ASM_VECTORS_H
 #define __ASM_VECTORS_H
 
-#include <linux/bug.h>
-#include <linux/percpu.h>
+#include <yai/bug.h>
+#include <yai/percpu.h>
 
-#include <asm/fixmap.h>
+#include <yai/fixmap.h>
 
 extern char vectors[];
 extern char tramp_vectors[];

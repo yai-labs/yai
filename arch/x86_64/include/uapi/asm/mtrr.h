@@ -24,9 +24,9 @@
 #ifndef _UAPI_ASM_X86_MTRR_H
 #define _UAPI_ASM_X86_MTRR_H
 
-#include <linux/types.h>
-#include <linux/ioctl.h>
-#include <linux/errno.h>
+#include <yai/types.h>
+#include <yai/ioctl.h>
+#include <yai/errno.h>
 
 #define	MTRR_IOCTL_BASE	'M'
 

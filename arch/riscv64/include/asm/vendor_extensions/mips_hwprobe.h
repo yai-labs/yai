@@ -6,7 +6,7 @@
 #ifndef _ASM_RISCV_VENDOR_EXTENSIONS_MIPS_HWPROBE_H_
 #define _ASM_RISCV_VENDOR_EXTENSIONS_MIPS_HWPROBE_H_
 
-#include <linux/cpumask.h>
+#include <yai/cpumask.h>
 #include <uapi/asm/hwprobe.h>
 
 #ifdef CONFIG_RISCV_ISA_VENDOR_EXT_MIPS

@@ -10,22 +10,22 @@
  * Copyright (C) 2012 ARM Ltd.
  */
 
-#include <linux/hardirq.h>
-#include <linux/init.h>
-#include <linux/irq.h>
-#include <linux/irqchip.h>
-#include <linux/kprobes.h>
-#include <linux/memory.h>
-#include <linux/scs.h>
-#include <linux/seq_file.h>
-#include <linux/smp.h>
-#include <linux/vmalloc.h>
-#include <asm/daifflags.h>
-#include <asm/exception.h>
-#include <asm/numa.h>
-#include <asm/softirq_stack.h>
-#include <asm/stacktrace.h>
-#include <asm/vmap_stack.h>
+#include <yai/hardirq.h>
+#include <yai/init.h>
+#include <yai/irq.h>
+#include <yai/irqchip.h>
+#include <yai/kprobes.h>
+#include <yai/memory.h>
+#include <yai/scs.h>
+#include <yai/seq_file.h>
+#include <yai/smp.h>
+#include <yai/vmalloc.h>
+#include <yai/daifflags.h>
+#include <yai/exception.h>
+#include <yai/numa.h>
+#include <yai/softirq_stack.h>
+#include <yai/stacktrace.h>
+#include <yai/vmap_stack.h>
 
 /* Only access this in an NMI enter/exit */
 DEFINE_PER_CPU(struct nmi_ctx, nmi_contexts);

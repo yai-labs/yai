@@ -7,7 +7,7 @@
  * Copyright (C) 2008 Wind River Systems, Inc.
  */
 
-#include <asm/ptrace.h>
+#include <yai/ptrace.h>
 
 /*
  * BUFMAX defines the maximum number of characters in inbound/outbound

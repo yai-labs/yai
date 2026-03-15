@@ -4,9 +4,9 @@
 #ifndef _ORC_HEADER_H
 #define _ORC_HEADER_H
 
-#include <linux/types.h>
-#include <linux/compiler.h>
-#include <asm/orc_hash.h>
+#include <yai/types.h>
+#include <yai/compiler.h>
+#include <yai/orc_hash.h>
 
 /*
  * The header is currently a 20-byte hash of the ORC entry definition; see

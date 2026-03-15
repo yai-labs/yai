@@ -16,12 +16,12 @@
 #define _ASM_ARM64_FIXMAP_H
 
 #ifndef __ASSEMBLER__
-#include <linux/kernel.h>
-#include <linux/math.h>
-#include <linux/sizes.h>
-#include <asm/boot.h>
-#include <asm/page.h>
-#include <asm/pgtable-prot.h>
+#include <yai/kernel.h>
+#include <yai/math.h>
+#include <yai/sizes.h>
+#include <yai/boot.h>
+#include <yai/page.h>
+#include <yai/pgtable-prot.h>
 
 /*
  * Here we define all the compile-time 'special' virtual
@@ -115,7 +115,7 @@ void __init early_fixmap_init(void);
 
 extern void __set_fixmap(enum fixed_addresses idx, phys_addr_t phys, pgprot_t prot);
 
-#include <asm-generic/fixmap.h>
+#include <yai/fixmap.h>
 
 #endif /* !__ASSEMBLER__ */
 #endif /* _ASM_ARM64_FIXMAP_H */

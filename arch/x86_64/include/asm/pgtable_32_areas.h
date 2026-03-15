@@ -1,7 +1,7 @@
 #ifndef _ASM_X86_PGTABLE_32_AREAS_H
 #define _ASM_X86_PGTABLE_32_AREAS_H
 
-#include <asm/cpu_entry_area.h>
+#include <yai/cpu_entry_area.h>
 
 /*
  * Just any arbitrary offset to the start of the vmalloc VM area: the

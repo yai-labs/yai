@@ -1,16 +1,16 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 
-#include <linux/memcontrol.h>
-#include <linux/swap.h>
-#include <linux/mm_inline.h>
-#include <linux/pagewalk.h>
-#include <linux/backing-dev.h>
-#include <linux/swap_cgroup.h>
-#include <linux/eventfd.h>
-#include <linux/poll.h>
-#include <linux/sort.h>
-#include <linux/file.h>
-#include <linux/seq_buf.h>
+#include <yai/memcontrol.h>
+#include <yai/swap.h>
+#include <yai/mm_inline.h>
+#include <yai/pagewalk.h>
+#include <yai/backing-dev.h>
+#include <yai/swap_cgroup.h>
+#include <yai/eventfd.h>
+#include <yai/poll.h>
+#include <yai/sort.h>
+#include <yai/file.h>
+#include <yai/seq_buf.h>
 
 #include "internal.h"
 #include "swap.h"

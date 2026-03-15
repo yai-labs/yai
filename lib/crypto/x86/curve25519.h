@@ -4,12 +4,12 @@
  * Copyright (c) 2016-2020 INRIA, CMU and Microsoft Corporation
  */
 
-#include <linux/types.h>
-#include <linux/jump_label.h>
-#include <linux/kernel.h>
+#include <yai/types.h>
+#include <yai/jump_label.h>
+#include <yai/kernel.h>
 
-#include <asm/cpufeature.h>
-#include <asm/processor.h>
+#include <yai/cpufeature.h>
+#include <yai/processor.h>
 
 static __always_inline u64 eq_mask(u64 a, u64 b)
 {

@@ -24,6 +24,6 @@
 #define __BITS_PER_LONG 64
 #endif
 
-#include <asm-generic/bitsperlong.h>
+#include <yai/bitsperlong.h>
 
 #endif	/* __ASM_BITSPERLONG_H */

@@ -4,10 +4,10 @@
  *
  * Copyright (C) 2022 Google LLC
  */
-#include <linux/string.h>
-#include <linux/cfi.h>
-#include <asm/insn.h>
-#include <asm/insn-eval.h>
+#include <yai/string.h>
+#include <yai/cfi.h>
+#include <yai/insn.h>
+#include <yai/insn-eval.h>
 
 /*
  * Returns the target address and the expected type when regs->ip points

@@ -5,9 +5,9 @@
  * Copyright (C) 2016 - 2017 Linaro Ltd <ard.biesheuvel@linaro.org>
  */
 
-#include <linux/cpufeature.h>
+#include <yai/cpufeature.h>
 
-#include <asm/simd.h>
+#include <yai/simd.h>
 
 static __ro_after_init DEFINE_STATIC_KEY_FALSE(have_asimd);
 static __ro_after_init DEFINE_STATIC_KEY_FALSE(have_pmull);

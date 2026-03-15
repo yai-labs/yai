@@ -13,11 +13,11 @@
  */
 
 #ifndef STATIC
-#include <linux/module.h>
-#include <linux/kernel.h>
+#include <yai/module.h>
+#include <yai/kernel.h>
 #endif
-#include <linux/unaligned.h>
-#include <linux/lzo.h>
+#include <yai/unaligned.h>
+#include <yai/lzo.h>
 #include "lzodefs.h"
 
 #define HAVE_IP(x)      ((size_t)(ip_end - ip) >= (size_t)(x))

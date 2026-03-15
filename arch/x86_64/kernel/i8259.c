@@ -1,29 +1,29 @@
 // SPDX-License-Identifier: GPL-2.0
-#include <linux/linkage.h>
-#include <linux/errno.h>
-#include <linux/signal.h>
-#include <linux/sched.h>
-#include <linux/ioport.h>
-#include <linux/interrupt.h>
-#include <linux/irq.h>
-#include <linux/timex.h>
-#include <linux/random.h>
-#include <linux/init.h>
-#include <linux/kernel_stat.h>
-#include <linux/syscore_ops.h>
-#include <linux/bitops.h>
-#include <linux/acpi.h>
-#include <linux/io.h>
-#include <linux/delay.h>
-#include <linux/pgtable.h>
+#include <yai/linkage.h>
+#include <yai/errno.h>
+#include <yai/signal.h>
+#include <yai/sched.h>
+#include <yai/ioport.h>
+#include <yai/interrupt.h>
+#include <yai/irq.h>
+#include <yai/timex.h>
+#include <yai/random.h>
+#include <yai/init.h>
+#include <yai/kernel_stat.h>
+#include <yai/syscore_ops.h>
+#include <yai/bitops.h>
+#include <yai/acpi.h>
+#include <yai/io.h>
+#include <yai/delay.h>
+#include <yai/pgtable.h>
 
-#include <linux/atomic.h>
-#include <asm/timer.h>
-#include <asm/hw_irq.h>
-#include <asm/desc.h>
-#include <asm/apic.h>
-#include <asm/i8259.h>
-#include <asm/io_apic.h>
+#include <yai/atomic.h>
+#include <yai/timer.h>
+#include <yai/hw_irq.h>
+#include <yai/desc.h>
+#include <yai/apic.h>
+#include <yai/i8259.h>
+#include <yai/io_apic.h>
 
 /*
  * This is the 'legacy' 8259A Programmable Interrupt Controller,

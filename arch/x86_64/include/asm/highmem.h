@@ -21,11 +21,11 @@
 
 #ifdef __KERNEL__
 
-#include <linux/interrupt.h>
-#include <linux/threads.h>
-#include <asm/tlbflush.h>
-#include <asm/fixmap.h>
-#include <asm/pgtable_areas.h>
+#include <yai/interrupt.h>
+#include <yai/threads.h>
+#include <yai/tlbflush.h>
+#include <yai/fixmap.h>
+#include <yai/pgtable_areas.h>
 
 /* declarations for highmem.c */
 extern unsigned long highstart_pfn, highend_pfn;

@@ -11,10 +11,10 @@
 #ifndef _INFUTIL_H
 #define _INFUTIL_H
 
-#include <linux/zlib.h>
+#include <yai/zlib.h>
 #ifdef CONFIG_ZLIB_DFLTCC
 #include "../zlib_dfltcc/dfltcc.h"
-#include <asm/page.h>
+#include <yai/page.h>
 #endif
 
 /* memory allocation for inflation */

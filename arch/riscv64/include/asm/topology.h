@@ -2,10 +2,10 @@
 #ifndef _ASM_RISCV_TOPOLOGY_H
 #define _ASM_RISCV_TOPOLOGY_H
 
-#include <linux/arch_topology.h>
+#include <yai/arch_topology.h>
 
 #ifdef CONFIG_NUMA
-#include <asm/numa.h>
+#include <yai/numa.h>
 #endif
 
 /* Replace task scheduler's default frequency-invariant accounting */
@@ -21,6 +21,6 @@
 /* Enable topology flag updates */
 #define arch_update_cpu_topology	topology_update_cpu_topology
 
-#include <asm-generic/topology.h>
+#include <yai/topology.h>
 
 #endif /* _ASM_RISCV_TOPOLOGY_H */

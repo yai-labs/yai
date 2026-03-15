@@ -7,8 +7,8 @@
 #ifndef __MM_ZPDESC_H__
 #define __MM_ZPDESC_H__
 
-#include <linux/migrate.h>
-#include <linux/pagemap.h>
+#include <yai/migrate.h>
+#include <yai/pagemap.h>
 
 /*
  * struct zpdesc -	Memory descriptor for zsmalloc pool memory.

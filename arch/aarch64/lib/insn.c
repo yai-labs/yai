@@ -5,17 +5,17 @@
  *
  * Copyright (C) 2014-2016 Zi Shen Lim <zlim.lnx@gmail.com>
  */
-#include <linux/bitfield.h>
-#include <linux/bitops.h>
-#include <linux/bug.h>
-#include <linux/printk.h>
-#include <linux/sizes.h>
-#include <linux/types.h>
+#include <yai/bitfield.h>
+#include <yai/bitops.h>
+#include <yai/bug.h>
+#include <yai/printk.h>
+#include <yai/sizes.h>
+#include <yai/types.h>
 
-#include <asm/debug-monitors.h>
-#include <asm/errno.h>
-#include <asm/insn.h>
-#include <asm/kprobes.h>
+#include <yai/debug-monitors.h>
+#include <yai/errno.h>
+#include <yai/insn.h>
+#include <yai/kprobes.h>
 
 #define AARCH64_INSN_SF_BIT	BIT(31)
 #define AARCH64_INSN_N_BIT	BIT(22)

@@ -2,8 +2,8 @@
 #ifndef _ASM_X86_COCO_H
 #define _ASM_X86_COCO_H
 
-#include <asm/asm.h>
-#include <asm/types.h>
+#include <yai/asm.h>
+#include <yai/types.h>
 
 enum cc_vendor {
 	CC_VENDOR_NONE,

@@ -11,12 +11,12 @@
 #ifndef __LINUX_MUTEX_H
 #define __LINUX_MUTEX_H
 
-#include <asm/current.h>
+#include <yai/current.h>
 #include <yai/list.h>
 #include <yai/spinlock_types.h>
 #include <yai/lockdep.h>
 #include <yai/atomic.h>
-#include <asm/processor.h>
+#include <yai/processor.h>
 #include <yai/osq_lock.h>
 #include <yai/debug_locks.h>
 #include <yai/cleanup.h>

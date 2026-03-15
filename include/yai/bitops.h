@@ -13,7 +13,7 @@
 
 #include <yai/irqflags.h>
 #include <yai/compiler.h>
-#include <asm/barrier.h>
+#include <yai/barrier.h>
 
 #include <yai/asm-generic/bitops/__ffs.h>
 #include <yai/asm-generic/bitops/ffz.h>

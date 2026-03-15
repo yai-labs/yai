@@ -36,31 +36,31 @@
 
 #define pr_fmt(fmt) "Memory failure: " fmt
 
-#include <linux/kernel.h>
-#include <linux/mm.h>
-#include <linux/memory-failure.h>
-#include <linux/page-flags.h>
-#include <linux/sched/signal.h>
-#include <linux/sched/task.h>
-#include <linux/dax.h>
-#include <linux/ksm.h>
-#include <linux/rmap.h>
-#include <linux/export.h>
-#include <linux/pagemap.h>
-#include <linux/swap.h>
-#include <linux/backing-dev.h>
-#include <linux/migrate.h>
-#include <linux/slab.h>
-#include <linux/leafops.h>
-#include <linux/hugetlb.h>
-#include <linux/memory_hotplug.h>
-#include <linux/mm_inline.h>
-#include <linux/memremap.h>
-#include <linux/kfifo.h>
-#include <linux/ratelimit.h>
-#include <linux/pagewalk.h>
-#include <linux/shmem_fs.h>
-#include <linux/sysctl.h>
+#include <yai/kernel.h>
+#include <yai/mm.h>
+#include <yai/memory-failure.h>
+#include <yai/page-flags.h>
+#include <yai/sched/signal.h>
+#include <yai/sched/task.h>
+#include <yai/dax.h>
+#include <yai/ksm.h>
+#include <yai/rmap.h>
+#include <yai/export.h>
+#include <yai/pagemap.h>
+#include <yai/swap.h>
+#include <yai/backing-dev.h>
+#include <yai/migrate.h>
+#include <yai/slab.h>
+#include <yai/leafops.h>
+#include <yai/hugetlb.h>
+#include <yai/memory_hotplug.h>
+#include <yai/mm_inline.h>
+#include <yai/memremap.h>
+#include <yai/kfifo.h>
+#include <yai/ratelimit.h>
+#include <yai/pagewalk.h>
+#include <yai/shmem_fs.h>
+#include <yai/sysctl.h>
 
 #define CREATE_TRACE_POINTS
 #include <trace/events/memory-failure.h>

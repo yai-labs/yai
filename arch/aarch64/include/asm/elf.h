@@ -5,13 +5,13 @@
 #ifndef __ASM_ELF_H
 #define __ASM_ELF_H
 
-#include <asm/hwcap.h>
+#include <yai/hwcap.h>
 
 /*
  * ELF register definitions..
  */
-#include <asm/ptrace.h>
-#include <asm/user.h>
+#include <yai/ptrace.h>
+#include <yai/user.h>
 
 /*
  * AArch64 static relocation types.
@@ -135,12 +135,12 @@
 
 #ifndef __ASSEMBLER__
 
-#include <uapi/linux/elf.h>
-#include <linux/bug.h>
-#include <linux/errno.h>
-#include <linux/fs.h>
-#include <linux/types.h>
-#include <asm/processor.h> /* for signal_minsigstksz, used by ARCH_DLINFO */
+#include <yai/elf.h>
+#include <yai/bug.h>
+#include <yai/errno.h>
+#include <yai/fs.h>
+#include <yai/types.h>
+#include <yai/processor.h> /* for signal_minsigstksz, used by ARCH_DLINFO */
 
 typedef unsigned long elf_greg_t;
 

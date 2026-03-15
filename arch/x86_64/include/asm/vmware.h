@@ -2,9 +2,9 @@
 #ifndef _ASM_X86_VMWARE_H
 #define _ASM_X86_VMWARE_H
 
-#include <asm/cpufeatures.h>
-#include <asm/alternative.h>
-#include <linux/stringify.h>
+#include <yai/cpufeatures.h>
+#include <yai/alternative.h>
+#include <yai/stringify.h>
 
 /*
  * VMware hypercall ABI.

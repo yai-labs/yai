@@ -7,17 +7,17 @@
 #ifndef __MM_INTERNAL_H
 #define __MM_INTERNAL_H
 
-#include <linux/fs.h>
-#include <linux/khugepaged.h>
-#include <linux/mm.h>
-#include <linux/mm_inline.h>
-#include <linux/pagemap.h>
-#include <linux/pagewalk.h>
-#include <linux/rmap.h>
-#include <linux/swap.h>
-#include <linux/leafops.h>
-#include <linux/swap_cgroup.h>
-#include <linux/tracepoint-defs.h>
+#include <yai/fs.h>
+#include <yai/khugepaged.h>
+#include <yai/mm.h>
+#include <yai/mm_inline.h>
+#include <yai/pagemap.h>
+#include <yai/pagewalk.h>
+#include <yai/rmap.h>
+#include <yai/swap.h>
+#include <yai/leafops.h>
+#include <yai/swap_cgroup.h>
+#include <yai/tracepoint-defs.h>
 
 /* Internal core VMA manipulation functions. */
 #include "vma.h"

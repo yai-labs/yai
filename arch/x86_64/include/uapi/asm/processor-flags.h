@@ -3,7 +3,7 @@
 #define _UAPI_ASM_X86_PROCESSOR_FLAGS_H
 /* Various flags defined: can be included from assembler. */
 
-#include <linux/const.h>
+#include <yai/const.h>
 
 /*
  * EFLAGS bits
@@ -154,7 +154,7 @@
 #define X86_CR8_TPR		_AC(0x0000000f,UL) /* task priority register */
 
 /*
- * AMD and Transmeta use MSRs for configuration; see <asm/msr-index.h>
+ * AMD and Transmeta use MSRs for configuration; see <yai/msr-index.h>
  */
 
 /*

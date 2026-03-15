@@ -8,7 +8,7 @@
 #include <yai/stddef.h>
 #include <yai/spinlock.h>
 
-#include <asm/current.h>
+#include <yai/current.h>
 
 typedef struct wait_queue_entry wait_queue_entry_t;
 

@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: GPL-2.0
 
-#include <linux/ptrace.h>
-#include <asm/bugs.h>
-#include <asm/msr.h>
-#include <asm/traps.h>
+#include <yai/ptrace.h>
+#include <yai/bugs.h>
+#include <yai/msr.h>
+#include <yai/traps.h>
 
 enum cp_error_code {
 	CP_EC        = (1 << 15) - 1,

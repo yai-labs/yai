@@ -10,9 +10,9 @@
 #ifndef __KVM_RISCV_AIA_H
 #define __KVM_RISCV_AIA_H
 
-#include <linux/jump_label.h>
-#include <linux/kvm_types.h>
-#include <asm/csr.h>
+#include <yai/jump_label.h>
+#include <yai/kvm_types.h>
+#include <yai/csr.h>
 
 struct kvm_aia {
 	/* In-kernel irqchip created */

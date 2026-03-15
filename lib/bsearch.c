@@ -6,9 +6,9 @@
  * Author: Tim Abbott <tabbott@ksplice.com>
  */
 
-#include <linux/export.h>
-#include <linux/bsearch.h>
-#include <linux/kprobes.h>
+#include <yai/export.h>
+#include <yai/bsearch.h>
+#include <yai/kprobes.h>
 
 /*
  * bsearch - binary search an array of elements

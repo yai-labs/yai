@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: GPL-2.0
 
-#include <asm/pgalloc.h>
-#include <linux/gfp.h>
-#include <linux/kernel.h>
-#include <linux/pgtable.h>
+#include <yai/pgalloc.h>
+#include <yai/gfp.h>
+#include <yai/kernel.h>
+#include <yai/pgtable.h>
 
 int ptep_set_access_flags(struct vm_area_struct *vma,
 			  unsigned long address, pte_t *ptep,

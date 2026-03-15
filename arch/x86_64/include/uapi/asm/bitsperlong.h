@@ -8,7 +8,7 @@
 # define __BITS_PER_LONG 32
 #endif
 
-#include <asm-generic/bitsperlong.h>
+#include <yai/bitsperlong.h>
 
 #endif /* __ASM_X86_BITSPERLONG_H */
 

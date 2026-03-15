@@ -3,11 +3,11 @@
  */
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
-#include <linux/init.h>
-#include <linux/kernel.h>
-#include <linux/module.h>
-#include <linux/random.h>
-#include <linux/string.h>
+#include <yai/init.h>
+#include <yai/kernel.h>
+#include <yai/module.h>
+#include <yai/random.h>
+#include <yai/string.h>
 
 static const unsigned char data_b[] = {
 	'\xbe', '\x32', '\xdb', '\x7b', '\x0a', '\x18', '\x93', '\xb2',	/* 00 - 07 */

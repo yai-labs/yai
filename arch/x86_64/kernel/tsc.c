@@ -1,39 +1,39 @@
 // SPDX-License-Identifier: GPL-2.0-only
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
-#include <linux/kernel.h>
-#include <linux/sched.h>
-#include <linux/sched/clock.h>
-#include <linux/init.h>
-#include <linux/export.h>
-#include <linux/timer.h>
-#include <linux/acpi_pmtmr.h>
-#include <linux/cpufreq.h>
-#include <linux/delay.h>
-#include <linux/clocksource.h>
-#include <linux/kvm_types.h>
-#include <linux/percpu.h>
-#include <linux/timex.h>
-#include <linux/static_key.h>
-#include <linux/static_call.h>
+#include <yai/kernel.h>
+#include <yai/sched.h>
+#include <yai/sched/clock.h>
+#include <yai/init.h>
+#include <yai/export.h>
+#include <yai/timer.h>
+#include <yai/acpi_pmtmr.h>
+#include <yai/cpufreq.h>
+#include <yai/delay.h>
+#include <yai/clocksource.h>
+#include <yai/kvm_types.h>
+#include <yai/percpu.h>
+#include <yai/timex.h>
+#include <yai/static_key.h>
+#include <yai/static_call.h>
 
-#include <asm/cpuid/api.h>
-#include <asm/hpet.h>
-#include <asm/timer.h>
-#include <asm/vgtod.h>
-#include <asm/time.h>
-#include <asm/delay.h>
-#include <asm/hypervisor.h>
-#include <asm/nmi.h>
-#include <asm/x86_init.h>
-#include <asm/geode.h>
-#include <asm/apic.h>
-#include <asm/cpu_device_id.h>
-#include <asm/i8259.h>
-#include <asm/msr.h>
-#include <asm/topology.h>
-#include <asm/uv/uv.h>
-#include <asm/sev.h>
+#include <yai/cpuid/api.h>
+#include <yai/hpet.h>
+#include <yai/timer.h>
+#include <yai/vgtod.h>
+#include <yai/time.h>
+#include <yai/delay.h>
+#include <yai/hypervisor.h>
+#include <yai/nmi.h>
+#include <yai/x86_init.h>
+#include <yai/geode.h>
+#include <yai/apic.h>
+#include <yai/cpu_device_id.h>
+#include <yai/i8259.h>
+#include <yai/msr.h>
+#include <yai/topology.h>
+#include <yai/uv/uv.h>
+#include <yai/sev.h>
 
 unsigned int __read_mostly cpu_khz;	/* TSC clocks / usec, not used here */
 EXPORT_SYMBOL(cpu_khz);

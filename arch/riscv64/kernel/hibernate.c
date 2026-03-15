@@ -7,23 +7,23 @@
  * Author: Jee Heng Sia <jeeheng.sia@starfivetech.com>
  */
 
-#include <asm/barrier.h>
-#include <asm/cacheflush.h>
-#include <asm/mmu_context.h>
-#include <asm/page.h>
-#include <asm/pgalloc.h>
-#include <asm/pgtable.h>
-#include <asm/sections.h>
-#include <asm/set_memory.h>
-#include <asm/smp.h>
-#include <asm/suspend.h>
+#include <yai/barrier.h>
+#include <yai/cacheflush.h>
+#include <yai/mmu_context.h>
+#include <yai/page.h>
+#include <yai/pgalloc.h>
+#include <yai/pgtable.h>
+#include <yai/sections.h>
+#include <yai/set_memory.h>
+#include <yai/smp.h>
+#include <yai/suspend.h>
 
-#include <linux/cpu.h>
-#include <linux/memblock.h>
-#include <linux/pm.h>
-#include <linux/sched.h>
-#include <linux/suspend.h>
-#include <linux/utsname.h>
+#include <yai/cpu.h>
+#include <yai/memblock.h>
+#include <yai/pm.h>
+#include <yai/sched.h>
+#include <yai/suspend.h>
+#include <yai/utsname.h>
 
 /* The logical cpu number we should resume on, initialised to a non-cpu number. */
 static int sleep_cpu = -EINVAL;

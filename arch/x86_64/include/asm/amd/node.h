@@ -17,7 +17,7 @@
 #ifndef _ASM_X86_AMD_NODE_H_
 #define _ASM_X86_AMD_NODE_H_
 
-#include <linux/pci.h>
+#include <yai/pci.h>
 
 #define MAX_AMD_NUM_NODES	8
 #define AMD_NODE0_PCI_SLOT	0x18

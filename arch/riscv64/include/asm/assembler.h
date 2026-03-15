@@ -12,9 +12,9 @@
 #ifndef __ASM_ASSEMBLER_H
 #define __ASM_ASSEMBLER_H
 
-#include <asm/asm.h>
-#include <asm/asm-offsets.h>
-#include <asm/csr.h>
+#include <yai/asm.h>
+#include <yai/asm-offsets.h>
+#include <yai/csr.h>
 
 /*
  * suspend_restore_csrs - restore CSRs

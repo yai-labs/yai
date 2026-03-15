@@ -4,11 +4,11 @@
  *
  * Copyright (C) 2015 ARM Limited
  */
-#include <linux/perf_event.h>
-#include <linux/stacktrace.h>
-#include <linux/uaccess.h>
+#include <yai/perf_event.h>
+#include <yai/stacktrace.h>
+#include <yai/uaccess.h>
 
-#include <asm/pointer_auth.h>
+#include <yai/pointer_auth.h>
 
 static bool callchain_trace(void *data, unsigned long pc)
 {

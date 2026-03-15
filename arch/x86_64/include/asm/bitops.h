@@ -10,13 +10,13 @@
  */
 
 #ifndef _LINUX_BITOPS_H
-#error only <linux/bitops.h> can be included directly
+#error only <yai/bitops.h> can be included directly
 #endif
 
-#include <linux/compiler.h>
-#include <asm/alternative.h>
-#include <asm/rmwcc.h>
-#include <asm/barrier.h>
+#include <yai/compiler.h>
+#include <yai/alternative.h>
+#include <yai/rmwcc.h>
+#include <yai/barrier.h>
 
 #if BITS_PER_LONG == 32
 # define _BITOPS_LONG_SHIFT 5
@@ -411,22 +411,22 @@ static __always_inline __attribute_const__ int fls64(__u64 x)
 	return bitpos + 1;
 }
 #else
-#include <asm-generic/bitops/fls64.h>
+#include <yai/bitops/fls64.h>
 #endif
 
-#include <asm-generic/bitops/sched.h>
+#include <yai/bitops/sched.h>
 
-#include <asm/arch_hweight.h>
+#include <yai/arch_hweight.h>
 
-#include <asm-generic/bitops/const_hweight.h>
+#include <yai/bitops/const_hweight.h>
 
-#include <asm-generic/bitops/instrumented-atomic.h>
-#include <asm-generic/bitops/instrumented-non-atomic.h>
-#include <asm-generic/bitops/instrumented-lock.h>
+#include <yai/bitops/instrumented-atomic.h>
+#include <yai/bitops/instrumented-non-atomic.h>
+#include <yai/bitops/instrumented-lock.h>
 
-#include <asm-generic/bitops/le.h>
+#include <yai/bitops/le.h>
 
-#include <asm-generic/bitops/ext2-atomic-setbit.h>
+#include <yai/bitops/ext2-atomic-setbit.h>
 
 #endif /* __KERNEL__ */
 #endif /* _ASM_X86_BITOPS_H */

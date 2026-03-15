@@ -251,7 +251,7 @@
 
 #ifndef __ASSEMBLER__
 
-#include <asm/sysreg.h>
+#include <yai/sysreg.h>
 
 #define read_cpuid(reg)			read_sysreg_s(SYS_ ## reg)
 

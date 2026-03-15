@@ -9,17 +9,17 @@
 #ifndef _ASM_ACPI_H
 #define _ASM_ACPI_H
 
-#include <linux/cpuidle.h>
-#include <linux/efi.h>
-#include <linux/memblock.h>
-#include <linux/psci.h>
-#include <linux/stddef.h>
+#include <yai/cpuidle.h>
+#include <yai/efi.h>
+#include <yai/memblock.h>
+#include <yai/psci.h>
+#include <yai/stddef.h>
 
-#include <asm/cputype.h>
-#include <asm/io.h>
-#include <asm/ptrace.h>
-#include <asm/smp_plat.h>
-#include <asm/tlbflush.h>
+#include <yai/cputype.h>
+#include <yai/io.h>
+#include <yai/ptrace.h>
+#include <yai/smp_plat.h>
+#include <yai/tlbflush.h>
 
 /* Macros for consistency checks of the GICC subtable of MADT */
 

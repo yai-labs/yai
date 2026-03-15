@@ -8,17 +8,17 @@
  *	Rafael J. Wysocki <rafael.j.wysocki@intel.com>
  */
 
-#include <linux/cpuhotplug.h>
-#include <linux/cpu.h>
-#include <linux/device.h>
-#include <linux/kernel.h>
-#include <linux/string.h>
-#include <linux/syscore_ops.h>
-#include <linux/pm.h>
+#include <yai/cpuhotplug.h>
+#include <yai/cpu.h>
+#include <yai/device.h>
+#include <yai/kernel.h>
+#include <yai/string.h>
+#include <yai/syscore_ops.h>
+#include <yai/pm.h>
 
-#include <asm/cpu_device_id.h>
-#include <asm/cpufeature.h>
-#include <asm/msr.h>
+#include <yai/cpu_device_id.h>
+#include <yai/cpufeature.h>
+#include <yai/msr.h>
 
 /**
  * DOC: overview

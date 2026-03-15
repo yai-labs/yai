@@ -5,10 +5,10 @@
 #ifndef __ASM_PGTABLE_PROT_H
 #define __ASM_PGTABLE_PROT_H
 
-#include <asm/memory.h>
-#include <asm/pgtable-hwdef.h>
+#include <yai/memory.h>
+#include <yai/pgtable-hwdef.h>
 
-#include <linux/const.h>
+#include <yai/const.h>
 
 /*
  * Software defined PTE bits definition.
@@ -64,9 +64,9 @@
 
 #ifndef __ASSEMBLER__
 
-#include <asm/cpufeature.h>
-#include <asm/pgtable-types.h>
-#include <asm/rsi.h>
+#include <yai/cpufeature.h>
+#include <yai/pgtable-types.h>
+#include <yai/rsi.h>
 
 extern bool arm64_use_ng_mappings;
 extern unsigned long prot_ns_shared;

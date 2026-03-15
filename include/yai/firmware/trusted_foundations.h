@@ -24,8 +24,8 @@
 #include <yai/smp.h>
 #include <yai/types.h>
 
-#include <asm/hardware/cache-l2x0.h>
-#include <asm/outercache.h>
+#include <yai/hardware/cache-l2x0.h>
+#include <yai/outercache.h>
 
 #define TF_PM_MODE_LP0			0
 #define TF_PM_MODE_LP1			1

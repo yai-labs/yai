@@ -8,40 +8,40 @@
 /* cpu_feature_enabled() cannot be used this early */
 #define USE_EARLY_PGTABLE_L5
 
-#include <linux/init.h>
-#include <linux/linkage.h>
-#include <linux/types.h>
-#include <linux/kernel.h>
-#include <linux/string.h>
-#include <linux/percpu.h>
-#include <linux/start_kernel.h>
-#include <linux/io.h>
-#include <linux/memblock.h>
-#include <linux/cc_platform.h>
-#include <linux/pgtable.h>
+#include <yai/init.h>
+#include <yai/linkage.h>
+#include <yai/types.h>
+#include <yai/kernel.h>
+#include <yai/string.h>
+#include <yai/percpu.h>
+#include <yai/start_kernel.h>
+#include <yai/io.h>
+#include <yai/memblock.h>
+#include <yai/cc_platform.h>
+#include <yai/pgtable.h>
 
-#include <asm/asm.h>
-#include <asm/page_64.h>
-#include <asm/processor.h>
-#include <asm/proto.h>
-#include <asm/smp.h>
-#include <asm/setup.h>
-#include <asm/desc.h>
-#include <asm/tlbflush.h>
-#include <asm/sections.h>
-#include <asm/kdebug.h>
-#include <asm/e820/api.h>
-#include <asm/bios_ebda.h>
-#include <asm/bootparam_utils.h>
-#include <asm/microcode.h>
-#include <asm/kasan.h>
-#include <asm/fixmap.h>
-#include <asm/realmode.h>
-#include <asm/extable.h>
-#include <asm/trapnr.h>
-#include <asm/sev.h>
-#include <asm/tdx.h>
-#include <asm/init.h>
+#include <yai/asm.h>
+#include <yai/page_64.h>
+#include <yai/processor.h>
+#include <yai/proto.h>
+#include <yai/smp.h>
+#include <yai/setup.h>
+#include <yai/desc.h>
+#include <yai/tlbflush.h>
+#include <yai/sections.h>
+#include <yai/kdebug.h>
+#include <yai/e820/api.h>
+#include <yai/bios_ebda.h>
+#include <yai/bootparam_utils.h>
+#include <yai/microcode.h>
+#include <yai/kasan.h>
+#include <yai/fixmap.h>
+#include <yai/realmode.h>
+#include <yai/extable.h>
+#include <yai/trapnr.h>
+#include <yai/sev.h>
+#include <yai/tdx.h>
+#include <yai/init.h>
 
 /*
  * Manage page tables very early on.

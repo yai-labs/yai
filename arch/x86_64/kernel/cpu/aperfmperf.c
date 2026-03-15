@@ -6,21 +6,21 @@
  * Copyright (C) 2017 Intel Corp.
  * Author: Len Brown <len.brown@intel.com>
  */
-#include <linux/cpufreq.h>
-#include <linux/delay.h>
-#include <linux/ktime.h>
-#include <linux/math64.h>
-#include <linux/percpu.h>
-#include <linux/rcupdate.h>
-#include <linux/sched/isolation.h>
-#include <linux/sched/topology.h>
-#include <linux/smp.h>
-#include <linux/syscore_ops.h>
+#include <yai/cpufreq.h>
+#include <yai/delay.h>
+#include <yai/ktime.h>
+#include <yai/math64.h>
+#include <yai/percpu.h>
+#include <yai/rcupdate.h>
+#include <yai/sched/isolation.h>
+#include <yai/sched/topology.h>
+#include <yai/smp.h>
+#include <yai/syscore_ops.h>
 
-#include <asm/cpu.h>
-#include <asm/cpu_device_id.h>
-#include <asm/intel-family.h>
-#include <asm/msr.h>
+#include <yai/cpu.h>
+#include <yai/cpu_device_id.h>
+#include <yai/intel-family.h>
+#include <yai/msr.h>
 
 #include "cpu.h"
 

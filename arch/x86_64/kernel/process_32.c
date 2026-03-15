@@ -9,50 +9,50 @@
  * This file handles the architecture-dependent parts of process handling..
  */
 
-#include <linux/cpu.h>
-#include <linux/errno.h>
-#include <linux/sched.h>
-#include <linux/sched/task.h>
-#include <linux/sched/task_stack.h>
-#include <linux/fs.h>
-#include <linux/kernel.h>
-#include <linux/mm.h>
-#include <linux/elfcore.h>
-#include <linux/smp.h>
-#include <linux/stddef.h>
-#include <linux/slab.h>
-#include <linux/vmalloc.h>
-#include <linux/user.h>
-#include <linux/interrupt.h>
-#include <linux/delay.h>
-#include <linux/reboot.h>
-#include <linux/mc146818rtc.h>
-#include <linux/export.h>
-#include <linux/kallsyms.h>
-#include <linux/ptrace.h>
-#include <linux/personality.h>
-#include <linux/percpu.h>
-#include <linux/prctl.h>
-#include <linux/ftrace.h>
-#include <linux/uaccess.h>
-#include <linux/io.h>
-#include <linux/kdebug.h>
-#include <linux/syscalls.h>
+#include <yai/cpu.h>
+#include <yai/errno.h>
+#include <yai/sched.h>
+#include <yai/sched/task.h>
+#include <yai/sched/task_stack.h>
+#include <yai/fs.h>
+#include <yai/kernel.h>
+#include <yai/mm.h>
+#include <yai/elfcore.h>
+#include <yai/smp.h>
+#include <yai/stddef.h>
+#include <yai/slab.h>
+#include <yai/vmalloc.h>
+#include <yai/user.h>
+#include <yai/interrupt.h>
+#include <yai/delay.h>
+#include <yai/reboot.h>
+#include <yai/mc146818rtc.h>
+#include <yai/export.h>
+#include <yai/kallsyms.h>
+#include <yai/ptrace.h>
+#include <yai/personality.h>
+#include <yai/percpu.h>
+#include <yai/prctl.h>
+#include <yai/ftrace.h>
+#include <yai/uaccess.h>
+#include <yai/io.h>
+#include <yai/kdebug.h>
+#include <yai/syscalls.h>
 
-#include <asm/ldt.h>
-#include <asm/processor.h>
-#include <asm/fpu/sched.h>
-#include <asm/desc.h>
+#include <yai/ldt.h>
+#include <yai/processor.h>
+#include <yai/fpu/sched.h>
+#include <yai/desc.h>
 
-#include <linux/err.h>
+#include <yai/err.h>
 
-#include <asm/tlbflush.h>
-#include <asm/cpu.h>
-#include <asm/debugreg.h>
-#include <asm/switch_to.h>
-#include <asm/vm86.h>
-#include <asm/resctrl.h>
-#include <asm/proto.h>
+#include <yai/tlbflush.h>
+#include <yai/cpu.h>
+#include <yai/debugreg.h>
+#include <yai/switch_to.h>
+#include <yai/vm86.h>
+#include <yai/resctrl.h>
+#include <yai/proto.h>
 
 #include "process.h"
 

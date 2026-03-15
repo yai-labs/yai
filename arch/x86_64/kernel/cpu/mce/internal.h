@@ -5,8 +5,8 @@
 #undef pr_fmt
 #define pr_fmt(fmt) "mce: " fmt
 
-#include <linux/device.h>
-#include <asm/mce.h>
+#include <yai/device.h>
+#include <yai/mce.h>
 
 enum severity_level {
 	MCE_NO_SEVERITY,

@@ -5,12 +5,12 @@
 #ifndef __ASM_PERCPU_H
 #define __ASM_PERCPU_H
 
-#include <linux/preempt.h>
+#include <yai/preempt.h>
 
-#include <asm/alternative.h>
-#include <asm/cmpxchg.h>
-#include <asm/stack_pointer.h>
-#include <asm/sysreg.h>
+#include <yai/alternative.h>
+#include <yai/cmpxchg.h>
+#include <yai/stack_pointer.h>
+#include <yai/sysreg.h>
 
 static inline void set_my_cpu_offset(unsigned long off)
 {
@@ -263,7 +263,7 @@ extern unsigned long __hyp_per_cpu_offset(unsigned int cpu);
 #define per_cpu_offset(cpu)	__hyp_per_cpu_offset((cpu))
 #endif
 
-#include <asm-generic/percpu.h>
+#include <yai/percpu.h>
 
 /* Redefine macros for nVHE hyp under DEBUG_PREEMPT to avoid its dependencies. */
 #if defined(__KVM_NVHE_HYPERVISOR__) && defined(CONFIG_DEBUG_PREEMPT)

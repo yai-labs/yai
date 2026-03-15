@@ -7,7 +7,7 @@
 #ifndef _ARM_PROBES_H
 #define _ARM_PROBES_H
 
-#include <asm/insn.h>
+#include <yai/insn.h>
 
 typedef void (probes_handler_t) (u32 opcode, long addr, struct pt_regs *);
 

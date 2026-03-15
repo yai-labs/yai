@@ -6,14 +6,14 @@
 #ifndef _ASM_CPUFEATURE_H
 #define _ASM_CPUFEATURE_H
 
-#include <linux/bitmap.h>
-#include <linux/jump_label.h>
-#include <linux/workqueue.h>
-#include <linux/kconfig.h>
-#include <linux/percpu-defs.h>
-#include <linux/threads.h>
-#include <asm/hwcap.h>
-#include <asm/cpufeature-macros.h>
+#include <yai/bitmap.h>
+#include <yai/jump_label.h>
+#include <yai/workqueue.h>
+#include <yai/kconfig.h>
+#include <yai/percpu-defs.h>
+#include <yai/threads.h>
+#include <yai/hwcap.h>
+#include <yai/cpufeature-macros.h>
 
 /*
  * These are probed via a device_initcall(), via either the SBI or directly

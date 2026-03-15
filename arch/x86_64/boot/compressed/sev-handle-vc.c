@@ -4,15 +4,15 @@
 #include "error.h"
 #include "sev.h"
 
-#include <linux/kernel.h>
-#include <linux/string.h>
-#include <asm/insn.h>
-#include <asm/pgtable_types.h>
-#include <asm/ptrace.h>
-#include <asm/sev.h>
-#include <asm/trapnr.h>
-#include <asm/trap_pf.h>
-#include <asm/fpu/xcr.h>
+#include <yai/kernel.h>
+#include <yai/string.h>
+#include <yai/insn.h>
+#include <yai/pgtable_types.h>
+#include <yai/ptrace.h>
+#include <yai/sev.h>
+#include <yai/trapnr.h>
+#include <yai/trap_pf.h>
+#include <yai/fpu/xcr.h>
 
 #define __BOOT_COMPRESSED
 #undef __init

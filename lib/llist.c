@@ -10,9 +10,9 @@
  * Copyright 2010,2011 Intel Corp.
  *   Author: Huang Ying <ying.huang@intel.com>
  */
-#include <linux/kernel.h>
-#include <linux/export.h>
-#include <linux/llist.h>
+#include <yai/kernel.h>
+#include <yai/export.h>
+#include <yai/llist.h>
 
 /**
  * llist_del_first - delete the first entry of lock-less list

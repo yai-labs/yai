@@ -12,10 +12,10 @@
 
 #ifndef __ASSEMBLER__
 
-#include <linux/init.h>
-#include <linux/cc_platform.h>
+#include <yai/init.h>
+#include <yai/cc_platform.h>
 
-#include <asm/asm.h>
+#include <yai/asm.h>
 struct boot_params;
 
 #ifdef CONFIG_X86_MEM_ENCRYPT

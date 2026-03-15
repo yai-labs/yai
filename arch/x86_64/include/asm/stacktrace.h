@@ -7,11 +7,11 @@
 #ifndef _ASM_X86_STACKTRACE_H
 #define _ASM_X86_STACKTRACE_H
 
-#include <linux/uaccess.h>
-#include <linux/ptrace.h>
+#include <yai/uaccess.h>
+#include <yai/ptrace.h>
 
-#include <asm/cpu_entry_area.h>
-#include <asm/switch_to.h>
+#include <yai/cpu_entry_area.h>
+#include <yai/switch_to.h>
 
 enum stack_type {
 	STACK_TYPE_UNKNOWN,

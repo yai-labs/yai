@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: GPL-2.0
-#include <linux/mm.h>
-#include <linux/gfp.h>
-#include <linux/hugetlb.h>
-#include <asm/pgalloc.h>
-#include <asm/tlb.h>
-#include <asm/fixmap.h>
-#include <asm/mtrr.h>
+#include <yai/mm.h>
+#include <yai/gfp.h>
+#include <yai/hugetlb.h>
+#include <yai/pgalloc.h>
+#include <yai/tlb.h>
+#include <yai/fixmap.h>
+#include <yai/mtrr.h>
 
 #ifdef CONFIG_DYNAMIC_PHYSICAL_MASK
 phys_addr_t physical_mask __ro_after_init = (1ULL << __PHYSICAL_MASK_SHIFT) - 1;

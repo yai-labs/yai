@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: GPL-2.0
 
-#include <linux/export.h>
-#include <linux/mm.h>
-#include <asm/pgtable.h>
-#include <asm/mem_encrypt.h>
+#include <yai/export.h>
+#include <yai/mm.h>
+#include <yai/pgtable.h>
+#include <yai/mem_encrypt.h>
 
 static pgprot_t protection_map[16] __ro_after_init = {
 	[VM_NONE]					= PAGE_NONE,

@@ -1,16 +1,16 @@
 // SPDX-License-Identifier: GPL-2.0
 /* Copyright (C) 2018-2019, Intel Corporation. */
 
-#include <linux/unaligned.h>
-#include <linux/crc32.h>
-#include <linux/device.h>
-#include <linux/firmware.h>
-#include <linux/kernel.h>
-#include <linux/module.h>
-#include <linux/pci.h>
-#include <linux/pldmfw.h>
-#include <linux/slab.h>
-#include <linux/uuid.h>
+#include <yai/unaligned.h>
+#include <yai/crc32.h>
+#include <yai/device.h>
+#include <yai/firmware.h>
+#include <yai/kernel.h>
+#include <yai/module.h>
+#include <yai/pci.h>
+#include <yai/pldmfw.h>
+#include <yai/slab.h>
+#include <yai/uuid.h>
 
 #include "pldmfw_private.h"
 

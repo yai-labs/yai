@@ -2,7 +2,7 @@
 #ifndef _ASM_X86_PM_TRACE_H
 #define _ASM_X86_PM_TRACE_H
 
-#include <asm/asm.h>
+#include <yai/asm.h>
 
 #define TRACE_RESUME(user)					\
 do {								\

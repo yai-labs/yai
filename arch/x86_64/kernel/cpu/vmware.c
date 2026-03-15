@@ -21,22 +21,22 @@
  *
  */
 
-#include <linux/dmi.h>
-#include <linux/init.h>
-#include <linux/export.h>
-#include <linux/clocksource.h>
-#include <linux/cpu.h>
-#include <linux/efi.h>
-#include <linux/reboot.h>
-#include <linux/static_call.h>
-#include <linux/sched/cputime.h>
-#include <asm/div64.h>
-#include <asm/x86_init.h>
-#include <asm/hypervisor.h>
-#include <asm/timer.h>
-#include <asm/apic.h>
-#include <asm/vmware.h>
-#include <asm/svm.h>
+#include <yai/dmi.h>
+#include <yai/init.h>
+#include <yai/export.h>
+#include <yai/clocksource.h>
+#include <yai/cpu.h>
+#include <yai/efi.h>
+#include <yai/reboot.h>
+#include <yai/static_call.h>
+#include <yai/sched/cputime.h>
+#include <yai/div64.h>
+#include <yai/x86_init.h>
+#include <yai/hypervisor.h>
+#include <yai/timer.h>
+#include <yai/apic.h>
+#include <yai/vmware.h>
+#include <yai/svm.h>
 
 #undef pr_fmt
 #define pr_fmt(fmt)	"vmware: " fmt

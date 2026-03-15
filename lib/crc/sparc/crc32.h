@@ -8,8 +8,8 @@
  *          Kent Liu <kent.liu@intel.com>
  */
 
-#include <asm/pstate.h>
-#include <asm/elf.h>
+#include <yai/pstate.h>
+#include <yai/elf.h>
 
 static __ro_after_init DEFINE_STATIC_KEY_FALSE(have_crc32c_opcode);
 

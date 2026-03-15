@@ -9,8 +9,8 @@
 #ifndef __ASM_GENERIC_ATOMIC_H
 #define __ASM_GENERIC_ATOMIC_H
 
-#include <asm/cmpxchg.h>
-#include <asm/barrier.h>
+#include <yai/cmpxchg.h>
+#include <yai/barrier.h>
 
 #ifdef CONFIG_SMP
 

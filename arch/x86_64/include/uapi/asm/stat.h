@@ -2,7 +2,7 @@
 #ifndef _ASM_X86_STAT_H
 #define _ASM_X86_STAT_H
 
-#include <asm/posix_types.h>
+#include <yai/posix_types.h>
 
 #define STAT_HAVE_NSEC 1
 

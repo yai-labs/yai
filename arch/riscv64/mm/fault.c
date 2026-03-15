@@ -7,18 +7,18 @@
  */
 
 
-#include <linux/mm.h>
-#include <linux/kernel.h>
-#include <linux/interrupt.h>
-#include <linux/perf_event.h>
-#include <linux/signal.h>
-#include <linux/uaccess.h>
-#include <linux/kprobes.h>
-#include <linux/kfence.h>
-#include <linux/entry-common.h>
+#include <yai/mm.h>
+#include <yai/kernel.h>
+#include <yai/interrupt.h>
+#include <yai/perf_event.h>
+#include <yai/signal.h>
+#include <yai/uaccess.h>
+#include <yai/kprobes.h>
+#include <yai/kfence.h>
+#include <yai/entry-common.h>
 
-#include <asm/ptrace.h>
-#include <asm/tlbflush.h>
+#include <yai/ptrace.h>
+#include <yai/tlbflush.h>
 
 #define CREATE_TRACE_POINTS
 #include <trace/events/exceptions.h>

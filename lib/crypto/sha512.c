@@ -10,13 +10,13 @@
 
 #include <crypto/hmac.h>
 #include <crypto/sha2.h>
-#include <linux/export.h>
-#include <linux/kernel.h>
-#include <linux/module.h>
-#include <linux/overflow.h>
-#include <linux/string.h>
-#include <linux/unaligned.h>
-#include <linux/wordpart.h>
+#include <yai/export.h>
+#include <yai/kernel.h>
+#include <yai/module.h>
+#include <yai/overflow.h>
+#include <yai/string.h>
+#include <yai/unaligned.h>
+#include <yai/wordpart.h>
 #include "fips.h"
 
 static const struct sha512_block_state sha384_iv = {

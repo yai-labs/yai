@@ -8,8 +8,8 @@
 #ifndef __ASM_CACHEFLUSH_H
 #define __ASM_CACHEFLUSH_H
 
-#include <linux/kgdb.h>
-#include <linux/mm.h>
+#include <yai/kgdb.h>
+#include <yai/mm.h>
 
 /*
  * This flag is used to indicate that the page pointed to by a pte is clean
@@ -139,6 +139,6 @@ static __always_inline void icache_inval_all_pou(void)
 	dsb(ish);
 }
 
-#include <asm-generic/cacheflush.h>
+#include <yai/cacheflush.h>
 
 #endif /* __ASM_CACHEFLUSH_H */

@@ -8,22 +8,22 @@
 
 #define pr_fmt(fmt) "arm-pv: " fmt
 
-#include <linux/arm-smccc.h>
-#include <linux/cpuhotplug.h>
-#include <linux/export.h>
-#include <linux/io.h>
-#include <linux/jump_label.h>
-#include <linux/printk.h>
-#include <linux/psci.h>
-#include <linux/reboot.h>
-#include <linux/slab.h>
-#include <linux/types.h>
-#include <linux/static_call.h>
-#include <linux/sched/cputime.h>
+#include <yai/arm-smccc.h>
+#include <yai/cpuhotplug.h>
+#include <yai/export.h>
+#include <yai/io.h>
+#include <yai/jump_label.h>
+#include <yai/printk.h>
+#include <yai/psci.h>
+#include <yai/reboot.h>
+#include <yai/slab.h>
+#include <yai/types.h>
+#include <yai/static_call.h>
+#include <yai/sched/cputime.h>
 
-#include <asm/paravirt.h>
-#include <asm/pvclock-abi.h>
-#include <asm/smp_plat.h>
+#include <yai/paravirt.h>
+#include <yai/pvclock-abi.h>
+#include <yai/smp_plat.h>
 
 struct pv_time_stolen_time_region {
 	struct pvclock_vcpu_stolen_time __rcu *kaddr;

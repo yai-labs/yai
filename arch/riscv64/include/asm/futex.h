@@ -7,11 +7,11 @@
 #ifndef _ASM_RISCV_FUTEX_H
 #define _ASM_RISCV_FUTEX_H
 
-#include <linux/futex.h>
-#include <linux/uaccess.h>
-#include <linux/errno.h>
-#include <asm/asm.h>
-#include <asm/asm-extable.h>
+#include <yai/futex.h>
+#include <yai/uaccess.h>
+#include <yai/errno.h>
+#include <yai/asm.h>
+#include <yai/asm-extable.h>
 
 /* We don't even really need the extable code, but for now keep it simple */
 #ifndef CONFIG_MMU

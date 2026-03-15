@@ -7,14 +7,14 @@
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
-#include <linux/init.h>
-#include <linux/bug.h>
-#include <linux/kernel.h>
-#include <linux/atomic.h>
-#include <linux/module.h>
+#include <yai/init.h>
+#include <yai/bug.h>
+#include <yai/kernel.h>
+#include <yai/atomic.h>
+#include <yai/module.h>
 
 #ifdef CONFIG_X86
-#include <asm/cpufeature.h>	/* for boot_cpu_has below */
+#include <yai/cpufeature.h>	/* for boot_cpu_has below */
 #endif
 
 #define TEST(bit, op, c_op, val)				\

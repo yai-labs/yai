@@ -3,9 +3,9 @@
 #include "../zlib_deflate/defutil.h"
 #include "dfltcc_util.h"
 #include "dfltcc_deflate.h"
-#include <asm/setup.h>
-#include <linux/export.h>
-#include <linux/zutil.h>
+#include <yai/setup.h>
+#include <yai/export.h>
+#include <yai/zutil.h>
 
 #define GET_DFLTCC_DEFLATE_STATE(state) ((struct dfltcc_deflate_state *)GET_DFLTCC_STATE(state))
 

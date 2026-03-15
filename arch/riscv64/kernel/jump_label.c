@@ -4,14 +4,14 @@
  *
  * Based on arch/arm64/kernel/jump_label.c
  */
-#include <linux/jump_label.h>
-#include <linux/kernel.h>
-#include <linux/memory.h>
-#include <linux/mutex.h>
-#include <asm/bug.h>
-#include <asm/cacheflush.h>
-#include <asm/text-patching.h>
-#include <asm/insn-def.h>
+#include <yai/jump_label.h>
+#include <yai/kernel.h>
+#include <yai/memory.h>
+#include <yai/mutex.h>
+#include <yai/bug.h>
+#include <yai/cacheflush.h>
+#include <yai/text-patching.h>
+#include <yai/insn-def.h>
 
 #define RISCV_INSN_JAL 0x0000006fU
 

@@ -3,11 +3,11 @@
  * Copyright (C) 2022 Ventana Micro Systems Inc.
  */
 
-#include <linux/export.h>
-#include <linux/libnvdimm.h>
+#include <yai/export.h>
+#include <yai/libnvdimm.h>
 
-#include <asm/cacheflush.h>
-#include <asm/dma-noncoherent.h>
+#include <yai/cacheflush.h>
+#include <yai/dma-noncoherent.h>
 
 void arch_wb_cache_pmem(void *addr, size_t size)
 {

@@ -8,7 +8,7 @@
 #include <yai/interrupt.h>
 #include <yai/sched.h>
 #include <yai/vtime.h>
-#include <asm/irq.h>
+#include <yai/irq.h>
 
 /*
  * 'kernel_stat.h' contains the definitions needed for doing

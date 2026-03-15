@@ -7,23 +7,23 @@
 
 #define pr_fmt(fmt) "bpf_jit: " fmt
 
-#include <linux/arm-smccc.h>
-#include <linux/bitfield.h>
-#include <linux/bpf.h>
-#include <linux/cfi.h>
-#include <linux/filter.h>
-#include <linux/memory.h>
-#include <linux/printk.h>
-#include <linux/slab.h>
+#include <yai/arm-smccc.h>
+#include <yai/bitfield.h>
+#include <yai/bpf.h>
+#include <yai/cfi.h>
+#include <yai/filter.h>
+#include <yai/memory.h>
+#include <yai/printk.h>
+#include <yai/slab.h>
 
-#include <asm/asm-extable.h>
-#include <asm/byteorder.h>
-#include <asm/cacheflush.h>
-#include <asm/cpufeature.h>
-#include <asm/debug-monitors.h>
-#include <asm/insn.h>
-#include <asm/text-patching.h>
-#include <asm/set_memory.h>
+#include <yai/asm-extable.h>
+#include <yai/byteorder.h>
+#include <yai/cacheflush.h>
+#include <yai/cpufeature.h>
+#include <yai/debug-monitors.h>
+#include <yai/insn.h>
+#include <yai/text-patching.h>
+#include <yai/set_memory.h>
 
 #include "bpf_jit.h"
 

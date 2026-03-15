@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: GPL-2.0
-#include <linux/export.h>
-#include <linux/kvm_types.h>
-#include <linux/percpu.h>
-#include <linux/preempt.h>
-#include <asm/msr.h>
+#include <yai/export.h>
+#include <yai/kvm_types.h>
+#include <yai/percpu.h>
+#include <yai/preempt.h>
+#include <yai/msr.h>
 #define CREATE_TRACE_POINTS
-#include <asm/msr-trace.h>
+#include <yai/msr-trace.h>
 
 struct msr __percpu *msrs_alloc(void)
 {

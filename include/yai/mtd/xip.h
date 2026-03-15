@@ -61,7 +61,7 @@
  *	e.g. a series of nops:  asm volatile (".rep 8; nop; .endr");
  */
 
-#include <asm/mtd-xip.h>
+#include <yai/mtd-xip.h>
 
 #ifndef xip_irqpending
 

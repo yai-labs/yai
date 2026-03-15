@@ -6,25 +6,25 @@
  * Yu-cheng Yu <yu-cheng.yu@intel.com>
  */
 
-#include <linux/sched.h>
-#include <linux/bitops.h>
-#include <linux/types.h>
-#include <linux/mm.h>
-#include <linux/mman.h>
-#include <linux/slab.h>
-#include <linux/uaccess.h>
-#include <linux/sched/signal.h>
-#include <linux/compat.h>
-#include <linux/sizes.h>
-#include <linux/user.h>
-#include <linux/syscalls.h>
-#include <asm/msr.h>
-#include <asm/fpu/xstate.h>
-#include <asm/fpu/types.h>
-#include <asm/shstk.h>
-#include <asm/special_insns.h>
-#include <asm/fpu/api.h>
-#include <asm/prctl.h>
+#include <yai/sched.h>
+#include <yai/bitops.h>
+#include <yai/types.h>
+#include <yai/mm.h>
+#include <yai/mman.h>
+#include <yai/slab.h>
+#include <yai/uaccess.h>
+#include <yai/sched/signal.h>
+#include <yai/compat.h>
+#include <yai/sizes.h>
+#include <yai/user.h>
+#include <yai/syscalls.h>
+#include <yai/msr.h>
+#include <yai/fpu/xstate.h>
+#include <yai/fpu/types.h>
+#include <yai/shstk.h>
+#include <yai/special_insns.h>
+#include <yai/fpu/api.h>
+#include <yai/prctl.h>
 
 #define SS_FRAME_SIZE 8
 

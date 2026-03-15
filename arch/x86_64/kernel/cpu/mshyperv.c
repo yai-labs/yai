@@ -6,33 +6,33 @@
  * Author : K. Y. Srinivasan <ksrinivasan@novell.com>
  */
 
-#include <linux/types.h>
-#include <linux/time.h>
-#include <linux/clocksource.h>
-#include <linux/init.h>
-#include <linux/export.h>
-#include <linux/hardirq.h>
-#include <linux/efi.h>
-#include <linux/interrupt.h>
-#include <linux/irq.h>
-#include <linux/kexec.h>
-#include <linux/random.h>
-#include <asm/processor.h>
-#include <asm/hypervisor.h>
+#include <yai/types.h>
+#include <yai/time.h>
+#include <yai/clocksource.h>
+#include <yai/init.h>
+#include <yai/export.h>
+#include <yai/hardirq.h>
+#include <yai/efi.h>
+#include <yai/interrupt.h>
+#include <yai/irq.h>
+#include <yai/kexec.h>
+#include <yai/random.h>
+#include <yai/processor.h>
+#include <yai/hypervisor.h>
 #include <hyperv/hvhdk.h>
-#include <asm/mshyperv.h>
-#include <asm/desc.h>
-#include <asm/idtentry.h>
-#include <asm/irq_regs.h>
-#include <asm/i8259.h>
-#include <asm/apic.h>
-#include <asm/timer.h>
-#include <asm/reboot.h>
-#include <asm/msr.h>
-#include <asm/nmi.h>
+#include <yai/mshyperv.h>
+#include <yai/desc.h>
+#include <yai/idtentry.h>
+#include <yai/irq_regs.h>
+#include <yai/i8259.h>
+#include <yai/apic.h>
+#include <yai/timer.h>
+#include <yai/reboot.h>
+#include <yai/msr.h>
+#include <yai/nmi.h>
 #include <clocksource/hyperv_timer.h>
-#include <asm/numa.h>
-#include <asm/svm.h>
+#include <yai/numa.h>
+#include <yai/svm.h>
 
 /* Is Linux running on nested Microsoft Hypervisor */
 bool hv_nested;

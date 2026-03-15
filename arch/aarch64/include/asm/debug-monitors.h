@@ -5,12 +5,12 @@
 #ifndef __ASM_DEBUG_MONITORS_H
 #define __ASM_DEBUG_MONITORS_H
 
-#include <linux/errno.h>
-#include <linux/types.h>
-#include <asm/brk-imm.h>
-#include <asm/esr.h>
-#include <asm/insn.h>
-#include <asm/ptrace.h>
+#include <yai/errno.h>
+#include <yai/types.h>
+#include <yai/brk-imm.h>
+#include <yai/esr.h>
+#include <yai/insn.h>
+#include <yai/ptrace.h>
 
 /* Low-level stepping controls. */
 #define DBG_SPSR_SS		(1 << 21)

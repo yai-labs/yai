@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: GPL-2.0
 /* Copyright (C) 2019 Hangzhou C-SKY Microsystems co.,ltd. */
 
-#include <linux/perf_event.h>
-#include <linux/uaccess.h>
+#include <yai/perf_event.h>
+#include <yai/uaccess.h>
 
-#include <asm/stacktrace.h>
+#include <yai/stacktrace.h>
 
 static bool fill_callchain(void *entry, unsigned long pc)
 {

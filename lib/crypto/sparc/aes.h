@@ -7,10 +7,10 @@
  * Copyright 2026 Google LLC
  */
 
-#include <asm/fpumacro.h>
-#include <asm/opcodes.h>
-#include <asm/pstate.h>
-#include <asm/elf.h>
+#include <yai/fpumacro.h>
+#include <yai/opcodes.h>
+#include <yai/pstate.h>
+#include <yai/elf.h>
 
 static __ro_after_init DEFINE_STATIC_KEY_FALSE(have_aes_opcodes);
 

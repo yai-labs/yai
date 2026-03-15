@@ -10,11 +10,11 @@
  * Very basic string functions
  */
 
-#include <linux/types.h>
-#include <linux/compiler.h>
-#include <linux/errno.h>
-#include <linux/limits.h>
-#include <asm/asm.h>
+#include <yai/types.h>
+#include <yai/compiler.h>
+#include <yai/errno.h>
+#include <yai/limits.h>
+#include <yai/asm.h>
 #include "ctype.h"
 #include "string.h"
 

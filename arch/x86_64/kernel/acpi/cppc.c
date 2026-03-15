@@ -4,12 +4,12 @@
  * Copyright (c) 2016, Intel Corporation.
  */
 
-#include <linux/bitfield.h>
+#include <yai/bitfield.h>
 
 #include <acpi/cppc_acpi.h>
-#include <asm/msr.h>
-#include <asm/processor.h>
-#include <asm/topology.h>
+#include <yai/msr.h>
+#include <yai/processor.h>
+#include <yai/topology.h>
 
 #define CPPC_HIGHEST_PERF_PERFORMANCE	196
 #define CPPC_HIGHEST_PERF_PREFCORE	166

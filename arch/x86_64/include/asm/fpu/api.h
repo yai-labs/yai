@@ -10,9 +10,9 @@
 
 #ifndef _ASM_X86_FPU_API_H
 #define _ASM_X86_FPU_API_H
-#include <linux/bottom_half.h>
+#include <yai/bottom_half.h>
 
-#include <asm/fpu/types.h>
+#include <yai/fpu/types.h>
 
 /*
  * Use kernel_fpu_begin/end() if you intend to use FPU in kernel context. It

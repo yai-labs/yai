@@ -6,8 +6,8 @@
 #ifndef __ASM_FPU_H
 #define __ASM_FPU_H
 
-#include <linux/preempt.h>
-#include <asm/neon.h>
+#include <yai/preempt.h>
+#include <yai/neon.h>
 
 #define kernel_fpu_available()	cpu_has_neon()
 

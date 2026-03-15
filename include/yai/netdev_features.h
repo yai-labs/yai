@@ -7,7 +7,7 @@
 
 #include <yai/types.h>
 #include <yai/bitops.h>
-#include <asm/byteorder.h>
+#include <yai/byteorder.h>
 
 typedef u64 netdev_features_t;
 

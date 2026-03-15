@@ -2,13 +2,13 @@
 /*
  * FPU register's regset abstraction, for ptrace, core dumps, etc.
  */
-#include <linux/sched/task_stack.h>
-#include <linux/vmalloc.h>
+#include <yai/sched/task_stack.h>
+#include <yai/vmalloc.h>
 
-#include <asm/fpu/api.h>
-#include <asm/fpu/signal.h>
-#include <asm/fpu/regset.h>
-#include <asm/prctl.h>
+#include <yai/fpu/api.h>
+#include <yai/fpu/signal.h>
+#include <yai/fpu/regset.h>
+#include <yai/prctl.h>
 
 #include "context.h"
 #include "internal.h"

@@ -7,7 +7,7 @@
 
 #ifndef __ASSEMBLER__
 
-#include <asm/unistd.h>
+#include <yai/unistd.h>
 
 /**
  * getrandom_syscall - Invoke the getrandom() syscall.

@@ -10,30 +10,30 @@
  */
 #define pr_fmt(fmt) "debug_vm_pgtable: [%-25s]: " fmt, __func__
 
-#include <linux/gfp.h>
-#include <linux/highmem.h>
-#include <linux/hugetlb.h>
-#include <linux/kernel.h>
-#include <linux/kconfig.h>
-#include <linux/memblock.h>
-#include <linux/mm.h>
-#include <linux/mman.h>
-#include <linux/mm_types.h>
-#include <linux/module.h>
-#include <linux/printk.h>
-#include <linux/pgtable.h>
-#include <linux/random.h>
-#include <linux/spinlock.h>
-#include <linux/swap.h>
-#include <linux/leafops.h>
-#include <linux/start_kernel.h>
-#include <linux/sched/mm.h>
-#include <linux/io.h>
-#include <linux/vmalloc.h>
-#include <linux/pgalloc.h>
+#include <yai/gfp.h>
+#include <yai/highmem.h>
+#include <yai/hugetlb.h>
+#include <yai/kernel.h>
+#include <yai/kconfig.h>
+#include <yai/memblock.h>
+#include <yai/mm.h>
+#include <yai/mman.h>
+#include <yai/mm_types.h>
+#include <yai/module.h>
+#include <yai/printk.h>
+#include <yai/pgtable.h>
+#include <yai/random.h>
+#include <yai/spinlock.h>
+#include <yai/swap.h>
+#include <yai/leafops.h>
+#include <yai/start_kernel.h>
+#include <yai/sched/mm.h>
+#include <yai/io.h>
+#include <yai/vmalloc.h>
+#include <yai/pgalloc.h>
 
-#include <asm/cacheflush.h>
-#include <asm/tlbflush.h>
+#include <yai/cacheflush.h>
+#include <yai/tlbflush.h>
 
 /*
  * Please refer Documentation/mm/arch_pgtable_helpers.rst for the semantics

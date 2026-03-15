@@ -8,17 +8,17 @@
 
 #define pr_fmt(fmt) "alternatives: " fmt
 
-#include <linux/init.h>
-#include <linux/cpu.h>
-#include <linux/elf.h>
-#include <asm/cacheflush.h>
-#include <asm/alternative.h>
-#include <asm/cpufeature.h>
-#include <asm/insn.h>
-#include <asm/module.h>
-#include <asm/sections.h>
-#include <asm/vdso.h>
-#include <linux/stop_machine.h>
+#include <yai/init.h>
+#include <yai/cpu.h>
+#include <yai/elf.h>
+#include <yai/cacheflush.h>
+#include <yai/alternative.h>
+#include <yai/cpufeature.h>
+#include <yai/insn.h>
+#include <yai/module.h>
+#include <yai/sections.h>
+#include <yai/vdso.h>
+#include <yai/stop_machine.h>
 
 #define __ALT_PTR(a, f)		((void *)&(a)->f + (a)->f)
 #define ALT_ORIG_PTR(a)		__ALT_PTR(a, orig_offset)

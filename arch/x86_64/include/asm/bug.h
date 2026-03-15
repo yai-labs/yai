@@ -2,10 +2,10 @@
 #ifndef _ASM_X86_BUG_H
 #define _ASM_X86_BUG_H
 
-#include <linux/stringify.h>
-#include <linux/instrumentation.h>
-#include <linux/objtool.h>
-#include <asm/asm.h>
+#include <yai/stringify.h>
+#include <yai/instrumentation.h>
+#include <yai/objtool.h>
+#include <yai/asm.h>
 
 #ifndef __ASSEMBLER__
 struct bug_entry;
@@ -138,7 +138,7 @@ do {									\
 #ifdef HAVE_ARCH_BUG_FORMAT_ARGS
 
 #ifndef __ASSEMBLER__
-#include <linux/static_call_types.h>
+#include <yai/static_call_types.h>
 DECLARE_STATIC_CALL(WARN_trap, __WARN_trap);
 
 struct pt_regs;
@@ -190,6 +190,6 @@ do {									\
 
 #endif /* HAVE_ARCH_BUG_FORMAT_ARGS */
 
-#include <asm-generic/bug.h>
+#include <yai/bug.h>
 
 #endif /* _ASM_X86_BUG_H */

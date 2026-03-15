@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: GPL-2.0
-#include <linux/slab.h>
-#include <linux/kernel.h>
-#include <linux/bitops.h>
-#include <linux/cpumask.h>
-#include <linux/export.h>
-#include <linux/memblock.h>
-#include <linux/numa.h>
+#include <yai/slab.h>
+#include <yai/kernel.h>
+#include <yai/bitops.h>
+#include <yai/cpumask.h>
+#include <yai/export.h>
+#include <yai/memblock.h>
+#include <yai/numa.h>
 
 /* These are not inline because of header tangles. */
 #ifdef CONFIG_CPUMASK_OFFSTACK
@@ -16,7 +16,7 @@
  * @node: memory node from which to allocate or %NUMA_NO_NODE
  *
  * Only defined when CONFIG_CPUMASK_OFFSTACK=y, otherwise is
- * a nop returning a constant 1 (in <linux/cpumask.h>).
+ * a nop returning a constant 1 (in <yai/cpumask.h>).
  *
  * Return: TRUE if memory allocation succeeded, FALSE otherwise.
  *
@@ -45,7 +45,7 @@ EXPORT_SYMBOL(alloc_cpumask_var_node);
  * @mask: pointer to cpumask_var_t where the cpumask is returned
  *
  * Only defined when CONFIG_CPUMASK_OFFSTACK=y, otherwise is
- * a nop (in <linux/cpumask.h>).
+ * a nop (in <yai/cpumask.h>).
  * Either returns an allocated (zero-filled) cpumask, or causes the
  * system to panic.
  */

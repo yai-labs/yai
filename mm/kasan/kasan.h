@@ -2,15 +2,15 @@
 #ifndef __MM_KASAN_KASAN_H
 #define __MM_KASAN_KASAN_H
 
-#include <linux/atomic.h>
-#include <linux/kasan.h>
-#include <linux/kasan-tags.h>
-#include <linux/kfence.h>
-#include <linux/stackdepot.h>
+#include <yai/atomic.h>
+#include <yai/kasan.h>
+#include <yai/kasan-tags.h>
+#include <yai/kfence.h>
+#include <yai/stackdepot.h>
 
 #if defined(CONFIG_KASAN_SW_TAGS) || defined(CONFIG_KASAN_HW_TAGS)
 
-#include <linux/static_key.h>
+#include <yai/static_key.h>
 
 DECLARE_STATIC_KEY_TRUE(kasan_flag_stacktrace);
 
@@ -131,7 +131,7 @@ static inline bool kasan_requires_meta(void)
 #if defined(CONFIG_KASAN_GENERIC) || defined(CONFIG_KASAN_SW_TAGS)
 #define KASAN_GRANULE_SIZE	(1UL << KASAN_SHADOW_SCALE_SHIFT)
 #else
-#include <asm/mte-kasan.h>
+#include <yai/mte-kasan.h>
 #define KASAN_GRANULE_SIZE	MTE_GRANULE_SIZE
 #endif
 

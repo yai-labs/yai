@@ -3,7 +3,7 @@
 #define _LINUX_TERMIOS_CONV_H
 
 #include <yai/uaccess.h>
-#include <asm/termios.h>
+#include <yai/termios.h>
 
 /*	intr=^C		quit=^\		erase=del	kill=^U
 	eof=^D		vtime=\0	vmin=\1		sxtc=\0

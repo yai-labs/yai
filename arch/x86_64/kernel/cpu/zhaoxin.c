@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: GPL-2.0
-#include <linux/sched.h>
-#include <linux/sched/clock.h>
+#include <yai/sched.h>
+#include <yai/sched/clock.h>
 
-#include <asm/cpu.h>
-#include <asm/cpufeature.h>
-#include <asm/msr.h>
+#include <yai/cpu.h>
+#include <yai/cpufeature.h>
+#include <yai/msr.h>
 
 #include "cpu.h"
 

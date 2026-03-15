@@ -7,26 +7,26 @@
  * Author: Will Deacon <will.deacon@arm.com>
  */
 
-#include <linux/cache.h>
-#include <linux/clocksource.h>
-#include <linux/elf.h>
-#include <linux/err.h>
-#include <linux/errno.h>
-#include <linux/gfp.h>
-#include <linux/kernel.h>
-#include <linux/mm.h>
-#include <linux/sched.h>
-#include <linux/signal.h>
-#include <linux/slab.h>
-#include <linux/vdso_datastore.h>
-#include <linux/vmalloc.h>
+#include <yai/cache.h>
+#include <yai/clocksource.h>
+#include <yai/elf.h>
+#include <yai/err.h>
+#include <yai/errno.h>
+#include <yai/gfp.h>
+#include <yai/kernel.h>
+#include <yai/mm.h>
+#include <yai/sched.h>
+#include <yai/signal.h>
+#include <yai/slab.h>
+#include <yai/vdso_datastore.h>
+#include <yai/vmalloc.h>
 #include <vdso/datapage.h>
 #include <vdso/helpers.h>
 #include <vdso/vsyscall.h>
 
-#include <asm/cacheflush.h>
-#include <asm/signal32.h>
-#include <asm/vdso.h>
+#include <yai/cacheflush.h>
+#include <yai/signal32.h>
+#include <yai/vdso.h>
 
 enum vdso_abi {
 	VDSO_ABI_AA64,

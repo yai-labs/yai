@@ -2,8 +2,8 @@
 #ifndef _UAPI_ASM_X86_MCE_H
 #define _UAPI_ASM_X86_MCE_H
 
-#include <linux/types.h>
-#include <linux/ioctl.h>
+#include <yai/types.h>
+#include <yai/ioctl.h>
 
 /*
  * Fields are zero when not available. Also, this struct is shared with

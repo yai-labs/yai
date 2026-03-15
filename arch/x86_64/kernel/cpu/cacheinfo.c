@@ -8,18 +8,18 @@
  * - Andi Kleen / Andreas Herrmann:	CPUID(0x4) emulation on AMD
  */
 
-#include <linux/cacheinfo.h>
-#include <linux/cpu.h>
-#include <linux/cpuhotplug.h>
-#include <linux/stop_machine.h>
+#include <yai/cacheinfo.h>
+#include <yai/cpu.h>
+#include <yai/cpuhotplug.h>
+#include <yai/stop_machine.h>
 
-#include <asm/amd/nb.h>
-#include <asm/cacheinfo.h>
-#include <asm/cpufeature.h>
-#include <asm/cpuid/api.h>
-#include <asm/mtrr.h>
-#include <asm/smp.h>
-#include <asm/tlbflush.h>
+#include <yai/amd/nb.h>
+#include <yai/cacheinfo.h>
+#include <yai/cpufeature.h>
+#include <yai/cpuid/api.h>
+#include <yai/mtrr.h>
+#include <yai/smp.h>
+#include <yai/tlbflush.h>
 
 #include "cpu.h"
 
@@ -78,7 +78,7 @@ struct _cpuid4_info {
 	unsigned long size;
 };
 
-/* Map CPUID(0x4) EAX.cache_type to <linux/cacheinfo.h> types */
+/* Map CPUID(0x4) EAX.cache_type to <yai/cacheinfo.h> types */
 static const enum cache_type cache_type_map[] = {
 	[CTYPE_NULL]	= CACHE_TYPE_NOCACHE,
 	[CTYPE_DATA]	= CACHE_TYPE_DATA,
@@ -483,7 +483,7 @@ void init_intel_cacheinfo(struct cpuinfo_x86 *c)
 }
 
 /*
- * <linux/cacheinfo.h> shared_cpu_map setup, AMD/Hygon
+ * <yai/cacheinfo.h> shared_cpu_map setup, AMD/Hygon
  */
 static int __cache_amd_cpumap_setup(unsigned int cpu, int index,
 				    const struct _cpuid4_info *id4)
@@ -542,7 +542,7 @@ static int __cache_amd_cpumap_setup(unsigned int cpu, int index,
 }
 
 /*
- * <linux/cacheinfo.h> shared_cpu_map setup, Intel + fallback AMD/Hygon
+ * <yai/cacheinfo.h> shared_cpu_map setup, Intel + fallback AMD/Hygon
  */
 static void __cache_cpumap_setup(unsigned int cpu, int index,
 				 const struct _cpuid4_info *id4)

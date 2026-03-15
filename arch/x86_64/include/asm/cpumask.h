@@ -3,8 +3,8 @@
 #define _ASM_X86_CPUMASK_H
 #ifndef __ASSEMBLER__
 
-#include <linux/compiler.h>
-#include <linux/cpumask.h>
+#include <yai/compiler.h>
+#include <yai/cpumask.h>
 
 extern void setup_cpu_local_masks(void);
 

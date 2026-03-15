@@ -10,9 +10,9 @@
  * Copyright (c) 2002 James Morris <jmorris@intercode.com.au>
  */
 
-#include <asm/elf.h>
-#include <asm/opcodes.h>
-#include <asm/pstate.h>
+#include <yai/elf.h>
+#include <yai/opcodes.h>
+#include <yai/pstate.h>
 
 static __ro_after_init DEFINE_STATIC_KEY_FALSE(have_md5_opcodes);
 

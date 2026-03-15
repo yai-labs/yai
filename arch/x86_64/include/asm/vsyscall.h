@@ -2,9 +2,9 @@
 #ifndef _ASM_X86_VSYSCALL_H
 #define _ASM_X86_VSYSCALL_H
 
-#include <linux/seqlock.h>
+#include <yai/seqlock.h>
 #include <uapi/asm/vsyscall.h>
-#include <asm/page_types.h>
+#include <yai/page_types.h>
 
 #ifdef CONFIG_X86_VSYSCALL_EMULATION
 extern void map_vsyscall(void);

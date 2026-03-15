@@ -2,10 +2,10 @@
 #ifndef __ASM_ASM_POINTER_AUTH_H
 #define __ASM_ASM_POINTER_AUTH_H
 
-#include <asm/alternative.h>
-#include <asm/asm-offsets.h>
-#include <asm/cpufeature.h>
-#include <asm/sysreg.h>
+#include <yai/alternative.h>
+#include <yai/asm-offsets.h>
+#include <yai/cpufeature.h>
+#include <yai/sysreg.h>
 
 #ifdef CONFIG_ARM64_PTR_AUTH_KERNEL
 

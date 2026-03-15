@@ -2,7 +2,7 @@
 #ifndef _ASM_X86_SWITCH_TO_H
 #define _ASM_X86_SWITCH_TO_H
 
-#include <linux/sched/task_stack.h>
+#include <yai/sched/task_stack.h>
 
 struct task_struct; /* one of the stranger aspects of C forward declarations */
 
@@ -52,7 +52,7 @@ do {									\
 } while (0)
 
 #ifdef CONFIG_X86_32
-#include <asm/msr.h>
+#include <yai/msr.h>
 
 static inline void refresh_sysenter_cs(struct thread_struct *thread)
 {

@@ -70,25 +70,25 @@
  *   The worst-case behavior is nevertheless O(N^2) for N wakeups.
  */
 
-#include <linux/compat.h>
-#include <linux/slab.h>
-#include <linux/spinlock.h>
-#include <linux/init.h>
-#include <linux/proc_fs.h>
-#include <linux/time.h>
-#include <linux/security.h>
-#include <linux/syscalls.h>
-#include <linux/audit.h>
-#include <linux/capability.h>
-#include <linux/seq_file.h>
-#include <linux/rwsem.h>
-#include <linux/nsproxy.h>
-#include <linux/ipc_namespace.h>
-#include <linux/sched/wake_q.h>
-#include <linux/nospec.h>
-#include <linux/rhashtable.h>
+#include <yai/compat.h>
+#include <yai/slab.h>
+#include <yai/spinlock.h>
+#include <yai/init.h>
+#include <yai/proc_fs.h>
+#include <yai/time.h>
+#include <yai/security.h>
+#include <yai/syscalls.h>
+#include <yai/audit.h>
+#include <yai/capability.h>
+#include <yai/seq_file.h>
+#include <yai/rwsem.h>
+#include <yai/nsproxy.h>
+#include <yai/ipc_namespace.h>
+#include <yai/sched/wake_q.h>
+#include <yai/nospec.h>
+#include <yai/rhashtable.h>
 
-#include <linux/uaccess.h>
+#include <yai/uaccess.h>
 #include "util.h"
 
 /* One semaphore structure for each semaphore in the system. */

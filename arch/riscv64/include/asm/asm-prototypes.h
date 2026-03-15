@@ -2,8 +2,8 @@
 #ifndef _ASM_RISCV_PROTOTYPES_H
 #define _ASM_RISCV_PROTOTYPES_H
 
-#include <linux/ftrace.h>
-#include <asm-generic/asm-prototypes.h>
+#include <yai/ftrace.h>
+#include <yai/asm-prototypes.h>
 
 long long __lshrti3(long long a, int b);
 long long __ashrti3(long long a, int b);

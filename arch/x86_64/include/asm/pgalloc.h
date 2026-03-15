@@ -2,20 +2,20 @@
 #ifndef _ASM_X86_PGALLOC_H
 #define _ASM_X86_PGALLOC_H
 
-#include <linux/threads.h>
-#include <linux/mm.h>		/* for struct page */
-#include <linux/pagemap.h>
+#include <yai/threads.h>
+#include <yai/mm.h>		/* for struct page */
+#include <yai/pagemap.h>
 
-#include <asm/cpufeature.h>
+#include <yai/cpufeature.h>
 
 #define __HAVE_ARCH_PTE_ALLOC_ONE
 #define __HAVE_ARCH_PGD_FREE
-#include <asm-generic/pgalloc.h>
+#include <yai/pgalloc.h>
 
 static inline int  __paravirt_pgd_alloc(struct mm_struct *mm) { return 0; }
 
 #ifdef CONFIG_PARAVIRT_XXL
-#include <asm/paravirt.h>
+#include <yai/paravirt.h>
 #else
 #define paravirt_pgd_alloc(mm)	__paravirt_pgd_alloc(mm)
 static inline void paravirt_pgd_free(struct mm_struct *mm, pgd_t *pgd) {}

@@ -18,12 +18,12 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
 
-#include <linux/bitops.h>
-#include <linux/byteorder/generic.h>
-#include <linux/count_zeros.h>
-#include <linux/export.h>
-#include <linux/scatterlist.h>
-#include <linux/string.h>
+#include <yai/bitops.h>
+#include <yai/byteorder/generic.h>
+#include <yai/count_zeros.h>
+#include <yai/export.h>
+#include <yai/scatterlist.h>
+#include <yai/string.h>
 #include "mpi-internal.h"
 
 #define MAX_EXTERN_MPI_BITS 16384

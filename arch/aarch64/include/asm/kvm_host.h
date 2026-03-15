@@ -11,23 +11,23 @@
 #ifndef __ARM64_KVM_HOST_H__
 #define __ARM64_KVM_HOST_H__
 
-#include <linux/arm-smccc.h>
-#include <linux/bitmap.h>
-#include <linux/types.h>
-#include <linux/jump_label.h>
-#include <linux/kvm_types.h>
-#include <linux/maple_tree.h>
-#include <linux/percpu.h>
-#include <linux/psci.h>
-#include <asm/arch_gicv3.h>
-#include <asm/barrier.h>
-#include <asm/cpufeature.h>
-#include <asm/cputype.h>
-#include <asm/daifflags.h>
-#include <asm/fpsimd.h>
-#include <asm/kvm.h>
-#include <asm/kvm_asm.h>
-#include <asm/vncr_mapping.h>
+#include <yai/arm-smccc.h>
+#include <yai/bitmap.h>
+#include <yai/types.h>
+#include <yai/jump_label.h>
+#include <yai/kvm_types.h>
+#include <yai/maple_tree.h>
+#include <yai/percpu.h>
+#include <yai/psci.h>
+#include <yai/arch_gicv3.h>
+#include <yai/barrier.h>
+#include <yai/cpufeature.h>
+#include <yai/cputype.h>
+#include <yai/daifflags.h>
+#include <yai/fpsimd.h>
+#include <yai/kvm.h>
+#include <yai/kvm_asm.h>
+#include <yai/vncr_mapping.h>
 
 #define __KVM_HAVE_ARCH_INTC_INITIALIZED
 

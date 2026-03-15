@@ -11,8 +11,8 @@
  * Based on Ingo Molnar and Zach Brown's respective MMX and SSE routines
  */
 
-#include <linux/compiler.h>
-#include <asm/fpu/api.h>
+#include <yai/compiler.h>
+#include <yai/fpu/api.h>
 
 #define BLOCK4(i) \
 		BLOCK(32 * i, 0) \

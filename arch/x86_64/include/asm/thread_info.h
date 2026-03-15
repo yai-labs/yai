@@ -8,10 +8,10 @@
 #ifndef _ASM_X86_THREAD_INFO_H
 #define _ASM_X86_THREAD_INFO_H
 
-#include <linux/compiler.h>
-#include <asm/page.h>
-#include <asm/percpu.h>
-#include <asm/types.h>
+#include <yai/compiler.h>
+#include <yai/page.h>
+#include <yai/percpu.h>
+#include <yai/types.h>
 
 /*
  * TOP_OF_KERNEL_STACK_PADDING is a number of unused bytes that we
@@ -56,8 +56,8 @@
  */
 #ifndef __ASSEMBLER__
 struct task_struct;
-#include <asm/cpufeature.h>
-#include <linux/atomic.h>
+#include <yai/cpufeature.h>
+#include <yai/atomic.h>
 
 struct thread_info {
 	unsigned long		flags;		/* low level flags */
@@ -75,7 +75,7 @@ struct thread_info {
 
 #else /* !__ASSEMBLER__ */
 
-#include <asm/asm-offsets.h>
+#include <yai/asm-offsets.h>
 
 #endif
 
@@ -86,7 +86,7 @@ struct thread_info {
 #define HAVE_TIF_POLLING_NRFLAG
 #define HAVE_TIF_SINGLESTEP
 
-#include <asm-generic/thread_info_tif.h>
+#include <yai/thread_info_tif.h>
 
 /* Architecture specific TIF space starts at 16 */
 #define TIF_SSBD		16	/* Speculative store bypass disable */

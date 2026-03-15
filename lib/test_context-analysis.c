@@ -4,17 +4,17 @@
  * positive errors when compiled with Clang's context analysis.
  */
 
-#include <linux/bit_spinlock.h>
-#include <linux/build_bug.h>
-#include <linux/local_lock.h>
-#include <linux/mutex.h>
-#include <linux/percpu.h>
-#include <linux/rcupdate.h>
-#include <linux/rwsem.h>
-#include <linux/seqlock.h>
-#include <linux/spinlock.h>
-#include <linux/srcu.h>
-#include <linux/ww_mutex.h>
+#include <yai/bit_spinlock.h>
+#include <yai/build_bug.h>
+#include <yai/local_lock.h>
+#include <yai/mutex.h>
+#include <yai/percpu.h>
+#include <yai/rcupdate.h>
+#include <yai/rwsem.h>
+#include <yai/seqlock.h>
+#include <yai/spinlock.h>
+#include <yai/srcu.h>
+#include <yai/ww_mutex.h>
 
 /*
  * Test that helper macros work as expected.

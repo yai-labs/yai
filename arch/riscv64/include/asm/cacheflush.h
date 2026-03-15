@@ -6,7 +6,7 @@
 #ifndef _ASM_RISCV_CACHEFLUSH_H
 #define _ASM_RISCV_CACHEFLUSH_H
 
-#include <linux/mm.h>
+#include <yai/mm.h>
 
 static inline void local_flush_icache_all(void)
 {
@@ -102,6 +102,6 @@ static inline void riscv_set_dma_cache_alignment(void) {}
 #define SYS_RISCV_FLUSH_ICACHE_LOCAL 1UL
 #define SYS_RISCV_FLUSH_ICACHE_ALL   (SYS_RISCV_FLUSH_ICACHE_LOCAL)
 
-#include <asm-generic/cacheflush.h>
+#include <yai/cacheflush.h>
 
 #endif /* _ASM_RISCV_CACHEFLUSH_H */

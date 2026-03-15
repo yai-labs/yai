@@ -39,7 +39,7 @@
 #ifdef __KERNEL__
 
 #include <yai/bitops.h>
-#include <asm/bug.h>
+#include <yai/bug.h>
 
 #define DQL_HIST_LEN		4
 #define DQL_HIST_ENT(dql, idx)	((dql)->history[(idx) % DQL_HIST_LEN])

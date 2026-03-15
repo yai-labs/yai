@@ -13,29 +13,29 @@
 
 #define pr_fmt(fmt) "dyndbg: " fmt
 
-#include <linux/kernel.h>
-#include <linux/module.h>
-#include <linux/moduleparam.h>
-#include <linux/kallsyms.h>
-#include <linux/types.h>
-#include <linux/mutex.h>
-#include <linux/proc_fs.h>
-#include <linux/seq_file.h>
-#include <linux/list.h>
-#include <linux/sysctl.h>
-#include <linux/ctype.h>
-#include <linux/string.h>
-#include <linux/parser.h>
-#include <linux/string_helpers.h>
-#include <linux/uaccess.h>
-#include <linux/dynamic_debug.h>
-#include <linux/debugfs.h>
-#include <linux/slab.h>
-#include <linux/jump_label.h>
-#include <linux/hardirq.h>
-#include <linux/sched.h>
-#include <linux/device.h>
-#include <linux/netdevice.h>
+#include <yai/kernel.h>
+#include <yai/module.h>
+#include <yai/moduleparam.h>
+#include <yai/kallsyms.h>
+#include <yai/types.h>
+#include <yai/mutex.h>
+#include <yai/proc_fs.h>
+#include <yai/seq_file.h>
+#include <yai/list.h>
+#include <yai/sysctl.h>
+#include <yai/ctype.h>
+#include <yai/string.h>
+#include <yai/parser.h>
+#include <yai/string_helpers.h>
+#include <yai/uaccess.h>
+#include <yai/dynamic_debug.h>
+#include <yai/debugfs.h>
+#include <yai/slab.h>
+#include <yai/jump_label.h>
+#include <yai/hardirq.h>
+#include <yai/sched.h>
+#include <yai/device.h>
+#include <yai/netdevice.h>
 
 #include <rdma/ib_verbs.h>
 

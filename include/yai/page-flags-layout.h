@@ -27,7 +27,7 @@
 #define ZONES_WIDTH		ZONES_SHIFT
 
 #ifdef CONFIG_SPARSEMEM
-#include <asm/sparsemem.h>
+#include <yai/sparsemem.h>
 #define SECTIONS_SHIFT	(MAX_PHYSMEM_BITS - SECTION_SIZE_BITS)
 #else
 #define SECTIONS_SHIFT	0

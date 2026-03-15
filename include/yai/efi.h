@@ -25,7 +25,7 @@
 #include <yai/reboot.h>
 #include <yai/uuid.h>
 
-#include <asm/page.h>
+#include <yai/page.h>
 
 struct screen_info;
 

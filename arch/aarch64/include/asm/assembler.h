@@ -12,19 +12,19 @@
 #ifndef __ASM_ASSEMBLER_H
 #define __ASM_ASSEMBLER_H
 
-#include <linux/export.h>
+#include <yai/export.h>
 
-#include <asm/alternative.h>
-#include <asm/asm-bug.h>
-#include <asm/asm-extable.h>
-#include <asm/asm-offsets.h>
-#include <asm/cpufeature.h>
-#include <asm/cputype.h>
-#include <asm/debug-monitors.h>
-#include <asm/page.h>
-#include <asm/pgtable-hwdef.h>
-#include <asm/ptrace.h>
-#include <asm/thread_info.h>
+#include <yai/alternative.h>
+#include <yai/asm-bug.h>
+#include <yai/asm-extable.h>
+#include <yai/asm-offsets.h>
+#include <yai/cpufeature.h>
+#include <yai/cputype.h>
+#include <yai/debug-monitors.h>
+#include <yai/page.h>
+#include <yai/pgtable-hwdef.h>
+#include <yai/ptrace.h>
+#include <yai/thread_info.h>
 
 	/*
 	 * Provide a wxN alias for each wN register so what we can paste a xN

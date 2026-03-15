@@ -4,19 +4,19 @@
 /* cpu_feature_enabled() cannot be used this early */
 #define USE_EARLY_PGTABLE_L5
 
-#include <linux/memblock.h>
-#include <linux/kasan.h>
-#include <linux/kdebug.h>
-#include <linux/mm.h>
-#include <linux/sched.h>
-#include <linux/sched/task.h>
-#include <linux/vmalloc.h>
+#include <yai/memblock.h>
+#include <yai/kasan.h>
+#include <yai/kdebug.h>
+#include <yai/mm.h>
+#include <yai/sched.h>
+#include <yai/sched/task.h>
+#include <yai/vmalloc.h>
 
-#include <asm/e820/types.h>
-#include <asm/pgalloc.h>
-#include <asm/tlbflush.h>
-#include <asm/sections.h>
-#include <asm/cpu_entry_area.h>
+#include <yai/e820/types.h>
+#include <yai/pgalloc.h>
+#include <yai/tlbflush.h>
+#include <yai/sections.h>
+#include <yai/cpu_entry_area.h>
 
 extern struct range pfn_mapped[E820_MAX_ENTRIES];
 

@@ -2,16 +2,16 @@
 /*
  * Interrupt descriptor table related code
  */
-#include <linux/interrupt.h>
+#include <yai/interrupt.h>
 
-#include <asm/cpu_entry_area.h>
-#include <asm/set_memory.h>
-#include <asm/traps.h>
-#include <asm/proto.h>
-#include <asm/desc.h>
-#include <asm/hw_irq.h>
-#include <asm/ia32.h>
-#include <asm/idtentry.h>
+#include <yai/cpu_entry_area.h>
+#include <yai/set_memory.h>
+#include <yai/traps.h>
+#include <yai/proto.h>
+#include <yai/desc.h>
+#include <yai/hw_irq.h>
+#include <yai/ia32.h>
+#include <yai/idtentry.h>
 
 #define DPL0		0x0
 #define DPL3		0x3

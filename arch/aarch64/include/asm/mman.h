@@ -5,11 +5,11 @@
 #include <uapi/asm/mman.h>
 
 #ifndef BUILD_VDSO
-#include <linux/compiler.h>
-#include <linux/fs.h>
-#include <linux/hugetlb.h>
-#include <linux/shmem_fs.h>
-#include <linux/types.h>
+#include <yai/compiler.h>
+#include <yai/fs.h>
+#include <yai/hugetlb.h>
+#include <yai/shmem_fs.h>
+#include <yai/types.h>
 
 static inline vm_flags_t arch_calc_vm_prot_bits(unsigned long prot,
 	unsigned long pkey)

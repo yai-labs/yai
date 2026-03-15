@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: GPL-2.0-only
-#include <linux/bitmap.h>
-#include <linux/bug.h>
-#include <linux/export.h>
-#include <linux/idr.h>
-#include <linux/slab.h>
-#include <linux/spinlock.h>
-#include <linux/xarray.h>
+#include <yai/bitmap.h>
+#include <yai/bug.h>
+#include <yai/export.h>
+#include <yai/idr.h>
+#include <yai/slab.h>
+#include <yai/spinlock.h>
+#include <yai/xarray.h>
 
 /**
  * idr_alloc_u32() - Allocate an ID.

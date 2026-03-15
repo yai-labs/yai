@@ -9,21 +9,21 @@
  *
  * Author: Arjan van de Ven <arjan@linux.intel.com>
  */
-#include <linux/debugfs.h>
-#include <linux/errno.h>
-#include <linux/fs.h>
-#include <linux/io.h>
-#include <linux/init.h>
-#include <linux/mm.h>
-#include <linux/ptdump.h>
-#include <linux/sched.h>
-#include <linux/seq_file.h>
+#include <yai/debugfs.h>
+#include <yai/errno.h>
+#include <yai/fs.h>
+#include <yai/io.h>
+#include <yai/init.h>
+#include <yai/mm.h>
+#include <yai/ptdump.h>
+#include <yai/sched.h>
+#include <yai/seq_file.h>
 
-#include <asm/fixmap.h>
-#include <asm/kasan.h>
-#include <asm/memory.h>
-#include <asm/pgtable-hwdef.h>
-#include <asm/ptdump.h>
+#include <yai/fixmap.h>
+#include <yai/kasan.h>
+#include <yai/memory.h>
+#include <yai/pgtable-hwdef.h>
+#include <yai/ptdump.h>
 
 
 #define pt_dump_seq_printf(m, fmt, args...)	\

@@ -5,10 +5,10 @@
 #ifndef __ASM_HW_BREAKPOINT_H
 #define __ASM_HW_BREAKPOINT_H
 
-#include <asm/cputype.h>
-#include <asm/cpufeature.h>
-#include <asm/sysreg.h>
-#include <asm/virt.h>
+#include <yai/cputype.h>
+#include <yai/cpufeature.h>
+#include <yai/sysreg.h>
+#include <yai/virt.h>
 
 struct arch_hw_breakpoint_ctrl {
 	u32 __reserved	: 19,

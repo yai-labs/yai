@@ -7,9 +7,9 @@
 #ifndef _ASM_RISCV_TLBFLUSH_H
 #define _ASM_RISCV_TLBFLUSH_H
 
-#include <linux/mm_types.h>
-#include <asm/smp.h>
-#include <asm/errata_list.h>
+#include <yai/mm_types.h>
+#include <yai/smp.h>
+#include <yai/errata_list.h>
 
 #define FLUSH_TLB_MAX_SIZE      ((unsigned long)-1)
 #define FLUSH_TLB_NO_ASID       ((unsigned long)-1)

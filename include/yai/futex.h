@@ -4,7 +4,7 @@
 
 #include <yai/futex.h>
 #include <yai/uaccess.h>
-#include <asm/errno.h>
+#include <yai/errno.h>
 
 #ifndef futex_atomic_cmpxchg_inatomic
 #ifndef CONFIG_SMP

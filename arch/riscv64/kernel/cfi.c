@@ -4,8 +4,8 @@
  *
  * Copyright (C) 2023 Google LLC
  */
-#include <linux/cfi.h>
-#include <asm/insn.h>
+#include <yai/cfi.h>
+#include <yai/insn.h>
 
 /*
  * Returns the target address and the expected type when regs->epc points

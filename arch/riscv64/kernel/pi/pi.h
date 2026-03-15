@@ -2,7 +2,7 @@
 #ifndef _RISCV_PI_H_
 #define _RISCV_PI_H_
 
-#include <linux/types.h>
+#include <yai/types.h>
 
 /*
  * The following functions are exported (but prefixed). Declare them here so

@@ -3,10 +3,10 @@
  *      crc7.c
  */
 
-#include <linux/crc7.h>
-#include <linux/export.h>
-#include <linux/module.h>
-#include <linux/types.h>
+#include <yai/crc7.h>
+#include <yai/export.h>
+#include <yai/module.h>
+#include <yai/types.h>
 
 /*
  * Table for CRC-7 (polynomial x^7 + x^3 + 1).

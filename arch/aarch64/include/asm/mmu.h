@@ -5,7 +5,7 @@
 #ifndef __ASM_MMU_H
 #define __ASM_MMU_H
 
-#include <asm/cputype.h>
+#include <yai/cputype.h>
 
 #define MMCF_AARCH32	0x1	/* mm context flag for AArch32 executables */
 #define USER_ASID_BIT	48
@@ -14,8 +14,8 @@
 
 #ifndef __ASSEMBLER__
 
-#include <linux/refcount.h>
-#include <asm/cpufeature.h>
+#include <yai/refcount.h>
+#include <yai/cpufeature.h>
 
 enum pgtable_type {
 	TABLE_PTE,

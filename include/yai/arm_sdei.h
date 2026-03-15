@@ -8,7 +8,7 @@
 #include <acpi/ghes.h>
 
 #ifdef CONFIG_ARM_SDE_INTERFACE
-#include <asm/sdei.h>
+#include <yai/sdei.h>
 #endif
 
 /* Arch code should override this to set the entry point from firmware... */

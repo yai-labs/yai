@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: GPL-2.0-only
 #ifndef CONFIG_HAVE_ARCH_BITREVERSE
-#include <linux/types.h>
-#include <linux/module.h>
-#include <linux/bitrev.h>
+#include <yai/types.h>
+#include <yai/module.h>
+#include <yai/bitrev.h>
 
 MODULE_AUTHOR("Akinobu Mita <akinobu.mita@gmail.com>");
 MODULE_DESCRIPTION("Bit ordering reversal functions");

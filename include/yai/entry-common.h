@@ -10,8 +10,8 @@
 #include <yai/seccomp.h>
 #include <yai/sched.h>
 
-#include <asm/entry-common.h>
-#include <asm/syscall.h>
+#include <yai/entry-common.h>
+#include <yai/syscall.h>
 
 #ifndef _TIF_UPROBE
 # define _TIF_UPROBE			(0)

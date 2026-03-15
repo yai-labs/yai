@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0-only
 #include <kunit/test.h>
-#include <linux/pgtable.h>
+#include <yai/pgtable.h>
 
 MODULE_IMPORT_NS("EXPORTED_FOR_KUNIT_TESTING");
 

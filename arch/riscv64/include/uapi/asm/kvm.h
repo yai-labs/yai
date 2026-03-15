@@ -11,9 +11,9 @@
 
 #ifndef __ASSEMBLER__
 
-#include <linux/types.h>
-#include <asm/bitsperlong.h>
-#include <asm/ptrace.h>
+#include <yai/types.h>
+#include <yai/bitsperlong.h>
+#include <yai/ptrace.h>
 
 #define __KVM_HAVE_IRQ_LINE
 

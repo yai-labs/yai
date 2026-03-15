@@ -6,11 +6,11 @@
  * Authors: Fenghua Yu <fenghua.yu@intel.com>,
  *          H. Peter Anvin <hpa@linux.intel.com>
  */
-#include <linux/printk.h>
+#include <yai/printk.h>
 
-#include <asm/processor.h>
-#include <asm/archrandom.h>
-#include <asm/sections.h>
+#include <yai/processor.h>
+#include <yai/archrandom.h>
+#include <yai/sections.h>
 
 /*
  * RDRAND has Built-In-Self-Test (BIST) that runs on every invocation.

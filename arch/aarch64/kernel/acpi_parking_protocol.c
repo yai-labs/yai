@@ -5,11 +5,11 @@
  * Authors: Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>
  *	    Mark Salter <msalter@redhat.com>
  */
-#include <linux/acpi.h>
-#include <linux/mm.h>
-#include <linux/types.h>
+#include <yai/acpi.h>
+#include <yai/mm.h>
+#include <yai/types.h>
 
-#include <asm/cpu_ops.h>
+#include <yai/cpu_ops.h>
 
 struct parking_protocol_mailbox {
 	__le32 cpu_id;

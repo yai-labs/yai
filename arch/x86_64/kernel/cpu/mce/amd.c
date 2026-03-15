@@ -5,24 +5,24 @@
  *  Written by Jacob Shin - AMD, Inc.
  *  Maintained by: Borislav Petkov <bp@alien8.de>
  */
-#include <linux/interrupt.h>
-#include <linux/notifier.h>
-#include <linux/kobject.h>
-#include <linux/percpu.h>
-#include <linux/errno.h>
-#include <linux/sched.h>
-#include <linux/sysfs.h>
-#include <linux/slab.h>
-#include <linux/init.h>
-#include <linux/cpu.h>
-#include <linux/smp.h>
-#include <linux/string.h>
+#include <yai/interrupt.h>
+#include <yai/notifier.h>
+#include <yai/kobject.h>
+#include <yai/percpu.h>
+#include <yai/errno.h>
+#include <yai/sched.h>
+#include <yai/sysfs.h>
+#include <yai/slab.h>
+#include <yai/init.h>
+#include <yai/cpu.h>
+#include <yai/smp.h>
+#include <yai/string.h>
 
-#include <asm/traps.h>
-#include <asm/apic.h>
-#include <asm/mce.h>
-#include <asm/msr.h>
-#include <asm/trace/irq_vectors.h>
+#include <yai/traps.h>
+#include <yai/apic.h>
+#include <yai/mce.h>
+#include <yai/msr.h>
+#include <yai/trace/irq_vectors.h>
 
 #include "internal.h"
 

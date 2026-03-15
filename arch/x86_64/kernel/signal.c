@@ -10,38 +10,38 @@
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
-#include <linux/sched.h>
-#include <linux/sched/task_stack.h>
-#include <linux/mm.h>
-#include <linux/smp.h>
-#include <linux/kernel.h>
-#include <linux/kstrtox.h>
-#include <linux/errno.h>
-#include <linux/wait.h>
-#include <linux/unistd.h>
-#include <linux/stddef.h>
-#include <linux/personality.h>
-#include <linux/uaccess.h>
-#include <linux/user-return-notifier.h>
-#include <linux/uprobes.h>
-#include <linux/context_tracking.h>
-#include <linux/entry-common.h>
-#include <linux/syscalls.h>
-#include <linux/rseq.h>
+#include <yai/sched.h>
+#include <yai/sched/task_stack.h>
+#include <yai/mm.h>
+#include <yai/smp.h>
+#include <yai/kernel.h>
+#include <yai/kstrtox.h>
+#include <yai/errno.h>
+#include <yai/wait.h>
+#include <yai/unistd.h>
+#include <yai/stddef.h>
+#include <yai/personality.h>
+#include <yai/uaccess.h>
+#include <yai/user-return-notifier.h>
+#include <yai/uprobes.h>
+#include <yai/context_tracking.h>
+#include <yai/entry-common.h>
+#include <yai/syscalls.h>
+#include <yai/rseq.h>
 
-#include <asm/processor.h>
-#include <asm/ucontext.h>
-#include <asm/fpu/signal.h>
-#include <asm/fpu/xstate.h>
-#include <asm/vdso.h>
-#include <asm/mce.h>
-#include <asm/sighandling.h>
-#include <asm/vm86.h>
+#include <yai/processor.h>
+#include <yai/ucontext.h>
+#include <yai/fpu/signal.h>
+#include <yai/fpu/xstate.h>
+#include <yai/vdso.h>
+#include <yai/mce.h>
+#include <yai/sighandling.h>
+#include <yai/vm86.h>
 
-#include <asm/syscall.h>
-#include <asm/sigframe.h>
-#include <asm/signal.h>
-#include <asm/shstk.h>
+#include <yai/syscall.h>
+#include <yai/sigframe.h>
+#include <yai/signal.h>
+#include <yai/shstk.h>
 
 static inline int is_ia32_compat_frame(struct ksignal *ksig)
 {

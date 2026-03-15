@@ -4,9 +4,9 @@
 
 #ifndef __ASSEMBLER__
 
-#include <asm/barrier.h>
-#include <asm/errata_list.h>
-#include <asm/insn-def.h>
+#include <yai/barrier.h>
+#include <yai/errata_list.h>
+#include <yai/insn-def.h>
 
 static inline void cpu_relax(void)
 {

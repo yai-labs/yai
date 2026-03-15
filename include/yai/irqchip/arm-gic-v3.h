@@ -602,7 +602,7 @@
 #define ICC_SGI1R_AFFINITY_3_SHIFT	48
 #define ICC_SGI1R_AFFINITY_3_MASK	(0xffULL << ICC_SGI1R_AFFINITY_3_SHIFT)
 
-#include <asm/arch_gicv3.h>
+#include <yai/arch_gicv3.h>
 
 #ifndef __ASSEMBLY__
 

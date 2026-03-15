@@ -6,29 +6,29 @@
  * Copyright (C) 2017 SiFive
  */
 
-#include <linux/acpi.h>
-#include <linux/bitmap.h>
-#include <linux/cpu.h>
-#include <linux/cpuhotplug.h>
-#include <linux/ctype.h>
-#include <linux/log2.h>
-#include <linux/memory.h>
-#include <linux/module.h>
-#include <linux/of.h>
-#include <asm/acpi.h>
-#include <asm/alternative.h>
-#include <asm/bugs.h>
-#include <asm/cacheflush.h>
-#include <asm/cpufeature.h>
-#include <asm/hwcap.h>
-#include <asm/text-patching.h>
-#include <asm/hwprobe.h>
-#include <asm/processor.h>
-#include <asm/sbi.h>
-#include <asm/vector.h>
-#include <asm/vendor_extensions.h>
-#include <asm/vendor_extensions/thead.h>
-#include <asm/usercfi.h>
+#include <yai/acpi.h>
+#include <yai/bitmap.h>
+#include <yai/cpu.h>
+#include <yai/cpuhotplug.h>
+#include <yai/ctype.h>
+#include <yai/log2.h>
+#include <yai/memory.h>
+#include <yai/module.h>
+#include <yai/of.h>
+#include <yai/acpi.h>
+#include <yai/alternative.h>
+#include <yai/bugs.h>
+#include <yai/cacheflush.h>
+#include <yai/cpufeature.h>
+#include <yai/hwcap.h>
+#include <yai/text-patching.h>
+#include <yai/hwprobe.h>
+#include <yai/processor.h>
+#include <yai/sbi.h>
+#include <yai/vector.h>
+#include <yai/vendor_extensions.h>
+#include <yai/vendor_extensions/thead.h>
+#include <yai/usercfi.h>
 
 #define NUM_ALPHA_EXTS ('z' - 'a' + 1)
 

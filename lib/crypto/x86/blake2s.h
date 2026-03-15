@@ -3,13 +3,13 @@
  * Copyright (C) 2015-2019 Jason A. Donenfeld <Jason@zx2c4.com>. All Rights Reserved.
  */
 
-#include <asm/cpufeature.h>
-#include <asm/fpu/api.h>
-#include <asm/processor.h>
-#include <asm/simd.h>
-#include <linux/jump_label.h>
-#include <linux/kernel.h>
-#include <linux/sizes.h>
+#include <yai/cpufeature.h>
+#include <yai/fpu/api.h>
+#include <yai/processor.h>
+#include <yai/simd.h>
+#include <yai/jump_label.h>
+#include <yai/kernel.h>
+#include <yai/sizes.h>
 
 asmlinkage void blake2s_compress_ssse3(struct blake2s_ctx *ctx,
 				       const u8 *data, size_t nblocks, u32 inc);

@@ -13,7 +13,7 @@
 #include <yai/mm.h>
 #include <yai/module.h>
 
-#include <asm/sections.h>
+#include <yai/sections.h>
 
 #define KSYM_NAME_LEN 512
 #define KSYM_SYMBOL_LEN (sizeof("%s+%#lx/%#lx [%s %s]") + \

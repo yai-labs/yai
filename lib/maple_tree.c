@@ -53,13 +53,13 @@
  */
 
 
-#include <linux/maple_tree.h>
-#include <linux/xarray.h>
-#include <linux/types.h>
-#include <linux/export.h>
-#include <linux/slab.h>
-#include <linux/limits.h>
-#include <asm/barrier.h>
+#include <yai/maple_tree.h>
+#include <yai/xarray.h>
+#include <yai/types.h>
+#include <yai/export.h>
+#include <yai/slab.h>
+#include <yai/limits.h>
+#include <yai/barrier.h>
 
 #define CREATE_TRACE_POINTS
 #include <trace/events/maple_tree.h>

@@ -13,18 +13,18 @@
  *	Greg Kroah-Hartman	<greg@kroah.com>
  */
 
-#include <linux/spinlock.h>
-#include <linux/string.h>
-#include <linux/kobject.h>
-#include <linux/export.h>
-#include <linux/kmod.h>
-#include <linux/slab.h>
-#include <linux/socket.h>
-#include <linux/skbuff.h>
-#include <linux/netlink.h>
-#include <linux/uidgid.h>
-#include <linux/uuid.h>
-#include <linux/ctype.h>
+#include <yai/spinlock.h>
+#include <yai/string.h>
+#include <yai/kobject.h>
+#include <yai/export.h>
+#include <yai/kmod.h>
+#include <yai/slab.h>
+#include <yai/socket.h>
+#include <yai/skbuff.h>
+#include <yai/netlink.h>
+#include <yai/uidgid.h>
+#include <yai/uuid.h>
+#include <yai/ctype.h>
 #include <net/sock.h>
 #include <net/netlink.h>
 #include <net/net_namespace.h>

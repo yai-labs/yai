@@ -6,7 +6,7 @@
 #include <yai/stddef.h>
 #include <yai/spinlock.h>
 #include <yai/wait.h>
-#include <asm/current.h>
+#include <yai/current.h>
 
 /*
  * Simple waitqueues are semantically very different to regular wait queues

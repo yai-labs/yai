@@ -1,17 +1,17 @@
 // SPDX-License-Identifier: GPL-2.0
-#include <linux/debugfs.h>
-#include <linux/mm.h>
-#include <linux/slab.h>
-#include <linux/uaccess.h>
-#include <linux/memblock.h>
-#include <linux/stacktrace.h>
-#include <linux/page_owner.h>
-#include <linux/jump_label.h>
-#include <linux/migrate.h>
-#include <linux/stackdepot.h>
-#include <linux/seq_file.h>
-#include <linux/memcontrol.h>
-#include <linux/sched/clock.h>
+#include <yai/debugfs.h>
+#include <yai/mm.h>
+#include <yai/slab.h>
+#include <yai/uaccess.h>
+#include <yai/memblock.h>
+#include <yai/stacktrace.h>
+#include <yai/page_owner.h>
+#include <yai/jump_label.h>
+#include <yai/migrate.h>
+#include <yai/stackdepot.h>
+#include <yai/seq_file.h>
+#include <yai/memcontrol.h>
+#include <yai/sched/clock.h>
 
 #include "internal.h"
 

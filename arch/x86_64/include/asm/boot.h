@@ -3,7 +3,7 @@
 #define _ASM_X86_BOOT_H
 
 
-#include <asm/pgtable_types.h>
+#include <yai/pgtable_types.h>
 #include <uapi/asm/boot.h>
 
 /* Minimum kernel alignment, as a power of two */

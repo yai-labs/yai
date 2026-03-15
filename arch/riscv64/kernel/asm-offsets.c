@@ -5,17 +5,17 @@
  */
 #define COMPILE_OFFSETS
 
-#include <linux/kbuild.h>
-#include <linux/mm.h>
-#include <linux/sched.h>
-#include <linux/ftrace.h>
-#include <linux/suspend.h>
-#include <asm/kvm_host.h>
-#include <asm/thread_info.h>
-#include <asm/ptrace.h>
-#include <asm/cpu_ops_sbi.h>
-#include <asm/stacktrace.h>
-#include <asm/suspend.h>
+#include <yai/kbuild.h>
+#include <yai/mm.h>
+#include <yai/sched.h>
+#include <yai/ftrace.h>
+#include <yai/suspend.h>
+#include <yai/kvm_host.h>
+#include <yai/thread_info.h>
+#include <yai/ptrace.h>
+#include <yai/cpu_ops_sbi.h>
+#include <yai/stacktrace.h>
+#include <yai/suspend.h>
 
 void asm_offsets(void);
 

@@ -15,14 +15,14 @@
  * ( The serial nature of the boot logic and the CPU hotplug lock
  *   protects against more than 2 CPUs entering this code. )
  */
-#include <linux/workqueue.h>
-#include <linux/topology.h>
-#include <linux/spinlock.h>
-#include <linux/kernel.h>
-#include <linux/smp.h>
-#include <linux/nmi.h>
-#include <asm/msr.h>
-#include <asm/tsc.h>
+#include <yai/workqueue.h>
+#include <yai/topology.h>
+#include <yai/spinlock.h>
+#include <yai/kernel.h>
+#include <yai/smp.h>
+#include <yai/nmi.h>
+#include <yai/msr.h>
+#include <yai/tsc.h>
 
 struct tsc_adjust {
 	s64		bootval;

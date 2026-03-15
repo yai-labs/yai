@@ -6,8 +6,8 @@
  * Author(s): Hendrik Brueckner <brueckner@linux.vnet.ibm.com>
  */
 
-#include <linux/cpufeature.h>
-#include <asm/fpu.h>
+#include <yai/cpufeature.h>
+#include <yai/fpu.h>
 #include "crc32-vx.h"
 
 #define VX_MIN_LEN		64

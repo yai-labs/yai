@@ -13,7 +13,7 @@
 #define ZSTD_LDM_H
 
 #include "zstd_compress_internal.h"   /* ldmParams_t, U32 */
-#include <linux/zstd.h>   /* ZSTD_CCtx, size_t */
+#include <yai/zstd.h>   /* ZSTD_CCtx, size_t */
 
 /*-*************************************
 *  Long distance matching

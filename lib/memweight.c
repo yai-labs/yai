@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0
-#include <linux/export.h>
-#include <linux/bug.h>
-#include <linux/bitmap.h>
+#include <yai/export.h>
+#include <yai/bug.h>
+#include <yai/bitmap.h>
 
 /**
  * memweight - count the total number of bits set in memory area

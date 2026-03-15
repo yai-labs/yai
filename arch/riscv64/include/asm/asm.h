@@ -76,7 +76,7 @@
 #endif
 
 #ifdef __ASSEMBLER__
-#include <asm/asm-offsets.h>
+#include <yai/asm-offsets.h>
 
 /* Common assembly source macros */
 

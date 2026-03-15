@@ -77,7 +77,7 @@
 #include <yai/list.h>
 #include <yai/plist_types.h>
 
-#include <asm/bug.h>
+#include <yai/bug.h>
 
 /**
  * PLIST_HEAD_INIT - static struct plist_head initializer

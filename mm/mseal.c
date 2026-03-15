@@ -7,12 +7,12 @@
  *  Author: Jeff Xu <jeffxu@chromium.org>
  */
 
-#include <linux/mempolicy.h>
-#include <linux/mman.h>
-#include <linux/mm.h>
-#include <linux/mm_inline.h>
-#include <linux/syscalls.h>
-#include <linux/sched.h>
+#include <yai/mempolicy.h>
+#include <yai/mman.h>
+#include <yai/mm.h>
+#include <yai/mm_inline.h>
+#include <yai/syscalls.h>
+#include <yai/sched.h>
 #include "internal.h"
 
 /*

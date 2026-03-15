@@ -2,9 +2,9 @@
 #ifndef _ASM_X86_SEGMENT_H
 #define _ASM_X86_SEGMENT_H
 
-#include <linux/const.h>
-#include <asm/alternative.h>
-#include <asm/ibt.h>
+#include <yai/const.h>
+#include <yai/alternative.h>
+#include <yai/ibt.h>
 
 /*
  * Constructor for a conventional segment GDT (or LDT) entry.
@@ -164,7 +164,7 @@
 
 #else /* 64-bit: */
 
-#include <asm/cache.h>
+#include <yai/cache.h>
 
 #define GDT_ENTRY_KERNEL32_CS		1
 #define GDT_ENTRY_KERNEL_CS		2

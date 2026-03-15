@@ -2,15 +2,15 @@
 #ifndef _ASM_EFI_H
 #define _ASM_EFI_H
 
-#include <asm/boot.h>
-#include <asm/cpufeature.h>
-#include <asm/fpsimd.h>
-#include <asm/io.h>
-#include <asm/memory.h>
-#include <asm/mmu_context.h>
-#include <asm/neon.h>
-#include <asm/ptrace.h>
-#include <asm/tlbflush.h>
+#include <yai/boot.h>
+#include <yai/cpufeature.h>
+#include <yai/fpsimd.h>
+#include <yai/io.h>
+#include <yai/memory.h>
+#include <yai/mmu_context.h>
+#include <yai/neon.h>
+#include <yai/ptrace.h>
+#include <yai/tlbflush.h>
 
 #ifdef CONFIG_EFI
 extern void efi_init(void);

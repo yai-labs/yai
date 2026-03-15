@@ -10,12 +10,12 @@
 
 #ifndef __ASSEMBLER__
 
-#include <linux/bitfield.h>
-#include <linux/mm_types.h>
-#include <linux/sched.h>
-#include <linux/mmu_notifier.h>
-#include <asm/cputype.h>
-#include <asm/mmu.h>
+#include <yai/bitfield.h>
+#include <yai/mm_types.h>
+#include <yai/sched.h>
+#include <yai/mmu_notifier.h>
+#include <yai/cputype.h>
+#include <yai/mmu.h>
 
 /*
  * Raw TLBI operations.

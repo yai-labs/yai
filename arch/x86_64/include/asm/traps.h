@@ -2,13 +2,13 @@
 #ifndef _ASM_X86_TRAPS_H
 #define _ASM_X86_TRAPS_H
 
-#include <linux/context_tracking_state.h>
-#include <linux/kprobes.h>
+#include <yai/context_tracking_state.h>
+#include <yai/kprobes.h>
 
-#include <asm/debugreg.h>
-#include <asm/idtentry.h>
-#include <asm/siginfo.h>			/* TRAP_TRACE, ... */
-#include <asm/trap_pf.h>
+#include <yai/debugreg.h>
+#include <yai/idtentry.h>
+#include <yai/siginfo.h>			/* TRAP_TRACE, ... */
+#include <yai/trap_pf.h>
 
 #ifdef CONFIG_X86_64
 asmlinkage __visible notrace struct pt_regs *sync_regs(struct pt_regs *eregs);

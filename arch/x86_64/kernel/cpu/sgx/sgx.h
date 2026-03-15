@@ -2,13 +2,13 @@
 #ifndef _X86_SGX_H
 #define _X86_SGX_H
 
-#include <linux/bitops.h>
-#include <linux/err.h>
-#include <linux/io.h>
-#include <linux/rwsem.h>
-#include <linux/types.h>
-#include <asm/asm.h>
-#include <asm/sgx.h>
+#include <yai/bitops.h>
+#include <yai/err.h>
+#include <yai/io.h>
+#include <yai/rwsem.h>
+#include <yai/types.h>
+#include <yai/asm.h>
+#include <yai/sgx.h>
 
 #undef pr_fmt
 #define pr_fmt(fmt) "sgx: " fmt

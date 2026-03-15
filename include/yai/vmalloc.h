@@ -8,11 +8,11 @@
 #include <yai/init.h>
 #include <yai/list.h>
 #include <yai/llist.h>
-#include <asm/page.h>		/* pgprot_t */
+#include <yai/page.h>		/* pgprot_t */
 #include <yai/rbtree.h>
 #include <yai/overflow.h>
 
-#include <asm/vmalloc.h>
+#include <yai/vmalloc.h>
 
 struct vm_area_struct;		/* vma defining user mapping in mm_types.h */
 struct notifier_block;		/* in notifier.h */

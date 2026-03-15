@@ -2,15 +2,15 @@
 #ifndef _ASM_X86_EFI_H
 #define _ASM_X86_EFI_H
 
-#include <asm/fpu/api.h>
-#include <asm/processor-flags.h>
-#include <asm/tlb.h>
-#include <asm/nospec-branch.h>
-#include <asm/mmu_context.h>
-#include <asm/ibt.h>
-#include <linux/build_bug.h>
-#include <linux/kernel.h>
-#include <linux/pgtable.h>
+#include <yai/fpu/api.h>
+#include <yai/processor-flags.h>
+#include <yai/tlb.h>
+#include <yai/nospec-branch.h>
+#include <yai/mmu_context.h>
+#include <yai/ibt.h>
+#include <yai/build_bug.h>
+#include <yai/kernel.h>
+#include <yai/pgtable.h>
 
 extern unsigned long efi_fw_vendor, efi_config_table;
 extern unsigned long efi_mixed_mode_stack_pa;

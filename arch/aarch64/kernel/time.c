@@ -7,30 +7,30 @@
  * Copyright (C) 2012 ARM Ltd.
  */
 
-#include <linux/clockchips.h>
-#include <linux/export.h>
-#include <linux/kernel.h>
-#include <linux/interrupt.h>
-#include <linux/time.h>
-#include <linux/init.h>
-#include <linux/sched.h>
-#include <linux/smp.h>
-#include <linux/timex.h>
-#include <linux/errno.h>
-#include <linux/profile.h>
-#include <linux/stacktrace.h>
-#include <linux/syscore_ops.h>
-#include <linux/timer.h>
-#include <linux/irq.h>
-#include <linux/delay.h>
-#include <linux/clocksource.h>
-#include <linux/of_clk.h>
-#include <linux/acpi.h>
+#include <yai/clockchips.h>
+#include <yai/export.h>
+#include <yai/kernel.h>
+#include <yai/interrupt.h>
+#include <yai/time.h>
+#include <yai/init.h>
+#include <yai/sched.h>
+#include <yai/smp.h>
+#include <yai/timex.h>
+#include <yai/errno.h>
+#include <yai/profile.h>
+#include <yai/stacktrace.h>
+#include <yai/syscore_ops.h>
+#include <yai/timer.h>
+#include <yai/irq.h>
+#include <yai/delay.h>
+#include <yai/clocksource.h>
+#include <yai/of_clk.h>
+#include <yai/acpi.h>
 
 #include <clocksource/arm_arch_timer.h>
 
-#include <asm/thread_info.h>
-#include <asm/paravirt.h>
+#include <yai/thread_info.h>
+#include <yai/paravirt.h>
 
 static bool profile_pc_cb(void *arg, unsigned long pc)
 {

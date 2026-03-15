@@ -16,7 +16,7 @@
 #include <yai/threads.h>
 #include <yai/types.h>
 
-#include <asm/bug.h>
+#include <yai/bug.h>
 
 /**
  * cpumask_pr_args - printf args to output a cpumask

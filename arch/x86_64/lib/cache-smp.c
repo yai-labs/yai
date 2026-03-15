@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0
-#include <linux/smp.h>
-#include <linux/export.h>
-#include <linux/kvm_types.h>
+#include <yai/smp.h>
+#include <yai/export.h>
+#include <yai/kvm_types.h>
 
 static void __wbinvd(void *dummy)
 {

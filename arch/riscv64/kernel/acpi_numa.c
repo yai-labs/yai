@@ -17,16 +17,16 @@
 
 #define pr_fmt(fmt) "ACPI: NUMA: " fmt
 
-#include <linux/acpi.h>
-#include <linux/bitmap.h>
-#include <linux/kernel.h>
-#include <linux/mm.h>
-#include <linux/memblock.h>
-#include <linux/mmzone.h>
-#include <linux/module.h>
-#include <linux/topology.h>
+#include <yai/acpi.h>
+#include <yai/bitmap.h>
+#include <yai/kernel.h>
+#include <yai/mm.h>
+#include <yai/memblock.h>
+#include <yai/mmzone.h>
+#include <yai/module.h>
+#include <yai/topology.h>
 
-#include <asm/numa.h>
+#include <yai/numa.h>
 
 static int acpi_early_node_map[NR_CPUS] __initdata = { [0 ... NR_CPUS - 1] = NUMA_NO_NODE };
 

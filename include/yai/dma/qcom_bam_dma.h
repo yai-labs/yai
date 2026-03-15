@@ -6,7 +6,7 @@
 #ifndef _QCOM_BAM_DMA_H
 #define _QCOM_BAM_DMA_H
 
-#include <asm/byteorder.h>
+#include <yai/byteorder.h>
 
 /*
  * This data type corresponds to the native Command Element

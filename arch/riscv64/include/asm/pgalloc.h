@@ -7,13 +7,13 @@
 #ifndef _ASM_RISCV_PGALLOC_H
 #define _ASM_RISCV_PGALLOC_H
 
-#include <linux/mm.h>
-#include <asm/sbi.h>
-#include <asm/tlb.h>
+#include <yai/mm.h>
+#include <yai/sbi.h>
+#include <yai/tlb.h>
 
 #ifdef CONFIG_MMU
 #define __HAVE_ARCH_PUD_FREE
-#include <asm-generic/pgalloc.h>
+#include <yai/pgalloc.h>
 
 static inline void pmd_populate_kernel(struct mm_struct *mm,
 	pmd_t *pmd, pte_t *pte)

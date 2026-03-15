@@ -2,10 +2,10 @@
 #ifndef __ARM64_KVM_NESTED_H
 #define __ARM64_KVM_NESTED_H
 
-#include <linux/bitfield.h>
-#include <linux/kvm_host.h>
-#include <asm/kvm_emulate.h>
-#include <asm/kvm_pgtable.h>
+#include <yai/bitfield.h>
+#include <yai/kvm_host.h>
+#include <yai/kvm_emulate.h>
+#include <yai/kvm_pgtable.h>
 
 static inline bool vcpu_has_nv(const struct kvm_vcpu *vcpu)
 {

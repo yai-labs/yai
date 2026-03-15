@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0
-#include <linux/export.h>
-#include <linux/min_heap.h>
+#include <yai/export.h>
+#include <yai/min_heap.h>
 
 void __min_heap_init(min_heap_char *heap, void *data, size_t size)
 {

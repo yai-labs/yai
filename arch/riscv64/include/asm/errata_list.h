@@ -5,12 +5,12 @@
 #ifndef ASM_ERRATA_LIST_H
 #define ASM_ERRATA_LIST_H
 
-#include <asm/csr.h>
-#include <asm/insn-def.h>
-#include <asm/hwcap.h>
-#include <asm/vendorid_list.h>
-#include <asm/errata_list_vendors.h>
-#include <asm/vendor_extensions/mips.h>
+#include <yai/csr.h>
+#include <yai/insn-def.h>
+#include <yai/hwcap.h>
+#include <yai/vendorid_list.h>
+#include <yai/errata_list_vendors.h>
+#include <yai/vendor_extensions/mips.h>
 
 #ifdef __ASSEMBLER__
 

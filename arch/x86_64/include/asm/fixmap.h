@@ -14,7 +14,7 @@
 #ifndef _ASM_X86_FIXMAP_H
 #define _ASM_X86_FIXMAP_H
 
-#include <asm/kmap_size.h>
+#include <yai/kmap_size.h>
 
 /*
  * Exposed to assembly code for setting up initial page tables. Cannot be
@@ -32,12 +32,12 @@
 #define FIXMAP_PMD_TOP	507
 
 #ifndef __ASSEMBLER__
-#include <linux/kernel.h>
-#include <asm/apicdef.h>
-#include <asm/page.h>
-#include <asm/pgtable_types.h>
+#include <yai/kernel.h>
+#include <yai/apicdef.h>
+#include <yai/page.h>
+#include <yai/pgtable_types.h>
 #ifdef CONFIG_X86_32
-#include <linux/threads.h>
+#include <yai/threads.h>
 #else
 #include <uapi/asm/vsyscall.h>
 #endif
@@ -188,7 +188,7 @@ void __init *early_memremap_decrypted(resource_size_t phys_addr,
 void __init *early_memremap_decrypted_wp(resource_size_t phys_addr,
 					 unsigned long size);
 
-#include <asm-generic/fixmap.h>
+#include <yai/fixmap.h>
 
 #define __late_set_fixmap(idx, phys, flags) __set_fixmap(idx, phys, flags)
 #define __late_clear_fixmap(idx) __set_fixmap(idx, 0, __pgprot(0))

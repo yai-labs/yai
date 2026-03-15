@@ -1,29 +1,29 @@
 // SPDX-License-Identifier: GPL-2.0-only
-#include <linux/kernel.h>
-#include <linux/errno.h>
-#include <linux/err.h>
-#include <linux/spinlock.h>
+#include <yai/kernel.h>
+#include <yai/errno.h>
+#include <yai/err.h>
+#include <yai/spinlock.h>
 
-#include <linux/mm.h>
-#include <linux/memfd.h>
-#include <linux/memremap.h>
-#include <linux/pagemap.h>
-#include <linux/rmap.h>
-#include <linux/swap.h>
-#include <linux/swapops.h>
-#include <linux/secretmem.h>
+#include <yai/mm.h>
+#include <yai/memfd.h>
+#include <yai/memremap.h>
+#include <yai/pagemap.h>
+#include <yai/rmap.h>
+#include <yai/swap.h>
+#include <yai/swapops.h>
+#include <yai/secretmem.h>
 
-#include <linux/sched/signal.h>
-#include <linux/rwsem.h>
-#include <linux/hugetlb.h>
-#include <linux/migrate.h>
-#include <linux/mm_inline.h>
-#include <linux/pagevec.h>
-#include <linux/sched/mm.h>
-#include <linux/shmem_fs.h>
+#include <yai/sched/signal.h>
+#include <yai/rwsem.h>
+#include <yai/hugetlb.h>
+#include <yai/migrate.h>
+#include <yai/mm_inline.h>
+#include <yai/pagevec.h>
+#include <yai/sched/mm.h>
+#include <yai/shmem_fs.h>
 
-#include <asm/mmu_context.h>
-#include <asm/tlbflush.h>
+#include <yai/mmu_context.h>
+#include <yai/tlbflush.h>
 
 #include "internal.h"
 #include "swap.h"
@@ -991,7 +991,7 @@ static struct page *follow_p4d_mask(struct vm_area_struct *vma,
  * @flags: flags modifying lookup behaviour
  * @page_mask: a pointer to output page_mask
  *
- * @flags can have FOLL_ flags set, defined in <linux/mm.h>
+ * @flags can have FOLL_ flags set, defined in <yai/mm.h>
  *
  * When getting an anonymous page and the caller has to trigger unsharing
  * of a shared anonymous page first, -EMLINK is returned. The caller should

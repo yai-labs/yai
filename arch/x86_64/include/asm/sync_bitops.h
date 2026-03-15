@@ -14,7 +14,7 @@
  * bit 0 is the LSB of addr; bit 32 is the LSB of (addr+1).
  */
 
-#include <asm/rmwcc.h>
+#include <yai/rmwcc.h>
 
 #define ADDR (*(volatile long *)addr)
 

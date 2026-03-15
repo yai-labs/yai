@@ -1,18 +1,18 @@
 // SPDX-License-Identifier: GPL-2.0
-#include <linux/bitops.h>
-#include <linux/delay.h>
-#include <linux/isa-dma.h>
-#include <linux/pci.h>
-#include <asm/dma.h>
-#include <linux/io.h>
-#include <asm/processor-cyrix.h>
-#include <asm/processor-flags.h>
-#include <linux/timer.h>
-#include <asm/pci-direct.h>
-#include <asm/tsc.h>
-#include <asm/cpufeature.h>
-#include <linux/sched.h>
-#include <linux/sched/clock.h>
+#include <yai/bitops.h>
+#include <yai/delay.h>
+#include <yai/isa-dma.h>
+#include <yai/pci.h>
+#include <yai/dma.h>
+#include <yai/io.h>
+#include <yai/processor-cyrix.h>
+#include <yai/processor-flags.h>
+#include <yai/timer.h>
+#include <yai/pci-direct.h>
+#include <yai/tsc.h>
+#include <yai/cpufeature.h>
+#include <yai/sched.h>
+#include <yai/sched/clock.h>
 
 #include "cpu.h"
 

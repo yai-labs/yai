@@ -18,27 +18,27 @@
  * Mostly rewritten by Thomas Gleixner <tglx@kernel.org> and
  *		       Andy Lutomirsky <luto@amacapital.net>
  */
-#include <linux/kernel.h>
-#include <linux/errno.h>
-#include <linux/string.h>
-#include <linux/types.h>
-#include <linux/bug.h>
-#include <linux/init.h>
-#include <linux/spinlock.h>
-#include <linux/mm.h>
-#include <linux/uaccess.h>
-#include <linux/cpu.h>
+#include <yai/kernel.h>
+#include <yai/errno.h>
+#include <yai/string.h>
+#include <yai/types.h>
+#include <yai/bug.h>
+#include <yai/init.h>
+#include <yai/spinlock.h>
+#include <yai/mm.h>
+#include <yai/uaccess.h>
+#include <yai/cpu.h>
 
-#include <asm/cpufeature.h>
-#include <asm/hypervisor.h>
-#include <asm/vsyscall.h>
-#include <asm/cmdline.h>
-#include <asm/pti.h>
-#include <asm/tlbflush.h>
-#include <asm/desc.h>
-#include <asm/sections.h>
-#include <asm/set_memory.h>
-#include <asm/bugs.h>
+#include <yai/cpufeature.h>
+#include <yai/hypervisor.h>
+#include <yai/vsyscall.h>
+#include <yai/cmdline.h>
+#include <yai/pti.h>
+#include <yai/tlbflush.h>
+#include <yai/desc.h>
+#include <yai/sections.h>
+#include <yai/set_memory.h>
+#include <yai/bugs.h>
 
 #undef pr_fmt
 #define pr_fmt(fmt)     "Kernel/User page tables isolation: " fmt

@@ -6,16 +6,16 @@
  *
  * Author: Liao Chang (liaochang1@huawei.com)
  */
-#include <linux/kexec.h>
-#include <linux/elf.h>
-#include <linux/slab.h>
-#include <linux/of.h>
-#include <linux/libfdt.h>
-#include <linux/types.h>
-#include <linux/memblock.h>
-#include <linux/vmalloc.h>
-#include <asm/setup.h>
-#include <asm/insn.h>
+#include <yai/kexec.h>
+#include <yai/elf.h>
+#include <yai/slab.h>
+#include <yai/of.h>
+#include <yai/libfdt.h>
+#include <yai/types.h>
+#include <yai/memblock.h>
+#include <yai/vmalloc.h>
+#include <yai/setup.h>
+#include <yai/insn.h>
 
 const struct kexec_file_ops * const kexec_file_loaders[] = {
 	&elf_kexec_ops,

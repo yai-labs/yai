@@ -9,15 +9,15 @@
  * quirks and other tweaks, and feeds that into the generic Linux memory
  * allocation code routines via a platform independent interface (memblock, etc.).
  */
-#include <linux/memblock.h>
-#include <linux/suspend.h>
-#include <linux/acpi.h>
-#include <linux/firmware-map.h>
-#include <linux/sort.h>
-#include <linux/kvm_types.h>
+#include <yai/memblock.h>
+#include <yai/suspend.h>
+#include <yai/acpi.h>
+#include <yai/firmware-map.h>
+#include <yai/sort.h>
+#include <yai/kvm_types.h>
 
-#include <asm/e820/api.h>
-#include <asm/setup.h>
+#include <yai/e820/api.h>
+#include <yai/setup.h>
 
 /*
  * We organize the E820 table into three main data structures:

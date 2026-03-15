@@ -11,8 +11,8 @@
 
 #ifndef __ASSEMBLER__
 
-#include <linux/types.h>
-#include <asm/io.h>
+#include <yai/types.h>
+#include <yai/io.h>
 
 /* This must match data at realmode/rm/header.S */
 struct real_mode_header {

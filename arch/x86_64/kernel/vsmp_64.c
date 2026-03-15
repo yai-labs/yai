@@ -9,16 +9,16 @@
  *			     Ravikiran Thirumalai <kiran@scalemp.com>
  */
 
-#include <linux/init.h>
-#include <linux/pci_ids.h>
-#include <linux/pci_regs.h>
-#include <linux/smp.h>
-#include <linux/irq.h>
+#include <yai/init.h>
+#include <yai/pci_ids.h>
+#include <yai/pci_regs.h>
+#include <yai/smp.h>
+#include <yai/irq.h>
 
-#include <asm/apic.h>
-#include <asm/pci-direct.h>
-#include <asm/io.h>
-#include <asm/setup.h>
+#include <yai/apic.h>
+#include <yai/pci-direct.h>
+#include <yai/io.h>
+#include <yai/setup.h>
 
 #define TOPOLOGY_REGISTER_OFFSET 0x10
 

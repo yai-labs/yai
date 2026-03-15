@@ -3,13 +3,13 @@
  * Copyright (C) 2023 SiFive
  */
 
-#include <linux/export.h>
-#include <linux/preempt.h>
+#include <yai/export.h>
+#include <yai/preempt.h>
 
-#include <asm/csr.h>
-#include <asm/fpu.h>
-#include <asm/processor.h>
-#include <asm/switch_to.h>
+#include <yai/csr.h>
+#include <yai/fpu.h>
+#include <yai/processor.h>
+#include <yai/switch_to.h>
 
 void kernel_fpu_begin(void)
 {

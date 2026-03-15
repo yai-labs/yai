@@ -10,11 +10,11 @@
 #ifndef _ASM_X86_SYSCALL_H
 #define _ASM_X86_SYSCALL_H
 
-#include <uapi/linux/audit.h>
-#include <linux/sched.h>
-#include <linux/err.h>
-#include <asm/thread_info.h>	/* for TS_COMPAT */
-#include <asm/unistd.h>
+#include <yai/audit.h>
+#include <yai/sched.h>
+#include <yai/err.h>
+#include <yai/thread_info.h>	/* for TS_COMPAT */
+#include <yai/unistd.h>
 
 /* This is used purely for kernel/trace/trace_syscalls.c */
 typedef long (*sys_call_ptr_t)(const struct pt_regs *);

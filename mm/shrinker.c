@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: GPL-2.0
-#include <linux/memcontrol.h>
-#include <linux/rwsem.h>
-#include <linux/shrinker.h>
-#include <linux/rculist.h>
+#include <yai/memcontrol.h>
+#include <yai/rwsem.h>
+#include <yai/shrinker.h>
+#include <yai/rculist.h>
 #include <trace/events/vmscan.h>
 
 #include "internal.h"

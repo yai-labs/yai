@@ -1,7 +1,7 @@
 /* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
 /* ML-DSA test vector extracted from leancrypto */
 
-#include <linux/fips.h>
+#include <yai/fips.h>
 
 static const u8 fips_test_mldsa65_signature[] __initconst __maybe_unused = {
 	0xda, 0xcf, 0x8d, 0x67, 0x59, 0x60, 0x6c, 0x39, 0x2d, 0x89, 0xb6, 0xa1,

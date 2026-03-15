@@ -4,8 +4,8 @@
  *
  * Copyright 2025 Google LLC
  */
-#include <asm/fpu/api.h>
-#include <linux/cpufeature.h>
+#include <yai/fpu/api.h>
+#include <yai/cpufeature.h>
 
 #define NUM_H_POWERS 8
 

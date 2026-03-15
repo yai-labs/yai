@@ -11,8 +11,8 @@
 #define _ASM_RISCV_BARRIER_H
 
 #ifndef __ASSEMBLER__
-#include <asm/cmpxchg.h>
-#include <asm/fence.h>
+#include <yai/cmpxchg.h>
+#include <yai/fence.h>
 
 /* These barriers need to enforce ordering on both devices or memory. */
 #define __mb()		RISCV_FENCE(iorw, iorw)
@@ -80,7 +80,7 @@ do {									\
 })
 #endif
 
-#include <asm-generic/barrier.h>
+#include <yai/barrier.h>
 
 #endif /* __ASSEMBLER__ */
 

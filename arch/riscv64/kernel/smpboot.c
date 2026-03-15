@@ -8,34 +8,34 @@
  * Copyright (C) 2017 SiFive
  */
 
-#include <linux/acpi.h>
-#include <linux/arch_topology.h>
-#include <linux/module.h>
-#include <linux/init.h>
-#include <linux/kernel.h>
-#include <linux/mm.h>
-#include <linux/sched.h>
-#include <linux/kernel_stat.h>
-#include <linux/notifier.h>
-#include <linux/cpu.h>
-#include <linux/percpu.h>
-#include <linux/delay.h>
-#include <linux/err.h>
-#include <linux/irq.h>
-#include <linux/of.h>
-#include <linux/sched/task_stack.h>
-#include <linux/sched/mm.h>
+#include <yai/acpi.h>
+#include <yai/arch_topology.h>
+#include <yai/module.h>
+#include <yai/init.h>
+#include <yai/kernel.h>
+#include <yai/mm.h>
+#include <yai/sched.h>
+#include <yai/kernel_stat.h>
+#include <yai/notifier.h>
+#include <yai/cpu.h>
+#include <yai/percpu.h>
+#include <yai/delay.h>
+#include <yai/err.h>
+#include <yai/irq.h>
+#include <yai/of.h>
+#include <yai/sched/task_stack.h>
+#include <yai/sched/mm.h>
 
-#include <asm/cacheflush.h>
-#include <asm/cpu_ops.h>
-#include <asm/irq.h>
-#include <asm/mmu_context.h>
-#include <asm/numa.h>
-#include <asm/tlbflush.h>
-#include <asm/sections.h>
-#include <asm/smp.h>
+#include <yai/cacheflush.h>
+#include <yai/cpu_ops.h>
+#include <yai/irq.h>
+#include <yai/mmu_context.h>
+#include <yai/numa.h>
+#include <yai/tlbflush.h>
+#include <yai/sections.h>
+#include <yai/smp.h>
 #include <uapi/asm/hwcap.h>
-#include <asm/vector.h>
+#include <yai/vector.h>
 
 #include "head.h"
 

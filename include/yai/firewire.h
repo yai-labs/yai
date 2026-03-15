@@ -16,7 +16,7 @@
 #include <yai/workqueue.h>
 
 #include <yai/atomic.h>
-#include <asm/byteorder.h>
+#include <yai/byteorder.h>
 
 #define CSR_REGISTER_BASE		0xfffff0000000ULL
 

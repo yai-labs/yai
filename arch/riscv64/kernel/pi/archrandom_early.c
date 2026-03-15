@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-only
 
-#include <asm/csr.h>
-#include <linux/processor.h>
+#include <yai/csr.h>
+#include <yai/processor.h>
 
 #include "pi.h"
 
@@ -14,7 +14,7 @@
 #undef pr_err_once
 #define pr_err_once(...)
 
-#include <asm/archrandom.h>
+#include <yai/archrandom.h>
 
 u64 get_kaslr_seed_zkr(const uintptr_t dtb_pa)
 {

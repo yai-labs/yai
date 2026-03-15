@@ -6,11 +6,11 @@
  *
  */
 
-#include <linux/bpf.h>
-#include <linux/filter.h>
-#include <linux/memory.h>
-#include <asm/text-patching.h>
-#include <asm/cfi.h>
+#include <yai/bpf.h>
+#include <yai/filter.h>
+#include <yai/memory.h>
+#include <yai/text-patching.h>
+#include <yai/cfi.h>
 #include "bpf_jit.h"
 
 /* Number of iterations to try until offsets converge. */

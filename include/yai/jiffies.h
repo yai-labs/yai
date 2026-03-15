@@ -10,7 +10,7 @@
 #include <yai/time.h>
 #include <yai/timex.h>
 #include <vdso/jiffies.h>
-#include <asm/param.h>			/* for HZ */
+#include <yai/param.h>			/* for HZ */
 #include <generated/timeconst.h>
 
 /*

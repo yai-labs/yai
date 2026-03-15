@@ -15,26 +15,26 @@
  * using the CPU's debug registers.
  */
 
-#include <linux/perf_event.h>
-#include <linux/hw_breakpoint.h>
-#include <linux/irqflags.h>
-#include <linux/notifier.h>
-#include <linux/kallsyms.h>
-#include <linux/kprobes.h>
-#include <linux/percpu.h>
-#include <linux/kdebug.h>
-#include <linux/kernel.h>
-#include <linux/kvm_types.h>
-#include <linux/export.h>
-#include <linux/sched.h>
-#include <linux/smp.h>
+#include <yai/perf_event.h>
+#include <yai/hw_breakpoint.h>
+#include <yai/irqflags.h>
+#include <yai/notifier.h>
+#include <yai/kallsyms.h>
+#include <yai/kprobes.h>
+#include <yai/percpu.h>
+#include <yai/kdebug.h>
+#include <yai/kernel.h>
+#include <yai/kvm_types.h>
+#include <yai/export.h>
+#include <yai/sched.h>
+#include <yai/smp.h>
 
-#include <asm/hw_breakpoint.h>
-#include <asm/processor.h>
-#include <asm/debugreg.h>
-#include <asm/user.h>
-#include <asm/desc.h>
-#include <asm/tlbflush.h>
+#include <yai/hw_breakpoint.h>
+#include <yai/processor.h>
+#include <yai/debugreg.h>
+#include <yai/user.h>
+#include <yai/desc.h>
+#include <yai/tlbflush.h>
 
 /* Per cpu debug control register value */
 DEFINE_PER_CPU(unsigned long, cpu_dr7);

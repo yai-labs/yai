@@ -2,23 +2,23 @@
 #ifndef _ASM_X86_PAGE_H
 #define _ASM_X86_PAGE_H
 
-#include <linux/types.h>
+#include <yai/types.h>
 
 #ifdef __KERNEL__
 
-#include <asm/page_types.h>
+#include <yai/page_types.h>
 
 #ifdef CONFIG_X86_64
-#include <asm/page_64.h>
+#include <yai/page_64.h>
 #else
-#include <asm/page_32.h>
+#include <yai/page_32.h>
 #endif	/* CONFIG_X86_64 */
 
 #ifndef __ASSEMBLER__
 
 struct page;
 
-#include <linux/range.h>
+#include <yai/range.h>
 extern struct range pfn_mapped[];
 extern int nr_pfn_mapped;
 
@@ -80,8 +80,8 @@ static __always_inline u64 __is_canonical_address(u64 vaddr, u8 vaddr_bits)
 
 #endif	/* __ASSEMBLER__ */
 
-#include <asm-generic/memory_model.h>
-#include <asm-generic/getorder.h>
+#include <yai/memory_model.h>
+#include <yai/getorder.h>
 
 #define HAVE_ARCH_HUGETLB_UNMAPPED_AREA
 

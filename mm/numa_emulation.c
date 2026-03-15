@@ -2,12 +2,12 @@
 /*
  * NUMA emulation
  */
-#include <linux/kernel.h>
-#include <linux/errno.h>
-#include <linux/topology.h>
-#include <linux/memblock.h>
-#include <linux/numa_memblks.h>
-#include <asm/numa.h>
+#include <yai/kernel.h>
+#include <yai/errno.h>
+#include <yai/topology.h>
+#include <yai/memblock.h>
+#include <yai/numa_memblks.h>
+#include <yai/numa.h>
 #include <acpi/acpi_numa.h>
 
 #define FAKE_NODE_MIN_SIZE	((u64)32 << 20)

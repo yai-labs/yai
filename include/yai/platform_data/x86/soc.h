@@ -14,7 +14,7 @@
 
 #include <yai/mod_devicetable.h>
 
-#include <asm/cpu_device_id.h>
+#include <yai/cpu_device_id.h>
 
 #define SOC_INTEL_IS_CPU(soc, type)				\
 static inline bool soc_intel_is_##soc(void)			\

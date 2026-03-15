@@ -7,9 +7,9 @@
 
 #include <yai/iopoll.h>
 
-#include <asm/cacheflush.h>
-#include <asm/smp.h>
-#include <asm/sysreg.h>
+#include <yai/cacheflush.h>
+#include <yai/smp.h>
+#include <yai/sysreg.h>
 
 #define GICV5_IPIS_PER_CPU		MAX_IPI
 

@@ -4,13 +4,13 @@
  */
 
 #include <kunit/test.h>
-#include <linux/bitops.h>
-#include <linux/kernel.h>
-#include <linux/module.h>
-#include <linux/overflow.h>
-#include <linux/prandom.h>
-#include <linux/slab.h>
-#include <linux/string.h>
+#include <yai/bitops.h>
+#include <yai/kernel.h>
+#include <yai/module.h>
+#include <yai/overflow.h>
+#include <yai/prandom.h>
+#include <yai/slab.h>
+#include <yai/string.h>
 
 #define BUF_SIZE 1024
 

@@ -6,34 +6,34 @@
     2007 - x86_64 support added by Glauber de Oliveira Costa, Red Hat Inc
 */
 
-#include <linux/errno.h>
-#include <linux/init.h>
-#include <linux/export.h>
-#include <linux/efi.h>
-#include <linux/bcd.h>
-#include <linux/highmem.h>
-#include <linux/kprobes.h>
-#include <linux/pgtable.h>
-#include <linux/static_call.h>
+#include <yai/errno.h>
+#include <yai/init.h>
+#include <yai/export.h>
+#include <yai/efi.h>
+#include <yai/bcd.h>
+#include <yai/highmem.h>
+#include <yai/kprobes.h>
+#include <yai/pgtable.h>
+#include <yai/static_call.h>
 
-#include <asm/bug.h>
-#include <asm/paravirt.h>
-#include <asm/debugreg.h>
-#include <asm/desc.h>
-#include <asm/setup.h>
-#include <asm/time.h>
-#include <asm/pgalloc.h>
-#include <asm/irq.h>
-#include <asm/delay.h>
-#include <asm/fixmap.h>
-#include <asm/apic.h>
-#include <asm/tlbflush.h>
-#include <asm/timer.h>
-#include <asm/special_insns.h>
-#include <asm/tlb.h>
-#include <asm/io_bitmap.h>
-#include <asm/gsseg.h>
-#include <asm/msr.h>
+#include <yai/bug.h>
+#include <yai/paravirt.h>
+#include <yai/debugreg.h>
+#include <yai/desc.h>
+#include <yai/setup.h>
+#include <yai/time.h>
+#include <yai/pgalloc.h>
+#include <yai/irq.h>
+#include <yai/delay.h>
+#include <yai/fixmap.h>
+#include <yai/apic.h>
+#include <yai/tlbflush.h>
+#include <yai/timer.h>
+#include <yai/special_insns.h>
+#include <yai/tlb.h>
+#include <yai/io_bitmap.h>
+#include <yai/gsseg.h>
+#include <yai/msr.h>
 
 /* stub always returning 0. */
 DEFINE_ASM_FUNC(paravirt_ret0, "xor %eax,%eax", .entry.text);

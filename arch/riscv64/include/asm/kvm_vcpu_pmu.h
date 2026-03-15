@@ -9,9 +9,9 @@
 #ifndef __KVM_VCPU_RISCV_PMU_H
 #define __KVM_VCPU_RISCV_PMU_H
 
-#include <linux/perf/riscv_pmu.h>
-#include <asm/kvm_vcpu_insn.h>
-#include <asm/sbi.h>
+#include <yai/perf/riscv_pmu.h>
+#include <yai/kvm_vcpu_insn.h>
+#include <yai/sbi.h>
 
 #ifdef CONFIG_RISCV_PMU_SBI
 #define RISCV_KVM_MAX_FW_CTRS	32

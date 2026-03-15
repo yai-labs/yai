@@ -5,10 +5,10 @@
  * Copyright (C) 2013 Linaro Ltd <ard.biesheuvel@linaro.org>
  */
 
-#include <linux/raid/pq.h>
+#include <yai/raid/pq.h>
 
 #ifdef __KERNEL__
-#include <asm/simd.h>
+#include <yai/simd.h>
 #else
 #define scoped_ksimd()
 #define cpu_has_neon()		(1)

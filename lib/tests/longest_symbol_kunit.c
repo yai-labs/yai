@@ -9,9 +9,9 @@
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
 #include <kunit/test.h>
-#include <linux/stringify.h>
-#include <linux/kprobes.h>
-#include <linux/kallsyms.h>
+#include <yai/stringify.h>
+#include <yai/kprobes.h>
+#include <yai/kallsyms.h>
 
 #define DI(name) s##name##name
 #define DDI(name) DI(n##name##name)

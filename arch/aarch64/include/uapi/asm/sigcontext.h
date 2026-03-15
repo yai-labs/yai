@@ -19,7 +19,7 @@
 
 #ifndef __ASSEMBLER__
 
-#include <linux/types.h>
+#include <yai/types.h>
 
 /*
  * Signal context structure - contains all info to do with the state
@@ -194,7 +194,7 @@ struct gcs_context {
 
 #endif /* !__ASSEMBLER__ */
 
-#include <asm/sve_context.h>
+#include <yai/sve_context.h>
 
 /*
  * The SVE architecture leaves space for future expansion of the

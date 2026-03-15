@@ -1,15 +1,15 @@
 // SPDX-License-Identifier: GPL-2.0
-#include <linux/mm.h>
-#include <linux/sched.h>
-#include <linux/sched/debug.h>
-#include <linux/init_task.h>
-#include <linux/fs.h>
+#include <yai/mm.h>
+#include <yai/sched.h>
+#include <yai/sched/debug.h>
+#include <yai/init_task.h>
+#include <yai/fs.h>
 
-#include <linux/uaccess.h>
-#include <asm/processor.h>
-#include <asm/desc.h>
-#include <asm/traps.h>
-#include <asm/doublefault.h>
+#include <yai/uaccess.h>
+#include <yai/processor.h>
+#include <yai/desc.h>
+#include <yai/traps.h>
+#include <yai/doublefault.h>
 
 #define ptr_ok(x) ((x) > PAGE_OFFSET && (x) < PAGE_OFFSET + MAXMEM)
 

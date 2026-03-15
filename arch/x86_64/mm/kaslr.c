@@ -20,14 +20,14 @@
  * physical memory mapping is the available physical memory.
  */
 
-#include <linux/kernel.h>
-#include <linux/init.h>
-#include <linux/prandom.h>
-#include <linux/memblock.h>
-#include <linux/pgtable.h>
+#include <yai/kernel.h>
+#include <yai/init.h>
+#include <yai/prandom.h>
+#include <yai/memblock.h>
+#include <yai/pgtable.h>
 
-#include <asm/setup.h>
-#include <asm/kaslr.h>
+#include <yai/setup.h>
+#include <yai/kaslr.h>
 
 #include "mm_internal.h"
 

@@ -53,7 +53,7 @@ struct compat_elf_prpsinfo
 };
 
 #ifdef CONFIG_ARCH_HAS_ELFCORE_COMPAT
-#include <asm/elfcore-compat.h>
+#include <yai/elfcore-compat.h>
 #endif
 
 struct compat_elf_prstatus

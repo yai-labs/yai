@@ -2,15 +2,15 @@
 #ifndef _ASM_X86_MSHYPER_H
 #define _ASM_X86_MSHYPER_H
 
-#include <linux/types.h>
-#include <linux/nmi.h>
-#include <linux/msi.h>
-#include <linux/io.h>
-#include <linux/static_call.h>
-#include <asm/nospec-branch.h>
-#include <asm/msr.h>
+#include <yai/types.h>
+#include <yai/nmi.h>
+#include <yai/msi.h>
+#include <yai/io.h>
+#include <yai/static_call.h>
+#include <yai/nospec-branch.h>
+#include <yai/msr.h>
 #include <hyperv/hvhdk.h>
-#include <asm/fpu/types.h>
+#include <yai/fpu/types.h>
 
 /*
  * Hyper-V always provides a single IO-APIC at this MMIO address.
@@ -313,6 +313,6 @@ static inline void mshv_vtl_return_hypercall(void) {}
 static inline void __mshv_vtl_return_call(struct mshv_vtl_cpu_context *vtl0) {}
 #endif
 
-#include <asm-generic/mshyperv.h>
+#include <yai/mshyperv.h>
 
 #endif

@@ -17,14 +17,14 @@
  * hibernate and kexec can overwrite the current page tables during transition.
  */
 
-#include <asm/trans_pgd.h>
-#include <asm/pgalloc.h>
-#include <asm/pgtable.h>
-#include <linux/suspend.h>
-#include <linux/bug.h>
-#include <linux/mm.h>
-#include <linux/mmzone.h>
-#include <linux/kfence.h>
+#include <yai/trans_pgd.h>
+#include <yai/pgalloc.h>
+#include <yai/pgtable.h>
+#include <yai/suspend.h>
+#include <yai/bug.h>
+#include <yai/mm.h>
+#include <yai/mmzone.h>
+#include <yai/kfence.h>
 
 static void *trans_alloc(struct trans_pgd_info *info)
 {

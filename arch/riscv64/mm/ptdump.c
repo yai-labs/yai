@@ -3,14 +3,14 @@
  * Copyright (C) 2019 SiFive
  */
 
-#include <linux/efi.h>
-#include <linux/init.h>
-#include <linux/debugfs.h>
-#include <linux/seq_file.h>
-#include <linux/ptdump.h>
+#include <yai/efi.h>
+#include <yai/init.h>
+#include <yai/debugfs.h>
+#include <yai/seq_file.h>
+#include <yai/ptdump.h>
 
-#include <linux/pgtable.h>
-#include <asm/kasan.h>
+#include <yai/pgtable.h>
+#include <yai/kasan.h>
 
 #define pt_dump_seq_printf(m, fmt, args...)	\
 ({						\

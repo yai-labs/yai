@@ -36,7 +36,7 @@
  * __idx_to_offset.
  */
 
-#include <asm/page.h>
+#include <yai/page.h>
 #include <yai/bug.h>
 #include <yai/limits.h>
 #include <yai/log2.h>

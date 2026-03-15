@@ -6,37 +6,37 @@
  * Author Mel Gorman <mel@csn.ul.ie>
  *
  */
-#include <linux/kernel.h>
-#include <linux/init.h>
-#include <linux/kobject.h>
-#include <linux/export.h>
-#include <linux/memory.h>
-#include <linux/notifier.h>
-#include <linux/sched.h>
-#include <linux/mman.h>
-#include <linux/memblock.h>
-#include <linux/page-isolation.h>
-#include <linux/padata.h>
-#include <linux/nmi.h>
-#include <linux/buffer_head.h>
-#include <linux/kmemleak.h>
-#include <linux/kfence.h>
-#include <linux/page_ext.h>
-#include <linux/pti.h>
-#include <linux/pgtable.h>
-#include <linux/stackdepot.h>
-#include <linux/swap.h>
-#include <linux/cma.h>
-#include <linux/crash_dump.h>
-#include <linux/execmem.h>
-#include <linux/vmstat.h>
-#include <linux/kexec_handover.h>
-#include <linux/hugetlb.h>
+#include <yai/kernel.h>
+#include <yai/init.h>
+#include <yai/kobject.h>
+#include <yai/export.h>
+#include <yai/memory.h>
+#include <yai/notifier.h>
+#include <yai/sched.h>
+#include <yai/mman.h>
+#include <yai/memblock.h>
+#include <yai/page-isolation.h>
+#include <yai/padata.h>
+#include <yai/nmi.h>
+#include <yai/buffer_head.h>
+#include <yai/kmemleak.h>
+#include <yai/kfence.h>
+#include <yai/page_ext.h>
+#include <yai/pti.h>
+#include <yai/pgtable.h>
+#include <yai/stackdepot.h>
+#include <yai/swap.h>
+#include <yai/cma.h>
+#include <yai/crash_dump.h>
+#include <yai/execmem.h>
+#include <yai/vmstat.h>
+#include <yai/kexec_handover.h>
+#include <yai/hugetlb.h>
 #include "internal.h"
 #include "slab.h"
 #include "shuffle.h"
 
-#include <asm/setup.h>
+#include <yai/setup.h>
 
 #ifndef CONFIG_NUMA
 unsigned long max_mapnr;

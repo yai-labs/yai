@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: GPL-2.0-only
-#include <linux/sched.h>
-#include <linux/sched/task.h>
-#include <linux/sched/task_stack.h>
-#include <linux/interrupt.h>
-#include <asm/sections.h>
-#include <asm/ptrace.h>
-#include <asm/bitops.h>
-#include <asm/stacktrace.h>
-#include <asm/unwind.h>
+#include <yai/sched.h>
+#include <yai/sched/task.h>
+#include <yai/sched/task_stack.h>
+#include <yai/interrupt.h>
+#include <yai/sections.h>
+#include <yai/ptrace.h>
+#include <yai/bitops.h>
+#include <yai/stacktrace.h>
+#include <yai/unwind.h>
 
 #define FRAME_HEADER_SIZE (sizeof(long) * 2)
 

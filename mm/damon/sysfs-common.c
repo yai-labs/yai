@@ -5,7 +5,7 @@
  * Author: SeongJae Park <sj@kernel.org>
  */
 
-#include <linux/slab.h>
+#include <yai/slab.h>
 
 #include "sysfs-common.h"
 

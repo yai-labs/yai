@@ -5,14 +5,14 @@
 #ifndef __ASM_PTDUMP_H
 #define __ASM_PTDUMP_H
 
-#include <linux/ptdump.h>
+#include <yai/ptdump.h>
 
 DECLARE_STATIC_KEY_FALSE(arm64_ptdump_lock_key);
 
 #ifdef CONFIG_PTDUMP
 
-#include <linux/mm_types.h>
-#include <linux/seq_file.h>
+#include <yai/mm_types.h>
+#include <yai/seq_file.h>
 
 struct addr_marker {
 	unsigned long start_address;

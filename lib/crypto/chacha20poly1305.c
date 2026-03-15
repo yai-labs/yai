@@ -11,12 +11,12 @@
 #include <crypto/chacha20poly1305.h>
 #include <crypto/poly1305.h>
 #include <crypto/utils.h>
-#include <linux/export.h>
-#include <linux/init.h>
-#include <linux/kernel.h>
-#include <linux/mm.h>
-#include <linux/module.h>
-#include <linux/unaligned.h>
+#include <yai/export.h>
+#include <yai/init.h>
+#include <yai/kernel.h>
+#include <yai/mm.h>
+#include <yai/module.h>
+#include <yai/unaligned.h>
 
 static void chacha_load_key(u32 *k, const u8 *in)
 {

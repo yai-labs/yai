@@ -2,13 +2,13 @@
 #ifndef __ASM_ALTERNATIVE_H
 #define __ASM_ALTERNATIVE_H
 
-#include <asm/alternative-macros.h>
+#include <yai/alternative-macros.h>
 
 #ifndef __ASSEMBLER__
 
-#include <linux/init.h>
-#include <linux/types.h>
-#include <linux/stddef.h>
+#include <yai/init.h>
+#include <yai/types.h>
+#include <yai/stddef.h>
 
 struct alt_instr {
 	s32 orig_offset;	/* offset to original instruction */

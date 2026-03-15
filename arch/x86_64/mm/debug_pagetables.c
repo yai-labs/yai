@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: GPL-2.0-only
-#include <linux/debugfs.h>
-#include <linux/efi.h>
-#include <linux/module.h>
-#include <linux/seq_file.h>
-#include <linux/pgtable.h>
+#include <yai/debugfs.h>
+#include <yai/efi.h>
+#include <yai/module.h>
+#include <yai/seq_file.h>
+#include <yai/pgtable.h>
 
 static int ptdump_show(struct seq_file *m, void *v)
 {

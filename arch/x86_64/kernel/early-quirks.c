@@ -10,24 +10,24 @@
    Mainboard specific bugs should be handled by DMI entries.
    CPU specific bugs in setup.c */
 
-#include <linux/pci.h>
-#include <linux/acpi.h>
-#include <linux/delay.h>
-#include <linux/pci_ids.h>
-#include <linux/bcma/bcma.h>
-#include <linux/bcma/bcma_regs.h>
-#include <linux/platform_data/x86/apple.h>
+#include <yai/pci.h>
+#include <yai/acpi.h>
+#include <yai/delay.h>
+#include <yai/pci_ids.h>
+#include <yai/bcma/bcma.h>
+#include <yai/bcma/bcma_regs.h>
+#include <yai/platform_data/x86/apple.h>
 #include <drm/intel/i915_drm.h>
 #include <drm/intel/pciids.h>
-#include <asm/pci-direct.h>
-#include <asm/dma.h>
-#include <asm/io_apic.h>
-#include <asm/apic.h>
-#include <asm/hpet.h>
-#include <asm/iommu.h>
-#include <asm/gart.h>
-#include <asm/irq_remapping.h>
-#include <asm/early_ioremap.h>
+#include <yai/pci-direct.h>
+#include <yai/dma.h>
+#include <yai/io_apic.h>
+#include <yai/apic.h>
+#include <yai/hpet.h>
+#include <yai/iommu.h>
+#include <yai/gart.h>
+#include <yai/irq_remapping.h>
+#include <yai/early_ioremap.h>
 
 static void __init fix_hypertransport_config(int num, int slot, int func)
 {

@@ -6,12 +6,12 @@
  */
 
 #include <crypto/chacha.h>
-#include <linux/bitops.h>
-#include <linux/bug.h>
-#include <linux/export.h>
-#include <linux/kernel.h>
-#include <linux/string.h>
-#include <linux/unaligned.h>
+#include <yai/bitops.h>
+#include <yai/bug.h>
+#include <yai/export.h>
+#include <yai/kernel.h>
+#include <yai/string.h>
+#include <yai/unaligned.h>
 
 static void chacha_permute(struct chacha_state *state, int nrounds)
 {

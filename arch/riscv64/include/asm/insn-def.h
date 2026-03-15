@@ -3,7 +3,7 @@
 #ifndef __ASM_INSN_DEF_H
 #define __ASM_INSN_DEF_H
 
-#include <asm/asm.h>
+#include <yai/asm.h>
 
 #define INSN_R_FUNC7_SHIFT		25
 #define INSN_R_RS2_SHIFT		20
@@ -43,7 +43,7 @@
 
 #else
 
-#include <asm/gpr-num.h>
+#include <yai/gpr-num.h>
 
 	.macro insn_r, opcode, func3, func7, rd, rs1, rs2
 	.4byte	((\opcode << INSN_R_OPCODE_SHIFT) |		\
@@ -92,8 +92,8 @@
 
 #else
 
-#include <linux/stringify.h>
-#include <asm/gpr-num.h>
+#include <yai/stringify.h>
+#include <yai/gpr-num.h>
 
 #define DEFINE_INSN_R							\
 	__DEFINE_ASM_GPR_NUMS						\

@@ -1,16 +1,16 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 
-#include <linux/compat.h>
-#include <linux/signal.h>
-#include <linux/uaccess.h>
-#include <linux/syscalls.h>
-#include <linux/linkage.h>
+#include <yai/compat.h>
+#include <yai/signal.h>
+#include <yai/uaccess.h>
+#include <yai/syscalls.h>
+#include <yai/linkage.h>
 
-#include <asm/csr.h>
-#include <asm/signal32.h>
-#include <asm/switch_to.h>
-#include <asm/ucontext.h>
-#include <asm/vdso.h>
+#include <yai/csr.h>
+#include <yai/signal32.h>
+#include <yai/switch_to.h>
+#include <yai/ucontext.h>
+#include <yai/vdso.h>
 
 #define COMPAT_DEBUG_SIG 0
 

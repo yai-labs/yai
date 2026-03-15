@@ -52,31 +52,31 @@
  *         folio_lock
  */
 
-#include <linux/mm.h>
-#include <linux/sched/mm.h>
-#include <linux/sched/task.h>
-#include <linux/pagemap.h>
-#include <linux/swap.h>
-#include <linux/leafops.h>
-#include <linux/slab.h>
-#include <linux/init.h>
-#include <linux/ksm.h>
-#include <linux/rmap.h>
-#include <linux/rcupdate.h>
-#include <linux/export.h>
-#include <linux/memcontrol.h>
-#include <linux/mmu_notifier.h>
-#include <linux/migrate.h>
-#include <linux/hugetlb.h>
-#include <linux/huge_mm.h>
-#include <linux/backing-dev.h>
-#include <linux/page_idle.h>
-#include <linux/memremap.h>
-#include <linux/userfaultfd_k.h>
-#include <linux/mm_inline.h>
-#include <linux/oom.h>
+#include <yai/mm.h>
+#include <yai/sched/mm.h>
+#include <yai/sched/task.h>
+#include <yai/pagemap.h>
+#include <yai/swap.h>
+#include <yai/leafops.h>
+#include <yai/slab.h>
+#include <yai/init.h>
+#include <yai/ksm.h>
+#include <yai/rmap.h>
+#include <yai/rcupdate.h>
+#include <yai/export.h>
+#include <yai/memcontrol.h>
+#include <yai/mmu_notifier.h>
+#include <yai/migrate.h>
+#include <yai/hugetlb.h>
+#include <yai/huge_mm.h>
+#include <yai/backing-dev.h>
+#include <yai/page_idle.h>
+#include <yai/memremap.h>
+#include <yai/userfaultfd_k.h>
+#include <yai/mm_inline.h>
+#include <yai/oom.h>
 
-#include <asm/tlb.h>
+#include <yai/tlb.h>
 
 #define CREATE_TRACE_POINTS
 #include <trace/events/migrate.h>

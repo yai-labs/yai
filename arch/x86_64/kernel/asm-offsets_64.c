@@ -3,10 +3,10 @@
 # error "Please do not build this file directly, build asm-offsets.c instead"
 #endif
 
-#include <asm/ia32.h>
+#include <yai/ia32.h>
 
 #if defined(CONFIG_KVM_GUEST)
-#include <asm/kvm_para.h>
+#include <yai/kvm_para.h>
 #endif
 
 int main(void)

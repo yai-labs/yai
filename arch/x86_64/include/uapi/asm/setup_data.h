@@ -21,7 +21,7 @@
 
 #ifndef __ASSEMBLER__
 
-#include <linux/types.h>
+#include <yai/types.h>
 
 /* extensible setup data list node */
 struct setup_data {

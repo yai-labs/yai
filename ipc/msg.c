@@ -23,26 +23,26 @@
  * Pavel Emelianov <xemul@openvz.org>
  */
 
-#include <linux/capability.h>
-#include <linux/msg.h>
-#include <linux/spinlock.h>
-#include <linux/init.h>
-#include <linux/mm.h>
-#include <linux/proc_fs.h>
-#include <linux/list.h>
-#include <linux/security.h>
-#include <linux/sched/wake_q.h>
-#include <linux/syscalls.h>
-#include <linux/audit.h>
-#include <linux/seq_file.h>
-#include <linux/rwsem.h>
-#include <linux/nsproxy.h>
-#include <linux/ipc_namespace.h>
-#include <linux/rhashtable.h>
-#include <linux/percpu_counter.h>
+#include <yai/capability.h>
+#include <yai/msg.h>
+#include <yai/spinlock.h>
+#include <yai/init.h>
+#include <yai/mm.h>
+#include <yai/proc_fs.h>
+#include <yai/list.h>
+#include <yai/security.h>
+#include <yai/sched/wake_q.h>
+#include <yai/syscalls.h>
+#include <yai/audit.h>
+#include <yai/seq_file.h>
+#include <yai/rwsem.h>
+#include <yai/nsproxy.h>
+#include <yai/ipc_namespace.h>
+#include <yai/rhashtable.h>
+#include <yai/percpu_counter.h>
 
-#include <asm/current.h>
-#include <linux/uaccess.h>
+#include <yai/current.h>
+#include <yai/uaccess.h>
 #include "util.h"
 
 /* one msq_queue structure for each present queue on the system */

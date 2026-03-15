@@ -8,7 +8,7 @@
 #ifndef __ASM_FTRACE_H
 #define __ASM_FTRACE_H
 
-#include <asm/insn.h>
+#include <yai/insn.h>
 
 #define HAVE_FUNCTION_GRAPH_FP_TEST
 
@@ -38,7 +38,7 @@
 #define ARCH_FTRACE_SHIFT_STACK_TRACER 1
 
 #ifndef __ASSEMBLER__
-#include <linux/compat.h>
+#include <yai/compat.h>
 
 extern void _mcount(unsigned long);
 extern void *return_address(unsigned int);

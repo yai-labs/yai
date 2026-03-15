@@ -3,8 +3,8 @@
 #define DFLTCC_H
 
 #include "../zlib_deflate/defutil.h"
-#include <asm/facility.h>
-#include <asm/setup.h>
+#include <yai/facility.h>
+#include <yai/setup.h>
 
 /*
  * Tuning parameters.

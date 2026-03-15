@@ -1,9 +1,9 @@
 #ifndef _ASM_X86_UNACCEPTED_MEMORY_H
 #define _ASM_X86_UNACCEPTED_MEMORY_H
 
-#include <linux/efi.h>
-#include <asm/tdx.h>
-#include <asm/sev.h>
+#include <yai/efi.h>
+#include <yai/tdx.h>
+#include <yai/sev.h>
 
 static inline void arch_accept_memory(phys_addr_t start, phys_addr_t end)
 {

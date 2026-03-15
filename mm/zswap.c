@@ -13,29 +13,29 @@
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
-#include <linux/module.h>
-#include <linux/cpu.h>
-#include <linux/highmem.h>
-#include <linux/slab.h>
-#include <linux/spinlock.h>
-#include <linux/types.h>
-#include <linux/atomic.h>
-#include <linux/swap.h>
-#include <linux/crypto.h>
-#include <linux/scatterlist.h>
-#include <linux/mempolicy.h>
-#include <linux/mempool.h>
+#include <yai/module.h>
+#include <yai/cpu.h>
+#include <yai/highmem.h>
+#include <yai/slab.h>
+#include <yai/spinlock.h>
+#include <yai/types.h>
+#include <yai/atomic.h>
+#include <yai/swap.h>
+#include <yai/crypto.h>
+#include <yai/scatterlist.h>
+#include <yai/mempolicy.h>
+#include <yai/mempool.h>
 #include <crypto/acompress.h>
 #include <crypto/scatterwalk.h>
-#include <linux/zswap.h>
-#include <linux/mm_types.h>
-#include <linux/page-flags.h>
-#include <linux/swapops.h>
-#include <linux/writeback.h>
-#include <linux/pagemap.h>
-#include <linux/workqueue.h>
-#include <linux/list_lru.h>
-#include <linux/zsmalloc.h>
+#include <yai/zswap.h>
+#include <yai/mm_types.h>
+#include <yai/page-flags.h>
+#include <yai/swapops.h>
+#include <yai/writeback.h>
+#include <yai/pagemap.h>
+#include <yai/workqueue.h>
+#include <yai/list_lru.h>
+#include <yai/zsmalloc.h>
 
 #include "swap.h"
 #include "internal.h"
@@ -1700,7 +1700,7 @@ void zswap_swapoff(int type)
 * debugfs functions
 **********************************/
 #ifdef CONFIG_DEBUG_FS
-#include <linux/debugfs.h>
+#include <yai/debugfs.h>
 
 static struct dentry *zswap_debugfs_root;
 

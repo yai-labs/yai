@@ -2,7 +2,7 @@
 #ifndef __FS_CEPH_PAGELIST_H
 #define __FS_CEPH_PAGELIST_H
 
-#include <asm/byteorder.h>
+#include <yai/byteorder.h>
 #include <yai/refcount.h>
 #include <yai/list.h>
 #include <yai/types.h>

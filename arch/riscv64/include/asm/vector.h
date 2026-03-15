@@ -6,21 +6,21 @@
 #ifndef __ASM_RISCV_VECTOR_H
 #define __ASM_RISCV_VECTOR_H
 
-#include <linux/types.h>
+#include <yai/types.h>
 #include <uapi/asm-generic/errno.h>
 
 #ifdef CONFIG_RISCV_ISA_V
 
-#include <linux/stringify.h>
-#include <linux/sched.h>
-#include <linux/sched/task_stack.h>
-#include <asm/ptrace.h>
-#include <asm/cpufeature.h>
-#include <asm/csr.h>
-#include <asm/asm.h>
-#include <asm/vendorid_list.h>
-#include <asm/vendor_extensions.h>
-#include <asm/vendor_extensions/thead.h>
+#include <yai/stringify.h>
+#include <yai/sched.h>
+#include <yai/sched/task_stack.h>
+#include <yai/ptrace.h>
+#include <yai/cpufeature.h>
+#include <yai/csr.h>
+#include <yai/asm.h>
+#include <yai/vendorid_list.h>
+#include <yai/vendor_extensions.h>
+#include <yai/vendor_extensions/thead.h>
 
 #define __riscv_v_vstate_or(_val, TYPE) ({				\
 	typeof(_val) _res = _val;					\

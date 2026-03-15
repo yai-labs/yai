@@ -7,17 +7,17 @@
 
 #define pr_fmt(fmt) "ODEBUG: " fmt
 
-#include <linux/cpu.h>
-#include <linux/debugobjects.h>
-#include <linux/debugfs.h>
-#include <linux/hash.h>
-#include <linux/kmemleak.h>
-#include <linux/sched.h>
-#include <linux/sched/loadavg.h>
-#include <linux/sched/task_stack.h>
-#include <linux/seq_file.h>
-#include <linux/slab.h>
-#include <linux/static_key.h>
+#include <yai/cpu.h>
+#include <yai/debugobjects.h>
+#include <yai/debugfs.h>
+#include <yai/hash.h>
+#include <yai/kmemleak.h>
+#include <yai/sched.h>
+#include <yai/sched/loadavg.h>
+#include <yai/sched/task_stack.h>
+#include <yai/seq_file.h>
+#include <yai/slab.h>
+#include <yai/static_key.h>
 
 #define ODEBUG_HASH_BITS	14
 #define ODEBUG_HASH_SIZE	(1 << ODEBUG_HASH_BITS)

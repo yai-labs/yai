@@ -10,13 +10,13 @@
 
 #ifndef MODULE
 
-#include <linux/bug.h>
-#include <linux/kfence.h>
+#include <yai/bug.h>
+#include <yai/kfence.h>
 
-#include <asm/pgalloc.h>
-#include <asm/pgtable.h>
-#include <asm/set_memory.h>
-#include <asm/tlbflush.h>
+#include <yai/pgalloc.h>
+#include <yai/pgtable.h>
+#include <yai/set_memory.h>
+#include <yai/tlbflush.h>
 
 /* Force 4K pages for __kfence_pool. */
 static inline bool arch_kfence_init_pool(void)

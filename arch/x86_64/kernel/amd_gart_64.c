@@ -11,36 +11,36 @@
  * Copyright 2002 Andi Kleen, SuSE Labs.
  */
 
-#include <linux/types.h>
-#include <linux/ctype.h>
-#include <linux/agp_backend.h>
-#include <linux/init.h>
-#include <linux/mm.h>
-#include <linux/sched.h>
-#include <linux/sched/debug.h>
-#include <linux/string.h>
-#include <linux/spinlock.h>
-#include <linux/pci.h>
-#include <linux/topology.h>
-#include <linux/interrupt.h>
-#include <linux/bitmap.h>
-#include <linux/kdebug.h>
-#include <linux/scatterlist.h>
-#include <linux/iommu-helper.h>
-#include <linux/syscore_ops.h>
-#include <linux/io.h>
-#include <linux/gfp.h>
-#include <linux/atomic.h>
-#include <linux/dma-direct.h>
-#include <linux/dma-map-ops.h>
-#include <asm/mtrr.h>
-#include <asm/proto.h>
-#include <asm/iommu.h>
-#include <asm/gart.h>
-#include <asm/set_memory.h>
-#include <asm/dma.h>
-#include <asm/amd/nb.h>
-#include <asm/x86_init.h>
+#include <yai/types.h>
+#include <yai/ctype.h>
+#include <yai/agp_backend.h>
+#include <yai/init.h>
+#include <yai/mm.h>
+#include <yai/sched.h>
+#include <yai/sched/debug.h>
+#include <yai/string.h>
+#include <yai/spinlock.h>
+#include <yai/pci.h>
+#include <yai/topology.h>
+#include <yai/interrupt.h>
+#include <yai/bitmap.h>
+#include <yai/kdebug.h>
+#include <yai/scatterlist.h>
+#include <yai/iommu-helper.h>
+#include <yai/syscore_ops.h>
+#include <yai/io.h>
+#include <yai/gfp.h>
+#include <yai/atomic.h>
+#include <yai/dma-direct.h>
+#include <yai/dma-map-ops.h>
+#include <yai/mtrr.h>
+#include <yai/proto.h>
+#include <yai/iommu.h>
+#include <yai/gart.h>
+#include <yai/set_memory.h>
+#include <yai/dma.h>
+#include <yai/amd/nb.h>
+#include <yai/x86_init.h>
 
 static unsigned long iommu_bus_base;	/* GART remapping area (physical) */
 static unsigned long iommu_size;	/* size of remapping area bytes */

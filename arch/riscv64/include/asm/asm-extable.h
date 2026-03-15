@@ -27,9 +27,9 @@
 
 #else /* __ASSEMBLER__ */
 
-#include <linux/bits.h>
-#include <linux/stringify.h>
-#include <asm/gpr-num.h>
+#include <yai/bits.h>
+#include <yai/stringify.h>
+#include <yai/gpr-num.h>
 
 #define __ASM_EXTABLE_RAW(insn, fixup, type, data)	\
 	".pushsection	__ex_table, \"a\"\n"		\

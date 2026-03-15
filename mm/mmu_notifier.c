@@ -7,17 +7,17 @@
  *             Christoph Lameter <cl@gentwo.org>
  */
 
-#include <linux/rculist.h>
-#include <linux/mmu_notifier.h>
-#include <linux/export.h>
-#include <linux/mm.h>
-#include <linux/err.h>
-#include <linux/interval_tree.h>
-#include <linux/srcu.h>
-#include <linux/rcupdate.h>
-#include <linux/sched.h>
-#include <linux/sched/mm.h>
-#include <linux/slab.h>
+#include <yai/rculist.h>
+#include <yai/mmu_notifier.h>
+#include <yai/export.h>
+#include <yai/mm.h>
+#include <yai/err.h>
+#include <yai/interval_tree.h>
+#include <yai/srcu.h>
+#include <yai/rcupdate.h>
+#include <yai/sched.h>
+#include <yai/sched/mm.h>
+#include <yai/slab.h>
 
 #include "vma.h"
 

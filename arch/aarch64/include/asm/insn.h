@@ -7,10 +7,10 @@
  */
 #ifndef	__ASM_INSN_H
 #define	__ASM_INSN_H
-#include <linux/build_bug.h>
-#include <linux/types.h>
+#include <yai/build_bug.h>
+#include <yai/types.h>
 
-#include <asm/insn-def.h>
+#include <yai/insn-def.h>
 
 #ifndef __ASSEMBLER__
 

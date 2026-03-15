@@ -10,7 +10,7 @@
 /*                                            */
 /**********************************************/
 
-#include <linux/font.h>
+#include <yai/font.h>
 
 #define FONTDATAMAX 2048
 

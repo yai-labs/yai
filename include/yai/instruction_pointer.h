@@ -2,7 +2,7 @@
 #ifndef _LINUX_INSTRUCTION_POINTER_H
 #define _LINUX_INSTRUCTION_POINTER_H
 
-#include <asm/linkage.h>
+#include <yai/linkage.h>
 
 #define _RET_IP_		(unsigned long)__builtin_return_address(0)
 

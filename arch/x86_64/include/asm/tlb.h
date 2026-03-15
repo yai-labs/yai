@@ -5,8 +5,8 @@
 #define tlb_flush tlb_flush
 static inline void tlb_flush(struct mmu_gather *tlb);
 
-#include <asm-generic/tlb.h>
-#include <linux/kernel.h>
+#include <yai/tlb.h>
+#include <yai/kernel.h>
 #include <vdso/bits.h>
 #include <vdso/page.h>
 

@@ -3,8 +3,8 @@
 #ifndef __ASM_APPLE_M1_PMU_h
 #define __ASM_APPLE_M1_PMU_h
 
-#include <linux/bits.h>
-#include <asm/sysreg.h>
+#include <yai/bits.h>
+#include <yai/sysreg.h>
 
 /* Counters */
 #define SYS_IMP_APL_PMC0_EL1	sys_reg(3, 2, 15, 0, 0)

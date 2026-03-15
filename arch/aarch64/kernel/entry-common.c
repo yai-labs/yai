@@ -5,30 +5,30 @@
  * Copyright (C) 2019 ARM Ltd.
  */
 
-#include <linux/context_tracking.h>
-#include <linux/irq-entry-common.h>
-#include <linux/kasan.h>
-#include <linux/linkage.h>
-#include <linux/livepatch.h>
-#include <linux/lockdep.h>
-#include <linux/ptrace.h>
-#include <linux/resume_user_mode.h>
-#include <linux/sched.h>
-#include <linux/sched/debug.h>
-#include <linux/thread_info.h>
+#include <yai/context_tracking.h>
+#include <yai/irq-entry-common.h>
+#include <yai/kasan.h>
+#include <yai/linkage.h>
+#include <yai/livepatch.h>
+#include <yai/lockdep.h>
+#include <yai/ptrace.h>
+#include <yai/resume_user_mode.h>
+#include <yai/sched.h>
+#include <yai/sched/debug.h>
+#include <yai/thread_info.h>
 
-#include <asm/cpufeature.h>
-#include <asm/daifflags.h>
-#include <asm/esr.h>
-#include <asm/exception.h>
-#include <asm/irq_regs.h>
-#include <asm/kprobes.h>
-#include <asm/mmu.h>
-#include <asm/processor.h>
-#include <asm/sdei.h>
-#include <asm/stacktrace.h>
-#include <asm/sysreg.h>
-#include <asm/system_misc.h>
+#include <yai/cpufeature.h>
+#include <yai/daifflags.h>
+#include <yai/esr.h>
+#include <yai/exception.h>
+#include <yai/irq_regs.h>
+#include <yai/kprobes.h>
+#include <yai/mmu.h>
+#include <yai/processor.h>
+#include <yai/sdei.h>
+#include <yai/stacktrace.h>
+#include <yai/sysreg.h>
+#include <yai/system_misc.h>
 
 /*
  * Handle IRQ/context state management when entering from kernel mode.

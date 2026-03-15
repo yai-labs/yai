@@ -5,17 +5,17 @@
  * Copyright (C) 2009 Jason Baron <jbaron@redhat.com>
  *
  */
-#include <linux/jump_label.h>
-#include <linux/memory.h>
-#include <linux/uaccess.h>
-#include <linux/module.h>
-#include <linux/list.h>
-#include <linux/jhash.h>
-#include <linux/cpu.h>
-#include <asm/kprobes.h>
-#include <asm/alternative.h>
-#include <asm/text-patching.h>
-#include <asm/insn.h>
+#include <yai/jump_label.h>
+#include <yai/memory.h>
+#include <yai/uaccess.h>
+#include <yai/module.h>
+#include <yai/list.h>
+#include <yai/jhash.h>
+#include <yai/cpu.h>
+#include <yai/kprobes.h>
+#include <yai/alternative.h>
+#include <yai/text-patching.h>
+#include <yai/insn.h>
 
 int arch_jump_entry_size(struct jump_entry *entry)
 {

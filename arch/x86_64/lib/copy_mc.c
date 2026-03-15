@@ -1,14 +1,14 @@
 // SPDX-License-Identifier: GPL-2.0
 /* Copyright(c) 2016-2020 Intel Corporation. All rights reserved. */
 
-#include <linux/jump_label.h>
-#include <linux/uaccess.h>
-#include <linux/export.h>
-#include <linux/instrumented.h>
-#include <linux/string.h>
-#include <linux/types.h>
+#include <yai/jump_label.h>
+#include <yai/uaccess.h>
+#include <yai/export.h>
+#include <yai/instrumented.h>
+#include <yai/string.h>
+#include <yai/types.h>
 
-#include <asm/mce.h>
+#include <yai/mce.h>
 
 #ifdef CONFIG_X86_MCE
 static DEFINE_STATIC_KEY_FALSE(copy_mc_fragile_key);

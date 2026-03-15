@@ -1,22 +1,22 @@
 // SPDX-License-Identifier: GPL-2.0
-#include <linux/sched.h>
-#include <linux/kernel.h>
-#include <linux/errno.h>
-#include <linux/mm.h>
-#include <linux/nmi.h>
-#include <linux/swap.h>
-#include <linux/smp.h>
-#include <linux/highmem.h>
-#include <linux/pagemap.h>
-#include <linux/spinlock.h>
+#include <yai/sched.h>
+#include <yai/kernel.h>
+#include <yai/errno.h>
+#include <yai/mm.h>
+#include <yai/nmi.h>
+#include <yai/swap.h>
+#include <yai/smp.h>
+#include <yai/highmem.h>
+#include <yai/pagemap.h>
+#include <yai/spinlock.h>
 
-#include <asm/cpu_entry_area.h>
-#include <asm/fixmap.h>
-#include <asm/e820/api.h>
-#include <asm/tlb.h>
-#include <asm/tlbflush.h>
-#include <asm/io.h>
-#include <linux/vmalloc.h>
+#include <yai/cpu_entry_area.h>
+#include <yai/fixmap.h>
+#include <yai/e820/api.h>
+#include <yai/tlb.h>
+#include <yai/tlbflush.h>
+#include <yai/io.h>
+#include <yai/vmalloc.h>
 
 unsigned int __VMALLOC_RESERVE = 128 << 20;
 

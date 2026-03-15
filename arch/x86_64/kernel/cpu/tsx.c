@@ -8,11 +8,11 @@
  *	Pawan Gupta <pawan.kumar.gupta@linux.intel.com>
  */
 
-#include <linux/cpufeature.h>
+#include <yai/cpufeature.h>
 
-#include <asm/cmdline.h>
-#include <asm/cpu.h>
-#include <asm/msr.h>
+#include <yai/cmdline.h>
+#include <yai/cpu.h>
+#include <yai/msr.h>
 
 #include "cpu.h"
 

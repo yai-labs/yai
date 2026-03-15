@@ -62,40 +62,40 @@
 
 #define pr_fmt(fmt) "CPU features: " fmt
 
-#include <linux/bsearch.h>
-#include <linux/cpumask.h>
-#include <linux/crash_dump.h>
-#include <linux/kstrtox.h>
-#include <linux/sort.h>
-#include <linux/stop_machine.h>
-#include <linux/sysfs.h>
-#include <linux/types.h>
-#include <linux/minmax.h>
-#include <linux/mm.h>
-#include <linux/cpu.h>
-#include <linux/kasan.h>
-#include <linux/percpu.h>
-#include <linux/sched/isolation.h>
+#include <yai/bsearch.h>
+#include <yai/cpumask.h>
+#include <yai/crash_dump.h>
+#include <yai/kstrtox.h>
+#include <yai/sort.h>
+#include <yai/stop_machine.h>
+#include <yai/sysfs.h>
+#include <yai/types.h>
+#include <yai/minmax.h>
+#include <yai/mm.h>
+#include <yai/cpu.h>
+#include <yai/kasan.h>
+#include <yai/percpu.h>
+#include <yai/sched/isolation.h>
 
-#include <asm/cpu.h>
-#include <asm/cpufeature.h>
-#include <asm/cpu_ops.h>
-#include <asm/fpsimd.h>
-#include <asm/hwcap.h>
-#include <asm/insn.h>
-#include <asm/kvm_host.h>
-#include <asm/mmu.h>
-#include <asm/mmu_context.h>
-#include <asm/mte.h>
-#include <asm/hypervisor.h>
-#include <asm/processor.h>
-#include <asm/smp.h>
-#include <asm/sysreg.h>
-#include <asm/traps.h>
-#include <asm/vectors.h>
-#include <asm/virt.h>
+#include <yai/cpu.h>
+#include <yai/cpufeature.h>
+#include <yai/cpu_ops.h>
+#include <yai/fpsimd.h>
+#include <yai/hwcap.h>
+#include <yai/insn.h>
+#include <yai/kvm_host.h>
+#include <yai/mmu.h>
+#include <yai/mmu_context.h>
+#include <yai/mte.h>
+#include <yai/hypervisor.h>
+#include <yai/processor.h>
+#include <yai/smp.h>
+#include <yai/sysreg.h>
+#include <yai/traps.h>
+#include <yai/vectors.h>
+#include <yai/virt.h>
 
-#include <asm/spectre.h>
+#include <yai/spectre.h>
 /* Kernel representation of AT_HWCAP and AT_HWCAP2 */
 static DECLARE_BITMAP(elf_hwcap, MAX_CPU_FEATURES) __read_mostly;
 
@@ -1585,7 +1585,7 @@ u64 __read_sysreg_by_encoding(u32 sys_id)
 	return val;
 }
 
-#include <linux/irqchip/arm-gic-v3.h>
+#include <yai/irqchip/arm-gic-v3.h>
 
 static bool
 has_always(const struct arm64_cpu_capabilities *entry, int scope)

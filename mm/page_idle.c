@@ -1,17 +1,17 @@
 // SPDX-License-Identifier: GPL-2.0
-#include <linux/init.h>
-#include <linux/memblock.h>
-#include <linux/fs.h>
-#include <linux/sysfs.h>
-#include <linux/kobject.h>
-#include <linux/memory_hotplug.h>
-#include <linux/mm.h>
-#include <linux/mmzone.h>
-#include <linux/pagemap.h>
-#include <linux/rmap.h>
-#include <linux/mmu_notifier.h>
-#include <linux/page_ext.h>
-#include <linux/page_idle.h>
+#include <yai/init.h>
+#include <yai/memblock.h>
+#include <yai/fs.h>
+#include <yai/sysfs.h>
+#include <yai/kobject.h>
+#include <yai/memory_hotplug.h>
+#include <yai/mm.h>
+#include <yai/mmzone.h>
+#include <yai/pagemap.h>
+#include <yai/rmap.h>
+#include <yai/mmu_notifier.h>
+#include <yai/page_ext.h>
+#include <yai/page_idle.h>
 
 #include "internal.h"
 

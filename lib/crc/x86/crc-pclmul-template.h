@@ -10,9 +10,9 @@
 #ifndef _CRC_PCLMUL_TEMPLATE_H
 #define _CRC_PCLMUL_TEMPLATE_H
 
-#include <asm/cpufeatures.h>
-#include <asm/simd.h>
-#include <linux/static_call.h>
+#include <yai/cpufeatures.h>
+#include <yai/simd.h>
+#include <yai/static_call.h>
 #include "crc-pclmul-consts.h"
 
 #define DECLARE_CRC_PCLMUL_FUNCS(prefix, crc_t)				\

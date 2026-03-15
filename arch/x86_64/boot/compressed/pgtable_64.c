@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: GPL-2.0
 #include "misc.h"
-#include <asm/bootparam.h>
-#include <asm/bootparam_utils.h>
-#include <asm/e820/types.h>
-#include <asm/pgtable.h>
-#include <asm/processor.h>
+#include <yai/bootparam.h>
+#include <yai/bootparam_utils.h>
+#include <yai/e820/types.h>
+#include <yai/pgtable.h>
+#include <yai/processor.h>
 #include "../string.h"
 #include "efi.h"
 

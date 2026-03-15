@@ -11,13 +11,13 @@
  * Algorithm list and algorithm selection for RAID-6
  */
 
-#include <linux/raid/pq.h>
+#include <yai/raid/pq.h>
 #ifndef __KERNEL__
 #include <sys/mman.h>
 #include <stdio.h>
 #else
-#include <linux/module.h>
-#include <linux/gfp.h>
+#include <yai/module.h>
+#include <yai/gfp.h>
 #endif
 
 struct raid6_calls raid6_call;

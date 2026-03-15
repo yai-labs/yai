@@ -11,20 +11,20 @@
  * pointer as suggested by Josh Triplett
  */
 
-#include <linux/atomic.h>
-#include <linux/kernel.h>
-#include <linux/init.h>
-#include <linux/log2.h>
-#include <linux/sched.h>
-#include <linux/rculist.h>
-#include <linux/slab.h>
-#include <linux/vmalloc.h>
-#include <linux/mm.h>
-#include <linux/jhash.h>
-#include <linux/random.h>
-#include <linux/rhashtable.h>
-#include <linux/err.h>
-#include <linux/export.h>
+#include <yai/atomic.h>
+#include <yai/kernel.h>
+#include <yai/init.h>
+#include <yai/log2.h>
+#include <yai/sched.h>
+#include <yai/rculist.h>
+#include <yai/slab.h>
+#include <yai/vmalloc.h>
+#include <yai/mm.h>
+#include <yai/jhash.h>
+#include <yai/random.h>
+#include <yai/rhashtable.h>
+#include <yai/err.h>
+#include <yai/export.h>
 
 #define HASH_DEFAULT_SIZE	64UL
 #define HASH_MIN_SIZE		4U

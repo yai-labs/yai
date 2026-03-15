@@ -43,7 +43,7 @@
 #include <yai/time.h>
 #include <yai/timer.h>
 #if defined(__hppa__)
-#include <asm/hardware.h>
+#include <yai/hardware.h>
 #endif
 
 

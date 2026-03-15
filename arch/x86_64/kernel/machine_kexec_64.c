@@ -6,30 +6,30 @@
 
 #define pr_fmt(fmt)	"kexec: " fmt
 
-#include <linux/mm.h>
-#include <linux/kexec.h>
-#include <linux/string.h>
-#include <linux/gfp.h>
-#include <linux/reboot.h>
-#include <linux/numa.h>
-#include <linux/ftrace.h>
-#include <linux/io.h>
-#include <linux/suspend.h>
-#include <linux/vmalloc.h>
-#include <linux/efi.h>
-#include <linux/cc_platform.h>
+#include <yai/mm.h>
+#include <yai/kexec.h>
+#include <yai/string.h>
+#include <yai/gfp.h>
+#include <yai/reboot.h>
+#include <yai/numa.h>
+#include <yai/ftrace.h>
+#include <yai/io.h>
+#include <yai/suspend.h>
+#include <yai/vmalloc.h>
+#include <yai/efi.h>
+#include <yai/cc_platform.h>
 
-#include <asm/init.h>
-#include <asm/tlbflush.h>
-#include <asm/mmu_context.h>
-#include <asm/io_apic.h>
-#include <asm/debugreg.h>
-#include <asm/kexec-bzimage64.h>
-#include <asm/setup.h>
-#include <asm/set_memory.h>
-#include <asm/cpu.h>
-#include <asm/efi.h>
-#include <asm/processor.h>
+#include <yai/init.h>
+#include <yai/tlbflush.h>
+#include <yai/mmu_context.h>
+#include <yai/io_apic.h>
+#include <yai/debugreg.h>
+#include <yai/kexec-bzimage64.h>
+#include <yai/setup.h>
+#include <yai/set_memory.h>
+#include <yai/cpu.h>
+#include <yai/efi.h>
+#include <yai/processor.h>
 
 #ifdef CONFIG_ACPI
 /*

@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: GPL-2.0-only
 
-#include <linux/highmem.h>
-#include <linux/ptrace.h>
-#include <linux/uprobes.h>
-#include <asm/insn.h>
+#include <yai/highmem.h>
+#include <yai/ptrace.h>
+#include <yai/uprobes.h>
+#include <yai/insn.h>
 
 #include "decode-insn.h"
 

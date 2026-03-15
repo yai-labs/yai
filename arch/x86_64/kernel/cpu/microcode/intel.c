@@ -11,24 +11,24 @@
  *		      H Peter Anvin" <hpa@zytor.com>
  */
 #define pr_fmt(fmt) "microcode: " fmt
-#include <linux/earlycpio.h>
-#include <linux/firmware.h>
-#include <linux/pci_ids.h>
-#include <linux/uaccess.h>
-#include <linux/initrd.h>
-#include <linux/kernel.h>
-#include <linux/delay.h>
-#include <linux/slab.h>
-#include <linux/cpu.h>
-#include <linux/uio.h>
-#include <linux/io.h>
-#include <linux/mm.h>
+#include <yai/earlycpio.h>
+#include <yai/firmware.h>
+#include <yai/pci_ids.h>
+#include <yai/uaccess.h>
+#include <yai/initrd.h>
+#include <yai/kernel.h>
+#include <yai/delay.h>
+#include <yai/slab.h>
+#include <yai/cpu.h>
+#include <yai/uio.h>
+#include <yai/io.h>
+#include <yai/mm.h>
 
-#include <asm/cpu_device_id.h>
-#include <asm/processor.h>
-#include <asm/tlbflush.h>
-#include <asm/setup.h>
-#include <asm/msr.h>
+#include <yai/cpu_device_id.h>
+#include <yai/processor.h>
+#include <yai/tlbflush.h>
+#include <yai/setup.h>
+#include <yai/msr.h>
 
 #include "internal.h"
 

@@ -2,14 +2,14 @@
 /*
  * x86 single-step support code, common to 32-bit and 64-bit.
  */
-#include <linux/sched.h>
-#include <linux/sched/task_stack.h>
-#include <linux/mm.h>
-#include <linux/ptrace.h>
+#include <yai/sched.h>
+#include <yai/sched/task_stack.h>
+#include <yai/mm.h>
+#include <yai/ptrace.h>
 
-#include <asm/desc.h>
-#include <asm/debugreg.h>
-#include <asm/mmu_context.h>
+#include <yai/desc.h>
+#include <yai/debugreg.h>
+#include <yai/mmu_context.h>
 
 unsigned long convert_ip_to_linear(struct task_struct *child, struct pt_regs *regs)
 {

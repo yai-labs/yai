@@ -22,11 +22,11 @@
 
 #else /* !__ASSEMBLER__: */
 
-#include <linux/args.h>
-#include <linux/bits.h>
-#include <linux/build_bug.h>
-#include <linux/stringify.h>
-#include <asm/asm.h>
+#include <yai/args.h>
+#include <yai/bits.h>
+#include <yai/build_bug.h>
+#include <yai/stringify.h>
+#include <yai/asm.h>
 
 #ifdef CONFIG_SMP
 
@@ -595,7 +595,7 @@ do {									\
 	 : x86_this_cpu_variable_test_bit(_nr, _var))
 
 
-#include <asm-generic/percpu.h>
+#include <yai/percpu.h>
 
 /* We can use this directly for local CPU (faster). */
 DECLARE_PER_CPU_CACHE_HOT(unsigned long, this_cpu_off);

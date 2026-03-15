@@ -22,7 +22,7 @@
 #include <yai/random.h>
 #include <yai/crc32.h>
 #include <yai/unaligned.h>
-#include <asm/bitsperlong.h>
+#include <yai/bitsperlong.h>
 
 #ifdef __KERNEL__
 struct device;

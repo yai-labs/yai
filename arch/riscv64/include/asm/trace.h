@@ -5,7 +5,7 @@
 #if !defined(_TRACE_RISCV_H) || defined(TRACE_HEADER_MULTI_READ)
 #define _TRACE_RISCV_H
 
-#include <linux/tracepoint.h>
+#include <yai/tracepoint.h>
 
 TRACE_EVENT_CONDITION(sbi_call,
 	TP_PROTO(int ext, int fid),

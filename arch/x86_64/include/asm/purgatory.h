@@ -3,7 +3,7 @@
 #define _ASM_X86_PURGATORY_H
 
 #ifndef __ASSEMBLER__
-#include <linux/purgatory.h>
+#include <yai/purgatory.h>
 
 extern void purgatory(void);
 #endif	/* __ASSEMBLER__ */

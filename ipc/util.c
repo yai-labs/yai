@@ -44,29 +44,29 @@
  *  see sem_lock().
  */
 
-#include <linux/mm.h>
-#include <linux/shm.h>
-#include <linux/init.h>
-#include <linux/msg.h>
-#include <linux/vmalloc.h>
-#include <linux/slab.h>
-#include <linux/notifier.h>
-#include <linux/capability.h>
-#include <linux/highuid.h>
-#include <linux/security.h>
-#include <linux/rcupdate.h>
-#include <linux/workqueue.h>
-#include <linux/seq_file.h>
-#include <linux/proc_fs.h>
-#include <linux/audit.h>
-#include <linux/nsproxy.h>
-#include <linux/rwsem.h>
-#include <linux/memory.h>
-#include <linux/ipc_namespace.h>
-#include <linux/rhashtable.h>
-#include <linux/log2.h>
+#include <yai/mm.h>
+#include <yai/shm.h>
+#include <yai/init.h>
+#include <yai/msg.h>
+#include <yai/vmalloc.h>
+#include <yai/slab.h>
+#include <yai/notifier.h>
+#include <yai/capability.h>
+#include <yai/highuid.h>
+#include <yai/security.h>
+#include <yai/rcupdate.h>
+#include <yai/workqueue.h>
+#include <yai/seq_file.h>
+#include <yai/proc_fs.h>
+#include <yai/audit.h>
+#include <yai/nsproxy.h>
+#include <yai/rwsem.h>
+#include <yai/memory.h>
+#include <yai/ipc_namespace.h>
+#include <yai/rhashtable.h>
+#include <yai/log2.h>
 
-#include <asm/unistd.h>
+#include <yai/unistd.h>
 
 #include "util.h"
 
@@ -548,7 +548,7 @@ void ipc_rcu_putref(struct kern_ipc_perm *ptr,
  * Check user, group, other permissions for access
  * to ipc resources. return 0 if allowed
  *
- * @flag will most probably be 0 or ``S_...UGO`` from <linux/stat.h>
+ * @flag will most probably be 0 or ``S_...UGO`` from <yai/stat.h>
  */
 int ipcperms(struct ipc_namespace *ns, struct kern_ipc_perm *ipcp, short flag)
 {

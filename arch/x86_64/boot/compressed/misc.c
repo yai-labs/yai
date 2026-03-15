@@ -16,7 +16,7 @@
 #include "error.h"
 #include "../string.h"
 #include "../voffset.h"
-#include <asm/bootparam_utils.h>
+#include <yai/bootparam_utils.h>
 
 /*
  * WARNING!!
@@ -29,7 +29,7 @@
 #define STATIC		static
 /* Define an externally visible malloc()/free(). */
 #define MALLOC_VISIBLE
-#include <linux/decompress/mm.h>
+#include <yai/decompress/mm.h>
 
 /*
  * Provide definitions of memzero and memmove as some of the decompressors will

@@ -8,22 +8,22 @@
  * (C) Copyright 2020 Hewlett Packard Enterprise Development LP
  * Copyright (C) 2007-2014 Silicon Graphics, Inc. All rights reserved.
  */
-#include <linux/crash_dump.h>
-#include <linux/cpuhotplug.h>
-#include <linux/cpumask.h>
-#include <linux/proc_fs.h>
-#include <linux/memory.h>
-#include <linux/export.h>
-#include <linux/pci.h>
-#include <linux/acpi.h>
-#include <linux/efi.h>
+#include <yai/crash_dump.h>
+#include <yai/cpuhotplug.h>
+#include <yai/cpumask.h>
+#include <yai/proc_fs.h>
+#include <yai/memory.h>
+#include <yai/export.h>
+#include <yai/pci.h>
+#include <yai/acpi.h>
+#include <yai/efi.h>
 
-#include <asm/e820/api.h>
-#include <asm/uv/uv_mmrs.h>
-#include <asm/uv/uv_hub.h>
-#include <asm/uv/bios.h>
-#include <asm/uv/uv.h>
-#include <asm/apic.h>
+#include <yai/e820/api.h>
+#include <yai/uv/uv_mmrs.h>
+#include <yai/uv/uv_hub.h>
+#include <yai/uv/bios.h>
+#include <yai/uv/uv.h>
+#include <yai/apic.h>
 
 #include "local.h"
 

@@ -3,7 +3,7 @@
 #define _LINUX_ELF_H
 
 #include <yai/types.h>
-#include <asm/elf.h>
+#include <yai/elf.h>
 #include <yai/uapi/elf.h>
 
 #ifndef elf_read_implies_exec

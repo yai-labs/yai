@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: GPL-2.0
-#include <linux/syscore_ops.h>
-#include <linux/suspend.h>
-#include <linux/cpu.h>
+#include <yai/syscore_ops.h>
+#include <yai/suspend.h>
+#include <yai/cpu.h>
 
-#include <asm/msr.h>
-#include <asm/mwait.h>
+#include <yai/msr.h>
+#include <yai/mwait.h>
 
 #define UMWAIT_C02_ENABLE	0
 

@@ -2,12 +2,12 @@
 // Copyright 2023 Google LLC
 // Author: Ard Biesheuvel <ardb@google.com>
 
-#include <linux/types.h>
-#include <linux/sizes.h>
+#include <yai/types.h>
+#include <yai/sizes.h>
 
-#include <asm/memory.h>
-#include <asm/pgalloc.h>
-#include <asm/pgtable.h>
+#include <yai/memory.h>
+#include <yai/pgalloc.h>
+#include <yai/pgtable.h>
 
 #include "pi.h"
 

@@ -1,14 +1,14 @@
 // SPDX-License-Identifier: GPL-2.0-only
-#include <linux/objtool.h>
-#include <linux/module.h>
-#include <linux/sort.h>
-#include <linux/bpf.h>
-#include <asm/ptrace.h>
-#include <asm/stacktrace.h>
-#include <asm/unwind.h>
-#include <asm/orc_types.h>
-#include <asm/orc_lookup.h>
-#include <asm/orc_header.h>
+#include <yai/objtool.h>
+#include <yai/module.h>
+#include <yai/sort.h>
+#include <yai/bpf.h>
+#include <yai/ptrace.h>
+#include <yai/stacktrace.h>
+#include <yai/unwind.h>
+#include <yai/orc_types.h>
+#include <yai/orc_lookup.h>
+#include <yai/orc_header.h>
 
 ORC_HEADER;
 

@@ -3,10 +3,10 @@
  * Copyright (C) 2023 ARM Ltd.
  */
 
-#include <linux/mm.h>
-#include <linux/efi.h>
-#include <linux/export.h>
-#include <asm/tlbflush.h>
+#include <yai/mm.h>
+#include <yai/efi.h>
+#include <yai/export.h>
+#include <yai/tlbflush.h>
 
 static inline bool mm_is_user(struct mm_struct *mm)
 {

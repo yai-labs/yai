@@ -12,7 +12,7 @@
 
 #include <yai/compiler.h>
 #include <yai/types.h>
-#include <asm/byteorder.h>
+#include <yai/byteorder.h>
 
 /* this is used only to give gcc a clue about good code generation */
 union cnt32_to_63 {

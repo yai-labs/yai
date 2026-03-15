@@ -5,10 +5,10 @@
  * Copyright (C) 2015 Intel Corp.
  * Author: Chen, Gong <gong.chen@linux.intel.com>
  */
-#include <linux/smp.h>
-#include <linux/mm.h>
-#include <linux/genalloc.h>
-#include <linux/llist.h>
+#include <yai/smp.h>
+#include <yai/mm.h>
+#include <yai/genalloc.h>
+#include <yai/llist.h>
 #include "internal.h"
 
 /*

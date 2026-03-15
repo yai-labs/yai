@@ -9,8 +9,8 @@
   linux/lib/rbtree.c
 */
 
-#include <linux/rbtree_augmented.h>
-#include <linux/export.h>
+#include <yai/rbtree_augmented.h>
+#include <yai/export.h>
 
 /*
  * red-black trees properties:  https://en.wikipedia.org/wiki/Rbtree

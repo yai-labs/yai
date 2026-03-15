@@ -8,10 +8,10 @@
 #ifndef __ASM_SMP_PLAT_H
 #define __ASM_SMP_PLAT_H
 
-#include <linux/cpumask.h>
+#include <yai/cpumask.h>
 
-#include <asm/smp.h>
-#include <asm/types.h>
+#include <yai/smp.h>
+#include <yai/types.h>
 
 struct mpidr_hash {
 	u64	mask;

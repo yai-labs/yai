@@ -6,11 +6,11 @@
 #ifndef __ASM_CPUFEATURE_H
 #define __ASM_CPUFEATURE_H
 
-#include <asm/alternative-macros.h>
-#include <asm/cpucaps.h>
-#include <asm/cputype.h>
-#include <asm/hwcap.h>
-#include <asm/sysreg.h>
+#include <yai/alternative-macros.h>
+#include <yai/cpucaps.h>
+#include <yai/cputype.h>
+#include <yai/hwcap.h>
+#include <yai/sysreg.h>
 
 #define MAX_CPU_FEATURES	192
 #define cpu_feature(x)		KERNEL_HWCAP_ ## x
@@ -21,10 +21,10 @@
 
 #ifndef __ASSEMBLER__
 
-#include <linux/bug.h>
-#include <linux/jump_label.h>
-#include <linux/kernel.h>
-#include <linux/cpumask.h>
+#include <yai/bug.h>
+#include <yai/jump_label.h>
+#include <yai/kernel.h>
+#include <yai/cpumask.h>
 
 /*
  * CPU feature register tracking

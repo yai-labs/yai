@@ -3,16 +3,16 @@
  * Copyright (C) 2023 ARM Ltd.
  */
 
-#include <linux/jump_label.h>
-#include <linux/memblock.h>
-#include <linux/psci.h>
-#include <linux/swiotlb.h>
-#include <linux/cc_platform.h>
-#include <linux/platform_device.h>
+#include <yai/jump_label.h>
+#include <yai/memblock.h>
+#include <yai/psci.h>
+#include <yai/swiotlb.h>
+#include <yai/cc_platform.h>
+#include <yai/platform_device.h>
 
-#include <asm/io.h>
-#include <asm/mem_encrypt.h>
-#include <asm/rsi.h>
+#include <yai/io.h>
+#include <yai/mem_encrypt.h>
+#include <yai/rsi.h>
 
 static struct realm_config config;
 

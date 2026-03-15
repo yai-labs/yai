@@ -5,12 +5,12 @@
 #ifndef _ASM_EFI_H
 #define _ASM_EFI_H
 
-#include <asm/csr.h>
-#include <asm/io.h>
-#include <asm/mmu_context.h>
-#include <asm/ptrace.h>
-#include <asm/tlbflush.h>
-#include <asm/pgalloc.h>
+#include <yai/csr.h>
+#include <yai/io.h>
+#include <yai/mmu_context.h>
+#include <yai/ptrace.h>
+#include <yai/tlbflush.h>
+#include <yai/pgalloc.h>
 
 #ifdef CONFIG_EFI
 extern void efi_init(void);

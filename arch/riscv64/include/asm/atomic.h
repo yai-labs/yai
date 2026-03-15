@@ -9,14 +9,14 @@
 #define _ASM_RISCV_ATOMIC_H
 
 #ifdef CONFIG_GENERIC_ATOMIC64
-# include <asm-generic/atomic64.h>
+# include <yai/atomic64.h>
 #else
 # if (__riscv_xlen < 64)
 #  error "64-bit atomics require XLEN to be at least 64"
 # endif
 #endif
 
-#include <asm/cmpxchg.h>
+#include <yai/cmpxchg.h>
 
 #define __atomic_acquire_fence()					\
 	__asm__ __volatile__(RISCV_ACQUIRE_BARRIER "" ::: "memory")

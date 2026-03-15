@@ -16,7 +16,7 @@
 #include <yai/atomic.h>
 #include <yai/kprobes.h>
 #ifdef CONFIG_HAVE_ARCH_KGDB
-#include <asm/kgdb.h>
+#include <yai/kgdb.h>
 #endif
 
 #ifdef CONFIG_KGDB

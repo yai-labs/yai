@@ -35,14 +35,14 @@
   *  - Arnaldo Carvalho de Melo <acme@conectiva.com.br>
   */
 
-#include <linux/string.h>
-#include <linux/compiler.h>
-#include <linux/cc_platform.h>
-#include <asm/page.h>
-#include <asm/early_ioremap.h>
-#include <asm/pgtable_types.h>
-#include <asm/shared/io.h>
-#include <asm/special_insns.h>
+#include <yai/string.h>
+#include <yai/compiler.h>
+#include <yai/cc_platform.h>
+#include <yai/page.h>
+#include <yai/early_ioremap.h>
+#include <yai/pgtable_types.h>
+#include <yai/shared/io.h>
+#include <yai/special_insns.h>
 
 #define build_mmio_read(name, size, type, reg, barrier) \
 static inline type name(const volatile void __iomem *addr) \
@@ -243,7 +243,7 @@ extern int io_delay_type;
 extern void io_delay_init(void);
 
 #if defined(CONFIG_PARAVIRT)
-#include <asm/paravirt.h>
+#include <yai/paravirt.h>
 #else
 
 static inline void slow_down_io(void)
@@ -340,7 +340,7 @@ extern bool is_early_ioremap_ptep(pte_t *ptep);
 
 #define IO_SPACE_LIMIT 0xffff
 
-#include <asm-generic/io.h>
+#include <yai/io.h>
 #undef PCI_IOBASE
 
 #ifdef CONFIG_MTRR

@@ -1,19 +1,19 @@
 // SPDX-License-Identifier: GPL-2.0
-#include <linux/dma-map-ops.h>
-#include <linux/dma-direct.h>
-#include <linux/iommu.h>
-#include <linux/dmar.h>
-#include <linux/export.h>
-#include <linux/memblock.h>
-#include <linux/gfp.h>
-#include <linux/pci.h>
-#include <linux/amd-iommu.h>
+#include <yai/dma-map-ops.h>
+#include <yai/dma-direct.h>
+#include <yai/iommu.h>
+#include <yai/dmar.h>
+#include <yai/export.h>
+#include <yai/memblock.h>
+#include <yai/gfp.h>
+#include <yai/pci.h>
+#include <yai/amd-iommu.h>
 
-#include <asm/proto.h>
-#include <asm/dma.h>
-#include <asm/iommu.h>
-#include <asm/gart.h>
-#include <asm/x86_init.h>
+#include <yai/proto.h>
+#include <yai/dma.h>
+#include <yai/iommu.h>
+#include <yai/gart.h>
+#include <yai/x86_init.h>
 
 #include <xen/xen.h>
 #include <xen/swiotlb-xen.h>

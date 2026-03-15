@@ -6,12 +6,12 @@
  */
 
 #define pr_fmt(fmt) "riscv: " fmt
-#include <linux/cpu.h>
-#include <linux/init.h>
-#include <linux/irq.h>
-#include <linux/irqchip/chained_irq.h>
-#include <linux/irqdomain.h>
-#include <asm/sbi.h>
+#include <yai/cpu.h>
+#include <yai/init.h>
+#include <yai/irq.h>
+#include <yai/irqchip/chained_irq.h>
+#include <yai/irqdomain.h>
+#include <yai/sbi.h>
 
 DEFINE_STATIC_KEY_FALSE(riscv_sbi_for_rfence);
 EXPORT_SYMBOL_GPL(riscv_sbi_for_rfence);

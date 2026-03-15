@@ -2,10 +2,10 @@
 #ifndef __ASM_TOPOLOGY_H
 #define __ASM_TOPOLOGY_H
 
-#include <linux/cpumask.h>
+#include <yai/cpumask.h>
 
 #ifdef CONFIG_NUMA
-#include <asm/numa.h>
+#include <yai/numa.h>
 
 struct pci_bus;
 int pcibus_to_node(struct pci_bus *bus);
@@ -15,7 +15,7 @@ int pcibus_to_node(struct pci_bus *bus);
 
 #endif /* CONFIG_NUMA */
 
-#include <linux/arch_topology.h>
+#include <yai/arch_topology.h>
 
 void update_freq_counters_refs(void);
 
@@ -39,6 +39,6 @@ void update_freq_counters_refs(void);
 #undef arch_cpu_is_threaded
 #define arch_cpu_is_threaded() (read_cpuid_mpidr() & MPIDR_MT_BITMASK)
 
-#include <asm-generic/topology.h>
+#include <yai/topology.h>
 
 #endif /* _ASM_ARM_TOPOLOGY_H */

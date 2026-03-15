@@ -4,17 +4,17 @@
  *  Copyright (C) 2017 Zihao Yu
  */
 
-#include <linux/elf.h>
-#include <linux/err.h>
-#include <linux/errno.h>
-#include <linux/hashtable.h>
-#include <linux/kernel.h>
-#include <linux/log2.h>
-#include <linux/moduleloader.h>
-#include <linux/sizes.h>
-#include <linux/pgtable.h>
-#include <asm/alternative.h>
-#include <asm/sections.h>
+#include <yai/elf.h>
+#include <yai/err.h>
+#include <yai/errno.h>
+#include <yai/hashtable.h>
+#include <yai/kernel.h>
+#include <yai/log2.h>
+#include <yai/moduleloader.h>
+#include <yai/sizes.h>
+#include <yai/pgtable.h>
+#include <yai/alternative.h>
+#include <yai/sections.h>
 
 struct used_bucket {
 	struct list_head head;

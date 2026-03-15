@@ -1,11 +1,11 @@
 /* SPDX-License-Identifier: GPL-2.0 */
-#include <linux/kernel.h>
+#include <yai/kernel.h>
 
-#include <asm/desc.h>
-#include <asm/fred.h>
-#include <asm/msr.h>
-#include <asm/tlbflush.h>
-#include <asm/traps.h>
+#include <yai/desc.h>
+#include <yai/fred.h>
+#include <yai/msr.h>
+#include <yai/tlbflush.h>
+#include <yai/traps.h>
 
 /* #DB in the kernel would imply the use of a kernel debugger. */
 #define FRED_DB_STACK_LEVEL		1UL

@@ -12,29 +12,29 @@
 
 #define pr_fmt(fmt) "ACPI: " fmt
 
-#include <linux/acpi.h>
-#include <linux/arm-smccc.h>
-#include <linux/cpumask.h>
-#include <linux/efi.h>
-#include <linux/efi-bgrt.h>
-#include <linux/init.h>
-#include <linux/irq.h>
-#include <linux/irqdomain.h>
-#include <linux/irq_work.h>
-#include <linux/memblock.h>
-#include <linux/of_fdt.h>
-#include <linux/libfdt.h>
-#include <linux/smp.h>
-#include <linux/serial_core.h>
-#include <linux/suspend.h>
-#include <linux/pgtable.h>
+#include <yai/acpi.h>
+#include <yai/arm-smccc.h>
+#include <yai/cpumask.h>
+#include <yai/efi.h>
+#include <yai/efi-bgrt.h>
+#include <yai/init.h>
+#include <yai/irq.h>
+#include <yai/irqdomain.h>
+#include <yai/irq_work.h>
+#include <yai/memblock.h>
+#include <yai/of_fdt.h>
+#include <yai/libfdt.h>
+#include <yai/smp.h>
+#include <yai/serial_core.h>
+#include <yai/suspend.h>
+#include <yai/pgtable.h>
 
 #include <acpi/ghes.h>
 #include <acpi/processor.h>
-#include <asm/cputype.h>
-#include <asm/cpu_ops.h>
-#include <asm/daifflags.h>
-#include <asm/smp_plat.h>
+#include <yai/cputype.h>
+#include <yai/cpu_ops.h>
+#include <yai/daifflags.h>
+#include <yai/smp_plat.h>
 
 int acpi_noirq = 1;		/* skip ACPI IRQ initialization */
 int acpi_disabled = 1;

@@ -12,8 +12,8 @@
  * Author(s): Hendrik Brueckner <brueckner@linux.vnet.ibm.com>
  */
 
-#include <linux/types.h>
-#include <asm/fpu.h>
+#include <yai/types.h>
+#include <yai/fpu.h>
 #include "crc32-vx.h"
 
 /* Vector register range containing CRC-32 constants */

@@ -9,7 +9,7 @@
  * You may select, at your option, one of the above-listed licenses.
  */
 
-#include <linux/module.h>
+#include <yai/module.h>
 
 #include "common/huf.h"
 #include "common/fse.h"

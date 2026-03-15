@@ -2,10 +2,10 @@
 /*
  * x86 FPU bug checks:
  */
-#include <linux/printk.h>
+#include <yai/printk.h>
 
-#include <asm/cpufeature.h>
-#include <asm/fpu/api.h>
+#include <yai/cpufeature.h>
+#include <yai/fpu/api.h>
 
 /*
  * Boot time CPU/FPU FDIV bug detection code:

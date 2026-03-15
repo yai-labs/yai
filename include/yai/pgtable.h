@@ -3,7 +3,7 @@
 #define _LINUX_PGTABLE_H
 
 #include <yai/pfn.h>
-#include <asm/pgtable.h>
+#include <yai/pgtable.h>
 
 #define PMD_ORDER	(PMD_SHIFT - PAGE_SHIFT)
 #define PUD_ORDER	(PUD_SHIFT - PAGE_SHIFT)
@@ -25,7 +25,7 @@
 /*
  * This defines the generic helper for accessing PMD page
  * table page. Although platforms can still override this
- * via their respective <asm/pgtable.h>.
+ * via their respective <yai/pgtable.h>.
  */
 #ifndef pmd_pgtable
 #define pmd_pgtable(pmd) pmd_page(pmd)
@@ -1658,7 +1658,7 @@ void arch_sync_kernel_mappings(unsigned long start, unsigned long end);
 /*
  * This defines the first usable user address. Platforms
  * can override its value with custom FIRST_USER_ADDRESS
- * defined in their respective <asm/pgtable.h>.
+ * defined in their respective <yai/pgtable.h>.
  */
 #ifndef FIRST_USER_ADDRESS
 #define FIRST_USER_ADDRESS	0UL

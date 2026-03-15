@@ -6,7 +6,7 @@
 
 #ifdef CONFIG_X86_64
 
-#include <asm/msr.h>
+#include <yai/msr.h>
 
 /*
  * Read/write a task's FSBASE or GSBASE. This returns the value that
@@ -49,7 +49,7 @@ static __always_inline void wrgsbase(unsigned long gsbase)
 	asm volatile("wrgsbase %0" :: "r" (gsbase) : "memory");
 }
 
-#include <asm/cpufeature.h>
+#include <yai/cpufeature.h>
 
 /* Helper functions for reading/writing FS/GS base */
 

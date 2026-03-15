@@ -4,7 +4,7 @@
 
 #include <yai/atomic.h>
 #include <yai/percpu.h>
-#include <asm/local.h>
+#include <yai/local.h>
 
 struct pcpu_gen_cookie {
 	local_t nesting;

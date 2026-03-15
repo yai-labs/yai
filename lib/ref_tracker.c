@@ -2,13 +2,13 @@
 
 #define pr_fmt(fmt) "ref_tracker: " fmt
 
-#include <linux/export.h>
-#include <linux/list_sort.h>
-#include <linux/ref_tracker.h>
-#include <linux/slab.h>
-#include <linux/stacktrace.h>
-#include <linux/stackdepot.h>
-#include <linux/seq_file.h>
+#include <yai/export.h>
+#include <yai/list_sort.h>
+#include <yai/ref_tracker.h>
+#include <yai/slab.h>
+#include <yai/stacktrace.h>
+#include <yai/stackdepot.h>
+#include <yai/seq_file.h>
 
 #define REF_TRACKER_STACK_ENTRIES 16
 #define STACK_BUF_SIZE 1024
@@ -30,7 +30,7 @@ struct ref_tracker_dir_stats {
 };
 
 #ifdef CONFIG_DEBUG_FS
-#include <linux/xarray.h>
+#include <yai/xarray.h>
 
 /*
  * ref_tracker_dir_init() is usually called in allocation-safe contexts, but
@@ -342,7 +342,7 @@ int ref_tracker_free(struct ref_tracker_dir *dir,
 EXPORT_SYMBOL_GPL(ref_tracker_free);
 
 #ifdef CONFIG_DEBUG_FS
-#include <linux/debugfs.h>
+#include <yai/debugfs.h>
 
 static struct dentry *ref_tracker_debug_dir = (struct dentry *)-ENOENT;
 

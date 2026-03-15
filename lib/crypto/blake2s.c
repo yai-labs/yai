@@ -9,13 +9,13 @@
  */
 
 #include <crypto/blake2s.h>
-#include <linux/bug.h>
-#include <linux/export.h>
-#include <linux/kernel.h>
-#include <linux/module.h>
-#include <linux/string.h>
-#include <linux/unroll.h>
-#include <linux/types.h>
+#include <yai/bug.h>
+#include <yai/export.h>
+#include <yai/kernel.h>
+#include <yai/module.h>
+#include <yai/string.h>
+#include <yai/unroll.h>
+#include <yai/types.h>
 
 static const u8 blake2s_sigma[10][16] = {
 	{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 },

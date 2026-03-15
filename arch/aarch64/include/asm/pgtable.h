@@ -5,14 +5,14 @@
 #ifndef __ASM_PGTABLE_H
 #define __ASM_PGTABLE_H
 
-#include <asm/bug.h>
-#include <asm/proc-fns.h>
+#include <yai/bug.h>
+#include <yai/proc-fns.h>
 
-#include <asm/memory.h>
-#include <asm/mte.h>
-#include <asm/pgtable-hwdef.h>
-#include <asm/pgtable-prot.h>
-#include <asm/tlbflush.h>
+#include <yai/memory.h>
+#include <yai/mte.h>
+#include <yai/pgtable-hwdef.h>
+#include <yai/pgtable-prot.h>
+#include <yai/tlbflush.h>
 
 /*
  * VMALLOC range.
@@ -32,13 +32,13 @@
 
 #ifndef __ASSEMBLER__
 
-#include <asm/cmpxchg.h>
-#include <asm/fixmap.h>
-#include <asm/por.h>
-#include <linux/mmdebug.h>
-#include <linux/mm_types.h>
-#include <linux/sched.h>
-#include <linux/page_table_check.h>
+#include <yai/cmpxchg.h>
+#include <yai/fixmap.h>
+#include <yai/por.h>
+#include <yai/mmdebug.h>
+#include <yai/mm_types.h>
+#include <yai/sched.h>
+#include <yai/page_table_check.h>
 
 static inline void emit_pte_barriers(void)
 {
@@ -929,7 +929,7 @@ static inline pmd_t *pud_pgtable(pud_t pud)
 #define pud_page_paddr(pud)	({ BUILD_BUG(); 0; })
 #define pud_user_exec(pud)	pud_user(pud) /* Always 0 with folding */
 
-/* Match pmd_offset folding in <asm/generic/pgtable-nopmd.h> */
+/* Match pmd_offset folding in <yai/generic/pgtable-nopmd.h> */
 #define pmd_set_fixmap(addr)		NULL
 #define pmd_set_fixmap_offset(pudp, addr)	((pmd_t *)pudp)
 #define pmd_clear_fixmap()
@@ -1059,7 +1059,7 @@ static inline bool pgtable_l4_enabled(void) { return false; }
 
 #define p4d_page_paddr(p4d)	({ BUILD_BUG(); 0;})
 
-/* Match pud_offset folding in <asm/generic/pgtable-nopud.h> */
+/* Match pud_offset folding in <yai/generic/pgtable-nopud.h> */
 #define pud_set_fixmap(addr)		NULL
 #define pud_set_fixmap_offset(pgdp, addr)	((pud_t *)pgdp)
 #define pud_clear_fixmap()
@@ -1181,7 +1181,7 @@ static inline bool pgtable_l5_enabled(void) { return false; }
 
 #define p4d_index(addr)		(((addr) >> P4D_SHIFT) & (PTRS_PER_P4D - 1))
 
-/* Match p4d_offset folding in <asm/generic/pgtable-nop4d.h> */
+/* Match p4d_offset folding in <yai/generic/pgtable-nop4d.h> */
 #define p4d_set_fixmap(addr)		NULL
 #define p4d_set_fixmap_offset(p4dp, addr)	((p4d_t *)p4dp)
 #define p4d_clear_fixmap()

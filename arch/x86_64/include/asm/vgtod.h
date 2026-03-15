@@ -7,12 +7,12 @@
  * unwanted headers.
  */
 #ifdef CONFIG_GENERIC_GETTIMEOFDAY
-#include <linux/compiler.h>
-#include <asm/clocksource.h>
+#include <yai/compiler.h>
+#include <yai/clocksource.h>
 #include <vdso/datapage.h>
 #include <vdso/helpers.h>
 
-#include <uapi/linux/time.h>
+#include <yai/time.h>
 
 #endif /* CONFIG_GENERIC_GETTIMEOFDAY */
 

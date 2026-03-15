@@ -17,9 +17,9 @@
 #include <yai/jump_label.h>
 
 #include <yai/atomic.h>
-#include <asm/ptrace.h>
-#include <asm/irq.h>
-#include <asm/sections.h>
+#include <yai/ptrace.h>
+#include <yai/irq.h>
+#include <yai/sections.h>
 
 /*
  * These correspond to the IORESOURCE_IRQ_* defines in

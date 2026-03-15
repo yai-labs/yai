@@ -6,9 +6,9 @@
 #ifndef X86_ASM_VDSO_SYS_CALL_H
 #define X86_ASM_VDSO_SYS_CALL_H
 
-#include <linux/compiler.h>
-#include <asm/cpufeatures.h>
-#include <asm/alternative.h>
+#include <yai/compiler.h>
+#include <yai/cpufeatures.h>
+#include <yai/alternative.h>
 
 #ifdef CONFIG_X86_64
 # define __sys_instr	"syscall"

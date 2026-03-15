@@ -3,16 +3,16 @@
  * 8253/PIT functions
  *
  */
-#include <linux/clockchips.h>
-#include <linux/init.h>
-#include <linux/timex.h>
-#include <linux/i8253.h>
+#include <yai/clockchips.h>
+#include <yai/init.h>
+#include <yai/timex.h>
+#include <yai/i8253.h>
 
-#include <asm/hypervisor.h>
-#include <asm/apic.h>
-#include <asm/hpet.h>
-#include <asm/time.h>
-#include <asm/smp.h>
+#include <yai/hypervisor.h>
+#include <yai/apic.h>
+#include <yai/hpet.h>
+#include <yai/time.h>
+#include <yai/smp.h>
 
 /*
  * HPET replaces the PIT, when enabled. So we need to know, which of

@@ -3,8 +3,8 @@
 #define _LINUX_IOREMAP_H
 
 #include <yai/kasan.h>
-#include <asm/pgtable.h>
-#include <asm/vmalloc.h>
+#include <yai/pgtable.h>
+#include <yai/vmalloc.h>
 
 #if defined(CONFIG_HAS_IOMEM) || defined(CONFIG_GENERIC_IOREMAP)
 /*

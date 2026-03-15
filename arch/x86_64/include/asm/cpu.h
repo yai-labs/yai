@@ -2,12 +2,12 @@
 #ifndef _ASM_X86_CPU_H
 #define _ASM_X86_CPU_H
 
-#include <linux/device.h>
-#include <linux/cpu.h>
-#include <linux/topology.h>
-#include <linux/nodemask.h>
-#include <linux/percpu.h>
-#include <asm/ibt.h>
+#include <yai/device.h>
+#include <yai/cpu.h>
+#include <yai/topology.h>
+#include <yai/nodemask.h>
+#include <yai/percpu.h>
+#include <yai/ibt.h>
 
 #ifndef CONFIG_SMP
 #define cpu_physical_id(cpu)			boot_cpu_physical_apicid

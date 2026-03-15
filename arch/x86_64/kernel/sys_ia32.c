@@ -21,33 +21,33 @@
  * hopefully all marked.  This should be fixed.
  */
 
-#include <linux/kernel.h>
-#include <linux/sched.h>
-#include <linux/fs.h>
-#include <linux/file.h>
-#include <linux/signal.h>
-#include <linux/syscalls.h>
-#include <linux/times.h>
-#include <linux/utsname.h>
-#include <linux/mm.h>
-#include <linux/uio.h>
-#include <linux/poll.h>
-#include <linux/personality.h>
-#include <linux/stat.h>
-#include <linux/rwsem.h>
-#include <linux/compat.h>
-#include <linux/vfs.h>
-#include <linux/ptrace.h>
-#include <linux/highuid.h>
-#include <linux/sysctl.h>
-#include <linux/slab.h>
-#include <linux/sched/task.h>
-#include <asm/mman.h>
-#include <asm/types.h>
-#include <linux/uaccess.h>
-#include <linux/atomic.h>
-#include <asm/vgtod.h>
-#include <asm/ia32.h>
+#include <yai/kernel.h>
+#include <yai/sched.h>
+#include <yai/fs.h>
+#include <yai/file.h>
+#include <yai/signal.h>
+#include <yai/syscalls.h>
+#include <yai/times.h>
+#include <yai/utsname.h>
+#include <yai/mm.h>
+#include <yai/uio.h>
+#include <yai/poll.h>
+#include <yai/personality.h>
+#include <yai/stat.h>
+#include <yai/rwsem.h>
+#include <yai/compat.h>
+#include <yai/vfs.h>
+#include <yai/ptrace.h>
+#include <yai/highuid.h>
+#include <yai/sysctl.h>
+#include <yai/slab.h>
+#include <yai/sched/task.h>
+#include <yai/mman.h>
+#include <yai/types.h>
+#include <yai/uaccess.h>
+#include <yai/atomic.h>
+#include <yai/vgtod.h>
+#include <yai/ia32.h>
 
 #define AA(__x)		((unsigned long)(__x))
 

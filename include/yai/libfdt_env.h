@@ -5,7 +5,7 @@
 #include <yai/limits.h>	/* For INT_MAX */
 #include <yai/string.h>
 
-#include <asm/byteorder.h>
+#include <yai/byteorder.h>
 
 #define INT32_MAX	S32_MAX
 #define UINT32_MAX	U32_MAX

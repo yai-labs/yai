@@ -1,16 +1,16 @@
 // SPDX-License-Identifier: GPL-2.0-only
-#include <linux/kernel.h>
-#include <linux/init.h>
-#include <linux/prandom.h>
-#include <linux/debugfs.h>
-#include <linux/sched.h>
-#include <linux/stat.h>
-#include <linux/types.h>
-#include <linux/fs.h>
-#include <linux/export.h>
-#include <linux/interrupt.h>
-#include <linux/stacktrace.h>
-#include <linux/fault-inject.h>
+#include <yai/kernel.h>
+#include <yai/init.h>
+#include <yai/prandom.h>
+#include <yai/debugfs.h>
+#include <yai/sched.h>
+#include <yai/stat.h>
+#include <yai/types.h>
+#include <yai/fs.h>
+#include <yai/export.h>
+#include <yai/interrupt.h>
+#include <yai/stacktrace.h>
+#include <yai/fault-inject.h>
 
 /*
  * The should_fail() functions use prandom instead of the normal Linux RNG

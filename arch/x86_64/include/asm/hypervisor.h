@@ -35,9 +35,9 @@ enum x86_hypervisor_type {
 
 #ifdef CONFIG_HYPERVISOR_GUEST
 
-#include <asm/kvm_para.h>
-#include <asm/x86_init.h>
-#include <asm/xen/hypervisor.h>
+#include <yai/kvm_para.h>
+#include <yai/x86_init.h>
+#include <yai/xen/hypervisor.h>
 
 struct hypervisor_x86 {
 	/* Hypervisor name */

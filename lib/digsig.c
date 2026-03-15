@@ -14,14 +14,14 @@
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
-#include <linux/err.h>
-#include <linux/module.h>
-#include <linux/slab.h>
-#include <linux/key.h>
+#include <yai/err.h>
+#include <yai/module.h>
+#include <yai/slab.h>
+#include <yai/key.h>
 #include <crypto/sha1.h>
 #include <keys/user-type.h>
-#include <linux/mpi.h>
-#include <linux/digsig.h>
+#include <yai/mpi.h>
+#include <yai/digsig.h>
 
 static const char *pkcs_1_v1_5_decode_emsa(const unsigned char *msg,
 						unsigned long  msglen,

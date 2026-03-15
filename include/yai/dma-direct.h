@@ -73,7 +73,7 @@ static inline dma_addr_t dma_range_map_max(const struct bus_dma_region *map)
 }
 
 #ifdef CONFIG_ARCH_HAS_PHYS_TO_DMA
-#include <asm/dma-direct.h>
+#include <yai/dma-direct.h>
 #ifndef phys_to_dma_unencrypted
 #define phys_to_dma_unencrypted		phys_to_dma
 #endif

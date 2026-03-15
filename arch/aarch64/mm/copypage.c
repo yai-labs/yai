@@ -6,13 +6,13 @@
  * Copyright (C) 2012 ARM Ltd.
  */
 
-#include <linux/bitops.h>
-#include <linux/mm.h>
+#include <yai/bitops.h>
+#include <yai/mm.h>
 
-#include <asm/page.h>
-#include <asm/cacheflush.h>
-#include <asm/cpufeature.h>
-#include <asm/mte.h>
+#include <yai/page.h>
+#include <yai/cacheflush.h>
+#include <yai/cpufeature.h>
+#include <yai/mte.h>
 
 void copy_highpage(struct page *to, struct page *from)
 {

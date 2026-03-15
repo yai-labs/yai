@@ -21,8 +21,8 @@
 
 #include <yai/spinlock.h>
 #include <yai/of.h>
-#include <asm/io.h>
-#include <asm/mpc52xx.h>
+#include <yai/io.h>
+#include <yai/mpc52xx.h>
 
 #include "sram.h"
 

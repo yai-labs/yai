@@ -16,7 +16,7 @@
 
 #include <mtd/mtd-abi.h>
 
-#include <asm/div64.h>
+#include <yai/div64.h>
 
 #define MTD_FAIL_ADDR_UNKNOWN -1LL
 

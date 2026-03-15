@@ -1,1 +1,1 @@
-#include <asm/apic.h>
+#include <yai/apic.h>

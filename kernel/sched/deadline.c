@@ -16,9 +16,9 @@
  *                    Fabio Checconi <fchecconi@gmail.com>
  */
 
-#include <linux/cpuset.h>
-#include <linux/sched/clock.h>
-#include <uapi/linux/sched/types.h>
+#include <yai/cpuset.h>
+#include <yai/sched/clock.h>
+#include <yai/sched/types.h>
 #include "sched.h"
 #include "pelt.h"
 

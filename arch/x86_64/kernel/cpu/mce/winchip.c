@@ -3,16 +3,16 @@
  * IDT Winchip specific Machine Check Exception Reporting
  * (C) Copyright 2002 Alan Cox <alan@lxorguk.ukuu.org.uk>
  */
-#include <linux/interrupt.h>
-#include <linux/kernel.h>
-#include <linux/types.h>
-#include <linux/hardirq.h>
+#include <yai/interrupt.h>
+#include <yai/kernel.h>
+#include <yai/types.h>
+#include <yai/hardirq.h>
 
-#include <asm/processor.h>
-#include <asm/traps.h>
-#include <asm/tlbflush.h>
-#include <asm/mce.h>
-#include <asm/msr.h>
+#include <yai/processor.h>
+#include <yai/traps.h>
+#include <yai/tlbflush.h>
+#include <yai/mce.h>
+#include <yai/msr.h>
 
 #include "internal.h"
 

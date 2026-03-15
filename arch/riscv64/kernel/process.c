@@ -7,34 +7,34 @@
  * Copyright (C) 2017 SiFive
  */
 
-#include <linux/bitfield.h>
-#include <linux/cpu.h>
-#include <linux/kernel.h>
-#include <linux/sched.h>
-#include <linux/sched/debug.h>
-#include <linux/sched/task_stack.h>
-#include <linux/tick.h>
-#include <linux/ptrace.h>
-#include <linux/uaccess.h>
-#include <linux/personality.h>
-#include <linux/entry-common.h>
+#include <yai/bitfield.h>
+#include <yai/cpu.h>
+#include <yai/kernel.h>
+#include <yai/sched.h>
+#include <yai/sched/debug.h>
+#include <yai/sched/task_stack.h>
+#include <yai/tick.h>
+#include <yai/ptrace.h>
+#include <yai/uaccess.h>
+#include <yai/personality.h>
+#include <yai/entry-common.h>
 
-#include <asm/asm-prototypes.h>
-#include <asm/unistd.h>
-#include <asm/processor.h>
-#include <asm/csr.h>
-#include <asm/stacktrace.h>
-#include <asm/string.h>
-#include <asm/switch_to.h>
-#include <asm/thread_info.h>
-#include <asm/cpuidle.h>
-#include <asm/vector.h>
-#include <asm/cpufeature.h>
-#include <asm/exec.h>
-#include <asm/usercfi.h>
+#include <yai/asm-prototypes.h>
+#include <yai/unistd.h>
+#include <yai/processor.h>
+#include <yai/csr.h>
+#include <yai/stacktrace.h>
+#include <yai/string.h>
+#include <yai/switch_to.h>
+#include <yai/thread_info.h>
+#include <yai/cpuidle.h>
+#include <yai/vector.h>
+#include <yai/cpufeature.h>
+#include <yai/exec.h>
+#include <yai/usercfi.h>
 
 #if defined(CONFIG_STACKPROTECTOR) && !defined(CONFIG_STACKPROTECTOR_PER_TASK)
-#include <linux/stackprotector.h>
+#include <yai/stackprotector.h>
 unsigned long __stack_chk_guard __read_mostly;
 EXPORT_SYMBOL(__stack_chk_guard);
 #endif

@@ -2,13 +2,13 @@
 #ifndef _X86_ENCLS_H
 #define _X86_ENCLS_H
 
-#include <linux/bitops.h>
-#include <linux/err.h>
-#include <linux/io.h>
-#include <linux/rwsem.h>
-#include <linux/types.h>
-#include <asm/asm.h>
-#include <asm/traps.h>
+#include <yai/bitops.h>
+#include <yai/err.h>
+#include <yai/io.h>
+#include <yai/rwsem.h>
+#include <yai/types.h>
+#include <yai/asm.h>
+#include <yai/traps.h>
 #include "sgx.h"
 
 /* Retrieve the encoded trapnr from the specified return code. */

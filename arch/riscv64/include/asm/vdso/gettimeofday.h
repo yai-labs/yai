@@ -4,10 +4,10 @@
 
 #ifndef __ASSEMBLER__
 
-#include <asm/barrier.h>
-#include <asm/unistd.h>
-#include <asm/csr.h>
-#include <uapi/linux/time.h>
+#include <yai/barrier.h>
+#include <yai/unistd.h>
+#include <yai/csr.h>
+#include <yai/time.h>
 
 /*
  * 32-bit land is lacking generic time vsyscalls as well as the legacy 32-bit

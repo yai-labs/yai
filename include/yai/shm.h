@@ -3,8 +3,8 @@
 #define _LINUX_SHM_H_
 
 #include <yai/types.h>
-#include <asm/page.h>
-#include <asm/shmparam.h>
+#include <yai/page.h>
+#include <yai/shmparam.h>
 
 struct file;
 struct task_struct;

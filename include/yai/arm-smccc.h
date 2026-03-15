@@ -542,8 +542,8 @@ asmlinkage void __arm_smccc_hvc(unsigned long a0, unsigned long a1,
 #define SMCCC_HVC_INST	"hvc	#0"
 
 #elif defined(CONFIG_ARM)
-#include <asm/opcodes-sec.h>
-#include <asm/opcodes-virt.h>
+#include <yai/opcodes-sec.h>
+#include <yai/opcodes-virt.h>
 
 #define SMCCC_SMC_INST	__SMC(0)
 #define SMCCC_HVC_INST	__HVC(0)

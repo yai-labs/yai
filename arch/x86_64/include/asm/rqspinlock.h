@@ -2,7 +2,7 @@
 #ifndef _ASM_X86_RQSPINLOCK_H
 #define _ASM_X86_RQSPINLOCK_H
 
-#include <asm/paravirt.h>
+#include <yai/paravirt.h>
 
 #ifdef CONFIG_PARAVIRT
 DECLARE_STATIC_KEY_FALSE(virt_spin_lock_key);
@@ -28,6 +28,6 @@ static inline int resilient_virt_spin_lock(rqspinlock_t *lock)
 
 #endif /* CONFIG_PARAVIRT */
 
-#include <asm-generic/rqspinlock.h>
+#include <yai/rqspinlock.h>
 
 #endif /* _ASM_X86_RQSPINLOCK_H */

@@ -9,12 +9,12 @@
 #ifndef __ASM_ATOMIC_H
 #define __ASM_ATOMIC_H
 
-#include <linux/compiler.h>
-#include <linux/types.h>
+#include <yai/compiler.h>
+#include <yai/types.h>
 
-#include <asm/barrier.h>
-#include <asm/cmpxchg.h>
-#include <asm/lse.h>
+#include <yai/barrier.h>
+#include <yai/cmpxchg.h>
+#include <yai/lse.h>
 
 #define ATOMIC_OP(op)							\
 static __always_inline void arch_##op(int i, atomic_t *v)		\

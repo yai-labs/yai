@@ -2,33 +2,33 @@
 /*
  * Common interrupt code for 32 and 64 bit
  */
-#include <linux/cpu.h>
-#include <linux/interrupt.h>
-#include <linux/kernel_stat.h>
-#include <linux/of.h>
-#include <linux/seq_file.h>
-#include <linux/smp.h>
-#include <linux/ftrace.h>
-#include <linux/delay.h>
-#include <linux/export.h>
-#include <linux/irq.h>
-#include <linux/kvm_types.h>
+#include <yai/cpu.h>
+#include <yai/interrupt.h>
+#include <yai/kernel_stat.h>
+#include <yai/of.h>
+#include <yai/seq_file.h>
+#include <yai/smp.h>
+#include <yai/ftrace.h>
+#include <yai/delay.h>
+#include <yai/export.h>
+#include <yai/irq.h>
+#include <yai/kvm_types.h>
 
-#include <asm/irq_stack.h>
-#include <asm/apic.h>
-#include <asm/io_apic.h>
-#include <asm/irq.h>
-#include <asm/mce.h>
-#include <asm/hw_irq.h>
-#include <asm/desc.h>
-#include <asm/traps.h>
-#include <asm/thermal.h>
-#include <asm/posted_intr.h>
-#include <asm/irq_remapping.h>
+#include <yai/irq_stack.h>
+#include <yai/apic.h>
+#include <yai/io_apic.h>
+#include <yai/irq.h>
+#include <yai/mce.h>
+#include <yai/hw_irq.h>
+#include <yai/desc.h>
+#include <yai/traps.h>
+#include <yai/thermal.h>
+#include <yai/posted_intr.h>
+#include <yai/irq_remapping.h>
 
 #if defined(CONFIG_X86_LOCAL_APIC) || defined(CONFIG_X86_THERMAL_VECTOR)
 #define CREATE_TRACE_POINTS
-#include <asm/trace/irq_vectors.h>
+#include <yai/trace/irq_vectors.h>
 #endif
 
 DEFINE_PER_CPU_SHARED_ALIGNED(irq_cpustat_t, irq_stat);

@@ -3,10 +3,10 @@
 #ifndef _ASM_RISCV_KFENCE_H
 #define _ASM_RISCV_KFENCE_H
 
-#include <linux/kfence.h>
-#include <linux/pfn.h>
-#include <asm-generic/pgalloc.h>
-#include <asm/pgtable.h>
+#include <yai/kfence.h>
+#include <yai/pfn.h>
+#include <yai/pgalloc.h>
+#include <yai/pgtable.h>
 
 static inline bool arch_kfence_init_pool(void)
 {

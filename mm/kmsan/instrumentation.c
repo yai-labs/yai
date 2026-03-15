@@ -13,11 +13,11 @@
  */
 
 #include "kmsan.h"
-#include <linux/gfp.h>
-#include <linux/kmsan.h>
-#include <linux/kmsan_string.h>
-#include <linux/mm.h>
-#include <linux/uaccess.h>
+#include <yai/gfp.h>
+#include <yai/kmsan.h>
+#include <yai/kmsan_string.h>
+#include <yai/mm.h>
+#include <yai/uaccess.h>
 
 static inline bool is_bad_asm_addr(void *addr, uintptr_t size, bool is_store)
 {

@@ -10,7 +10,7 @@ struct perf_regs {
 };
 
 #ifdef CONFIG_HAVE_PERF_REGS
-#include <asm/perf_regs.h>
+#include <yai/perf_regs.h>
 
 #ifndef PERF_REG_EXTENDED_MASK
 #define PERF_REG_EXTENDED_MASK	0

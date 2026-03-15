@@ -10,10 +10,10 @@
 #ifndef _ASM_RISCV_SYSCALL_H
 #define _ASM_RISCV_SYSCALL_H
 
-#include <asm/hwprobe.h>
-#include <uapi/linux/audit.h>
-#include <linux/sched.h>
-#include <linux/err.h>
+#include <yai/hwprobe.h>
+#include <yai/audit.h>
+#include <yai/sched.h>
+#include <yai/err.h>
 
 /* The array of function pointers for syscalls. */
 extern void * const sys_call_table[];

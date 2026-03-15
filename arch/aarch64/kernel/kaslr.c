@@ -3,12 +3,12 @@
  * Copyright (C) 2016 Linaro Ltd <ard.biesheuvel@linaro.org>
  */
 
-#include <linux/cache.h>
-#include <linux/init.h>
-#include <linux/printk.h>
+#include <yai/cache.h>
+#include <yai/init.h>
+#include <yai/printk.h>
 
-#include <asm/cpufeature.h>
-#include <asm/memory.h>
+#include <yai/cpufeature.h>
+#include <yai/memory.h>
 
 bool __ro_after_init __kaslr_is_enabled = false;
 

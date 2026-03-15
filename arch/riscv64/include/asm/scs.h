@@ -3,7 +3,7 @@
 #define _ASM_SCS_H
 
 #ifdef __ASSEMBLER__
-#include <asm/asm-offsets.h>
+#include <yai/asm-offsets.h>
 
 #ifdef CONFIG_SHADOW_CALL_STACK
 

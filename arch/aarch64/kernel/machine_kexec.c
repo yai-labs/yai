@@ -6,24 +6,24 @@
  * Copyright (C) Huawei Futurewei Technologies.
  */
 
-#include <linux/interrupt.h>
-#include <linux/irq.h>
-#include <linux/kernel.h>
-#include <linux/kexec.h>
-#include <linux/page-flags.h>
-#include <linux/reboot.h>
-#include <linux/set_memory.h>
-#include <linux/smp.h>
+#include <yai/interrupt.h>
+#include <yai/irq.h>
+#include <yai/kernel.h>
+#include <yai/kexec.h>
+#include <yai/page-flags.h>
+#include <yai/reboot.h>
+#include <yai/set_memory.h>
+#include <yai/smp.h>
 
-#include <asm/cacheflush.h>
-#include <asm/cpu_ops.h>
-#include <asm/daifflags.h>
-#include <asm/memory.h>
-#include <asm/mmu.h>
-#include <asm/mmu_context.h>
-#include <asm/page.h>
-#include <asm/sections.h>
-#include <asm/trans_pgd.h>
+#include <yai/cacheflush.h>
+#include <yai/cpu_ops.h>
+#include <yai/daifflags.h>
+#include <yai/memory.h>
+#include <yai/mmu.h>
+#include <yai/mmu_context.h>
+#include <yai/page.h>
+#include <yai/sections.h>
+#include <yai/trans_pgd.h>
 
 /**
  * kexec_image_info - For debugging output.

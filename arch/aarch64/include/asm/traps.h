@@ -7,10 +7,10 @@
 #ifndef __ASM_TRAP_H
 #define __ASM_TRAP_H
 
-#include <linux/list.h>
-#include <asm/esr.h>
-#include <asm/ptrace.h>
-#include <asm/sections.h>
+#include <yai/list.h>
+#include <yai/esr.h>
+#include <yai/ptrace.h>
+#include <yai/sections.h>
 
 #ifdef CONFIG_ARMV8_DEPRECATED
 bool try_emulate_armv8_deprecated(struct pt_regs *regs, u32 insn);

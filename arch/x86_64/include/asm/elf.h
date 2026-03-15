@@ -5,13 +5,13 @@
 /*
  * ELF register definitions..
  */
-#include <linux/thread_info.h>
+#include <yai/thread_info.h>
 
-#include <asm/ia32.h>
-#include <asm/ptrace.h>
-#include <asm/user.h>
-#include <asm/auxvec.h>
-#include <asm/fsgsbase.h>
+#include <yai/ia32.h>
+#include <yai/ptrace.h>
+#include <yai/user.h>
+#include <yai/auxvec.h>
+#include <yai/fsgsbase.h>
 
 typedef unsigned long elf_greg_t;
 
@@ -74,7 +74,7 @@ typedef struct user_i387_struct elf_fpregset_t;
 
 #endif
 
-#include <asm/vdso.h>
+#include <yai/vdso.h>
 
 extern unsigned int vdso64_enabled;
 extern unsigned int vdso32_enabled;
@@ -85,10 +85,10 @@ extern unsigned int vdso32_enabled;
 #define elf_check_arch_ia32(x) \
 	(((x)->e_machine == EM_386) || ((x)->e_machine == EM_486))
 
-#include <asm/processor.h>
+#include <yai/processor.h>
 
 #ifdef CONFIG_X86_32
-#include <asm/desc.h>
+#include <yai/desc.h>
 
 #define elf_check_arch(x)	elf_check_arch_ia32(x)
 

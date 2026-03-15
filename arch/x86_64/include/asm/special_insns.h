@@ -3,12 +3,12 @@
 #define _ASM_X86_SPECIAL_INSNS_H
 
 #ifdef __KERNEL__
-#include <asm/nops.h>
-#include <asm/processor-flags.h>
+#include <yai/nops.h>
+#include <yai/processor-flags.h>
 
-#include <linux/errno.h>
-#include <linux/irqflags.h>
-#include <linux/jump_label.h>
+#include <yai/errno.h>
+#include <yai/irqflags.h>
+#include <yai/jump_label.h>
 
 void native_write_cr0(unsigned long val);
 
@@ -139,7 +139,7 @@ static inline unsigned long __read_cr4(void)
 }
 
 #ifdef CONFIG_PARAVIRT_XXL
-#include <asm/paravirt.h>
+#include <yai/paravirt.h>
 #else
 
 static inline unsigned long read_cr0(void)

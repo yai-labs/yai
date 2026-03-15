@@ -7,11 +7,11 @@
 #ifndef __ASM_CMPXCHG_H
 #define __ASM_CMPXCHG_H
 
-#include <linux/build_bug.h>
-#include <linux/compiler.h>
+#include <yai/build_bug.h>
+#include <yai/compiler.h>
 
-#include <asm/barrier.h>
-#include <asm/lse.h>
+#include <yai/barrier.h>
+#include <yai/lse.h>
 
 /*
  * We need separate acquire parameters for ll/sc and lse, since the full

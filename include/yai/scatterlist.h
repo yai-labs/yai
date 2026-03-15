@@ -6,7 +6,7 @@
 #include <yai/types.h>
 #include <yai/bug.h>
 #include <yai/mm.h>
-#include <asm/io.h>
+#include <yai/io.h>
 
 struct scatterlist {
 	unsigned long	page_link;

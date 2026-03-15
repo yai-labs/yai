@@ -29,7 +29,7 @@
 #include <generated/utsrelease.h>
 
 #define _SETUP
-#include <asm/setup.h>	/* For COMMAND_LINE_SIZE */
+#include <yai/setup.h>	/* For COMMAND_LINE_SIZE */
 #undef _SETUP
 
 extern unsigned long get_cmd_line_ptr(void);

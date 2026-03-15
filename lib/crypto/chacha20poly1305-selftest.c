@@ -7,12 +7,12 @@
 #include <crypto/chacha.h>
 #include <crypto/poly1305.h>
 
-#include <linux/unaligned.h>
-#include <linux/bug.h>
-#include <linux/init.h>
-#include <linux/mm.h>
-#include <linux/kernel.h>
-#include <linux/slab.h>
+#include <yai/unaligned.h>
+#include <yai/bug.h>
+#include <yai/init.h>
+#include <yai/mm.h>
+#include <yai/kernel.h>
+#include <yai/slab.h>
 
 struct chacha20poly1305_testvec {
 	const u8 *input, *output, *assoc, *nonce, *key;

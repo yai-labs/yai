@@ -12,8 +12,8 @@
 
 #ifdef __KERNEL__
 
-#include <asm/cpu-features.h>
-#include <asm/fpu.h>
+#include <yai/cpu-features.h>
+#include <yai/fpu.h>
 
 #else /* for user-space testing */
 

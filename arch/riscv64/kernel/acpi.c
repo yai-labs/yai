@@ -13,14 +13,14 @@
  *	Author: Sunil V L <sunilvl@ventanamicro.com>
  */
 
-#include <linux/acpi.h>
-#include <linux/efi-bgrt.h>
-#include <linux/efi.h>
-#include <linux/io.h>
-#include <linux/memblock.h>
-#include <linux/of_fdt.h>
-#include <linux/pci.h>
-#include <linux/serial_core.h>
+#include <yai/acpi.h>
+#include <yai/efi-bgrt.h>
+#include <yai/efi.h>
+#include <yai/io.h>
+#include <yai/memblock.h>
+#include <yai/of_fdt.h>
+#include <yai/pci.h>
+#include <yai/serial_core.h>
 
 int acpi_noirq = 1;		/* skip ACPI IRQ initialization */
 int acpi_disabled = 1;

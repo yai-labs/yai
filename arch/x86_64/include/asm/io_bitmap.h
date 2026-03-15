@@ -2,8 +2,8 @@
 #ifndef _ASM_X86_IOBITMAP_H
 #define _ASM_X86_IOBITMAP_H
 
-#include <linux/refcount.h>
-#include <asm/processor.h>
+#include <yai/refcount.h>
+#include <yai/processor.h>
 
 struct io_bitmap {
 	u64		sequence;
@@ -37,7 +37,7 @@ static inline void native_tss_invalidate_io_bitmap(void)
 void native_tss_update_io_bitmap(void);
 
 #ifdef CONFIG_PARAVIRT_XXL
-#include <asm/paravirt.h>
+#include <yai/paravirt.h>
 #else
 #define tss_update_io_bitmap native_tss_update_io_bitmap
 #define tss_invalidate_io_bitmap native_tss_invalidate_io_bitmap

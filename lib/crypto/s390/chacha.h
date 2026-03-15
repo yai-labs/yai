@@ -5,11 +5,11 @@
  * Copyright IBM Corp. 2021
  */
 
-#include <linux/cpufeature.h>
-#include <linux/export.h>
-#include <linux/kernel.h>
-#include <linux/sizes.h>
-#include <asm/fpu.h>
+#include <yai/cpufeature.h>
+#include <yai/export.h>
+#include <yai/kernel.h>
+#include <yai/sizes.h>
+#include <yai/fpu.h>
 #include "chacha-s390.h"
 
 #define hchacha_block_arch hchacha_block_generic /* not implemented yet */

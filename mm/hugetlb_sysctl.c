@@ -4,7 +4,7 @@
  * (C) Nadia Yvette Chambers, April 2004
  */
 
-#include <linux/sysctl.h>
+#include <yai/sysctl.h>
 
 #include "hugetlb_internal.h"
 

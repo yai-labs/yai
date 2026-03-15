@@ -4,8 +4,8 @@
 
 #ifdef CONFIG_UNWIND_USER
 
-#include <asm/ptrace.h>
-#include <asm/uprobes.h>
+#include <yai/ptrace.h>
+#include <yai/uprobes.h>
 
 static inline int unwind_user_word_size(struct pt_regs *regs)
 {

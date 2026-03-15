@@ -6,7 +6,7 @@
  */
 
 #include <kunit/test.h>
-#include <linux/seq_buf.h>
+#include <yai/seq_buf.h>
 
 static void seq_buf_init_test(struct kunit *test)
 {

@@ -3,10 +3,10 @@
  * Copyright (C) 2017 SiFive
  */
 
-#include <linux/acpi.h>
-#include <linux/cpu.h>
-#include <linux/of.h>
-#include <asm/cacheinfo.h>
+#include <yai/acpi.h>
+#include <yai/cpu.h>
+#include <yai/of.h>
+#include <yai/cacheinfo.h>
 
 static struct riscv_cacheinfo_ops *rv_cache_ops;
 

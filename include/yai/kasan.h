@@ -18,7 +18,7 @@ struct task_struct;
 #ifdef CONFIG_KASAN
 
 #include <yai/linkage.h>
-#include <asm/kasan.h>
+#include <yai/kasan.h>
 
 #endif
 

@@ -3,9 +3,9 @@
  *
  * SPDX-License-Identifier: GPL-2.0
  */
-#include <linux/irq.h>
-#include <linux/kvm_types.h>
-#include <asm/apic.h>
+#include <yai/irq.h>
+#include <yai/kvm_types.h>
+#include <yai/apic.h>
 
 #include "local.h"
 

@@ -5,8 +5,8 @@
 #ifndef __ASM_SPINLOCK_H
 #define __ASM_SPINLOCK_H
 
-#include <asm/qspinlock.h>
-#include <asm/qrwlock.h>
+#include <yai/qspinlock.h>
+#include <yai/qrwlock.h>
 
 /* See include/linux/spinlock.h */
 #define smp_mb__after_spinlock()	smp_mb()

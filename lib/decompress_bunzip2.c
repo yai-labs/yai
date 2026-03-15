@@ -47,11 +47,11 @@
 #ifdef STATIC
 #define PREBOOT
 #else
-#include <linux/decompress/bunzip2.h>
+#include <yai/decompress/bunzip2.h>
 #endif /* STATIC */
 
-#include <linux/decompress/mm.h>
-#include <linux/crc32poly.h>
+#include <yai/decompress/mm.h>
+#include <yai/crc32poly.h>
 
 #ifndef INT_MAX
 #define INT_MAX 0x7fffffff

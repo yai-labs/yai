@@ -2,13 +2,13 @@
 /*
  * x86 FPU boot time init code:
  */
-#include <asm/fpu/api.h>
-#include <asm/tlbflush.h>
-#include <asm/setup.h>
+#include <yai/fpu/api.h>
+#include <yai/tlbflush.h>
+#include <yai/setup.h>
 
-#include <linux/sched.h>
-#include <linux/sched/task.h>
-#include <linux/init.h>
+#include <yai/sched.h>
+#include <yai/sched/task.h>
+#include <yai/init.h>
 
 #include "internal.h"
 #include "legacy.h"

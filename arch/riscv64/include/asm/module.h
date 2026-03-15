@@ -4,8 +4,8 @@
 #ifndef _ASM_RISCV_MODULE_H
 #define _ASM_RISCV_MODULE_H
 
-#include <asm-generic/module.h>
-#include <linux/elf.h>
+#include <yai/module.h>
+#include <yai/elf.h>
 
 struct module;
 unsigned long module_emit_got_entry(struct module *mod, unsigned long val);

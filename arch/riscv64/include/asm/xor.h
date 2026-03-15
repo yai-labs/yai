@@ -3,12 +3,12 @@
  * Copyright (C) 2021 SiFive
  */
 
-#include <linux/hardirq.h>
-#include <asm-generic/xor.h>
+#include <yai/hardirq.h>
+#include <yai/xor.h>
 #ifdef CONFIG_RISCV_ISA_V
-#include <asm/vector.h>
-#include <asm/switch_to.h>
-#include <asm/asm-prototypes.h>
+#include <yai/vector.h>
+#include <yai/switch_to.h>
+#include <yai/asm-prototypes.h>
 
 static void xor_vector_2(unsigned long bytes, unsigned long *__restrict p1,
 			 const unsigned long *__restrict p2)

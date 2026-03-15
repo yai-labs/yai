@@ -1,15 +1,15 @@
 // SPDX-License-Identifier: GPL-2.0
 
-#include <linux/init.h>
-#include <linux/linkage.h>
-#include <linux/types.h>
-#include <linux/kernel.h>
-#include <linux/pgtable.h>
+#include <yai/init.h>
+#include <yai/linkage.h>
+#include <yai/types.h>
+#include <yai/kernel.h>
+#include <yai/pgtable.h>
 
-#include <asm/init.h>
-#include <asm/sections.h>
-#include <asm/setup.h>
-#include <asm/sev.h>
+#include <yai/init.h>
+#include <yai/sections.h>
+#include <yai/setup.h>
+#include <yai/sev.h>
 
 extern pmd_t early_dynamic_pgts[EARLY_DYNAMIC_PAGE_TABLES][PTRS_PER_PMD];
 extern unsigned int next_early_pgt;

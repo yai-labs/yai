@@ -2,17 +2,17 @@
 
 #define pr_fmt(fmt) "kprobes: " fmt
 
-#include <linux/kprobes.h>
-#include <linux/extable.h>
-#include <linux/slab.h>
-#include <linux/stop_machine.h>
-#include <linux/vmalloc.h>
-#include <asm/ptrace.h>
-#include <linux/uaccess.h>
-#include <asm/sections.h>
-#include <asm/cacheflush.h>
-#include <asm/bug.h>
-#include <asm/text-patching.h>
+#include <yai/kprobes.h>
+#include <yai/extable.h>
+#include <yai/slab.h>
+#include <yai/stop_machine.h>
+#include <yai/vmalloc.h>
+#include <yai/ptrace.h>
+#include <yai/uaccess.h>
+#include <yai/sections.h>
+#include <yai/cacheflush.h>
+#include <yai/bug.h>
+#include <yai/text-patching.h>
 
 #include "decode-insn.h"
 

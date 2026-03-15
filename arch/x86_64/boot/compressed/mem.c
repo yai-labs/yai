@@ -4,7 +4,7 @@
 #include "misc.h"
 #include "tdx.h"
 #include "sev.h"
-#include <asm/shared/tdx.h>
+#include <yai/shared/tdx.h>
 
 /*
  * accept_memory() and process_unaccepted_memory() called from EFI stub which

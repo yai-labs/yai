@@ -7,14 +7,14 @@
 #ifndef __ASM_SIMD_H
 #define __ASM_SIMD_H
 
-#include <linux/compiler.h>
-#include <linux/irqflags.h>
-#include <linux/percpu.h>
-#include <linux/preempt.h>
-#include <linux/types.h>
-#include <linux/thread_info.h>
+#include <yai/compiler.h>
+#include <yai/irqflags.h>
+#include <yai/percpu.h>
+#include <yai/preempt.h>
+#include <yai/types.h>
+#include <yai/thread_info.h>
 
-#include <asm/vector.h>
+#include <yai/vector.h>
 
 #ifdef CONFIG_RISCV_ISA_V
 /*

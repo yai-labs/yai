@@ -7,18 +7,18 @@
  * Modified by Will Deacon <will.deacon@arm.com>
  */
 
-#include <linux/compat.h>
-#include <linux/signal.h>
-#include <linux/syscalls.h>
-#include <linux/ratelimit.h>
+#include <yai/compat.h>
+#include <yai/signal.h>
+#include <yai/syscalls.h>
+#include <yai/ratelimit.h>
 
-#include <asm/esr.h>
-#include <asm/fpsimd.h>
-#include <asm/signal32.h>
-#include <asm/traps.h>
-#include <linux/uaccess.h>
-#include <asm/unistd_compat_32.h>
-#include <asm/vdso.h>
+#include <yai/esr.h>
+#include <yai/fpsimd.h>
+#include <yai/signal32.h>
+#include <yai/traps.h>
+#include <yai/uaccess.h>
+#include <yai/unistd_compat_32.h>
+#include <yai/vdso.h>
 
 struct compat_vfp_sigframe {
 	compat_ulong_t	magic;

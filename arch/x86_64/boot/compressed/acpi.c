@@ -5,9 +5,9 @@
 #include "../string.h"
 #include "efi.h"
 
-#include <asm/bootparam.h>
+#include <yai/bootparam.h>
 
-#include <linux/numa.h>
+#include <yai/numa.h>
 
 /*
  * Longest parameter of 'acpi=' is 'copy_dsdt', plus an extra '\0'

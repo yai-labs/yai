@@ -3,7 +3,7 @@
 #ifndef __ASM_KGDB_H_
 #define __ASM_KGDB_H_
 
-#include <linux/build_bug.h>
+#include <yai/build_bug.h>
 
 #ifdef __KERNEL__
 

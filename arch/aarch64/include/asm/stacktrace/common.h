@@ -9,7 +9,7 @@
 #ifndef __ASM_STACKTRACE_COMMON_H
 #define __ASM_STACKTRACE_COMMON_H
 
-#include <linux/types.h>
+#include <yai/types.h>
 
 struct stack_info {
 	unsigned long low;

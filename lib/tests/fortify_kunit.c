@@ -43,10 +43,10 @@ void fortify_add_kunit_error(int write);
 #include <kunit/device.h>
 #include <kunit/test.h>
 #include <kunit/test-bug.h>
-#include <linux/device.h>
-#include <linux/slab.h>
-#include <linux/string.h>
-#include <linux/vmalloc.h>
+#include <yai/device.h>
+#include <yai/slab.h>
+#include <yai/string.h>
+#include <yai/vmalloc.h>
 
 /* Handle being built without CONFIG_FORTIFY_SOURCE */
 #ifndef __compiletime_strlen

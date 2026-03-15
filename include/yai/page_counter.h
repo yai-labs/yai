@@ -5,7 +5,7 @@
 #include <yai/atomic.h>
 #include <yai/cache.h>
 #include <yai/limits.h>
-#include <asm/page.h>
+#include <yai/page.h>
 
 struct page_counter {
 	/*

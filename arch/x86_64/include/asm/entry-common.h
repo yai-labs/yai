@@ -2,13 +2,13 @@
 #ifndef _ASM_X86_ENTRY_COMMON_H
 #define _ASM_X86_ENTRY_COMMON_H
 
-#include <linux/randomize_kstack.h>
-#include <linux/user-return-notifier.h>
+#include <yai/randomize_kstack.h>
+#include <yai/user-return-notifier.h>
 
-#include <asm/nospec-branch.h>
-#include <asm/io_bitmap.h>
-#include <asm/fpu/api.h>
-#include <asm/fred.h>
+#include <yai/nospec-branch.h>
+#include <yai/io_bitmap.h>
+#include <yai/fpu/api.h>
+#include <yai/fred.h>
 
 /* Check that the stack and regs on entry from user mode are sane. */
 static __always_inline void arch_enter_from_user_mode(struct pt_regs *regs)

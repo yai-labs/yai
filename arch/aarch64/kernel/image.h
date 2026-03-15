@@ -11,7 +11,7 @@
 #error This file should only be included in vmlinux.lds.S
 #endif
 
-#include <asm/image.h>
+#include <yai/image.h>
 
 /*
  * There aren't any ELF relocations we can use to endian-swap values known only

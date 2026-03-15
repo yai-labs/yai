@@ -5,7 +5,7 @@
 #include <yai/compiler.h>
 #include <yai/types.h>
 
-#include <asm/errno.h>
+#include <yai/errno.h>
 
 /*
  * Kernel pointers have redundant information, so we can use a

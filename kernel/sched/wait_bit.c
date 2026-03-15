@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0-only
 
-#include <linux/sched/debug.h>
+#include <yai/sched/debug.h>
 #include "sched.h"
 
 /*

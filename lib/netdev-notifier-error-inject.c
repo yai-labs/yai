@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-only
-#include <linux/kernel.h>
-#include <linux/module.h>
-#include <linux/netdevice.h>
+#include <yai/kernel.h>
+#include <yai/module.h>
+#include <yai/netdevice.h>
 
 #include "notifier-error-inject.h"
 

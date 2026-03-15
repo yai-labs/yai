@@ -5,10 +5,10 @@
  *	(c) 1999 Martin Mares <mj@ucw.cz>
  */
 
-#include <linux/errno.h>
-#include <linux/init.h>
-#include <linux/ioport.h>
-#include <linux/spinlock.h>
+#include <yai/errno.h>
+#include <yai/init.h>
+#include <yai/ioport.h>
+#include <yai/spinlock.h>
 
 #undef DEBUG
 

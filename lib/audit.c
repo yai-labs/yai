@@ -1,31 +1,31 @@
 // SPDX-License-Identifier: GPL-2.0
-#include <linux/init.h>
-#include <linux/types.h>
-#include <linux/audit.h>
-#include <asm/unistd.h>
+#include <yai/init.h>
+#include <yai/types.h>
+#include <yai/audit.h>
+#include <yai/unistd.h>
 
 static unsigned dir_class[] = {
-#include <asm-generic/audit_dir_write.h>
+#include <yai/audit_dir_write.h>
 ~0U
 };
 
 static unsigned read_class[] = {
-#include <asm-generic/audit_read.h>
+#include <yai/audit_read.h>
 ~0U
 };
 
 static unsigned write_class[] = {
-#include <asm-generic/audit_write.h>
+#include <yai/audit_write.h>
 ~0U
 };
 
 static unsigned chattr_class[] = {
-#include <asm-generic/audit_change_attr.h>
+#include <yai/audit_change_attr.h>
 ~0U
 };
 
 static unsigned signal_class[] = {
-#include <asm-generic/audit_signal.h>
+#include <yai/audit_signal.h>
 ~0U
 };
 

@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0
-#include <linux/export.h>
-#include <linux/lockref.h>
+#include <yai/export.h>
+#include <yai/lockref.h>
 
 #if USE_CMPXCHG_LOCKREF
 

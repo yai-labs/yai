@@ -2,9 +2,9 @@
 #ifndef _ASM_X86_PGTABLE_H
 #define _ASM_X86_PGTABLE_H
 
-#include <linux/mem_encrypt.h>
-#include <asm/page.h>
-#include <asm/pgtable_types.h>
+#include <yai/mem_encrypt.h>
+#include <yai/page.h>
+#include <yai/pgtable_types.h>
 
 /*
  * Macro to mark a page protection value as UC-
@@ -16,13 +16,13 @@
 	 : (prot))
 
 #ifndef __ASSEMBLER__
-#include <linux/spinlock.h>
-#include <asm/x86_init.h>
-#include <asm/pkru.h>
-#include <asm/fpu/api.h>
-#include <asm/coco.h>
-#include <asm-generic/pgtable_uffd.h>
-#include <linux/page_table_check.h>
+#include <yai/spinlock.h>
+#include <yai/x86_init.h>
+#include <yai/pkru.h>
+#include <yai/fpu/api.h>
+#include <yai/coco.h>
+#include <yai/pgtable_uffd.h>
+#include <yai/page_table_check.h>
 
 extern pgd_t early_top_pgt[PTRS_PER_PGD];
 bool __init __early_make_pgtable(unsigned long address, pmdval_t pmd);
@@ -63,7 +63,7 @@ extern struct mm_struct *pgd_page_get_mm(struct page *page);
 extern pmdval_t early_pmd_flags;
 
 #ifdef CONFIG_PARAVIRT_XXL
-#include <asm/paravirt.h>
+#include <yai/paravirt.h>
 #else  /* !CONFIG_PARAVIRT_XXL */
 #define set_pte(ptep, pte)		native_set_pte(ptep, pte)
 
@@ -934,16 +934,16 @@ static inline pgd_t pti_set_user_pgtbl(pgd_t *pgdp, pgd_t pgd)
 
 
 #ifdef CONFIG_X86_32
-# include <asm/pgtable_32.h>
+# include <yai/pgtable_32.h>
 #else
-# include <asm/pgtable_64.h>
+# include <yai/pgtable_64.h>
 #endif
 
 #ifndef __ASSEMBLER__
-#include <linux/mm_types.h>
-#include <linux/mmdebug.h>
-#include <linux/log2.h>
-#include <asm/fixmap.h>
+#include <yai/mm_types.h>
+#include <yai/mmdebug.h>
+#include <yai/log2.h>
+#include <yai/fixmap.h>
 
 static inline int pte_none(pte_t pte)
 {

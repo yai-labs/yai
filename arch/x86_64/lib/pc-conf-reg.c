@@ -6,8 +6,8 @@
  * it may have to be protected with a spinlock, depending on the context.
  */
 
-#include <linux/spinlock.h>
+#include <yai/spinlock.h>
 
-#include <asm/pc-conf-reg.h>
+#include <yai/pc-conf-reg.h>
 
 DEFINE_RAW_SPINLOCK(pc_conf_lock);

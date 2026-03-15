@@ -3,7 +3,7 @@
 #define _CPUIDLE_HALTPOLL_H
 
 #ifdef CONFIG_ARCH_CPUIDLE_HALTPOLL
-#include <asm/cpuidle_haltpoll.h>
+#include <yai/cpuidle_haltpoll.h>
 #else
 static inline void arch_haltpoll_enable(unsigned int cpu)
 {

@@ -5,15 +5,15 @@
  *  Copyright (C) 1991, 1992  Linus Torvalds
  */
 
-#include <linux/delay.h>
-#include <linux/init.h>
-#include <linux/jiffies.h>
-#include <linux/kstrtox.h>
-#include <linux/percpu.h>
-#include <linux/printk.h>
-#include <linux/smp.h>
-#include <linux/stddef.h>
-#include <linux/timex.h>
+#include <yai/delay.h>
+#include <yai/init.h>
+#include <yai/jiffies.h>
+#include <yai/kstrtox.h>
+#include <yai/percpu.h>
+#include <yai/printk.h>
+#include <yai/smp.h>
+#include <yai/stddef.h>
+#include <yai/timex.h>
 
 unsigned long lpj_fine;
 unsigned long preset_lpj;

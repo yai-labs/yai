@@ -8,14 +8,14 @@
  *   Copyright (C) 2011 Red Hat, Inc., Don Zickus <dzickus@redhat.com>
  */
 
-#include <linux/smp.h>
-#include <linux/cpumask.h>
-#include <linux/delay.h>
-#include <linux/init.h>
-#include <linux/percpu.h>
+#include <yai/smp.h>
+#include <yai/cpumask.h>
+#include <yai/delay.h>
+#include <yai/init.h>
+#include <yai/percpu.h>
 
-#include <asm/apic.h>
-#include <asm/nmi.h>
+#include <yai/apic.h>
+#include <yai/nmi.h>
 
 #define SUCCESS		0
 #define FAILURE		1

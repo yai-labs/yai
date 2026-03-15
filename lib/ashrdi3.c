@@ -2,9 +2,9 @@
 /*
  */
 
-#include <linux/export.h>
+#include <yai/export.h>
 
-#include <linux/libgcc.h>
+#include <yai/libgcc.h>
 
 long long notrace __ashrdi3(long long u, word_type b)
 {

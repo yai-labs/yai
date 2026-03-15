@@ -16,10 +16,10 @@
 
 #define pr_fmt(fmt)		KBUILD_MODNAME ": " fmt
 
-#include <linux/crc8.h>
-#include <linux/export.h>
-#include <linux/module.h>
-#include <linux/printk.h>
+#include <yai/crc8.h>
+#include <yai/export.h>
+#include <yai/module.h>
+#include <yai/printk.h>
 
 /**
  * crc8_populate_msb - fill crc table for given polynomial in reverse bit order.

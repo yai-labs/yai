@@ -7,14 +7,14 @@
  *
  */
 
-#include <asm/kmsan.h>
-#include <asm/tlbflush.h>
-#include <linux/cacheflush.h>
-#include <linux/memblock.h>
-#include <linux/mm_types.h>
-#include <linux/slab.h>
-#include <linux/smp.h>
-#include <linux/stddef.h>
+#include <yai/kmsan.h>
+#include <yai/tlbflush.h>
+#include <yai/cacheflush.h>
+#include <yai/memblock.h>
+#include <yai/mm_types.h>
+#include <yai/slab.h>
+#include <yai/smp.h>
+#include <yai/stddef.h>
 
 #include "../internal.h"
 #include "kmsan.h"

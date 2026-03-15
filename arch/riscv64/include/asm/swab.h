@@ -2,11 +2,11 @@
 #ifndef _ASM_RISCV_SWAB_H
 #define _ASM_RISCV_SWAB_H
 
-#include <linux/types.h>
-#include <linux/compiler.h>
-#include <asm/cpufeature-macros.h>
-#include <asm/hwcap.h>
-#include <asm-generic/swab.h>
+#include <yai/types.h>
+#include <yai/compiler.h>
+#include <yai/cpufeature-macros.h>
+#include <yai/hwcap.h>
+#include <yai/swab.h>
 
 #if defined(CONFIG_TOOLCHAIN_HAS_ZBB) && defined(CONFIG_RISCV_ISA_ZBB) && !defined(NO_ALTERNATIVE)
 

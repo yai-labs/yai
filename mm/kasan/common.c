@@ -9,26 +9,26 @@
  *        Andrey Konovalov <andreyknvl@gmail.com>
  */
 
-#include <linux/export.h>
-#include <linux/init.h>
-#include <linux/kasan.h>
-#include <linux/kernel.h>
-#include <linux/linkage.h>
-#include <linux/memblock.h>
-#include <linux/memory.h>
-#include <linux/mm.h>
-#include <linux/module.h>
-#include <linux/printk.h>
-#include <linux/sched.h>
-#include <linux/sched/clock.h>
-#include <linux/sched/task_stack.h>
-#include <linux/slab.h>
-#include <linux/stackdepot.h>
-#include <linux/stacktrace.h>
-#include <linux/string.h>
-#include <linux/types.h>
-#include <linux/bug.h>
-#include <linux/vmalloc.h>
+#include <yai/export.h>
+#include <yai/init.h>
+#include <yai/kasan.h>
+#include <yai/kernel.h>
+#include <yai/linkage.h>
+#include <yai/memblock.h>
+#include <yai/memory.h>
+#include <yai/mm.h>
+#include <yai/module.h>
+#include <yai/printk.h>
+#include <yai/sched.h>
+#include <yai/sched/clock.h>
+#include <yai/sched/task_stack.h>
+#include <yai/slab.h>
+#include <yai/stackdepot.h>
+#include <yai/stacktrace.h>
+#include <yai/string.h>
+#include <yai/types.h>
+#include <yai/bug.h>
+#include <yai/vmalloc.h>
 
 #include "kasan.h"
 #include "../slab.h"

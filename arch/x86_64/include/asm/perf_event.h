@@ -2,7 +2,7 @@
 #ifndef _ASM_X86_PERF_EVENT_H
 #define _ASM_X86_PERF_EVENT_H
 
-#include <linux/static_call.h>
+#include <yai/static_call.h>
 
 /*
  * Performance event hw details:
@@ -718,7 +718,7 @@ extern unsigned long perf_arch_guest_misc_flags(struct pt_regs *regs);
 #define perf_arch_misc_flags(regs)	perf_arch_misc_flags(regs)
 #define perf_arch_guest_misc_flags(regs)	perf_arch_guest_misc_flags(regs)
 
-#include <asm/stacktrace.h>
+#include <yai/stacktrace.h>
 
 /*
  * We abuse bit 3 from flags to pass exact information, see

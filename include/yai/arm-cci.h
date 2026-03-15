@@ -11,7 +11,7 @@
 #include <yai/errno.h>
 #include <yai/types.h>
 
-#include <asm/arm-cci.h>
+#include <yai/arm-cci.h>
 
 struct device_node;
 

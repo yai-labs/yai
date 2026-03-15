@@ -5,20 +5,20 @@
  * Copyright (C) 2011-2013 Eric Dumazet (eric.dumazet@gmail.com)
  * Copyright (c) 2011-2014 PLUMgrid, http://plumgrid.com
  */
-#include <linux/netdevice.h>
-#include <linux/filter.h>
-#include <linux/if_vlan.h>
-#include <linux/bitfield.h>
-#include <linux/bpf.h>
-#include <linux/memory.h>
-#include <linux/sort.h>
-#include <asm/extable.h>
-#include <asm/ftrace.h>
-#include <asm/set_memory.h>
-#include <asm/nospec-branch.h>
-#include <asm/text-patching.h>
-#include <asm/unwind.h>
-#include <asm/cfi.h>
+#include <yai/netdevice.h>
+#include <yai/filter.h>
+#include <yai/if_vlan.h>
+#include <yai/bitfield.h>
+#include <yai/bpf.h>
+#include <yai/memory.h>
+#include <yai/sort.h>
+#include <yai/extable.h>
+#include <yai/ftrace.h>
+#include <yai/set_memory.h>
+#include <yai/nospec-branch.h>
+#include <yai/text-patching.h>
+#include <yai/unwind.h>
+#include <yai/cfi.h>
 
 static bool all_callee_regs_used[4] = {true, true, true, true};
 

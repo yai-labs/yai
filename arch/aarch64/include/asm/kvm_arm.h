@@ -7,10 +7,10 @@
 #ifndef __ARM64_KVM_ARM_H__
 #define __ARM64_KVM_ARM_H__
 
-#include <asm/esr.h>
-#include <asm/memory.h>
-#include <asm/sysreg.h>
-#include <asm/types.h>
+#include <yai/esr.h>
+#include <yai/memory.h>
+#include <yai/sysreg.h>
+#include <yai/types.h>
 
 /*
  * Because I'm terribly lazy and that repainting the whole of the KVM

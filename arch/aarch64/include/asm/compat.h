@@ -17,16 +17,16 @@ typedef u16		compat_ipc_pid_t;
 
 #define compat_statfs	compat_statfs
 
-#include <asm-generic/compat.h>
+#include <yai/compat.h>
 
 #ifdef CONFIG_COMPAT
 
 /*
  * Architecture specific compatibility types
  */
-#include <linux/types.h>
-#include <linux/sched.h>
-#include <linux/sched/task_stack.h>
+#include <yai/types.h>
+#include <yai/sched.h>
+#include <yai/sched/task_stack.h>
 
 #ifdef __AARCH64EB__
 #define COMPAT_UTS_MACHINE	"armv8b\0\0"

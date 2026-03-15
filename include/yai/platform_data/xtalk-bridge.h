@@ -6,7 +6,7 @@
 #ifndef PLATFORM_DATA_XTALK_BRIDGE_H
 #define PLATFORM_DATA_XTALK_BRIDGE_H
 
-#include <asm/sn/types.h>
+#include <yai/sn/types.h>
 
 struct xtalk_bridge_platform_data {
 	struct resource	mem;

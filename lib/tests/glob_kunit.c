@@ -4,8 +4,8 @@
  */
 
 #include <kunit/test.h>
-#include <linux/glob.h>
-#include <linux/module.h>
+#include <yai/glob.h>
+#include <yai/module.h>
 
 /**
  * struct glob_test_case - Test case for glob matching.

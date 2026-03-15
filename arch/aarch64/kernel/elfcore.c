@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: GPL-2.0-only
 
-#include <linux/coredump.h>
-#include <linux/elfcore.h>
-#include <linux/kernel.h>
-#include <linux/mm.h>
+#include <yai/coredump.h>
+#include <yai/elfcore.h>
+#include <yai/kernel.h>
+#include <yai/mm.h>
 
-#include <asm/cpufeature.h>
-#include <asm/mte.h>
+#include <yai/cpufeature.h>
+#include <yai/mte.h>
 
 #define for_each_mte_vma(cprm, i, m)					\
 	if (system_supports_mte())					\

@@ -22,26 +22,26 @@
  *  Integrated into 2.2.5 kernel by Tigran Aivazian <tigran@sco.com>
  *  X86_64 changes from Andi Kleen's patch merged by Jim Houston
  */
-#include <linux/spinlock.h>
-#include <linux/kdebug.h>
-#include <linux/string.h>
-#include <linux/kernel.h>
-#include <linux/ptrace.h>
-#include <linux/sched.h>
-#include <linux/delay.h>
-#include <linux/kgdb.h>
-#include <linux/smp.h>
-#include <linux/nmi.h>
-#include <linux/hw_breakpoint.h>
-#include <linux/uaccess.h>
-#include <linux/memory.h>
+#include <yai/spinlock.h>
+#include <yai/kdebug.h>
+#include <yai/string.h>
+#include <yai/kernel.h>
+#include <yai/ptrace.h>
+#include <yai/sched.h>
+#include <yai/delay.h>
+#include <yai/kgdb.h>
+#include <yai/smp.h>
+#include <yai/nmi.h>
+#include <yai/hw_breakpoint.h>
+#include <yai/uaccess.h>
+#include <yai/memory.h>
 
-#include <asm/text-patching.h>
-#include <asm/debugreg.h>
-#include <asm/apicdef.h>
-#include <asm/apic.h>
-#include <asm/nmi.h>
-#include <asm/switch_to.h>
+#include <yai/text-patching.h>
+#include <yai/debugreg.h>
+#include <yai/apicdef.h>
+#include <yai/apic.h>
+#include <yai/nmi.h>
+#include <yai/switch_to.h>
 
 struct dbg_reg_def_t dbg_reg_def[DBG_MAX_REG_NUM] =
 {

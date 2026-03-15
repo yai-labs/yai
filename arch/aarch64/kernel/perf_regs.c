@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: GPL-2.0
-#include <linux/compat.h>
-#include <linux/errno.h>
-#include <linux/kernel.h>
-#include <linux/perf_event.h>
-#include <linux/bug.h>
-#include <linux/sched/task_stack.h>
+#include <yai/compat.h>
+#include <yai/errno.h>
+#include <yai/kernel.h>
+#include <yai/perf_event.h>
+#include <yai/bug.h>
+#include <yai/sched/task_stack.h>
 
-#include <asm/perf_regs.h>
-#include <asm/ptrace.h>
+#include <yai/perf_regs.h>
+#include <yai/ptrace.h>
 
 static u64 perf_ext_regs_value(int idx)
 {

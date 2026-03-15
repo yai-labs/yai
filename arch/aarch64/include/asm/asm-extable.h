@@ -2,8 +2,8 @@
 #ifndef __ASM_ASM_EXTABLE_H
 #define __ASM_ASM_EXTABLE_H
 
-#include <linux/bits.h>
-#include <asm/gpr-num.h>
+#include <yai/bits.h>
+#include <yai/gpr-num.h>
 
 #define EX_TYPE_NONE			0
 #define EX_TYPE_BPF			1
@@ -79,7 +79,7 @@
 
 #else /* __ASSEMBLER__ */
 
-#include <linux/stringify.h>
+#include <yai/stringify.h>
 
 #define __ASM_EXTABLE_RAW(insn, fixup, type, data)	\
 	".pushsection	__ex_table, \"a\"\n"		\

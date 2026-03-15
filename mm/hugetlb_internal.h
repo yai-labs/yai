@@ -7,8 +7,8 @@
 #ifndef _LINUX_HUGETLB_INTERNAL_H
 #define _LINUX_HUGETLB_INTERNAL_H
 
-#include <linux/hugetlb.h>
-#include <linux/hugetlb_cgroup.h>
+#include <yai/hugetlb.h>
+#include <yai/hugetlb_cgroup.h>
 
 /*
  * Check if the hstate represents gigantic pages but gigantic page

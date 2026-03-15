@@ -6,11 +6,11 @@
 #ifndef __ASM_RSI_CMDS_H
 #define __ASM_RSI_CMDS_H
 
-#include <linux/arm-smccc.h>
-#include <linux/string.h>
-#include <asm/memory.h>
+#include <yai/arm-smccc.h>
+#include <yai/string.h>
+#include <yai/memory.h>
 
-#include <asm/rsi_smc.h>
+#include <yai/rsi_smc.h>
 
 #define RSI_GRANULE_SHIFT		12
 #define RSI_GRANULE_SIZE		(_AC(1, UL) << RSI_GRANULE_SHIFT)

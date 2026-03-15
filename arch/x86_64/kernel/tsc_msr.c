@@ -6,15 +6,15 @@
  * Author: Bin Gao <bin.gao@intel.com>
  */
 
-#include <linux/kernel.h>
-#include <linux/thread_info.h>
+#include <yai/kernel.h>
+#include <yai/thread_info.h>
 
-#include <asm/apic.h>
-#include <asm/cpu_device_id.h>
-#include <asm/intel-family.h>
-#include <asm/msr.h>
-#include <asm/param.h>
-#include <asm/tsc.h>
+#include <yai/apic.h>
+#include <yai/cpu_device_id.h>
+#include <yai/intel-family.h>
+#include <yai/msr.h>
+#include <yai/param.h>
+#include <yai/tsc.h>
 
 #define MAX_NUM_FREQS	16 /* 4 bits to select the frequency */
 

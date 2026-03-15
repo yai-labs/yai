@@ -4,37 +4,37 @@
  *  Copyright (C) 2001, 2002 Andi Kleen, SuSE Labs.
  *  Copyright (C) 2008-2009, Red Hat Inc., Ingo Molnar
  */
-#include <linux/sched.h>		/* test_thread_flag(), ...	*/
-#include <linux/sched/task_stack.h>	/* task_stack_*(), ...		*/
-#include <linux/kdebug.h>		/* oops_begin/end, ...		*/
-#include <linux/memblock.h>		/* max_low_pfn			*/
-#include <linux/kfence.h>		/* kfence_handle_page_fault	*/
-#include <linux/kprobes.h>		/* NOKPROBE_SYMBOL, ...		*/
-#include <linux/mmiotrace.h>		/* kmmio_handler, ...		*/
-#include <linux/perf_event.h>		/* perf_sw_event		*/
-#include <linux/hugetlb.h>		/* hstate_index_to_shift	*/
-#include <linux/context_tracking.h>	/* exception_enter(), ...	*/
-#include <linux/uaccess.h>		/* faulthandler_disabled()	*/
-#include <linux/efi.h>			/* efi_crash_gracefully_on_page_fault()*/
-#include <linux/mm_types.h>
-#include <linux/mm.h>			/* find_and_lock_vma() */
-#include <linux/vmalloc.h>
+#include <yai/sched.h>		/* test_thread_flag(), ...	*/
+#include <yai/sched/task_stack.h>	/* task_stack_*(), ...		*/
+#include <yai/kdebug.h>		/* oops_begin/end, ...		*/
+#include <yai/memblock.h>		/* max_low_pfn			*/
+#include <yai/kfence.h>		/* kfence_handle_page_fault	*/
+#include <yai/kprobes.h>		/* NOKPROBE_SYMBOL, ...		*/
+#include <yai/mmiotrace.h>		/* kmmio_handler, ...		*/
+#include <yai/perf_event.h>		/* perf_sw_event		*/
+#include <yai/hugetlb.h>		/* hstate_index_to_shift	*/
+#include <yai/context_tracking.h>	/* exception_enter(), ...	*/
+#include <yai/uaccess.h>		/* faulthandler_disabled()	*/
+#include <yai/efi.h>			/* efi_crash_gracefully_on_page_fault()*/
+#include <yai/mm_types.h>
+#include <yai/mm.h>			/* find_and_lock_vma() */
+#include <yai/vmalloc.h>
 
-#include <asm/cpufeature.h>		/* boot_cpu_has, ...		*/
-#include <asm/traps.h>			/* dotraplinkage, ...		*/
-#include <asm/fixmap.h>			/* VSYSCALL_ADDR		*/
-#include <asm/vsyscall.h>		/* emulate_vsyscall		*/
-#include <asm/vm86.h>			/* struct vm86			*/
-#include <asm/mmu_context.h>		/* vma_pkey()			*/
-#include <asm/efi.h>			/* efi_crash_gracefully_on_page_fault()*/
-#include <asm/desc.h>			/* store_idt(), ...		*/
-#include <asm/cpu_entry_area.h>		/* exception stack		*/
-#include <asm/pgtable_areas.h>		/* VMALLOC_START, ...		*/
-#include <asm/kvm_para.h>		/* kvm_handle_async_pf		*/
-#include <asm/vdso.h>			/* fixup_vdso_exception()	*/
-#include <asm/irq_stack.h>
-#include <asm/fred.h>
-#include <asm/sev.h>			/* snp_dump_hva_rmpentry()	*/
+#include <yai/cpufeature.h>		/* boot_cpu_has, ...		*/
+#include <yai/traps.h>			/* dotraplinkage, ...		*/
+#include <yai/fixmap.h>			/* VSYSCALL_ADDR		*/
+#include <yai/vsyscall.h>		/* emulate_vsyscall		*/
+#include <yai/vm86.h>			/* struct vm86			*/
+#include <yai/mmu_context.h>		/* vma_pkey()			*/
+#include <yai/efi.h>			/* efi_crash_gracefully_on_page_fault()*/
+#include <yai/desc.h>			/* store_idt(), ...		*/
+#include <yai/cpu_entry_area.h>		/* exception stack		*/
+#include <yai/pgtable_areas.h>		/* VMALLOC_START, ...		*/
+#include <yai/kvm_para.h>		/* kvm_handle_async_pf		*/
+#include <yai/vdso.h>			/* fixup_vdso_exception()	*/
+#include <yai/irq_stack.h>
+#include <yai/fred.h>
+#include <yai/sev.h>			/* snp_dump_hva_rmpentry()	*/
 
 #define CREATE_TRACE_POINTS
 #include <trace/events/exceptions.h>

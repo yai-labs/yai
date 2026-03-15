@@ -7,14 +7,14 @@
 #ifndef __ASM_ARCH_GICV3_H
 #define __ASM_ARCH_GICV3_H
 
-#include <asm/sysreg.h>
+#include <yai/sysreg.h>
 
 #ifndef __ASSEMBLER__
 
-#include <linux/irqchip/arm-gic-common.h>
-#include <linux/stringify.h>
-#include <asm/barrier.h>
-#include <asm/cacheflush.h>
+#include <yai/irqchip/arm-gic-common.h>
+#include <yai/stringify.h>
+#include <yai/barrier.h>
+#include <yai/cacheflush.h>
 
 #define read_gicreg(r)			read_sysreg_s(SYS_ ## r)
 #define write_gicreg(v, r)		write_sysreg_s(v, SYS_ ## r)

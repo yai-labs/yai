@@ -11,19 +11,19 @@
  * for more details.
  */
 
-#include <linux/acpi.h>
-#include <linux/arch_topology.h>
-#include <linux/cacheinfo.h>
-#include <linux/cpufreq.h>
-#include <linux/cpu_smt.h>
-#include <linux/init.h>
-#include <linux/percpu.h>
-#include <linux/sched/isolation.h>
-#include <linux/xarray.h>
+#include <yai/acpi.h>
+#include <yai/arch_topology.h>
+#include <yai/cacheinfo.h>
+#include <yai/cpufreq.h>
+#include <yai/cpu_smt.h>
+#include <yai/init.h>
+#include <yai/percpu.h>
+#include <yai/sched/isolation.h>
+#include <yai/xarray.h>
 
-#include <asm/cpu.h>
-#include <asm/cputype.h>
-#include <asm/topology.h>
+#include <yai/cpu.h>
+#include <yai/cputype.h>
+#include <yai/topology.h>
 
 #ifdef CONFIG_ARM64_AMU_EXTN
 #define read_corecnt()	read_sysreg_s(SYS_AMEVCNTR0_CORE_EL0)

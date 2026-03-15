@@ -8,14 +8,14 @@
 #ifndef __ASM_ENCRYPTED_STATE_H
 #define __ASM_ENCRYPTED_STATE_H
 
-#include <linux/types.h>
-#include <linux/sev-guest.h>
+#include <yai/types.h>
+#include <yai/sev-guest.h>
 
-#include <asm/insn.h>
-#include <asm/sev-common.h>
-#include <asm/coco.h>
-#include <asm/set_memory.h>
-#include <asm/svm.h>
+#include <yai/insn.h>
+#include <yai/sev-common.h>
+#include <yai/coco.h>
+#include <yai/set_memory.h>
+#include <yai/svm.h>
 
 #define GHCB_PROTOCOL_MIN	1ULL
 #define GHCB_PROTOCOL_MAX	2ULL

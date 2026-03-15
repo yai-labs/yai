@@ -5,10 +5,10 @@
  * eventually.
  */
 
-#include <linux/migrate.h>
-#include <linux/pagemap.h>
-#include <linux/rmap.h>
-#include <linux/swap.h>
+#include <yai/migrate.h>
+#include <yai/pagemap.h>
+#include <yai/rmap.h>
+#include <yai/swap.h>
 #include "internal.h"
 
 void unlock_page(struct page *page)

@@ -3,25 +3,25 @@
     Copyright (C) 2008 Glauber de Oliveira Costa, Red Hat Inc.
 */
 
-#include <linux/clocksource.h>
-#include <linux/kvm_para.h>
-#include <asm/pvclock.h>
-#include <asm/msr.h>
-#include <asm/apic.h>
-#include <linux/percpu.h>
-#include <linux/hardirq.h>
-#include <linux/cpuhotplug.h>
-#include <linux/sched.h>
-#include <linux/sched/clock.h>
-#include <linux/mm.h>
-#include <linux/slab.h>
-#include <linux/set_memory.h>
-#include <linux/cc_platform.h>
+#include <yai/clocksource.h>
+#include <yai/kvm_para.h>
+#include <yai/pvclock.h>
+#include <yai/msr.h>
+#include <yai/apic.h>
+#include <yai/percpu.h>
+#include <yai/hardirq.h>
+#include <yai/cpuhotplug.h>
+#include <yai/sched.h>
+#include <yai/sched/clock.h>
+#include <yai/mm.h>
+#include <yai/slab.h>
+#include <yai/set_memory.h>
+#include <yai/cc_platform.h>
 
-#include <asm/hypervisor.h>
-#include <asm/timer.h>
-#include <asm/x86_init.h>
-#include <asm/kvmclock.h>
+#include <yai/hypervisor.h>
+#include <yai/timer.h>
+#include <yai/x86_init.h>
+#include <yai/kvmclock.h>
 
 static int kvmclock __initdata = 1;
 static int kvmclock_vsyscall __initdata = 1;

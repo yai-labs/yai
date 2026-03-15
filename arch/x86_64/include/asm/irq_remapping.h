@@ -10,9 +10,9 @@
 #ifndef __X86_IRQ_REMAPPING_H
 #define __X86_IRQ_REMAPPING_H
 
-#include <asm/irqdomain.h>
-#include <asm/hw_irq.h>
-#include <asm/io_apic.h>
+#include <yai/irqdomain.h>
+#include <yai/hw_irq.h>
+#include <yai/io_apic.h>
 
 struct msi_msg;
 struct irq_alloc_info;

@@ -13,12 +13,12 @@
 
 #ifdef CONFIG_STACKPROTECTOR
 
-#include <asm/tsc.h>
-#include <asm/processor.h>
-#include <asm/percpu.h>
-#include <asm/desc.h>
+#include <yai/tsc.h>
+#include <yai/processor.h>
+#include <yai/percpu.h>
+#include <yai/desc.h>
 
-#include <linux/sched.h>
+#include <yai/sched.h>
 
 DECLARE_PER_CPU_CACHE_HOT(unsigned long, __stack_chk_guard);
 

@@ -5,9 +5,9 @@
  * Copyright (C) 2012 ARM Ltd.
  */
 
-#include <linux/export.h>
-#include <linux/types.h>
-#include <linux/io.h>
+#include <yai/export.h>
+#include <yai/types.h>
+#include <yai/io.h>
 
 /*
  * This generates a memcpy that works on a from/to address which is aligned to

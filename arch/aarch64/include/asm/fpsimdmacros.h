@@ -6,7 +6,7 @@
  * Author: Catalin Marinas <catalin.marinas@arm.com>
  */
 
-#include <asm/assembler.h>
+#include <yai/assembler.h>
 
 .macro fpsimd_save state, tmpnr
 	stp	q0, q1, [\state, #16 * 0]

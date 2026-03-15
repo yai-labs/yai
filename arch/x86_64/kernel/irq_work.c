@@ -5,13 +5,13 @@
  * Copyright (C) 2010 Red Hat, Inc., Peter Zijlstra
  */
 
-#include <linux/kernel.h>
-#include <linux/irq_work.h>
-#include <linux/hardirq.h>
-#include <asm/apic.h>
-#include <asm/idtentry.h>
-#include <asm/trace/irq_vectors.h>
-#include <linux/interrupt.h>
+#include <yai/kernel.h>
+#include <yai/irq_work.h>
+#include <yai/hardirq.h>
+#include <yai/apic.h>
+#include <yai/idtentry.h>
+#include <yai/trace/irq_vectors.h>
+#include <yai/interrupt.h>
 
 #ifdef CONFIG_X86_LOCAL_APIC
 DEFINE_IDTENTRY_SYSVEC(sysvec_irq_work)

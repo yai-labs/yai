@@ -3,7 +3,7 @@
 #define _LINUX_PART_STAT_H
 
 #include <yai/blkdev.h>
-#include <asm/local.h>
+#include <yai/local.h>
 
 struct disk_stats {
 	u64 nsecs[NR_STAT_GROUPS];

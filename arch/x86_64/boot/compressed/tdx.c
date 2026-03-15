@@ -8,7 +8,7 @@
 #include <vdso/limits.h>
 #include <uapi/asm/vmx.h>
 
-#include <asm/shared/tdx.h>
+#include <yai/shared/tdx.h>
 
 /* Called from __tdx_hypercall() for unrecoverable failure */
 void __tdx_hypercall_failed(void)

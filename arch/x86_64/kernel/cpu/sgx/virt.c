@@ -5,15 +5,15 @@
  * Copyright(c) 2021 Intel Corporation.
  */
 
-#include <linux/kvm_types.h>
-#include <linux/miscdevice.h>
-#include <linux/mm.h>
-#include <linux/mman.h>
-#include <linux/sched/mm.h>
-#include <linux/sched/signal.h>
-#include <linux/slab.h>
-#include <linux/xarray.h>
-#include <asm/sgx.h>
+#include <yai/kvm_types.h>
+#include <yai/miscdevice.h>
+#include <yai/mm.h>
+#include <yai/mman.h>
+#include <yai/sched/mm.h>
+#include <yai/sched/signal.h>
+#include <yai/slab.h>
+#include <yai/xarray.h>
+#include <yai/sgx.h>
 #include <uapi/asm/sgx.h>
 
 #include "encls.h"

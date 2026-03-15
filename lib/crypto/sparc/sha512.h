@@ -7,9 +7,9 @@
  * Copyright (c) 2003 Kyle McMartin <kyle@debian.org>
  */
 
-#include <asm/elf.h>
-#include <asm/opcodes.h>
-#include <asm/pstate.h>
+#include <yai/elf.h>
+#include <yai/opcodes.h>
+#include <yai/pstate.h>
 
 static __ro_after_init DEFINE_STATIC_KEY_FALSE(have_sha512_opcodes);
 

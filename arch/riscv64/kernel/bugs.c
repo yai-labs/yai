@@ -3,12 +3,12 @@
  * Copyright (C) 2024 Rivos Inc.
  */
 
-#include <linux/cpu.h>
-#include <linux/device.h>
-#include <linux/sprintf.h>
+#include <yai/cpu.h>
+#include <yai/device.h>
+#include <yai/sprintf.h>
 
-#include <asm/bugs.h>
-#include <asm/vendor_extensions/thead.h>
+#include <yai/bugs.h>
+#include <yai/vendor_extensions/thead.h>
 
 static enum mitigation_state ghostwrite_state;
 

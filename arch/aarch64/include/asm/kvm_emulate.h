@@ -11,17 +11,17 @@
 #ifndef __ARM64_KVM_EMULATE_H__
 #define __ARM64_KVM_EMULATE_H__
 
-#include <linux/bitfield.h>
-#include <linux/kvm_host.h>
+#include <yai/bitfield.h>
+#include <yai/kvm_host.h>
 
-#include <asm/debug-monitors.h>
-#include <asm/esr.h>
-#include <asm/kvm_arm.h>
-#include <asm/kvm_hyp.h>
-#include <asm/kvm_nested.h>
-#include <asm/ptrace.h>
-#include <asm/cputype.h>
-#include <asm/virt.h>
+#include <yai/debug-monitors.h>
+#include <yai/esr.h>
+#include <yai/kvm_arm.h>
+#include <yai/kvm_hyp.h>
+#include <yai/kvm_nested.h>
+#include <yai/ptrace.h>
+#include <yai/cputype.h>
+#include <yai/virt.h>
 
 #define CURRENT_EL_SP_EL0_VECTOR	0x0
 #define CURRENT_EL_SP_ELx_VECTOR	0x200

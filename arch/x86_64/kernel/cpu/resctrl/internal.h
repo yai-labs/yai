@@ -2,7 +2,7 @@
 #ifndef _ASM_X86_RESCTRL_INTERNAL_H
 #define _ASM_X86_RESCTRL_INTERNAL_H
 
-#include <linux/resctrl.h>
+#include <yai/resctrl.h>
 
 #define L3_QOS_CDP_ENABLE		0x01ULL
 

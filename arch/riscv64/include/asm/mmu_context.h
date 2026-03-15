@@ -7,11 +7,11 @@
 #ifndef _ASM_RISCV_MMU_CONTEXT_H
 #define _ASM_RISCV_MMU_CONTEXT_H
 
-#include <linux/mm_types.h>
-#include <asm-generic/mm_hooks.h>
+#include <yai/mm_types.h>
+#include <yai/mm_hooks.h>
 
-#include <linux/mm.h>
-#include <linux/sched.h>
+#include <yai/mm.h>
+#include <yai/sched.h>
 
 void switch_mm(struct mm_struct *prev, struct mm_struct *next,
 	struct task_struct *task);
@@ -55,6 +55,6 @@ static inline void deactivate_mm(struct task_struct *tsk,
 	shstk_release(tsk);
 }
 
-#include <asm-generic/mmu_context.h>
+#include <yai/mmu_context.h>
 
 #endif /* _ASM_RISCV_MMU_CONTEXT_H */

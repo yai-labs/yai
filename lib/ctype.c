@@ -5,9 +5,9 @@
  *  Copyright (C) 1991, 1992  Linus Torvalds
  */
 
-#include <linux/ctype.h>
-#include <linux/compiler.h>
-#include <linux/export.h>
+#include <yai/ctype.h>
+#include <yai/compiler.h>
+#include <yai/export.h>
 
 const unsigned char _ctype[] = {
 _C,_C,_C,_C,_C,_C,_C,_C,				/* 0-7 */

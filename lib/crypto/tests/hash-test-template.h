@@ -7,7 +7,7 @@
  */
 #include <kunit/run-in-irq-context.h>
 #include <kunit/test.h>
-#include <linux/vmalloc.h>
+#include <yai/vmalloc.h>
 
 /* test_buf is a guarded buffer, i.e. &test_buf[TEST_BUF_LEN] is not mapped. */
 #define TEST_BUF_LEN 16384
@@ -20,7 +20,7 @@ static u64 random_seed;
 /*
  * This is a simple linear congruential generator.  It is used only for testing,
  * which does not require cryptographically secure random numbers.  A hard-coded
- * algorithm is used instead of <linux/prandom.h> so that it matches the
+ * algorithm is used instead of <yai/prandom.h> so that it matches the
  * algorithm used by the test vector generation script.  This allows the input
  * data in random test vectors to be concisely stored as just the seed.
  */

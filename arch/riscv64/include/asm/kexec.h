@@ -7,7 +7,7 @@
 #ifndef _RISCV_KEXEC_H
 #define _RISCV_KEXEC_H
 
-#include <asm/page.h>    /* For PAGE_SIZE */
+#include <yai/page.h>    /* For PAGE_SIZE */
 
 /* Maximum physical address we can use pages from */
 #define KEXEC_SOURCE_MEMORY_LIMIT (-1UL)

@@ -10,21 +10,21 @@
 
 #ifndef __ASSEMBLER__
 
-#include <linux/compiler.h>
-#include <linux/sched.h>
-#include <linux/sched/hotplug.h>
-#include <linux/mm_types.h>
-#include <linux/pgtable.h>
-#include <linux/pkeys.h>
+#include <yai/compiler.h>
+#include <yai/sched.h>
+#include <yai/sched/hotplug.h>
+#include <yai/mm_types.h>
+#include <yai/pgtable.h>
+#include <yai/pkeys.h>
 
-#include <asm/cacheflush.h>
-#include <asm/cpufeature.h>
-#include <asm/daifflags.h>
-#include <asm/gcs.h>
-#include <asm/proc-fns.h>
-#include <asm/cputype.h>
-#include <asm/sysreg.h>
-#include <asm/tlbflush.h>
+#include <yai/cacheflush.h>
+#include <yai/cpufeature.h>
+#include <yai/daifflags.h>
+#include <yai/gcs.h>
+#include <yai/proc-fns.h>
+#include <yai/cputype.h>
+#include <yai/sysreg.h>
+#include <yai/tlbflush.h>
 
 extern bool rodata_full;
 
@@ -320,7 +320,7 @@ static inline void deactivate_mm(struct task_struct *tsk,
 }
 
 
-#include <asm-generic/mmu_context.h>
+#include <yai/mmu_context.h>
 
 #endif /* !__ASSEMBLER__ */
 

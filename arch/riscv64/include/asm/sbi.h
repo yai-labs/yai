@@ -7,9 +7,9 @@
 #ifndef _ASM_RISCV_SBI_H
 #define _ASM_RISCV_SBI_H
 
-#include <linux/types.h>
-#include <linux/cpumask.h>
-#include <linux/jump_label.h>
+#include <yai/types.h>
+#include <yai/cpumask.h>
+#include <yai/jump_label.h>
 
 #ifdef CONFIG_RISCV_SBI
 enum sbi_ext_id {

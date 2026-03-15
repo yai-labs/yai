@@ -4,12 +4,12 @@
  * Documentation/ABI/testing/sysfs-devices-system-cpu
  */
 
-#include <linux/cacheinfo.h>
-#include <linux/capability.h>
-#include <linux/pci.h>
-#include <linux/sysfs.h>
+#include <yai/cacheinfo.h>
+#include <yai/capability.h>
+#include <yai/pci.h>
+#include <yai/sysfs.h>
 
-#include <asm/amd/nb.h>
+#include <yai/amd/nb.h>
 
 #include "cpu.h"
 

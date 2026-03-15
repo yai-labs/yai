@@ -8,12 +8,12 @@
 /*
  * The msync() system call.
  */
-#include <linux/fs.h>
-#include <linux/mm.h>
-#include <linux/mman.h>
-#include <linux/file.h>
-#include <linux/syscalls.h>
-#include <linux/sched.h>
+#include <yai/fs.h>
+#include <yai/mm.h>
+#include <yai/mman.h>
+#include <yai/file.h>
+#include <yai/syscalls.h>
+#include <yai/sched.h>
 
 /*
  * MS_SYNC syncs the entire file - including mappings.

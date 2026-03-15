@@ -5,11 +5,11 @@
 
 #define pr_fmt(fmt) "damon-stat: " fmt
 
-#include <linux/damon.h>
-#include <linux/init.h>
-#include <linux/kernel.h>
-#include <linux/module.h>
-#include <linux/sort.h>
+#include <yai/damon.h>
+#include <yai/init.h>
+#include <yai/kernel.h>
+#include <yai/module.h>
+#include <yai/sort.h>
 
 #ifdef MODULE_PARAM_PREFIX
 #undef MODULE_PARAM_PREFIX

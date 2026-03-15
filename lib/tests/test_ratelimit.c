@@ -2,10 +2,10 @@
 
 #include <kunit/test.h>
 
-#include <linux/ratelimit.h>
-#include <linux/module.h>
-#include <linux/kthread.h>
-#include <linux/cpumask.h>
+#include <yai/ratelimit.h>
+#include <yai/module.h>
+#include <yai/kthread.h>
+#include <yai/cpumask.h>
 
 /* a simple boot-time regression test */
 

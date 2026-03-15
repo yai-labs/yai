@@ -5,10 +5,10 @@
 #ifndef __ASM_FUTEX_H
 #define __ASM_FUTEX_H
 
-#include <linux/futex.h>
-#include <linux/uaccess.h>
+#include <yai/futex.h>
+#include <yai/uaccess.h>
 
-#include <asm/errno.h>
+#include <yai/errno.h>
 
 #define FUTEX_MAX_LOOPS	128 /* What's the largest number you can think of? */
 

@@ -69,16 +69,16 @@
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
-#include <linux/bits.h>
-#include <linux/err.h>
-#include <linux/file.h>
-#include <linux/io.h>
-#include <linux/kexec_handover.h>
-#include <linux/kho/abi/memfd.h>
-#include <linux/liveupdate.h>
-#include <linux/shmem_fs.h>
-#include <linux/vmalloc.h>
-#include <linux/memfd.h>
+#include <yai/bits.h>
+#include <yai/err.h>
+#include <yai/file.h>
+#include <yai/io.h>
+#include <yai/kexec_handover.h>
+#include <yai/kho/abi/memfd.h>
+#include <yai/liveupdate.h>
+#include <yai/shmem_fs.h>
+#include <yai/vmalloc.h>
+#include <yai/memfd.h>
 #include "internal.h"
 
 static int memfd_luo_preserve_folios(struct file *file,

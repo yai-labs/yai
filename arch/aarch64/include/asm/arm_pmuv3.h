@@ -6,10 +6,10 @@
 #ifndef __ASM_PMUV3_H
 #define __ASM_PMUV3_H
 
-#include <asm/kvm_host.h>
+#include <yai/kvm_host.h>
 
-#include <asm/cpufeature.h>
-#include <asm/sysreg.h>
+#include <yai/cpufeature.h>
+#include <yai/sysreg.h>
 
 #define RETURN_READ_PMEVCNTRN(n) \
 	return read_sysreg(pmevcntr##n##_el0)

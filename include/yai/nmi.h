@@ -6,11 +6,11 @@
 #define YAI_NMI_H
 
 #include <yai/sched.h>
-#include <asm/irq.h>
+#include <yai/irq.h>
 
 /* Arch specific watchdogs might need to share extra watchdog-related APIs. */
 #if defined(CONFIG_HARDLOCKUP_DETECTOR_ARCH) || defined(CONFIG_HARDLOCKUP_DETECTOR_SPARC64)
-#include <asm/nmi.h>
+#include <yai/nmi.h>
 #endif
 
 #ifdef CONFIG_LOCKUP_DETECTOR
@@ -218,7 +218,7 @@ static inline void watchdog_update_hrtimer_threshold(u64 period) { }
 #endif
 
 #ifdef CONFIG_HAVE_ACPI_APEI_NMI
-#include <asm/nmi.h>
+#include <yai/nmi.h>
 #endif
 
 #ifdef CONFIG_NMI_CHECK_CPU

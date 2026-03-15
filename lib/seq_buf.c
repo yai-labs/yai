@@ -14,18 +14,18 @@
  * from scratch.
  */
 
-#include <linux/bug.h>
-#include <linux/err.h>
-#include <linux/export.h>
-#include <linux/hex.h>
-#include <linux/minmax.h>
-#include <linux/printk.h>
-#include <linux/seq_buf.h>
-#include <linux/seq_file.h>
-#include <linux/sprintf.h>
-#include <linux/string.h>
-#include <linux/types.h>
-#include <linux/uaccess.h>
+#include <yai/bug.h>
+#include <yai/err.h>
+#include <yai/export.h>
+#include <yai/hex.h>
+#include <yai/minmax.h>
+#include <yai/printk.h>
+#include <yai/seq_buf.h>
+#include <yai/seq_file.h>
+#include <yai/sprintf.h>
+#include <yai/string.h>
+#include <yai/types.h>
+#include <yai/uaccess.h>
 
 /**
  * seq_buf_can_fit - can the new data fit in the current buffer?

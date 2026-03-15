@@ -4,7 +4,7 @@
 
 #include <yai/seq_buf.h>
 
-#include <asm/page.h>
+#include <yai/page.h>
 
 /*
  * Trace sequences are used to allow a function to call several other functions

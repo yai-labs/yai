@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: GPL-2.0
-#include <linux/kernel.h>
-#include <linux/export.h>
-#include <linux/uaccess.h>
-#include <linux/mm.h>
-#include <linux/bitops.h>
+#include <yai/kernel.h>
+#include <yai/export.h>
+#include <yai/uaccess.h>
+#include <yai/mm.h>
+#include <yai/bitops.h>
 
-#include <asm/word-at-a-time.h>
+#include <yai/word-at-a-time.h>
 
 /*
  * Do a strnlen, return length of string *with* final '\0'.

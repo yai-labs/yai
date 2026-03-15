@@ -6,17 +6,17 @@
 #ifndef __ASM_ALTERNATIVE_H
 #define __ASM_ALTERNATIVE_H
 
-#include <asm/alternative-macros.h>
+#include <yai/alternative-macros.h>
 
 #ifndef __ASSEMBLER__
 
 #ifdef CONFIG_RISCV_ALTERNATIVE
 
-#include <linux/init.h>
-#include <linux/kernel.h>
-#include <linux/types.h>
-#include <linux/stddef.h>
-#include <asm/hwcap.h>
+#include <yai/init.h>
+#include <yai/kernel.h>
+#include <yai/types.h>
+#include <yai/stddef.h>
+#include <yai/hwcap.h>
 
 #define PATCH_ID_CPUFEATURE_ID(p)		lower_16_bits(p)
 #define PATCH_ID_CPUFEATURE_VALUE(p)		upper_16_bits(p)

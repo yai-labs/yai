@@ -5,30 +5,30 @@
  * Userspace programs can register with the driver to mirror their own address
  * space and can use the device to read/write any valid virtual address.
  */
-#include <linux/init.h>
-#include <linux/fs.h>
-#include <linux/mm.h>
-#include <linux/module.h>
-#include <linux/kernel.h>
-#include <linux/cdev.h>
-#include <linux/device.h>
-#include <linux/memremap.h>
-#include <linux/mutex.h>
-#include <linux/rwsem.h>
-#include <linux/sched.h>
-#include <linux/slab.h>
-#include <linux/highmem.h>
-#include <linux/delay.h>
-#include <linux/pagemap.h>
-#include <linux/hmm.h>
-#include <linux/vmalloc.h>
-#include <linux/swap.h>
-#include <linux/swapops.h>
-#include <linux/sched/mm.h>
-#include <linux/platform_device.h>
-#include <linux/rmap.h>
-#include <linux/mmu_notifier.h>
-#include <linux/migrate.h>
+#include <yai/init.h>
+#include <yai/fs.h>
+#include <yai/mm.h>
+#include <yai/module.h>
+#include <yai/kernel.h>
+#include <yai/cdev.h>
+#include <yai/device.h>
+#include <yai/memremap.h>
+#include <yai/mutex.h>
+#include <yai/rwsem.h>
+#include <yai/sched.h>
+#include <yai/slab.h>
+#include <yai/highmem.h>
+#include <yai/delay.h>
+#include <yai/pagemap.h>
+#include <yai/hmm.h>
+#include <yai/vmalloc.h>
+#include <yai/swap.h>
+#include <yai/swapops.h>
+#include <yai/sched/mm.h>
+#include <yai/platform_device.h>
+#include <yai/rmap.h>
+#include <yai/mmu_notifier.h>
+#include <yai/migrate.h>
 
 #include "test_hmm_uapi.h"
 

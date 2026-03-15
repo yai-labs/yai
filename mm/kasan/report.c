@@ -11,27 +11,27 @@
 
 #include <kunit/test.h>
 #include <kunit/visibility.h>
-#include <linux/bitops.h>
-#include <linux/ftrace.h>
-#include <linux/init.h>
-#include <linux/kernel.h>
-#include <linux/lockdep.h>
-#include <linux/mm.h>
-#include <linux/printk.h>
-#include <linux/sched.h>
-#include <linux/slab.h>
-#include <linux/stackdepot.h>
-#include <linux/stacktrace.h>
-#include <linux/string.h>
-#include <linux/types.h>
-#include <linux/vmalloc.h>
-#include <linux/kasan.h>
-#include <linux/module.h>
-#include <linux/sched/task_stack.h>
-#include <linux/uaccess.h>
+#include <yai/bitops.h>
+#include <yai/ftrace.h>
+#include <yai/init.h>
+#include <yai/kernel.h>
+#include <yai/lockdep.h>
+#include <yai/mm.h>
+#include <yai/printk.h>
+#include <yai/sched.h>
+#include <yai/slab.h>
+#include <yai/stackdepot.h>
+#include <yai/stacktrace.h>
+#include <yai/string.h>
+#include <yai/types.h>
+#include <yai/vmalloc.h>
+#include <yai/kasan.h>
+#include <yai/module.h>
+#include <yai/sched/task_stack.h>
+#include <yai/uaccess.h>
 #include <trace/events/error_report.h>
 
-#include <asm/sections.h>
+#include <yai/sections.h>
 
 #include "kasan.h"
 #include "../slab.h"

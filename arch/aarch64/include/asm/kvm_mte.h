@@ -7,7 +7,7 @@
 
 #ifdef __ASSEMBLER__
 
-#include <asm/sysreg.h>
+#include <yai/sysreg.h>
 
 #ifdef CONFIG_ARM64_MTE
 

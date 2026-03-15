@@ -3,10 +3,10 @@
  * Copyright (C) 2021 Intel Corporation
  * Author: Johannes Berg <johannes@sipsolutions.net>
  */
-#include <linux/types.h>
-#include <linux/slab.h>
-#include <linux/logic_iomem.h>
-#include <asm/io.h>
+#include <yai/types.h>
+#include <yai/slab.h>
+#include <yai/logic_iomem.h>
+#include <yai/io.h>
 
 struct logic_iomem_region {
 	const struct resource *res;

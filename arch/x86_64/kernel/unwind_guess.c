@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: GPL-2.0-only
-#include <linux/sched.h>
-#include <linux/ftrace.h>
-#include <asm/ptrace.h>
-#include <asm/bitops.h>
-#include <asm/stacktrace.h>
-#include <asm/unwind.h>
+#include <yai/sched.h>
+#include <yai/ftrace.h>
+#include <yai/ptrace.h>
+#include <yai/bitops.h>
+#include <yai/stacktrace.h>
+#include <yai/unwind.h>
 
 unsigned long unwind_get_return_address(struct unwind_state *state)
 {

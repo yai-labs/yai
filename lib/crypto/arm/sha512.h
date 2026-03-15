@@ -4,8 +4,8 @@
  *
  * Copyright 2025 Google LLC
  */
-#include <asm/neon.h>
-#include <asm/simd.h>
+#include <yai/neon.h>
+#include <yai/simd.h>
 
 static __ro_after_init DEFINE_STATIC_KEY_FALSE(have_neon);
 

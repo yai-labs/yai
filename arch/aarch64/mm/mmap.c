@@ -5,13 +5,13 @@
  * Copyright (C) 2012 ARM Ltd.
  */
 
-#include <linux/io.h>
-#include <linux/memblock.h>
-#include <linux/mm.h>
-#include <linux/types.h>
+#include <yai/io.h>
+#include <yai/memblock.h>
+#include <yai/mm.h>
+#include <yai/types.h>
 
-#include <asm/cpufeature.h>
-#include <asm/page.h>
+#include <yai/cpufeature.h>
+#include <yai/page.h>
 
 static pgprot_t protection_map[16] __ro_after_init = {
 	[VM_NONE]					= PAGE_NONE,

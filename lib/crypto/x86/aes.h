@@ -5,7 +5,7 @@
  * Copyright 2026 Google LLC
  */
 
-#include <asm/fpu/api.h>
+#include <yai/fpu/api.h>
 
 static __ro_after_init DEFINE_STATIC_KEY_FALSE(have_aes);
 

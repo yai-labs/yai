@@ -4,8 +4,8 @@
 
 #ifdef __ASSEMBLER__
 
-#include <asm/asm-offsets.h>
-#include <asm/sysreg.h>
+#include <yai/asm-offsets.h>
+#include <yai/sysreg.h>
 
 #ifdef CONFIG_SHADOW_CALL_STACK
 	scs_sp	.req	x18
@@ -29,8 +29,8 @@
 
 #else
 
-#include <linux/scs.h>
-#include <asm/cpufeature.h>
+#include <yai/scs.h>
+#include <yai/cpufeature.h>
 
 #ifdef CONFIG_UNWIND_PATCH_PAC_INTO_SCS
 static inline void dynamic_scs_init(void)

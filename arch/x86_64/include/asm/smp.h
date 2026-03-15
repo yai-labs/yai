@@ -2,10 +2,10 @@
 #ifndef _ASM_X86_SMP_H
 #define _ASM_X86_SMP_H
 #ifndef __ASSEMBLER__
-#include <linux/cpumask.h>
-#include <linux/thread_info.h>
+#include <yai/cpumask.h>
+#include <yai/thread_info.h>
 
-#include <asm/cpumask.h>
+#include <yai/cpumask.h>
 
 DECLARE_PER_CPU_CACHE_HOT(int, cpu_number);
 

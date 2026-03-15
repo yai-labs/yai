@@ -16,30 +16,30 @@
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
-#include <linux/export.h>
-#include <linux/mm.h>
-#include <linux/sched/mm.h>
-#include <linux/mman.h>
-#include <linux/swap.h>
-#include <linux/file.h>
-#include <linux/highmem.h>
-#include <linux/pagemap.h>
-#include <linux/slab.h>
-#include <linux/vmalloc.h>
-#include <linux/backing-dev.h>
-#include <linux/compiler.h>
-#include <linux/mount.h>
-#include <linux/personality.h>
-#include <linux/security.h>
-#include <linux/syscalls.h>
-#include <linux/audit.h>
-#include <linux/printk.h>
+#include <yai/export.h>
+#include <yai/mm.h>
+#include <yai/sched/mm.h>
+#include <yai/mman.h>
+#include <yai/swap.h>
+#include <yai/file.h>
+#include <yai/highmem.h>
+#include <yai/pagemap.h>
+#include <yai/slab.h>
+#include <yai/vmalloc.h>
+#include <yai/backing-dev.h>
+#include <yai/compiler.h>
+#include <yai/mount.h>
+#include <yai/personality.h>
+#include <yai/security.h>
+#include <yai/syscalls.h>
+#include <yai/audit.h>
+#include <yai/printk.h>
 
-#include <linux/uaccess.h>
-#include <linux/uio.h>
-#include <asm/tlb.h>
-#include <asm/tlbflush.h>
-#include <asm/mmu_context.h>
+#include <yai/uaccess.h>
+#include <yai/uio.h>
+#include <yai/tlb.h>
+#include <yai/tlbflush.h>
+#include <yai/mmu_context.h>
 #include "internal.h"
 
 unsigned long highest_memmap_pfn;

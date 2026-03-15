@@ -9,45 +9,45 @@
  *   coalescing source files to amortize header inclusion
  *   cost. )
  */
-#include <linux/sched/clock.h>
-#include <linux/sched/cputime.h>
-#include <linux/sched/debug.h>
-#include <linux/sched/isolation.h>
-#include <linux/sched/loadavg.h>
-#include <linux/sched/nohz.h>
-#include <linux/sched/mm.h>
-#include <linux/sched/rseq_api.h>
-#include <linux/sched/task_stack.h>
+#include <yai/sched/clock.h>
+#include <yai/sched/cputime.h>
+#include <yai/sched/debug.h>
+#include <yai/sched/isolation.h>
+#include <yai/sched/loadavg.h>
+#include <yai/sched/nohz.h>
+#include <yai/sched/mm.h>
+#include <yai/sched/rseq_api.h>
+#include <yai/sched/task_stack.h>
 
-#include <linux/cpufreq.h>
-#include <linux/cpumask_api.h>
-#include <linux/cpuset.h>
-#include <linux/ctype.h>
-#include <linux/debugfs.h>
-#include <linux/energy_model.h>
-#include <linux/hashtable_api.h>
-#include <linux/irq.h>
-#include <linux/kobject_api.h>
-#include <linux/membarrier.h>
-#include <linux/mempolicy.h>
-#include <linux/nmi.h>
-#include <linux/nospec.h>
-#include <linux/proc_fs.h>
-#include <linux/psi.h>
-#include <linux/ptrace_api.h>
-#include <linux/sched_clock.h>
-#include <linux/security.h>
-#include <linux/spinlock_api.h>
-#include <linux/swait_api.h>
-#include <linux/timex.h>
-#include <linux/utsname.h>
-#include <linux/wait_api.h>
-#include <linux/workqueue_api.h>
+#include <yai/cpufreq.h>
+#include <yai/cpumask_api.h>
+#include <yai/cpuset.h>
+#include <yai/ctype.h>
+#include <yai/debugfs.h>
+#include <yai/energy_model.h>
+#include <yai/hashtable_api.h>
+#include <yai/irq.h>
+#include <yai/kobject_api.h>
+#include <yai/membarrier.h>
+#include <yai/mempolicy.h>
+#include <yai/nmi.h>
+#include <yai/nospec.h>
+#include <yai/proc_fs.h>
+#include <yai/psi.h>
+#include <yai/ptrace_api.h>
+#include <yai/sched_clock.h>
+#include <yai/security.h>
+#include <yai/spinlock_api.h>
+#include <yai/swait_api.h>
+#include <yai/timex.h>
+#include <yai/utsname.h>
+#include <yai/wait_api.h>
+#include <yai/workqueue_api.h>
 
-#include <uapi/linux/prctl.h>
-#include <uapi/linux/sched/types.h>
+#include <yai/prctl.h>
+#include <yai/sched/types.h>
 
-#include <asm/switch_to.h>
+#include <yai/switch_to.h>
 
 #include "sched.h"
 #include "sched-pelt.h"

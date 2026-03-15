@@ -7,7 +7,7 @@
  */
 #include <kunit/test.h>
 
-#include <linux/hashtable.h>
+#include <yai/hashtable.h>
 
 struct hashtable_test_entry {
 	int key;

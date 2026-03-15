@@ -29,7 +29,7 @@
  * not a legacy or ISA standard.
  */
 #ifdef CONFIG_ATA_NONSTANDARD
-#include <asm/libata-portmap.h>
+#include <yai/libata-portmap.h>
 #else
 #define ATA_PRIMARY_IRQ(dev)	14
 #define ATA_SECONDARY_IRQ(dev)	15

@@ -8,7 +8,7 @@
 #ifndef _ARM_KERNEL_KPROBES_ARM64_H
 #define _ARM_KERNEL_KPROBES_ARM64_H
 
-#include <asm/kprobes.h>
+#include <yai/kprobes.h>
 
 /*
  * ARM strongly recommends a limit of 128 bytes between LoadExcl and

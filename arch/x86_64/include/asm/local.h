@@ -2,10 +2,10 @@
 #ifndef _ASM_X86_LOCAL_H
 #define _ASM_X86_LOCAL_H
 
-#include <linux/percpu.h>
+#include <yai/percpu.h>
 
-#include <linux/atomic.h>
-#include <asm/asm.h>
+#include <yai/atomic.h>
+#include <yai/asm.h>
 
 typedef struct {
 	atomic_long_t a;

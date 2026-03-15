@@ -5,8 +5,8 @@
 
 #include <acpi/apei.h>
 
-#include <asm/mce.h>
-#include <asm/tlbflush.h>
+#include <yai/mce.h>
+#include <yai/tlbflush.h>
 
 int arch_apei_enable_cmcff(struct acpi_hest_header *hest_hdr, void *data)
 {

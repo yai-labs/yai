@@ -5,7 +5,7 @@
 #ifndef __ASM_PGTABLE_HWDEF_H
 #define __ASM_PGTABLE_HWDEF_H
 
-#include <asm/memory.h>
+#include <yai/memory.h>
 
 #define PTDESC_ORDER 3
 

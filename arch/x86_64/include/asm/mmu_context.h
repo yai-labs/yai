@@ -2,17 +2,17 @@
 #ifndef _ASM_X86_MMU_CONTEXT_H
 #define _ASM_X86_MMU_CONTEXT_H
 
-#include <linux/atomic.h>
-#include <linux/mm_types.h>
-#include <linux/pkeys.h>
+#include <yai/atomic.h>
+#include <yai/mm_types.h>
+#include <yai/pkeys.h>
 
 #include <trace/events/tlb.h>
 
-#include <asm/tlbflush.h>
-#include <asm/paravirt.h>
-#include <asm/debugreg.h>
-#include <asm/gsseg.h>
-#include <asm/desc.h>
+#include <yai/tlbflush.h>
+#include <yai/paravirt.h>
+#include <yai/debugreg.h>
+#include <yai/gsseg.h>
+#include <yai/desc.h>
 
 extern atomic64_t last_mm_ctx_id;
 
@@ -278,7 +278,7 @@ static inline bool arch_vma_access_permitted(struct vm_area_struct *vma,
 
 unsigned long __get_current_cr3_fast(void);
 
-#include <asm-generic/mmu_context.h>
+#include <yai/mmu_context.h>
 
 extern struct mm_struct *use_temporary_mm(struct mm_struct *temp_mm);
 extern void unuse_temporary_mm(struct mm_struct *prev_mm);

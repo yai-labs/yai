@@ -3,10 +3,10 @@
 #ifndef __ASM_CPUCAPS_H
 #define __ASM_CPUCAPS_H
 
-#include <asm/cpucap-defs.h>
+#include <yai/cpucap-defs.h>
 
 #ifndef __ASSEMBLER__
-#include <linux/types.h>
+#include <yai/types.h>
 /*
  * Check whether a cpucap is possible at compiletime.
  */

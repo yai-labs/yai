@@ -5,13 +5,13 @@
  * Copyright (c) 2020 Western Digital Corporation or its affiliates.
  */
 
-#include <linux/init.h>
-#include <linux/mm.h>
-#include <linux/sched/task_stack.h>
-#include <asm/cpu_ops.h>
-#include <asm/cpu_ops_sbi.h>
-#include <asm/sbi.h>
-#include <asm/smp.h>
+#include <yai/init.h>
+#include <yai/mm.h>
+#include <yai/sched/task_stack.h>
+#include <yai/cpu_ops.h>
+#include <yai/cpu_ops_sbi.h>
+#include <yai/sbi.h>
+#include <yai/smp.h>
 
 extern char secondary_start_sbi[];
 const struct cpu_operations cpu_ops_sbi;

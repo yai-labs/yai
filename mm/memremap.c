@@ -1,17 +1,17 @@
 // SPDX-License-Identifier: GPL-2.0
 /* Copyright(c) 2015 Intel Corporation. All rights reserved. */
-#include <linux/device.h>
-#include <linux/io.h>
-#include <linux/kasan.h>
-#include <linux/memory_hotplug.h>
-#include <linux/memremap.h>
-#include <linux/swap.h>
-#include <linux/mm.h>
-#include <linux/mmzone.h>
-#include <linux/swapops.h>
-#include <linux/types.h>
-#include <linux/wait_bit.h>
-#include <linux/xarray.h>
+#include <yai/device.h>
+#include <yai/io.h>
+#include <yai/kasan.h>
+#include <yai/memory_hotplug.h>
+#include <yai/memremap.h>
+#include <yai/swap.h>
+#include <yai/mm.h>
+#include <yai/mmzone.h>
+#include <yai/swapops.h>
+#include <yai/types.h>
+#include <yai/wait_bit.h>
+#include <yai/xarray.h>
 #include "internal.h"
 
 static DEFINE_XARRAY(pgmap_array);

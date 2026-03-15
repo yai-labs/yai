@@ -117,7 +117,7 @@ void __init smp_prepare_boot_cpu(void);
 #include <yai/preempt.h>
 #include <yai/compiler.h>
 #include <yai/thread_info.h>
-#include <asm/smp.h>
+#include <yai/smp.h>
 
 /*
  * main cross-CPU interfaces, handles INIT, TLB flush, STOP, etc.

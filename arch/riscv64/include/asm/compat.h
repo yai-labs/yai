@@ -7,9 +7,9 @@
 /*
  * Architecture specific compatibility types
  */
-#include <linux/types.h>
-#include <linux/sched.h>
-#include <asm-generic/compat.h>
+#include <yai/types.h>
+#include <yai/sched.h>
+#include <yai/compat.h>
 
 static inline int is_compat_task(void)
 {

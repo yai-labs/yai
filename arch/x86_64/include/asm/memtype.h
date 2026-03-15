@@ -2,8 +2,8 @@
 #ifndef _ASM_X86_MEMTYPE_H
 #define _ASM_X86_MEMTYPE_H
 
-#include <linux/types.h>
-#include <asm/pgtable_types.h>
+#include <yai/types.h>
+#include <yai/pgtable_types.h>
 
 extern bool pat_enabled(void);
 extern void pat_bp_init(void);

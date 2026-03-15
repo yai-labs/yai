@@ -4,10 +4,10 @@
  * Copyright (C) 2017 Linaro Ltd. <ard.biesheuvel@linaro.org>
  */
 
-#include <linux/raid/pq.h>
+#include <yai/raid/pq.h>
 
 #ifdef __KERNEL__
-#include <asm/simd.h>
+#include <yai/simd.h>
 #include "neon.h"
 #else
 #define scoped_ksimd()

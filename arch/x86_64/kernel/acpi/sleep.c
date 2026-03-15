@@ -6,20 +6,20 @@
  *  Copyright (C) 2001-2003 Pavel Machek <pavel@ucw.cz>
  */
 
-#include <linux/acpi.h>
-#include <linux/memblock.h>
-#include <linux/dmi.h>
-#include <linux/cpumask.h>
-#include <linux/pgtable.h>
-#include <asm/segment.h>
-#include <asm/desc.h>
-#include <asm/cacheflush.h>
-#include <asm/realmode.h>
-#include <asm/hypervisor.h>
-#include <asm/msr.h>
-#include <asm/smp.h>
+#include <yai/acpi.h>
+#include <yai/memblock.h>
+#include <yai/dmi.h>
+#include <yai/cpumask.h>
+#include <yai/pgtable.h>
+#include <yai/segment.h>
+#include <yai/desc.h>
+#include <yai/cacheflush.h>
+#include <yai/realmode.h>
+#include <yai/hypervisor.h>
+#include <yai/msr.h>
+#include <yai/smp.h>
 
-#include <linux/ftrace.h>
+#include <yai/ftrace.h>
 #include "../../realmode/rm/wakeup.h"
 #include "sleep.h"
 

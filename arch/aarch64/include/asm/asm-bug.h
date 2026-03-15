@@ -5,7 +5,7 @@
  */
 #define __ASM_ASM_BUG_H
 
-#include <asm/brk-imm.h>
+#include <yai/brk-imm.h>
 
 #ifdef CONFIG_DEBUG_BUGVERBOSE
 #define _BUGVERBOSE_LOCATION(file, line) __BUGVERBOSE_LOCATION(file, line)

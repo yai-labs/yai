@@ -6,12 +6,12 @@
  * Ricardo Neri <ricardo.neri-calderon@linux.intel.com>
  */
 
-#include <linux/uaccess.h>
-#include <asm/umip.h>
-#include <asm/traps.h>
-#include <asm/insn.h>
-#include <asm/insn-eval.h>
-#include <linux/ratelimit.h>
+#include <yai/uaccess.h>
+#include <yai/umip.h>
+#include <yai/traps.h>
+#include <yai/insn.h>
+#include <yai/insn-eval.h>
+#include <yai/ratelimit.h>
 
 #undef pr_fmt
 #define pr_fmt(fmt) "umip: " fmt

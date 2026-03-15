@@ -11,8 +11,8 @@
  */
 
 #include "boot.h"
-#include <asm/desc_defs.h>
-#include <asm/segment.h>
+#include <yai/desc_defs.h>
+#include <yai/segment.h>
 
 /*
  * Invoke the realmode switch hook if present; otherwise

@@ -4,12 +4,12 @@
  * Copyright (C) 2015 International Business Machines Inc.
  * Copyright 2026 Google LLC
  */
-#include <asm/simd.h>
-#include <asm/switch_to.h>
-#include <linux/cpufeature.h>
-#include <linux/jump_label.h>
-#include <linux/preempt.h>
-#include <linux/uaccess.h>
+#include <yai/simd.h>
+#include <yai/switch_to.h>
+#include <yai/cpufeature.h>
+#include <yai/jump_label.h>
+#include <yai/preempt.h>
+#include <yai/uaccess.h>
 
 #ifdef CONFIG_SPE
 

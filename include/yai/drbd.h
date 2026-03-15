@@ -13,11 +13,11 @@
 */
 #ifndef DRBD_H
 #define DRBD_H
-#include <asm/types.h>
+#include <yai/types.h>
 
 #ifdef __KERNEL__
 #include <yai/types.h>
-#include <asm/byteorder.h>
+#include <yai/byteorder.h>
 #else
 #include <sys/types.h>
 #include <sys/wait.h>

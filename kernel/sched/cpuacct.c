@@ -6,7 +6,7 @@
  * Based on the work by Paul Menage (menage@google.com) and Balbir Singh
  * (balbir@in.ibm.com).
  */
-#include <linux/sched/cputime.h>
+#include <yai/sched/cputime.h>
 #include "sched.h"
 
 /* Time spent by the tasks of the CPU accounting group executing in ... */

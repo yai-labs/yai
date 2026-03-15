@@ -17,9 +17,9 @@
  * separate file or part of the same file.
  */
 
-#include <linux/earlycpio.h>
-#include <linux/kernel.h>
-#include <linux/string.h>
+#include <yai/earlycpio.h>
+#include <yai/kernel.h>
+#include <yai/string.h>
 
 enum cpio_fields {
 	C_MAGIC,

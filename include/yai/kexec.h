@@ -17,7 +17,7 @@
 
 #include <yai/vmcore_info.h>
 #include <yai/crash_reserve.h>
-#include <asm/io.h>
+#include <yai/io.h>
 #include <yai/range.h>
 
 #include <yai/uapi/kexec.h>
@@ -35,7 +35,7 @@ extern note_buf_t __percpu *crash_notes;
 #include <yai/ioport.h>
 #include <yai/module.h>
 #include <yai/highmem.h>
-#include <asm/kexec.h>
+#include <yai/kexec.h>
 #include <yai/crash_core.h>
 
 /* Verify architecture specific macros are defined */

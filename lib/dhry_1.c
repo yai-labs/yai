@@ -18,9 +18,9 @@
 
 #include "dhry.h"
 
-#include <linux/ktime.h>
-#include <linux/slab.h>
-#include <linux/string.h>
+#include <yai/ktime.h>
+#include <yai/slab.h>
+#include <yai/string.h>
 
 /* Global Variables: */
 

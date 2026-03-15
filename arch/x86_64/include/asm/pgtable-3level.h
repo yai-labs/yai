@@ -204,6 +204,6 @@ static inline pmd_t pmdp_establish(struct vm_area_struct *vma,
 /* We borrow bit 7 to store the exclusive marker in swap PTEs. */
 #define _PAGE_SWP_EXCLUSIVE	_PAGE_PSE
 
-#include <asm/pgtable-invert.h>
+#include <yai/pgtable-invert.h>
 
 #endif /* _ASM_X86_PGTABLE_3LEVEL_H */

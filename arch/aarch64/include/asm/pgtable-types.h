@@ -9,7 +9,7 @@
 #ifndef __ASM_PGTABLE_TYPES_H
 #define __ASM_PGTABLE_TYPES_H
 
-#include <asm/types.h>
+#include <yai/types.h>
 
 /*
  * Page Table Descriptor
@@ -59,11 +59,11 @@ typedef struct { ptdesc_t pgprot; } pgprot_t;
 #define __pgprot(x)	((pgprot_t) { (x) } )
 
 #if CONFIG_PGTABLE_LEVELS == 2
-#include <asm-generic/pgtable-nopmd.h>
+#include <yai/pgtable-nopmd.h>
 #elif CONFIG_PGTABLE_LEVELS == 3
-#include <asm-generic/pgtable-nopud.h>
+#include <yai/pgtable-nopud.h>
 #elif CONFIG_PGTABLE_LEVELS == 4
-#include <asm-generic/pgtable-nop4d.h>
+#include <yai/pgtable-nop4d.h>
 #endif
 
 #endif	/* __ASM_PGTABLE_TYPES_H */

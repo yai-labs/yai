@@ -1,25 +1,25 @@
 // SPDX-License-Identifier: GPL-2.0-only
 /* Common code for 32 and 64-bit NUMA */
-#include <linux/acpi.h>
-#include <linux/kernel.h>
-#include <linux/mm.h>
-#include <linux/of.h>
-#include <linux/string.h>
-#include <linux/init.h>
-#include <linux/memblock.h>
-#include <linux/mmzone.h>
-#include <linux/ctype.h>
-#include <linux/nodemask.h>
-#include <linux/sched.h>
-#include <linux/topology.h>
-#include <linux/sort.h>
-#include <linux/numa_memblks.h>
+#include <yai/acpi.h>
+#include <yai/kernel.h>
+#include <yai/mm.h>
+#include <yai/of.h>
+#include <yai/string.h>
+#include <yai/init.h>
+#include <yai/memblock.h>
+#include <yai/mmzone.h>
+#include <yai/ctype.h>
+#include <yai/nodemask.h>
+#include <yai/sched.h>
+#include <yai/topology.h>
+#include <yai/sort.h>
+#include <yai/numa_memblks.h>
 
-#include <asm/e820/api.h>
-#include <asm/proto.h>
-#include <asm/dma.h>
-#include <asm/numa.h>
-#include <asm/amd/nb.h>
+#include <yai/e820/api.h>
+#include <yai/proto.h>
+#include <yai/dma.h>
+#include <yai/numa.h>
+#include <yai/amd/nb.h>
 
 #include "mm_internal.h"
 

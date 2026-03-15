@@ -18,27 +18,27 @@
     System Programming Guide; Section 9.11. (1997 edition - PPro).
 */
 
-#include <linux/types.h> /* FIXME: kvm_para.h needs this */
+#include <yai/types.h> /* FIXME: kvm_para.h needs this */
 
-#include <linux/stop_machine.h>
-#include <linux/kvm_para.h>
-#include <linux/uaccess.h>
-#include <linux/export.h>
-#include <linux/mutex.h>
-#include <linux/init.h>
-#include <linux/sort.h>
-#include <linux/cpu.h>
-#include <linux/pci.h>
-#include <linux/smp.h>
-#include <linux/syscore_ops.h>
-#include <linux/rcupdate.h>
+#include <yai/stop_machine.h>
+#include <yai/kvm_para.h>
+#include <yai/uaccess.h>
+#include <yai/export.h>
+#include <yai/mutex.h>
+#include <yai/init.h>
+#include <yai/sort.h>
+#include <yai/cpu.h>
+#include <yai/pci.h>
+#include <yai/smp.h>
+#include <yai/syscore_ops.h>
+#include <yai/rcupdate.h>
 
-#include <asm/cacheinfo.h>
-#include <asm/cpufeature.h>
-#include <asm/e820/api.h>
-#include <asm/mtrr.h>
-#include <asm/msr.h>
-#include <asm/memtype.h>
+#include <yai/cacheinfo.h>
+#include <yai/cpufeature.h>
+#include <yai/e820/api.h>
+#include <yai/mtrr.h>
+#include <yai/msr.h>
+#include <yai/memtype.h>
 
 #include "mtrr.h"
 

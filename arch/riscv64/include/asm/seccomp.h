@@ -3,9 +3,9 @@
 #ifndef _ASM_SECCOMP_H
 #define _ASM_SECCOMP_H
 
-#include <asm/unistd.h>
+#include <yai/unistd.h>
 
-#include <asm-generic/seccomp.h>
+#include <yai/seccomp.h>
 
 #ifdef CONFIG_64BIT
 # define SECCOMP_ARCH_NATIVE		AUDIT_ARCH_RISCV64

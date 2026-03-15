@@ -13,7 +13,7 @@
  * Linus
  */
 
-#include <asm/processor-flags.h>
+#include <yai/processor-flags.h>
 
 #define BIOSSEG		0x0f000
 

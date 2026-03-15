@@ -7,7 +7,7 @@
 #include <yai/context_tracking_state.h>
 #include <yai/instrumentation.h>
 
-#include <asm/ptrace.h>
+#include <yai/ptrace.h>
 
 
 #ifdef CONFIG_CONTEXT_TRACKING_USER

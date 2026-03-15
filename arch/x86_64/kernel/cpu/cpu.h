@@ -2,8 +2,8 @@
 #ifndef ARCH_X86_CPU_H
 #define ARCH_X86_CPU_H
 
-#include <asm/cpu.h>
-#include <asm/topology.h>
+#include <yai/cpu.h>
+#include <yai/topology.h>
 
 #include "topology.h"
 

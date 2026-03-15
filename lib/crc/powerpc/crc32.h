@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: GPL-2.0-only
-#include <asm/simd.h>
-#include <asm/switch_to.h>
-#include <linux/cpufeature.h>
-#include <linux/jump_label.h>
-#include <linux/preempt.h>
-#include <linux/uaccess.h>
+#include <yai/simd.h>
+#include <yai/switch_to.h>
+#include <yai/cpufeature.h>
+#include <yai/jump_label.h>
+#include <yai/preempt.h>
+#include <yai/uaccess.h>
 
 #define VMX_ALIGN		16
 #define VMX_ALIGN_MASK		(VMX_ALIGN-1)

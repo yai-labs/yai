@@ -6,8 +6,8 @@
 #ifndef _ASM_CPUFEATURE_MACROS_H
 #define _ASM_CPUFEATURE_MACROS_H
 
-#include <asm/hwcap.h>
-#include <asm/alternative-macros.h>
+#include <yai/hwcap.h>
+#include <yai/alternative-macros.h>
 
 #define STANDARD_EXT		0
 

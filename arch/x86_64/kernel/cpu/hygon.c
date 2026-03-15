@@ -6,17 +6,17 @@
  *
  * Author: Pu Wen <puwen@hygon.cn>
  */
-#include <linux/io.h>
+#include <yai/io.h>
 
-#include <asm/apic.h>
-#include <asm/cpu.h>
-#include <asm/smp.h>
-#include <asm/numa.h>
-#include <asm/cacheinfo.h>
-#include <asm/spec-ctrl.h>
-#include <asm/delay.h>
-#include <asm/msr.h>
-#include <asm/resctrl.h>
+#include <yai/apic.h>
+#include <yai/cpu.h>
+#include <yai/smp.h>
+#include <yai/numa.h>
+#include <yai/cacheinfo.h>
+#include <yai/spec-ctrl.h>
+#include <yai/delay.h>
+#include <yai/msr.h>
+#include <yai/resctrl.h>
 
 #include "cpu.h"
 

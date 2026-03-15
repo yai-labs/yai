@@ -58,50 +58,50 @@
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
-#include <linux/init.h>
-#include <linux/kernel.h>
-#include <linux/list.h>
-#include <linux/sched/signal.h>
-#include <linux/sched/task.h>
-#include <linux/sched/task_stack.h>
-#include <linux/jiffies.h>
-#include <linux/delay.h>
-#include <linux/export.h>
-#include <linux/kthread.h>
-#include <linux/rbtree.h>
-#include <linux/fs.h>
-#include <linux/debugfs.h>
-#include <linux/seq_file.h>
-#include <linux/cpumask.h>
-#include <linux/spinlock.h>
-#include <linux/module.h>
-#include <linux/mutex.h>
-#include <linux/rcupdate.h>
-#include <linux/stacktrace.h>
-#include <linux/stackdepot.h>
-#include <linux/cache.h>
-#include <linux/percpu.h>
-#include <linux/memblock.h>
-#include <linux/pfn.h>
-#include <linux/mmzone.h>
-#include <linux/slab.h>
-#include <linux/thread_info.h>
-#include <linux/err.h>
-#include <linux/uaccess.h>
-#include <linux/string.h>
-#include <linux/nodemask.h>
-#include <linux/mm.h>
-#include <linux/workqueue.h>
-#include <linux/crc32.h>
+#include <yai/init.h>
+#include <yai/kernel.h>
+#include <yai/list.h>
+#include <yai/sched/signal.h>
+#include <yai/sched/task.h>
+#include <yai/sched/task_stack.h>
+#include <yai/jiffies.h>
+#include <yai/delay.h>
+#include <yai/export.h>
+#include <yai/kthread.h>
+#include <yai/rbtree.h>
+#include <yai/fs.h>
+#include <yai/debugfs.h>
+#include <yai/seq_file.h>
+#include <yai/cpumask.h>
+#include <yai/spinlock.h>
+#include <yai/module.h>
+#include <yai/mutex.h>
+#include <yai/rcupdate.h>
+#include <yai/stacktrace.h>
+#include <yai/stackdepot.h>
+#include <yai/cache.h>
+#include <yai/percpu.h>
+#include <yai/memblock.h>
+#include <yai/pfn.h>
+#include <yai/mmzone.h>
+#include <yai/slab.h>
+#include <yai/thread_info.h>
+#include <yai/err.h>
+#include <yai/uaccess.h>
+#include <yai/string.h>
+#include <yai/nodemask.h>
+#include <yai/mm.h>
+#include <yai/workqueue.h>
+#include <yai/crc32.h>
 
-#include <asm/sections.h>
-#include <asm/processor.h>
-#include <linux/atomic.h>
+#include <yai/sections.h>
+#include <yai/processor.h>
+#include <yai/atomic.h>
 
-#include <linux/kasan.h>
-#include <linux/kfence.h>
-#include <linux/kmemleak.h>
-#include <linux/memory_hotplug.h>
+#include <yai/kasan.h>
+#include <yai/kfence.h>
+#include <yai/kmemleak.h>
+#include <yai/memory_hotplug.h>
 
 /*
  * Kmemleak configuration and common defines.

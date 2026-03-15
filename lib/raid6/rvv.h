@@ -8,16 +8,16 @@
  */
 
 #ifdef __KERNEL__
-#include <asm/vector.h>
+#include <yai/vector.h>
 #else
 #define kernel_vector_begin()
 #define kernel_vector_end()
 #include <sys/auxv.h>
-#include <asm/hwcap.h>
+#include <yai/hwcap.h>
 #define has_vector() (getauxval(AT_HWCAP) & COMPAT_HWCAP_ISA_V)
 #endif
 
-#include <linux/raid/pq.h>
+#include <yai/raid/pq.h>
 
 static int rvv_has_vector(void)
 {

@@ -2,14 +2,14 @@
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
-#include <linux/init.h>
-#include <linux/sched.h>
-#include <linux/kthread.h>
-#include <linux/workqueue.h>
-#include <linux/memblock.h>
+#include <yai/init.h>
+#include <yai/sched.h>
+#include <yai/kthread.h>
+#include <yai/workqueue.h>
+#include <yai/memblock.h>
 
-#include <asm/proto.h>
-#include <asm/setup.h>
+#include <yai/proto.h>
+#include <yai/setup.h>
 
 /*
  * Some BIOSes seem to corrupt the low 64k of memory during events

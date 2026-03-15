@@ -6,12 +6,12 @@
  * Copyright © 2008 Ingo Molnar
  */
 
-#include <linux/fs.h>
-#include <linux/mm.h>
-#include <linux/uaccess.h>
-#include <linux/highmem.h>
-#include <asm/cacheflush.h>
-#include <asm/tlbflush.h>
+#include <yai/fs.h>
+#include <yai/mm.h>
+#include <yai/uaccess.h>
+#include <yai/highmem.h>
+#include <yai/cacheflush.h>
+#include <yai/tlbflush.h>
 
 void __iomem *__iomap_local_pfn_prot(unsigned long pfn, pgprot_t prot);
 

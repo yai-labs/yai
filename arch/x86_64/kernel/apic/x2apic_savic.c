@@ -7,13 +7,13 @@
  * Author: Neeraj Upadhyay <Neeraj.Upadhyay@amd.com>
  */
 
-#include <linux/cc_platform.h>
-#include <linux/cpumask.h>
-#include <linux/percpu-defs.h>
-#include <linux/align.h>
+#include <yai/cc_platform.h>
+#include <yai/cpumask.h>
+#include <yai/percpu-defs.h>
+#include <yai/align.h>
 
-#include <asm/apic.h>
-#include <asm/sev.h>
+#include <yai/apic.h>
+#include <yai/sev.h>
 
 #include "local.h"
 

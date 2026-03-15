@@ -3,13 +3,13 @@
  * Copyright (c) 2020 Western Digital Corporation or its affiliates.
  */
 
-#include <linux/errno.h>
-#include <linux/of.h>
-#include <linux/string.h>
-#include <linux/sched/task_stack.h>
-#include <asm/cpu_ops.h>
-#include <asm/sbi.h>
-#include <asm/smp.h>
+#include <yai/errno.h>
+#include <yai/of.h>
+#include <yai/string.h>
+#include <yai/sched/task_stack.h>
+#include <yai/cpu_ops.h>
+#include <yai/sbi.h>
+#include <yai/smp.h>
 
 #include "head.h"
 

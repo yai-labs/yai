@@ -2,19 +2,19 @@
 #ifndef _ASM_X86_APIC_H
 #define _ASM_X86_APIC_H
 
-#include <linux/cpumask.h>
-#include <linux/static_call.h>
+#include <yai/cpumask.h>
+#include <yai/static_call.h>
 
-#include <asm/alternative.h>
-#include <asm/cpufeature.h>
-#include <asm/apicdef.h>
-#include <linux/atomic.h>
-#include <asm/fixmap.h>
-#include <asm/mpspec.h>
-#include <asm/msr.h>
-#include <asm/hardirq.h>
-#include <asm/io.h>
-#include <asm/posted_intr.h>
+#include <yai/alternative.h>
+#include <yai/cpufeature.h>
+#include <yai/apicdef.h>
+#include <yai/atomic.h>
+#include <yai/fixmap.h>
+#include <yai/mpspec.h>
+#include <yai/msr.h>
+#include <yai/hardirq.h>
+#include <yai/io.h>
+#include <yai/posted_intr.h>
 
 #define ARCH_APICTIMER_STOPS_ON_C3	1
 
@@ -577,7 +577,7 @@ static inline int apic_test_vector(int vec, void *bitmap)
 
 #ifdef CONFIG_X86_LOCAL_APIC
 
-#include <asm/smp.h>
+#include <yai/smp.h>
 
 extern struct apic apic_noop;
 

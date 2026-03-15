@@ -9,24 +9,24 @@
 
 #define pr_fmt(fmt) "hw-breakpoint: " fmt
 
-#include <linux/compat.h>
-#include <linux/cpu_pm.h>
-#include <linux/errno.h>
-#include <linux/hw_breakpoint.h>
-#include <linux/kprobes.h>
-#include <linux/perf_event.h>
-#include <linux/ptrace.h>
-#include <linux/smp.h>
-#include <linux/uaccess.h>
+#include <yai/compat.h>
+#include <yai/cpu_pm.h>
+#include <yai/errno.h>
+#include <yai/hw_breakpoint.h>
+#include <yai/kprobes.h>
+#include <yai/perf_event.h>
+#include <yai/ptrace.h>
+#include <yai/smp.h>
+#include <yai/uaccess.h>
 
-#include <asm/current.h>
-#include <asm/debug-monitors.h>
-#include <asm/esr.h>
-#include <asm/exception.h>
-#include <asm/hw_breakpoint.h>
-#include <asm/traps.h>
-#include <asm/cputype.h>
-#include <asm/system_misc.h>
+#include <yai/current.h>
+#include <yai/debug-monitors.h>
+#include <yai/esr.h>
+#include <yai/exception.h>
+#include <yai/hw_breakpoint.h>
+#include <yai/traps.h>
+#include <yai/cputype.h>
+#include <yai/system_misc.h>
 
 /* Breakpoint currently in use for each BRP. */
 static DEFINE_PER_CPU(struct perf_event *, bp_on_reg[ARM_MAX_BRP]);

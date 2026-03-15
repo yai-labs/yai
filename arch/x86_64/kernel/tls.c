@@ -1,18 +1,18 @@
 // SPDX-License-Identifier: GPL-2.0
-#include <linux/kernel.h>
-#include <linux/errno.h>
-#include <linux/sched.h>
-#include <linux/user.h>
-#include <linux/regset.h>
-#include <linux/syscalls.h>
-#include <linux/nospec.h>
+#include <yai/kernel.h>
+#include <yai/errno.h>
+#include <yai/sched.h>
+#include <yai/user.h>
+#include <yai/regset.h>
+#include <yai/syscalls.h>
+#include <yai/nospec.h>
 
-#include <linux/uaccess.h>
-#include <asm/desc.h>
-#include <asm/ldt.h>
-#include <asm/processor.h>
-#include <asm/proto.h>
-#include <asm/gsseg.h>
+#include <yai/uaccess.h>
+#include <yai/desc.h>
+#include <yai/ldt.h>
+#include <yai/processor.h>
+#include <yai/proto.h>
+#include <yai/gsseg.h>
 
 #include "tls.h"
 

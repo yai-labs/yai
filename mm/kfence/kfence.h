@@ -9,10 +9,10 @@
 #ifndef MM_KFENCE_KFENCE_H
 #define MM_KFENCE_KFENCE_H
 
-#include <linux/mm.h>
-#include <linux/slab.h>
-#include <linux/spinlock.h>
-#include <linux/types.h>
+#include <yai/mm.h>
+#include <yai/slab.h>
+#include <yai/spinlock.h>
+#include <yai/types.h>
 
 #include "../slab.h" /* for struct kmem_cache */
 

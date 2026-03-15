@@ -3,9 +3,9 @@
  * crc4.c - simple crc-4 calculations.
  */
 
-#include <linux/crc4.h>
-#include <linux/export.h>
-#include <linux/module.h>
+#include <yai/crc4.h>
+#include <yai/export.h>
+#include <yai/module.h>
 
 static const uint8_t crc4_tab[] = {
 	0x0, 0x7, 0xe, 0x9, 0xb, 0xc, 0x5, 0x2,

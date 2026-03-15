@@ -8,9 +8,9 @@
 #ifndef _ASM_RISCV_THREAD_INFO_H
 #define _ASM_RISCV_THREAD_INFO_H
 
-#include <asm/page.h>
-#include <linux/const.h>
-#include <linux/sizes.h>
+#include <yai/page.h>
+#include <yai/const.h>
+#include <yai/sizes.h>
 
 /* thread information allocation */
 #ifdef CONFIG_KASAN
@@ -39,8 +39,8 @@
 
 #ifndef __ASSEMBLER__
 
-#include <asm/processor.h>
-#include <asm/csr.h>
+#include <yai/processor.h>
+#include <yai/csr.h>
 
 /*
  * low level task data that entry.S needs immediate access to
@@ -117,7 +117,7 @@ int arch_dup_task_struct(struct task_struct *dst, struct task_struct *src);
 #define HAVE_TIF_NEED_RESCHED_LAZY
 #define HAVE_TIF_RESTORE_SIGMASK
 
-#include <asm-generic/thread_info_tif.h>
+#include <yai/thread_info_tif.h>
 
 #define TIF_32BIT			16	/* compat-mode 32bit process */
 #define TIF_RISCV_V_DEFER_RESTORE	17	/* restore Vector before returing to user */

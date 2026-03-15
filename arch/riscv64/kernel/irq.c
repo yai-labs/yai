@@ -5,16 +5,16 @@
  * Copyright (C) 2018 Christoph Hellwig
  */
 
-#include <linux/interrupt.h>
-#include <linux/irqchip.h>
-#include <linux/irqdomain.h>
-#include <linux/module.h>
-#include <linux/scs.h>
-#include <linux/seq_file.h>
-#include <asm/sbi.h>
-#include <asm/smp.h>
-#include <asm/softirq_stack.h>
-#include <asm/stacktrace.h>
+#include <yai/interrupt.h>
+#include <yai/irqchip.h>
+#include <yai/irqdomain.h>
+#include <yai/module.h>
+#include <yai/scs.h>
+#include <yai/seq_file.h>
+#include <yai/sbi.h>
+#include <yai/smp.h>
+#include <yai/softirq_stack.h>
+#include <yai/stacktrace.h>
 
 static struct fwnode_handle *(*__get_intc_node)(void);
 
@@ -67,7 +67,7 @@ int riscv_get_hart_index(struct fwnode_handle *fwnode, u32 logical_index,
 }
 
 #ifdef CONFIG_IRQ_STACKS
-#include <asm/irq_stack.h>
+#include <yai/irq_stack.h>
 
 DECLARE_PER_CPU(ulong *, irq_shadow_call_stack_ptr);
 

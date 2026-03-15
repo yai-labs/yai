@@ -2,12 +2,12 @@
 #ifndef _ASM_X86_SPINLOCK_H
 #define _ASM_X86_SPINLOCK_H
 
-#include <linux/jump_label.h>
-#include <linux/atomic.h>
-#include <asm/page.h>
-#include <asm/processor.h>
-#include <linux/compiler.h>
-#include <asm/bitops.h>
+#include <yai/jump_label.h>
+#include <yai/atomic.h>
+#include <yai/page.h>
+#include <yai/processor.h>
+#include <yai/compiler.h>
+#include <yai/bitops.h>
 
 /*
  * Your basic SMP spinlocks, allowing only a single CPU anywhere
@@ -23,7 +23,7 @@
 /* How long a lock should spin before we consider blocking */
 #define SPIN_THRESHOLD	(1 << 15)
 
-#include <asm/qspinlock.h>
+#include <yai/qspinlock.h>
 
 /*
  * Read-write spinlocks, allowing multiple readers
@@ -39,6 +39,6 @@
  * x86 specific optimization.
  */
 
-#include <asm/qrwlock.h>
+#include <yai/qrwlock.h>
 
 #endif /* _ASM_X86_SPINLOCK_H */

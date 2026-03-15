@@ -7,27 +7,27 @@
  * (C) Copyright 1995 1996 Linus Torvalds
  */
 
-#include <linux/memblock.h>
-#include <linux/init.h>
-#include <linux/io.h>
-#include <linux/ioport.h>
-#include <linux/ioremap.h>
-#include <linux/slab.h>
-#include <linux/vmalloc.h>
-#include <linux/mmiotrace.h>
-#include <linux/cc_platform.h>
-#include <linux/efi.h>
-#include <linux/pgtable.h>
-#include <linux/kmsan.h>
+#include <yai/memblock.h>
+#include <yai/init.h>
+#include <yai/io.h>
+#include <yai/ioport.h>
+#include <yai/ioremap.h>
+#include <yai/slab.h>
+#include <yai/vmalloc.h>
+#include <yai/mmiotrace.h>
+#include <yai/cc_platform.h>
+#include <yai/efi.h>
+#include <yai/pgtable.h>
+#include <yai/kmsan.h>
 
-#include <asm/set_memory.h>
-#include <asm/e820/api.h>
-#include <asm/efi.h>
-#include <asm/fixmap.h>
-#include <asm/tlbflush.h>
-#include <asm/pgalloc.h>
-#include <asm/memtype.h>
-#include <asm/setup.h>
+#include <yai/set_memory.h>
+#include <yai/e820/api.h>
+#include <yai/efi.h>
+#include <yai/fixmap.h>
+#include <yai/tlbflush.h>
+#include <yai/pgalloc.h>
+#include <yai/memtype.h>
+#include <yai/setup.h>
 
 #include "physaddr.h"
 

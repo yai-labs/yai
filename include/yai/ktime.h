@@ -21,7 +21,7 @@
 #ifndef _LINUX_KTIME_H
 #define _LINUX_KTIME_H
 
-#include <asm/bug.h>
+#include <yai/bug.h>
 #include <yai/jiffies.h>
 #include <yai/time.h>
 #include <yai/types.h>

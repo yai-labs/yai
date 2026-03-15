@@ -8,20 +8,20 @@
  */
 #include <acpi/proc_cap_intel.h>
 
-#include <asm/numa.h>
-#include <asm/fixmap.h>
-#include <asm/processor.h>
-#include <asm/mmu.h>
-#include <asm/mpspec.h>
-#include <asm/x86_init.h>
-#include <asm/cpufeature.h>
-#include <asm/irq_vectors.h>
-#include <asm/xen/hypervisor.h>
+#include <yai/numa.h>
+#include <yai/fixmap.h>
+#include <yai/processor.h>
+#include <yai/mmu.h>
+#include <yai/mpspec.h>
+#include <yai/x86_init.h>
+#include <yai/cpufeature.h>
+#include <yai/irq_vectors.h>
+#include <yai/xen/hypervisor.h>
 
 #include <xen/xen.h>
 
 #ifdef CONFIG_ACPI_APEI
-# include <asm/pgtable_types.h>
+# include <yai/pgtable_types.h>
 #endif
 
 #ifdef CONFIG_ACPI

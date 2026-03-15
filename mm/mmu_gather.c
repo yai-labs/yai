@@ -1,19 +1,19 @@
 // SPDX-License-Identifier: GPL-2.0
-#include <linux/gfp.h>
-#include <linux/highmem.h>
-#include <linux/kernel.h>
-#include <linux/mmdebug.h>
-#include <linux/mm_types.h>
-#include <linux/mm_inline.h>
-#include <linux/pagemap.h>
-#include <linux/rcupdate.h>
-#include <linux/smp.h>
-#include <linux/swap.h>
-#include <linux/rmap.h>
-#include <linux/pgalloc.h>
-#include <linux/hugetlb.h>
+#include <yai/gfp.h>
+#include <yai/highmem.h>
+#include <yai/kernel.h>
+#include <yai/mmdebug.h>
+#include <yai/mm_types.h>
+#include <yai/mm_inline.h>
+#include <yai/pagemap.h>
+#include <yai/rcupdate.h>
+#include <yai/smp.h>
+#include <yai/swap.h>
+#include <yai/rmap.h>
+#include <yai/pgalloc.h>
+#include <yai/hugetlb.h>
 
-#include <asm/tlb.h>
+#include <yai/tlb.h>
 
 #ifndef CONFIG_MMU_GATHER_NO_GATHER
 

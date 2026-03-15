@@ -4,8 +4,8 @@
  */
 #include <kunit/resource.h>
 #include <kunit/test.h>
-#include <linux/kthread.h>
-#include <linux/mm.h>
+#include <yai/kthread.h>
+#include <yai/mm.h>
 
 struct kunit_vm_mmap_resource {
 	unsigned long addr;

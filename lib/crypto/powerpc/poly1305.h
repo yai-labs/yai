@@ -4,11 +4,11 @@
  *
  * Copyright 2023- IBM Corp. All rights reserved.
  */
-#include <asm/switch_to.h>
-#include <linux/cpufeature.h>
-#include <linux/jump_label.h>
-#include <linux/kernel.h>
-#include <linux/unaligned.h>
+#include <yai/switch_to.h>
+#include <yai/cpufeature.h>
+#include <yai/jump_label.h>
+#include <yai/kernel.h>
+#include <yai/unaligned.h>
 
 asmlinkage void poly1305_p10le_4blocks(struct poly1305_block_state *state, const u8 *m, u32 mlen);
 asmlinkage void poly1305_64s(struct poly1305_block_state *state, const u8 *m, u32 mlen, int highbit);

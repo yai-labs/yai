@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-only
 #define pr_fmt(fmt) "APIC: " fmt
 
-#include <asm/apic.h>
+#include <yai/apic.h>
 
 #include "local.h"
 

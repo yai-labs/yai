@@ -6,13 +6,13 @@
  * Author: Marc Zyngier <maz@kernel.org>
  */
 
-#include <linux/ctype.h>
-#include <linux/kernel.h>
-#include <linux/libfdt.h>
+#include <yai/ctype.h>
+#include <yai/kernel.h>
+#include <yai/libfdt.h>
 
-#include <asm/cacheflush.h>
-#include <asm/cpufeature.h>
-#include <asm/setup.h>
+#include <yai/cacheflush.h>
+#include <yai/cpufeature.h>
+#include <yai/setup.h>
 
 #include "pi.h"
 

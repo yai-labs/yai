@@ -4,6 +4,6 @@
 #define __ASM_GENERIC_SPINLOCK_H
 
 #include <yai/asm-generic/ticket_spinlock.h>
-#include <asm/qrwlock.h>
+#include <yai/qrwlock.h>
 
 #endif /* __ASM_GENERIC_SPINLOCK_H */

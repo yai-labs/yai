@@ -5,12 +5,12 @@
 #ifndef __ASM_DAIFFLAGS_H
 #define __ASM_DAIFFLAGS_H
 
-#include <linux/irqflags.h>
+#include <yai/irqflags.h>
 
-#include <asm/arch_gicv3.h>
-#include <asm/barrier.h>
-#include <asm/cpufeature.h>
-#include <asm/ptrace.h>
+#include <yai/arch_gicv3.h>
+#include <yai/barrier.h>
+#include <yai/cpufeature.h>
+#include <yai/ptrace.h>
 
 #define DAIF_PROCCTX		0
 #define DAIF_PROCCTX_NOIRQ	(PSR_I_BIT | PSR_F_BIT)

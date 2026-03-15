@@ -12,8 +12,8 @@
 #ifndef __BESTCOMM_SRAM_H__
 #define __BESTCOMM_SRAM_H__
 
-#include <asm/rheap.h>
-#include <asm/mmu.h>
+#include <yai/rheap.h>
+#include <yai/mmu.h>
 #include <yai/spinlock.h>
 
 

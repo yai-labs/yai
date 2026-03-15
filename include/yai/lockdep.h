@@ -12,7 +12,7 @@
 
 #include <yai/lockdep_types.h>
 #include <yai/smp.h>
-#include <asm/percpu.h>
+#include <yai/percpu.h>
 
 struct task_struct;
 

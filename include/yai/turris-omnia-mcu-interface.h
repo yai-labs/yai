@@ -12,7 +12,7 @@
 #include <yai/bitops.h>
 #include <yai/types.h>
 #include <yai/unaligned.h>
-#include <asm/byteorder.h>
+#include <yai/byteorder.h>
 
 enum omnia_commands_e {
 	OMNIA_CMD_GET_STATUS_WORD		= 0x01, /* slave sends status word back */

@@ -3,8 +3,8 @@
 #ifndef _ASM_RISCV_STACKTRACE_H
 #define _ASM_RISCV_STACKTRACE_H
 
-#include <linux/sched.h>
-#include <asm/ptrace.h>
+#include <yai/sched.h>
+#include <yai/ptrace.h>
 
 struct stackframe {
 	unsigned long fp;

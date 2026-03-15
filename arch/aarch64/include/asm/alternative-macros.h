@@ -2,11 +2,11 @@
 #ifndef __ASM_ALTERNATIVE_MACROS_H
 #define __ASM_ALTERNATIVE_MACROS_H
 
-#include <linux/const.h>
+#include <yai/const.h>
 #include <vdso/bits.h>
 
-#include <asm/cpucaps.h>
-#include <asm/insn-def.h>
+#include <yai/cpucaps.h>
+#include <yai/insn-def.h>
 
 /*
  * Binutils 2.27.0 can't handle a 'UL' suffix on constants, so for the assembly
@@ -21,7 +21,7 @@
 
 #ifndef __ASSEMBLER__
 
-#include <linux/stringify.h>
+#include <yai/stringify.h>
 
 #define ALTINSTR_ENTRY(cpucap)					              \
 	" .word 661b - .\n"				/* label           */ \
@@ -89,7 +89,7 @@
 	__ALTERNATIVE_CFG_CB(oldinstr, (1 << ARM64_CB_SHIFT) | (cpucap), 1, cb)
 #else
 
-#include <asm/assembler.h>
+#include <yai/assembler.h>
 
 .macro altinstruction_entry orig_offset alt_offset cpucap orig_len alt_len
 	.word \orig_offset - .
@@ -221,7 +221,7 @@ alternative_endif
 
 #ifndef __ASSEMBLER__
 
-#include <linux/types.h>
+#include <yai/types.h>
 
 static __always_inline bool
 alternative_has_cap_likely(const unsigned long cpucap)

@@ -12,10 +12,10 @@
  */
 
 #include <crypto/nh.h>
-#include <linux/export.h>
-#include <linux/kernel.h>
-#include <linux/module.h>
-#include <linux/unaligned.h>
+#include <yai/export.h>
+#include <yai/kernel.h>
+#include <yai/module.h>
+#include <yai/unaligned.h>
 
 #ifdef CONFIG_CRYPTO_LIB_NH_ARCH
 #include "nh.h" /* $(SRCARCH)/nh.h */

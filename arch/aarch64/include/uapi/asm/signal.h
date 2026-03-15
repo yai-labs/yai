@@ -23,6 +23,6 @@
 #define MINSIGSTKSZ 5120
 #define SIGSTKSZ    16384
 
-#include <asm-generic/signal.h>
+#include <yai/signal.h>
 
 #endif

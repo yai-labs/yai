@@ -2,11 +2,11 @@
 #ifndef _ASM_X86_ALTERNATIVE_H
 #define _ASM_X86_ALTERNATIVE_H
 
-#include <linux/types.h>
-#include <linux/stringify.h>
-#include <linux/objtool.h>
-#include <asm/asm.h>
-#include <asm/bug.h>
+#include <yai/types.h>
+#include <yai/stringify.h>
+#include <yai/objtool.h>
+#include <yai/asm.h>
+#include <yai/bug.h>
 
 #define ALT_FLAGS_SHIFT		16
 
@@ -18,7 +18,7 @@
 
 #ifndef __ASSEMBLER__
 
-#include <linux/stddef.h>
+#include <yai/stddef.h>
 
 /*
  * Alternative inline assembly for SMP.

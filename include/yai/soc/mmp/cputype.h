@@ -3,7 +3,7 @@
 #define __ASM_MACH_CPUTYPE_H
 
 #if defined(CONFIG_ARM) || defined(CONFIG_ARM64)
-#include <asm/cputype.h>
+#include <yai/cputype.h>
 #endif
 
 /*

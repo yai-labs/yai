@@ -5,20 +5,20 @@
  * Copyright 31 August 2008 James Bottomley
  * Copyright (C) 2013, Intel Corporation
  */
-#include <linux/bug.h>
-#include <linux/kernel.h>
-#include <linux/math64.h>
-#include <linux/export.h>
-#include <linux/ctype.h>
-#include <linux/device.h>
-#include <linux/errno.h>
-#include <linux/fs.h>
-#include <linux/hex.h>
-#include <linux/limits.h>
-#include <linux/mm.h>
-#include <linux/slab.h>
-#include <linux/string.h>
-#include <linux/string_helpers.h>
+#include <yai/bug.h>
+#include <yai/kernel.h>
+#include <yai/math64.h>
+#include <yai/export.h>
+#include <yai/ctype.h>
+#include <yai/device.h>
+#include <yai/errno.h>
+#include <yai/fs.h>
+#include <yai/hex.h>
+#include <yai/limits.h>
+#include <yai/mm.h>
+#include <yai/slab.h>
+#include <yai/string.h>
+#include <yai/string_helpers.h>
 #include <kunit/test.h>
 #include <kunit/test-bug.h>
 

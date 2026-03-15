@@ -9,8 +9,8 @@
 #ifndef _ASM_RISCV_PAGE_H
 #define _ASM_RISCV_PAGE_H
 
-#include <linux/pfn.h>
-#include <linux/const.h>
+#include <yai/pfn.h>
+#include <yai/const.h>
 
 #include <vdso/page.h>
 
@@ -206,7 +206,7 @@ static __always_inline void *pfn_to_kaddr(unsigned long pfn)
 
 #define VM_DATA_DEFAULT_FLAGS	VM_DATA_FLAGS_NON_EXEC
 
-#include <asm-generic/memory_model.h>
-#include <asm-generic/getorder.h>
+#include <yai/memory_model.h>
+#include <yai/getorder.h>
 
 #endif /* _ASM_RISCV_PAGE_H */

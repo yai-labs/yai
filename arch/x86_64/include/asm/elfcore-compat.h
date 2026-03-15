@@ -1,7 +1,7 @@
 #ifndef _ASM_X86_ELFCORE_COMPAT_H
 #define _ASM_X86_ELFCORE_COMPAT_H
 
-#include <asm/user32.h>
+#include <yai/user32.h>
 
 /*
  * On amd64 we have two 32bit ABIs - i386 and x32.  The latter

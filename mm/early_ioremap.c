@@ -8,15 +8,15 @@
  * (C) Copyright 1995 1996, 2014 Linus Torvalds
  *
  */
-#include <linux/kernel.h>
-#include <linux/init.h>
-#include <linux/io.h>
-#include <linux/module.h>
-#include <linux/slab.h>
-#include <linux/mm.h>
-#include <linux/vmalloc.h>
-#include <asm/fixmap.h>
-#include <asm/early_ioremap.h>
+#include <yai/kernel.h>
+#include <yai/init.h>
+#include <yai/io.h>
+#include <yai/module.h>
+#include <yai/slab.h>
+#include <yai/mm.h>
+#include <yai/vmalloc.h>
+#include <yai/fixmap.h>
+#include <yai/early_ioremap.h>
 #include "internal.h"
 
 #ifdef CONFIG_MMU

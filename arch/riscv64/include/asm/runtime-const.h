@@ -2,14 +2,14 @@
 #ifndef _ASM_RISCV_RUNTIME_CONST_H
 #define _ASM_RISCV_RUNTIME_CONST_H
 
-#include <asm/asm.h>
-#include <asm/alternative.h>
-#include <asm/cacheflush.h>
-#include <asm/insn-def.h>
-#include <linux/memory.h>
-#include <asm/text-patching.h>
+#include <yai/asm.h>
+#include <yai/alternative.h>
+#include <yai/cacheflush.h>
+#include <yai/insn-def.h>
+#include <yai/memory.h>
+#include <yai/text-patching.h>
 
-#include <linux/uaccess.h>
+#include <yai/uaccess.h>
 
 #ifdef CONFIG_32BIT
 #define runtime_const_ptr(sym)					\

@@ -1,26 +1,26 @@
 // SPDX-License-Identifier: GPL-2.0
-#include <linux/console.h>
-#include <linux/kernel.h>
-#include <linux/kexec.h>
-#include <linux/init.h>
-#include <linux/string.h>
-#include <linux/screen_info.h>
-#include <linux/usb/ch9.h>
-#include <linux/pci_regs.h>
-#include <linux/pci_ids.h>
-#include <linux/errno.h>
-#include <linux/pgtable.h>
-#include <asm/io.h>
-#include <asm/processor.h>
-#include <asm/fcntl.h>
-#include <asm/setup.h>
+#include <yai/console.h>
+#include <yai/kernel.h>
+#include <yai/kexec.h>
+#include <yai/init.h>
+#include <yai/string.h>
+#include <yai/screen_info.h>
+#include <yai/usb/ch9.h>
+#include <yai/pci_regs.h>
+#include <yai/pci_ids.h>
+#include <yai/errno.h>
+#include <yai/pgtable.h>
+#include <yai/io.h>
+#include <yai/processor.h>
+#include <yai/fcntl.h>
+#include <yai/setup.h>
 #include <xen/hvc-console.h>
-#include <asm/pci-direct.h>
-#include <asm/fixmap.h>
-#include <linux/usb/ehci_def.h>
-#include <linux/usb/xhci-dbgp.h>
-#include <asm/pci_x86.h>
-#include <linux/static_call.h>
+#include <yai/pci-direct.h>
+#include <yai/fixmap.h>
+#include <yai/usb/ehci_def.h>
+#include <yai/usb/xhci-dbgp.h>
+#include <yai/pci_x86.h>
+#include <yai/static_call.h>
 
 /* Simple VGA output */
 #define VGABASE		(__ISA_IO_base + 0xb8000)

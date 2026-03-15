@@ -5,16 +5,16 @@
  * Copyright (C) 2007, Intel Corp.
  *	Huang Ying <ying.huang@intel.com>
  */
-#include <linux/debugfs.h>
-#include <linux/uaccess.h>
-#include <linux/export.h>
-#include <linux/slab.h>
-#include <linux/init.h>
-#include <linux/stat.h>
-#include <linux/io.h>
-#include <linux/mm.h>
+#include <yai/debugfs.h>
+#include <yai/uaccess.h>
+#include <yai/export.h>
+#include <yai/slab.h>
+#include <yai/init.h>
+#include <yai/stat.h>
+#include <yai/io.h>
+#include <yai/mm.h>
 
-#include <asm/setup.h>
+#include <yai/setup.h>
 
 struct dentry *arch_debugfs_dir;
 EXPORT_SYMBOL(arch_debugfs_dir);

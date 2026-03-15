@@ -6,13 +6,13 @@
 #ifndef _ASM_RISCV_TIMEX_H
 #define _ASM_RISCV_TIMEX_H
 
-#include <asm/csr.h>
+#include <yai/csr.h>
 
 typedef unsigned long cycles_t;
 
 #ifdef CONFIG_RISCV_M_MODE
 
-#include <asm/clint.h>
+#include <yai/clint.h>
 
 #ifdef CONFIG_64BIT
 static inline cycles_t get_cycles(void)

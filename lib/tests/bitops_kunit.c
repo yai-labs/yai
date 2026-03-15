@@ -4,8 +4,8 @@
  * Copyright (C) 2026 Ryota Sakamoto <sakamo.ryota@gmail.com>
  */
 
-#include <linux/bitops.h>
-#include <linux/module.h>
+#include <yai/bitops.h>
+#include <yai/module.h>
 #include <kunit/test.h>
 
 /* use an enum because that's the most common BITMAP usage */

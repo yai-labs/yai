@@ -5,58 +5,58 @@
  * This file contains the setup_arch() code, which handles the architecture-dependent
  * parts of early kernel initialization.
  */
-#include <linux/acpi.h>
-#include <linux/console.h>
-#include <linux/cpu.h>
-#include <linux/crash_dump.h>
-#include <linux/dma-map-ops.h>
-#include <linux/efi.h>
-#include <linux/hugetlb.h>
-#include <linux/ima.h>
-#include <linux/init_ohci1394_dma.h>
-#include <linux/initrd.h>
-#include <linux/iscsi_ibft.h>
-#include <linux/memblock.h>
-#include <linux/panic_notifier.h>
-#include <linux/pci.h>
-#include <linux/random.h>
-#include <linux/root_dev.h>
-#include <linux/static_call.h>
-#include <linux/sysfb.h>
-#include <linux/swiotlb.h>
-#include <linux/tboot.h>
-#include <linux/usb/xhci-dbgp.h>
-#include <linux/vmalloc.h>
+#include <yai/acpi.h>
+#include <yai/console.h>
+#include <yai/cpu.h>
+#include <yai/crash_dump.h>
+#include <yai/dma-map-ops.h>
+#include <yai/efi.h>
+#include <yai/hugetlb.h>
+#include <yai/ima.h>
+#include <yai/init_ohci1394_dma.h>
+#include <yai/initrd.h>
+#include <yai/iscsi_ibft.h>
+#include <yai/memblock.h>
+#include <yai/panic_notifier.h>
+#include <yai/pci.h>
+#include <yai/random.h>
+#include <yai/root_dev.h>
+#include <yai/static_call.h>
+#include <yai/sysfb.h>
+#include <yai/swiotlb.h>
+#include <yai/tboot.h>
+#include <yai/usb/xhci-dbgp.h>
+#include <yai/vmalloc.h>
 
-#include <uapi/linux/mount.h>
+#include <yai/mount.h>
 
 #include <xen/xen.h>
 
-#include <asm/apic.h>
-#include <asm/bios_ebda.h>
-#include <asm/bugs.h>
-#include <asm/cacheinfo.h>
-#include <asm/coco.h>
-#include <asm/cpu.h>
-#include <asm/efi.h>
-#include <asm/gart.h>
-#include <asm/hypervisor.h>
-#include <asm/io_apic.h>
-#include <asm/kasan.h>
-#include <asm/kaslr.h>
-#include <asm/mce.h>
-#include <asm/memtype.h>
-#include <asm/mtrr.h>
-#include <asm/nmi.h>
-#include <asm/numa.h>
-#include <asm/olpc_ofw.h>
-#include <asm/pci-direct.h>
-#include <asm/prom.h>
-#include <asm/proto.h>
-#include <asm/realmode.h>
-#include <asm/thermal.h>
-#include <asm/unwind.h>
-#include <asm/vsyscall.h>
+#include <yai/apic.h>
+#include <yai/bios_ebda.h>
+#include <yai/bugs.h>
+#include <yai/cacheinfo.h>
+#include <yai/coco.h>
+#include <yai/cpu.h>
+#include <yai/efi.h>
+#include <yai/gart.h>
+#include <yai/hypervisor.h>
+#include <yai/io_apic.h>
+#include <yai/kasan.h>
+#include <yai/kaslr.h>
+#include <yai/mce.h>
+#include <yai/memtype.h>
+#include <yai/mtrr.h>
+#include <yai/nmi.h>
+#include <yai/numa.h>
+#include <yai/olpc_ofw.h>
+#include <yai/pci-direct.h>
+#include <yai/prom.h>
+#include <yai/proto.h>
+#include <yai/realmode.h>
+#include <yai/thermal.h>
+#include <yai/unwind.h>
+#include <yai/vsyscall.h>
 
 /*
  * max_low_pfn_mapped: highest directly mapped pfn < 4 GB

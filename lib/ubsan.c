@@ -6,15 +6,15 @@
  * Author: Andrey Ryabinin <ryabinin.a.a@gmail.com>
  */
 
-#include <linux/bitops.h>
-#include <linux/bug.h>
-#include <linux/ctype.h>
-#include <linux/init.h>
-#include <linux/kernel.h>
-#include <linux/types.h>
-#include <linux/sched.h>
-#include <linux/uaccess.h>
-#include <linux/ubsan.h>
+#include <yai/bitops.h>
+#include <yai/bug.h>
+#include <yai/ctype.h>
+#include <yai/init.h>
+#include <yai/kernel.h>
+#include <yai/types.h>
+#include <yai/sched.h>
+#include <yai/uaccess.h>
+#include <yai/ubsan.h>
 #include <kunit/test-bug.h>
 
 #include "ubsan.h"

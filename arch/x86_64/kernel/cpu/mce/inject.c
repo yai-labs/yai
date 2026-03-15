@@ -16,21 +16,21 @@
  *			   Advanced Micro Devices Inc.
  */
 
-#include <linux/cpu.h>
-#include <linux/debugfs.h>
-#include <linux/kernel.h>
-#include <linux/module.h>
-#include <linux/notifier.h>
-#include <linux/pci.h>
-#include <linux/uaccess.h>
+#include <yai/cpu.h>
+#include <yai/debugfs.h>
+#include <yai/kernel.h>
+#include <yai/module.h>
+#include <yai/notifier.h>
+#include <yai/pci.h>
+#include <yai/uaccess.h>
 
-#include <asm/amd/nb.h>
-#include <asm/apic.h>
-#include <asm/irq_vectors.h>
-#include <asm/mce.h>
-#include <asm/msr.h>
-#include <asm/nmi.h>
-#include <asm/smp.h>
+#include <yai/amd/nb.h>
+#include <yai/apic.h>
+#include <yai/irq_vectors.h>
+#include <yai/mce.h>
+#include <yai/msr.h>
+#include <yai/nmi.h>
+#include <yai/smp.h>
 
 #include "internal.h"
 

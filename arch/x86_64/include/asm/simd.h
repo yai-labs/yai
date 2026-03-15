@@ -2,9 +2,9 @@
 #ifndef _ASM_SIMD_H
 #define _ASM_SIMD_H
 
-#include <asm/fpu/api.h>
-#include <linux/compiler_attributes.h>
-#include <linux/types.h>
+#include <yai/fpu/api.h>
+#include <yai/compiler_attributes.h>
+#include <yai/types.h>
 
 /*
  * may_use_simd - whether it is allowable at this time to issue SIMD

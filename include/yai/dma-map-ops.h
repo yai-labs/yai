@@ -65,7 +65,7 @@ struct dma_map_ops {
 };
 
 #ifdef CONFIG_ARCH_HAS_DMA_OPS
-#include <asm/dma-mapping.h>
+#include <yai/dma-mapping.h>
 
 static inline const struct dma_map_ops *get_dma_ops(struct device *dev)
 {

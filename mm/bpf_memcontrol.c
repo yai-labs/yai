@@ -5,8 +5,8 @@
  * Author: Roman Gushchin <roman.gushchin@linux.dev>
  */
 
-#include <linux/memcontrol.h>
-#include <linux/bpf.h>
+#include <yai/memcontrol.h>
+#include <yai/bpf.h>
 
 __bpf_kfunc_start_defs();
 

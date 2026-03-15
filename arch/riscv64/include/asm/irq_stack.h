@@ -3,12 +3,12 @@
 #ifndef _ASM_RISCV_IRQ_STACK_H
 #define _ASM_RISCV_IRQ_STACK_H
 
-#include <linux/bug.h>
-#include <linux/gfp.h>
-#include <linux/kconfig.h>
-#include <linux/vmalloc.h>
-#include <linux/pgtable.h>
-#include <asm/thread_info.h>
+#include <yai/bug.h>
+#include <yai/gfp.h>
+#include <yai/kconfig.h>
+#include <yai/vmalloc.h>
+#include <yai/pgtable.h>
+#include <yai/thread_info.h>
 
 DECLARE_PER_CPU(ulong *, irq_stack_ptr);
 

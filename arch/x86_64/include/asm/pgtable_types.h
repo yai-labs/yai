@@ -2,10 +2,10 @@
 #ifndef _ASM_X86_PGTABLE_DEFS_H
 #define _ASM_X86_PGTABLE_DEFS_H
 
-#include <linux/const.h>
-#include <linux/mem_encrypt.h>
+#include <yai/const.h>
+#include <yai/mem_encrypt.h>
 
-#include <asm/page_types.h>
+#include <yai/page_types.h>
 
 #define _PAGE_BIT_PRESENT	0	/* is present */
 #define _PAGE_BIT_RW		1	/* writeable */
@@ -272,14 +272,14 @@ enum page_cache_mode {
 #endif
 
 #ifdef CONFIG_X86_32
-# include <asm/pgtable_32_types.h>
+# include <yai/pgtable_32_types.h>
 #else
-# include <asm/pgtable_64_types.h>
+# include <yai/pgtable_64_types.h>
 #endif
 
 #ifndef __ASSEMBLER__
 
-#include <linux/types.h>
+#include <yai/types.h>
 
 /* Extracts the PFN from a (pte|pmd|pud|pgd)val_t of a 4KB page */
 #define PTE_PFN_MASK		((pteval_t)PHYSICAL_PAGE_MASK)
@@ -351,7 +351,7 @@ static inline p4dval_t native_p4d_val(p4d_t p4d)
 	return p4d.p4d;
 }
 #else
-#include <asm-generic/pgtable-nop4d.h>
+#include <yai/pgtable-nop4d.h>
 
 static inline p4d_t native_make_p4d(pudval_t val)
 {
@@ -377,7 +377,7 @@ static inline pudval_t native_pud_val(pud_t pud)
 	return pud.pud;
 }
 #else
-#include <asm-generic/pgtable-nopud.h>
+#include <yai/pgtable-nopud.h>
 
 static inline pud_t native_make_pud(pudval_t val)
 {
@@ -401,7 +401,7 @@ static inline pmdval_t native_pmd_val(pmd_t pmd)
 	return pmd.pmd;
 }
 #else
-#include <asm-generic/pgtable-nopmd.h>
+#include <yai/pgtable-nopmd.h>
 
 static inline pmd_t native_make_pmd(pmdval_t val)
 {

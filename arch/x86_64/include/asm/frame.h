@@ -2,7 +2,7 @@
 #ifndef _ASM_X86_FRAME_H
 #define _ASM_X86_FRAME_H
 
-#include <asm/asm.h>
+#include <yai/asm.h>
 
 /*
  * These are stack frame creation macros.  They should be used by every

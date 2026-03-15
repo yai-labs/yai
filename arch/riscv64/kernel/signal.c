@@ -6,23 +6,23 @@
  * Copyright (C) 2012 Regents of the University of California
  */
 
-#include <linux/compat.h>
-#include <linux/signal.h>
-#include <linux/uaccess.h>
-#include <linux/syscalls.h>
-#include <linux/resume_user_mode.h>
-#include <linux/linkage.h>
-#include <linux/entry-common.h>
+#include <yai/compat.h>
+#include <yai/signal.h>
+#include <yai/uaccess.h>
+#include <yai/syscalls.h>
+#include <yai/resume_user_mode.h>
+#include <yai/linkage.h>
+#include <yai/entry-common.h>
 
-#include <asm/ucontext.h>
-#include <asm/vdso.h>
-#include <asm/signal.h>
-#include <asm/signal32.h>
-#include <asm/switch_to.h>
-#include <asm/vector.h>
-#include <asm/csr.h>
-#include <asm/cacheflush.h>
-#include <asm/usercfi.h>
+#include <yai/ucontext.h>
+#include <yai/vdso.h>
+#include <yai/signal.h>
+#include <yai/signal32.h>
+#include <yai/switch_to.h>
+#include <yai/vector.h>
+#include <yai/csr.h>
+#include <yai/cacheflush.h>
+#include <yai/usercfi.h>
 
 unsigned long signal_minsigstksz __ro_after_init;
 

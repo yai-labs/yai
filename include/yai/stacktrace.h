@@ -3,7 +3,7 @@
 #define __LINUX_STACKTRACE_H
 
 #include <yai/types.h>
-#include <asm/errno.h>
+#include <yai/errno.h>
 
 struct task_struct;
 struct pt_regs;

@@ -8,18 +8,18 @@
  *		Initial version.
  */
 
-#include <linux/kernel.h>
-#include <linux/file.h>
-#include <linux/fs.h>
-#include <linux/mm.h>
-#include <linux/pagemap.h>
-#include <linux/backing-dev.h>
-#include <linux/fadvise.h>
-#include <linux/writeback.h>
-#include <linux/syscalls.h>
-#include <linux/swap.h>
+#include <yai/kernel.h>
+#include <yai/file.h>
+#include <yai/fs.h>
+#include <yai/mm.h>
+#include <yai/pagemap.h>
+#include <yai/backing-dev.h>
+#include <yai/fadvise.h>
+#include <yai/writeback.h>
+#include <yai/syscalls.h>
+#include <yai/swap.h>
 
-#include <asm/unistd.h>
+#include <yai/unistd.h>
 
 #include "internal.h"
 

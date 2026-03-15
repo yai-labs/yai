@@ -6,44 +6,44 @@
  * Copyright (C) 2012 ARM Ltd.
  */
 
-#include <linux/cache.h>
-#include <linux/export.h>
-#include <linux/kernel.h>
-#include <linux/errno.h>
-#include <linux/init.h>
-#include <linux/ioport.h>
-#include <linux/kexec.h>
-#include <linux/libfdt.h>
-#include <linux/mman.h>
-#include <linux/nodemask.h>
-#include <linux/memblock.h>
-#include <linux/memremap.h>
-#include <linux/memory.h>
-#include <linux/fs.h>
-#include <linux/io.h>
-#include <linux/mm.h>
-#include <linux/vmalloc.h>
-#include <linux/set_memory.h>
-#include <linux/kfence.h>
-#include <linux/pkeys.h>
-#include <linux/mm_inline.h>
-#include <linux/pagewalk.h>
-#include <linux/stop_machine.h>
+#include <yai/cache.h>
+#include <yai/export.h>
+#include <yai/kernel.h>
+#include <yai/errno.h>
+#include <yai/init.h>
+#include <yai/ioport.h>
+#include <yai/kexec.h>
+#include <yai/libfdt.h>
+#include <yai/mman.h>
+#include <yai/nodemask.h>
+#include <yai/memblock.h>
+#include <yai/memremap.h>
+#include <yai/memory.h>
+#include <yai/fs.h>
+#include <yai/io.h>
+#include <yai/mm.h>
+#include <yai/vmalloc.h>
+#include <yai/set_memory.h>
+#include <yai/kfence.h>
+#include <yai/pkeys.h>
+#include <yai/mm_inline.h>
+#include <yai/pagewalk.h>
+#include <yai/stop_machine.h>
 
-#include <asm/barrier.h>
-#include <asm/cputype.h>
-#include <asm/fixmap.h>
-#include <asm/kasan.h>
-#include <asm/kernel-pgtable.h>
-#include <asm/sections.h>
-#include <asm/setup.h>
-#include <linux/sizes.h>
-#include <asm/tlb.h>
-#include <asm/mmu_context.h>
-#include <asm/ptdump.h>
-#include <asm/tlbflush.h>
-#include <asm/pgalloc.h>
-#include <asm/kfence.h>
+#include <yai/barrier.h>
+#include <yai/cputype.h>
+#include <yai/fixmap.h>
+#include <yai/kasan.h>
+#include <yai/kernel-pgtable.h>
+#include <yai/sections.h>
+#include <yai/setup.h>
+#include <yai/sizes.h>
+#include <yai/tlb.h>
+#include <yai/mmu_context.h>
+#include <yai/ptdump.h>
+#include <yai/tlbflush.h>
+#include <yai/pgalloc.h>
+#include <yai/kfence.h>
 
 #define NO_BLOCK_MAPPINGS	BIT(0)
 #define NO_CONT_MAPPINGS	BIT(1)

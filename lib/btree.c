@@ -37,11 +37,11 @@
  * simply loop once over all slots and terminate on the first NUL.
  */
 
-#include <linux/btree.h>
-#include <linux/cache.h>
-#include <linux/kernel.h>
-#include <linux/slab.h>
-#include <linux/module.h>
+#include <yai/btree.h>
+#include <yai/cache.h>
+#include <yai/kernel.h>
+#include <yai/slab.h>
+#include <yai/module.h>
 
 #define NODESIZE MAX(L1_CACHE_BYTES, 128)
 

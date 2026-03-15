@@ -8,25 +8,25 @@
  * Copyright (C) 2017 SiFive
  */
 
-#include <linux/cpu.h>
-#include <linux/clockchips.h>
-#include <linux/interrupt.h>
-#include <linux/module.h>
-#include <linux/kexec.h>
-#include <linux/kgdb.h>
-#include <linux/percpu.h>
-#include <linux/profile.h>
-#include <linux/smp.h>
-#include <linux/sched.h>
-#include <linux/seq_file.h>
-#include <linux/delay.h>
-#include <linux/irq.h>
-#include <linux/irq_work.h>
-#include <linux/nmi.h>
+#include <yai/cpu.h>
+#include <yai/clockchips.h>
+#include <yai/interrupt.h>
+#include <yai/module.h>
+#include <yai/kexec.h>
+#include <yai/kgdb.h>
+#include <yai/percpu.h>
+#include <yai/profile.h>
+#include <yai/smp.h>
+#include <yai/sched.h>
+#include <yai/seq_file.h>
+#include <yai/delay.h>
+#include <yai/irq.h>
+#include <yai/irq_work.h>
+#include <yai/nmi.h>
 
-#include <asm/tlbflush.h>
-#include <asm/cacheflush.h>
-#include <asm/cpu_ops.h>
+#include <yai/tlbflush.h>
+#include <yai/cacheflush.h>
+#include <yai/cpu_ops.h>
 
 enum ipi_message_type {
 	IPI_RESCHEDULE,

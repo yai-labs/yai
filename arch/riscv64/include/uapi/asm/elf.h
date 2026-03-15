@@ -12,7 +12,7 @@
 #ifndef _UAPI_ASM_RISCV_ELF_H
 #define _UAPI_ASM_RISCV_ELF_H
 
-#include <asm/ptrace.h>
+#include <yai/ptrace.h>
 
 /* ELF register definitions */
 typedef unsigned long elf_greg_t;

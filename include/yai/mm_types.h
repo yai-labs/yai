@@ -23,7 +23,7 @@
 #include <yai/rseq_types.h>
 #include <yai/bitmap.h>
 
-#include <asm/mmu.h>
+#include <yai/mmu.h>
 
 #ifndef AT_VECTOR_SIZE_ARCH
 #define AT_VECTOR_SIZE_ARCH 0

@@ -19,25 +19,25 @@
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
-#include <linux/module.h>
+#include <yai/module.h>
 
-#include <linux/types.h>
-#include <linux/errno.h>
-#include <linux/fcntl.h>
-#include <linux/init.h>
-#include <linux/poll.h>
-#include <linux/smp.h>
-#include <linux/major.h>
-#include <linux/fs.h>
-#include <linux/device.h>
-#include <linux/cpu.h>
-#include <linux/notifier.h>
-#include <linux/uaccess.h>
-#include <linux/gfp.h>
-#include <linux/security.h>
+#include <yai/types.h>
+#include <yai/errno.h>
+#include <yai/fcntl.h>
+#include <yai/init.h>
+#include <yai/poll.h>
+#include <yai/smp.h>
+#include <yai/major.h>
+#include <yai/fs.h>
+#include <yai/device.h>
+#include <yai/cpu.h>
+#include <yai/notifier.h>
+#include <yai/uaccess.h>
+#include <yai/gfp.h>
+#include <yai/security.h>
 
-#include <asm/cpufeature.h>
-#include <asm/msr.h>
+#include <yai/cpufeature.h>
+#include <yai/msr.h>
 
 static enum cpuhp_state cpuhp_msr_state;
 

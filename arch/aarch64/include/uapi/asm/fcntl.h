@@ -25,6 +25,6 @@
 #define O_DIRECT	0200000	/* direct disk access hint - currently ignored */
 #define O_LARGEFILE	0400000
 
-#include <asm-generic/fcntl.h>
+#include <yai/fcntl.h>
 
 #endif

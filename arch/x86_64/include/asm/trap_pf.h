@@ -2,7 +2,7 @@
 #ifndef _ASM_X86_TRAP_PF_H
 #define _ASM_X86_TRAP_PF_H
 
-#include <linux/bits.h>
+#include <yai/bits.h>
 
 /*
  * Page fault error code bits:

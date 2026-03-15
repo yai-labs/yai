@@ -9,36 +9,36 @@
 
 #define pr_fmt(fmt)	"SEV: " fmt
 
-#include <linux/percpu-defs.h>
-#include <linux/cc_platform.h>
-#include <linux/printk.h>
-#include <linux/mm_types.h>
-#include <linux/set_memory.h>
-#include <linux/memblock.h>
-#include <linux/kernel.h>
-#include <linux/mm.h>
-#include <linux/cpumask.h>
-#include <linux/efi.h>
-#include <linux/io.h>
-#include <linux/psp-sev.h>
-#include <uapi/linux/sev-guest.h>
+#include <yai/percpu-defs.h>
+#include <yai/cc_platform.h>
+#include <yai/printk.h>
+#include <yai/mm_types.h>
+#include <yai/set_memory.h>
+#include <yai/memblock.h>
+#include <yai/kernel.h>
+#include <yai/mm.h>
+#include <yai/cpumask.h>
+#include <yai/efi.h>
+#include <yai/io.h>
+#include <yai/psp-sev.h>
+#include <yai/sev-guest.h>
 
-#include <asm/init.h>
-#include <asm/cpu_entry_area.h>
-#include <asm/stacktrace.h>
-#include <asm/sev.h>
-#include <asm/insn-eval.h>
-#include <asm/fpu/xcr.h>
-#include <asm/processor.h>
-#include <asm/realmode.h>
-#include <asm/setup.h>
-#include <asm/traps.h>
-#include <asm/svm.h>
-#include <asm/smp.h>
-#include <asm/cpu.h>
-#include <asm/apic.h>
-#include <asm/cpuid/api.h>
-#include <asm/cmdline.h>
+#include <yai/init.h>
+#include <yai/cpu_entry_area.h>
+#include <yai/stacktrace.h>
+#include <yai/sev.h>
+#include <yai/insn-eval.h>
+#include <yai/fpu/xcr.h>
+#include <yai/processor.h>
+#include <yai/realmode.h>
+#include <yai/setup.h>
+#include <yai/traps.h>
+#include <yai/svm.h>
+#include <yai/smp.h>
+#include <yai/cpu.h>
+#include <yai/apic.h>
+#include <yai/cpuid/api.h>
+#include <yai/cmdline.h>
 
 #include "../../coco/sev/internal.h"
 

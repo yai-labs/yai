@@ -9,9 +9,9 @@
 #define _ASM_RISCV_WORD_AT_A_TIME_H
 
 
-#include <asm/asm-extable.h>
-#include <linux/bitops.h>
-#include <linux/wordpart.h>
+#include <yai/asm-extable.h>
+#include <yai/bitops.h>
+#include <yai/wordpart.h>
 
 struct word_at_a_time {
 	const unsigned long one_bits, high_bits;

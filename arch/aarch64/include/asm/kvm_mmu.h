@@ -7,10 +7,10 @@
 #ifndef __ARM64_KVM_MMU_H__
 #define __ARM64_KVM_MMU_H__
 
-#include <asm/page.h>
-#include <asm/memory.h>
-#include <asm/mmu.h>
-#include <asm/cpufeature.h>
+#include <yai/page.h>
+#include <yai/memory.h>
+#include <yai/mmu.h>
+#include <yai/cpufeature.h>
 
 /*
  * As ARMv8.0 only has the TTBR0_EL2 register, we cannot express
@@ -51,7 +51,7 @@
 
 #ifdef __ASSEMBLER__
 
-#include <asm/alternative.h>
+#include <yai/alternative.h>
 
 /*
  * Convert a hypervisor VA to a PA
@@ -91,14 +91,14 @@ alternative_cb_end
 
 #else
 
-#include <linux/pgtable.h>
-#include <asm/pgalloc.h>
-#include <asm/cache.h>
-#include <asm/cacheflush.h>
-#include <asm/mmu_context.h>
-#include <asm/kvm_emulate.h>
-#include <asm/kvm_host.h>
-#include <asm/kvm_nested.h>
+#include <yai/pgtable.h>
+#include <yai/pgalloc.h>
+#include <yai/cache.h>
+#include <yai/cacheflush.h>
+#include <yai/mmu_context.h>
+#include <yai/kvm_emulate.h>
+#include <yai/kvm_host.h>
+#include <yai/kvm_nested.h>
 
 void kvm_update_va_mask(struct alt_instr *alt,
 			__le32 *origptr, __le32 *updptr, int nr_inst);
@@ -152,8 +152,8 @@ extern u32 __hyp_va_bits;
 #define kvm_phys_size(mmu)		(_AC(1, ULL) << kvm_phys_shift(mmu))
 #define kvm_phys_mask(mmu)		(kvm_phys_size(mmu) - _AC(1, ULL))
 
-#include <asm/kvm_pgtable.h>
-#include <asm/stage2_pgtable.h>
+#include <yai/kvm_pgtable.h>
+#include <yai/stage2_pgtable.h>
 
 int kvm_share_hyp(void *from, void *to);
 void kvm_unshare_hyp(void *from, void *to);

@@ -10,14 +10,14 @@
  */
 #define pr_fmt(fmt)	"HugeTLB: " fmt
 
-#include <linux/pgtable.h>
-#include <linux/moduleparam.h>
-#include <linux/bootmem_info.h>
-#include <linux/mmdebug.h>
-#include <linux/pagewalk.h>
-#include <linux/pgalloc.h>
+#include <yai/pgtable.h>
+#include <yai/moduleparam.h>
+#include <yai/bootmem_info.h>
+#include <yai/mmdebug.h>
+#include <yai/pagewalk.h>
+#include <yai/pgalloc.h>
 
-#include <asm/tlbflush.h>
+#include <yai/tlbflush.h>
 #include "hugetlb_vmemmap.h"
 
 /**

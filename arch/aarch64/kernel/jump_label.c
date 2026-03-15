@@ -5,11 +5,11 @@
  *
  * Based on arch/arm/kernel/jump_label.c
  */
-#include <linux/kernel.h>
-#include <linux/jump_label.h>
-#include <linux/smp.h>
-#include <asm/insn.h>
-#include <asm/text-patching.h>
+#include <yai/kernel.h>
+#include <yai/jump_label.h>
+#include <yai/smp.h>
+#include <yai/insn.h>
+#include <yai/text-patching.h>
 
 bool arch_jump_label_transform_queue(struct jump_entry *entry,
 				     enum jump_label_type type)

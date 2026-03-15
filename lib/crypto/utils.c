@@ -6,9 +6,9 @@
  */
 
 #include <crypto/utils.h>
-#include <linux/export.h>
-#include <linux/module.h>
-#include <linux/unaligned.h>
+#include <yai/export.h>
+#include <yai/module.h>
+#include <yai/unaligned.h>
 
 /*
  * XOR @len bytes from @src1 and @src2 together, writing the result to @dst

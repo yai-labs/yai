@@ -5,8 +5,8 @@
  * Copyright 2018 Google LLC
  */
 
-#include <asm/fpu/api.h>
-#include <linux/static_call.h>
+#include <yai/fpu/api.h>
+#include <yai/static_call.h>
 
 static __ro_after_init DEFINE_STATIC_KEY_FALSE(have_sse2);
 static __ro_after_init DEFINE_STATIC_KEY_FALSE(have_avx2);

@@ -25,7 +25,7 @@
  * no advantages to be gotten from x86-64 here anyways.
  */
 
-#include <asm/fpu/api.h>
+#include <yai/fpu/api.h>
 
 #ifdef CONFIG_X86_32
 /* reduce register pressure */
@@ -491,9 +491,9 @@ static struct xor_block_template xor_block_sse_pf64 = {
 #undef XOR_CONSTANT_CONSTRAINT
 
 #ifdef CONFIG_X86_32
-# include <asm/xor_32.h>
+# include <yai/xor_32.h>
 #else
-# include <asm/xor_64.h>
+# include <yai/xor_64.h>
 #endif
 
 #define XOR_SELECT_TEMPLATE(FASTEST) \

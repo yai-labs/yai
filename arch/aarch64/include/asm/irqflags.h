@@ -5,9 +5,9 @@
 #ifndef __ASM_IRQFLAGS_H
 #define __ASM_IRQFLAGS_H
 
-#include <asm/barrier.h>
-#include <asm/ptrace.h>
-#include <asm/sysreg.h>
+#include <yai/barrier.h>
+#include <yai/ptrace.h>
+#include <yai/sysreg.h>
 
 /*
  * Aarch64 has flags for masking: Debug, Asynchronous (serror), Interrupts and

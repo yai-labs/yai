@@ -8,21 +8,21 @@
  */
 #define COMPILE_OFFSETS
 
-#include <linux/arm_sdei.h>
-#include <linux/sched.h>
-#include <linux/ftrace.h>
-#include <linux/kexec.h>
-#include <linux/mm.h>
-#include <linux/kvm_host.h>
-#include <linux/suspend.h>
-#include <asm/cpufeature.h>
-#include <asm/fixmap.h>
-#include <asm/thread_info.h>
-#include <asm/memory.h>
-#include <asm/smp_plat.h>
-#include <asm/suspend.h>
-#include <linux/kbuild.h>
-#include <linux/arm-smccc.h>
+#include <yai/arm_sdei.h>
+#include <yai/sched.h>
+#include <yai/ftrace.h>
+#include <yai/kexec.h>
+#include <yai/mm.h>
+#include <yai/kvm_host.h>
+#include <yai/suspend.h>
+#include <yai/cpufeature.h>
+#include <yai/fixmap.h>
+#include <yai/thread_info.h>
+#include <yai/memory.h>
+#include <yai/smp_plat.h>
+#include <yai/suspend.h>
+#include <yai/kbuild.h>
+#include <yai/arm-smccc.h>
 
 int main(void)
 {

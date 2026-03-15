@@ -8,7 +8,7 @@
  * ask the bios for the correct state.
  */
 
-#include <asm/setup.h>
+#include <yai/setup.h>
 
 static inline int kbd_defleds(void)
 {

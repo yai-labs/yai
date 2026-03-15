@@ -2,7 +2,7 @@
 #ifndef _ASM_E820_API_H
 #define _ASM_E820_API_H
 
-#include <asm/e820/types.h>
+#include <yai/e820/types.h>
 
 extern struct e820_table *e820_table;
 extern struct e820_table *e820_table_kexec;

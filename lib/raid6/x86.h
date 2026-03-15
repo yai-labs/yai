@@ -18,7 +18,7 @@
 
 #ifdef __KERNEL__ /* Real code */
 
-#include <asm/fpu/api.h>
+#include <yai/fpu/api.h>
 
 #else /* Dummy code for user space testing */
 

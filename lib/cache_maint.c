@@ -11,16 +11,16 @@
  * race exists but this is no worse than the case where the operations instance
  * responsible for a given memory region has not yet registered.
  */
-#include <linux/cache_coherency.h>
-#include <linux/cleanup.h>
-#include <linux/container_of.h>
-#include <linux/export.h>
-#include <linux/kref.h>
-#include <linux/list.h>
-#include <linux/memregion.h>
-#include <linux/module.h>
-#include <linux/rwsem.h>
-#include <linux/slab.h>
+#include <yai/cache_coherency.h>
+#include <yai/cleanup.h>
+#include <yai/container_of.h>
+#include <yai/export.h>
+#include <yai/kref.h>
+#include <yai/list.h>
+#include <yai/memregion.h>
+#include <yai/module.h>
+#include <yai/rwsem.h>
+#include <yai/slab.h>
 
 static LIST_HEAD(cache_ops_instance_list);
 static DECLARE_RWSEM(cache_ops_instance_list_lock);

@@ -2,7 +2,7 @@
 #ifndef _ASM_X86_PAGE_32_H
 #define _ASM_X86_PAGE_32_H
 
-#include <asm/page_32_types.h>
+#include <yai/page_32_types.h>
 
 #ifndef __ASSEMBLER__
 
@@ -15,7 +15,7 @@ extern unsigned long __phys_addr(unsigned long);
 #define __phys_addr_symbol(x)	__phys_addr(x)
 #define __phys_reloc_hide(x)	RELOC_HIDE((x), 0)
 
-#include <linux/string.h>
+#include <yai/string.h>
 
 /**
  * clear_page() - clear a page using a kernel virtual address.

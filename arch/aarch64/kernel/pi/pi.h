@@ -2,7 +2,7 @@
 // Copyright 2023 Google LLC
 // Author: Ard Biesheuvel <ardb@google.com>
 
-#include <linux/types.h>
+#include <yai/types.h>
 
 #define __prel64_initconst	__section(".init.rodata.prel64")
 

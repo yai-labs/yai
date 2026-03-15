@@ -7,35 +7,35 @@
  */
 #define pr_fmt(fmt) "ACPI: " fmt
 
-#include <linux/init.h>
-#include <linux/acpi.h>
-#include <linux/acpi_pmtmr.h>
-#include <linux/efi.h>
-#include <linux/cpumask.h>
-#include <linux/export.h>
-#include <linux/dmi.h>
-#include <linux/irq.h>
-#include <linux/slab.h>
-#include <linux/memblock.h>
-#include <linux/ioport.h>
-#include <linux/pci.h>
-#include <linux/efi-bgrt.h>
-#include <linux/serial_core.h>
-#include <linux/pgtable.h>
+#include <yai/init.h>
+#include <yai/acpi.h>
+#include <yai/acpi_pmtmr.h>
+#include <yai/efi.h>
+#include <yai/cpumask.h>
+#include <yai/export.h>
+#include <yai/dmi.h>
+#include <yai/irq.h>
+#include <yai/slab.h>
+#include <yai/memblock.h>
+#include <yai/ioport.h>
+#include <yai/pci.h>
+#include <yai/efi-bgrt.h>
+#include <yai/serial_core.h>
+#include <yai/pgtable.h>
 
 #include <xen/xen.h>
 
-#include <asm/e820/api.h>
-#include <asm/irqdomain.h>
-#include <asm/pci_x86.h>
-#include <asm/io_apic.h>
-#include <asm/apic.h>
-#include <asm/io.h>
-#include <asm/mpspec.h>
-#include <asm/smp.h>
-#include <asm/i8259.h>
-#include <asm/setup.h>
-#include <asm/hypervisor.h>
+#include <yai/e820/api.h>
+#include <yai/irqdomain.h>
+#include <yai/pci_x86.h>
+#include <yai/io_apic.h>
+#include <yai/apic.h>
+#include <yai/io.h>
+#include <yai/mpspec.h>
+#include <yai/smp.h>
+#include <yai/i8259.h>
+#include <yai/setup.h>
+#include <yai/hypervisor.h>
 
 #include "sleep.h" /* To include x86_acpi_suspend_lowlevel */
 static int __initdata acpi_force = 0;
@@ -43,7 +43,7 @@ int acpi_disabled;
 EXPORT_SYMBOL(acpi_disabled);
 
 #ifdef	CONFIG_X86_64
-# include <asm/proto.h>
+# include <yai/proto.h>
 #endif				/* X86 */
 
 int acpi_noirq;				/* skip ACPI IRQ initialization */
@@ -890,7 +890,7 @@ static int __init acpi_parse_sbf(struct acpi_table_header *table)
 }
 
 #ifdef CONFIG_HPET_TIMER
-#include <asm/hpet.h>
+#include <yai/hpet.h>
 
 static struct resource *hpet_res __initdata;
 

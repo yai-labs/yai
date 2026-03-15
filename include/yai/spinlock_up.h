@@ -5,8 +5,8 @@
 # error "Please do not include this file directly."
 #endif
 
-#include <asm/processor.h>	/* for cpu_relax() */
-#include <asm/barrier.h>
+#include <yai/processor.h>	/* for cpu_relax() */
+#include <yai/barrier.h>
 
 /*
  * include/linux/spinlock_up.h - UP-debug version of spinlocks.

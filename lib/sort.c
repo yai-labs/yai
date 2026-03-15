@@ -10,9 +10,9 @@
  * quicksort's O(n^2) worst case.
  */
 
-#include <linux/types.h>
-#include <linux/export.h>
-#include <linux/sort.h>
+#include <yai/types.h>
+#include <yai/export.h>
+#include <yai/sort.h>
 
 /**
  * is_aligned - is this pointer & size okay for word-wide copying?
@@ -186,7 +186,7 @@ static size_t parent(size_t i, unsigned int lsbit, size_t size)
 	return i / 2;
 }
 
-#include <linux/sched.h>
+#include <yai/sched.h>
 
 static void __sort_r(void *base, size_t num, size_t size,
 		     cmp_r_func_t cmp_func,

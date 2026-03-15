@@ -1,30 +1,30 @@
 // SPDX-License-Identifier: GPL-2.0
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
-#include <linux/mm.h>
-#include <linux/sched.h>
-#include <linux/sched/mm.h>
-#include <linux/mmu_notifier.h>
-#include <linux/rmap.h>
-#include <linux/swap.h>
-#include <linux/mm_inline.h>
-#include <linux/kthread.h>
-#include <linux/khugepaged.h>
-#include <linux/freezer.h>
-#include <linux/mman.h>
-#include <linux/hashtable.h>
-#include <linux/userfaultfd_k.h>
-#include <linux/page_idle.h>
-#include <linux/page_table_check.h>
-#include <linux/rcupdate_wait.h>
-#include <linux/leafops.h>
-#include <linux/shmem_fs.h>
-#include <linux/dax.h>
-#include <linux/ksm.h>
-#include <linux/pgalloc.h>
-#include <linux/backing-dev.h>
+#include <yai/mm.h>
+#include <yai/sched.h>
+#include <yai/sched/mm.h>
+#include <yai/mmu_notifier.h>
+#include <yai/rmap.h>
+#include <yai/swap.h>
+#include <yai/mm_inline.h>
+#include <yai/kthread.h>
+#include <yai/khugepaged.h>
+#include <yai/freezer.h>
+#include <yai/mman.h>
+#include <yai/hashtable.h>
+#include <yai/userfaultfd_k.h>
+#include <yai/page_idle.h>
+#include <yai/page_table_check.h>
+#include <yai/rcupdate_wait.h>
+#include <yai/leafops.h>
+#include <yai/shmem_fs.h>
+#include <yai/dax.h>
+#include <yai/ksm.h>
+#include <yai/pgalloc.h>
+#include <yai/backing-dev.h>
 
-#include <asm/tlb.h>
+#include <yai/tlb.h>
 #include "internal.h"
 #include "mm_slot.h"
 

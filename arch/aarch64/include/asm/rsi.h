@@ -6,9 +6,9 @@
 #ifndef __ASM_RSI_H_
 #define __ASM_RSI_H_
 
-#include <linux/errno.h>
-#include <linux/jump_label.h>
-#include <asm/rsi_cmds.h>
+#include <yai/errno.h>
+#include <yai/jump_label.h>
+#include <yai/rsi_cmds.h>
 
 #define RSI_PDEV_NAME "arm-cca-dev"
 

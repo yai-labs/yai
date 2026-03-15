@@ -35,16 +35,16 @@
  */
 #define USE_EARLY_PGTABLE_L5
 
-#include <linux/kernel.h>
-#include <linux/mm.h>
-#include <linux/mem_encrypt.h>
-#include <linux/cc_platform.h>
+#include <yai/kernel.h>
+#include <yai/mm.h>
+#include <yai/mem_encrypt.h>
+#include <yai/cc_platform.h>
 
-#include <asm/init.h>
-#include <asm/setup.h>
-#include <asm/sections.h>
-#include <asm/coco.h>
-#include <asm/sev.h>
+#include <yai/init.h>
+#include <yai/setup.h>
+#include <yai/sections.h>
+#include <yai/coco.h>
+#include <yai/sev.h>
 
 #define PGD_FLAGS		_KERNPG_TABLE_NOENC
 #define P4D_FLAGS		_KERNPG_TABLE_NOENC

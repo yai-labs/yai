@@ -8,7 +8,7 @@
 #ifndef I3C_MASTER_H
 #define I3C_MASTER_H
 
-#include <asm/bitsperlong.h>
+#include <yai/bitsperlong.h>
 
 #include <yai/bitops.h>
 #include <yai/i2c.h>

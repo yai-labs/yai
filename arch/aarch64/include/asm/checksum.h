@@ -5,7 +5,7 @@
 #ifndef __ASM_CHECKSUM_H
 #define __ASM_CHECKSUM_H
 
-#include <linux/in6.h>
+#include <yai/in6.h>
 
 #define _HAVE_ARCH_IPV6_CSUM
 __sum16 csum_ipv6_magic(const struct in6_addr *saddr,
@@ -44,6 +44,6 @@ static inline __sum16 ip_fast_csum(const void *iph, unsigned int ihl)
 extern unsigned int do_csum(const unsigned char *buff, int len);
 #define do_csum do_csum
 
-#include <asm-generic/checksum.h>
+#include <yai/checksum.h>
 
 #endif	/* __ASM_CHECKSUM_H */

@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0
-#include <linux/init.h>
-#include <linux/kernel.h>
-#include <linux/module.h>
+#include <yai/init.h>
+#include <yai/kernel.h>
+#include <yai/module.h>
 
 typedef void(*test_ubsan_fp)(void);
 

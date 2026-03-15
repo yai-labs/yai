@@ -2,14 +2,14 @@
 #ifndef _ASM_X86_CPUFEATURE_H
 #define _ASM_X86_CPUFEATURE_H
 
-#include <asm/processor.h>
+#include <yai/processor.h>
 
 #if defined(__KERNEL__) && !defined(__ASSEMBLER__)
 
-#include <asm/asm.h>
-#include <linux/bitops.h>
-#include <asm/alternative.h>
-#include <asm/cpufeaturemasks.h>
+#include <yai/asm.h>
+#include <yai/bitops.h>
+#include <yai/alternative.h>
+#include <yai/cpufeaturemasks.h>
 
 enum cpuid_leafs
 {

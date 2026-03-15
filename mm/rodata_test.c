@@ -7,10 +7,10 @@
  */
 #define pr_fmt(fmt) "rodata_test: " fmt
 
-#include <linux/rodata_test.h>
-#include <linux/uaccess.h>
-#include <linux/mm.h>
-#include <asm/sections.h>
+#include <yai/rodata_test.h>
+#include <yai/uaccess.h>
+#include <yai/mm.h>
+#include <yai/sections.h>
 
 #define TEST_VALUE 0xC3
 static const int rodata_test_data = TEST_VALUE;

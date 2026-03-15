@@ -16,13 +16,13 @@
  * frequency under ITMT.
  */
 
-#include <linux/sched.h>
-#include <linux/cpumask.h>
-#include <linux/cpuset.h>
-#include <linux/debugfs.h>
-#include <linux/mutex.h>
-#include <linux/sysctl.h>
-#include <linux/nodemask.h>
+#include <yai/sched.h>
+#include <yai/cpumask.h>
+#include <yai/cpuset.h>
+#include <yai/debugfs.h>
+#include <yai/mutex.h>
+#include <yai/sysctl.h>
+#include <yai/nodemask.h>
 
 static DEFINE_MUTEX(itmt_update_mutex);
 DEFINE_PER_CPU_READ_MOSTLY(int, sched_core_priority);

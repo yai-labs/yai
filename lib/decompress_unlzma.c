@@ -32,10 +32,10 @@
 #ifdef STATIC
 #define PREBOOT
 #else
-#include <linux/decompress/unlzma.h>
+#include <yai/decompress/unlzma.h>
 #endif /* STATIC */
 
-#include <linux/decompress/mm.h>
+#include <yai/decompress/mm.h>
 
 #ifndef MIN
 #define	MIN(a, b) (((a) < (b)) ? (a) : (b))
@@ -62,7 +62,7 @@ static long long INIT read_int(unsigned char *ptr, int size)
  *Copyright (c) 1999-2005  Igor Pavlov
  */
 
-#include <linux/compiler.h>
+#include <yai/compiler.h>
 
 #define LZMA_IOBUF_SIZE	0x10000
 

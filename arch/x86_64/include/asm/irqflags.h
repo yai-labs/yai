@@ -2,11 +2,11 @@
 #ifndef _X86_IRQFLAGS_H_
 #define _X86_IRQFLAGS_H_
 
-#include <asm/processor-flags.h>
+#include <yai/processor-flags.h>
 
 #ifndef __ASSEMBLER__
 
-#include <asm/nospec-branch.h>
+#include <yai/nospec-branch.h>
 
 /*
  * Interrupt control:
@@ -99,10 +99,10 @@ static __always_inline void halt(void)
 #endif /* CONFIG_PARAVIRT */
 
 #ifdef CONFIG_PARAVIRT_XXL
-#include <asm/paravirt.h>
+#include <yai/paravirt.h>
 #else
 #ifndef __ASSEMBLER__
-#include <linux/types.h>
+#include <yai/types.h>
 
 static __always_inline unsigned long arch_local_save_flags(void)
 {

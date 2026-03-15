@@ -103,9 +103,9 @@
       a repeat code (16, 17, or 18) to go across the boundary between
       the two sets of lengths.
  */
-#include <linux/compiler.h>
+#include <yai/compiler.h>
 #ifdef NO_INFLATE_MALLOC
-#include <linux/slab.h>
+#include <yai/slab.h>
 #endif
 
 #ifdef RCSID

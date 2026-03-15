@@ -9,21 +9,21 @@
 #ifndef __RISCV_KVM_HOST_H__
 #define __RISCV_KVM_HOST_H__
 
-#include <linux/types.h>
-#include <linux/kvm.h>
-#include <linux/kvm_types.h>
-#include <linux/spinlock.h>
-#include <asm/hwcap.h>
-#include <asm/kvm_aia.h>
-#include <asm/ptrace.h>
-#include <asm/kvm_tlb.h>
-#include <asm/kvm_vmid.h>
-#include <asm/kvm_vcpu_fp.h>
-#include <asm/kvm_vcpu_insn.h>
-#include <asm/kvm_vcpu_sbi.h>
-#include <asm/kvm_vcpu_sbi_fwft.h>
-#include <asm/kvm_vcpu_timer.h>
-#include <asm/kvm_vcpu_pmu.h>
+#include <yai/types.h>
+#include <yai/kvm.h>
+#include <yai/kvm_types.h>
+#include <yai/spinlock.h>
+#include <yai/hwcap.h>
+#include <yai/kvm_aia.h>
+#include <yai/ptrace.h>
+#include <yai/kvm_tlb.h>
+#include <yai/kvm_vmid.h>
+#include <yai/kvm_vcpu_fp.h>
+#include <yai/kvm_vcpu_insn.h>
+#include <yai/kvm_vcpu_sbi.h>
+#include <yai/kvm_vcpu_sbi_fwft.h>
+#include <yai/kvm_vcpu_timer.h>
+#include <yai/kvm_vcpu_pmu.h>
 
 #define KVM_MAX_VCPUS			1024
 

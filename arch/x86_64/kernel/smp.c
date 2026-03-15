@@ -9,32 +9,32 @@
  *	i386 and x86_64 integration by Glauber Costa <gcosta@redhat.com>
  */
 
-#include <linux/init.h>
+#include <yai/init.h>
 
-#include <linux/mm.h>
-#include <linux/delay.h>
-#include <linux/spinlock.h>
-#include <linux/export.h>
-#include <linux/kernel_stat.h>
-#include <linux/mc146818rtc.h>
-#include <linux/cache.h>
-#include <linux/interrupt.h>
-#include <linux/cpu.h>
-#include <linux/gfp.h>
-#include <linux/kexec.h>
+#include <yai/mm.h>
+#include <yai/delay.h>
+#include <yai/spinlock.h>
+#include <yai/export.h>
+#include <yai/kernel_stat.h>
+#include <yai/mc146818rtc.h>
+#include <yai/cache.h>
+#include <yai/interrupt.h>
+#include <yai/cpu.h>
+#include <yai/gfp.h>
+#include <yai/kexec.h>
 
-#include <asm/mtrr.h>
-#include <asm/tlbflush.h>
-#include <asm/mmu_context.h>
-#include <asm/proto.h>
-#include <asm/apic.h>
-#include <asm/cpu.h>
-#include <asm/idtentry.h>
-#include <asm/nmi.h>
-#include <asm/mce.h>
-#include <asm/trace/irq_vectors.h>
-#include <asm/kexec.h>
-#include <asm/reboot.h>
+#include <yai/mtrr.h>
+#include <yai/tlbflush.h>
+#include <yai/mmu_context.h>
+#include <yai/proto.h>
+#include <yai/apic.h>
+#include <yai/cpu.h>
+#include <yai/idtentry.h>
+#include <yai/nmi.h>
+#include <yai/mce.h>
+#include <yai/trace/irq_vectors.h>
+#include <yai/kexec.h>
+#include <yai/reboot.h>
 
 /*
  *	Some notes on x86 processor bugs affecting SMP operation:

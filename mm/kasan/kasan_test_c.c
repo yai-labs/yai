@@ -8,26 +8,26 @@
 #define pr_fmt(fmt) "kasan: test: " fmt
 
 #include <kunit/test.h>
-#include <linux/bitops.h>
-#include <linux/delay.h>
-#include <linux/io.h>
-#include <linux/kasan.h>
-#include <linux/kernel.h>
-#include <linux/mempool.h>
-#include <linux/mm.h>
-#include <linux/mman.h>
-#include <linux/module.h>
-#include <linux/printk.h>
-#include <linux/random.h>
-#include <linux/set_memory.h>
-#include <linux/slab.h>
-#include <linux/string.h>
-#include <linux/tracepoint.h>
-#include <linux/uaccess.h>
-#include <linux/vmalloc.h>
+#include <yai/bitops.h>
+#include <yai/delay.h>
+#include <yai/io.h>
+#include <yai/kasan.h>
+#include <yai/kernel.h>
+#include <yai/mempool.h>
+#include <yai/mm.h>
+#include <yai/mman.h>
+#include <yai/module.h>
+#include <yai/printk.h>
+#include <yai/random.h>
+#include <yai/set_memory.h>
+#include <yai/slab.h>
+#include <yai/string.h>
+#include <yai/tracepoint.h>
+#include <yai/uaccess.h>
+#include <yai/vmalloc.h>
 #include <trace/events/printk.h>
 
-#include <asm/page.h>
+#include <yai/page.h>
 
 #include "kasan.h"
 

@@ -7,8 +7,8 @@
  *
  * Copyright (C) 2022 Google LLC
  */
-#include <linux/bug.h>
-#include <asm/ibt.h>
+#include <yai/bug.h>
+#include <yai/ibt.h>
 
 /*
  * An overview of the various calling conventions...

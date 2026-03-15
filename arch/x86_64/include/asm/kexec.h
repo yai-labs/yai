@@ -15,7 +15,7 @@
 
 #ifdef CONFIG_X86_64
 
-#include <linux/bits.h>
+#include <yai/bits.h>
 
 #define RELOC_KERNEL_PRESERVE_CONTEXT	BIT(0)
 #define RELOC_KERNEL_CACHE_INCOHERENT	BIT(1)
@@ -27,12 +27,12 @@
 
 #ifndef __ASSEMBLER__
 
-#include <linux/string.h>
-#include <linux/kernel.h>
+#include <yai/string.h>
+#include <yai/kernel.h>
 
-#include <asm/asm.h>
-#include <asm/page.h>
-#include <asm/ptrace.h>
+#include <yai/asm.h>
+#include <yai/page.h>
+#include <yai/ptrace.h>
 
 struct kimage;
 

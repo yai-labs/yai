@@ -4,12 +4,12 @@
  *
  * Copyright (C) Hitachi Ltd., 2012
  */
-#include <linux/kprobes.h>
-#include <linux/ptrace.h>
-#include <linux/hardirq.h>
-#include <linux/preempt.h>
-#include <linux/ftrace.h>
-#include <asm/text-patching.h>
+#include <yai/kprobes.h>
+#include <yai/ptrace.h>
+#include <yai/hardirq.h>
+#include <yai/preempt.h>
+#include <yai/ftrace.h>
+#include <yai/text-patching.h>
 
 #include "common.h"
 

@@ -5,11 +5,11 @@
  * Copyright (c) 2021 Western Digital Corporation or its affiliates.
  */
 
-#include <linux/dma-direct.h>
-#include <linux/dma-map-ops.h>
-#include <linux/mm.h>
-#include <asm/cacheflush.h>
-#include <asm/dma-noncoherent.h>
+#include <yai/dma-direct.h>
+#include <yai/dma-map-ops.h>
+#include <yai/mm.h>
+#include <yai/cacheflush.h>
+#include <yai/dma-noncoherent.h>
 
 static bool noncoherent_supported __ro_after_init;
 int dma_cache_alignment __ro_after_init = ARCH_DMA_MINALIGN;

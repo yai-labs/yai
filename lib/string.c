@@ -15,20 +15,20 @@
  */
 
 #define __NO_FORTIFY
-#include <linux/bits.h>
-#include <linux/bug.h>
-#include <linux/ctype.h>
-#include <linux/errno.h>
-#include <linux/limits.h>
-#include <linux/linkage.h>
-#include <linux/stddef.h>
-#include <linux/string.h>
-#include <linux/types.h>
+#include <yai/bits.h>
+#include <yai/bug.h>
+#include <yai/ctype.h>
+#include <yai/errno.h>
+#include <yai/limits.h>
+#include <yai/linkage.h>
+#include <yai/stddef.h>
+#include <yai/string.h>
+#include <yai/types.h>
 
-#include <asm/page.h>
-#include <asm/rwonce.h>
-#include <linux/unaligned.h>
-#include <asm/word-at-a-time.h>
+#include <yai/page.h>
+#include <yai/rwonce.h>
+#include <yai/unaligned.h>
+#include <yai/word-at-a-time.h>
 
 #ifndef __HAVE_ARCH_STRNCASECMP
 /**

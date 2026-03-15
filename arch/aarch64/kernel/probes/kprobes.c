@@ -10,29 +10,29 @@
 
 #define pr_fmt(fmt) "kprobes: " fmt
 
-#include <linux/execmem.h>
-#include <linux/extable.h>
-#include <linux/kasan.h>
-#include <linux/kernel.h>
-#include <linux/kprobes.h>
-#include <linux/sched/debug.h>
-#include <linux/set_memory.h>
-#include <linux/slab.h>
-#include <linux/stop_machine.h>
-#include <linux/stringify.h>
-#include <linux/uaccess.h>
-#include <linux/vmalloc.h>
+#include <yai/execmem.h>
+#include <yai/extable.h>
+#include <yai/kasan.h>
+#include <yai/kernel.h>
+#include <yai/kprobes.h>
+#include <yai/sched/debug.h>
+#include <yai/set_memory.h>
+#include <yai/slab.h>
+#include <yai/stop_machine.h>
+#include <yai/stringify.h>
+#include <yai/uaccess.h>
+#include <yai/vmalloc.h>
 
-#include <asm/cacheflush.h>
-#include <asm/daifflags.h>
-#include <asm/debug-monitors.h>
-#include <asm/insn.h>
-#include <asm/irq.h>
-#include <asm/text-patching.h>
-#include <asm/ptrace.h>
-#include <asm/sections.h>
-#include <asm/system_misc.h>
-#include <asm/traps.h>
+#include <yai/cacheflush.h>
+#include <yai/daifflags.h>
+#include <yai/debug-monitors.h>
+#include <yai/insn.h>
+#include <yai/irq.h>
+#include <yai/text-patching.h>
+#include <yai/ptrace.h>
+#include <yai/sections.h>
+#include <yai/system_misc.h>
+#include <yai/traps.h>
 
 #include "decode-insn.h"
 

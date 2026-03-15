@@ -10,7 +10,7 @@
 #include <yai/tick.h>
 #include <yai/unwind_deferred.h>
 
-#include <asm/entry-common.h>
+#include <yai/entry-common.h>
 
 /*
  * Define dummy _TIF work flags if not defined by the architecture or for

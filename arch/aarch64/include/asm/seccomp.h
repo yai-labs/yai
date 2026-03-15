@@ -8,7 +8,7 @@
 #ifndef _ASM_SECCOMP_H
 #define _ASM_SECCOMP_H
 
-#include <asm/unistd_compat_32.h>
+#include <yai/unistd_compat_32.h>
 
 #ifdef CONFIG_COMPAT
 #define __NR_seccomp_read_32		__NR_compat32_read
@@ -17,7 +17,7 @@
 #define __NR_seccomp_sigreturn_32	__NR_compat32_rt_sigreturn
 #endif /* CONFIG_COMPAT */
 
-#include <asm-generic/seccomp.h>
+#include <yai/seccomp.h>
 
 #define SECCOMP_ARCH_NATIVE		AUDIT_ARCH_AARCH64
 #define SECCOMP_ARCH_NATIVE_NR		NR_syscalls

@@ -26,35 +26,35 @@
  *		<arjan@infradead.org> and Jim Keniston <jkenisto@us.ibm.com>
  *		unified x86 kprobes code.
  */
-#include <linux/kprobes.h>
-#include <linux/ptrace.h>
-#include <linux/string.h>
-#include <linux/slab.h>
-#include <linux/hardirq.h>
-#include <linux/preempt.h>
-#include <linux/sched/debug.h>
-#include <linux/perf_event.h>
-#include <linux/extable.h>
-#include <linux/kdebug.h>
-#include <linux/kallsyms.h>
-#include <linux/kgdb.h>
-#include <linux/ftrace.h>
-#include <linux/kasan.h>
-#include <linux/objtool.h>
-#include <linux/vmalloc.h>
-#include <linux/pgtable.h>
-#include <linux/set_memory.h>
-#include <linux/cfi.h>
-#include <linux/execmem.h>
+#include <yai/kprobes.h>
+#include <yai/ptrace.h>
+#include <yai/string.h>
+#include <yai/slab.h>
+#include <yai/hardirq.h>
+#include <yai/preempt.h>
+#include <yai/sched/debug.h>
+#include <yai/perf_event.h>
+#include <yai/extable.h>
+#include <yai/kdebug.h>
+#include <yai/kallsyms.h>
+#include <yai/kgdb.h>
+#include <yai/ftrace.h>
+#include <yai/kasan.h>
+#include <yai/objtool.h>
+#include <yai/vmalloc.h>
+#include <yai/pgtable.h>
+#include <yai/set_memory.h>
+#include <yai/cfi.h>
+#include <yai/execmem.h>
 
-#include <asm/text-patching.h>
-#include <asm/cacheflush.h>
-#include <asm/desc.h>
-#include <linux/uaccess.h>
-#include <asm/alternative.h>
-#include <asm/insn.h>
-#include <asm/debugreg.h>
-#include <asm/ibt.h>
+#include <yai/text-patching.h>
+#include <yai/cacheflush.h>
+#include <yai/desc.h>
+#include <yai/uaccess.h>
+#include <yai/alternative.h>
+#include <yai/insn.h>
+#include <yai/debugreg.h>
+#include <yai/ibt.h>
 
 #include "common.h"
 

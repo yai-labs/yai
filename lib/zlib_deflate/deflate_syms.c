@@ -6,10 +6,10 @@
  *
  */
 
-#include <linux/module.h>
-#include <linux/init.h>
+#include <yai/module.h>
+#include <yai/init.h>
 
-#include <linux/zlib.h>
+#include <yai/zlib.h>
 
 EXPORT_SYMBOL(zlib_deflate_workspacesize);
 EXPORT_SYMBOL(zlib_deflate_dfltcc_enabled);

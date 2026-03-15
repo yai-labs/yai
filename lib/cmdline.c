@@ -9,10 +9,10 @@
  * GNU Indent formatting options for this file: -kr -i8 -npsl -pcs
  */
 
-#include <linux/export.h>
-#include <linux/kernel.h>
-#include <linux/string.h>
-#include <linux/ctype.h>
+#include <yai/export.h>
+#include <yai/kernel.h>
+#include <yai/string.h>
+#include <yai/ctype.h>
 
 /*
  *	If a hyphen was found in get_option, this will handle the

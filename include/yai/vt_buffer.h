@@ -17,7 +17,7 @@
 #include <yai/string.h>
 
 #if IS_ENABLED(CONFIG_VGA_CONSOLE) || IS_ENABLED(CONFIG_MDA_CONSOLE)
-#include <asm/vga.h>
+#include <yai/vga.h>
 #endif
 
 #ifndef VT_BUF_HAVE_RW

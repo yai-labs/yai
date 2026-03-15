@@ -12,17 +12,17 @@
  */
 #include "misc.h"
 
-#include <asm/bootparam.h>
-#include <asm/pgtable_types.h>
-#include <asm/shared/msr.h>
-#include <asm/sev.h>
-#include <asm/trapnr.h>
-#include <asm/trap_pf.h>
-#include <asm/msr-index.h>
-#include <asm/fpu/xcr.h>
-#include <asm/ptrace.h>
-#include <asm/svm.h>
-#include <asm/cpuid/api.h>
+#include <yai/bootparam.h>
+#include <yai/pgtable_types.h>
+#include <yai/shared/msr.h>
+#include <yai/sev.h>
+#include <yai/trapnr.h>
+#include <yai/trap_pf.h>
+#include <yai/msr-index.h>
+#include <yai/fpu/xcr.h>
+#include <yai/ptrace.h>
+#include <yai/svm.h>
+#include <yai/cpuid/api.h>
 
 #include "error.h"
 #include "sev.h"

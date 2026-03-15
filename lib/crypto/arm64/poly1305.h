@@ -5,11 +5,11 @@
  * Copyright (C) 2019 Linaro Ltd. <ard.biesheuvel@linaro.org>
  */
 
-#include <asm/hwcap.h>
-#include <asm/simd.h>
-#include <linux/cpufeature.h>
-#include <linux/jump_label.h>
-#include <linux/kernel.h>
+#include <yai/hwcap.h>
+#include <yai/simd.h>
+#include <yai/cpufeature.h>
+#include <yai/jump_label.h>
+#include <yai/kernel.h>
 
 asmlinkage void poly1305_block_init(struct poly1305_block_state *state,
 				    const u8 raw_key[POLY1305_BLOCK_SIZE]);

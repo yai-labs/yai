@@ -6,21 +6,21 @@
  *  General FPU state handling cleanups
  *	Gareth Hughes <gareth@valinux.com>, May 2000
  */
-#include <asm/fpu/api.h>
-#include <asm/fpu/regset.h>
-#include <asm/fpu/sched.h>
-#include <asm/fpu/signal.h>
-#include <asm/fpu/types.h>
-#include <asm/msr.h>
-#include <asm/traps.h>
-#include <asm/irq_regs.h>
+#include <yai/fpu/api.h>
+#include <yai/fpu/regset.h>
+#include <yai/fpu/sched.h>
+#include <yai/fpu/signal.h>
+#include <yai/fpu/types.h>
+#include <yai/msr.h>
+#include <yai/traps.h>
+#include <yai/irq_regs.h>
 
 #include <uapi/asm/kvm.h>
 
-#include <linux/hardirq.h>
-#include <linux/kvm_types.h>
-#include <linux/pkeys.h>
-#include <linux/vmalloc.h>
+#include <yai/hardirq.h>
+#include <yai/kvm_types.h>
+#include <yai/pkeys.h>
+#include <yai/vmalloc.h>
 
 #include "context.h"
 #include "internal.h"
@@ -28,7 +28,7 @@
 #include "xstate.h"
 
 #define CREATE_TRACE_POINTS
-#include <asm/trace/fpu.h>
+#include <yai/trace/fpu.h>
 
 #ifdef CONFIG_X86_64
 DEFINE_STATIC_KEY_FALSE(__fpu_state_size_dynamic);

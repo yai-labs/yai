@@ -24,7 +24,7 @@
 #include <yai/sunrpc/xdr.h>
 #include <yai/sunrpc/timer.h>
 #include <yai/sunrpc/rpc_pipe_fs.h>
-#include <asm/signal.h>
+#include <yai/signal.h>
 #include <yai/path.h>
 #include <net/ipv6.h>
 #include <yai/sunrpc/xprtmultipath.h>

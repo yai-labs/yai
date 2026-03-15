@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: GPL-2.0
 
-#include <linux/cpuhotplug.h>
-#include <linux/cpumask.h>
-#include <linux/slab.h>
-#include <linux/mm.h>
+#include <yai/cpuhotplug.h>
+#include <yai/cpumask.h>
+#include <yai/slab.h>
+#include <yai/mm.h>
 
-#include <asm/apic.h>
+#include <yai/apic.h>
 
 #include "local.h"
 

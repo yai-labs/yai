@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: GPL-2.0
-#include <linux/errno.h>
-#include <linux/kernel.h>
-#include <linux/sched.h>
-#include <linux/sched/task_stack.h>
-#include <linux/perf_event.h>
-#include <linux/bug.h>
-#include <linux/stddef.h>
-#include <asm/perf_regs.h>
-#include <asm/ptrace.h>
+#include <yai/errno.h>
+#include <yai/kernel.h>
+#include <yai/sched.h>
+#include <yai/sched/task_stack.h>
+#include <yai/perf_event.h>
+#include <yai/bug.h>
+#include <yai/stddef.h>
+#include <yai/perf_regs.h>
+#include <yai/ptrace.h>
 
 #ifdef CONFIG_X86_32
 #define PERF_REG_X86_MAX PERF_REG_X86_32_MAX

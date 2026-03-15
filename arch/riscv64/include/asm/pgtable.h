@@ -6,10 +6,10 @@
 #ifndef _ASM_RISCV_PGTABLE_H
 #define _ASM_RISCV_PGTABLE_H
 
-#include <linux/mmzone.h>
-#include <linux/sizes.h>
+#include <yai/mmzone.h>
+#include <yai/sizes.h>
 
-#include <asm/pgtable-bits.h>
+#include <yai/pgtable-bits.h>
 
 #ifndef CONFIG_MMU
 #ifdef CONFIG_RELOCATABLE
@@ -113,26 +113,26 @@
 
 #ifndef __ASSEMBLER__
 
-#include <asm/page.h>
-#include <asm/tlbflush.h>
-#include <linux/mm_types.h>
-#include <asm/compat.h>
-#include <asm/cpufeature.h>
+#include <yai/page.h>
+#include <yai/tlbflush.h>
+#include <yai/mm_types.h>
+#include <yai/compat.h>
+#include <yai/cpufeature.h>
 
 #define __page_val_to_pfn(_val)  (((_val) & _PAGE_PFN_MASK) >> _PAGE_PFN_SHIFT)
 
 #ifdef CONFIG_64BIT
-#include <asm/pgtable-64.h>
+#include <yai/pgtable-64.h>
 
 #define MMAP_VA_BITS_64 ((VA_BITS >= VA_BITS_SV48) ? VA_BITS_SV48 : VA_BITS)
 #define MMAP_MIN_VA_BITS_64 (VA_BITS_SV39)
 #define MMAP_VA_BITS (is_compat_task() ? VA_BITS_SV32 : MMAP_VA_BITS_64)
 #define MMAP_MIN_VA_BITS (is_compat_task() ? VA_BITS_SV32 : MMAP_MIN_VA_BITS_64)
 #else
-#include <asm/pgtable-32.h>
+#include <yai/pgtable-32.h>
 #endif /* CONFIG_64BIT */
 
-#include <linux/page_table_check.h>
+#include <yai/page_table_check.h>
 
 #ifdef CONFIG_XIP_KERNEL
 #define XIP_FIXUP(addr) ({							\

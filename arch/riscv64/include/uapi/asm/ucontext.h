@@ -8,7 +8,7 @@
 #ifndef _UAPI_ASM_RISCV_UCONTEXT_H
 #define _UAPI_ASM_RISCV_UCONTEXT_H
 
-#include <linux/types.h>
+#include <yai/types.h>
 
 struct ucontext {
 	unsigned long	  uc_flags;

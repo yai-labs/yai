@@ -13,8 +13,8 @@
  * Copyright (c) 2003 Kyle McMartin <kyle@debian.org>
  */
 
-#include <asm/octeon/crypto.h>
-#include <asm/octeon/octeon.h>
+#include <yai/octeon/crypto.h>
+#include <yai/octeon/octeon.h>
 
 /*
  * We pass everything as 64-bit. OCTEON can handle misaligned data.

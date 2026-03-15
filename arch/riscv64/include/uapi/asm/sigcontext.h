@@ -6,7 +6,7 @@
 #ifndef _UAPI_ASM_RISCV_SIGCONTEXT_H
 #define _UAPI_ASM_RISCV_SIGCONTEXT_H
 
-#include <asm/ptrace.h>
+#include <yai/ptrace.h>
 
 /* The Magic number for signal context frame header. */
 #define RISCV_V_MAGIC	0x53465457
